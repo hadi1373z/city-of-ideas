@@ -20,11 +20,11 @@
     "safetyRecordsPerUpdate": 64,
     "safetyNodesPerUpdate": 64
   },
-  "buildMilliseconds": 1020.6603,
+  "buildMilliseconds": 1012.5564000000004,
   "updateMilliseconds": {
     "samples": 25,
-    "mean": 6.295352000000239,
-    "max": 9.874899999999798
+    "mean": 6.321968000000124,
+    "max": 11.244200000001001
   },
   "checks": [
     "world geometry/normals/UV/colors/mirrored winding",

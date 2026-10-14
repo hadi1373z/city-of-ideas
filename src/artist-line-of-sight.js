@@ -11,6 +11,7 @@ export function artistLineOfSight(T,{scene,artGroup,residentGroup,player,state})
  const visible=object=>{for(let node=object;node;node=node.parent)if(node.visible===false)return false;return true;};
  const actor=object=>{for(let node=object;node;node=node.parent)if(node===residentGroup)return true;return false;};
  const glass=object=>{const materials=Array.isArray(object.material)?object.material:[object.material];return materials.length&&materials.every(material=>material?.transparent&&material.opacity<.2);};
- const hit=ray.intersectObject(artGroup,true).find(item=>!actor(item.object)&&visible(item.object)&&item.object.geometry&&!glass(item.object));
+ const meshes=[];artGroup.traverse(object=>{if(object.isMesh&&!actor(object)&&visible(object))meshes.push(object);});
+ const hit=ray.intersectObjects(meshes,false).find(item=>item.object.geometry&&!glass(item.object));
  return!hit||hit.distance>distance-.18*scale;
 }
