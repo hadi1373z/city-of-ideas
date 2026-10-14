@@ -1,0 +1,25 @@
+{
+  "sources": [
+    {
+      "file": "src/city-source-assets/park-tools/public-fa.js",
+      "sha256": "439e2cd0e5acc2a506cae858b016f494ac490b615ea892e0a5d128116d791563",
+      "bytes": 219572
+    },
+    {
+      "file": "integrations/reader-locale/reader-public-fa.js",
+      "sha256": "3a59befc929fd8f26d0254399d9ee1103e4ea1d1474fb849871eca29163bb5be",
+      "bytes": 160872
+    },
+    {
+      "file": "src/city-source-assets/home-tools/city-tools-merged-public-fa.js",
+      "sha256": "6a674d7a8b1a54114b63fccc6fefff1407cfe823a963113375490690a33eb5d5",
+      "bytes": 211734
+    }
+  ],
+  "normalizedBaseUnion": 3743,
+  "authoredMissingContent": 423,
+  "authoredUIKeys": 122,
+  "composedKnownTitleImpactPairs": 131,
+  "totalExactKeys": 4391,
+  "publicTemplates": 75
+}

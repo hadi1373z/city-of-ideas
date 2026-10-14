@@ -1,0 +1,5 @@
+'use strict';const fs=require('node:fs'),path=require('node:path'),root=path.resolve(__dirname,'..');
+let file=path.join(root,'src/gallery.js'),s=fs.readFileSync(file,'utf8');s=s.replaceAll('ray.layers.enable(1);ray.setFromCamera','ray.layers.enable(1);ray.layers.enable(31);ray.setFromCamera');fs.writeFileSync(file,s);
+file=path.join(root,'src/index.html');s=fs.readFileSync(file,'utf8');if(!s.includes('src="rendering-init.js"'))s=s.replace('</body>','<script type="module" src="rendering-init.js"></script>\n</body>');fs.writeFileSync(file,s);
+let test=fs.readFileSync(path.join(root,'integrations/rendering/test-static-mesh-batches.mjs'),'utf8');test=test.replace("from './static-mesh-batches.js'","from '../src/static-mesh-batches.js'").replace("from '../extra-districts/home-editions-scene.js'","from '../src/home-editions-scene.js'").replace("from '../extra-districts/extra-districts.js'","from '../src/extra-districts.js'").replaceAll('../../src/','../src/');fs.writeFileSync(path.join(root,'tests/static-mesh-batches.mjs'),test);
+console.log('Original source rays, render module and portable rendering fixtures wired.');

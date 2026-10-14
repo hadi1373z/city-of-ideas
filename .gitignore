@@ -1,0 +1,13 @@
+_site/
+node_modules/
+*.local.json
+.env
+.env.*
+!.env.example
+output/
+work/
+source-staging.local/
+source-backup-*.local/
+integrations/
+source-guard-fixture-*/
+publication-fixture-*/

@@ -1,0 +1,39 @@
+import {installHomeMessages} from './city-home-messages.js';
+import {validateGlb} from './design-objects.js';
+import {storeAssetUrl} from './object-store.js';
+import {browserAssets} from './city-adapter-store.js';
+import {browserStore,requestHouse,setHouseService,isBrowserMode,loadBrowserAssets,importBrowserAsset} from './city-adapter-store.js';
+import {initToolsLanguage} from './city-tools-language.js';
+
+const bar=document.createElement('section');bar.id='city-tools-storage';bar.setAttribute('aria-label','House tools and storage');
+bar.innerHTML='<div><strong data-storage-title>Original House tools</strong><small data-storage-status>This browser · separate from the private online house</small></div><div class="city-tools-actions"><button data-close-tools>Return to city</button><button data-connect-service>Connect original private service</button><button data-local-mode hidden>Use this browser</button><button data-full-export>Export complete browser backup</button><label class="city-import-label">Import complete house archive<input data-full-import type="file" accept="application/json,.json"></label><button data-tools-language>Switch to Persian</button></div><p data-storage-error role="status"></p>';
+document.body.prepend(bar);
+const navigation=document.createElement('nav');navigation.id='city-tools-navigation';navigation.setAttribute('aria-label','All original House tools');
+for(const [id,label]of [['home','Home & Socrates'],['rooms','Assign rooms & ideas'],['notes','Room notes'],['journal','Journal'],['socrates','Socrates'],['conversations','Conversations'],['learning','Learning trail'],['construction','Construction'],['design','Design workshop'],['objects','Object store'],['world','World guide'],['artists','Artist galleries'],['mathematics','Mathematics & Atlas'],['collection','Travel & collection'],['editions','Earlier homes']]){const b=document.createElement('button');b.type='button';b.textContent=label;b.onclick=()=>window.CITY_HOME_TOOLS?.open?.(id);navigation.append(b);}
+bar.append(navigation);
+const note=bar.querySelector('[data-storage-error]'),status=bar.querySelector('[data-storage-status]'),connect=bar.querySelector('[data-connect-service]'),local=bar.querySelector('[data-local-mode]');
+let dirty=false;
+document.addEventListener('input',event=>{if(event.target.matches('input:not([type=search]),textarea'))dirty=true;},true);
+function update(){status.textContent=isBrowserMode()?'This browser · separate from the private online house':'Original authenticated private service · browser data kept separately';local.hidden=isBrowserMode();connect.hidden=!isBrowserMode();bar.querySelector('[data-full-export]').textContent=isBrowserMode()?'Export complete browser backup':'Export original cloud house';bar.querySelector('[data-full-import]').disabled=!isBrowserMode();}
+function download(data,name){const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)+'\n'],{type:'application/json;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),2000);}
+async function switchStorage(service){if(dirty&&!window.confirm('Switching storage reloads the tools. Save or export your unsaved draft first. Continue?'))return;setHouseService(service);note.textContent='';await window.CITY_HOME_TOOLS?.reload?.();dirty=false;update();}
+connect.onclick=async()=>{try{const owner=window.parent===window?window:window.parent;if(!owner.CITY_HOUSE_SERVICE)throw Error('The original service bridge has not been installed in the city yet. Browser storage remains separate; no cloud save was attempted.');await owner.CITY_HOUSE_SERVICE.connect();await switchStorage(owner.CITY_HOUSE_SERVICE);}catch(error){note.textContent=error.message;}};
+local.onclick=()=>switchStorage(null).catch(error=>note.textContent=error.message);
+bar.querySelector('[data-close-tools]').onclick=()=>homeMessages.close();
+window.CITY_HOME_EXPORT_COMPLETE=async()=>{try{const data=isBrowserMode()?await browserStore.state():await requestHouse('/api/house/export');if(isBrowserMode()){data.assets=[];for(const [id,blob]of await browserStore.storage.assets()){const bytes=new Uint8Array(await blob.arrayBuffer());let binary='';for(let i=0;i<bytes.length;i+=8192)binary+=String.fromCharCode(...bytes.subarray(i,i+8192));data.assets.push({id,mediaType:'model/gltf-binary',base64:btoa(binary)});}}download(data,isBrowserMode()?'city-of-ideas-browser-house-backup.json':'house-of-ideas-online.json');note.textContent='Complete backup downloaded. It contains private notes and conversations; keep it private.';}catch(error){note.textContent=error.message;throw error;}};
+bar.querySelector('[data-full-export]').onclick=()=>window.CITY_HOME_EXPORT_COMPLETE().catch(()=>{});
+bar.querySelector('[data-full-import]').onchange=async event=>{const file=event.target.files?.[0];if(!file)return;try{if(!isBrowserMode())throw Error('Switch explicitly to browser storage to import a separate archive.');if(file.size>256*1024*1024)throw Error('Use an archive no larger than 256 MiB; keep the original file if larger.');const data=JSON.parse(await file.text());for(const asset of data.assets||[]){if(!/^[a-f0-9]{64}$/.test(asset.id)||typeof asset.base64!=='string')throw Error('Invalid design asset in the archive.');const raw=Uint8Array.from(atob(asset.base64),c=>c.charCodeAt(0));const restored=await importBrowserAsset(raw.buffer);if(restored.id!==asset.id)throw Error('An imported design asset does not match its stable identifier.');}await browserStore.importNeighborhood(data);await window.CITY_HOME_TOOLS?.reload?.();note.textContent='Archive imported as additional preserved homes and conversations. Existing homes were kept; unmodified source records are included in complete backups. If both archives have independent city collections, the incoming collection stays in its preserved source backup instead of replacing yours.';}catch(error){note.textContent=error.message;}finally{event.target.value='';}};
+document.addEventListener('click',async event=>{const a=event.target.closest('a[href]');if(!a)return;const url=new URL(a.href,location.href);if(url.origin!==location.origin||!url.pathname.startsWith('/api/'))return;event.preventDefault();try{const data=await requestHouse(url.pathname+url.search);download(data,a.download||'house-of-ideas-export.json');}catch(error){note.textContent=error.message;}},true);
+const language=initToolsLanguage({button:bar.querySelector('[data-tools-language]'),getState:()=>window.CITY_HOME_TOOLS?.readState?.()});
+const homeMessages=installHomeMessages({getTools:()=>window.CITY_HOME_TOOLS,language,notify:text=>{note.textContent=text;},readAsset:async(id,maxBytes)=>{
+ const reference=browserAssets.get(id)||storeAssetUrl(id);if(!reference)throw Error('This GLB is not bundled or kept in this browser. The original cloud service does not upload new models.');
+ const url=new URL(reference,location.href);if(url.origin!==location.origin||!['http:','https:','blob:'].includes(url.protocol))throw Error('Use an owned original model.');
+ const response=await fetch(url,{credentials:'same-origin'});if(!response.ok)throw Error('The owned model could not load.');
+ if(Number(response.headers.get('content-length')||0)>maxBytes)throw Error('The model exceeds the 12 MiB shared-scene limit.');
+ const chunks=[];let size=0;const reader=response.body.getReader();try{for(;;){const {done,value}=await reader.read();if(done)break;size+=value.byteLength;if(size>maxBytes){await reader.cancel();throw Error('The model exceeds the 12 MiB shared-scene limit.');}chunks.push(value);}}finally{reader.releaseLock();}
+ const bytes=new Uint8Array(size);let offset=0;for(const chunk of chunks){bytes.set(chunk,offset);offset+=chunk.byteLength;}validateGlb(bytes);return bytes.buffer;
+}});
+await loadBrowserAssets().catch(error=>{note.textContent=error.message;});
+await import('./app.js');
+update();
+homeMessages.announceReady();

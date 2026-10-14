@@ -1,0 +1,92 @@
+[
+  {
+    "id": "music-dialogues-at-dawn",
+    "file": "./city-source-assets/object-store/audio/dialogues-at-dawn.wav",
+    "bytes": 1050426,
+    "sha256": "0c83f36563b28800b51f39276f4edc76591cbfe3d5b9f0879d30b59257023fdf",
+    "creator": "House of Ideas project · procedural instrumental composition",
+    "license": "Original project composition and poster; see project source",
+    "sourceRecord": "./city-source-assets/object-store/sources/music-dialogues-at-dawn.txt"
+  },
+  {
+    "id": "music-counterexample-waltz",
+    "file": "./city-source-assets/object-store/audio/counterexample-waltz.wav",
+    "bytes": 970244,
+    "sha256": "2e75f3d41a82d20fe109be9e28265d5767ca72b2b7e49988293faeecba8b3588",
+    "creator": "House of Ideas project · procedural instrumental composition",
+    "license": "Original project composition and poster; see project source",
+    "sourceRecord": "./city-source-assets/object-store/sources/music-counterexample-waltz.txt"
+  },
+  {
+    "id": "music-memory-rooms",
+    "file": "./city-source-assets/object-store/audio/memory-rooms.wav",
+    "bytes": 1202350,
+    "sha256": "7c8a4c9927637aab68e3c2e19944dbf06a6720b9121ca65bd479e2032f440988",
+    "creator": "House of Ideas project · procedural instrumental composition",
+    "license": "Original project composition and poster; see project source",
+    "sourceRecord": "./city-source-assets/object-store/sources/music-memory-rooms.txt"
+  },
+  {
+    "id": "music-constellation-walk",
+    "file": "./city-source-assets/object-store/audio/constellation-walk.wav",
+    "bytes": 934964,
+    "sha256": "9ad358586cd9f2eba2e2ddd7c538cb59e9fcddd72f1f8b4696decb6018833efa",
+    "creator": "House of Ideas project · procedural instrumental composition",
+    "license": "Original project composition and poster; see project source",
+    "sourceRecord": "./city-source-assets/object-store/sources/music-constellation-walk.txt"
+  },
+  {
+    "id": "music-uncertainty-blue",
+    "file": "./city-source-assets/object-store/audio/uncertainty-blue.wav",
+    "bytes": 1146644,
+    "sha256": "48ba8bac1d155f75e8fdc587039e4833ed663fa633fa0c13a5bdbf98f1349c44",
+    "creator": "House of Ideas project · procedural instrumental composition",
+    "license": "Original project composition and poster; see project source",
+    "sourceRecord": "./city-source-assets/object-store/sources/music-uncertainty-blue.txt"
+  },
+  {
+    "id": "music-garden-of-branches",
+    "file": "./city-source-assets/object-store/audio/garden-of-branches.wav",
+    "bytes": 1008592,
+    "sha256": "0a2a34741ba19b8be62e32828c94527054db674cb8907a5d7af43a60fe2f782a",
+    "creator": "House of Ideas project · procedural instrumental composition",
+    "license": "Original project composition and poster; see project source",
+    "sourceRecord": "./city-source-assets/object-store/sources/music-garden-of-branches.txt"
+  },
+  {
+    "id": "music-perspective-windows",
+    "file": "./city-source-assets/object-store/audio/perspective-windows.wav",
+    "bytes": 1096244,
+    "sha256": "f215f957d1cfaffa87977b090e1e2b8596907006ff8a5c919cee7aee0c7c274a",
+    "creator": "House of Ideas project · procedural instrumental composition",
+    "license": "Original project composition and poster; see project source",
+    "sourceRecord": "./city-source-assets/object-store/sources/music-perspective-windows.txt"
+  },
+  {
+    "id": "music-quiet-well",
+    "file": "./city-source-assets/object-store/audio/quiet-well.wav",
+    "bytes": 1264244,
+    "sha256": "a9f6db59fc9358074eccde9c648bece467a5a6dd295e5da00db2b8adc0f349c2",
+    "creator": "House of Ideas project · procedural instrumental composition",
+    "license": "Original project composition and poster; see project source",
+    "sourceRecord": "./city-source-assets/object-store/sources/music-quiet-well.txt"
+  },
+  {
+    "id": "music-city-of-tomorrow",
+    "file": "./city-source-assets/object-store/audio/city-of-tomorrow.wav",
+    "bytes": 902398,
+    "sha256": "c7de72ee144d2b17ba2e47a273f39929a51cccca8f4ed085daa5919cd66d5940",
+    "creator": "House of Ideas project · procedural instrumental composition",
+    "license": "Original project composition and poster; see project source",
+    "sourceRecord": "./city-source-assets/object-store/sources/music-city-of-tomorrow.txt"
+  },
+  {
+    "id": "music-return-home",
+    "file": "./city-source-assets/object-store/audio/return-home.wav",
+    "bytes": 1173784,
+    "sha256": "691b702484b8bcc225105f8ff762c74618fb8819cadd9c48568ae6f5369a7428",
+    "creator": "House of Ideas project · procedural instrumental composition",
+    "license": "Original project composition and poster; see project source",
+    "sourceRecord": "./city-source-assets/object-store/sources/music-return-home.txt"
+  }
+]

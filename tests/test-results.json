@@ -1,0 +1,42 @@
+{
+  "passed": true,
+  "three": "160",
+  "sourceMeshes": 9056,
+  "originalRayComparisons": 150,
+  "beforeDrawObjects": 9112,
+  "afterDrawObjects": 1438,
+  "drawObjectsSaved": 7674,
+  "stats": {
+    "batches": 451,
+    "visibleBatches": 451,
+    "originalsBatched": 8125,
+    "drawCallsSaved": 7674,
+    "sourceLayer": 31,
+    "sourceNodesRetained": true,
+    "includeStaticActions": true,
+    "mergeEquivalentMaterials": true,
+    "batchDescendants": true,
+    "validationMode": "fast",
+    "safetyRecordsPerUpdate": 64,
+    "safetyNodesPerUpdate": 64
+  },
+  "buildMilliseconds": 1020.6603,
+  "updateMilliseconds": {
+    "samples": 25,
+    "mean": 6.295352000000239,
+    "max": 9.874899999999798
+  },
+  "checks": [
+    "world geometry/normals/UV/colors/mirrored winding",
+    "manual matrices and nested ancestor transforms",
+    "source hidden floor/restoration and direct color/light/depth mutations",
+    "dirty buffer and interleaved data.version changes",
+    "exact original ray objects and static actionable book metadata",
+    "original collisions and private JSON unchanged",
+    "actor/door/design/skinned/morph/transparent/instanced/custom shader exclusions",
+    "texture identity and exact rendered material equivalence",
+    "dynamic group rescan/register/removal",
+    "owned geometry disposal without source resource release"
+  ],
+  "note": "Draw objects and Node update timings are fixture measurements, not substitutes for Root actual renderer.info.render.calls/FPS."
+}

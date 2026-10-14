@@ -1,0 +1,27 @@
+{
+  "originalCanonical": {
+    "bytes": 977348,
+    "sha256": "bd07240709cc2626f581556f1b272bc8e118a20a98da4ce2e3b711f3aa4d2da4"
+  },
+  "originalCheckout": {
+    "bytes": 977348,
+    "sha256": "bd07240709cc2626f581556f1b272bc8e118a20a98da4ce2e3b711f3aa4d2da4"
+  },
+  "atlasDataSHA256": "b51dd2730bbf10348cfd0a85c4aa572fe54d7f39e17e33fe7f81413dd6df0a53",
+  "mathUiBaselineSHA256": "9a3c68e330ddec785449f9c580f2620dc036a21ee5a774631d5e631ae85b251c",
+  "files": {
+    "reader-localized.html": {
+      "sha256": "fcd9f48bc8f613d5ac8ffd193ec4337abc777e0f430565b1570ca5fdcc382987"
+    },
+    "math-reader-locale.js": {
+      "sha256": "b4103a4f14dfbd8616a737110ca454866aeaa869c2aa7966bd0ece51f8611ca4"
+    },
+    "math-reader-locale.css": {
+      "sha256": "ba22ad0f61c307975c9330eea0e92f343318d25bf9b159f3f41a8b2d0194fcd5"
+    },
+    "math-city-ui.js": {
+      "sha256": "cf18c57c290a4e49acdd6ebfda74ce1b2799032443bb5788481e7d95088181b1"
+    }
+  },
+  "installation": "Additional adapted reader + public locale assets; canonical index.html and source.json remain byte-for-byte unchanged."
+}

@@ -1,0 +1,13 @@
+{
+  "kind": "public source and synthetic test fixtures only",
+  "sourceCanonicalSHA256": "bd07240709cc2626f581556f1b272bc8e118a20a98da4ce2e3b711f3aa4d2da4",
+  "files": {
+    "manifest.json": "c14f29c71ac101931da62a9e6a423a815fa6b038cf7b1495e5057d278222840b",
+    "dictionary-provenance.json": "aecaeff79d97440bb9afb4772b6ca4b18beabfc9019bd9eddbc40429ec0710d0",
+    "math-public-fa.js": "2e9ea941dd1ec95eecd83fecd1991731ec23fae7a55c8f09c10c60f4410f5592",
+    "math-locale-core.js": "154ed4fb605a193e2227822a7de7f42ae6f20033ffc4d82a655588c459f2d971",
+    "content-inventory.json": "a16cbdb2e4a56efb0cc14b01b3c8b1e8080a9a2621ba38714424ccff25bec6b2",
+    "ui-rendered-inventory.json": "2014e18183061be0215afca9caff259e9e0186bf919958e0c20db5411d15bd5d",
+    "coverage.json": "7c4d28cfb5e2c414a837143ee3b251a2c6a3ccfb90d521b24e25b9b48e233927"
+  }
+}

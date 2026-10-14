@@ -1,0 +1,1 @@
+{"name":"city-of-ideas-original-house-tools","private":true,"type":"module","scripts":{"test":"node adapter-tests.mjs"}}

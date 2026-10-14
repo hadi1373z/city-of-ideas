@@ -1,0 +1,292 @@
+[
+  {
+    "id": "model-lantern",
+    "assetId": "a79458c4b02d695187a952f23a63b8bf278e7bc3d316a3c2a314f2d6974181f1",
+    "bytes": 9564264,
+    "nodes": 4,
+    "meshes": 3,
+    "extensionsRequired": []
+  },
+  {
+    "id": "model-avocado",
+    "assetId": "ccc9c3ce56423720b09399c2351537207cd5a65f859f9e6e2f30922762f3abd4",
+    "bytes": 8110040,
+    "nodes": 1,
+    "meshes": 1,
+    "extensionsRequired": []
+  },
+  {
+    "id": "model-boombox",
+    "assetId": "f8b918445ebdd006768232205a62f5182d2208ca57f84c6ccc084943c0bc8f15",
+    "bytes": 10614184,
+    "nodes": 1,
+    "meshes": 1,
+    "extensionsRequired": []
+  },
+  {
+    "id": "model-waterbottle",
+    "assetId": "b337e526fd6a162013c2984aeec163f5fbb4f717252724dfc3f3458bd51df94b",
+    "bytes": 8966700,
+    "nodes": 1,
+    "meshes": 1,
+    "extensionsRequired": []
+  },
+  {
+    "id": "model-sheenchair",
+    "assetId": "f0af2a2b102d28d540236306ae19f8fb36842df76bd38cf76f063f9bd2853399",
+    "bytes": 4125648,
+    "nodes": 4,
+    "meshes": 4,
+    "extensionsRequired": [
+      "KHR_texture_transform"
+    ]
+  },
+  {
+    "id": "model-toycar",
+    "assetId": "01a60862de55cd4b9f3acfab0b0def86451800f9c42467fcd61052c16cb9838c",
+    "bytes": 5422412,
+    "nodes": 11,
+    "meshes": 3,
+    "extensionsRequired": []
+  },
+  {
+    "id": "stock-reading-chair",
+    "assetId": "12f76c0f4e055168d3e58a6575712fd18b9f4ee4cac331dce728ec091d694646",
+    "bytes": 17944,
+    "nodes": 12,
+    "meshes": 12,
+    "extensionsRequired": []
+  },
+  {
+    "id": "stock-bed",
+    "assetId": "9ece0627957feba210e276f5e68ed1a8b891c225bf9e72aed7ebd06f9b35a6b9",
+    "bytes": 87040,
+    "nodes": 17,
+    "meshes": 17,
+    "extensionsRequired": []
+  },
+  {
+    "id": "stock-sofa",
+    "assetId": "a3eb8795b05139e59bf4f92a8438055bf257d56ded483682b16a7076d48c4e25",
+    "bytes": 84064,
+    "nodes": 15,
+    "meshes": 15,
+    "extensionsRequired": []
+  },
+  {
+    "id": "stock-dream-chair",
+    "assetId": "ef2e5384267677d5270322099f22eb458af780a82128ec67ead996d213fc1319",
+    "bytes": 36508,
+    "nodes": 8,
+    "meshes": 8,
+    "extensionsRequired": []
+  },
+  {
+    "id": "stock-dream-cabinet",
+    "assetId": "c31b85f68da7c5ac9bb511d881896e32a2e766de230b3a69e2f69b09154aabf6",
+    "bytes": 248716,
+    "nodes": 19,
+    "meshes": 19,
+    "extensionsRequired": []
+  },
+  {
+    "id": "stock-dream-spheres",
+    "assetId": "9f99da064b9f2b9255ac42481505242840a73a2f3b984e3cc76ec68a1a65fcaa",
+    "bytes": 233948,
+    "nodes": 9,
+    "meshes": 9,
+    "extensionsRequired": []
+  },
+  {
+    "id": "artifact-assumption-balance",
+    "assetId": "c06c81e7a7f346bd52acd991ef7bdb8e777c7ea8e5e8c2c5db5e40800449c31b",
+    "bytes": 92732,
+    "nodes": 9,
+    "meshes": 9,
+    "extensionsRequired": []
+  },
+  {
+    "id": "artifact-idea-constellation",
+    "assetId": "673be6b2e55171872ed2841a90236ed57ea90de76ae4c162ba0af52e79e5c546",
+    "bytes": 157212,
+    "nodes": 14,
+    "meshes": 14,
+    "extensionsRequired": []
+  },
+  {
+    "id": "artifact-memory-cabinet",
+    "assetId": "24f8346a20d35d96b033f000a7a1805d9b31846582a734b474ad6bbacec83e49",
+    "bytes": 81972,
+    "nodes": 15,
+    "meshes": 15,
+    "extensionsRequired": []
+  },
+  {
+    "id": "artifact-uncertainty-lantern",
+    "assetId": "dfeae78875a4ad8378904e35aecc799ebdf4d96c6aa25e4f31eecb4f35aa26d9",
+    "bytes": 123824,
+    "nodes": 10,
+    "meshes": 10,
+    "extensionsRequired": []
+  },
+  {
+    "id": "artifact-forked-path",
+    "assetId": "6554f81b0166ba207096d08981bcd02505fb0a0449856793a7ce75ed787c5d42",
+    "bytes": 61556,
+    "nodes": 7,
+    "meshes": 7,
+    "extensionsRequired": []
+  },
+  {
+    "id": "artifact-perspective-window",
+    "assetId": "1d19c3d21d09deb094feecc140cb803a3c116a9b99cd67dcc030af69d9faf464",
+    "bytes": 40812,
+    "nodes": 14,
+    "meshes": 14,
+    "extensionsRequired": []
+  },
+  {
+    "id": "artifact-reflection-well",
+    "assetId": "d79d5c03f675bdd4eefd259e45e3b06abd3f6bd100dd7187dea858e383f3f03d",
+    "bytes": 113912,
+    "nodes": 5,
+    "meshes": 5,
+    "extensionsRequired": []
+  },
+  {
+    "id": "artifact-dialogue-table",
+    "assetId": "6d60c902bf8d8455c066d8e4036324e113e9f6bdcc7e6b7b8c4c49a56c6f189d",
+    "bytes": 84992,
+    "nodes": 16,
+    "meshes": 16,
+    "extensionsRequired": []
+  },
+  {
+    "id": "music-dialogues-at-dawn",
+    "assetId": "7d342bd5e0f4b2d19dfa42566d73ada2df4c04be98485fd990ee18c831d66323",
+    "bytes": 88596,
+    "nodes": 16,
+    "meshes": 16,
+    "extensionsRequired": []
+  },
+  {
+    "id": "music-counterexample-waltz",
+    "assetId": "a7f2897ce0598f7a6aee3074fa446ddd03868e351e630abaf23eb7beaeb7781e",
+    "bytes": 88600,
+    "nodes": 16,
+    "meshes": 16,
+    "extensionsRequired": []
+  },
+  {
+    "id": "music-memory-rooms",
+    "assetId": "1ef30e90fd045e370d30de4d232fa995f1ba67ca7ed4d401784a07f7c58791c1",
+    "bytes": 88596,
+    "nodes": 16,
+    "meshes": 16,
+    "extensionsRequired": []
+  },
+  {
+    "id": "music-constellation-walk",
+    "assetId": "b2f94b37b6bda4f939337581cdc4c7a10c1e2f120d8eb917e6dcbdb796cef512",
+    "bytes": 88596,
+    "nodes": 16,
+    "meshes": 16,
+    "extensionsRequired": []
+  },
+  {
+    "id": "music-uncertainty-blue",
+    "assetId": "ecb8e47c97bf4510a86c2d15a877ca949fb666918ed81f3852c9289e1a9e473d",
+    "bytes": 88600,
+    "nodes": 16,
+    "meshes": 16,
+    "extensionsRequired": []
+  },
+  {
+    "id": "music-garden-of-branches",
+    "assetId": "2b0e8a78defb2e875026a4a2ebc72facc13768b3842a3b62912728c1f8882fa7",
+    "bytes": 88592,
+    "nodes": 16,
+    "meshes": 16,
+    "extensionsRequired": []
+  },
+  {
+    "id": "music-perspective-windows",
+    "assetId": "9c9ba21fd343f28fb2a1c4830a1395555ff33fe59a4c418350249026105ad04b",
+    "bytes": 88596,
+    "nodes": 16,
+    "meshes": 16,
+    "extensionsRequired": []
+  },
+  {
+    "id": "music-quiet-well",
+    "assetId": "e7e2810d299b6a5b473283b64b216bcd41e65aad6d977beb161d4befb28a4959",
+    "bytes": 88596,
+    "nodes": 16,
+    "meshes": 16,
+    "extensionsRequired": []
+  },
+  {
+    "id": "music-city-of-tomorrow",
+    "assetId": "ed9be7469af7ffb3dd18b1e923813bc9a1025a14e82699f22e05fe716db9787e",
+    "bytes": 88592,
+    "nodes": 16,
+    "meshes": 16,
+    "extensionsRequired": []
+  },
+  {
+    "id": "music-return-home",
+    "assetId": "a6e3b38d79627100e0b664ebb9980b7798c4bae50c9b2da5784bf86466b73dc9",
+    "bytes": 88596,
+    "nodes": 16,
+    "meshes": 16,
+    "extensionsRequired": []
+  },
+  {
+    "id": "explore-chance-die",
+    "assetId": "5fc80c6c71fc20e9f3c81db5065adf08ba1a561862ddc71a7326d53c456f423f",
+    "bytes": 203740,
+    "nodes": 11,
+    "meshes": 11,
+    "extensionsRequired": []
+  },
+  {
+    "id": "explore-pendulum-lab",
+    "assetId": "39f614f683a400b92b73c7f679141da8322c024fe200fab03af31b5f7a263197",
+    "bytes": 74584,
+    "nodes": 10,
+    "meshes": 10,
+    "extensionsRequired": []
+  },
+  {
+    "id": "explore-mobius-ribbon",
+    "assetId": "14c5166166d74f3cc8a0f8bdba969046570eb45a4c582b9b30136664ab9756a3",
+    "bytes": 114404,
+    "nodes": 3,
+    "meshes": 3,
+    "extensionsRequired": []
+  },
+  {
+    "id": "explore-colour-prism",
+    "assetId": "2e77690a27f185f1e412838a0c224060dfddc4244b568b9ccae27a36c928b564",
+    "bytes": 13456,
+    "nodes": 9,
+    "meshes": 9,
+    "extensionsRequired": []
+  },
+  {
+    "id": "explore-hanoi-towers",
+    "assetId": "65a8131dea3011d5f3300a379bc881c07c4cb8e97d6ae70d74a3563e25565dd4",
+    "bytes": 124580,
+    "nodes": 7,
+    "meshes": 7,
+    "extensionsRequired": []
+  },
+  {
+    "id": "explore-prime-cabinet",
+    "assetId": "610bba43a8c90a8b7e7d1d394056c77ddbb3118c7379c76dd7380cc414f1de58",
+    "bytes": 373636,
+    "nodes": 24,
+    "meshes": 24,
+    "extensionsRequired": []
+  }
+]

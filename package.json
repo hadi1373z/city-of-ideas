@@ -1,0 +1,13 @@
+{
+  "name": "city-of-ideas",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A continuous Persian/English City of Ideas",
+  "scripts": {
+    "build": "node tools/build.cjs",
+    "check": "node tools/check.cjs",
+    "preview": "node tools/preview.cjs",
+    "verify-live": "node tools/verify-live.cjs"
+  }
+}

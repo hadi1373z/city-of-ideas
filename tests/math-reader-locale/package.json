@@ -1,0 +1,1 @@
+{"name":"city-math-reader-release-tests","private":true,"type":"module","scripts":{"test":"node test.mjs"}}

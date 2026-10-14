@@ -1,0 +1,34 @@
+'use strict';
+const fs=require('node:fs'),path=require('node:path');
+const root=path.resolve(__dirname,'..'),src=path.join(root,'src');
+const reader=path.join(root,'integrations/reader-locale/reader-public-fa.js');
+const destination=path.join(src,'city-source-assets/park-tools/reader-public-fa.js');
+const readerBytes=fs.readFileSync(fs.existsSync(reader)?reader:destination);fs.writeFileSync(destination,readerBytes);
+for(const name of ['index.html','atlas.html']){
+ const file=path.join(src,'city-source-assets/park-tools',name);let text=fs.readFileSync(file,'utf8');
+ if(!text.includes('src="./reader-public-fa.js"'))text=text.replace(/<script src="\.\/language\.js"/, '<script src="./reader-public-fa.js"></script><script src="./language.js"');
+ if(!text.includes('src="./reader-public-fa.js"'))throw Error('Missing Park language anchor: '+name);
+ if(name==='index.html'&&!text.includes('id="city-park-tools-layout"'))text=text.replace('</head>','<style id="city-park-tools-layout">#park{height:auto;min-height:0;overflow:visible}.vignette{display:none}.topbar{position:relative;flex-wrap:wrap}.top-actions{flex-wrap:wrap}.scene-tools,.bottom-bar,#world-narration-status{position:relative;inset:auto;transform:none}.scene-tools{flex-direction:row;flex-wrap:wrap;margin:12px 24px;width:max-content;max-width:calc(100% - 48px)}.bottom-bar{flex-wrap:wrap}.trail-guide,.nearby{position:relative;inset:auto;transform:none;margin:16px}.park-tools-intro{margin:20px auto;max-width:680px}body[data-language="fa"] .brand,body[data-language="fa"] .garden-entry{text-align:right}@media(max-width:700px){.topbar{justify-content:center}.top-actions{justify-content:center;width:100%}.top-center{display:none}.scene-tools{margin:8px auto}.bottom-bar{justify-content:center}.bottom-meta{align-items:center}.park-tools-intro{padding:18px}.park-tools-intro button{display:block;width:100%;margin:8px 0}}</style></head>');
+ fs.writeFileSync(file,text);
+}
+let file=path.join(src,'i18n.js'),text=fs.readFileSync(file,'utf8');
+const aria="const accessibility={'#world':['نمای سه‌بعدی شهر ایده‌ها','Three-dimensional City of Ideas'],'.identity':['بازگشت به نمای شهر','Return to the city overview'],'.floor-nav':['چهار بخش کتاب','Four parts of the book'],'.touch-pad':['کنترل حرکت','Movement controls'],'#map':['موقعیت شما در شهر پیوسته','Your position in the continuous city']};";
+if(!text.includes('const accessibility='))text=text.replace('function apply(){',aria+'\nfunction apply(){');
+const anchor="document.querySelector('#help')?.setAttribute('aria-label',t('help'));";
+if(!text.includes('Object.entries(accessibility)'))text=text.replace(anchor,anchor+"for(const [selector,labels]of Object.entries(accessibility))document.querySelector(selector)?.setAttribute('aria-label',labels[lang==='en'?1:0]);");
+text=text.replace('The81stations include the prologue and80discourses.','The 81 stations include the prologue and 80 discourses.');
+fs.writeFileSync(file,text);
+file=path.join(src,'gallery.js');text=fs.readFileSync(file,'utf8');
+for(const [fa,en]of [['زرتشت','Zarathustra'],['مارپیچ','Ascent'],['سقراط','Socrates'],['هنرمندان','Artists'],['اشیا','Objects']])text=text.replaceAll(",'"+fa+"');",",tx('"+fa+"','"+en+"'));");
+text=text.replace("ctx.fillText('زایش',130,151)","ctx.fillText(tx('زایش','Birth'),130,151)");
+if(!text.includes("b.querySelector('.floor-number').textContent=chapterNumber(index+1)"))text=text.replace("b.querySelector('small').textContent=floors[index].title", "b.querySelector('small').textContent=floors[index].title;b.querySelector('.floor-number').textContent=chapterNumber(index+1)");
+fs.writeFileSync(file,text);
+file=path.join(src,'city-integration.js');text=fs.readFileSync(file,'utf8');
+const regionAnchor='const r=E?.region(x,z,{y:M.player.y-M.eye});if(!r?.homeId)return r;';
+const regionReplacement="let r=E?.region(x,z,{y:M.player.y-M.eye});if(r?.id==='mathematics'&&CITY_I18N.lang==='fa'){const names=['مبانی','جبر','هندسه','حسابان و تحلیل','ریاضیات گسسته','احتمال و آمار','توپولوژی','رصدخانهٔ منطق و محاسبه'];r={...r,title:r.inside?'اطلس ریاضیات · '+names[r.floor]:'مؤسسهٔ ریاضیات · میدان'};}if(r?.id==='makers'&&CITY_I18N.lang==='fa'){const halls={'makers-library':'کتابخانه','makers-workshop':'کارگاه','makers-dialogue':'خانهٔ گفت‌وگو'};r={...r,title:'شهر سازندگان · '+(halls[r.hallId]||'حیاط مشترک')};}if(r?.artistId==='dali'&&!r.artistEditionId&&CITY_I18N.lang==='fa')r={...r,title:'سالوادور دالی · اقامتگاه رؤیا'};if(!r?.homeId)return r;";
+text=text.replace(regionAnchor,regionReplacement);fs.writeFileSync(file,text);
+file=path.join(src,'i18n.js');text=fs.readFileSync(file,'utf8');if(!text.includes("'گالری زرتشت':'Zarathustra Gallery'"))text=text.replace('const signs={',"const signs={'گالری زرتشت':'Zarathustra Gallery',");fs.writeFileSync(file,text);
+file=path.join(src,'index.html');text=fs.readFileSync(file,'utf8');
+if(!text.includes('rel="icon"'))text=text.replace('<link rel="stylesheet" href="style.css">','<link rel="icon" href="favicon.svg" type="image/svg+xml">\n  <link rel="stylesheet" href="style.css">');
+fs.writeFileSync(file,text);
+console.log('Fixed public Park reader, accessibility labels, map captions and favicon installed.');

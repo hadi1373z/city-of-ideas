@@ -1,0 +1,4 @@
+'use strict';
+const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto'),root=path.resolve(__dirname,'..'),stage=path.join(root,'integrations/home-layout-fix/city-tools-layout.css'),dest=path.join(root,'src/city-source-assets/home-tools');
+const bytes=fs.readFileSync(stage);if(crypto.createHash('sha256').update(bytes).digest('hex')!=='dc522c0faebed9b137c8dd4631973e8e567581d5026474f14c6303e9ce2e6bba')throw Error('Reviewed Home layout stage changed.');
+fs.writeFileSync(path.join(dest,'city-tools-layout.css'),bytes);const file=path.join(dest,'index.html');let text=fs.readFileSync(file,'utf8');if(!text.includes('href="./city-tools-layout.css"'))text=text.replace('</head>','<link rel="stylesheet" href="./city-tools-layout.css"></head>');fs.writeFileSync(file,text);console.log('Reviewed accessible Home tools layout installed.');

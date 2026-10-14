@@ -1,0 +1,27 @@
+/* Append after city-tools.css in the persistent original House tools frame.
+   These tools share the parent city renderer; their activity UI uses document flow. */
+html{height:auto!important;min-height:100%;overflow:auto!important}
+body,body.immersive{height:auto!important;min-height:100%;overflow:visible!important;padding-top:0!important}
+#city-tools-storage{position:relative!important;inset:auto!important;z-index:auto!important;width:100%;max-width:100%;box-sizing:border-box}
+#city-tools-storage>*{min-width:0}
+#city-tools-storage .city-tools-actions{min-width:0;max-width:100%}
+#city-tools-storage .city-tools-actions>*{max-width:100%;box-sizing:border-box}
+#city-tools-storage .city-import-label{flex-wrap:wrap;min-width:0}
+#city-tools-storage .city-import-label input{min-width:0;max-width:100%}
+#city-tools-navigation{min-width:0;max-width:100%;overflow-x:auto;flex-wrap:nowrap;overscroll-behavior-x:contain}
+#city-tools-navigation button{flex:none}
+body main,body.immersive main,body.immersive.rooms-open main{display:flex!important;flex-direction:column!important;height:auto!important;min-height:0!important;max-width:100%}
+body .workspace,body.immersive .workspace,body.plan-mode .workspace{position:relative!important;inset:auto!important;order:0;height:auto!important;min-height:0!important;width:auto!important;max-width:100%!important;overflow:visible!important}
+#sidebar{order:1;z-index:auto!important;height:auto!important;max-height:none!important;overflow:visible!important;box-sizing:border-box}
+#home-activity{position:relative!important;inset:auto!important;transform:none!important;z-index:auto!important;width:min(720px,calc(100% - 24px))!important;max-width:100%!important;max-height:none!important;height:auto!important;overflow:visible!important;margin:12px auto!important;box-sizing:border-box}
+#home-activity[hidden]{display:none!important}
+#home-activity .dialog-head{flex-wrap:wrap;gap:10px}
+#home-activity .dialog-head>div{min-width:0;flex:1 1 180px}
+#home-activity .dialog-head h2{overflow-wrap:anywhere}
+#home-activity .book-pages,#home-activity .activity-actions{flex-wrap:wrap}
+#home-activity select,#home-activity textarea{box-sizing:border-box;min-width:0;max-width:100%}
+#home-orientation-open,#learning-trail-hud,.market-music-controls,.residence-entry-writing,#world-toast,#residence-open,#residence-map-open{position:relative!important;inset:auto!important;transform:none!important;z-index:auto!important;max-width:calc(100% - 24px)!important;max-height:none!important;box-sizing:border-box;margin:12px}
+@media(max-width:600px){
+ #home-activity{width:calc(100% - 12px)!important;margin:6px auto!important;padding:14px}
+ #city-tools-storage{padding:10px}
+}

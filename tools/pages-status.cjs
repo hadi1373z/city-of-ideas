@@ -1,0 +1,3 @@
+'use strict';
+const {GitHub}=require('./github.cjs');
+(async()=>{const api=new GitHub('hadi1373z');await api.identity();const runs=await api.api('repos/hadi1373z/city-of-ideas/actions/workflows/pages.yml/runs?per_page=3');const pages=await api.api('repos/hadi1373z/city-of-ideas/pages','GET',undefined,true);console.log(JSON.stringify({pages:pages&&{url:pages.html_url,status:pages.status,build_type:pages.build_type,source:pages.source},runs:runs.workflow_runs.map(r=>({id:r.id,commit:r.head_sha,status:r.status,conclusion:r.conclusion,url:r.html_url}))},null,2));})().catch(e=>{console.error(e.message);process.exitCode=1;});

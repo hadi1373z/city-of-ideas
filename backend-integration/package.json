@@ -1,0 +1,1 @@
+{"name":"city-house-original-service-bridge","private":true,"type":"module","scripts":{"test":"node tests/bridge-smoke.mjs"}}

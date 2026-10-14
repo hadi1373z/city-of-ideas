@@ -1,0 +1,97 @@
+{
+  "counts": {
+    "people": 131,
+    "expandedProfiles": 49,
+    "connections": 181,
+    "ideaLenses": 13,
+    "publicationRecords": 20
+  },
+  "dictionary": {
+    "exact": 4391,
+    "templates": 75
+  },
+  "categories": {
+    "names": {
+      "unique": 131,
+      "exactMapped": 131,
+      "originalEnglishRetained": 0
+    },
+    "profileDescriptions": {
+      "unique": 493,
+      "exactMapped": 493,
+      "originalEnglishRetained": 0
+    },
+    "biographies": {
+      "unique": 131,
+      "exactMapped": 131,
+      "originalEnglishRetained": 0
+    },
+    "sectionTitles": {
+      "unique": 188,
+      "exactMapped": 188,
+      "originalEnglishRetained": 0
+    },
+    "articleParagraphs": {
+      "unique": 398,
+      "exactMapped": 178,
+      "originalEnglishRetained": 220
+    },
+    "fields": {
+      "unique": 9,
+      "exactMapped": 9,
+      "originalEnglishRetained": 0
+    },
+    "connections": {
+      "unique": 363,
+      "exactMapped": 363,
+      "originalEnglishRetained": 0
+    },
+    "trails": {
+      "unique": 24,
+      "exactMapped": 24,
+      "originalEnglishRetained": 0
+    },
+    "standards": {
+      "unique": 8,
+      "exactMapped": 8,
+      "originalEnglishRetained": 0
+    },
+    "exploration": {
+      "unique": 191,
+      "exactMapped": 191,
+      "originalEnglishRetained": 0
+    }
+  },
+  "renderedFixtures": 465,
+  "renderedUniqueUIStrings": 2533,
+  "translatedExactOrDeclaredTemplate": 2510,
+  "unchangedTechnicalOrDiagramTokens": 7,
+  "originalEnglishArticleSearchFragments": 16,
+  "intentionallyUntranslatedRenderedStrings": [
+    "c",
+    "a",
+    "d",
+    "b",
+    "E",
+    "F = EK",
+    "K",
+    "Beyond one technique. Lovász’s topological",
+    "proof",
+    "of Kneser’s conjecture and his work on graphons both replace a finite combinatorial problem with a richer object. Dense graphons and bounded-degree graphings are different…",
+    "…ed probabilistic encryption and, with Micali and Rackoff, interactive",
+    "s and zero knowledge. Her work made security a subject of precise computational definitions.",
+    "…tax as arithmetic. Gödel assigns natural-number codes to formulas and",
+    "s. Arithmetic can then express a relation saying that one number encodes a",
+    "of the formula encoded by another. A diagonal construction produ…",
+    "…Lund, proved MIP=NEXP. His graph-isomorphism work and his interactive-",
+    "work connect through complexity but should not be confused as the same algorithm.",
+    "…ackward and solving simpler cases. These are heuristics for finding a",
+    ", not inference rules that establish correctness by themselves.",
+    "The",
+    "side. The dual seeks bounded-degree sum-of-squares certificates modulo the constraints. General polynomial optimization needs appropriate compactness or positivity assumptions for convergence claims. A pseudoex…",
+    "Shamir proved IP=PSPACE, extending the algebraic interactive-",
+    "approach of Lund, Fortnow, Karloff and Nisan. He also co-developed RSA and introduced secret sharing."
+  ],
+  "scope": "Synthetic original reader renders: all131 profiles,13 lenses,8 trails,20 public archives,publication journal,home/library/timeline/about/shelf,settings/equation/search/help/import dialogs,and2 connection-map selections. Not a live visual or screen-reader acceptance claim.",
+  "privateDataSource": "none"
+}

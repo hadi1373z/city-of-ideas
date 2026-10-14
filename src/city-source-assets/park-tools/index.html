@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#e6eadf">
+  <meta name="description" content="Walk through a large garden of mathematical minds. Explore 118 thinkers, follow connections, try a creative mission, and plant an idea of your own.">
+  <title>Ideas Park · Atlas of Ideas</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="importmap">{"imports":{"three":"./vendor/three.module.js"}}</script>
+<style>#world,#labels,#welcome,#loading,#location,.canvas-controls,#joystick,.park-orbit{display:none!important}body{background:#edf0e8}header{position:relative!important}.park-tools-intro{margin:100px auto 20px;max-width:680px;padding:24px;font:18px/1.6 sans-serif}.park-tools-intro button{padding:16px;margin:6px;border-radius:8px}</style><style id="city-park-tools-layout">#park{height:auto;min-height:0;overflow:visible}.vignette{display:none}.topbar{position:relative;flex-wrap:wrap}.top-actions{flex-wrap:wrap}.scene-tools,.bottom-bar,#world-narration-status{position:relative;inset:auto;transform:none}.scene-tools{flex-direction:row;flex-wrap:wrap;margin:12px 24px;width:max-content;max-width:calc(100% - 48px)}.bottom-bar{flex-wrap:wrap}.trail-guide,.nearby{position:relative;inset:auto;transform:none;margin:16px}.park-tools-intro{margin:20px auto;max-width:680px}body[data-language="fa"] .brand,body[data-language="fa"] .garden-entry{text-align:right}@media(max-width:700px){.topbar{justify-content:center}.top-actions{justify-content:center;width:100%}.top-center{display:none}.scene-tools{margin:8px auto}.bottom-bar{justify-content:center}.bottom-meta{align-items:center}.park-tools-intro{padding:18px}.park-tools-intro button{display:block;width:100%;margin:8px 0}}</style></head>
+<body>
+  <main id="park" aria-label="Interactive Ideas Park">
+    <canvas id="world" aria-label="3D park. Use WASD or arrow keys to walk, drag to look around, or use the map and garden buttons." tabindex="0"></canvas>
+    <div id="labels" aria-hidden="true"></div>
+    <div class="vignette" aria-hidden="true"></div>
+    <header class="topbar">
+      <button class="brand" id="home" aria-label="Return to the park entrance"><span class="brand-icon">✳</span><span>ATLAS <i>of</i> IDEAS<small>THE IDEAS PARK</small></span></button>
+      <div class="top-center"><span class="live-dot"></span> OPEN TO POSSIBILITY</div>
+      <nav class="top-actions" aria-label="Park tools">
+        <button id="world-open" class="soft-btn">City &amp; houses</button><button id="world-narration" class="icon-btn" aria-label="Toggle walking narration" aria-pressed="false">▶</button><button id="search-open" class="icon-btn" aria-label="Find a thinker" title="Find a thinker">⌕</button>
+        <button id="map-open" class="soft-btn" aria-label="Open park map"><span>⌘</span> <span class="button-word">Park map</span></button>
+        <button id="grove-open" class="dark-btn" aria-label="Open my idea grove"><span>＋</span> <span class="button-word">My idea grove</span></button>
+      </nav>
+    </header>
+    <section id="welcome" class="welcome paper">
+      <div class="eyebrow">A FIELD GUIDE, WITH ROOM TO WANDER</div>
+      <h1>A little room<br>for <em>big ideas.</em></h1>
+      <p>Walk among mathematical minds.<br>Follow a question. Leave with something<br>that is your own.</p>
+      <div class="welcome-stats"><span><strong>9</strong> gardens</span><span><strong id="thinker-count">118</strong> thinkers</span><span><strong>∞</strong> possibilities</span></div>
+      <button id="explore" class="dark-btn wide">Step into the park <span>↗</span></button>
+      <button id="mission-open" class="text-btn">Or try a 15-minute idea mission →</button>
+      <div class="welcome-note">No rush. Every detour belongs here.</div>
+    </section>
+    <div id="loading" class="loading"><span class="loader"></span> Growing your park…</div>
+    <div id="fallback" class="fallback paper" hidden><h2>Your park, in map view.</h2><p>This device could not open the 3D scene. Every garden, thinker, and mission is still available.</p><button class="dark-btn" id="fallback-map">Explore the map →</button></div>
+    <aside id="location" class="location paper" hidden><span class="eyebrow">YOU ARE WANDERING THROUGH</span><strong id="location-name">Curiosity Square</strong><span id="location-note">Click a sculpture to discover an idea.</span></aside>
+    <aside id="trail-guide" class="trail-guide paper" hidden></aside>
+    <span id="world-narration-status" class="world-voice" role="status">Walking narration off</span><div id="nearby" class="nearby paper" hidden></div>
+    <div class="scene-tools paper" aria-label="Scene settings">
+      <button id="view-toggle" aria-label="Switch to walking view" title="Overview / walking">◉</button>
+      <button id="zoom-in" aria-label="Zoom in" title="Zoom in">＋</button>
+      <button id="zoom-out" aria-label="Zoom out" title="Zoom out">−</button>
+      <span></span><button id="time-toggle" aria-label="Switch to evening light" title="Day / evening">☀</button>
+      <button id="sound-toggle" aria-label="Enable ambient sound" title="Ambient sound">♫</button>
+      <button id="help-open" aria-label="Park controls" title="Help">?</button>
+    </div>
+    <div id="joystick" class="joystick" hidden aria-label="Touch joystick"><div class="joystick-ring"></div><div id="joystick-knob"></div><span>WANDER</span></div>
+    <footer class="bottom-bar">
+      <button id="garden-open" class="garden-entry"><span class="mini-flower">✳</span><span>Choose a garden<small>Let a question lead the way</small></span><span>↗</span></button>
+      <div class="bottom-meta"><span id="planted-count">0 ideas planted</span><span class="separator">/</span><button id="paths-open">Reading paths</button><span class="separator">/</span><button id="reader-open">The Atlas reader ↗</button></div>
+      <span class="coordinates" id="coordinates">A PLACE TO BEGIN</span>
+    </footer>
+  </main>
+  <dialog id="detail" aria-labelledby="detail-title"><div class="dialog-top"><span class="eyebrow" id="detail-kicker">THE IDEAS PARK</span><button class="icon-btn close" id="detail-close" aria-label="Close">×</button></div><div id="detail-body"></div></dialog>
+  <dialog id="reader" class="reader-dialog" aria-label="Atlas of Ideas reader"><div class="reader-bar"><span>ATLAS <i>of</i> IDEAS <small> / READING ROOM</small></span><button id="reader-close" class="soft-btn">Back to the park ×</button></div><iframe id="reader-frame" title="Atlas of Ideas original reader" loading="lazy"></iframe></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <input id="backup-input" type="file" accept="application/json,.json" hidden>
+  <script src="./public-fa.js"></script>
+  <script src="./reader-public-fa.js"></script><script src="./language.js"></script>
+  <script type="module" src="app.js"></script>
+<section class="park-tools-intro"><h2>Atlas · Ideas Park</h2><p>The original park tools, catalogue, reader, missions and personal idea grove are available here. Garden visits return you to walking in the shared city.</p><button onclick="document.getElementById('garden-open').click()">Nine gardens</button><button onclick="document.getElementById('search-open').click()">Search all minds</button><button onclick="document.getElementById('grove-open').click()">Your idea grove</button><button onclick="document.getElementById('mission-open').click()">Missions</button><button onclick="document.getElementById('paths-open').click()">Reading paths</button><button onclick="document.getElementById('reader-open').click()">Complete Atlas reader</button></section></body>
+</html>

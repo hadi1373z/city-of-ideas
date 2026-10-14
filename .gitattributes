@@ -1,0 +1,10 @@
+* text=auto
+# Imported browser sources are verified byte-for-byte across Windows and CI.
+src/** -text
+tests/** -text
+*.glb binary
+*.webp binary
+*.wav binary
+*.png binary
+*.jpg binary
+*.woff2 binary

@@ -1,0 +1,15 @@
+{
+  "project": "City of Ideas",
+  "sourceProject": "Zarathustra continuous city builder",
+  "importedAt": "2026-10-14T13:11:04.287Z",
+  "sourceContentHash": "b2de392175b6766d76dedc97c55a0e5f5d5bc7c0dc30a878a65ab7df909a09f9",
+  "files": 309,
+  "bytes": 94595801,
+  "visualMerge": {
+    "snapshot": "city-of-ideas-visual-20261014-v1",
+    "method": "Bounded geometry and public-language merge; established City tools and service preserved",
+    "verifiedManifestFiles": 346,
+    "verifiedManifestBytes": 95114107,
+    "completeDeltaPaths": 31
+  }
+}

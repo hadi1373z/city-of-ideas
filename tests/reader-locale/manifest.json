@@ -1,0 +1,28 @@
+{
+  "status": "authored-complete",
+  "inventoryCount": 952,
+  "contentCount": 239,
+  "uiCount": 713,
+  "readerPeople": 118,
+  "readerSections": 183,
+  "inventorySHA256": "69df5eabe88d51af5def5cd09d0af74fb3dcd118cec8432ad4aa5e6d2e531ad5",
+  "dictionarySHA256": "3a59befc929fd8f26d0254399d9ee1103e4ea1d1474fb849871eca29163bb5be",
+  "global": "CITY_PARK_READER_FA",
+  "loadBefore": "language.js",
+  "privateDataSource": "none",
+  "unchangedPublicTokens": [
+    "hadi1373z/atlas-of-ideas",
+    "px",
+    "F",
+    "Esc",
+    "Tab",
+    "W",
+    "A",
+    "S",
+    "D"
+  ],
+  "files": [
+    "reader-public-fa.js",
+    "fixed-inventory.json"
+  ]
+}

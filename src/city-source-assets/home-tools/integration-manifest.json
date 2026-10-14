@@ -1,0 +1,1243 @@
+{
+  "project": "City of Ideas original House tools adapter",
+  "files": 247,
+  "bytes": 116560301,
+  "sourceContentHash": "d47333af3c7a5d3a8f15ec264c9ce2ed3d852d3939bb2a1b5a7a8b368f1e372d",
+  "entries": [
+    {
+      "path": "adapter-tests.mjs",
+      "bytes": 4650,
+      "sha256": "d8b2cf81454ace5e62187f7b62f963571861953b51f59d28c443e6a20c1e1297"
+    },
+    {
+      "path": "app.js",
+      "bytes": 53941,
+      "sha256": "92a10b49ba6004acef15224daf6d2482c0e9f383050b098b61642b0ad07b6cf3"
+    },
+    {
+      "path": "art-city/artworks/hilma-af-klint_number-2.webp",
+      "bytes": 208922,
+      "sha256": "3026ba4361143d5f2e1ca122df0126b048d10a4ff73af047e84cf0e85a1e2635"
+    },
+    {
+      "path": "art-city/artworks/hilma-af-klint_number-3.webp",
+      "bytes": 287380,
+      "sha256": "9c66f950a997a3a2e1f5ca9218ab2d301c2fa86b2b6e4a1b41841d01aac08fc2"
+    },
+    {
+      "path": "art-city/artworks/hilma-af-klint_number-4.webp",
+      "bytes": 208380,
+      "sha256": "cff562767fcca4388e0d59a3430bd543b7e6d92ea63c95c84816f4c2567ff242"
+    },
+    {
+      "path": "art-city/artworks/hilma-af-klint_number-5.webp",
+      "bytes": 183412,
+      "sha256": "884c8fe5d244200abd8b93c105a13032a76e96a1d23177a3248231f8d37023a9"
+    },
+    {
+      "path": "art-city/artworks/hilma-af-klint_number-7.webp",
+      "bytes": 263990,
+      "sha256": "9239a1dc357cacd60f1e1431d78b8f1bd218c91b70d6e2e4af826debb18db3cc"
+    },
+    {
+      "path": "art-city/artworks/hilma-af-klint_number-9.webp",
+      "bytes": 271776,
+      "sha256": "8c554be183e7029e4020a0851e723ac07f3e50d3d870c5e098571c98abd33893"
+    },
+    {
+      "path": "art-city/artworks/hokusai_ejiri.webp",
+      "bytes": 437878,
+      "sha256": "95d74b2667910e08c3d5f83bae2f141e4ed827ab46d9da8ca99070cf3d97fd2c"
+    },
+    {
+      "path": "art-city/artworks/hokusai_great-wave.webp",
+      "bytes": 458256,
+      "sha256": "f1c53ea707df1054001bc33ab43e51bbed9c6fdbfe2f0cc2eafdf054bbe26e37"
+    },
+    {
+      "path": "art-city/artworks/hokusai_kajikazawa.webp",
+      "bytes": 175874,
+      "sha256": "e05c7f7655ddd5da9be4c455913d935914d63a530ded01acb822887f9fb1ef26"
+    },
+    {
+      "path": "art-city/artworks/hokusai_mishima.webp",
+      "bytes": 306664,
+      "sha256": "332f1d851af330e852ee53d60f1962a0a45be33c98689b6045eff5fc5e588b38"
+    },
+    {
+      "path": "art-city/artworks/hokusai_red-fuji.webp",
+      "bytes": 426022,
+      "sha256": "3ae0b7450e908706cd399d87bc7e77364e769fb5f95f8b527000ddc5319170d9"
+    },
+    {
+      "path": "art-city/artworks/hokusai_tsukuda.webp",
+      "bytes": 305954,
+      "sha256": "ddbc4a68771e790880a13670ca85e0b8f4972688f7dbdfe5e7bfe4493aff7d56"
+    },
+    {
+      "path": "art-city/artworks/kandinsky_black-and-violet.webp",
+      "bytes": 555576,
+      "sha256": "0d0391968330b54e78722077bef2acbfc8ab095602e3fda286369b973f3d3f66"
+    },
+    {
+      "path": "art-city/artworks/kandinsky_composition-eight.webp",
+      "bytes": 244830,
+      "sha256": "a7485d141ccdc01d10595893b8b84c9c3e7c2192cfba30d5271638b169329f28"
+    },
+    {
+      "path": "art-city/artworks/kandinsky_composition-seven.webp",
+      "bytes": 207088,
+      "sha256": "4180352d5870a58436253a5badcaec8e0427849bdd8d5f19d7a3fabfd4bfbc17"
+    },
+    {
+      "path": "art-city/artworks/kandinsky_several-circles.webp",
+      "bytes": 306804,
+      "sha256": "b4cf08855c347b660ff0119f0f1b72b0ba3f6dc6432c88437ce57a92f6947538"
+    },
+    {
+      "path": "art-city/artworks/kandinsky_study-seven.webp",
+      "bytes": 422312,
+      "sha256": "cdbac996dab96b921fbde5db2cbcd3a910e040e5bb53172e98f99d931fd5c698"
+    },
+    {
+      "path": "art-city/artworks/kandinsky_yellow-red-blue.webp",
+      "bytes": 199338,
+      "sha256": "5be74c2f0ac7ffd6eb5c11996eafd9a56ef7bc544a9138359ad7d6341b3b90fd"
+    },
+    {
+      "path": "art-city/artworks/klee_ancient-sound.webp",
+      "bytes": 251544,
+      "sha256": "1a33f4db44a75e0675b1d02e97cb2ea98cf2429c562f77677307f262f746d70e"
+    },
+    {
+      "path": "art-city/artworks/klee_castle-and-sun.webp",
+      "bytes": 437194,
+      "sha256": "9b9fa029eb1b1a3324f80ebee5c67fe0b6a307d4114ada656eb3c2f04e9ae338"
+    },
+    {
+      "path": "art-city/artworks/klee_fish-magic.webp",
+      "bytes": 540366,
+      "sha256": "b2f9536cc96d1f7da3d9bec9a174bd4876ef0eea083ae7b83ca316f710bb9006"
+    },
+    {
+      "path": "art-city/artworks/klee_red-balloon.webp",
+      "bytes": 898710,
+      "sha256": "891f174098fa459bd3ac104553c8533e97b2de932b0fbb6144195e335f55bfd2"
+    },
+    {
+      "path": "art-city/artworks/klee_senecio.webp",
+      "bytes": 518348,
+      "sha256": "445339af004ad34e4238f209600e57831ddb849895859b2595effb5bc292f696"
+    },
+    {
+      "path": "art-city/artworks/klee_twittering-machine.webp",
+      "bytes": 666564,
+      "sha256": "f28c73a7fc76c2ddcd0e83bd6da123a03b2688367ec5dca06342faedcbaaddad"
+    },
+    {
+      "path": "art-city/artworks/lange_children-camp.webp",
+      "bytes": 113482,
+      "sha256": "21e4b29681d0a62b7cd8172c24f9ad2fb2347acb0b8e798b999b477d068e12fc"
+    },
+    {
+      "path": "art-city/artworks/lange_dust-storm.webp",
+      "bytes": 203556,
+      "sha256": "35fc9e627ed89d22b18f41736555637bafa447401356ae82701e9a6ba37862c1"
+    },
+    {
+      "path": "art-city/artworks/lange_migrant-mother.webp",
+      "bytes": 329040,
+      "sha256": "af4d73d2a3fc4564c1832035dd8013c687bb9504e90119893aaa0d10a7688b18"
+    },
+    {
+      "path": "art-city/artworks/lange_pea-pickers-children.webp",
+      "bytes": 101732,
+      "sha256": "8776f181a16d4817f1a5b4ea3a6a97f5de3e76778973c9ab17b2eab915d08738"
+    },
+    {
+      "path": "art-city/artworks/lange_roadside-blythe.webp",
+      "bytes": 313428,
+      "sha256": "833b0d803b1bea1f032e32fa6bd5167b50940ebf9110edc41fa36e0fd62a0399"
+    },
+    {
+      "path": "art-city/artworks/lange_toward-la.webp",
+      "bytes": 318266,
+      "sha256": "d7511333e68dfe0ffea5fc7720a8845bec5c90992c6e37cd8f4452183dd2a19d"
+    },
+    {
+      "path": "art-city/artworks/mondrian_apple-tree.webp",
+      "bytes": 443864,
+      "sha256": "3da098cd325ab42a15cc0d2ef15e6c5b32f1560388623dfdb1d558e1cb2e8ee5"
+    },
+    {
+      "path": "art-city/artworks/mondrian_composition-1921.webp",
+      "bytes": 362110,
+      "sha256": "c542bcf97d4e2d2be60997b5eef0e73ddca17baa7822f271c0fa2426db4ed8b1"
+    },
+    {
+      "path": "art-city/artworks/mondrian_composition-1929.webp",
+      "bytes": 316978,
+      "sha256": "d80478bf61ba7fff9b959d9430ed38ca663556fdaeedd4f503b2e91f12ec4768"
+    },
+    {
+      "path": "art-city/artworks/mondrian_composition-red.webp",
+      "bytes": 221088,
+      "sha256": "66159ec4c77167da080ada5a6d91a6bee9ee62662527e0a9ade6f92a48b81579"
+    },
+    {
+      "path": "art-city/artworks/mondrian_gray-tree.webp",
+      "bytes": 427224,
+      "sha256": "098a3170bf0db7fda86cfc7238326b12c1190cb6c041bfbc790c7f056d2f9670"
+    },
+    {
+      "path": "art-city/artworks/mondrian_red-tree.webp",
+      "bytes": 598608,
+      "sha256": "5c628cb0747f5d92506f660ea990cb406ba4e38163950f391f9e79ebe3b46c3b"
+    },
+    {
+      "path": "art-city/artworks/monet_impression-sunrise.webp",
+      "bytes": 151148,
+      "sha256": "79ab24b1a464374a9069de3f529629c5f41e8be75e5fb592607d1618fe58a1ed"
+    },
+    {
+      "path": "art-city/artworks/monet_japanese-footbridge.webp",
+      "bytes": 486650,
+      "sha256": "f05502cb3e80c0f026c7bb7adfe398c1c566e77a2e949eaa43fbf4d9bd0623bf"
+    },
+    {
+      "path": "art-city/artworks/monet_poppy-field.webp",
+      "bytes": 181398,
+      "sha256": "07f9f54e06927f69dc5a58c79f54fd6bb6dd7274a355a9094e0f915deded1b61"
+    },
+    {
+      "path": "art-city/artworks/monet_water-lilies-and-bridge.webp",
+      "bytes": 794432,
+      "sha256": "b5540d4d123d7708c8849668dd75b4b07e37379b692bf6ff366beef18b844368"
+    },
+    {
+      "path": "art-city/artworks/monet_water-lilies.webp",
+      "bytes": 392252,
+      "sha256": "0d7950d597c8b667ca3e154554101aed7592a7906ae74b323abb5177ddccb9e9"
+    },
+    {
+      "path": "art-city/artworks/monet_woman-with-a-parasol.webp",
+      "bytes": 753842,
+      "sha256": "22cddd79713b092304d9c6eda30f66027aa6494cfff98810087d754ba38b88e8"
+    },
+    {
+      "path": "art-city/artworks/morris_acanthus.webp",
+      "bytes": 270298,
+      "sha256": "555304975b62b5e34d627232203c7daa54ad65076f7b1c3258344ed12d55abef"
+    },
+    {
+      "path": "art-city/artworks/morris_daisy.webp",
+      "bytes": 600664,
+      "sha256": "c4679207a85d405fc166c9f32b40fdb7a55597848366c7c81b230ba793278afa"
+    },
+    {
+      "path": "art-city/artworks/morris_snakeshead.webp",
+      "bytes": 411754,
+      "sha256": "6692af0bbb8de2d628684998a88ac64d60a7e95a86e1e5bd0f0ee05c7138660c"
+    },
+    {
+      "path": "art-city/artworks/morris_strawberry-thief.webp",
+      "bytes": 387712,
+      "sha256": "e9af364cb9704e34e8c229245cb69df9a2546f7128ce7020aea2d0048f37d036"
+    },
+    {
+      "path": "art-city/artworks/morris_trellis.webp",
+      "bytes": 478106,
+      "sha256": "dfcfd21b6d3f599dd1793d01a2e6647cf81f167080ae7694d1fd7b4a6b104d08"
+    },
+    {
+      "path": "art-city/artworks/morris_willow-boughs.webp",
+      "bytes": 381744,
+      "sha256": "41a01bd0d1f2e50c6689acf6004f93d636dc1bb1637cd0ded4a5f350f7881f27"
+    },
+    {
+      "path": "art-city/artworks/rodin_age-of-bronze.webp",
+      "bytes": 78164,
+      "sha256": "3ea3036687b23fe5dedf5669e65b67ab380e5902ecb31a91b257305472a5c8d5"
+    },
+    {
+      "path": "art-city/artworks/rodin_eternal-spring.webp",
+      "bytes": 87464,
+      "sha256": "7d7746db52c71ef9214ff4499a4851d520c90698c3c09ff54a524db9ded54871"
+    },
+    {
+      "path": "art-city/artworks/rodin_hand-of-god.webp",
+      "bytes": 84200,
+      "sha256": "9c73435ec14ea2adef0bcec54319a8415053e65c89057f5b536ce270d4b95867"
+    },
+    {
+      "path": "art-city/artworks/rodin_madame-x.webp",
+      "bytes": 218460,
+      "sha256": "60bdd764c11145bdc6d8231c12617cf85d85f4a6e418667f029bd0fef469b41f"
+    },
+    {
+      "path": "art-city/artworks/rodin_thinker.webp",
+      "bytes": 199384,
+      "sha256": "0e73a3df5be0303f7bd7779c192392e35b136062c8615498f13675319e498833"
+    },
+    {
+      "path": "art-city/artworks/rodin_walking-man.webp",
+      "bytes": 247216,
+      "sha256": "c38cc20b0592da886bdcf2c52c2e48685f47a07410ca8249c88d6a1e2f90bbe2"
+    },
+    {
+      "path": "art-city/artworks/van-gogh_almond-blossom.webp",
+      "bytes": 450790,
+      "sha256": "f47ecf5fb91d1b35240c82baabb51d5c4f8b2bc9db26062b3cc2f1cb1fd5bc9f"
+    },
+    {
+      "path": "art-city/artworks/van-gogh_bedroom.webp",
+      "bytes": 502920,
+      "sha256": "0281618f372e000a534f7cb6fd8efd452661a0328d0f74743e38df2e179ccf11"
+    },
+    {
+      "path": "art-city/artworks/van-gogh_rhone.webp",
+      "bytes": 297644,
+      "sha256": "3b69c0be15825af95c56497165ab9ff74f4c5f7a0e9644d5fa22e09189f52288"
+    },
+    {
+      "path": "art-city/artworks/van-gogh_starry-night.webp",
+      "bytes": 356864,
+      "sha256": "4e07cc9d11b09eefc1cdbc8e21d0767c4fdbfe6034882b97d72456e5550aae34"
+    },
+    {
+      "path": "art-city/artworks/van-gogh_sunflowers.webp",
+      "bytes": 782228,
+      "sha256": "245655341f98423ff7ea8ce083d8bbe02872c8d36f1394d198095e94bc11b444"
+    },
+    {
+      "path": "art-city/artworks/van-gogh_wheatfield.webp",
+      "bytes": 344606,
+      "sha256": "c2f95dabe78f8729acd7ff45dbed45a63aab4e2507552fcc602d925ab34d69df"
+    },
+    {
+      "path": "art-city/credits.json",
+      "bytes": 133041,
+      "sha256": "2244e639ccec804841f9690aed8209af723f07cce5186a9f9b76ee4e4a460610"
+    },
+    {
+      "path": "art-city-data.js",
+      "bytes": 78352,
+      "sha256": "c3178550477c8c5d488885a7a36fdfe6c59c6fb179b2c19c7d9358321c84715b"
+    },
+    {
+      "path": "art-city-navigation.js",
+      "bytes": 2606,
+      "sha256": "dcca10630cb1e277e9906dd96886cfb514f5dfaf3485ffc71c72e0069d3914e9"
+    },
+    {
+      "path": "art-city-scene.js",
+      "bytes": 17464,
+      "sha256": "786791f5bb45f1db8ecb04b303db0da0980d03c1cf2842a0a3610a88af8793b7"
+    },
+    {
+      "path": "art-city-ui.js",
+      "bytes": 14538,
+      "sha256": "2dbf6e17553bab2c5b24c23eafd2cad3d196c97bc82a7de43211b0bbdcd1d46e"
+    },
+    {
+      "path": "artist-catalog.js",
+      "bytes": 167,
+      "sha256": "216e972fbe2f1af0867c0ec363ca9afe79757ee748251e1e3bed2e299b87b9e8"
+    },
+    {
+      "path": "artist-city-editions.js",
+      "bytes": 14331,
+      "sha256": "2abc83464770b6eed4e38087d32c1b7568f6e1596fdba444c4d2f57dd630cfb1"
+    },
+    {
+      "path": "artist-dialogue.js",
+      "bytes": 14008,
+      "sha256": "25fa2ab0c174f15b7a369e147be43329734ce3ffe1ef9ed57b324c3c2e84030c"
+    },
+    {
+      "path": "artist-home-data.js",
+      "bytes": 3878,
+      "sha256": "e1c4198e54c23f355f5fc03f74a621dc86d3be49ffe74e15d4fba86da11f49ff"
+    },
+    {
+      "path": "artist-homes-ui.js",
+      "bytes": 11061,
+      "sha256": "83dfce03133191cfc5998f90f080df7d9df53534a43dd201d9ba0e21e08c085f"
+    },
+    {
+      "path": "artist-homes.js",
+      "bytes": 4370,
+      "sha256": "3ae9567000bcbd8bc90c3c0c0dd2c3991f9a44d0941db685be1994d44c82c4ce"
+    },
+    {
+      "path": "artist-resident-ui.js",
+      "bytes": 16239,
+      "sha256": "3b64267802cdd00210ebdce83b0d8450731a4eeda92e5a4e5cee6d6585883cc5"
+    },
+    {
+      "path": "artist-resident.css",
+      "bytes": 4024,
+      "sha256": "3d6d9190ca241246d88fffecc16abc73b7795873ecbf0b77795ec03c96f35e25"
+    },
+    {
+      "path": "artist-residents.js",
+      "bytes": 17535,
+      "sha256": "c386cd15d5fae0f5cbc20fac4f054d7baa21c36a6e267a0cb07eb80fa692345e"
+    },
+    {
+      "path": "artists-websites.html",
+      "bytes": 29473179,
+      "sha256": "ace1492fd76e5c75f3816ba4b0b0c80db3b77e69bcb9c05db26a6a875ae9fa68"
+    },
+    {
+      "path": "books.js",
+      "bytes": 3443,
+      "sha256": "7efecb8471ca354e60723c3ae6690f520d29cbfc633bbeebda1c0bb9278aad88"
+    },
+    {
+      "path": "chatgpt-ui.js",
+      "bytes": 7783,
+      "sha256": "ac7e69e5d792ebe4715ae25fa52f98dc991c3bc3fc33ec969393a973e96c9d40"
+    },
+    {
+      "path": "city-adapter-store.js",
+      "bytes": 2489,
+      "sha256": "88616c54fd20c9790d3d18b909b0faeb230e1b17c8fd25a007b331ea0c1c7016"
+    },
+    {
+      "path": "city-browser-store.js",
+      "bytes": 13163,
+      "sha256": "9530ba492dd767cae683028b4cb094136b26700c3a620564871438a978ae54b3"
+    },
+    {
+      "path": "city-facilities.js",
+      "bytes": 7396,
+      "sha256": "56f8d91e927583dee6137e61174161ebbeb8e06c1ba270d2ed1d375e03aaba10"
+    },
+    {
+      "path": "city-network.js",
+      "bytes": 16791,
+      "sha256": "57e65260e40f8e692f7477378e7ee3ccc9f4f7c4744d737207ec2f377dd05830"
+    },
+    {
+      "path": "city-scene-bridge.js",
+      "bytes": 9671,
+      "sha256": "d3b96a9eefa741c0151c75a6d878c1f77bb3419878ef63f14dfc9f4dce4ab34a"
+    },
+    {
+      "path": "city-tools-content-fa.js",
+      "bytes": 17882,
+      "sha256": "72470374b58be8369ae003bfff76b76bc46a97899e6f31e2cc6f95ecf9696c61"
+    },
+    {
+      "path": "city-tools-entry.js",
+      "bytes": 7070,
+      "sha256": "7f79fb9634aa263a6dcda708aa4a0089096c0f5b39472a80347b52e8773f4721"
+    },
+    {
+      "path": "city-tools-language.js",
+      "bytes": 16697,
+      "sha256": "bb3132cf40bbc0cb4014218bfc66ff342a53893ff1aacf6b39ade280a88b74b7"
+    },
+    {
+      "path": "city-tools.css",
+      "bytes": 3216,
+      "sha256": "4e02dc36a7658d828e33daeafb7be70abd81bfdcfa56e50259ec0f0817b05c09"
+    },
+    {
+      "path": "city-travel-ui.js",
+      "bytes": 24439,
+      "sha256": "f3238eee2144fbf146a34ee89ff7d1a2cbb61262dd27e8a10642d001d35e31c6"
+    },
+    {
+      "path": "construction-data.js",
+      "bytes": 2584,
+      "sha256": "0fddc25c7c938570a218bc92b57da2dbed6d5b4850f43d20b491d8234335cfed"
+    },
+    {
+      "path": "construction-ui.js",
+      "bytes": 14500,
+      "sha256": "487b911bbad9391c852be544bf165a31077f63b85da70c80536b3ab3c94af869"
+    },
+    {
+      "path": "conversation-data.js",
+      "bytes": 10640,
+      "sha256": "331698a81832d0e9768f6baa2eff0c2a212ec21ed7bd4178fd9bbfbe2d06dd9f"
+    },
+    {
+      "path": "conversation-import.js",
+      "bytes": 4357,
+      "sha256": "98e2cc778802272500476f7bc08f96a1c947dcffbead6c34b9ff606de6e06908"
+    },
+    {
+      "path": "conversation-ui.js",
+      "bytes": 12480,
+      "sha256": "de2f46f068c627c2abf7ab0c7cc8b5a0ae2d39df3b196e2002e47155094ba602"
+    },
+    {
+      "path": "dali-data.js",
+      "bytes": 3416,
+      "sha256": "2147e769b34bf3ed3b7bb57478aa8d0dbcea12618dae9177482910007c4b0a99"
+    },
+    {
+      "path": "dali-house/face.svg",
+      "bytes": 494,
+      "sha256": "52bb2ee330aab1cb41c7fc858b920139404970d0992f62c8ce88be4151c3a499"
+    },
+    {
+      "path": "dali-house/galatea.svg",
+      "bytes": 835,
+      "sha256": "1252187ac8479ae9bf108df8c1016793d7a585721f04b143f1ec25d7b06f3ae2"
+    },
+    {
+      "path": "dali-house/leda.svg",
+      "bytes": 576,
+      "sha256": "f49945fe7cbf9bf6c0c7d3d8a1855ce1c735c863db4f4534b91f389fbabc5008"
+    },
+    {
+      "path": "dali-house/memory.svg",
+      "bytes": 537,
+      "sha256": "e35da5a9e4d64cb98d654e306288f01c9a1c50a18008e26b4b3655095dad4a40"
+    },
+    {
+      "path": "dali-house-scene.js",
+      "bytes": 5538,
+      "sha256": "6fcfc1ac4305b62169aa58a372304c5e861818b4f2ace0cefe191584705c02e6"
+    },
+    {
+      "path": "design-objects.js",
+      "bytes": 19285,
+      "sha256": "19d45082f7345fcaed8a6a5804fe9cb5b8aacbde9ea09eae9671f6fda23f9fbb"
+    },
+    {
+      "path": "design-scene.js",
+      "bytes": 11981,
+      "sha256": "e797b33412a8861da00d4c2b02e181f1454941de4151f5276f88e0f896da2799"
+    },
+    {
+      "path": "designer-ui.js",
+      "bytes": 21793,
+      "sha256": "9ebb18915bdcf70cda2665d13fe2163c3432bf0d56ba56c9967d3b2596103a98"
+    },
+    {
+      "path": "exploration-activities.js",
+      "bytes": 4711,
+      "sha256": "f1d4f031d5a4380d61a36d6bc7359f9af05505b2de1c8bfe52eb69413de918f4"
+    },
+    {
+      "path": "exploration-objects.js",
+      "bytes": 5830,
+      "sha256": "0de787e13b838bdd265437dc58bb7935f2170386053867e8bfbd1da282b4d9ee"
+    },
+    {
+      "path": "favicon.svg",
+      "bytes": 277,
+      "sha256": "acfbc7bd078e47c21530162b4832d52af6482f8fb785e3ffebc2d56d7644bda9"
+    },
+    {
+      "path": "home-interior.js",
+      "bytes": 21638,
+      "sha256": "614ab4bd840fb7d4ebc40428b2fa117450d32ebc694563bcda6a37334fbf716e"
+    },
+    {
+      "path": "home-orientation.js",
+      "bytes": 4039,
+      "sha256": "c967f52588f3f41d51a8a8bf111aebe735372733aa08b07b4bdc4daaf60561ac"
+    },
+    {
+      "path": "home-ui.js",
+      "bytes": 7830,
+      "sha256": "8630720c64d77447e73964b1ecf423ea84b703b5e71d02064ecfaf5dc9f94d2e"
+    },
+    {
+      "path": "idea-artifacts.js",
+      "bytes": 6563,
+      "sha256": "57eb8b68edd85f0adfc00781c427315a0cb5207f4fdce5447af27ee14b208091"
+    },
+    {
+      "path": "idea-display.js",
+      "bytes": 2792,
+      "sha256": "db025f204420eb4b30b746793aebc9d3b44ffbad5d8e2d6c46b32077e9eafada"
+    },
+    {
+      "path": "index.html",
+      "bytes": 21047,
+      "sha256": "bf76e8e834e21d6f2c5cf838d6b0fa416049221b2d11b60b4bf9a3fbc9ba8e3a"
+    },
+    {
+      "path": "inhabited-scene-v1.js",
+      "bytes": 55464,
+      "sha256": "91897c739a4a427a869a00bcbe159105345056cb827b0441b17ef233518e716e"
+    },
+    {
+      "path": "joystick.js",
+      "bytes": 2527,
+      "sha256": "ef8cb545a6933c62933f5de824669491a4fc3284ef265c7f053a784536a8e6a9"
+    },
+    {
+      "path": "learning-trail-ui.js",
+      "bytes": 7684,
+      "sha256": "6ad272858a2dc4b3c8f398d0675405ec552ecd8aa3db2533529ffbe40da7bbed"
+    },
+    {
+      "path": "learning-trail.js",
+      "bytes": 7884,
+      "sha256": "4a1c9fd450519f09a2732d8937d807014e2e9e110eefcc59807954001fa99d02"
+    },
+    {
+      "path": "learning-ui.js",
+      "bytes": 11191,
+      "sha256": "7fdd69f9ee357a8ea2961434e3862ead5654e8ef7d1b19a79ca0f565fc9d8112"
+    },
+    {
+      "path": "legacy-scene.js",
+      "bytes": 35400,
+      "sha256": "b9dc0deed9e20bef1ba52e5bd3b6b877318c13789a92249d723261052380544b"
+    },
+    {
+      "path": "makers-city-scene.js",
+      "bytes": 17859,
+      "sha256": "f7db1d5e26133f1ea70ce5f0e8a09236ac301373a4d70cf67ecef1b36c1dad41"
+    },
+    {
+      "path": "math-city/atlas/index.html",
+      "bytes": 978790,
+      "sha256": "723ab770c80780741a8d32803c405561590dcef5ef43f4109e8910de9f6d1c10"
+    },
+    {
+      "path": "math-city/atlas/README.md",
+      "bytes": 2383,
+      "sha256": "33b2a72c0ebae9104257016603fffe5640496e435e8fac462f13df7c123984a4"
+    },
+    {
+      "path": "math-city/atlas/source.json",
+      "bytes": 2460,
+      "sha256": "bca4fffe72f25fe02f07c43cfc1eaab0126189f28c45b1fa5e43b243a117897a"
+    },
+    {
+      "path": "math-city-data.js",
+      "bytes": 10717,
+      "sha256": "6934f0934bde0e1a18eff2bcd044acbcb30ab1d30e5951d9b876aceef0b9fba0"
+    },
+    {
+      "path": "math-city-scene.js",
+      "bytes": 16976,
+      "sha256": "36e7a96ec0e79b7047e121144499215b71a661d49b8ce2129068a3e2d4e40c2e"
+    },
+    {
+      "path": "math-city-ui.js",
+      "bytes": 10156,
+      "sha256": "9a3c68e330ddec785449f9c580f2620dc036a21ee5a774631d5e631ae85b251c"
+    },
+    {
+      "path": "math-city.css",
+      "bytes": 3251,
+      "sha256": "a761f47e7308340da31629c0ef279376e62d56910cc358a82f527065715bd79c"
+    },
+    {
+      "path": "model.js",
+      "bytes": 6763,
+      "sha256": "010ea373f8b3ec11edd93b288c0d12d61f42a98c1720964bed5171b037535082"
+    },
+    {
+      "path": "navigation.js",
+      "bytes": 5641,
+      "sha256": "cfba29bb6572a8eada433593535446b0e942f97db2eb9aae86c748d017d4997f"
+    },
+    {
+      "path": "neighborhood.js",
+      "bytes": 6114,
+      "sha256": "d06e0879a959f715985ab1577e4ba6002e261844ace452487f4950804c379ebf"
+    },
+    {
+      "path": "object-library.js",
+      "bytes": 5552,
+      "sha256": "644610f5b3e705363c9694ac4b0b78ae75a0d8c6386d7ae498f5294e4c8317ff"
+    },
+    {
+      "path": "object-market-scene.js",
+      "bytes": 7383,
+      "sha256": "ac9141222b016dc2607b34c6c34c6631d2daf62b01d230ff5ee1de167f163dc7"
+    },
+    {
+      "path": "object-preview.js",
+      "bytes": 5005,
+      "sha256": "cac5496aea2e151f0a3b521f63aa929ee6281c2afa7e4e3238a529b7915420a1"
+    },
+    {
+      "path": "object-store/assets/01a60862de55cd4b9f3acfab0b0def86451800f9c42467fcd61052c16cb9838c.glb",
+      "bytes": 5422412,
+      "sha256": "01a60862de55cd4b9f3acfab0b0def86451800f9c42467fcd61052c16cb9838c"
+    },
+    {
+      "path": "object-store/assets/12f76c0f4e055168d3e58a6575712fd18b9f4ee4cac331dce728ec091d694646.glb",
+      "bytes": 17944,
+      "sha256": "12f76c0f4e055168d3e58a6575712fd18b9f4ee4cac331dce728ec091d694646"
+    },
+    {
+      "path": "object-store/assets/14c5166166d74f3cc8a0f8bdba969046570eb45a4c582b9b30136664ab9756a3.glb",
+      "bytes": 114404,
+      "sha256": "14c5166166d74f3cc8a0f8bdba969046570eb45a4c582b9b30136664ab9756a3"
+    },
+    {
+      "path": "object-store/assets/1d19c3d21d09deb094feecc140cb803a3c116a9b99cd67dcc030af69d9faf464.glb",
+      "bytes": 40812,
+      "sha256": "1d19c3d21d09deb094feecc140cb803a3c116a9b99cd67dcc030af69d9faf464"
+    },
+    {
+      "path": "object-store/assets/1ef30e90fd045e370d30de4d232fa995f1ba67ca7ed4d401784a07f7c58791c1.glb",
+      "bytes": 88596,
+      "sha256": "1ef30e90fd045e370d30de4d232fa995f1ba67ca7ed4d401784a07f7c58791c1"
+    },
+    {
+      "path": "object-store/assets/24f8346a20d35d96b033f000a7a1805d9b31846582a734b474ad6bbacec83e49.glb",
+      "bytes": 81972,
+      "sha256": "24f8346a20d35d96b033f000a7a1805d9b31846582a734b474ad6bbacec83e49"
+    },
+    {
+      "path": "object-store/assets/2b0e8a78defb2e875026a4a2ebc72facc13768b3842a3b62912728c1f8882fa7.glb",
+      "bytes": 88592,
+      "sha256": "2b0e8a78defb2e875026a4a2ebc72facc13768b3842a3b62912728c1f8882fa7"
+    },
+    {
+      "path": "object-store/assets/2e77690a27f185f1e412838a0c224060dfddc4244b568b9ccae27a36c928b564.glb",
+      "bytes": 13456,
+      "sha256": "2e77690a27f185f1e412838a0c224060dfddc4244b568b9ccae27a36c928b564"
+    },
+    {
+      "path": "object-store/assets/39f614f683a400b92b73c7f679141da8322c024fe200fab03af31b5f7a263197.glb",
+      "bytes": 74584,
+      "sha256": "39f614f683a400b92b73c7f679141da8322c024fe200fab03af31b5f7a263197"
+    },
+    {
+      "path": "object-store/assets/5fc80c6c71fc20e9f3c81db5065adf08ba1a561862ddc71a7326d53c456f423f.glb",
+      "bytes": 203740,
+      "sha256": "5fc80c6c71fc20e9f3c81db5065adf08ba1a561862ddc71a7326d53c456f423f"
+    },
+    {
+      "path": "object-store/assets/610bba43a8c90a8b7e7d1d394056c77ddbb3118c7379c76dd7380cc414f1de58.glb",
+      "bytes": 373636,
+      "sha256": "610bba43a8c90a8b7e7d1d394056c77ddbb3118c7379c76dd7380cc414f1de58"
+    },
+    {
+      "path": "object-store/assets/6554f81b0166ba207096d08981bcd02505fb0a0449856793a7ce75ed787c5d42.glb",
+      "bytes": 61556,
+      "sha256": "6554f81b0166ba207096d08981bcd02505fb0a0449856793a7ce75ed787c5d42"
+    },
+    {
+      "path": "object-store/assets/65a8131dea3011d5f3300a379bc881c07c4cb8e97d6ae70d74a3563e25565dd4.glb",
+      "bytes": 124580,
+      "sha256": "65a8131dea3011d5f3300a379bc881c07c4cb8e97d6ae70d74a3563e25565dd4"
+    },
+    {
+      "path": "object-store/assets/673be6b2e55171872ed2841a90236ed57ea90de76ae4c162ba0af52e79e5c546.glb",
+      "bytes": 157212,
+      "sha256": "673be6b2e55171872ed2841a90236ed57ea90de76ae4c162ba0af52e79e5c546"
+    },
+    {
+      "path": "object-store/assets/6d60c902bf8d8455c066d8e4036324e113e9f6bdcc7e6b7b8c4c49a56c6f189d.glb",
+      "bytes": 84992,
+      "sha256": "6d60c902bf8d8455c066d8e4036324e113e9f6bdcc7e6b7b8c4c49a56c6f189d"
+    },
+    {
+      "path": "object-store/assets/7d342bd5e0f4b2d19dfa42566d73ada2df4c04be98485fd990ee18c831d66323.glb",
+      "bytes": 88596,
+      "sha256": "7d342bd5e0f4b2d19dfa42566d73ada2df4c04be98485fd990ee18c831d66323"
+    },
+    {
+      "path": "object-store/assets/9c9ba21fd343f28fb2a1c4830a1395555ff33fe59a4c418350249026105ad04b.glb",
+      "bytes": 88596,
+      "sha256": "9c9ba21fd343f28fb2a1c4830a1395555ff33fe59a4c418350249026105ad04b"
+    },
+    {
+      "path": "object-store/assets/9ece0627957feba210e276f5e68ed1a8b891c225bf9e72aed7ebd06f9b35a6b9.glb",
+      "bytes": 87040,
+      "sha256": "9ece0627957feba210e276f5e68ed1a8b891c225bf9e72aed7ebd06f9b35a6b9"
+    },
+    {
+      "path": "object-store/assets/9f99da064b9f2b9255ac42481505242840a73a2f3b984e3cc76ec68a1a65fcaa.glb",
+      "bytes": 233948,
+      "sha256": "9f99da064b9f2b9255ac42481505242840a73a2f3b984e3cc76ec68a1a65fcaa"
+    },
+    {
+      "path": "object-store/assets/a3eb8795b05139e59bf4f92a8438055bf257d56ded483682b16a7076d48c4e25.glb",
+      "bytes": 84064,
+      "sha256": "a3eb8795b05139e59bf4f92a8438055bf257d56ded483682b16a7076d48c4e25"
+    },
+    {
+      "path": "object-store/assets/a6e3b38d79627100e0b664ebb9980b7798c4bae50c9b2da5784bf86466b73dc9.glb",
+      "bytes": 88596,
+      "sha256": "a6e3b38d79627100e0b664ebb9980b7798c4bae50c9b2da5784bf86466b73dc9"
+    },
+    {
+      "path": "object-store/assets/a79458c4b02d695187a952f23a63b8bf278e7bc3d316a3c2a314f2d6974181f1.glb",
+      "bytes": 9564264,
+      "sha256": "a79458c4b02d695187a952f23a63b8bf278e7bc3d316a3c2a314f2d6974181f1"
+    },
+    {
+      "path": "object-store/assets/a7f2897ce0598f7a6aee3074fa446ddd03868e351e630abaf23eb7beaeb7781e.glb",
+      "bytes": 88600,
+      "sha256": "a7f2897ce0598f7a6aee3074fa446ddd03868e351e630abaf23eb7beaeb7781e"
+    },
+    {
+      "path": "object-store/assets/b2f94b37b6bda4f939337581cdc4c7a10c1e2f120d8eb917e6dcbdb796cef512.glb",
+      "bytes": 88596,
+      "sha256": "b2f94b37b6bda4f939337581cdc4c7a10c1e2f120d8eb917e6dcbdb796cef512"
+    },
+    {
+      "path": "object-store/assets/b337e526fd6a162013c2984aeec163f5fbb4f717252724dfc3f3458bd51df94b.glb",
+      "bytes": 8966700,
+      "sha256": "b337e526fd6a162013c2984aeec163f5fbb4f717252724dfc3f3458bd51df94b"
+    },
+    {
+      "path": "object-store/assets/c06c81e7a7f346bd52acd991ef7bdb8e777c7ea8e5e8c2c5db5e40800449c31b.glb",
+      "bytes": 92732,
+      "sha256": "c06c81e7a7f346bd52acd991ef7bdb8e777c7ea8e5e8c2c5db5e40800449c31b"
+    },
+    {
+      "path": "object-store/assets/c31b85f68da7c5ac9bb511d881896e32a2e766de230b3a69e2f69b09154aabf6.glb",
+      "bytes": 248716,
+      "sha256": "c31b85f68da7c5ac9bb511d881896e32a2e766de230b3a69e2f69b09154aabf6"
+    },
+    {
+      "path": "object-store/assets/ccc9c3ce56423720b09399c2351537207cd5a65f859f9e6e2f30922762f3abd4.glb",
+      "bytes": 8110040,
+      "sha256": "ccc9c3ce56423720b09399c2351537207cd5a65f859f9e6e2f30922762f3abd4"
+    },
+    {
+      "path": "object-store/assets/d79d5c03f675bdd4eefd259e45e3b06abd3f6bd100dd7187dea858e383f3f03d.glb",
+      "bytes": 113912,
+      "sha256": "d79d5c03f675bdd4eefd259e45e3b06abd3f6bd100dd7187dea858e383f3f03d"
+    },
+    {
+      "path": "object-store/assets/dfeae78875a4ad8378904e35aecc799ebdf4d96c6aa25e4f31eecb4f35aa26d9.glb",
+      "bytes": 123824,
+      "sha256": "dfeae78875a4ad8378904e35aecc799ebdf4d96c6aa25e4f31eecb4f35aa26d9"
+    },
+    {
+      "path": "object-store/assets/e7e2810d299b6a5b473283b64b216bcd41e65aad6d977beb161d4befb28a4959.glb",
+      "bytes": 88596,
+      "sha256": "e7e2810d299b6a5b473283b64b216bcd41e65aad6d977beb161d4befb28a4959"
+    },
+    {
+      "path": "object-store/assets/ecb8e47c97bf4510a86c2d15a877ca949fb666918ed81f3852c9289e1a9e473d.glb",
+      "bytes": 88600,
+      "sha256": "ecb8e47c97bf4510a86c2d15a877ca949fb666918ed81f3852c9289e1a9e473d"
+    },
+    {
+      "path": "object-store/assets/ed9be7469af7ffb3dd18b1e923813bc9a1025a14e82699f22e05fe716db9787e.glb",
+      "bytes": 88592,
+      "sha256": "ed9be7469af7ffb3dd18b1e923813bc9a1025a14e82699f22e05fe716db9787e"
+    },
+    {
+      "path": "object-store/assets/ef2e5384267677d5270322099f22eb458af780a82128ec67ead996d213fc1319.glb",
+      "bytes": 36508,
+      "sha256": "ef2e5384267677d5270322099f22eb458af780a82128ec67ead996d213fc1319"
+    },
+    {
+      "path": "object-store/assets/f0af2a2b102d28d540236306ae19f8fb36842df76bd38cf76f063f9bd2853399.glb",
+      "bytes": 4125648,
+      "sha256": "f0af2a2b102d28d540236306ae19f8fb36842df76bd38cf76f063f9bd2853399"
+    },
+    {
+      "path": "object-store/assets/f8b918445ebdd006768232205a62f5182d2208ca57f84c6ccc084943c0bc8f15.glb",
+      "bytes": 10614184,
+      "sha256": "f8b918445ebdd006768232205a62f5182d2208ca57f84c6ccc084943c0bc8f15"
+    },
+    {
+      "path": "object-store/audio/city-of-tomorrow.wav",
+      "bytes": 902398,
+      "sha256": "c7de72ee144d2b17ba2e47a273f39929a51cccca8f4ed085daa5919cd66d5940"
+    },
+    {
+      "path": "object-store/audio/constellation-walk.wav",
+      "bytes": 934964,
+      "sha256": "9ad358586cd9f2eba2e2ddd7c538cb59e9fcddd72f1f8b4696decb6018833efa"
+    },
+    {
+      "path": "object-store/audio/counterexample-waltz.wav",
+      "bytes": 970244,
+      "sha256": "2e75f3d41a82d20fe109be9e28265d5767ca72b2b7e49988293faeecba8b3588"
+    },
+    {
+      "path": "object-store/audio/dialogues-at-dawn.wav",
+      "bytes": 1050426,
+      "sha256": "0c83f36563b28800b51f39276f4edc76591cbfe3d5b9f0879d30b59257023fdf"
+    },
+    {
+      "path": "object-store/audio/garden-of-branches.wav",
+      "bytes": 1008592,
+      "sha256": "0a2a34741ba19b8be62e32828c94527054db674cb8907a5d7af43a60fe2f782a"
+    },
+    {
+      "path": "object-store/audio/memory-rooms.wav",
+      "bytes": 1202350,
+      "sha256": "7c8a4c9927637aab68e3c2e19944dbf06a6720b9121ca65bd479e2032f440988"
+    },
+    {
+      "path": "object-store/audio/perspective-windows.wav",
+      "bytes": 1096244,
+      "sha256": "f215f957d1cfaffa87977b090e1e2b8596907006ff8a5c919cee7aee0c7c274a"
+    },
+    {
+      "path": "object-store/audio/quiet-well.wav",
+      "bytes": 1264244,
+      "sha256": "a9f6db59fc9358074eccde9c648bece467a5a6dd295e5da00db2b8adc0f349c2"
+    },
+    {
+      "path": "object-store/audio/return-home.wav",
+      "bytes": 1173784,
+      "sha256": "691b702484b8bcc225105f8ff762c74618fb8819cadd9c48568ae6f5369a7428"
+    },
+    {
+      "path": "object-store/audio/uncertainty-blue.wav",
+      "bytes": 1146644,
+      "sha256": "48ba8bac1d155f75e8fdc587039e4833ed663fa633fa0c13a5bdbf98f1349c44"
+    },
+    {
+      "path": "object-store/exploration-models.js",
+      "bytes": 6273,
+      "sha256": "2d9ea0fee30fa0c82a20557a2aacd12c304cd106166584c00685208dcdc53645"
+    },
+    {
+      "path": "object-store/idea-models.js",
+      "bytes": 8156,
+      "sha256": "d61a46e6b0417974d851eabe3c2bea50e1de58415baa69fac1c67f03aa95ed2e"
+    },
+    {
+      "path": "object-store/models.js",
+      "bytes": 6394,
+      "sha256": "4200cede704795cd463c23efc37daf92441f54eb42ddd70182d6ae8dd4827d05"
+    },
+    {
+      "path": "object-store/models.json",
+      "bytes": 6034,
+      "sha256": "0b3cb12bd51dac1981de59c31c3a9c580aaaf8465c6fa014689eab854033a736"
+    },
+    {
+      "path": "object-store/music-models.js",
+      "bytes": 12356,
+      "sha256": "b4284155d4d115c5170495996951a1f1ec289240d302d1d7bba3c5777d87f5db"
+    },
+    {
+      "path": "object-store/project-models.js",
+      "bytes": 5780,
+      "sha256": "9abb37aa7dc966570aaa3dcdb22d33d1d7c4150cfd8b9e97cfb492410fe5a5d5"
+    },
+    {
+      "path": "object-store/sources/assumption-balance.txt",
+      "bytes": 967,
+      "sha256": "3bb348d09e5c189a9a70f28e1493cded641cc5eaa00cc30603c8780a2ff41eb2"
+    },
+    {
+      "path": "object-store/sources/Avocado.txt",
+      "bytes": 1003,
+      "sha256": "62d157b6547449cef44a10d7929d4679f9d4ce8a9fd427ee4a47da8eb4bddc6d"
+    },
+    {
+      "path": "object-store/sources/bed.txt",
+      "bytes": 907,
+      "sha256": "f0e46e9b5bb790a78ca01e4636d5a74b201f2e3dbdc39ca4ca4184d1c5bfeb99"
+    },
+    {
+      "path": "object-store/sources/BoomBox.txt",
+      "bytes": 1034,
+      "sha256": "a88325588b541198710bd8f4f3463e6b48f0ca887195f8fc07eb3119164c83af"
+    },
+    {
+      "path": "object-store/sources/CC0-1.0.txt",
+      "bytes": 6638,
+      "sha256": "7c379fd6f146cf66ec623fa6dcc49228ce426a717aa143f0af1033e747db0700"
+    },
+    {
+      "path": "object-store/sources/chance-die.txt",
+      "bytes": 958,
+      "sha256": "e6ca824db7ed29686328c8d666b85bcfc3e264da6b165a1109b978dca2f84dee"
+    },
+    {
+      "path": "object-store/sources/colour-prism.txt",
+      "bytes": 1043,
+      "sha256": "357325aa1238c9f2f875a9a6a739a856e03939d00a9e1fea11f3010fb723e62d"
+    },
+    {
+      "path": "object-store/sources/dialogue-table.txt",
+      "bytes": 981,
+      "sha256": "a8d7ade2f66dd1e81ec8b99939cb1c93d96c4b6adb4cc44a2f25535102f69907"
+    },
+    {
+      "path": "object-store/sources/dream-cabinet.txt",
+      "bytes": 933,
+      "sha256": "69e4ac09cf3d12c2cccc9aca6130a2c198cd03793ea4eeaf41d1e60aa0be38a4"
+    },
+    {
+      "path": "object-store/sources/dream-chair.txt",
+      "bytes": 931,
+      "sha256": "0857fd338f2f85977f6d97adc3480bbee4afc72a7c51e894befb9e4a979f9fa5"
+    },
+    {
+      "path": "object-store/sources/dream-spheres.txt",
+      "bytes": 934,
+      "sha256": "c1fc565f8899eb4f8f46e4ea741cd9383c6cadf5c363170cceaabf145d50e865"
+    },
+    {
+      "path": "object-store/sources/forked-path.txt",
+      "bytes": 972,
+      "sha256": "492b91d13b2df16fb479b0fd5a99eb16eb2f11e94cbf2cae672d0859534e2fa9"
+    },
+    {
+      "path": "object-store/sources/hanoi-towers.txt",
+      "bytes": 994,
+      "sha256": "a9f8ad52334a37384b47f577c745f3b19201928feb6b136eeb58f205ba394585"
+    },
+    {
+      "path": "object-store/sources/idea-constellation.txt",
+      "bytes": 982,
+      "sha256": "25c2516a5bf0e489e479b458239b23c544e63ba43de136590fd0aa88b48ee831"
+    },
+    {
+      "path": "object-store/sources/Lantern.txt",
+      "bytes": 1118,
+      "sha256": "c2ef859080e4ee246237fc366121a1fb45c59e469c69da8e6dbf94d83ecc6e1a"
+    },
+    {
+      "path": "object-store/sources/memory-cabinet.txt",
+      "bytes": 958,
+      "sha256": "100cc94b5455ed316d527f66cf1181c77bc3c44a8ee260a9b1c821d1675e0c4f"
+    },
+    {
+      "path": "object-store/sources/mobius-ribbon.txt",
+      "bytes": 980,
+      "sha256": "747fd2f334b72e78194cd4805694d49f3887a0dac75cbdced0cbf021a1dd777d"
+    },
+    {
+      "path": "object-store/sources/music-city-of-tomorrow.txt",
+      "bytes": 1195,
+      "sha256": "a025247d9cdfab44f8381ebc5f63f2faee1ea9c593c656ed16f2befc3b683620"
+    },
+    {
+      "path": "object-store/sources/music-constellation-walk.txt",
+      "bytes": 1203,
+      "sha256": "46940aa5791004b9239694eac4a820a1dba27dad9d1fe4b662e00b20031a57c3"
+    },
+    {
+      "path": "object-store/sources/music-counterexample-waltz.txt",
+      "bytes": 1191,
+      "sha256": "68b337702f9a8c4eeba99d3037c59c60bc48cb642f9685aa4b4d28c76bf295a5"
+    },
+    {
+      "path": "object-store/sources/music-dialogues-at-dawn.txt",
+      "bytes": 1186,
+      "sha256": "ed7bfd6061e18959f1ebb954f66558947e0af66e04a79b6b5be697ad9fd76ca4"
+    },
+    {
+      "path": "object-store/sources/music-garden-of-branches.txt",
+      "bytes": 1210,
+      "sha256": "dac090fe8c0410c3cd18b033965732c537508101b40089f2a9513339b0f9fd0f"
+    },
+    {
+      "path": "object-store/sources/music-memory-rooms.txt",
+      "bytes": 1179,
+      "sha256": "a6af181297cd22803f2edf7aea7baafea30a161bc9290dd880872e5eb47ac56d"
+    },
+    {
+      "path": "object-store/sources/music-perspective-windows.txt",
+      "bytes": 1215,
+      "sha256": "33141c013a371c055e331239888f9ea5090c8a3b6f6adb5d1416348b576ca999"
+    },
+    {
+      "path": "object-store/sources/music-quiet-well.txt",
+      "bytes": 1162,
+      "sha256": "9c127025e7fd9fa30c971340d8c8bbcc6cd7018f49ed06c412fcb085a427b44c"
+    },
+    {
+      "path": "object-store/sources/music-return-home.txt",
+      "bytes": 1175,
+      "sha256": "9ddd6c809d887beee5355478c40664f024ecc8befe9381a621322167f3e8213b"
+    },
+    {
+      "path": "object-store/sources/music-uncertainty-blue.txt",
+      "bytes": 1178,
+      "sha256": "e95c9eb6db035343fc1f5a827c056baaf7ab766652503c48de3f3dad3a0de50a"
+    },
+    {
+      "path": "object-store/sources/pendulum-lab.txt",
+      "bytes": 1016,
+      "sha256": "167026629c3463b43c5045fa9e16a1285821db420d4a9dc675231e1af4ba9539"
+    },
+    {
+      "path": "object-store/sources/perspective-window.txt",
+      "bytes": 992,
+      "sha256": "cea3be2c93620b107611bef68bf5fa481665dae8cd0717f4590dda1da0633b61"
+    },
+    {
+      "path": "object-store/sources/prime-cabinet.txt",
+      "bytes": 1022,
+      "sha256": "7d317a55d05fe33e14b101b202d32232fa8a6d7f37a2662a4d45366c6f01ffec"
+    },
+    {
+      "path": "object-store/sources/reading-chair.txt",
+      "bytes": 929,
+      "sha256": "f32933c6696134fc1049cdb7d0702c514e523cc1ff1397c8a0b4594f7869fbf7"
+    },
+    {
+      "path": "object-store/sources/reflection-well.txt",
+      "bytes": 982,
+      "sha256": "c9d871514c118b7b455549a956f2753480f62f941880f590fde4743249f74fd5"
+    },
+    {
+      "path": "object-store/sources/SheenChair.txt",
+      "bytes": 4322,
+      "sha256": "73ae250d313e35ba31b41f2124077737aefc220fd385a15d00a453c33d603f56"
+    },
+    {
+      "path": "object-store/sources/sofa.txt",
+      "bytes": 914,
+      "sha256": "ba0d9c31cbed19ea12a7753cbcd439efd7d2edd077c0ad634e15fdeab5a569f4"
+    },
+    {
+      "path": "object-store/sources/ToyCar.txt",
+      "bytes": 2122,
+      "sha256": "b40cf20ffe6b97215a0b9a751f3fc52e744bfde5872225440cd91e94b3b8e2d2"
+    },
+    {
+      "path": "object-store/sources/uncertainty-lantern.txt",
+      "bytes": 1011,
+      "sha256": "7f7389c27d7aecf60e6a223f961e31ae82e83035f4b32c472ba0ef971decdf99"
+    },
+    {
+      "path": "object-store/sources/WaterBottle.txt",
+      "bytes": 1038,
+      "sha256": "f7d1039b49237ea4e1e3e194f7a9140c7ff656b9ac1b0bb4eb46730a4bbf4096"
+    },
+    {
+      "path": "object-store-preview.js",
+      "bytes": 2588,
+      "sha256": "5cffab1fc3cb4e4854f009bec2cfe446dcbf0c91f16a60750269ffeaa61ec455"
+    },
+    {
+      "path": "object-store-ui.js",
+      "bytes": 8697,
+      "sha256": "a35a0349da25532695404b3b88dc02859946bd4b7f02698a553821f5c456eecf"
+    },
+    {
+      "path": "object-store.js",
+      "bytes": 2830,
+      "sha256": "d7a7b3c1198872c730ed38bc17d684f311529746ea635f70ce0818500df32b4d"
+    },
+    {
+      "path": "package.json",
+      "bytes": 121,
+      "sha256": "ba1afeb2abed579a107d99b6ca046f81ca06bf4fcc48d5d3a5dd71281a707e8b"
+    },
+    {
+      "path": "pattern-house.js",
+      "bytes": 2831,
+      "sha256": "f453c166e7816710fdca2ebe1024e02de2a1ccd81f86e81f6d46418b10a78e76"
+    },
+    {
+      "path": "README.md",
+      "bytes": 6988,
+      "sha256": "bff2f0151ac67b8ee74f33bb11d1fb57bdee68af5a4a14446a838a04d8ed7ecc"
+    },
+    {
+      "path": "residence-data.js",
+      "bytes": 9183,
+      "sha256": "c9f0bb6da9f42657a1ea3ffc127db5cb91175e8aaea6e3ce7a95a151d1a3f6e1"
+    },
+    {
+      "path": "residence-interior-v1.js",
+      "bytes": 21892,
+      "sha256": "b96e69db98ee493784ad04b4a3bf518d99f5ad8d2b536be6b301a6438a8d7c19"
+    },
+    {
+      "path": "residence-scene-v1.js",
+      "bytes": 36815,
+      "sha256": "74d5556bb3e9050259987a79d3a8605dc69ab72ee9c94cc3c2058f9f12339647"
+    },
+    {
+      "path": "residence-ui.js",
+      "bytes": 33090,
+      "sha256": "12a3bc6b594a4728fe14dfb392cf88f69eeaf512c572d12325e5c00c2a23a1a5"
+    },
+    {
+      "path": "residence.css",
+      "bytes": 7045,
+      "sha256": "c72a9a27ea6f3ad5845788401583561fa76b2b064bc944037e28a1952620674e"
+    },
+    {
+      "path": "resident-ui.js",
+      "bytes": 15874,
+      "sha256": "e8d217ab1ada539e9828a059eb39475965020137099db47d8681b6d0185cd696"
+    },
+    {
+      "path": "resident.js",
+      "bytes": 58715,
+      "sha256": "c0ea47fcf3768567a8e0b3eee7800e7a34b9ebd8eac89ccd63dc665be149e542"
+    },
+    {
+      "path": "scene-original.js",
+      "bytes": 91284,
+      "sha256": "f2cc5d4ff484d26d3863a19aca29ce406cefefebf891382f28f19ab11fe849c9"
+    },
+    {
+      "path": "scene.js",
+      "bytes": 124,
+      "sha256": "26d6e4a7cf27841d0fb752cf62066de2193cc0ede61a3719a54c46ec2d27f7ef"
+    },
+    {
+      "path": "socrates.js",
+      "bytes": 22638,
+      "sha256": "f25300055f2f2511d860f3c385d5628cea439234ba99e4464bca7f41b737be3b"
+    },
+    {
+      "path": "style.css",
+      "bytes": 42524,
+      "sha256": "5fd3045dae0cc2aa1c8148f2f71b428a041a8de4000325c3817463258973e24d"
+    },
+    {
+      "path": "vendor/GLTFLoader.js",
+      "bytes": 122505,
+      "sha256": "a70b5ef11e526c4a5a240d8e2a51bd31618c042df67d347d2e4bb6b1a2b5b3e9"
+    },
+    {
+      "path": "vendor/LICENSE-three.txt",
+      "bytes": 1102,
+      "sha256": "5d5dad8147523d59bc15cca838ae0bdaae7075230ec49132c551a1d18e7b3412"
+    },
+    {
+      "path": "vendor/OrbitControls.js",
+      "bytes": 42727,
+      "sha256": "97c6ad5c5b19d958be1652c7b3f920062ad1be836850008327ae463b16d91ef5"
+    },
+    {
+      "path": "vendor/three.core.js",
+      "bytes": 1518699,
+      "sha256": "8bf68efebbef2b6f162a5bc5746ec88a60523254c4ae0b042277ed0ce0b30a07"
+    },
+    {
+      "path": "vendor/three.module.js",
+      "bytes": 682491,
+      "sha256": "211760950dc7bddeb46b09ca7fa4d3620ddde43168a4fba8560489f86a92548f"
+    },
+    {
+      "path": "vendor/utils/BufferGeometryUtils.js",
+      "bytes": 39226,
+      "sha256": "2ce3b34c3dcafadb98898098948826a0d36b7bcc80445678fbc22f832fc979f7"
+    },
+    {
+      "path": "vendor/utils/SkeletonUtils.js",
+      "bytes": 12044,
+      "sha256": "6be26bbb83beba7d294c551b08b85fe352d57fe0aa9612d348629428780b9bbe"
+    },
+    {
+      "path": "world-guide.js",
+      "bytes": 17542,
+      "sha256": "d6ca145fb29bed12bfdc56dd2e7a38b08ba92206cb4f1444887640e6c8b52179"
+    },
+    {
+      "path": "xr.js",
+      "bytes": 9563,
+      "sha256": "3096af459e7a649113d7851e1b261fb19ed2d5f24efe920d41e50733579b309c"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+window.GALLERY_CONTENT={note:'این گالری، بازآفرینی هنری و تفسیری از چهار بخش «چنین گفت زرتشت» است. متن‌ها نوشته‌های تازه‌اند و نقل‌قول از کتاب نیستند.',floors:[
+{part:1,title:'آستانهٔ دگرگونی',subtitle:'از بارِ پذیرفته‌شده تا امکانِ آفرینش',color:'#F2B86B',exhibits:[
+{title:'سه هیئتِ شدن',body:'این اثر، تفسیری از دگرگونیِ روح میان تحمل، سرپیچی و آفرینش است. سه حجمِ پیوسته نشان می‌دهند که آزادی می‌تواند از پذیرفتنِ بار آغاز شود و به ساختنِ ارزشی تازه برسد.',shape:'metamorphosis'},
+{title:'قدم بر خلأ',body:'این اثر، برداشتی از تصویرِ بندباز و شکنندگیِ عبور است. پیکرِ معلق میان دو سکوی نابرابر، انسان را در حرکت و خطر نشان می‌دهد؛ مقصد هنوز تضمین‌شده نیست.',shape:'ropewalker'},
+{title:'خورشیدِ بخشنده',body:'این اثر، تفسیری از پیوندِ فراوانی و بخشیدن است. حلقه‌های نور از مرکزی خاموش گسترش می‌یابند و پرسش می‌سازند: آنچه در ما فزونی می‌گیرد، چگونه به جهان می‌رسد؟',shape:'sunrise'}]},
+{part:2,title:'کارگاهِ خودفرارَوی',subtitle:'ارزش‌ها، اراده و رویارویی با گذشته',color:'#AE91E8',exhibits:[
+{title:'آینهٔ گسسته',body:'این اثر، تفسیری از دشواریِ دیدنِ خود در میان تصویرهای تحمیل‌شده است. صفحه‌های ناهم‌راستا هیچ چهرهٔ کاملی نمی‌سازند و بیننده را به بازنگری در شناختِ خویش دعوت می‌کنند.',shape:'mirror'},
+{title:'پلِ بازگشت‌ناپذیر',body:'این اثر، برداشتی از کشمکشِ اراده با گذشته است. پل به سوی سنگی بسته امتداد دارد؛ شکافِ میانی پرسشِ تبدیلِ گذشته به بخشی از آفرینشِ آینده را باز می‌گذارد.',shape:'bridge'},
+{title:'نیرویِ عبور',body:'این اثر، تفسیری از خودفرارَوی به‌مثابه فرایندی پایان‌ناپذیر است. مارپیچ از میان پوسته‌های شکسته بالا می‌رود و نشان می‌دهد که رشد، گاهی به واگذاشتنِ صورتِ پیشینِ خود نیاز دارد.',shape:'spiral'}]},
+{part:3,title:'دروازهٔ بازگشت',subtitle:'زمان، تکرار و آزمونِ پذیرشِ زندگی',color:'#59C4BE',exhibits:[
+{title:'دو راه، یک لحظه',body:'این اثر، تفسیری از تلاقیِ گذشته و آینده در تجربهٔ لحظه است. دو مسیر در دروازه‌ای واحد به هم می‌رسند و جای ایستادنِ بیننده را به مرکزِ پرسشِ زمان تبدیل می‌کنند.',shape:'gateway'},
+{title:'حلقهٔ سنگین',body:'این اثر، برداشتی از اندیشهٔ بازگشتِ جاودان و دشواریِ رویارویی با آن است. حلقه‌ای مایل نزدیکِ زمین معلق می‌ماند؛ تکرار در اینجا هم امکانِ تأیید است و هم فشاری که باید احساس شود.',shape:'ring'},
+{title:'شنِ بی‌پایان',body:'این اثر، تفسیری از آزمونِ خواستنِ دوبارهٔ زندگی با شادی‌ها و رنج‌های آن است. دو ظرفِ متقارن، آغازی روشن ندارند و بیننده را با پرسشِ پذیرشِ تمامِ تجربه روبه‌رو می‌کنند.',shape:'hourglass'}]},
+{part:4,title:'صبحِ آزمون',subtitle:'همراهان، وسوسه‌ها و ادامهٔ راه',color:'#ED7D91',exhibits:[
+{title:'تاجِ خالی',body:'این اثر، تفسیری از فاصلهٔ ادعای بلندی با توانِ آفرینشِ مستقل است. تاج بر ستونی ناپایدار قرار دارد و عنوانِ برتر را به پرسشی دربارهٔ وابستگی و ناتمام‌بودن تبدیل می‌کند.',shape:'crown'},
+{title:'ضیافتِ سایه‌ها',body:'این اثر، برداشتی از گردهماییِ انسان‌های والاتر و کششِ آنان به تسلی و پرستش است. پیکرهای ساده گردِ سکویی کوچک جمع شده‌اند؛ نزدیکیِ جمع، تنهاییِ هر پیکر را محو نمی‌کند.',shape:'gathering'},
+{title:'قدمِ بعدی',body:'این اثر، تفسیری از بیداریِ پایانی و گشوده‌ماندنِ مسیر است. گذرگاهی رو به روشنایی ساخته شده، اما پیکرِ مرکزی غایب است تا ادامهٔ حرکت به انتخابِ بازدیدکننده سپرده شود.',shape:'threshold'}]}]};
+GALLERY_CONTENT.centralArtwork={title:'زایشِ ابرانسان',body:'این اثر، تفسیری هنری از ابرانسان به‌عنوان افقِ خودفرارَوی و آفرینشِ ارزش‌های تازه است. برخاستنِ پیکرِ طلایی از گدازه، گذر از صورتِ پیشینِ خویش و گشودنِ امکان‌های تازه برای زندگی را مجسم می‌کند.'};
+GALLERY_CONTENT.english={note:'Original artistic interpretations of the four parts of Thus Spoke Zarathustra; these texts are not quotations.',floors:[
+{title:'Threshold of transformation',subtitle:'From the accepted burden to the possibility of creation',exhibits:[
+{title:'Three forms of becoming',body:'An interpretation of the spirit’s transformations through endurance, refusal and creation. Three connected forms suggest that freedom may begin by accepting a burden and lead toward making a new value.'},
+{title:'A step over the void',body:'An interpretation of the tightrope walker and the fragility of passage. A suspended figure between unequal platforms presents human life in motion and danger, with no guaranteed arrival.'},
+{title:'The giving sun',body:'An interpretation of abundance and giving. Rings of light spread from a quiet center, asking how what grows within us can reach the world.'}]},
+{title:'Workshop of self-overcoming',subtitle:'Values, will and confronting the past',exhibits:[
+{title:'The fractured mirror',body:'An interpretation of the difficulty of seeing oneself among imposed images. Misaligned planes form no complete face, inviting the visitor to reconsider self-knowledge.'},
+{title:'The irreversible bridge',body:'An interpretation of the will’s struggle with the past. A bridge extends toward a closed stone; its gap leaves open the question of making the past part of future creation.'},
+{title:'The force of passage',body:'An interpretation of self-overcoming as an unfinished process. A spiral rises through broken shells, suggesting that growth sometimes requires relinquishing one’s previous form.'}]},
+{title:'Gateway of return',subtitle:'Time, recurrence and the test of affirming life',exhibits:[
+{title:'Two paths, one moment',body:'An interpretation of the meeting of past and future within a moment. Two paths converge at one gateway, placing the visitor at the center of a question about time.'},
+{title:'The heavy ring',body:'An interpretation of eternal recurrence and the difficulty of confronting it. A tilted ring hovers close to the ground: repetition offers affirmation and also a pressure to be felt.'},
+{title:'Endless sand',body:'An interpretation of wanting life again, with its joys and suffering. Two symmetrical vessels have no clear beginning, confronting the visitor with the acceptance of experience as a whole.'}]},
+{title:'Morning of the test',subtitle:'Companions, temptations and continuing the journey',exhibits:[
+{title:'The empty crown',body:'An interpretation of the distance between claiming greatness and creating independently. A crown on an unstable pillar turns a title of superiority into a question about dependence and incompleteness.'},
+{title:'Feast of shadows',body:'An interpretation of the gathering of the higher human beings and their attraction to consolation and worship. Simple figures gather around a small platform; their closeness does not erase each figure’s solitude.'},
+{title:'The next step',body:'An interpretation of the final awakening and the openness of the path. A passage faces light, but its central figure is absent, leaving the continuation of movement to the visitor’s choice.'}]}],centralArtwork:{title:'Birth of the Übermensch',body:'An artistic interpretation of the Übermensch as a horizon of self-overcoming and the creation of new values. The golden figure rising from molten rock embodies leaving a former shape behind and opening new possibilities for life.'}};
+GALLERY_CONTENT.persian=JSON.parse(JSON.stringify({note:GALLERY_CONTENT.note,floors:GALLERY_CONTENT.floors,centralArtwork:GALLERY_CONTENT.centralArtwork}));
+GALLERY_CONTENT.setLanguage=function(lang){const source=lang==='en'?this.english:this.persian;this.note=source.note;this.floors.forEach((f,i)=>{f.title=source.floors[i].title;f.subtitle=source.floors[i].subtitle;f.exhibits.forEach((e,j)=>Object.assign(e,source.floors[i].exhibits[j]))});Object.assign(this.centralArtwork,source.centralArtwork)};

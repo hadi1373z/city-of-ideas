@@ -1,0 +1,9 @@
+html[lang="fa"]{--serif:Tahoma,"Segoe UI",Arial,sans-serif;--display:Tahoma,"Segoe UI",Arial,sans-serif;--sans:Tahoma,"Segoe UI",Arial,sans-serif;}
+html[lang="fa"] h1,html[lang="fa"] h2,html[lang="fa"] h3,html[lang="fa"] .eyebrow{letter-spacing:0;}
+html[lang="fa"] .nav{margin-left:0;margin-right:auto;}
+html[lang="fa"] .header-actions{margin-left:0;}
+html[lang="fa"] .article,html[lang="fa"] .ui-text,html[lang="fa"] .bio,html[lang="fa"] .profile-subtitle{text-align:start;}
+.formula,[role="math"],.math-source,pre,code,[data-math-original-article],[data-math-article-language="en"]{direction:ltr;text-align:left;}
+input,textarea,[contenteditable="true"]{unicode-bidi:plaintext;}
+html[lang="fa"] .reader-locale-note{padding:12px 18px;border-inline-start:2px solid var(--accent);background:var(--soft);font:13px/1.8 var(--sans);}
+.focus-mode .reader-locale-note{display:none;}
