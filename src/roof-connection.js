@@ -1,30 +1,50 @@
 /* The roof and summit share one elevation; the connector is wide enough for the original infant. */
 (function(g){'use strict';
-g.createRoofConnection=function(T,{scene,city,stairs}){
+g.createSnakeSkinTiles=function(T){return new T.ShaderMaterial({uniforms:{tileSize:{value:1.35}},vertexShader:'varying vec3 vWorld;varying float vLight;void main(){vec4 world=modelMatrix*vec4(position,1.0);vWorld=world.xyz;vec3 n=normalize(mat3(modelMatrix)*normal);vLight=.68+.32*max(dot(n,normalize(vec3(-.6,1.,.4))),0.);gl_Position=projectionMatrix*viewMatrix*world;}',fragmentShader:'uniform float tileSize;varying vec3 vWorld;varying float vLight;void main(){vec2 uv=vWorld.xz/tileSize;float row=floor(uv.y);vec2 q=vec2(fract(uv.x+mod(row,2.)*.5)-.5,fract(uv.y)-.5);float edge=abs(q.x)*1.12+abs(q.y)*.82;float seam=1.-smoothstep(.02,.055,abs(edge-.46));float ridge=smoothstep(.28,.34,edge)*(1.-seam);float shade=.96+.04*sin(floor(uv.x+mod(row,2.)*.5)*2.31+row*1.7);vec3 c=mix(vec3(.72,.69,.55)*shade,vec3(.12,.18,.15),seam*.7);c=mix(c,vec3(.79,.75,.6),ridge*.22);gl_FragColor=vec4(c*vLight,1.);\n#include <colorspace_fragment>\n}'});};
+g.createRoofConnection=function(T,{scene,city,stairs,tiles=null}){
  const height=32.395,width=stairs.headWidth,half=width/2,route=[{x:125,z:0},{x:106,z:0},{x:106,z:-12},{x:46,z:-12}],group=new T.Group();group.name='Gallery roof and summit crawling path';scene.add(group);
- const stone=new T.MeshLambertMaterial({color:0xc8b98e}),bronze=new T.MeshLambertMaterial({color:0x8d7852});
+ const ownTiles=!tiles;tiles=tiles||g.createSnakeSkinTiles(T);const stone=tiles,bronze=new T.MeshLambertMaterial({color:0x8d7852});
  function block(w,h,d,x,y,z,name){const m=new T.Mesh(new T.BoxGeometry(w,h,d),stone);m.position.set(x,y,z);m.name=name;group.add(m);return m;}
+ const curves=[[[67,0],[24,-56],[-52,-56],[-52,0]],[[-52,0],[-52,56],[24,56],[67,0]],[[67,0],[102,-40],[157,-40],[157,0]],[[157,0],[157,40],[102,40],[67,0]]].map(c=>new T.CubicBezierCurve3(...c.map(p=>new T.Vector3(p[0],height,p[1]))));
+ const infinity=[];for(let j=0;j<curves.length;j++)for(let i=0;i<120;i++){const p=curves[j].getPoint(i/120),d=curves[j].getTangent(i/120);infinity.push({x:p.x,z:p.z,nx:-d.z,nz:d.x});}infinity.push({...infinity[0]});
+ function infinityDistance(x,z){let best=1e9;for(let i=1;i<infinity.length;i++){const a=infinity[i-1],b=infinity[i],dx=b.x-a.x,dz=b.z-a.z,u=Math.max(0,Math.min(1,((x-a.x)*dx+(z-a.z)*dz)/(dx*dx+dz*dz)));best=Math.min(best,Math.hypot(x-a.x-u*dx,z-a.z-u*dz));}return best;}
+ const dark=new T.MeshLambertMaterial({color:0x263e35});
+ function ribbon(w,y,mat,name){const p=[],indices=[];for(const a of infinity)for(const side of[-1,1])p.push(a.x+a.nx*w/2*side,y,a.z+a.nz*w/2*side);for(let i=0;i<infinity.length-1;i++){let k=i*2;indices.push(k,k+1,k+2,k+1,k+3,k+2);}const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(p,3));geo.setIndex(indices);geo.computeVertexNormals();const m=new T.Mesh(geo,mat);m.name=name;group.add(m);return m;}
+ // One closed figure-eight with a shared, level crossing. The same world-aligned tiles cover every surface.
+ const outline=ribbon(width+.8,height+.008,dark,'Infinity walkway dark border');outline.material.side=T.DoubleSide;
+ const infinityDeck=ribbon(width,height+.022,tiles,'Infinity snake-skin rooftop walk');infinityDeck.material.side=T.DoubleSide;
+ const fascia=ribbon(width,height-.32,bronze,'Infinity structural soffit');fascia.material.side=T.DoubleSide;
+ const sides=[],sideIndices=[];for(let i=0;i<infinity.length-1;i++)for(const side of[-1,1]){const a=infinity[i],b=infinity[i+1],k=sides.length/3;for(const p of[a,b])for(const y of[height-.32,height+.022])sides.push(p.x+p.nx*half*side,y,p.z+p.nz*half*side);sideIndices.push(k,k+1,k+2,k+1,k+3,k+2);}const sideGeo=new T.BufferGeometry();sideGeo.setAttribute('position',new T.Float32BufferAttribute(sides,3));sideGeo.setIndex(sideIndices);sideGeo.computeVertexNormals();const sideMesh=new T.Mesh(sideGeo,bronze);sideMesh.name='Solid infinity bridge edges';group.add(sideMesh);
+
  const railTransforms=[];
  function rail(a,b){const d=new T.Vector3().subVectors(b,a),matrix=new T.Matrix4(),q=new T.Quaternion().setFromUnitVectors(new T.Vector3(0,1,0),d.clone().normalize());matrix.compose(a.clone().add(b).multiplyScalar(.5),q,new T.Vector3(1,d.length(),1));railTransforms.push(matrix);}
- function edge(ax,az,bx,bz){rail(new T.Vector3(ax,height+1.15,az),new T.Vector3(bx,height+1.15,bz));const n=Math.ceil(Math.hypot(bx-ax,bz-az)/3);for(let i=0;i<=n;i++){const x=ax+(bx-ax)*i/n,z=az+(bz-az)*i/n;rail(new T.Vector3(x,height,z),new T.Vector3(x,height+1.15,z));}}
+ function rawEdge(ax,az,bx,bz){rail(new T.Vector3(ax,height+1.15,az),new T.Vector3(bx,height+1.15,bz));rail(new T.Vector3(ax,height,az),new T.Vector3(ax,height+1.15,az));}
+ function edge(ax,az,bx,bz){const n=Math.max(1,Math.ceil(Math.hypot(bx-ax,bz-az)));for(let i=0;i<n;i++){const u=i/n,v=(i+1)/n,m=(u+v)/2;if(infinityDistance(ax+(bx-ax)*m,az+(bz-az)*m)<half+.5)continue;rawEdge(ax+(bx-ax)*u,az+(bz-az)*u,ax+(bx-ax)*v,az+(bz-az)*v);}}
+
  const deck={minX:50,maxX:106+half,minZ:-12-half,maxZ:half},summitRadius=15.5;
  // One uninterrupted terrace replaces the two parallel bridges and their dividing rails.
  block(deck.maxX-deck.minX,.4,deck.maxZ-deck.minZ,(deck.minX+deck.maxX)/2,height-.2,(deck.minZ+deck.maxZ)/2,'Unified roof terrace');
  block(width,.1,1.5,43,height-.05,stairs.run+.65,'Roof stair landing');
+ const summitTiles=new T.Mesh(new T.CircleGeometry(summitRadius,128),tiles);summitTiles.rotation.x=-Math.PI/2;summitTiles.position.set(125,height+.018,0);summitTiles.name='Snake-skin summit roof';group.add(summitTiles);
  const circleX=z=>Math.sqrt(57*57-z*z),joinX=125-Math.sqrt(summitRadius*summitRadius-deck.maxZ*deck.maxZ),joinZ=-Math.sqrt(summitRadius*summitRadius-(125-deck.maxX)**2);
  edge(circleX(deck.minZ),deck.minZ,deck.maxX,deck.minZ);edge(circleX(deck.maxZ),deck.maxZ,joinX,deck.maxZ);edge(deck.maxX,deck.minZ,deck.maxX,joinZ);
  // Guards follow the outside of the combined walking surface, leaving its interior open.
- for(const radius of[28.5,57])for(let i=0;i<180;i++){const a=i*Math.PI*2/180,b=(i+1)*Math.PI*2/180,mid=(a+b)/2,x=Math.cos(mid)*radius,z=Math.sin(mid)*radius;if(radius===57&&x>deck.minX&&z>deck.minZ&&z<deck.maxZ)continue;edge(Math.cos(a)*radius,Math.sin(a)*radius,Math.cos(b)*radius,Math.sin(b)*radius);}
+ for(const radius of[15.8,57])for(let i=0;i<180;i++){const a=i*Math.PI*2/180,b=(i+1)*Math.PI*2/180,mid=(a+b)/2,x=Math.cos(mid)*radius,z=Math.sin(mid)*radius;if(radius===57&&x>deck.minX&&z>deck.minZ&&z<deck.maxZ)continue;edge(Math.cos(a)*radius,Math.sin(a)*radius,Math.cos(b)*radius,Math.sin(b)*radius);}
  for(let i=0;i<180;i++){const a=i*Math.PI*2/180,b=(i+1)*Math.PI*2/180,mid=(a+b)/2,x=125+Math.cos(mid)*summitRadius,z=Math.sin(mid)*summitRadius;if(x<=deck.maxX&&z>=deck.minZ&&z<=deck.maxZ)continue;edge(125+Math.cos(a)*summitRadius,Math.sin(a)*summitRadius,125+Math.cos(b)*summitRadius,Math.sin(b)*summitRadius);}
+ for(let i=0;i<infinity.length-1;i++)for(const side of[-1,1]){const a=infinity[i],b=infinity[i+1],mx=(a.x+b.x)/2+(a.nx+b.nx)/2*(half+.6)*side,mz=(a.z+b.z)/2+(a.nz+b.nz)/2*(half+.6)*side;if(baseCanWalk(mx,mz)||infinityDistance(mx,mz)<half-.1)continue;rawEdge(a.x+a.nx*half*side,a.z+a.nz*half*side,b.x+b.nx*half*side,b.z+b.nz*half*side);}
+ // Match the two outside entrances to the roof paving.
+ block(24,.08,width,70,.395-.04,0,'Shared snake-skin entrance paving');
+ for(const x of[58,82]){for(const z of[-half,half]){const post=new T.Mesh(new T.CylinderGeometry(.2,.28,4.2,12),bronze);post.position.set(x,2.5,z);group.add(post);}const arch=[];for(let i=0;i<=32;i++){const a=i/32*Math.PI;arch.push(new T.Vector3(x,4.6+Math.sin(a)*1.8,Math.cos(a)*half));}const m=new T.Mesh(new T.TubeGeometry(new T.CatmullRomCurve3(arch),32,.14,8,false),bronze);m.name='Renewed snake-skin entrance portal';group.add(m);}
  const rails=new T.InstancedMesh(new T.CylinderGeometry(.045,.045,1,6),bronze,railTransforms.length);railTransforms.forEach((m,i)=>rails.setMatrixAt(i,m));rails.name='Batched roof and bridge guards';group.add(rails);
  function onBridge(x,z,margin=.35){return x>=deck.minX&&x<=deck.maxX-margin&&z>=deck.minZ+margin&&z<=deck.maxZ-margin;}
- function canWalk(x,z){const r=Math.hypot(x,z);return onBridge(x,z)||Math.hypot(x-125,z)<=summitRadius-.65||r>=29.5&&r<=56.3&&!stairs.holeAt(x,z,4)||Math.abs(x-43)<half-.35&&z>=stairs.run&&z<stairs.run+1.4;}
+ function baseCanWalk(x,z){const r=Math.hypot(x,z);return onBridge(x,z)||Math.hypot(x-125,z)<=summitRadius-.65||r>=16.15&&r<=56.3&&!stairs.holeAt(x,z,4)||Math.abs(x-43)<half-.35&&z>=stairs.run&&z<stairs.run+1.4;}
+ function canWalk(x,z){return baseCanWalk(x,z)||infinityDistance(x,z)<=half-.35;}
  function canVisit(x,z){if(!canWalk(x,z))return false;const baby=city.mountain.infant,dx=x-(city.A.x+baby.position.x),dz=z-(city.A.z+baby.position.z),c=Math.cos(baby.rotation.y),s=Math.sin(baby.rotation.y),lx=c*dx-s*dz,lz=s*dx+c*dz,nearest=Math.max(-3.6,Math.min(1.5,lx));return Math.hypot(lx-nearest,lz)>=3.15;}
  let progress=0,target=0,lastTime=null,moving=false,waiting=false;const lengths=route.slice(1).map((p,i)=>Math.hypot(p.x-route[i].x,p.z-route[i].z)),total=lengths.reduce((a,b)=>a+b,0);
  function pointAt(distance){let remaining=Math.max(0,Math.min(total,distance));for(let i=0;i<lengths.length;i++){if(remaining<=lengths[i]||i===lengths.length-1){const u=remaining/lengths[i],a=route[i],b=route[i+1];return{x:a.x+(b.x-a.x)*u,z:a.z+(b.z-a.z)*u,dx:(b.x-a.x)/lengths[i],dz:(b.z-a.z)/lengths[i]};}remaining-=lengths[i];}}
  function invite(reduced=false){target=target===total?0:total;moving=true;if(reduced){progress=target;moving=false;pose(0);}return target===total;}
  function pose(time){const p=pointAt(progress),baby=city.mountain.infant,direction=target>=progress?1:-1;baby.position.set(p.x-city.A.x,height-.02,p.z-city.A.z);if(moving)baby.rotation.y=Math.atan2(p.dz*direction,-p.dx*direction);city.mountain.setCrawling(moving&&!waiting);}
  function update(time,player,mode,reduced){const dt=lastTime===null?0:Math.min(.1,time-lastTime);lastTime=time;waiting=false;if(moving&&!reduced){const sign=Math.sign(target-progress),p=pointAt(progress),ahead=(player.x-p.x)*p.dx*sign+(player.z-p.z)*p.dz*sign,side=Math.abs((player.x-p.x)*p.dz-(player.z-p.z)*p.dx),blocked=Math.abs(player.y-height)<4&&ahead>0&&ahead<9&&side<4;waiting=blocked;if(!blocked){progress+=sign*Math.min(Math.abs(target-progress),dt*2.2);if(Math.abs(target-progress)<.001)moving=false;}}pose(time);}
- return{height,width,group,route,total,pointAt,onBridge,canWalk,canVisit,deck,summitRadius,invite,update,dispose(){group.traverse(o=>{if(o.isMesh)o.geometry.dispose();});stone.dispose();bronze.dispose();group.removeFromParent();},get state(){return{progress,target,moving,waiting,atRoof:progress===total,position:pointAt(progress)};}};
+ return{height,width,group,route,total,pointAt,onBridge,canWalk,canVisit,deck,infinity,infinityDistance,tiles,openingRadius:15.5,summitRadius,invite,update,dispose(){group.traverse(o=>{if(o.isMesh)o.geometry.dispose();});if(ownTiles)tiles.dispose();dark.dispose();bronze.dispose();group.removeFromParent();},get state(){return{progress,target,moving,waiting,atRoof:progress===total,position:pointAt(progress)};}};
 };
 })(window);

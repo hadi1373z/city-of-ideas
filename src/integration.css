@@ -6,3 +6,5 @@
 [data-language="en"] .floor-nav button{text-align:left}
 .map-panel>.eyebrow{padding-inline-end:32px}
 .map-panel>.close{left:auto;right:auto;inset-inline-end:12px}
+
+body[data-mode="aerial"] .movement-help,body[data-mode="aerial"] .touch-pad,body[data-mode="aerial"] .route-label small{display:none!important}
