@@ -2,7 +2,7 @@ import {PHILOSOPHERS,pickLanguage} from './philosopher-data.js';
 import {createPhilosopherQuarter} from './philosopher-quarter.js';
 
 export function installPhilosopherQuarter(M,T){
- const lang=()=>window.CITY_I18N.lang,tx=(fa,en)=>lang()==='fa'?fa:en;
+ const lang=()=>window.CITY_I18N.lang,tx=(fa,en)=>CITY_I18N.tx(fa,en);
  const quarter=createPhilosopherQuarter(T,{language:lang});M.scene.add(quarter.group);window.CITY_PHILOSOPHERS=quarter;
  M.city.targets.push(...quarter.targets);M.city.buildingTargets.push(...quarter.homes.map(h=>h.group));
  M.city.landmarks.philosophers=quarter.entryFor('philosophers');

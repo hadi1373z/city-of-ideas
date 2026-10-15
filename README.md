@@ -1,6 +1,6 @@
 # City of Ideas
 
-A Persian/English walking city containing the four-floor Zarathustra gallery, a mountain ascent with 81 stations, Socrates’ house, the artists’ neighborhood, Mathematics Institute, Makers’ City, the object market, and Ideas Park.
+A Persian/English/German walking city containing the four-floor Zarathustra gallery, a mountain ascent with 81 stations, Socrates’ house, the artists’ neighborhood, Mathematics Institute, Makers’ City, the object market, and Ideas Park.
 
 The philosophers’ quarter adds six explorable homes for Plato, Aristotle, Epicurus, Hypatia, Confucius and Ibn Sina. Choose **Philosophers’ homes** on the welcome screen, **Philosophers** while walking, or follow the western path from the object market. Each imagined home contains a concept object, a bilingual reading guide with an attributed source, and an independent browser-local reflection. The city map includes the quarter and its connecting paths.
 
@@ -24,6 +24,8 @@ To import a new, stable builder snapshot, run `node tools/import-source.cjs <abs
 
 Original artwork, model, music and book source credits remain beside the source assets. Private user notes, histories, authentication, local storage exports and credentials are never repository content. See `docs/` for verified function coverage and data migration constraints.
 
-Public controls and catalogue descriptions support Persian and English. The full Thomas Common book and some long Atlas articles retain their original English text. Private authored text stays unchanged when the interface language changes.
+Public controls support Persian, English and German. The book reader offers the full German original, Thomas Common English, and a clearly labelled Persian AI draft, with chapter comparison and translation notes. Some imported articles retain their source language. Private authored text stays unchanged when the interface language changes. See docs/TRANSLATION-CREDITS.md.
 
 The original private House service has an installed authenticated popup bridge. Connecting a live account requires explicit consent in that original service window; publication does not grant account access. No live-account save test is claimed by the automated fixture checks.
+
+Choose **Walk with Socrates** for a warm illustrated guide and seven episode rehearsals with captions, camera framing and optional browser speech. Ideas Park has two roaming paper friends with seven-step dog and cat origami lessons, before/after diagrams and fold checkpoints. The gallery doorway faces the mountain baby; its snake-head landing begins a continuous three-turn ramp connecting all four levels, with both manual walking and a gentle guided climb.

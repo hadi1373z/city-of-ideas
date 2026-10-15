@@ -11,3 +11,6 @@
 .language-choice button{margin:12px 5px;min-width:115px}.header-actions [data-set-language]{padding:9px 10px;font-size:10px}
 html[dir=ltr] .welcome{text-align:left}html[dir=ltr] .identity{text-align:left}html[dir=ltr] .reader-panel{direction:ltr}
 @media(max-width:760px){.header-actions{gap:4px}.header-actions [data-set-language]{padding:7px 6px}.masthead{padding-inline:12px}.source-tools-dialog{width:98vw;height:96dvh}.visit-actions{max-width:225px;flex-wrap:wrap}.source-tools-head{padding:10px}#source-tools-title{font-size:12px}}
+
+body:not([data-mode="gallery"]) #gallery-spiral-start{display:none}body[data-mode="gallery"] #origami-open,body[data-mode="gallery"] #socrates-tour-open{display:none}
+@media(max-width:450px){.masthead{top:12px;left:12px;right:12px;flex-direction:column;align-items:stretch;gap:7px}.identity{gap:8px}.identity strong{font-size:15px}.identity small{display:none}.ring-mark{width:25px;height:25px;flex:none}.ring-mark:after{inset:5px}.ring-mark:before{left:10px;top:10px}.header-actions{justify-content:flex-end}.header-actions #city-exit{max-width:none}.header-actions .glass{font-size:10px}.reader-panel{top:100px}#socrates-studio{top:100px;max-height:calc(100dvh - 112px)}}

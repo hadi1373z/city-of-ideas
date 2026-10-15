@@ -1,10 +1,11 @@
+import '../../public-de.js';
 import {PUBLIC_FA} from './city-tools-merged-public-fa.js';
 import {collectPrivateStrings,protectedText,protectedAttribute,createPublicTranslator,markPublicText,markPrivateText} from './city-tools-observer-core.js';
 export {markPublicText,markPrivateText};
 // Drop-in replacement for the copied tools observer. Single observer; no owner locale globals.
 export function initToolsLanguage({button,getState=()=>null,documentLike=document,windowLike=window}){
- const doc=documentLike,w=windowLike;let lang='en';try{lang=new URL(w.location.href).searchParams.get('lang')||w.localStorage.getItem('zarathustra-city-language')||'en';}catch{}lang=lang==='fa'?'fa':'en';
- const translate=createPublicTranslator(PUBLIC_FA),textRecords=new WeakMap(),attributeRecords=new WeakMap();let applying=false,pending=false,initialized=false;
+ const doc=documentLike,w=windowLike;let lang='en';try{lang=new URL(w.location.href).searchParams.get('lang')||w.localStorage.getItem('zarathustra-city-language')||'en';}catch{}lang=['fa','de'].includes(lang)?lang:'en';
+ const fa=createPublicTranslator(PUBLIC_FA),de=createPublicTranslator(w.CITY_PUBLIC_DE||{}),translate=(value,language)=>language==='de'?de(value,'fa'):fa(value,language),textRecords=new WeakMap(),attributeRecords=new WeakMap();let applying=false,pending=false,initialized=false;
  function apply(){if(applying)return;applying=true;try{
   const privateStrings=collectPrivateStrings(getState());doc.documentElement.lang=lang;doc.documentElement.dir=lang==='fa'?'rtl':'ltr';doc.body.dataset.language=lang;
   const walker=doc.createTreeWalker(doc.body,w.NodeFilter?.SHOW_TEXT??4);let node;
@@ -15,6 +16,6 @@ export function initToolsLanguage({button,getState=()=>null,documentLike=documen
  }finally{applying=false;}}
  function schedule(){if(pending)return;pending=true;w.queueMicrotask(()=>{pending=false;apply();});}
  const observer=new w.MutationObserver(schedule);observer.observe(doc.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['title','aria-label','placeholder','data-public-authored','data-private-text','data-home-private']});
- function set(value){const next=value==='fa'?'fa':'en';if(initialized&&next===lang)return false;lang=next;initialized=true;if(button){const text=lang==='en'?'Switch to Persian':'تغییر به انگلیسی';button.textContent=text;button.setAttribute('aria-label',text);button.setAttribute('data-public-authored','');}apply();return true;}
+ function set(value){const next=['fa','de'].includes(value)?value:'en';if(initialized&&next===lang)return false;lang=next;initialized=true;if(button){const text=lang==='de'?'Zu Englisch wechseln':lang==='en'?'Switch to Persian':'تغییر به انگلیسی';button.textContent=text;button.setAttribute('aria-label',text);button.setAttribute('data-public-authored','');}apply();return true;}
  if(button)button.onclick=()=>set(lang==='en'?'fa':'en');set(lang);return {set,apply,get language(){return lang;},dispose:()=>observer.disconnect()};
 }

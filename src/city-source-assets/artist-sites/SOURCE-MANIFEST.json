@@ -36,7 +36,7 @@
         "monet_woman-with-a-parasol"
       ],
       "originalHtmlSha256": "66a2eb82cf58f73d5149bca5c8715d38184c771d6f90ef6f81e2202272b678f7",
-      "adaptedHtmlSha256": "430a84bc98a785d00b997c49144e69c1e92e278404993dfba75987352634bedb",
+      "adaptedHtmlSha256": "a33e56db9eb504828507f2d663f1e3e06ebc438e36394d4601631ea63558fb2c",
       "bytes": 76501
     },
     {
@@ -68,7 +68,7 @@
         "kandinsky_yellow-red-blue"
       ],
       "originalHtmlSha256": "ea088c75e6b52066888bd2ba6b3774ba5dfa1385530d76c9887e6ca80442c668",
-      "adaptedHtmlSha256": "7d19ba3a357ae6234dba667bc581543154889d39b944ec426185e50815944c3f",
+      "adaptedHtmlSha256": "c7afa7d4108826d5b08437aed9bd24401579ec3fa44e9dea6633d33ae85cfb27",
       "bytes": 76869
     },
     {
@@ -100,7 +100,7 @@
         "van-gogh_wheatfield"
       ],
       "originalHtmlSha256": "ad3c8faf49f4a876061830e8c5bbc2b534636e94e4b8df754455e8f712d5247c",
-      "adaptedHtmlSha256": "ae1d8a1ce45f0bcc2e10a339cd772e72fd319ba51098353b8332f3685c36edec",
+      "adaptedHtmlSha256": "04c2d47731bc9932502f69bea5338d42929e714abee3805aa7e88603673f5905",
       "bytes": 76839
     },
     {
@@ -132,7 +132,7 @@
         "hokusai_tsukuda"
       ],
       "originalHtmlSha256": "7cd091aa6dcbeab076ee29eec90d852ae1793fae699fe24d949e05b09e8eb26d",
-      "adaptedHtmlSha256": "52a10b21f0eb973a1ebf517d367e93998c3f963aa2f4419279acd3bcbed797c4",
+      "adaptedHtmlSha256": "c5d68c6e737abbb75d372c2ba12925b3bcb7a72e3b1d1ee9ab105d4ffdfc7c45",
       "bytes": 89102
     },
     {
@@ -164,7 +164,7 @@
         "rodin_walking-man"
       ],
       "originalHtmlSha256": "8dbef8bc7f6adc620baf4178675411f76751e3e93ec77f8c74455c2586d69ff3",
-      "adaptedHtmlSha256": "77b1901bd71cfd23b5c8b54bb4e2da19da26a5b2e882fb310dd077c0b9c0497e",
+      "adaptedHtmlSha256": "fe31b7d0bd2a6f2b646d026b24f1ee771e037842d9698eeff592e4faa6054d9b",
       "bytes": 77583
     },
     {
@@ -196,7 +196,7 @@
         "hilma-af-klint_number-9"
       ],
       "originalHtmlSha256": "e6a1b3beb38c26a1a1baee9c77ccdcd499e99206b7d7ca83f9162b45bbdc3880",
-      "adaptedHtmlSha256": "32f9844150f0315de2c2854eb13a3e6a5a696a28de4a6420bb74b361df3346db",
+      "adaptedHtmlSha256": "5495ace3cd849cef12346f50219d37642a0bd01f7e105b13e32131e5f116543d",
       "bytes": 87359
     },
     {
@@ -228,7 +228,7 @@
         "mondrian_red-tree"
       ],
       "originalHtmlSha256": "9316b23828f509bed69ca40083341ad54e3a3426269ddd57ae5d6141eaaefd76",
-      "adaptedHtmlSha256": "39f7d29b3bf36810353bb05afe0e0e12ef78cdd51bc3820d488816de037857d6",
+      "adaptedHtmlSha256": "b05b63150f92127de249d62f85d21692cdc43b4ed342f927a98627eeef4d8f70",
       "bytes": 79559
     },
     {
@@ -260,7 +260,7 @@
         "lange_toward-la"
       ],
       "originalHtmlSha256": "6476ffd1f6b5bbff0fa859fc647b3784a2d4071559ed30f240d78c7f2ab326d1",
-      "adaptedHtmlSha256": "ece8e5ccffb1081da376dac73a311bd80e1e0a0e9b1026a1446bcc481c024163",
+      "adaptedHtmlSha256": "190c3d52eff6aa8f3e5196df6d08b56b8ed56796cd1494e3ca28abc2d32c903b",
       "bytes": 83649
     },
     {
@@ -292,7 +292,7 @@
         "morris_willow-boughs"
       ],
       "originalHtmlSha256": "d31beeef083b9d195d29957a0d2dd3c6e88420a543e252a5472371dd459025de",
-      "adaptedHtmlSha256": "722612053505100c5fc69a41fd102c756ca5439dbeec4b4d2f338b2acf569f09",
+      "adaptedHtmlSha256": "12dc6a8015dba072313cf8281ef27ddfb6025476f9a7ebe885e6dc65a1f9fee9",
       "bytes": 74389
     },
     {
@@ -324,7 +324,7 @@
         "klee_twittering-machine"
       ],
       "originalHtmlSha256": "28cb183f7e87041f828d9716d7ce46b64a4a43d376e2d65e2fd32933480db199",
-      "adaptedHtmlSha256": "8a6aaf16e961679943a8a211a6175e477e3b77cfceeb024bcbfb81f034c802ee",
+      "adaptedHtmlSha256": "52e5579832699ab15c4e0c69915f4aeba82bc65bd86d9a81131b728a29448ba2",
       "bytes": 86715
     }
   ]

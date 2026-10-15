@@ -3,7 +3,7 @@
   'use strict';
   var doc = g.document, norm = function (s) { return String(s == null ? '' : s).replace(/\s+/g, ' ').trim(); };
   var originals = new WeakMap(), attributes = new WeakMap(), publicBlocks = new WeakMap();
-  var lang = new URLSearchParams(g.location.search).get('lang') === 'fa' ? 'fa' : 'en';
+  var requested=new URLSearchParams(g.location.search).get('lang');var lang=['fa','de'].includes(requested)?requested:'en';
   var scheduled = false, observer, guardTimer, dictionary = {}, fragments = [], signature = '', sourcePeople = null, refreshGuarded = false;
   var privateSelector = '[data-city-private],input,textarea,[contenteditable="true"]';
   var skipped = privateSelector + ',script,style,svg,code,pre,.math-box,.math-display,.formula,[role="math"],.math-expression,.tex-source,.plain-notation,[data-city-public-key]';
@@ -17,16 +17,16 @@
     var a = g.CITY_PARK_PUBLIC_FA || {}, b = g.CITY_PARK_READER_FA || {};
     if (!sourcePeople && g.Atlas) sourcePeople = g.Atlas.catalogue.people;
     var people = sourcePeople || [];
-    var next = Object.keys(a).length + ':' + Object.keys(b).length + ':' + people.length;
+    var next = Object.keys(a).length + ':' + Object.keys(b).length + ':' + people.length+':'+lang;
     if (next === signature) return;
     signature = next; dictionary = {};
-    [shared,a,b].forEach(function (part) { Object.keys(part).forEach(function (key) { dictionary[norm(key)] = part[key]; }); });
+    [shared,a,b].forEach(function (part) { Object.keys(part).forEach(function (key) { dictionary[norm(key)] = lang==='de'?(g.CITY_PUBLIC_DE?.[key]||key):part[key]; }); });
     people.forEach(function(p) {var full=dictionary[norm(p.name)];if(!full)return;var surname=norm(p.name).split(' ').pop(), faSurname=norm(full).split(' ').pop();if(!dictionary[surname])dictionary[surname]=faSurname;});
     fragments = Object.keys(dictionary).filter(function (key) { return /[A-Za-z]/.test(key) && key.length > 2 && dictionary[key] !== key; }).sort(function (a,b) { return b.length-a.length; });
   }
   function lookup(text) { buildDictionary(); var key = norm(text); return Object.prototype.hasOwnProperty.call(dictionary,key) ? dictionary[key] : null; }
   function translate(text, language) {
-    var raw = String(text == null ? '' : text); if ((language || lang) !== 'fa') return raw;
+    var raw = String(text == null ? '' : text); if (!['fa','de'].includes(language || lang)) return raw;
     var exact = lookup(raw); if (exact != null) return raw.match(/^\s*/)[0] + exact + raw.match(/\s*$/)[0];
     // Only exact authored fragments may be replaced; generated numbers and punctuation are retained.
     var value = raw, slots = [];
@@ -56,7 +56,7 @@
     var record=originals.get(node);
     if(record && record.lang===lang && record.version===signature && node.nodeValue===record.last)return;
     if (!record || (node.nodeValue!==record.last && node.nodeValue!==record.raw)) record={raw:node.nodeValue,last:node.nodeValue};
-    var exactSVG=svgText && lang==='fa' ? lookup(record.raw) : null;
+    var exactSVG=svgText && lang!=='en' ? lookup(record.raw) : null;
     var next=svgText ? (exactSVG==null ? record.raw : exactSVG) : translate(record.raw); if(node.nodeValue!==next){guardOnce();node.nodeValue=next;} record.last=next;record.lang=lang;record.version=signature; originals.set(node,record);
   }
   function html(s) { return String(s).replace(/[&<>"']/g,function(c) {return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
@@ -95,7 +95,7 @@
   }
   function schedule() {if(scheduled)return;scheduled=true;requestAnimationFrame(refresh);}
   function relay() {Array.prototype.forEach.call(doc.querySelectorAll('iframe'),function (frame) {try {frame.contentWindow.postMessage({type:'city-language',lang:lang},g.location.origin);}catch (_) {}});}
-  function setLanguage(value) {lang=value==='fa'?'fa':'en';refresh();relay();return lang;}
+  function setLanguage(value) {lang=['fa','de'].includes(value)?value:'en';refresh();relay();return lang;}
   function publicSearchText(value) {var raw=String(value==null?'':value);var pieces=raw.split(/\n\s*\n/);return raw+' '+pieces.map(function(p){return translate(p,'fa');}).join(' ');}
   function boot() {
     var style=doc.createElement('style');style.textContent='body[data-language="fa"]{direction:rtl}body[data-language="fa"] .article,body[data-language="fa"] .lead,body[data-language="fa"] .ui-text,body[data-language="fa"] .park-tools-intro{text-align:right}body[data-language="fa"] .math-box,body[data-language="fa"] .math-display,body[data-language="fa"] .formula,body[data-language="fa"] [role="math"],body[data-language="fa"] code,body[data-language="fa"] pre{direction:ltr;text-align:left}body[data-language="fa"] input[type="url"]{direction:ltr}';doc.head.appendChild(style);

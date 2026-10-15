@@ -32,4 +32,4 @@ export const PHILOSOPHERS = [
   prompt:['چیزی را تصور کنید که ممکن است وجود داشته باشد، اما اکنون وجود ندارد. توصیفِ آن چه چیزی را ثابت می‌کند و چه چیزی را نه؟','Imagine something possible that does not exist around you. What does describing it establish, and what does it leave unproved?'],source:'https://plato.stanford.edu/entries/ibn-sina/',sourceName:'Stanford Encyclopedia of Philosophy · Ibn Sina'}
 ];
 export const quarterPaths = [[[ -138,-150],[-266,-150],[-266,18]], ...[-81,-37,7].map(z=>[[-266,z],[-208,z]])];
-export const pickLanguage = (pair,lang='en') => pair[lang==='fa'?0:1];
+export const pickLanguage = (pair,lang='en') => lang==='de'?(globalThis.CITY_PUBLIC_DE?.[pair[1]]||pair[1]):pair[lang==='fa'?0:1];

@@ -2,7 +2,7 @@
   "kind": "public source and synthetic test fixtures only",
   "sourceCanonicalSHA256": "bd07240709cc2626f581556f1b272bc8e118a20a98da4ce2e3b711f3aa4d2da4",
   "files": {
-    "manifest.json": "c14f29c71ac101931da62a9e6a423a815fa6b038cf7b1495e5057d278222840b",
+    "manifest.json": "e7359d47a2259b2c260881989ed10e67ad2f10b70902bf60a7dff51b75c7a60c",
     "dictionary-provenance.json": "aecaeff79d97440bb9afb4772b6ca4b18beabfc9019bd9eddbc40429ec0710d0",
     "math-public-fa.js": "2e9ea941dd1ec95eecd83fecd1991731ec23fae7a55c8f09c10c60f4410f5592",
     "math-locale-core.js": "154ed4fb605a193e2227822a7de7f42ae6f20033ffc4d82a655588c459f2d971",

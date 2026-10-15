@@ -7,8 +7,8 @@ export function installHomeMessages({windowLike=window,getTools,language,notify=
   const listener=async event=>{
     if(!isHomeParentEvent(event,w))return;
     const data=event.data,tools=getTools();if(!data||!tools)return;
-    if(data.type==='city-language'||data.type==='CITY_HOME_LANGUAGE'){if(['fa','en'].includes(data.lang))language?.set(data.lang);return;}
-    if(data.type==='city-home-state'){if(['fa','en'].includes(data.state?.lang))language?.set(data.state.lang);return;}
+    if(data.type==='city-language'||data.type==='CITY_HOME_LANGUAGE'){if(['fa','en','de'].includes(data.lang))language?.set(data.lang);return;}
+    if(data.type==='city-home-state'){if(['fa','en','de'].includes(data.state?.lang))language?.set(data.state.lang);return;}
     if(data.type==='city-home-interaction'||data.type==='CITY_HOME_PICK'){
       await enqueue(async()=>{try{await tools.ready;await tools.pick(data.data);if(data.id)reply(event,{type:'city-home-command-result',id:data.id,ok:true});}catch(error){fail(event,data,error);}});return;
     }

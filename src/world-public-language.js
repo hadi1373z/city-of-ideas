@@ -16,9 +16,9 @@
  };
  let lang=g.CITY_I18N?.lang||(new URLSearchParams(g.location.search).get('lang')==='fa'?'fa':'en');
  function counterpart(text){for(const map of [g.CITY_PARK_READER_FA,g.CITY_PARK_PUBLIC_FA,authored])if(map&&Object.prototype.hasOwnProperty.call(map,text))return map[text];return null;}
- function translatePublic(text){const raw=String(text==null?'':text);if(lang!=='fa')return raw;const value=counterpart(raw);return value==null?raw:String(value);}
+ function translatePublic(text){const raw=String(text==null?'':text);if(lang==='de')return g.CITY_PUBLIC_DE?.[raw]||raw;if(lang!=='fa')return raw;const value=counterpart(raw);return value==null?raw:String(value);}
  function refresh(){for(const record of records)record.repaint();return records.size;}
- function setLanguage(next){if(next!=='fa'&&next!=='en')return lang;if(next!==lang){lang=next;refresh();}return lang;}
+ function setLanguage(next){if(next!=='fa'&&next!=='en'&&next!=='de')return lang;if(next!==lang){lang=next;refresh();}return lang;}
  function registerPublicLabel(record){
   if(!record||record.private===true||typeof record.repaint!=='function')throw Error('Register only an explicitly authored public label with a repaint function.');
   const retained={title:String(record.title||''),subtitle:String(record.subtitle||''),repaint:record.repaint};records.add(retained);retained.repaint();

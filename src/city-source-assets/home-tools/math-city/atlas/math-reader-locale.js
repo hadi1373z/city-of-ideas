@@ -4719,8 +4719,8 @@ function privateAttribute(element,name){
 }
 
 function initMathReaderLanguage({documentLike=document,windowLike=window,dictionary=PUBLIC_FA,templates=PUBLIC_TEMPLATES}={}){
- const doc=documentLike,w=windowLike,translator=createPublicTranslator(dictionary,templates),texts=new WeakMap(),attributes=new WeakMap(),blocks=new WeakMap();let language='en',applying=false,scheduled=false,observer;
- try{language=new URL(w.location.href).searchParams.get('lang')==='fa'?'fa':'en';}catch{}
+ const doc=documentLike,w=windowLike,translator=createPublicTranslator(dictionary,templates),german=createPublicTranslator(Object.fromEntries(Object.keys(dictionary).map(key=>[key,w.CITY_PUBLIC_DE?.[key]||key])),templates.map(([key])=>[key,w.CITY_PUBLIC_DE?.[key]||key])),translate=(raw,lang)=>lang==='de'?german.translate(raw,'fa'):translator.translate(raw,lang),texts=new WeakMap(),attributes=new WeakMap(),blocks=new WeakMap();let language='en',applying=false,scheduled=false,observer;
+ try{language=['fa','de'].includes(new URL(w.location.href).searchParams.get('lang'))?new URL(w.location.href).searchParams.get('lang'):'en';}catch{}
  const skipped=node=>privateText(node)||Boolean(node.parentElement?.closest?.(MATH_SELECTORS+',[data-math-public-key],[data-math-original-article]'));
  const escaped=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  function apply(){if(applying||!doc.documentElement)return;applying=true;observer?.disconnect();try{
@@ -4728,26 +4728,26 @@ function initMathReaderLanguage({documentLike=document,windowLike=window,diction
   for(const element of doc.querySelectorAll('[data-math-public-key]')){
    if(privateText(element)||element.closest(MATH_SELECTORS))continue;
    const key=element.getAttribute('data-math-public-key'),old=blocks.get(element),record=old&&old.key===key&&old.last===element.innerHTML?old:{key,raw:element.innerHTML};
-   const translated=language==='fa'?translator.lookup(key):null,target=translated===null?record.raw:escaped(translated).replace(/\n/g,'<br>');
+   const translated=language==='fa'?translator.lookup(key):language==='de'?german.lookup(key):null,target=translated===null?record.raw:escaped(translated).replace(/\n/g,'<br>');
    if(element.innerHTML!==target)element.innerHTML=target;record.last=target;blocks.set(element,record);
    // An unmapped authored article paragraph stays wholly in original English.
-   element.setAttribute('data-math-article-language',translated===null?'en':'fa');
+   element.setAttribute('data-math-article-language',translated===null?'en':language);
   }
   const walker=doc.createTreeWalker(doc.documentElement,w.NodeFilter?.SHOW_TEXT??4);let node;
   while((node=walker.nextNode())){
    if(skipped(node))continue;
-   const old=texts.get(node),raw=old&&old.last===node.nodeValue?old.raw:node.nodeValue,target=translator.translate(raw,language);
+   const old=texts.get(node),raw=old&&old.last===node.nodeValue?old.raw:node.nodeValue,target=translate(raw,language);
    texts.set(node,{raw,last:target});if(target!==node.nodeValue)node.nodeValue=target;
   }
   for(const element of doc.querySelectorAll('[title],[aria-label],[placeholder],[alt]')){
    const records=attributes.get(element)||{};
-   for(const name of ['title','aria-label','placeholder','alt']){if(!element.hasAttribute(name)||privateAttribute(element,name))continue;const now=element.getAttribute(name),old=records[name],raw=old&&old.last===now?old.raw:now,target=translator.translate(raw,language);records[name]={raw,last:target};if(target!==now)element.setAttribute(name,target);}attributes.set(element,records);
+   for(const name of ['title','aria-label','placeholder','alt']){if(!element.hasAttribute(name)||privateAttribute(element,name))continue;const now=element.getAttribute(name),old=records[name],raw=old&&old.last===now?old.raw:now,target=translate(raw,language);records[name]={raw,last:target};if(target!==now)element.setAttribute(name,target);}attributes.set(element,records);
   }
-  for(const element of doc.querySelectorAll('meta[name="description"],meta[property="og:title"],meta[property="og:description"]')){const record=attributes.get(element)||{},now=element.getAttribute('content'),old=record.content,raw=old&&old.last===now?old.raw:now,target=translator.translate(raw,language);record.content={raw,last:target};attributes.set(element,record);if(now!==target)element.setAttribute('content',target);}
+  for(const element of doc.querySelectorAll('meta[name="description"],meta[property="og:title"],meta[property="og:description"]')){const record=attributes.get(element)||{},now=element.getAttribute('content'),old=record.content,raw=old&&old.last===now?old.raw:now,target=translate(raw,language);record.content={raw,last:target};attributes.set(element,record);if(now!==target)element.setAttribute('content',target);}
  }finally{applying=false;observer?.observe(doc.documentElement,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['title','aria-label','placeholder','alt','content']});}}
  function schedule(){if(scheduled)return;scheduled=true;w.queueMicrotask(()=>{scheduled=false;apply();});}
- function setLanguage(value){if(value!=='en'&&value!=='fa')return false;if(value===language)return false;language=value;apply();return true;}
- const message=event=>{let origin;try{origin=new URL(w.location.href).origin;}catch{return;}if(w.parent===w||event.source!==w.parent||event.origin!==origin)return;if(event.data?.type==='city-language'&&['en','fa'].includes(event.data.lang))setLanguage(event.data.lang);};
+ function setLanguage(value){if(value!=='en'&&value!=='fa'&&value!=='de')return false;if(value===language)return false;language=value;apply();return true;}
+ const message=event=>{let origin;try{origin=new URL(w.location.href).origin;}catch{return;}if(w.parent===w||event.source!==w.parent||event.origin!==origin)return;if(event.data?.type==='city-language'&&['en','fa','de'].includes(event.data.lang))setLanguage(event.data.lang);};
  w.addEventListener('message',message);
  function boot(){observer=new w.MutationObserver(schedule);apply();}
  if(doc.readyState==='loading')doc.addEventListener('DOMContentLoaded',boot,{once:true});else boot();

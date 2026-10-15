@@ -11,17 +11,17 @@
   "mathUiBaselineSHA256": "9a3c68e330ddec785449f9c580f2620dc036a21ee5a774631d5e631ae85b251c",
   "files": {
     "reader-localized.html": {
-      "sha256": "fcd9f48bc8f613d5ac8ffd193ec4337abc777e0f430565b1570ca5fdcc382987"
+      "sha256": "162bd737b170fcfdd3c799f725b5ce6e72e077336d43026500e9f7a46946e063"
     },
     "math-reader-locale.js": {
-      "sha256": "b4103a4f14dfbd8616a737110ca454866aeaa869c2aa7966bd0ece51f8611ca4"
+      "sha256": "0f1069594849a4dada3fedef66240b3f9c755f774712ae7758c027b661e5db3a"
     },
     "math-reader-locale.css": {
       "sha256": "ba22ad0f61c307975c9330eea0e92f343318d25bf9b159f3f41a8b2d0194fcd5"
     },
     "math-city-ui.js": {
-      "sha256": "cf18c57c290a4e49acdd6ebfda74ce1b2799032443bb5788481e7d95088181b1"
+      "sha256": "2a1cf6da19de7b2f336834dc3d4a9ca86caec309d0273166526f8a0b195d999e"
     }
   },
-  "installation": "Additional adapted reader + public locale assets; canonical index.html and source.json remain byte-for-byte unchanged."
+  "installation": "Additional adapted reader + public locale assets; canonical index.html and source.json remain byte-for-byte unchanged. German public dictionaries and language relay added; canonical source remains unchanged."
 }

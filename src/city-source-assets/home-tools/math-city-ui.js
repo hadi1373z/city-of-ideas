@@ -24,7 +24,7 @@ export function initMathCityUI({$,document,window,scene,notify=()=>{},openTravel
  const readerNote=node('p','Notes made inside this isolated reader last only for this page session. Export them with the reader’s JSON export before leaving or reloading. For a reflection kept with your house, save it in the Mathematics City journal instead.','math-city-atlas-note');readerNote.className='math-city-reader-note';atlasView.append(readerNote);
  const frame=node('iframe',null,'math-city-atlas-frame');frame.title='Offline miniature of Atlas of Ideas';frame.setAttribute('sandbox','allow-scripts allow-downloads');frame.setAttribute('referrerpolicy','no-referrer');frame.setAttribute('loading','eager');atlasView.append(frame);
  // Opaque sandbox receives public language only; no notes, credentials, state or catalogue transfer.
- let sentReaderLanguage=null;const readerLanguage=()=>document.documentElement.lang==='fa'?'fa':'en';
+ let sentReaderLanguage=null;const readerLanguage=()=>['fa','de'].includes(document.documentElement.lang)?document.documentElement.lang:'en';
  const relayReaderLanguage=()=>{if(!atlasLoaded)return;const lang=readerLanguage();if(lang===sentReaderLanguage)return;frame.contentWindow?.postMessage({type:'city-language',lang},'*');sentReaderLanguage=lang;};
  frame.addEventListener('load',()=>{sentReaderLanguage=null;relayReaderLanguage();});
  const readerLanguageObserver=typeof window.MutationObserver==='function'?new window.MutationObserver(relayReaderLanguage):null;

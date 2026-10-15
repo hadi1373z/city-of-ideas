@@ -11,7 +11,7 @@ window.createGalleryCity=function(T,ctx){
  function road(points,width=8){for(let i=1;i<points.length;i++){const a=new T.Vector3(points[i-1][0],.07,points[i-1][1]),b=new T.Vector3(points[i][0],.07,points[i][1]),d=b.clone().sub(a),m=box(width,.12,d.length()+width*.35,pathMaterial,(a.x+b.x)/2,.07,(a.z+b.z)/2,city);m.rotation.y=Math.atan2(d.x,d.z)}}
  function plaque(title,x,z,width=9){const m=textSign(title,'#f1e8cd',width,.9,city);m.position.set(x,3.2,z);box(width+.4,1.2,.14,materials.dark,x,3.2,z-.035,city);for(const side of [-1,1])box(.10,3,.10,bronze,x+side*(width/2),1.5,z,city)}
  cylinder(570,570,.24,new T.MeshLambertMaterial({color:0x556563}),0,-.22,-100,city);
- road([[0,58],[0,94]],10);road([[0,94],[-97.7,110]],9);road([[-97.7,110],[-97.7,103.8]],4.2);
+ road([[58,0],[70,0],[70,75],[0,94]],9);road([[0,94],[-97.7,110]],9);road([[-97.7,110],[-97.7,103.8]],4.2);
  road([[0,94],[82.9,108]],9);road([[0,94],[65,75],[A.x,A.radius+10]],8);
  road([[-97.7,110],[-86,45],[-84,-9],[-116,-29],[-138,-32]],9);
  road([[-84,-9],[-84,-110],[0,-185],[0,-195]],9);road([[-138,-32],[-138,-150],[0,-185]],8);
