@@ -1,28 +1,48 @@
-// Shared geometry and navigation for the four gallery levels, at the snake head.
+// Straight gallery flights; the old factory name remains for saved diagnostic clients.
 (function(g){'use strict';
- g.createGallerySpiral=function(T){
-  const radius=43,width=6,spacing=8,base=.395,max=Math.PI*6,gap=2.1,clamp=T.MathUtils.clamp;
-  const wrap=a=>Math.atan2(Math.sin(a),Math.cos(a));
-  const pointAt=(theta,r=radius)=>({x:Math.cos(theta)*r,z:Math.sin(theta)*r,y:base+theta/(Math.PI*2)*spacing});
-  const headingAt=(theta,direction=1)=>Math.atan2(Math.sin(theta)*direction,-Math.cos(theta)*direction);
-  const nearLanding=theta=>Math.abs(theta-Math.round(theta/(Math.PI*2))*Math.PI*2)<.12;
-  function resolve(x,z,theta,previous){const next=clamp(theta+wrap(Math.atan2(z,x)-Math.atan2(previous.z,previous.x)),0,max),r=clamp(Math.hypot(x,z),radius-width/2+.28,radius+width/2-.28);return{...pointAt(next,r),theta:next};}
-  function holeAt(x,z,floor){const r=Math.hypot(x,z),a=wrap(Math.atan2(z,x));return floor>0&&r>39.3&&r<46.7&&a> -gap&&a<0;}
-  function build(parent){
-   const owned=[],mats=[],mat=(c,extra={})=>{const m=new T.MeshLambertMaterial({color:c,...extra});mats.push(m);return m;},stone=mat(0xc8b98e),bronze=mat(0x786946),gold=mat(0xdfc27e),count=1080,positions=[],indices=[];
-   const add=(x,y,z)=>positions.push(x,y,z);
-   for(let i=0;i<=count;i++){const theta=max*i/count,a=pointAt(theta,radius-width/2),b=pointAt(theta,radius+width/2);add(a.x,a.y,a.z);add(b.x,b.y,b.z);add(a.x,a.y-.18,a.z);add(b.x,b.y-.18,b.z);if(i<count){const k=i*4;indices.push(k,k+4,k+1,k+1,k+4,k+5,k+2,k+3,k+6,k+3,k+7,k+6,k,k+2,k+4,k+2,k+6,k+4,k+1,k+5,k+3,k+3,k+5,k+7);}}
-   const geometry=new T.BufferGeometry();geometry.setAttribute('position',new T.Float32BufferAttribute(positions,3));geometry.setIndex(indices);geometry.computeVertexNormals();owned.push(geometry);const ramp=new T.Mesh(geometry,stone);ramp.name='Continuous gallery spiral · snake head to fourth level';parent.add(ramp);
-   const tube=(points,r,material,name)=>{const geo=new T.TubeGeometry(new T.CatmullRomCurve3(points),points.length-1,r,6,false);owned.push(geo);const mesh=new T.Mesh(geo,material);mesh.name=name;parent.add(mesh);return mesh;};
-   for(let turn=0;turn<3;turn++)for(const r of [radius-width/2,radius+width/2])for(const h of [.55,1.08])tube(Array.from({length:361},(_,i)=>{const theta=turn*Math.PI*2+.07+i*(Math.PI*2-.14)/360,p=pointAt(theta,r);return new T.Vector3(p.x,p.y+h,p.z);}),h>1?.045:.025,bronze,'Spiral handrail with open floor landing');
-   const postGeo=new T.CylinderGeometry(.028,.028,1.08,6);owned.push(postGeo);const poses=[];for(let i=0;i<=181;i++){const theta=max*i/181;if(nearLanding(theta))continue;for(const r of [radius-width/2,radius+width/2])poses.push(pointAt(theta,r));}const posts=new T.InstancedMesh(postGeo,bronze,poses.length),dummy=new T.Object3D();poses.forEach((p,i)=>{dummy.position.set(p.x,p.y+.54,p.z);dummy.updateMatrix();posts.setMatrixAt(i,dummy.matrix);});posts.instanceMatrix.needsUpdate=true;parent.add(posts);
-   // Thin contrasting centre line helps a visitor read the rising path.
-   tube(Array.from({length:count+1},(_,i)=>{const p=pointAt(max*i/count);return new T.Vector3(p.x,p.y+.015,p.z);}),.025,gold,'Gallery ascent wayfinding line');
-   // Upper floor openings are guarded on their inner, outer and trailing edges.
-   for(let floor=1;floor<4;floor++)for(const r of [39.3,46.7]){const points=Array.from({length:81},(_,i)=>new T.Vector3(Math.cos(-gap+i*(gap-.07)/80)*r,floor*spacing+base+1.08,Math.sin(-gap+i*(gap-.07)/80)*r));tube(points,.035,bronze,'Guard around gallery spiral opening');}
-   for(let floor=1;floor<4;floor++)tube([39.3,46.7].map(r=>new T.Vector3(Math.cos(-gap)*r,floor*spacing+base+1.08,Math.sin(-gap)*r)),.035,bronze,'Trailing edge guard at gallery floor opening');
-   return{ramp,dispose(){for(const geo of owned)geo.dispose();for(const m of mats)m.dispose();posts.dispose?.();}};
+g.createGallerySpiral=function(T){
+ const headWidth=(351-263)/596*96,width=headWidth*3,spacing=8,base=.395,steps=40,rise=spacing/steps,tread=.28,run=steps*tread,startX=43,endX=startX-run,edge=width/2+1.2,clamp=T.MathUtils.clamp;
+ const segments=[],starts=[],landings=[];let length=0;
+ function segment(a,b,kind,floor){const distance=Math.hypot(b.x-a.x,b.z-a.z);segments.push({a,b,kind,floor,start:length,end:length+distance,length:distance});length+=distance;}
+ for(let floor=0;floor<3;floor++){
+  const y=base+floor*spacing;starts.push(length);segment({x:startX,z:0,y},{x:endX,z:0,y:y+spacing},'steps',floor);
+  landings.push({x:endX,z:0,y:y+spacing,floor:floor+1,progress:length});
+  if(floor<2){let a={x:endX,z:0,y:y+spacing};for(const [x,z]of [[endX-1.5,0],[endX-1.5,edge],[startX+1.5,edge],[startX+1.5,0],[startX,0]]){const b={x,z,y:y+spacing};segment(a,b,'landing',floor+1);a=b;}}
+ }
+ const max=length,at=p=>segments.find(s=>p<s.end-1e-8)||segments.at(-1);
+ function pointAt(p){p=clamp(p,0,max);const s=at(p),u=clamp((p-s.start)/s.length,0,1);return{x:s.a.x+(s.b.x-s.a.x)*u,z:s.a.z+(s.b.z-s.a.z)*u,y:s.kind==='steps'?s.a.y+Math.ceil(Math.max(0,u*steps-1e-7))*rise:s.a.y};}
+ function headingAt(p,direction=1){const s=at(clamp(p,0,max));return Math.atan2(-(s.b.x-s.a.x)*direction,-(s.b.z-s.a.z)*direction);}
+ function floorAt(p){const s=at(clamp(p,0,max));return s.kind==='landing'?s.floor:s.floor+(p>=s.end-1e-6?1:0);}
+ function nearLanding(p){const s=at(p);return s.kind==='landing'||p-s.start<.45||s.end-p<.45;}
+ function contains(x,z,margin=0){return x>endX-margin&&x<startX+margin&&Math.abs(z)<width/2+margin;}
+ function holeAt(x,z,floor){return floor>0&&contains(x,z,.08);}
+ function entryAt(x,z,floor,previous){if(Math.abs(z)>width/2-.28)return null;if(floor<3&&previous.x>=startX-.02&&x<startX&&x>endX)return starts[floor]+startX-x;if(floor>0&&previous.x<=endX+.02&&x>endX&&x<startX)return starts[floor-1]+startX-x;return null;}
+ function resolve(x,z,p){const s=at(p);if(s.kind!=='steps')return{...pointAt(p),theta:p};const theta=s.start+clamp(startX-x,0,run),q=pointAt(theta);return{...q,z:clamp(z,-width/2+.28,width/2-.28),theta};}
+ function exitAt(x,z,p){const s=at(p);if(s.kind==='landing')return s.floor;if(s.end-p<.5&&x<endX)return s.floor+1;if(p-s.start<.5&&x>startX)return s.floor;return null;}
+ function build(parent){
+  const owned=[],mats=[],stone=new T.MeshLambertMaterial({color:0xc8b98e}),bronze=new T.MeshLambertMaterial({color:0x786946}),gold=new T.MeshLambertMaterial({color:0xe2c47e});mats.push(stone,bronze,gold);
+  const positions=[],indices=[];function quad(a,b,c,d){const k=positions.length/3;for(const p of[a,b,c,d])positions.push(...p);indices.push(k,k+1,k+2,k,k+2,k+3);}
+  const z0=-width/2,z1=width/2;
+  for(let floor=0;floor<3;floor++)for(let i=0;i<steps;i++){
+   const x0=startX-i*tread,x1=x0-tread,y0=base+floor*spacing+i*rise,y=y0+rise;
+   quad([x0,y,z0],[x1,y,z0],[x1,y,z1],[x0,y,z1]);
+   quad([x0,y0,z0],[x0,y,z0],[x0,y,z1],[x0,y0,z1]);
+   quad([x0,y0-.18,z0],[x0,y,z0],[x1,y,z0],[x1,y0-.18,z0]);
+   quad([x1,y0-.18,z1],[x1,y,z1],[x0,y,z1],[x0,y0-.18,z1]);
+   quad([x1,y0-.18,z0],[x1,y0-.18,z1],[x0,y0-.18,z1],[x0,y0-.18,z0]);
   }
-  return{radius,width,spacing,base,max,gap,pointAt,headingAt,nearLanding,resolve,holeAt,build,entrance:{x:58,z:0},head:{x:43,z:0},levels:[0,1,2,3].map(f=>({...pointAt(f*Math.PI*2),floor:f}))};
- };
+  const geometry=new T.BufferGeometry();geometry.setAttribute('position',new T.Float32BufferAttribute(positions,3));geometry.setIndex(indices);geometry.computeVertexNormals();owned.push(geometry);const ramp=new T.Mesh(geometry,stone);ramp.name='Gallery staircase · 120 real treads and vertical risers';ramp.userData={galleryStairs:true,stepCount:120,headWidth,width,widthRatio:3};parent.add(ramp);
+  function beam(a,b,r,mat,name){const delta=new T.Vector3().subVectors(b,a),geo=new T.CylinderGeometry(r,r,delta.length(),8);owned.push(geo);const mesh=new T.Mesh(geo,mat);mesh.position.copy(a).add(b).multiplyScalar(.5);mesh.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),delta.normalize());mesh.name=name;parent.add(mesh);}
+  const vector=(x,y,z)=>new T.Vector3(x,y,z);
+  for(let floor=0;floor<3;floor++){
+   const y=base+floor*spacing;
+   for(const z of[z0,z1]){beam(vector(startX,y+1.08,z),vector(endX,y+spacing+1.08,z),.045,bronze,'Straight stair handrail');for(let i=0;i<=steps;i+=4){const x=startX-i*tread,h=y+i*rise;beam(vector(x,h,z),vector(x,h+1.08,z),.028,bronze,'Stair rail post');}}
+   for(let i=0;i<steps;i++){const x=startX-i*tread,h=y+(i+1)*rise+.008;beam(vector(x,h,z0),vector(x,h,z1),.014,gold,'Visible stair nosing');}
+  }
+  // Opening guards follow both sides; full-width ends remain open for landing access.
+  for(let floor=1;floor<4;floor++)for(const z of[z0-.08,z1+.08]){const y=base+floor*spacing;beam(vector(startX,y+1.08,z),vector(endX,y+1.08,z),.035,bronze,'Gallery stairwell guard');for(const x of[startX,endX,(startX+endX)/2])beam(vector(x,y,z),vector(x,y+1.08,z),.025,bronze,'Landing guard post');}
+  return{ramp,dispose(){for(const geo of owned)geo.dispose();for(const mat of mats)mat.dispose();}};
+ }
+ return{headWidth,width,widthRatio:3,spacing,base,steps,rise,tread,run,startX,endX,starts,max,segments,pointAt,headingAt,floorAt,nearLanding,contains,holeAt,entryAt,resolve,exitAt,build,entrance:{x:58,z:0},head:{x:43,z:0},levels:[0,1,2,3].map(f=>f===3?landings[2]:{x:startX,z:0,y:base+f*spacing,floor:f,progress:starts[f]})};
+};
 })(window);

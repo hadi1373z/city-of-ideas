@@ -1,7 +1,17 @@
 import assert from 'node:assert/strict';import vm from 'node:vm';import{readFile}from'node:fs/promises';
 const T={};vm.runInNewContext(await readFile(new URL('../src/assets/three.min.js',import.meta.url),'utf8'),{exports:T,module:{exports:T},console:{...console,warn(){}}});const w={};vm.runInNewContext(await readFile(new URL('../src/gallery-spiral.js',import.meta.url),'utf8'),{window:w});const route=w.createGallerySpiral(T);
-assert.equal(route.levels.length,4);assert.equal(route.entrance.x,58);assert.equal(route.entrance.z,0);assert(route.entrance.x<125-6,'The east-facing gallery door must face the baby to the east.');
-let theta=0,previous=route.pointAt(0),samples=0;for(let target=.001;target<=route.max+.001;target+=.001){const ideal=route.pointAt(Math.min(target,route.max)),p=route.resolve(ideal.x,ideal.z,theta,previous);assert(Math.abs(p.theta-Math.min(target,route.max))<1e-6);assert(p.y>=previous.y-1e-8);for(let floor=1;floor<4;floor++){const ceiling=floor*8;if(ceiling>p.y+.12&&ceiling<p.y+2.1)assert(route.holeAt(p.x,p.z,floor),'A higher gallery slab must have a head-clearance opening.');}previous=p;theta=p.theta;samples++;}
-assert(Math.abs(previous.y-24.395)<.001);for(let floor=0;floor<4;floor++){const p=route.pointAt(floor*Math.PI*2);assert(Math.abs(p.y-(floor*8+.395))<1e-7);assert(Math.abs(p.x-43)<1e-7&&Math.abs(p.z)<1e-7);assert(route.nearLanding(floor*Math.PI*2));}
-for(let t=route.max;t>0;t-=.003){const ideal=route.pointAt(Math.max(0,t-.003)),p=route.resolve(ideal.x,ideal.z,theta,previous);assert(p.y<=previous.y+1e-7);theta=p.theta;previous=p;}
-const scene=new T.Scene(),built=route.build(scene);scene.updateMatrixWorld(true);assert(built.ramp.isMesh);assert(built.ramp.geometry.attributes.position.count>4000);built.dispose();console.log('PASS: east-facing entrance, four level landings, '+samples+' small ascent steps, descent and overhead openings.');
+assert.equal(route.levels.length,4);assert.equal(route.entrance.x,58);assert.equal(route.entrance.z,0);assert.equal(route.width,route.headWidth*3);assert.equal(route.steps,40);assert.equal(route.rise,.2);
+let built,scene;for(let floor=0;floor<3;floor++){
+ const start=route.starts[floor],heights=new Set();
+ for(let step=0;step<40;step++){
+  const p=route.pointAt(start+(step+.5)*route.tread);heights.add(p.y.toFixed(5));assert.equal(p.z,0);assert(Math.abs(p.y-(route.base+floor*8+(step+1)*.2))<1e-6);
+  const q=route.resolve(p.x,.5,start+(step+.1)*route.tread);assert(Math.abs(q.theta-(start+(step+.5)*route.tread))<1e-6);assert.equal(q.z,.5);
+  const ray=new T.Raycaster(new T.Vector3(p.x,p.y+2,0),new T.Vector3(0,-1,0),0,2.01);const hits=ray.intersectObject(builtStairs(),false);assert(hits.length,'Each tread is real walkable geometry');assert(Math.abs(hits[0].point.y-p.y)<1e-5);
+ }
+ assert.equal(heights.size,40);assert(route.holeAt(37,0,floor+1));
+ assert(route.entryAt(42.9,0,floor,{x:43.1,z:0})!==null);
+ assert(route.entryAt(route.endX+.1,0,floor+1,{x:route.endX-.1,z:0})!==null);
+}
+function builtStairs(){if(!built){scene=new T.Scene();built=route.build(scene);scene.updateMatrixWorld(true);}return built.ramp;}
+for(let p=0;p<route.max;p+=.07){const a=route.pointAt(p),b=route.pointAt(Math.min(route.max,p+.07));assert(b.y>=a.y-1e-7);assert(Math.hypot(a.x,a.z)>29.5&&Math.hypot(a.x,a.z)<56.3,'Landings remain inside gallery walking bounds');}
+assert.equal(route.floorAt(route.max),3);assert(Math.abs(route.pointAt(route.max).y-24.395)<1e-7);assert.equal(built.ramp.userData.stepCount,120);built.dispose();console.log('PASS: three straight 40-step flights, exactly three head-widths, real horizontal treads, vertical risers, four levels and reversible entrances.');
