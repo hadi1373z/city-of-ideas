@@ -1,7 +1,7 @@
 'use strict';
 const path=require('node:path'),{spawnSync}=require('node:child_process');
 const root=path.resolve(__dirname,'..');
-for(const args of [['tests/source-guard.cjs'],['tests/build-import.cjs'],['backend-integration/tests/bridge-smoke.mjs'],['src/city-source-assets/home-tools/adapter-tests.mjs'],['tests/home-protocol.mjs'],['tests/home-language.mjs'],['tests/home-restore.mjs'],['tests/reader-locale/test.cjs'],['tests/math-reader-locale/test.mjs'],['tests/extra-districts.mjs'],['tests/shared-activities.mjs'],['tests/home-editions.mjs','src/home-scene.js'],['tests/static-mesh-batches.mjs'],['tests/root-controls.mjs'],['tests/root-home-bridge.mjs'],['tests/root-artist-los.mjs'],['tests/check-source.cjs']]){
+for(const args of [['tests/source-guard.cjs'],['tests/build-import.cjs'],['backend-integration/tests/bridge-smoke.mjs'],['src/city-source-assets/home-tools/adapter-tests.mjs'],['tests/home-protocol.mjs'],['tests/home-language.mjs'],['tests/home-restore.mjs'],['tests/reader-locale/test.cjs'],['tests/math-reader-locale/test.mjs'],['tests/extra-districts.mjs'],['tests/shared-activities.mjs'],['tests/home-editions.mjs','src/home-scene.js'],['tests/static-mesh-batches.mjs'],['tests/root-controls.mjs'],['tests/root-home-bridge.mjs'],['tests/root-artist-los.mjs'],['tests/philosopher-quarter.mjs'],['tests/check-source.cjs']]){
   const file=args[0],result=spawnSync(process.execPath,args,{cwd:root,stdio:'inherit',windowsHide:true});
   if(result.error||result.status!==0){console.error('Release check failed: '+file);process.exit(result.status||1);}
 }

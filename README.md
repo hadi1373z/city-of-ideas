@@ -2,6 +2,8 @@
 
 A Persian/English walking city containing the four-floor Zarathustra gallery, a mountain ascent with 81 stations, Socrates’ house, the artists’ neighborhood, Mathematics Institute, Makers’ City, the object market, and Ideas Park.
 
+The philosophers’ quarter adds six explorable homes for Plato, Aristotle, Epicurus, Hypatia, Confucius and Ibn Sina. Choose **Philosophers’ homes** on the welcome screen, **Philosophers** while walking, or follow the western path from the object market. Each imagined home contains a concept object, a bilingual reading guide with an attributed source, and an independent browser-local reflection. The city map includes the quarter and its connecting paths.
+
 Live target: https://hadi1373z.github.io/city-of-ideas/
 
 The repository’s `src/` is the explicit, reviewed source snapshot. GitHub Actions checks it, builds `_site/`, publishes that artifact, then compares the live version and asset hashes. It does not fetch or automatically synchronize a different Sites project or a different chat’s workspace.

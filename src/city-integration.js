@@ -1,4 +1,5 @@
 import {artistLineOfSight} from './artist-line-of-sight.js';
+import {installPhilosopherQuarter} from './philosopher-ui.js';
 import {createExtraDistricts} from './extra-districts.js';
 import {buildHome} from './home-editions-scene.js';
 import {buildArtistResidents} from './city-source-assets/home-tools/artist-residents.js';
@@ -70,5 +71,6 @@ try{
  addEventListener('message',e=>{if(e.origin!==location.origin||!CITY_TOOL_FRAMES.isHome(e.source))return;if(e.data?.type==='city-home-tool'&&e.data.action==='ready')refreshTargets();});
  addEventListener('pagehide',()=>{activities.dispose();socrates.dispose();residents.dispose();E.dispose();M.homeBridge?.dispose();},{once:true});
  if(!frame().hasAttribute('src'))frame().src=new URL('./city-source-assets/home-tools/index.html?lang='+CITY_I18N.lang,import.meta.url).href;
+ installPhilosopherQuarter(M,T);
  M.status('ready');
 }catch(error){console.error('Original district integration failed',error);M.status(error.message);}

@@ -2,7 +2,7 @@ import {createStaticMeshBatches} from './static-mesh-batches.js';
 // This owns only render proxies. Original nodes remain the action/collision source.
 while(!window.CITY_MAIN?.homeState||!window.CITY_EXTRAS||!window.CITY_ACTIVITIES)await new Promise(resolve=>setTimeout(resolve,25));
 const M=window.CITY_MAIN,E=window.CITY_EXTRAS,A=window.CITY_ACTIVITIES,T=window.THREE;
-const roots=()=>[M.city.homeBuilt?.group,M.city.art?.group,E.group,...A.groups].filter(Boolean);
+const roots=()=>[M.city.homeBuilt?.group,M.city.art?.group,E.group,...A.groups,window.CITY_PHILOSOPHERS?.group].filter(Boolean);
 const batches=createStaticMeshBatches(T,{roots:roots(),includeStaticActions:true,mergeEquivalentMaterials:true,batchDescendants:true,validationMode:'fast'});window.CITY_RENDER_BATCHES=batches;
 let disposed=false,pending=false;const watched=new WeakSet();
 const rescan=()=>{if(disposed)return;batches.rescan(roots());watchReady();};
