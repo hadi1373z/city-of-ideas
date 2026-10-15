@@ -1,5 +1,5 @@
 /* Original procedural mountain and metamorphosis figures for this project.
- * No external sculpture/model is copied; this is not the Zizkov infant asset.
+ * Procedural geometry, with the infant finish and silhouette guided by the owner reference.
  * Uses the caller's THREE r160 (MIT). No renderer, lights, shadows, ramp or colliders.
  * buildSpiralMountainArt(THREE, options) -> {group, update(seconds,reducedMotion), dispose(), metadata}
  */
@@ -53,35 +53,33 @@
     mesh(root,new T.CylinderGeometry(baseRadius,baseRadius,.28,64,1),mats.rock,0,.14,0).name='Low basalt plinth';
     var crawlLimbs=[],crawling=false;
     var infant=new T.Group();infant.name='Original giant crawling infant';infant.position.y=top-.02;infant.userData={stage:'infant',original:true};root.add(infant);
-    // Oversized head, round belly, diaper, bent crawling elbows and grounded knees.
-    ball(infant,mats.skin,-.2,2.35,0,3.05,1.6,1.95);
-    ball(infant,mats.cloth,2.0,1.95,0,1.7,1.42,1.72);
-    ball(infant,mats.skin,-3.65,3.45,0,2.35,2.4,2.2);
+    // Smooth sculptural volumes inspired by the owner reference, with no cartoon face or diaper.
+    var bronze=material('infantBronze',0x292b2d,{roughness:.3,metalness:.68});
+    infant.name='Dark bronze crawling infant';infant.userData.finish='dark bronze';
+    // A smooth implicit union avoids visible sphere/cylinder seams while retaining four moving limbs.
+    function sculpture(parent,forms,bounds){
+      var step=.19,nx=Math.ceil((bounds[1]-bounds[0])/step),ny=Math.ceil((bounds[3]-bounds[2])/step),nz=Math.ceil((bounds[5]-bounds[4])/step),dx=(bounds[1]-bounds[0])/nx,dy=(bounds[3]-bounds[2])/ny,dz=(bounds[5]-bounds[4])/nz;
+      function field(x,y,z){var d=100;for(var f of forms){var q;if(f.length===6){q=(Math.hypot((x-f[0])/f[3],(y-f[1])/f[4],(z-f[2])/f[5])-1)*Math.min(f[3],f[4],f[5]);}else{var ax=x-f[0],ay=y-f[1],az=z-f[2],bx=f[3]-f[0],by=f[4]-f[1],bz=f[5]-f[2],t=Math.max(0,Math.min(1,(ax*bx+ay*by+az*bz)/(bx*bx+by*by+bz*bz)));q=Math.hypot(ax-bx*t,ay-by*t,az-bz*t)-f[6];}var k=.3,h=Math.max(k-Math.abs(d-q),0)/k;d=Math.min(d,q)-h*h*k*.25;}return Math.max(d,.02-y);}
+      var grid=[],points=[],vertices=[],normals=[],stride=nx+1,layer=stride*(ny+1);
+      for(var z=0;z<=nz;z++)for(var y=0;y<=ny;y++)for(var x=0;x<=nx;x++){var p=[bounds[0]+x*dx,bounds[2]+y*dy,bounds[4]+z*dz];points.push(p);grid.push(field.apply(null,p));}
+      function crossing(a,b){var u=grid[a]/(grid[a]-grid[b]),p=points[a],q=points[b];return p.map(function(v,i){return v+(q[i]-v)*u;});}
+      function normal(p){var e=.012,n=new T.Vector3(field(p[0]+e,p[1],p[2])-field(p[0]-e,p[1],p[2]),field(p[0],p[1]+e,p[2])-field(p[0],p[1]-e,p[2]),field(p[0],p[1],p[2]+e)-field(p[0],p[1],p[2]-e));return n.normalize();}
+      function tri(a,b,c){var na=normal(a),nb=normal(b),nc=normal(c),ab=new T.Vector3().fromArray(b).sub(new T.Vector3().fromArray(a)),ac=new T.Vector3().fromArray(c).sub(new T.Vector3().fromArray(a));if(ab.cross(ac).dot(na)<0){var swap=b;b=c;c=swap;swap=nb;nb=nc;nc=swap;}vertices.push.apply(vertices,a.concat(b,c));for(var n of[na,nb,nc])normals.push(n.x,n.y,n.z);}
+      var tetra=[[0,5,1,6],[0,1,2,6],[0,2,3,6],[0,3,7,6],[0,7,4,6],[0,4,5,6]];
+      for(var z=0;z<nz;z++)for(var y=0;y<ny;y++)for(var x=0;x<nx;x++){var i=x+y*stride+z*layer,c=[i,i+1,i+1+stride,i+stride,i+layer,i+1+layer,i+1+stride+layer,i+stride+layer];for(var ids of tetra){var inside=[],outside=[];for(var id of ids)(grid[c[id]]<0?inside:outside).push(c[id]);if(inside.length===1||inside.length===3){var one=inside.length===1?inside[0]:outside[0],many=inside.length===1?outside:inside;tri(crossing(one,many[0]),crossing(one,many[1]),crossing(one,many[2]));}else if(inside.length===2){var a=crossing(inside[0],outside[0]),b=crossing(inside[0],outside[1]),d=crossing(inside[1],outside[0]),e=crossing(inside[1],outside[1]);tri(a,b,d);tri(b,e,d);}}}
+      var geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(vertices,3));geo.setAttribute('normal',new T.Float32BufferAttribute(normals,3));geo.computeBoundingSphere();return mesh(parent,geo,bronze);
+    }
+    sculpture(infant,[[-.35,2.8,0,2.65,1.35,1.68],[1.7,2.05,0,1.55,1.45,1.55],[-1.85,3.05,0,1.1,1.3,1.62],[-2.7,3.8,0,.8,.95,.9],[-3.6,4.6,0,1.65,1.8,1.58],[-3.45,4.55,1.48,.35,.42,.2],[-3.45,4.55,-1.48,.35,.42,.2]],[-5.7,3.6,.4,6.8,-2.1,2.1]).name='Smooth bronze head and body';
     [-1,1].forEach(function(s){
-      ball(infant,mats.skin,-3.5,3.45,s*2.18,.52,.65,.35);
-      ball(infant,mats.rose,-3.61,3.42,s*2.45,.2,.32,.08,1);
       var armStart=infant.children.length;
-      bone(infant,mats.skin,[-1.9,2.3,s*1.5],[-2.65,.66,s*2.04],.48,.5);
-      ball(infant,mats.skin,-2.65,.66,s*2.04,.51,.5,.51);
-      bone(infant,mats.skin,[-2.65,.66,s*2.04],[-3.7,.3,s*2.43],.44,.43);
-      round(infant,mats.skin,-3.82,.26,s*2.48,.69,.23,.51);
-      for(var finger=0;finger<3;finger++)round(infant,mats.skin,-4.2-.1*finger,.2,s*(2.23+.19* finger),.26,.16,.12);
-      captureLimb(armStart,[-1.9,2.3,s*1.5],s, 'arm');
+      sculpture(infant,[[-1.8,3,s*1.32,-2.1,1.65,s*1.75,.55],[-2.1,1.65,s*1.75,-2.5,.45,s*2.08,.42],[-2.8,.25,s*2.12,.68,.23,.48]],[-3.8,-.9,0,3.7,s<0?-2.9:.6,s<0?-.6:2.9]).name='Smooth supporting arm';
+      captureLimb(armStart,[-1.8,3,s*1.32],s,'arm');
       var legStart=infant.children.length;
-      bone(infant,mats.skin,[1.65,1.75,s*1.32],[2.75,.6,s*1.83],.69,.53);
-      ball(infant,mats.skin,2.75,.6,s*1.83,.57,.53,.6);
-      bone(infant,mats.skin,[2.75,.6,s*1.83],[1.73,.3,s*2.49],.46,.35);
-      round(infant,mats.skin,1.64,.23,s*2.56,.7,.21,.42);
-      captureLimb(legStart,[1.65,1.75,s*1.32],-s,'knee');
-      round(infant,mats.cloth,-5.54,3.99,s*.79,.29,.43,.43);
-      round(infant,mats.dark,-5.82,3.97,s*.82,.075,.19,.21);
-      round(infant,mats.skin,-5.31,3.07,s*1.24,.45,.47,.47);
+      sculpture(infant,[[1.6,2.1,s*1.2,2.3,.65,s*1.85,.65],[2.3,.65,s*1.85,3.1,.36,s*2.02,.46],[3.65,.25,s*2.07,.7,.23,.43]],[.7,4.7,0,2.9,s<0?-2.9:.3,s<0?-.3:2.9]).name='Smooth bent knee and foot';
+      captureLimb(legStart,[1.6,2.1,s*1.2],-s,'knee');
     });
-    round(infant,mats.skin,-6.04,3.44,0,.46,.43,.42);
-    tube(infant,mats.rose,[[-5.86,2.82,-.43],[-5.99,2.72,0],[-5.86,2.82,.43]],.085);
-    tube(infant,mats.dark,[[-3.54,5.81,0],[-3.8,6.05,.04],[-4.0,5.92,.12]],.11);
-    function captureLimb(start,pivot,phase,kind){var group=new T.Group();group.name='Crawling '+kind;group.position.set.apply(group.position,pivot);var parts=infant.children.slice(start);infant.add(group);parts.forEach(function(part){group.add(part);part.position.sub(group.position);});combine(group);crawlLimbs.push({group:group,phase:phase,lift:kind==='arm'?-1:1});}
-    var limbs=crawlLimbs.map(function(l){return l.group;});limbs.forEach(function(l){infant.remove(l);});combine(infant);limbs.forEach(function(l){infant.add(l);});
+    function captureLimb(start,pivot,phase,kind){var group=new T.Group();group.name='Crawling '+kind;group.position.set.apply(group.position,pivot);var parts=infant.children.slice(start);infant.add(group);parts.forEach(function(part){group.add(part);part.position.sub(group.position);});crawlLimbs.push({group:group,phase:phase,lift:kind==='arm'?-1:1});}
+
     function leg(parent,coat,x,z,length,phase,hoof) {var joint=new T.Group();joint.position.set(x,length,z);parent.add(joint);
       bone(joint,coat,[0,0,0],[.12,-length*.54,0],.16,.135);round(joint,coat,.12,-length*.54,0,.17,.2,.17);bone(joint,coat,[.12,-length*.54,0],[0,-length+.14,0],.13,.1);round(joint,hoof,0,-length+.1,0,.27,.12,.16);combine(joint);return {joint:joint,phase:phase};}
     function lionBody() {var animal=new T.Group(),body=new T.Group();animal.add(body);animal.name='Original orbiting lion';animal.userData={stage:'lion',original:true};
@@ -114,7 +112,7 @@
       infant.scale.set(scaleR,scaleR*(1+.006*Math.sin(t*.7)),scaleR);infant.rotation.z=.003*Math.sin(t*.43);
     }
     update(0,false);
-    var infantExtent=new T.Box3().setFromObject(infant).getSize(new T.Vector3());metadata.infant={length:infantExtent.x,height:infantExtent.y,width:infantExtent.z,original:true};
+    var infantExtent=new T.Box3().setFromObject(infant).getSize(new T.Vector3());metadata.infant={length:infantExtent.x,height:infantExtent.y,width:infantExtent.z,original:true,finish:'dark bronze',smooth:true};
     function dispose(){if(disposed)return;disposed=true;root.removeFromParent();ownedGeometry.forEach(function(v){v.dispose();});ownedMaterial.forEach(function(v){v.dispose();});ownedGeometry.clear();ownedMaterial.clear();root.clear();}
     return {group:root,update:update,dispose:dispose,metadata:metadata,infant:infant,setCrawling:function(value){crawling=value;if(!value)crawlLimbs.forEach(function(l){l.group.rotation.z=0;});},crawlLimbs:crawlLimbs,lion:lion.node,camel:camel.node};
   };
