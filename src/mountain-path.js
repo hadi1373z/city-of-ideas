@@ -1,6 +1,6 @@
 /* New path geometry is independent of historical chapter IDs and saved notes. */
 window.createMountainPath=function(T){
- const A={x:125,z:0,radius:43,topRadius:19,width:7,start:.42,top:24.5,turns:4},MAX=Math.PI*8;
+ const A={x:125,z:0,radius:43,topRadius:19,width:7,start:.42,top:32.395,turns:4},MAX=Math.PI*8;
  const clamp=T.MathUtils.clamp,wrap=a=>Math.atan2(Math.sin(a),Math.cos(a));
  const radiusAt=theta=>A.radius+(A.topRadius-A.radius)*clamp(theta/MAX,0,1);
  const heightAt=theta=>A.start+(A.top-A.start)*clamp(theta/MAX,0,1);

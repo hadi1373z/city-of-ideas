@@ -51,6 +51,7 @@
     for(var j=0;j<segments;j++)triangle([0,top,0],radiusAtRing(rings[rings.length-1],j+1),radiusAtRing(rings[rings.length-1],j),true,j+777);
     var terrain=new T.BufferGeometry();terrain.setAttribute('position',new T.Float32BufferAttribute(positions,3));terrain.setAttribute('color',new T.Float32BufferAttribute(colors,3));terrain.computeVertexNormals();mesh(root,terrain,mats.terrain).name='Faceted basalt and green terraces';
     mesh(root,new T.CylinderGeometry(baseRadius,baseRadius,.28,64,1),mats.rock,0,.14,0).name='Low basalt plinth';
+    var crawlLimbs=[],crawling=false;
     var infant=new T.Group();infant.name='Original giant crawling infant';infant.position.y=top-.02;infant.userData={stage:'infant',original:true};root.add(infant);
     // Oversized head, round belly, diaper, bent crawling elbows and grounded knees.
     ball(infant,mats.skin,-.2,2.35,0,3.05,1.6,1.95);
@@ -59,15 +60,19 @@
     [-1,1].forEach(function(s){
       ball(infant,mats.skin,-3.5,3.45,s*2.18,.52,.65,.35);
       ball(infant,mats.rose,-3.61,3.42,s*2.45,.2,.32,.08,1);
+      var armStart=infant.children.length;
       bone(infant,mats.skin,[-1.9,2.3,s*1.5],[-2.65,.66,s*2.04],.48,.5);
       ball(infant,mats.skin,-2.65,.66,s*2.04,.51,.5,.51);
       bone(infant,mats.skin,[-2.65,.66,s*2.04],[-3.7,.3,s*2.43],.44,.43);
       round(infant,mats.skin,-3.82,.26,s*2.48,.69,.23,.51);
       for(var finger=0;finger<3;finger++)round(infant,mats.skin,-4.2-.1*finger,.2,s*(2.23+.19* finger),.26,.16,.12);
+      captureLimb(armStart,[-1.9,2.3,s*1.5],s, 'arm');
+      var legStart=infant.children.length;
       bone(infant,mats.skin,[1.65,1.75,s*1.32],[2.75,.6,s*1.83],.69,.53);
       ball(infant,mats.skin,2.75,.6,s*1.83,.57,.53,.6);
       bone(infant,mats.skin,[2.75,.6,s*1.83],[1.73,.3,s*2.49],.46,.35);
       round(infant,mats.skin,1.64,.23,s*2.56,.7,.21,.42);
+      captureLimb(legStart,[1.65,1.75,s*1.32],-s,'knee');
       round(infant,mats.cloth,-5.54,3.99,s*.79,.29,.43,.43);
       round(infant,mats.dark,-5.82,3.97,s*.82,.075,.19,.21);
       round(infant,mats.skin,-5.31,3.07,s*1.24,.45,.47,.47);
@@ -75,7 +80,8 @@
     round(infant,mats.skin,-6.04,3.44,0,.46,.43,.42);
     tube(infant,mats.rose,[[-5.86,2.82,-.43],[-5.99,2.72,0],[-5.86,2.82,.43]],.085);
     tube(infant,mats.dark,[[-3.54,5.81,0],[-3.8,6.05,.04],[-4.0,5.92,.12]],.11);
-    combine(infant);
+    function captureLimb(start,pivot,phase,kind){var group=new T.Group();group.name='Crawling '+kind;group.position.set.apply(group.position,pivot);var parts=infant.children.slice(start);infant.add(group);parts.forEach(function(part){group.add(part);part.position.sub(group.position);});combine(group);crawlLimbs.push({group:group,phase:phase,lift:kind==='arm'?-1:1});}
+    var limbs=crawlLimbs.map(function(l){return l.group;});limbs.forEach(function(l){infant.remove(l);});combine(infant);limbs.forEach(function(l){infant.add(l);});
     function leg(parent,coat,x,z,length,phase,hoof) {var joint=new T.Group();joint.position.set(x,length,z);parent.add(joint);
       bone(joint,coat,[0,0,0],[.12,-length*.54,0],.16,.135);round(joint,coat,.12,-length*.54,0,.17,.2,.17);bone(joint,coat,[.12,-length*.54,0],[0,-length+.14,0],.13,.1);round(joint,hoof,0,-length+.1,0,.27,.12,.16);combine(joint);return {joint:joint,phase:phase};}
     function lionBody() {var animal=new T.Group(),body=new T.Group();animal.add(body);animal.name='Original orbiting lion';animal.userData={stage:'lion',original:true};
@@ -104,12 +110,13 @@
     function update(seconds,reducedMotion) {if(disposed||reducedMotion)return;var t=Number.isFinite(seconds)?seconds:0;
       place(lion,lionRadius,lionY,.5-t*.036);place(camel,camelRadius,camelY,3.1+t*.022);
       lion.legs.forEach(function(l){l.joint.rotation.z=Math.sin(t*2.25+l.phase)*.14;});camel.legs.forEach(function(l){l.joint.rotation.z=Math.sin(t*1.8+l.phase)*.11;});
+      crawlLimbs.forEach(function(l){l.group.rotation.z=crawling?Math.max(0,Math.sin(t*3.5+l.phase*Math.PI/2))*.12*l.lift:0;});
       infant.scale.set(scaleR,scaleR*(1+.006*Math.sin(t*.7)),scaleR);infant.rotation.z=.003*Math.sin(t*.43);
     }
     update(0,false);
     var infantExtent=new T.Box3().setFromObject(infant).getSize(new T.Vector3());metadata.infant={length:infantExtent.x,height:infantExtent.y,width:infantExtent.z,original:true};
     function dispose(){if(disposed)return;disposed=true;root.removeFromParent();ownedGeometry.forEach(function(v){v.dispose();});ownedMaterial.forEach(function(v){v.dispose();});ownedGeometry.clear();ownedMaterial.clear();root.clear();}
-    return {group:root,update:update,dispose:dispose,metadata:metadata,infant:infant,lion:lion.node,camel:camel.node};
+    return {group:root,update:update,dispose:dispose,metadata:metadata,infant:infant,setCrawling:function(value){crawling=value;if(!value)crawlLimbs.forEach(function(l){l.group.rotation.z=0;});},crawlLimbs:crawlLimbs,lion:lion.node,camel:camel.node};
   };
   g.buildSpiralMountainArt.source='Original procedural project artwork. Three.js runtime supplied by caller, MIT. No copied Zizkov or other model asset.';
 })(window);
