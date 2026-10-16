@@ -14,6 +14,7 @@
     if (top <= bottom + 4) throw new Error('Mountain top must be above its base.');
     var baseRadius = Number.isFinite(options.baseRadius) ? options.baseRadius : 47;
     var summitRadius = Number.isFinite(options.topRadius) ? options.topRadius : 15.5;
+    var rampStart=Number.isFinite(options.rampStartRadius)?options.rampStartRadius:43,rampEnd=Number.isFinite(options.rampEndRadius)?options.rampEndRadius:19,rampWidth=Number.isFinite(options.rampWidth)?options.rampWidth:7;
     var height = top-bottom, scaleH = height/24.08, scaleR = summitRadius/15.5;
     var ownedGeometry = new Set(), ownedMaterial = new Set(), supplied = options.materials || {}, disposed = false;
     var root = new T.Group(); root.name='Original spiral mountain art';root.position.set(Number(center.x)||0,0,Number(center.z)||0);
@@ -41,7 +42,8 @@
       children.forEach(function(item){item.parent.remove(item);item.geometry.dispose();ownedGeometry.delete(item.geometry);});
     }
     var camelY=bottom+4.58*scaleH,lionY=bottom+12.08*scaleH;
-    var slopeBase=Math.min(39.5*scaleR,baseRadius-0.5),camelOuter=32.1*scaleR,camelInner=28.7*scaleR,lionOuter=25.2*scaleR,lionInner=22.0*scaleR;
+    var expansion=rampStart-43*scaleR,camelExpansion=expansion*(1-(camelY-bottom)/height),lionExpansion=expansion*(1-(lionY-bottom)/height);
+    var slopeBase=Math.min(rampStart-rampWidth/2,baseRadius-.5),camelOuter=32.1*scaleR+camelExpansion,camelInner=28.7*scaleR+camelExpansion,lionOuter=25.2*scaleR+lionExpansion,lionInner=22.0*scaleR+lionExpansion;
     // Stepped cross-section supplies real flat animal ledges; all rings stay inside the ramp's inner edge.
     var rings=[[bottom,slopeBase],[camelY,camelOuter],[camelY,camelInner],[lionY,lionOuter],[lionY,lionInner],[top,summitRadius]];
     var segments=64,positions=[],colors=[],color=new T.Color();
@@ -97,13 +99,13 @@
     var lion=lionBody(),camel=camelBody();root.add(lion.node,camel.node);
     // Clearance uses every actual mesh vertex at its elevation, including raised heads/tails.
     function safeOrbit(animal,footY,wanted) {animal.node.updateMatrixWorld(true);var penalty=0,scale=animal.node.scale.x;
-      animal.node.traverse(function(o){if(!o.isMesh)return;var rel=new T.Matrix4().copy(animal.node.matrixWorld).invert().multiply(o.matrixWorld),p=o.geometry.attributes.position,v=new T.Vector3();for(var i=0;i<p.count;i++){v.fromBufferAttribute(p,i).applyMatrix4(rel);var y=footY+v.y*scale,inner=43*scaleR-24*scaleR*((y-bottom)/height)-3.5*scaleR-1.5*scaleR;penalty=Math.max(penalty,Math.abs(v.z*scale)+v.x*v.x*scale*scale/(2*Math.max(1,wanted))-inner+wanted);}});
+      animal.node.traverse(function(o){if(!o.isMesh)return;var rel=new T.Matrix4().copy(animal.node.matrixWorld).invert().multiply(o.matrixWorld),p=o.geometry.attributes.position,v=new T.Vector3();for(var i=0;i<p.count;i++){v.fromBufferAttribute(p,i).applyMatrix4(rel);var y=footY+v.y*scale,inner=rampStart-(rampStart-rampEnd)*((y-bottom)/height)-rampWidth/2-1.5*scaleR;penalty=Math.max(penalty,Math.abs(v.z*scale)+v.x*v.x*scale*scale/(2*Math.max(1,wanted))-inner+wanted);}});
       return Math.max(1,wanted-Math.max(0,penalty)-.14*scaleR);
     }
-    var lionRadius=safeOrbit(lion,lionY,24.8*scaleR),camelRadius=safeOrbit(camel,camelY,33.5*scaleR);
+    var lionRadius=safeOrbit(lion,lionY,(lionOuter+lionInner)/2),camelRadius=safeOrbit(camel,camelY,(camelOuter+camelInner)/2);
     function place(animal,radius,y,angle){animal.node.position.set(Math.cos(angle)*radius,y,Math.sin(angle)*radius);animal.node.rotation.y=-angle-Math.PI/2;}
     place(lion,lionRadius,lionY,.5);place(camel,camelRadius,camelY,3.1);
-    var metadata={source:root.userData.source,center:{x:root.position.x,z:root.position.z},bottom:bottom,top:top,slopeBaseRadius:slopeBase,summitRadius:summitRadius,rings:rings.map(function(r){return {y:r[0],radius:r[1]};}),rampEnvelope:{startRadius:43*scaleR,endRadius:19*scaleR,turns:4,clearance:1.5*scaleR},infant:{length:10.9*scaleR},bands:{lion:{y:lionY,radius:lionRadius},camel:{y:camelY,radius:camelRadius}},materials:ownedMaterial.size};
+    var metadata={source:root.userData.source,center:{x:root.position.x,z:root.position.z},bottom:bottom,top:top,slopeBaseRadius:slopeBase,summitRadius:summitRadius,rings:rings.map(function(r){return {y:r[0],radius:r[1]};}),rampEnvelope:{startRadius:rampStart,endRadius:rampEnd,turns:4,clearance:1.5*scaleR},infant:{length:10.9*scaleR},bands:{lion:{y:lionY,radius:lionRadius},camel:{y:camelY,radius:camelRadius}},materials:ownedMaterial.size};
     root.userData.geometryContract=metadata;
     function update(seconds,reducedMotion) {if(disposed||reducedMotion)return;var t=Number.isFinite(seconds)?seconds:0;
       place(lion,lionRadius,lionY,.5-t*.036);place(camel,camelRadius,camelY,3.1+t*.022);
