@@ -138,19 +138,20 @@ export function buildArtistResidents(THREE,artists,city){
    if(player&&[player.x,player.z].every(Number.isFinite))resident.label.rotation.y=Math.atan2(player.x-position.x,player.z-position.z)-resident.root.rotation.y;
    let moving=false;
    if(talkingId===resident.artist.id){resident.activity='talking';if(nearPlayer)face(resident,player,dt);}
+   else if(nearPlayer){resident.path=[];resident.pause=10;resident.activity='listening';face(resident,player,dt);}
    else if(resident.path.length){
     const target=resident.path[0],dx=target.x-position.x,dz=target.z-position.z,distance=Math.hypot(dx,dz),step=Math.min(distance,.7*dt),next=distance?{x:position.x+dx/distance*step,z:position.z+dz/distance*step}:{x:position.x,z:position.z};
     const personalSpace=nearPlayer&&Math.hypot(next.x-player.x,next.z-player.z)<.62;
     if(!resident.nav.canStand(next.x,next.z)){resident.path=[];resident.pause=2;resident.activity='observing';}
     else if(personalSpace){resident.activity='observing';face(resident,player,dt);}
-    else {position.x=next.x;position.z=next.z;face(resident,target,dt);moving=distance>.018;resident.activity=moving?'walking':'observing';if(distance<=step+.001)resident.path.shift();if(!resident.path.length){resident.pause=3.2;resident.activity='observing';}}
+    else {position.x=next.x;position.z=next.z;face(resident,target,dt);moving=distance>.018;resident.activity=moving?'walking':'observing';if(distance<=step+.001)resident.path.shift();if(!resident.path.length){resident.pause=12;resident.activity='observing';}}
    }else{
     resident.activity='observing';if(!resident.greeting)resident.pause-=dt;if(nearPlayer)face(resident,player,dt);else if(resident.focus)face(resident,resident.focus,dt);
     if(resident.pause<=0){const target=resident.anchors[resident.next++%resident.anchors.length];plan(resident,target);if(!resident.path.length)resident.pause=2;}
    }
-   resident.walkingTime+=dt;const gait=moving?Math.sin(resident.walkingTime*7)*.26:0;
+   resident.walkingTime+=dt;const gait=moving?Math.sin(resident.walkingTime*5)*.14:0;
    resident.legs[0].rotation.x=gait;resident.legs[1].rotation.x=-gait;resident.arms[0].rotation.x=-gait*.45;resident.arms[1].rotation.x=gait*.45;
-   resident.head.rotation.z=resident.activity==='talking'?Math.sin(resident.walkingTime*2.5)*.024:0;
+   resident.head.rotation.z=resident.activity==='talking'?Math.sin(resident.walkingTime*2.5)*.024:0;if(resident.activity==='talking'){resident.arms[0].rotation.x=.08+Math.sin(resident.walkingTime*1.7)*.055;resident.arms[1].rotation.x=-.05;}
   }
   group.updateMatrixWorld(true);
  },dispose(){if(disposed)return;disposed=true;for(const texture of textures)texture.dispose();for(const mat of new Set(materials.values()))mat.dispose();for(const geo of geometries.values())geo.dispose();group.clear();residents.clear();}};

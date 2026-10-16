@@ -1,11 +1,11 @@
 /* One optional summit event, using the existing child, roof and crater. */
 (function(g){'use strict';
 g.createSummitStory=function(T,{roof,mountain,figure,volcano,lava,figureLight,coreLight}){
- const child=mountain.infant,baseY=-2.16,clamp=T.MathUtils.clamp,smooth=u=>u*u*(3-2*u);
+ const child=mountain.infant,baseY=-2.16+(volcano.userData.figureRise||0),landingHeight=volcano.userData.landingHeight||12.35,coreIntensity=volcano.userData.coreIntensity||150,clamp=T.MathUtils.clamp,smooth=u=>u*u*(3-2*u);
  let mode='explore',phase='explore',elapsed=0,following=false,lastCamera=null;
  const active=()=>['arrival','crawl','poise','leap','flare','emerge'].includes(phase);
  const glowMaterial=new T.MeshBasicMaterial({color:0xffdeb0,transparent:true,opacity:0,depthWrite:false,blending:T.AdditiveBlending});
- const glow=new T.Mesh(new T.SphereGeometry(1,24,16),glowMaterial);glow.name='Summit transformation light';glow.position.set(0,17,0);glow.visible=false;volcano.add(glow);
+ const glow=new T.Mesh(new T.SphereGeometry(1,24,16),glowMaterial);glow.name='Summit transformation light';glow.position.set(0,17+(volcano.userData.figureRise||0),0);glow.visible=false;volcano.add(glow);
  function setPhase(value){phase=value;elapsed=0;}
  function rest(){glow.visible=false;glowMaterial.opacity=0;mountain.setCrawling(false);child.rotation.z=0;}
  function setMode(value){if(value!==mode){mode=value==='story'?'story':'explore';roof.reset();rest();following=false;lastCamera=null;setPhase(mode==='story'?'armed':'explore');apply(0);}}
@@ -19,16 +19,16 @@ g.createSummitStory=function(T,{roof,mountain,figure,volcano,lava,figureLight,co
   const reveal=phase==='emerge'?smooth(clamp(elapsed/5,0,1)):1;
   figure.position.y=baseY-(1-reveal)*22+(shown?.12*Math.sin(time*.28)*reveal:0);
   if(figureLight)figureLight.intensity=shown?65*reveal:0;
-  if(coreLight)coreLight.intensity=mode==='story'&&phase!=='complete'?80:150;
-  if(mode==='story'&&!['flare','emerge','complete'].includes(phase))lava.emissiveIntensity=1.35;
+  if(coreLight)coreLight.intensity=mode==='story'&&phase!=='complete'?coreIntensity*.65:coreIntensity;
+  if(mode==='story'&&!['flare','emerge','complete'].includes(phase))lava.emissiveIntensity=2.8;
   if(phase==='poise'){child.position.y=roof.height-.02+.16*Math.sin(Math.PI*clamp(elapsed/1.6,0,1));}
   if(phase==='leap'){
    const u=clamp(elapsed/3.2,0,1),arc=Math.sin(Math.PI*u);
-   child.position.set(24.75*(1-u)-125,roof.height-.02+(12.35-roof.height+.02)*u+14*arc,0);
+   child.position.set(24.75*(1-u)-125,roof.height-.02+(landingHeight-roof.height+.02)*u+14*arc,0);
    child.rotation.y=0;child.rotation.z=-.1*arc;
   }
   glow.visible=phase==='flare'||phase==='emerge';
-  if(glow.visible){const pulse=phase==='flare'?Math.sin(Math.PI*clamp(elapsed/1.6,0,1)):.18*(1-clamp(elapsed/5,0,1));glow.scale.setScalar(7+5*pulse);glowMaterial.opacity=.3*pulse;if(coreLight)coreLight.intensity=150+450*pulse;lava.emissiveIntensity=1.8+1.4*pulse;}
+  if(glow.visible){const pulse=phase==='flare'?Math.sin(Math.PI*clamp(elapsed/1.6,0,1)):.18*(1-clamp(elapsed/5,0,1));glow.scale.setScalar(7+5*pulse);glowMaterial.opacity=.3*pulse;if(coreLight)coreLight.intensity=coreIntensity+450*pulse;lava.emissiveIntensity=2.8+1.4*pulse;}
  }
  function update(dt,time,player,visitMode,{paused=false,reduced=false}={}){
   if(!['peak','roof','aerial'].includes(visitMode))following=false;

@@ -18,3 +18,8 @@ pad.buttons[0].pressed=true;state=input.poll(true);assert.equal(state.confirm,tr
 pad.buttons[9].pressed=true;pad.buttons[13].pressed=true;state=input.poll(true);assert.equal(state.menu,true);assert.equal(state.next,true);assert.equal(state.start,false);
 pad.buttons.forEach(b=>b.pressed=false);input.poll();pad.buttons[2].pressed=true;pad.buttons[3].pressed=true;state=input.poll();assert.equal(state.light,true);assert.equal(state.fast,true);state=input.poll();assert.equal(state.light,false);assert.equal(state.fast,false);
 console.log('Controller close/menu edges survive modal blocking; speed/light toggles are edge-triggered.');
+
+pad.axes[0]=.8;state=input.poll(true);assert.equal(state.strafe,0);assert(state.uiX>.7,"Panel navigation retains the left stick while world movement is blocked");
+
+pad.axes=[-.004,-.004,-.23,-1];input.poll();assert(input.calibrate());state=input.poll();assert.equal(state.lookX,0);assert.equal(state.lookY,0);assert.equal(Math.abs(state.forward),0);pad.axes[2]=.7;assert(input.poll().lookX>.5);pads=[];input.poll();assert.equal(input.calibrate(),false);
+console.log('Explicit neutral calibration clears resting axis drift; intentional movement remains available.');

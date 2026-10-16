@@ -6,6 +6,11 @@ The philosophers’ quarter adds six explorable homes for Plato, Aristotle, Epic
 
 Choose **Summit story** before starting the mountain to play the child’s crawl, leap into the crater, and the Übermensch’s emergence. The event has optional camera following, skip/replay controls and reduced-motion support. **Free exploration** retains the original roof invitation. The quieter mountain paving, mineral retaining faces, softer bronze and grouped entrance planting preserve the symmetrical bridge. See [Summit story and design update](docs/SUMMIT-STORY.md).
 
+The gallery has two opposite ground-level entrances, including one facing the mountain. The final roof stair has a longer opening with clear headroom; all flights are centered on the snake head. The raised volcano keeps the child’s landing and figure reveal aligned with its brighter crater.
+
+Use **Fast** for quicker movement, **Light** to hide or restore the following lantern, and **Music** to choose one of the ten existing instrumental compositions. Keyboard shortcuts are **F**, **L**, and **M**. Controller D-pad or left stick selects controls in an open panel; the bottom face button activates and the right face button closes the innermost panel. **Menu** enters or leaves control selection. If the view drifts, open Help, release the sticks, and select **Center controller**; calibration lasts for that connection. Text entry and some embedded tools still require their own keyboard controls.
+
+
 Live target: https://hadi1373z.github.io/city-of-ideas/
 
 The repository’s `src/` is the explicit, reviewed source snapshot. GitHub Actions checks it, builds `_site/`, publishes that artifact, then compares the live version and asset hashes. It does not fetch or automatically synchronize a different Sites project or a different chat’s workspace.

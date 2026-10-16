@@ -1,0 +1,21 @@
+import assert from 'node:assert/strict';
+import vm from 'node:vm';
+import {readFile} from 'node:fs/promises';
+import {buildArtCity} from '../src/city-source-assets/home-tools/art-city-scene.js';
+import {buildArtistResidents} from '../src/city-source-assets/home-tools/artist-residents.js';
+import {ARTISTS} from '../src/city-source-assets/home-tools/artist-catalog.js';
+const T={};
+vm.runInNewContext(await readFile(new URL('../src/assets/three.min.js',import.meta.url),'utf8'),{exports:T,module:{exports:T},console:{warn(){}}});
+T.TextureLoader=class{load(){return new T.Texture();}};
+const artists=ARTISTS.slice(0,2),city=buildArtCity(T,artists,{artworkUrl:()=>''}),hosts=buildArtistResidents(T,artists,city),id=artists[0].id;
+const start=hosts.state(id).position,player={x:start.x+1,z:start.z};
+for(let i=0;i<100;i++)hosts.update(.1,{player});
+assert.deepEqual(hosts.state(id).position,start,'A nearby visitor receives attention instead of being paced past');
+assert.equal(hosts.state(id).activity,'listening');
+hosts.update(.1,{player,talkingId:id});
+assert.equal(hosts.state(id).activity,'talking');
+let moved=false;
+for(let i=0;i<500;i++){hosts.update(.1,{player:{x:1000,z:1000}});const p=hosts.state(id).position;if(Math.hypot(p.x-start.x,p.z-start.z)>.1)moved=true;}
+assert(moved,'The host resumes visiting artwork after the visitor leaves');
+hosts.dispose();city.dispose();
+console.log('Artist hosts stop for nearby visitors, retain dialogue, and resume deliberate visits after departure.');
