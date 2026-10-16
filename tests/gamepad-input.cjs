@@ -1,0 +1,12 @@
+const assert=require('node:assert/strict'),vm=require('node:vm'),fs=require('node:fs');
+const window={};vm.runInNewContext(fs.readFileSync('src/gamepad-input.js','utf8'),{window});
+let pads=[];const input=window.createCityGamepad(()=>pads);
+assert.equal(input.poll().connected,false);
+const pad={index:0,connected:true,axes:[.1,-.59,1,0],buttons:Array.from({length:16},()=>({pressed:false}))};pads=[pad];
+let state=input.poll();assert.equal(state.strafe,0);assert.ok(Math.abs(state.forward-.5)<1e-8);assert.equal(state.lookX,1);
+pad.buttons[0].pressed=true;assert.equal(input.poll().interact,true);assert.equal(input.poll().interact,false);
+pad.buttons[0].pressed=false;input.poll();pad.buttons[0].pressed=true;
+state=input.poll(true);assert.equal(state.forward,0);assert.equal(state.interact,false);assert.equal(input.poll().interact,false);
+pads=[];state=input.poll();assert.equal(state.forward,0);assert.equal(state.connected,false);
+pads=[pad];assert.equal(input.poll().interact,false);
+console.log('Gamepad dead zone, analog movement, button edges, modal suppression and reconnection passed.');
