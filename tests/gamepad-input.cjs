@@ -10,3 +10,11 @@ state=input.poll(true);assert.equal(state.forward,0);assert.equal(state.interact
 pads=[];state=input.poll();assert.equal(state.forward,0);assert.equal(state.connected,false);
 pads=[pad];assert.equal(input.poll().interact,false);
 console.log('Gamepad dead zone, analog movement, button edges, modal suppression and reconnection passed.');
+
+// Closing and menu edges remain available when world movement is blocked.
+pad.buttons.forEach(b=>b.pressed=false);input.poll(true);
+pad.buttons[1].pressed=true;state=input.poll(true);assert.equal(state.back,true);assert.equal(state.forward,0);assert.equal(input.poll(true).back,false);
+pad.buttons[0].pressed=true;state=input.poll(true);assert.equal(state.confirm,true);assert.equal(state.interact,false);
+pad.buttons[9].pressed=true;pad.buttons[13].pressed=true;state=input.poll(true);assert.equal(state.menu,true);assert.equal(state.next,true);assert.equal(state.start,false);
+pad.buttons.forEach(b=>b.pressed=false);input.poll();pad.buttons[2].pressed=true;pad.buttons[3].pressed=true;state=input.poll();assert.equal(state.light,true);assert.equal(state.fast,true);state=input.poll();assert.equal(state.light,false);assert.equal(state.fast,false);
+console.log('Controller close/menu edges survive modal blocking; speed/light toggles are edge-triggered.');
