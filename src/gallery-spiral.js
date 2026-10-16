@@ -24,7 +24,7 @@ g.createGallerySpiral=function(T){
  function pointAt(p){return toWorld(localPointAt(p));}
  function headingAt(p,direction=1){return localHeadingAt(p,direction)+Math.PI/2;}
  function contains(x,z,margin=0){const p=toLocal(x,z);return localContains(p.x,p.z,margin);}
- function holeAt(x,z,floor){return floor>0&&contains(x,z,.08);}
+ function holeAt(x,z,floor){return floor>0&&(floor<4||z>=7.5)&&contains(x,z,.08);}
  function entryAt(x,z,floor,previous){const p=toLocal(x,z),q=toLocal(previous.x,previous.z);return localEntryAt(p.x,p.z,floor,q);}
  function resolve(x,z,progress){const p=toLocal(x,z);return toWorld(localResolve(p.x,p.z,progress));}
  function exitAt(x,z,progress){const p=toLocal(x,z);return localExitAt(p.x,p.z,progress);}
@@ -53,9 +53,10 @@ g.createGallerySpiral=function(T){
    for(let i=0;i<steps;i++){const x=startX-i*tread,h=y+(i+1)*rise+.008;beam(vector(x,h,z0),vector(x,h,z1),.014,gold,'Visible stair nosing');}
   }
   // Opening guards follow both sides; full-width ends remain open for landing access.
-  for(let floor=1;floor<5;floor++)for(const z of[z0-.08,z1+.08]){const y=base+floor*spacing;beam(vector(startX,y+1.08,z),vector(endX,y+1.08,z),.035,bronze,'Gallery stairwell guard');for(const x of[startX,endX,(startX+endX)/2])beam(vector(x,y,z),vector(x,y+1.08,z),.025,bronze,'Landing guard post');}
+  for(let floor=1;floor<5;floor++)for(const z of[z0-.08,z1+.08]){const y=base+floor*spacing,guardStart=floor===4?startX-7.5:startX;beam(vector(guardStart,y+1.08,z),vector(endX,y+1.08,z),.035,bronze,'Gallery stairwell guard');for(const x of[guardStart,endX,(guardStart+endX)/2])beam(vector(x,y,z),vector(x,y+1.08,z),.025,bronze,'Landing guard post');}
+  beam(vector(startX-7.5,base+4*spacing+1.08,z0),vector(startX-7.5,base+4*spacing+1.08,z1),.035,bronze,'Roof stair opening end guard');
   return{ramp,group,dispose(){for(const geo of owned)geo.dispose();for(const mat of mats)mat.dispose();}};
  }
- return{headWidth,width,widthRatio:1,spacing,base,steps,rise,tread,run,startX,endX,starts,max,segments,opening,toWorld,toLocal,pointAt,headingAt,floorAt,nearLanding,contains,holeAt,entryAt,resolve,exitAt,build,direction:{x:0,z:1},entrance:{x:58,z:0},head:{x:43,z:0},levels:[0,1,2,3,4].map(f=>toWorld(f===4?landings[3]:{x:startX,z:0,y:base+f*spacing,floor:f,progress:starts[f]}))};
+ return{headWidth,width,widthRatio:1,spacing,base,steps,rise,tread,run,startX,endX,starts,max,segments,opening,toWorld,toLocal,pointAt,headingAt,floorAt,nearLanding,contains,holeAt,entryAt,resolve,exitAt,build,direction:{x:0,z:1},entrance:{x:-58,z:0},head:{x:43,z:0},levels:[0,1,2,3,4].map(f=>toWorld(f===4?landings[3]:{x:startX,z:0,y:base+f*spacing,floor:f,progress:starts[f]}))};
 };
 })(window);

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';import vm from 'node:vm';import{readFile}from'node:fs/promises';
 const T={};vm.runInNewContext(await readFile(new URL('../src/assets/three.min.js',import.meta.url),'utf8'),{exports:T,module:{exports:T},console:{...console,warn(){}}});const w={};vm.runInNewContext(await readFile(new URL('../src/gallery-spiral.js',import.meta.url),'utf8'),{window:w});const route=w.createGallerySpiral(T);
-assert.equal(route.levels.length,5);assert.equal(route.entrance.x,58);assert.equal(route.entrance.z,0);assert.equal(route.width,route.headWidth);assert.equal(route.headingAt(0),Math.PI);assert.equal(route.direction.z,1);assert.equal(route.steps,40);assert.equal(route.rise,.2);
+assert.equal(route.levels.length,5);assert.equal(route.entrance.x,-58);assert.equal(route.entrance.z,0);assert.equal(route.width,route.headWidth);assert.equal(route.headingAt(0),Math.PI);assert.equal(route.direction.z,1);assert.equal(route.steps,40);assert.equal(route.rise,.2);
 let built,scene;for(let floor=0;floor<4;floor++){
  const start=route.starts[floor],heights=new Set();
  for(let step=0;step<40;step++){
@@ -8,7 +8,7 @@ let built,scene;for(let floor=0;floor<4;floor++){
   const q=route.resolve(43.5,p.z,start+(step+.1)*route.tread);assert(Math.abs(q.theta-(start+(step+.5)*route.tread))<1e-6);assert.equal(q.x,43.5);
   const ray=new T.Raycaster(new T.Vector3(p.x,p.y+2,p.z),new T.Vector3(0,-1,0),0,2.01);const hits=ray.intersectObject(builtStairs(),false);assert(hits.length,'Each tread is real walkable geometry');assert(Math.abs(hits[0].point.y-p.y)<1e-5);
  }
- assert.equal(heights.size,40);assert(route.holeAt(43,5,floor+1));
+ assert.equal(heights.size,40);assert.equal(route.holeAt(43,5,floor+1),floor<3);assert(route.holeAt(43,9,floor+1));
  assert(route.entryAt(43,.1,floor,{x:43,z:-.1})!==null);
  assert(route.entryAt(43,route.run-.1,floor+1,{x:43,z:route.run+.1})!==null);
 }
