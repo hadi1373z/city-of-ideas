@@ -4,6 +4,8 @@ A Persian/English/German walking city containing the four-floor Zarathustra gall
 
 The philosophers’ quarter adds six explorable homes for Plato, Aristotle, Epicurus, Hypatia, Confucius and Ibn Sina. Choose **Philosophers’ homes** on the welcome screen, **Philosophers** while walking, or follow the western path from the object market. Each imagined home contains a concept object, a bilingual reading guide with an attributed source, and an independent browser-local reflection. The city map includes the quarter and its connecting paths.
 
+Choose **Summit story** before starting the mountain to play the child’s crawl, leap into the crater, and the Übermensch’s emergence. The event has optional camera following, skip/replay controls and reduced-motion support. **Free exploration** retains the original roof invitation. The quieter mountain paving, mineral retaining faces, softer bronze and grouped entrance planting preserve the symmetrical bridge. See [Summit story and design update](docs/SUMMIT-STORY.md).
+
 Live target: https://hadi1373z.github.io/city-of-ideas/
 
 The repository’s `src/` is the explicit, reviewed source snapshot. GitHub Actions checks it, builds `_site/`, publishes that artifact, then compares the live version and asset hashes. It does not fetch or automatically synchronize a different Sites project or a different chat’s workspace.

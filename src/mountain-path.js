@@ -13,16 +13,16 @@ window.createMountainPath=function(T){
  const peak={minX:lift.x-2.1,maxX:A.x+A.topRadius+4,minZ:lift.z-3,maxZ:A.z+3,rampThreshold:A.topRadius+.3};
  // A tapered stone embankment joins the trail to the hillside instead of leaving a floating ribbon.
  function trailFoundation(){
-  const positions=[],indices=[],segments=720;
+  const positions=[],indices=[],colors=[],segments=720;
   for(let i=0;i<=segments;i++){
    const theta=MAX*i/segments,r=radiusAt(theta),y=heightAt(theta);let bottom=Math.max(.13,y-8.2);
    // Lift the underside over each animal terrace; retain a thin bridge at its crossing.
    for(const level of[4.58,12.08]){const terrace=A.start+level*(A.top-A.start)/24.08;if(y>terrace&&bottom<terrace+4.1)bottom=Math.min(y-.18,terrace+4.1);}
    const shoulder=9*Math.min(1,Math.max(0,(y-bottom-.18)/2));
-   for(const [radius,h]of[[r-A.width/2,y-.035],[r+A.width/2,y-.035],[r+A.width/2,bottom],[Math.max(0,r-A.width/2-shoulder),bottom]]){const p=polar(radius,theta,h);positions.push(p.x,p.y,p.z);}
+   for(const [radius,h]of[[r-A.width/2,y-.035],[r+A.width/2,y-.035],[r+A.width/2,bottom],[Math.max(0,r-A.width/2-shoulder),bottom]]){const p=polar(radius,theta,h);positions.push(p.x,p.y,p.z);const grain=.92+.055*Math.sin(p.x*1.7+p.z*.9+p.y*4)+.025*Math.sin(p.y*12+Math.sin(p.x*.7));colors.push(.49*grain,.52*grain,.46*grain);}
    if(i<segments)for(let side=0;side<4;side++){const a=i*4+side,b=i*4+(side+1)%4;indices.push(a,b,a+4,b,b+4,a+4);}
   }
-  const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(positions,3));geo.setIndex(indices);geo.computeVertexNormals();return geo;
+  const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(positions,3));geo.setAttribute('color',new T.Float32BufferAttribute(colors,3));geo.setIndex(indices);geo.computeVertexNormals();return geo;
  }
 
  return{A,MAX,radiusAt,heightAt,polar,pointAt,headingAt,resolveRamp,toLocal,localLift,lift,startGate,peak,trailFoundation};

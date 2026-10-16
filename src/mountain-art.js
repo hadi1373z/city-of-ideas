@@ -56,7 +56,7 @@
     var crawlLimbs=[],crawling=false;
     var infant=new T.Group();infant.name='Original giant crawling infant';infant.position.y=top-.02;infant.userData={stage:'infant',original:true};root.add(infant);
     // Smooth sculptural volumes inspired by the owner reference, with no cartoon face or diaper.
-    var bronze=material('infantBronze',0x292b2d,{roughness:.3,metalness:.68});
+    var bronze=material('infantBronze',0x292b2d,{roughness:.44,metalness:.68});
     infant.name='Dark bronze crawling infant';infant.userData.finish='dark bronze';
     // A smooth implicit union avoids visible sphere/cylinder seams while retaining four moving limbs.
     function sculpture(parent,forms,bounds){

@@ -4,7 +4,8 @@ const KEY='city-of-ideas-zarathustra-progress-v1',valid=new Set(CITY_BOOK.chapte
 let state={schemaVersion:1,completed:[],lastTheta:0,notes:{},noteRevisions:{}};
 try{const old=JSON.parse(localStorage.getItem(KEY)||'null');if(old?.schemaVersion===1)state={...state,...old};}catch{}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch{message(tx('فضای ذخیره‌سازی مرورگر در دسترس نیست؛ یک نسخهٔ پشتیبان بگیرید.','Browser storage is unavailable; export a backup.'));}}
-const tx=(fa,en)=>CITY_I18N.lang==='en'?en:fa;
+const germanUI={'Resume saved ascent':'Gespeicherten Aufstieg fortsetzen','Private note for this chapter':'Private Notiz zu diesem Kapitel','Saved in this browser. Switching language keeps your note unchanged.':'In diesem Browser gespeichert. Beim Sprachwechsel bleibt deine Notiz unverändert.','Export notes and progress':'Notizen und Fortschritt exportieren','Merge a backup':'Sicherung zusammenführen'};
+const tx=(fa,en)=>CITY_I18N.lang==='de'?(germanUI[en]||CITY_I18N.tx(fa,en)):CITY_I18N.tx(fa,en);
 const resume=document.createElement('button');resume.id='resume-ascent';resume.className='glass';document.querySelector('.welcome-secondary').after(resume);resume.hidden=!(state.lastTheta>.001);resume.onclick=()=>window.gallery?.resumeAscent(state.lastTheta);
 const controls=document.createElement('section');controls.className='chapter-notes';
 controls.innerHTML='<label for="chapter-note" id="chapter-note-label"></label><textarea id="chapter-note" data-private-text dir="auto" rows="4" maxlength="32000"></textarea><small id="chapter-note-hint"></small><div><button id="reading-export" class="glass"></button><label class="glass" id="reading-import-label"><span></span><input id="reading-import" type="file" accept="application/json,.json"></label></div><p id="reading-status" role="status"></p>';
