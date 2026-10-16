@@ -22,14 +22,14 @@ g.createRoofConnection=function(T,{scene,city,stairs,tiles=null}){
  function rawEdge(ax,az,bx,bz){rail(new T.Vector3(ax,height+1.15,az),new T.Vector3(bx,height+1.15,bz));rail(new T.Vector3(ax,height,az),new T.Vector3(ax,height+1.15,az));}
  function edge(ax,az,bx,bz){const n=Math.max(1,Math.ceil(Math.hypot(bx-ax,bz-az)));for(let i=0;i<n;i++){const u=i/n,v=(i+1)/n,m=(u+v)/2;if(infinityDistance(ax+(bx-ax)*m,az+(bz-az)*m)<half+.5)continue;rawEdge(ax+(bx-ax)*u,az+(bz-az)*u,ax+(bx-ax)*v,az+(bz-az)*v);}}
 
- const deck={minX:50,maxX:106+half,minZ:-12-half,maxZ:half},summitRadius=15.5;
- // One uninterrupted terrace replaces the two parallel bridges and their dividing rails.
+ const deck={minX:50,maxX:106+half,minZ:-half,maxZ:half},summitRadius=15.5;
+ // A centered terrace keeps the crawling route level without an asymmetric side apron.
  block(deck.maxX-deck.minX,.4,deck.maxZ-deck.minZ,(deck.minX+deck.maxX)/2,height-.2,(deck.minZ+deck.maxZ)/2,'Unified roof terrace');
  block(width,.1,1.5,43,height-.05,stairs.run+.65,'Roof stair landing');
  block(8,.4,9,141,height-.2,1,'Mountain summit trail landing');rawEdge(137,5.5,145,5.5);rawEdge(145,5.5,145,-3.5);rawEdge(137,-3.5,140,-3.5);
  const summitTiles=new T.Mesh(new T.CircleGeometry(summitRadius,128),tiles);summitTiles.rotation.x=-Math.PI/2;summitTiles.position.set(125,height+.018,0);summitTiles.name='Snake-skin summit roof';group.add(summitTiles);
- const circleX=z=>Math.sqrt(57*57-z*z),joinX=125-Math.sqrt(summitRadius*summitRadius-deck.maxZ*deck.maxZ),joinZ=-Math.sqrt(summitRadius*summitRadius-(125-deck.maxX)**2);
- edge(circleX(deck.minZ),deck.minZ,deck.maxX,deck.minZ);edge(circleX(deck.maxZ),deck.maxZ,joinX,deck.maxZ);edge(deck.maxX,deck.minZ,deck.maxX,joinZ);
+ const circleX=z=>Math.sqrt(57*57-z*z),joinX=125-Math.sqrt(summitRadius*summitRadius-half*half);
+ for(const z of[-half,half])edge(circleX(z),z,joinX,z);
  // Guards follow the outside of the combined walking surface, leaving its interior open.
  for(const radius of[15.8,57])for(let i=0,n=radius===15.8?36:180;i<n;i++){const offset=radius===15.8?.5:0,a=(i+offset)*Math.PI*2/n,b=(i+1+offset)*Math.PI*2/n,mid=(a+b)/2,x=Math.cos(mid)*radius,z=Math.sin(mid)*radius;if(radius===57&&x>deck.minX&&z>deck.minZ&&z<deck.maxZ)continue;(radius===15.8?rawEdge:edge)(Math.cos(a)*radius,Math.sin(a)*radius,Math.cos(b)*radius,Math.sin(b)*radius);}
  for(let i=0;i<180;i++){const a=i*Math.PI*2/180,b=(i+1)*Math.PI*2/180,mid=(a+b)/2,x=125+Math.cos(mid)*summitRadius,z=Math.sin(mid)*summitRadius;if(x<=deck.maxX&&z>=deck.minZ&&z<=deck.maxZ||x>138&&z> -3.5&&z<5.5)continue;edge(125+Math.cos(a)*summitRadius,Math.sin(a)*summitRadius,125+Math.cos(b)*summitRadius,Math.sin(b)*summitRadius);}
