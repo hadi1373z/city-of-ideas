@@ -58,3 +58,7 @@ Music: **V**, **R2**, or **Play/Mute music** toggles playback directly; **M / Mu
 ### Rooftop simplification
 
 The infinity-shaped elevated loops and their collision surfaces have been removed. The gallery roof, summit terrace, direct bridge and baby-to-volcano path remain. The return lift now lands within the straight bridge, and the aerial controls use plain roof-view labels.
+
+### Origami flock
+
+Eight differently coloured single-sheet paper birds fly around the park entrance in separate short routes, with varied sizes, folded wing poses and animation timing. They have no added bodies, eyes, legs or other attachments. Approaching any bird opens the existing paper-bird folding lesson; the dog and cat lessons remain available in that guide. Reduced-motion mode holds the paper poses still.

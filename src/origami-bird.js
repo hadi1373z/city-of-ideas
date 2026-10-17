@@ -1,5 +1,6 @@
 // One folded square, doubled into a triangle; all surfaces are paper panels.
-export function buildPaperBird(T,{color='#90afa4',scale=1.25}={}){
+export function buildPaperBird(T,{color='#90afa4',scale=1.25,wingAngle=.12}={}){
+ wingAngle=T.MathUtils.clamp(wingAngle,-.1,.65);
  const group=new T.Group(),geometries=[],materials=[],wings=[],half=.12,fold=Math.PI*5/12;
  group.name='Single-sheet paper bird';group.scale.setScalar(scale);group.userData={paperOnly:true,sourceSheets:1,addedParts:0};
  const front=new T.MeshLambertMaterial({color,side:T.DoubleSide}),back=new T.MeshLambertMaterial({color:'#efe9d7',side:T.DoubleSide}),line=new T.LineBasicMaterial({color:'#526b64'});materials.push(front,back,line);
@@ -14,7 +15,7 @@ export function buildPaperBird(T,{color='#90afa4',scale=1.25}={}){
    panel(bodyPoints,group,([x,y])=>[x*Math.cos(fold),(Math.abs(x)-half)*Math.sin(fold),-y],layer);
   }
  }
- function animate(time,{flying=true,reducedMotion=false}={}){for(const wing of wings)wing.group.rotation.z=wing.sign*(.12+(flying&&!reducedMotion?Math.sin(time*3.4)*.2:0));}
+ function animate(time,{flying=true,reducedMotion=false}={}){for(const wing of wings)wing.group.rotation.z=wing.sign*(wingAngle+(flying&&!reducedMotion?Math.sin(time*3.4)*.2:0));}
  animate(0,{reducedMotion:true});
  return{group,wings,animate,dispose(){group.removeFromParent();geometries.forEach(g=>g.dispose());materials.forEach(m=>m.dispose());group.clear();}};
 }

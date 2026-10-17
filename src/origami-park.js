@@ -1,15 +1,26 @@
 import {buildPaperBird} from './origami-bird.js';
 import {ORIGAMI_LESSONS,paperDiagram} from './origami-lessons.js';
+// All eight friends use the same reproducible single-square bird fold, with different wing poses.
+export const ORIGAMI_FLOCK=Object.freeze([
+ {x:-4,z:-201,y:2.3,color:'#8fb9ad',scale:1.55,wingAngle:.08},
+ {x:0,z:-204,y:2.8,color:'#e2bd76',scale:1.65,wingAngle:.3},
+ {x:4,z:-201,y:2.4,color:'#c68d82',scale:1.5,wingAngle:.48},
+ {x:-6,z:-212,y:2.7,color:'#92b6cc',scale:1.7,wingAngle:.22},
+ {x:-2,z:-216,y:3.1,color:'#b6a0cb',scale:1.55,wingAngle:.4},
+ {x:2,z:-216,y:2.4,color:'#d9d0aa',scale:1.75,wingAngle:.12},
+ {x:6,z:-212,y:3,color:'#a9bd88',scale:1.6,wingAngle:.52},
+ {x:0,z:-225,y:2.8,color:'#cda36a',scale:1.7,wingAngle:.32}
+].map(Object.freeze));
 export function installOrigamiPark(M,T){
  const group=new T.Group();group.name='Flying origami birds';M.scene.add(group);
  const friends=[];let current=ORIGAMI_LESSONS[0],step=0,lastTime=0,nearest=null,finished=false;
  const tx=(fa,en)=>CITY_I18N.tx(fa,en),pick=p=>CITY_I18N.lang==='de'&&p[2]?p[2]:CITY_I18N.translatePublic(p[CITY_I18N.lang==='fa'?0:1]);
- for(let i=0;i<2;i++){
-  const lesson=ORIGAMI_LESSONS.find(l=>l.id==='bird'),bird=buildPaperBird(T,{color:i?'#d6c69c':'#90afa4'}),root=bird.group;root.name='Gliding paper bird '+(i+1);root.position.set(i?-5:5,2.2+i*.35,-205-i*5);group.add(root);
+ for(let i=0;i<ORIGAMI_FLOCK.length;i++){
+  const spec=ORIGAMI_FLOCK[i],lesson=ORIGAMI_LESSONS.find(l=>l.id==='bird'),bird=buildPaperBird(T,spec),root=bird.group;root.name='Gliding paper bird '+(i+1);root.position.set(spec.x,spec.y,spec.z);group.add(root);
   root.traverse(o=>o.userData={...o.userData,origamiFriend:lesson.id,animated:true});M.city.targets.push(root);
-  friends.push({lesson,root,bird,baseHeight:root.position.y,start:{x:root.position.x,z:root.position.z},target:{x:-root.position.x,z:root.position.z-3},pause:0});
+  friends.push({lesson,root,bird,baseHeight:root.position.y,start:{x:root.position.x,z:root.position.z},target:{x:root.position.x+Math.sin(i*2.4)*2,z:root.position.z-2},phase:i*1.7,pause:0});
  }
- const dialog=document.createElement('dialog');dialog.id='origami-dialog';dialog.setAttribute('aria-labelledby','origami-title');dialog.innerHTML='<header><div><p class="origami-kicker"></p><h2 id="origami-title"></h2></div><button class="glass" data-origami="close" type="button"></button></header><nav class="origami-friends"></nav><p class="origami-materials"></p><div class="origami-progress" role="status"></div><h3 class="origami-step-title"></h3><p class="origami-step-text"></p><div class="origami-papers"><figure><figcaption class="origami-before"></figcaption><div class="origami-before-svg"></div></figure><figure><figcaption class="origami-after"></figcaption><div class="origami-after-svg"></div></figure></div><p class="origami-legend"></p><div class="origami-check"></div><footer><button class="glass" data-origami="back" type="button"></button><button class="glass" data-origami="replay" type="button"></button><button class="primary" data-origami="next" type="button"></button></footer><p class="origami-result" role="status"></p><div class="origami-bottom"><button class="glass" data-origami="park" type="button"></button><button class="glass" data-origami="reset" type="button"></button><a target="_blank" rel="noopener noreferrer"></a></div>';
+ const dialog=document.createElement('dialog');dialog.id='origami-dialog';dialog.setAttribute('aria-labelledby','origami-title');dialog.innerHTML='<header><div><p class="origami-kicker"></p><h2 id="origami-title"></h2></div><button class="glass" data-origami="close" data-close type="button"></button></header><nav class="origami-friends"></nav><p class="origami-materials"></p><div class="origami-progress" role="status"></div><h3 class="origami-step-title"></h3><p class="origami-step-text"></p><div class="origami-papers"><figure><figcaption class="origami-before"></figcaption><div class="origami-before-svg"></div></figure><figure><figcaption class="origami-after"></figcaption><div class="origami-after-svg"></div></figure></div><p class="origami-legend"></p><div class="origami-check"></div><footer><button class="glass" data-origami="back" type="button"></button><button class="glass" data-origami="replay" type="button"></button><button class="primary" data-origami="next" type="button"></button></footer><p class="origami-result" role="status"></p><div class="origami-bottom"><button class="glass" data-origami="park" type="button"></button><button class="glass" data-origami="reset" type="button"></button><a target="_blank" rel="noopener noreferrer"></a></div>';
  document.body.append(dialog);const n=s=>dialog.querySelector(s),button=id=>n(`[data-origami="${id}"]`);
  const near=document.createElement('button');near.type='button';near.id='origami-near';near.className='primary';near.hidden=true;near.onclick=()=>nearest&&open(nearest.lesson.id);document.body.append(near);
  const launcher=document.createElement('button');launcher.type='button';launcher.className='glass';launcher.id='origami-open';launcher.onclick=()=>open(nearest?.lesson.id);document.querySelector('.visit-actions').append(launcher);
@@ -30,8 +41,8 @@ export function installOrigamiPark(M,T){
  const oldUpdate=M.city.update;M.city.update=(...args)=>{oldUpdate(...args);const time=args[1],dt=Math.min(.06,lastTime?time-lastTime:0);lastTime=time;const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;nearest=null;let nearestDistance=3.8;
   group.visible=M.mode==='overview'||M.mode==='city'&&M.city.region(M.player.x,M.player.z).id==='park';
   for(const friend of friends){const p=friend.root.position,d=Math.hypot(M.player.x-p.x,M.player.z-p.z);if(d<nearestDistance){nearest=friend;nearestDistance=d;}
-   friend.bird.animate(time,{flying:d>=3.8&&!dialog.open,reducedMotion:reduced});if(!reduced&&!dialog.open)p.y=friend.baseHeight+Math.sin(time*1.7+friend.baseHeight)*.14;if(d<3.8){friend.root.rotation.y=Math.atan2(p.x-M.player.x,p.z-M.player.z);continue;}if(reduced||dialog.open)continue;
-   const dx=friend.target.x-p.x,dz=friend.target.z-p.z,length=Math.hypot(dx,dz),speed=Math.min(length,dt*.65);if(length<.15){friend.pause+=dt;if(friend.pause>2){friend.pause=0;friend.target={x:friend.start.x+(Math.sin(time*.13)*6),z:friend.start.z-2-Math.cos(time*.17)*4};}}else{const x=p.x+dx/length*speed,z=p.z+dz/length*speed;if(M.city.canStand(x,z)){p.x=x;p.z=z;friend.root.rotation.y=Math.atan2(-dx,-dz);}else friend.target={...friend.start};}friend.root.rotation.z=Math.sin(time*1.3)*.035;
+   friend.bird.animate(time+friend.phase,{flying:d>=3.8&&!dialog.open,reducedMotion:reduced});if(!reduced&&!dialog.open)p.y=friend.baseHeight+Math.sin(time*1.7+friend.phase)*.14;if(d<3.8){friend.root.rotation.y=Math.atan2(p.x-M.player.x,p.z-M.player.z);continue;}if(reduced||dialog.open)continue;
+   const dx=friend.target.x-p.x,dz=friend.target.z-p.z,length=Math.hypot(dx,dz),speed=Math.min(length,dt*.65);if(length<.15){friend.pause+=dt;if(friend.pause>2){friend.pause=0;friend.target={x:friend.start.x+(Math.sin(time*.13+friend.phase)*2),z:friend.start.z-2-Math.cos(time*.17+friend.phase)*2};}}else{const x=p.x+dx/length*speed,z=p.z+dz/length*speed;if(M.city.canStand(x,z)){p.x=x;p.z=z;friend.root.rotation.y=Math.atan2(-dx,-dz);}else friend.target={...friend.start};}friend.root.rotation.z=Math.sin(time*1.3+friend.phase)*.035;
   }
   near.hidden=!nearest||!group.visible||M.mode!=='city'||dialog.open;if(nearest)near.textContent=tx('با ','Fold with ')+pick(nearest.lesson.name)+tx(' تا بزن','');
  };
