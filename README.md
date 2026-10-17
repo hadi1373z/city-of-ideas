@@ -44,3 +44,13 @@ The five city utility buttons have been removed from the lower toolbar. Origami 
 The root walking scene supports a connected browser gamepad: left stick moves, right stick looks, left-stick click runs, the bottom face button opens the nearby interaction, and Start enters the city from the welcome view. Face-button labels depend on the controller mode. Movement uses the same collision paths as keyboard/touch, with an 18% stick dead zone and analog speed. Input is suspended while readers, exhibit panels, dialogs, or lift transitions are active. Close panels with touch/keyboard. Embedded tools keep their own controls.
 
 Pair the controller before opening the city, enter walking mode, then press a button to expose the controller to the browser. Hardware testing on Android with an 8BitDo Pro 2 remains required. Button remapping and new puzzle rooms are not part of this first patch. Run `node tests/gamepad-input.cjs` for synthetic input checks.
+
+### Playable houses and summit route
+
+The question room now has two seats at a shared table, and study desks reserve a reachable standing aisle. In the House tools navigation (or Socrates’ conversation panel in the original edition), **Examine a claim** opens a four-step, explicitly scripted exercise in English, German or Persian. Its conclusion is saved locally in this browser and can be revisited there; it is separate from private conversation history.
+
+Dalí’s four frames now contain catalogue-sourced painting images, fitted to their original aspect ratios. Source URLs and SHA-256 checksums are recorded in `src/city-source-assets/home-tools/dali-house/painting-sources.json`; attribution remains in the work inspector. A **Look → notice → record** action leads into the existing learning-journal form. Artist sculptures use smoother surfaces and a finer Dalí moustache.
+
+The connected roofs have a warm straight route inlay and a darker infinity promenade using the same snake-skin pattern, with deeper bridge edges. At the roof or summit, **Begin the child’s journey to the volcano** starts the crawl/leap/emergence event without resetting a crawl already in progress.
+
+Music: **V**, **R2**, or **Play/Mute music** toggles playback directly; **M / Music** opens track selection. Starting playback requires an intentional action. Standard L2 remains unassigned; the reported language change still needs reproduction on the physical controller.

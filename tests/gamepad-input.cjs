@@ -23,3 +23,6 @@ pad.axes[0]=.8;state=input.poll(true);assert.equal(state.strafe,0);assert(state.
 
 pad.axes=[-.004,-.004,-.23,-1];input.poll();assert(input.calibrate());state=input.poll();assert.equal(state.lookX,0);assert.equal(state.lookY,0);assert.equal(Math.abs(state.forward),0);pad.axes[2]=.7;assert(input.poll().lookX>.5);pads=[];input.poll();assert.equal(input.calibrate(),false);
 console.log('Explicit neutral calibration clears resting axis drift; intentional movement remains available.');
+
+// Music is reachable even when an open panel blocks movement; L2 has no language action.
+pads=[pad];pad.axes=[0,0,0,0];pad.buttons.forEach(b=>b.pressed=false);input.poll(true);pad.buttons[7].pressed=true;assert.equal(input.poll(true).music,true);assert.equal(input.poll(true).music,false);pad.buttons[7].pressed=false;pad.buttons[6].pressed=true;const l2=input.poll();assert.equal(l2.music,false);assert.equal(l2.confirm,false);assert.equal(l2.menu,false);

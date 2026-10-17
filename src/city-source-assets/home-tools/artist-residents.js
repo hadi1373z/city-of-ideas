@@ -25,8 +25,8 @@ export function buildArtistResidents(THREE,artists,city){
  const geometry=(key,create)=>{if(!geometries.has(key))geometries.set(key,create());return geometries.get(key);};
  const material=(color,basic=false)=>{const key=color+':'+basic;if(!materials.has(key))materials.set(key,basic?new THREE.MeshBasicMaterial({color,side:THREE.DoubleSide}):new THREE.MeshStandardMaterial({color,roughness:.88}));return materials.get(key);};
  const box=(parent,w,h,d,x,y,z,color)=>{const mesh=new THREE.Mesh(geometry(`box:${w}:${h}:${d}`,()=>new THREE.BoxGeometry(w,h,d)),material(color));mesh.position.set(x,y,z);parent.add(mesh);return mesh;};
- const sphere=(parent,r,x,y,z,color,scale)=>{const mesh=new THREE.Mesh(geometry('sphere:'+r,()=>new THREE.SphereGeometry(r,12,8)),material(color));mesh.position.set(x,y,z);if(scale)mesh.scale.set(...scale);parent.add(mesh);return mesh;};
- const cylinder=(parent,top,bottom,h,x,y,z,color)=>{const mesh=new THREE.Mesh(geometry(`cylinder:${top}:${bottom}:${h}`,()=>new THREE.CylinderGeometry(top,bottom,h,12)),material(color));mesh.position.set(x,y,z);parent.add(mesh);return mesh;};
+ const sphere=(parent,r,x,y,z,color,scale)=>{const mesh=new THREE.Mesh(geometry('sphere:'+r,()=>new THREE.SphereGeometry(r,20,14)),material(color));mesh.position.set(x,y,z);if(scale)mesh.scale.set(...scale);parent.add(mesh);return mesh;};
+ const cylinder=(parent,top,bottom,h,x,y,z,color)=>{const mesh=new THREE.Mesh(geometry(`cylinder:${top}:${bottom}:${h}`,()=>new THREE.CylinderGeometry(top,bottom,h,20)),material(color));mesh.position.set(x,y,z);parent.add(mesh);return mesh;};
  const disc=(parent,r,x,y,z,color)=>{const mesh=new THREE.Mesh(geometry('disc:'+r,()=>new THREE.CircleGeometry(r,16)),material(color,true));mesh.position.set(x,y,z);parent.add(mesh);return mesh;};
  const ring=(parent,r,x,y,z,color)=>{const mesh=new THREE.Mesh(geometry('ring:'+r,()=>new THREE.RingGeometry(r*.78,r,16)),material(color,true));mesh.position.set(x,y,z);parent.add(mesh);return mesh;};
  function nameplate(parent,artist){
@@ -88,8 +88,7 @@ export function buildArtistResidents(THREE,artists,city){
   if(look.hairStyle==='bun')sphere(head,.089,0,.06,-.145,look.hair);
   if(look.hairStyle==='bob')for(const x of [-.135,.135])sphere(head,.089,x,-.055,-.035,look.hair,[.6,1.5,1]);
   if(look.hairStyle==='curls')for(const x of [-.13,0,.13])sphere(head,.079,x,.105,-.028,look.hair,[1,1,.9]);
-  if(look.mustache)for(const side of [-1,1]){const whisker=sphere(head,.08,side*.095,-.045,.145,look.hair,[1.8,.16,.2]);whisker.rotation.z=side*.48;}
-  if(look.mustache)for(const side of [-1,1]){const whisker=sphere(head,.08,side*.095,-.045,.145,look.hair,[1.8,.16,.2]);whisker.rotation.z=side*.48;}
+  if(look.mustache)for(const side of [-1,1]){const whisker=sphere(head,.055,side*.074,-.045,.15,look.hair,[1.5,.12,.16]);whisker.rotation.z=side*.48;}
   if(look.beard){const beard=sphere(head,look.beard==='long'?.118:.097,0,look.beard==='long'?-.155:-.1,.105,look.hair,[1,look.beard==='long'?1.55:look.beard==='point'?1.15:.82,.7]);beard.rotation.x=-.12;}
   if(look.glasses){for(const x of [-.061,.061])ring(head,.039,x,.035,.165,'#484947');box(head,.044,.01,.011,0,.035,.167,'#484947');}
   if(look.hat==='beret'){sphere(head,.192,0,.181,0,look.hatColor,[1.13,.31,1]);sphere(head,.017,0,.246,0,look.hatColor);}

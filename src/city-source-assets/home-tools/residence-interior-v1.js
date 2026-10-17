@@ -29,7 +29,11 @@ function kit(T){
 function prototype(k,kind,compact=false){
  const {T,m,box,cyl,ball,ring,book,cup,lamp,plant,chair}=k,g=new T.Group(),actions=[];
  const action=(node,type,label,x=0,y=.8,z=0)=>actions.push({node,type,label,target:new T.Vector3(x,y,z)});
- if(kind==='desk'){
+ if(kind==='dialogue'){
+  box(g,.68,.055,.68,0,.74,0,m.oak);cyl(g,.055,.69,0,.37,0,m.walnut);cyl(g,.26,.04,0,.035,0,m.walnut);
+  for(const side of[-1,1]){const seat=chair(g,0,0,m.sage);seat.position.x=side*.78;seat.rotation.y=-side*Math.PI/2;action(seat,'sit','Sit at the dialogue table',side*.78,.65,0);}
+  const writing=book(g,0,.8,0,.24,.3,m.blue);action(writing,'journal','Record a question at the dialogue table',0,.84,0);
+ }else if(kind==='desk'){
   const w=compact?1.05:1.5;box(g,w,.055,.65,0,.76,0,m.oak);for(const dx of [-w/2+.08,w/2-.08])for(const dz of [-.24,.24])box(g,.055,.72,.055,dx,.36,dz,m.walnut);
   box(g,.39,.24,.56,w/2-.24,.59,0,m.oak);for(const y of [.52,.64]){box(g,.35,.095,.018,w/2-.24,y,.29,m.linen);box(g,.12,.014,.027,w/2-.24,y,.308,m.gold);}
   const journal=book(g,-.17,.81,.03,.27,.34,m.blue);action(journal,'journal','Write at the study desk',-.17,.84,.03);
@@ -117,7 +121,9 @@ function place(T,p,r,reserved,occupied){
   for(const x of xs)for(const z of zs){const b={minX:x-hw,maxX:x+hw,minZ:z-hd,maxZ:z+hd};if(reserved.some(q=>overlap(b,q))||occupied.some(q=>overlap(b,q,.075)))continue;
    const wallDistance=Math.min(b.minX,r.w-b.maxX,b.minZ,r.h-b.maxZ);if(wallDistance>.55)continue;
    const front={x:Math.sin(yaw),z:Math.cos(yaw)},toward={x:r.w/2-x,z:r.h/2-z},face=front.x*toward.x+front.z*toward.z;
-   const score=wallDistance*8+(face<0?8:0)+x*.035+z*.017;if(!best||score<best.score)best={x,z,yaw,b,score};
+   // Reserve a usable standing aisle at the desk, not merely its solid footprint.
+   let approach=null;if(p.kind==='desk'){const reach=.95,side=.48,fx=front.x,fz=front.z,cx=x+fx*(Math.abs(fx)*hw+Math.abs(fz)*hd+reach/2),cz=z+fz*(Math.abs(fx)*hw+Math.abs(fz)*hd+reach/2);approach={minX:cx-(Math.abs(fx)*reach/2+Math.abs(fz)*side),maxX:cx+(Math.abs(fx)*reach/2+Math.abs(fz)*side),minZ:cz-(Math.abs(fz)*reach/2+Math.abs(fx)*side),maxZ:cz+(Math.abs(fz)*reach/2+Math.abs(fx)*side)};if(approach.minX<.2||approach.maxX>r.w-.2||approach.minZ<.2||approach.maxZ>r.h-.2||occupied.some(q=>overlap(approach,q,.2))||reserved.some(q=>q.kind==='idea'&&overlap(approach,q,.2)))continue;}
+   const score=wallDistance*8+(face<0?8:0)+x*.035+z*.017;if(!best||score<best.score)best={x,z,yaw,b,approach,score};
   }
  }
  if(!best)return null;const rotated=center.clone().applyAxisAngle(new T.Vector3(0,1,0),best.yaw);p.group.rotation.y=best.yaw;p.group.position.set(r.x-10+best.x-rotated.x,0,r.y-8+best.z-rotated.z);p.group.updateMatrixWorld(true);return best;
@@ -134,11 +140,11 @@ function freeAnchor(r,target,obstacles,preferred){
 export function buildInterior(house,room,THREE,{walk=true}={}){
  if(!room||![room.x,room.y,room.w,room.h].every(Number.isFinite)||room.w<3||room.h<3)throw Error('A domestic interior needs a room at least 3 × 3 metres.');
  const k=kit(THREE),group=new THREE.Group(),obstacles=[],interactions=[],occupied=[],reserved=reservedAreas(house,room),parts=[],compact=Math.min(room.w,room.h)<4,role=HOME_ROLES[room.id]||'study',primaryNodes=new Map();group.name=`home-interior-${room.id}`;
- const sets={study:['desk','armchair','bookshelf','plant'],bedroom:['bed','wardrobe','nightstand','plant'],kitchen:['counter','dining','fridge','plant'],'living room':['sofa','coffee','fireplace','plant'],'entrance hall':['console','bench','coat','plant'],library:['bookshelf','armchair','side','globe']};
- for(const kind of sets[role]){const p=prototype(k,kind,compact),placement=place(THREE,p,room,reserved,occupied);if(!placement)continue;group.add(p.group);occupied.push(placement.b);parts.push(p);const b=placement.b;obstacles.push({minX:b.minX+room.x-10,maxX:b.maxX+room.x-10,minZ:b.minZ+room.y-8,maxZ:b.maxZ+room.y-8,roomId:room.id,label:kind});}
+ const sets={study:['desk','armchair','bookshelf','plant'],bedroom:['bed','wardrobe','nightstand','plant'],kitchen:['counter','dining','fridge','plant'],'living room':['dialogue','bookshelf','plant'],'entrance hall':['console','bench','coat','plant'],library:['bookshelf','armchair','side','globe']};
+ for(const kind of sets[role]){const p=prototype(k,kind,compact),placement=place(THREE,p,room,reserved,occupied);if(!placement)continue;group.add(p.group);occupied.push(placement.b);if(placement.approach)occupied.push(placement.approach);parts.push(p);if(placement.approach)p.group.userData.approach={...placement.approach,minX:placement.approach.minX+room.x-10,maxX:placement.approach.maxX+room.x-10,minZ:placement.approach.minZ+room.y-8,maxZ:placement.approach.maxZ+room.y-8};const b=placement.b;obstacles.push({minX:b.minX+room.x-10,maxX:b.maxX+room.x-10,minZ:b.minZ+room.y-8,maxZ:b.maxZ+room.y-8,roomId:room.id,label:kind});}
  // Crowded/minimum rooms use a real narrow wall ledge rather than obstructing
  // their doors or shrinking major furniture to toy scale.
- if(parts.reduce((sum,p)=>sum+p.actions.length,0)<2){for(let attempt=0;attempt<2;attempt++){const p=prototype(k,'ledge',true),placement=place(THREE,p,room,reserved,occupied);if(!placement)break;group.add(p.group);occupied.push(placement.b);parts.push(p);const b=placement.b;obstacles.push({minX:b.minX+room.x-10,maxX:b.maxX+room.x-10,minZ:b.minZ+room.y-8,maxZ:b.maxZ+room.y-8,roomId:room.id,label:'wall ledge'});if(parts.reduce((sum,q)=>sum+q.actions.length,0)>=2)break;}}
+ if(parts.reduce((sum,p)=>sum+p.actions.length,0)<2){for(let attempt=0;attempt<2;attempt++){const p=prototype(k,'ledge',true),placement=place(THREE,p,room,reserved,occupied);if(!placement)break;group.add(p.group);occupied.push(placement.b);if(placement.approach)occupied.push(placement.approach);parts.push(p);if(placement.approach)p.group.userData.approach={...placement.approach,minX:placement.approach.minX+room.x-10,maxX:placement.approach.maxX+room.x-10,minZ:placement.approach.minZ+room.y-8,maxZ:placement.approach.maxZ+room.y-8};const b=placement.b;obstacles.push({minX:b.minX+room.x-10,maxX:b.maxX+room.x-10,minZ:b.minZ+room.y-8,maxZ:b.maxZ+room.y-8,roomId:room.id,label:'wall ledge'});if(parts.reduce((sum,q)=>sum+q.actions.length,0)>=2)break;}}
  group.updateMatrixWorld(true);
  const anchorObstacles=obstacles.concat(reserved.filter(b=>b.kind==='idea').map(b=>({...b,minX:b.minX+room.x-10,maxX:b.maxX+room.x-10,minZ:b.minZ+room.y-8,maxZ:b.maxZ+room.y-8})));
  for(const part of parts)for(const a of part.actions){if(interactions.length>=4)break;const target=a.target.clone().applyMatrix4(part.group.matrixWorld),front=new THREE.Vector3(0,0,1).applyAxisAngle(new THREE.Vector3(0,1,0),part.group.rotation.y),anchor=freeAnchor(room,target,anchorObstacles,{x:target.x+front.x*.7,z:target.z+front.z*.7});if(!anchor)continue;

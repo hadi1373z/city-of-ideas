@@ -1,0 +1,26 @@
+[
+  {
+    "id": "memory",
+    "record": "https://www.salvador-dali.org/en/heritageobject/478/",
+    "image": "https://d1i5r06pd82mff.cloudfront.net/public/DigitalAsset/b25877ed-1f87-580d-ad35-2d9a8fcdef41/3c8be81b679ba37694edda945ba970fd/full/medium/0/default.jpg",
+    "sha256": "ed7be3c54c410f432f47474b6ebcb0d706a7019840ecc08f525ba4a8120f13e0"
+  },
+  {
+    "id": "galatea",
+    "record": "https://catalogues.salvador-dali.org/catalogues/en/heritageobject/54/",
+    "image": "https://d1i5r06pd82mff.cloudfront.net/public/DigitalAsset/0fecc826-7664-359d-8014-e96e1cc8282d/823791de4367c0ac58e11380fd26e10d/full/medium/0/default.jpg",
+    "sha256": "19c161e23f5fb9a698dd4c7df8f7675cf62d58f884118f66ba50d9c273c44ccb"
+  },
+  {
+    "id": "leda",
+    "record": "https://catalogues.salvador-dali.org/catalogues/en/heritageobject/51/",
+    "image": "https://d1i5r06pd82mff.cloudfront.net/public/DigitalAsset/8c51befb-303f-dceb-98fd-ca84bcf062a6/d9d1c2fd06164d3cee7b48b774cf6622/full/medium/0/default.jpg",
+    "sha256": "f63daafec42a47d74b5d6c1ab5e21538b215c2854afd556feffab75e0e05605c"
+  },
+  {
+    "id": "face",
+    "record": "https://catalogues.salvador-dali.org/catalogues/en/heritageobject/22-5103/",
+    "image": "https://d1i5r06pd82mff.cloudfront.net/public/DigitalAsset/34401be9-e546-41c2-4d0c-b9b5c2f3c03e/fc64e06ce99ab4def4dd4d1178e09ab9/full/medium/0/default.jpg",
+    "sha256": "503294b0bf1a7d13966b8f907fc2ee59c9b9a3489c799faa6543c9244b995bad"
+  }
+]

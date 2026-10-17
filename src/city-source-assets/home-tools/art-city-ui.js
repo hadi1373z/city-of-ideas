@@ -104,6 +104,7 @@ export function initArtCityUI({$, document, window, scene, artists, getHouse, ge
   const question = node('p', 'art-city-question');
   const form = node('form', 'art-city-reflection-form'), answer = node('textarea', 'art-city-answer');
   answer.rows = 4; answer.required = true;
+  const observation=button('art-city-observe','Look → notice → record',()=>{const {artist,work}=selection();if(artist?.id!=='dali'||!work)return;if(!answer.value.trim())answer.value='In '+work.title+', I notice: ';answer.focus();message('Look at one edge, shadow or gap in the painting. Describe what is visible first, then add one possible interpretation. Save your observation below.');});
   const reflectionRoom = node('p', 'art-city-reflection-room');
   const save = button('art-city-save', 'Save observation to my home'); save.type = 'submit';
   form.append(label('Your observation or experiment', answer), reflectionRoom, save);
@@ -112,7 +113,7 @@ export function initArtCityUI({$, document, window, scene, artists, getHouse, ge
   const allHouses = button('art-city-all-houses', 'All artist houses', showOverview);
   actions.append(examine, allHouses);
   detail.append(artistDescription, approach, websites, controls, figure, onlineImage,
-    workDescription, rights, source, imageCredit, question, form, actions);
+    workDescription, rights, source, imageCredit, question, observation, form, actions);
   dialog.replaceChildren(head, status, overview, detail);
   dialog.setAttribute('aria-labelledby', 'art-city-title');
   dialog.addEventListener?.('cancel', remember);
@@ -134,6 +135,7 @@ export function initArtCityUI({$, document, window, scene, artists, getHouse, ge
     remember(); artistId = id;
     workId = artist.works?.find(item => item.id === selectedWork)?.id || artist.works?.[0]?.id || null;
     version++; inCity = true; answer.value = drafts.get(draftKey()) || '';
+    observation.hidden=artist.id!=='dali';
     heading.textContent = artist.name + '’s house';
     overview.hidden = true; detail.hidden = false;
     artistDescription.textContent = artist.description || '';

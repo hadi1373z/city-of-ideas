@@ -1,3 +1,4 @@
+import {mountSocraticPractice} from './socratic-practice.js';
 import {isBrowserMode} from './city-adapter-store.js';
 import {validateResident,observeRoom,converse,proposeCritique,pendingProposals,decideProposal,buildHandoff,setResidentPreferences} from './resident.js';
 
@@ -12,6 +13,7 @@ export function initResidentUI({$,document,window,scene,getHouse,getSelected,isL
   $('gpt-form').hidden=true;$('chatgpt-settings').hidden=true;$('gpt-key').disabled=true;$('gpt-model').disabled=true;
  }
  if(local&&typeof exportConversation==='function'){archiveExport=document.createElement('button');archiveExport.id='resident-archive-export';archiveExport.type='button';archiveExport.className='full';archiveExport.textContent='Download full private conversation file';archiveExport.onclick=async()=>{if(exporting||isSaving())return;exporting=true;render();try{const data=await exportConversation(),blob=new Blob([JSON.stringify(data,null,2)+'\n'],{type:'application/json;charset=utf-8'}),url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download='house-of-ideas-private-conversations.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);note.textContent='Full private conversation file downloaded. It includes the durable archive; keep it private and import it into your online house only when you choose.';}catch(error){note.textContent=error.message;}finally{exporting=false;render();}};$('resident-conversation').append(archiveExport);$('resident-export').textContent='Export recent game improvement brief';}
+ mountSocraticPractice({document,window,parent:$('city-tools-navigation')||$('resident-conversation')});
  const location=()=>scene?.residentState?.()||{roomId:getSelected(),near:true,activity:'examining the house'};
  const roomId=()=>{const state=location();return state.near&&!state.summoning&&getHouse().rooms.some(r=>r.id===state.roomId)?state.roomId:getSelected();};
  function renderSpatial() {

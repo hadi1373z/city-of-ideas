@@ -11,6 +11,7 @@ g.createSummitStory=function(T,{roof,mountain,figure,volcano,lava,figureLight,co
  function setMode(value){if(value!==mode){mode=value==='story'?'story':'explore';roof.reset();rest();following=false;lastCamera=null;setPhase(mode==='story'?'armed':'explore');apply(0);}}
  function finish(keepView=false){if(mode!=='story')return;roof.reset();rest();setPhase('complete');following=keepView&&following;if(!following)lastCamera=null;apply(0);}
  function reachSummit(reduced=false){if(mode!=='story'||phase!=='armed')return false;roof.reset();setPhase('arrival');if(reduced)finish();return true;}
+ function beginFromRoof(reduced=false){if(active()||phase==='complete')return false;mode='story';rest();following=false;lastCamera=null;if(roof.state.target!==roof.total)roof.invite(false,3.2);setPhase(roof.state.atRoof?'poise':'crawl');if(reduced)finish();else apply(0);return true;}
  function replay(player,reduced=false){if(mode!=='story'||phase!=='complete'||Math.hypot(player.x-125,player.z)<8)return false;roof.reset();rest();following=false;lastCamera=null;setPhase('armed');return reachSummit(reduced);}
  function apply(time){
   const shown=mode==='explore'||phase==='complete'||phase==='emerge';
@@ -52,7 +53,7 @@ g.createSummitStory=function(T,{roof,mountain,figure,volcano,lava,figureLight,co
  }
  function follow(value){following=!!value;lastCamera=null;}
  function dispose(){glow.removeFromParent();glow.geometry.dispose();glowMaterial.dispose();}
- return{setMode,reachSummit,replay,finish,follow,update,updateCamera,dispose,get state(){return{mode,phase,active:active(),elapsed,following,waiting:phase==='crawl'&&roof.state.waiting};}};
+ return{setMode,reachSummit,beginFromRoof,replay,finish,follow,update,updateCamera,dispose,get state(){return{mode,phase,active:active(),elapsed,following,waiting:phase==='crawl'&&roof.state.waiting};}};
 };
 
 g.mountSummitStoryUI=function(story,{language,getPlayer,getVisitMode,isPaused=()=>false,readChapter=()=>{},reduced=false}){
@@ -69,6 +70,7 @@ g.mountSummitStoryUI=function(story,{language,getPlayer,getVisitMode,isPaused=()
  const status=document.createElement('p');status.setAttribute('role','status');status.setAttribute('aria-live','polite');
  const note=document.createElement('small'),actions=document.createElement('div');actions.className='story-actions';
  function button(id,handler){const b=document.createElement('button');b.type='button';b.id=id;b.className='glass';b.onclick=handler;actions.append(b);return b;}
+ const begin=button('story-begin-roof',()=>story.beginFromRoof(reduced));
  const skip=button('story-skip',()=>story.finish()),follow=button('story-follow',()=>story.follow(!story.state.following)),replay=button('story-replay',()=>story.replay(getPlayer(),reduced)),read=button('story-read',readChapter);
  panel.append(status,note,actions);document.body.append(panel);let key='',uiKey='';
  function update(){const s=story.state,p=getPlayer(),visit=getVisitMode(),w=words[language()]||words.en;
@@ -76,9 +78,10 @@ g.mountSummitStoryUI=function(story,{language,getPlayer,getVisitMode,isPaused=()
   const near=Math.abs(p.y-34.195)<3&&(Math.hypot(p.x-125,p.z)<25||Math.hypot(p.x,p.z)<55);
   const renderKey=[language(),s.mode,s.phase,s.waiting,s.following,visit,near,isPaused(),Math.hypot(p.x-125,p.z)<8].join(':');if(renderKey===uiKey)return;uiKey=renderKey;legend.textContent=w.legend;options.explore.textContent=w.explore;options.story.textContent=w.story;document.getElementById('enter').textContent=s.mode==='story'?w.begin:g.CITY_I18N.t('enter');
   document.body.dataset.storyFollowing=String(s.following);document.body.dataset.storyActive=String(s.active);
-  panel.hidden=isPaused()||s.mode!=='story'||visit==='overview'||visit==='aerial'||visit==='return'||!(s.active||s.phase==='complete'&&near);document.body.dataset.storyPanel=String(!panel.hidden);
+  const canBegin=['roof','peak'].includes(visit)&&s.mode==='explore';begin.hidden=!canBegin;begin.textContent=language()==='fa'?'کودک را تا آتشفشان همراهی کن':language()==='de'?'Das Kind zum Vulkan begleiten':'Begin the child’s journey to the volcano';for(const input of choice.querySelectorAll('input'))input.checked=input.value===s.mode;
+  panel.hidden=isPaused()||!canBegin&&s.mode!=='story'||visit==='overview'||visit==='aerial'||visit==='return'||!(canBegin||s.active||s.phase==='complete'&&near);document.body.dataset.storyPanel=String(!panel.hidden);
   const blocked=s.phase==='complete'&&Math.hypot(p.x-125,p.z)<8,phase=s.waiting?'waiting':blocked?'aside':s.phase,next=language()+phase;
-  if(next!==key){status.textContent=w[phase]||'';note.textContent=w.note;key=next;}
+  if(next!==key){status.textContent=canBegin?(language()==='fa'?'راه روشن به آتشفشان می‌رسد.':language()==='de'?'Der helle Weg führt zum Vulkan.':'The light stone path leads straight to the volcano.'):(w[phase]||'');note.textContent=w.note;key=next;}
   skip.textContent=w.skip;follow.textContent=s.following?w.free:w.follow;replay.textContent=w.replay;
   read.textContent=language()==='fa'?'خواندن فصل':language()==='de'?'Kapitel lesen':'Read chapter';read.hidden=s.phase!=='complete';
   skip.hidden=!s.active;follow.hidden=!s.active&&s.phase!=='complete'||reduced;follow.setAttribute('aria-pressed',String(s.following));replay.hidden=s.phase!=='complete';replay.disabled=blocked;

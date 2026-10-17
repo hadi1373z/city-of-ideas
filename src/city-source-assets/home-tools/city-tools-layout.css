@@ -25,3 +25,7 @@ body .workspace,body.immersive .workspace,body.plan-mode .workspace{position:rel
  #home-activity{width:calc(100% - 12px)!important;margin:6px auto!important;padding:14px}
  #city-tools-storage{padding:10px}
 }
+
+#art-city-work-source,#art-city-image-credit{display:inline-block;margin:8px 16px 8px 0}#socratic-practice dt{font-weight:600;margin-top:12px}#socratic-practice dd{margin:6px 0 14px 18px}
+
+#city-tools-navigation{justify-content:flex-start!important}
