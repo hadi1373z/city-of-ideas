@@ -51,6 +51,10 @@ The question room now has two seats at a shared table, and study desks reserve a
 
 Dalí’s four frames now contain catalogue-sourced painting images, fitted to their original aspect ratios. Source URLs and SHA-256 checksums are recorded in `src/city-source-assets/home-tools/dali-house/painting-sources.json`; attribution remains in the work inspector. A **Look → notice → record** action leads into the existing learning-journal form. Artist sculptures use smoother surfaces and a finer Dalí moustache.
 
-The connected roofs have a warm straight route inlay and a darker infinity promenade using the same snake-skin pattern, with deeper bridge edges. At the roof or summit, **Begin the child’s journey to the volcano** starts the crawl/leap/emergence event without resetting a crawl already in progress.
+The connected roofs have a warm straight route inlay using the same snake-skin pattern, with deeper bridge edges. At the roof or summit, **Begin the child’s journey to the volcano** starts the crawl/leap/emergence event without resetting a crawl already in progress.
 
 Music: **V**, **R2**, or **Play/Mute music** toggles playback directly; **M / Music** opens track selection. Starting playback requires an intentional action. Standard L2 remains unassigned; the reported language change still needs reproduction on the physical controller.
+
+### Rooftop simplification
+
+The infinity-shaped elevated loops and their collision surfaces have been removed. The gallery roof, summit terrace, direct bridge and baby-to-volcano path remain. The return lift now lands within the straight bridge, and the aerial controls use plain roof-view labels.

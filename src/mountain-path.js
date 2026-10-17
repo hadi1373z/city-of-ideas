@@ -8,7 +8,7 @@ window.createMountainPath=function(T){
  const pointAt=(theta,r=radiusAt(theta))=>polar(r,theta,heightAt(theta));
  const headingAt=(theta,direction=1)=>{const a=pointAt(theta),b=pointAt(theta+direction*.001);return Math.atan2(-(b.x-a.x),-(b.z-a.z))};
  function resolveRamp(x,z,theta,previous){const lx=x-A.x,lz=z-A.z,a=Math.atan2(lz,lx),old=Math.atan2(previous.z-A.z,previous.x-A.x),next=clamp(theta+wrap(a-old),0,MAX),center=radiusAt(next),r=clamp(Math.hypot(lx,lz),center-A.width/2+.35,center+A.width/2-.35),p=pointAt(next,r);return{x:p.x,z:p.z,y:p.y,theta:next}}
- const toLocal=(x,z)=>({x:A.z-z,z:x-A.x}),localLift={x:A.x-8,z:62.5,exitZ:62.5},lift={x:62.5,z:-8,exitX:62.5,exitZ:-18},startGate={inner:A.radius-A.width/2+.35,entryOuter:A.radius+A.width/2-.35,exitOuter:A.radius+A.width/2-.26,roadEnd:A.radius+8};
+ const toLocal=(x,z)=>({x:A.z-z,z:x-A.x}),localLift={x:A.x-4.2,z:62.5,exitZ:62.5},lift={x:62.5,z:-4.2,exitX:62.5,exitZ:-18},startGate={inner:A.radius-A.width/2+.35,entryOuter:A.radius+A.width/2-.35,exitOuter:A.radius+A.width/2-.26,roadEnd:A.radius+8};
 
  const peak={minX:lift.x-2.1,maxX:A.x+A.topRadius+4,minZ:lift.z-3,maxZ:A.z+3,rampThreshold:A.topRadius+.3};
  // A tapered stone embankment joins the trail to the hillside instead of leaving a floating ribbon.
