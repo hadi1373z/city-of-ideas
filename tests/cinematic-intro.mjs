@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';
+import {readFileSync,statSync} from 'node:fs';
+import {OPENING_SCRIPT} from '../src/opening-script.js';
+import {createOpeningTimeline} from '../src/cinematic-intro.js';
+const timeline=createOpeningTimeline();assert.equal(timeline.step,-1);assert.equal(timeline.tick(1,0),false);
+timeline.start();assert.equal(timeline.step,0);timeline.pause(true);for(let i=0;i<500;i++)timeline.tick(.1,0);assert.equal(timeline.elapsed,0,'Pause must hold the camera/caption timeline');timeline.pause(false);
+for(let step=0;step<3;step++){assert.equal(timeline.step,step);let advanced=false;const duration=OPENING_SCRIPT.beats[step].seconds+2;for(let i=0;i<(duration-1)*10;i++)assert.equal(timeline.tick(.1,duration),false,'A clip cannot be cut off before its duration');for(let i=0;i<12&&!advanced;i++)advanced=timeline.tick(.1,duration);assert(advanced);}
+for(let i=0;i<1000;i++)assert.equal(timeline.tick(.1,0),false);assert.equal(timeline.step,3,'The last shot waits for the visitor to enter');assert.equal(timeline.next(),false);timeline.reset();assert.equal(timeline.step,-1);assert.equal(timeline.elapsed,0);
+for(const lang of ['en','de','fa']){const text=OPENING_SCRIPT.languages[lang];assert.equal(text.lines.length,OPENING_SCRIPT.beats.length);assert.equal(text.speakers.length,4);for(const key of ['book','quote','bookCredit','begin','skip','next','walk','pause','resume','credit','soundFailed'])assert(text[key]?.trim(),lang+' '+key);for(const beat of OPENING_SCRIPT.beats){const path=new URL('../src/assets/opening/'+lang+'-'+beat.id+'.mp3',import.meta.url);assert(statSync(path).size>10000,'Each narrated shot has a real local recording');const bytes=readFileSync(path);assert(bytes.includes(Buffer.from([0xff,0xfb]))||bytes.subarray(0,3).toString()==='ID3','MP3 header/frame');}}
+const html=readFileSync(new URL('../src/index.html',import.meta.url),'utf8'),css=readFileSync(new URL('../src/cinematic-intro.css',import.meta.url),'utf8'),script=readFileSync(new URL('../src/cinematic-intro.js',import.meta.url),'utf8');assert(html.includes('cinematic-pending'));assert(css.includes('prefers-reduced-motion'));assert(!script.includes('speechSynthesis'),'The cinematic uses packaged narration, not default browser speech');assert(script.includes("document.hidden"));assert(script.includes("dialog.addEventListener('cancel'"));
+console.log('PASS: opening pause/resume, full audio durations, held final shot, reset, three complete scripts, twelve local voice recordings and accessibility exits.');
+
+assert(OPENING_SCRIPT.languages.fa.book.includes('زرتشت'));assert(OPENING_SCRIPT.languages.fa.speechLines[2].includes('زَرْتُشْتْ'));

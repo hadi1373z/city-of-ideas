@@ -9,6 +9,7 @@ import {ARTISTS} from './city-source-assets/home-tools/artist-catalog.js';
 import {createDistrictNavigation} from './district-navigation.js';
 import {createSharedResidents} from './shared-residents.js';
 import {createSharedActivities} from './shared-activities.js';
+import {installCinematicIntro} from './cinematic-intro.js';
 import {installDiscoveryStory} from './discovery-story.js';
 const waitMain=()=>new Promise(resolve=>{if(window.CITY_MAIN?.city)resolve(window.CITY_MAIN);else addEventListener('gallery-ready',()=>resolve(window.CITY_MAIN),{once:true});});
 const M=await waitMain(),T=window.THREE,frame=()=>CITY_TOOL_FRAMES.get('home'),originalHome={...window.CITY_HOME_SCENE};let selectedEdition='residence';
@@ -79,4 +80,5 @@ try{
  installOrigamiPark(M,T);
  M.storyJourney=installDiscoveryStory(M);
  M.status('ready');
-}catch(error){console.error('Original district integration failed',error);M.status(error.message);}
+ installCinematicIntro(M,T);
+}catch(error){document.body.classList.remove('cinematic-pending');console.error('Original district integration failed',error);M.status(error.message);}

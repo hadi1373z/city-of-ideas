@@ -281,3 +281,10 @@ The sections above preserve the supplied design notes. This dated section distin
 5. Only then prototype one short ceremony with a remembered consequence. Keep free exploration available.
 
 Offline-first remains a design direction. Browser-local notes do not by themselves make the website installable or fully usable without a network. Cinematic narration, AI residents, arbitrary image/model generation and multiplayer remain proposals.
+
+
+### Main-city cinematic opening — 19 October 2026
+
+The cinematic introduction is implemented directly to the main city independently of draft PR #2: begin alone with Zarathustra, reveal the existing study, meet an illustrated Socrates and enter the wider city. Authored EN/DE/FA narration and twelve packaged neural voice recordings are separate from scene code. See `docs/CINEMATIC_OPENING.md` for editing and verification. This implements a draft introduction; the script remains revisable, and no live AI resident is implied.
+
+Persian naming: use **زرتشت** in ordinary text and **زَرْتُشْتْ** as the user-supplied pronunciation in spoken scripts. The opening audio uses this vocalization.
