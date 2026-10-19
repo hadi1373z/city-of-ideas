@@ -288,3 +288,10 @@ Offline-first remains a design direction. Browser-local notes do not by themselv
 The cinematic introduction is implemented directly to the main city independently of draft PR #2: begin alone with Zarathustra, reveal the existing study, meet an illustrated Socrates and enter the wider city. Authored EN/DE/FA narration and twelve packaged neural voice recordings are separate from scene code. See `docs/CINEMATIC_OPENING.md` for editing and verification. This implements a draft introduction; the script remains revisable, and no live AI resident is implied.
 
 Persian naming: use **زرتشت** in ordinary text and **زَرْتُشْتْ** as the user-supplied pronunciation in spoken scripts. The opening audio uses this vocalization.
+
+
+### Ground coherence and physical desk opening — 19 October 2026
+
+The user clarified that coherence concerns the ground shapes and their relationship to buildings throughout the city. Removed the empty circular plaza and large Continuous city / Ideas Park sign. Replaced separate road boxes with joined paving strips, connected the civic street to real entrances and district branches, and routed the makers approach around the mountain. Building positions and personal home editions are preserved. Further planting, signage and whole-city composition still need visual refinement; connected paving alone does not complete that design.
+
+The opening now frames a physical localized Zarathustra book on Socrates’ actual desk. The camera remains aligned when the source home restores, pulls back into the study, and leaves the visitor there to walk out. The nearby book opens the complete reader, with an optional discussion action into the existing discovery journey. Completion no longer teleports to the former center. Persian display remains زرتشت; the authored voice script retains زَرْتُشْتْ.

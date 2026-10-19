@@ -8,18 +8,20 @@ window.createGalleryCity=function(T,ctx){
  const chapterCounts=[23,22,16,20],chapterOffsets=[0,23,45,61],partColors=['#efbc6a','#ae91e8','#59c4be','#ed7d91'];
  const pathMaterial=new T.MeshLambertMaterial({color:0xd2c6af}),wallMaterial=new T.MeshLambertMaterial({color:0xc3c1ad}),bronze=new T.MeshStandardMaterial({color:0x947844,roughness:.6,metalness:.65});
  const batches=(geometry,material,points)=>{const m=new T.InstancedMesh(geometry,material,points.length),o=new T.Object3D();points.forEach((p,i)=>{o.position.copy(p.position||p);o.rotation.set(0,p.yaw||0,0);o.scale.set(1,1,1);if(p.scale)o.scale.copy(p.scale);o.updateMatrix();m.setMatrixAt(i,o.matrix)});city.add(m);return m};
- function road(points,width=8){for(let i=1;i<points.length;i++){const a=new T.Vector3(points[i-1][0],.07,points[i-1][1]),b=new T.Vector3(points[i][0],.07,points[i][1]),d=b.clone().sub(a),m=box(width,.12,d.length()+width*.35,pathMaterial,(a.x+b.x)/2,.07,(a.z+b.z)/2,city);m.rotation.y=Math.atan2(d.x,d.z)}}
+ function road(points,width=8){return createCityRoad(T,points,width,pathMaterial,city)}
  function plaque(title,x,z,width=5,yaw=0){const prior=new Set(city.children);for(const side of[-1,1]){const m=textSign(title,'#e8dec7',width,.6,city);m.position.set(x,2.05,z+side*.09);m.rotation.y=side<0?Math.PI:0;}box(width+.2,.88,.14,materials.garden,x,2.05,z,city);for(const side of[-1,1])box(.07,1.65,.07,materials.rail,x+side*(width/2-.18),.95,z,city);if(yaw){const transform=new T.Matrix4().makeTranslation(x,0,z).multiply(new T.Matrix4().makeRotationY(yaw)).multiply(new T.Matrix4().makeTranslation(-x,0,-z));for(const node of city.children)if(!prior.has(node))node.applyMatrix4(transform);}}
 
  cylinder(570,570,.24,new T.MeshLambertMaterial({color:0x556563}),0,-.22,-100,city);
- road([[0,94],[-97.7,110]],9);road([[-97.7,110],[-97.7,103.8]],4.2);
- road([[0,94],[82.9,108]],9);
- road([[-97.7,110],[-76,110],[-76,45],[-84,-9],[-116,-29],[-138,-32]],9);
- road([[-84,-9],[-84,-110],[0,-185],[0,-195]],9);road([[-138,-32],[-138,-150],[0,-185]],8);
- road([[A.x,A.radius+10],[156,80],[156,108]],6);
+ // One civic street follows the front doors; branches meet it at shared junctions.
+ road([[-97.7,110],[0,110],[82.9,110]],9);
+ road([[-97.7,110],[-97.7,103.8]],4.2);road([[82.9,110],[82.9,108]],4.2);
+ road([[0,110],[0,94]],6);
+ road([[-97.7,110],[-76,110],[-76,0],[-84,0],[-84,-32],[-138,-32]],6);
+ road([[-76,0],[-64,0]],5);
+ road([[-84,-32],[-84,-110],[0,-185],[0,-195]],7);road([[-138,-32],[-138,-150],[0,-185]],6);
+ road([[A.x,A.radius+10],[156,76],[156,108]],5);
  const landscape=createCityLandscape(T,{parent:city,tiles:ctx.siteTiles,outerRadius:A.outerRadius});
- cylinder(15,15,.14,materials.stone,0,.10,94,city);torus(13.4,.035,bronze,.23,city).position.z=94;
- plaque('شهر پیوسته · پارک ایده‌ها',0,108,14);plaque('گالری زرتشت',-65,9,4.6);plaque('کوهِ شدن · چهار دور',190,9,4.6);
+ plaque('گالری زرتشت',-65,9,4.6);plaque('کوهِ شدن · چهار دور',190,9,4.6);
  plaque('خانهٔ سقراط',-109,107.3,5);plaque('محلهٔ هنرمندان',82.7,112,11);plaque('گالری اشیا · بازار روباز',-138,-28.8,14);
  const mountain=buildSpiralMountainArt(T,{center:{x:A.x,z:A.z},baseHeight:A.start,topHeight:A.top,baseRadius:A.outerRadius,topRadius:15.5,rampStartRadius:A.radius,rampEndRadius:A.topRadius,rampWidth:A.width});city.add(mountain.group);mountain.group.userData.cityDestination='spiral';buildingTargets.push(mountain.group);
  const positions=[],uv=[],indices=[],colors=[],segments=720;

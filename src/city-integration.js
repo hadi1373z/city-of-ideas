@@ -9,6 +9,7 @@ import {ARTISTS} from './city-source-assets/home-tools/artist-catalog.js';
 import {createDistrictNavigation} from './district-navigation.js';
 import {createSharedResidents} from './shared-residents.js';
 import {createSharedActivities} from './shared-activities.js';
+import {installStudyBook} from './study-book.js';
 import {installCinematicIntro} from './cinematic-intro.js';
 import {installDiscoveryStory} from './discovery-story.js';
 const waitMain=()=>new Promise(resolve=>{if(window.CITY_MAIN?.city)resolve(window.CITY_MAIN);else addEventListener('gallery-ready',()=>resolve(window.CITY_MAIN),{once:true});});
@@ -79,6 +80,7 @@ try{
  installSocratesTour(M,T,socrates);
  installOrigamiPark(M,T);
  M.storyJourney=installDiscoveryStory(M);
+ M.studyBook=installStudyBook(M,T);
  M.status('ready');
  installCinematicIntro(M,T);
 }catch(error){document.body.classList.remove('cinematic-pending');console.error('Original district integration failed',error);M.status(error.message);}

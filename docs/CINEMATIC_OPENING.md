@@ -1,8 +1,14 @@
 # Cinematic opening
 
-The main city begins with a first-person reading of the opening of *Thus Spoke Zarathustra*, in Socrates’ study. One Read on action unlocks audio. Four narrated shots reveal the room, introduce the illustrated Socrates, and reveal the larger city. The last shot waits for Step into the city. This is an authored fictional encounter, not a historical quotation or live AI dialogue.
+The main city begins with a first-person reading of the opening of *Thus Spoke Zarathustra*, in Socrates’ study. A physical open hardback rests on the actual study desk, with localized title, excerpt and attribution on its pages. One Read on action unlocks audio. Four narrated shots pull back into the room, introduce the illustrated Socrates and invite the visitor to walk outside. The last shot waits for Begin exploring; completion and skipping leave the visitor in the study, without a plaza teleport. This is an authored fictional encounter, not a historical quotation or live AI dialogue.
 
 The original menu is available through City overview after the introduction. Begin with the book replays it. Skip, Escape and the controller Back action leave the introduction; ordinary exploration and saved reflections remain independent. Pause, optional voice, captions and reduced-motion support are included. Switching away from the page pauses it. A missing/blocked audio file leaves captions and navigation usable.
+
+The nearby desk-book action opens the actual Zarathustra reader. Its optional Discuss this reading with Socrates action connects to the existing authored discovery journey. Reading and the cinematic remain independently accessible. The camera follows the desk if the source house finishes restoring after the opening starts.
+
+## Connected city ground
+
+A shared civic street connects the house and artist entrances. Branches connect the gallery, object gallery, park, mathematics institute and makers district. Continuous mitered paving replaces separate overlapping road boxes, with a consistent surface height. The makers route goes around the mountain footprint. The empty round plaza and its oversized Continuous city / Ideas Park sign are removed. Existing building locations and personal-home editions remain in place; this is a ground-route refinement, not a complete city redesign.
 
 ## Change the narration
 
@@ -16,4 +22,4 @@ To regenerate, install edge-tts in a development Python environment and run `pyt
 
 ## Validation
 
-`node tests/cinematic-intro.mjs` checks pause/resume, duration guards, the held final shot, replay state, complete language text and twelve nonempty MP3 assets. The root integration fixture checks that the opening installs after the existing city features. Browser review separately checks book → room → Socrates → city, keyboard skip, pause, voice toggle and restoration of normal controls. Audio quality and physical controller/mobile hardware need human review; passing source tests is not a claim that every device has been tested.
+`node tests/cinematic-intro.mjs` checks pause/resume, duration guards, the held final shot, replay state, complete language text and twelve nonempty MP3 assets. The root integration fixture checks that the opening installs after the existing city features. The study-book fixture checks original desk/book identity, tabletop bounds, multilingual textures and owned resource disposal; the road fixture checks continuous joints and surface height. Browser review separately checks physical book → room → Socrates → exploration, keyboard skip, pause, voice toggle and restoration of normal controls. Audio quality and physical controller/mobile hardware need human review; passing source tests is not a claim that every device has been tested.

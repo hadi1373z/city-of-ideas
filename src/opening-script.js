@@ -7,7 +7,7 @@ export const OPENING_SCRIPT={
       "begin": "Read on",
       "skip": "Skip introduction",
       "next": "Continue",
-      "walk": "Step into the city",
+      "walk": "Begin exploring",
       "pause": "Pause",
       "resume": "Resume",
       "voice": "Voice",
@@ -30,7 +30,7 @@ export const OPENING_SCRIPT={
         "Before there is a city, there is a page. You are alone with a book, and a question has begun to stir.",
         "The room slowly returns around you. Beyond its walls are places where a thought can become a conversation, an experiment, or something you make.",
         "You have been reading Zarathustra. I am Socrates. Let us not hurry to agree with him, or to disagree. Which thought would you like to examine for yourself?",
-        "Come. There is a whole city beyond this doorway. Walk, look closely, and keep a question with you. You can begin with the book on my desk."
+        "Take your time with the book. When you are ready, walk through the doorway. The city begins here, with the question you carry."
       ]
     },
     "de": {
@@ -38,7 +38,7 @@ export const OPENING_SCRIPT={
       "begin": "Weiterlesen",
       "skip": "Einleitung überspringen",
       "next": "Weiter",
-      "walk": "Die Stadt betreten",
+      "walk": "Erkundung beginnen",
       "pause": "Pause",
       "resume": "Fortsetzen",
       "voice": "Stimme",
@@ -61,7 +61,7 @@ export const OPENING_SCRIPT={
         "Bevor es eine Stadt gibt, gibt es eine Seite. Du bist allein mit einem Buch. Eine Frage beginnt in dir Gestalt anzunehmen.",
         "Langsam tritt der Raum um dich hervor. Jenseits seiner Wände liegen Orte, an denen ein Gedanke zum Gespräch, zum Experiment oder zu etwas Selbstgeschaffenem werden kann.",
         "Du hast Zarathustra gelesen. Ich bin Sokrates. Wir müssen ihm nicht vorschnell zustimmen oder widersprechen. Welchen Gedanken möchtest du selbst genauer prüfen?",
-        "Komm. Hinter dieser Tür liegt eine ganze Stadt. Geh umher, schau genau hin und nimm eine Frage mit. Du kannst mit dem Buch auf meinem Schreibtisch beginnen."
+        "Nimm dir Zeit für das Buch. Wenn du bereit bist, geh durch die Tür. Die Stadt beginnt hier, mit der Frage, die du mitnimmst."
       ]
     },
     "fa": {
@@ -69,7 +69,7 @@ export const OPENING_SCRIPT={
       "begin": "خواندن را ادامه بده",
       "skip": "گذشتن از مقدمه",
       "next": "ادامه",
-      "walk": "قدم گذاشتن در شهر",
+      "walk": "آغاز گشت‌وگذار",
       "pause": "مکث",
       "resume": "ادامهٔ پخش",
       "voice": "صدا",
@@ -92,13 +92,13 @@ export const OPENING_SCRIPT={
         "پیش از آن‌که شهری باشد، صفحه‌ای هست. با یک کتاب تنهایی و پرسشی آرام در ذهنت جوانه می‌زند.",
         "کم‌کم اتاق در پیرامونت پیدا می‌شود. آن سوی دیوارها جاهایی هست که در آن‌ها یک اندیشه می‌تواند به گفت‌وگو، آزمایش یا چیزی که خودت می‌سازی بدل شود.",
         "زرتشت می‌خواندی. من سقراطم. برای موافقت یا مخالفت با او عجله نکنیم. کدام اندیشه را می‌خواهی خودت بیازمایی؟",
-        "بیا. آن سوی این در، شهری کامل منتظر است. قدم بزن، دقیق نگاه کن و پرسشی با خودت داشته باش. می‌توانی از کتاب روی میز من آغاز کنی."
+        "برای خواندن کتاب به خودت فرصت بده. هر وقت آماده بودی، از در بیرون برو. شهر از همین‌جا آغاز می‌شود، با پرسشی که همراه خود داری."
       ],
       "speechLines": [
         "پیش از آن‌که شهری باشد، صفحه‌ای هست. با یک کتاب تنهایی و پرسشی آرام در ذهنت جوانه می‌زند.",
         "کم‌کم اتاق در پیرامونت پیدا می‌شود. آن سوی دیوارها جاهایی هست که در آن‌ها یک اندیشه می‌تواند به گفت‌وگو، آزمایش یا چیزی که خودت می‌سازی بدل شود.",
         "زَرْتُشْتْ می‌خواندی. من سقراطم. برای موافقت یا مخالفت با او عجله نکنیم. کدام اندیشه را می‌خواهی خودت بیازمایی؟",
-        "بیا. آن سوی این در، شهری کامل منتظر است. قدم بزن، دقیق نگاه کن و پرسشی با خودت داشته باش. می‌توانی از کتاب روی میز من آغاز کنی."
+        "برای خواندن کتاب به خودت فرصت بده. هر وقت آماده بودی، از در بیرون برو. شهر از همین‌جا آغاز می‌شود، با پرسشی که همراه خود داری."
       ]
     }
   },

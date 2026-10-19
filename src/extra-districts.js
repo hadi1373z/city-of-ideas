@@ -1,3 +1,4 @@
+import './city-road-surface.js';
 /* Additive source-authentic geometry for the principal City of Ideas scene.
    Copy this module to src/extra-districts.js when its controller hooks are wired. */
 const copy=value=>JSON.parse(JSON.stringify(value));
@@ -65,9 +66,9 @@ export async function createExtraDistricts(THREE,options={}){
  const studyBlobUrls=[];
  const roads=new THREE.Group();roads.name='Shared paths to appended originals';root.add(roads);
  const roadMaterial=new THREE.MeshLambertMaterial({color:0xd2c6af}),groundMaterial=new THREE.MeshLambertMaterial({color:0x556563}),roadGeometries=new Set();
- function road(points,width=6,parent=roads){for(let i=1;i<points.length;i++){const a=points[i-1],b=points[i],dx=b[0]-a[0],dz=b[1]-a[1],g=new THREE.BoxGeometry(width,.12,Math.hypot(dx,dz)+width*.25);roadGeometries.add(g);const m=new THREE.Mesh(g,roadMaterial);m.position.set((a[0]+b[0])/2,.07,(a[1]+b[1])/2);m.rotation.y=Math.atan2(dx,dz);parent.add(m);}}
- road([[-97.7,110],[-145,140],[-215,140],[-215,104.6]],7);
- road([[108,37],[180,37],[203.5,-32],[203.5,-50],[211.5,-50]],6);
+ function road(points,width=6,parent=roads){const mesh=globalThis.createCityRoad(THREE,points,width,roadMaterial,parent);if(mesh)roadGeometries.add(mesh.geometry);}
+ road([[-97.7,110],[-125,110],[-125,140],[-215,140],[-215,104.6]],7);
+ road([[74,110],[74,76],[200,76],[203.5,65],[203.5,-50],[211.5,-50]],6);
  road([[84.5,108],[84.5,85.05],[118,85.05],[118,82.08]],3);
  const assetUrl=value=>{
   if(/^(?:data:|blob:)/i.test(value))return value;
@@ -225,8 +226,8 @@ export async function createExtraDistricts(THREE,options={}){
    homeOwners=next;
    // Roads and parcel ground expand exactly with the preserved source lots.
    homeRoads.traverse(o=>{if(o.geometry){o.geometry.dispose();roadGeometries.delete(o.geometry);}});homeRoads.clear();
-   road([[-97.7,110],[-97.7,145],[-170,145]],6,homeRoads);
-   for(const owner of homeOwners.values()){const b=owner.worldBounds,g=new THREE.BoxGeometry(b.maxX-b.minX+6,.16,b.maxZ-b.minZ+6);roadGeometries.add(g);const parcel=new THREE.Mesh(g,groundMaterial);parcel.position.set((b.minX+b.maxX)/2,-.12,(b.minZ+b.maxZ)/2);homeRoads.add(parcel);const entry=entryFor('home:'+owner.record.id);if(entry)road([[-195,145],[-195,owner.transform.z+18],[entry.x,owner.transform.z+18],[entry.x,entry.z]],4,homeRoads);}
+   // Personal-home lanes branch from the same west street as the institute.
+   for(const owner of homeOwners.values()){const b=owner.worldBounds,g=new THREE.BoxGeometry(b.maxX-b.minX+6,.16,b.maxZ-b.minZ+6);roadGeometries.add(g);const parcel=new THREE.Mesh(g,groundMaterial);parcel.position.set((b.minX+b.maxX)/2,-.12,(b.minZ+b.maxZ)/2);homeRoads.add(parcel);const entry=entryFor('home:'+owner.record.id);if(entry)road([[-195,140],[-195,owner.transform.z+18],[entry.x,owner.transform.z+18],[entry.x,entry.z]],4,homeRoads);}
    return{status:'ready',homes:homeOwners.size,activeHomeId,privateStateWritten:false};
   }
   const bounds=()=>{let result=union(baseWorldBounds,union(mathBounds,makerBounds));result=union(result,transformedBounds(artAggregate?.bounds||daliArt.bounds,transforms.artists));for(const owner of homeOwners.values())result=union(result,{minX:Math.min(-197,owner.worldBounds.minX-3),maxX:owner.worldBounds.maxX+3,minZ:145,maxZ:owner.worldBounds.maxZ+20});return result;};
