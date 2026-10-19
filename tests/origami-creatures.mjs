@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
+import {buildPaperBird} from '../src/origami-bird.js';
 import * as T from '../src/city-source-assets/home-tools/vendor/three.module.js';
 import {buildPaperCrane,buildPaperButterfly,origamiFlightPose} from '../src/origami-creatures.js';
-import {CREATURE_FLOCK} from '../src/origami-park.js';
+import {CREATURE_FLOCK,ORIGAMI_FLOCK,FLOATING_FLOCK,createOrigamiTour,origamiTourPose,floatingOrigamiPose} from '../src/origami-park.js';
 assert.equal(CREATURE_FLOCK.filter(f=>f.type==='crane').length,2);assert.equal(CREATURE_FLOCK.filter(f=>f.type==='butterfly').length,3);
 for(const [type,build]of [['crane',buildPaperCrane],['butterfly',buildPaperButterfly]]){
  const model=build(T);assert(model.group.userData.paperOnly);assert.equal(model.group.userData.addedParts,0);
@@ -19,3 +20,24 @@ for(const [type,build]of [['crane',buildPaperCrane],['butterfly',buildPaperButte
 }
 const crane=buildPaperCrane(T),butterfly=buildPaperButterfly(T);crane.animate(4);const glide=crane.wings[0].group.rotation.z;crane.animate(6);assert.equal(crane.wings[0].group.rotation.z,glide,'Crane holds extended wings between occasional folds');butterfly.animate(.1);const flutter=butterfly.wings[0].group.rotation.z;butterfly.animate(.3);assert.notEqual(butterfly.wings[0].group.rotation.z,flutter,'Butterfly flutters at its own rhythm');crane.dispose();butterfly.dispose();
 console.log('PASS: distinct connected crane/butterfly paper surfaces, attached fold hinges, slow crane glides, butterfly flutter, bounded loops, reduced motion and owned disposal.');
+
+const park={x:0,z:-330,scale:.65},flock=[...ORIGAMI_FLOCK,...CREATURE_FLOCK];
+for(const [i,spec]of flock.entries()){
+ const tour=createOrigamiTour(T,spec,i,park),start=origamiTourPose(tour,0,0,spec.y,spec.type,i);
+ assert(Math.hypot(start.x-spec.x,start.z-spec.z)<1e-6,'Each explorer starts at its assigned park location');
+ let travel=0,last=start;
+ for(let distance=1;distance<=tour.getLength();distance++){
+  const pose=origamiTourPose(tour,distance,distance,spec.y,spec.type,i);
+  assert(Object.values(pose).every(Number.isFinite));assert(Math.hypot(pose.x-park.x,pose.z-park.z)<230*park.scale,'Tours stay within the park');
+  assert(Math.hypot(pose.x-last.x,pose.z-last.z)<1.1,'Tours remain continuous at the join');travel=Math.max(travel,Math.hypot(pose.x-start.x,pose.z-start.z));last=pose;
+ }
+ assert(travel>65,'Explorers visit distant parts of the park');
+}
+assert(new Set(flock.map(s=>Math.floor((Math.atan2(s.x,s.z-park.z)+Math.PI)*4/Math.PI))).size>=7,'Starting points are distributed around the park');
+assert.equal(FLOATING_FLOCK.length,3);
+for(const spec of FLOATING_FLOCK)for(const time of[0,20,80,140]){
+ const pose=floatingOrigamiPose(time,spec.angle,park),bird=buildPaperBird(T,spec);bird.animate(time,{flying:false});bird.group.position.set(pose.x,pose.y,pose.z);bird.group.rotation.set(0,pose.yaw,pose.roll);bird.group.updateMatrixWorld(true);
+ const bounds=new T.Box3().setFromObject(bird.group);assert(bounds.min.y>1.35*park.scale-.01,'Folded paper floats above the water');
+ for(const x of[bounds.min.x,bounds.max.x])for(const z of[bounds.min.z,bounds.max.z])assert(Math.hypot(x-park.x,z-park.z)<11.1*park.scale,'Floating origami stay inside the basin');bird.dispose();
+}
+console.log('PASS: distributed starting points, smooth park-wide tours, bounded routes and three paper-only floating birds above the fountain water.');

@@ -178,7 +178,7 @@ window.buildIdeaPark=function(THREE){
   }
 
   // Central fountain: the constellation at the park's heart.
-  const fountain = new THREE.Group(); fountain.position.set(-18,0,-107); scene.add(fountain);
+  const fountain = new THREE.Group(); fountain.name='Central Question Fountain'; fountain.position.set(0,0,0); scene.add(fountain);
   cylinder(0, .6, 0, 12.5, 1.2, mats.stone, fountain);
   cylinder(0, 1.26, 0, 11.1, .18, mats.water, fountain, false);
   ring(0, 1.35, 0, 11.7, .68, mats.cream, fountain);
@@ -198,10 +198,10 @@ window.buildIdeaPark=function(THREE){
   dynamicMaterials.push(jetMat);
   const waterDrops = new THREE.Points(jetGeo, jetMat); fountain.add(waterDrops);
   const fountainHalo = ring(0, 1.4, 0, 8, .035, mats.waterLight, fountain);
-  mark(fountain, 'landmark', 'fountain'); landmarks.set('fountain', { x: -18, z: -107 });
+  mark(fountain, 'landmark', 'fountain'); landmarks.set('fountain', { x: 0, z: 0 });
   for (let i = 0; i < 7; i++) {
     const a = i * Math.PI * 2 / 7;
-    bench(-18 + Math.sin(a) * 23, -107 + Math.cos(a) * 23, a);
+    bench(Math.sin(a) * 23, Math.cos(a) * 23, a);
   }
 
   // House of Ideas: a warm terracotta studio with an open colonnade.
