@@ -14,13 +14,13 @@ window.createGalleryCity=function(T,ctx){
  cylinder(570,570,.24,new T.MeshLambertMaterial({color:0x556563}),0,-.22,-100,city);
  road([[0,94],[-97.7,110]],9);road([[-97.7,110],[-97.7,103.8]],4.2);
  road([[0,94],[82.9,108]],9);
- road([[-97.7,110],[-86,45],[-84,-9],[-116,-29],[-138,-32]],9);
+ road([[-97.7,110],[-76,110],[-76,45],[-84,-9],[-116,-29],[-138,-32]],9);
  road([[-84,-9],[-84,-110],[0,-185],[0,-195]],9);road([[-138,-32],[-138,-150],[0,-185]],8);
  road([[A.x,A.radius+10],[156,80],[156,108]],6);
  const landscape=createCityLandscape(T,{parent:city,tiles:ctx.siteTiles,outerRadius:A.outerRadius});
  cylinder(15,15,.14,materials.stone,0,.10,94,city);torus(13.4,.035,bronze,.23,city).position.z=94;
  plaque('شهر پیوسته · پارک ایده‌ها',0,108,14);plaque('گالری زرتشت',-65,9,4.6);plaque('کوهِ شدن · چهار دور',190,9,4.6);
- plaque('خانهٔ سقراط',-97.7,107.3,10);plaque('محلهٔ هنرمندان',82.7,112,11);plaque('گالری اشیا · بازار روباز',-138,-28.8,14);
+ plaque('خانهٔ سقراط',-109,107.3,5);plaque('محلهٔ هنرمندان',82.7,112,11);plaque('گالری اشیا · بازار روباز',-138,-28.8,14);
  const mountain=buildSpiralMountainArt(T,{center:{x:A.x,z:A.z},baseHeight:A.start,topHeight:A.top,baseRadius:A.outerRadius,topRadius:15.5,rampStartRadius:A.radius,rampEndRadius:A.topRadius,rampWidth:A.width});city.add(mountain.group);mountain.group.userData.cityDestination='spiral';buildingTargets.push(mountain.group);
  const positions=[],uv=[],indices=[],colors=[],segments=720;
  for(let i=0;i<=segments;i++){const theta=i/segments*MAX,tone=new T.Color(partColors[Math.min(3,Math.floor(i/segments*4))]),center=radiusAt(theta);for(const r of [center-A.width/2,center+A.width/2]){const q=pointAt(theta,r);positions.push(q.x,q.y,q.z);uv.push(i/segments,(r-center+A.width/2)/A.width);colors.push(.65+tone.r*.22,.65+tone.g*.22,.65+tone.b*.22)}if(i<segments){const j=i*2;indices.push(j,j+1,j+2,j+1,j+3,j+2)}}
