@@ -62,3 +62,9 @@ The infinity-shaped elevated loops and their collision surfaces have been remove
 ### Origami flock
 
 Eight differently coloured single-sheet paper birds fly around the park entrance in separate short routes, with varied sizes, folded wing poses and animation timing. They have no added bodies, eyes, legs or other attachments. Approaching any bird opens the existing paper-bird folding lesson; the dog and cat lessons remain available in that guide. Reduced-motion mode holds the paper poses still.
+
+### Crane and butterfly additions
+
+The park now also has two paper cranes and three paper butterflies: 13 creatures across three 3D types. Cranes glide slowly with occasional wing folds; butterflies follow compact loops with faster wing opening and closing. All visible shapes are connected folded-paper panels, without added animal bodies, eyes, legs or antennae. These are stylized folded surfaces, not a physical square-to-model simulator.
+
+Approaching a new creature opens its corresponding English/German/Persian folding guide. The crane has twelve milestones and the butterfly ten; the original sketches are orientation aids, explicitly distinct from the simulated flat folds in the simpler lessons. Full illustrated traditional instructions remain linked from [Origami-Fun’s crane guide](https://www.origami-fun.com/origami-crane.html) and [butterfly guide](https://www.origami-fun.com/origami-butterfly.html). Movement pauses near visitors, during a lesson, and in reduced-motion mode.
