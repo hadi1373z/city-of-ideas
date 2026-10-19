@@ -188,11 +188,6 @@ export const LANDMARKS = {
     description: 'A place to pause, choose a small experiment, and let curiosity decide your next walk.',
     missionIds: ['bridge-experiment', 'greedy-counterexample', 'implication-cards']
   },
-  lake: {
-    name: 'Reflection Lake', title: 'Let an idea settle',
-    description: 'Watch a pattern change slowly. Draw what you see and compare it with what you expected.',
-    missionIds: ['area-by-slices', 'circle-estimate', 'modular-rhythm']
-  },
   studio: {
     name: 'Open Studio', title: 'Leave with something you made',
     description: 'Turn a connection into a drawing, a rhythm, or a few quiet frames. A small finished piece is enough.',

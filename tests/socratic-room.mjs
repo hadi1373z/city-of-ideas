@@ -14,7 +14,13 @@ for(const build of [buildInterior,residenceInterior]){
  const step=.1,left=room.x-10,top=room.y-8,key=(x,z)=>x+':'+z,queue=[[Math.round(room.w/2/step),Math.round(room.h/2/step)]],seen=new Set();let reached=false;
  for(let i=0;i<queue.length;i++){const [ix,iz]=queue[i],id=key(ix,iz);if(seen.has(id))continue;seen.add(id);const x=left+ix*step,z=top+iz*step;if(x<left+.22||x>left+room.w-.22||z<top+.22||z>top+room.h-.22||!canOccupy(built.obstacles,x,z,.22))continue;if(Math.hypot(x-goal.x,z-goal.z)<.15){reached=true;break;}for(const [dx,dz]of [[1,0],[-1,0],[0,1],[0,-1]])queue.push([ix+dx,iz+dz]);}
  assert(reached,'The desk approach connects to the room centre without crossing furniture');
+ const libraryRoom=house.rooms.find(r=>r.id==='connections'),library=build(house,libraryRoom,T),shelf=library.group.getObjectByName('home-bookshelf');
+ assert(shelf,'The library retains its bookcase');
+ const browse=shelf.userData.approach;assert(browse,'The bookcase reserves a browsing aisle before the chair is placed');
+ for(const offset of [-.2,0,.2])assert(canOccupy(library.obstacles,(browse.minX+browse.maxX)/2+offset,(browse.minZ+browse.maxZ)/2,.22),'The library chair leaves room to browse the lower shelves');
+ const footprint=new T.Box3().setFromObject(shelf),front=new T.Vector3(0,0,1).applyAxisAngle(new T.Vector3(0,1,0),shelf.rotation.y),backGap=Math.abs(front.x)>.5?(front.x>0?footprint.min.x-(libraryRoom.x-10):libraryRoom.x+libraryRoom.w-10-footprint.max.x):(front.z>0?footprint.min.z-(libraryRoom.y-8):libraryRoom.y+libraryRoom.h-8-footprint.max.z);
+ assert(backGap<.14,'Bookcases face inward with their backs against a wall');
  const questionRoom=house.rooms.find(r=>r.id==='questions'),dialogue=build(house,questionRoom,T);assert(dialogue.group.getObjectByName('home-dialogue'),'The question room contains a shared dialogue table');assert(dialogue.interactions.filter(a=>a.homeAction==='sit').length>=2,'Both dialogue seats are usable');
- for(const item of [built,dialogue])item.group.traverse(o=>{o.geometry?.dispose();});
+ for(const item of [built,dialogue,library])item.group.traverse(o=>{o.geometry?.dispose();});
 }
 console.log('PASS: desk approaches fit a visitor and connect to the room centre; both dialogue seats have usable anchors in both home editions.');

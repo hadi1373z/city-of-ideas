@@ -17,10 +17,10 @@ export const HOME_EDITION_PROVENANCE=Object.freeze({
     "sha256": "db025f204420eb4b30b746793aebc9d3b44ffbad5d8e2d6c46b32077e9eafada"
   },
   "home-interior.js": {
-    "sha256": "838d3ac744b197b558705a1c7563f84d48a97688731cb37fb04dfd8a367169a1"
+    "sha256": "f9c0642afbc93cb6dc4a1f686975de170946ccfd349a68aa26df60d5f8adc940"
   },
   "residence-interior-v1.js": {
-    "sha256": "77614e98e06c50a8b7505b3878e832d98326f44f3fa3254e02c6a0dd391e0d80"
+    "sha256": "f65d4c6052917ec73009ff54cb558411e7671d780fc4a87a5a84fa0adf560ca6"
   },
   "scene-original.js": {
     "sha256": "f2cc5d4ff484d26d3863a19aca29ce406cefefebf891382f28f19ab11fe849c9"
@@ -32,7 +32,7 @@ export const HOME_EDITION_PROVENANCE=Object.freeze({
     "sha256": "91897c739a4a427a869a00bcbe159105345056cb827b0441b17ef233518e716e"
   },
   "residence-scene-v1.js": {
-    "sha256": "74d5556bb3e9050259987a79d3a8605dc69ab72ee9c94cc3c2058f9f12339647"
+    "sha256": "930273b7256c435a0ff7d809e7ccdb033010f3e23bc044a8d39612e046d4bf23"
   },
   "residence-data.js": {
     "sha256": "c9f0bb6da9f42657a1ea3ffc127db5cb91175e8aaea6e3ce7a95a151d1a3f6e1"
@@ -247,8 +247,10 @@ function place(T,p,r,reserved,occupied){
   for(const x of xs)for(const z of zs){const b={minX:x-hw,maxX:x+hw,minZ:z-hd,maxZ:z+hd};if(reserved.some(q=>overlap(b,q))||occupied.some(q=>overlap(b,q,.075)))continue;
    const wallDistance=Math.min(b.minX,r.w-b.maxX,b.minZ,r.h-b.maxZ);if(wallDistance>.55)continue;
    const front={x:Math.sin(yaw),z:Math.cos(yaw)},toward={x:r.w/2-x,z:r.h/2-z},face=front.x*toward.x+front.z*toward.z;
+   // Bookcases belong against their back wall, with a clear browsing aisle.
+   if(p.kind==='bookshelf'){const backGap=Math.abs(front.x)>.5?(front.x>0?b.minX:r.w-b.maxX):(front.z>0?b.minZ:r.h-b.maxZ);if(backGap>.13||face<=0)continue;}
    // Reserve a usable standing aisle at the desk, not merely its solid footprint.
-   let approach=null;if(p.kind==='desk'){const reach=.95,side=.48,fx=front.x,fz=front.z,cx=x+fx*(Math.abs(fx)*hw+Math.abs(fz)*hd+reach/2),cz=z+fz*(Math.abs(fx)*hw+Math.abs(fz)*hd+reach/2);approach={minX:cx-(Math.abs(fx)*reach/2+Math.abs(fz)*side),maxX:cx+(Math.abs(fx)*reach/2+Math.abs(fz)*side),minZ:cz-(Math.abs(fz)*reach/2+Math.abs(fx)*side),maxZ:cz+(Math.abs(fz)*reach/2+Math.abs(fx)*side)};if(approach.minX<.2||approach.maxX>r.w-.2||approach.minZ<.2||approach.maxZ>r.h-.2||occupied.some(q=>overlap(approach,q,.2))||reserved.some(q=>q.kind==='idea'&&overlap(approach,q,.2)))continue;}
+   let approach=null;if(p.kind==='desk'||p.kind==='bookshelf'){const reach=p.kind==='bookshelf'?1.05:.95,side=p.kind==='bookshelf'?Math.max(.58,w/2):.48,fx=front.x,fz=front.z,cx=x+fx*(Math.abs(fx)*hw+Math.abs(fz)*hd+reach/2),cz=z+fz*(Math.abs(fx)*hw+Math.abs(fz)*hd+reach/2);approach={minX:cx-(Math.abs(fx)*reach/2+Math.abs(fz)*side),maxX:cx+(Math.abs(fx)*reach/2+Math.abs(fz)*side),minZ:cz-(Math.abs(fz)*reach/2+Math.abs(fx)*side),maxZ:cz+(Math.abs(fz)*reach/2+Math.abs(fx)*side)};if(approach.minX<.2||approach.maxX>r.w-.2||approach.minZ<.2||approach.maxZ>r.h-.2||occupied.some(q=>overlap(approach,q,.2))||reserved.some(q=>q.kind==='idea'&&overlap(approach,q,.2)))continue;}
    const score=wallDistance*8+(face<0?8:0)+x*.035+z*.017;if(!best||score<best.score)best={x,z,yaw,b,approach,score};
   }
  }
@@ -410,8 +412,10 @@ function place(T,p,r,reserved,occupied){
   for(const x of xs)for(const z of zs){const b={minX:x-hw,maxX:x+hw,minZ:z-hd,maxZ:z+hd};if(reserved.some(q=>overlap(b,q))||occupied.some(q=>overlap(b,q,.075)))continue;
    const wallDistance=Math.min(b.minX,r.w-b.maxX,b.minZ,r.h-b.maxZ);if(wallDistance>.55)continue;
    const front={x:Math.sin(yaw),z:Math.cos(yaw)},toward={x:r.w/2-x,z:r.h/2-z},face=front.x*toward.x+front.z*toward.z;
+   // Bookcases belong against their back wall, with a clear browsing aisle.
+   if(p.kind==='bookshelf'){const backGap=Math.abs(front.x)>.5?(front.x>0?b.minX:r.w-b.maxX):(front.z>0?b.minZ:r.h-b.maxZ);if(backGap>.13||face<=0)continue;}
    // Reserve a usable standing aisle at the desk, not merely its solid footprint.
-   let approach=null;if(p.kind==='desk'){const reach=.95,side=.48,fx=front.x,fz=front.z,cx=x+fx*(Math.abs(fx)*hw+Math.abs(fz)*hd+reach/2),cz=z+fz*(Math.abs(fx)*hw+Math.abs(fz)*hd+reach/2);approach={minX:cx-(Math.abs(fx)*reach/2+Math.abs(fz)*side),maxX:cx+(Math.abs(fx)*reach/2+Math.abs(fz)*side),minZ:cz-(Math.abs(fz)*reach/2+Math.abs(fx)*side),maxZ:cz+(Math.abs(fz)*reach/2+Math.abs(fx)*side)};if(approach.minX<.2||approach.maxX>r.w-.2||approach.minZ<.2||approach.maxZ>r.h-.2||occupied.some(q=>overlap(approach,q,.2))||reserved.some(q=>q.kind==='idea'&&overlap(approach,q,.2)))continue;}
+   let approach=null;if(p.kind==='desk'||p.kind==='bookshelf'){const reach=p.kind==='bookshelf'?1.05:.95,side=p.kind==='bookshelf'?Math.max(.58,w/2):.48,fx=front.x,fz=front.z,cx=x+fx*(Math.abs(fx)*hw+Math.abs(fz)*hd+reach/2),cz=z+fz*(Math.abs(fx)*hw+Math.abs(fz)*hd+reach/2);approach={minX:cx-(Math.abs(fx)*reach/2+Math.abs(fz)*side),maxX:cx+(Math.abs(fx)*reach/2+Math.abs(fz)*side),minZ:cz-(Math.abs(fz)*reach/2+Math.abs(fx)*side),maxZ:cz+(Math.abs(fz)*reach/2+Math.abs(fx)*side)};if(approach.minX<.2||approach.maxX>r.w-.2||approach.minZ<.2||approach.maxZ>r.h-.2||occupied.some(q=>overlap(approach,q,.2))||reserved.some(q=>q.kind==='idea'&&overlap(approach,q,.2)))continue;}
    const score=wallDistance*8+(face<0?8:0)+x*.035+z*.017;if(!best||score<best.score)best={x,z,yaw,b,approach,score};
   }
  }
@@ -1062,7 +1066,7 @@ function buildFloor(house,walk=false,exterior=false){
   const c=roomCenter(r),tile=r.id==='work'||r.id==='learning',floor=box(group,r.w-.03,.12,r.h-.03,c.x,-.055,c.z,surface(tile?'stone':'wood',tile?'#c4bcaa':'#b19a73',r.w/(tile?2.2:3),r.h/(tile?2.2:2)),{roomId:r.id});floors.push(floor);
   wall('x',r.y,r.x,r.x+r.w,r);wall('x',r.y+r.h,r.x,r.x+r.w,r);wall('z',r.x,r.y,r.y+r.h,r);wall('z',r.x+r.w,r.y,r.y+r.h,r);
   if(!walk){const roomLabel=label(r.name.toUpperCase(),'#334d42',Math.min(r.w*.78,4.6));roomLabel.position.set(c.x,.15,r.y-8+.6);roomLabel.userData={roomId:r.id};interior.add(roomLabel);}const domestic=buildInterior(house,r,THREE,{walk});domestic.group.userData.roomId=r.id;interior.add(domestic.group);obstacles.push(...domestic.obstacles);interactions.push(...domestic.interactions);
-  if(walk||exterior){const ceiling=box(group,r.w+.025,.13,r.h+.025,c.x,2.865,c.z,surface('plaster','#f2eadc',2,2));ceiling.userData={ceiling:true,roomId:r.id};ceilings.push(ceiling);cylinder(group,.22,.065,c.x,2.73,c.z,mat('#766a55'));cylinder(group,.17,.045,c.x,2.69,c.z,new THREE.MeshStandardMaterial({color:'#f3e6c5',emissive:'#ffdfac',emissiveIntensity:.8,roughness:.5}));const lamp=new THREE.PointLight('#ffe1b5',5.5,8,2);lamp.position.set(c.x,2.58,c.z);lamp.userData={roomId:r.id,roomLight:true};group.add(lamp);}
+  if(walk||exterior){const ceiling=box(group,r.w+.025,.13,r.h+.025,c.x,2.865,c.z,surface('plaster','#f2eadc',2,2));ceiling.userData={ceiling:true,roomId:r.id};ceilings.push(ceiling);const stairRoom=(house.stairs||[]).some(s=>s.a===r.id||s.b===r.id),lightX=c.x+(stairRoom?Math.min(.9,r.w/2-.45):0),lightZ=c.z+(stairRoom?Math.min(1.1,r.h/2-.45):0);cylinder(group,.22,.065,lightX,2.73,lightZ,mat('#766a55'));cylinder(group,.17,.045,lightX,2.69,lightZ,new THREE.MeshStandardMaterial({color:'#f3e6c5',emissive:'#ffdfac',emissiveIntensity:.8,roughness:.5}));const lamp=new THREE.PointLight('#ffe1b5',5.5,8,2);lamp.position.set(lightX,2.58,lightZ);lamp.userData={roomId:r.id,roomLight:true};group.add(lamp);}
   const display=ideaDisplays(house,r);for(const cabinet of display.cabinets){const rack=new THREE.Group();rack.position.set(cabinet.x,0,cabinet.z);rack.rotation.y=cabinet.yaw;interior.add(rack);const wood=surface('wood','#9c7d57');box(rack,cabinet.width,2.2,.035,0,1.15,-cabinet.depth/2,wood);for(const dx of [-cabinet.width/2,cabinet.width/2])box(rack,.025,2.24,cabinet.depth,dx,1.14,0,wood);for(const y of [.1,.55,1.17,1.79,2.24])box(rack,cabinet.width,.035,cabinet.depth,0,y,0,wood);obstacles.push({...cabinet,roomId:r.id,label:'Idea display cabinet'});}
   display.slots.forEach(slot=>{
    const {idea,x,z,y,scale}=slot,data={ideaId:idea.id,roomId:r.id};
@@ -1149,9 +1153,9 @@ function buildHouse(house,walk=false,exterior=false){
   built.obstacles=built.obstacles.map(o=>({...o,floor:level}));built.walls=built.walls.map(w=>({...w,floor:level}));levels[level]={...built,house:projected};objects.push(...built.objects);floors.push(...built.floors);ceilings.push(...built.ceilings);interactions.push(...built.interactions);
  }
  for(const stairs of house.stairs||[]){const a=house.rooms.find(r=>r.id===stairs.a),b=house.rooms.find(r=>r.id===stairs.b);if(!a||!b)continue;const low=Math.min(floorOf(a),floorOf(b)),high=low+1,landing=stairLanding(house,stairs,low),root=new THREE.Group();root.position.y=low*FLOOR_HEIGHT;group.add(root);stairGroups.push({group:root,low,high});
-  const stone=mat('#c5b699'),rail=mat('#6f5a42'),sx=landing.centerX-.4,sz=landing.centerZ;for(let n=0;n<14;n++){const h=(n+1)*FLOOR_HEIGHT/14;box(root,.74,.16,.135,sx,h-.08,sz+.84-n*.127,stone,{stairsId:stairs.id,stairStep:true});}
-  beam(root,new THREE.Vector3(sx-.38,.85,sz+.84),new THREE.Vector3(sx-.38,FLOOR_HEIGHT+.85,sz-.81),.027,rail);
-  for(const level of [low,high]){const toFloor=level===low?high:low,mark=label(level===low?'UPSTAIRS ↑':'DOWNSTAIRS ↓','#263d34',1.05);mark.position.set(landing.centerX+.46,(level-low)*FLOOR_HEIGHT+1.17,sz+(level===low?.75:-.75)+.075);root.add(mark);const data={homeAction:'stairs',stairsId:stairs.id,fromFloor:level,toFloor,roomId:stairLanding(house,stairs,level).roomId,label:toFloor>level?'Go upstairs · floor '+(toFloor+1):'Go downstairs · floor '+(toFloor+1)},panel=box(root,.57,.32,.12,landing.centerX+.46,(level-low)*FLOOR_HEIGHT+1.15,sz+(level===low?.75:-.75),mat('#bcc49c'),data);mark.userData=data;levels[level].interactions.push(data);interactions.push(data);levels[level].obstacles.push({floor:level,roomId:data.roomId,minX:sx-.4,maxX:sx+.4,minZ:sz-.9,maxZ:sz+.9,label:'Staircase'});objects.push(panel);}
+  const stone=mat('#c5b699'),rail=mat('#6f5a42'),sx=landing.centerX-.4,sz=landing.centerZ;for(let n=0;n<14;n++){const h=(n+1)*FLOOR_HEIGHT/14;box(root,.74,h,.135,sx,h/2,sz+.84-n*.127,stone,{stairsId:stairs.id,stairStep:true,structural:true});}
+  for(const side of [-1,1]){const x=sx+side*.38;beam(root,new THREE.Vector3(x,FLOOR_HEIGHT/14+.85,sz+.84),new THREE.Vector3(x,FLOOR_HEIGHT+.85,sz-.811),.027,rail);for(const n of [0,4,8,13]){const h=(n+1)*FLOOR_HEIGHT/14;box(root,.035,.85,.035,x,h+.425,sz+.84-n*.127,rail,{stairsId:stairs.id,stairSupport:true});}}
+  for(const level of [low,high]){const toFloor=level===low?high:low;let mark=label(level===low?'UPSTAIRS ↑':'DOWNSTAIRS ↓','#263d34',1.05);if(mark.isSprite){const source=mark;mark=new THREE.Mesh(new THREE.PlaneGeometry(.53,.145),new THREE.MeshBasicMaterial({map:source.material.map,transparent:true,side:THREE.DoubleSide}));source.material.dispose();}mark.position.set(landing.centerX+.46,(level-low)*FLOOR_HEIGHT+1.17,sz+(level===low?.75:-.75)+.075);root.add(mark);const signZ=sz+(level===low?.75:-.75);box(root,.16,.035,.16,landing.centerX+.46,(level-low)*FLOOR_HEIGHT+.0175,signZ,rail,{stairsId:stairs.id,stairSignSupport:true});box(root,.045,1.15,.045,landing.centerX+.46,(level-low)*FLOOR_HEIGHT+.575,signZ,rail,{stairsId:stairs.id,stairSignSupport:true});const data={homeAction:'stairs',stairsId:stairs.id,fromFloor:level,toFloor,roomId:stairLanding(house,stairs,level).roomId,label:toFloor>level?'Go upstairs · floor '+(toFloor+1):'Go downstairs · floor '+(toFloor+1)},panel=box(root,.57,.32,.12,landing.centerX+.46,(level-low)*FLOOR_HEIGHT+1.15,sz+(level===low?.75:-.75),mat('#bcc49c'),data);mark.userData=data;levels[level].interactions.push(data);interactions.push(data);levels[level].obstacles.push({floor:level,roomId:data.roomId,minX:sx-.4,maxX:sx+.4,minZ:sz-.9,maxZ:sz+.9,label:'Staircase'});objects.push(panel);}
  }
  let currentFloor=0;function setFloor(level){if(!levels[level])return false;currentFloor=level;for(const [id,built]of levels.entries())if(built)built.group.visible=walk||exterior||id===level;for(const stair of stairGroups)stair.group.visible=walk||exterior||stair.low===level||stair.high===level;return true;}setFloor(0);
  return {group,levels,objects,floors,ceilings,interactions,toggleLight:id=>toggleHomeLight(group,id),frontDoor:levels[0]?.frontDoor||null,entrance:levels[0]?.entrance,setFloor,get floor(){return currentFloor;},get walls(){return levels[currentFloor]?.walls||[];},get obstacles(){return levels[currentFloor]?.obstacles||[];},get navigationHouse(){return levels[currentFloor]?.house||house;},roomInventory(id){return interactions.filter(item=>item.roomId===id);}};

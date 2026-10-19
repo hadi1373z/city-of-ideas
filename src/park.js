@@ -156,12 +156,12 @@ window.buildIdeaPark=function(THREE){
   // A 480 metre park, with broad promenades and nine quiet circular gardens.
   const terrain = cylinder(0, -.75, 0, 240, 1.5, mats.grass, scene, false);
   terrain.receiveShadow = true;
-  ring(0, .055, 0, 100, 2.3, mats.path);
-  cylinder(0, .08, 0, 28, .16, mats.path, scene, false);
-  ring(0, .2, 0, 28, .38, mats.stone);
+
+  box(0, .08, 0, 12, .16, 12, mats.path, scene, false);
+
   for (let i = 0; i < 8; i++) {
     const a = i * Math.PI / 4;
-    road(new THREE.Vector3(Math.sin(a) * 27, 0, Math.cos(a) * 27), new THREE.Vector3(Math.sin(a) * 228, 0, Math.cos(a) * 228), 5);
+    road(new THREE.Vector3(0, 0, 0), new THREE.Vector3(Math.sin(a) * 228, 0, Math.cos(a) * 228), 5);
   }
 
   function bench(x, z, angle = 0, parent = scene) {
@@ -203,35 +203,6 @@ window.buildIdeaPark=function(THREE){
     const a = i * Math.PI * 2 / 7;
     bench(-18 + Math.sin(a) * 23, -107 + Math.cos(a) * 23, a);
   }
-
-  // A shaded lake and the little timber bridge across its eastern inlet.
-  const lakeCenter = { x: -63, z: 37 };
-  const lake = new THREE.Group(); lake.position.set(lakeCenter.x, .06, lakeCenter.z); scene.add(lake);
-  const shore = cylinder(0, .11, 0, 31, .2, mats.stone, lake, false); shore.scale.z = .73;
-  const lakeWater = cylinder(0, .24, 0, 29.5, .14, mats.water, lake, false); lakeWater.scale.z = .72;
-  const shoreRing = ring(0, .22, 0, 30, .52, mats.path, lake); shoreRing.scale.z = .73;
-  for (let i = 0; i < 7; i++) {
-    const a = i * 2.4;
-    const ripple = ring(Math.sin(a) * 18, .34, Math.cos(a) * 12, 1.6 + i * .15, .025, mats.waterLight, lake);
-    pulses.push({ object: ripple, offset: i });
-  }
-  for (let i = 0; i < 25; i++) {
-    const a = i * 2.4, r = 18 + (i % 3) * 2;
-    const lily = cylinder(Math.sin(a) * r, .37, Math.cos(a) * r * .7, .6, .03, mats.leaf, lake, false);
-    if (i % 3 === 0) sphere(lily.position.x, .53, lily.position.z, .22, .13, .22, mats.cream, lake, false);
-  }
-  const bridge = new THREE.Group(); bridge.position.set(-37, 0, 37); bridge.rotation.y = .19; scene.add(bridge);
-  for (let i = 0; i < 23; i++) {
-    const z = (i - 11) * .83;
-    const y = 1.3 + Math.cos(z / 20 * Math.PI) * 2;
-    box(0, y, z, 6.8, .22, .74, mats.wood, bridge);
-    for (const side of [-1, 1]) {
-      if (i % 3 === 0) box(side * 3.3, y + 1, z, .18, 2.2, .18, mats.dark, bridge);
-      if (i < 22) box(side * 3.3, y + 2.1, z, .18, .18, .92, mats.dark, bridge);
-    }
-  }
-  mark(lake, 'landmark', 'lake'); mark(bridge, 'landmark', 'lake'); landmarks.set('lake', lakeCenter);
-  bench(-60, 65, Math.PI); bench(-79, 14, .9);
 
   // House of Ideas: a warm terracotta studio with an open colonnade.
   const studio = new THREE.Group(); studio.position.set(44, 0, -54); scene.add(studio);
@@ -623,12 +594,8 @@ window.buildIdeaPark=function(THREE){
   }
 
  batchStaticGeometry();
- function canStand(x,z){
-  const inLake=((x+63)/29.5)**2+((z-37)/21.2)**2<1;
-  if(inLake&&!(x> -41&&x< -33&&z>25&&z<49))return false;
-  if(Math.hypot(x+18,z+107)<13||(Math.abs(x-44)<11&&z> -62&&z< -47)||Math.hypot(x+67,z+68)<10.5)return false;
-  return true;
- }
+ // Ideas Park is freely walkable; scenery and selection remain visible.
+ function canStand(){return true;}
  function update(t,reducedMotion){if(reducedMotion)return;waterDrops.rotation.y=t*.11;waterDrops.position.y=Math.sin(t*2)*.1;fountainHalo.rotation.z=t*.15;pulses.forEach(p=>p.object.scale.setScalar(1+((t*.12+p.offset*.17)%1)*.7));telescope.rotation.y=Math.sin(t*.045)*.35;}
  return{group:scene,targets:clickable,districtPositions,personPositions,seedPositions,landmarks,addSeed,removeSeed,updateSeed,setSeeds,canStand,update,stats:{people:people.length,districts:districts.length,trees:treeCount}};
 };

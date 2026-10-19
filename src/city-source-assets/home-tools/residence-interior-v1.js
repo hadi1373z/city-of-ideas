@@ -121,8 +121,10 @@ function place(T,p,r,reserved,occupied){
   for(const x of xs)for(const z of zs){const b={minX:x-hw,maxX:x+hw,minZ:z-hd,maxZ:z+hd};if(reserved.some(q=>overlap(b,q))||occupied.some(q=>overlap(b,q,.075)))continue;
    const wallDistance=Math.min(b.minX,r.w-b.maxX,b.minZ,r.h-b.maxZ);if(wallDistance>.55)continue;
    const front={x:Math.sin(yaw),z:Math.cos(yaw)},toward={x:r.w/2-x,z:r.h/2-z},face=front.x*toward.x+front.z*toward.z;
+   // Bookcases belong against their back wall, with a clear browsing aisle.
+   if(p.kind==='bookshelf'){const backGap=Math.abs(front.x)>.5?(front.x>0?b.minX:r.w-b.maxX):(front.z>0?b.minZ:r.h-b.maxZ);if(backGap>.13||face<=0)continue;}
    // Reserve a usable standing aisle at the desk, not merely its solid footprint.
-   let approach=null;if(p.kind==='desk'){const reach=.95,side=.48,fx=front.x,fz=front.z,cx=x+fx*(Math.abs(fx)*hw+Math.abs(fz)*hd+reach/2),cz=z+fz*(Math.abs(fx)*hw+Math.abs(fz)*hd+reach/2);approach={minX:cx-(Math.abs(fx)*reach/2+Math.abs(fz)*side),maxX:cx+(Math.abs(fx)*reach/2+Math.abs(fz)*side),minZ:cz-(Math.abs(fz)*reach/2+Math.abs(fx)*side),maxZ:cz+(Math.abs(fz)*reach/2+Math.abs(fx)*side)};if(approach.minX<.2||approach.maxX>r.w-.2||approach.minZ<.2||approach.maxZ>r.h-.2||occupied.some(q=>overlap(approach,q,.2))||reserved.some(q=>q.kind==='idea'&&overlap(approach,q,.2)))continue;}
+   let approach=null;if(p.kind==='desk'||p.kind==='bookshelf'){const reach=p.kind==='bookshelf'?1.05:.95,side=p.kind==='bookshelf'?Math.max(.58,w/2):.48,fx=front.x,fz=front.z,cx=x+fx*(Math.abs(fx)*hw+Math.abs(fz)*hd+reach/2),cz=z+fz*(Math.abs(fx)*hw+Math.abs(fz)*hd+reach/2);approach={minX:cx-(Math.abs(fx)*reach/2+Math.abs(fz)*side),maxX:cx+(Math.abs(fx)*reach/2+Math.abs(fz)*side),minZ:cz-(Math.abs(fz)*reach/2+Math.abs(fx)*side),maxZ:cz+(Math.abs(fz)*reach/2+Math.abs(fx)*side)};if(approach.minX<.2||approach.maxX>r.w-.2||approach.minZ<.2||approach.maxZ>r.h-.2||occupied.some(q=>overlap(approach,q,.2))||reserved.some(q=>q.kind==='idea'&&overlap(approach,q,.2)))continue;}
    const score=wallDistance*8+(face<0?8:0)+x*.035+z*.017;if(!best||score<best.score)best={x,z,yaw,b,approach,score};
   }
  }
