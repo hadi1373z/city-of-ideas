@@ -2,8 +2,10 @@ import assert from 'node:assert/strict';
 import * as T from '../src/city-source-assets/home-tools/vendor/three.module.js';
 import {starter} from '../src/city-source-assets/home-tools/model.js';
 import {buildInterior} from '../src/city-source-assets/home-tools/residence-interior-v1.js';
-import {findStudyDesk,findReadingBook,buildZarathustraBook} from '../src/study-book.js';
+import {findStudyDesk,findReadingBook,buildZarathustraBook,arrangeStudyNotebook} from '../src/study-book.js';
 const house=starter(),room=house.rooms.find(r=>r.id==='math'),source=buildInterior(house,room,T),desk=findStudyDesk(source.group),original=findReadingBook(desk);assert(desk&&original);const paint=[];
+const undoNotebook=arrangeStudyNotebook(T,desk);let journal=null;desk.traverse(o=>{if(!journal&&o.userData.homeAction==='journal')journal=o;});while(journal.parent!==desk)journal=journal.parent;desk.updateMatrixWorld(true);const inverse=desk.matrixWorld.clone().invert(),journalBounds=new T.Box3();journal.traverse(o=>{if(o.isMesh){o.geometry.computeBoundingBox();journalBounds.union(o.geometry.boundingBox.clone().applyMatrix4(inverse.clone().multiply(o.matrixWorld)));}});assert(journalBounds.max.x<-.10,'Notebook has a clear gap beside the reading stand');assert(journalBounds.max.z<.325&&journalBounds.min.z>-.325,'Notebook remains supported by the desk');assert(journalBounds.min.y>=.787,'Notebook rests on the tabletop');undoNotebook();assert.equal(journal.position.x,0);assert.equal(journal.position.z,0);
+
 const canvas=()=>({width:0,height:0,getContext:()=>({fillRect(){},strokeRect(){},measureText:s=>({width:s.length*15}),fillText:s=>paint.push(s)})});
 const book=buildZarathustraBook(T,original.data,canvas);book.setLanguage('fa');assert(paint.some(s=>s.includes('زرتشت')),'The physical page carries the Persian title');book.setLanguage('de');assert(paint.some(s=>s.includes('Zarathustra')));book.setLanguage('en');
 const bounds=new T.Box3().setFromObject(book.group);assert(bounds.min.y>.787&&bounds.max.y<1.02,'The reading stand rests on the tabletop and supports the inclined book');assert(bounds.min.x>-.75&&bounds.max.x<.75&&bounds.min.z>-.325&&bounds.max.z<.325,'The open pages fit on the desk');

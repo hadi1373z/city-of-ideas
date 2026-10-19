@@ -3,6 +3,15 @@ import {OPENING_SCRIPT} from './opening-script.js';
 export function findStudyDesk(group){let desk=group?.getObjectByName('home-interior-math')?.getObjectByName('home-desk');if(!desk)group?.traverse(o=>{if(!desk&&o.name==='home-desk')desk=o;});return desk;}
 export function findReadingBook(desk){let mesh=null;desk?.traverse(o=>{if(!mesh&&o.isMesh&&o.userData.homeAction==='read'&&o.userData.bookInstanceId)mesh=o;});if(!mesh)return null;let root=mesh;while(root.parent&&root.parent!==desk)root=root.parent;return{root,data:{...mesh.userData}};}
 
+export function arrangeStudyNotebook(T,desk){
+ let node=null;desk?.traverse(o=>{if(!node&&o.userData.homeAction==='journal')node=o;});if(!node)return()=>{};
+ while(node.parent&&node.parent!==desk)node=node.parent;
+ const before=node.position.clone(),bounds=new T.Box3();desk.updateWorldMatrix(true,true);const inverse=desk.matrixWorld.clone().invert();node.traverse(o=>{if(o.isMesh){o.geometry.computeBoundingBox();bounds.union(o.geometry.boundingBox.clone().applyMatrix4(inverse.clone().multiply(o.matrixWorld)));}});const center=bounds.getCenter(new T.Vector3());
+ // Keep the closed notebook in the front-left writing area, separate from the open book and lamp base.
+ node.position.x+=-.30-center.x;node.position.z+=.145-center.z;node.position.y+=.789-bounds.min.y;
+ return()=>{node.position.copy(before);};
+}
+
 export function buildZarathustraBook(T,data,canvasFactory=()=>document.createElement('canvas')){
  const group=new T.Group();group.name='Zarathustra · open book on the study desk';group.userData={animated:true,studyBook:true};const owned=[],textures=[],surfaces=[];
  const paper=new T.MeshStandardMaterial({color:'#f2e7ca',roughness:.92}),cover=new T.MeshStandardMaterial({color:'#654b35',roughness:.85});owned.push(paper,cover);
@@ -22,11 +31,11 @@ export function buildZarathustraBook(T,data,canvasFactory=()=>document.createEle
 }
 
 export function installStudyBook(M,T){
- let owner=null,desk=null,original=null,book=null;const lang=()=>['de','fa'].includes(CITY_I18N.lang)?CITY_I18N.lang:'en';
+ let owner=null,desk=null,original=null,book=null,restoreNotebook=null;const lang=()=>['de','fa'].includes(CITY_I18N.lang)?CITY_I18N.lang:'en';
  const discuss=document.createElement('button');discuss.type='button';discuss.className='glass';discuss.id='study-book-discuss';discuss.hidden=true;document.querySelector('#reader-panel footer')?.append(discuss);
  const readButton=document.createElement('button');readButton.type='button';readButton.className='primary';readButton.id='study-book-read';readButton.hidden=true;Object.assign(readButton.style,{position:'fixed',insetInlineStart:'50%',transform:'translateX(-50%)',bottom:'130px',maxWidth:'88vw',minHeight:'44px',zIndex:'24'});readButton.onclick=()=>read();document.body.append(readButton);
- function clear(){if(book){const i=M.city.targets.indexOf(book.group);if(i>=0)M.city.targets.splice(i,1);book.dispose();}if(original)original.root.visible=true;book=null;original=null;desk=null;}
- function sync(){if(owner===M.city.homeBuilt)return;clear();owner=M.city.homeBuilt;desk=findStudyDesk(owner?.group);original=findReadingBook(desk);if(!original)return;original.root.visible=false;book=buildZarathustraBook(T,original.data);book.setLanguage(lang());book.group.matrixAutoUpdate=false;desk.updateWorldMatrix(true,false);book.group.matrix.copy(desk.matrixWorld);M.scene.add(book.group);M.city.targets.push(book.group);}
+ function clear(){restoreNotebook?.();restoreNotebook=null;if(book){const i=M.city.targets.indexOf(book.group);if(i>=0)M.city.targets.splice(i,1);book.dispose();}if(original)original.root.visible=true;book=null;original=null;desk=null;}
+ function sync(){if(owner===M.city.homeBuilt)return;clear();owner=M.city.homeBuilt;desk=findStudyDesk(owner?.group);original=findReadingBook(desk);if(!original)return;restoreNotebook=arrangeStudyNotebook(T,desk);original.root.visible=false;book=buildZarathustraBook(T,original.data);book.setLanguage(lang());book.group.matrixAutoUpdate=false;desk.updateWorldMatrix(true,false);book.group.matrix.copy(desk.matrixWorld);M.scene.add(book.group);M.city.targets.push(book.group);}
  function position(){sync();if(!book||!desk)return null;desk.updateWorldMatrix(true,false);book.group.matrix.copy(desk.matrixWorld);book.group.updateMatrixWorld(true);const target=book.group.localToWorld(new T.Vector3(.23,.921,-.052)),anchor=original.data.anchor,S=M.city.SOC;let safe=anchor?{x:S.x+anchor.x*S.scale,z:S.z+anchor.z*S.scale}:null;if(!safe||!M.city.canStand(safe.x,safe.z))safe={x:M.player.x,z:M.player.z};let dx=safe.x-target.x,dz=safe.z-target.z,l=Math.hypot(dx,dz);if(l<.1){const front=new T.Vector3(0,0,1).transformDirection(desk.matrixWorld);dx=front.x;dz=front.z;l=1;}const yaw=Math.atan2(dx,dz);return{target,safe:{...safe,y:M.cityGroundHeight(safe.x,safe.z)+M.eye,yaw,pitch:-.15},close:{x:target.x+dx/l*.9,z:target.z+dz/l*.9,y:target.y+.85,yaw,pitch:Math.atan2(-.91,.9)}};}
  function read(){M.clearMovement();discuss.hidden=false;M.readBookAtDesk();}
  discuss.onclick=()=>{document.getElementById('reader-panel').hidden=true;discuss.hidden=true;M.storyJourney?.open(()=>read());};
