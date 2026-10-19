@@ -1,3 +1,4 @@
+import {installVisitMemory} from './visit-memory.js';
 import {artistLineOfSight} from './artist-line-of-sight.js';
 import {installPhilosopherQuarter} from './philosopher-ui.js';
 import {installSocratesTour} from './socrates-tour.js';
@@ -80,6 +81,7 @@ try{
  if(!frame().hasAttribute('src'))frame().src=new URL('./city-source-assets/home-tools/index.html?lang='+CITY_I18N.lang,import.meta.url).href;
  installPhilosopherQuarter(M,T);
  installIdeasGraveyard(M,T);
+ installVisitMemory(M);
  installEscherHouse(M,T);
  installSocratesTour(M,T,socrates);
  installOrigamiPark(M,T);

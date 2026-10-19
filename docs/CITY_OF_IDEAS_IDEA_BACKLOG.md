@@ -322,3 +322,13 @@ The city now opens at the overview on every visit. The desk-book cinematic is an
 - Removed the full-height return-lift glass screen. Kept the functioning return platform.
 - Door glazing now shares the facade glass, facet width, radius and thickness. Entrance glass facets align with the actual opposite entrances; ground-floor columns keep both entry axes clear. Gallery doors are retained: the user clarified that the requested removal concerned the two trees in Dalí’s house.
 - Removed the two landscape trees intersecting Dalí’s residence and their collision circles.
+
+
+### Escher viewpoint journey and a returning city
+- Three physically separate stair profiles occupy different depths. Their projected endpoints align from the middle floor mark; looking away or comparing side marks does not solve the puzzle. Hold the view briefly to open a real passage.
+- Waterfall is now the hidden fourth print, behind a collision-gated reading alcove. The original three front-room prints remain available. The print browser skips Waterfall until the passage opens.
+- Visitors can walk between viewing marks or use the next-mark and look controls with keyboard/controller. Replay returns the visitor to the entry before closing the passage; it preserves discoveries and notes.
+- The notebook stores unfinished questions, first answers, revised answers and reasons locally in this browser. The original book journey is linked from the notebook without replacing its saved pages. No answers are inferred from puzzle completion.
+- Revisited Socrates, Dalí and Escher locations acknowledge prior visits and discoveries. The Socrates conversation also uses this context. The open passage and reflection history survive reload.
+- Large freestanding destination boards and their supports are removed from the city, philosophers' quarter, graveyard garden, park districts and idea grove. The park entrance banner is removed; architectural arches, painting displays, person labels and interaction labels remain.
+- Verification: screen-space geometry tests; blocked/open passage and replay tests; persistence/validation/storage-failure tests; isolated-browser completion, physical passage traversal, Waterfall inspection, saved revisions and reload/revisit checks.

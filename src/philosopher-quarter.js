@@ -14,8 +14,6 @@ export function createPhilosopherQuarter(T,{language=()=> 'en',canvas=()=>docume
  const action=(mesh,home,section)=>{mesh.userData={philosopherId:home.id,philosopherSection:section};targets.push(mesh);return mesh;};
  const pathMaterial=0xc5b797;
  for(const points of quarterPaths)for(let i=1;i<points.length;i++){const [a,b]=[points[i-1],points[i]],dx=b[0]-a[0],dz=b[1]-a[1];const mesh=box(group,4.6,.1,Math.hypot(dx,dz)+1,(a[0]+b[0])/2,.075,(a[1]+b[1])/2,pathMaterial);mesh.rotation.y=Math.atan2(dx,dz);mesh.visible=globalThis.CITY_CONFIG?.showGroundPaving!==false;}
- const sign=label(group,()=>language()==='fa'?'محلهٔ فیلسوفان · شش خانه':'PHILOSOPHERS’ QUARTER · SIX HOMES',-260,3.3,-130,15);sign.rotation.y=Math.PI/2;
- cylinder(group,.13,3.5,-260,1.75,-130,0x625b4b);
  for(const home of PHILOSOPHERS){
   const root=new T.Group();root.name=home.id+' · '+home.home[1];root.position.set(home.x,0,home.z);root.userData.cityDestination='philosopher:'+home.id;group.add(root);
   const wall=home.style==='library'?0xc3b18b:home.style==='courtyard'?0xd8c9ad:0xded8c5,wood=0x71573e,ink=0x344248;

@@ -17,7 +17,8 @@ window.createGalleryCity=function(T,ctx){
  const pathMaterial=new T.MeshLambertMaterial({color:0xd2c6af}),wallMaterial=new T.MeshLambertMaterial({color:0xc3c1ad}),bronze=new T.MeshStandardMaterial({color:0x947844,roughness:.6,metalness:.65});
  const batches=(geometry,material,points)=>{const m=new T.InstancedMesh(geometry,material,points.length),o=new T.Object3D();points.forEach((p,i)=>{o.position.copy(p.position||p);o.rotation.set(0,p.yaw||0,0);o.scale.set(1,1,1);if(p.scale)o.scale.copy(p.scale);o.updateMatrix();m.setMatrixAt(i,o.matrix)});city.add(m);return m};
  function road(points,width=8){return createCityRoad(T,points,width,pathMaterial,city)}
- function plaque(title,x,z,width=5,yaw=0){const prior=new Set(city.children);for(const side of[-1,1]){const m=textSign(title,'#e8dec7',width,.6,city);m.position.set(x,2.05,z+side*.09);m.rotation.y=side<0?Math.PI:0;}box(width+.2,.88,.14,materials.garden,x,2.05,z,city);for(const side of[-1,1])box(.07,1.65,.07,materials.rail,x+side*(width/2-.18),.95,z,city);if(yaw){const transform=new T.Matrix4().makeTranslation(x,0,z).multiply(new T.Matrix4().makeRotationY(yaw)).multiply(new T.Matrix4().makeTranslation(-x,0,-z));for(const node of city.children)if(!prior.has(node))node.applyMatrix4(transform);}}
+ // Large roadside destination boards and their posts have been removed.
+ function plaque(){}
 
  cylinder(570,570,.24,new T.MeshLambertMaterial({color:0x556563}),0,-.22,-100,city);
  // One civic street follows the front doors; branches meet it at shared junctions.
