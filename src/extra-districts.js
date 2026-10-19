@@ -68,7 +68,7 @@ export async function createExtraDistricts(THREE,options={}){
  const roads=new THREE.Group();roads.name='Shared paths to appended originals';root.add(roads);
  const roadMaterial=new THREE.MeshLambertMaterial({color:0xd2c6af}),groundMaterial=new THREE.MeshLambertMaterial({color:0x556563}),roadGeometries=new Set();
  function road(points,width=6,parent=roads){const mesh=globalThis.createCityRoad(THREE,points,width,roadMaterial,parent);if(mesh)roadGeometries.add(mesh.geometry);}
- road(city.GRAVEYARD?[[-97.7,110],[-290,110],[-290,65],[transforms.mathematics.x,65],[transforms.mathematics.x,transforms.mathematics.z+9.6]]:[[-97.7,110],[-125,110],[-125,140],[-215,140],[-215,104.6]],7);
+ road(city.GRAVEYARD?[[transforms.mathematics.x+50,-65],[transforms.mathematics.x+50,65],[transforms.mathematics.x,65],[transforms.mathematics.x,transforms.mathematics.z+9.6]]:[[-97.7,110],[-125,110],[-125,140],[-215,140],[-215,104.6]],7);
  road([[74,110],[74,76],[200,76],[203.5,65],[203.5,-50],[211.5,-50]],6);
  road([[84.5,108],[84.5,85.05],[118,85.05],[118,82.08]],3);
  const assetUrl=value=>{

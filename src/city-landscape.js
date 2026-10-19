@@ -34,7 +34,9 @@ g.createCityLandscape=function(T,{parent,tiles,outerRadius=58}){
  for(let d=12;d<main.getLength()-10;d+=12){const u=d/main.getLength(),p=main.getPointAt(u),t=main.getTangentAt(u);for(const side of[-1,1]){const x=p.x-t.z*side*5,z=p.z+t.x*side*5;if(Math.hypot(x,z)>outerRadius+2&&Math.hypot(x-125,z)>outerRadius+2){lampPositions.push({x,z});if(z>35)treePositions.push({x:p.x-t.z*side*8,z:p.z+t.x*side*8});}}}
  function clearOfPaths(p,margin){for(const path of paths)for(let i=1;i<path.points.length;i++){const a=path.points[i-1],b=path.points[i],dx=b.x-a.x,dz=b.z-a.z,u=Math.max(0,Math.min(1,((p.x-a.x)*dx+(p.z-a.z)*dz)/(dx*dx+dz*dz)));if(Math.hypot(p.x-a.x-dx*u,p.z-a.z-dz*u)<path.width/2+margin)return false;}return true;}
  const cleanLamps=lampPositions.filter(p=>clearOfPaths(p,.45));
- const trees=treePositions.filter((p,i)=>!(Math.abs(p.z)<8&&(p.x< -58||p.x>183))&&clearOfPaths(p,2)&&Math.hypot(p.x,p.z)>outerRadius+4&&Math.hypot(p.x-125,p.z)>outerRadius+4&&treePositions.findIndex(q=>Math.hypot(q.x-p.x,q.z-p.z)<5)===i);
+ // Dalí's residence occupies this lot; keep both trunks and foliage out of its rooms.
+ const daliLot={minX:108,maxX:128,minZ:65,maxZ:83};
+ const trees=treePositions.filter((p,i)=>!(p.x>daliLot.minX&&p.x<daliLot.maxX&&p.z>daliLot.minZ&&p.z<daliLot.maxZ)&&!(Math.abs(p.z)<8&&(p.x< -58||p.x>183))&&clearOfPaths(p,2)&&Math.hypot(p.x,p.z)>outerRadius+4&&Math.hypot(p.x-125,p.z)>outerRadius+4&&treePositions.findIndex(q=>Math.hypot(q.x-p.x,q.z-p.z)<5)===i);
  function instances(geo,mat,list,transform,name){const m=new T.InstancedMesh(geo,mat,list.length),o=new T.Object3D();list.forEach((p,i)=>{o.position.set(0,0,0);o.scale.set(1,1,1);transform(o,p,i);o.updateMatrix();m.setMatrixAt(i,o.matrix);});m.name=name;m.userData.groundPaving=true;m.visible=g.CITY_CONFIG?.showGroundPaving!==false;group.add(m);}
  g.buildNaturalCityTrees(T,group,trees);
  instances(new T.CylinderGeometry(.1,.12,.85,10),metal,cleanLamps,(o,p)=>o.position.set(p.x,(groundHeight(p.x,p.z)??.13)+.425,p.z),'Aligned low path lights');

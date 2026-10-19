@@ -1,3 +1,4 @@
+import {installStartModes} from './start-modes.js';
 import {OPENING_SCRIPT} from './opening-script.js';
 import {buildSocratesGuide} from './socrates-character.js';
 import {findHostSpot} from './socrates-tour.js';
@@ -14,7 +15,8 @@ export function installCinematicIntro(M,T,residents){
  const dialog=document.createElement('dialog');dialog.id='cinematic-opening';dialog.dataset.confirmFocused='true';dialog.setAttribute('aria-labelledby','opening-title');
  dialog.innerHTML='<div class="opening-shade"></div><button type="button" class="glass opening-skip" data-close></button><main><article class="opening-book"><div><p class="opening-author">FRIEDRICH NIETZSCHE</p><h1 id="opening-title"></h1><p class="opening-part"></p></div><div><blockquote></blockquote><small class="opening-book-credit"></small></div></article><div class="opening-caption"><p class="opening-speaker"></p><p class="opening-line" aria-live="polite"></p><small class="opening-credit"></small><small class="opening-audio-status" role="status"></small></div></main><footer><button type="button" class="glass" data-opening="voice"></button><button type="button" class="glass" data-opening="pause"></button><button type="button" class="primary" data-opening="next"></button></footer>';
  document.body.append(dialog);const n=s=>dialog.querySelector(s),next=n('[data-opening="next"]'),pause=n('[data-opening="pause"]'),sound=n('[data-opening="voice"]');
- const replay=document.createElement('button');replay.type='button';replay.className='glass';replay.id='opening-replay';replay.onclick=()=>show();document.querySelector('.welcome-secondary')?.prepend(replay);
+ const replay=document.createElement('button');replay.type='button';replay.className='glass';replay.id='opening-replay';replay.onclick=()=>show();// The book is a start mode rather than another destination button.
+ const startModes=installStartModes(M,{beginBook:()=>show()});
  function render(){const t=copy(),i=timeline.step;dialog.lang=lang();dialog.dir=lang()==='fa'?'rtl':'ltr';dialog.dataset.shot=i<1?'page':OPENING_SCRIPT.beats[i].id;n('h1').textContent=t.book;n('.opening-part').textContent=t.part;n('blockquote').textContent=t.quote;n('.opening-book-credit').textContent=t.bookCredit;n('.opening-speaker').textContent=i<0?t.title:t.speakers[i];n('.opening-line').textContent=i<0?'':t.lines[i];n('.opening-credit').textContent=t.credit;n('.opening-audio-status').textContent=audioFailed?t.soundFailed:'';n('[data-close]').textContent=t.skip;next.textContent=i<0?t.begin:i===OPENING_SCRIPT.beats.length-1?t.walk:t.next;pause.textContent=timeline.paused?t.resume:t.pause;pause.hidden=i<0;sound.textContent=t.voice+' · '+(voice?t.on:t.off);sound.setAttribute('aria-pressed',String(voice));replay.textContent=t.replay;}
  function stopAudio(){playSerial++;audio.pause();}
  function speak(){stopAudio();audioFailed=false;if(timeline.step<0||!voice||timeline.paused)return;audioKey=lang()+'-'+OPENING_SCRIPT.beats[timeline.step].id;audio.src=new URL('./assets/opening/'+audioKey+'.mp3',import.meta.url).href;const serial=playSerial;audio.play().catch(()=>{if(serial===playSerial&&active){audioFailed=true;render();}});}
@@ -29,5 +31,5 @@ export function installCinematicIntro(M,T,residents){
  // Start at the overview. The visitor explicitly chooses the desk-book introduction.
  render();document.body.classList.remove('cinematic-pending');
  window.CITY_OPENING={show,finish,get active(){return active;},get step(){return timeline.step;},script:OPENING_SCRIPT};
- addEventListener('pagehide',()=>{residents?.setPresentation(false,'opening');stopAudio();audio.removeAttribute('src');audio.load();actor.dispose();dialog.remove();replay.remove();removeEventListener('city-language',languageChanged);},{once:true});return window.CITY_OPENING;
+ addEventListener('pagehide',()=>{residents?.setPresentation(false,'opening');stopAudio();audio.removeAttribute('src');audio.load();actor.dispose();dialog.remove();replay.remove();startModes.dispose();removeEventListener('city-language',languageChanged);},{once:true});return window.CITY_OPENING;
 }

@@ -1,0 +1,24 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import vm from 'node:vm';
+import * as T from '../src/city-source-assets/home-tools/vendor/three.module.js';
+import {CITY_EDGE_DOOR,installGraveyardWorld} from '../src/graveyard-world.js';
+const source=readFileSync(new URL('../src/city.js',import.meta.url),'utf8');
+const layout=vm.runInNewContext('('+source.match(/const GRAVEYARD=(\{[^\n]+\});/)[1]+')');
+assert(layout.bounds.maxX< -2000,'The other city lies beyond the main camera far plane');
+globalThis.addEventListener=()=>{};globalThis.removeEventListener=()=>{};
+const button={hidden:true,remove(){this.removed=true;}},mapDestination={hidden:false};
+globalThis.document={createElement:()=>button,querySelector:s=>s==='[data-direction="objects"]'?mapDestination:null,body:{dataset:{},append(){}}};globalThis.CITY_I18N={tx:(_fa,en)=>en};
+const M={mode:'city',player:{x:0,z:94},scene:new T.Scene(),city:{targets:[],canStand:()=>true,targetInfo:()=>null,update(){}},clearMovement(){},showExtra:()=>false,arrive:p=>Object.assign(M.player,p)};
+const entry={x:layout.x+42,z:layout.z,y:.13,yaw:Math.PI/2},world=installGraveyardWorld(M,T,layout,entry);
+assert.equal(world.doors.length,2);for(const d of world.doors){let meshes=0;d.group.traverse(o=>{if(o.isMesh){meshes++;assert(o.userData.worldDoor);}});assert(meshes>=6);}
+assert.equal(M.city.canStand(-1000,0),false,'No walkable corridor joins the two cities');assert.equal(mapDestination.hidden,true);
+M.city.update(M.player,1,'city');assert(!world.active);assert(!world.doors[1].group.visible);
+Object.assign(M.player,{x:CITY_EDGE_DOOR.x+.5,z:CITY_EDGE_DOOR.z});M.city.update(M.player,3,'city');assert.equal(M.player.x,entry.x,'Walking through the city door enters the other world');
+M.city.update(M.player,4,'city');assert(world.active);assert(!world.doors[0].group.visible);assert(M.city.canStand(entry.x,entry.z));assert(!M.city.canStand(layout.bounds.maxX+1,entry.z));
+const map={clearRect(){},fillRect(){},fillText(){},strokeRect(){},beginPath(){},arc(){},fill(){}};assert(world.drawActiveMap(map));
+const returnDoor=world.doors[1].group;Object.assign(M.player,{x:returnDoor.position.x,z:returnDoor.position.z});M.city.update(M.player,7,'city');assert.equal(M.player.x,CITY_EDGE_DOOR.x+12,'The return door lands clear of the trigger');
+assert(M.showExtra({kind:'world-door',data:{worldDoor:'graveyard'}}));assert.equal(M.player.x,entry.x,'Keyboard/controller interaction uses the same arrival');
+M.mode='overview';M.city.update(M.player,8,'overview');assert(!world.active);assert.equal(world.drawActiveMap(map),false,'Overview keeps the main city map');world.dispose();assert(button.removed);
+assert(!source.includes('box(5.4,A.top+3,.04,glass'),'No full-height return-lift glass screen is built');
+console.log('PASS: isolated graveyard bounds, edge and return doors, walking and button traversal, separate map, independent ground and removed tall glass.');

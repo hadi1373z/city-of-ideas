@@ -10,7 +10,7 @@ window.createGalleryCity=function(T,ctx){
  const {scene,mesh,box,cylinder,torus,textSign,materials}=ctx,S=window.CITY_SOURCES;
  const city=new T.Group();city.name='Continuous Ideas City';scene.add(city);
  const path=window.createMountainPath(T),{A,MAX,radiusAt,heightAt,pointAt,polar}=path;
- const GRAVEYARD={x:-360,z:-65,bounds:{minX:-455,maxX:-288,minZ:-225,maxZ:90},mathematics:{x:-360,y:.13,z:35,scale:1},objects:{x:-360,z:-160,scale:1.3},stations:{home:{x:-310,z:5},artists:{x:-310,z:-20},objects:{x:-310,z:-45}}};
+ const GRAVEYARD={x:-2360,z:-65,bounds:{minX:-2455,maxX:-2288,minZ:-225,maxZ:90},mathematics:{x:-2360,y:.13,z:35,scale:1},objects:{x:-2360,z:-160,scale:1.3},stations:{home:{x:-2310,z:5},artists:{x:-2310,z:-20},objects:{x:-2310,z:-45}}};
  const SOC={x:-96,z:100,scale:1.7},ART={x:118,z:108,scale:1.35},OBJ={...GRAVEYARD.objects},PARK={x:0,z:-330,scale:.65};
  const districts=[],targets=[],colliders=[],chapterMarkers=[],sourceItems=[],supports=[],buildingTargets=[];
  const chapterCounts=[23,22,16,20],chapterOffsets=[0,23,45,61],partColors=['#efbc6a','#ae91e8','#59c4be','#ed7d91'];
@@ -50,7 +50,7 @@ window.createGalleryCity=function(T,ctx){
  const start=pointAt(0);
  // The roof connection owns the single continuous summit terrace.
  // Return-lift movement is independent of the removed four freestanding guide poles.
- const glass=new T.MeshBasicMaterial({color:0x94b5b4,transparent:true,opacity:.12,side:T.DoubleSide,depthWrite:false});box(5.4,A.top+3,.04,glass,path.localLift.x,(A.top+3)/2,path.localLift.z+2,city);
+ // The return platform has no full-height glass screen.
  const liftCab=box(5.3,.16,4,pathMaterial,path.localLift.x,A.top-.08,path.localLift.z,city);const returnSign=textSign('آسانسور بازگشت به میدان','#efcf92',6,.6,city);returnSign.position.set(path.localLift.x,A.top+2.4,path.localLift.z+1.5);
  const landingRotation=new T.Matrix4().makeTranslation(A.x,0,A.z).multiply(new T.Matrix4().makeRotationY(-Math.PI/2)).multiply(new T.Matrix4().makeTranslation(-A.x,0,-A.z));for(const node of city.children)if(!priorMountainLandingNodes.has(node))node.applyMatrix4(landingRotation);
 

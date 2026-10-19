@@ -31,3 +31,6 @@ The shared-city house omits its standalone garden stepping-stone strip, which ot
 Outdoor paving is temporarily hidden with `CITY_CONFIG.showGroundPaving=false`, including shared streets, circular promenades, philosopher approaches and park ground paths. Route footprints and entry grades remain for navigation; building floors, porches and elevated walkways remain. Gallery landscaping now uses deterministic instanced forked branches and layered individual leaves, with varied crown proportions and muted greens; the oval canopy meshes and round tree plinths are removed. This is procedural foliage, not photoreal scanned vegetation.
 
 Gallery entrances: only the ground floor has gaps in the curved glazing. Two opposite open double doors have frames, lower wood panels and metal handles, with glazed transoms above; upper floors have complete glazing. The four freestanding full-height return-lift guide poles are removed; lift movement and gallery structural columns remain.
+
+
+The overview now presents two start modes with a single Start action: free city exploration or the desk-book introduction. Mountain options and direct destinations remain under the secondary places disclosure.
