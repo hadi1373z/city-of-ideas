@@ -23,3 +23,12 @@ The experimental route is \`idea-room.html\`. The existing city remains in \`ind
 
 \`node tests/idea-to-world.mjs\` checks script syntax and the local route, links, and state interface.
 \`npm run check\` runs the existing suite plus the new static regression check. Manual 3D, gamepad, and mobile checks are still required.
+
+
+## Return doorway refinement — 19 October 2026
+
+The draft has been updated with current main. Its return action now sits outside the city toolbar's CSS filter, has a 44px minimum touch target, and is hidden while dialogs or reading panels are open. E does not navigate while editing or focusing a control. Arrival faces a clear portal south of the plaza; labels support EN/DE/FA.
+
+`node tests/idea-portal.mjs` exercises proximity, overview/modal hiding, click and keyboard navigation, editing/repeat guards and arrival. The full release suite passed. Desktop browser QA created a library, saved a synthetic thought, entered the city, saw that thought and elapsed time, and returned with E to the preserved room. E did not navigate while help was open.
+
+This remains a draft. Real mobile/touch hardware, imagined-room/controller traversal, all themes/scales, storage failure handling and complete prototype translation remain to be verified. No live deployment or seamless scene transition is claimed.

@@ -9,24 +9,30 @@ function start(){
  box(3.4,.2,1.8,0,.1,0,bronze);box(.22,3,.3,-1.45,1.6,0,bronze);box(.22,3,.3,1.45,1.6,0,bronze);box(3.12,.22,.3,0,3.05,0,bronze);
  box(2.15,2.55,.06,0,1.48,0,new T.MeshBasicMaterial({color:0x6d6250,side:T.DoubleSide,transparent:true,opacity:.22,depthWrite:false}));
  box(2.6,.07,.12,0,2.6,.2,glow);
- portal.position.set(13,.13,105);M.scene.add(portal);
- const controls=document.querySelector('.visit-actions'),welcome=document.querySelector('.welcome-secondary');
+ portal.position.set(0,.13,115);M.scene.add(portal);
+ const welcome=document.querySelector('.welcome-secondary');
  if(welcome){const a=document.createElement('a');a.href='idea-room.html';a.className='glass';a.textContent='Imagine a room';a.style.textDecoration='none';welcome.append(a);}
  const button=document.createElement('button');button.type='button';button.className='glass';button.textContent='Enter imagined room';button.hidden=true;
  const name='idea-room-portal';button.id=name;
- if(controls)controls.append(button);
- const enter=()=>{location.href='idea-room.html';};button.addEventListener('click',enter);
- const near=()=>M.mode==='city'&&Math.hypot(M.player.x-13,M.player.z-105)<8;
- const update=()=>{button.hidden=!near();};
+ // A contextual door action lives outside the city-mode toolbar filter.
+ Object.assign(button.style,{position:'fixed',insetInlineStart:'50%',transform:'translateX(-50%)',bottom:'185px',maxWidth:'calc(100vw - 32px)',minHeight:'44px',zIndex:'25'});
+ document.body.append(button);
+ const blocked=()=>!!document.querySelector('dialog[open],#exhibit-panel:not([hidden]),#reader-panel:not([hidden])');
+ const enter=()=>{if(near()&&!blocked()){M.clearMovement();location.href='idea-room.html';}};button.addEventListener('click',enter);
+ const near=()=>M.mode==='city'&&Math.hypot(M.player.x,M.player.z-115)<8;
+ const copy={en:['Imagine a room','Enter imagined room'],de:['Einen Raum vorstellen','Vorgestellten Raum betreten'],fa:['اتاقی را تصور کن','ورود به اتاق خیالی']};
+ const update=()=>{button.hidden=!near()||blocked();const text=copy[window.CITY_I18N?.lang]||copy.en;button.textContent=text[1];if(welcome?.lastElementChild?.getAttribute('href')==='idea-room.html')welcome.lastElementChild.textContent=text[0];};
  const interval=setInterval(update,300);update();
  // E near the visible portal acts like a door; existing E functions elsewhere remain unaffected.
- addEventListener('keydown',e=>{if(e.code==='KeyE'&&near()&&!e.repeat&&!['INPUT','TEXTAREA'].includes(document.activeElement?.tagName)){e.preventDefault();e.stopImmediatePropagation();enter();}},{capture:true});
+ addEventListener('keydown',e=>{if(e.code==='KeyE'&&near()&&!blocked()&&!e.repeat&&!['INPUT','TEXTAREA','SELECT','BUTTON','A'].includes(document.activeElement?.tagName)&&!document.activeElement?.isContentEditable){e.preventDefault();e.stopImmediatePropagation();enter();}},{capture:true});
  // The link works on touch/click as well as E.
  const canvas=document.querySelector('#world canvas');
- canvas?.addEventListener('click',e=>{if(!near())return;const ray=new T.Raycaster();ray.setFromCamera(new T.Vector2(e.clientX/innerWidth*2-1,1-e.clientY/innerHeight*2),M.camera);if(ray.intersectObjects(portal.children,true).length)enter();},{capture:true});
+ canvas?.addEventListener('click',e=>{if(!near()||blocked())return;const ray=new T.Raycaster();ray.setFromCamera(new T.Vector2(e.clientX/innerWidth*2-1,1-e.clientY/innerHeight*2),M.camera);if(ray.intersectObjects(portal.children,true).length)enter();},{capture:true});
  addEventListener('pagehide',()=>clearInterval(interval),{once:true});
  if(new URLSearchParams(location.search).get('from')==='idea-room'){
    M.quickStart('city');
+   // Arrive facing the return door, with its contextual action within reach.
+   if(M.city.canStand(0,121))M.arrive({x:0,z:121,yaw:0});
    let data;try{data=JSON.parse(localStorage.getItem('city-idea-room-v1')||'null');}catch{}
    const banner=document.createElement('div');banner.id='idea-room-arrival';banner.setAttribute('role','status');
    const line=document.createElement('p');line.style.margin='0';line.style.fontSize='12px';
