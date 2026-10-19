@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import vm from 'node:vm';
+import * as T from '../src/city-source-assets/home-tools/vendor/three.module.js';
+import {starter} from '../src/city-source-assets/home-tools/model.js';
+import {createResidence} from '../src/city-source-assets/home-tools/residence-data.js';
+import {createSharedResidents} from '../src/shared-residents.js';
+const scope={window:{},structuredClone};vm.runInNewContext(readFileSync(new URL('../src/city.js',import.meta.url),'utf8'),scope);
+const source=createResidence(starter(),{floors:2}),upper=source.rooms.find(r=>r.floor===1);source.ideas.push({id:'upstairs-note',roomId:upper.id,title:'Synthetic saved note',text:'Preserve this original'});const before=JSON.stringify(source),ground=scope.window.cityGroundFloorHome(source);
+assert.equal(JSON.stringify(source),before,'Scene projection must not delete saved upper rooms or notes');assert.equal(ground.residence.floors,1);assert.equal(ground.stairs.length,0);assert(ground.rooms.every(r=>!r.floor));assert(ground.ideas.every(i=>ground.rooms.some(r=>r.id===i.roomId)));assert.equal(ground.rooms.length,6);
+globalThis.document={querySelector:()=>null};const resident=new T.Group(),M={scene:new T.Scene(),player:{x:0,y:1.7,z:0},eye:1.7,city:{resident,targets:[],region:()=>({id:'city'})}},E={region:()=>null},N={};M.scene.add(resident);const actors=createSharedResidents(T,{main:M,extras:E,navigation:N});actors.update(0);assert(resident.visible);actors.setPresentation(true,'opening');actors.update(1);assert(!resident.visible&&!actors.group.visible,'Cinematic guide replaces both ordinary resident representations');actors.setPresentation(true,'tour');actors.setPresentation(false,'opening');actors.update(2);assert(!resident.visible,'Finishing the opening cannot release another presentation owner');actors.setPresentation(false,'tour');actors.update(3);assert(resident.visible,'Ordinary resident returns when all presentations end');actors.dispose();
+console.log('PASS: single-storey main-house projection preserves source data; cinematic suppresses duplicate residents and restores their visibility without releasing another presentation.');

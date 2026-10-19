@@ -82,5 +82,5 @@ try{
  M.storyJourney=installDiscoveryStory(M);
  M.studyBook=installStudyBook(M,T);
  M.status('ready');
- installCinematicIntro(M,T);
+ installCinematicIntro(M,T,socrates);
 }catch(error){document.body.classList.remove('cinematic-pending');console.error('Original district integration failed',error);M.status(error.message);}
