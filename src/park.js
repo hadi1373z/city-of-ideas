@@ -156,8 +156,6 @@ window.buildIdeaPark=function(THREE){
   // A 480 metre park, with broad promenades and nine quiet circular gardens.
   const terrain = cylinder(0, -.75, 0, 240, 1.5, mats.grass, scene, false);
   terrain.receiveShadow = true;
-  ring(0, .035, 0, 231, 3.7, mats.path);
-  ring(0, .045, 0, 145, 4.4, mats.path);
   ring(0, .055, 0, 100, 2.3, mats.path);
   cylinder(0, .08, 0, 28, .16, mats.path, scene, false);
   ring(0, .2, 0, 28, .38, mats.stone);
