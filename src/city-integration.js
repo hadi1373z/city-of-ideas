@@ -9,6 +9,8 @@ import {ARTISTS} from './city-source-assets/home-tools/artist-catalog.js';
 import {createDistrictNavigation} from './district-navigation.js';
 import {createSharedResidents} from './shared-residents.js';
 import {createSharedActivities} from './shared-activities.js';
+import {installIdeasGraveyard} from './ideas-graveyard.js';
+import {installEscherHouse} from './escher-house.js';
 import {installStudyBook} from './study-book.js';
 import {installCinematicIntro} from './cinematic-intro.js';
 import {installDiscoveryStory} from './discovery-story.js';
@@ -77,6 +79,8 @@ try{
  addEventListener('pagehide',()=>{activities.dispose();socrates.dispose();residents.dispose();E.dispose();M.homeBridge?.dispose();},{once:true});
  if(!frame().hasAttribute('src'))frame().src=new URL('./city-source-assets/home-tools/index.html?lang='+CITY_I18N.lang,import.meta.url).href;
  installPhilosopherQuarter(M,T);
+ installIdeasGraveyard(M,T);
+ installEscherHouse(M,T);
  installSocratesTour(M,T,socrates);
  installOrigamiPark(M,T);
  M.storyJourney=installDiscoveryStory(M);

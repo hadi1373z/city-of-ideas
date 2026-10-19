@@ -58,8 +58,9 @@ export async function createExtraDistricts(THREE,options={}){
  for(const name of ['buildMathCity','buildMakersCity','addDaliHouse','buildArtistCityEditions','validateCityNetwork','validateNeighborhood','buildCityCargo','buildCityFacilities'])if(typeof F[name]!=='function')throw Error('Missing original source factory: '+name);
  if(F.MATH_BUILDING?.floors!==8||F.MATH_CONCEPTS?.length!==24||F.DALI_ARTIST?.works?.length!==4||F.DALI_OBJECTS?.length!==5)throw Error('Original district collections are incomplete.');
  const root=new THREE.Group();root.name='Original appended city districts';scene.add(root);
- const transforms={mathematics:{x:-215,y:.13,z:95,scale:1},makers:{x:225,y:.13,z:-50,scale:1},artists:{x:city.ART?.x??118,y:city.art.group.position.y,z:city.ART?.z??108,scale:city.ART?.scale??1.35}};
+ const transforms={mathematics:{...(city.GRAVEYARD?.mathematics||{x:-215,y:.13,z:95,scale:1})},makers:{x:225,y:.13,z:-50,scale:1},artists:{x:city.ART?.x??118,y:city.art.group.position.y,z:city.ART?.z??108,scale:city.ART?.scale??1.35}};
  const baseWorldBounds={...(options.worldBounds||{minX:-270,maxX:260,minZ:-500,maxZ:215})};
+ if(city.GRAVEYARD)Object.assign(baseWorldBounds,union(baseWorldBounds,city.GRAVEYARD.bounds));
  const originalArt=city.art,baseHouses=originalArt.houses.slice(),baseChildren=new Set(originalArt.group.children);
  let activeMathFloor=0,disposed=false,network=null,editions=null,cargoOwners=[],homeOwners=new Map(),homeLotIndices=new Map(),pendingNeighborhood=null,activeHomeId=null;
  let artStation=null,daliArt=null,artAggregate=null,makers=null,visualSignature=null,editionCatalog=F.ARTISTS;
@@ -67,7 +68,7 @@ export async function createExtraDistricts(THREE,options={}){
  const roads=new THREE.Group();roads.name='Shared paths to appended originals';root.add(roads);
  const roadMaterial=new THREE.MeshLambertMaterial({color:0xd2c6af}),groundMaterial=new THREE.MeshLambertMaterial({color:0x556563}),roadGeometries=new Set();
  function road(points,width=6,parent=roads){const mesh=globalThis.createCityRoad(THREE,points,width,roadMaterial,parent);if(mesh)roadGeometries.add(mesh.geometry);}
- road([[-97.7,110],[-125,110],[-125,140],[-215,140],[-215,104.6]],7);
+ road(city.GRAVEYARD?[[-97.7,110],[-290,110],[-290,65],[transforms.mathematics.x,65],[transforms.mathematics.x,transforms.mathematics.z+9.6]]:[[-97.7,110],[-125,110],[-125,140],[-215,140],[-215,104.6]],7);
  road([[74,110],[74,76],[200,76],[203.5,65],[203.5,-50],[211.5,-50]],6);
  road([[84.5,108],[84.5,85.05],[118,85.05],[118,82.08]],3);
  const assetUrl=value=>{
@@ -93,7 +94,7 @@ export async function createExtraDistricts(THREE,options={}){
   const daliAdded=originalArt.group.children.filter(o=>!baseChildren.has(o));
   for(const o of daliAdded)o.userData.cityDestination='artist:dali';
   const daliHouse=daliArt.houses.find(h=>h.artistId==='dali');daliHouse.group.userData.cityDestination='artist:dali';
-  artStation=F.buildCityFacilities(THREE,{cityId:'artists'});disableLights(artStation.group);originalArt.group.add(artStation.group);
+  artStation=F.buildCityFacilities(THREE,{cityId:'artists'});disableLights(artStation.group);if(city.GRAVEYARD){const p=city.GRAVEYARD.stations.artists;artStation.transform={x:p.x-25,y:.13,z:p.z,scale:1};mount(artStation,artStation.transform);artStation.group.traverse(o=>{if(o.userData.cityAction)o.userData={...o.userData,sharedFacility:true,extraCityId:'artists',cityId:'artists'};});}else originalArt.group.add(artStation.group);
   const staticOwners=[...mathModels,makers],mathBounds=transformedBounds(mathModels[0].bounds,transforms.mathematics),makerBounds=transformedBounds(makers.bounds,transforms.makers);
   const homeRoads=new THREE.Group();homeRoads.name='Paths to preserved personal homes';roads.add(homeRoads);
   const collisions=owner=>[...(owner.colliders||owner.obstacles||[])];
@@ -106,6 +107,7 @@ export async function createExtraDistricts(THREE,options={}){
   const ownerCargo=(cityId,floor=0)=>cargoOwners.find(o=>o.cityId===cityId&&(cityId!=='mathematics'||o.floor===floor));
   function canStand(x,z,yOrOptions){
    if(!finite(x)||!finite(z))return false;
+   if(artStation.transform){const p=localPoint(x,z,artStation.transform);if(blocked([...artStation.obstacles,...(ownerCargo('artists')?.obstacles||[])],p.x,p.z))return false;}
    const opts=typeof yOrOptions==='object'&&yOrOptions?yOrOptions:{y:yOrOptions};
    if(contains(mathBounds,x,z)){const p=localPoint(x,z,transforms.mathematics),floor=mathFloorFor(opts.y,opts.floor),model=mathModels[floor];return !!model&&(floor===0?!blocked(model.colliders,p.x,p.z):model.canStand(p.x,p.z))&&!blocked(ownerCargo('mathematics',floor)?.obstacles||[],p.x,p.z);}
    if(contains(makerBounds,x,z)){const p=localPoint(x,z,transforms.makers);return !blocked(makers.colliders,p.x,p.z)&&!blocked(ownerCargo('makers')?.obstacles||[],p.x,p.z);}
@@ -181,14 +183,14 @@ export async function createExtraDistricts(THREE,options={}){
    try{
     nextEditions=F.buildArtistCityEditions(AssetThree,editionCatalog,daliArt,list);disableLights(nextEditions.group);
     for(const house of nextEditions.houses)house.group.userData.cityDestination='artist-edition:'+house.editionId;
-    const definitions=[{cityId:'makers',floor:0,anchors:makers.anchors,transform:transforms.makers},{cityId:'mathematics',floor:activeMathFloor,anchors:mathModels[activeMathFloor].anchors,transform:transforms.mathematics},{cityId:'artists',floor:0,anchors:artStation.anchors,transform:transforms.artists}];
+    const definitions=[{cityId:'makers',floor:0,anchors:makers.anchors,transform:transforms.makers},{cityId:'mathematics',floor:activeMathFloor,anchors:mathModels[activeMathFloor].anchors,transform:transforms.mathematics},{cityId:'artists',floor:0,anchors:artStation.anchors,transform:artStation.transform||transforms.artists}];
     for(const definition of definitions){const built=F.buildCityCargo(THREE,next,definition.cityId,definition.anchors);if(definition.cityId==='mathematics')built.group.position.y=mathModels[definition.floor].height;nextCargo.push({...built,...definition});}
    }catch(error){disposeOwned(nextEditions);nextCargo.forEach(disposeOwned);throw error;}
    const previousEditions=editions,previousCargo=cargoOwners;
    originalArt.group.add(nextEditions.group);
-   for(const owner of nextCargo){if(owner.cityId==='artists')originalArt.group.add(owner.group);else{const y=owner.group.position.y;mount(owner,{...owner.transform,y:owner.transform.y+y});}}
+   for(const owner of nextCargo){if(owner.cityId==='artists'&&!artStation.transform)originalArt.group.add(owner.group);else{const y=owner.group.position.y;mount(owner,{...owner.transform,y:owner.transform.y+y});}}
    editions=nextEditions;cargoOwners=nextCargo;network=next;visualSignature=signature;
-   artAggregate={...daliArt,houses:[...daliArt.houses,...editions.houses],bounds:union(daliArt.bounds,editions.bounds),colliders:[...daliArt.colliders,...editions.colliders,...artStation.obstacles,...(ownerCargo('artists')?.obstacles||[])],insideAt:(x,z)=>editions.insideAt(x,z),entryFor:(artistId,editionId)=>editionId?editions.entryFor(artistId,editionId):daliArt.entryFor(artistId),canStand:artLocalCanStand};
+   artAggregate={...daliArt,houses:[...daliArt.houses,...editions.houses],bounds:union(daliArt.bounds,editions.bounds),colliders:[...daliArt.colliders,...editions.colliders,...(artStation.transform?[]:artStation.obstacles),...(artStation.transform?[]:(ownerCargo('artists')?.obstacles||[]))],insideAt:(x,z)=>editions.insideAt(x,z),entryFor:(artistId,editionId)=>editionId?editions.entryFor(artistId,editionId):daliArt.entryFor(artistId),canStand:artLocalCanStand};
    city.art=artAggregate;
    disposeOwned(previousEditions);previousCargo.forEach(disposeOwned);
    return{artistEditions:editions.houses.length,cargoCopies:next.placements.length,geometryChanged:true,privateStateWritten:false};

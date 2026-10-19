@@ -295,3 +295,21 @@ Persian naming: use **زرتشت** in ordinary text and **زَرْتُشْتْ**
 The user clarified that coherence concerns the ground shapes and their relationship to buildings throughout the city. Removed the empty circular plaza and large Continuous city / Ideas Park sign. Replaced separate road boxes with joined paving strips, connected the civic street to real entrances and district branches, and routed the makers approach around the mountain. Building positions and personal home editions are preserved. Further planting, signage and whole-city composition still need visual refinement; connected paving alone does not complete that design.
 
 The opening now frames a physical localized Zarathustra book on Socrates’ actual desk. The camera remains aligned when the source home restores, pulls back into the study, and leaves the visitor there to walk out. The nearby book opens the complete reader, with an optional discussion action into the existing discovery journey. Completion no longer teleports to the former center. Persian display remains زرتشت; the authored voice script retains زَرْتُشْتْ.
+
+
+### Western Graveyard of Ideas and Escher house — 19 October 2026
+
+Implemented a quiet western district around x=-360, z=-65, with six authored markers for retired or unfinished ideas. Mathematics moves to (-360,35), the Object Market to (-360,-160), and all three public travel pavilions to the eastern edge of that district. Their source identities, eight mathematics floors, source actions and carried-copy placements remain intact. The ground stays unpaved.
+
+Escher’s House of Perspective occupies the former artists’ travel-station site, with four locally packaged official-gallery study images: Relativity (1953), Drawing Hands (1948), Ascending and Descending (1960), and Waterfall (1961). The house/relief are original interpretations. Image sources and reserved rights are recorded in src/assets/escher/SOURCES.md; observation prompts support EN/DE/FA. This adds a dedicated study house, not a generated Escher resident.
+
+Removed the large Artists’ neighborhood board and House of Ideas return gateway/sign. Gallery doorway gaps exist only on the ground floor, with recognizable open double doors and continuous upper-floor glazing. The four freestanding return-lift poles are removed.
+
+The city now opens at the overview on every visit. The desk-book cinematic is an explicit optional choice.
+
+
+### Fountain paper boats
+- Replaced all three floating bird shapes with connected, open paper-boat hulls, pointed ends and a central paper fold. No attached sails, masts or animal parts.
+- Boats sit at the fountain waterline, drift slowly and bob gently; flying origami keep exploring the park.
+- Selecting a boat opens its own nine-step rectangular-paper guide in English, Persian and German.
+- Verified all three hulls stay inside the basin and touch the water throughout their drifting motion.

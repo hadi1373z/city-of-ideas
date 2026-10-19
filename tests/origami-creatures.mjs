@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {buildPaperBird} from '../src/origami-bird.js';
+import {buildPaperBoat} from '../src/origami-boat.js';
 import * as T from '../src/city-source-assets/home-tools/vendor/three.module.js';
 import {buildPaperCrane,buildPaperButterfly,origamiFlightPose} from '../src/origami-creatures.js';
 import {CREATURE_FLOCK,ORIGAMI_FLOCK,FLOATING_FLOCK,createOrigamiTour,origamiTourPose,floatingOrigamiPose} from '../src/origami-park.js';
@@ -36,8 +36,8 @@ for(const [i,spec]of flock.entries()){
 assert(new Set(flock.map(s=>Math.floor((Math.atan2(s.x,s.z-park.z)+Math.PI)*4/Math.PI))).size>=7,'Starting points are distributed around the park');
 assert.equal(FLOATING_FLOCK.length,3);
 for(const spec of FLOATING_FLOCK)for(const time of[0,20,80,140]){
- const pose=floatingOrigamiPose(time,spec.angle,park),bird=buildPaperBird(T,spec);bird.animate(time,{flying:false});bird.group.position.set(pose.x,pose.y,pose.z);bird.group.rotation.set(0,pose.yaw,pose.roll);bird.group.updateMatrixWorld(true);
- const bounds=new T.Box3().setFromObject(bird.group);assert(bounds.min.y>1.35*park.scale-.01,'Folded paper floats above the water');
+ const pose=floatingOrigamiPose(time,spec.angle,park),bird=buildPaperBoat(T,spec);bird.animate(time,{flying:false});bird.group.position.set(pose.x,pose.y,pose.z);bird.group.rotation.set(0,pose.yaw,pose.roll);bird.group.updateMatrixWorld(true);
+ const bounds=new T.Box3().setFromObject(bird.group);assert(Math.abs(bounds.min.y-1.35*park.scale)<.035,'The hull touches the water instead of hovering');assert.equal(bird.group.userData.origamiType,'boat');assert.equal(bird.group.userData.addedParts,0);
  for(const x of[bounds.min.x,bounds.max.x])for(const z of[bounds.min.z,bounds.max.z])assert(Math.hypot(x-park.x,z-park.z)<11.1*park.scale,'Floating origami stay inside the basin');bird.dispose();
 }
-console.log('PASS: distributed starting points, smooth park-wide tours, bounded routes and three paper-only floating birds above the fountain water.');
+console.log('PASS: distributed starting points, smooth park-wide tours, bounded routes and three paper-only floating boats touching the fountain water.');
