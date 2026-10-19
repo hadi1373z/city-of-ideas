@@ -9,6 +9,7 @@ import {ARTISTS} from './city-source-assets/home-tools/artist-catalog.js';
 import {createDistrictNavigation} from './district-navigation.js';
 import {createSharedResidents} from './shared-residents.js';
 import {createSharedActivities} from './shared-activities.js';
+import {installDiscoveryStory} from './discovery-story.js';
 const waitMain=()=>new Promise(resolve=>{if(window.CITY_MAIN?.city)resolve(window.CITY_MAIN);else addEventListener('gallery-ready',()=>resolve(window.CITY_MAIN),{once:true});});
 const M=await waitMain(),T=window.THREE,frame=()=>CITY_TOOL_FRAMES.get('home'),originalHome={...window.CITY_HOME_SCENE};let selectedEdition='residence';
 const reply=(d,value,error)=>frame().contentWindow?.postMessage({type:'city-home-scene-result',id:d.id,action:d.action,ok:!error&&value!==false,value,error},location.origin);
@@ -37,7 +38,7 @@ try{
  M.startExtra=destination=>{const p=E.entryFor(destination);if(!p)return false;if(p.cityId==='mathematics')E.selectMathFloor(p.floor||0);M.arrive(p);return true;};
  const lift=floor=>{const journey=E.selectMathFloor(Number(floor)),fromY=M.player.y;M.arrive({...journey.to,yaw:-Math.PI/2});mathJourney={...journey,start:performance.now(),fromY};M.player.y=fromY;M.status(CITY_I18N.tx('طبقهٔ ریاضیات ','Mathematics level ')+(Number(floor)+1));return true;};
  const neighborFloor=(id,level,roomId)=>{const owner=homeOwners.get(id);if(!owner?.setFloor(Number(level)))throw Error('This preserved home has no requested floor.');const p=owner.entryFor(roomId,Number(level));if(!p)throw Error('This preserved room has no safe arrival.');M.arrive(E.toWorld('home',p,{homeId:id}));return true;};
- M.showExtra=info=>{if(!['home-source','home'].includes(info.kind))return false;const data=info.data,owner=data.extraHomeId?homeOwners.get(data.extraHomeId):M.city.homeBuilt;if(data.door){owner?.toggleDoor();return true;}if(data.homeAction==='light'){owner?.toggleLight(data.homeLightId);return true;}if(data.extraHomeId&&data.homeAction==='stairs'){const stairs=owner.house.stairs?.find(s=>s.id===data.stairsId),from=data.fromFloor??owner.floor,other=[stairs?.a,stairs?.b].map(id=>owner.house.rooms.find(r=>r.id===id)).find(r=>r&&(r.floor||0)!==from);if(other)neighborFloor(data.extraHomeId,other.floor||0,other.id);return true;}if(info.kind==='home')return false;if(data.mathAction==='floor'){lift(data.targetFloor);return true;}if(info.homeId)M.homeCommand('inspectHome',info.homeId);M.homePick(data);return true;};
+ M.showExtra=info=>{if(M.storyJourney?.handle(info))return true;if(!['home-source','home'].includes(info.kind))return false;const data=info.data,owner=data.extraHomeId?homeOwners.get(data.extraHomeId):M.city.homeBuilt;if(data.door){owner?.toggleDoor();return true;}if(data.homeAction==='light'){owner?.toggleLight(data.homeLightId);return true;}if(data.extraHomeId&&data.homeAction==='stairs'){const stairs=owner.house.stairs?.find(s=>s.id===data.stairsId),from=data.fromFloor??owner.floor,other=[stairs?.a,stairs?.b].map(id=>owner.house.rooms.find(r=>r.id===id)).find(r=>r&&(r.floor||0)!==from);if(other)neighborFloor(data.extraHomeId,other.floor||0,other.id);return true;}if(info.kind==='home')return false;if(data.mathAction==='floor'){lift(data.targetFloor);return true;}if(info.homeId)M.homeCommand('inspectHome',info.homeId);M.homePick(data);return true;};
  M.toolsExtra=()=>{if(activities.stationAt(M.player.x,M.player.z)){M.homeCommand('openCollection');return true;}const r=current();if(!r)return false;if(r.id==='mathematics'){M.homeCommand('openMathematics');return true;}if(r.id==='makers'){M.homeCommand('openCollection');return true;}if(r.id==='home'){M.homeCommand('inspectHome',r.homeId);M.homeCommand('openResidence');return true;}if(r.artistId==='dali'||r.artistEditionId){M.homePick({artistId:r.artistId,artistEditionId:r.artistEditionId,artAction:r.artistEditionId?'edition-study':'study'});return true;}return false;};
  if(M.homeBridge){
   const original=M.homeBridge.handle,extraMethods=['prepareCity','enterMathCity','visitMathFloor','showNeighborhood','greetArtistResident','setArtistTalking','setSocrates','restoreResidentState','useFloorLanding'];M.homeBridge.supported.push(...extraMethods);
@@ -76,5 +77,6 @@ try{
  installPhilosopherQuarter(M,T);
  installSocratesTour(M,T,socrates);
  installOrigamiPark(M,T);
+ M.storyJourney=installDiscoveryStory(M);
  M.status('ready');
 }catch(error){console.error('Original district integration failed',error);M.status(error.message);}

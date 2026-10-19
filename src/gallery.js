@@ -233,7 +233,7 @@ function updateGamepad(dt){
  if(blocked&&!controllerMenu&&activeControlPanel()&&(input.next||input.previous||Math.abs(input.uiX)>.55||Math.abs(input.uiY)>.55)){setControllerMenu(true);lastControlMove=performance.now();focusControllerControl(input.previous||input.uiX<-.55||input.uiY<-.55?-1:1);return;}
  if(input.menu){if(!inside&&!modalActive()){quickStart('city');return;}setControllerMenu(!controllerMenu);return;}
  if(controllerMenu){const stick=Math.abs(input.uiY)>.55?Math.sign(input.uiY):Math.abs(input.uiX)>.55?Math.sign(input.uiX):0;if(input.next||input.previous||stick&&performance.now()-lastControlMove>300){focusControllerControl(input.previous?-1:input.next?1:stick);lastControlMove=performance.now();}if(input.scroll)(activeControlPanel()||document.scrollingElement)?.scrollBy({top:input.scroll*260,behavior:'instant'});if(input.confirm){const node=controllerControls().find(el=>el===el.ownerDocument.activeElement);if(node)node.click();}return;}
- if(blocked){if(input.confirm){if(!closeControlPanel())setControllerMenu(true);}return;}
+ if(blocked){if(input.confirm){if(activeControlPanel()?.dataset.confirmFocused==='true'){const node=controllerControls().find(el=>el===el.ownerDocument.activeElement);if(node)node.click();else setControllerMenu(true);}else if(!closeControlPanel())setControllerMenu(true);}return;}
  if(input.fast)$('fast-toggle').click();
  if(input.light)$('lantern-toggle').click();
  if(!inside)return;
