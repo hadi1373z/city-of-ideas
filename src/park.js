@@ -48,6 +48,7 @@ window.buildIdeaPark=function(THREE){
     m.position.set(x, y, z);
     m.castShadow = shadow;
     m.receiveShadow = true;
+    if(material===mats.path&&parent===scene&&y<.2)m.visible=window.CITY_CONFIG?.showGroundPaving!==false;
     parent.add(m);
     return m;
   }
@@ -372,11 +373,11 @@ window.buildIdeaPark=function(THREE){
     const material = accent(district.color);
     colors.set(district.id, material);
     const garden = new THREE.Group(); garden.position.set(x, 0, z); scene.add(garden);
-    cylinder(0, .09, 0, 34.5, .18, mats.path, garden, false);
+    cylinder(0, .09, 0, 34.5, .18, mats.path, garden, false).visible=window.CITY_CONFIG?.showGroundPaving!==false;
     cylinder(0, .2, 0, 30.3, .12, index % 2 ? mats.grassDark : mats.grass, garden, false);
-    ring(0, .26, 0, 31.4, 1.2, mats.path, garden);
+    ring(0, .26, 0, 31.4, 1.2, mats.path, garden).visible=window.CITY_CONFIG?.showGroundPaving!==false;
     ring(0, .29, 0, 34, .28, mats.cream, garden);
-    ring(0, .3, 0, 23, 2.7, mats.path, garden);
+    ring(0, .3, 0, 23, 2.7, mats.path, garden).visible=window.CITY_CONFIG?.showGroundPaving!==false;
     const pavilionGroup = new THREE.Group(); garden.add(pavilionGroup);
     pavilion(pavilionGroup, district.id, material);
     mark(pavilionGroup, 'district', district.id);

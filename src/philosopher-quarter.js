@@ -13,7 +13,7 @@ export function createPhilosopherQuarter(T,{language=()=> 'en',canvas=()=>docume
  const label=(parent,text,x,y,z,width=8)=>{const c=canvas();c.width=1024;c.height=192;const texture=new T.CanvasTexture(c);textures.push(texture);const mat=new T.MeshBasicMaterial({map:texture,side:T.DoubleSide,transparent:true});const mesh=new T.Mesh(geometry('label',()=>new T.PlaneGeometry(1,1)),mat);mesh.position.set(x,y,z);mesh.scale.set(width,width*192/1024,1);parent.add(mesh);labels.push({c,texture,text,mat});return mesh;};
  const action=(mesh,home,section)=>{mesh.userData={philosopherId:home.id,philosopherSection:section};targets.push(mesh);return mesh;};
  const pathMaterial=0xc5b797;
- for(const points of quarterPaths)for(let i=1;i<points.length;i++){const [a,b]=[points[i-1],points[i]],dx=b[0]-a[0],dz=b[1]-a[1];const mesh=box(group,4.6,.1,Math.hypot(dx,dz)+1,(a[0]+b[0])/2,.075,(a[1]+b[1])/2,pathMaterial);mesh.rotation.y=Math.atan2(dx,dz);}
+ for(const points of quarterPaths)for(let i=1;i<points.length;i++){const [a,b]=[points[i-1],points[i]],dx=b[0]-a[0],dz=b[1]-a[1];const mesh=box(group,4.6,.1,Math.hypot(dx,dz)+1,(a[0]+b[0])/2,.075,(a[1]+b[1])/2,pathMaterial);mesh.rotation.y=Math.atan2(dx,dz);mesh.visible=globalThis.CITY_CONFIG?.showGroundPaving!==false;}
  const sign=label(group,()=>language()==='fa'?'محلهٔ فیلسوفان · شش خانه':'PHILOSOPHERS’ QUARTER · SIX HOMES',-260,3.3,-130,15);sign.rotation.y=Math.PI/2;
  cylinder(group,.13,3.5,-260,1.75,-130,0x625b4b);
  for(const home of PHILOSOPHERS){
@@ -29,7 +29,7 @@ export function createPhilosopherQuarter(T,{language=()=> 'en',canvas=()=>docume
   for(const z of [-11,11])box(root,20.6,.25,.65,0,3.86,z,home.color);
   action(label(root,()=>pickLanguage(home.name,language()),0,4.7,11.35,8),home,'intro');
   label(root,()=>pickLanguage(home.home,language()),0,3.15,11.23,7.4);
-  box(root,3,.08,5,0,.09,14,pathMaterial);
+  box(root,3,.08,5,0,.09,14,pathMaterial).visible=globalThis.CITY_CONFIG?.showGroundPaving!==false;
   // Library desk with a real interactive book, plus an unobstructed centre aisle.
   box(root,4,.18,1.8,4,1.2,-6,wood);block(home,4,-6,4,1.8);
   for(const x of [2.4,5.6])box(root,.15,1.1,1.4,x,.63,-6,wood);

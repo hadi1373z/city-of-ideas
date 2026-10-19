@@ -12,6 +12,6 @@
   }
   const end=(ps.length-1)*4;ix.push(0,1,2,1,3,2,end,end+2,end+1,end+1,end+2,end+3);
   const indexed=new T.BufferGeometry();indexed.setAttribute('position',new T.Float32BufferAttribute(v,3));indexed.setIndex(ix);const geo=indexed.toNonIndexed();indexed.dispose();geo.computeVertexNormals();
-  const mesh=new T.Mesh(geo,material);mesh.name='Continuous connected city paving';mesh.userData={groundRoute:true,width,points:ps.map(p=>[...p])};parent.add(mesh);return mesh;
+  const mesh=new T.Mesh(geo,material);mesh.name='Continuous connected city paving';mesh.visible=g.CITY_CONFIG?.showGroundPaving!==false;mesh.userData={groundRoute:true,width,points:ps.map(p=>[...p])};parent.add(mesh);return mesh;
  };
 })(typeof window!=='undefined'?window:globalThis);

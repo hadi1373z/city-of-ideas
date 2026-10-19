@@ -4,7 +4,7 @@ window.cityGroundFloorHome=function(source){
  house.rooms=house.rooms.filter(r=>ids.has(r.id));house.doors=house.doors.filter(d=>ids.has(d.a)&&ids.has(d.b));house.ideas=house.ideas.filter(i=>ids.has(i.roomId));
  if(house.designObjects)house.designObjects=house.designObjects.filter(o=>o.placement==='garden'||ids.has(o.roomId));
  if(house.resident)house.resident.roomFeatures=(house.resident.roomFeatures||[]).filter(f=>ids.has(f.roomId));
- house.residence={version:1,floors:1};house.stairs=[];return house;
+ house.residence={version:1,floors:1};house.stairs=[];house.sharedCityApproach=true;return house;
 };
 window.createGalleryCity=function(T,ctx){
  const {scene,mesh,box,cylinder,torus,textSign,materials}=ctx,S=window.CITY_SOURCES;
