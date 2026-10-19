@@ -48,7 +48,7 @@ window.createGalleryCity=function(T,ctx){
  const priorMountainLandingNodes=new Set(city.children);
  const start=pointAt(0);
  // The roof connection owns the single continuous summit terrace.
- const lift=new T.Group();lift.name='Mountain return lift';city.add(lift);for(const x of [-2.7,2.7])for(const z of [path.localLift.z-2,path.localLift.z+2])box(.10,A.top+3,.10,bronze,path.localLift.x+x,(A.top+3)/2,z,city);
+ // Return-lift movement is independent of the removed four freestanding guide poles.
  const glass=new T.MeshBasicMaterial({color:0x94b5b4,transparent:true,opacity:.12,side:T.DoubleSide,depthWrite:false});box(5.4,A.top+3,.04,glass,path.localLift.x,(A.top+3)/2,path.localLift.z+2,city);
  const liftCab=box(5.3,.16,4,pathMaterial,path.localLift.x,A.top-.08,path.localLift.z,city);const returnSign=textSign('آسانسور بازگشت به میدان','#efcf92',6,.6,city);returnSign.position.set(path.localLift.x,A.top+2.4,path.localLift.z+1.5);
  const landingRotation=new T.Matrix4().makeTranslation(A.x,0,A.z).multiply(new T.Matrix4().makeRotationY(-Math.PI/2)).multiply(new T.Matrix4().makeTranslation(-A.x,0,-A.z));for(const node of city.children)if(!priorMountainLandingNodes.has(node))node.applyMatrix4(landingRotation);
