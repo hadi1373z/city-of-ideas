@@ -75,9 +75,9 @@ function buildArchitecture(){
   torus(inner+.16,.047,materials.rail,y+1.42);torus(inner+.16,.029,materials.rail,y+.82);
   galleryCeilingArc(y+7.47);
   for(let i=0;i<144;i++){const a=i*Math.PI*2/144;railPosts.push({position:polar(inner+.16,a,y+.89)})}
-  for(let i=0;i<44;i++){const a=i*Math.PI*2/44;if(f>0||Math.abs(Math.sin(a))>.08)columns.push({position:polar(outer-.7,a,y+4)});const q=polar(inner+3,a,y+7.18),end=polar(outer-.7,a,y+7.18),delta=new THREE.Vector3().subVectors(end,q);if(Array.from({length:31},(_,j)=>inner+3+j*(outer-inner-3.7)/30).every(r=>!gallerySpiral.contains(Math.sin(a)*r,-Math.cos(a)*r,.6)))ceilingSpokes.push({position:q.clone().add(end).multiplyScalar(.5),quaternion:new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0,1,0),delta.clone().normalize()),scale:new THREE.Vector3(1,delta.length(),1)})}
+  for(let i=0;i<44;i++){const a=i*Math.PI*2/44;if(f>0||Math.abs(Math.cos(a))>.08)columns.push({position:polar(outer-.7,a,y+4)});const q=polar(inner+3,a,y+7.18),end=polar(outer-.7,a,y+7.18),delta=new THREE.Vector3().subVectors(end,q);if(Array.from({length:31},(_,j)=>inner+3+j*(outer-inner-3.7)/30).every(r=>!gallerySpiral.contains(Math.sin(a)*r,-Math.cos(a)*r,.6)))ceilingSpokes.push({position:q.clone().add(end).multiplyScalar(.5),quaternion:new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0,1,0),delta.clone().normalize()),scale:new THREE.Vector3(1,delta.length(),1)})}
   // Curved glass exterior: intentionally transparent so the circulation remains visible.
-  const glassTransforms=[];for(let i=0;i<72;i++){const a=i*Math.PI*2/72;if(f===0&&Math.abs(Math.sin(a))<.07)continue;glassTransforms.push({position:polar(outer-.25,a,y+3.9),yaw:-a-Math.PI/2})}instances(new THREE.BoxGeometry(Math.PI*2*(outer-.25)/72+.03,6.5,.06),materials.glass,glassTransforms);
+  const glassTransforms=[];for(let i=0;i<72;i++){const a=i*Math.PI*2/72;if(f===0&&Math.abs(Math.cos(a))<.07)continue;glassTransforms.push({position:polar(outer-.25,a,y+3.9),yaw:-a-Math.PI/2})}instances(new THREE.BoxGeometry(Math.PI*2*(outer-.25)/72+.03,6.5,.06),materials.glass,glassTransforms);
   const color=new THREE.Color(floors[f].color);
   for(let j=0;j<3;j++){
    const angle=Math.PI/2+.56+j*Math.PI*2/3,p=polar(exhibitRadius,angle,y+.42),root=new THREE.Group();root.position.copy(p);root.rotation.y=-angle-Math.PI/2;root.scale.setScalar(1.45);scene.add(root);
@@ -109,7 +109,7 @@ function buildArchitecture(){
    for(const x of[-leafSide*.08,-leafSide*1.90])box(.13,3.24,.10,doorWood,x,1.66,0,leaf);for(const y of[.10,1.02,3.22])box(1.96,.13,.10,doorWood,center,y,0,leaf);box(1.72,.83,.08,doorWood,center,.56,0,leaf);box(1.72,2.04,.035,doorGlazing,center,2.10,0,leaf);box(.045,.48,.09,materials.metal,-leafSide*1.72,1.45,.12,leaf);
   }
  }
- const transoms=[];for(const a of[0,Math.PI])transoms.push({position:polar(outer-.25,a,(3.85+7.15)/2),yaw:-a-Math.PI/2});
+ const transoms=[];for(const a of[-Math.PI/2,Math.PI/2])transoms.push({position:polar(outer-.25,a,(3.85+7.15)/2),yaw:-a-Math.PI/2});
  instances(new THREE.BoxGeometry(Math.PI*2*(outer-.25)/72+.03,7.15-3.85,.06),materials.glass,transoms).name='Facade glazing above ground doors';
  for(const side of[-1,1]){const entry=textSign('گالری زرتشت','#e3d8be',4.6,.65);entry.position.set(0,4.15,side*(outer+.5));entry.rotation.y=side<0?Math.PI:0;entry.name='Opposite gallery entrance '+side;box(4.3,.18,6.2,materials.stone,0,.37,side*(outer+.65));}
 

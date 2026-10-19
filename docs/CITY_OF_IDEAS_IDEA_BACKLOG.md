@@ -320,5 +320,5 @@ The city now opens at the overview on every visit. The desk-book cinematic is an
 - A framed door at the western city edge leads there; a return door leads back. Walk through or use the nearby keyboard/controller/button interaction. Other places > Visit the door at the world’s edge provides a convenient approach.
 - The start screen offers exactly two opening modes: Explore the city, or Begin with the book. Existing mountain/story and destination options sit under a secondary disclosure.
 - Removed the full-height return-lift glass screen. Kept the functioning return platform.
-- Door glazing now shares the facade glass, facet width, radius and thickness. Entrance glass gaps and columns align with the actual opposite entrances. Gallery doors are retained: the user clarified that the requested removal concerned the two trees in Dalí’s house.
+- Door glazing now shares the facade glass, facet width, radius and thickness. Entrance glass facets align with the actual opposite entrances; ground-floor columns keep both entry axes clear. Gallery doors are retained: the user clarified that the requested removal concerned the two trees in Dalí’s house.
 - Removed the two landscape trees intersecting Dalí’s residence and their collision circles.
