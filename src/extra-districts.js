@@ -87,6 +87,10 @@ export async function createExtraDistricts(THREE,options={}){
   const mathDeduplication=removeRepeatedMathExterior(THREE,mathModels);
   for(const model of mathModels){model.group.name='Mathematics original level '+(model.floor+1);model.group.userData.cityDestination='mathematics';mount(model,transforms.mathematics);}
   makers=mount(F.buildMakersCity(THREE),transforms.makers);makers.group.userData.cityDestination='makers';
+  // Remove the obsolete travel gateway, including both boards and its blocking posts.
+  const travelGate=[];makers.group.traverse(o=>{if(o.userData?.cityAction==='travel')travelGate.push(o);});
+  for(const node of travelGate)node.removeFromParent();
+  for(let i=makers.colliders.length-1;i>=0;i--)if(makers.colliders[i].label==='Travel gate post')makers.colliders.splice(i,1);
   for(const hall of makers.houses)hall.group.userData.cityDestination='makers:'+hall.id;
   // The source add-on's disposal normally owns its base. A facade with a no-op
   // base disposer lets this additive layer own only Dalí and protect all ten lots.

@@ -25,6 +25,9 @@ const report={three:THREE.REVISION,sourceHashes:{},mathActions:0,conceptIds:[],m
 for(const name of moduleNames){const data=await readFile(new URL(name,sourceBase));report.sourceHashes[name]={sha256:createHash('sha256').update(data).digest('hex'),bytes:data.length};}report.sourceHashes['principal-three.min.js']={sha256:createHash('sha256').update(bundle).digest('hex'),bytes:Buffer.byteLength(bundle)};
 const layer=await createExtraDistricts(THREE,{scene,city,sourceBaseUrl:sourceBase.href,factories:F,buildHome:(T,house,options)=>buildHome(T,house,{...options,owner:null,source:{ARTISTS:F.ARTISTS}}),fetch:async(url,options)=>{fetches.push({url,credentials:options.credentials});return new Response('<svg xmlns="http://www.w3.org/2000/svg" width="720" height="480"></svg>',{headers:{'Content-Type':'image/svg+xml'}});}});
 assert.equal(scene.children.includes(layer.group),true);assert.equal(original.houses.length,10);assert.equal(city.art.houses.length,11);assert.deepEqual(baseSnapshot(),baseBefore);assert.equal(borrowedDisposals,0);assert.ok(layer.mathDeduplication.regularRemoved>0);assert.ok(layer.mathDeduplication.instancesRemoved>0);report.mathDeduplication=layer.mathDeduplication;
+const remainingTravelGate=[];layer.makers.group.traverse(o=>{if(o.userData?.cityAction==='travel')remainingTravelGate.push(o);});
+assert.equal(remainingTravelGate.length,0,'obsolete travel boards and posts are removed');
+assert.equal(layer.makers.colliders.some(c=>c.label==='Travel gate post'),false,'removed posts cannot block movement');
 const ray=new THREE.Raycaster(),concepts=new Set();
 const navigation=await createDistrictNavigation(layer,{findCityPath,baseCanStand:(x,z)=>!(x>-1&&x<1&&z>90&&z<92)});
 assert.equal(navigation.canStand(0,91),false);assert.equal(navigation.canStand(0,94),true);assert.equal(navigation.canStand(-215,100.3,{y:2.13}),false);report.originalNavigationPaths=0;
