@@ -15,7 +15,7 @@ html[dir=ltr] .welcome{text-align:left}html[dir=ltr] .identity{text-align:left}h
 body:not([data-mode="gallery"]) #gallery-spiral-start{display:none}body[data-mode="gallery"] #origami-open,body[data-mode="gallery"] #socrates-tour-open{display:none}
 @media(max-width:450px){.masthead{top:12px;left:12px;right:12px;flex-direction:column;align-items:stretch;gap:7px}.identity{gap:8px}.identity strong{font-size:15px}.identity small{display:none}.ring-mark{width:25px;height:25px;flex:none}.ring-mark:after{inset:5px}.ring-mark:before{left:10px;top:10px}.header-actions{justify-content:flex-end}.header-actions #city-exit{max-width:none}.header-actions .glass{font-size:10px}.reader-panel{top:100px}#socrates-studio{top:100px;max-height:calc(100dvh - 112px)}}
 
-body[data-mode="city"] .visit-actions{display:flex!important}body[data-mode="city"] .visit-actions>:not(#fast-toggle):not(#lantern-toggle):not(#music-open):not(#music-toggle):not(#visit-notebook-open){display:none!important}
+body[data-mode="city"] .visit-actions{display:flex!important}body[data-mode="city"] .visit-actions>:not(#fast-toggle):not(#lantern-toggle):not(#music-open):not(#music-toggle):not(#visit-notebook-open):not(#take-photo){display:none!important}
 
 .visit-actions>#source-tools-open,.visit-actions>#map-toggle,.visit-actions>#philosophers-open,.visit-actions>#socrates-tour-open,.visit-actions>#origami-open{display:none!important}
 
@@ -29,3 +29,5 @@ body[data-mode="city"] .visit-actions{display:flex!important}body[data-mode="cit
 #music-toggle{min-height:44px}body[data-mode="city"] .visit-actions #music-toggle{display:block!important}@media(max-width:760px){body[data-mode="city"] .visit-actions{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
 @media(max-width:760px){body[data-mode="city"] .route-label{bottom:158px}body[data-mode="city"] .touch-pad{bottom:215px}}
+
+#take-photo{min-height:44px}#city-photo-status{position:fixed;z-index:55;inset-inline-start:50%;bottom:110px;transform:translateX(-50%);max-width:min(90vw,570px);padding:13px 19px;border:1px solid #efbc6a66;border-radius:5px;background:#101b21ed;color:#f4eadb;text-align:center;font-size:12px;line-height:1.7;pointer-events:none}#photo-shutter{position:fixed;inset:0;z-index:50;background:#fff;opacity:0;pointer-events:none}#photo-shutter.firing{animation:city-photo-shutter .22s ease-out}@keyframes city-photo-shutter{from{opacity:.3}to{opacity:0}}@media(max-width:760px){#city-photo-status{bottom:205px;width:max-content;max-width:86vw;font-size:11px}}@media(prefers-reduced-motion:reduce){#photo-shutter{display:none}}

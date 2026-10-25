@@ -1,0 +1,14 @@
+const assert=require('node:assert/strict'),vm=require('node:vm'),fs=require('node:fs');
+const window={};vm.runInNewContext(fs.readFileSync('src/scene-photo.js','utf8'),{window});
+const events=[],downloads=[];let allowed=true,callback,calls=0;
+const canvas={width:1600,height:900,toBlob(fn,type){assert.equal(type,'image/png');calls++;callback=fn;}};
+const photo=window.createCityPhotoCapture({canCapture:()=>allowed,onState:(state,detail)=>events.push({state,...detail}),save:(blob,name)=>downloads.push({blob,name}),now:()=>new Date('2026-10-25T15:12:13.456Z')});
+assert.equal(photo.request(),true);assert.equal(calls,0,'A request waits for a fresh rendered frame');assert.equal(photo.busy,true);assert.equal(photo.request(),false,'Repeated requests do not create duplicate downloads');
+assert.equal(photo.afterRender(canvas),true);assert.equal(calls,1);assert.equal(photo.afterRender(canvas),false);assert.equal(photo.request(),false,'PNG encoding cannot overlap another capture');
+canvas.width=800;canvas.height=450;const blob={type:'image/png',size:1234};callback(blob);assert.equal(photo.busy,false);assert.equal(downloads.length,1);assert.equal(downloads[0].blob,blob);assert.equal(downloads[0].name,'city-of-ideas-photo-2026-10-25T15-12-13-456Z.png');assert.equal(events.at(-1).width,1600,'Export metadata keeps the captured size across a resize');assert.equal(events.at(-1).height,900);
+allowed=false;assert.equal(photo.request(),false);assert.equal(events.at(-1).state,'walk');assert.equal(downloads.length,1,'An overview cannot be exported as a first-person photo');
+allowed=true;photo.request();allowed=false;assert.equal(photo.afterRender(canvas),false,'A changed camera mode cancels a pending photo');assert.equal(calls,1);
+allowed=true;photo.request();photo.afterRender(canvas);callback(null);assert.equal(events.at(-1).state,'error');assert.equal(photo.busy,false);assert.equal(photo.request(),true,'Failed encodes can be retried');photo.afterRender({toBlob(){throw Error('Canvas read blocked');}});assert.equal(events.at(-1).state,'error');assert.equal(photo.busy,false);
+photo.request();photo.afterRender(canvas);photo.dispose();callback(blob);assert.equal(downloads.length,1,'Leaving the page cancels a pending download');assert.equal(photo.request(),false);
+const failure=window.createCityPhotoCapture({save(){throw Error('Download failed');},onState:state=>events.push({state})});failure.request();failure.afterRender(canvas);callback(blob);assert.equal(events.at(-1).state,'error');assert.equal(failure.busy,false);
+console.log('PASS: photo export waits for a fresh first-person frame, encodes PNG once, survives resize, rejects overview cameras, recovers from failure and cancels on disposal.');
