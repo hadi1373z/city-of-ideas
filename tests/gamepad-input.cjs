@@ -30,3 +30,26 @@ pads=[pad];pad.axes=[0,0,0,0];pad.buttons.forEach(b=>b.pressed=false);input.poll
 // L1 / LB takes one photo per press, including while menus block walking.
 pad.buttons.forEach(b=>b.pressed=false);pad.axes=[0,0,0,0];input.poll(true);pad.buttons[4].pressed=true;state=input.poll(true);assert.equal(state.photo,true);assert.equal(state.scroll,0);assert.equal(input.poll(true).photo,false);pad.buttons[4].pressed=false;input.poll(true);pad.buttons[5].pressed=true;state=input.poll(true);assert.equal(state.scroll,1);assert.equal(state.photo,false);pad.axes[3]=-.8;state=input.poll(true);assert.ok(state.uiLookY<-.7);assert.equal(state.lookY,0);
 vm.runInNewContext(fs.readFileSync('src/scene-photo.js','utf8'),{window});let photos=0;const capture=window.createCityPhotoCapture({save(){photos++;}}),canvas={width:100,height:50,toBlob(fn){fn({type:'image/png'});}};pad.buttons.forEach(b=>b.pressed=false);input.poll();pad.buttons[4].pressed=true;for(let i=0;i<4;i++){if(input.poll().photo)capture.request();capture.afterRender(canvas);}assert.equal(photos,1);pad.buttons[4].pressed=false;input.poll();pad.buttons[4].pressed=true;if(input.poll(true).photo)capture.request();capture.afterRender(canvas);assert.equal(photos,2);pads=[];state=input.poll();assert.equal(state.photo,false);assert.equal(state.uiLookY,0);console.log('L1 takes first-person photos without scrolling or repeats; R1 and right-stick panel scrolling remain available.');
+
+// Learn the physical shoulder on non-standard layouts; ignore the A press
+// that opened setup, consume assignment, and persist only a hashed device key.
+const memory=new Map(),storage={getItem:k=>memory.get(k),setItem:(k,v)=>memory.set(k,v)};
+const custom={id:'Test shoulder layout',mapping:'',index:2,connected:true,axes:[0,0,0,0],buttons:Array.from({length:18},()=>({pressed:false}))};
+let customPads=[custom];const learned=window.createCityGamepad(()=>customPads,storage);
+assert.equal(learned.beginPhotoBinding(),false);learned.poll();
+custom.buttons[0].pressed=true;learned.poll(true);assert.equal(learned.beginPhotoBinding(),true);
+state=learned.poll(true);assert.equal(state.photoLearning,true);assert.equal(state.photoAssigned,false);
+custom.buttons[7].pressed=true;state=learned.poll(true);assert.equal(state.photoAssigned,false,'Buttons must first be released');
+custom.buttons.forEach(b=>b.pressed=false);learned.poll(true);custom.buttons[7].pressed=true;
+state=learned.poll(true);assert.equal(state.photoAssigned,true);assert.equal(state.photo,false);assert.equal(state.music,false);assert.equal(state.confirm,false);assert.equal(state.photoButton,7);assert.equal(state.photoMappingSaved,true);
+assert.equal(learned.poll().photo,false,'Holding the assignment button must not capture');
+custom.buttons[7].pressed=false;learned.poll();custom.buttons[7].pressed=true;
+state=learned.poll(true);assert.equal(state.photo,true);assert.equal(state.music,false,'The learned shoulder must not trigger its former music action');assert.equal(learned.poll().photo,false);
+assert(![...memory.values()][0].includes(custom.id),'Raw device identity is not saved');
+const restored=window.createCityGamepad(()=>customPads,storage);assert.equal(restored.poll().photoButton,7);assert.equal(restored.poll().photo,false);
+customPads=[];assert.equal(restored.poll().connected,false);customPads=[custom];assert.equal(restored.poll().photoButton,7);assert.equal(restored.poll().photo,false);
+custom.buttons[7].pressed=false;restored.poll();custom.buttons[7].pressed=true;assert.equal(restored.poll().photo,true);
+restored.resetPhotoBinding();assert.equal(restored.poll().photoButton,4);assert.equal(window.createCityGamepad(()=>customPads,storage).poll().photoButton,4);
+restored.beginPhotoBinding();restored.cancelPhotoBinding();assert.equal(restored.poll().photoLearning,false);
+const broken=window.createCityGamepad(()=>customPads,{getItem(){throw Error('Unavailable');},setItem(){throw Error('Unavailable');}});broken.poll();assert(broken.beginPhotoBinding());custom.buttons.forEach(b=>b.pressed=false);broken.poll();custom.buttons[6].pressed=true;state=broken.poll();assert.equal(state.photoAssigned,true);assert.equal(state.photoMappingSaved,false);custom.buttons[6].pressed=false;broken.poll();custom.buttons[6].pressed=true;assert.equal(broken.poll().photo,true,'Session binding works even when storage is unavailable');
+console.log('Custom L1 learning consumes assignment, requires release, survives reconnection, persists by device, avoids conflicting actions and tolerates unavailable storage.');
