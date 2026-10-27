@@ -1,4 +1,5 @@
-import {installVisitMemory} from './visit-memory.js';
+import {installVisitMemory} from './visit-memory.js?v=question1';
+import {installQuestionWalk} from './question-walk.js';
 import {artistLineOfSight} from './artist-line-of-sight.js';
 import {installPhilosopherQuarter} from './philosopher-ui.js';
 import {installSocratesTour} from './socrates-tour.js';
@@ -87,6 +88,7 @@ try{
  installOrigamiPark(M,T);
  M.storyJourney=installDiscoveryStory(M);
  M.studyBook=installStudyBook(M,T);
+ installQuestionWalk(M,T);
  M.status('ready');
  installCinematicIntro(M,T,socrates);
 }catch(error){document.body.classList.remove('cinematic-pending');console.error('Original district integration failed',error);M.status(error.message);}
