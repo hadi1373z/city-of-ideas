@@ -22,7 +22,7 @@ export function installGraveyardWorld(M,T,layout,entry){
  M.city.canStand=(x,z)=>remote()?!inWorld(bounds,x,z)?false:oldCan(x,z):x< -270?false:oldCan(x,z);
  M.extraGround=(x,z)=>{const y=oldGround?.(x,z);return Number.isFinite(y)?y:remote(x)?.13:undefined;};
  const go=destination=>{M.clearMovement();M.arrive(destination==='graveyard'?entry:{x:CITY_EDGE_DOOR.x+12,z:CITY_EDGE_DOOR.z,y:.13,yaw:-Math.PI/2});};
- const visitDoor=()=>M.arrive({x:CITY_EDGE_DOOR.x+12,z:CITY_EDGE_DOOR.z,y:.13,yaw:Math.PI/2});
+ const visitDoor=()=>M.arrive({x:CITY_EDGE_DOOR.x+7,z:CITY_EDGE_DOOR.z,y:.13,yaw:Math.PI/2});
  M.startExtra=d=>{if(!['graveyard','graveyard-door'].includes(d))return oldStart?.(d);visitDoor();return true;};
  const visit=document.createElement('button');visit.id='visit-world-door';visit.type='button';visit.className='glass';visit.onclick=visitDoor;document.querySelector('.welcome-secondary')?.append(visit);
  const languageChanged=()=>visit.textContent=CITY_I18N.lang==='fa'?'دیدار از دروازهٔ لبهٔ جهان':CITY_I18N.lang==='de'?'Die Tür am Weltrand besuchen':'Visit the door at the world’s edge';languageChanged();addEventListener('city-language',languageChanged);
