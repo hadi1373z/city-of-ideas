@@ -1,0 +1,28 @@
+{
+  "sourceProject": "appgprj_6ade48309fd48191acf9b1b6b7b61cb1",
+  "sourceCommit": "cf47412",
+  "edition": "Restored illustrated cast / 04",
+  "files": {
+    "film.html": "db8c10294d075eae9954a0bef84e23668c8c234c1638531b6caa7a5a8a76e12a",
+    "index.html": "d862f22af92d2915b722a0184af7b9c400efa21cdbcb33fbcc78ecd3311e11ce",
+    "mesh-report.json": "d9221e31061ef4129d9142deeef7170c0087ab904567c49f7829825da686b30f",
+    "README.txt": "9326d8e117ef54faf35fa66b25644a0392f9dc389888e36ccd522c8c4daf5911",
+    "studio.html": "11f12fc6c37fd3b14403ff50d553958757eb4756bfd201271ee26673b5295e56",
+    "assets/anonymous.glb": "1840889409fef7678303b9daf8174cd1acc483c9c5b56c402daee0280df11d41",
+    "assets/character-adapter.js": "6173c1c3eb67eeeaa92a12448d00d2931579be4b3a7fa673d202f02ea455d082",
+    "assets/embedded-anonymous.js": "8ddf87d09522b65f360735f3853aa6d880d2a06b6034bf0f37ffacddde2cc512",
+    "assets/embedded-models.js": "c4c8c87ee0460dde81b4792701bfddfe8eabe981b62d7d5bfcc95adce4ef4336",
+    "assets/embedded-nietzsche.js": "0bf7e99ee1be8babf01421712eb2e9da016c11717964992c143240532cbe3b64",
+    "assets/embedded-socrates.js": "6238e50ad504386100f90700278a9696447cd8255117a34a6be210b77ea71162",
+    "assets/embedded-zarathustra.js": "e202bc62c32eb94af36b7d532de75cfa4a2d7ba66eceaf2a45c28199a36f011c",
+    "assets/legacy-actors.js": "522a39bf8d312c2c5a3fc3dd0022e0e1bbcf80e3337afa59e0a8b9d6f79cef77",
+    "assets/nietzsche.glb": "bf3d64852b8740ee5d6db74a4cf4cdd3709a142cb9f4a8fa9a322ec1f84e8961",
+    "assets/ramsey.glb": "1bdda8f660344d09d4a4234a710ee803cab1b6c859d899eee569865543786b15",
+    "assets/socrates.glb": "c8b2a243bc01e39fd0d75e0e2a126bc65501ed68a69639b654ee72660f7e4205",
+    "assets/turing.glb": "17298338dfe68aee2716ce6afd91dcaacb700f49fad5dfd8103dc6aeb6168a93",
+    "assets/zarathustra.glb": "3c9c329802693128eb1ac293c172d06fa5d72cd72aa860411f4ee1da0cb63ae5",
+    "vendor/gltf-loader.js": "d9a0052d52368cc532469d617b35b97a4a42167e8481f50f9c5158a3dc2fd43f",
+    "vendor/THREE-LICENSE.txt": "852e0e8699169bf9f6fdc6bda3e682d078dcbc738b5d33e74df594721bff271d",
+    "vendor/three.min.js": "a4a80fb9b30b9d4e3959be3c19c36ce1fb4aaee237893320232a575d45098120"
+  }
+}

@@ -53,7 +53,12 @@ const digest=file=>crypto.createHash('sha256').update(fs.readFileSync(path.join(
 assert.equal(digest('city-source-assets/home-tools/math-city/atlas/index.html'),'bd07240709cc2626f581556f1b272bc8e118a20a98da4ce2e3b711f3aa4d2da4','Canonical Math reader Git blob changed');
 assert.equal(digest('city-source-assets/home-tools/artists-websites.html'),'5fa732497902c19009f7164612846345c513888f2f21436f1bb93dd8cca168d6','Canonical artist websites Git blob changed');
 assert.equal(modelDigests.size,36,'Original model assets must remain distinct');assert.equal(songDigests.size,10,'Original songs must remain distinct');
-for(const file of glbs)assert(modelDigests.has(digest(file)),'Unexpected or changed duplicate model: '+file);
+// The film edition has six independently authored character assets, preserved by checksum.
+const filmManifest=JSON.parse(read('ramsey-film/import-provenance.json'));
+const filmModels=new Set(['anonymous','nietzsche','ramsey','socrates','turing','zarathustra'].map(id=>'ramsey-film/assets/'+id+'.glb'));
+assert.equal(glbs.filter(file=>filmModels.has(file)).length,6,'All six film characters must be present');
+for(const [rel,sha]of Object.entries(filmManifest.files)){assert(!rel.startsWith('/')&&!rel.split('/').includes('..'));assert.equal(digest('ramsey-film/'+rel),sha,'Film edition changed: '+rel);}
+for(const file of glbs)assert(filmModels.has(file)||modelDigests.has(digest(file)),'Unexpected or changed duplicate model: '+file);
 for(const file of songs)assert(songDigests.has(digest(file)),'Unexpected or changed duplicate song: '+file);
 for(const file of glbs){const data=fs.readFileSync(path.join(src,file));assert.equal(data.readUInt32LE(0),0x46546c67);assert.equal(data.readUInt32LE(4),2);assert.equal(data.readUInt32LE(8),data.length);const name=path.basename(file,'.glb');if(/^[0-9a-f]{64}$/.test(name))assert.equal(crypto.createHash('sha256').update(data).digest('hex'),name,'Source GLB byte integrity: '+file);}
 assert(all.includes('city-source-assets/park-tools/atlas.html'),'Full Park reader must be retained');
