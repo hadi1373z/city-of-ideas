@@ -1,7 +1,7 @@
 async function loadAcademicGLB(id) {
  if(['socrates','nietzsche','zarathustra'].includes(id)){
   const actor=id==='socrates'?buildSocratesGuide(THREE):buildLiteraryCharacter(THREE,id);
-  actor.id=id;actor.restored=true;actor.face=null;actor.animations=[];actor.style='restored-illustrated-v1';return actor;
+  actor.id=id;actor.restored=true;actor.face=null;actor.animations=[];actor.style=id==='socrates'?'restored-illustrated-v1':'sculpted-literary-v2';return actor;
  }
  const encoded=window.CITY_CHARACTER_ASSETS[id],raw=atob(encoded),bytes=new Uint8Array(raw.length);
  for(let i=0;i<raw.length;i++)bytes[i]=raw.charCodeAt(i);

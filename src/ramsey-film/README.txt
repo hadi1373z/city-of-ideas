@@ -38,3 +38,7 @@ https://www.makehumancommunity.org/about/license.html
 https://github.com/makehumancommunity/makehuman/tree/master/makehuman/data
 Three.js r160, GLTFLoader, GLTFExporter: MIT; vendor/THREE-LICENSE.txt.
 The original scene and audio retain their original provenance and ownership.
+
+Edition 05 — 2026-11-02
+The city now enters this room at the Ramsey House doorway. Walk back through the room exit or choose Return to city. The conversation pauses on departure and resumes during the same visit session. Left stick walks; right stick looks; A starts/pauses; B leaves film mode, then exits the room.
+Nietzsche and Zarathustra share revised sculpted geometry between the studio and film. Their GLBs contain standing and seated poses (not skin rigs). Both original five-minute audio recordings are unchanged; voice matching remains separate work.

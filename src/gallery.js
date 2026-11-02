@@ -232,6 +232,7 @@ function updateGamepad(dt){
  Object.assign(padInput,input);
  $('world').dataset.controller=input.connected?'connected':'disconnected';
  if(document.hidden)return;
+ if(window.CITY_MAIN?.ramseyRoom?.active){clearMovement();return;}
  cityPhoto?.updateController(input);
  if(input.photoLearning||input.photoAssigned){clearMovement();return;}
  if(input.photo)cityPhoto?.request();
@@ -251,6 +252,7 @@ function updateGamepad(dt){
 }
 function animate(){requestAnimationFrame(animate);const wallDt=clock.getDelta(),dt=Math.min(wallDt,.5),inputDt=Math.min(wallDt,1),t=performance.now()/1000;
  updateGamepad(Math.min(inputDt,.05));
+ if(window.CITY_MAIN?.ramseyRoom?.active)return;
  if(inside&&!modalActive()&&!panelOpen&&$('reader-panel').hidden&&!controllerMenu){if(visitMode!=="gallery"){updateSharedVisit(inputDt,t);}else if(transition){let q=THREE.MathUtils.clamp((performance.now()-transition.start)/transition.duration,0,1);q=q*q*(3-2*q);player.y=transition.from+(transition.to-transition.from)*q;scene.getObjectByName('lift-platform').position.y=player.y-eye-.05;if(q>=1){currentFloor=transition.target;transition=null;player.x=outer-3.8;player.z=12;player.yaw=Math.PI/2;player.y=currentFloor*spacing+eye+.395;player.pitch=THREE.MathUtils.clamp(Math.atan2(16-player.y,player.z),-.08,.32);$('floor-transition').hidden=true;floorButtons.forEach(b=>b.disabled=false);updateFloorUI();if(pendingCityExit){pendingCityExit=false;pointToward({x:-outer-7,z:0})}}}else{
   let forward=(keys.KeyW||keys.ArrowUp?1:0)-(keys.KeyS||keys.ArrowDown?1:0)+padInput.forward,strafe=(keys.KeyD?1:0)-(keys.KeyA?1:0)+padInput.strafe,turn=(keys.ArrowLeft?1:0)-(keys.ArrowRight?1:0);player.yaw+=turn*inputDt*1.65;
   if(touring){if(gallerySpiralTheta===null)startGallerySpiral();touring=true;const theta=THREE.MathUtils.clamp(gallerySpiralTheta+inputDt*2.8*(movingFast()?2:1)*gallerySpiralDirection,0,gallerySpiral.max),p=gallerySpiral.pointAt(theta);Object.assign(player,{x:p.x,z:p.z,y:p.y+eye,yaw:gallerySpiral.headingAt(theta,gallerySpiralDirection),pitch:-.15});updateGalleryAscent(theta);if(theta===0||theta===gallerySpiral.max){touring=false;$('tour-toggle').textContent=CITY_I18N.t('tour');}}

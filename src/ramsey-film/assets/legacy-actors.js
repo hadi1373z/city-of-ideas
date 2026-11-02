@@ -138,7 +138,7 @@ function buildLiteraryCharacter(T, id) {
   group.name = isNietzsche ? 'Nietzsche · illustrated author' : 'Zarathustra · illustrated wanderer';
   const geometries = new Set(), materials = new Set();
   const material = (color, options = {}) => {
-    const value = new T.MeshToonMaterial({ color, ...options });
+    const value = new T.MeshStandardMaterial({ color, roughness: .82, metalness: 0, ...options });
     materials.add(value);
     return value;
   };
@@ -285,170 +285,80 @@ function buildLiteraryCharacter(T, id) {
   head.name = `${id}-head`;
   head.position.set(0, isNietzsche ? 1.67 : 1.665, -.008);
   body.add(head);
-  let jaw;
-  if (isNietzsche) {
-    // Armand Assante's Nietzsche in When Nietzsche Wept: mature planes, a severe
-    // folded brow, swept-back volume and a bushy three-dimensional moustache.
-    const faceGeometry=new T.SphereGeometry(.199,32,24),p=faceGeometry.attributes.position;
-    for(let i=0;i<p.count;i++) {
-      const x=p.getX(i),y=p.getY(i),z=p.getZ(i),ny=y/.199;
-      const plane=ny<-.22?1.045:ny>.45?.94:1;
-      p.setXYZ(i,x*.84*plane,y*1.19,z*.80-(z<0&&y<-.07?.009:0));
+  // One sculpted surface carries the cheeks, chin, brow and nose.
+  // Geometry is shared by the room, studio and downloadable poses.
+  const faceGeometry=new T.SphereGeometry(1,72,56),fp=faceGeometry.attributes.position;
+  for(let i=0;i<fp.count;i++){
+    const nx=fp.getX(i),ny=fp.getY(i),nz=fp.getZ(i),y=ny*.234;
+    const taper=1-.20*Math.max(0,-ny),x=nx*(isNietzsche?.171:.175)*taper;
+    let z=nz*.153;
+    if(nz<0){
+      const front=Math.pow(-nz,3),nose=Math.exp(-Math.pow(x/.026,2));
+      z-=front*nose*(.037*Math.exp(-Math.pow((y+.015)/.09,2))+.026*Math.exp(-Math.pow((y+.061)/.024,2)));
+      z-=front*.012*Math.exp(-Math.pow((Math.abs(x)-.104)/.040,2)-Math.pow((y+.048)/.055,2));
+      z-=front*.013*Math.exp(-Math.pow((y-.067)/.021,2));
+      z-=front*.013*Math.exp(-Math.pow((y+.175)/.037,2));
     }
-    faceGeometry.computeVertexNormals();mesh(head,faceGeometry,palette.skin);
-    ball(head,.086,0,-.166,-.035,palette.skin,1.12,.73,1.03);
-    ball(head,.078,0,-.202,-.068,palette.skin,1.12,.5,1.0);
-    for(const side of [-1,1]) {
-      ball(head,.043,side*.168,-.013,.012,palette.skin,.57,1,.72);
-      ball(head,.018,side*.178,-.014,-.007,palette.cheek,.5,1,.9);
-      // Cheek planes, a faint nasolabial fold and lower orbital rim.
-      tube(head,[[side*.034,-.095,-.196],[side*.064,-.126,-.179],[side*.077,-.149,-.163]],.0028,palette.crease);
-      const eye=new T.Group();eye.position.set(side*.066,.029,-.151);head.add(eye);eyes.push(eye);
-      ball(eye,.028,0,0,0,palette.eye,1.06,.32,.27);
-      ball(eye,.012,0,-.001,-.008,palette.iris,.83,.74,.35);
-      ball(eye,.007,0,-.001,-.012,palette.ink,.78,.85,.28);
-      ball(eye,.0025,-side*.003,.002,-.014,palette.eye);
-      tube(eye,[[-.03,.003,-.008],[0,.009,-.013],[.03,.003,-.008]],.007,palette.skin);
-      tube(eye,[[-.027,-.006,-.007],[0,-.012,-.01],[.026,-.006,-.007]],.0033,palette.crease);
-      tube(head,[[side*.023,.063,-.155],[side*.057,.078,-.149],[side*.089,.076,-.134],[side*.12,.061,-.113]],.0065,palette.hair);
-      tube(head,[[side*.038,-.006,-.16],[side*.072,-.014,-.151],[side*.109,-.004,-.136]],.0025,palette.crease);
-      tube(head,[[side*.119,.023,-.139],[side*.139,.008,-.117]],.0025,palette.crease);
-    }
-    // Thin round wire spectacles follow the seated dialogue frames from the film.
-    // There are no lens surfaces, so the small deep-set eyes remain visible.
-    const spectacles=new T.Group();spectacles.name='nietzsche-wire-spectacles';head.add(spectacles);
-    const wire=material('#514b40');
-    for(const side of [-1,1]) {
-      const rim=mesh(spectacles,new T.TorusGeometry(.04,.0026,6,36),wire,side*.066,.01,-.184);
-      rim.rotation.y=-side*.08;
-      tube(spectacles,[[side*.106,.017,-.181],[side*.15,.021,-.115],[side*.176,.002,.018]],.0026,wire);
-    }
-    tube(spectacles,[[-.026,.019,-.185],[0,.027,-.208],[.026,.019,-.185]],.0026,wire);
-    // One continuous tapered nose surface, embedded into the facial mesh.
-    // The rear of each cross-section penetrates the face, preventing a floating nose.
-    const noseRows=[
-      [ .092,.019,.018,-.137],
-      [ .063,.024,.024,-.149],
-      [ .020,.027,.031,-.164],
-      [-.030,.027,.040,-.179],
-      [-.063,.031,.044,-.188],
-      [-.086,.036,.041,-.189],
-      [-.104,.031,.030,-.179],
-      [-.115,.017,.018,-.164]
-    ];
-    const noseVertices=[],noseIndices=[],noseRadial=20;
-    for(let r=0;r<noseRows.length;r++){
-      const [y,rx,rz,cz]=noseRows[r];
-      for(let j=0;j<noseRadial;j++){
-        const a=j/noseRadial*Math.PI*2;
-        noseVertices.push(Math.cos(a)*rx,y,cz+Math.sin(a)*rz);
-        if(r<noseRows.length-1){
-          const k=r*noseRadial+j,n=r*noseRadial+(j+1)%noseRadial;
-          noseIndices.push(k,k+noseRadial,n,n,k+noseRadial,(r+1)*noseRadial+(j+1)%noseRadial);
-        }
-      }
-    }
-    const noseGeometry=new T.BufferGeometry();
-    noseGeometry.setAttribute('position',new T.Float32BufferAttribute(noseVertices,3));
-    noseGeometry.setIndex(noseIndices);noseGeometry.computeVertexNormals();
-    mesh(head,noseGeometry,palette.skin);
-    for(const side of [-1,1]) {
-      // Nostrils sit on the underside, not between the nose and the face.
-      ball(head,.0055,side*.020,-.105,-.196,palette.crease,1,.45,.48);
-    }
-    jaw=new T.Group();jaw.position.set(0,-.17,-.159);head.add(jaw);
-    tube(jaw,[[-.038,0,0],[0,-.003,-.009],[.038,.001,0]],.0045,palette.crease);
-    ball(jaw,.029,0,-.011,-.001,palette.cheek,1.15,.13,.35);
-    // Brushed-back hair has height and a visible receding temple line.
-    ball(head,.177,0,.172,.054,palette.hair,1.08,.66,1.04);
-    ball(head,.125,0,.014,.106,palette.hair,1.3,1.23,.63);
-    for(const side of [-1,1]) {
-      ball(head,.058,side*.158,.035,.065,palette.hair,.59,2.15,1.18);
-      ball(head,.033,side*.159,-.043,.023,palette.hair,.38,1.3,.65);
-    }
-    for(let i=0;i<9;i++) {
-      const x=-.137+i*.034;
-      tube(head,[[x,.171+Math.cos(i*.4)*.012,-.047],[x*.84-.013,.254+Math.sin(i*.41)*.016,-.003],[x*.77-.018,.224,.127]],.007,i%4===0?palette.hairLight:palette.hair);
-    }
-    for(const side of [-1,1])tube(head,[[side*.132,.167,-.035],[side*.176,.138,.029],[side*.177,.025,.109],[side*.132,-.105,.13]],.009,palette.hairLight);
-    // Tapered rounded sweeps supply real moustache volume and descending corners.
-    const moustacheSweep=(side)=>{
-      const curve=new T.CatmullRomCurve3([[.004,-.114,-.215],[.054,-.122,-.225],[.096,-.146,-.211],[.116,-.184,-.19],[.142,-.178,-.164]].map(([x,y,z])=>new T.Vector3(side*x,y,z)));
-      const segments=32,radial=12,frames=curve.computeFrenetFrames(segments,false),positions=[],indices=[],radii=[.026,.037,.030,.014,.0015];
-      for(let i=0;i<=segments;i++) {
-        const t=i/segments,center=curve.getPointAt(t),a=t*(radii.length-1),lo=Math.min(radii.length-2,Math.floor(a)),radius=radii[lo]+(radii[lo+1]-radii[lo])*(a-lo);
-        for(let j=0;j<=radial;j++) {
-          const angle=j/radial*Math.PI*2;
-          const n=frames.normals[i].clone().multiplyScalar(Math.cos(angle)).addScaledVector(frames.binormals[i],Math.sin(angle));
-          positions.push(center.x+n.x*radius,center.y+n.y*radius,center.z+n.z*radius);
-          if(i<segments&&j<radial){const k=i*(radial+1)+j;indices.push(k,k+radial+1,k+1,k+1,k+radial+1,k+radial+2);}
-        }
-      }
-      const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(positions,3));g.setIndex(indices);g.computeVertexNormals();mesh(head,g,palette.hair);
-    };
-    ball(head,.042,0,-.123,-.218,palette.hair,1.06,.62,.63);
-    for(const side of [-1,1]) {
-      moustacheSweep(side);
-      for(let i=0;i<5;i++) {
-        const shift=i*.006;
-        tube(head,[[side*(.014+shift),-.105+i*.003,-.239],[side*(.058+shift),-.125+i*.004,-.254],[side*(.097+shift*.5),-.162+i*.004,-.232],[side*(.119+shift*.25),-.186+i*.003,-.198]],.0022,i%3===0?palette.hairLight:palette.hair);
-      }
-    }
-  } else {
-  // Longer, narrower heads and a defined chin keep both figures visibly adult.
-  const faceGeometry = new T.SphereGeometry(.199, 24, 18);
-  const faceVertices = faceGeometry.attributes.position;
-  for (let i=0;i<faceVertices.count;i++) {
-    const x=faceVertices.getX(i), y=faceVertices.getY(i), z=faceVertices.getZ(i);
-    const jawTaper=y<-.045 ? 1-Math.min(.1,(-y-.045)*.7) : 1;
-    faceVertices.setXYZ(i,x*(isNietzsche?.84:.88)*jawTaper,y*1.1,z*.81);
+    fp.setXYZ(i,x,y,z);
   }
-  faceGeometry.computeVertexNormals();
-  mesh(head, faceGeometry, palette.skin);
-  ball(head, .09, 0, -.143, -.029, palette.skin, 1.08, .69, 1.04);
-  for (const side of [-1, 1]) {
-    ball(head, .043, side * (isNietzsche?.168:.175), -.013, .004, palette.skin, .57, 1, .72);
-    ball(head, .018, side * (isNietzsche?.177:.184), -.014, -.018, palette.cheek, .5, 1, .9);
-    ball(head, .032, side * .11, -.068, -.131, palette.cheek, 1, .43, .13);
-    const eye = new T.Group();
-    eye.position.set(side * .067, .024, -.152);
-    head.add(eye);
-    ball(eye, .034, 0, 0, 0, palette.eye, 1.04, .43, .34);
-    ball(eye, .016, 0, -.001, -.011, palette.iris, .8, .74, .3);
-    ball(eye, .009, 0, -.001, -.016, palette.ink, .72, .85, .3);
-    ball(eye, .0035, -side * .004, .004, -.02, palette.eye);
-    tube(eye, [[-.033,.004,-.008],[0,.012,-.013],[.033,.004,-.008]], .0065, palette.skin);
-    tube(eye, [[-.03,-.007,-.007],[0,-.013,-.011],[.03,-.007,-.007]], .0035, palette.cheek);
-    eyes.push(eye);
-    tube(head, [[side * .031, .067, -.15], [side * .068, isNietzsche ? .073 : .079, -.164], [side * .109, .059, -.143]], .011, palette.hair);
-    tube(head, [[side*.047,-.005,-.155],[side*.079,-.012,-.152],[side*.107,-.005,-.139]], .0025, palette.cheek);
-  }
-  ball(head, .034, 0, -.02, -.177, palette.skin, .81, 1.6, 1.17);
-  ball(head, .031, 0, -.064, -.21, palette.skin, .96, .67, .8);
-  for(const side of [-1,1]) ball(head,.017,side*.022,-.068,-.195,palette.skin,1,.65,.8);
-  jaw = new T.Group();
-  jaw.position.set(0, -.158, -.139);
-  head.add(jaw);
-  tube(jaw, [[-.032, 0, 0], [0, -.004, -.006], [.032, 0, 0]], .005, palette.ink);
+  faceGeometry.computeVertexNormals();mesh(head,faceGeometry,palette.skin).name=id+'-sculpted-face';
+  for(const side of [-1,1]){
+    ball(head,.039,side*.171,-.014,.009,palette.skin,.52,1,.67);
+    tube(head,[[side*.177,.012,-.009],[side*.185,-.012,-.015],[side*.176,-.037,-.009]],.004,palette.crease);
+    const eye=new T.Group();eye.position.set(side*.065,.029,-.144);head.add(eye);eyes.push(eye);
+    ball(eye,.025,0,0,0,palette.eye,1.06,.38,.32);
+    ball(eye,.010,0,-.001,-.008,palette.iris,.9,.92,.34);
+    ball(eye,.005,0,-.001,-.011,palette.ink,.9,1,.3);
+    ball(eye,.002,-.002,.002,-.013,palette.eye);
+    tube(eye,[[-.027,0,-.001],[0,.009,-.008],[.027,0,-.001]],.0045,palette.skin);
+    tube(eye,[[-.026,-.003,0],[0,-.009,-.006],[.026,-.003,0]],.0025,palette.crease);
+    tube(head,[[side*.031,.065,-.151],[side*.065,.075,-.151],[side*.106,.061,-.126]],isNietzsche?.005:.006,palette.hair);
+    tube(head,[[side*.097,.015,-.129],[side*.118,.006,-.117]],.0015,palette.crease);
 
-    // Broad continuous hair masses and a tapered beard replace clustered curls.
-    ball(head, .178, 0, .135, .042, palette.hair, 1.06, .53, .98);
-    for (const side of [-1, 1]) {
-      ball(head,.061,side*.159,-.005,.067,palette.hair,.68,2.5,1.05);
-      tube(head, [[side*.04,.204,.02],[side*.13,.174,.025],[side*.17,.075,.063],[side*.162,-.11,.085]], .009, palette.hairLight);
-      tube(head, [[side*.08,.197,.057],[side*.163,.13,.07],[side*.171,-.065,.11]], .005, palette.hairLight);
+  }
+  const jaw=new T.Group();jaw.position.set(0,-.116,-.148);head.add(jaw);
+  tube(jaw,[[-.029,0,0],[0,-.003,-.006],[.029,0,0]],.0028,palette.crease);
+  tube(jaw,[[-.022,-.006,.001],[0,-.008,-.003],[.022,-.006,.001]],.003,palette.cheek);
+  // Sculpted hair cap follows the skull; strands lie on its surface.
+  const hairPoint=(u,v)=>{
+    const theta=u*Math.PI*2,front=(1-Math.cos(theta))/2;
+    const edge=isNietzsche?1.90-.94*front+.12*Math.sin(theta)*front:2.14-1.02*front+.08*Math.cos(theta*2)*front;
+    const phi=.018+v*edge,ripple=1+.012*Math.sin(theta*17+v*3);
+    return [Math.sin(phi)*Math.sin(theta)*.190*ripple,Math.cos(phi)*.247+.012+(isNietzsche?.04:.012)*Math.sin(v*Math.PI)*(1+Math.sin(theta)),Math.sin(phi)*Math.cos(theta)*.178*ripple+.015];
+  };
+  const surface=(name,rows,cols,point,mat)=>{
+    const ps=[],ix=[];for(let y=0;y<=rows;y++)for(let x=0;x<=cols;x++)ps.push(...point(x/cols,y/rows));
+    for(let y=0;y<rows;y++)for(let x=0;x<cols;x++){const k=y*(cols+1)+x;ix.push(k,k+1,k+cols+1,k+1,k+cols+2,k+cols+1);}
+    const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(ps,3));g.setIndex(ix);g.computeVertexNormals();
+    const m=mesh(head,g,mat);m.name=name;m.material.side=T.DoubleSide;return m;
+  };
+  surface(id+'-swept-hair',30,72,hairPoint,palette.hair);
+  for(let i=0;i<38;i++){
+    const pts=[];for(let j=0;j<=10;j++){const p=hairPoint((i/38+j*.0007)%1,.15+j*.077);p[0]*=1.008;p[2]*=1.008;pts.push(p);}
+    tube(head,pts,.0017,i%5===0?palette.hairLight:palette.hair);
+  }
+  if(isNietzsche){
+    // A full moustache rooted in the upper lip; no gap in the side silhouette.
+    for(const side of [-1,1]){
+      const root=ball(head,.045,side*.039,-.104,-.154,palette.hair,1.25,.52,.58);root.rotation.z=side*.18;
+      const tip=ball(head,.041,side*.082,-.129,-.112,palette.hair,.75,1.05,.54);tip.rotation.z=-side*.42;
+
     }
-    ball(head, .127, 0, -.157, -.046, palette.hair, 1, .94, .84);
-    panel(head, [[-.137,-.062],[-.139,-.142],[-.105,-.213],[0,-.251],[.105,-.213],[.139,-.142],[.137,-.062],
-      [.1,-.108],[.044,-.121],[-.044,-.121],[-.1,-.108]], palette.hair, -.168);
-    for(let i=-3;i<=3;i++) tube(head,
-      [[i*.035,-.131,-.185],[i*.03,-.177,-.183],[i*.019,-.229+Math.abs(i)*.009,-.172]],
-      .0045,Math.abs(i)%2?palette.hairLight:palette.hair);
-    for(const side of [-1,1]) {
-      ball(head,.05,side*.04,-.095,-.184,palette.hair,1.06,.38,.5);
-      tube(head,[[side*.015,-.087,-.207],[side*.049,-.096,-.21],[side*.086,-.118,-.184]],.004,palette.hairLight);
-    }
-    jaw.position.z = -.199;
+    const wire=material('#625746',{metalness:.65,roughness:.4}),spec=new T.Group();spec.name='nietzsche-wire-spectacles';head.add(spec);
+    for(const side of [-1,1]){mesh(spec,new T.TorusGeometry(.035,.0018,8,48),wire,side*.065,.025,-.166);tube(spec,[[side*.10,.028,-.166],[side*.151,.026,-.091],[side*.177,.007,.018]],.0018,wire);}
+    tube(spec,[[-.03,.034,-.167],[0,.046,-.177],[.03,.034,-.167]],.0018,wire);
+  }else{
+    // A curved beard wraps the jaw instead of an extruded flat face plate.
+    const beardPoint=(u,v)=>{
+      const a=(u-.5)*Math.PI*.95,side=Math.abs(Math.sin(a));
+      const top=-.125+.07*side,bottom=-.265+.07*side;
+      const x=Math.sin(a)*(.155*(1-v)+.046*v),y=top*(1-v)+bottom*v;
+      const faceZ=-.153*Math.sqrt(Math.max(.015,1-(x/.165)**2-(Math.max(y,-.20)/.234)**2));
+      return [x,y,faceZ-.014-.022*Math.sin(v*Math.PI)];
+    };
+    surface('zarathustra-curved-beard',24,56,beardPoint,palette.hair);
+    for(let i=1;i<29;i++){const pts=[];for(let j=0;j<=8;j++){const p=beardPoint(i/29,j/8);p[2]-=.0015;pts.push(p);}tube(head,pts,.0011,i%7===0?palette.hairLight:palette.hair);}
+    for(const side of [-1,1]){const m=ball(head,.035,side*.034,-.098,-.16,palette.hair,1.05,.34,.42);m.rotation.z=side*.14;}
   }
 
   // The seated pose has real bent legs, table-resting arms and draped lap cloth.
@@ -545,7 +455,7 @@ function buildLiteraryCharacter(T, id) {
     geometries.clear();
     materials.clear();
   }
-  return { group, head, body, limbs, arms, legs, eyes, seatedPose, seatedArms, animate, dispose, style: 'warm-illustrated-v1', id };
+  return { group, head, body, limbs, arms, legs, eyes, seatedPose, seatedArms, animate, dispose, style: 'sculpted-literary-v2', id };
 }
 
 // A rigid Guy Fawkes mask and dark hood, facing -Z like the other companions.

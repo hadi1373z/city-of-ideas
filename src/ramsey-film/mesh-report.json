@@ -46,28 +46,28 @@
     "assetType": "Restored illustrated geometry with two baked poses; no skin rig or facial morphs. Gameplay retains original procedural gestures."
   },
   "nietzsche": {
-    "bytes": 5382584,
+    "bytes": 6600672,
     "bones": 0,
     "meshes": 30,
-    "triangles": 74440,
+    "triangles": 91352,
     "morphs": [],
     "animations": [
       "Standing pose",
       "Seated at hexagonal table"
     ],
-    "assetType": "Restored illustrated geometry with two baked poses; no skin rig or facial morphs. Gameplay retains original procedural gestures."
+    "assetType": "Revised sculpted literary geometry with two baked poses; no skin rig or facial morphs. Gameplay retains original procedural gestures."
   },
   "zarathustra": {
-    "bytes": 4768804,
+    "bytes": 7843072,
     "bones": 0,
-    "meshes": 26,
-    "triangles": 65952,
+    "meshes": 28,
+    "triangles": 108624,
     "morphs": [],
     "animations": [
       "Standing pose",
       "Seated at hexagonal table"
     ],
-    "assetType": "Restored illustrated geometry with two baked poses; no skin rig or facial morphs. Gameplay retains original procedural gestures."
+    "assetType": "Revised sculpted literary geometry with two baked poses; no skin rig or facial morphs. Gameplay retains original procedural gestures."
   },
   "anonymous": {
     "bytes": 4770428,
