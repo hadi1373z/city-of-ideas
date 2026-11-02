@@ -124,5 +124,120 @@
     "The original files contain audio but no recoverable provider voice identifiers. Null means unknown, not a default.",
     "Only Anonymous, Ramsey and Turing speak in the first five minutes. The other three reference clips are first appearances, not approved voice matches.",
     "Use the same voiceKey across city scenes. References in other city scenes need matching before claiming game-wide consistency."
-  ]
+  ],
+  "pendingReplacement": {
+    "status": "partially-generated-quota-exhausted",
+    "approved": "2026-11-02: user approved replacing all characters with a new consistent cast",
+    "provider": "HeyGen",
+    "requestedEngine": "heygen_voice",
+    "returnedEngine": "orca",
+    "language": "en",
+    "speed": 1,
+    "inputType": "text",
+    "cast": {
+      "anonymous": {
+        "name": "Adam Stone",
+        "id": "88bb9ee1c81b466eb2a08fdde86d3619"
+      },
+      "ramsey": {
+        "name": "Optimist Ollie",
+        "id": "9542b02f456a428ab0328cd94f687de7"
+      },
+      "turing": {
+        "name": "Oliver Hart",
+        "id": "82e7dad5136942bca1a67bb90d95f1b7"
+      },
+      "socrates": {
+        "name": "Gentleman George",
+        "id": "368fd56a854a41938b9c9947ede221b7"
+      },
+      "nietzsche": {
+        "name": "Henry Worthington",
+        "id": "a2805de1ed104642a9cd299eddc8097e"
+      },
+      "zarathustra": {
+        "name": "Sunny",
+        "id": "1f8bf1bba5e648d2ba0305408b5517cf"
+      }
+    },
+    "completedCues": [
+      {
+        "cue": "cue-00",
+        "duration": 13.061,
+        "transcriptMatch": true,
+        "file": "cue-00.mp3"
+      },
+      {
+        "cue": "cue-01",
+        "duration": 14.132,
+        "transcriptMatch": true,
+        "file": "cue-01.mp3"
+      },
+      {
+        "cue": "cue-02",
+        "duration": 14.655,
+        "transcriptMatch": true,
+        "file": "cue-02.mp3"
+      },
+      {
+        "cue": "cue-03",
+        "duration": 14.707,
+        "transcriptMatch": true,
+        "file": "cue-03.mp3"
+      },
+      {
+        "cue": "cue-04",
+        "duration": 14.106,
+        "transcriptMatch": true,
+        "file": "cue-04.mp3"
+      },
+      {
+        "cue": "cue-05",
+        "duration": 12.643,
+        "transcriptMatch": true,
+        "file": "cue-05.mp3"
+      },
+      {
+        "cue": "cue-06",
+        "duration": 14.968,
+        "transcriptMatch": true,
+        "file": "cue-06.mp3"
+      },
+      {
+        "cue": "cue-07",
+        "duration": 13.871,
+        "transcriptMatch": true,
+        "file": "cue-07.mp3"
+      },
+      {
+        "cue": "cue-08",
+        "duration": 18.051,
+        "transcriptMatch": true,
+        "file": "cue-08.mp3"
+      },
+      {
+        "cue": "cue-09",
+        "duration": 14.576,
+        "transcriptMatch": true,
+        "file": "cue-09.mp3"
+      },
+      {
+        "cue": "cue-10",
+        "duration": 14.054,
+        "transcriptMatch": true,
+        "file": "cue-10.mp3"
+      },
+      {
+        "cue": "cue-11",
+        "duration": 14.446,
+        "transcriptMatch": true,
+        "file": "cue-11.mp3"
+      }
+    ],
+    "remainingCount": 34,
+    "resumeAtCueIndex": 12,
+    "nextAction": "Restore account voice allowance, then generate only the remaining cues. Install the complete cast together.",
+    "artifactsDirectory": "outputs/ramsey-voice-references/generated",
+    "activeRecordingsUnchanged": true
+  }
 }

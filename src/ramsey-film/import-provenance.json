@@ -28,7 +28,7 @@
     "assets/conversation-1.mp3": "e1e83a7079a60a3d0b44506d78f1ea899b25c217444727698a69d051a48f580c",
     "assets/conversation-2.mp3": "ec6981de0aba944e2719242aaccbb8af53542d5ddc9077223b5765228fb1367e",
     "assets/conversation.json": "afde9e2c9e167f008e92099f573aa23a1ff0458a8fb994388a485d0398205681",
-    "assets/voice-cast.json": "bdf924c2254f164f60a1865048bcd8cbc9dea88bfdda9287d4c308b1aafaaf6d"
+    "assets/voice-cast.json": "3ad33578d463863f34cfedbc7cd54b3be93a96de2bfd2f497dd761cd35369046"
   },
   "upstreamSourceCommit": "cf47412",
   "localRevision": "2026-11-02: shared recordings and permanent cast record; second-half voice replacement still pending"
