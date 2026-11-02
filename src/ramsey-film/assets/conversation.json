@@ -1,0 +1,373 @@
+{
+  "duration": 600,
+  "cues": [
+    {
+      "start": 0,
+      "end": 20,
+      "speaker": "anonymous",
+      "shot": "wide",
+      "text": "You invited me to a house named after someone else, gave me a chair, and arranged us like a diagram. Before we begin, I want to know something. Am I here because you wanted me, or because you needed a sixth person?",
+      "direction": "Open on all six sides of the table, then approach Anonymous. He opens one gloved hand toward the counters. His mask remains rigid."
+    },
+    {
+      "start": 20,
+      "end": 40,
+      "speaker": "ramsey",
+      "shot": "medium",
+      "text": "Both, perhaps. Six is useful for a little problem. But a useful number is a poor reason to invite someone to dinner. Stay for the problem, if you like. Afterwards you can decide whether the company deserves any more of your evening.",
+      "direction": "Ramsey smiles slightly and slides a wooden counter toward Anonymous. Establish his youthful broad face and round spectacles."
+    },
+    {
+      "start": 40,
+      "end": 60,
+      "speaker": "turing",
+      "shot": "medium",
+      "text": "Then let us settle what your problem means before it settles anything about us. When you say two people know each other, do you mean they recognise a face, know a name, or understand a person? Those are rather different accomplishments.",
+      "direction": "Turing leans forward with an open palm, then looks toward Ramsey. Socrates listens."
+    },
+    {
+      "start": 60,
+      "end": 80,
+      "speaker": "ramsey",
+      "shot": "table",
+      "text": "For this game, only mutual acquaintance. Every pair either knows one another or does not. We draw a red line for the first case, a blue line for the second. I claim that among six people, three always make a triangle of one colour.",
+      "direction": "Show six counters in a hexagon and a red-blue graph. Legend: red means mutually acquainted; blue means not mutually acquainted."
+    },
+    {
+      "start": 80,
+      "end": 100,
+      "speaker": "turing",
+      "shot": "medium",
+      "text": "Let me try it from your chair. Five lines leave Ramsey. They have only two colours, so at least three must share a colour. Three red, say. We can put those three people here. Now the interesting part is what connects them to each other.",
+      "direction": "Establish Turing's narrow face, ears and tweed jacket. He indicates the five connections and then three red edges."
+    },
+    {
+      "start": 100,
+      "end": 120,
+      "speaker": "ramsey",
+      "shot": "table",
+      "text": "Exactly. Those three all know me. If any two of them know each other, those two and I make a red triangle. If none of them know each other, the three themselves make a blue triangle. Either way, we have what we need.",
+      "direction": "Show a red edge completing a red triangle through Ramsey; then the alternative blue triangle among the three other counters."
+    },
+    {
+      "start": 120,
+      "end": 140,
+      "speaker": "turing",
+      "shot": "table",
+      "text": "And if the three lines from you are blue, reverse the argument. If any two of those people are strangers to each other, they and you make a blue triangle. Otherwise, all three know one another, making a red triangle. That covers every possibility.",
+      "direction": "Reverse the colours on the diagram, demonstrate both alternatives, and return to Turing as he puts down the pencil."
+    },
+    {
+      "start": 140,
+      "end": 160,
+      "speaker": "anonymous",
+      "shot": "medium",
+      "text": "That covers the colours. But it does not tell us much about this gathering. Three acquaintances may dislike each other. Three strangers may have something urgent to say. Your triangle has no opinion about either. What does it tell you about me?",
+      "direction": "Anonymous tilts his head toward the diagram, then looks at Ramsey. Nietzsche listens and gives a small nod."
+    },
+    {
+      "start": 160,
+      "end": 180,
+      "speaker": "ramsey",
+      "shot": "table",
+      "text": "Nor should it. And six really is the smallest guarantee. With five points, colour the five edges around a pentagon red and its diagonals blue. Each colour forms a five-sided cycle, with no triangle. So five can escape; six cannot. That is the whole claim.",
+      "direction": "Show the five-point counterexample: red pentagon edges and blue diagonals. Restore the sixth counter at the end."
+    },
+    {
+      "start": 180,
+      "end": 200,
+      "speaker": "anonymous",
+      "shot": "medium",
+      "text": "Good. Then my mask does not spoil your proof. You can count me without knowing my face. But outside the diagram, people often demand a face before they will listen. I would rather they ask whether my words are worth hearing. Is that unreasonable?",
+      "direction": "Eye-level Anonymous close view, a slight head tilt and one gloved hand beside the counter. No mask deformation."
+    },
+    {
+      "start": 200,
+      "end": 220,
+      "speaker": "ramsey",
+      "shot": "medium",
+      "text": "No. Although hearing your words is only a beginning. Suppose you tell me something difficult, and I ask what you mean. Will you remain long enough to answer? I can question a mask. I cannot have a conversation with someone who has already left.",
+      "direction": "Ramsey speaks openly and curiously to Anonymous. Socrates watches the exchange without taking a speaking turn."
+    },
+    {
+      "start": 220,
+      "end": 240,
+      "speaker": "turing",
+      "shot": "medium",
+      "text": "We can make that practical. Give each person a question, let someone answer, and allow a correction. We learn more from the exchange than from guessing what a face means. You need not reveal everything about yourself to show that you are paying attention.",
+      "direction": "Turing places a blank page and pencil near the centre, then looks around the table."
+    },
+    {
+      "start": 240,
+      "end": 260,
+      "speaker": "ramsey",
+      "shot": "medium",
+      "text": "I prepared this little proof before you arrived. I had not prepared for your first question. Perhaps being a host means letting the evening change. So let us try your experiment, Alan. Anonymous, what would you ask us if we stopped examining you?",
+      "direction": "Ramsey turns his attention fully to Anonymous. Zarathustra relaxes into his chair and listens."
+    },
+    {
+      "start": 260,
+      "end": 280,
+      "speaker": "anonymous",
+      "shot": "medium",
+      "text": "Whether a place can feel like home before I have earned it. I can contribute a question, or a little work. But I do not want every visit to become an audition. Sometimes I would like to sit down without proving that my chair was deserved.",
+      "direction": "Hold on Anonymous. His hands are still. Use quiet listening reactions from the other five."
+    },
+    {
+      "start": 280,
+      "end": 290,
+      "speaker": "turing",
+      "shot": "medium",
+      "text": "Then keep your chair. You can disagree with me all evening. Agreement would be a poor condition for starting a conversation.",
+      "direction": "Turing gives Anonymous a slight nod. The others remain attentive, with no obligatory closing speeches."
+    },
+    {
+      "start": 290,
+      "end": 300,
+      "speaker": "ramsey",
+      "shot": "wide",
+      "text": "The triangle was inevitable. The conversation was not. Let us put the diagram aside. What would you like to talk about next?",
+      "direction": "Pull back to the gameplay entry view. All six remain at the table; the visitor can choose to explore the room."
+    },
+    {
+      "start": 300,
+      "end": 310,
+      "speaker": "ramsey",
+      "text": "Look at the six of us. Color each connection red for acquaintance, blue for stranger. One triangle must have a single color.",
+      "shot": "wide",
+      "direction": "Interactive 3D scene: speaker gestures and listeners respond."
+    },
+    {
+      "start": 310,
+      "end": 320,
+      "speaker": "turing",
+      "text": "You are claiming inevitability, Frank. Not merely that some arrangements happen to contain a triangle?",
+      "shot": "medium",
+      "direction": "Interactive 3D scene: speaker gestures and listeners respond."
+    },
+    {
+      "start": 320,
+      "end": 330,
+      "speaker": "ramsey",
+      "text": "Exactly. Choose one person. Among their five connections, at least three share a color. Now look at those three people.",
+      "shot": "medium",
+      "direction": "Interactive 3D scene: speaker gestures and listeners respond."
+    },
+    {
+      "start": 330,
+      "end": 340,
+      "speaker": "socrates",
+      "text": "Before the proof, what is an acquaintance? Is it enough to know a name, or must two people recognize one another?",
+      "shot": "close",
+      "direction": "Interactive 3D scene: speaker gestures and listeners respond."
+    },
+    {
+      "start": 340,
+      "end": 350,
+      "speaker": "ramsey",
+      "text": "For the mathematical game, it is a symmetric yes-or-no relation. The proof depends on that precision.",
+      "shot": "medium",
+      "direction": "Interactive 3D scene: speaker gestures and listeners respond."
+    },
+    {
+      "start": 350,
+      "end": 360,
+      "speaker": "anonymous",
+      "text": "But identity is rarely so precise. My mask hides a face. Does it make our relationship more uncertain?",
+      "shot": "medium",
+      "direction": "Interactive 3D scene: speaker gestures and listeners respond."
+    },
+    {
+      "start": 360,
+      "end": 370,
+      "speaker": "nietzsche",
+      "text": "The mask may reveal something too. People sometimes speak more freely when the ordinary face disappears.",
+      "shot": "close",
+      "direction": "Interactive 3D scene: speaker gestures and listeners respond."
+    },
+    {
+      "start": 370,
+      "end": 380,
+      "speaker": "zarathustra",
+      "text": "Then a gathering is not merely six bodies. It is six ways of confronting the others and oneself.",
+      "shot": "table",
+      "direction": "Interactive 3D scene: speaker gestures and listeners respond."
+    },
+    {
+      "start": 380,
+      "end": 390,
+      "speaker": "turing",
+      "text": "Return to the three connections, Frank. Suppose they are red. What happens next?",
+      "shot": "medium",
+      "direction": "Interactive 3D scene: speaker gestures and listeners respond."
+    },
+    {
+      "start": 390,
+      "end": 400,
+      "speaker": "ramsey",
+      "text": "If any edge among those three is red, we have a red triangle. If none is red, all three edges are blue.",
+      "shot": "wide",
+      "direction": "Interactive 3D scene: speaker gestures and listeners respond."
+    },
+    {
+      "start": 400,
+      "end": 410,
+      "speaker": "socrates",
+      "text": "So either way a monochromatic triangle appears. The conclusion was hidden in the choice of five edges.",
+      "shot": "medium",
+      "direction": "Interactive 3D scene: speaker gestures and listeners respond."
+    },
+    {
+      "start": 410,
+      "end": 420,
+      "speaker": "ramsey",
+      "text": "Yes. The pigeonhole principle supplies the first step. The rest is a simple but unavoidable alternative.",
+      "shot": "medium",
+      "direction": "Interactive 3D scene: speaker gestures and listeners respond."
+    },
+    {
+      "start": 420,
+      "end": 430,
+      "speaker": "anonymous",
+      "text": "Can I break it by refusing to classify one relationship? A person can be both friend and stranger.",
+      "shot": "close",
+      "direction": "Interactive 3D scene: speaker gestures and listeners respond."
+    },
+    {
+      "start": 430,
+      "end": 440,
+      "speaker": "turing",
+      "text": "Then you have changed the rules. With two definite colors, the theorem holds. With missing edges, a different question begins.",
+      "shot": "medium",
+      "direction": "Interactive 3D scene: speaker gestures and listeners respond."
+    },
+    {
+      "start": 440,
+      "end": 450,
+      "speaker": "nietzsche",
+      "text": "A theorem does not imprison life. It tells us what follows once we decide what distinctions matter.",
+      "shot": "table",
+      "direction": "Interactive 3D scene: speaker gestures and listeners respond."
+    },
+    {
+      "start": 450,
+      "end": 460,
+      "speaker": "zarathustra",
+      "text": "And a choice of distinctions is itself a human act. The world is not obliged to use our categories.",
+      "shot": "close",
+      "direction": "Interactive 3D scene: speaker gestures and listeners respond."
+    },
+    {
+      "start": 460,
+      "end": 470,
+      "speaker": "ramsey",
+      "text": "Yet within a clear model, surprising structure becomes certain. Six is the smallest number that forces this particular triangle.",
+      "shot": "medium",
+      "direction": "Interactive 3D scene: speaker gestures and listeners respond."
+    },
+    {
+      "start": 470,
+      "end": 480,
+      "speaker": "turing",
+      "text": "With five, there is a coloring with no monochromatic triangle. Imagine alternating red and blue around a pentagon.",
+      "shot": "medium",
+      "direction": "Interactive 3D scene: speaker gestures and listeners respond."
+    },
+    {
+      "start": 480,
+      "end": 490,
+      "speaker": "socrates",
+      "text": "Now we have both a proof and a boundary. Why does the boundary matter?",
+      "shot": "wide",
+      "direction": "Interactive 3D scene: speaker gestures and listeners respond."
+    },
+    {
+      "start": 490,
+      "end": 500,
+      "speaker": "turing",
+      "text": "Because it separates what an algorithm can search for from what a theorem proves for every possible arrangement.",
+      "shot": "medium",
+      "direction": "Interactive 3D scene: speaker gestures and listeners respond."
+    },
+    {
+      "start": 500,
+      "end": 510,
+      "speaker": "anonymous",
+      "text": "Could we show visitors the pentagon, then let them add a sixth person and watch the pattern become inevitable?",
+      "shot": "medium",
+      "direction": "Interactive 3D scene: speaker gestures and listeners respond."
+    },
+    {
+      "start": 510,
+      "end": 520,
+      "speaker": "ramsey",
+      "text": "That would be an excellent exhibit. They should be able to color the edges themselves, and discover the obstruction.",
+      "shot": "table",
+      "direction": "Interactive 3D scene: speaker gestures and listeners respond."
+    },
+    {
+      "start": 520,
+      "end": 530,
+      "speaker": "nietzsche",
+      "text": "Let the visitor fail before showing the proof. Discovery has more force when certainty arrives as a surprise.",
+      "shot": "medium",
+      "direction": "Interactive 3D scene: speaker gestures and listeners respond."
+    },
+    {
+      "start": 530,
+      "end": 540,
+      "speaker": "zarathustra",
+      "text": "And after the proof, open the door. Knowledge should lead back into the city, not trap us at this table.",
+      "shot": "medium",
+      "direction": "Interactive 3D scene: speaker gestures and listeners respond."
+    },
+    {
+      "start": 540,
+      "end": 550,
+      "speaker": "socrates",
+      "text": "But what question should the visitor carry through that door?",
+      "shot": "close",
+      "direction": "Interactive 3D scene: speaker gestures and listeners respond."
+    },
+    {
+      "start": 550,
+      "end": 560,
+      "speaker": "anonymous",
+      "text": "Which connections in my own life have I named too quickly, without asking what they really mean?",
+      "shot": "medium",
+      "direction": "Interactive 3D scene: speaker gestures and listeners respond."
+    },
+    {
+      "start": 560,
+      "end": 570,
+      "speaker": "turing",
+      "text": "And which patterns can we compute, even when the number of possibilities grows beyond intuition?",
+      "shot": "medium",
+      "direction": "Interactive 3D scene: speaker gestures and listeners respond."
+    },
+    {
+      "start": 570,
+      "end": 580,
+      "speaker": "ramsey",
+      "text": "The lesson is modest: a sufficiently large network contains order, even when every edge is chosen freely.",
+      "shot": "wide",
+      "direction": "Interactive 3D scene: speaker gestures and listeners respond."
+    },
+    {
+      "start": 580,
+      "end": 590,
+      "speaker": "nietzsche",
+      "text": "Order is not the same as meaning. Meaning still demands interpretation, courage, and sometimes disagreement.",
+      "shot": "table",
+      "direction": "Interactive 3D scene: speaker gestures and listeners respond."
+    },
+    {
+      "start": 590,
+      "end": 600,
+      "speaker": "zarathustra",
+      "text": "Then we leave the table together: not because we agree, but because our questions have become sharper.",
+      "shot": "medium",
+      "direction": "Interactive 3D scene: speaker gestures and listeners respond."
+    }
+  ]
+}

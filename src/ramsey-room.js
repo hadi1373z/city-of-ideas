@@ -1,52 +1,75 @@
-// A room boundary keeps the city alive while the larger conversation scene loads.
-export function crossedRamseyDoor(previous, current, origin) {
-  return !!previous && previous.z >= origin.z + 8 && current.z < origin.z + 8 &&
-    current.z > origin.z + 5 && Math.abs(current.x - origin.x) < 1.5;
+import {buildNativeRamseyHouse} from './ramsey-native-house.js';
+import {createConversation} from './ramsey-conversation.js';
+
+const CAST=[['socrates','Socrates'],['nietzsche','Nietzsche'],['zarathustra','Zarathustra · زرتشت'],['anonymous','Anonymous'],['ramsey','Frank Ramsey'],['turing','Alan Turing']];
+const scripts=new Map();
+function loadScript(path){
+ const url=new URL(path,import.meta.url).href;
+ if(!scripts.has(url))scripts.set(url,new Promise((resolve,reject)=>{const script=document.createElement('script');script.src=url;script.onload=resolve;script.onerror=()=>{scripts.delete(url);script.remove();reject(new Error('Character assets could not be loaded.'));};document.head.append(script);}));
+ return scripts.get(url);
 }
-export function installRamseyRoom(M) {
-  const house=M.ramseyHouse, lang=()=>window.CITY_I18N.lang;
-  const label=(en,de,fa)=>lang()==='fa'?fa:lang()==='de'?de:en;
-  const dialog=document.createElement('dialog');dialog.id='ramsey-room';
-  dialog.setAttribute('aria-label','Ramsey House conversation room');
-  const exit=document.createElement('button');exit.className='glass';exit.dataset.close='';
-  const status=document.createElement('p');status.setAttribute('role','status');
-  const frame=document.createElement('iframe');frame.title='Ramsey House · ten-minute conversation';frame.allow='autoplay; gamepad';
-  dialog.append(exit,status,frame);document.body.append(dialog);
-  let previous=null,ready=false,timer=null,closedAt=0,musicWasPlaying=false;
-  const outside=()=>({x:house.origin.x,z:house.origin.z+9.6,y:house.origin.y,yaw:Math.PI});
-  function visit(){document.querySelector('#welcome')?.setAttribute('hidden','');M.arrive({...outside(),yaw:0});}
-  function enter(){
-    if(dialog.open)return;
-    M.clearMovement();musicWasPlaying=document.querySelector("#music-toggle")?.getAttribute("aria-pressed")==="true";if(musicWasPlaying)document.querySelector("#music-toggle").click();dialog.showModal();status.hidden=ready;
-    if(!frame.hasAttribute('src'))frame.src=new URL('./ramsey-film/index.html?cityRoom=1',import.meta.url).href;
-    else frame.contentWindow?.postMessage({type:'city-room-enter'},location.origin);
-    if(ready)frame.focus();else exit.focus();exit.hidden=ready;clearTimeout(timer);timer=setTimeout(()=>{if(!ready)status.textContent=label('The room is still loading. You can return to the city and try again.','Der Raum lädt noch. Du kannst zur Stadt zurückkehren.','اتاق هنوز در حال بارگذاری است. می‌توانی به شهر برگردی.');},25000);
-  }
-  function leave(){if(dialog.open)dialog.close();}
-  dialog.addEventListener('close',()=>{
-    clearTimeout(timer);frame.contentWindow?.postMessage({type:'city-room-leave'},location.origin);
-    if(musicWasPlaying){document.querySelector("#music-toggle")?.click();musicWasPlaying=false;}closedAt=performance.now();previous=null;M.arrive(outside());M.clearMovement();
-    document.querySelector('#world')?.focus();
-  });
-  exit.onclick=leave;
-  const message=e=>{
-    if(e.origin!==location.origin||e.source!==frame.contentWindow)return;
-    if(e.data?.type==='city-room-ready'){ready=true;exit.hidden=true;clearTimeout(timer);status.hidden=true;if(dialog.open){frame.contentWindow.postMessage({type:'city-room-enter'},location.origin);frame.focus();}}
-    if(e.data?.type==='city-room-exit')leave();
-  };addEventListener('message',message);
-  const oldUpdate=M.city.update;
-  M.city.update=(...args)=>{oldUpdate(...args);const current={x:M.player.x,z:M.player.z};
-    if(!dialog.open&&M.mode==='city'&&!document.querySelector('dialog[open]')&&performance.now()-closedAt>700&&crossedRamseyDoor(previous,current,house.origin))enter();
-    if(dialog.open)M.clearMovement();previous=current;
-  };
-  const link=document.querySelector('#ramsey-film-link');
-  if(link){link.href='#ramsey-house';link.onclick=e=>{e.preventDefault();visit();};}
-  const join=document.querySelector('#ramsey-join');if(join)join.onclick=enter;
-  const map=document.createElement('button');map.onclick=()=>{document.querySelector('#map-panel').hidden=true;visit();};document.querySelector('.map-directions')?.append(map);
-  function locale(){exit.textContent=label('Return to city','Zurück zur Stadt','بازگشت به شهر');status.textContent=label('Entering Ramsey House…','Ramsey-Haus wird geöffnet…','در حال ورود به خانهٔ رمزی…');const title=label('Visit Ramsey’s conversation','Ramsays Gespräch besuchen','دیدار از گفت‌وگوی رمزی');if(link)link.textContent=title;map.textContent=label('Ramsey House','Ramsey-Haus','خانهٔ رمزی');if(join)join.textContent=label('Enter conversation room','Gesprächsraum betreten','ورود به اتاق گفت‌وگو');}
-  addEventListener('city-language',locale);locale();
-  M.ramseyRoom={enter,leave,visit,get active(){return dialog.open;}};
-  if(new URLSearchParams(location.search).get('arrival')==='ramsey')visit();
-  addEventListener('pagehide',()=>{clearTimeout(timer);removeEventListener('message',message);removeEventListener('city-language',locale);dialog.remove();},{once:true});
-  return M.ramseyRoom;
+export function installRamseyRoom(M,T=window.THREE){
+ const previous=M.ramseyHouse,house=buildNativeRamseyHouse(T,previous.origin),actors=[];
+ // Retire the temporary city's small stand-in interior and its collision boxes.
+ const oldTargets=new Set(previous.targets);M.city.targets=M.city.targets.filter(t=>!oldTargets.has(t));M.city.buildingTargets=M.city.buildingTargets.filter(t=>t!==previous.group);
+ previous.colliders.length=0;previous.dispose();M.scene.add(house.group);M.city.buildingTargets.push(house.group);
+ let inside=false,near=false,ready=false,disposed=false,conversation=null,lastCue=null,musicWasPlaying=false,loading=null;
+ const panel=document.createElement('section');panel.id='ramsey-conversation';panel.hidden=true;panel.setAttribute('aria-label','Conversation at Ramsey House');
+ const title=document.createElement('strong'),caption=document.createElement('p'),controls=document.createElement('div'),play=document.createElement('button'),restart=document.createElement('button'),mute=document.createElement('button'),seek=document.createElement('input'),clock=document.createElement('span'),note=document.createElement('small');
+ title.textContent='Ramsey House';caption.textContent='The conversation is getting ready…';play.textContent='Loading conversation…';play.disabled=true;restart.textContent='Restart';mute.textContent='Voice on';mute.setAttribute('aria-pressed','false');
+ for(const b of [play,restart,mute])b.className='glass';
+ seek.type='range';seek.min='0';seek.max='600';seek.step='.1';seek.value='0';seek.setAttribute('aria-label','Conversation time');seek.disabled=true;
+ note.textContent='E / A: start or pause · Keep walking to explore · Leaving pauses the conversation';controls.append(play,restart,mute,clock);panel.append(title,caption,controls,seek,note);document.body.append(panel);
+ const format=t=>Math.floor(t/60)+':'+String(Math.floor(t%60)).padStart(2,'0');
+ function updateCaption(state){play.textContent=state.playing?'Pause conversation':state.time>=600?'Replay conversation':state.time>0?'Resume conversation':'Start conversation';clock.textContent=format(state.time)+' / 10:00';if(document.activeElement!==seek)seek.value=String(state.time);if(state.cue!==lastCue){lastCue=state.cue;title.textContent=CAST.find(([id])=>id===state.cue?.speaker)?.[1]||'Ramsey House';caption.textContent=state.cue?.text||'Take a place by the table.';}}
+ function pause(){conversation?.pause();if(musicWasPlaying){document.querySelector('#music-toggle')?.click();musicWasPlaying=false;}}
+ function toggle(){if(!inside||!ready)return;if(!conversation.state.playing){musicWasPlaying=document.querySelector('#music-toggle')?.getAttribute('aria-pressed')==='true';if(musicWasPlaying)document.querySelector('#music-toggle').click();}void conversation.toggle();}
+ play.onclick=()=>ready?toggle():void load();restart.onclick=()=>{conversation?.pause();conversation?.seek(0);};seek.oninput=()=>conversation?.seek(seek.value);
+ mute.onclick=()=>{const muted=mute.getAttribute('aria-pressed')!=='true';mute.setAttribute('aria-pressed',String(muted));mute.textContent=muted?'Voice off':'Voice on';conversation?.mute(muted);};
+ const base=new URL('./ramsey-film/assets/',import.meta.url);
+ async function load(){
+  if(loading)return loading;
+  play.disabled=true;
+  loading=(async()=>{
+   try{
+    await loadScript('./ramsey-film/assets/legacy-actors.js?v=6');
+    await loadScript('./ramsey-film/vendor/gltf-loader.js');
+    await loadScript('./ramsey-film/assets/character-adapter.js?v=6');
+    const response=await fetch(new URL('conversation.json',base));if(!response.ok)throw new Error('Conversation could not be loaded.');const data=await response.json();
+    const loaded=await Promise.all(CAST.map(async([id,name])=>{
+     const actor=id==='socrates'?window.buildSocratesGuide(T):['nietzsche','zarathustra'].includes(id)?window.buildLiteraryCharacter(T,id):window.academicActorFromGLTF(await new window.GLTFLoader().loadAsync(new URL(id+'.glb',base).href),id);
+     return {id,name,actor};
+    }));
+    if(disposed){loaded.forEach(a=>a.actor.dispose());return;}
+    for(const [i,a]of loaded.entries()){const seat=house.study.seats[i];a.actor.group.position.set(seat.x,0,seat.z);a.actor.group.rotation.y=seat.yaw;a.actor.group.traverse(o=>{o.userData.animated=true;});house.group.add(a.actor.group);a.actor.animate(0,{seated:true,reducedMotion:true});actors.push(a);}
+    conversation=createConversation({tracks:[1,2].map(i=>new Audio(new URL('conversation-'+i+'.mp3',base).href)),cues:data.cues,onChange:updateCaption,onError:()=>{caption.textContent='Audio could not start. Press Start conversation to try again.';}});
+    ready=true;play.disabled=false;seek.disabled=false;conversation.update();
+   }catch(error){caption.textContent=error.message+' You can still walk through the house.';play.textContent='Retry loading conversation';play.disabled=false;loading=null;}
+  })();return loading;
+ }
+ void load();
+ const originalCanStand=M.city.canStand,originalRegion=M.city.region,originalUpdate=M.city.update;
+ M.city.canStand=(x,z)=>house.canStand(x,z)&&originalCanStand(x,z);
+ M.city.region=(x,z)=>house.inside(x,z)?{id:'ramsey-conversation',title:'Ramsey House · conversation',inside:true}:originalRegion(x,z);
+ const join=document.querySelector('#ramsey-join');if(join)join.hidden=true;
+ M.city.update=(player,time,mode)=>{
+  originalUpdate(player,time,mode);
+  house.group.visible=player.x<-1000;
+  near=mode==='city'&&Math.hypot(player.x-house.origin.x,player.z-house.origin.z)<7;
+  const nowInside=mode==='city'&&house.inside(player.x,player.z);
+  if(inside&&!nowInside)pause();inside=nowInside;
+  panel.hidden=!inside||!!document.querySelector('dialog[open]');if(join)join.hidden=true;
+  if(document.hidden||document.querySelector('dialog[open]')){if(conversation?.state.playing)pause();}
+  conversation?.update();
+  if(house.group.visible&&near)for(const a of actors)a.actor.animate(conversation?.state.playing?conversation.state.time:time,{seated:true,talking:!!conversation?.state.playing&&lastCue?.speaker===a.id,reducedMotion:matchMedia('(prefers-reduced-motion: reduce)').matches});
+ };
+ function visit(){document.querySelector('#welcome')?.setAttribute('hidden','');M.arrive(house.entry);M.pointToward(house.origin);}
+ const link=document.querySelector('#ramsey-film-link');if(link){link.href='#ramsey-house';link.onclick=e=>{e.preventDefault();visit();};}
+ const map=document.createElement('button');map.onclick=()=>{document.querySelector('#map-panel').hidden=true;visit();};document.querySelector('.map-directions')?.append(map);
+ function locale(){const lang=window.CITY_I18N.lang;map.textContent=lang==='fa'?'خانهٔ رمزی':lang==='de'?'Ramsey-Haus':'Ramsey House';if(link)link.textContent=lang==='fa'?'دیدار از گفت‌وگوی رمزی':lang==='de'?'Ramsays Gespräch besuchen':'Visit Ramsey’s conversation';}
+ addEventListener('city-language',locale);locale();
+ const api={house,actors,visit,toggle,pause,get inside(){return inside;},get near(){return near;},get ready(){return ready;},get state(){return conversation?.state;}};M.ramseyRoom=api;
+ if(new URLSearchParams(location.search).get('arrival')==='ramsey')visit();
+ addEventListener('pagehide',()=>{disposed=true;conversation?.dispose();actors.forEach(a=>a.actor.dispose());house.dispose();panel.remove();removeEventListener('city-language',locale);},{once:true});
+ return api;
 }

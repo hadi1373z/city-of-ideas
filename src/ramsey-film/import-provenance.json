@@ -1,12 +1,12 @@
 {
   "sourceProject": "appgprj_6ade48309fd48191acf9b1b6b7b61cb1",
   "sourceCommit": "cf47412",
-  "edition": "City-connected conversation / restored illustrated cast / 06",
+  "edition": "Native city conversation / restored illustrated cast / 07",
   "files": {
-    "film.html": "7442365187ac837997c4a0dba2b8e1dbafa74202d351ea440b6ec2a255733748",
-    "index.html": "549775181fccafcbe8fd076140ca461e9723d29e60518bc76114dabdb449417d",
+    "film.html": "2bd806d61cc1faea339cdcebfa45b7e222c1c34a8a5b514d28f2c14592a87526",
+    "index.html": "df94aba36250c9f650d8e5451bdc9d9df4d8ac815fdeb613c09ece1e3f886d86",
     "mesh-report.json": "d9221e31061ef4129d9142deeef7170c0087ab904567c49f7829825da686b30f",
-    "README.txt": "a11cc3ed7f20acaedfb3d3e2275097c879972834bab58d4023f96407ce753a45",
+    "README.txt": "4db1d359ee482ddddd8b50e1752c70a52c4d58b2eba0f49365081e8ea71487ed",
     "studio.html": "aaeadd43e27762888d98f1940b0c06a8cbb32124957370b45d6b5de1df63e18f",
     "assets/anonymous.glb": "1840889409fef7678303b9daf8174cd1acc483c9c5b56c402daee0280df11d41",
     "assets/character-adapter.js": "6173c1c3eb67eeeaa92a12448d00d2931579be4b3a7fa673d202f02ea455d082",
@@ -24,8 +24,11 @@
     "vendor/gltf-loader.js": "d9a0052d52368cc532469d617b35b97a4a42167e8481f50f9c5158a3dc2fd43f",
     "vendor/THREE-LICENSE.txt": "852e0e8699169bf9f6fdc6bda3e682d078dcbc738b5d33e74df594721bff271d",
     "vendor/three.min.js": "a4a80fb9b30b9d4e3959be3c19c36ce1fb4aaee237893320232a575d45098120",
-    "assets/room-connection.js": "dc1803594f67e7f112a776a41135e341b73f5832961fea5a48a3bf60bb65a17c"
+    "assets/room-connection.js": "dc1803594f67e7f112a776a41135e341b73f5832961fea5a48a3bf60bb65a17c",
+    "assets/conversation-1.mp3": "e1e83a7079a60a3d0b44506d78f1ea899b25c217444727698a69d051a48f580c",
+    "assets/conversation-2.mp3": "ec6981de0aba944e2719242aaccbb8af53542d5ddc9077223b5765228fb1367e",
+    "assets/conversation.json": "afde9e2c9e167f008e92099f573aa23a1ff0458a8fb994388a485d0398205681"
   },
   "upstreamSourceCommit": "cf47412",
-  "localRevision": "2026-11-02: city room doorway; Nietzsche and Zarathustra restored by request"
+  "localRevision": "2026-11-02: continuous native city room and original two-part recordings"
 }
