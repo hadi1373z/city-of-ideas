@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "updated": "2026-11-02",
+  "policy": "Each character retains the voice of their approved first appearance throughout the city and film. Do not choose a new voice per chapter or use a device voice as fallback.",
+  "status": "Second-half voice mismatch unresolved; replacement speech has not been generated.",
+  "recordings": {
+    "firstHalf": {
+      "file": "conversation-1.mp3",
+      "status": "approved-preserve"
+    },
+    "secondHalf": {
+      "file": "conversation-2.mp3",
+      "status": "mismatched-needs-rerecording"
+    }
+  },
+  "characters": {
+    "anonymous": {
+      "voiceKey": "city.anonymous.v1",
+      "provider": null,
+      "model": null,
+      "providerVoiceId": null,
+      "generationSettings": null,
+      "reference": {
+        "file": "conversation-1.mp3",
+        "startSeconds": 0,
+        "endSeconds": 20,
+        "transcript": "You invited me to a house named after someone else, gave me a chair, and arranged us like a diagram. Before we begin, I want to know something. Am I here because you wanted me, or because you needed a sixth person?",
+        "sha256": "e1e83a7079a60a3d0b44506d78f1ea899b25c217444727698a69d051a48f580c"
+      },
+      "approval": "approved-first-five-minutes",
+      "status": "original-provider-unknown"
+    },
+    "ramsey": {
+      "voiceKey": "city.ramsey.v1",
+      "provider": null,
+      "model": null,
+      "providerVoiceId": null,
+      "generationSettings": null,
+      "reference": {
+        "file": "conversation-1.mp3",
+        "startSeconds": 20,
+        "endSeconds": 40,
+        "transcript": "Both, perhaps. Six is useful for a little problem. But a useful number is a poor reason to invite someone to dinner. Stay for the problem, if you like. Afterwards you can decide whether the company deserves any more of your evening.",
+        "sha256": "e1e83a7079a60a3d0b44506d78f1ea899b25c217444727698a69d051a48f580c"
+      },
+      "approval": "approved-first-five-minutes",
+      "status": "original-provider-unknown"
+    },
+    "turing": {
+      "voiceKey": "city.turing.v1",
+      "provider": null,
+      "model": null,
+      "providerVoiceId": null,
+      "generationSettings": null,
+      "reference": {
+        "file": "conversation-1.mp3",
+        "startSeconds": 40,
+        "endSeconds": 60,
+        "transcript": "Then let us settle what your problem means before it settles anything about us. When you say two people know each other, do you mean they recognise a face, know a name, or understand a person? Those are rather different accomplishments.",
+        "sha256": "e1e83a7079a60a3d0b44506d78f1ea899b25c217444727698a69d051a48f580c"
+      },
+      "approval": "approved-first-five-minutes",
+      "status": "original-provider-unknown"
+    },
+    "socrates": {
+      "voiceKey": "city.socrates.v1",
+      "provider": null,
+      "model": null,
+      "providerVoiceId": null,
+      "generationSettings": null,
+      "reference": {
+        "file": "conversation-2.mp3",
+        "startSeconds": 30,
+        "endSeconds": 40,
+        "transcript": "Before the proof, what is an acquaintance? Is it enough to know a name, or must two people recognize one another?",
+        "sha256": "ec6981de0aba944e2719242aaccbb8af53542d5ddc9077223b5765228fb1367e"
+      },
+      "approval": "unconfirmed-first-appearance",
+      "status": "original-provider-unknown"
+    },
+    "nietzsche": {
+      "voiceKey": "city.nietzsche.v1",
+      "provider": null,
+      "model": null,
+      "providerVoiceId": null,
+      "generationSettings": null,
+      "reference": {
+        "file": "conversation-2.mp3",
+        "startSeconds": 60,
+        "endSeconds": 70,
+        "transcript": "The mask may reveal something too. People sometimes speak more freely when the ordinary face disappears.",
+        "sha256": "ec6981de0aba944e2719242aaccbb8af53542d5ddc9077223b5765228fb1367e"
+      },
+      "approval": "unconfirmed-first-appearance",
+      "status": "original-provider-unknown"
+    },
+    "zarathustra": {
+      "voiceKey": "city.zarathustra.v1",
+      "provider": null,
+      "model": null,
+      "providerVoiceId": null,
+      "generationSettings": null,
+      "reference": {
+        "file": "conversation-2.mp3",
+        "startSeconds": 70,
+        "endSeconds": 80,
+        "transcript": "Then a gathering is not merely six bodies. It is six ways of confronting the others and oneself.",
+        "sha256": "ec6981de0aba944e2719242aaccbb8af53542d5ddc9077223b5765228fb1367e"
+      },
+      "approval": "unconfirmed-first-appearance",
+      "status": "original-provider-unknown"
+    }
+  },
+  "requiredOnRegeneration": [
+    "provider",
+    "model",
+    "providerVoiceId",
+    "generationSettings",
+    "reference approval",
+    "generation date",
+    "output SHA-256"
+  ],
+  "notes": [
+    "The original files contain audio but no recoverable provider voice identifiers. Null means unknown, not a default.",
+    "Only Anonymous, Ramsey and Turing speak in the first five minutes. The other three reference clips are first appearances, not approved voice matches.",
+    "Use the same voiceKey across city scenes. References in other city scenes need matching before claiming game-wide consistency."
+  ]
+}

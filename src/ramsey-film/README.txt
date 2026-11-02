@@ -50,3 +50,15 @@ geometry lives in ../ramsey-room-scene.js. The city streams the original two
 recordings from assets/conversation-1.mp3 and conversation-2.mp3, using the
 audio clock for captions and speaking gestures. No voice recording changed.
 Nietzsche and Zarathustra retain their restored illustrated models.
+
+VOICE CONTINUITY RECORD - 2026-11-02
+assets/voice-cast.json is the permanent cast record. It preserves reference
+recording hashes, exact cue times, transcripts and stable character voice keys.
+The original provider, model and voice IDs are UNKNOWN. Do not infer them.
+When replacing speech, record the actual provider, model, voice ID and all
+settings in that file. Use the same cast across both recordings and city scenes.
+The first five minutes are approved; the second-half mismatch is NOT FIXED.
+Socrates, Nietzsche and Zarathustra have no spoken reference in the first half.
+Their first later appearances are recorded as unconfirmed references only.
+The city and both standalone players now use the same external MP3 files.
+A failed recording must not silently switch to a generic browser voice.

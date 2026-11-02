@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import {createHash} from 'node:crypto';
 import * as T from '../src/city-source-assets/home-tools/vendor/three.module.js';
 import {buildNativeRamseyHouse} from '../src/ramsey-native-house.js';
 import {buildCharacterStudyScene} from '../src/ramsey-room-scene.js';
@@ -29,3 +30,22 @@ c.pause();c.seek(299);await c.play();tracks[0].onended();await Promise.resolve()
 tracks[1].onended();assert.equal(c.state.time,600);assert(!c.state.playing);await c.play();assert.equal(c.state.time,0);c.mute(true);assert(tracks.every(t=>t.muted));
 c.dispose();assert(tracks.every(t=>t.paused&&t.onended===null));house.dispose();assert.equal(house.group.children.length,0);
 console.log('PASS continuous native entrance, clear aisles, solid furniture, real window, pause/resume, seeking and two-part audio handoff');
+
+const audioBase=new URL('../src/ramsey-film/assets/',import.meta.url);
+const voiceCast=JSON.parse(fs.readFileSync(new URL('voice-cast.json',audioBase)));
+const voiceKeys=new Set();
+for(const [id,voice]of Object.entries(voiceCast.characters)){
+ assert(!voiceKeys.has(voice.voiceKey));voiceKeys.add(voice.voiceKey);
+ const bytes=fs.readFileSync(new URL(voice.reference.file,audioBase));
+ assert.equal(createHash('sha256').update(bytes).digest('hex'),voice.reference.sha256,'Do not overwrite a voice reference silently: '+id);
+ assert(voice.reference.endSeconds>voice.reference.startSeconds);
+ assert(voice.reference.transcript.length>10);
+}
+assert.equal(voiceKeys.size,6);
+for(const name of ['index.html','film.html']){
+ const html=fs.readFileSync(new URL('../src/ramsey-film/'+name,import.meta.url),'utf8');
+ for(const part of[1,2])assert(html.includes('assets/conversation-'+part+'.mp3'),'Both players must share the same recordings');
+ assert(!html.includes('data:audio/mpeg;base64,'),'No stale embedded voice recording');
+ assert(html.includes('const speechAvailable=false;'),'Never silently switch to a different device voice');
+}
+console.log('PASS permanent cast references, six stable voice keys, shared player recordings and no device-voice fallback');
