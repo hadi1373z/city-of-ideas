@@ -32,12 +32,12 @@ export function installRamseyRoom(M,T=window.THREE){
   play.disabled=true;
   loading=(async()=>{
    try{
-    await loadScript('./ramsey-film/assets/legacy-actors.js?v=6');
+    await loadScript('./ramsey-film/assets/legacy-actors.js?v=7');
     await loadScript('./ramsey-film/vendor/gltf-loader.js');
-    await loadScript('./ramsey-film/assets/character-adapter.js?v=6');
+    await loadScript('./ramsey-film/assets/character-adapter.js?v=7');
     const response=await fetch(new URL('conversation.json',base));if(!response.ok)throw new Error('Conversation could not be loaded.');const data=await response.json();
     const loaded=await Promise.all(CAST.map(async([id,name])=>{
-     const actor=id==='socrates'?window.buildSocratesGuide(T):['nietzsche','zarathustra'].includes(id)?window.buildLiteraryCharacter(T,id):window.academicActorFromGLTF(await new window.GLTFLoader().loadAsync(new URL(id+'.glb',base).href),id);
+     const actor=id==='socrates'?window.buildSocratesGuide(T):['nietzsche','zarathustra'].includes(id)?window.buildLiteraryCharacter(T,id):window.academicActorFromGLTF(await new window.GLTFLoader().loadAsync(new URL(id+'.glb?v=7',base).href),id);
      return {id,name,actor};
     }));
     if(disposed){loaded.forEach(a=>a.actor.dispose());return;}

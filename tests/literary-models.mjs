@@ -16,8 +16,29 @@ for(const id of ['nietzsche','zarathustra']){
  const json=JSON.parse(bytes.subarray(20,20+bytes.readUInt32LE(12)).toString());assert.equal(json.animations.length,2);
  actor.dispose();assert.equal(actor.group.children.length,0);
 }
-for(const file of ['index.html','film.html','studio.html']){const source=fs.readFileSync(new URL(file,base),'utf8');assert(source.includes('assets/legacy-actors.js?v=6'));for(const [i,match]of [...source.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)].entries())new vm.Script(match[1],{filename:file+':'+i});}
+for(const file of ['index.html','film.html','studio.html']){const source=fs.readFileSync(new URL(file,base),'utf8');assert(source.includes('assets/legacy-actors.js?v=7'));for(const [i,match]of [...source.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)].entries())new vm.Script(match[1],{filename:file+':'+i});}
 console.log('PASS shared literary models, standing/seated geometry, exports, disposal and all inline script syntax');
 
-const approved={"assets/legacy-actors.js": "522a39bf8d312c2c5a3fc3dd0022e0e1bbcf80e3337afa59e0a8b9d6f79cef77", "assets/nietzsche.glb": "bf3d64852b8740ee5d6db74a4cf4cdd3709a142cb9f4a8fa9a322ec1f84e8961", "assets/zarathustra.glb": "3c9c329802693128eb1ac293c172d06fa5d72cd72aa860411f4ee1da0cb63ae5"};
-for(const [file,hash]of Object.entries(approved))assert.equal(createHash("sha256").update(fs.readFileSync(new URL(file,base))).digest("hex"),hash,"Preserve the restored approved character: "+file);
+const approved={"assets/legacy-actors.js": "d87f9fffc810a7a76660dfdfc186a160b9b55bcfbbf8bd1cf6d44386e27927a2", "assets/nietzsche.glb": "af51e76db55cb03500be97275f951f4881ae6ba9c2389c0ea99d43d2212c8dbf", "assets/zarathustra.glb": "94ca6e6ba01cebc206e3eb0683561692612c699b0b1c8549fd6febe91b00e86e"};
+for(const [file,hash]of Object.entries(approved))assert.equal(createHash("sha256").update(fs.readFileSync(new URL(file,base))).digest("hex"),hash,"Preserve the refined shared character: "+file);
+
+for(const id of ['socrates','nietzsche','zarathustra']){
+ const actor=id==='socrates'?context.buildSocratesGuide(T):context.buildLiteraryCharacter(T,id);
+ let hands=0;actor.group.traverse(o=>{if(o.name==='relaxed-open-hand')hands++;});assert.equal(hands,2,id+' must have two open hands');
+ if(id==='nietzsche'){
+  const scalp=actor.group.getObjectByName('nietzsche-fitted-scalp');assert(scalp);scalp.geometry.computeBoundingBox();assert(scalp.geometry.boundingBox.max.y<.26,'Avoid the old oversized hair mass');
+  let eyes=0;actor.head.traverse(o=>{if(o.name==='nietzsche-recessed-eye'){eyes++;assert(o.position.z>-.15);}});assert.equal(eyes,2);
+ }
+ actor.dispose();
+}
+for(const id of ['anonymous','ramsey','turing']){
+ const data=fs.readFileSync(new URL('assets/'+id+'.glb',base));const model=JSON.parse(data.subarray(20,20+data.readUInt32LE(12)).toString());assert(model.nodes.some(n=>n.name===id+'-relaxed-open-hands'));
+ const bin=data.subarray(28+data.readUInt32LE(12));
+ for(const mesh of model.meshes)for(const primitive of mesh.primitives){
+  for(const key of ['POSITION','NORMAL','WEIGHTS_0']){
+   const acc=model.accessors[primitive.attributes[key]];if(!acc)continue;const view=model.bufferViews[acc.bufferView],components=key==='WEIGHTS_0'?4:3;
+   for(let i=0;i<acc.count;i++){let sum=0;for(let j=0;j<components;j++){const v=bin.readFloatLE((view.byteOffset||0)+(acc.byteOffset||0)+i*(view.byteStride||components*4)+j*4);assert(Number.isFinite(v));sum+=v;}if(key==='WEIGHTS_0')assert(Math.abs(sum-1)<.001);}
+  }
+ }
+}
+console.log('PASS fitted scalp, recessed eyes, six open procedural palms, three rigged open-hand sets, finite mesh data and normalized skin weights');

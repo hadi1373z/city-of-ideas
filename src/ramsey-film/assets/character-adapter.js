@@ -21,7 +21,7 @@ function academicActorFromGLTF(gltf,id){
   for(let i=0;i<2;i++){
    parts.legs[i].position.copy(bases.get(parts.legs[i]));if(seated)parts.legs[i].position.y=.64;
    parts.legs[i].rotation.set(seated?1.277:gait*(i?1:-1),0,0);parts.knees[i].rotation.set(seated?-1.277:0,0,0);
-   parts.arms[i].rotation.set(seated?.3:-gait*(i?1:-1),0,0);parts.elbows[i].rotation.set(seated?1.64:0,0,0);
+   parts.arms[i].rotation.set(seated?.80:-gait*(i?1:-1),0,0);parts.elbows[i].rotation.set(seated?.95:0,0,0);
   }
   if(talking&&motion){parts.arms[0].rotation.x-=Math.sin(t*1.7)*.014;parts.arms[0].rotation.z=.02+Math.sin(t*2)*.012;}
   const phase=((t+(id==='ramsey'?.7:2.3))%6+6)%6,blink=motion?Math.max(0,1-Math.abs(phase-5.85)/.10):0;

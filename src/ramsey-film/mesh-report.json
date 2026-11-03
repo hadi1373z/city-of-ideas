@@ -1,9 +1,9 @@
 {
   "turing": {
-    "bytes": 5782828,
+    "bytes": 5939072,
     "bones": 13,
     "meshes": 17,
-    "triangles": 76845,
+    "triangles": 77805,
     "morphs": [
       "blinkLeft",
       "blinkRight",
@@ -14,13 +14,18 @@
       "Standing idle",
       "Seated at hexagonal table",
       "Blink"
-    ]
+    ],
+    "validation": {
+      "errors": 0,
+      "warnings": 0
+    },
+    "revision": "Smoothed nape, gradual neck skin weights, relaxed open palms and revised seated elbow pose."
   },
   "ramsey": {
-    "bytes": 8809976,
+    "bytes": 8966808,
     "bones": 14,
     "meshes": 24,
-    "triangles": 96263,
+    "triangles": 97223,
     "morphs": [
       "blinkLeft",
       "blinkRight",
@@ -31,55 +36,78 @@
       "Standing idle",
       "Seated at hexagonal table",
       "Blink"
-    ]
+    ],
+    "validation": {
+      "errors": 0,
+      "warnings": 0
+    },
+    "revision": "Smoothed nape, gradual neck skin weights, relaxed open palms and revised seated elbow pose."
   },
   "socrates": {
-    "bytes": 8678748,
+    "bytes": 3444272,
     "bones": 0,
-    "meshes": 24,
-    "triangles": 120280,
+    "meshes": 298,
+    "triangles": 121640,
     "morphs": [],
     "animations": [
-      "Standing pose",
-      "Seated at hexagonal table"
+      "standing",
+      "seated"
     ],
-    "assetType": "Restored illustrated geometry with two baked poses; no skin rig or facial morphs. Gameplay retains original procedural gestures."
+    "assetType": "Restored illustrated geometry with two baked poses; no skin rig or facial morphs. Gameplay retains original procedural gestures.",
+    "validation": {
+      "errors": 0,
+      "warnings": 0
+    }
   },
   "nietzsche": {
-    "bytes": 5382584,
+    "bytes": 1923604,
     "bones": 0,
-    "meshes": 30,
-    "triangles": 74440,
+    "meshes": 164,
+    "triangles": 64776,
     "morphs": [],
     "animations": [
-      "Standing pose",
-      "Seated at hexagonal table"
+      "standing",
+      "seated"
     ],
-    "assetType": "Restored illustrated geometry with two baked poses; no skin rig or facial morphs. Gameplay retains original procedural gestures."
+    "assetType": "Restored illustrated geometry with two baked poses; no skin rig or facial morphs. Gameplay retains original procedural gestures.",
+    "validation": {
+      "errors": 0,
+      "warnings": 0
+    },
+    "revision": "Fitted scalp, recessed eyes, closer spectacles and open seated hands."
   },
   "zarathustra": {
-    "bytes": 4768804,
+    "bytes": 1964712,
     "bones": 0,
-    "meshes": 26,
-    "triangles": 65952,
+    "meshes": 177,
+    "triangles": 67432,
     "morphs": [],
     "animations": [
-      "Standing pose",
-      "Seated at hexagonal table"
+      "standing",
+      "seated"
     ],
-    "assetType": "Restored illustrated geometry with two baked poses; no skin rig or facial morphs. Gameplay retains original procedural gestures."
+    "assetType": "Restored illustrated geometry with two baked poses; no skin rig or facial morphs. Gameplay retains original procedural gestures.",
+    "validation": {
+      "errors": 0,
+      "warnings": 0
+    }
   },
   "anonymous": {
-    "bytes": 4770428,
+    "bytes": 4983896,
     "bones": 11,
-    "meshes": 12,
-    "triangles": 60992,
+    "meshes": 13,
+    "triangles": 63756,
     "morphs": [],
     "garmentMorphs": [],
     "animations": [
       "Standing idle",
       "Seated at hexagonal table"
     ],
-    "identity": "Rigid white mask and black hood"
+    "identity": "Rigid white mask and black hood",
+    "validation": {
+      "errors": 0,
+      "warnings": 0
+    },
+    "revision": "Shorter integrated mask nose, removed raised nasal strips, open gloved hands."
   }
 }

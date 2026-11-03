@@ -1,3 +1,14 @@
+
+function addRelaxedHand(T,parent,x,y,z,side,skin,ball,tube){
+ const hand=new T.Group();hand.name='relaxed-open-hand';hand.position.set(x,y,z);parent.add(hand);
+ ball(hand,.045,0,0,0,skin,.82,.24,1.05);
+ for(let i=0;i<4;i++){
+  const fx=(i-1.5)*.016,reach=[.049,.061,.057,.043][i];
+  tube(hand,[[fx,-.001,-.025],[fx,-.002,-.048],[fx,-.005,-.025-reach]],.007,skin);
+ }
+ tube(hand,[[side*.026,0,.012],[side*.044,-.004,-.008],[side*.048,-.008,-.031]],.009,skin);
+ return hand;
+}
 // Original warm illustrated host. Front faces -Z, matching the city actors.
 // The canonical source visitor remains in home-editions-scene.js.
 function buildSocratesGuide(T){
@@ -101,8 +112,7 @@ function buildSocratesGuide(T){
   segment(arm,[0,-.025,0],[side*.035,-.17,-.10],.09,.07,side<0?palette.cloak:palette.linen);
   ball(arm,.066,side*.035,-.17,-.10,palette.skin);
   segment(arm,[side*.035,-.17,-.10],[side*.025,-.11,-.40],.067,.049,palette.skin);
-  ball(arm,.074,side*.025,-.11,-.44,palette.skin,.8,.58,1.12);
-  ball(arm,.025,-side*.023,-.10,-.43,palette.skin,.75,.9,1.1);
+  addRelaxedHand(T,arm,side*.025,-.11,-.417,side,palette.skin,ball,tube);
  }
  group.traverse(o=>{o.userData={...o.userData,resident:true,socratesGuide:true,animated:true};});
  let disposed=false;
@@ -302,14 +312,14 @@ function buildLiteraryCharacter(T, id) {
       ball(head,.043,side*.168,-.013,.012,palette.skin,.57,1,.72);
       ball(head,.018,side*.178,-.014,-.007,palette.cheek,.5,1,.9);
       // Cheek planes, a faint nasolabial fold and lower orbital rim.
-      tube(head,[[side*.034,-.095,-.196],[side*.064,-.126,-.179],[side*.077,-.149,-.163]],.0028,palette.crease);
-      const eye=new T.Group();eye.position.set(side*.066,.029,-.151);head.add(eye);eyes.push(eye);
-      ball(eye,.028,0,0,0,palette.eye,1.06,.32,.27);
-      ball(eye,.012,0,-.001,-.008,palette.iris,.83,.74,.35);
-      ball(eye,.007,0,-.001,-.012,palette.ink,.78,.85,.28);
-      ball(eye,.0025,-side*.003,.002,-.014,palette.eye);
-      tube(eye,[[-.03,.003,-.008],[0,.009,-.013],[.03,.003,-.008]],.007,palette.skin);
-      tube(eye,[[-.027,-.006,-.007],[0,-.012,-.01],[.026,-.006,-.007]],.0033,palette.crease);
+
+      const eye=new T.Group();eye.position.set(side*.066,.029,-.145);eye.rotation.y=-side*.34;eye.name='nietzsche-recessed-eye';head.add(eye);eyes.push(eye);
+      ball(eye,.025,0,0,0,palette.eye,1.02,.30,.18);
+      ball(eye,.010,0,-.001,-.004,palette.iris,.83,.74,.24);
+      ball(eye,.006,0,-.001,-.006,palette.ink,.78,.85,.20);
+      ball(eye,.0017,-side*.002,.002,-.008,palette.eye);
+      tube(eye,[[-.026,.002,-.004],[0,.008,-.007],[.026,.002,-.004]],.007,palette.skin);
+      tube(eye,[[-.024,-.005,-.003],[0,-.009,-.005],[.024,-.005,-.003]],.0033,palette.crease);
       tube(head,[[side*.023,.063,-.155],[side*.057,.078,-.149],[side*.089,.076,-.134],[side*.12,.061,-.113]],.0065,palette.hair);
       tube(head,[[side*.038,-.006,-.16],[side*.072,-.014,-.151],[side*.109,-.004,-.136]],.0025,palette.crease);
       tube(head,[[side*.119,.023,-.139],[side*.139,.008,-.117]],.0025,palette.crease);
@@ -319,11 +329,11 @@ function buildLiteraryCharacter(T, id) {
     const spectacles=new T.Group();spectacles.name='nietzsche-wire-spectacles';head.add(spectacles);
     const wire=material('#514b40');
     for(const side of [-1,1]) {
-      const rim=mesh(spectacles,new T.TorusGeometry(.04,.0026,6,36),wire,side*.066,.01,-.184);
+      const rim=mesh(spectacles,new T.TorusGeometry(.033,.0019,6,36),wire,side*.066,.026,-.171);
       rim.rotation.y=-side*.08;
-      tube(spectacles,[[side*.106,.017,-.181],[side*.15,.021,-.115],[side*.176,.002,.018]],.0026,wire);
+      tube(spectacles,[[side*.099,.03,-.166],[side*.147,.022,-.105],[side*.169,.002,.016]],.0026,wire);
     }
-    tube(spectacles,[[-.026,.019,-.185],[0,.027,-.208],[.026,.019,-.185]],.0026,wire);
+    tube(spectacles,[[-.033,.031,-.173],[0,.039,-.181],[.033,.031,-.173]],.0026,wire);
     // One continuous tapered nose surface, embedded into the facial mesh.
     // The rear of each cross-section penetrates the face, preventing a floating nose.
     const noseRows=[
@@ -359,21 +369,20 @@ function buildLiteraryCharacter(T, id) {
     jaw=new T.Group();jaw.position.set(0,-.17,-.159);head.add(jaw);
     tube(jaw,[[-.038,0,0],[0,-.003,-.009],[.038,.001,0]],.0045,palette.crease);
     ball(jaw,.029,0,-.011,-.001,palette.cheek,1.15,.13,.35);
-    // Brushed-back hair has height and a visible receding temple line.
-    ball(head,.177,0,.172,.054,palette.hair,1.08,.66,1.04);
-    ball(head,.125,0,.014,.106,palette.hair,1.3,1.23,.63);
-    for(const side of [-1,1]) {
-      ball(head,.058,side*.158,.035,.065,palette.hair,.59,2.15,1.18);
-      ball(head,.033,side*.159,-.043,.023,palette.hair,.38,1.3,.65);
+    // A fitted continuous scalp follows the skull, with a receding hairline.
+    const hairPositions=[],hairIndices=[],hairRows=24,hairSides=48;
+    for(let row=0;row<=hairRows;row++)for(let col=0;col<=hairSides;col++){
+      const phi=col/hairSides*Math.PI*2,theta=row/hairRows*(1.35+.27*Math.cos(phi));
+      hairPositions.push(.183*Math.sin(phi)*Math.sin(theta),.014+.239*Math.cos(theta),.014+.194*Math.cos(phi)*Math.sin(theta));
+      if(row<hairRows&&col<hairSides){const k=row*(hairSides+1)+col;hairIndices.push(k,k+hairSides+1,k+1,k+1,k+hairSides+1,k+hairSides+2);}
     }
-    for(let i=0;i<9;i++) {
-      const x=-.137+i*.034;
-      tube(head,[[x,.171+Math.cos(i*.4)*.012,-.047],[x*.84-.013,.254+Math.sin(i*.41)*.016,-.003],[x*.77-.018,.224,.127]],.007,i%4===0?palette.hairLight:palette.hair);
-    }
-    for(const side of [-1,1])tube(head,[[side*.132,.167,-.035],[side*.176,.138,.029],[side*.177,.025,.109],[side*.132,-.105,.13]],.009,palette.hairLight);
+    const scalpGeometry=new T.BufferGeometry();scalpGeometry.setAttribute('position',new T.Float32BufferAttribute(hairPositions,3));scalpGeometry.setIndex(hairIndices);scalpGeometry.computeVertexNormals();
+    const scalp=mesh(head,scalpGeometry,palette.hair);scalp.name='nietzsche-fitted-scalp';
+    for(const side of [-1,1])ball(head,.032,side*.157,-.025,.047,palette.hair,.40,1.5,.65);
+
     // Tapered rounded sweeps supply real moustache volume and descending corners.
     const moustacheSweep=(side)=>{
-      const curve=new T.CatmullRomCurve3([[.004,-.114,-.215],[.054,-.122,-.225],[.096,-.146,-.211],[.116,-.184,-.19],[.142,-.178,-.164]].map(([x,y,z])=>new T.Vector3(side*x,y,z)));
+      const curve=new T.CatmullRomCurve3([[.004,-.114,-.208],[.050,-.122,-.218],[.090,-.146,-.207],[.110,-.180,-.182],[.121,-.202,-.151]].map(([x,y,z])=>new T.Vector3(side*x,y,z)));
       const segments=32,radial=12,frames=curve.computeFrenetFrames(segments,false),positions=[],indices=[],radii=[.026,.037,.030,.014,.0015];
       for(let i=0;i<=segments;i++) {
         const t=i/segments,center=curve.getPointAt(t),a=t*(radii.length-1),lo=Math.min(radii.length-2,Math.floor(a)),radius=radii[lo]+(radii[lo+1]-radii[lo])*(a-lo);
@@ -389,10 +398,7 @@ function buildLiteraryCharacter(T, id) {
     ball(head,.042,0,-.123,-.218,palette.hair,1.06,.62,.63);
     for(const side of [-1,1]) {
       moustacheSweep(side);
-      for(let i=0;i<5;i++) {
-        const shift=i*.006;
-        tube(head,[[side*(.014+shift),-.105+i*.003,-.239],[side*(.058+shift),-.125+i*.004,-.254],[side*(.097+shift*.5),-.162+i*.004,-.232],[side*(.119+shift*.25),-.186+i*.003,-.198]],.0022,i%3===0?palette.hairLight:palette.hair);
-      }
+
     }
   } else {
   // Longer, narrower heads and a defined chin keep both figures visibly adult.
@@ -493,8 +499,7 @@ function buildLiteraryCharacter(T, id) {
     ball(arm,.068,...elbow,sleeve);
     segment(arm,elbow,wrist,.065,.053,sleeve);
     if(isNietzsche)segment(arm,[wrist[0],wrist[1],wrist[2]+.025],[wrist[0],wrist[1],wrist[2]-.005],.054,.054,palette.linen);
-    ball(arm,.066,wrist[0],wrist[1],-.445,palette.skin,.84,.55,1.1);
-    ball(arm,.023,-side*.022,wrist[1]+.008,-.433,palette.skin,.8,.9,1.1);
+    addRelaxedHand(T,arm,wrist[0],wrist[1],-.416,side,palette.skin,ball,tube);
   }
   if(!isNietzsche) {
     // Stowed beside the chair, behind the sitter's elbow and clear of the desk.

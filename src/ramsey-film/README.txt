@@ -45,3 +45,13 @@ and Zarathustra retain the original procedural illustrated character definitions
 in assets/legacy-actors.js; their downloadable pose GLBs are not skin rigs.
 The original audio and partial HeyGen recordings remain in local development
 backups and repository history. The current release uses the complete Kokoro cast.
+
+CHARACTER REFINEMENT - 2026-11-03
+Nietzsche has a fitted scalp, smaller recessed eyes, closer wire glasses and
+cleaner moustache contours. Anonymous has a shorter mask nose and the raised
+grey nose-contour strips are removed. Ramsey and Turing have smoothed nape
+surfaces and gradually blended neck skin weights. All six seated characters
+have relaxed open hands, with the rigged forearms lowered toward the table.
+The GLB downloads and embedded assets match the room geometry. All six pass
+Khronos glTF validation with zero errors and zero warnings. The studio includes
+a rear-view control to inspect neck shape. Voices and recordings are unchanged.
