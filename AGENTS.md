@@ -1,0 +1,50 @@
+# City of Ideas — persistent character voices
+
+User instruction reaffirmed 2026-11-03: keep each character's voice fixed across
+future requests, scenes, dialogue additions, and the entire conversation. Reuse
+the saved setup without repeating service selection or account setup.
+
+## Established English cast
+
+| Character | Kokoro voice | Language | Character direction |
+| --- | --- | --- | --- |
+| Socrates | `bm_george` | `en-gb` | Warm, patient, curious |
+| Nietzsche | `am_fenrir` | `en-us` | Firm, precise, thoughtful |
+| Zarathustra / زرتشت | `bm_fable` | `en-gb` | Resonant, reflective storyteller |
+| Frank Ramsey | `bm_lewis` | `en-gb` | Youthful, clear, conversational |
+| Alan Turing | `bm_daniel` | `en-gb` | Restrained, analytical, reflective |
+| Anonymous | `am_michael` | `en-us` | Grounded, direct, questioning |
+
+Use free local **Kokoro-82M v1.0**, **kokoro-onnx 0.4.7**, speed **1.0**.
+The authoritative record is `src/ramsey-film/assets/voice-cast.json`: it stores
+voice IDs, exact settings, model/voice-bank hashes, scripts, cue timings, and
+recording hashes. Preserve those identities unless the user explicitly requests
+a voice change. Character directions guide performance, not claims of authentic
+historical voices.
+
+## Continue voice work
+
+- All 46 conversation lines are recorded. Both five-minute tracks use the same
+  six voices. English Socrates in the desk-book opening uses `bm_george` too.
+- The city and standalone film share `assets/conversation-1.mp3` and
+  `assets/conversation-2.mp3` under `src/ramsey-film/`. Update them together.
+- Reuse `tools/render-ramsey-voices.py` and `tools/assemble-ramsey-voices.py`.
+  Consult `src/ramsey-film/README.txt` for regeneration instructions.
+- Existing local environment: `../../work/kokoro-env`; models:
+  `../../work/kokoro-model`; original generated cues and preview:
+  `../ramsey-voice-references/kokoro` (paths relative to this repository).
+  If absent on another machine, recreate the environment from the saved model
+  version and verify the hashes in the cast record.
+- Preserve completed recordings and exact dialogue. Do not regenerate already
+  accepted lines unnecessarily. Keep full speech, captions, and gestures aligned;
+  never cut words or accelerate speech merely to fit a slot.
+- Do not return to HeyGen for routine voice work: its free quota was exhausted,
+  and the user explicitly switched to a free solution. Its partial recordings
+  are development backups, not the active cast.
+- Do not introduce generic browser-voice fallbacks or choose a different voice
+  for a later chapter. Other language introductions retain their existing
+  localized recordings; the established conversation cast is English.
+- Save any future character's voice assignment once and reuse it thereafter.
+  Update the cast record and relevant provenance hashes after audio edits.
+- Verify with the relevant voice checks in `tests/ramsey-room.mjs`, source
+  integrity checks, and playback across the five-minute boundary when changed.
