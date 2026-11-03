@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Nietzsche · Option A model study</title>
+<style>
+*{box-sizing:border-box}html,body{max-width:100%;overflow-x:hidden}body{margin:0;background:#e7e1d7;color:#263b34;font:15px system-ui,sans-serif}header{padding:24px 28px 8px;display:flex;justify-content:space-between;gap:20px;align-items:start}small{letter-spacing:.13em;text-transform:uppercase;font-size:11px}h1{font:34px Georgia,serif;margin:8px 0}p{max-width:720px;line-height:1.5;margin:8px 0}.controls{display:flex;gap:8px;flex-wrap:wrap;padding:12px 28px}button,a.control{border:1px solid #a7afa1;border-radius:8px;background:#f6f1e8;color:#263b34;padding:10px 15px;font:inherit;cursor:pointer;text-decoration:none}button[aria-pressed=true]{background:#284d40;color:white}label{display:flex;align-items:center;gap:7px;padding:8px}#view{height:68vh;min-height:420px;touch-action:none}canvas{display:block;width:100%;height:100%}footer{padding:10px 28px 24px;color:#566358}#status{font-size:12px}#error{color:#8a2c20}@media(max-width:650px){header{display:block;padding:18px}.controls{padding:10px 18px}#view{height:62vh}h1{font-size:29px}footer{padding:12px 18px}}
+</style></head><body>
+<header><div><small>City of Ideas · construction study A01</small><h1>Nietzsche · a new model in progress</h1><p>A real, rotatable head-and-shoulders model. This first pass explores the face, swept hair, moustache and glasses. Likeness, materials and animation still need refinement.</p></div><a class="control" href="../studio.html">Character studio</a></header>
+<div class="controls" aria-label="Model controls"><button data-yaw="0">Front</button><button data-yaw="0.65" aria-pressed="true">Three-quarter</button><button data-yaw="1.570796">Profile</button><button data-yaw="3.141593">Back</button><button id="face">Face detail</button><button id="reset">Reset view</button><label><input id="spin" type="checkbox">Rotate</label><label><input id="wire" type="checkbox">Wireframe</label><a class="control" href="nietzsche-a.glb" download>Download GLB</a></div>
+<main id="view" aria-label="Rotatable 3D Nietzsche bust"></main>
+<footer><p>Drag to turn · Scroll to zoom. The city’s current character and his fixed voice are preserved.</p><p id="status" role="status">Loading model…</p><p id="error" role="alert"></p></footer>
+<script src="../vendor/three.min.js"></script><script src="../vendor/gltf-loader.js"></script>
+<script>
+(async()=>{try{
+const T=THREE,view=document.getElementById('view'),renderer=new T.WebGLRenderer({antialias:true,preserveDrawingBuffer:true});renderer.setPixelRatio(Math.min(devicePixelRatio,1.7));renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.05;view.append(renderer.domElement);
+const scene=new T.Scene();scene.background=new T.Color('#555857');scene.add(new T.HemisphereLight('#f9f3e8','#33312c',1.0));
+for(const [color,power,position]of [['#fff1dd',3,[-2,3,4]],['#d4e2ef',1,[3,2,1]],['#f3ce9a',2,[1,3,-3]]]){const light=new T.DirectionalLight(color,power);light.position.set(...position);scene.add(light);}
+const loaded=await new GLTFLoader().loadAsync('nietzsche-a.glb?v=1');scene.add(loaded.scene);let triangles=0,meshes=0;const materials=new Set();loaded.scene.traverse(o=>{if(o.isMesh){triangles+=(o.geometry.index?.count||o.geometry.attributes.position.count)/3;meshes++;for(const m of(Array.isArray(o.material)?o.material:[o.material]))materials.add(m);}});
+document.getElementById('status').textContent=Math.round(triangles).toLocaleString()+' triangles · '+meshes+' mesh parts · static construction study';
+const camera=new T.PerspectiveCamera(35,1,.01,20);let yaw=.65,pitch=.07,distance=1.60,targetY=.53,pointer=null,last=0;
+function resize(){renderer.setSize(view.clientWidth,view.clientHeight,false);camera.aspect=view.clientWidth/view.clientHeight;camera.updateProjectionMatrix();}addEventListener('resize',resize);resize();
+const buttons=[...document.querySelectorAll('[data-yaw]')];for(const button of buttons)button.onclick=()=>{yaw=Number(button.dataset.yaw);buttons.forEach(b=>b.setAttribute('aria-pressed',String(b===button)));};
+document.getElementById('face').onclick=()=>{distance=.95;targetY=.735;pitch=.03;};
+document.getElementById('reset').onclick=()=>{yaw=.65;pitch=.07;distance=1.60;targetY=.53;document.getElementById('spin').checked=false;};
+document.getElementById('wire').onchange=e=>materials.forEach(m=>m.wireframe=e.target.checked);
+view.onpointerdown=e=>{pointer={x:e.clientX,y:e.clientY};view.setPointerCapture(e.pointerId);};view.onpointermove=e=>{if(!pointer)return;yaw-=(e.clientX-pointer.x)*.008;pitch=T.MathUtils.clamp(pitch+(e.clientY-pointer.y)*.005,-.45,.65);pointer={x:e.clientX,y:e.clientY};};view.onpointerup=view.onpointercancel=()=>pointer=null;
+view.addEventListener('wheel',e=>{e.preventDefault();distance=T.MathUtils.clamp(distance*Math.exp(e.deltaY*.001),.75,3.5);},{passive:false});
+function render(time){requestAnimationFrame(render);if(document.getElementById('spin').checked)yaw+=Math.min(.05,(time-last)/1000)*.25;last=time;camera.position.set(Math.sin(yaw)*Math.cos(pitch)*distance,targetY+Math.sin(pitch)*distance,Math.cos(yaw)*Math.cos(pitch)*distance);camera.lookAt(0,targetY,0);renderer.render(scene,camera);}requestAnimationFrame(render);
+document.body.dataset.ready='true';
+}catch(error){document.getElementById('status').textContent='Model could not load.';document.getElementById('error').textContent=error.message;console.error(error);}})();
+</script></body></html>

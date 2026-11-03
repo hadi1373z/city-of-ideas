@@ -55,3 +55,13 @@ have relaxed open hands, with the rigged forearms lowered toward the table.
 The GLB downloads and embedded assets match the room geometry. All six pass
 Khronos glTF validation with zero errors and zero warnings. The studio includes
 a rear-view control to inspect neck shape. Voices and recordings are unchanged.
+
+NIETZSCHE OPTION A CONSTRUCTION STUDY - 2026-11-03
+prototypes/nietzsche-a.html is a separate static bust study with orbit, zoom,
+front/profile/back, face detail and wireframe controls. It is an early geometric
+study, not a finished likeness or an animated replacement. Production models
+and every saved voice remain unchanged. Source: tools/build-nietzsche-study.py.
+The editable .blend, packed concept reference and three actual mesh renders are
+in the local outputs/nietzsche-a-prototype folder. Further sculpting of the
+likeness, hair silhouette and garment detail is required. Model report and
+construction credits are in prototypes/model-study.json and README.txt.

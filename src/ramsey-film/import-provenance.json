@@ -6,8 +6,8 @@
     "film.html": "1f60ac4c6ad37a9e9e6c73ed7af74d6fcec1e1ad009277d02ef6efca18e082c6",
     "index.html": "55997ecd9b66d56869e2cdf6423454aa8c6a91c729f39a8eeef0583bfe5ac293",
     "mesh-report.json": "7dfb479d09390d0de1be4bf9ce0132a1a4b34b5e393546058eba53a0908c35fe",
-    "README.txt": "0467a07bed58c3c56df01d530f146b04d511f1fc8371ccb822eea12ab56a7c6a",
-    "studio.html": "98c252a64de8516580846b0ee89390cd7ad735e7ec52b76c7f9ec5ceecd9bbcd",
+    "README.txt": "3f566d8c6ec82b84eb69c01c406ddae5074336e6da3529dce55c61ba3a0be23e",
+    "studio.html": "6706803bd362e6ce4c569a69dfd54a71e2d3ed5ded4c5c3b16afc761e33222eb",
     "assets/anonymous.glb": "8a2c0e3f8f582257a614d4d9ecc6624d1939e9960ddc322b7d22aa1ef2133192",
     "assets/character-adapter.js": "48e8ebcb2717671f86850ea2e7bf8404ef12b3720b68fbbd0f7f186fb4d1c3f5",
     "assets/embedded-anonymous.js": "4562ea0feaee8e46a55101e5863e461474dc3663b0bb23e594aabf709d13c280",
@@ -28,8 +28,12 @@
     "assets/conversation-1.mp3": "1fd2a76b960b64dc32bd712ee762855148e762036e1bbf11bb54184a109e135a",
     "assets/conversation-2.mp3": "72c3d06ea302997846c00cea84535dead51208749743cecdf0d975d4e055f616",
     "assets/conversation.json": "eb68f5458182912517ee24fa1f645ed8076fe6511c2398cef429ad32a7ed1a54",
-    "assets/voice-cast.json": "df04d746ed9783bb01c8e74a48652c2d8671953dc8d1740b9ac6e9a56f123ac0"
+    "assets/voice-cast.json": "df04d746ed9783bb01c8e74a48652c2d8671953dc8d1740b9ac6e9a56f123ac0",
+    "prototypes/nietzsche-a.html": "d83d09c182cda3d0748c82673b02bad106c071f14f21107105c72e02035e4363",
+    "prototypes/nietzsche-a.glb": "05630b1936d8800bad0b31a06f90d854a44b084444f12d0f64dd5796fbf8d082",
+    "prototypes/model-study.json": "45b291731e3ca14aba57def7fb9bf7ee4896fbb1013570d4f715ac718769d7ff",
+    "prototypes/README.txt": "fe9a103b5f2c5ceb5d5b6cc30cec6ed6bb7b66970963e03d829b3a70aa5d156c"
   },
   "upstreamSourceCommit": "cf47412",
-  "localRevision": "2026-11-03: refined Nietzsche and Anonymous faces, smoothed Ramsey/Turing necks, relaxed seated hands for all six; existing voices preserved"
+  "localRevision": "2026-11-03: separate Nietzsche A static model study and viewer added; production cast and voice assignments preserved"
 }

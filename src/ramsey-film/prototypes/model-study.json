@@ -1,0 +1,26 @@
+{
+  "name": "Nietzsche A \u00e2\u20ac\u201d first construction study",
+  "status": "Real mesh prototype; not yet approved likeness or animation-ready character",
+  "triangles": 73984,
+  "objects": 39,
+  "blenderVersion": "4.5.9 LTS",
+  "anatomicalBase": {
+    "file": "src/ramsey-film/assets/turing.glb",
+    "sha256": "cceb1c939cddf5da42428ae149a041a063ed6ad1aa6efe854f3720604bd80e3c",
+    "credit": "Existing project MakeHuman CC0-derived base, reshaped for the prototype"
+  },
+  "voice": "am_fenrir (existing, unchanged)",
+  "features": [
+    "Continuous modeled head and neck",
+    "Separate fitted bronze spectacles",
+    "Reshaped anatomical hair base with swept quiff layers",
+    "Connected tapered moustache locks",
+    "Editable jacket and collar"
+  ],
+  "limitations": [
+    "Anatomical base reshaped from the existing CC0-derived project mesh; likeness still needs sculpting",
+    "No facial animation or full body rig yet",
+    "Hair and material detail still need refinement"
+  ],
+  "source": "tools/build-nietzsche-study.py"
+}

@@ -58,7 +58,9 @@ const filmManifest=JSON.parse(read('ramsey-film/import-provenance.json'));
 const filmModels=new Set(['anonymous','nietzsche','ramsey','socrates','turing','zarathustra'].map(id=>'ramsey-film/assets/'+id+'.glb'));
 assert.equal(glbs.filter(file=>filmModels.has(file)).length,6,'All six film characters must be present');
 for(const [rel,sha]of Object.entries(filmManifest.files)){assert(!rel.startsWith('/')&&!rel.split('/').includes('..'));assert.equal(digest('ramsey-film/'+rel),sha,'Film edition changed: '+rel);}
-for(const file of glbs)assert(filmModels.has(file)||modelDigests.has(digest(file)),'Unexpected or changed duplicate model: '+file);
+const studyModels=new Set(['ramsey-film/prototypes/nietzsche-a.glb']);
+for(const file of studyModels)assert(filmManifest.files[file.replace('ramsey-film/','')],'Prototype must have a pinned provenance checksum');
+for(const file of glbs)assert(filmModels.has(file)||studyModels.has(file)||modelDigests.has(digest(file)),'Unexpected or changed duplicate model: '+file);
 for(const file of songs)assert(songDigests.has(digest(file)),'Unexpected or changed duplicate song: '+file);
 for(const file of glbs){const data=fs.readFileSync(path.join(src,file));assert.equal(data.readUInt32LE(0),0x46546c67);assert.equal(data.readUInt32LE(4),2);assert.equal(data.readUInt32LE(8),data.length);const name=path.basename(file,'.glb');if(/^[0-9a-f]{64}$/.test(name))assert.equal(crypto.createHash('sha256').update(data).digest('hex'),name,'Source GLB byte integrity: '+file);}
 assert(all.includes('city-source-assets/park-tools/atlas.html'),'Full Park reader must be retained');
