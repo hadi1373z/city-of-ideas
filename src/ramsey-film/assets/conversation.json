@@ -133,240 +133,240 @@
       "start": 300,
       "end": 310,
       "speaker": "ramsey",
-      "text": "Look at the six of us. Color each connection red for acquaintance, blue for stranger. One triangle must have a single color.",
       "shot": "wide",
+      "text": "Look at the six of us. Color each connection red for acquaintance, blue for stranger. One triangle must have a single color.",
       "direction": "Interactive 3D scene: speaker gestures and listeners respond."
     },
     {
       "start": 310,
       "end": 320,
       "speaker": "turing",
-      "text": "You are claiming inevitability, Frank. Not merely that some arrangements happen to contain a triangle?",
       "shot": "medium",
+      "text": "You are claiming inevitability, Frank. Not merely that some arrangements happen to contain a triangle?",
       "direction": "Interactive 3D scene: speaker gestures and listeners respond."
     },
     {
       "start": 320,
       "end": 330,
       "speaker": "ramsey",
-      "text": "Exactly. Choose one person. Among their five connections, at least three share a color. Now look at those three people.",
       "shot": "medium",
+      "text": "Exactly. Choose one person. Among their five connections, at least three share a color. Now look at those three people.",
       "direction": "Interactive 3D scene: speaker gestures and listeners respond."
     },
     {
       "start": 330,
       "end": 340,
       "speaker": "socrates",
-      "text": "Before the proof, what is an acquaintance? Is it enough to know a name, or must two people recognize one another?",
       "shot": "close",
+      "text": "Before the proof, what is an acquaintance? Is it enough to know a name, or must two people recognize one another?",
       "direction": "Interactive 3D scene: speaker gestures and listeners respond."
     },
     {
       "start": 340,
       "end": 350,
       "speaker": "ramsey",
-      "text": "For the mathematical game, it is a symmetric yes-or-no relation. The proof depends on that precision.",
       "shot": "medium",
+      "text": "For the mathematical game, it is a symmetric yes-or-no relation. The proof depends on that precision.",
       "direction": "Interactive 3D scene: speaker gestures and listeners respond."
     },
     {
       "start": 350,
       "end": 360,
       "speaker": "anonymous",
-      "text": "But identity is rarely so precise. My mask hides a face. Does it make our relationship more uncertain?",
       "shot": "medium",
+      "text": "But identity is rarely so precise. My mask hides a face. Does it make our relationship more uncertain?",
       "direction": "Interactive 3D scene: speaker gestures and listeners respond."
     },
     {
       "start": 360,
       "end": 370,
       "speaker": "nietzsche",
-      "text": "The mask may reveal something too. People sometimes speak more freely when the ordinary face disappears.",
       "shot": "close",
+      "text": "The mask may reveal something too. People sometimes speak more freely when the ordinary face disappears.",
       "direction": "Interactive 3D scene: speaker gestures and listeners respond."
     },
     {
       "start": 370,
       "end": 380,
       "speaker": "zarathustra",
-      "text": "Then a gathering is not merely six bodies. It is six ways of confronting the others and oneself.",
       "shot": "table",
+      "text": "Then a gathering is not merely six bodies. It is six ways of confronting the others and oneself.",
       "direction": "Interactive 3D scene: speaker gestures and listeners respond."
     },
     {
       "start": 380,
       "end": 390,
       "speaker": "turing",
-      "text": "Return to the three connections, Frank. Suppose they are red. What happens next?",
       "shot": "medium",
+      "text": "Return to the three connections, Frank. Suppose they are red. What happens next?",
       "direction": "Interactive 3D scene: speaker gestures and listeners respond."
     },
     {
       "start": 390,
       "end": 400,
       "speaker": "ramsey",
-      "text": "If any edge among those three is red, we have a red triangle. If none is red, all three edges are blue.",
       "shot": "wide",
+      "text": "If any edge among those three is red, we have a red triangle. If none is red, all three edges are blue.",
       "direction": "Interactive 3D scene: speaker gestures and listeners respond."
     },
     {
       "start": 400,
       "end": 410,
       "speaker": "socrates",
-      "text": "So either way a monochromatic triangle appears. The conclusion was hidden in the choice of five edges.",
       "shot": "medium",
+      "text": "So either way a monochromatic triangle appears. The conclusion was hidden in the choice of five edges.",
       "direction": "Interactive 3D scene: speaker gestures and listeners respond."
     },
     {
       "start": 410,
       "end": 420,
       "speaker": "ramsey",
-      "text": "Yes. The pigeonhole principle supplies the first step. The rest is a simple but unavoidable alternative.",
       "shot": "medium",
+      "text": "Yes. The pigeonhole principle supplies the first step. The rest is a simple but unavoidable alternative.",
       "direction": "Interactive 3D scene: speaker gestures and listeners respond."
     },
     {
       "start": 420,
       "end": 430,
       "speaker": "anonymous",
-      "text": "Can I break it by refusing to classify one relationship? A person can be both friend and stranger.",
       "shot": "close",
+      "text": "Can I break it by refusing to classify one relationship? A person can be both friend and stranger.",
       "direction": "Interactive 3D scene: speaker gestures and listeners respond."
     },
     {
       "start": 430,
       "end": 440,
       "speaker": "turing",
-      "text": "Then you have changed the rules. With two definite colors, the theorem holds. With missing edges, a different question begins.",
       "shot": "medium",
+      "text": "Then you have changed the rules. With two definite colors, the theorem holds. With missing edges, a different question begins.",
       "direction": "Interactive 3D scene: speaker gestures and listeners respond."
     },
     {
       "start": 440,
       "end": 450,
       "speaker": "nietzsche",
-      "text": "A theorem does not imprison life. It tells us what follows once we decide what distinctions matter.",
       "shot": "table",
+      "text": "A theorem does not imprison life. It tells us what follows once we decide what distinctions matter.",
       "direction": "Interactive 3D scene: speaker gestures and listeners respond."
     },
     {
       "start": 450,
       "end": 460,
       "speaker": "zarathustra",
-      "text": "And a choice of distinctions is itself a human act. The world is not obliged to use our categories.",
       "shot": "close",
+      "text": "And a choice of distinctions is itself a human act. The world is not obliged to use our categories.",
       "direction": "Interactive 3D scene: speaker gestures and listeners respond."
     },
     {
       "start": 460,
       "end": 470,
       "speaker": "ramsey",
-      "text": "Yet within a clear model, surprising structure becomes certain. Six is the smallest number that forces this particular triangle.",
       "shot": "medium",
+      "text": "Yet within a clear model, surprising structure becomes certain. Six is the smallest number that forces this particular triangle.",
       "direction": "Interactive 3D scene: speaker gestures and listeners respond."
     },
     {
       "start": 470,
       "end": 480,
       "speaker": "turing",
-      "text": "With five, there is a coloring with no monochromatic triangle. Imagine alternating red and blue around a pentagon.",
       "shot": "medium",
+      "text": "With five, there is a coloring with no monochromatic triangle. Imagine alternating red and blue around a pentagon.",
       "direction": "Interactive 3D scene: speaker gestures and listeners respond."
     },
     {
       "start": 480,
       "end": 490,
       "speaker": "socrates",
-      "text": "Now we have both a proof and a boundary. Why does the boundary matter?",
       "shot": "wide",
+      "text": "Now we have both a proof and a boundary. Why does the boundary matter?",
       "direction": "Interactive 3D scene: speaker gestures and listeners respond."
     },
     {
       "start": 490,
       "end": 500,
       "speaker": "turing",
-      "text": "Because it separates what an algorithm can search for from what a theorem proves for every possible arrangement.",
       "shot": "medium",
+      "text": "Because it separates what an algorithm can search for from what a theorem proves for every possible arrangement.",
       "direction": "Interactive 3D scene: speaker gestures and listeners respond."
     },
     {
       "start": 500,
       "end": 510,
       "speaker": "anonymous",
-      "text": "Could we show visitors the pentagon, then let them add a sixth person and watch the pattern become inevitable?",
       "shot": "medium",
+      "text": "Could we show visitors the pentagon, then let them add a sixth person and watch the pattern become inevitable?",
       "direction": "Interactive 3D scene: speaker gestures and listeners respond."
     },
     {
       "start": 510,
       "end": 520,
       "speaker": "ramsey",
-      "text": "That would be an excellent exhibit. They should be able to color the edges themselves, and discover the obstruction.",
       "shot": "table",
+      "text": "That would be an excellent exhibit. They should be able to color the edges themselves, and discover the obstruction.",
       "direction": "Interactive 3D scene: speaker gestures and listeners respond."
     },
     {
       "start": 520,
       "end": 530,
       "speaker": "nietzsche",
-      "text": "Let the visitor fail before showing the proof. Discovery has more force when certainty arrives as a surprise.",
       "shot": "medium",
+      "text": "Let the visitor fail before showing the proof. Discovery has more force when certainty arrives as a surprise.",
       "direction": "Interactive 3D scene: speaker gestures and listeners respond."
     },
     {
       "start": 530,
       "end": 540,
       "speaker": "zarathustra",
-      "text": "And after the proof, open the door. Knowledge should lead back into the city, not trap us at this table.",
       "shot": "medium",
+      "text": "And after the proof, open the door. Knowledge should lead back into the city, not trap us at this table.",
       "direction": "Interactive 3D scene: speaker gestures and listeners respond."
     },
     {
       "start": 540,
       "end": 550,
       "speaker": "socrates",
-      "text": "But what question should the visitor carry through that door?",
       "shot": "close",
+      "text": "But what question should the visitor carry through that door?",
       "direction": "Interactive 3D scene: speaker gestures and listeners respond."
     },
     {
       "start": 550,
       "end": 560,
       "speaker": "anonymous",
-      "text": "Which connections in my own life have I named too quickly, without asking what they really mean?",
       "shot": "medium",
+      "text": "Which connections in my own life have I named too quickly, without asking what they really mean?",
       "direction": "Interactive 3D scene: speaker gestures and listeners respond."
     },
     {
       "start": 560,
       "end": 570,
       "speaker": "turing",
-      "text": "And which patterns can we compute, even when the number of possibilities grows beyond intuition?",
       "shot": "medium",
+      "text": "And which patterns can we compute, even when the number of possibilities grows beyond intuition?",
       "direction": "Interactive 3D scene: speaker gestures and listeners respond."
     },
     {
       "start": 570,
       "end": 580,
       "speaker": "ramsey",
-      "text": "The lesson is modest: a sufficiently large network contains order, even when every edge is chosen freely.",
       "shot": "wide",
+      "text": "The lesson is modest: a sufficiently large network contains order, even when every edge is chosen freely.",
       "direction": "Interactive 3D scene: speaker gestures and listeners respond."
     },
     {
       "start": 580,
       "end": 590,
       "speaker": "nietzsche",
-      "text": "Order is not the same as meaning. Meaning still demands interpretation, courage, and sometimes disagreement.",
       "shot": "table",
+      "text": "Order is not the same as meaning. Meaning still demands interpretation, courage, and sometimes disagreement.",
       "direction": "Interactive 3D scene: speaker gestures and listeners respond."
     },
     {
       "start": 590,
       "end": 600,
       "speaker": "zarathustra",
-      "text": "Then we leave the table together: not because we agree, but because our questions have become sharper.",
       "shot": "medium",
+      "text": "Then we leave the table together: not because we agree, but because our questions have become sharper.",
       "direction": "Interactive 3D scene: speaker gestures and listeners respond."
     }
   ]

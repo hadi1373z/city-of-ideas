@@ -49,3 +49,17 @@ for(const name of ['index.html','film.html']){
  assert(html.includes('const speechAvailable=false;'),'Never silently switch to a different device voice');
 }
 console.log('PASS permanent cast references, six stable voice keys, shared player recordings and no device-voice fallback');
+
+if(voiceCast.schemaVersion===2){
+ const script=JSON.parse(fs.readFileSync(new URL('conversation.json',audioBase),'utf8'));
+ assert.equal(voiceCast.cues.length,46);assert.equal(new Set(Object.values(voiceCast.characters).map(v=>v.providerVoiceId)).size,6);
+ for(const [i,cue]of voiceCast.cues.entries()){
+  assert.equal(cue.text,script.cues[i].text,'Exact spoken script must be retained');
+  assert.equal(cue.voice,voiceCast.characters[cue.speaker].providerVoiceId,'Character voice must stay fixed');
+  assert(cue.duration>0&&cue.audioEnd<=cue.end,'Speech must finish before the next cue');
+  assert(cue.start>=0&&cue.end<=600);assert.equal(cue.sha256.length,64);
+ }
+ assert.equal(voiceCast.openingRecordings.length,2);
+ assert(voiceCast.openingRecordings.every(c=>c.voice===voiceCast.characters.socrates.providerVoiceId),'English Socrates opening must match room voice');
+ console.log('PASS all 46 complete lines, six persistent voice IDs, exact scripts and matching Socrates opening');
+}

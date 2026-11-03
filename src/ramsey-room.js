@@ -42,7 +42,7 @@ export function installRamseyRoom(M,T=window.THREE){
     }));
     if(disposed){loaded.forEach(a=>a.actor.dispose());return;}
     for(const [i,a]of loaded.entries()){const seat=house.study.seats[i];a.actor.group.position.set(seat.x,0,seat.z);a.actor.group.rotation.y=seat.yaw;a.actor.group.traverse(o=>{o.userData.animated=true;});house.group.add(a.actor.group);a.actor.animate(0,{seated:true,reducedMotion:true});actors.push(a);}
-    conversation=createConversation({tracks:[1,2].map(i=>new Audio(new URL('conversation-'+i+'.mp3',base).href)),cues:data.cues,onChange:updateCaption,onError:()=>{caption.textContent='Audio could not start. Press Start conversation to try again.';}});
+    conversation=createConversation({tracks:[1,2].map(i=>new Audio(new URL('conversation-'+i+'.mp3?v=kokoro-1',base).href)),cues:data.cues,onChange:updateCaption,onError:()=>{caption.textContent='Audio could not start. Press Start conversation to try again.';}});
     ready=true;play.disabled=false;seek.disabled=false;conversation.update();
    }catch(error){caption.textContent=error.message+' You can still walk through the house.';play.textContent='Retry loading conversation';play.disabled=false;loading=null;}
   })();return loading;

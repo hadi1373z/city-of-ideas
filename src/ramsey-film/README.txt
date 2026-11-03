@@ -1,64 +1,47 @@
-CITY OF IDEAS - RESTORED ILLUSTRATED CAST / 04
+CITY OF IDEAS - CONTINUOUS RAMSEY HOUSE / LOCAL VOICES / 08
 
-Socrates, Nietzsche and Zarathustra use their earlier illustrated appearances.
-The replacement faces, hair shells, beards and tubular garments from edition 03
-were rejected and are no longer active. Anonymous, Ramsey and Turing keep their
-edition 03 GLBs unchanged. The table, scene, interactions and film are retained.
+Walk into Ramsey House in the city with the same camera and controls. E / A
+starts or pauses the conversation. Leaving pauses; returning allows resume.
+The standalone film and character studio remain available separately.
+Room geometry is shared through ../ramsey-room-scene.js. Nietzsche and
+Zarathustra retain their restored illustrated appearances.
 
-Open index.html for gameplay, film.html for the paused interactive film, or
-studio.html to compare front, three-quarter and side views of all six figures.
+VOICE CAST - 2026-11-03
+All 46 English dialogue turns now use local Kokoro-82M v1.0 synthesis.
+No paid account, network speech service or browser voice is needed to play them.
+Anonymous: am_michael. Ramsey: bm_lewis. Turing: bm_daniel.
+Socrates: bm_george. Nietzsche: am_fenrir. Zarathustra: bm_fable.
+These are fictional character performances, not historical voice recreations.
+Each character uses one fixed voice in both halves. Socrates uses bm_george
+in the English desk-book introduction too. Other language introductions retain
+their existing localized recordings; the Ramsey conversation is English.
 
-DOWNLOADS
-assets/turing.glb, ramsey.glb and anonymous.glb retain weighted skeletons,
-standing / seated clips, and their existing materials. Turing and Ramsey have
-facial morphs; Anonymous keeps its rigid mask and hood.
-assets/socrates.glb, nietzsche.glb and zarathustra.glb contain the restored
-illustrated geometry, with two baked pose groups and standing / seated clips.
-These three downloads have NO skin rig or facial morphs. Gameplay and studio
-use the original procedural character definitions for gestures and blinking;
-those definitions are supplied in assets/legacy-actors.js.
-The pose downloads use approximate glTF PBR versions of the original toon
-materials; their shapes match the illustrated characters. They are restoration
-assets, not new production character sculpts. See mesh-report.json for details.
-All assets use metres, Y up, facing -Z.
+assets/voice-cast.json records every voice ID, language, speed, exact submitted
+text, individual cue duration/hash, model and voice-bank hashes, runtime version,
+reference excerpts and both final recording hashes. All lines fit their existing
+slots without truncation, speeding or pitch shifting. The recordings are the same
+in the city, index.html and film.html. Device-voice substitution is disabled.
+Waveforms and durations were checked automatically. Aesthetic listening review
+by the user remains necessary. Listen to the six-character preview to judge fit.
 
-QUALITY AND CHECKS
-All six GLB files pass Khronos validation. Actual Three.js scene logic checks
-cover original character restoration, all six cast slots, Play/Pause, user audio
-gesture, 32 film camera shots, proof diagrams and studio controls.
-Previews are offline renders of actual geometry with approximate lighting,
-not browser screenshots. Current browser playback was not rechecked because
-browser preview was unavailable. Mobile performance, file-URL launching and
-external retargeting remain unverified. Cinematic references were inaccessible.
+REGENERATE
+Install kokoro-onnx in a local Python environment. Download kokoro-v1.0.onnx
+and voices-v1.0.bin from the runtime project's model-files-v1.1 release.
+Run tools/render-ramsey-voices.py --model-dir PATH --output CLIPS from the repo.
+Then run tools/assemble-ramsey-voices.py --clips CLIPS. FFmpeg must be available.
+The model is about 325 MB and the voice bank about 28 MB; neither is shipped
+to website visitors. The website receives only the finished audio recordings.
+https://github.com/thewh1teagle/kokoro-onnx (runtime: MIT)
+https://huggingface.co/hexgrad/Kokoro-82M (model: Apache-2.0)
+https://huggingface.co/hexgrad/Kokoro-82M/blob/main/VOICES.md
 
-PROVENANCE
+MODEL AND SCENE PROVENANCE
 Original scene: city-of-ideas-ramsey-render-error-fixed.html from the user's files.
 Turing/Ramsey anatomical base: MakeHuman CC0 core assets and sculpting targets.
 https://www.makehumancommunity.org/about/license.html
-https://github.com/makehumancommunity/makehuman/tree/master/makehuman/data
-Three.js r160, GLTFLoader, GLTFExporter: MIT; vendor/THREE-LICENSE.txt.
-The original scene and audio retain their original provenance and ownership.
-
-Edition 07 - 2026-11-02
-Ramsey House is now a native part of the city scene, with the same player,
-camera and walking controls on both sides of its doorway. The table, six
-characters, walls, roof and window are real city geometry. No iframe or scene
-switch is used when entering. The conversation starts with E / A or the room
-button, pauses when you leave, and can resume from that point on returning.
-The standalone film and studio remain available separately. Shared room
-geometry lives in ../ramsey-room-scene.js. The city streams the original two
-recordings from assets/conversation-1.mp3 and conversation-2.mp3, using the
-audio clock for captions and speaking gestures. No voice recording changed.
-Nietzsche and Zarathustra retain their restored illustrated models.
-
-VOICE CONTINUITY RECORD - 2026-11-02
-assets/voice-cast.json is the permanent cast record. It preserves reference
-recording hashes, exact cue times, transcripts and stable character voice keys.
-The original provider, model and voice IDs are UNKNOWN. Do not infer them.
-When replacing speech, record the actual provider, model, voice ID and all
-settings in that file. Use the same cast across both recordings and city scenes.
-The first five minutes are approved; the second-half mismatch is NOT FIXED.
-Socrates, Nietzsche and Zarathustra have no spoken reference in the first half.
-Their first later appearances are recorded as unconfirmed references only.
-The city and both standalone players now use the same external MP3 files.
-A failed recording must not silently switch to a generic browser voice.
+Three.js and GLTFLoader: MIT; vendor/THREE-LICENSE.txt.
+Anonymous, Ramsey and Turing retain their rigged GLB models. Socrates, Nietzsche
+and Zarathustra retain the original procedural illustrated character definitions
+in assets/legacy-actors.js; their downloadable pose GLBs are not skin rigs.
+The original audio and partial HeyGen recordings remain in local development
+backups and repository history. The current release uses the complete Kokoro cast.

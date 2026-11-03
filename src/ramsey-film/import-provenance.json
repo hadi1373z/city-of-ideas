@@ -1,12 +1,12 @@
 {
   "sourceProject": "appgprj_6ade48309fd48191acf9b1b6b7b61cb1",
   "sourceCommit": "cf47412",
-  "edition": "Native city conversation / restored illustrated cast / 07",
+  "edition": "Native city conversation / six consistent local voices / 08",
   "files": {
-    "film.html": "d39999066ea0fb7cd1a72a521d8fd684d343254257fdbba8c4b2df25cb21aefa",
-    "index.html": "3e42ad625542198e457021abff3f8ac85a5a36c99b92365aaa42712cad15d64b",
+    "film.html": "98fba77be3c2ad18ca9aa03b511b91c5345c8530877df49920ab3cafe65a1887",
+    "index.html": "1d96b840ae545d643d750fe3bb19bb324a98f0ebf7f92a1c953972dbdc66daba",
     "mesh-report.json": "d9221e31061ef4129d9142deeef7170c0087ab904567c49f7829825da686b30f",
-    "README.txt": "0ce997c57fccc737c2cd8f11d0bc13a88b82ee76554462ad22350a5bebb03ba5",
+    "README.txt": "5e78ad2a85a410072db9c2aeceadeec6106ff44ed4f419b19ba567e34f34441d",
     "studio.html": "aaeadd43e27762888d98f1940b0c06a8cbb32124957370b45d6b5de1df63e18f",
     "assets/anonymous.glb": "1840889409fef7678303b9daf8174cd1acc483c9c5b56c402daee0280df11d41",
     "assets/character-adapter.js": "6173c1c3eb67eeeaa92a12448d00d2931579be4b3a7fa673d202f02ea455d082",
@@ -25,11 +25,11 @@
     "vendor/THREE-LICENSE.txt": "852e0e8699169bf9f6fdc6bda3e682d078dcbc738b5d33e74df594721bff271d",
     "vendor/three.min.js": "a4a80fb9b30b9d4e3959be3c19c36ce1fb4aaee237893320232a575d45098120",
     "assets/room-connection.js": "dc1803594f67e7f112a776a41135e341b73f5832961fea5a48a3bf60bb65a17c",
-    "assets/conversation-1.mp3": "e1e83a7079a60a3d0b44506d78f1ea899b25c217444727698a69d051a48f580c",
-    "assets/conversation-2.mp3": "ec6981de0aba944e2719242aaccbb8af53542d5ddc9077223b5765228fb1367e",
-    "assets/conversation.json": "afde9e2c9e167f008e92099f573aa23a1ff0458a8fb994388a485d0398205681",
-    "assets/voice-cast.json": "3ad33578d463863f34cfedbc7cd54b3be93a96de2bfd2f497dd761cd35369046"
+    "assets/conversation-1.mp3": "1fd2a76b960b64dc32bd712ee762855148e762036e1bbf11bb54184a109e135a",
+    "assets/conversation-2.mp3": "72c3d06ea302997846c00cea84535dead51208749743cecdf0d975d4e055f616",
+    "assets/conversation.json": "eb68f5458182912517ee24fa1f645ed8076fe6511c2398cef429ad32a7ed1a54",
+    "assets/voice-cast.json": "df04d746ed9783bb01c8e74a48652c2d8671953dc8d1740b9ac6e9a56f123ac0"
   },
   "upstreamSourceCommit": "cf47412",
-  "localRevision": "2026-11-02: shared recordings and permanent cast record; second-half voice replacement still pending"
+  "localRevision": "2026-11-03: all 46 lines generated with local Kokoro; six fixed voices; matching English Socrates opening"
 }
