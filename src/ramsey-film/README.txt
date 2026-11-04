@@ -169,3 +169,11 @@ then run node tools/refit-nietzsche-neck.mjs INPUT.glb OUTPUT.glb REPORT.json.
 The script checks the source hash and uses Python, numpy and Pillow for the
 neck atlas. Its portrait base and suit credits above continue to apply.
 neck-fit-report.json records the cut, alignment, extension and preserved parts.
+
+NIETZSCHE HEAD / SUIT PROPORTIONS - 2026-11-04 / 12
+The supplied head is uniformly scaled to 88% around the neck anchor. The
+portrait shape, hair and maps are retained. The anatomical neck extension
+is regenerated against the same suit collar, with matching seam weights
+and normals. Standing full-body and seated speaking views are checked.
+The other characters, suit, voices and separate Option A study are unchanged.
+The source and reproduction command remain tools/refit-nietzsche-neck.mjs.

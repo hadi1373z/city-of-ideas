@@ -60,7 +60,13 @@ let area=0;for(let i=0;i<ring.length;i++){const a=records[ring[i]].POSITION,b=re
 // Increasing atan2(x,z) is clockwise when projected into x/z.
 if(area>0)ring.reverse();
 const headDrop=.045;
-for(const record of records)record.POSITION[1]-=headDrop;
+// Match the supplied portrait's scale to the existing adult suit. Anchor the
+// resize at the neck so the jaw stays connected while the skull gets smaller.
+const headScale=.88,scaleAnchor=new T.Vector3(0,1.475,.015);
+for(const record of records){
+ const p=new T.Vector3(...record.POSITION);p.y-=headDrop;
+ record.POSITION=p.sub(scaleAnchor).multiplyScalar(headScale).add(scaleAnchor).toArray();
+}
 function attributeArray(key,ids){const a=attrs[key],C=types[a.componentType];return new C(ids.flatMap(i=>records[i][key]));}
 const used=[...new Set(indices)],remap=new Map(used.map((id,i)=>[id,i]));
 for(const [key,a]of Object.entries(attrs))primitive.attributes[key]=add.accessor(attributeArray(key,used),a.type,a.componentType,34962,key==='POSITION');
@@ -124,7 +130,7 @@ for(const node of d.nodes.filter(n=>/^nietzsche-wardrobe-shirt/.test(n.name||'')
  for(let i=0;i<tangent.length;i+=4){const n=new T.Vector3(...normal.subarray(i/4*3,i/4*3+3));let v=new T.Vector3(...tangent.subarray(i,i+3));if(v.lengthSq()<.01)v.set(1,0,0).addScaledVector(n,-n.x);v.normalize();tangent.set([...v.toArray(),tangent[i+3]<0?-1:1],i);}
  p.attributes.POSITION=add.accessor(pos,'VEC3',5126,34962,true);p.attributes.NORMAL=add.accessor(normal,'VEC3',5126,34962);p.attributes.TANGENT=add.accessor(tangent,'VEC4',5126,34962);
 }
-const report={sourceSha256:sourceSha,removed:'Original portrait clothing below the anatomical neck contour, and nietzsche-supplied-head-neck-collar-base',cut:{plane:'y = 1.532 + .17 * (z + .04)',contourVertices:N,originalTriangles:sourceIndices.length/3,retainedTriangles:indices.length/3},headAlignmentY:-headDrop,extension:{name:'nietzsche-continuous-neck-extension',bottomY:1.380,rows,triangles:neckIndices.length/3,material:'Baked boundary-to-original-neck skin transition; no stretched portrait clothing',weights:'Original boundary weights to Spine, blended across the neck'},restoredSuitCollarVertices:collarVertices,preserved:['Portrait geometry and maps above cut (rigid vertical alignment only)','Existing business suit outside its previously compressed collar','Hands, shoes, skeleton and animation clips','All six fixed voice recordings']};
+const report={sourceSha256:sourceSha,removed:'Original portrait clothing below the anatomical neck contour, and nietzsche-supplied-head-neck-collar-base',cut:{plane:'y = 1.532 + .17 * (z + .04)',contourVertices:N,originalTriangles:sourceIndices.length/3,retainedTriangles:indices.length/3},headAlignmentY:-headDrop,headScale,scaleAnchor:scaleAnchor.toArray(),extension:{name:'nietzsche-continuous-neck-extension',bottomY:1.380,rows,triangles:neckIndices.length/3,material:'Baked boundary-to-original-neck skin transition; no stretched portrait clothing',weights:'Original boundary weights to Spine, blended across the neck'},restoredSuitCollarVertices:collarVertices,preserved:['Portrait shape and maps above cut (uniform scale and vertical alignment only)','Existing business suit outside its previously compressed collar','Hands, shoes, skeleton and animation clips','All six fixed voice recordings']};
 d.asset.extras={...(d.asset.extras||{}),neckFix:report};
 const result=prune(d,add.bin);writeGLB(output,result.doc,result.bin);
 fs.writeFileSync(reportFile,JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));

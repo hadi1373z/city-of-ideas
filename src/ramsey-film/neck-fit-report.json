@@ -8,6 +8,12 @@
     "retainedTriangles": 89748
   },
   "headAlignmentY": -0.045,
+  "headScale": 0.88,
+  "scaleAnchor": [
+    0,
+    1.475,
+    0.015
+  ],
   "extension": {
     "name": "nietzsche-continuous-neck-extension",
     "bottomY": 1.38,
@@ -18,7 +24,7 @@
   },
   "restoredSuitCollarVertices": 1546,
   "preserved": [
-    "Portrait geometry and maps above cut (rigid vertical alignment only)",
+    "Portrait shape and maps above cut (uniform scale and vertical alignment only)",
     "Existing business suit outside its previously compressed collar",
     "Hands, shoes, skeleton and animation clips",
     "All six fixed voice recordings"
