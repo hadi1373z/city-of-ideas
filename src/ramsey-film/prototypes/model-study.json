@@ -1,26 +1,52 @@
 {
-  "name": "Nietzsche A \u00e2\u20ac\u201d first construction study",
-  "status": "Real mesh prototype; not yet approved likeness or animation-ready character",
-  "triangles": 73984,
-  "objects": 39,
+  "name": "Nietzsche A - groom and proportion study",
+  "status": "Real mesh prototype; likeness and animation remain in progress",
+  "revision": 2,
+  "triangles": 203080,
+  "objects": 30,
   "blenderVersion": "4.5.9 LTS",
   "anatomicalBase": {
     "file": "src/ramsey-film/assets/turing.glb",
     "sha256": "cceb1c939cddf5da42428ae149a041a063ed6ad1aa6efe854f3720604bd80e3c",
-    "credit": "Existing project MakeHuman CC0-derived base, reshaped for the prototype"
+    "credit": "Existing project MakeHuman CC0-derived base, reshaped for the prototype",
+    "gitCommit": "760f74100be29b07ca24cf94a7b1d8959ab225ea"
   },
   "voice": "am_fenrir (existing, unchanged)",
+  "groom": {
+    "eyebrow": 480,
+    "moustache": 520,
+    "scalp": 720
+  },
+  "materials": {
+    "skin": "Embedded baked complexion and tangent-space pore normal maps",
+    "hair": "Tapered mesh fibres, merged by material for web review"
+  },
+  "proportions": {
+    "shoulderSpan": 0.705630898475647,
+    "headSpanIncludingEars": 0.323,
+    "collarBottom": 0.423,
+    "collarTop": 0.483,
+    "jacketNeckline": 0.452,
+    "neckReduction": 0.028
+  },
+  "references": [
+    {
+      "url": "https://cults3d.com/en/3d-model/art/friedrich-nietzsche-bust-german-philosopher",
+      "use": "GLB reference candidate only; no mesh purchased, downloaded or incorporated"
+    }
+  ],
   "features": [
-    "Continuous modeled head and neck",
-    "Separate fitted bronze spectacles",
-    "Reshaped anatomical hair base with swept quiff layers",
-    "Connected tapered moustache locks",
-    "Editable jacket and collar"
+    "Continuous anatomical head and neck",
+    "Fitted bronze spectacles",
+    "480 individually tapered eyebrow hairs",
+    "Swept scalp and moustache mesh grooms",
+    "Portable baked skin detail",
+    "Rounded adult shoulders and fitted overlapping collar"
   ],
   "limitations": [
     "Anatomical base reshaped from the existing CC0-derived project mesh; likeness still needs sculpting",
     "No facial animation or full body rig yet",
-    "Hair and material detail still need refinement"
+    "Bust proportions and hair remain an iterative study"
   ],
   "source": "tools/build-nietzsche-study.py"
 }

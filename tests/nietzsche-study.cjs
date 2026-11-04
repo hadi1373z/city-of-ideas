@@ -21,4 +21,19 @@ assert(names.includes('anatomical'));assert(names.includes('spectacle'));assert(
 const info=JSON.parse(fs.readFileSync(path.join(root,'model-study.json')));
 assert.equal(info.voice,'am_fenrir (existing, unchanged)');assert.equal(info.triangles,triangles);
 assert.equal(info.anatomicalBase.sha256.length,64);
-console.log('PASS real self-contained static bust, finite geometry, bounded polygon count, truthful metadata and preserved voice assignment');
+const bounds=name=>{
+ const node=json.nodes.find(n=>(n.name||'').startsWith(name));assert(node,'Missing model part: '+name);
+ const accessors=json.meshes[node.mesh].primitives.map(p=>json.accessors[p.attributes.POSITION]);
+ return {min:[0,1,2].map(i=>Math.min(...accessors.map(a=>a.min[i]))),max:[0,1,2].map(i=>Math.max(...accessors.map(a=>a.max[i])))};
+};
+const head=bounds('Nietzsche A anatomical Mesh_0'),shoulders=bounds('Tailored wool shoulders'),collar=bounds('Fitted ivory neck collar');
+const ratio=(shoulders.max[0]-shoulders.min[0])/(head.max[0]-head.min[0]);
+assert(ratio>2.05&&ratio<2.6,'Shoulders must have adult proportions relative to the anatomical head');
+assert(collar.min[1]<shoulders.max[1]&&collar.max[1]>shoulders.max[1],'Collar must overlap the jacket neckline');
+assert(head.min[1]<collar.min[1]&&head.max[1]>collar.max[1],'Anatomical neck must continue inside the collar');
+for(const groom of ['Eyebrow groom','Moustache groom','Scalp hair groom'])bounds(groom);
+const skin=json.materials.find(m=>m.name==='Skin - baked complexion and pores');
+assert(skin?.pbrMetallicRoughness.baseColorTexture&&skin.normalTexture,'Skin detail must survive GLB export');
+assert(json.images.every(i=>Number.isInteger(i.bufferView)),'Skin maps must be embedded');
+assert.equal(info.groom.eyebrow,480);
+console.log('PASS self-contained bust, portable skin detail, mesh grooms, head/shoulder proportions, overlapping neck/collar and preserved voice');
