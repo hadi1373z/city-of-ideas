@@ -1,13 +1,14 @@
 {
   "turing": {
-    "bytes": 5939072,
+    "bytes": 11708504,
     "bones": 13,
-    "meshes": 17,
-    "triangles": 77805,
+    "meshes": 26,
+    "triangles": 144920,
     "morphs": [
       "blinkLeft",
       "blinkRight",
       "jawOpen",
+      "seatedDrape",
       "smile"
     ],
     "animations": [
@@ -15,21 +16,23 @@
       "Seated at hexagonal table",
       "Blink"
     ],
-    "validation": {
-      "errors": 0,
-      "warnings": 0
-    },
-    "revision": "Smoothed nape, gradual neck skin weights, relaxed open palms and revised seated elbow pose."
+    "wardrobe": "Charcoal slim suit, muted green tie",
+    "wardrobeTriangles": 83484,
+    "garmentMorphs": [
+      "seatedDrape"
+    ],
+    "wardrobeSource": "https://sketchfab.com/3d-models/man-black-business-suit-7a669a06fb954d459985ccaa98672177"
   },
   "ramsey": {
-    "bytes": 8966808,
+    "bytes": 14733892,
     "bones": 14,
-    "meshes": 24,
-    "triangles": 97223,
+    "meshes": 33,
+    "triangles": 164300,
     "morphs": [
       "blinkLeft",
       "blinkRight",
       "jawOpen",
+      "seatedDrape",
       "smile"
     ],
     "animations": [
@@ -37,11 +40,12 @@
       "Seated at hexagonal table",
       "Blink"
     ],
-    "validation": {
-      "errors": 0,
-      "warnings": 0
-    },
-    "revision": "Smoothed nape, gradual neck skin weights, relaxed open palms and revised seated elbow pose."
+    "wardrobe": "Navy three-piece, burgundy tie",
+    "wardrobeTriangles": 83484,
+    "garmentMorphs": [
+      "seatedDrape"
+    ],
+    "wardrobeSource": "https://sketchfab.com/3d-models/man-black-business-suit-7a669a06fb954d459985ccaa98672177"
   },
   "socrates": {
     "bytes": 3444272,
@@ -54,27 +58,40 @@
       "seated"
     ],
     "assetType": "Restored illustrated geometry with two baked poses; no skin rig or facial morphs. Gameplay retains original procedural gestures.",
-    "validation": {
-      "errors": 0,
-      "warnings": 0
-    }
+    "runtime": "Preserved illustrated procedural actor; GLB is the archived two-pose export."
   },
   "nietzsche": {
-    "bytes": 1923604,
-    "bones": 0,
-    "meshes": 164,
-    "triangles": 64776,
-    "morphs": [],
-    "animations": [
-      "standing",
-      "seated"
+    "bytes": 19740936,
+    "bones": 13,
+    "meshes": 20,
+    "triangles": 196790,
+    "morphs": [
+      "seatedDrape"
     ],
-    "assetType": "Restored illustrated geometry with two baked poses; no skin rig or facial morphs. Gameplay retains original procedural gestures.",
-    "validation": {
-      "errors": 0,
-      "warnings": 0
+    "animations": [
+      "Standing idle",
+      "Seated at hexagonal table"
+    ],
+    "assetType": "User-supplied textured head and neck on weighted body; no facial morphs",
+    "headTriangles": 106602,
+    "textures": 4,
+    "textureResolution": 2048,
+    "wardrobe": "Near-black long jacket, warm waistcoat and linen",
+    "wardrobeTriangles": 83058,
+    "garmentMorphs": [
+      "seatedDrape"
+    ],
+    "wardrobeSource": "https://sketchfab.com/3d-models/man-black-business-suit-7a669a06fb954d459985ccaa98672177",
+    "lowerFaceCorrection": {
+      "yawAlignmentDegrees": 10,
+      "region": "lower lip and chin beneath the moustache",
+      "modifiedVertices": 4037,
+      "meanMirrorDistanceBeforeMm": 5.110339641571045,
+      "meanMirrorDistanceAfterMm": 1.9364935159683228,
+      "maxSculptDisplacementMm": 8.197040557861328,
+      "limit": "Original baked texture shading remains naturally asymmetric; source face is static."
     },
-    "revision": "Fitted scalp, recessed eyes, closer spectacles and open seated hands."
+    "facialAnimation": "Static source portrait; head and body gestures only."
   },
   "zarathustra": {
     "bytes": 1964712,
@@ -87,10 +104,7 @@
       "seated"
     ],
     "assetType": "Restored illustrated geometry with two baked poses; no skin rig or facial morphs. Gameplay retains original procedural gestures.",
-    "validation": {
-      "errors": 0,
-      "warnings": 0
-    }
+    "runtime": "Preserved illustrated procedural actor; GLB is the archived two-pose export."
   },
   "anonymous": {
     "bytes": 4983896,
@@ -103,11 +117,6 @@
       "Standing idle",
       "Seated at hexagonal table"
     ],
-    "identity": "Rigid white mask and black hood",
-    "validation": {
-      "errors": 0,
-      "warnings": 0
-    },
-    "revision": "Shorter integrated mask nose, removed raised nasal strips, open gloved hands."
+    "identity": "Rigid white mask and black hood"
   }
 }

@@ -1,4 +1,4 @@
-import {buildNativeRamseyHouse} from './ramsey-native-house.js';
+import {buildNativeRamseyHouse} from './ramsey-native-house.js?v=wardrobe10';
 import {createConversation} from './ramsey-conversation.js';
 
 const CAST=[['socrates','Socrates'],['nietzsche','Nietzsche'],['zarathustra','Zarathustra · زرتشت'],['anonymous','Anonymous'],['ramsey','Frank Ramsey'],['turing','Alan Turing']];
@@ -19,7 +19,7 @@ export function installRamseyRoom(M,T=window.THREE){
  title.textContent='Ramsey House';caption.textContent='The conversation is getting ready…';play.textContent='Loading conversation…';play.disabled=true;restart.textContent='Restart';mute.textContent='Voice on';mute.setAttribute('aria-pressed','false');
  for(const b of [play,restart,mute])b.className='glass';
  seek.type='range';seek.min='0';seek.max='600';seek.step='.1';seek.value='0';seek.setAttribute('aria-label','Conversation time');seek.disabled=true;
- note.textContent='E / A: start or pause · Keep walking to explore · Leaving pauses the conversation';controls.append(play,restart,mute,clock);panel.append(title,caption,controls,seek,note);document.body.append(panel);
+ note.textContent='Red: acquainted / Blue: not acquainted / Gray dashes: unknown · E / A: start or pause · Keep walking to explore · Leaving pauses the conversation';controls.append(play,restart,mute,clock);panel.append(title,caption,controls,seek,note);document.body.append(panel);
  const format=t=>Math.floor(t/60)+':'+String(Math.floor(t%60)).padStart(2,'0');
  function updateCaption(state){play.textContent=state.playing?'Pause conversation':state.time>=600?'Replay conversation':state.time>0?'Resume conversation':'Start conversation';clock.textContent=format(state.time)+' / 10:00';if(document.activeElement!==seek)seek.value=String(state.time);if(state.cue!==lastCue){lastCue=state.cue;title.textContent=CAST.find(([id])=>id===state.cue?.speaker)?.[1]||'Ramsey House';caption.textContent=state.cue?.text||'Take a place by the table.';}}
  function pause(){conversation?.pause();if(musicWasPlaying){document.querySelector('#music-toggle')?.click();musicWasPlaying=false;}}
@@ -34,10 +34,10 @@ export function installRamseyRoom(M,T=window.THREE){
    try{
     await loadScript('./ramsey-film/assets/legacy-actors.js?v=7');
     await loadScript('./ramsey-film/vendor/gltf-loader.js');
-    await loadScript('./ramsey-film/assets/character-adapter.js?v=7');
+    await loadScript('./ramsey-film/assets/character-adapter.js?v=wardrobe10');
     const response=await fetch(new URL('conversation.json',base));if(!response.ok)throw new Error('Conversation could not be loaded.');const data=await response.json();
     const loaded=await Promise.all(CAST.map(async([id,name])=>{
-     const actor=id==='socrates'?window.buildSocratesGuide(T):['nietzsche','zarathustra'].includes(id)?window.buildLiteraryCharacter(T,id):window.academicActorFromGLTF(await new window.GLTFLoader().loadAsync(new URL(id+'.glb?v=7',base).href),id);
+     const actor=id==='socrates'?window.buildSocratesGuide(T):id==='zarathustra'?window.buildLiteraryCharacter(T,id):window.academicActorFromGLTF(await new window.GLTFLoader().loadAsync(new URL(id+'.glb?v=wardrobe10',base).href),id);
      return {id,name,actor};
     }));
     if(disposed){loaded.forEach(a=>a.actor.dispose());return;}
@@ -47,7 +47,7 @@ export function installRamseyRoom(M,T=window.THREE){
    }catch(error){caption.textContent=error.message+' You can still walk through the house.';play.textContent='Retry loading conversation';play.disabled=false;loading=null;}
   })();return loading;
  }
- void load();
+ // Load the detailed cast when approaching or visiting Ramsey House.
  const originalCanStand=M.city.canStand,originalRegion=M.city.region,originalUpdate=M.city.update;
  M.city.canStand=(x,z)=>house.canStand(x,z)&&originalCanStand(x,z);
  M.city.region=(x,z)=>house.inside(x,z)?{id:'ramsey-conversation',title:'Ramsey House · conversation',inside:true}:originalRegion(x,z);
@@ -55,7 +55,7 @@ export function installRamseyRoom(M,T=window.THREE){
  M.city.update=(player,time,mode)=>{
   originalUpdate(player,time,mode);
   house.group.visible=player.x<-1000;
-  near=mode==='city'&&Math.hypot(player.x-house.origin.x,player.z-house.origin.z)<7;
+  near=mode==='city'&&Math.hypot(player.x-house.origin.x,player.z-house.origin.z)<7;if(near&&!ready&&!loading)void load();
   const nowInside=mode==='city'&&house.inside(player.x,player.z);
   if(inside&&!nowInside)pause();inside=nowInside;
   panel.hidden=!inside||!!document.querySelector('dialog[open]');if(join)join.hidden=true;
@@ -63,7 +63,7 @@ export function installRamseyRoom(M,T=window.THREE){
   conversation?.update();
   if(house.group.visible&&near)for(const a of actors)a.actor.animate(conversation?.state.playing?conversation.state.time:time,{seated:true,talking:!!conversation?.state.playing&&lastCue?.speaker===a.id,reducedMotion:matchMedia('(prefers-reduced-motion: reduce)').matches});
  };
- function visit(){document.querySelector('#welcome')?.setAttribute('hidden','');M.arrive(house.entry);M.pointToward(house.origin);}
+ function visit(){void load();document.querySelector('#welcome')?.setAttribute('hidden','');M.arrive(house.entry);M.pointToward(house.origin);}
  const link=document.querySelector('#ramsey-film-link');if(link){link.href='#ramsey-house';link.onclick=e=>{e.preventDefault();visit();};}
  const map=document.createElement('button');map.onclick=()=>{document.querySelector('#map-panel').hidden=true;visit();};document.querySelector('.map-directions')?.append(map);
  function locale(){const lang=window.CITY_I18N.lang;map.textContent=lang==='fa'?'خانهٔ رمزی':lang==='de'?'Ramsey-Haus':'Ramsey House';if(link)link.textContent=lang==='fa'?'دیدار از گفت‌وگوی رمزی':lang==='de'?'Ramsays Gespräch besuchen':'Visit Ramsey’s conversation';}

@@ -1,0 +1,297 @@
+{
+  "engine": "Chrome headless, real Three.js WebGLRenderer",
+  "target": "https://hadi1373z.github.io/city-of-ideas/",
+  "checkedLocally": true,
+  "views": [
+    "front",
+    "three-quarter",
+    "side"
+  ],
+  "poses": [
+    "standing bust",
+    "seated full body"
+  ],
+  "characters": {
+    "socrates": {
+      "style": "restored-illustrated-v1",
+      "face": false,
+      "clips": 0
+    },
+    "nietzsche": {
+      "style": "unified-glb-cast-v3",
+      "face": false,
+      "drapes": 10,
+      "clips": 2
+    },
+    "zarathustra": {
+      "style": "restored-illustrated-v1",
+      "face": false,
+      "clips": 0
+    },
+    "anonymous": {
+      "style": "unified-glb-cast-v3",
+      "face": false,
+      "drapes": 0,
+      "clips": 2
+    },
+    "ramsey": {
+      "style": "unified-glb-cast-v3",
+      "face": true,
+      "drapes": 10,
+      "clips": 3
+    },
+    "turing": {
+      "style": "unified-glb-cast-v3",
+      "face": true,
+      "drapes": 10,
+      "clips": 3
+    }
+  },
+  "filmTableMap": {
+    "vertices": 6,
+    "phase": "gathering-with-anonymous-unknown",
+    "center": [
+      0,
+      0.896,
+      0.35
+    ],
+    "nodes": [
+      {
+        "id": "socrates",
+        "name": "Socrates",
+        "position": [
+          0.29444863728670917,
+          0.011,
+          -0.16999999999999993
+        ],
+        "sideYaw": 2.0943951023931953
+      },
+      {
+        "id": "nietzsche",
+        "name": "Nietzsche",
+        "position": [
+          4.163799117101001e-17,
+          0.011,
+          -0.34
+        ],
+        "sideYaw": 3.141592653589793
+      },
+      {
+        "id": "zarathustra",
+        "name": "Zarathustra",
+        "position": [
+          -0.29444863728670906,
+          0.011,
+          -0.17000000000000015
+        ],
+        "sideYaw": 4.1887902047863905
+      },
+      {
+        "id": "anonymous",
+        "name": "Anonymous",
+        "position": [
+          0,
+          0.011,
+          0.34
+        ],
+        "sideYaw": 0
+      },
+      {
+        "id": "ramsey",
+        "name": "Frank Ramsey",
+        "position": [
+          0.29444863728670917,
+          0.011,
+          0.17000000000000004
+        ],
+        "sideYaw": 1.0471975511965976
+      },
+      {
+        "id": "turing",
+        "name": "Alan Turing",
+        "position": [
+          -0.29444863728670917,
+          0.011,
+          0.17000000000000004
+        ],
+        "sideYaw": -1.0471975511965976
+      }
+    ],
+    "edges": [
+      {
+        "people": [
+          "socrates",
+          "nietzsche"
+        ],
+        "relation": "knows"
+      },
+      {
+        "people": [
+          "socrates",
+          "zarathustra"
+        ],
+        "relation": "does-not-know"
+      },
+      {
+        "people": [
+          "socrates",
+          "anonymous"
+        ],
+        "relation": "unknown"
+      },
+      {
+        "people": [
+          "socrates",
+          "ramsey"
+        ],
+        "relation": "knows"
+      },
+      {
+        "people": [
+          "socrates",
+          "turing"
+        ],
+        "relation": "does-not-know"
+      },
+      {
+        "people": [
+          "nietzsche",
+          "zarathustra"
+        ],
+        "relation": "knows"
+      },
+      {
+        "people": [
+          "nietzsche",
+          "anonymous"
+        ],
+        "relation": "unknown"
+      },
+      {
+        "people": [
+          "nietzsche",
+          "ramsey"
+        ],
+        "relation": "does-not-know"
+      },
+      {
+        "people": [
+          "nietzsche",
+          "turing"
+        ],
+        "relation": "does-not-know"
+      },
+      {
+        "people": [
+          "zarathustra",
+          "anonymous"
+        ],
+        "relation": "unknown"
+      },
+      {
+        "people": [
+          "zarathustra",
+          "ramsey"
+        ],
+        "relation": "does-not-know"
+      },
+      {
+        "people": [
+          "zarathustra",
+          "turing"
+        ],
+        "relation": "knows"
+      },
+      {
+        "people": [
+          "anonymous",
+          "ramsey"
+        ],
+        "relation": "unknown"
+      },
+      {
+        "people": [
+          "anonymous",
+          "turing"
+        ],
+        "relation": "unknown"
+      },
+      {
+        "people": [
+          "ramsey",
+          "turing"
+        ],
+        "relation": "knows"
+      }
+    ],
+    "knownPairs": [
+      [
+        "nietzsche",
+        "zarathustra"
+      ],
+      [
+        "nietzsche",
+        "socrates"
+      ],
+      [
+        "socrates",
+        "ramsey"
+      ],
+      [
+        "ramsey",
+        "turing"
+      ],
+      [
+        "turing",
+        "zarathustra"
+      ]
+    ],
+    "anonymous": "unknown"
+  },
+  "nativeCity": {
+    "ready": true,
+    "cast": [
+      {
+        "id": "socrates",
+        "style": "warm-illustrated-v1"
+      },
+      {
+        "id": "nietzsche",
+        "style": "unified-glb-cast-v3"
+      },
+      {
+        "id": "zarathustra",
+        "style": "warm-illustrated-v1"
+      },
+      {
+        "id": "anonymous",
+        "style": "unified-glb-cast-v3"
+      },
+      {
+        "id": "ramsey",
+        "style": "unified-glb-cast-v3"
+      },
+      {
+        "id": "turing",
+        "style": "unified-glb-cast-v3"
+      }
+    ],
+    "tableProps": {
+      "coffee": 0,
+      "notebooks": 0,
+      "deskBooks": 0
+    },
+    "conversationControls": {
+      "playing": true,
+      "paused": true,
+      "inside": true
+    }
+  },
+  "pageErrors": [],
+  "failedRequests": [],
+  "limits": [
+    "No mobile or external retargeting check",
+    "Nietzsche face is static",
+    "Stylized visual fidelity, original baked shading retained"
+  ]
+}

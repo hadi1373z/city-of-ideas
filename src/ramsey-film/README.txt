@@ -1,10 +1,10 @@
-CITY OF IDEAS - CONTINUOUS RAMSEY HOUSE / LOCAL VOICES / 08
+CITY OF IDEAS - CONTINUOUS RAMSEY HOUSE / LOCAL VOICES / SUITS / 10
 
 Walk into Ramsey House in the city with the same camera and controls. E / A
 starts or pauses the conversation. Leaving pauses; returning allows resume.
 The standalone film and character studio remain available separately.
-Room geometry is shared through ../ramsey-room-scene.js. Nietzsche and
-Zarathustra retain their restored illustrated appearances.
+Room geometry is shared through ../ramsey-room-scene.js. Nietzsche uses the
+supplied textured portrait; Zarathustra and Socrates retain their illustrated actors.
 
 VOICE CAST - 2026-11-03
 All 46 English dialogue turns now use local Kokoro-82M v1.0 synthesis.
@@ -65,3 +65,91 @@ The editable .blend, packed concept reference and three actual mesh renders are
 in the local outputs/nietzsche-a-prototype folder. Further sculpting of the
 likeness, hair silhouette and garment detail is required. Model report and
 construction credits are in prototypes/model-study.json and README.txt.
+
+
+WARDROBE AND ACQUAINTANCE MAP - 2026-11-04
+CITY OF IDEAS - SUIT VARIANTS AND ACQUAINTANCE MAP / 10
+
+Ramsey, Turing and Nietzsche have individual outfits adapted from the supplied
+Man Black Business Suit: shaped lapels, layered fronts, trousers, cuffs, buttons
+and fabric normal maps. Ramsey wears navy with a burgundy tie, Turing charcoal
+with a muted green tie, and Nietzsche a longer near-black jacket with warmer
+waistcoat and linen tones. Turing and Ramsey retain their existing head geometry, hair, spectacles,
+facial morphs, hands and shoes. Nietzsche uses the supplied portrait aligned
+to face forward, with a local bilateral correction beneath the moustache.
+His original jaw/neck surface is retained; the redundant second shirt collar
+is tucked inside a fitted dark cravat extending the original collar contour. Anonymous, Socrates and Zarathustra
+are unchanged. The new suits have weighted sleeves / trousers and seatedDrape
+shapes for the coat and shirt, included in the exported pose clips.
+
+The coffee cups, individual writing notebooks / pages and open desk book have
+been removed. There is one graph sheet, exactly centered over the hexagonal
+table. Each named node lies toward its person's seat. In the fictional gathering:
+Nietzsche knows Zarathustra and Socrates; Socrates knows Ramsey; Ramsey knows
+Turing; Turing knows Zarathustra. These five pairs are red. Every other pair
+among the five is blue (not acquainted). Anonymous's five pairs remain unknown,
+shown as gray dashes. Node positions and pair states do not change to an
+invented relation during the film. Its five-person example omits Anonymous
+while keeping the other five nodes on their own table sectors.
+
+The recorded fictional film dialogue is retained. Its general six-person
+Ramsey theorem assumes every edge is classified. This gathering leaves
+Anonymous unclassified; its partial map is not a complete two-colour K6.
+The five specified acquaintance pairs form a C5, and neither colour among
+those five contains a triangle.
+
+OPEN / DOWNLOAD
+index.html: gameplay; film.html: paused interactive film; studio.html: character
+views, wireframe, standing/seated poses and individual GLB downloads.
+assets/turing.glb, ramsey.glb, nietzsche.glb and anonymous.glb have weighted rigs.
+Turing and Ramsey retain four facial morphs. Nietzsche's source face and the
+Anonymous mask are static. Speaking uses their head / arm gestures.
+Socrates and Zarathustra retain the earlier illustrated procedural actors;
+their GLBs contain two baked poses without a skin rig.
+Units are metres, Y is up, characters face -Z. See mesh-report.json,
+wardrobe-report.json, scene-checks.json and validation.json for details.
+
+VERIFICATION / LIMITS
+All six GLBs pass Khronos validation with zero errors and zero warnings.
+The release checks cover centered paper, exact fixed pair states, unknown
+Anonymous links, seat-node alignment, garment weight normalization, pose clips,
+retained Turing/Ramsey head attributes, fixed voices and the rest of the city.
+Headless Chrome / WebGL previews show front, three-quarter and side views,
+standing and seated, in the actual studio. The shared room, film table view
+and native city room are also checked in the browser. See scene-checks.json.
+
+The visual result is a stylized game cast, not finished cinematic realism.
+Nietzsche's source face is static. Original baked shading and natural facial
+asymmetry remain, despite reducing the lower-lip/chin geometry mismatch.
+Clothes use linear skinning and authored seated morphs, without cloth simulation.
+Extreme external retargeting, mobile performance and file-URL launching are
+unverified. Model downloads are separate GLBs; serve the game over HTTP.
+
+SUIT ATTRIBUTION - CC BY 4.0
+Man Black Business Suit by Style3D CG (https://sketchfab.com/Style3DMeta).
+https://sketchfab.com/3d-models/man-black-business-suit-7a669a06fb954d459985ccaa98672177
+License: https://creativecommons.org/licenses/by/4.0/
+Adapted from the user-supplied file: optimized geometry and textures, new fit,
+colour variants, skin weights and seated garment morphs. Original title,
+author and license metadata are retained in each derivative GLB and report.
+
+OTHER PROVENANCE
+Nietzsche head: user-supplied source/model.glb. Original conditions continue to
+apply; no author/license metadata was present in that file.
+Original scene: city-of-ideas-ramsey-render-error-fixed.html from the user's files.
+Turing/Ramsey anatomical base: MakeHuman CC0 core assets and sculpting targets.
+https://www.makehumancommunity.org/about/license.html
+Three.js r160 and its loader/exporter: MIT; vendor/THREE-LICENSE.txt.
+The original scene and audio retain their original provenance and ownership.
+
+ADDITIONAL CLOTHING STYLE REFERENCE - CC BY 4.0
+Indian Man in suit by Pixel_Monster (https://sketchfab.com/ar.jethin).
+https://sketchfab.com/3d-models/indian-man-in-suit-985dd9756d89464b9380414b5b12d8aa
+https://creativecommons.org/licenses/by/4.0/
+Used as a shoulder, sleeve and restrained clothing reference; its identity
+and head are not imported. The derivatives above use the Style3D garment.
+
+TARGET
+https://hadi1373z.github.io/city-of-ideas/
+Integrated into the native walkable room and the shared standalone film.
+Recorded voice files, exact dialogue and the Nietzsche A prototype are preserved.

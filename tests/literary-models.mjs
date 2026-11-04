@@ -19,7 +19,7 @@ for(const id of ['nietzsche','zarathustra']){
 for(const file of ['index.html','film.html','studio.html']){const source=fs.readFileSync(new URL(file,base),'utf8');assert(source.includes('assets/legacy-actors.js?v=7'));for(const [i,match]of [...source.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)].entries())new vm.Script(match[1],{filename:file+':'+i});}
 console.log('PASS shared literary models, standing/seated geometry, exports, disposal and all inline script syntax');
 
-const approved={"assets/legacy-actors.js": "d87f9fffc810a7a76660dfdfc186a160b9b55bcfbbf8bd1cf6d44386e27927a2", "assets/nietzsche.glb": "af51e76db55cb03500be97275f951f4881ae6ba9c2389c0ea99d43d2212c8dbf", "assets/zarathustra.glb": "94ca6e6ba01cebc206e3eb0683561692612c699b0b1c8549fd6febe91b00e86e"};
+const approved={"assets/legacy-actors.js": "d87f9fffc810a7a76660dfdfc186a160b9b55bcfbbf8bd1cf6d44386e27927a2", "assets/zarathustra.glb": "94ca6e6ba01cebc206e3eb0683561692612c699b0b1c8549fd6febe91b00e86e"};
 for(const [file,hash]of Object.entries(approved))assert.equal(createHash("sha256").update(fs.readFileSync(new URL(file,base))).digest("hex"),hash,"Preserve the refined shared character: "+file);
 
 for(const id of ['socrates','nietzsche','zarathustra']){

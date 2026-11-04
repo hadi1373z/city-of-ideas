@@ -1,11 +1,9 @@
 async function loadAcademicGLB(id) {
- if(['socrates','nietzsche','zarathustra'].includes(id)){
+ if(['socrates','zarathustra'].includes(id)){
   const actor=id==='socrates'?buildSocratesGuide(THREE):buildLiteraryCharacter(THREE,id);
   actor.id=id;actor.restored=true;actor.face=null;actor.animations=[];actor.style='restored-illustrated-v1';return actor;
  }
- const encoded=window.CITY_CHARACTER_ASSETS[id],raw=atob(encoded),bytes=new Uint8Array(raw.length);
- for(let i=0;i<raw.length;i++)bytes[i]=raw.charCodeAt(i);
- const gltf=await new GLTFLoader().parseAsync(bytes.buffer,'');
+ const gltf=await new GLTFLoader().loadAsync(new URL('assets/'+id+'.glb?v=wardrobe10',location.href).href);
  return academicActorFromGLTF(gltf,id);
 }
 function academicActorFromGLTF(gltf,id){

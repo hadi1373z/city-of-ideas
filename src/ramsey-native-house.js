@@ -1,4 +1,4 @@
-import {buildCharacterStudyScene} from './ramsey-room-scene.js';
+import {buildCharacterStudyScene} from './ramsey-room-scene.js?v=wardrobe10';
 export function buildNativeRamseyHouse(T,origin){
  const study=buildCharacterStudyScene(T,{openToCity:true}),group=new T.Group();group.name='Ramsey House · continuous city interior';group.position.set(origin.x,origin.y+.003,origin.z);group.rotation.y=Math.PI;group.add(study.group);
  const owned=[],plaster=new T.MeshLambertMaterial({color:0xd1c5aa}),wood=new T.MeshLambertMaterial({color:0x69503b});owned.push(plaster,wood);

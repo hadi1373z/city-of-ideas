@@ -5,7 +5,7 @@
 <title>City of Ideas | Anatomical meshes — A conversation at Ramsey’s house</title>
 <style>
 *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#bbae95;color:#f7efdc;font-family:Georgia,serif}canvas{display:block;width:100%;height:100%;touch-action:none}button,input{font:inherit}button{cursor:pointer;border:1px solid #e0cfad66;background:#273e35;color:#f7efdc;border-radius:22px;padding:10px 16px;font:600 12px system-ui;min-height:40px}button:hover{background:#3d5849}button:focus-visible,input:focus-visible{outline:3px solid #dfb26a;outline-offset:3px}button:disabled{opacity:.5;cursor:default}.secondary{background:#eee5cfed;color:#294135;border-color:#63563c33}.secondary:hover{background:#fff4dc}.glass{background:#eee5cfee;color:#263a30;border:1px solid #fff6df55;box-shadow:0 6px 24px #1b1b1522;backdrop-filter:blur(8px)}.top{position:absolute;inset:20px 24px auto;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;pointer-events:none}.heading{border-radius:16px;padding:15px 20px;max-width:390px}.eyebrow{font:700 10px/1.5 system-ui;letter-spacing:.17em;color:#716047}.heading h1{font-size:clamp(21px,2.3vw,32px);font-weight:400;margin:5px 0 2px}.heading p{font:12px/1.5 system-ui;margin:0;color:#685b46}.actions{display:flex;gap:8px;pointer-events:auto;flex-wrap:wrap;justify-content:flex-end}.names{position:absolute;inset:0;pointer-events:none}.name{position:absolute;transform:translate(-50%,-50%);padding:4px 9px;border-radius:12px;background:#eee5cfdd;color:#294135;white-space:nowrap;font:12px system-ui}.film-panel{position:absolute;left:50%;bottom:20px;transform:translateX(-50%);width:min(940px,calc(100% - 40px));border-radius:18px;padding:16px 20px}.caption{min-height:76px;padding:0 0 13px}.speaker{font:800 11px/1.4 system-ui;letter-spacing:.12em;text-transform:uppercase;color:#805d30;margin-bottom:5px}.line{font:clamp(15px,1.6vw,21px)/1.5 Georgia,serif}.film-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.seek{flex:1;min-width:110px;accent-color:#4c6953;height:24px}.clock{font:12px/1 system-ui;font-variant-numeric:tabular-nums;white-space:nowrap}.sound{display:flex;align-items:center;gap:8px;font:11px/1.4 system-ui;color:#665b47}.volume{width:76px;accent-color:#4c6953}.film-note{font:10px/1.5 system-ui;color:#796d56;margin-top:7px}.explore-panel{position:absolute;left:24px;bottom:22px;max-width:720px;border-radius:18px;padding:14px 16px}.instruction{font:12px/1.6 system-ui;margin-bottom:9px;color:#665b47}.portraits{display:flex;flex-wrap:wrap;gap:6px}.portraits button{min-height:34px;font-size:11px;padding:7px 12px}.move-pad{position:absolute;right:24px;bottom:28px;display:grid;grid-template-columns:repeat(3,46px);grid-template-rows:repeat(2,44px);gap:5px;pointer-events:auto}.move-pad button{border-radius:12px;font-size:19px;padding:0;touch-action:none;user-select:none}.move-pad [data-move="w"]{grid-column:2;grid-row:1}.move-pad [data-move="a"]{grid-column:1;grid-row:2}.move-pad [data-move="s"]{grid-column:2;grid-row:2}.move-pad [data-move="d"]{grid-column:3;grid-row:2}.notice{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border-radius:15px;padding:16px 22px;max-width:450px;font:15px/1.5 system-ui}.error{position:absolute;inset:32% 10% auto;background:#eee5cf;color:#422d20;border-radius:16px;padding:20px;font:16px/1.5 system-ui;white-space:pre-wrap}[hidden]{display:none!important}@media(max-width:720px){.top{inset:12px 12px auto;gap:8px}.heading{padding:10px 12px}.heading h1{font-size:20px}.heading p{font-size:10px}.eyebrow{font-size:8px}.actions{max-width:150px;gap:5px}.actions button{font-size:10px;padding:8px 11px;min-height:35px}.film-panel{width:calc(100% - 20px);bottom:10px;padding:12px 13px}.caption{min-height:82px;padding-bottom:9px}.line{font-size:16px}.film-row{gap:7px}.film-row button{padding:8px 12px;min-height:36px}.sound{flex-basis:100%;justify-content:flex-start}.film-note{font-size:9px}.explore-panel{left:12px;right:12px;bottom:12px;max-width:none;padding:12px}.instruction{max-width:calc(100% - 150px);font-size:10px;min-height:54px}.portraits{max-width:100%}.portraits button{font-size:10px;padding:6px 9px}.move-pad{right:18px;bottom:95px;grid-template-columns:repeat(3,40px);grid-template-rows:repeat(2,36px);gap:4px}.name{font-size:9px;padding:3px 6px}}@media(prefers-reduced-motion:reduce){.glass{backdrop-filter:none}}
-</style>
+#connection-legend{position:absolute;right:24px;top:128px;border-radius:12px;padding:9px 13px;font:11px/1.5 system-ui;max-width:230px;z-index:2}#connection-legend summary{cursor:pointer;font-weight:600}</style>
 </head>
 <body>
 <header class="top">
@@ -20,7 +20,7 @@
 </section>
 <section id="explore-panel" class="explore-panel glass"><div id="explore-instruction" class="instruction">Choose Explore the room to walk with WASD or arrow keys. Drag the scene to look around. Select a name for a close view.</div><div class="portraits" aria-label="Close character views"><button type="button" data-portrait="socrates">Socrates</button><button type="button" data-portrait="nietzsche">Nietzsche</button><button type="button" data-portrait="zarathustra">Zarathustra</button><button type="button" data-portrait="anonymous">Anonymous</button><button type="button" data-portrait="ramsey">Frank Ramsey</button><button type="button" data-portrait="turing">Alan Turing</button></div></section>
 <div id="move-pad" class="move-pad" aria-label="Walk controls" hidden><button type="button" data-move="w" aria-label="Walk forward">↑</button><button type="button" data-move="a" aria-label="Step left">←</button><button type="button" data-move="s" aria-label="Walk backward">↓</button><button type="button" data-move="d" aria-label="Step right">→</button></div>
-<div class="error" id="error" hidden></div>
+<details class="glass" id="connection-legend"><summary>Connections</summary><p>Red: know each other<br>Blue: do not know each other<br>Gray dashes: unknown</p><p>Nietzsche - Zarathustra<br>Nietzsche - Socrates<br>Socrates - Ramsey<br>Ramsey - Turing<br>Turing - Zarathustra</p><p>Anonymous remains unknown.</p></details><div class="error" id="error" hidden></div>
 <script>console.warn('Scripts "build/three.js" and "build/three.min.js" are deprecated with r150+, and will be removed with r160. Please use ES Modules or alternatives: https://threejs.org/docs/index.html#manual/en/introduction/Installation'),
 /**
  * @license
@@ -35,8 +35,8 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
 
 <script>window.RAMSEY_FILM_AUDIO=new URL("assets/conversation-1.mp3?v=kokoro-1",location.href).href;</script>
 <script src="vendor/gltf-loader.js"></script>
-<script src="assets/embedded-models.js?v=7"></script><script src="assets/embedded-socrates.js?v=4"></script><script src="assets/embedded-nietzsche.js?v=4"></script><script src="assets/embedded-zarathustra.js?v=4"></script><script src="assets/embedded-anonymous.js?v=7"></script>
-<script src="assets/character-adapter.js?v=7"></script>
+
+<script src="assets/character-adapter.js?v=wardrobe10"></script>
 <script>(async()=>{
 try {
 const T=THREE,scene=new T.Scene();scene.background=new T.Color('#c8bba4');
@@ -47,7 +47,7 @@ window.RAMSEY_SECOND_AUDIO=new URL("assets/conversation-2.mp3?v=kokoro-1",locati
 const renderer=new T.WebGLRenderer({antialias:true,preserveDrawingBuffer:true});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.12;renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;document.body.prepend(renderer.domElement);
 const camera=new T.PerspectiveCamera(34,innerWidth/innerHeight,.05,100);
 scene.add(new T.HemisphereLight('#fff0d7','#4c5662',1.65));const sun=new T.DirectionalLight('#fff0d0',2.5);sun.position.set(-4,8,-5);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);Object.assign(sun.shadow.camera,{left:-9,right:9,top:9,bottom:-9,near:.5,far:35});sun.shadow.bias=-.0003;scene.add(sun);const fill=new T.DirectionalLight('#d7e2ec',.65);fill.position.set(6,4,-2);scene.add(fill);
-const {buildCharacterStudyScene}=await import("../ramsey-room-scene.js");
+const {buildCharacterStudyScene}=await import("../ramsey-room-scene.js?v=wardrobe10");
 const room=buildCharacterStudyScene(T);scene.add(room.group);const floorExtension=new T.Mesh(new T.PlaneGeometry(18,14),new T.MeshLambertMaterial({color:'#b39b78'}));floorExtension.rotation.x=-Math.PI/2;floorExtension.position.y=-.065;scene.add(floorExtension);
 const cast=[{id:'socrates',name:'Socrates',role:'THE QUESTIONER',actor:await loadAcademicGLB('socrates')},{id:'nietzsche',name:'Nietzsche',role:'THE AUTHOR',actor:await loadAcademicGLB('nietzsche')},{id:'zarathustra',name:'Zarathustra',role:'THE WANDERER',actor:await loadAcademicGLB('zarathustra')},{id:'anonymous',name:'Anonymous',role:'THE MASKED COMPANION',actor:await loadAcademicGLB('anonymous')},{id:'ramsey',name:'Frank Ramsey',role:'THE HOST',actor:await loadAcademicGLB('ramsey')},{id:'turing',name:'Alan Turing',role:'THE COMPUTING PIONEER',actor:await loadAcademicGLB('turing')}];
 const actors=cast.map((entry,i)=>({...entry,...room.seats[i]}));const actorById=Object.fromEntries(actors.map(a=>[a.id,a]));
@@ -56,7 +56,7 @@ scene.userData.previewActors=actors.map(({id,name,role,x,z,yaw})=>({id,name,role
 // Bake only the immobile room into material batches; articulated characters and proof stay independent.
 function batchStaticRoom(root){
  root.updateMatrixWorld(true);const inverse=new T.Matrix4().copy(root.matrixWorld).invert(),groups=new Map();let before=0,after=0;
- root.traverseVisible(o=>{if(!o.isMesh||Array.isArray(o.material)||!o.geometry.attributes.position||!o.geometry.attributes.normal)return;const key=o.material.uuid+':'+o.castShadow+':'+o.receiveShadow;if(!groups.has(key))groups.set(key,[]);groups.get(key).push(o);before++;});
+ root.traverseVisible(o=>{if(o.userData.acquaintanceMap||!o.isMesh||Array.isArray(o.material)||!o.geometry.attributes.position||!o.geometry.attributes.normal)return;const key=o.material.uuid+':'+o.castShadow+':'+o.receiveShadow;if(!groups.has(key))groups.set(key,[]);groups.get(key).push(o);before++;});
  for(const meshes of groups.values()){
   if(meshes.length<2){after++;continue;}const positions=[],normals=[];
   for(const o of meshes){const g=o.geometry.index?o.geometry.toNonIndexed():o.geometry.clone();g.applyMatrix4(new T.Matrix4().multiplyMatrices(inverse,o.matrixWorld));positions.push(g.attributes.position.array);normals.push(g.attributes.normal.array);}
@@ -69,33 +69,8 @@ function batchStaticRoom(root){
 }
 batchStaticRoom(room.group);
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
-// Exact Ramsey diagrams on the same physical tabletop used during exploration.
-// The new paper covers the original decorative graph; all elements remain real 3D meshes.
-const proofGroup=new T.Group();proofGroup.name='Ramsey proof on the table';proofGroup.position.set(.29,.925,.29);scene.add(proofGroup);
-const proofMaterials={paper:new T.MeshLambertMaterial({color:'#f5e9c8'}),red:new T.MeshLambertMaterial({color:'#bc4037'}),blue:new T.MeshLambertMaterial({color:'#275f91'}),node:new T.MeshLambertMaterial({color:'#423b30'})};
-const proofPaper=new T.Mesh(new T.BoxGeometry(.54,.018,.51),proofMaterials.paper);proofPaper.position.y=-.012;proofPaper.receiveShadow=true;proofGroup.add(proofPaper);
-function makeProofDiagram(count){
- const group=new T.Group(),nodes=[],edges=[];group.name=count+'-point Ramsey diagram';proofGroup.add(group);
- for(let i=0;i<count;i++){const a=-Math.PI/2+i*2*Math.PI/count,p=new T.Vector3(Math.cos(a)*.202,.006,Math.sin(a)*.202);nodes.push(p);const dot=new T.Mesh(new T.SphereGeometry(.013,12,8),proofMaterials.node);dot.position.copy(p);group.add(dot);}
- for(let i=0;i<count;i++)for(let j=i+1;j<count;j++){const a=nodes[i],b=nodes[j],delta=b.clone().sub(a),edge=new T.Mesh(new T.CylinderGeometry(.0036,.0036,delta.length(),8),proofMaterials.blue);edge.position.copy(a).add(b).multiplyScalar(.5);edge.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),delta.normalize());group.add(edge);edges.push({i,j,mesh:edge});}
- return{group,nodes,edges};
-}
-const proofSix=makeProofDiagram(6),proofFive=makeProofDiagram(5);proofFive.group.visible=false;
-for(const {i,j,mesh}of proofFive.edges)mesh.material=(j===i+1||(i===0&&j===4))?proofMaterials.red:proofMaterials.blue;
-function updateProof(t,film){
- const five=film&&t>=160&&t<180;proofFive.group.visible=five;proofSix.group.visible=!five;
- const swapped=film&&t>=120&&t<140,redCase=film&&((t>=100&&t<110)||(t>=120&&t<130)),blueCase=film&&((t>=110&&t<120)||(t>=130&&t<140));
- for(const edge of proofSix.edges){const{i,j,mesh}=edge;let red;
-  if(i===0)red=j<=3;
-  else if(i>=1&&j<=3)red=redCase&&i===1&&j===2;
-  else red=(i+j)%2===0;
-  if(swapped)red=!red;
-  mesh.material=red?proofMaterials.red:proofMaterials.blue;
-  const highlight=(redCase&&((i===0&&(j===1||j===2))||(i===1&&j===2)))||(blueCase&&i>=1&&j<=3);
-  mesh.scale.set(highlight?1.65:1,1,highlight?1.65:1);
- }
- scene.userData.proof={vertices:five?5:6,phase:five?'five-point-counterexample':swapped?'colours-reversed':redCase?'triangle-through-host':blueCase?'triangle-among-neighbours':'six-point-graph'};
-}
+const proofGroup=room.acquaintanceMap.group;
+function updateProof(t,film){room.acquaintanceMap.update(t,film);scene.userData.proof=room.acquaintanceMap.state;}
 function cueAt(t){return filmScript.find(c=>t>=c.start&&t<c.end)||filmScript[filmScript.length-1]||{start:0,end:300,speaker:'ramsey',text:'',shot:'wide'};}
 // A gentle reversible gesture cycle is shared by the live scene and video export.
 function gestureTime(t){const cue=cueAt(t),phase=(t-cue.start)%4;return cue.start+(phase<=2?phase:4-phase);}
@@ -103,7 +78,7 @@ function overviewCamera(){const d=Math.max(7.9,3.15/(Math.tan(34*Math.PI/360)*ca
 function filmCamera(t){
  const cue=cueAt(t),entry=actorById[cue.speaker]||actors[4],shot=cue.shot||'medium';scene.userData.filmCue={...cue,time:t};
  if(shot==='wide'||shot==='overview'){overviewCamera();return;}
- if(shot==='table'){camera.fov=35;camera.position.set(.43,2.02,-.61);camera.lookAt(.29,.925,.29);camera.updateProjectionMatrix();return;}
+ if(shot==='table'){camera.fov=40;camera.position.set(0,3.4,room.tableCentreZ-.65);camera.lookAt(0,room.tableTopHeight+.016,room.tableCentreZ);camera.updateProjectionMatrix();return;}
  const close=shot==='close'||shot==='close-up',distance=close?1.62:2.25;
  const forward=new T.Vector3(-Math.sin(entry.yaw),0,-Math.cos(entry.yaw)),side=new T.Vector3(Math.cos(entry.yaw),0,-Math.sin(entry.yaw));
  const drift=Math.sin((gestureTime(t)-cue.start)*.32)*.035;
@@ -204,7 +179,7 @@ if(exporting){
   time=clamp(Number(t)||0,0,duration);animateActors(time,true,false);filmCamera(time);updateCaption();camera.updateMatrixWorld(true);renderer.render(scene,camera);
   return{time,speaker:cueAt(time).speaker,proof:scene.userData.proof,roomBatch:scene.userData.roomBatch};
  }
- window.CITY_MESH_DIAGNOSTICS={loaded:['turing','ramsey'],tableSides:room.tableSides,characters:actors.map(a=>({id:a.id,style:a.actor.style})),scene,camera,renderer,actors};
+ window.CITY_MESH_DIAGNOSTICS={loaded:['turing','ramsey'],tableSides:room.tableSides,characters:actors.map(a=>({id:a.id,style:a.actor.style})),scene,camera,renderer,actors,room};
  window.RAMSEY_PREVIEW={seek,renderAt,watch:()=>enterFilm(true),explore:enterExplore,overview:enterOverview,inspect,get state(){return{mode,time,duration,playing,speaker:cueAt(time).speaker,caption:cueAt(time).text,player:{x:player.x,y:player.y,z:player.z},inspectId,narration,audioTrack:!!recordedAudio,proof:scene.userData.proof};}};
  const roomConnection=installConversationRoom({T,scene,player,keys,getMode:()=>mode,explore:enterExplore,watch:()=>enterFilm(false),pause:()=>{playing=false;stopSpeech();keys.clear();},turn:(y,p)=>{yaw+=y;pitch=clamp(pitch+p,-1.1,.9);},walk:walkInput,playPause:()=>$('play').click()});
  overviewCamera();modeUI();resize();if(new URLSearchParams(location.search).get('cityRoom')!=='1'&&(window.CITY_FILM_ENTRY||new URLSearchParams(location.search).get('film')==='1')){enterFilm(true,true);animateActors(0,true,true);filmCamera(0);renderer.render(scene,camera);}requestAnimationFrame(animate);document.body.dataset.previewReady='true';

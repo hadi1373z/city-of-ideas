@@ -1,3 +1,4 @@
+import {createAcquaintanceMap} from './ramsey-acquaintance-map.js';
 // Shared furniture and room geometry for the city and standalone film.
 export function buildCharacterStudyScene(T, {openToCity=false}={}) {
   const group = new T.Group();
@@ -151,29 +152,7 @@ export function buildCharacterStudyScene(T, {openToCity=false}={}) {
   box(.075,.075,1.35,p.edge,-.64,.23,0,desk);
   box(.075,.075,1.35,p.edge,.64,.23,0,desk);
 
-  // Six individual writing places follow the sides, rather than a straight row.
-  for(const [index,yaw] of seatAngles.entries()) {
-    const place=new T.Group();place.name=`Writing place ${index+1}`;
-    place.position.set(Math.sin(yaw)*(tableApothem-.23),0,Math.cos(yaw)*(tableApothem-.23));
-    place.rotation.y=yaw;desk.add(place);
-    box(.43,.008,.30,p.paper,0,.888,0,place);
-    for(let line=0;line<4;line++)box(.24-(line%2)*.04,.0015,.0035,p.ink,-.025,.893,-.08+line*.038,place);
-    rod([.17,.9,-.10],[.19,.9,.10],.008,p.edge,place);
-    cylinder(.054,.05,.10,p.ceramic,-.32,.935,-.03,place);
-    cylinder(.044,.044,.003,p.dark,-.32,.987,-.03,place);
-    const handle=mesh(new T.TorusGeometry(.033,.009,6,14),p.ceramic,-.378,.94,-.03,place);handle.rotation.y=Math.PI/2;
-  }
-  // A low open book and two-colour graph occupy the shared centre.
-  box(.52,.025,.34,p.green,-.34,.9,.07,desk);
-  for(const side of [-1,1]) {
-    const page=box(.235,.012,.31,p.paper,-.34+side*.12,.921,.07,desk);page.rotation.z=side*.045;
-  }
-  box(.51,.006,.48,p.paper,.29,.887,-.06,desk);
-  const diagram=[];
-  for(let i=0;i<6;i++){const a=i*Math.PI/3;diagram.push([.29+Math.cos(a)*.185,.894,-.06+Math.sin(a)*.185]);}
-  for(let i=0;i<6;i++)for(let j=i+1;j<6;j++)rod(diagram[i],diagram[j],.0028,(i+j)%2?p.red:p.blue,desk);
-  for(const point of diagram)ball(.012,p.ink,...point,desk);
-
+  // Keep the shared tabletop clear except for the centered acquaintance sheet.
   // The lamp moves to a side table so it cannot hide a face or the hexagon edge.
   const sideTable=new T.Group();sideTable.name='Lamp side table';sideTable.position.set(3.45,0,1.3);group.add(sideTable);
   box(.8,.07,.65,p.oak,0,.78,0,sideTable);
@@ -184,12 +163,13 @@ export function buildCharacterStudyScene(T, {openToCity=false}={}) {
   cylinder(.215,.215,.012,p.cream,0,1.239,0,sideTable);
   ball(.04,p.moon,0,1.222,0,sideTable);
 
+  const acquaintanceMap=createAcquaintanceMap(T,{group,seats,tableTopHeight:.88,tableCentreZ});
   let disposed=false;
   function dispose(){
-    if(disposed)return;disposed=true;group.removeFromParent();
+    if(disposed)return;disposed=true;acquaintanceMap.dispose();group.removeFromParent();
     geometries.forEach(value=>value.dispose());materials.forEach(value=>value.dispose());
     group.clear();geometries.clear();materials.clear();
   }
-  return {group,desk,chairs,seats,tableTopHeight:.88,seatHeight:.56,dispose,
+  return {group,desk,chairs,seats,acquaintanceMap,tableProps:{coffee:0,notebooks:0,deskBooks:0},tableTopHeight:.88,seatHeight:.56,dispose,
     tableSides:6,tableRadius,tableApothem,tableCentreZ,style:'warm-illustrated-study',roomName:'Ramsey house',historicalReconstruction:false};
 }
