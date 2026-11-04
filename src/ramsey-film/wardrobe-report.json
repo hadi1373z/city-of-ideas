@@ -1,5 +1,5 @@
 {
-  "edition": 12,
+  "edition": 13,
   "reference": {
     "author": "Style3D CG (https://sketchfab.com/Style3DMeta)",
     "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
@@ -56,7 +56,7 @@
         "nietzsche-continuous-neck-extension"
       ],
       "newTriangles": 83058,
-      "bytes": 19266788
+      "bytes": 19266792
     }
   ],
   "changes": "Geometry, garment fit, palette, rig weights and seated morphs; existing heads, facial morphs, spectacles, skin hands and shoes retained.",
@@ -221,7 +221,7 @@
   "neckRefit": "neck-fit-report.json",
   "headProportions": {
     "character": "nietzsche",
-    "uniformScale": 0.88,
+    "uniformScale": 0.792,
     "anchor": [
       0,
       1.475,

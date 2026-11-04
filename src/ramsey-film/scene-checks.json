@@ -311,7 +311,7 @@
     ],
     "observed": "Portrait collar removed; skin joins business shirt collar; rear skin remains inside jacket",
     "geometryCheck": "tests/nietzsche-neck.mjs verifies identical seam positions, normals and skin weights",
-    "headScale": 0.88,
+    "headScale": 0.792,
     "proportionViews": [
       "standing full body: front, three-quarter, side",
       "seated speaking bust: front, three-quarter, side"

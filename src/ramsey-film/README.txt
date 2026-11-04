@@ -177,3 +177,8 @@ is regenerated against the same suit collar, with matching seam weights
 and normals. Standing full-body and seated speaking views are checked.
 The other characters, suit, voices and separate Option A study are unchanged.
 The source and reproduction command remain tools/refit-nietzsche-neck.mjs.
+
+NIETZSCHE HEAD / SUIT PROPORTIONS - 2026-11-04 / 13
+Head scale is now 79.2% of the original supplied portrait: another 10% smaller
+than edition 12. Uniform scaling preserves the likeness. The neck extension
+is regenerated from the resized contour to the same suit collar.

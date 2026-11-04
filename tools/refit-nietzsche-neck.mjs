@@ -62,7 +62,7 @@ if(area>0)ring.reverse();
 const headDrop=.045;
 // Match the supplied portrait's scale to the existing adult suit. Anchor the
 // resize at the neck so the jaw stays connected while the skull gets smaller.
-const headScale=.88,scaleAnchor=new T.Vector3(0,1.475,.015);
+const headScale=.792,scaleAnchor=new T.Vector3(0,1.475,.015);
 for(const record of records){
  const p=new T.Vector3(...record.POSITION);p.y-=headDrop;
  record.POSITION=p.sub(scaleAnchor).multiplyScalar(headScale).add(scaleAnchor).toArray();

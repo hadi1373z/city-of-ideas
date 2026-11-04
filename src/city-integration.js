@@ -1,5 +1,5 @@
 import {installVisitMemory} from './visit-memory.js?v=question1';
-import {installRamseyRoom} from './ramsey-room.js?v=proportion12';
+import {installRamseyRoom} from './ramsey-room.js?v=proportion13';
 import {installRamseyHouse} from './ramsey-house.js';
 import {installQuestionWalk} from './question-walk.js';
 import {artistLineOfSight} from './artist-line-of-sight.js';
