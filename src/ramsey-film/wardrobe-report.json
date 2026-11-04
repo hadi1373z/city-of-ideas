@@ -1,5 +1,5 @@
 {
-  "edition": 10,
+  "edition": 11,
   "reference": {
     "author": "Style3D CG (https://sketchfab.com/Style3DMeta)",
     "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
@@ -53,10 +53,10 @@
         "turing-material-batch-9_1",
         "turing-relaxed-open-hands",
         "nietzsche-supplied-head-neck",
-        "nietzsche-supplied-head-neck-collar-base"
+        "nietzsche-continuous-neck-extension"
       ],
       "newTriangles": 83058,
-      "bytes": 19740936
+      "bytes": 19266732
     }
   ],
   "changes": "Geometry, garment fit, palette, rig weights and seated morphs; existing heads, facial morphs, spectacles, skin hands and shoes retained.",
@@ -67,7 +67,7 @@
     "title": "Indian Man in suit",
     "use": "Shoulder and sleeve fit and a restrained shirt/jacket palette; no identity or head imported."
   },
-  "neckFix": "The original bust collar contour extends continuously into a fitted dark cravat base. The redundant business shirt collar is tucked beneath it, and the second tie is removed.",
+  "neckFix": "Portrait clothing and artificial collar base removed first. Original face/neck fitted 45 mm lower, actual skin contour extended into the restored business-suit collar. Boundary weights and skin shading blend continuously.",
   "lowerFaceCorrection": {
     "yawAlignmentDegrees": 10,
     "region": "lower lip and chin beneath the moustache",
@@ -217,5 +217,6 @@
         "WEIGHTS_0": "1dc983e22930ead05b02066cf3803e45186427683d983ab1ef10fa63157dbd75"
       }
     }
-  }
+  },
+  "neckRefit": "neck-fit-report.json"
 }

@@ -61,10 +61,10 @@
     "runtime": "Preserved illustrated procedural actor; GLB is the archived two-pose export."
   },
   "nietzsche": {
-    "bytes": 19740936,
+    "bytes": 19266732,
     "bones": 13,
     "meshes": 20,
-    "triangles": 196790,
+    "triangles": 192486,
     "morphs": [
       "seatedDrape"
     ],
@@ -73,7 +73,7 @@
       "Seated at hexagonal table"
     ],
     "assetType": "User-supplied textured head and neck on weighted body; no facial morphs",
-    "headTriangles": 106602,
+    "headTriangles": 89748,
     "textures": 4,
     "textureResolution": 2048,
     "wardrobe": "Near-black long jacket, warm waistcoat and linen",
@@ -91,7 +91,10 @@
       "maxSculptDisplacementMm": 8.197040557861328,
       "limit": "Original baked texture shading remains naturally asymmetric; source face is static."
     },
-    "facialAnimation": "Static source portrait; head and body gestures only."
+    "facialAnimation": "Static source portrait; head and body gestures only.",
+    "neckTriangles": 14400,
+    "neckTextures": 3,
+    "neckRefit": "neck-fit-report.json"
   },
   "zarathustra": {
     "bytes": 1964712,

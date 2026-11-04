@@ -293,5 +293,23 @@
     "No mobile or external retargeting check",
     "Nietzsche face is static",
     "Stylized visual fidelity, original baked shading retained"
-  ]
+  ],
+  "neckRefit": {
+    "browser": "In-app browser, real Three.js WebGL studio",
+    "character": "nietzsche",
+    "views": [
+      "front",
+      "three-quarter",
+      "side",
+      "back",
+      "rear three-quarter"
+    ],
+    "poses": [
+      "standing bust",
+      "seated bust",
+      "seated speaking gesture"
+    ],
+    "observed": "Portrait collar removed; skin joins business shirt collar; rear skin remains inside jacket",
+    "geometryCheck": "tests/nietzsche-neck.mjs verifies identical seam positions, normals and skin weights"
+  }
 }

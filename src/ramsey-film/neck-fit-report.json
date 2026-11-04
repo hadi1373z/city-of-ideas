@@ -1,0 +1,26 @@
+{
+  "sourceSha256": "d3fac5d1def30b1e08fb5cfbbaff8ba298935a323611b6eb9440ca8233bb0a0b",
+  "removed": "Original portrait clothing below the anatomical neck contour, and nietzsche-supplied-head-neck-collar-base",
+  "cut": {
+    "plane": "y = 1.532 + .17 * (z + .04)",
+    "contourVertices": 450,
+    "originalTriangles": 106602,
+    "retainedTriangles": 89748
+  },
+  "headAlignmentY": -0.045,
+  "extension": {
+    "name": "nietzsche-continuous-neck-extension",
+    "bottomY": 1.38,
+    "rows": 16,
+    "triangles": 14400,
+    "material": "Baked boundary-to-original-neck skin transition; no stretched portrait clothing",
+    "weights": "Original boundary weights to Spine, blended across the neck"
+  },
+  "restoredSuitCollarVertices": 1546,
+  "preserved": [
+    "Portrait geometry and maps above cut (rigid vertical alignment only)",
+    "Existing business suit outside its previously compressed collar",
+    "Hands, shoes, skeleton and animation clips",
+    "All six fixed voice recordings"
+  ]
+}

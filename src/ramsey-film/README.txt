@@ -77,8 +77,8 @@ with a muted green tie, and Nietzsche a longer near-black jacket with warmer
 waistcoat and linen tones. Turing and Ramsey retain their existing head geometry, hair, spectacles,
 facial morphs, hands and shoes. Nietzsche uses the supplied portrait aligned
 to face forward, with a local bilateral correction beneath the moustache.
-His original jaw/neck surface is retained; the redundant second shirt collar
-is tucked inside a fitted dark cravat extending the original collar contour. Anonymous, Socrates and Zarathustra
+His face is retained, while the source bust clothing is trimmed away and its
+neck is extended inside the business suit collar (see edition 11 below). Anonymous, Socrates and Zarathustra
 are unchanged. The new suits have weighted sleeves / trousers and seatedDrape
 shapes for the coat and shirt, included in the exported pose clips.
 
@@ -153,3 +153,19 @@ TARGET
 https://hadi1373z.github.io/city-of-ideas/
 Integrated into the native walkable room and the shared standalone film.
 Recorded voice files, exact dialogue and the Nietzsche A prototype are preserved.
+
+NIETZSCHE PORTRAIT / SUIT JOIN - 2026-11-04 / 11
+The supplied portrait's old clothing and added collar-base mesh are removed.
+The retained face and neck move down 45 mm as one piece. A continuous skin
+extension follows the exact clipped anatomical contour and fits inside the
+existing business suit's restored shirt collar. The rear neck tapers inside
+the jacket. Original seam normals and bone weights are shared, preserving
+the join during seated and speaking gestures. Original face maps are retained;
+three small baked skin transition maps prevent a stretched clothing texture.
+The other five characters, recorded voices and Option A study are unchanged.
+
+Reproduce: extract assets/nietzsche.glb from city commit c9a8df3 as INPUT.glb,
+then run node tools/refit-nietzsche-neck.mjs INPUT.glb OUTPUT.glb REPORT.json.
+The script checks the source hash and uses Python, numpy and Pillow for the
+neck atlas. Its portrait base and suit credits above continue to apply.
+neck-fit-report.json records the cut, alignment, extension and preserved parts.

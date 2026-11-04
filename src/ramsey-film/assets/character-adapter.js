@@ -3,7 +3,7 @@ async function loadAcademicGLB(id) {
   const actor=id==='socrates'?buildSocratesGuide(THREE):buildLiteraryCharacter(THREE,id);
   actor.id=id;actor.restored=true;actor.face=null;actor.animations=[];actor.style='restored-illustrated-v1';return actor;
  }
- const gltf=await new GLTFLoader().loadAsync(new URL('assets/'+id+'.glb?v=wardrobe10',location.href).href);
+ const gltf=await new GLTFLoader().loadAsync(new URL('assets/'+id+'.glb?v=neck11',location.href).href);
  return academicActorFromGLTF(gltf,id);
 }
 function academicActorFromGLTF(gltf,id){

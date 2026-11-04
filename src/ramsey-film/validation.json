@@ -1818,7 +1818,7 @@
     "uri": "nietzsche.glb",
     "mimeType": "model/gltf-binary",
     "validatorVersion": "2.0.0-dev.3.10",
-    "validatedAt": "2026-11-04T01:09:02.366Z",
+    "validatedAt": "2026-11-04T21:53:42.737Z",
     "issues": {
       "numErrors": 0,
       "numWarnings": 0,
@@ -1881,7 +1881,7 @@
           "pointer": "/buffers/0",
           "mimeType": "application/gltf-buffer",
           "storage": "glb",
-          "byteLength": 19694472
+          "byteLength": 19219296
         },
         {
           "pointer": "/images/0",
@@ -1965,6 +1965,45 @@
             "format": "rgb",
             "bits": 8
           }
+        },
+        {
+          "pointer": "/images/7",
+          "mimeType": "image/png",
+          "storage": "buffer-view",
+          "image": {
+            "width": 1024,
+            "height": 256,
+            "format": "rgb",
+            "primaries": "srgb",
+            "transfer": "srgb",
+            "bits": 8
+          }
+        },
+        {
+          "pointer": "/images/8",
+          "mimeType": "image/png",
+          "storage": "buffer-view",
+          "image": {
+            "width": 1024,
+            "height": 256,
+            "format": "rgb",
+            "primaries": "srgb",
+            "transfer": "srgb",
+            "bits": 8
+          }
+        },
+        {
+          "pointer": "/images/9",
+          "mimeType": "image/png",
+          "storage": "buffer-view",
+          "image": {
+            "width": 1024,
+            "height": 256,
+            "format": "rgb",
+            "primaries": "srgb",
+            "transfer": "srgb",
+            "bits": 8
+          }
         }
       ],
       "animationCount": 2,
@@ -1974,8 +2013,8 @@
       "hasTextures": true,
       "hasDefaultScene": true,
       "drawCallCount": 20,
-      "totalVertexCount": 146330,
-      "totalTriangleCount": 196790,
+      "totalVertexCount": 141203,
+      "totalTriangleCount": 192486,
       "maxUVs": 1,
       "maxInfluences": 4,
       "maxAttributes": 7

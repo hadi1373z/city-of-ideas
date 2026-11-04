@@ -36,7 +36,7 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
 <script>window.RAMSEY_FILM_AUDIO=new URL("assets/conversation-1.mp3?v=kokoro-1",location.href).href;</script>
 <script src="vendor/gltf-loader.js"></script>
 
-<script src="assets/character-adapter.js?v=wardrobe10"></script>
+<script src="assets/character-adapter.js?v=neck11"></script>
 <script>(async()=>{
 try {
 const T=THREE,scene=new T.Scene();scene.background=new T.Color('#c8bba4');
@@ -47,7 +47,7 @@ window.RAMSEY_SECOND_AUDIO=new URL("assets/conversation-2.mp3?v=kokoro-1",locati
 const renderer=new T.WebGLRenderer({antialias:true,preserveDrawingBuffer:true});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.12;renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;document.body.prepend(renderer.domElement);
 const camera=new T.PerspectiveCamera(34,innerWidth/innerHeight,.05,100);
 scene.add(new T.HemisphereLight('#fff0d7','#4c5662',1.65));const sun=new T.DirectionalLight('#fff0d0',2.5);sun.position.set(-4,8,-5);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);Object.assign(sun.shadow.camera,{left:-9,right:9,top:9,bottom:-9,near:.5,far:35});sun.shadow.bias=-.0003;scene.add(sun);const fill=new T.DirectionalLight('#d7e2ec',.65);fill.position.set(6,4,-2);scene.add(fill);
-const {buildCharacterStudyScene}=await import("../ramsey-room-scene.js?v=wardrobe10");
+const {buildCharacterStudyScene}=await import("../ramsey-room-scene.js?v=neck11");
 const room=buildCharacterStudyScene(T);scene.add(room.group);const floorExtension=new T.Mesh(new T.PlaneGeometry(18,14),new T.MeshLambertMaterial({color:'#b39b78'}));floorExtension.rotation.x=-Math.PI/2;floorExtension.position.y=-.065;scene.add(floorExtension);
 const cast=[{id:'socrates',name:'Socrates',role:'THE QUESTIONER',actor:await loadAcademicGLB('socrates')},{id:'nietzsche',name:'Nietzsche',role:'THE AUTHOR',actor:await loadAcademicGLB('nietzsche')},{id:'zarathustra',name:'Zarathustra',role:'THE WANDERER',actor:await loadAcademicGLB('zarathustra')},{id:'anonymous',name:'Anonymous',role:'THE MASKED COMPANION',actor:await loadAcademicGLB('anonymous')},{id:'ramsey',name:'Frank Ramsey',role:'THE HOST',actor:await loadAcademicGLB('ramsey')},{id:'turing',name:'Alan Turing',role:'THE COMPUTING PIONEER',actor:await loadAcademicGLB('turing')}];
 const actors=cast.map((entry,i)=>({...entry,...room.seats[i]}));const actorById=Object.fromEntries(actors.map(a=>[a.id,a]));
