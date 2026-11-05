@@ -22,6 +22,16 @@ recording hashes. Preserve those identities unless the user explicitly requests
 a voice change. Character directions guide performance, not claims of authentic
 historical voices.
 
+## Zarathustra visual direction
+
+On 2026-11-06 the user selected **B — Persian scholar** from the visual board.
+Keep the direction around thirty: swept-back dark wavy hair, a short beard,
+ivory tunic and an indigo mantle with a restrained woven border. Do not reopen
+the A/B/C choice. The concept is an artistic interpretation, not a historical
+portrait. Use a properly credited existing GLB as an anatomical base. New mesh
+studies remain separate from the live cast until they are ready for animation.
+The character's established `bm_fable` voice remains fixed.
+
 ## Continue voice work
 
 - All 46 conversation lines are recorded. Both five-minute tracks use the same
