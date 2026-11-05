@@ -139,7 +139,7 @@ const fitNode=d.nodes.length;
 const roots=d.scenes[d.scene||0].nodes,skinnedRoots=roots.filter(i=>d.nodes[i].skin!==undefined);
 // Skin vertices follow the scaled skeleton. Keep skinned mesh nodes at scene
 // root, as required by glTF; a parent scale on them would be ignored.
-d.nodes.push({name:'Nietzsche whole-character fit',scale:[wholeScale,wholeScale,wholeScale],translation:[0,standingY,0],children:roots.filter(i=>!skinnedRoots.includes(i)),extras:{characterFit:{scale:wholeScale,standingY,seatedY}}});
+d.nodes.push({name:'nietzsche-whole-character-fit',scale:[wholeScale,wholeScale,wholeScale],translation:[0,standingY,0],children:roots.filter(i=>!skinnedRoots.includes(i)),extras:{characterFit:{scale:wholeScale,standingY,seatedY}}});
 d.scenes[d.scene||0].nodes=[...skinnedRoots,fitNode];
 const fitTime=add.accessor(new Float32Array([0,1]),'SCALAR',5126,undefined,true);
 for(const animation of d.animations){

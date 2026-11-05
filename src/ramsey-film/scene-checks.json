@@ -344,6 +344,7 @@
     "limits": [
       "Live browser verification unavailable: local browser use disabled in Work settings",
       "No new mobile or external retargeting check"
-    ]
+    ],
+    "runtimeCheck": "tests/character-scale.mjs loads actual geometry/rigs through the live Three.js GLTFLoader and adapter: standing/seated resets, uniform world bone scale, comparable cast heights. Texture decoding is covered by the separate Blender render."
   }
 }

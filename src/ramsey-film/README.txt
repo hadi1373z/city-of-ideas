@@ -189,3 +189,7 @@ head-to-suit proportion. A shared skeleton transform scales the portrait,
 neck, suit, hands and shoes together. Standing feet and seated hip retain
 their contact anchors; the portable clips and live actor use the same fit.
 The six fixed character voices and other character assets are unchanged.
+
+The whole-character control uses a loader-safe node name. The release check
+loads the actual GLB with the live Three.js loader and actor adapter, tests
+standing/seated resets, uniform world bone scale and comparable cast heights.

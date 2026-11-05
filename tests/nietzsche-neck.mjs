@@ -26,7 +26,7 @@ for(let i=0;i<np.length/3;i++){
 assert(d.animations.some(a=>a.name==='Seated at hexagonal table'));assert(d.animations.some(a=>a.name==='Standing idle'));
 // The complete person grows together; preserve the approved portrait/suit
 // ratio and the contact points with the floor and chair.
-const fitIndex=d.nodes.findIndex(n=>n.name==='Nietzsche whole-character fit'),fit=d.nodes[fitIndex];
+const fitIndex=d.nodes.findIndex(n=>n.name==='nietzsche-whole-character-fit'),fit=d.nodes[fitIndex];
 assert(fit,'Whole-character sizing must be part of the portable GLB');
 assert.deepEqual(fit.scale,[1.1,1.1,1.1]);
 assert.equal(info.headScale,.792,'Keep the approved internal head-to-suit proportion');
