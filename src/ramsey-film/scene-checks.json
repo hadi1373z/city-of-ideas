@@ -316,5 +316,34 @@
       "standing full body: front, three-quarter, side",
       "seated speaking bust: front, three-quarter, side"
     ]
+  },
+  "wholeCharacterFit": {
+    "edition": 14,
+    "uniformScale": 1.1,
+    "internalHeadScale": 0.792,
+    "geometryChecks": "tests/nietzsche-neck.mjs: shared skeleton scale, identical seam weights/normals, exported clip fit channels and standing/seated contact anchors",
+    "visualCheck": "Blender 4.5.9 actual GLB imports rendered side by side at the same floor height and camera scale",
+    "standingBounds": {
+      "turing": {
+        "minZ": 0.06730005145072937,
+        "maxZ": 1.9312463998794556,
+        "height": 1.8639463484287262
+      },
+      "nietzsche": {
+        "minZ": 0.06730005890130997,
+        "maxZ": 1.9015331268310547,
+        "height": 1.8342330679297447
+      },
+      "ramsey": {
+        "minZ": 0.06730005145072937,
+        "maxZ": 1.9178379774093628,
+        "height": 1.8505379259586334
+      }
+    },
+    "observed": "Nietzsche, Ramsey and Turing have comparable standing heights; the accepted portrait/suit ratio is retained.",
+    "limits": [
+      "Live browser verification unavailable: local browser use disabled in Work settings",
+      "No new mobile or external retargeting check"
+    ]
   }
 }

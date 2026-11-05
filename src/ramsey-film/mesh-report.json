@@ -61,7 +61,7 @@
     "runtime": "Preserved illustrated procedural actor; GLB is the archived two-pose export."
   },
   "nietzsche": {
-    "bytes": 19266792,
+    "bytes": 19267864,
     "bones": 13,
     "meshes": 20,
     "triangles": 192486,
@@ -95,7 +95,8 @@
     "neckTriangles": 14400,
     "neckTextures": 3,
     "neckRefit": "neck-fit-report.json",
-    "headScale": 0.792
+    "headScale": 0.792,
+    "wholeCharacterScale": 1.1
   },
   "zarathustra": {
     "bytes": 1964712,

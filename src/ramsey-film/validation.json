@@ -1818,7 +1818,7 @@
     "uri": "nietzsche.glb",
     "mimeType": "model/gltf-binary",
     "validatorVersion": "2.0.0-dev.3.10",
-    "validatedAt": "2026-11-04T22:31:22.925Z",
+    "validatedAt": "2026-11-05T21:18:26.816Z",
     "issues": {
       "numErrors": 0,
       "numWarnings": 0,
@@ -1881,7 +1881,7 @@
           "pointer": "/buffers/0",
           "mimeType": "application/gltf-buffer",
           "storage": "glb",
-          "byteLength": 19219296
+          "byteLength": 19219352
         },
         {
           "pointer": "/images/0",

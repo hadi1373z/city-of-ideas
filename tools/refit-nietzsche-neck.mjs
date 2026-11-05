@@ -131,6 +131,25 @@ for(const node of d.nodes.filter(n=>/^nietzsche-wardrobe-shirt/.test(n.name||'')
  p.attributes.POSITION=add.accessor(pos,'VEC3',5126,34962,true);p.attributes.NORMAL=add.accessor(normal,'VEC3',5126,34962);p.attributes.TANGENT=add.accessor(tangent,'VEC4',5126,34962);
 }
 const report={sourceSha256:sourceSha,removed:'Original portrait clothing below the anatomical neck contour, and nietzsche-supplied-head-neck-collar-base',cut:{plane:'y = 1.532 + .17 * (z + .04)',contourVertices:N,originalTriangles:sourceIndices.length/3,retainedTriangles:indices.length/3},headAlignmentY:-headDrop,headScale,scaleAnchor:scaleAnchor.toArray(),extension:{name:'nietzsche-continuous-neck-extension',bottomY:1.380,rows,triangles:neckIndices.length/3,material:'Baked boundary-to-original-neck skin transition; no stretched portrait clothing',weights:'Original boundary weights to Spine, blended across the neck'},restoredSuitCollarVertices:collarVertices,preserved:['Portrait shape and maps above cut (uniform scale and vertical alignment only)','Existing business suit outside its previously compressed collar','Hands, shoes, skeleton and animation clips','All six fixed voice recordings']};
+// Preserve the approved head-to-suit ratio and bring the complete person to
+// the roughly 1.9 m scale of the other citizens. A shared parent transforms
+// the portrait, suit, hands, shoes and skeleton by exactly the same amount.
+const wholeScale=1.10,standingY=.0673*(1-wholeScale),seatedY=.56*(1-wholeScale);
+const fitNode=d.nodes.length;
+const roots=d.scenes[d.scene||0].nodes,skinnedRoots=roots.filter(i=>d.nodes[i].skin!==undefined);
+// Skin vertices follow the scaled skeleton. Keep skinned mesh nodes at scene
+// root, as required by glTF; a parent scale on them would be ignored.
+d.nodes.push({name:'Nietzsche whole-character fit',scale:[wholeScale,wholeScale,wholeScale],translation:[0,standingY,0],children:roots.filter(i=>!skinnedRoots.includes(i)),extras:{characterFit:{scale:wholeScale,standingY,seatedY}}});
+d.scenes[d.scene||0].nodes=[...skinnedRoots,fitNode];
+const fitTime=add.accessor(new Float32Array([0,1]),'SCALAR',5126,undefined,true);
+for(const animation of d.animations){
+ const y=animation.name==='Seated at hexagonal table'?seatedY:standingY;
+ const sampler=animation.samplers.length;
+ animation.samplers.push({input:fitTime,output:add.accessor(new Float32Array([0,y,0,0,y,0]),'VEC3',5126),interpolation:'LINEAR'});
+ animation.channels.push({sampler,target:{node:fitNode,path:'translation'}});
+}
+report.wholeCharacterScale=wholeScale;
+report.wholeCharacterFit={standingY,seatedY,reference:'Overall standing scale of Ramsey and Turing; seated hip remains at chair height'};
 d.asset.extras={...(d.asset.extras||{}),neckFix:report};
 const result=prune(d,add.bin);writeGLB(output,result.doc,result.bin);
 fs.writeFileSync(reportFile,JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));

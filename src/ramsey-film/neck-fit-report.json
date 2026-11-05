@@ -28,5 +28,11 @@
     "Existing business suit outside its previously compressed collar",
     "Hands, shoes, skeleton and animation clips",
     "All six fixed voice recordings"
-  ]
+  ],
+  "wholeCharacterScale": 1.1,
+  "wholeCharacterFit": {
+    "standingY": -0.006730000000000006,
+    "seatedY": -0.05600000000000006,
+    "reference": "Overall standing scale of Ramsey and Turing; seated hip remains at chair height"
+  }
 }

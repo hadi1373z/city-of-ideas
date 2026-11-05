@@ -3,16 +3,17 @@ async function loadAcademicGLB(id) {
   const actor=id==='socrates'?buildSocratesGuide(THREE):buildLiteraryCharacter(THREE,id);
   actor.id=id;actor.restored=true;actor.face=null;actor.animations=[];actor.style='restored-illustrated-v1';return actor;
  }
- const gltf=await new GLTFLoader().loadAsync(new URL('assets/'+id+'.glb?v=proportion13',location.href).href);
+ const gltf=await new GLTFLoader().loadAsync(new URL('assets/'+id+'.glb?v=proportion14',location.href).href);
  return academicActorFromGLTF(gltf,id);
 }
 function academicActorFromGLTF(gltf,id){
- const group=gltf.scene,body=group.getObjectByName('Spine'),head=group.getObjectByName('Head');
+ const group=gltf.scene,body=group.getObjectByName('Spine'),head=group.getObjectByName('Head'),fit=group.getObjectByName('Nietzsche whole-character fit');
  const names=['Arms','Elbows','Legs','Knees'],parts=Object.fromEntries(names.map(k=>[k.toLowerCase(),['Left','Right'].map(s=>group.getObjectByName(s+k))]));
  const face=group.getObjectByName(id+'-continuous-face-neck')||null,drapes=[];
  group.traverse(o=>{if(o.isMesh){o.castShadow=o.receiveShadow=true;o.frustumCulled=false;if(o.morphTargetDictionary?.seatedDrape!==undefined)drapes.push(o);}});
  const bases=new Map();parts.legs.forEach(b=>bases.set(b,b.position.clone()));
  function animate(time,{seated=false,talking=false,walking=false,reducedMotion=false}={}){
+  if(fit)fit.position.y=seated?fit.userData.characterFit.seatedY:fit.userData.characterFit.standingY;
   const t=Number.isFinite(time)?time:0,motion=!reducedMotion,gait=walking&&!seated&&motion?Math.sin(t*5.6)*.17:0;
   body.position.y=(seated?-.32:0)+(motion?Math.sin(t*1.6)*.0015:0);
   head.rotation.set(talking&&motion?Math.sin(t*1.3)*.012:0,talking&&motion?Math.sin(t*.8)*.025:0,talking&&motion?Math.sin(t*1.9)*.014:0);

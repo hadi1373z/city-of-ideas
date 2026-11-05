@@ -1,4 +1,4 @@
-import {buildNativeRamseyHouse} from './ramsey-native-house.js?v=proportion13';
+import {buildNativeRamseyHouse} from './ramsey-native-house.js?v=proportion14';
 import {createConversation} from './ramsey-conversation.js';
 
 const CAST=[['socrates','Socrates'],['nietzsche','Nietzsche'],['zarathustra','Zarathustra · زرتشت'],['anonymous','Anonymous'],['ramsey','Frank Ramsey'],['turing','Alan Turing']];
@@ -34,10 +34,10 @@ export function installRamseyRoom(M,T=window.THREE){
    try{
     await loadScript('./ramsey-film/assets/legacy-actors.js?v=7');
     await loadScript('./ramsey-film/vendor/gltf-loader.js');
-    await loadScript('./ramsey-film/assets/character-adapter.js?v=proportion13');
+    await loadScript('./ramsey-film/assets/character-adapter.js?v=proportion14');
     const response=await fetch(new URL('conversation.json',base));if(!response.ok)throw new Error('Conversation could not be loaded.');const data=await response.json();
     const loaded=await Promise.all(CAST.map(async([id,name])=>{
-     const actor=id==='socrates'?window.buildSocratesGuide(T):id==='zarathustra'?window.buildLiteraryCharacter(T,id):window.academicActorFromGLTF(await new window.GLTFLoader().loadAsync(new URL(id+'.glb?v=proportion13',base).href),id);
+     const actor=id==='socrates'?window.buildSocratesGuide(T):id==='zarathustra'?window.buildLiteraryCharacter(T,id):window.academicActorFromGLTF(await new window.GLTFLoader().loadAsync(new URL(id+'.glb?v=proportion14',base).href),id);
      return {id,name,actor};
     }));
     if(disposed){loaded.forEach(a=>a.actor.dispose());return;}

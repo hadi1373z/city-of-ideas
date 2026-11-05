@@ -24,6 +24,24 @@ for(let i=0;i<np.length/3;i++){
  if(i>=np.length/3-stride){assert(Math.abs(np[i*3+1]-1.38)<1e-6);assert.equal(influence(nj,nw,i).get(spine),1);assert(np[i*3+2]<.0401,'Neck must tuck inside the rear coat collar');}
 }
 assert(d.animations.some(a=>a.name==='Seated at hexagonal table'));assert(d.animations.some(a=>a.name==='Standing idle'));
+// The complete person grows together; preserve the approved portrait/suit
+// ratio and the contact points with the floor and chair.
+const fitIndex=d.nodes.findIndex(n=>n.name==='Nietzsche whole-character fit'),fit=d.nodes[fitIndex];
+assert(fit,'Whole-character sizing must be part of the portable GLB');
+assert.deepEqual(fit.scale,[1.1,1.1,1.1]);
+assert.equal(info.headScale,.792,'Keep the approved internal head-to-suit proportion');
+const descendants=new Set();function visit(i){descendants.add(i);for(const c of d.nodes[i].children||[])visit(c);}visit(fitIndex);
+for(const node of d.nodes.filter(n=>n.skin!==undefined)){
+ assert(d.scenes[d.scene||0].nodes.includes(d.nodes.indexOf(node)),'Skinned meshes stay at scene root');
+ assert(d.skins[node.skin].joints.every(i=>descendants.has(i)),'Portrait and suit must follow the same scaled skeleton');
+}
+for(const [pose,anchor,y] of [['Standing idle',.0673,fit.extras.characterFit.standingY],['Seated at hexagonal table',.56,fit.extras.characterFit.seatedY]]){
+ assert(Math.abs(anchor*fit.scale[1]+y-anchor)<1e-8,pose+' must keep its contact anchor fixed');
+ const animation=d.animations.find(a=>a.name===pose),channel=animation.channels.find(c=>c.target.node===fitIndex&&c.target.path==='translation');
+ assert(channel,'Exported '+pose+' needs the same fit as the live actor');
+ const positions=read(animation.samplers[channel.sampler].output);
+ assert(Math.abs(positions[1]-y)<1e-7&&Math.abs(positions[4]-y)<1e-7);
+}
 const skin=d.materials[neck.primitive.material];
 for(const texture of [skin.pbrMetallicRoughness.baseColorTexture,skin.emissiveTexture,skin.pbrMetallicRoughness.metallicRoughnessTexture])assert(Number.isInteger(d.images[d.textures[texture.index].source].bufferView),'Neck transition maps must be embedded');
-console.log('PASS removed portrait collar, continuous anatomical contour, identical animated seam weights/normals, hidden rear overlap, portable skin maps and retained pose clips');
+console.log('PASS continuous portrait/suit seam, portable skin maps, uniform whole-character scale, fixed floor/chair anchors and retained pose clips');

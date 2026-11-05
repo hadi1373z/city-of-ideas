@@ -182,3 +182,10 @@ NIETZSCHE HEAD / SUIT PROPORTIONS - 2026-11-04 / 13
 Head scale is now 79.2% of the original supplied portrait: another 10% smaller
 than edition 12. Uniform scaling preserves the likeness. The neck extension
 is regenerated from the resized contour to the same suit collar.
+
+NIETZSCHE WHOLE CHARACTER / 14 - 2026-11-05
+The complete person is uniformly enlarged by 10%, preserving edition 13's
+head-to-suit proportion. A shared skeleton transform scales the portrait,
+neck, suit, hands and shoes together. Standing feet and seated hip retain
+their contact anchors; the portable clips and live actor use the same fit.
+The six fixed character voices and other character assets are unchanged.
