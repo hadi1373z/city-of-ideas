@@ -68,6 +68,7 @@ export function installCityDiscoveries(M,T){
   if(view!=='hub')action(w().back,()=>open('hub'),'back');
   if(view==='hub'){
    body.append(el('p',w().intro));const cards=el('div');cards.className='discovery-cards';
+   if(M.learningLab){const learning=el('article');learning.append(el('h3',M.learningLab.title),el('p',M.learningLab.intro));action(M.learningLab.label,()=>{dialog.close();M.learningLab.open();},'learning-lab',learning,true);cards.append(learning);}
    for(const [name,text,label,fn]of [[w().sixth,w().summary,trial.state.complete?w().revisit:trial.state.active?w().resume:w().begin,()=>{trial.begin();view='route';render();}],[w().qWalk,w().qWalkText,w().startWalk,()=>{dialog.close();M.questionWalk.open();}],[w().book,w().bookText,w().startBook,()=>visit('book')]]){const card=el('article');card.append(el('h3',name),el('p',text));action(label,fn,null,card,true);cards.append(card);}body.append(cards);
   }else if(view==='table')table();else if(view==='clue'){
    title.textContent=w().clue;graph(body,fiveCycle(),5);body.append(el('p',w().clueRead));if(context().alcove)action(w().readClue,()=>{if(trial.readClue(context()))M.visitorMemory.discover('sixth-guest-sketch');view='route';render();},'read-clue',body,true);
