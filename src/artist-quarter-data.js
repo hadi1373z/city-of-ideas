@@ -1,20 +1,22 @@
+import './artist-quarter-layout.js?v=artists2';
+const PLAN=globalThis.ARTIST_QUARTER_PLAN;
 // Fictional studios, with public-domain paintings from the Met's Open Access collection.
 export const QUARTER_ARTISTS=[
- {id:'cezanne',name:'Paul Cézanne',x:178,z:93,turn:0,wall:0xdcc9a5,trim:0x71877c,roof:0x9e6550,
+ {id:'cezanne',name:'Paul Cézanne',...PLAN.studios.cezanne,wall:0xdcc9a5,trim:0x71877c,roof:0x9e6550,
   title:{en:'The still-life studio',de:'Das Stillleben-Atelier',fa:'آتلیهٔ طبیعت بی‌جان'},
   theme:{en:'Can a painted table hold several viewpoints?',de:'Kann ein gemalter Tisch mehrere Blickwinkel zeigen?',fa:'آیا یک میز نقاشی‌شده می‌تواند چند زاویهٔ دید داشته باشد؟'},
   prompt:{en:'Compare the painted tabletop with the study on the left. Walk around the fruit: which edges change, and which stay together?',de:'Vergleiche den gemalten Tisch mit der Studie links. Geh um die Früchte: Welche Kanten verändern sich, welche bleiben zusammen?',fa:'میز نقاشی را با تمرین سمت چپ مقایسه کن. دور میوه‌ها قدم بزن: کدام لبه‌ها تغییر می‌کنند و کدام کنار هم می‌مانند؟'},
   activity:{en:'Turn the still life',de:'Stillleben drehen',fa:'چرخاندن طبیعت بی‌جان'},
   question:{en:'What can a painting show that a single fixed viewpoint cannot?',de:'Was kann ein Gemälde zeigen, das ein fester Blickwinkel nicht zeigt?',fa:'نقاشی چه چیزی را نشان می‌دهد که یک زاویهٔ دید ثابت نمی‌تواند؟'},
   work:{id:435882,title:'Still Life with Apples and a Pot of Primroses',date:'ca. 1890',image:'cezanne.jpg',ratio:600/476,source:'https://www.metmuseum.org/art/collection/search/435882'}},
- {id:'morisot',name:'Berthe Morisot',x:199,z:93,turn:0,wall:0xe2dacf,trim:0x748c91,roof:0x697c7d,
+ {id:'morisot',name:'Berthe Morisot',...PLAN.studios.morisot,wall:0xe2dacf,trim:0x748c91,roof:0x697c7d,
   title:{en:'The light-filled room',de:'Das lichtdurchflutete Zimmer',fa:'اتاق روشنایی'},
   theme:{en:'Where does a figure end and its room begin?',de:'Wo endet eine Figur und wo beginnt ihr Raum?',fa:'پیکر کجا تمام می‌شود و اتاقش از کجا آغاز می‌شود؟'},
   prompt:{en:'Look at the dress, the hands and the background. Some edges are firm; others dissolve into brushwork. Compare the whole painting with a close detail.',de:'Betrachte Kleid, Hände und Hintergrund. Einige Kanten sind fest, andere lösen sich in Pinselstrichen auf. Vergleiche das ganze Bild mit einem Detail.',fa:'به لباس، دست‌ها و پس‌زمینه نگاه کن. بعضی لبه‌ها روشن‌اند و بعضی در قلم‌مو محو می‌شوند. تصویر کامل را با جزئیات مقایسه کن.'},
   activity:{en:'Slide the studio curtain',de:'Ateliervorhang verschieben',fa:'کنار زدن پردهٔ آتلیه'},
   question:{en:'Which unfinished-looking edge makes the figure feel more alive to me, and why?',de:'Welche unfertig wirkende Kante lässt die Figur für mich lebendiger wirken, und warum?',fa:'کدام لبهٔ ناتمام، پیکر را برای من زنده‌تر می‌کند و چرا؟'},
   work:{id:438009,title:'The Pink Dress (Albertie-Marguerite Carré)',date:'ca. 1870',image:'morisot.jpg',ratio:599/487,source:'https://www.metmuseum.org/art/collection/search/438009'}},
- {id:'seurat',name:'Georges Seurat',x:188.5,z:129,turn:Math.PI,wall:0xd4d3bf,trim:0x4e6c7c,roof:0x606f78,
+ {id:'seurat',name:'Georges Seurat',...PLAN.studios.seurat,wall:0xd4d3bf,trim:0x4e6c7c,roof:0x606f78,
   title:{en:'The colour-distance workshop',de:'Die Werkstatt für Farbe und Abstand',fa:'کارگاه رنگ و فاصله'},
   theme:{en:'Does distance change what a colour seems to be?',de:'Verändert Abstand, wie eine Farbe erscheint?',fa:'آیا فاصله، رنگی را که می‌بینیم تغییر می‌دهد؟'},
   prompt:{en:'The painting is a preparatory study. The separate blue-and-yellow dot panel is our own experiment: compare it up close and from the far floor mark.',de:'Das Gemälde ist eine Vorstudie. Die separate blau-gelbe Punktfläche ist unser eigenes Experiment: Vergleiche sie aus der Nähe und von der entfernten Bodenmarke.',fa:'نقاشی یک مطالعهٔ مقدماتی است. صفحهٔ نقطه‌های آبی و زرد، آزمایش خود ماست: آن را از نزدیک و از نشان دورِ کف مقایسه کن.'},

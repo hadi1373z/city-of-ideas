@@ -95,6 +95,7 @@ export async function createExtraDistricts(THREE,options={}){
   // The source add-on's disposal normally owns its base. A facade with a no-op
   // base disposer lets this additive layer own only Dalí and protect all ten lots.
   daliArt=F.addDaliHouse(AssetThree,{...originalArt,dispose(){}});
+  (options.layoutArtists||globalThis.window?.layoutArtistDali)?.(THREE,daliArt);
   const daliAdded=originalArt.group.children.filter(o=>!baseChildren.has(o));
   for(const o of daliAdded)o.userData.cityDestination='artist:dali';
   const daliHouse=daliArt.houses.find(h=>h.artistId==='dali');daliHouse.group.userData.cityDestination='artist:dali';

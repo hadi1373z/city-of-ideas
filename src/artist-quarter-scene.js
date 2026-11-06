@@ -1,4 +1,5 @@
-import {QUARTER_ARTISTS} from './artist-quarter-data.js';
+import {QUARTER_ARTISTS} from './artist-quarter-data.js?v=artists2';
+const PLAN=globalThis.ARTIST_QUARTER_PLAN;
 
 export function buildArtistStudios(T,{loadTexture=url=>new T.TextureLoader().load(url),canvas=()=>document.createElement('canvas')}={}){
  const group=new T.Group();group.name='Artists’ studio garden';const houses=[],targets=[],colliders=[],owned=new Set();
@@ -71,25 +72,24 @@ export function buildArtistStudios(T,{loadTexture=url=>new T.TextureLoader().loa
  return{group,houses,targets,colliders,canStand,dispose(){group.removeFromParent();group.traverse(o=>{if(o.isInstancedMesh)o.dispose?.();});for(const r of owned)r.dispose();group.clear();}};
 }
 
-export function buildQuarterGarden(T,art,{naturalTrees=globalThis.window?.buildNaturalCityTrees}={}){
+export function buildQuarterGarden(T,art,{naturalTrees=globalThis.window?.buildNaturalCityTrees,plan=PLAN}={}){
  const group=new T.Group();group.name='Artists’ connected garden lanes';const owned=new Set(),paths=[],colliders=[];
  const mat=c=>{const m=new T.MeshLambertMaterial({color:c});owned.add(m);return m;},lawn=mat(0x6b8069),wood=mat(0x8b765d),leaf=mat(0x7b8b6b);
  function box(w,h,d,x,y,z,m){const g=new T.BoxGeometry(w,h,d);owned.add(g);const o=new T.Mesh(g,m);o.position.set(x,y,z);group.add(o);return o;}
  function path(points,width=3){paths.push({points,width});for(let i=1;i<points.length;i++){const a=points[i-1],b=points[i],length=Math.hypot(b[0]-a[0],b[1]-a[1]),geo=new T.PlaneGeometry(width,length+.015);owned.add(geo);const mesh=new T.Mesh(geo,lawn);mesh.rotation.x=-Math.PI/2;mesh.rotation.z=-Math.atan2(b[0]-a[0],b[1]-a[1]);mesh.position.set((a[0]+b[0])/2,.012,(a[1]+b[1])/2);mesh.name='Mown lawn route · no raised paving';group.add(mesh);}}
- path([[76,110],[145,110],[145,118],[164,118],[168,109],[210,109]],5);
+ for(const points of plan.routes)path(points,4);
  for(const h of art.houses.filter(h=>h.artistId!=='dali'&&!h.editionId)){
   const p={x:118+h.entry.x*1.35,z:108+h.entry.z*1.35};
-  if(h.artistId==='rodin')path([[p.x,p.z],[p.x,p.z+2],[145,p.z+2],[145,110]],2.5);
-  else path([[p.x,p.z],[p.x,110]],2.5);
+  const court=plan.courts.find(c=>c.artists.includes(h.artistId)),end=court?.id==='garden'?98:['rodin','klee'].includes(h.artistId)?118:116;
+  path([[p.x,p.z],[p.x,end]],2.5);
  }
- path([[118,81.8],[118,85],[109,85],[109,110]],2.5); // Dalí, avoiding Van Gogh's room.
- path([[151.75,116.4],[151.75,118]],3);
- for(const h of QUARTER_ARTISTS){const front=h.z+(h.turn?-6:6);path([[h.x,front],[h.x,109]],3);}
- const plants=[[94,103],[111,102],[128,102],[139,103],[94,115],[111,115],[128,115],[166,102],[169,120],[208,119],[210,103]];
- for(const [x,z]of plants){const bed=box(1.65,.16,1.15,x,.04,z,leaf);bed.name='Low garden planting';}
- for(const [x,z]of[[98,105],[129,115],[172,113],[205,113]]){
+ const dali=art.houses.find(h=>h.artistId==='dali');if(dali){const p={x:118+dali.entry.x*1.35,z:108+dali.entry.z*1.35};path([[p.x,p.z],[p.x,187]],3);}
+ path([[plan.escher.x,plan.escher.z+8.4],[plan.escher.x,126]],3);
+ for(const h of QUARTER_ARTISTS){const front=h.z+(h.turn?-6:6);path([[h.x,front],[h.x,179]],3);}
+ for(const [x,z]of plan.plants){const bed=box(1.65,.16,1.15,x,.04,z,leaf);bed.name='Low garden planting';}
+ for(const [x,z]of plan.seats){
   box(2.6,.12,.65,x,.52,z,wood);box(2.6,.5,.1,x,.84,z+.3,wood);for(const dx of[-1.05,1.05])box(.1,.46,.46,x+dx,.23,z,wood);colliders.push({minX:x-1.35,maxX:x+1.35,minZ:z-.4,maxZ:z+.4,label:'Garden seat'});
  }
- if(naturalTrees)naturalTrees(T,group,[[89,99],[107,101],[124,100],[138,101],[98,115],[120,116],[164,99],[166,125],[211,119]].map(([x,z])=>({x,z})));
+ if(naturalTrees)naturalTrees(T,group,plan.trees.map(([x,z])=>({x,z})));
  return{group,paths,colliders,dispose(){group.removeFromParent();const all=new Set(owned);group.traverse(o=>{if(o.geometry)all.add(o.geometry);for(const m of Array.isArray(o.material)?o.material:o.material?[o.material]:[])all.add(m);if(o.isInstancedMesh)o.dispose?.();});for(const r of all)r.dispose();group.clear();}};
 }
