@@ -6,7 +6,7 @@ import {installCityDiscoveries} from './city-discoveries.js?v=study1';
 import {installArtistQuarter} from './artist-quarter.js?v=artists2';
 import {installLearningLab} from './learning-lab.js?v=learning1';
 import {installStudyHouses} from './study-houses.js?v=study1';
-import {installOrigamiHouse} from './origami-house.js?v=coast1';
+import {installOrigamiHouse} from './origami-house.js?v=coast2';
 import {artistLineOfSight} from './artist-line-of-sight.js';
 import {installPhilosopherQuarter} from './philosopher-ui.js';
 import {installSocratesTour} from './socrates-tour.js';

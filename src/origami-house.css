@@ -17,3 +17,5 @@
 
 #coastal-city-map .coastal-plan{height:min(62dvh,720px);object-fit:contain;background:#eee8d2}
 @media(max-width:760px){body[data-mode=city] .route-label{bottom:152px}#origami-house-context{bottom:212px;max-width:220px;padding:12px}}
+
+#coastal-map-return{display:none;position:fixed;left:20px;bottom:24px;z-index:20;min-height:44px;padding:12px 18px;border:1px solid #8d9d7b;border-radius:8px;background:#20483cec;color:#fff9e8;font:inherit;cursor:pointer}body[data-mode=overview][data-coastal-overview=clear] #welcome{display:none}body[data-mode=overview][data-coastal-overview=clear] #coastal-map-return{display:block}#coastal-map-return:focus-visible{outline:3px solid #e2c67b;outline-offset:3px}
