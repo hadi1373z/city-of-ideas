@@ -1,7 +1,8 @@
-import {installVisitMemory} from './visit-memory.js?v=question1';
+import {installVisitMemory} from './visit-memory.js?v=discoveries1';
 import {installRamseyRoom} from './ramsey-room.js?v=ramsey-paper1';
 import {installRamseyHouse} from './ramsey-house.js';
 import {installQuestionWalk} from './question-walk.js';
+import {installCityDiscoveries} from './city-discoveries.js';
 import {artistLineOfSight} from './artist-line-of-sight.js';
 import {installPhilosopherQuarter} from './philosopher-ui.js';
 import {installSocratesTour} from './socrates-tour.js';
@@ -13,7 +14,7 @@ import {ARTISTS} from './city-source-assets/home-tools/artist-catalog.js';
 import {createDistrictNavigation} from './district-navigation.js';
 import {createSharedResidents} from './shared-residents.js';
 import {createSharedActivities} from './shared-activities.js';
-import {installIdeasGraveyard} from './ideas-graveyard.js';
+import {installIdeasGraveyard} from './ideas-graveyard.js?v=discoveries1';
 import {installEscherHouse} from './escher-house.js';
 import {installStudyBook} from './study-book.js';
 import {installCinematicIntro} from './cinematic-intro.js';
@@ -93,6 +94,7 @@ try{
  installQuestionWalk(M,T);
  installRamseyHouse(M,T);
  installRamseyRoom(M);
+ installCityDiscoveries(M,T);
  M.status('ready');
  installCinematicIntro(M,T,socrates);
 }catch(error){document.body.classList.remove('cinematic-pending');console.error('Original district integration failed',error);M.status(error.message);}

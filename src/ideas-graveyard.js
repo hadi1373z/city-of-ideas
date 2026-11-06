@@ -1,4 +1,4 @@
-import {installGraveyardWorld} from './graveyard-world.js';
+import {installGraveyardWorld} from './graveyard-world.js?v=discoveries1';
 const pick=(value,lang)=>value[lang]||value.en;
 export const RETIRED_IDEAS=[
  {id:'perfect-plan',title:{en:'The perfect plan',de:'Der perfekte Plan',fa:'برنامهٔ بی‌نقص'},body:{en:'A plan waited for perfect conditions and was never tried. What small experiment could give it another life?',de:'Ein Plan wartete auf perfekte Bedingungen und wurde nie erprobt. Welcher kleine Versuch könnte ihn wiederbeleben?',fa:'برنامه‌ای منتظر شرایط بی‌نقص ماند و هرگز آزموده نشد. کدام آزمایش کوچک می‌تواند دوباره به آن زندگی بدهد؟'}},
@@ -31,7 +31,7 @@ export function installIdeasGraveyard(M,T){
  M.showExtra=info=>{if(info?.kind!=='retired-idea')return oldShow?.(info);selected=info.data.graveyardGuide?guide:RETIRED_IDEAS.find(i=>i.id===info.data.retiredIdea)||RETIRED_IDEAS[0];M.clearMovement();render();dialog.showModal();return true;};
  render();addEventListener('city-language',render);
  const trees=[];for(let i=0;i<10;i++)trees.push({x:layout.x-60+(i%5)*20,z:layout.z+(i<5?35:-55)});const forest=window.buildNaturalCityTrees?.(T,model.group,trees);
- const world=installGraveyardWorld(M,T,layout,entry),api={...model,layout,entry,drawDoor:world.drawDoor,drawActiveMap:world.drawActiveMap,go:world.go};Object.defineProperty(api,'active',{get:()=>world.active});window.CITY_GRAVEYARD=api;
+ const world=installGraveyardWorld(M,T,layout,entry),api={...model,layout,entry,returnEntry:world.returnEntry,drawDoor:world.drawDoor,drawActiveMap:world.drawActiveMap,go:world.go};Object.defineProperty(api,'active',{get:()=>world.active});window.CITY_GRAVEYARD=api;
 
  addEventListener('pagehide',()=>{removeEventListener('city-language',render);if(forest)forest.traverse(o=>{o.geometry?.dispose();o.material?.dispose();});world.dispose();model.dispose();dialog.remove();},{once:true});return api;
 }
