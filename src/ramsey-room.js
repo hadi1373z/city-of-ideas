@@ -61,7 +61,13 @@ export function installRamseyRoom(M,T=window.THREE){
   panel.hidden=!inside||!!document.querySelector('dialog[open]');if(join)join.hidden=true;
   if(document.hidden||document.querySelector('dialog[open]')){if(conversation?.state.playing)pause();}
   conversation?.update();
-  if(house.group.visible&&near)for(const a of actors)a.actor.animate(conversation?.state.playing?conversation.state.time:time,{seated:true,talking:!!conversation?.state.playing&&lastCue?.speaker===a.id,reducedMotion:matchMedia('(prefers-reduced-motion: reduce)').matches});
+  if(house.group.visible&&near){
+   const state=conversation?.state;
+   // The paper follows the recording even when paused or scrubbed. The second
+   // argument selects the conversation presentation, not whether audio plays.
+   house.study.acquaintanceMap.update(state?.time||0,!!state);
+   for(const a of actors)a.actor.animate(state?.playing?state.time:time,{seated:true,talking:!!state?.playing&&lastCue?.speaker===a.id,reducedMotion:matchMedia('(prefers-reduced-motion: reduce)').matches});
+  }
  };
  function visit(){void load();document.querySelector('#welcome')?.setAttribute('hidden','');M.arrive(house.entry);M.pointToward(house.origin);}
  const link=document.querySelector('#ramsey-film-link');if(link){link.href='#ramsey-house';link.onclick=e=>{e.preventDefault();visit();};}
