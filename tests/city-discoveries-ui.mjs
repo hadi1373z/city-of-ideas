@@ -45,6 +45,7 @@ try{
  click(t.visitRamsey);assert.equal(destination,'graveyard-door');assert(player.x>-1000,'A guide must lead to the world door, not bypass it');
  Object.assign(player,{x:origin.x-2.5,z:origin.z+1});document.querySelector('#ramsey-trial-open').onclick();assert(paused>0);assert(api.paper.group.visible);assert(!house.study.acquaintanceMap.group.visible);
  click(t.useClue);click(t.predict[0]);assert.equal(api.trial.state.count,6);assert.equal(memory.state.questions[0].history[0].answer,t.predict[0]);
+ const summaries=[];const findSummaries=node=>{if(node.tagName==='summary')summaries.push(node);for(const child of node.children)findSummaries(child);};findSummaries(dialog);assert(summaries.length>=1);for(const summary of summaries)assert.equal(summary.tabIndex,0,'Expandable explanations must join controller navigation');
  dialog.querySelector('[data-point="1"]').onclick();for(const i of[3,5])dialog.querySelector('[data-trial="point-'+i+'"]').onclick();click(t.check);assert(api.trial.state.witness);assert(memory.has('sixth-guest-witness'));
  click(t.visitPark);assert.equal(player.x,window.CITY_GRAVEYARD.returnEntry.x,'Leave the separate world through its return door');
  Object.assign(player,{x:0,z:0});api.open('route');click(t.visitPark);assert(api.context().fountain);assert(player.pitch<0,'Look down toward boats, rather than up toward the crane flight');api.open('route');click(t.answers[1]);click(t.release);assert(api.trial.state.complete);

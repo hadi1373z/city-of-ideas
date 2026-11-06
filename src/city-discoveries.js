@@ -5,7 +5,7 @@ import {DISCOVERY_COPY} from './city-discoveries-copy.js';
 export function installCityDiscoveries(M,T){
  let storage;try{storage=localStorage;}catch{storage={getItem(){throw Error('Unavailable');},setItem(){throw Error('Unavailable');}};}
  const trial=createSixthGuest(storage),lang=()=>window.CITY_I18N.lang,w=()=>DISCOVERY_COPY[lang()]||DISCOVERY_COPY.en;
- const el=(tag,text)=>{const node=document.createElement(tag);if(text)node.textContent=text;return node;};
+ const el=(tag,text)=>{const node=document.createElement(tag);if(tag==='summary')node.tabIndex=0;if(text)node.textContent=text;return node;};
  const dialog=el('dialog');dialog.id='city-discoveries';dialog.dataset.confirmFocused='true';dialog.setAttribute('aria-labelledby','city-discoveries-title');
  const header=el('header'),title=el('h2'),close=el('button','×'),body=el('main'),status=el('p');title.id='city-discoveries-title';close.type='button';close.className='glass';close.dataset.close='';status.setAttribute('role','status');header.append(title,close);dialog.append(header,body,status);document.body.append(dialog);
  let view='hub',selected=[],conclusion=0,feedback='',opener=null,last=0,clock=0,lastContext='',disposed=false;
