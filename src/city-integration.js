@@ -3,6 +3,7 @@ import {installRamseyRoom} from './ramsey-room.js?v=ramsey-paper1';
 import {installRamseyHouse} from './ramsey-house.js';
 import {installQuestionWalk} from './question-walk.js';
 import {installCityDiscoveries} from './city-discoveries.js';
+import {installArtistQuarter} from './artist-quarter.js';
 import {artistLineOfSight} from './artist-line-of-sight.js';
 import {installPhilosopherQuarter} from './philosopher-ui.js';
 import {installSocratesTour} from './socrates-tour.js';
@@ -95,6 +96,7 @@ try{
  installRamseyHouse(M,T);
  installRamseyRoom(M);
  installCityDiscoveries(M,T);
+ installArtistQuarter(M,T);
  M.status('ready');
  installCinematicIntro(M,T,socrates);
 }catch(error){document.body.classList.remove('cinematic-pending');console.error('Original district integration failed',error);M.status(error.message);}
