@@ -71,7 +71,17 @@ against exact search and walks routes against the real source district layer;
 `tests/study-houses-ui.mjs` checks physical entry, experiments, private notebook
 history, focus, language disclosure and removal of only owned objects.
 
-## Coastal city and House of Origami
+## Circular island and House of Origami
+
+`?arrival=island` opens the unobstructed full-island overview.
+The public city is one circular island centred on Zarathustra Gallery at world (0, 0).
+`src/island-layout.js` owns its 570 m shoreline, 552 m lawn, 565 m walking limit,
+536 m shoreline loop and the eastern paper-boat lookout. Ocean surrounds all
+360 degrees. The previous offset land disc and straight eastern coast are removed.
+The overview fits the entire circle in portrait and landscape and uses a separate
+near plane for stable ground depth at that distance; walking restores the close
+near plane. Private notes, existing house coordinates and the separate graveyard
+world are preserved. New woodland avoids the park, paths and western home lots.
 
 `?arrival=origami-house` approaches a new paper atelier between the artists'
 quarter and the eastern ocean. `?arrival=coast` visits its paper-boat lookout.

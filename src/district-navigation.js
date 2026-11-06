@@ -3,7 +3,7 @@
 const inside=(b,x,z)=>x>=b.minX&&x<=b.maxX&&z>=b.minZ&&z<=b.maxZ;
 const transformBounds=(b,t)=>({minX:t.x+b.minX*t.scale,maxX:t.x+b.maxX*t.scale,minZ:t.z+b.minZ*t.scale,maxZ:t.z+b.maxZ*t.scale});
 const point=(p,t)=>({...p,x:t.x+p.x*t.scale,y:t.y+(p.y||0)*t.scale,z:t.z+p.z*t.scale});
-export async function createDistrictNavigation(extras,{baseCanStand,baseBounds={minX:-270,maxX:260,minZ:-500,maxZ:215},sourceBaseUrl=new URL('./city-source-assets/home-tools/',import.meta.url).href,findCityPath}={}){
+export async function createDistrictNavigation(extras,{baseCanStand,baseBounds={minX:-565,maxX:565,minZ:-565,maxZ:565},sourceBaseUrl=new URL('./city-source-assets/home-tools/',import.meta.url).href,findCityPath}={}){
  if(!extras?.canStand||!extras?.mathModels||!extras?.makers)throw Error('Provide the original appended district layer.');
  const planner=findCityPath||(await import(new URL('art-city-navigation.js',sourceBaseUrl).href)).findCityPath;
  if(typeof planner!=='function')throw Error('The original city path planner is unavailable.');

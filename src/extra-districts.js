@@ -59,7 +59,7 @@ export async function createExtraDistricts(THREE,options={}){
  if(F.MATH_BUILDING?.floors!==8||F.MATH_CONCEPTS?.length!==24||F.DALI_ARTIST?.works?.length!==4||F.DALI_OBJECTS?.length!==5)throw Error('Original district collections are incomplete.');
  const root=new THREE.Group();root.name='Original appended city districts';scene.add(root);
  const transforms={mathematics:{...(city.GRAVEYARD?.mathematics||{x:-215,y:.13,z:95,scale:1})},makers:{x:225,y:.13,z:-50,scale:1},artists:{x:city.ART?.x??118,y:city.art.group.position.y,z:city.ART?.z??108,scale:city.ART?.scale??1.35}};
- const baseWorldBounds={...(options.worldBounds||{minX:-270,maxX:260,minZ:-500,maxZ:215})};
+ const baseWorldBounds={...(options.worldBounds||{minX:-565,maxX:565,minZ:-565,maxZ:565})};
  if(city.GRAVEYARD)Object.assign(baseWorldBounds,union(baseWorldBounds,city.GRAVEYARD.bounds));
  const originalArt=city.art,baseHouses=originalArt.houses.slice(),baseChildren=new Set(originalArt.group.children);
  let activeMathFloor=0,disposed=false,network=null,editions=null,cargoOwners=[],homeOwners=new Map(),homeLotIndices=new Map(),pendingNeighborhood=null,activeHomeId=null;

@@ -1,22 +1,30 @@
-import {coastX,COAST_ROUTES,HOUSE_ORIGAMI} from './origami-house-math.js';
-export function buildCityCoast(T){
- const group=new T.Group();group.name='Eastern ocean and connected coastal walk';const owned=new Set(),own=r=>(owned.add(r),r),mat=c=>own(new T.MeshLambertMaterial({color:c})),sand=mat(0xc9bd96),wood=mat(0x826e50),grass=mat(0x6b8069),rock=mat(0x8c9381);
+import {COAST_ROUTES,HOUSE_ORIGAMI} from './origami-house-math.js';
+import {CITY_ISLAND as I,islandRadius} from './island-layout.js';
+export function buildCityCoast(T,{cityPaths=[],heightAt=()=>0,naturalTrees=globalThis.window?.buildNaturalCityTrees}={}){
+ const group=new T.Group();group.name='Circular island and surrounding ocean';const owned=new Set(),own=r=>(owned.add(r),r),mat=c=>own(new T.MeshLambertMaterial({color:c})),sand=mat(0xcbbd96),wood=mat(0x846d50),pathMat=mat(0xc6bd9e);
  function box(w,h,d,x,y,z,m){const o=new T.Mesh(own(new T.BoxGeometry(w,h,d)),m);o.position.set(x,y,z);group.add(o);return o;}
- const positions=[],ix=[],nx=64,nz=128;
- for(let j=0;j<=nz;j++){const z=-850+j/nz*1400;for(let i=0;i<=nx;i++)positions.push(coastX(z)+i/nx*1900,-.015,z);}
- for(let j=0;j<nz;j++)for(let i=0;i<nx;i++){const a=j*(nx+1)+i;ix.push(a,a+nx+1,a+1,a+1,a+nx+1,a+nx+2);}
- const geo=own(new T.BufferGeometry());geo.setAttribute('position',new T.Float32BufferAttribute(positions,3));geo.setIndex(ix);geo.computeVertexNormals();
- const uniforms={time:{value:0},fogColor:{value:new T.Color(0x8d9e9b)},fogDensity:{value:.0015}};
+ function polarBand(inner,outer,radial,angular,height,material,name,colours){
+  const pos=[],indices=[],cols=[];for(let j=0;j<=angular;j++){const a=j/angular*Math.PI*2;for(let i=0;i<=radial;i++){const u=i/radial,r=inner+(outer-inner)*u;const x=Math.cos(a)*r,z=Math.sin(a)*r;pos.push(x,height(r,u),z);if(colours)cols.push(...colours(x,z,r));}}
+  for(let j=0;j<angular;j++)for(let i=0;i<radial;i++){const a=j*(radial+1)+i,b=a+radial+1;indices.push(a,b,a+1,a+1,b,b+1);}
+  const g=own(new T.BufferGeometry());g.setAttribute('position',new T.Float32BufferAttribute(pos,3));if(colours)g.setAttribute('color',new T.Float32BufferAttribute(cols,3));g.setIndex(indices);g.computeVertexNormals();const m=new T.Mesh(g,material);m.name=name;group.add(m);return m;
+ }
+ const grass=own(new T.MeshLambertMaterial({vertexColors:true})),base=new T.Color(0x84916d);
+ const land=polarBand(0,I.lawnRadius,64,192,()=>.005,grass,'Continuous circular lawn centred on the gallery',(x,z)=>{const n=.035*Math.sin(x*.018+Math.sin(z*.011))+.018*Math.cos(z*.043-x*.021),c=base.clone().offsetHSL(0,0,n);return[c.r,c.g,c.b];});
+ const beach=polarBand(I.lawnRadius,I.radius,5,256,(_,u)=>.005-.05*u,sand,'Unbroken beach around the entire island');
+ const uniforms={time:{value:0},fogColor:{value:new T.Color(0xc2d6df)},fogDensity:{value:.0007},islandRadius:{value:I.radius}};
  const water=own(new T.ShaderMaterial({uniforms,fog:true,side:T.DoubleSide,
- vertexShader:'uniform float time; varying vec3 vSea; varying float vDepth; void main(){vec3 p=position;float shore=264.0+2.0*sin(p.z/60.0)+sin(p.z/19.0);float d=max(0.0,p.x-shore);p.y+=.024*min(1.0,d/12.0)*(sin(p.x*.11+p.z*.17-time*.7)+.4*sin(p.z*.32-time*.45));vSea=p;vec4 mv=modelViewMatrix*vec4(p,1.0);vDepth=-mv.z;gl_Position=projectionMatrix*mv;}',
- fragmentShader:'uniform float time;uniform vec3 fogColor;uniform float fogDensity;varying vec3 vSea;varying float vDepth;void main(){float shore=264.0+2.0*sin(vSea.z/60.0)+sin(vSea.z/19.0);float d=max(0.0,vSea.x-shore);float rip=sin(vSea.x*.48+vSea.z*.30-time*.65)+.45*sin(vSea.z*.83-time*.43);vec3 col=mix(vec3(.24,.48,.52),vec3(.12,.27,.36),smoothstep(0.0,180.0,d));col+=.025*rip;float swash=1.0-smoothstep(.1,1.9,abs(d-(1.4+.6*sin(vSea.z*.17-time*.25))));col=mix(col,vec3(.77,.83,.73),swash*.7);float fleck=smoothstep(1.15,1.43,rip)*.12;col+=vec3(fleck);float fog=1.0-exp(-fogDensity*fogDensity*vDepth*vDepth);gl_FragColor=vec4(mix(col,fogColor,clamp(fog,0.0,1.0)),1.0);\n#include <tonemapping_fragment>\n#include <colorspace_fragment>\n}'
- }));const sea=new T.Mesh(geo,water);sea.name='Ocean · moving swells and shoreline foam';sea.frustumCulled=false;group.add(sea);
- const beach=[],bi=[];for(let j=0;j<=180;j++){const z=-540+j/180*800;beach.push(258,.105,z,coastX(z)+.5,-.035,z);if(j<180){const k=j*2;bi.push(k,k+2,k+1,k+1,k+2,k+3);}}const bg=own(new T.BufferGeometry());bg.setAttribute('position',new T.Float32BufferAttribute(beach,3));bg.setIndex(bi);bg.computeVertexNormals();const bank=new T.Mesh(bg,sand);bank.name='Continuous sandy coast at the eastern city edge';group.add(bank);
- // Low stone coping makes the walking boundary visible rather than an invisible wall.
- for(let z=-500;z<=215;z+=5.5){const lip=box(.65,.28,5.55,259.55,.05,z,rock);lip.name='Low coastal stone edge';}
- for(const points of COAST_ROUTES)for(let i=1;i<points.length;i++){const a=points[i-1],b=points[i],len=Math.hypot(b[0]-a[0],b[1]-a[1]),g=own(new T.PlaneGeometry(3.1,len+.025)),o=new T.Mesh(g,grass);o.rotation.x=-Math.PI/2;o.rotation.z=-Math.atan2(b[0]-a[0],b[1]-a[1]);o.position.set((a[0]+b[0])/2,.014,(a[1]+b[1])/2);o.name='Mown route to the coast';group.add(o);}
- for(let i=0;i<12;i++)box(4,.09,.48,257,.085,73.1+i*.5,wood);
- for(const z of[73,76,79])box(.12,.85,.12,259.05,.5,z,wood);box(.12,.10,6.2,259.05,.88,76,wood);
- const launch=box(.5,.06,.42,258.85,.95,76,mat(0xe3d6af));launch.name='Paper boat launch rest';launch.userData={origamiHouse:'shore',dynamic:true};
- return{group,sea,launch,paths:COAST_ROUTES,uniforms,update(time,{reduced=false,fog}={}){uniforms.time.value=reduced?0:time;if(fog?.color)uniforms.fogColor.value.copy(fog.color);if(Number.isFinite(fog?.density))uniforms.fogDensity.value=fog.density;},dispose(){group.removeFromParent();for(const r of owned)r.dispose();group.clear();}};
+ vertexShader:'uniform float time;uniform float islandRadius;varying vec3 vSea;varying float vDepth;void main(){vec3 p=position;float d=max(0.0,length(p.xz)-islandRadius);p.y+=.024*min(1.0,d/12.0)*(sin(p.x*.11+p.z*.17-time*.7)+.4*sin(p.z*.32-time*.45));vSea=p;vec4 mv=modelViewMatrix*vec4(p,1.0);vDepth=-mv.z;gl_Position=projectionMatrix*mv;}',
+ fragmentShader:'uniform float time;uniform float islandRadius;uniform vec3 fogColor;uniform float fogDensity;varying vec3 vSea;varying float vDepth;void main(){float d=max(0.0,length(vSea.xz)-islandRadius);float rip=sin(vSea.x*.48+vSea.z*.30-time*.65)+.45*sin(vSea.z*.83-time*.43);vec3 col=mix(vec3(.25,.56,.61),vec3(.10,.29,.40),smoothstep(0.0,220.0,d));col+=.018*rip*(1.0-smoothstep(40.0,260.0,d));float foam=1.0-smoothstep(.1,1.9,abs(d-(1.4+.6*sin(atan(vSea.z,vSea.x)*570.0*.17-time*.25))));col=mix(col,vec3(.82,.89,.83),foam*.7);float fog=1.0-exp(-fogDensity*fogDensity*vDepth*vDepth);gl_FragColor=vec4(mix(col,fogColor,clamp(fog,0.0,1.0)),1.0);\n#include <tonemapping_fragment>\n#include <colorspace_fragment>\n}'
+ }));
+ const sea=polarBand(I.radius,3600,100,256,()=>-.015,water,'Ocean surrounding all 360 degrees of the island');sea.frustumCulled=false;
+ const promenade=polarBand(I.promenadeRadius-3,I.promenadeRadius+3,1,256,()=>.017,pathMat,'Continuous shoreline walking loop');
+ function road(points,width){const v=[],ix=[];for(let i=0;i<points.length;i++){const a=points[Math.max(0,i-1)],p=points[i],b=points[Math.min(points.length-1,i+1)],before=new T.Vector2(p[0]-a[0],p[1]-a[1]).normalize(),after=new T.Vector2(b[0]-p[0],b[1]-p[1]).normalize();if(i===0)before.copy(after);if(i===points.length-1)after.copy(before);const normal=new T.Vector2(-after.y,after.x),miter=new T.Vector2(-before.y,before.x).add(normal).normalize(),distance=Math.min(width,width/2/Math.max(.5,miter.dot(normal)));v.push(p[0]+miter.x*distance,Math.max(.018,(heightAt(p[0],p[1])||0)+.003),p[1]+miter.y*distance,p[0]-miter.x*distance,Math.max(.018,(heightAt(p[0],p[1])||0)+.003),p[1]-miter.y*distance);if(i<points.length-1){const k=i*2;ix.push(k,k+2,k+1,k+1,k+2,k+3);}}const g=own(new T.BufferGeometry());g.setAttribute('position',new T.Float32BufferAttribute(v,3));g.setIndex(ix);g.computeVertexNormals();const o=new T.Mesh(g,pathMat);o.name='Continuous unpatterned island path';group.add(o);return o;}
+ const paths=[...COAST_ROUTES.map(points=>({points,width:4})),...cityPaths].filter(p=>p.points.length>1&&p.points.every(([x,z])=>islandRadius(x,z)<I.radius));for(const p of paths)road(p.points,p.width||4);
+ // A loose coastal woodland frames the city; the park and future western home lots stay clear.
+ const trees=[];for(let n=0;n<150;n++){const a=n*2.399963,r=390+((n*41)%105),x=Math.cos(a)*r,z=Math.sin(a)*r;if(Math.hypot(x,z+330)<179||x<0&&z>125)continue;const clear=paths.every(p=>p.points.slice(1).every((b,i)=>{const a=p.points[i],dx=b[0]-a[0],dz=b[1]-a[1],u=Math.max(0,Math.min(1,((x-a[0])*dx+(z-a[1])*dz)/(dx*dx+dz*dz)));return Math.hypot(x-a[0]-dx*u,z-a[1]-dz*u)>(p.width||4)/2+3;}));if(clear)trees.push({x,z});}if(naturalTrees)naturalTrees(T,group,trees);
+ const shore=HOUSE_ORIGAMI.shore,dx=shore.x-256.5;
+ for(let i=0;i<12;i++)box(4,.09,.48,257+dx,.085,73.1+i*.5,wood);
+ for(const z of[73,76,79])box(.12,.85,.12,259.05+dx,.5,z,wood);box(.12,.10,6.2,259.05+dx,.88,76,wood);
+ const launch=box(.5,.06,.42,258.85+dx,.95,76,mat(0xe3d6af));launch.name='Paper boat launch rest';launch.userData={origamiHouse:'shore',dynamic:true};
+ return{group,sea,land,beach,promenade,launch,paths:COAST_ROUTES,treePositions:trees,canStand:(x,z)=>!trees.some(p=>Math.hypot(x-p.x,z-p.z)<.45),uniforms,update(time,{reduced=false,fog}={}){uniforms.time.value=reduced?0:time;if(fog?.color)uniforms.fogColor.value.copy(fog.color);if(Number.isFinite(fog?.density))uniforms.fogDensity.value=fog.density;},dispose(){group.removeFromParent();group.traverse(o=>{if(o.geometry)owned.add(o.geometry);for(const m of Array.isArray(o.material)?o.material:o.material?[o.material]:[])owned.add(m);if(o.isInstancedMesh)o.dispose?.();});for(const r of owned)r.dispose();group.clear();}};
 }
