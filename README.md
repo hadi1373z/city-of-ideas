@@ -70,3 +70,47 @@ and interaction hooks. `tests/study-houses.mjs` independently checks matching
 against exact search and walks routes against the real source district layer;
 `tests/study-houses-ui.mjs` checks physical entry, experiments, private notebook
 history, focus, language disclosure and removal of only owned objects.
+
+## Coastal city and House of Origami
+
+`?arrival=origami-house` approaches a new paper atelier between the artists'
+quarter and the eastern ocean. `?arrival=coast` visits its paper-boat lookout.
+The existing Zarathustra gallery stays at the civic centre (world 0,0). City
+Overview now offers a gallery-centred coastal plan; its 3D view also faces the
+gallery. The small city map uses the same centre and includes the ocean. The
+separate Graveyard of Ideas retains its own map and world visibility rules.
+
+The house has a supported folded-plate roof, clear central doorway, real window
+openings, suspended paper cranes and three working stations. Its Miura model is
+a finite, zero-thickness patch of 32 rigid parallelograms controlled by one fold
+tilt. Coordinates preserve all panel edge lengths, angles and areas; this is a
+kinematic model, not a paper-stiffness or collision solver. The crease lab keeps
+Kawasaki–Justin's unassigned single-vertex angle condition separate from
+Maekawa's necessary mountain/valley count and from global foldability. The boat
+workshop reuses the saved multilingual traditional-boat milestones, explicitly
+labelled as sketches rather than a continuous layer simulation.
+
+After the boat sequence, visitors can release their paper boat at the ocean
+lookout. Completed boat work from the existing park guide counts too. The boat
+follows the same analytic water height as the sea shader. Reduced motion freezes
+the water and boat and applies fold changes immediately. The digital voyage is
+identified as art, not a claim that ordinary paper survives indefinitely in water.
+Personal folds, colour, launch state and reflection use the new local key
+`city-of-ideas:house-of-origami:v1`; existing private notes and original lesson
+completion keys are preserved. Reflections also enter the existing notebook.
+
+The new architecture, coast, map and mathematical geometry are original code.
+Sources attached to the house include Schenk & Guest (2013), Wei et al. (2013),
+Adachi/Ishibashi/Kume on flat folding, and the existing traditional boat guide.
+Existing folded-paper boat/crane builders and their credits are reused. No
+character geometry, accepted recordings or fixed Kokoro voice settings change.
+All new instruction and controls support English, German and Persian.
+
+`origami-house-math.js` owns coordinates and validated progress;
+`origami-house-scene.js` owns the ateliers; `coastal-city-scene.js` owns the sea
+and route geometry; `origami-house.js` connects them to the existing city.
+`node tools/render-coastal-plan.mjs` regenerates the three map SVGs from the
+actual artist-quarter plan and study-house coordinates. Release tests verify
+rigid-fold invariants across the full tilt range, source-clear walking routes,
+saved lesson compatibility, physical entry and launch guards, local notes,
+theorem feedback, map identity, language parity and owned-resource cleanup.
