@@ -1,4 +1,6 @@
-import {PHILOSOPHERS,quarterPaths,pickLanguage} from './philosopher-data.js';
+import {PHILOSOPHERS,quarterPaths} from './philosopher-data.js';
+import {buildPlatoComparison} from './plato-house-scene.js';
+import {philosopherField,PHILOSOPHER_UI} from './plato-house-copy.js';
 
 // A single, additive ground-level district. No renderer, account or private archive.
 export function createPhilosopherQuarter(T,{language=()=> 'en',canvas=()=>document.createElement('canvas')}={}){
@@ -25,21 +27,21 @@ export function createPhilosopherQuarter(T,{language=()=> 'en',canvas=()=>docume
   box(root,3,1,.35,0,3.23,11,home.color);
   for(const x of [-10,10])box(root,.55,.25,22.7,x,3.86,0,home.color);
   for(const z of [-11,11])box(root,20.6,.25,.65,0,3.86,z,home.color);
-  action(label(root,()=>pickLanguage(home.name,language()),0,4.7,11.35,8),home,'intro');
-  label(root,()=>pickLanguage(home.home,language()),0,3.15,11.23,7.4);
+  action(label(root,()=>philosopherField(home,'name',language()),0,4.7,11.35,8),home,'intro');
+  label(root,()=>philosopherField(home,'home',language()),0,3.15,11.23,7.4);
   box(root,3,.08,5,0,.09,14,pathMaterial).visible=globalThis.CITY_CONFIG?.showGroundPaving!==false;
   // Library desk with a real interactive book, plus an unobstructed centre aisle.
   box(root,4,.18,1.8,4,1.2,-6,wood);block(home,4,-6,4,1.8);
   for(const x of [2.4,5.6])box(root,.15,1.1,1.4,x,.63,-6,wood);
   const book=action(box(root,1.15,.14,.85,3.4,1.36,-5.9,home.color),home,'reading');
   box(root,1.05,.08,.76,3.4,1.4,-5.9,0xf2e6ca);book.userData.label=home.reading[1];
-  label(root,()=>language()==='fa'?'خواندن و اندیشیدن':'READ & REFLECT',4,2.35,-6.8,4.2);
+  label(root,()=>home.id==='plato'?(PHILOSOPHER_UI[language()]||PHILOSOPHER_UI.en).reading:language()==='fa'?'خواندن و اندیشیدن':'READ & REFLECT',4,2.35,-6.8,4.2);
   for(let shelf=0;shelf<3;shelf++){
    box(root,4,.13,.6,-5,1+shelf*.65,-10.45,wood);
    for(let i=0;i<8;i++)box(root,.25,.4+(i%3)*.06,.38,-6.5+i*.43,1.27+shelf*.65,-10.4,[home.color,0x9d6c53,0x8d9d86][i%3]);
   }block(home,-5,-10.45,4,.8);
   for(const x of [4,7]){box(root,1.3,.15,1.2,x,.65,2,wood);box(root,1.3,.9,.15,x,1.14,2.5,home.color);block(home,x,2,1.3,1.35);for(const dx of [-.45,.45])box(root,.12,.55,.8,x+dx,.34,2,wood);}
-  action(label(root,()=>pickLanguage(home.object,language()),-5,2.8,-3.8,6),home,'idea');
+  action(label(root,()=>philosopherField(home,'object',language()),-5,2.8,-3.8,6),home,'idea');
   const pedestal=action(cylinder(root,1.3,.7,-5,.48,-2,0x8c8776),home,'idea');block(home,-5,-2,2.6,2.6);
   const disc=()=>{const n=cylinder(root,1.25,.1,-5,1.6,-2,home.color);action(n,home,'idea');return n;};
   if(home.style==='academy'){
@@ -64,12 +66,13 @@ export function createPhilosopherQuarter(T,{language=()=> 'en',canvas=()=>docume
    for(const x of [-8,8]){cylinder(root,.22,3.5,x,1.88,7.5,wall);block(home,x,7.5,.6,.6);}const arch=ring(root,8,0,3.8,7.5,home.color);arch.scale.y=.27;
    const archIdea=action(ring(root,1,-5,1.7,-2,0xd6b66b),home,'idea');archIdea.scale.y=1.25;box(root,1.7,.08,1.2,-5,1,-2,home.color);
   }
+  const exhibit=home.id==='plato'?buildPlatoComparison(T,{root,home,box,cylinder,ring,block,action}):null;
   const bounds={minX:home.x-10,maxX:home.x+10,minZ:home.z-11,maxZ:home.z+11};
-  homes.push({...home,group:root,bounds,entry:{x:home.x,y:.13,z:home.z+13,yaw:0},study:{x:home.x,y:.13,z:home.z-4,yaw:0}});
+  homes.push({...home,group:root,bounds,exhibit,entry:{x:home.x,y:.13,z:home.z+13,yaw:0},study:{x:home.x,y:.13,z:home.z-4,yaw:0}});
  }
  function refreshLanguage(){for(const item of labels){const ctx=item.c.getContext('2d');ctx.clearRect(0,0,1024,192);ctx.fillStyle='#233b39';ctx.fillRect(0,0,1024,192);ctx.strokeStyle='#bda779';ctx.lineWidth=4;ctx.strokeRect(6,6,1012,180);ctx.fillStyle='#f2e6cc';ctx.font='52px Tahoma, sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.direction=language()==='fa'?'rtl':'ltr';ctx.fillText(item.text(),512,96,970);item.texture.needsUpdate=true;}}
  function canStand(x,z){return Number.isFinite(x)&&Number.isFinite(z)&&!colliders.some(b=>x>b.minX-.24&&x<b.maxX+.24&&z>b.minZ-.24&&z<b.maxZ+.24);}
- function region(x,z){const home=homes.find(h=>x>h.bounds.minX&&x<h.bounds.maxX&&z>h.bounds.minZ&&z<h.bounds.maxZ);if(home)return{id:'philosophers',philosopherId:home.id,title:pickLanguage(home.name,language())+' · '+pickLanguage(home.home,language()),inside:true};if(x>-269&&x<-191&&z>-151&&z<21)return{id:'philosophers',title:language()==='fa'?'محلهٔ فیلسوفان':'Philosophers’ quarter',inside:false};return null;}
+ function region(x,z){const home=homes.find(h=>x>h.bounds.minX&&x<h.bounds.maxX&&z>h.bounds.minZ&&z<h.bounds.maxZ);if(home)return{id:'philosophers',philosopherId:home.id,title:philosopherField(home,'name',language())+' · '+philosopherField(home,'home',language()),inside:true};if(x>-269&&x<-191&&z>-151&&z<21)return{id:'philosophers',title:(PHILOSOPHER_UI[language()]||PHILOSOPHER_UI.en).direction,inside:false};return null;}
  function entryFor(destination){if(destination==='philosophers')return{x:-260,y:.13,z:-132,yaw:Math.PI};return homes.find(h=>'philosopher:'+h.id===destination)?.entry||null;}
  function dispose(){group.removeFromParent();for(const g of geometries.values())g.dispose();for(const m of materials.values())m.dispose();for(const item of labels)item.mat.dispose();textures.forEach(t=>t.dispose());}
  function drawMap(ctx,{s,cx,cz}){ctx.strokeStyle='#b4cba5';ctx.lineWidth=1;for(const path of quarterPaths){ctx.beginPath();path.forEach((p,i)=>ctx[i?'lineTo':'moveTo'](cx+p[0]*s,cz+p[1]*s));ctx.stroke();}ctx.fillStyle='#b4cba5';for(const h of homes)ctx.fillRect(cx+(h.x-10)*s,cz+(h.z-11)*s,20*s,22*s);ctx.font='10px Tahoma';ctx.textAlign='center';ctx.fillText(language()==='fa'?'فیلسوفان':'Philosophers',cx-229*s,cz+29*s);}

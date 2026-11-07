@@ -351,3 +351,80 @@ Its brief EN/FA guide already introduces a brass circle and shadow. Inspect its
 actual scene and interactions before adding a modest visible comparison and
 original sourced EN/DE/FA/CS reading. Preserve its circle, plot, entrance and
 private writing, and prioritize other underdeveloped existing houses afterward.
+
+## 2026-11-07 — Plato: a circle and its appearance
+
+Criticism: Plato's Courtyard of Questions had a brass circle, a stylized floor
+patch and a short EN/FA guide, but no controlled comparison between an object's
+shape and its appearance. Its original book and private reflection field already
+worked and needed to be preserved.
+
+Kept the original circle's geometry, pose and radius, its pedestal/floor patch,
+book, desk, chairs, columns, plot at (-242, -98), walls, entrance and paths.
+Added a separate turning ring on a solid comparison stand, a cushioned bench,
+and small divider/rolled-paper tools beside the original reading book. The
+central approach and a front cross-aisle remain clear; new furniture is solid.
+
+Two native buttons set the separate ring forward or turn it through 60 degrees
+without scaling it. A generated diagram compares a fixed unit circle with the
+selected parallel front projection. The turned projection has half the width
+and the same height, while every sampled 3D centreline point retains unit radius.
+The text distinguishes the diagram's parallel projection from the perspective
+view in the room. The original ring and stylized floor patch never change.
+
+Original reading explains the distinction between a drawing, an observation
+and what a mathematical definition must establish. Its short historical
+introduction cites Plato's Republic VI, particularly the divided-line discussion
+at 510d–511a, in the Jowett translation at MIT's Internet Classics Archive:
+https://classics.mit.edu/Plato/republic.7.vi.html . No quotation or diagram was
+copied. This modest geometric exercise does not claim to prove Plato's account
+of Forms or reconstruct the Academy.
+
+Plato's new readings and the associated name, home guide, source notes, controls,
+reflection labels and in-room reading action support EN/DE/FA/CS. Existing EN/FA
+guide strings remain in philosopher-data.js; DE/CS Plato fields are additive.
+Shared philosopher-dialog controls now also have explicit four-language copy.
+Other philosopher readings and unrelated city content still have partial Czech
+coverage and English fallback. Persian dialog/reading direction remains RTL.
+
+The existing welcome directory, visit action, book/object actions and reflection
+field are retained. A labelled button inside Plato's room opens the comparison;
+it hides outside the room and while a dialog is open. The dialog uses the existing
+focused-controller confirmation hook. Choice stays in memory for the visit only.
+The existing per-house note keys, contents and input behavior are preserved; no
+new note/storage key, voice, recording, account or private-archive access was added.
+
+Verification: all 67 release test programs, build and whitespace checks passed.
+Expanded philosopher checks independently verify unit radii, both projection
+widths/heights, invalid poses, unscaled model rotation, exact original ring/patch,
+all six existing road/entrance routes, clear new cross-aisle and solid furniture.
+The real UI installer runs against a minimal DOM fixture to check four-language
+readings, pressed/live/alt states, source links, visit-state/focus retention,
+context visibility and note isolation. A synthetic mixed-language note retains
+exact text/spacing and caret selection across language refreshes without storage
+writes; the existing explicit input action still writes once to the same key.
+Earlier foundation-house and Czech shell checks remain unchanged and pass.
+
+Native browser at 1280 × 720 confirmed the original welcome/home visit action,
+physical doorway walking, the in-house reading button, Enter/Space and Escape,
+the unchanged original circle and visible rotation of the separate ring. Choice
+survived reopening and EN/DE/FA/CS switches. German/Persian article client/scroll
+widths were equal at 763 px; Persian reading was RTL. Czech at 390 × 844 showed
+both choices and diagram with equal article widths of 339 px and inner reading
+widths of 303 px, without horizontal overflow. A synthetic note survived all
+language switches, switching to Aristotle and back, and reload. Czech selection
+also survived reload. No browser console errors were logged. Front/turned room
+and Czech mobile screenshots are in the originating chat's outputs. Hardware
+controller A was not directly exercised; the established focused-button hook is
+reused. The original E/book targeting remains unchanged.
+
+Remaining weakness: the ring has two immediate poses rather than a continuous
+rotation control, and the original floor patch remains a stylized illustration.
+The diagram is a bounded geometric comparison rather than an optics simulation
+or a survey of Plato's philosophy. Review only; nothing merged or deployed.
+
+The six foundation first passes and Plato's courtyard pass are complete. Next
+useful house: Aristotle's existing Porch of Habit and Virtue at (-208, -98).
+Inspect its balance, colonnade, book, reading and per-house notes before adding
+modest architectural details and an original sourced EN/DE/FA/CS encounter about
+practical judgment. Preserve the existing balance, location, entrances and notes.
