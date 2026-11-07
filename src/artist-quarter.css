@@ -77,3 +77,22 @@
 #monet-guide-context{position:fixed;inset-inline-start:24px;bottom:170px;z-index:18;max-width:min(310px,calc(100vw - 48px))}
 #monet-guide-context[hidden]{display:none}
 @media(max-width:430px){#monet-guide header{padding:14px}#monet-guide .monet-guide-body{padding:6px 14px 18px}#monet-guide-context{inset-inline-start:12px;bottom:245px;max-width:220px}}
+
+/* Van Gogh's additive companion leaves the original catalog reader intact. */
+#van-gogh-guide{color:#293c43;background:#f6f0df;border:1px solid #b8c1aa;border-radius:16px;width:min(840px,calc(100vw - 28px));max-height:88dvh;padding:0;box-sizing:border-box}
+#van-gogh-guide::backdrop{background:#192e3ab8}
+#van-gogh-guide header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 22px;border-bottom:1px solid #d2c5a7}
+#van-gogh-guide h2{font:normal clamp(22px,3vw,30px)/1.3 Georgia,serif;margin:0;overflow-wrap:anywhere}
+#van-gogh-guide header button{min-width:44px;flex-shrink:0}
+#van-gogh-guide .van-gogh-guide-body{padding:8px 22px 24px;max-height:calc(88dvh - 130px);overflow:auto;overflow-wrap:anywhere}
+#van-gogh-guide p{line-height:1.7;max-width:72ch}
+#van-gogh-guide h3{font:normal 24px/1.3 Georgia,serif;margin:24px 0 12px}
+#van-gogh-guide h4{font:normal 21px/1.35 Georgia,serif;margin:0}
+#van-gogh-guide article{margin:14px 0;padding:16px;background:#fffbef;border:1px solid #d4c9ae;border-radius:9px}
+#van-gogh-guide .van-gogh-guide-actions{display:flex;gap:8px;flex-wrap:wrap}
+#van-gogh-guide button,#van-gogh-guide-context button{min-height:44px;padding:10px 14px;border:1px solid #6c7c84;border-radius:7px;background:#38596b;color:#fff9e8;line-height:1.4;white-space:normal}
+#van-gogh-guide a{display:flex;align-items:center;min-height:44px;color:#38596b}
+#van-gogh-guide button:focus-visible,#van-gogh-guide a:focus-visible,#van-gogh-guide-context button:focus-visible{outline:3px solid #b28132;outline-offset:3px}
+#van-gogh-guide-context{position:fixed;inset-inline-start:24px;bottom:170px;z-index:18;max-width:min(310px,calc(100vw - 48px))}
+#van-gogh-guide-context[hidden]{display:none}
+@media(max-width:430px){#van-gogh-guide header{padding:14px}#van-gogh-guide .van-gogh-guide-body{padding:6px 14px 18px}#van-gogh-guide-context{inset-inline-start:12px;bottom:245px;max-width:220px}}

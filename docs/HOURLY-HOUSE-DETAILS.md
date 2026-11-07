@@ -1504,3 +1504,111 @@ the scholarly letters edition and explicitly avoids inventing the artist's
 voice. Inspect real language gaps before adding a modest four-language
 companion; do not claim full legacy catalog translation. Preserve Monet's
 folio, guide, six viewpoint/catalog handoffs and all nineteen completed passes.
+
+## 2026-11-07 — Vincent van Gogh: a picture beside a letter
+
+Criticism: the original gallery at world (108, 84) already had six paintings,
+its high gable and sunflower facade, a bench, palette/brushes/worktable and
+resident. Its installed catalog/private observation reader and approach to the
+scholarly letters already existed. It needed modest room detail and an original
+four-language companion, without substituting invented speech for the letters.
+
+Added ochre edge trim along the unchanged high gable/eaves, blue window sill
+and header outside the aperture, blue/ochre bench pads with seams, bench end
+joints and a worktable apron. A small comparison rack meets the original right
+wall on two spacers. Its colour strips and ruled card are original city prompts,
+not a historical letter, handwriting sample or reconstructed historical room.
+The rack clears the existing painting, palette, brushes and original padded
+walking clearance; both pads rest on the original seat within its footprint.
+No borrowed geometry, material, mesh transform, opening, collider or furniture
+was moved or replaced. The sunflower facade and resident remain unchanged.
+
+Selecting the rack by pointer or aiming at it and pressing E opens an accessible
+guide. It is also available from an inside-room context button and Van Gogh's
+card in the existing Artists' quarter directory. The outside guide offers the
+original doorway; inside-only viewpoint controls reuse all six existing
+approaches/yaws/look targets. Each original reader handoff sends the exact
+existing work ID: starry-night, almond-blossom, sunflowers, rhone, bedroom or
+wheatfield. Work-specific accessible button labels distinguish repeated actions.
+
+The original reading first asks for a visible contour, colour pair or mark,
+then distinguishes a dated letter from a viewer's response. A Look/read/return
+activity uses The Bedroom and letter 705, followed by six looking prompts.
+Historical background says that the scholarly edition dates the letter to
+Theo to 16 October 1888 in Arles, and that it discusses the painting's colours
+and the intention to suggest rest. Primary source:
+https://vangoghletters.org/vg/letters/let705/letter.html
+The archive redirects to its current JavaScript reader. Its actual heading,
+French text, enclosed-sketch reference and editorial dating metadata were
+opened and read in an owned native browser. The museum object link remains an
+additional reference:
+https://www.vangoghmuseum.nl/en/collection/s0047V1962
+The public text fetch could not expose that museum page's body; no new factual
+claim relies on an unread museum explanation. No source text, sketch, voice or
+facsimile was downloaded or republished. New prose is original, with no invented
+quotation and no demand that every viewer share the artist's stated intention.
+
+All companion reading, six prompts, source labels and controls support
+EN/DE/FA/CS; Persian reads RTL. Original catalog/image bytes, aspect ratios,
+rights/source/citation metadata, private observation controls and language
+handling remain. The guide explicitly discloses that some catalog/shared text
+remains English and that the linked archive has its own languages and needs
+internet. This is not full city-wide Czech localization. Guide/locale rendering
+has no private/lesson storage access or new saved state. Existing language
+preference persistence, private keys and explicit observation-save actions stay.
+
+Verification: all 71 release programs, build and whitespace checks passed on
+the final source. Source hash:
+f4c26fdfb380ba3ba37b5c8085d7bfff19e602c976fa39418c181448ff1088a1
+(717 assets / 332,107,910 bytes). The new release program checks all borrowed
+node transforms, material/geometry identity, vertex arrays, material colours/
+properties, pick payloads and visibility, plus unchanged catalog, colliders,
+entries and approaches. It checks rack-to-wall support, original padded walking
+clearance, painting/palette/all-brush clearance, seat support/footprint, a pick
+ray, the six retained work IDs, every view/catalog handoff in every language,
+work-specific accessible labels, rejected remote physical picks, locale keys/
+RTL, top-of-guide reopening, zero storage access and exact owned disposal.
+Earlier release checks retain Monet, all Makers' flows, the advanced models,
+source bytes, original artwork ratios/credits, cast/voices and the island.
+
+Native Playwright CLI review at 1280 x 720 confirmed the welcome/directory route,
+Monet's still-working directory guide, Van Gogh's outside-guide doorway action
+and physical walking through the existing entrance. High roof/window trim,
+bench pads and the table/rack were visually reviewed. A pointer pick and native
+E on the visible rack both opened the new guide. All six native viewpoint and
+catalog handoff buttons worked; actual The Bedroom and Starry Night views were
+visually inspected. The original reader retained its image, rights/source
+links, scholarly-letters approach and private observation field. A Czech
+viewpoint button also worked with keyboard Enter. Hardware controller A was
+not separately exercised; the shared focused-button mechanism remains.
+
+All four native languages were reviewed. Persian computed direction was RTL,
+guide/body client and scroll widths matched at 838 px, and opening started at
+scrollTop 0. At Czech 390 x 844, guide/body client/scroll widths matched at
+354 px, with minimum button height 44 px. The Czech reading and scrolled
+work-specific controls were visually reviewed. A synthetic mixed-language
+Bedroom draft, including leading/trailing spaces, survived all six catalog
+handoffs, six viewpoint actions and EN/DE/FA/CS guide visits. No save action was
+taken and no private text was translated. Reopening after scrolling started at
+the top. Console errors: zero. Exterior, room/rack, EN/DE/FA/CS guide/control and
+original viewpoint screenshots are in the originating chat's outputs. No
+signed-in service was used.
+
+Latest branch/PR inspection found review head d523cc5e and main b0d03a87
+unchanged before publication. All nineteen earlier passes, main's map/facing,
+Babel, voyage, branding and seminar houses remain. Other branches and PRs were
+preserved. Review only; nothing merged or deployed.
+
+Twenty first detail/reading passes are complete. Next useful house: the existing
+Hilma af Klint gallery, id hilma-af-klint, at world (84, 112). Inspect the actual
+source scene/catalog, quarter layout and installed reader first; its source
+house is on the opposite row and turns by pi. Preserve its six work IDs:
+number-2, number-3, number-4, number-5, number-7 and number-9. The catalog
+deliberately selects six paintings from The Ten Largest and retains their
+original numbers; omitted numbers are not missing pages to fill. Keep all
+images/ratios/metadata, original source geometry, furniture, resident, private
+observations, openings, approaches and interactions. Inspect real language gaps
+before a modest four-language companion; do not claim the catalog is fully
+translated. Preserve Van Gogh's rack, guide, letter-versus-observation distinction,
+six viewpoint/catalog handoffs, Monet's folio/guide and all twenty completed
+passes.
