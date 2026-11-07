@@ -153,3 +153,64 @@ Next useful house: Chomsky's light-filled study. Give the existing branching
 relief a clear linguistic example, readable explanation and reachable station,
 while preserving its doorway, window light, paths and fixed plot. Keep the
 separate House of Psychoanalysis at the design stage.
+
+## 2026-11-07 — Chomsky: the same words, two groupings
+
+Criticism: the original branching relief gave the study a theme but no readable
+linguistic example or reason to compare its branches. Borges, Ada and Calvino's
+completed first passes were preserved and not repeated.
+
+Kept the original wooden relief and added two framed comparison boards on either
+side. A solid writing desk carries four legible word tiles in a fixed order:
+small, birds, and, butterflies. A chair and a side bench give the room a working
+and reading area while leaving the central entrance axis and front cross-aisle
+clear. The plot, windows, doorway, original relief, paths and island stay fixed.
+
+The reading station offers an original small example of structural ambiguity.
+Two actual tree structures yield the same four words but give different scopes
+to the size description. Choosing A or B updates the generated diagram, bracket
+notation, localized scope explanation and question, and the corresponding wall
+frame's highlight. It never rearranges the tiles or original relief. Neither
+choice is labelled correct, and an unspecified size is not described as large.
+
+The short historical introduction links sections 3 and 6 of Chomsky's primary
+paper Three Models for the Description of Language in his own archive:
+https://chomsky.info/wp-content/uploads/195609-.pdf . The example, diagrams and
+explanations are new work; no quotation or published diagram was copied.
+
+All reading text, meaning prompts, source notes and controls support EN/DE/FA/CS.
+The example deliberately remains English in every locale, with an explicit
+explanation that German, Persian and Czech need not share its grammar. Persian
+reading remains RTL, with the English sample and bracket notation marked LTR.
+The existing directory, E/shared controller action and inside-room context make
+the station reachable. Choice survives reopening and language changes for the
+visit only. No new storage key, private note, voice or recording was introduced.
+
+Verification: all 67 release test programs, the build and whitespace checks
+passed. Expanded foundation-house checks compare both tree yields and scopes
+against independent expectations, validate diagram nodes/edges and unknown-ID
+rejection, retain word positions across choices, check active board frames and
+the original relief, and cover solid furniture, clear aisles, four-language
+pressed/live/alt states, focus/state retention, modal guards and owned cleanup.
+Previous Borges, Ada and Calvino checks remain in the same suite.
+
+Native browser at 1280 × 720 confirmed physical entrance walking, the two boards,
+original relief and furniture, E reading, both choices using Enter/Space, retained
+choice on reopening and language switches, and the matching physical frame
+highlight. EN/DE/FA/CS text and localized source notes were checked. Persian RTL
+had equal 815 px client/scroll widths; its sample and brackets retained LTR.
+Czech at 390 × 844 supported both choices with equal 311 px reading client/scroll
+widths, readable wrapping and no horizontal overflow. No browser errors were
+logged. Study and Czech mobile screenshots are in the originating chat's outputs.
+Hardware controller A was not directly exercised; it shares the verified E hook.
+
+Remaining weakness: this is a deliberately bounded grouping model, not a full
+parser, complete grammar, reconstruction of Chomsky's home or proof of a theory.
+The original wooden relief remains an evocative object rather than a labelled
+syntax tree. Other city content still has partial Czech coverage. Review only.
+
+Next useful house: Ursula Le Guin's courtyard. Give its existing hearth, seats
+and open space a coherent reading encounter about perspective and imagined societies,
+with original sourced text and a modest physical reading station. Preserve its
+open walking area, doors and plot. Keep the separate House of Psychoanalysis at
+the design stage.

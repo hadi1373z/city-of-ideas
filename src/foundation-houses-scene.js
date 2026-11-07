@@ -1,4 +1,5 @@
 import {FOUNDATION_HOUSES,houseWorld,houseEntry,houseInside} from './foundation-houses-data.js';
+import {CHOMSKY_GROUPINGS,chomskyWords,chomskyTree,paintChomskyDiagram} from './chomsky-house-model.js';
 export function buildFoundationHouses(T,{canvas=()=>document.createElement('canvas')}={}){
  const group=new T.Group();group.name='Six first house studies on the island lanes';const owned=new Set(),own=r=>(owned.add(r),r),houses=[],targets=[];
  const mat=(color,options={})=>own(new T.MeshLambertMaterial({color,...options})),wood=mat(0x785d45),paper=mat(0xece1c9),brass=mat(0xb49357),glass=mat(0xb6d0d2,{transparent:true,opacity:.12,depthWrite:false,side:T.DoubleSide});
@@ -35,6 +36,23 @@ export function buildFoundationHouses(T,{canvas=()=>document.createElement('canv
    const red=mat(0x8c3f3d);box(feature,3.8,.36,1.3,-4.6,.57,-3.2,red);box(feature,3.8,.72,.23,-4.6,.9,-3.8,red);for(const x of[-6.4,-2.8]){box(feature,.25,.62,1.4,x,.78,-3.2,red);for(const z of[-3.65,-2.75])box(feature,.10,.38,.10,x,.19,z,wood);}furniture(-4.6,-3.2,4.1,1.5);
   }else if(data.id==='chomsky'){
    const branch=new T.Group();branch.position.set(0,2.5,-7.75);feature.add(branch);for(const[a,b]of[[[0,.9,0],[-1,0,0]],[[0,.9,0],[1,0,0]],[[-1,0,0],[-1.7,-.8,0]],[[-1,0,0],[-.3,-.8,0]],[[1,0,0],[.3,-.8,0]],[[1,0,0],[1.7,-.8,0]]])beam(branch,a,b,.055,wood);for(const[x,y]of[[0,.9],[-1,0],[1,0],[-1.7,-.8],[-.3,-.8],[.3,-.8],[1.7,-.8]])box(branch,.26,.18,.08,x,y,.04,brass);
+   const boards=[],tiles=[];
+   // Keep the original relief; the new flanking boards make two groupings legible.
+   for(const [i,id]of CHOMSKY_GROUPINGS.entries()){
+    const x=i?4.8:-4.8,frame=box(feature,4.2,2.2,.14,x,2.65,-7.65,mat(0x8b8067));
+    const boardCanvas=canvas();boardCanvas.width=1024;boardCanvas.height=512;paintChomskyDiagram(boardCanvas.getContext('2d'),id);
+    const map=own(new T.CanvasTexture(boardCanvas));map.colorSpace=T.SRGBColorSpace;
+    const diagram=new T.Mesh(own(new T.PlaneGeometry(4,2)),own(new T.MeshBasicMaterial({map,toneMapped:false})));diagram.position.set(x,2.65,-7.56);diagram.name='Chomsky grouping '+(i?'B':'A');feature.add(diagram);boards.push({id,frame,diagram});furniture(x,-7.65,4.2,.2);
+   }
+   box(feature,3.8,.12,2,-4.7,1,-1.5,wood);for(const x of[-6.2,-3.2])for(const z of[-2.2,-.8])box(feature,.12,.94,.12,x,.47,z,wood);furniture(-4.7,-1.5,3.8,2);
+   for(const [i,word]of chomskyWords(chomskyTree('both')).entries()){
+    const x=-6.05+i*.9;box(feature,.82,.045,.39,x,1.085,-1.5,paper);
+    const cardCanvas=canvas();cardCanvas.width=512;cardCanvas.height=224;const ctx=cardCanvas.getContext('2d');ctx.fillStyle='#f6f0df';ctx.fillRect(0,0,512,224);ctx.fillStyle='#285a49';ctx.textAlign='center';ctx.textBaseline='middle';ctx.direction='ltr';ctx.font='bold 70px Tahoma';ctx.fillText(word,256,112,470);
+    const map=own(new T.CanvasTexture(cardCanvas));map.colorSpace=T.SRGBColorSpace;const tile=new T.Mesh(own(new T.PlaneGeometry(.8,.34)),own(new T.MeshBasicMaterial({map,toneMapped:false})));tile.rotation.x=-Math.PI/2;tile.position.set(x,1.112,-1.5);tile.userData.wordToken=word;feature.add(tile);tiles.push(tile);
+   }
+   box(feature,1.3,.14,1.1,-4.7,.5,.75,wood);box(feature,1.3,.85,.13,-4.7,1.05,1.24,wood);for(const x of[-5.2,-4.2])for(const z of[.35,1.15])box(feature,.1,.43,.1,x,.215,z,wood);furniture(-4.7,.75,1.4,1.25);
+   box(feature,3,.22,1,4.5,.5,-2.5,wood);for(const x of[3.3,5.7])box(feature,.14,.4,.7,x,.2,-2.5,wood);furniture(4.5,-2.5,3,1.1);
+   let grouping='both';exhibit={boards,tiles,get grouping(){return grouping;},setGrouping(id){if(!CHOMSKY_GROUPINGS.includes(id))return false;grouping=id;for(const b of boards)b.frame.material.color.setHex(b.id===id?0xc4a24c:0x8b8067);return true;}};exhibit.setGrouping(grouping);
   }else if(data.id==='borges'){
    for(const x of[-5.2,5.2])box(feature,.18,3.6,.55,x,1.8,-7.45,wood);for(const y of[.15,1.25,2.35,3.45])box(feature,10.5,.13,.6,0,y,-7.45,wood);const colours=[mat(0x556e6b),mat(0x9d6550),mat(0xbaa370)];for(let row=0;row<3;row++)for(let i=0;i<28;i++)box(feature,.25,.6+(i%3)*.09,.38,-4.7+i*.35,.53+row*1.1,-7.4,colours[(i+row)%3]);furniture(0,-7.45,10.6,.6);
    const rug=mat(0x6a5144),seat=mat(0x475e59),lampShade=mat(0xe3c98f,{emissive:0x493820});

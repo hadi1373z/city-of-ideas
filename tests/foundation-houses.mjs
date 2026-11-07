@@ -7,6 +7,8 @@ import {ADA_ROOM} from '../src/ada-house-copy.js';
 import {adaTrace} from '../src/ada-house-model.js';
 import {CALVINO_ROOM} from '../src/calvino-house-copy.js';
 import {CALVINO_LENSES,calvinoViewingPose} from '../src/calvino-house-model.js';
+import {CHOMSKY_ROOM} from '../src/chomsky-house-copy.js';
+import {CHOMSKY_GROUPINGS,chomskyTree,chomskyWords,chomskyScope,chomskyBrackets,chomskyLayout} from '../src/chomsky-house-model.js';
 import {installHouseFoundations} from '../src/foundation-houses.js';
 const canvas=()=>({getContext:()=>new Proxy({},{get:()=>()=>{}})}),built=buildFoundationHouses(T,{canvas});assert.equal(built.houses.length,6);assert.equal(new Set(FOUNDATION_HOUSES.map(h=>h.style)).size,6);built.group.updateMatrixWorld(true);let draws=0;
 for(const h of built.houses){
@@ -81,5 +83,32 @@ for(const locale of['en','de','fa','cs']){
  assert(allNodes(dialog).find(n=>n.tagName==='a').href.startsWith('https://www.arsenal.arch.ethz.ch/'));
  control('calvino-look').onclick();assert(!dialog.open);assert.equal(M.player.x,mark.x);assert.equal(M.player.z,mark.z);assert.equal(M.player.yaw,mark.yaw);assert.equal(M.player.pitch,mark.pitch);
 }
+const words=['small','birds','and','butterflies'];
+assert.deepEqual(chomskyWords(chomskyTree('both')),words);assert.deepEqual(chomskyWords(chomskyTree('birds')),words);
+assert.deepEqual(chomskyScope('both'),['birds','butterflies']);assert.deepEqual(chomskyScope('birds'),['birds']);
+assert.equal(chomskyBrackets('both'),'[small [birds and butterflies]]');assert.equal(chomskyBrackets('birds'),'[[small birds] and butterflies]');
+for(const id of[undefined,'__proto__','other',1])assert.throws(()=>chomskyTree(id),RangeError);
+const leafPositions=id=>chomskyLayout(id).nodes.filter(n=>n.kind==='word').map(n=>[n.text,n.x,n.y]);
+assert.deepEqual(leafPositions('both'),leafPositions('birds'),'Different groupings retain the same word order and positions');
+assert.notDeepEqual(chomskyLayout('both').edges,chomskyLayout('birds').edges);
+for(const id of CHOMSKY_GROUPINGS){const layout=chomskyLayout(id);assert.equal(layout.nodes.length,6);assert.equal(layout.edges.length,5);assert.equal(new Set(layout.nodes.map(n=>n.key)).size,6);assert(layout.nodes.every(n=>Number.isFinite(n.x)&&Number.isFinite(n.y)));}
+const chomskyModel=api.built.houses.find(h=>h.data.id==='chomsky'),study=chomskyModel.exhibit;
+assert.equal(study.boards.length,2);assert.deepEqual(study.tiles.map(n=>n.userData.wordToken),words);
+const tilePositions=()=>study.tiles.map(n=>n.position.toArray()),fixedTiles=tilePositions();
+const relief=chomskyModel.feature.children.find(n=>n.position.y===2.5&&n.position.z===-7.75);assert(relief);assert.equal(relief.children.filter(n=>n.geometry?.type==='CylinderGeometry').length,6,'The original relief is retained');
+for(const id of CHOMSKY_GROUPINGS){assert(study.setGrouping(id));assert.equal(study.grouping,id);assert.deepEqual(tilePositions(),fixedTiles);for(const b of study.boards)assert.equal(b.frame.material.color.getHex(),b.id===id?0xc4a24c:0x8b8067);}
+assert(!study.setGrouping('__proto__'));
+for(const [x,z]of[[-4.7,-1.5],[-4.7,.75],[4.5,-2.5]]){const p=houseWorld(chomskyModel.data,x,z);assert(!chomskyModel.canStand(p.x,p.z),'Desk, chair and bench are solid');}
+for(let x=-7;x<=7;x+=.1){const p=houseWorld(chomskyModel.data,x,4.5);assert(chomskyModel.canStand(p.x,p.z),'The front cross-aisle stays clear');}
+for(const locale of['en','de','fa','cs']){
+ window.CITY_I18N.lang=locale;events.get('city-language')();api.visit('chomsky',true);M.city.update(M.player,1);assert(!body.querySelector('#house-foundations-context').hidden);assert(api.interact());assert(!api.interact());
+ const c=CHOMSKY_ROOM[locale];assert(dialog.textContent.includes(c.title));assert.equal(dialog.dir,locale==='fa'?'rtl':'ltr');
+ const control=id=>allNodes(dialog).find(n=>n.dataset.houseFocus==='chomsky-'+id);
+ for(const id of CHOMSKY_GROUPINGS){control(id).focus();control(id).onclick();assert.equal(control(id).attributes['aria-pressed'],'true');assert.equal(study.grouping,id);const result=dialog.querySelector('#chomsky-grouping-result');assert.equal(result.attributes['aria-live'],'polite');assert(result.textContent.includes(chomskyBrackets(id)));assert(result.textContent.includes(c.texts[id][1]));const picture=allNodes(dialog).find(n=>n.tagName==='img');assert(picture.src.startsWith('data:image/svg+xml;'));assert(picture.alt.includes(c.labels[CHOMSKY_GROUPINGS.indexOf(id)]));}
+ assert.equal(allNodes(dialog).find(n=>n.className==='chomsky-example').lang,'en');assert.equal(allNodes(dialog).find(n=>n.className==='chomsky-brackets').dir,'ltr','English brackets are readable within Persian RTL');
+ events.get('city-language')();assert.equal(document.activeElement.dataset.houseFocus,'chomsky-birds');assert.equal(study.grouping,'birds');
+ assert.equal(allNodes(dialog).find(n=>n.tagName==='a').href,'https://chomsky.info/wp-content/uploads/195609-.pdf');dialog.close();api.open('chomsky');assert.equal(study.grouping,'birds');dialog.close();
+}
+
 events.get('pagehide')();assert.deepEqual(M.city.targets,[sentinel]);assert.deepEqual(M.city.buildingTargets,[sentinel]);assert.equal(M.scene.children.length,0);
 console.log('PASS six foundation houses: distinct roofs, readable/pickable names, clear rotated entrances and aisles, connected lanes, batched details, directory/entry routing, EN/DE/FA, delegated controls and owned cleanup');
