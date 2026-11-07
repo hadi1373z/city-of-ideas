@@ -1113,3 +1113,110 @@ EN/DE/FA, with a real Czech gap. Extend it additively after inspecting the
 original experience; preserve book IDs/texts, all first-plan/reveal/transfer/
 reflection and private-note flows, furniture, clearances and existing geometry.
 Do not replace or restart the learning experiment or repeat the fifteen passes.
+
+## 2026-11-07 — Makers' Library: reading and questioning
+
+Criticism: the existing makers-library at world (216, -58) already had six
+original offline books, three shelf bays, a desk/journal, chair/tea and the
+first stop of the counterexample walk. The learning journey had EN/DE/FA copy
+but no Czech, and there was no readable companion to connect the shelves with
+careful testing. This pass extends that library and the existing journey.
+
+Added a timber front roof fascia, a window sill/header outside the original
+clear opening, shelf top caps/feet and a wall-mounted two-leaf reading rack.
+The rack shows ruled claim lines beside a question mark. It is mounted within
+the right wall's existing padded obstruction, with no new collider or walking
+obstacle. E while aiming at it opens an expanded reading in the existing
+learning dialog. The same reading is available as a disclosure when visiting
+the library. Opening or reading it does not begin, grade or reset the task.
+
+The new EN/DE/FA/CS guide separates a claim, its supporting reason and a
+question that could change it. It develops the existing library example about
+whether more books necessarily make a better library and links reading to the
+unchanged first-plan-before-reveal flow. The one-way-rule background cites
+forall x: Calgary, chapters 9–10:
+https://forallx.openlogicproject.org/html/Ch10.html . The original Eric Pacuit
+Reasoning Experiments link remains:
+https://logic-probability.pacuit.org/docs/reasoning/experiments/ . Both sources
+were opened and reviewed; these new scenes/examples remain original city
+material. No historical room or quotation was invented.
+
+Filled the actual Czech gap across the entire existing counterexample walk:
+Library, Workshop, Dialogue House, first plan, card reveals, evidence gating,
+both error types on the shuffled parcel transfer, reflection, completion and
+fresh practice. Source-link labels now follow EN/DE/FA/CS and accurately name
+the linked truth-functional-connectives chapter. The existing canvas updater
+also paints Czech parcel-card faces. The rule cards and their backs, required
+masks 9/6/12, physical location gates and all state transitions remain intact.
+
+Feedback now uses stable message keys, so it follows a language change.
+Choice/conclusion/card controls use stable focus keys; reflection textareas
+retain exact draft spacing, focus and caret selection through locale renders.
+The original explicit keep actions, immutable first plan, learning-counterexample
+question ID and city-of-ideas:learning-lab:v1 storage key remain. Reading and
+language changes make no storage writes, and no new private key was introduced.
+
+The source makers-city-scene.js and books.js files were not edited. All six
+book IDs/texts, furniture, chair/tea interactions, source metadata, original
+geometry and colliders remain. The six shelf books keep their existing reader
+and English source text; the guide explicitly explains this language boundary.
+This pass localizes the new guide and existing learning walk, not every legacy
+book, shared notebook control or city text. Czech is not complete city-wide
+localization. Accepted characters, fixed voices and recordings are untouched.
+
+Verification: all 69 release programs, build and whitespace checks passed on
+the final source. Source hash:
+27d21fc7d3368fdfbfb5872591b0e789621106d529e9178f644967145dbe8763
+(707 assets / 332,046,609 bytes). The learning scene checks compare every
+borrowed source mesh's geometry, transform, material and pick payload before/
+after the additive groups; the original collision array and book data match.
+The rack remains in the existing padded wall obstruction. Original doorways,
+interior spawns and all action approaches remain standable. Cleanup removes
+only owned groups and disposes tested new geometry/materials once.
+
+The real UI fixture runs the full journey in EN/DE/FA/CS: first A/4 plan,
+missing-observation gate, wrong/correct conclusions, missing/extra/correct parcel
+checks, required reflection and wrong/correct fresh practice. It checks guide
+entry before and after completion without state mutation, locale key parity,
+pressed choices, translated feedback and stable focus. Synthetic mixed-language
+drafts retain whitespace/caret through all four locales; only the existing two
+state keys are written by explicit actions, alongside an untouched sentinel.
+Reloaded state retains the first plan and kept reason. Earlier checks for all
+sixteen masks and the original hinges/learning-state recovery remain.
+
+Owned Playwright CLI browser review at 1280 × 720 confirmed original welcome
+entry, walking through all three existing doorways, and E opening the new rack.
+Shelf caps/feet, window detail and fascia were visually reviewed. The guide
+opened in EN/DE/FA/CS; selected A/4 survived the language changes. Space selected
+a card. German/Persian body client/scroll widths matched at 883 px; Persian
+guide and reflection were RTL. At 390 × 844, Czech body/guide widths matched at
+339 / 307 px with no horizontal overflow; card controls were 90 px high and
+the keep/close controls at least 44 px. Czech physical parcel faces were visible.
+
+Completed the Czech journey natively with the A/4 first plan, observed A/7
+counterexample, insufficient/excess/correct parcel checks, required-reason
+feedback and wrong/correct fresh practice. A nearby resident caught E during
+an initial language check; that check was repeated using the journey's actual
+Continue control, confirming the visible dialog in every locale. An exact
+mixed-language draft survived all four changes/reopening. After explicit keep
+and full reload, Czech selection, completion, the original A/4 answer and later
+A/7/parcel reasoning plus the synthetic reason remained in the existing notebook.
+The browser reported zero console errors. Screenshots of the exterior, rack,
+English/Persian guide, Czech mobile guide and parcel board are in the originating
+chat's outputs. Hardware controller A was not directly exercised; the existing
+focused-button hook remains. Shared notebook controls still use English fallback.
+
+Latest branch/PR inspection found the review head at 497e6c68 and main at
+b0d03a87 unchanged. The fifteen earlier detail passes and main's seminar, map,
+Babel, ocean-voyage and branding work remain. Other branches/PRs were preserved.
+Review only; nothing merged or deployed.
+
+Sixteen first detail/reading passes are now complete. Next useful house: the
+existing Makers' Workshop, id makers-workshop, at world (234, -58). Inspect its
+offset roof, workbench, two original practice/counterexample books, idea board,
+cabinet, tool wall, journal and plant in makers-city-scene.js before extending.
+The shared counterexample walk is now four-language; do not repeat that
+translation or replace the experiment. Preserve the A/D/4/7 backs, reveal and
+conclusion gates, transfer/practice masks, first/later private-note flow, original
+source geometry/metadata, furniture, entrances and all walking clearances.
+Keep this library's new rack/guide and the fifteen earlier passes intact.
