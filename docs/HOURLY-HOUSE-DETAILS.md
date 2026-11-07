@@ -583,3 +583,84 @@ passes. Next useful house: Hypatia's existing House of Geometry and Sky at
 (-208, -54). Inspect its sky rings, geometry, book, source and per-house notes
 before extending it. Preserve its existing exhibits, plot and entrances, and
 distinguish historical evidence from this city's original EN/DE/FA/CS activities.
+
+## 2026-11-07 — Hypatia: what can a drawing establish?
+
+Criticism: the House of Geometry and Sky had three display rings, three roof
+rings and a short EN/FA guide, but no extended encounter that distinguished a
+geometric comparison from historical evidence or an actual sky observation.
+
+Kept the plot at (-208, -54), all six original sky rings and their exact geometry,
+poses/scales, original columns, pedestal, book/desk, chairs, walls, entrance and
+paths. Added column bases within the original footprints, collars, diagonal roof
+support braces and small divisions around the horizontal roof ring. A solid
+drafting table holds a paper board, compass and rolled sheet. All resources use
+the quarter's existing cache/disposal; the central/front aisles remain clear.
+
+Two native controls compare two fixed circles through A and B, then add C on
+only the gold circle. At the third-point stage, the table hides the alternative
+circle/centre and shows three equal radii and the new point. A generated original
+diagram retains the other circle as a dashed outline, with labels, explanatory
+caption and localized alt text. This checks two already chosen circles, rather
+than displaying every circle through two points or claiming to measure stars.
+The original sky rings never move when selecting or changing language.
+
+The short historical introduction links the University of St Andrews' MacTutor
+biography: https://mathshistory.st-andrews.ac.uk/Biographies/Hypatia/ . It describes
+Hypatia's teaching and the indirect survival of her mathematical work, without
+attributing these new instruments or this exercise to her. Further geometry
+reading links Euclid IV.5 in D. E. Joyce's edition at Clark University:
+https://mathcs.clarku.edu/~djoyce/elements/bookIV/propIV5.html . The text explicitly
+distinguishes this two-candidate comparison from Euclid's full construction of a
+circumcircle. No historical quotation, source image or diagram was copied.
+
+New readings, diagram descriptions/captions, source labels, controls and in-room
+reading action support EN/DE/FA/CS, including Persian RTL. Existing EN/FA guide
+fields remain with additive DE/CS translations. Czech remains partial elsewhere,
+with English fallback. Existing visits, book/object actions and private per-house
+reflections are preserved. The in-room action hides outside Hypatia's house or
+behind a dialog. Choice lasts for the visit, without a new storage key. Plato's
+ring comparison, Aristotle's cases and Epicurus's settings retain independent
+state and notes. Main and the review branch had not advanced since the prior
+run; main's visitor-position/facing map work, City Map, Babel, voyage and branding
+work remain in the existing branch.
+
+Verification: all 67 release test programs, build and whitespace checks passed.
+The geometry checks independently calculate both circles' distances to A/B,
+the equal gold radii and C's 0.8-unit radial mismatch on the other circle. They
+check non-collinearity, invalid input rejection and dashed-diagram state. All
+four stage transitions preserve snapshots of the original six sky meshes and
+walking obstacles. Checks cover solid new furniture, the central/front aisles,
+the side approach to the drafting table, rear column clearance and all six
+existing road/entrance routes. Owned geometry/material disposal still passes.
+The real UI installer fixture exercises four-language readings and alt text,
+pressed/live/source states, focus retention, context visibility, object-opening
+and reopening. Four independent synthetic note keys retain exact mixed-language
+text/spacing and caret selection without writes on language/stage changes; the
+existing explicit input still writes once to its unchanged key.
+
+Native browser at 1280 × 720 confirmed the existing welcome/home visit action,
+physical doorway walking, in-room reading, Enter/Space and Escape. The drafting
+table visibly changed from two circles to the gold circle with equal radii,
+while the original sky rings remained. German/Persian article client/scroll
+widths matched at 763 px; Persian reading was RTL. Czech at 390 × 844 showed both
+controls at 47 px high and a loaded, readable diagram, with equal article widths
+of 339 px and inner reading widths of 303 px, without horizontal overflow. A
+synthetic note survived EN/DE/FA/CS switches, reopening, switching to Plato,
+Aristotle and Epicurus and back, and reload. Czech selection survived reload;
+the new visit correctly began at the two-point stage. No browser console errors
+were logged. Study, both table stages, Persian and Czech/mobile diagram images
+are saved in the originating chat's outputs. The browser review used the in-room
+action; E ray targeting and hardware controller A were not directly exercised.
+Their established code/hooks remain unchanged.
+
+Remaining weakness: the construction compares two fixed candidates and does not
+offer free compass drawing, a circumcircle-construction lesson or a sky/astrolabe
+simulation. It is an original small activity with clear historical boundaries.
+Review only; nothing merged or deployed.
+
+The six foundation passes, Plato, Aristotle, Epicurus and Hypatia are complete
+first passes. Next useful house: Confucius's existing Courtyard of Learning at
+(-242, -10). Inspect its conversation seats, roof, book, source and per-house
+notes before extending it with modest details and original sourced EN/DE/FA/CS
+reading about learning and relationships. Preserve its exhibits and entrances.
