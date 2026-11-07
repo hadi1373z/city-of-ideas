@@ -1314,3 +1314,96 @@ shared journey is already four-language. Add modest details and an original
 four-language companion without restarting/replacing it, moving source
 geometry/metadata/furniture or narrowing entrances and walking clearances.
 Preserve the Library rack/guide, Workshop tray/guide and all earlier passes.
+
+## 2026-11-07 — Makers' Dialogue House: summarize and ask
+
+Criticism: makers-dialogue at world (225, -41) already had paired chairs, a tea
+table, a sofa/care book, reflection desk/journal/dialogue book, fireplace and
+the existing parcel transfer/reflection task. It needed modest domestic detail
+and a companion about hearing another view without replacing the exercise.
+
+Added eave/hip-rib/ridge trim following the unchanged roof, window sill/header,
+chair back rails/inlays/lower stretchers, fireplace surround/cornice/hearth and
+a folded throw on the sofa's other cushion. Two small ruled prompt cards face
+the original seats on the tea table. Both clear the cup and rest on the unchanged
+tabletop; the throw clears the care book. No original furniture, opening,
+collider, plot or approach was moved, and no walking lane was narrowed.
+
+Selecting a table card opens an expanded reading in the existing learning
+dialog. Its disclosure is also available inside the Dialogue House. Original
+EN/DE/FA/CS reading asks for a recognizable summary, a supporting reason and a
+question that permits revision, then connects this to explaining card roles
+and keeping the first plan. Historical background links John Stuart Mill,
+On Liberty, chapter II:
+https://www.gutenberg.org/files/34901/34901-h/34901-h.htm . The actual chapter's
+discussion of hearing opponents was opened and reviewed. These room details
+and activities are original city material; no quotation or historical home
+was invented. The two table cards are prompts, not extra parcel-task cards.
+
+All new text/source labels support EN/DE/FA/CS, including Persian RTL. The two
+original books keep their existing reader and English texts, as disclosed.
+Shared notebook/city text still has English fallback; this is not city-wide
+Czech localization. Library/Workshop details, guide copy, reveal marks, all
+original task cards/backs, masks 9/6/12, gates, first-plan immutability, note IDs,
+private keys and explicit keep actions remain. Reading is available before
+starting and after finishing without starting/resetting the task or writing
+lesson/private progress. Language preference retains its existing persistence.
+Source makers-city-scene.js/books.js bytes, cast, fixed voices, recordings and
+private accounts were not edited.
+
+Verification: all 69 release programs, build and whitespace checks passed on
+the final source. Source hash:
+7173dd70f8d8299c203a8662d15763436ba8e9c77016953ada6873b9ab54aa6b
+(711 assets / 332,065,650 bytes). Scene checks compare every borrowed source
+mesh/transform/material/payload, collider and book record with the pre-addition
+model. New checks cover supported card bounds on the original table, cup
+clearance, opposite orientations, supported throw/care-book clearance, complete
+locale keys and exact owned geometry/material/texture disposal. Original
+spawns/action approaches and the earlier inspection-mask checks remain.
+
+The real UI fixture runs the unchanged full journey in all four languages.
+New guide checks cover idle, transfer and completed states, rejected remote
+picks, and unchanged lesson/private storage during guide/locale rendering.
+Original selected cards, first/later answers, private sentinel and exact draft
+spacing/caret/focus remain protected. Original transfer/practice masks,
+corrupt-save recovery and both prior Makers' guides remain covered.
+
+Owned Playwright CLI browser review at 1280 × 720 confirmed original welcome
+routing and walking through the three existing doorways. A pointer selection
+on the visible table card opened the new guide. Initial E aiming selected the
+nearby roaming resident; keyboard reader checks used the existing Continue
+button and disclosure instead. Resident interaction was retained. Native E on
+these small cards and hardware controller A were not conclusively exercised;
+the existing interaction/focused-button callbacks remain and are fixture-tested.
+Roof/window, chair/fireplace, table/cup and sofa/throw details were visually
+reviewed. EN/DE/FA/CS guide entry retained the selected Red-label parcel card.
+
+German/Persian body client/scroll widths matched at 883 px; Persian reading and
+reflection were RTL. At 390 × 844, Czech body/guide widths matched at 339 /
+307 px without horizontal overflow. Summary/close/check controls were at least
+44 px high and parcel-card buttons 90 px. Native missing/extra/correct parcel
+feedback remained usable; Space selected Express. A mixed-language synthetic
+draft survived all four language changes and reading disclosure toggles. After
+explicit keep and full reload, Czech completion, the original English A/4
+first answer and later Czech reasoning plus the synthetic reason remained in
+the original notebook. No private text was translated. Console errors: zero.
+Exterior, room/nook and English/Persian/Czech-mobile guide screenshots are in
+the originating chat's outputs. Shared notebook controls still use English.
+
+Branch/PR inspection found review head e6fa3489 and main b0d03a87 unchanged.
+The seventeen earlier passes and main's seminar, City Map/facing, Babel,
+ocean-voyage and branding work remain. Other branches/PRs were preserved.
+Review only; nothing merged or deployed.
+
+Eighteen first detail/reading passes are now complete. Next useful house: the
+existing Claude Monet gallery, id monet, at world (85, 82). Inspect the actual
+source art-city-scene.js, art-city-data.js, artist-quarter-layout.js and installed
+profile/reader before extending it additively. It is an original gallery,
+distinct from the Cézanne/Morisot/Seurat working studios. Preserve its six work
+IDs: water-lilies, impression-sunrise, woman-with-a-parasol, poppy-field,
+japanese-footbridge and water-lilies-and-bridge; keep image bytes/ratios,
+attribution/rights/source metadata, furniture, residents, private notes and all
+existing interactions. Inspect actual language gaps before adding a modest
+four-language companion; do not claim the legacy catalog is fully translated.
+Keep existing house locations, source geometry, entrances and walking lanes.
+Preserve all three Makers' guides and the eighteen completed passes.
