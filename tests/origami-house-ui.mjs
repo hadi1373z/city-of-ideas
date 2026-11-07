@@ -55,6 +55,7 @@ try{
  M.player.x=-24000;api.openMap();assert.equal(map.querySelector('#coastal-visitor-position'),undefined);assert.equal(map.querySelector('#coastal-position-distance').hidden,true);
  Object.assign(M.player,previousPosition);
 assert.deepEqual(values,beforeMap,'Map selection and route visibility do not write storage');
+ for(const id of['noether','mirzakhani','cage']){api.openMap();selectMap('place-'+id);selectMap('visit');assert.equal(extraTravels.at(-1),'seminar:'+id);assert(!map.open);}
  for(const id of['gallery','park','socrates','artists','shore']){
   api.openMap();selectMap('place-'+id);selectMap('visit');assert(!map.open,'Visit closes the map');
   if(id==='shore'){assert.equal(M.player.x,SHORE.x);assert.equal(M.player.z,76);}

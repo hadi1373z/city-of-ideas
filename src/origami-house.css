@@ -57,3 +57,8 @@
 .coastal-visitor-position[data-underground=true]{border-style:dashed}
 #coastal-city-map .coastal-position-summary{font-size:13px;line-height:1.65;margin:10px 0;padding-inline-start:16px;border-inline-start:4px solid #125c86}
 #coastal-city-map .coastal-location-info .coastal-position-distance{border-top:1px solid #cecdb4;padding-top:10px;margin-top:12px;font-size:13px}
+
+.coastal-seminar-paths{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+
+.coastal-house-anchor{position:absolute;z-index:1;width:5px;height:5px;transform:translate(-50%,-50%);border:1px solid #fff9e8;border-radius:50%;background:#294f45;pointer-events:none}
+@media(max-width:480px){#coastal-city-map .coastal-landmark[data-landmark=noether]{transform:translate(calc(-50% - 17px),-50%)}#coastal-city-map .coastal-landmark[data-landmark=cage]{transform:translate(calc(-50% + 17px),-50%)}#coastal-city-map .coastal-landmark[data-landmark=mirzakhani]{transform:translate(-50%,calc(-50% + 20px))}#coastal-city-map .coastal-landmark[data-landmark=noether]::after,#coastal-city-map .coastal-landmark[data-landmark=cage]::after{content:"";position:absolute;top:12px;width:5px;height:1px;background:#294f45}#coastal-city-map .coastal-landmark[data-landmark=noether]::after{left:100%}#coastal-city-map .coastal-landmark[data-landmark=cage]::after{right:100%}#coastal-city-map .coastal-landmark[data-landmark=mirzakhani]::after{content:"";position:absolute;bottom:100%;left:12px;width:1px;height:8px;background:#294f45}}

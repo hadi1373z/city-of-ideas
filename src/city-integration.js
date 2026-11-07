@@ -1,3 +1,4 @@
+import {installSeminarHouses} from './seminar-houses.js?v=1';
 import {installBabelLibrary} from './babel-library.js';
 import {installOceanVoyage} from './ocean-voyage.js';
 import {installHouseFoundations} from './foundation-houses.js?v=foundations1';
@@ -9,7 +10,7 @@ import {installCityDiscoveries} from './city-discoveries.js?v=study1';
 import {installArtistQuarter} from './artist-quarter.js?v=artists2';
 import {installLearningLab} from './learning-lab.js?v=learning1';
 import {installStudyHouses} from './study-houses.js?v=study1';
-import {installOrigamiHouse} from './origami-house.js?v=map-position1';
+import {installOrigamiHouse} from './origami-house.js?v=seminar1';
 import {artistLineOfSight} from './artist-line-of-sight.js';
 import {installPhilosopherQuarter} from './philosopher-ui.js';
 import {installSocratesTour} from './socrates-tour.js';
@@ -109,6 +110,7 @@ try{
  installHouseFoundations(M,T);
  installOceanVoyage(M,T);
  installBabelLibrary(M,T);
+ installSeminarHouses(M,T);
  M.status('ready');
  installCinematicIntro(M,T,socrates);
 }catch(error){document.body.classList.remove('cinematic-pending');console.error('Original district integration failed',error);M.status(error.message);}
