@@ -214,3 +214,70 @@ and open space a coherent reading encounter about perspective and imagined socie
 with original sourced text and a modest physical reading station. Preserve its
 open walking area, doors and plot. Keep the separate House of Psychoanalysis at
 the design stage.
+
+## 2026-11-07 — Ursula Le Guin: a gathering courtyard
+
+Criticism: the courtyard had a hearth and two benches but no reading encounter.
+The open space suggested shared life without giving the visitor anything to
+gather, examine or discuss. The four completed house passes were preserved.
+
+Added a solid side table with an open woven carrying basket, two raised handles,
+a seed pouch with visible seeds, a mending spool and folded cloth, and a clay
+cup with an actual inner wall/open top. A woven wall panel and two green seat
+cushions add material detail. The original hearth, benches, roof opening,
+columns, windows, doorway, plot, paths and central walking area stay fixed.
+There is a clear front cross-aisle and a side approach to the gathering table.
+
+The new reading action is reachable through the directory, the room context
+button and E/shared controller interaction. Selecting an object places its real
+3D model in the basket and opens an original short scene and question. Selecting
+it again returns it to the table. Reset returns all three. A collected passage
+combines one sentence for each selected object in a stable order, while the full
+scenes remain readable underneath. There is no score, winning set, simulation
+of an economy, or interpretation of a visitor's private writing.
+
+The scenes concern keeping seed for a future season, time spent repairing a
+coat, and a welcome that raises questions about a shared room's rules. The source
+introduction cites The Carrier Bag Theory of Fiction and Le Guin's own foreword
+to The Birthday of the World on her official website:
+https://www.ursulakleguin.com/the-carrier-bag-theory-of-fiction and
+https://www.ursulakleguin.com/foreword-the-birthday-of-the-world . The objects,
+scenes and questions are new work, not quotations, book characters or episodes.
+
+All new readings and controls support EN/DE/FA/CS. Persian remains RTL. Selection
+survives reopening and language changes within the visit only. No new storage
+keys, notes, accounts, characters, voice assignments or recordings were added.
+Czech elsewhere in the city still has partial coverage and English fallback.
+
+Verification: all 67 release test programs, build and whitespace checks passed.
+Expanded house checks independently cover all eight selections, canonical order,
+invalid-input rejection, caller-state preservation, object bounds/separation,
+the cup's inner lip, fixed table/hearth and original seat colliders, solid
+furniture, clear entrance/cross-aisle/table approach, four-language scenes,
+computed collected passage, reversible choices/reset, live/pressed states,
+focus and selection retention, source links, modal guards and owned cleanup.
+The existing batched draw-object budget still passes. All prior house checks
+remain in the same suite.
+
+Native browser at 1280 × 720 confirmed physical doorway walking and the real
+table approach; inspected the basket, objects, wall weaving, cushions and open
+roof; used E, Enter/Space, Escape and reset; saw objects move into the basket
+without moving the table or room. Choice survived reopening and EN/DE/FA/CS
+switches. German and Persian readings measured equal 815 px client/scroll widths;
+Persian direction was RTL. Czech at 390 × 844 supported gathering all three,
+reading the resulting passage/scenes and reset, with equal 311 px reading
+client/scroll widths and no horizontal overflow. No browser errors were logged.
+Table, gathered-basket and Czech mobile screenshots are saved in the originating
+chat's outputs. Hardware controller A was not directly exercised; it shares E's
+verified interaction hook.
+
+Remaining weakness: the three short scenes are a small writing invitation, not
+a survey of Le Guin's work or a society simulator. Object transfers are immediate,
+without a carrying animation. The pouch and cloth are stylized geometry; the
+room is imagined for this city rather than a reconstruction. Review only.
+
+Next useful house: the small Freud foundation study, the only one of these six
+without a first reading pass. Give its existing couch a quiet writing/reading
+corner and a clearly sourced historical encounter with dreams and memory.
+Preserve the couch, window, entrances, plot and walking space. Keep this city
+room distinct from the separate House of Psychoanalysis design project.

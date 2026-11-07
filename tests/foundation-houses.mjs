@@ -9,6 +9,8 @@ import {CALVINO_ROOM} from '../src/calvino-house-copy.js';
 import {CALVINO_LENSES,calvinoViewingPose} from '../src/calvino-house-model.js';
 import {CHOMSKY_ROOM} from '../src/chomsky-house-copy.js';
 import {CHOMSKY_GROUPINGS,chomskyTree,chomskyWords,chomskyScope,chomskyBrackets,chomskyLayout} from '../src/chomsky-house-model.js';
+import {LEGUIN_ROOM,LEGUIN_SOURCES} from '../src/leguin-house-copy.js';
+import {LEGUIN_OBJECTS,leguinContents,leguinToggle,leguinObjectPose} from '../src/leguin-house-model.js';
 import {installHouseFoundations} from '../src/foundation-houses.js';
 const canvas=()=>({getContext:()=>new Proxy({},{get:()=>()=>{}})}),built=buildFoundationHouses(T,{canvas});assert.equal(built.houses.length,6);assert.equal(new Set(FOUNDATION_HOUSES.map(h=>h.style)).size,6);built.group.updateMatrixWorld(true);let draws=0;
 for(const h of built.houses){
@@ -110,5 +112,41 @@ for(const locale of['en','de','fa','cs']){
  assert.equal(allNodes(dialog).find(n=>n.tagName==='a').href,'https://chomsky.info/wp-content/uploads/195609-.pdf');dialog.close();api.open('chomsky');assert.equal(study.grouping,'birds');dialog.close();
 }
 
+const courtyard=api.built.houses.find(h=>h.data.id==='leguin'),gathering=courtyard.exhibit;
+assert.deepEqual(leguinContents(['cup','seeds','cup']),['seeds','cup']);
+const prior=['seeds'];assert.deepEqual(leguinToggle(prior,'cup'),['seeds','cup']);assert.deepEqual(prior,['seeds'],'Toggle does not mutate caller state');assert.deepEqual(leguinToggle(prior,'seeds'),[]);
+for(const bad of[undefined,null,{},['__proto__'],['seeds','other']])assert.throws(()=>leguinContents(bad),RangeError);
+assert.throws(()=>leguinToggle([],'__proto__'),RangeError);assert.throws(()=>leguinObjectPose('unknown',false),RangeError);
+const fixedTable=gathering.table.position.toArray(),hearth=courtyard.feature.children.find(n=>n.geometry?.type==='TorusGeometry');
+assert.deepEqual(hearth.position.toArray(),[-4,.14,-2]);assert.equal(hearth.geometry.parameters.radius,.9);
+for(const collider of[[-4,-2,2.2,2.2],[-4,-5,2.8,1],[-4,1,2.8,1]])assert(courtyard.colliders.some(b=>[b.x,b.z,b.w,b.d].every((v,i)=>v===collider[i])),'Original hearth and seats stay fixed');
+for(const [x,z]of[[5.8,-3.2],[-4,-2],[-4,-5],[-4,1]]){const p=houseWorld(courtyard.data,x,z);assert(!courtyard.canStand(p.x,p.z),'Table, hearth and seats remain solid');}
+for(let x=-7;x<=7;x+=.1){const p=houseWorld(courtyard.data,x,4.5);assert(courtyard.canStand(p.x,p.z),'Front cross-aisle remains clear');}
+for(let z=4.5;z>=-2;z-=.1){const p=houseWorld(courtyard.data,2,z);assert(courtyard.canStand(p.x,p.z),'The gathering table has a reachable side approach');}
+for(let bits=0;bits<8;bits++){
+ const ids=['seeds','thread','cup'].filter((_,i)=>bits&(1<<i));assert(gathering.setContents([...ids].reverse()));assert.deepEqual(gathering.selected,ids);
+ const boxes=[];api.built.group.updateMatrixWorld(true);
+ for(const [i,id]of['seeds','thread','cup'].entries()){
+  const p=gathering.objects[id].position;assert.equal(p.x,ids.includes(id)?-.58+i*.58:-1.35+i*1.35);assert.equal(p.z,ids.includes(id)?-.4:.5);
+  const bounds=new T.Box3().setFromObject(gathering.objects[id]);assert(!bounds.isEmpty());assert([bounds.min.x,bounds.min.y,bounds.min.z,bounds.max.x,bounds.max.y,bounds.max.z].every(Number.isFinite));boxes.push(bounds);
+ }
+ for(let i=0;i<3;i++)for(let j=i+1;j<3;j++)assert(!boxes[i].intersectsBox(boxes[j]),'Every selection keeps the three objects physically separate');
+ assert.deepEqual(gathering.table.position.toArray(),fixedTable);assert.deepEqual(hearth.position.toArray(),[-4,.14,-2]);
+}
+assert(!gathering.setContents(['unknown']));assert.deepEqual(gathering.selected,['seeds','thread','cup']);const detached=gathering.selected;detached.pop();assert.equal(gathering.selected.length,3);
+const cupMesh=gathering.objects.cup.children.find(n=>n.geometry?.type==='LatheGeometry');assert(cupMesh);assert(cupMesh.geometry.parameters.points.some(p=>p.x===.155&&p.y===.4),'Cup has an inner lip and open top');
+for(const locale of['en','de','fa','cs']){
+ window.CITY_I18N.lang=locale;events.get('city-language')();api.visit('leguin',true);M.city.update(M.player,1);assert(!body.querySelector('#house-foundations-context').hidden);assert(api.interact());assert(!api.interact());
+ const c=LEGUIN_ROOM[locale];assert(dialog.textContent.includes(c.title));assert.equal(dialog.dir,locale==='fa'?'rtl':'ltr');
+ const control=id=>allNodes(dialog).find(n=>n.dataset.houseFocus==='leguin-'+id);control('reset').onclick();assert.deepEqual(gathering.selected,[]);assert(dialog.textContent.includes(c.empty));
+ for(const id of['cup','seeds','thread']){control(id).focus();control(id).onclick();assert.equal(control(id).attributes['aria-pressed'],'true');assert(dialog.querySelector('#leguin-collection').textContent.includes(c.objects[id].story));}
+ assert.deepEqual(gathering.selected,['seeds','thread','cup']);assert.equal(dialog.querySelector('#leguin-collection').attributes['aria-live'],'polite');
+ const passage=allNodes(dialog).find(n=>n.className==='leguin-gathered');assert.equal(passage.textContent,['seeds','thread','cup'].map(id=>c.objects[id].line).join(' '));
+ control('thread').onclick();assert.equal(control('thread').attributes['aria-pressed'],'false');assert(!dialog.querySelector('#leguin-collection').textContent.includes(c.objects.thread.story));control('thread').onclick();
+ events.get('city-language')();assert.equal(document.activeElement.dataset.houseFocus,'leguin-thread');assert.deepEqual(gathering.selected,['seeds','thread','cup']);
+ const links=allNodes(dialog).filter(n=>n.tagName==='a');assert.deepEqual(links.map(n=>n.href),LEGUIN_SOURCES.map(n=>n.url));assert(links.every(n=>n.rel==='noopener noreferrer'));
+ dialog.close();api.open('leguin');assert.deepEqual(gathering.selected,['seeds','thread','cup']);control('reset').focus();control('reset').onclick();assert.deepEqual(gathering.selected,[]);assert.equal(document.activeElement.dataset.houseFocus,'leguin-reset');dialog.close();
+}
+
 events.get('pagehide')();assert.deepEqual(M.city.targets,[sentinel]);assert.deepEqual(M.city.buildingTargets,[sentinel]);assert.equal(M.scene.children.length,0);
-console.log('PASS six foundation houses: distinct roofs, readable/pickable names, clear rotated entrances and aisles, connected lanes, batched details, directory/entry routing, EN/DE/FA, delegated controls and owned cleanup');
+console.log('PASS six foundation houses: distinct roofs, readable/pickable names, clear rotated entrances and aisles, connected lanes, batched details, directory/entry routing, EN/DE/FA/CS, five reading encounters and owned cleanup');

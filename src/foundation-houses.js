@@ -7,6 +7,8 @@ import {calvinoViewingPose} from './calvino-house-model.js';
 import {mountCalvinoReading} from './calvino-house-reading.js';
 import {CHOMSKY_ROOM} from './chomsky-house-copy.js';
 import {mountChomskyReading} from './chomsky-house-reading.js';
+import {LEGUIN_ROOM} from './leguin-house-copy.js';
+import {mountLeguinReading} from './leguin-house-reading.js';
 import {buildFoundationHouses} from './foundation-houses-scene.js';
 export function installHouseFoundations(M,T){
  const built=buildFoundationHouses(T);M.scene.add(built.group);M.city.targets.push(...built.targets);M.city.buildingTargets.push(...built.houses.map(h=>h.group));
@@ -15,8 +17,8 @@ export function installHouseFoundations(M,T){
  const dialog=el('dialog');dialog.id='house-foundations';dialog.dataset.confirmFocused='true';dialog.setAttribute('aria-labelledby','house-foundations-title');const header=el('header'),title=el('h2'),close=button('×',()=>dialog.close()),body=el('div');title.id='house-foundations-title';close.dataset.close='';header.append(title,close);dialog.append(header,body);document.body.append(dialog);dialog.addEventListener('close',()=>M.clearMovement());let selected=null,readingContext=null;
  const borges=()=>BORGES_ROOM[lang()]||BORGES_ROOM.en;
  const adaState={order:'double-add',completed:0};
- const calvinoState={lens:'memory',compare:false},chomskyState={grouping:'both'};
- const readingCopies={borges:BORGES_ROOM,ada:ADA_ROOM,calvino:CALVINO_ROOM,chomsky:CHOMSKY_ROOM},readingIds=Object.keys(readingCopies);
+ const calvinoState={lens:'memory',compare:false},chomskyState={grouping:'both'},leguinState={selected:[]};
+ const readingCopies={borges:BORGES_ROOM,ada:ADA_ROOM,calvino:CALVINO_ROOM,chomsky:CHOMSKY_ROOM,leguin:LEGUIN_ROOM},readingIds=Object.keys(readingCopies);
  const readLabel=id=>(readingCopies[id][lang()]||readingCopies[id].en).read;
  function viewCalvino(){
   const h=built.houses.find(h=>h.data.id==='calvino'),pose=calvinoViewingPose(h.data);
@@ -34,7 +36,8 @@ export function installHouseFoundations(M,T){
    if(selected.id==='borges')renderBorges();
    else if(selected.id==='ada')mountAdaReading(body,lang(),adaState,focus);
    else if(selected.id==='calvino')mountCalvinoReading(body,lang(),calvinoState,{focusKey:focus,onView:viewCalvino,onLens:id=>built.houses.find(h=>h.data.id==='calvino').exhibit.setLens(id)});
-   else mountChomskyReading(body,lang(),chomskyState,{focusKey:focus,onGrouping:id=>built.houses.find(h=>h.data.id==='chomsky').exhibit.setGrouping(id)});
+   else if(selected.id==='chomsky')mountChomskyReading(body,lang(),chomskyState,{focusKey:focus,onGrouping:id=>built.houses.find(h=>h.data.id==='chomsky').exhibit.setGrouping(id)});
+   else mountLeguinReading(body,lang(),leguinState,{focusKey:focus,onContents:ids=>built.houses.find(h=>h.data.id==='leguin').exhibit.setContents(ids)});
    return;
   }
   body.append(el('p',w().intro));const list=selected?[selected]:FOUNDATION_HOUSES;

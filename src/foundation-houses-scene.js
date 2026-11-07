@@ -1,5 +1,6 @@
 import {FOUNDATION_HOUSES,houseWorld,houseEntry,houseInside} from './foundation-houses-data.js';
 import {CHOMSKY_GROUPINGS,chomskyWords,chomskyTree,paintChomskyDiagram} from './chomsky-house-model.js';
+import {buildLeguinTable} from './leguin-house-scene.js';
 export function buildFoundationHouses(T,{canvas=()=>document.createElement('canvas')}={}){
  const group=new T.Group();group.name='Six first house studies on the island lanes';const owned=new Set(),own=r=>(owned.add(r),r),houses=[],targets=[];
  const mat=(color,options={})=>own(new T.MeshLambertMaterial({color,...options})),wood=mat(0x785d45),paper=mat(0xece1c9),brass=mat(0xb49357),glass=mat(0xb6d0d2,{transparent:true,opacity:.12,depthWrite:false,side:T.DoubleSide});
@@ -109,6 +110,7 @@ export function buildFoundationHouses(T,{canvas=()=>document.createElement('canv
    box(feature,3.8,.15,2,-4.6,1,-3.4,wood);for(const x of[-6.1,-3.1])for(const z of[-4.1,-2.7])box(feature,.15,.94,.15,x,.47,z,wood);box(feature,.2,1.2,.3,-4.6,1.65,-3.7,wood);beam(feature,[-4.6,2,-3.85],[-4.6,2,-3.25],.09,brass);const gear=new T.Group();gear.position.set(-4.6,2,-3.4);feature.add(gear);const rim=new T.Mesh(own(new T.TorusGeometry(.92,.08,8,40)),brass);gear.add(rim);for(let i=0;i<12;i++){const a=i/12*Math.PI*2,o=box(gear,.18,.25,.18,Math.cos(a)*1.02,Math.sin(a)*1.02,0,brass);o.rotation.z=a-Math.PI/2;}for(let i=0;i<6;i++){const a=i/6*Math.PI*2;beam(gear,[0,0,0],[.85*Math.cos(a),.85*Math.sin(a),0],.035,brass);}furniture(-4.6,-3.4,3.8,2);
   }else{
    const stone=mat(0x8e8c7a);const hearth=new T.Mesh(own(new T.TorusGeometry(.9,.13,8,32)),stone);hearth.rotation.x=Math.PI/2;hearth.position.set(-4,.14,-2);feature.add(hearth);for(const z of[-5,1]){box(feature,2.7,.3,.9,-4,.5,z,wood);for(const x of[-5,-3])box(feature,.12,.35,.65,x,.175,z,wood);furniture(-4,z,2.8,1);}furniture(-4,-2,2.2,2.2);
+   exhibit=buildLeguinTable(T,{feature,own,mat,box,wood,paper,furniture});
   }
   feature.traverse(o=>{if(o.isMesh)o.userData={...o.userData,foundationHouse:data.id};});targets.push(feature);
   const local=(x,z)=>{const dx=x-data.x,dz=z-data.z;return{x:dx*Math.cos(data.turn)-dz*Math.sin(data.turn),z:dx*Math.sin(data.turn)+dz*Math.cos(data.turn)};};
