@@ -501,3 +501,85 @@ useful house: Epicurus's existing Garden of Friendship at (-242, -54). Inspect
 its bread-and-water table, garden, reading and per-house notes before adding
 modest visible details and original sourced EN/DE/FA/CS reading about friendship,
 desires and simple pleasures. Preserve the existing table, plot and entrance.
+
+## 2026-11-07 — Epicurus: a place for another guest
+
+Criticism: the Garden of Friendship had a pergola, planters, a bread-and-water
+display and a short EN/FA guide, but little detail for a visitor to notice and no
+extended reading about an ordinary pause or an invitation. Its raised tabletop
+also had no visible connection to the original pedestal below it.
+
+Kept the plot at (-242, -54), walls, doorway, paths, original pergola posts/beams,
+planters, desk/book, chairs, pedestal, raised tabletop, bread and water. Added a
+slatted garden bench with back rails and a cushion, post bases within the original
+footprints, overhead vine rails and attached stems/leaves. A narrow support stem
+and collars connect the original pedestal and tabletop without moving them or
+adding another obstacle. A bordered, woven mat, scored loaf, cup rim, water
+surface and handle give the original display more detail.
+
+Two native buttons select a pause alone or an invitation. The latter reveals a
+second small plate, bread and cup of water on the same table. Returning to the
+first arrangement hides only that optional setting; the original provisions and
+all walking obstacles stay fixed. No guest character, score, new storage key,
+account, voice or recording is added. New meshes use the quarter's existing
+cached geometry/materials and owned cleanup.
+
+Original readings give each arrangement a scene, explanation, open question and
+small practice. A pause after a walk asks what would make it sufficient; an
+invitation considers time, attention and the possibility of a refusal. These
+scenes are city interpretations rather than historical dialogue. The historical
+introduction cites Epicurus's Letter to Menoeceus on desires/choice and Principal
+Doctrines 27–28 on friendship, in Robert Drew Hicks's translations at MIT's
+Internet Classics Archive:
+https://classics.mit.edu/Epicurus/menoec.html and
+https://classics.mit.edu/Epicurus/princdoc.html . The existing Stanford source
+remains. No quotation was copied or invented.
+
+New readings, source labels, arrangement controls and the in-room reading action
+support EN/DE/FA/CS, including Persian RTL. The existing EN/FA guide is preserved
+with additive DE/CS guide fields. Czech remains partial elsewhere, with English
+fallback. Existing visits, book/object actions and per-house private reflection
+remain; the in-room action hides outside this house or behind a dialog. Plato's
+ring comparison and Aristotle's cases retain their independent state and notes.
+Main and the review branch had not advanced since the prior run. Main's visitor
+position/facing map work at 12dff4dfc0645dab421cdb26bbe3d438faa86fb7 and the
+City Map, Babel, ocean-voyage and branding work remain in the branch.
+
+Verification: all 67 release test programs, build and whitespace checks passed
+after the final visual corrections. Expanded philosopher checks independently
+verify exact original pedestal/tabletop/bread/water geometry and poses across all
+four arrangement transitions, stable obstacles, invalid-setting rejection, a
+solid bench, the aisle between bench/table, the front cross-aisle, original post
+footprints and all six existing road/entrance routes. All rendered quarter
+geometries/materials receive owned disposal. Four-language UI checks exercise
+both readings, pressed/live/source states, focus retention, context visibility,
+the existing object-opening handler and reopen behavior. Three independent
+synthetic note keys retain exact mixed-language text/spacing and caret selection;
+language/arrangement changes make no writes, while explicit note input still
+writes once to its unchanged key. Earlier house and map checks remain and pass.
+
+Native browser at 1280 × 720 confirmed the existing welcome/home visit action,
+physical doorway walking, in-room reading action, Enter/Space and Escape. The
+second cup and plate visibly appeared while the original bread/water stayed put;
+the supported tabletop, bench and connected vine rails were inspected. German
+and Persian article client/scroll widths matched at 763 px; Persian reading was
+RTL. Czech at 390 × 844 showed both native controls at 47 px high, with equal
+article widths of 339 px and inner reading widths of 303 px, without horizontal
+overflow. A synthetic note survived EN/DE/FA/CS switches, reopening, switching to
+Plato and Aristotle and back, and reload. Czech selection also survived reload;
+the new visit correctly began at the first arrangement. No browser console
+errors were logged. Final garden, both table arrangements, Persian and Czech
+mobile screenshots are saved in the originating chat's outputs. Browser review
+used the in-room action; E ray targeting and hardware controller A were not
+directly exercised. Their established code/hooks remain unchanged.
+
+Remaining weakness: the second setting is a symbolic invitation rather than a
+social simulation, and the existing raised tabletop is retained at its original
+height. The garden reading is a small encounter with this theme rather than a
+survey of Epicurean philosophy. Review only; no merge or deployment.
+
+The six foundation passes, Plato, Aristotle and Epicurus are complete first
+passes. Next useful house: Hypatia's existing House of Geometry and Sky at
+(-208, -54). Inspect its sky rings, geometry, book, source and per-house notes
+before extending it. Preserve its existing exhibits, plot and entrances, and
+distinguish historical evidence from this city's original EN/DE/FA/CS activities.
