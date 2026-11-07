@@ -124,3 +124,31 @@ actual artist-quarter plan and study-house coordinates. Release tests verify
 rigid-fold invariants across the full tilt range, source-clear walking routes,
 saved lesson compatibility, physical entry and launch guards, local notes,
 theorem feedback, map identity, language parity and owned-resource cleanup.
+
+## Exhibitions of Ideas
+
+`?arrival=ideas-gallery` opens four curated, idea-led exhibitions without
+replacing any existing artist house. A question and an artwork lead to a real
+walkable stop; the visitor can retain each open question in the existing private
+notebook. The theme names and visitor prompts are available in English, German
+and Persian.
+
+- **Philosophy — Giorgio de Chirico, *Le trouble du philosophe* (1925–26).**
+  `?arrival=philosophy-art` approaches the *Metaphysical shore* in the artists’
+  quarter, an original three-dimensional scene with anonymous figures, columns,
+  a miniature city, and a place to reconsider the view. The 1926 painting is held
+  by the Museo del Novecento in Milan. An external attribution link opens a
+  reference page; its reproduction is not copied into the public site.
+- **Time — Salvador Dalí, *The Persistence of Memory* (1931).**
+  The exhibition visits the already existing dream residence.
+- **Perception — Georges Seurat, *Study for “A Sunday on La Grande Jatte”*
+  (1884).** The existing colour-distance experiment remains interactive.
+- **Representation — Paul Cézanne, *Still Life with Apples and a Pot of
+  Primroses* (ca. 1890).** The existing still-life rotation activity remains
+  interactive.
+
+New scene and its source/rights disclosure live in `de-chirico-exhibit.js`;
+curation, keyboard-accessible dialog, routes, source links, and private question
+hooks live in `idea-exhibitions.js`. Both are additive to
+`artist-quarter.js`. Release checks include
+`tests/idea-exhibitions.mjs` and `tests/artist-quarter-ui.mjs`.
