@@ -1,3 +1,4 @@
+import {coastVisitor,COAST_POSITION_COPY,coastPositionText,coastDistance} from '../src/coastal-position.js';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {readFileSync} from 'node:fs';
@@ -58,3 +59,12 @@ for (let i = 1; i < COAST_WALK.length; i++) {
 }
 assert(coastWalkSvg().includes('stroke-dasharray'), 'Route is identifiable without colour alone');
 console.log('PASS coastal map: original 97-shape geometry fingerprint, exact centre and landmark anchors, deterministic EN/DE/FA SVGs/copy, and every walking-route segment on existing paths');
+
+// Visitor position comes from the same world projection, never the chosen landmark.
+assert.deepEqual(coastVisitor({x:0,z:0,yaw:0}).point,[460,460]);
+for(const [yaw,bearing]of[[0,0],[-Math.PI/2,2],[Math.PI,4],[Math.PI/2,6],[-Math.PI/4,1],[Math.PI*6,0]])assert.equal(coastVisitor({x:20,z:30,yaw}).bearing,bearing);
+for(const visitor of[null,{}, {x:NaN,z:1},{x:0,z:Infinity},{x:'2',z:0},{x:-24000,z:0},{x:800,z:0}])assert.equal(coastVisitor(visitor),null,'Do not clamp or invent an island position');
+assert(coastVisitor({x:570,z:0}));assert.equal(coastVisitor({x:571,z:0}),null);
+assert.equal(coastVisitor({x:0,z:0}).bearing,null);assert(Number.isFinite(coastVisitor({x:0,z:0,yaw:Number.MAX_VALUE}).bearing));
+for(const lang of ['en','de','fa']){const c=COAST_POSITION_COPY[lang],visitor=coastVisitor({x:3,z:4,yaw:0,belowGround:true});assert(coastPositionText(visitor,c).startsWith(c.below));assert(coastPositionText(visitor,c).includes(c.directions[0]));assert.equal(coastPositionText(null,c),c.outside);assert.equal(coastDistance(null,[0,0],lang,c),'');assert(coastDistance(visitor,[0,0],lang,c).includes(new Intl.NumberFormat(lang==='fa'?'fa-IR':lang).format(5)));}
+console.log('PASS map position: geographic heading and wrap, finite input guard, island/world boundaries, localized distance and underground disclosure');

@@ -1,10 +1,12 @@
 import {COAST_LANDMARKS, COAST_EXPLORER_COPY, coastMapPoint, coastWalkSvg} from './coastal-map-data.js';
 
+import {coastVisitor,COAST_POSITION_COPY,coastPositionText,coastDistance} from './coastal-position.js';
+
 // Native buttons keep map selection available to touch, keyboard and controllers.
 // The SVG remains an ordinary image, with the same geometry in every language.
-export function mountCoastalMap(container, {language = 'en', state, onVisit}) {
+export function mountCoastalMap(container, {language = 'en', state, onVisit, visitor}) {
   const lang = Object.hasOwn(COAST_EXPLORER_COPY, language) ? language : 'en';
-  const c = COAST_EXPLORER_COPY[lang];
+  const c = COAST_EXPLORER_COPY[lang], positionCopy=COAST_POSITION_COPY[lang], position=coastVisitor(visitor);
   state ||= {selected: 'gallery', route: true};
   if (!COAST_LANDMARKS.some(p => p.id === state.selected)) state.selected = 'gallery';
   const el = (tag, text, className) => {
@@ -61,7 +63,16 @@ export function mountCoastalMap(container, {language = 'en', state, onVisit}) {
     list.append(item);
   }
   const caption = el('figcaption', c.places);
-  figure.append(stage, caption);
+  const positionSummary=el('p',coastPositionText(position,positionCopy),'coastal-position-summary');
+  positionSummary.id='coastal-position-summary';
+  if(position){
+    const marker=el('span','','coastal-visitor-position');marker.id='coastal-visitor-position';
+    marker.setAttribute('role','img');marker.setAttribute('aria-label',positionSummary.textContent);
+    marker.style.left=position.point[0]/920*100+'%';marker.style.top=position.point[1]/920*100+'%';
+    if(position.yaw!==null){marker.dataset.heading='true';marker.style.transform='translate(-50%,-50%) rotate('+(-position.yaw*180/Math.PI)+'deg)';}
+    marker.dataset.underground=String(position.belowGround);stage.append(marker);
+  }
+  figure.append(stage, caption, positionSummary);
   const sidebar = el('div', '', 'coastal-map-sidebar');
   const heading = el('h3', c.places);
   const info = el('section', '', 'coastal-location-info');
@@ -73,10 +84,10 @@ export function mountCoastalMap(container, {language = 'en', state, onVisit}) {
   const name = el('h3');
   name.id = 'coastal-location-name';
   const area = el('p', '', 'coastal-location-area');
-  const description = el('p');
+  const description = el('p'),distance=el('p');distance.id='coastal-position-distance';distance.className='coastal-position-distance';
   const visit = button(c.visit, () => onVisit(state.selected));
   visit.dataset.coastFocus = 'visit';
-  info.append(kicker, name, area, description);
+  info.append(kicker, name, area, description, distance);
   // Keep the focused action outside the live region so selection is announced once.
   sidebar.append(heading, list, info, visit);
   layout.append(figure, sidebar);
@@ -107,6 +118,7 @@ export function mountCoastalMap(container, {language = 'en', state, onVisit}) {
     name.textContent = place.name;
     area.textContent = place.area;
     description.textContent = place.description;
+    distance.textContent=coastDistance(position,COAST_LANDMARKS.find(p=>p.id===id).point,lang,positionCopy);distance.hidden=!position;
     visit.setAttribute('aria-label', c.visit + ' · ' + place.name);
     for (const n of controls) n.setAttribute('aria-pressed', String(n.dataset.landmark === id));
   }

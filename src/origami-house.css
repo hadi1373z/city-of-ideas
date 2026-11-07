@@ -50,3 +50,10 @@
 @media(max-width:760px){body[data-mode=city] .route-label{bottom:152px}#origami-house-context{bottom:212px;max-width:220px;padding:12px}}
 
 #coastal-map-return{display:none;position:fixed;left:20px;bottom:24px;z-index:20;min-height:44px;padding:12px 18px;border:1px solid #8d9d7b;border-radius:8px;background:#20483cec;color:#fff9e8;font:inherit;cursor:pointer}body[data-mode=overview][data-coastal-overview=clear] #welcome{display:none}body[data-mode=overview][data-coastal-overview=clear] #coastal-map-return{display:block}#coastal-map-return:focus-visible{outline:3px solid #e2c67b;outline-offset:3px}
+
+/* A hollow compass halo leaves the numbered destination beneath it usable. */
+.coastal-visitor-position{position:absolute;z-index:4;pointer-events:none;box-sizing:border-box;width:44px;height:44px;transform:translate(-50%,-50%);transform-origin:center;border:3px solid #125c86;border-radius:50%;box-shadow:0 0 0 2px #fff9e8;background:transparent}
+.coastal-visitor-position[data-heading=true]::before{content:"";position:absolute;left:11px;top:-13px;border-left:8px solid transparent;border-right:8px solid transparent;border-bottom:12px solid #125c86;filter:drop-shadow(0 -1px 1px #fff9e8)}
+.coastal-visitor-position[data-underground=true]{border-style:dashed}
+#coastal-city-map .coastal-position-summary{font-size:13px;line-height:1.65;margin:10px 0;padding-inline-start:16px;border-inline-start:4px solid #125c86}
+#coastal-city-map .coastal-location-info .coastal-position-distance{border-top:1px solid #cecdb4;padding-top:10px;margin-top:12px;font-size:13px}
