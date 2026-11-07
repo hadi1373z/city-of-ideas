@@ -1612,3 +1612,110 @@ before a modest four-language companion; do not claim the catalog is fully
 translated. Preserve Van Gogh's rack, guide, letter-versus-observation distinction,
 six viewpoint/catalog handoffs, Monet's folio/guide and all twenty completed
 passes.
+
+## 2026-11-07 — Hilma af Klint: keep the number, compare the form
+
+Criticism: the original Hilma gallery at world (84, 112) already contained six
+selected works from The Ten Largest, its high gable, symbolic facade, bench,
+palette/brushes/worktable, resident and installed catalog/private reader. It
+needed modest architectural/interior detail and a four-language companion that
+kept the deliberate selection and original work numbers clear. Its source
+house is on the opposite row and rotates by pi; this orientation remains.
+
+Added pale high-gable/eave edging, window sill/header outside the aperture,
+a supported plum bench pad with binding/tufts, bench end joints and worktable
+joint caps. A shallow numbered reading ledge meets the original wall below
+the window, entirely within the wall's existing padded clearance zone. Six
+supported city index cards carry the retained numbers 2, 3, 4, 5, 7 and 9 as
+small geometric numerals. There are no empty slots for omitted works. The
+ledge clears the window and every existing painting. Borrowed mesh geometry,
+materials, transforms, furniture/brush instances, colliders, openings, plots,
+paths, resident and walking approaches remain unchanged.
+
+A pointer pick or aiming at the ledge and pressing E opens an accessible guide.
+The inside context button and Hilma's card in the existing quarter directory
+also open it. The outside guide offers the original doorway. Inside-only
+viewpoint actions reuse original world-local approaches, yaw and look targets;
+those source points already include the opposite-row turn. Each reader action
+hands off the exact existing artist/work ID to the installed catalog/private
+observation reader. Accessible action names include the work title/number.
+
+Original reading asks visitors to describe edges, relative scale, repeated
+curves and intervals while retaining each work's number. A No. 3/No. 4 Youth
+comparison separates a visible similarity from an assumed shared meaning.
+Six individual prompts correspond to number-2, number-3, number-4, number-5,
+number-7 and number-9. The ledge/cards and activities are original city material,
+not the artist's notes, a symbol key or a historical-room reconstruction.
+
+Historical background cites Moderna Museet's account of The Ten Largest, 1907,
+and its four phases of human life. Artist background links the Foundation:
+https://guide.modernamuseet.se/stockholm/en/collection/hilma-af-klint/de-tio-storsta/
+https://hilmaafklint.se/about-hilma-af-klint/
+Both primary pages were opened and read. New prose is original; no quotations,
+images, historical notes or recordings were invented or republished.
+
+The guide, six prompts, source labels and controls support EN/DE/FA/CS with
+Persian RTL. Original catalog/image bytes, IDs/numbers, aspect ratios,
+rights/source/citation metadata, reader language handling and private controls
+remain. The companion discloses that some original catalog/shared text remains
+English and that external sources have their own languages and need internet.
+This is not complete city-wide Czech localization. Guide/locale rendering has
+no private/lesson storage access or new saved state; existing language
+preference persistence and explicit observation-save actions remain.
+
+Verification: all 72 release programs, build and whitespace checks passed on
+the final source. Source hash:
+c6698834ce43d175aa172abeca776a2ac5dc44b5fca65f02f5bac72e3758a097
+(720 assets / 332,130,633 bytes). The new release program compares every
+borrowed node's transform, material/geometry identity, vertex arrays, material
+values, pick payload and visibility, plus original instance matrices, catalog,
+colliders, entries and approaches. It checks the pi orientation, ledge-to-wall
+support, window/walking/painting clearance, all six supported numbered cards,
+bench-pad support/footprint, an opposite-row pick ray, all six original work
+IDs, all view/catalog handoffs in four languages, work-specific accessible names,
+rejected remote physical picks, locale keys/RTL, top-of-guide reopening, zero
+storage access and exact owned resource disposal. Earlier checks retain the
+first twenty passes, original artwork ratios/credits, source bytes, Makers'
+flows, advanced models, cast/voices and island geometry.
+
+Native Playwright CLI review at 1280 x 720 confirmed the welcome/directory route,
+Monet and Van Gogh's still-working directory guides, Hilma's outside-guide
+doorway action and physical walking through the original entrance. Gable/window
+trim, bench pad, supported ledge and legible 2/3/4/5/7/9 cards were visually
+reviewed. Pointer selection and native E on the ledge opened the guide. All six
+native viewpoint buttons and six reader handoffs worked with exact work IDs.
+No. 3 and No. 4 views were visually inspected. The original reader retained its
+selected-number description, image, rights/source links and observation field.
+A Czech viewpoint button also worked with keyboard Enter. Hardware controller
+A was not separately exercised; the shared focused-button mechanism remains.
+
+All four native guide languages were reviewed. Persian computed direction was
+RTL; guide/body client and scroll widths matched at 838 px and opening started
+at scrollTop 0. At Czech 390 x 844, guide/body client and scroll widths matched
+at 354 px, with minimum button height 44 px. Introductory reading and scrolled
+numbered-work controls were visually reviewed. A synthetic mixed-language
+No. 3 draft, including leading/trailing spaces, survived all six catalog
+handoffs, six viewpoints and EN/DE/FA/CS guide visits. No save action was taken
+and no private text was translated. Reopening after scrolling started at the
+top. Console errors: zero. Exterior, room/ledge, EN/DE/FA/CS guide/control and
+No. 3/No. 4 screenshots are in the originating chat's outputs. No signed-in
+service was used.
+
+Latest branch/PR inspection found review head 616556db and main b0d03a87
+unchanged before publication. All twenty prior passes, main's map/facing,
+Babel, voyage, branding and seminar houses remain. Other branches/PRs were
+preserved. Review only; nothing merged or deployed.
+
+Twenty-one first detail/reading passes are complete. Next useful house: the
+existing William Morris gallery, id morris, at world (108, 115). Inspect the
+actual source scene/catalog, opposite-row rotation, quarter layout and installed
+reader before extending it additively. Preserve its six work IDs:
+strawberry-thief, snakeshead, willow-boughs, trellis, daisy and acanthus. Its
+original approach repeats a supplied photograph at different scales and
+explicitly does not claim a production-ready or necessarily seamless textile
+tile. Keep that distinction, image bytes/ratios/metadata, source geometry,
+furniture, resident, private observations, openings, walking lanes and existing
+interactions. Inspect actual language gaps before a modest four-language
+companion; do not claim full legacy catalog translation. Preserve Hilma's
+numbered ledge, selected-six boundary, comparison guide and exact view/catalog
+handoffs, Monet and Van Gogh's guides, and all twenty-one completed passes.

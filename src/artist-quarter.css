@@ -96,3 +96,22 @@
 #van-gogh-guide-context{position:fixed;inset-inline-start:24px;bottom:170px;z-index:18;max-width:min(310px,calc(100vw - 48px))}
 #van-gogh-guide-context[hidden]{display:none}
 @media(max-width:430px){#van-gogh-guide header{padding:14px}#van-gogh-guide .van-gogh-guide-body{padding:6px 14px 18px}#van-gogh-guide-context{inset-inline-start:12px;bottom:245px;max-width:220px}}
+
+/* Hilma's original selected catalog stays in its existing reader. */
+#hilma-guide{color:#40354a;background:#f6eddf;border:1px solid #bcafbd;border-radius:16px;width:min(840px,calc(100vw - 28px));max-height:88dvh;padding:0;box-sizing:border-box}
+#hilma-guide::backdrop{background:#302438b8}
+#hilma-guide header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 22px;border-bottom:1px solid #d2c4cb}
+#hilma-guide h2{font:normal clamp(22px,3vw,30px)/1.3 Georgia,serif;margin:0;overflow-wrap:anywhere}
+#hilma-guide header button{min-width:44px;flex-shrink:0}
+#hilma-guide .hilma-guide-body{padding:8px 22px 24px;max-height:calc(88dvh - 130px);overflow:auto;overflow-wrap:anywhere}
+#hilma-guide p{line-height:1.7;max-width:72ch}
+#hilma-guide h3{font:normal 24px/1.3 Georgia,serif;margin:24px 0 12px}
+#hilma-guide h4{font:normal 21px/1.35 Georgia,serif;margin:0}
+#hilma-guide article{margin:14px 0;padding:16px;background:#fff8ed;border:1px solid #d8c6d2;border-radius:9px}
+#hilma-guide .hilma-guide-actions{display:flex;gap:8px;flex-wrap:wrap}
+#hilma-guide button,#hilma-guide-context button{min-height:44px;padding:10px 14px;border:1px solid #907b97;border-radius:7px;background:#675174;color:#fff9e8;line-height:1.4;white-space:normal}
+#hilma-guide a{display:flex;align-items:center;min-height:44px;color:#675174}
+#hilma-guide button:focus-visible,#hilma-guide a:focus-visible,#hilma-guide-context button:focus-visible{outline:3px solid #b28132;outline-offset:3px}
+#hilma-guide-context{position:fixed;inset-inline-start:24px;bottom:170px;z-index:18;max-width:min(310px,calc(100vw - 48px))}
+#hilma-guide-context[hidden]{display:none}
+@media(max-width:430px){#hilma-guide header{padding:14px}#hilma-guide .hilma-guide-body{padding:6px 14px 18px}#hilma-guide-context{inset-inline-start:12px;bottom:245px;max-width:220px}}
