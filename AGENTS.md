@@ -72,3 +72,13 @@ Calvino, Ada Lovelace and Ursula Le Guin), their shared coordinates and later
 expansion directions. Keep these stable when developing the houses further.
 The small Freud city room is separate from the House of Psychoanalysis side
 project, which remains at the design stage.
+
+
+## Ocean voyage
+
+`src/ocean-voyage*.js` adds an embarkable paper boat at the eastern shore.
+`ocean-voyage-model.js` owns water bounds, motion and six original poems in
+English, Persian and German. Preserve their original-writing attribution; they
+are not historical quotations. Sailing uses a first-person vehicle hook in
+`gallery.js`, preserves the island walking boundary, and cancels cleanly on
+city travel. No character voice assignments or recordings are used or changed.

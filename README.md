@@ -179,3 +179,12 @@ rotated entrances and both lanes against original district collisions.
 The separate House of Psychoanalysis remains a design study. This small city
 room does not implement its underground or therapeutic experience. No cast,
 recording, private-note or account-connection data is changed by these shells.
+
+
+### The paper sea
+
+A large embarkable origami boat waits at the eastern landing, reached from the city map or `?arrival=ocean`. Board there with E, controller A, or the shore button. The connected folded-paper hull reuses `src/origami-boat.js`; no sail or mast has been added. It floats, leaves a wake and carries the first-person view across the ocean. W / up accelerates, S / down slows, A / D or the controller left stick steers, and normal drag/right-stick controls look around. On-screen steering is available on touch screens. The return control (or controller B) takes the visitor safely back to the landing.
+
+Six original short poems for City of Ideas drift across the view in English, Persian or German, following sailing time. They can be hidden, and sailing can be paused to read. Reduced-motion preferences remove text drift and boat rocking. These poems are original project writing, not attributed quotations or translations of a historical poet. There is no added narration and the fixed Kokoro cast is unchanged. No notes, accounts or persistent visitor records are written by this voyage.
+
+Sailing is limited to the surrounding sea, with the island excluded and an outer current boundary. Navigation to another city destination cancels the voyage instead of moving the visitor back onto the boat. Sailing state remains local to the current visit; boats are not synchronized between visitors.
