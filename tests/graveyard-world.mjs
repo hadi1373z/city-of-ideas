@@ -12,6 +12,7 @@ globalThis.document={createElement:()=>button,querySelector:s=>s==='[data-direct
 const M={mode:'city',player:{x:0,z:94},scene:new T.Scene(),city:{targets:[],canStand:()=>true,targetInfo:()=>null,update(){}},clearMovement(){},showExtra:()=>false,arrive:p=>Object.assign(M.player,p)};
 const entry={x:layout.x+42,z:layout.z,y:.13,yaw:Math.PI/2},world=installGraveyardWorld(M,T,layout,entry);
 assert.equal(world.doors.length,2);for(const d of world.doors){let meshes=0;d.group.traverse(o=>{if(o.isMesh){meshes++;assert(o.userData.worldDoor);}});assert(meshes>=6);}
+for(const p of[[-360,-200],[360,-200],[0,-540],[0,540]])assert(M.city.canStand(...p),'The main world uses the whole circular island, including western house plots');for(const p of[[-566,0],[0,566],[500,500]])assert(!M.city.canStand(...p),'Ocean stays beyond the island edge');
 assert.equal(M.city.canStand(-1000,0),false,'No walkable corridor joins the two cities');assert.equal(mapDestination.hidden,true);
 M.city.update(M.player,1,'city');assert(!world.active);assert(!world.doors[1].group.visible);
 Object.assign(M.player,{x:CITY_EDGE_DOOR.x+.5,z:CITY_EDGE_DOOR.z});M.city.update(M.player,3,'city');assert.equal(M.player.x,entry.x,'Walking through the city door enters the other world');

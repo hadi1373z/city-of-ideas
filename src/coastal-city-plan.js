@@ -1,3 +1,4 @@
+import {FOUNDATION_HOUSES,FOUNDATION_ROUTES} from './foundation-houses-data.js';
 import {CITY_ISLAND as I} from './island-layout.js';
 import {coastX,HOUSE_ORIGAMI,COAST_ROUTES} from './origami-house-math.js';
 import {STUDY_HOUSES} from './study-houses-data.js';
@@ -14,7 +15,8 @@ export function coastalPlanSvg(plan,lang='en'){
  parts.push('<circle cx="'+px(125)+'" cy="460" r="'+47*s+'" fill="#bfccba" stroke="#839b87"/>',text(125,-50,c.mountain,13),path([[58,0],[78,0]],'#a78d57',4));
  for(const[x,z]of[[-242,-98],[-208,-98],[-242,-54],[-208,-54],[-242,-10],[-208,-10]])parts.push(dot(x,z,5));parts.push(text(-225,24,c.philosophers,14),dot(-96,100,9),text(-96,125,c.socrates));
  for(const pos of Object.values(plan?.galleries||{}))parts.push(dot(...pos));for(const p of Object.values(plan?.studios||{}))parts.push(dot(p.x,p.z));if(plan?.escher)parts.push(dot(plan.escher.x,plan.escher.z));if(plan?.dali)parts.push(dot(plan.dali.x,plan.dali.z));parts.push(text(126,222,c.artists,18));
- for(const[x,z]of[[216,-58],[234,-58],[225,-41]])parts.push(dot(x,z,4));parts.push(path([[225,-50],[310,-32]],'#9ba88f',1.3),text(335,-34,c.makers,13));for(const h of STUDY_HOUSES)parts.push(dot(h.x,h.z,5));parts.push(text(255,-156,c.study,14));
+ for(const[x,z]of[[216,-58],[234,-58],[225,-41]])parts.push(dot(x,z,4));parts.push(path([[225,-50],[310,-32]],'#9ba88f',1.3),text(295,-88,c.makers,13));for(const h of STUDY_HOUSES)parts.push(dot(h.x,h.z,5));parts.push(text(255,-156,c.study,14));
  parts.push('<path d="M'+(px(HOUSE_ORIGAMI.x)-8)+' '+(pz(HOUSE_ORIGAMI.z)+6)+'v-11l4 -5 4 5 4 -5 4 5v11z" fill="#cba76b" stroke="#8c7350"/>',path([[229,76],[310,126]],'#9ba88f',1.3),text(337,147,c.origami,14),dot(HOUSE_ORIGAMI.shore.x,HOUSE_ORIGAMI.shore.z,4,'#486c7b'),path([[HOUSE_ORIGAMI.shore.x,76],[440,28]],'#9ba88f',1.3),text(428,8,c.shore,13));
+ for(const r of FOUNDATION_ROUTES)parts.push(path(r.points,'#a99d7d',2.3));for(const h of FOUNDATION_HOUSES){const name=h.names[lang]||h.names.en,tx=h.x<0?-445:470,tz=h.z+(h.id==='leguin'?38:0);parts.push('<rect data-house="'+h.id+'" x="'+(px(h.x)-6)+'" y="'+(pz(h.z)-5)+'" width="12" height="10" rx="2" fill="#a77f58"/>',path([[h.x,h.z],[tx,tz]],'#a99d7d',1),text(tx,tz-9,name,13));}
  parts.push('<text x="460" y="895" text-anchor="middle" font-size="17" fill="#f5f3df">'+escape(c.note)+'</text></g></svg>');return parts.join('');
 }

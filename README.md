@@ -152,3 +152,30 @@ curation, keyboard-accessible dialog, routes, source links, and private question
 hooks live in `idea-exhibitions.js`. Both are additive to
 `artist-quarter.js`. Release checks include
 `tests/idea-exhibitions.mjs` and `tests/artist-quarter-ui.mjs`.
+
+## New house foundations
+
+The six houses in `src/foundation-houses-data.js` are deliberately first-stage
+architectural shells, not completed learning experiences or reconstructions of
+real buildings. Each has a localised name, an open entrance, a single original
+feature and a saved direction for later development:
+
+| House | First feature | Later direction |
+| --- | --- | --- |
+| Freud | Red couch and window | Dreams and memory |
+| Chomsky | Wooden branching relief | Language and argument |
+| Borges | Small library and desk book | Branching reading journeys |
+| Calvino | Vault and nested viewing frames | Different readings of one city |
+| Ada Lovelace | Skylight and mounted brass wheel | Patterns and computation |
+| Ursula Le Guin | Open courtyard and two seats at a hearth | Imagined societies |
+
+The west arc joins the existing western island road; the east arc joins the
+origami-to-shore route. Every house faces the gallery. `?arrival=new-houses`
+opens the directory; `?arrival=house:freud` (and each of the other stable IDs)
+approaches its front. The island map and small walking map use the same layout.
+Static details are batched, plot clearings exclude trees, and tests sample the
+rotated entrances and both lanes against original district collisions.
+
+The separate House of Psychoanalysis remains a design study. This small city
+room does not implement its underground or therapeutic experience. No cast,
+recording, private-note or account-connection data is changed by these shells.

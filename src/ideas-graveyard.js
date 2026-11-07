@@ -1,4 +1,4 @@
-import {installGraveyardWorld} from './graveyard-world.js?v=discoveries1';
+import {installGraveyardWorld} from './graveyard-world.js?v=foundations1';
 const pick=(value,lang)=>value[lang]||value.en;
 export const RETIRED_IDEAS=[
  {id:'perfect-plan',title:{en:'The perfect plan',de:'Der perfekte Plan',fa:'برنامهٔ بی‌نقص'},body:{en:'A plan waited for perfect conditions and was never tried. What small experiment could give it another life?',de:'Ein Plan wartete auf perfekte Bedingungen und wurde nie erprobt. Welcher kleine Versuch könnte ihn wiederbeleben?',fa:'برنامه‌ای منتظر شرایط بی‌نقص ماند و هرگز آزموده نشد. کدام آزمایش کوچک می‌تواند دوباره به آن زندگی بدهد؟'}},

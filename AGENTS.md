@@ -58,3 +58,17 @@ The character's established `bm_fable` voice remains fixed.
   Update the cast record and relevant provenance hashes after audio edits.
 - Verify with the relevant voice checks in `tests/ramsey-room.mjs`, source
   integrity checks, and playback across the five-minute boundary when changed.
+
+
+## Island layout and first house studies
+
+The public city is a circular island centred on Zarathustra Gallery at (0, 0),
+with ocean surrounding every side. Preserve this geometry and the separate
+Graveyard world. `src/island-layout.js` defines the island.
+
+The user requested new houses with only names and small features for now.
+`src/foundation-houses-data.js` records six first studies (Freud, Chomsky, Borges,
+Calvino, Ada Lovelace and Ursula Le Guin), their shared coordinates and later
+expansion directions. Keep these stable when developing the houses further.
+The small Freud city room is separate from the House of Psychoanalysis side
+project, which remains at the design stage.

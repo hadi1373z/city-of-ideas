@@ -1,3 +1,4 @@
+import {installHouseFoundations} from './foundation-houses.js?v=foundations1';
 import {installVisitMemory} from './visit-memory.js?v=discoveries1';
 import {installRamseyRoom} from './ramsey-room.js?v=ramsey-paper1';
 import {installRamseyHouse} from './ramsey-house.js';
@@ -6,7 +7,7 @@ import {installCityDiscoveries} from './city-discoveries.js?v=study1';
 import {installArtistQuarter} from './artist-quarter.js?v=artists2';
 import {installLearningLab} from './learning-lab.js?v=learning1';
 import {installStudyHouses} from './study-houses.js?v=study1';
-import {installOrigamiHouse} from './origami-house.js?v=island1';
+import {installOrigamiHouse} from './origami-house.js?v=foundations1';
 import {artistLineOfSight} from './artist-line-of-sight.js';
 import {installPhilosopherQuarter} from './philosopher-ui.js';
 import {installSocratesTour} from './socrates-tour.js';
@@ -18,7 +19,7 @@ import {ARTISTS} from './city-source-assets/home-tools/artist-catalog.js';
 import {createDistrictNavigation} from './district-navigation.js';
 import {createSharedResidents} from './shared-residents.js';
 import {createSharedActivities} from './shared-activities.js';
-import {installIdeasGraveyard} from './ideas-graveyard.js?v=discoveries1';
+import {installIdeasGraveyard} from './ideas-graveyard.js?v=foundations1';
 import {installEscherHouse} from './escher-house.js?v=artists2';
 import {installStudyBook} from './study-book.js';
 import {installCinematicIntro} from './cinematic-intro.js';
@@ -103,6 +104,7 @@ try{
  installLearningLab(M,T,E);
  installStudyHouses(M,T);
  installOrigamiHouse(M,T);
+ installHouseFoundations(M,T);
  M.status('ready');
  installCinematicIntro(M,T,socrates);
 }catch(error){document.body.classList.remove('cinematic-pending');console.error('Original district integration failed',error);M.status(error.message);}

@@ -1,0 +1,10 @@
+#house-foundations{width:min(880px,calc(100vw - 24px));max-height:88dvh;padding:0;border:1px solid #afbaa1;border-radius:14px;background:#f0ebd8;color:#29483c}
+#house-foundations::backdrop{background:#12392bba;backdrop-filter:blur(4px)}
+#house-foundations header{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px 24px;border-bottom:1px solid #c7cfb6}
+#house-foundations h2{font:normal clamp(24px,3vw,32px) Georgia,serif;margin:0}#house-foundations h3{font:normal 25px/1.4 Georgia,serif;margin:8px 0}
+#house-foundations header button{width:44px;flex:0 0 44px}#house-foundations>div{max-height:calc(88dvh - 96px);overflow:auto;padding:18px 24px;scrollbar-gutter:stable}
+#house-foundations p{font-size:15px;line-height:1.8;max-width:72ch}#house-foundations small{display:block;font-size:12px;line-height:1.7;color:#63735b}
+#house-foundations article{padding:20px 0;border-bottom:1px solid #c7cfb6;margin-bottom:18px}#house-foundations button{min-height:44px;background:#285a49;color:#fff9e8;border:1px solid #78917b;border-radius:7px;padding:10px 15px;margin:5px 8px 5px 0;font:inherit;cursor:pointer}
+#house-foundations button:focus-visible,#house-foundations-context button:focus-visible{outline:3px solid #bc904b;outline-offset:3px}
+#house-foundations-context{position:fixed;left:20px;bottom:170px;z-index:19;background:#20483cee;color:#f5edda;border:1px solid #8d9d7b;padding:15px;border-radius:10px;max-width:275px}#house-foundations-context[hidden]{display:none}#house-foundations-context strong{display:block;font:normal 22px/1.4 Georgia,serif;margin-bottom:8px}#house-foundations-context button{min-height:44px;padding:10px 14px;background:#e2c67b;color:#29483c;border:0;border-radius:6px;font:inherit;cursor:pointer}
+@media(max-width:760px){#house-foundations-context{left:12px;bottom:212px;max-width:220px;padding:12px}#house-foundations header,#house-foundations>div{padding:14px}}
