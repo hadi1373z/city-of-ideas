@@ -1003,3 +1003,113 @@ Extend visible details and actual EN/DE/FA/CS gaps while preserving countdown,
 cycle and long-run behavior, the distinction between timeout/repeated complete
 state, both diagonal branches, note keys, window/door openings and walking
 lanes. Preserve Proof's workbench and Uncertainty's report cards/readers.
+
+## 2026-11-07 — Computation: a journal of run evidence
+
+Criticism: the existing House of Computation at (229, -129) already had a
+stepped roof, counter board, desk, five sourced advanced sections and a bounded
+toy-machine experiment. Its advanced reading/controls still fell back to
+English, and its desk did not make the three kinds of run evidence visible.
+This pass extends that house and its existing experiment.
+
+Added pale fascia to the three original roof steps, window headers/sills
+outside the clear apertures, desk joint caps and narrow bench-back strips.
+A small supported journal rests on the original desk sheet. Its fixed solid
+square, closed square loop and open frame stand for an observed halt, repeated
+complete configuration and unresolved run. A gold underline moves between them
+with the existing program controls. E while aiming at the journal opens the
+existing reader. No doorway/window, roof form, furniture, collider, plot, path
+or walking lane was moved, and there is no new storage key or program engine.
+
+An original desk reading distinguishes a finite observation from a proof.
+It explicitly explains that countdown zero is still pending until the next
+transition, the step count is a log rather than an extra transition variable,
+and the program must be read together with its counter. The teaching journal
+is not a historical computer or a universal solver. Turing's 1936 paper,
+section 8, is linked as historical background on limits of computability:
+https://www.cs.virginia.edu/~robins/Turing_Paper_1936.pdf . The five existing
+sections present the modern halting argument; their English text and both
+original source URLs remain. The MIT lecture link remains further context.
+No quotation or historical room was invented.
+
+Added DE/FA/CS versions of all five sections, topic/level, question, first
+prediction and reflection prompts. The original controls, state descriptions,
+trace feedback, both hypothetical D(D) branches, answer feedback, source labels
+and physical wall captions now support EN/DE/FA/CS. Czech includes the name
+Dům výpočtů. A four-row accessible table replaces the raw execution-state JSON:
+program, counter, observed steps and status. Row headings have scope="row";
+Persian prose/program/status stay RTL while numeric cells and counter traces
+stay LTR. Program and hypothetical-prediction buttons expose pressed states
+and stable focus keys. New steps clear stale trace-check feedback.
+
+Fixed a physical-counter display cache that used only the observed step count:
+loading a different program at step zero could leave the old digits visible.
+Its key now includes the program, counter and evidence flags. The original
+countdown/cycle/long-run rules, bounded runner, repeat detection, both diagonal
+branches and answer gate are unchanged. In particular, a timeout is not a
+nonhalting proof and the hypothetical controls do not implement the assumed
+decider H. Three private draft keys, immutable first predictions, notebook IDs
+and explicit keep actions remain. No accounts, accepted characters, recordings
+or fixed voices were edited.
+
+All three advanced study houses now have their five sections and experiments
+in EN/DE/FA/CS. Updated the directory disclosure and its comparison paragraph
+accordingly. Some shared notebook and unrelated city text still has English
+fallback; this is not complete city-wide Czech localization.
+
+Verification: all 69 release programs, build and whitespace checks passed on
+the final source. Build source hash:
+ffa9fbd56896a79fa5d59615b430c625f1e984b1e979b1b0f7b71829aa74dee9
+(705 assets / 332,031,246 bytes). Original mesh fingerprints for all three
+study houses and the complete original collision array still match when only
+the separate additive detail groups are excluded. Journal support/footprint,
+all three marker positions, invalid evidence flags, same-step program reloads,
+localized wall captions and exact resource disposal have automated checks.
+
+The real UI fixture exercises all four languages: countdown zero after five
+steps remains pending and the next transition halts; cycle repeats after two
+steps; long countdown after 50 steps remains pending at 950 and halts after
+1001 transitions. Checks cover stale-feedback clearing, both diagonal branches
+and their gate, false/valid quantified answers, row headings, numeric direction,
+section translations, physical-journal entry, stable focus and three independent
+private drafts. Text spacing/caret and the first-prediction invariant remain;
+locale/reading changes make no storage writes. Earlier Proof and Uncertainty
+coverage remains.
+
+Owned Playwright CLI browser at 1280 × 720 confirmed the original directory
+arrival, walking through the unchanged entrance and E opening from the journal.
+Loading long at zero steps immediately displayed 01000; original short/cycle/
+long controls displayed the verified states. Closing the reader visibly showed
+the marker at the left for halt, middle for repetition and right for pending.
+Space/Enter activated the original controls. English and Czech checks exercised
+both hypothetical branches and correct-answer feedback. German cycle feedback
+and Persian halt feedback were localized. German/Persian body widths matched
+at 943 px; Persian table width matched at 859 px, with prose RTL and numeric
+cells LTR. Czech mobile at 390 × 844 had matching client/scroll widths of
+339 / 311 / 287 px for body/reading/table; every experiment control was at least
+44 px high. No horizontal overflow or browser console error was observed.
+
+A synthetic mixed-language draft survived EN/DE/FA/CS changes and reopening.
+After explicitly keeping the reasoning, a full reload retained Czech selection,
+the original first prediction and later reasoning in the existing personal
+notebook. Native exterior, journal states, Persian reading and Czech mobile
+screenshots are in the originating chat's outputs. Hardware controller A was
+not directly exercised; the existing focused-button hook is reused. The journal
+remains a schematic for three small teaching programs, not arbitrary-code
+execution or a general decision procedure.
+
+Branch/PR inspection found the review head at 57f05af8 and main at b0d03a87
+unchanged. The fourteen earlier passes, Noether/Mirzakhani/Cage seminar houses,
+visitor-position/facing update, City Map, Babel, voyage and branding remain.
+Other branches are left intact. Review only; nothing merged or deployed.
+
+Fifteen first detail/reading passes are now complete. Next useful house: the
+existing Makers' Library, id makers-library, at world (216, -58). Inspect its
+six original offline books, shelf bays, desk/journal, chair/tea and source
+metadata in src/city-source-assets/home-tools/makers-city-scene.js, plus the
+counterexample journey in src/learning-lab-copy.js and src/learning-lab-scene.js.
+The library is that existing journey's first stop; its copy currently supports
+EN/DE/FA, with a real Czech gap. Extend it additively after inspecting the
+original experience; preserve book IDs/texts, all first-plan/reveal/transfer/
+reflection and private-note flows, furniture, clearances and existing geometry.
+Do not replace or restart the learning experiment or repeat the fifteen passes.
