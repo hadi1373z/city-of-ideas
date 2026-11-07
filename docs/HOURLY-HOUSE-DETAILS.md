@@ -829,3 +829,87 @@ Inspect the actual scene and language handling before adding modest architectura
 details and filling real Czech reading/control gaps. Preserve its plot, window/
 door openings, experiment, note keys and all shared walking clearances. Keep the
 new seminar houses intact and do not restart the twelve completed first passes.
+
+## 2026-11-07 — House of Proof: a pair is not a covering
+
+Criticism: the existing advanced house already had a working domino/Hall
+experiment and five sourced sections, but a plain desk and minimally framed
+windows. Reading and experiment copy were fixed to English, including when
+German, Persian or Czech was selected. This pass extends that house at
+(215, -94), rather than replacing its mathematics or repeating an earlier room.
+
+Added timber window sills/headers outside the clear apertures, front roof fascia,
+bench slats and a supported desk drawer face/knob. On the unchanged desk sheet,
+a single two-colour domino sample rests on a thin base beside a pencil. The
+sample is an actual selectable target: E opens the existing house reader. It
+represents one adjacent dark/light pair, without pretending to tile the board.
+All additions use the existing owned materials/geometry and introduce no new
+walking obstacles. Original roof, window glass/openings, walls, door, desks,
+benches, shelves, exhibit and route geometry remain exactly as before.
+
+Added an original workbench reading connecting the small sample to the wall
+experiment: one valid placement does not certify a covering of every square.
+It cites Jonathan Hirata's MIT Notes on Matching, sections 1.2–1.3:
+https://math.mit.edu/~djk/18.310/Lecture-Notes/MatchingProblem.pdf . The original
+five English sections and both source URLs remain. Added DE/FA/CS versions of
+all five sections, topic, level, prediction and reflection prompts. Hall's
+every-subset quantifier, finite bipartite setting and necessity/sufficiency
+distinction are retained. The room/activity are explicitly original city
+designs, with no invented quotation or historical-workshop claim.
+
+The Proof board choices, square accessibility names, instructions, counts,
+checks, matching report, transfer answers/feedback, source labels and physical
+caption now support EN/DE/FA/CS. Added the Czech study-directory/dialog controls
+and Proof name. Persian prose is RTL, with the board coordinates/counts kept
+LTR. Updated the four-language disclosure: Uncertainty/Computation advanced
+readings and experiments remain English; unrelated city/notebook text still
+has English fallback. This is not city-wide Czech localization.
+
+Stable control keys preserve focus when translated labels change. The existing
+private draft keys now also retain textarea selection/caret across rendering.
+The first conjecture remains immutable; private prediction/reflection and
+notebook writes keep the same explicit actions, question IDs and storage keys.
+Reading, choosing language and changing a board do not write private drafts.
+No accepted recordings, character appearances or voices were touched.
+
+Verification: all 69 release programs, build and whitespace checks passed.
+Fingerprints recorded before editing verify every original mesh vertex,
+transform and material in all three study houses, excluding only the separate
+new detail group. The original collision array matches exactly. Existing
+independent matching/exact-cover, Hall witness, Bayes, machine and real-district
+walking-route checks pass. New resources all dispose once. The real UI fixture
+exercises all three board matchings, valid/invalid certificates, physical-cell
+selection, transfer, source links, pressed feedback, note/focus/caret retention
+and all five translated sections in each of four languages. Three independent
+private drafts stay separate; locale changes make no storage writes. The other
+two houses retain their English experiment/reading direction and mathematics.
+
+Native browser at 1280 × 720 confirmed the existing welcome directory approach,
+walking through the unchanged doorway, context reader and E opening from the
+new desk sample. Space/Enter operated square choices and controls. A selected
+two-square witness produced |S| = 2 and |N(S)| = 1; the balanced board's maximum
+matching reported four dominoes covering eight of ten squares. German/Persian
+body widths matched at 943 px; Persian prose was RTL. Czech at 390 × 844 had
+equal body widths of 339 px, reading widths of 311 px and grid widths of 287 px,
+without horizontal overflow; every experiment button was at least 44 px high.
+A mixed-language synthetic draft survived EN/DE/FA/CS changes and reopening.
+After explicit keep and reload, the original conjecture and later reasoning
+were present in the existing personal notebook; Czech selection survived.
+Native exterior/workbench, Persian and Czech mobile screenshots are saved in
+the originating chat's outputs. No browser console errors. Hardware controller
+A was not directly exercised; the existing focused-button hook remains.
+
+Concurrent branch/main/PR inspection found the review head at 2d3b1da4 and main
+at b0d03a87 unchanged. Preserve their twelve earlier house passes, three seminar
+houses, City Map/position-facing, Babel, voyage and branding work. Review only;
+nothing merged or deployed. Remaining weakness: the desk sample is a static
+illustration; it does not simulate placing loose dominoes on the desk. The
+separate shared notebook and other advanced houses retain some English text.
+
+Thirteen first detail/reading passes are now complete. Next useful house: the
+existing House of Uncertainty at (243, -94). Inspect its skylight, bars, desk,
+five sourced Bayesian sections and private prediction/reflection flow. Extend
+visible architectural/interior details and actual EN/DE/FA/CS reading/control
+gaps while preserving its stipulated rates, denominators, independent-versus-
+copied evidence distinction, note keys, window/door openings and walking lanes.
+Keep Proof's new workbench, four-language reader and original Hall experiment.
