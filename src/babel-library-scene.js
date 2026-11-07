@@ -1,0 +1,51 @@
+import {BABEL,stairs,babelDesk,BABEL_COPY} from './babel-library-model.js';
+export function buildBabelLibrary(T,{canvas=()=>document.createElement('canvas')}={}){
+ const group=new T.Group();group.name='Beneath Zarathustra · circular Library of Babel';const owned=new Set(),own=v=>(owned.add(v),v),batches=new Map(),beamBatches=new Map(),labels=[],targets=[];
+ const material=(color,opts={})=>own(new T.MeshLambertMaterial({color,...opts}));
+ const oak=material(0x765238),edgeWood=material(0x3e3027),plaster=material(0x8f8065,{side:T.BackSide}),stone=material(0xc5b28b),floor=material(0x9c8965),brass=material(0xa58b56),pages=material(0xe2d4b0),leather=[0x7e5144,0x405e5a,0x8a784b,0x4e5266,0x6a775c,0xb39360,0x574439,0x9a6b59].map(c=>material(c));
+ const unit=own(new T.BoxGeometry(1,1,1)),stamp=material(0xa58b56,{side:T.DoubleSide}),unitStamp=own(new T.PlaneGeometry(1,1)),unitBeam=own(new T.CylinderGeometry(1,1,1,7));
+ function box(w,h,d,x,y,z,m,yaw=0){if(!batches.has(m))batches.set(m,[]);batches.get(m).push({w,h,d,x,y,z,yaw});}
+ function mesh(g,m,x=0,y=0,z=0){own(g);const o=new T.Mesh(g,m);o.position.set(x,y,z);group.add(o);return o;}
+ function beam(a,b,w,m){const start=new T.Vector3(...a),end=new T.Vector3(...b),delta=end.clone().sub(start);if(!beamBatches.has(m))beamBatches.set(m,[]);beamBatches.get(m).push({p:start.clone().add(end).multiplyScalar(.5),q:new T.Quaternion().setFromUnitVectors(new T.Vector3(0,1,0),delta.clone().normalize()),length:delta.length(),w});}
+ function band(ri,ro,y,m,{gap=null}={}){const v=[],ix=[],n=480;for(let i=0;i<=n;i++){const a=i/n*Math.PI*2;for(const r of[ri,ro])v.push(Math.cos(a)*r,y,Math.sin(a)*r);}for(let i=0;i<n;i++){const a=(i+.5)/n*Math.PI*2,delta=gap?Math.atan2(Math.sin(a-gap.a),Math.cos(a-gap.a)):10;if(gap&&Math.abs(delta)<gap.half)continue;const k=i*2;ix.push(k,k+2,k+1,k+1,k+2,k+3);}const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(v,3));g.setIndex(ix);g.computeVertexNormals();return mesh(g,m);}
+ function label(text,x,y,z,yaw,w=3.2,h=.6){const c=canvas();c.width=1024;c.height=192;const texture=own(new T.CanvasTexture(c));texture.colorSpace=T.SRGBColorSpace;const o=mesh(new T.PlaneGeometry(w,h),own(new T.MeshBasicMaterial({map:texture,side:T.DoubleSide})),x,y,z);o.rotation.y=yaw;labels.push({c,texture,text});return o;}
+ // A real enclosed vault, physically underneath the gallery; the top stairwell is open.
+ const wall=mesh(new T.CylinderGeometry(57.5,57.5,25,160,1,true),plaster,0,-15,0);wall.name='Earthen library vault';const shape=new T.Shape();shape.absarc(0,0,58,0,Math.PI*2,false);const h=new T.Path();h.moveTo(-10.5,42);h.lineTo(-10.5,46);h.lineTo(10.5,46);h.lineTo(10.5,42);h.closePath();shape.holes.push(h);const ceiling=mesh(new T.ExtrudeGeometry(shape,{depth:.5,bevelEnabled:false,curveSegments:120}),material(0x665743,{side:T.DoubleSide}),0,-2.8,0);ceiling.rotation.x=-Math.PI/2;ceiling.name='Vault ceiling with open gallery stairwell';
+ const pit=mesh(new T.CircleGeometry(57.4,160),floor,0,BABEL.base,0);pit.rotation.x=-Math.PI/2;
+ for(let i=0;i<24;i++){const a=i*Math.PI*2/24;box(.5,24,.6,Math.cos(a)*56.5,-14.8,Math.sin(a)*56.5,oak,-a);beam([0,-3.2,0],[Math.cos(a)*56.5,-3.2,Math.sin(a)*56.5],.16,edgeWood);}
+ let bookCount=0;
+ for(const l of BABEL.levels){
+  const gap=l.id<4?{a:l.angle,half:1.9/l.r}:null;band(l.r-3.8,l.r,l.y,floor,{gap});band(l.r,l.r+4.4,l.y,floor);
+  const count=Math.ceil(Math.PI*2*(l.r+4)/2.8),da=Math.PI*2/count,arc=(l.r+4)*da;
+  for(let j=0;j<count;j++){
+   const a=(j+.5)*da,R=l.r+4,x=Math.cos(a)*R,z=Math.sin(a)*R,incoming=l.id>0?stairs[l.id-1]:null,delta=incoming?Math.atan2(Math.sin(a-incoming.a),Math.cos(a-incoming.a)):10;if(incoming&&Math.abs(delta)<2.35/R)continue;
+   const yaw=Math.PI/2-a,point=(t,rad)=>({x:Math.cos(a)*(R+rad)-Math.sin(a)*t,z:Math.sin(a)*(R+rad)+Math.cos(a)*t});
+   for(const t of[-arc/2+.06,arc/2-.06]){const p=point(t,0);box(.15,3.8,.95,p.x,l.y+1.9,p.z,oak,yaw);}
+   for(let row=0;row<=5;row++)box(arc,.11,1.0,x,l.y+.12+row*.69,z,oak,yaw);
+   for(let row=0;row<5;row++)for(let k=0;k<10;k++){const t=(k-4.5)*(arc-.35)/10,p=point(t,0),index=(j*29+row*13+k*7+l.id*5),height=.39+(index%5)*.047,width=(arc-.43)/10*.83;box(width,height,.64,p.x,l.y+.23+row*.69+height/2,p.z,leather[index%leather.length],yaw);bookCount++;if(k%3===0)for(const rad of[-.327,.327]){const q=point(t,rad);box(width*.55,.028,.012,q.x,l.y+.34+row*.69,q.z,stamp,yaw);}}
+   if(j%9===0){const p=point(0,0);box(.9,.11,.75,p.x,l.y+3.68,p.z,leather[j%8],yaw+.12);box(.78,.045,.69,p.x,l.y+3.765,p.z,pages,yaw+.12);}
+  }
+  // Inner balcony fascias and slender rails, with actual gaps for the stairs.
+  const railR=l.r-3.8,posts=240;
+  for(let j=0;j<posts;j++){const a=j/posts*Math.PI*2,next=(j+.5)/posts*Math.PI*2,d=Math.atan2(Math.sin(a-l.angle),Math.cos(a-l.angle)),entry=l.id===0&&Math.abs(Math.cos(a)*railR-10)<3&&Math.sin(a)*railR<-42;
+   if(l.id<4&&Math.abs(d)<2.1/l.r||entry)continue;const x=Math.cos(next)*railR,z=Math.sin(next)*railR,yaw=Math.PI/2-next,w=railR*Math.PI*2/posts+.02;box(w,.38,.16,x,l.y-.17,z,edgeWood,yaw);for(const dy of[.66,1.1])box(w,.045,.055,x,l.y+dy,z,brass,yaw);if(j%3===0)box(.055,1.15,.055,Math.cos(a)*railR,l.y+.55,Math.sin(a)*railR,brass);}
+  const d=babelDesk(l.id),a=d.a,yaw=Math.PI/2-a;box(1.7,.14,1.05,d.x,l.y+.95,d.z,oak,yaw);box(.32,.9,.32,d.x,l.y+.45,d.z,edgeWood);const book=mesh(new T.BoxGeometry(.85,.065,.62),pages,d.x,l.y+1.06,d.z);book.rotation.y=yaw;book.name='Open catalogue book · terrace '+(l.id+1);book.userData={babelBook:l.id};targets.push(book);const cover=mesh(new T.BoxGeometry(.96,.045,.70),leather[(l.id+1)%8],d.x,l.y+1.013,d.z);cover.rotation.y=yaw;cover.userData={babelBook:l.id};targets.push(cover);
+  label(String(l.id+1).padStart(2,'0'),Math.cos(a)*(l.r+3.43),l.y+2.7,Math.sin(a)*(l.r+3.43),-a-Math.PI/2,1.2,.5);
+ }
+ function flight({start,end,width,top,bottom,steps:count}){const a=new T.Vector3(...start),b=new T.Vector3(...end),dir=b.clone().sub(a),length=dir.length(),yaw=Math.atan2(-dir.z,dir.x),side=new T.Vector3(-dir.z,0,dir.x).normalize();for(let i=0;i<count;i++){const p=a.clone().lerp(b,(i+.5)/count),y=top-(i+1)*(top-bottom)/count;box(length/count+.014,.18,width,p.x,y-.09,p.z,stone,yaw);}
+  for(const sign of[-1,1]){const va=a.clone().addScaledVector(side,sign*(width/2-.1)),vb=b.clone().addScaledVector(side,sign*(width/2-.1));beam([va.x,top-.18,va.z],[vb.x,bottom-.18,vb.z],.15,oak);beam([va.x,top+1.03,va.z],[vb.x,bottom+1.03,vb.z],.035,brass);for(let i=0;i<=count;i+=4){const p=va.clone().lerp(vb,i/count),y=top-(top-bottom)*i/count;box(.05,1.08,.05,p.x,y+.5,p.z,brass);}}
+ }
+ for(const s of stairs)flight({start:[Math.cos(s.a)*s.outer,0,Math.sin(s.a)*s.outer],end:[Math.cos(s.a)*s.inner,0,Math.sin(s.a)*s.inner],width:s.width,top:s.top,bottom:s.bottom,steps:s.steps});
+ const f=BABEL.flight;flight({start:[f.x0,0,f.z],end:[f.x1,0,f.z],width:f.width,top:f.top,bottom:f.bottom,steps:f.steps});box(5,.18,5.5,10,-8.09,-46.3,stone);box(2,.18,3.4,-11,.305,-44,stone);
+ // Solid stairwell returns and an architectural lintel, not a freestanding destination board.
+ for(const z of[-46.1,-41.9])box(21,1,.14,0,.895,z,oak);box(.16,1,4.2,10.6,.895,-44,oak);for(const z of[-45.8,-42.2])box(.2,3.15,.2,-11.5,1.97,z,oak);box(.2,.24,3.8,-11.5,3.52,-44,oak);
+ const entrance=label('entry',-11.62,3.12,-44,-Math.PI/2,3.1,.6);entrance.userData={babelDoor:true};targets.push(entrance);
+ // Oversized volumes form the central book well, as in the supplied architectural reference.
+ for(let i=0;i<18;i++){const a=i*2.399963,r=1+(i%4)*.7,x=Math.cos(a)*r,z=Math.sin(a)*r,h=2.5+(i%5)*.6,yaw=a*.5;box(.65,h,1.65,x,BABEL.base+h/2,z,leather[i%8],yaw);box(.5,h-.18,1.5,x,BABEL.base+h/2,z,pages,yaw);for(const side of[-1,1]){const dx=Math.cos(yaw)*side*.34,dz=-Math.sin(yaw)*side*.34;box(.06,h,1.7,x+dx,BABEL.base+h/2,z+dz,leather[i%8],yaw);}}
+ const lamps=new T.Group();lamps.name='Warm underground reading lights';group.add(lamps);const glow=own(new T.MeshBasicMaterial({color:0xffdf9a})),lampPositions=[];for(const l of BABEL.levels)for(let j=0;j<6;j++){const a=j*Math.PI/3+.3,x=Math.cos(a)*(l.r+4),z=Math.sin(a)*(l.r+4);box(.06,.8,.06,x,l.y+3.8,z,brass);lampPositions.push([x,l.y+4.32,z]);}
+ const ambient=new T.AmbientLight(0xe4cfac,.8);ambient.userData.babelOwned=true;lamps.add(ambient);for(const p of[[0,-9,0],[30,-5,-20],[-25,-17,20]]){const light=new T.PointLight(0xffcf88,55,100,1.7);light.position.set(...p);light.userData.babelOwned=true;lamps.add(light);}lamps.visible=false;
+ const object=new T.Object3D();const globes=new T.InstancedMesh(own(new T.SphereGeometry(.18,8,6)),glow,lampPositions.length);lampPositions.forEach((p,i)=>{object.position.set(...p);object.updateMatrix();globes.setMatrixAt(i,object.matrix);});globes.instanceMatrix.needsUpdate=true;lamps.add(globes);for(const[m,items]of beamBatches){const inst=new T.InstancedMesh(unitBeam,m,items.length);items.forEach((b,i)=>{object.position.copy(b.p);object.quaternion.copy(b.q);object.scale.set(b.w,b.length,b.w);object.updateMatrix();inst.setMatrixAt(i,object.matrix);});inst.instanceMatrix.needsUpdate=true;inst.computeBoundingSphere?.();group.add(inst);}object.rotation.set(0,0,0);object.scale.set(1,1,1);let meshes=0;for(const[m,items]of batches){const inst=new T.InstancedMesh(m===stamp?unitStamp:unit,m,items.length);inst.name=m===pages?'Bound pages':'Batched library books and joinery';for(const[p,t]of items.entries()){object.position.set(t.x,t.y,t.z);object.rotation.set(0,t.yaw,0);object.scale.set(t.w,t.h,m===stamp?1:t.d);object.updateMatrix();inst.setMatrixAt(p,object.matrix);}inst.instanceMatrix.needsUpdate=true;inst.computeBoundingSphere?.();group.add(inst);meshes++;}
+ function paint(lang){const c=BABEL_COPY[lang]||BABEL_COPY.en;for(const l of labels){const ctx=l.c.getContext('2d');ctx.fillStyle='#dbcaa4';ctx.fillRect(0,0,1024,192);ctx.fillStyle='#332d24';ctx.textAlign='center';ctx.textBaseline='middle';ctx.direction=lang==='fa'?'rtl':'ltr';ctx.font='58px Tahoma';ctx.fillText(l.text==='entry'?c.title+' ↓':l.text,512,96,970);l.texture.needsUpdate=true;}}
+ paint('en');group.visible=true;
+ return{group,lamps,targets,bookCount,meshes,paint,dispose(){group.removeFromParent();group.traverse(o=>{if(o.isInstancedMesh)o.dispose?.();});for(const r of owned)r.dispose();group.clear();}};
+}

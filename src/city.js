@@ -20,7 +20,7 @@ window.createGalleryCity=function(T,ctx){
  // Large roadside destination boards and their posts have been removed.
  function plaque(){}
 
- const islandBase=cylinder(552,552,.24,new T.MeshLambertMaterial({color:0x7c8868}),0,-.22,0,city);islandBase.name='Circular island foundation centred on Zarathustra Gallery';
+ const islandShape=new T.Shape();islandShape.absarc(0,0,552,0,Math.PI*2,false);const galleryVoid=new T.Path();galleryVoid.absarc(0,0,58,0,Math.PI*2,true);islandShape.holes.push(galleryVoid);const islandBase=mesh(new T.ExtrudeGeometry(islandShape,{depth:.24,bevelEnabled:false,curveSegments:160}),new T.MeshLambertMaterial({color:0x7c8868}),0,-.34,0,city);islandBase.rotation.x=-Math.PI/2;islandBase.name='Circular island foundation centred on Zarathustra Gallery';
  // One civic street follows the front doors; branches meet it at shared junctions.
  road([[-97.7,110],[0,110],[82.9,110]],9);
  road([[-97.7,110],[-97.7,103.8]],4.2);road([[82.9,110],[82.9,108]],4.2);

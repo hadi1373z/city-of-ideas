@@ -82,3 +82,16 @@ English, Persian and German. Preserve their original-writing attribution; they
 are not historical quotations. Sailing uses a first-person vehicle hook in
 `gallery.js`, preserves the island walking boundary, and cancels cleanly on
 city travel. No character voice assignments or recordings are used or changed.
+
+
+## Underground Library of Babel
+
+The gallery’s northern ground-floor stairwell leads to a five-terrace circular
+library below the same building. `babel-layout.js` supplies the bounds shared
+by the real gallery slab opening and the library navigation. Preserve the holes
+in the slab, floor-ink shader, gallery plinth, island foundation and lawn; do not
+cover the descent with a new ground plane. Library geometry is an original
+interpretation of the user-supplied circular library image; the image itself is
+not published. The interactive catalogue is explicitly a finite 4^6-symbol
+experiment, not all possible books. Keep its source attribution and restore
+surface lighting on exit. Voices and private notes remain untouched.

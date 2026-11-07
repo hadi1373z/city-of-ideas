@@ -10,7 +10,7 @@ export function buildCityCoast(T,{cityPaths=[],heightAt=()=>0,naturalTrees=globa
   const g=own(new T.BufferGeometry());g.setAttribute('position',new T.Float32BufferAttribute(pos,3));if(colours)g.setAttribute('color',new T.Float32BufferAttribute(cols,3));g.setIndex(indices);g.computeVertexNormals();const m=new T.Mesh(g,material);m.name=name;group.add(m);return m;
  }
  const grass=own(new T.MeshLambertMaterial({vertexColors:true})),base=new T.Color(0x84916d);
- const land=polarBand(0,I.lawnRadius,64,192,()=>.005,grass,'Continuous circular lawn centred on the gallery',(x,z)=>{const n=.035*Math.sin(x*.018+Math.sin(z*.011))+.018*Math.cos(z*.043-x*.021),c=base.clone().offsetHSL(0,0,n);return[c.r,c.g,c.b];});
+ const land=polarBand(58,I.lawnRadius,64,192,()=>.005,grass,'Continuous circular lawn centred on the gallery',(x,z)=>{const n=.035*Math.sin(x*.018+Math.sin(z*.011))+.018*Math.cos(z*.043-x*.021),c=base.clone().offsetHSL(0,0,n);return[c.r,c.g,c.b];});
  const beach=polarBand(I.lawnRadius,I.radius,5,256,(_,u)=>.005-.05*u,sand,'Unbroken beach around the entire island');
  const uniforms={time:{value:0},fogColor:{value:new T.Color(0xc2d6df)},fogDensity:{value:.0007},islandRadius:{value:I.radius}};
  const water=own(new T.ShaderMaterial({uniforms,fog:true,side:T.DoubleSide,
