@@ -35,3 +35,26 @@
 #artist-quarter-context button{min-height:44px}
 @media(max-width:760px){#artist-quarter .quarter-directory{grid-template-columns:repeat(2,minmax(0,1fr))}#artist-quarter header{padding:16px}#artist-quarter .quarter-body{padding:8px 16px 20px}#artist-quarter-context{left:12px;bottom:215px;max-width:250px;padding:12px}#artist-quarter-context p{display:none}}
 @media(max-width:430px){#artist-quarter .quarter-directory{grid-template-columns:1fr}#artist-quarter-context{bottom:245px;max-width:215px}#artist-quarter-context strong{font-size:18px}}
+
+/* Idea-led exhibitions: separate from artist homes and reachable on small screens. */
+#idea-exhibitions{color:#273a34;background:#f3efdf;border:1px solid #b9bba9;border-radius:16px;width:min(940px,calc(100vw - 24px));max-height:88dvh;padding:0;box-shadow:0 24px 80px #102a2355}
+#idea-exhibitions::backdrop{background:#102a23b8;backdrop-filter:blur(5px)}
+#idea-exhibitions header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 24px 16px;border-bottom:1px solid #c6cab6}
+#idea-exhibitions h2{font:normal clamp(24px,3vw,34px)/1.2 Georgia,serif;margin:0}
+#idea-exhibitions header button{min-width:44px;min-height:44px;padding:8px;flex:0 0 auto}
+#idea-exhibitions .idea-exhibitions-body{overflow:auto;max-height:calc(88dvh - 103px);padding:14px 24px 28px}
+#idea-exhibitions .idea-exhibitions-body>p{max-width:72ch;line-height:1.6}
+#idea-exhibitions .idea-exhibitions-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:20px}
+#idea-exhibitions .idea-exhibitions-card{min-width:0;background:#fcf9ed;border:1px solid #d4d4c3;border-radius:12px;padding:20px}
+#idea-exhibitions .idea-exhibitions-kicker{font:600 12px/1.5 system-ui,sans-serif;letter-spacing:.09em;text-transform:uppercase;color:#5d7368;margin:0 0 4px}
+#idea-exhibitions h3{font:normal 27px/1.2 Georgia,serif;margin:0}
+#idea-exhibitions h4{font:normal 19px/1.25 Georgia,serif;margin:7px 0 14px;color:#50665a}
+#idea-exhibitions .idea-exhibitions-attribution{font-size:13px;font-weight:600}
+#idea-exhibitions .idea-exhibitions-card p{line-height:1.55}
+#idea-exhibitions blockquote{margin:15px 0;padding:12px 16px;border-inline-start:3px solid #8d957c;background:#f3f0e2;font:italic 17px/1.5 Georgia,serif}
+#idea-exhibitions .idea-exhibitions-actions{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 0}
+#idea-exhibitions button{background:#285646;color:#fff9e8;border:1px solid #557565;border-radius:7px;padding:10px 14px;min-height:44px;line-height:1.4}
+#idea-exhibitions a{color:#2b5d4b;display:inline-flex;align-items:center;min-height:44px;padding:0 8px}
+#idea-exhibitions button:focus-visible,#idea-exhibitions a:focus-visible{outline:3px solid #b28132;outline-offset:3px}
+#idea-exhibitions [role="status"]{font-size:13px;color:#395a49}
+@media(max-width:760px){#idea-exhibitions .idea-exhibitions-grid{grid-template-columns:1fr}#idea-exhibitions header{padding:16px}#idea-exhibitions .idea-exhibitions-body{padding:10px 16px 20px}}

@@ -3,6 +3,7 @@ import * as Three from '../src/city-source-assets/home-tools/vendor/three.module
 import {installArtistQuarter} from '../src/artist-quarter.js';
 import {createVisitMemory} from '../src/visit-memory.js';
 import {QUARTER_COPY} from '../src/artist-quarter-data.js';
+import {IDEA_EXHIBITIONS,IDEA_EXHIBITION_COPY} from '../src/idea-exhibitions.js';
 class Element{
  constructor(tag){this.tagName=tag;this.children=[];this.dataset={};this.style={};this.attributes={};this.events={};this._text='';this.open=false;}
  set textContent(v){this._text=String(v);this.children=[];}get textContent(){return this._text+this.children.map(n=>n.textContent).join('');}
@@ -27,7 +28,23 @@ try{
  api.open('cezanne');findButton(copy.reflect).onclick();assert.equal(store.state.questions.length,1);findButton(copy.reflect).onclick();assert.equal(store.state.questions.length,1,'Revisits reuse the same question');findButton(copy.note).onclick();assert.equal(opened,'studio-cezanne');assert.equal(values.get('private-note'),'Keep exactly');
  const h=api.studios.houses[0],before=h.study.rotation.y;M.showExtra({kind:'artist-quarter',data:{quarterArtist:'cezanne',quarterAction:'activity'}});assert.notEqual(h.study.rotation.y,before);Object.assign(M.player,{x:0,z:0});const changed=h.study.rotation.y;M.showExtra({kind:'artist-quarter',data:{quarterArtist:'cezanne',quarterAction:'activity'}});assert.equal(h.study.rotation.y,changed,'Physical exercises require entering the studio');
  const p=api.entry('monet');assert.equal(p.x,118-23*1.35);assert.equal(p.z,108-8.3*1.35);assert.equal(api.entry('escher').x,151.75);assert.equal(api.entry('missing'),null);
- window.CITY_I18N.lang='fa';events.get('city-language')();api.open('morisot');assert.equal(dialog.dir,'rtl');assert(dialog.textContent.includes(QUARTER_COPY.fa.enter));
+ const ideaDialog=body.querySelector('#idea-exhibitions');
+ assert(ideaDialog,'Dedicated thematic exhibition UI should exist');
+ assert.deepEqual(IDEA_EXHIBITIONS.map(item=>item.id),['philosophy','time','perception','representation']);
+ M.startExtra('ideas-gallery');assert(ideaDialog.open);assert(ideaDialog.textContent.includes('Giorgio de Chirico'));
+ assert(ideaDialog.textContent.includes('The Persistence of Memory'));
+ assert.equal(M.city.targetInfo({deChirico:true}).kind,'idea-art');
+ M.showExtra({kind:'idea-art',data:{deChirico:true}});assert(ideaDialog.open);
+ const findIdeaButton=text=>{const scan=n=>{if(n.tagName==='button'&&n.textContent===text)return n;for(const x of n.children){const result=scan(x);if(result)return result;}};return scan(ideaDialog);};
+ findIdeaButton(IDEA_EXHIBITION_COPY.en.save).onclick();
+ assert.equal(store.state.questions.length,2,'Theme reflection should enter existing private notebook');
+ assert.equal(values.get('private-note'),'Keep exactly');
+ M.startExtra('idea:philosophy');assert(!ideaDialog.open);assert.equal(M.player.x,226);assert.equal(M.player.z,191);
+ M.startExtra('idea:perception');assert.equal(M.player.x,182);
+ window.CITY_I18N.lang='fa';events.get('city-language')();
+ M.startExtra('ideas-gallery');assert.equal(ideaDialog.dir,'rtl');
+ assert(ideaDialog.textContent.includes(IDEA_EXHIBITION_COPY.fa.visit));ideaDialog.close();
+ api.open('morisot');assert.equal(dialog.dir,'rtl');assert(dialog.textContent.includes(QUARTER_COPY.fa.enter));
  const details=dialog.querySelector('summary');assert.equal(details.tabIndex,0,'Credits reachable through controller focus');assert.equal(dialog.children[0].children[1].getAttribute('data-close'),'','Escape and controller Back can find the close control');
 }finally{events.get('pagehide')();}
 assert.equal(M.city.targets.length,0);assert.equal(M.city.buildingTargets.length,0);assert.equal(M.scene.children.length,0);
