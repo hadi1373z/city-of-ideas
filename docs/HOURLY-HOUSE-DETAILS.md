@@ -34,7 +34,7 @@ Exercise context is in memory only, with no new storage key or network request.
 Verification: expanded foundation-house checks cover geometry, all rotated aisles,
 read actions inside the room, both context choices, four languages, Babel travel
 and owned cleanup. Czech shell checks cover saved selection, language switching,
-English fallback and a private-text sentinel. All 68 release checks passed. Native browser checks at 623 × 604 confirmed
+English fallback and a private-text sentinel. All 67 release checks passed. Native browser checks at 623 × 604 confirmed
 physical entrance walking, the E reading shortcut, EN/DE/FA/CS content,
 Persian RTL, Czech persistence after reload, both exercise responses, Enter/Space,
 Escape and the real Babel stairwell destination. No browser errors were logged.
