@@ -913,3 +913,93 @@ visible architectural/interior details and actual EN/DE/FA/CS reading/control
 gaps while preserving its stipulated rates, denominators, independent-versus-
 copied evidence distinction, note keys, window/door openings and walking lanes.
 Keep Proof's new workbench, four-language reader and original Hall experiment.
+
+## 2026-11-07 — House of Uncertainty: two reports, one observation?
+
+Criticism: the existing house at (243, -94) already had a skylight form, wall
+bars and five sourced Bayesian sections, but a plain desk and English-only
+reading/experiment. Its copied-versus-independent distinction needed a small
+visible counterpart. This pass extends that room and its existing controls.
+
+Added a timber curb/corner frame around the existing roof glazing, pale window
+sills and a lintel cap, desk aprons/joints and bench seat/back pads. Original
+roof/ceiling, glazing, windows, doorway, furniture, bar meshes, colliders and
+paths are retained. A pair of small report cards rests on the existing desk
+sheet. Both carry positive marks: one corner stroke identifies the first
+report; the copied second repeats that origin, while two strokes identify the
+second report in independent mode. The existing one-report control hides the
+second card. E on a card opens the existing reader. No extra control, storage
+key, collision obstacle or probability engine was introduced.
+
+An original desk reading explains that two papers need not supply two
+observations. The corner marks illustrate the chosen model; they cannot prove
+independence from actual data. It links Kosuke Imai's Probability, slides 6–8,
+for conditional probability and Bayes' rule:
+https://imai.fas.harvard.edu/teaching/files/probabilityuG.pdf . The original
+Harvard Stat 110 resource link also remains. The workshop and stipulated rates
+are explicitly fictional teaching designs; no quotation or historical room
+was invented. All five English sections remain, with additive DE/FA/CS
+versions of their topic, level, prediction and reflection prompts.
+
+New reading, prior/evidence controls, table headings, calculation/dependence
+feedback, source labels and physical wall captions support EN/DE/FA/CS. Added
+the Czech name Dům nejistoty. Persian prose is RTL; numeric table cells stay
+LTR and do not wrap a percentage onto a second line. Evidence choices have
+pressed states and stable focus keys. The fixed calculation question still
+asks about a 1% prior after one flag, even when exploring another table state.
+All rates, likelihood assumptions and denominators retain the existing model.
+The copied flag contributes no additional likelihood multiplier; it does not
+turn the combined one-flag likelihood ratio into zero or one.
+
+The existing study directory/disclosure now accurately names Proof and
+Uncertainty as four-language readers. Computation's advanced reading and
+experiment remain English. Some shared notebook/city text still has English
+fallback; this is not complete city-wide Czech localization. Private draft
+keys, first-conjecture immutability, explicit keep actions and notebook IDs are
+unchanged. Numeric input retains its value/focus across a locale render; the
+earlier textarea spacing/caret behavior remains. Accepted characters, fixed
+voices, recordings, accounts and private notes were not edited.
+
+Verification: all 69 release programs, build and whitespace checks passed on
+the final source. Original mesh fingerprints still match all three study
+houses when only the separate new detail groups are excluded; the complete
+original collision array matches. New scene checks cover supported card
+footprints, invariant positions, valid/invalid evidence modes, all four priors,
+both evidence assumptions and exact owned disposal. The real UI fixture covers
+the 48 prior/mode/locale combinations, all six numeric results, row headers,
+card visibility, actual bars, good/bad calculation and dependence feedback,
+translated sections, focus and three independent private drafts. Locale/read
+changes make no storage writes. Earlier Proof and Computation checks remain.
+
+Native browser at 1280 × 720 confirmed original directory arrival, walking
+through the doorway and E opening from a report card. One/copy/independent
+controls visibly changed card count and origin marks. At prior 1%, one/copy
+showed 90 and 495 expected flagged parts with 15.38%; independent flags showed
+81 and 24.75 with 76.60%. German prior 10% with independent flags showed 810
+and 22.50 with 97.30%. Space/Enter operated the controls and checks. German/
+Persian body widths matched at 943 px; Persian reading was RTL and number cells
+LTR. At 390 × 844, Czech body/reading/table widths matched at 339/311/287 px,
+with all experiment controls at least 44 px high. A mixed-language draft and
+the calculation input survived EN/DE/FA/CS changes and reopening.
+
+The browser capability became unavailable during reload. Finished in an owned
+Playwright CLI browser, using a fresh synthetic local profile: verified the
+final no-wrap numeric layout visually at 390 × 844, equal 339/287 px body/table
+widths and zero console errors. Explicitly kept first/later reasoning survived
+full reload into the existing personal notebook; Czech selection remained.
+Report-mode, Persian and final Czech mobile screenshots are in the originating
+chat's outputs. Hardware controller A was not directly exercised; the existing
+focused-button hook is reused. The cards are schematic, not a detector or an
+empirical test of independence; roof framing decorates the existing roof form.
+
+Branch/main inspection found the review head at 764d431b and main at b0d03a87
+unchanged. The thirteen earlier passes, three seminar houses, City Map/facing,
+Babel, voyage and branding remain. Review only; nothing merged or deployed.
+
+Fourteen first detail/reading passes are now complete. Next useful house: the
+existing House of Computation at (229, -129). Inspect its stepped roof, counter
+board, desk, five sourced sections and private prediction/reflection flow.
+Extend visible details and actual EN/DE/FA/CS gaps while preserving countdown,
+cycle and long-run behavior, the distinction between timeout/repeated complete
+state, both diagonal branches, note keys, window/door openings and walking
+lanes. Preserve Proof's workbench and Uncertainty's report cards/readers.
