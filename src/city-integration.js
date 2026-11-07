@@ -1,6 +1,6 @@
 import {installBabelLibrary} from './babel-library.js';
 import {installOceanVoyage} from './ocean-voyage.js';
-import {installHouseFoundations} from './foundation-houses.js?v=foundations1';
+import {installHouseFoundations} from './foundation-houses.js?v=house-details1';
 import {installVisitMemory} from './visit-memory.js?v=discoveries1';
 import {installRamseyRoom} from './ramsey-room.js?v=ramsey-paper1';
 import {installRamseyHouse} from './ramsey-house.js';
