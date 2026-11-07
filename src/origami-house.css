@@ -15,7 +15,38 @@
 
 @media(max-width:760px){body[data-mode=city] .visit-actions{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}body[data-mode=city] .visit-actions .glass{min-height:44px;padding:8px 5px;font-size:11px;line-height:1.4}}
 
-#coastal-city-map .coastal-plan{height:min(62dvh,720px);object-fit:contain;background:#eee8d2}
+#coastal-city-map{width:min(1240px,calc(100vw - 24px))}
+#coastal-city-map .coastal-intro{margin:0 0 16px}
+.coastal-explorer-layout{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(270px,1fr);gap:22px;align-items:start}
+.coastal-map-figure{margin:0;min-width:0}
+.coastal-map-stage{position:relative;aspect-ratio:1;isolation:isolate;border-radius:12px;background:#365f72}
+#coastal-city-map .coastal-plan{display:block;width:100%;height:auto;aspect-ratio:1;margin:0;border-radius:12px}
+.coastal-walk-overlay{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.coastal-walk-overlay[hidden]{display:none}
+#coastal-city-map .coastal-landmark{position:absolute;transform:translate(-50%,-50%);z-index:1;box-sizing:border-box;width:32px;height:32px;min-height:32px;margin:0;padding:0;border:2px solid #fff9e8;border-radius:50%;background:#234f43;color:#fff9e8;font:700 14px/1 Tahoma,Arial,sans-serif;box-shadow:0 2px 5px #173c4055}
+#coastal-city-map .coastal-landmark[aria-pressed=true]{background:#963c26;outline:2px solid #fff9e8;outline-offset:2px;z-index:2}
+#coastal-city-map .coastal-landmark:focus-visible{outline:3px solid #182c39;outline-offset:4px;z-index:3}
+.coastal-map-figure figcaption{font-size:12px;padding-top:8px;color:#486152}
+.coastal-map-sidebar{min-width:0}
+.coastal-map-sidebar h3{font:normal 23px/1.35 Georgia,serif;margin:0 0 12px}
+.coastal-place-list{display:grid;gap:6px}
+#coastal-city-map .coastal-place-list button{margin:0;text-align:start;background:#e6e8d3;color:#29483c;border-color:#a5b599;font-size:14px}
+#coastal-city-map .coastal-place-list button[aria-pressed=true]{background:#285a49;color:#fff9e8;border-inline-start:5px solid #c8994d}
+.coastal-location-info{margin-top:20px;padding:16px;background:#fff9e9;border:1px solid #cecdb4;border-radius:10px}
+#coastal-city-map .coastal-location-info p{margin:6px 0;font-size:14px}
+#coastal-city-map .coastal-location-info .coastal-kicker{font-size:11px;color:#536b59;margin:0 0 7px}
+.coastal-location-info .coastal-location-area{font-weight:600}
+.coastal-route{margin-top:20px;border-top:1px solid #c1c9ae;padding-top:12px}
+#coastal-city-map .coastal-route button{margin-inline-end:12px}
+#coastal-city-map .coastal-route button[aria-pressed=true]{background:#963c26;color:#fff9e8}
+.coastal-route-status{font-size:13px}
+.coastal-route ol{padding-inline-start:24px;margin:10px 0;max-width:80ch}
+.coastal-route li{padding-inline-start:4px;margin-block:8px;font-size:14px;line-height:1.65}
+.coastal-more{border-top:1px solid #c1c9ae;margin-top:18px;padding-block:12px}
+#coastal-city-map summary{cursor:pointer;min-height:44px;align-content:center;line-height:1.5}
+#coastal-city-map summary:focus-visible{outline:3px solid #ac7c32;outline-offset:3px}
+@media(max-width:760px){.coastal-explorer-layout{grid-template-columns:1fr;gap:16px}.coastal-place-list{grid-template-columns:repeat(2,minmax(0,1fr))}#coastal-city-map .coastal-landmark{width:28px;height:28px;min-height:28px;font-size:12px}.coastal-route-status{display:block;margin-block:6px}.coastal-location-info{margin-top:16px}}
+@media(max-width:380px){.coastal-place-list{grid-template-columns:1fr}}
 @media(max-width:760px){body[data-mode=city] .route-label{bottom:152px}#origami-house-context{bottom:212px;max-width:220px;padding:12px}}
 
 #coastal-map-return{display:none;position:fixed;left:20px;bottom:24px;z-index:20;min-height:44px;padding:12px 18px;border:1px solid #8d9d7b;border-radius:8px;background:#20483cec;color:#fff9e8;font:inherit;cursor:pointer}body[data-mode=overview][data-coastal-overview=clear] #welcome{display:none}body[data-mode=overview][data-coastal-overview=clear] #coastal-map-return{display:block}#coastal-map-return:focus-visible{outline:3px solid #e2c67b;outline-offset:3px}

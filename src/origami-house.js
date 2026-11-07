@@ -5,6 +5,8 @@ import {buildCityCoast} from './coastal-city-scene.js?v=foundations1';
 import {foldHouseMemory,HOUSE_ORIGAMI as P,miura,vertexTests,CREASE_CASES,coastX,COAST_ROUTES} from './origami-house-math.js';
 import {FOLD_COPY} from './origami-house-copy.js';
 import {ORIGAMI_LESSONS,paperDiagram} from './origami-lessons.js';
+import {mountCoastalMap} from './coastal-map.js';
+import {COAST_EXPLORER_COPY} from './coastal-map-data.js';
 export function installOrigamiHouse(M,T){
  const cityPaths=[],hiddenRoutes=[];M.scene.traverse(o=>{const r=o.userData;if(r?.groundRoute&&r.points?.every(([x,z])=>Math.hypot(x,z)<ISLAND.radius))cityPaths.push({points:r.points,width:r.width});if(o.name==='Mown lawn route · no raised paving'){hiddenRoutes.push([o,o.visible]);o.visible=false;}});for(const p of M.city.landscape?.paths||[])cityPaths.push({points:p.points.map(q=>[q.x,q.z]),width:p.width});cityPaths.push(...(M.artistQuarter?.garden.paths||[]));
  let storage;try{storage=localStorage;}catch{}const memory=foldHouseMemory(storage),house=buildOrigamiHouse(T),coast=buildCityCoast(T,{cityPaths,heightAt:(x,z)=>M.city.landscape?.groundHeight(x,z)}),boatLesson=ORIGAMI_LESSONS.find(l=>l.id==='boat');M.scene.add(house.group,house.released.group,coast.group);M.city.targets.push(...house.targets,coast.launch);M.city.buildingTargets.push(house.group);
@@ -35,7 +37,29 @@ export function installOrigamiHouse(M,T){
   if(feedback){const p=el('p',feedback);p.className='fold-feedback';p.setAttribute('role','status');b.append(p);}const label=el('label',w().reflect),input=el('textarea');input.rows=3;input.maxLength=1200;input.value=draft;input.dataset.privateText='';input.dir='auto';input.oninput=()=>draft=input.value;label.append(input);b.append(label,button(w().save,()=>{if(!memory.reflect(draft)){feedback=w().required;render();return;}const store=M.visitorMemory?.store;store?.question('house-origami','personal',w().reflect);store?.answer('house-origami',draft,draft);feedback=w().kept;render();}),button(w().notebook,()=>{M.visitorMemory?.store.question('house-origami','personal',w().reflect);ui.d.close();M.visitorMemory?.open('house-origami');}));source();status();if(focus)Array.from(b.querySelectorAll('button')).find(n=>n.dataset.foldFocus===focus)?.focus({preventScroll:true});
  }
  function open(next='welcome'){tab=next;feedback='';M.clearMovement();render();if(!ui.d.open)ui.d.showModal();ui.close.focus();ui.body.scrollTop=0;}
- function openMap(){delete document.body.dataset.coastalOverview;M.clearMovement();map.title.textContent=w().map;map.close.setAttribute('aria-label',w().close);map.d.dir=lang()==='fa'?'rtl':'ltr';map.body.replaceChildren(el('p',w().mapIntro));const image=el('img');image.src=new URL('./assets/city-coast-'+(['en','de','fa'].includes(lang())?lang():'en')+'.svg',import.meta.url).href;image.alt=w().mapIntro;image.className='coastal-plan';map.body.append(image);for(const[label,action]of[[w().gallery,()=>{map.d.close();M.quickStart('gallery');}],[w().open,()=>visit('entry')],[w().shore,()=>visit('shore')],[M.oceanSailing?.copy().visit||w().shore,()=>{map.d.close();M.startExtra('ocean');}],[w().artists,()=>{map.d.close();M.quickStart('artists-quarter');}],[w().study,()=>{map.d.close();M.studyHouses?.open();}],[w().park,()=>{map.d.close();M.quickStart('park');}],[w().makers,()=>{map.d.close();M.startExtra('makers');}],[w().socrates,()=>{map.d.close();M.quickStart('socrates');}]])map.body.append(button(label,action));const future=el('details');future.append(el('summary',(FOUNDATION_COPY[lang()]||FOUNDATION_COPY.en).map));for(const h of FOUNDATION_HOUSES)future.append(button(h.names[lang()]||h.names.en,()=>{map.d.close();M.startExtra('house:'+h.id);}));map.body.append(future);map.body.append(button(w().city3d,()=>{document.body.dataset.coastalOverview='clear';map.d.close();}));status();if(!map.d.open)map.d.showModal();map.close.focus();map.body.scrollTop=0;}
+ const mapState={selected:'gallery',route:true};
+ function openMap(){
+  const wasOpen=map.d.open,focus=wasOpen?document.activeElement?.dataset?.coastFocus:null;
+  const c=COAST_EXPLORER_COPY[lang()]||COAST_EXPLORER_COPY.en;
+  delete document.body.dataset.coastalOverview;M.clearMovement();
+  map.title.textContent=c.title;map.close.setAttribute('aria-label',w().close);
+  map.d.lang=lang();map.d.dir=lang()==='fa'?'rtl':'ltr';map.body.replaceChildren();
+  mountCoastalMap(map.body,{language:lang(),state:mapState,onVisit:id=>{
+   map.d.close();
+   if(id==='shore')visit('shore');
+   else M.quickStart(id==='artists'?'artists-quarter':id);
+  }});
+  const more=el('details');more.className='coastal-more';more.append(el('summary',c.more));
+  for(const[label,action]of[[w().open,()=>visit('entry')],[M.oceanSailing?.copy().visit||w().shore,()=>{map.d.close();M.startExtra('ocean');}],[w().study,()=>{map.d.close();M.studyHouses?.open();}],[w().makers,()=>{map.d.close();M.startExtra('makers');}]])more.append(button(label,action));
+  const future=el('details');future.append(el('summary',(FOUNDATION_COPY[lang()]||FOUNDATION_COPY.en).map));
+  for(const h of FOUNDATION_HOUSES)future.append(button(h.names[lang()]||h.names.en,()=>{map.d.close();M.startExtra('house:'+h.id);}));
+  more.append(future);map.body.append(more,button(w().city3d,()=>{document.body.dataset.coastalOverview='clear';map.d.close();}));
+  // The city map does not save visitor data; omit the folding lesson's storage status.
+  map.status.hidden=true;if(!wasOpen)map.d.showModal();
+  if(focus)Array.from(map.body.querySelectorAll('button')).find(n=>n.dataset.coastFocus===focus)?.focus({preventScroll:true});
+  else if(!wasOpen)map.close.focus();
+  if(!wasOpen)map.body.scrollTop=0;
+ }
  const mapReturn=button('',openMap);mapReturn.id='coastal-map-return';document.body.append(mapReturn);
  const launch=button('',()=>open()),mapLaunch=button('',openMap),mapDoor=button('',()=>{map.d.close();visit('entry');});document.querySelector('.welcome-secondary')?.append(launch,mapLaunch);document.querySelector('.map-directions')?.append(mapDoor);
  const panel=el('aside');panel.id='origami-house-context';panel.hidden=true;const panelTitle=el('strong'),panelButton=button('',()=>open(atShore()?'shore':'welcome'));panel.append(panelTitle,panelButton);document.body.append(panel);
