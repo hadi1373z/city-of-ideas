@@ -35,7 +35,7 @@ for (const lang of ['en', 'de', 'fa']) {
   assert(svg.includes('lang="' + lang + '"'));
 }
 assert.deepEqual(COAST_LANDMARKS.map(p => coastMapPoint(...p.point)), [
-  [460,460], [460,229.00000000000003], [392.8,530], [527.2,528.6], [849.1374286786722,513.2]
+  [460,460], [460,229.00000000000003], [392.8,530], [527.2,528.6], [849.1374286786722,513.2], [387.2,681.2], [460,701.5], [532.8,681.2]
 ]);
 assert.deepEqual(COAST_LANDMARKS.find(p => p.id === 'artists').point, Array.from([plan.arrival.x, plan.arrival.z]));
 

@@ -1,5 +1,6 @@
-import {COAST_LANDMARKS, COAST_EXPLORER_COPY, coastMapPoint, coastWalkSvg} from './coastal-map-data.js';
+import {COAST_LANDMARKS, COAST_EXPLORER_COPY, coastMapPoint, coastWalkSvg} from './coastal-map-data.js?v=seminar1';
 
+import {seminarPathsSvg} from './seminar-houses-data.js';
 import {coastVisitor,COAST_POSITION_COPY,coastPositionText,coastDistance} from './coastal-position.js';
 
 // Native buttons keep map selection available to touch, keyboard and controllers.
@@ -38,7 +39,8 @@ export function mountCoastalMap(container, {language = 'en', state, onVisit, vis
   overlay.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(coastWalkSvg());
   overlay.alt = '';
   overlay.setAttribute('aria-hidden', 'true');
-  stage.append(image, overlay);
+  const gardenPaths=el('img','','coastal-seminar-paths');gardenPaths.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(seminarPathsSvg());gardenPaths.alt='';gardenPaths.setAttribute('aria-hidden','true');
+  stage.append(image, overlay, gardenPaths);
   const list = el('div', '', 'coastal-place-list');
   list.setAttribute('role', 'group');
   list.setAttribute('aria-label', c.places);
@@ -52,6 +54,7 @@ export function mountCoastalMap(container, {language = 'en', state, onVisit, vis
     const [x, y] = coastMapPoint(...place.point);
     marker.style.left = x / 920 * 100 + '%';
     marker.style.top = y / 920 * 100 + '%';
+    if(place.seminarHouse){const pin=el('span','','coastal-house-anchor');pin.style.left=marker.style.left;pin.style.top=marker.style.top;pin.setAttribute('aria-hidden','true');stage.append(pin);}
     const item = button(place.number + '. ' + name, () => select(place.id));
     for (const [control, prefix] of [[marker, 'marker-'], [item, 'place-']]) {
       control.dataset.coastFocus = prefix + place.id;

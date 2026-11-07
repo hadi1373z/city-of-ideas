@@ -4,6 +4,7 @@ import {buildAristotlePorch} from './aristotle-house-scene.js';
 import {buildEpicurusGarden} from './epicurus-house-scene.js';
 import {buildHypatiaStudy} from './hypatia-house-scene.js';
 import {buildConfuciusCourtyard} from './confucius-house-scene.js';
+import {buildSinaStudy} from './sina-house-scene.js';
 import {philosopherField,PHILOSOPHER_UI} from './plato-house-copy.js';
 
 // A single, additive ground-level district. No renderer, account or private archive.
@@ -14,7 +15,7 @@ export function createPhilosopherQuarter(T,{language=()=> 'en',canvas=()=>docume
  const geometry=(key,create)=>{if(!geometries.has(key))geometries.set(key,create());return geometries.get(key);};
  const box=(parent,w,h,d,x,y,z,color)=>{const mesh=new T.Mesh(geometry(`b:${w}:${h}:${d}`,()=>new T.BoxGeometry(w,h,d)),material(color));mesh.position.set(x,y,z);parent.add(mesh);return mesh;};
  const cylinder=(parent,r,h,x,y,z,color,top=r)=>{const mesh=new T.Mesh(geometry(`c:${r}:${h}:${top}`,()=>new T.CylinderGeometry(top,r,h,12)),material(color));mesh.position.set(x,y,z);parent.add(mesh);return mesh;};
- const ring=(parent,r,x,y,z,color,rotation=0)=>{const mesh=new T.Mesh(geometry(`r:${r}`,()=>new T.TorusGeometry(r,.055,6,40)),material(color));mesh.position.set(x,y,z);mesh.rotation.x=rotation;parent.add(mesh);return mesh;};
+ const ring=(parent,r,x,y,z,color,rotation=0,arc=Math.PI*2)=>{const mesh=new T.Mesh(geometry(arc===Math.PI*2?`r:${r}`:`r:${r}:arc:${arc}`,()=>new T.TorusGeometry(r,.055,6,40,arc)),material(color));mesh.position.set(x,y,z);mesh.rotation.x=rotation;parent.add(mesh);return mesh;};
  const block=(home,x,z,w,d)=>colliders.push({minX:home.x+x-w/2,maxX:home.x+x+w/2,minZ:home.z+z-d/2,maxZ:home.z+z+d/2});
  const label=(parent,text,x,y,z,width=8)=>{const c=canvas();c.width=1024;c.height=192;const texture=new T.CanvasTexture(c);textures.push(texture);const mat=new T.MeshBasicMaterial({map:texture,side:T.DoubleSide,transparent:true});const mesh=new T.Mesh(geometry('label',()=>new T.PlaneGeometry(1,1)),mat);mesh.position.set(x,y,z);mesh.scale.set(width,width*192/1024,1);parent.add(mesh);labels.push({c,texture,text,mat});return mesh;};
  const action=(mesh,home,section)=>{mesh.userData={philosopherId:home.id,philosopherSection:section};targets.push(mesh);return mesh;};
@@ -39,7 +40,7 @@ export function createPhilosopherQuarter(T,{language=()=> 'en',canvas=()=>docume
   for(const x of [2.4,5.6])box(root,.15,1.1,1.4,x,.63,-6,wood);
   const book=action(box(root,1.15,.14,.85,3.4,1.36,-5.9,home.color),home,'reading');
   box(root,1.05,.08,.76,3.4,1.4,-5.9,0xf2e6ca);book.userData.label=home.reading[1];
-  label(root,()=>['plato','aristotle','epicurus','hypatia','confucius'].includes(home.id)?(PHILOSOPHER_UI[language()]||PHILOSOPHER_UI.en).reading:language()==='fa'?'خواندن و اندیشیدن':'READ & REFLECT',4,2.35,-6.8,4.2);
+  label(root,()=>(PHILOSOPHER_UI[language()]||PHILOSOPHER_UI.en).reading,4,2.35,-6.8,4.2);
   for(let shelf=0;shelf<3;shelf++){
    box(root,4,.13,.6,-5,1+shelf*.65,-10.45,wood);
    for(let i=0;i<8;i++)box(root,.25,.4+(i%3)*.06,.38,-6.5+i*.43,1.27+shelf*.65,-10.4,[home.color,0x9d6c53,0x8d9d86][i%3]);
@@ -70,7 +71,7 @@ export function createPhilosopherQuarter(T,{language=()=> 'en',canvas=()=>docume
    for(const x of [-8,8]){cylinder(root,.22,3.5,x,1.88,7.5,wall);block(home,x,7.5,.6,.6);}const arch=ring(root,8,0,3.8,7.5,home.color);arch.scale.y=.27;
    const archIdea=action(ring(root,1,-5,1.7,-2,0xd6b66b),home,'idea');archIdea.scale.y=1.25;box(root,1.7,.08,1.2,-5,1,-2,home.color);
   }
-  const exhibit=home.id==='plato'?buildPlatoComparison(T,{root,home,box,cylinder,ring,block,action}):home.id==='aristotle'?buildAristotlePorch(T,{root,home,box,cylinder,block,action}):home.id==='epicurus'?buildEpicurusGarden(T,{root,home,box,cylinder,ring,block,action}):home.id==='hypatia'?buildHypatiaStudy(T,{root,home,box,cylinder,ring,block,action}):home.id==='confucius'?buildConfuciusCourtyard(T,{root,home,box,cylinder,action}):null;
+  const exhibit=home.id==='plato'?buildPlatoComparison(T,{root,home,box,cylinder,ring,block,action}):home.id==='aristotle'?buildAristotlePorch(T,{root,home,box,cylinder,block,action}):home.id==='epicurus'?buildEpicurusGarden(T,{root,home,box,cylinder,ring,block,action}):home.id==='hypatia'?buildHypatiaStudy(T,{root,home,box,cylinder,ring,block,action}):home.id==='confucius'?buildConfuciusCourtyard(T,{root,home,box,cylinder,action}):home.id==='ibn-sina'?buildSinaStudy(T,{root,home,box,cylinder,ring,action}):null;
   const bounds={minX:home.x-10,maxX:home.x+10,minZ:home.z-11,maxZ:home.z+11};
   homes.push({...home,group:root,bounds,exhibit,entry:{x:home.x,y:.13,z:home.z+13,yaw:0},study:{x:home.x,y:.13,z:home.z-4,yaw:0}});
  }

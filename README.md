@@ -5,6 +5,13 @@ An AI made city project under development.
 
 Live target: https://hadi1373z.github.io/city-of-ideas/
 
+## Southern garden · form and listening
+
+Visit `?arrival=seminar-houses` or map markers 6–8 for Noether’s rotunda,
+Mirzakhani’s ribbon-roof house and Cage’s listening room. Each has a physical
+experiment, five reading sections, primary sources and a further challenge in
+EN/DE/FA/CS. [Design, content and verification](docs/SEMINAR-HOUSES.md).
+
 ## Day 1 · City Map 1.1
 
 Open **City overview** to explore the coastal map. Five numbered map buttons and

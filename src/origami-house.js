@@ -5,8 +5,9 @@ import {buildCityCoast} from './coastal-city-scene.js?v=babel1';
 import {foldHouseMemory,HOUSE_ORIGAMI as P,miura,vertexTests,CREASE_CASES,coastX,COAST_ROUTES} from './origami-house-math.js';
 import {FOLD_COPY} from './origami-house-copy.js';
 import {ORIGAMI_LESSONS,paperDiagram} from './origami-lessons.js';
-import {mountCoastalMap} from './coastal-map.js';
-import {COAST_EXPLORER_COPY} from './coastal-map-data.js';
+import {mountCoastalMap} from './coastal-map.js?v=seminar1';
+import {COAST_EXPLORER_COPY} from './coastal-map-data.js?v=seminar1';
+import {SEMINAR_HOUSES} from './seminar-houses-data.js';
 export function installOrigamiHouse(M,T){
  const cityPaths=[],hiddenRoutes=[];M.scene.traverse(o=>{const r=o.userData;if(r?.groundRoute&&r.points?.every(([x,z])=>Math.hypot(x,z)<ISLAND.radius))cityPaths.push({points:r.points,width:r.width});if(o.name==='Mown lawn route · no raised paving'){hiddenRoutes.push([o,o.visible]);o.visible=false;}});for(const p of M.city.landscape?.paths||[])cityPaths.push({points:p.points.map(q=>[q.x,q.z]),width:p.width});cityPaths.push(...(M.artistQuarter?.garden.paths||[]));
  let storage;try{storage=localStorage;}catch{}const memory=foldHouseMemory(storage),house=buildOrigamiHouse(T),coast=buildCityCoast(T,{cityPaths,heightAt:(x,z)=>M.city.landscape?.groundHeight(x,z)}),boatLesson=ORIGAMI_LESSONS.find(l=>l.id==='boat');M.scene.add(house.group,house.released.group,coast.group);M.city.targets.push(...house.targets,coast.launch);M.city.buildingTargets.push(house.group);
@@ -46,7 +47,8 @@ export function installOrigamiHouse(M,T){
   map.d.lang=lang();map.d.dir=lang()==='fa'?'rtl':'ltr';map.body.replaceChildren();
   mountCoastalMap(map.body,{language:lang(),state:mapState,visitor:{x:M.player.x,z:M.player.z,yaw:M.player.yaw,belowGround:!!M.babelLibrary?.active},onVisit:id=>{
    map.d.close();
-   if(id==='shore')visit('shore');
+   if(SEMINAR_HOUSES.some(h=>h.id===id))M.startExtra('seminar:'+id);
+   else if(id==='shore')visit('shore');
    else M.quickStart(id==='artists'?'artists-quarter':id);
   }});
   const more=el('details');more.className='coastal-more';more.append(el('summary',c.more));

@@ -742,3 +742,90 @@ Confucius first passes are complete. Next useful house: Ibn Sina's existing
 House of Being and Thought at (-208, -10). Inspect its arch, book, source and
 per-house notes before extending it with visible details and original sourced
 EN/DE/FA/CS reading. Preserve its exhibits, entrance and walking clearances.
+
+## 2026-11-07 — Ibn Sina: description and what is there
+
+Criticism: the House of Being and Thought had a large entrance arch, an oval
+Arch of Possibility and a short EN/FA guide, but no extended comparison between
+a description, a model and evidence about a particular thing.
+
+Kept the plot at (-208, -10), original arches and their exact geometry/poses/
+scales, columns, pedestal, desk/book, chairs, shelves, walls, entrance and paths.
+Added column bases within original footprints and new capitals, plus a framed
+geometric panel on the existing right wall. A sheet beside the original book
+carries a flat arch outline; two native controls reveal or hide a matching
+miniature on the right. Its uprights and curved top rest on a small base on the
+same sheet. The outline remains visible. The panel and desk additions introduce
+no new walking obstacles. All meshes use the existing cached resources and
+owned disposal. The ring helper accepts an optional half arc while preserving
+the original full-ring geometry exactly.
+
+Original readings give each view a scene, explanation, question and small
+practice. They distinguish what a description supplies from evidence about a
+particular object, and make clear that both desk items are representations in
+this city. Revealing a model does not establish that a proposed building exists
+outside the illustration. The short philosophical introduction links Stanford's
+Ibn Sina's Metaphysics, sections 3.2–3.4, on essence, existence and mental
+existence: https://plato.stanford.edu/entries/ibn-sina-metaphysics/ . The original
+general Stanford source and floating-person reading suggestion remain. No
+quotation or historical reconstruction was invented; the limited analogy is
+explicitly not a proof of Ibn Sina's metaphysics.
+
+New readings, source labels, controls and in-room action support EN/DE/FA/CS,
+including Persian RTL. Existing EN/FA guide fields remain, with additive DE/CS
+translations. All six philosopher-home guides now have these additions; this
+does not extend Czech to the whole city, which still has English fallback.
+Existing visits, E/book actions and per-house reflections remain. The context
+action hides outside this house or behind a dialog; choice lasts for the visit
+and uses no new storage key. Earlier house states and notes stay independent.
+
+Concurrent work: main advanced to b0d03a87eba2f6a0d81381cfe0e54a7b961c301d,
+adding Noether, Mirzakhani and Cage seminar houses, their southern routes,
+map integration, four-language readers and two release checks. Incorporated
+that work into this review branch. Kept the new seminar asset versions and
+stylesheet together with the Freud/house versions and Czech shell test. The
+combined release list contains 69 programs. The source files for the seminar
+houses and existing City Map, visitor-position/facing, Babel, voyage, branding,
+characters, voices and recordings are preserved. This synchronizes the review
+branch; it does not merge the house PR into main or deploy it.
+
+Verification: all 69 release programs, build and whitespace checks passed.
+The expanded philosopher checks compare the original arch vertices with the
+original full TorusGeometry construction and verify their exact positions and
+scales. Snapshots of arches/columns stay fixed across all four view transitions.
+The outline and miniature share the same half-arc geometry; flattening affects
+only the outline's depth. Invalid views are rejected. All twelve original
+walking obstacles match independent expected positions/sizes, with no new ones;
+central/front aisles and all six road/entrance routes stay clear. Owned geometry
+and material disposal passes. UI fixture checks cover both readings in four
+languages, pressed/live/source states, focus retention, context visibility,
+object-opening and reopening. Six independent synthetic note keys preserve
+mixed-language text/spacing and caret selection; changing language/view makes
+no writes and explicit note input still writes once to its unchanged key.
+
+Native browser at 1280 × 720 confirmed the existing welcome/home visit action,
+doorway walking, in-room action and E opening of the house reader at the desk.
+Enter/Space and Escape worked; the miniature visibly appeared beside the fixed
+outline and original book. German/Persian article widths matched at 763 px;
+Persian reading was RTL. Czech at 390 × 844 showed both controls at 47 px high,
+with equal article widths of 339 px and inner widths of 303 px, without horizontal
+overflow. A synthetic note survived all four languages, reopening, switching to
+the other five philosopher readers and back, and reload. Czech selection survived
+reload; the new visit correctly began with the outline. No browser console
+errors were logged. Study, outline/model, Persian and Czech mobile screenshots
+are in the originating chat's outputs. Hardware controller A was not directly
+exercised; the existing focused-button hook remains.
+
+Remaining weakness: this is a two-view analogy with immediate reveal/hide, not a
+construction simulator or an account of the whole metaphysical system. The wall
+panel is an original geometric design, without a historical-authenticity claim.
+Review only; the PR remains unmerged and nothing was deployed.
+
+All six foundation and all six philosopher-home first passes are now complete.
+Next useful house: the existing House of Proof at (215, -94), recorded in
+study-houses-data.js. It already has a domino/Hall experiment and five sourced
+advanced sections; preserve them and its private prediction/reflection flow.
+Inspect the actual scene and language handling before adding modest architectural
+details and filling real Czech reading/control gaps. Preserve its plot, window/
+door openings, experiment, note keys and all shared walking clearances. Keep the
+new seminar houses intact and do not restart the twelve completed first passes.

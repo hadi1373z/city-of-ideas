@@ -1,0 +1,23 @@
+import assert from 'node:assert/strict';
+import * as T from '../src/city-source-assets/home-tools/vendor/three.module.js';
+import {oscillator,diskGeodesic,diskDistance,chordLength,DISK_CASES,chanceScore} from '../src/seminar-house-models.js';
+import {buildSeminarHouses} from '../src/seminar-houses-scene.js';
+import {SEMINAR_HOUSES,SEMINAR_PATHS,seminarWorld} from '../src/seminar-houses-data.js';
+import {SEMINAR_TEXT} from '../src/seminar-houses-copy.js';
+import {buildArtCity} from '../src/city-source-assets/home-tools/art-city-scene.js';
+import {ARTISTS} from '../src/city-source-assets/home-tools/artist-catalog.js';
+import {createExtraDistricts} from '../src/extra-districts.js';
+import vm from 'node:vm';import {readFileSync} from 'node:fs';
+for(const broken of[false,true]){let min=Infinity,max=-Infinity;for(let t=0;t<12;t+=.037){const s=oscillator(t,broken),a=oscillator(t+1e-5,broken),b=oscillator(t-1e-5,broken);assert(Math.abs(s.energy-(broken?12.5:6.5))<1e-10);assert(Math.abs((a.momentum-b.momentum)/2e-5-s.torque)<1e-7);if(!broken)assert(Math.abs(s.momentum-6)<1e-10);min=Math.min(min,s.momentum);max=Math.max(max,s.momentum);}if(broken)assert(max-min>10);}
+assert.throws(()=>oscillator(Infinity));
+for(const {a,b}of DISK_CASES){const geo=diskGeodesic(a,b,200),distance=diskDistance(a,b);assert(Math.hypot(...geo.points[0].map((v,i)=>v-a[i]))<1e-10);assert(Math.hypot(...geo.points.at(-1).map((v,i)=>v-b[i]))<1e-10);assert(geo.points.every(p=>Math.hypot(...p)<1));if(!geo.diameter)assert(Math.abs(geo.center[0]**2+geo.center[1]**2-geo.radius**2-1)<1e-10);assert(chordLength(a,b)>=distance-1e-10);assert(Math.abs(distance-diskDistance(b,a))<1e-10);}
+assert(Math.abs(diskDistance([0,0],[.5,0])-Math.log(3))<1e-12);assert(diskDistance([0,0],[.999,0])>7);assert.throws(()=>diskDistance([1,0],[0,0]));assert.throws(()=>diskGeodesic([0,0],[.5,0],Infinity));assert.throws(()=>chordLength([0,0],[.5,0],3));
+for(let seed=1;seed<50;seed++){const s=chanceScore(seed);assert.equal(s.length,16);assert.deepEqual(s,chanceScore(seed));assert(s.every(v=>Number.isInteger(v)&&v>=0&&v<4));}assert.notDeepEqual(chanceScore(1),chanceScore(2));assert.throws(()=>chanceScore(0));
+const canvas=()=>({getContext:()=>new Proxy({},{get:()=>()=>{}})}),built=buildSeminarHouses(T,{canvas});assert.equal(built.houses.length,3);let draws=0;
+for(const h of built.houses){assert(h.inside(h.insideEntry.x,h.insideEntry.z));assert(!h.inside(h.entry.x,h.entry.z));for(let z=20;z>=-9;z-=.1){const p=seminarWorld(h.data,0,z);assert(built.canStand(p.x,p.z),'Entrance and aisle '+h.data.id);}for(const lang of['en','de','fa','cs']){h.paint(lang);const copy=SEMINAR_TEXT[lang].houses[h.data.id];assert(copy.level.length>15);assert.equal(copy.sections.length,5);assert(copy.sections.every(s=>s[0]&&s[1].length>80));assert(copy.challenge.length>80);}for(const broken of[false,true])for(const disk of[0,1,2])h.update({phase:.8,broken,disk,seed:2});h.group.traverse(o=>{if(o.isMesh||o.isLine){draws++;assert(o.geometry.attributes.position.array.every(Number.isFinite));}});}
+assert(draws<200,'Keep these detailed houses within a bounded draw budget');
+for(const route of SEMINAR_PATHS)for(let i=1;i<route.length;i++)for(let t=0;t<=1;t+=.005){const a=route[i-1],b=route[i];assert(built.canStand(a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t),'Garden routes stay clear');}
+// Actual source districts: new entrances and lanes must be free there too.
+const RootT={};vm.runInNewContext(readFileSync(new URL('../src/assets/three.min.js',import.meta.url),'utf8'),{exports:RootT,module:{exports:RootT},console});RootT.TextureLoader=class{load(){return new RootT.Texture();}};const art=buildArtCity(RootT,ARTISTS.slice(0,10));art.group.position.set(118,.06,108);art.group.scale.setScalar(1.35);const scene=new RootT.Scene();scene.add(art.group);const extra=await createExtraDistricts(RootT,{scene,city:{art,ART:{x:118,z:108,scale:1.35}}});for(const h of built.houses)for(const p of[h.entry,h.insideEntry])assert(extra.canStand(p.x,p.z,.13),'Existing districts must not block new entrances');for(const route of SEMINAR_PATHS)for(let i=1;i<route.length;i++)for(let t=0;t<=1;t+=.01){const a=route[i-1],b=route[i];assert(extra.canStand(a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t,.13),'Existing district route clearance');}extra.dispose();art.dispose();
+for(const locale of['de','fa','cs'])assert.deepEqual(Object.keys(SEMINAR_TEXT[locale]).sort(),Object.keys(SEMINAR_TEXT.en).sort());built.dispose();assert.equal(built.group.children.length,0);
+console.log('PASS seminar houses: independent differential identities, metric and orthogonal arcs, reproducible score, three source-clear designs, walking lanes, four-language advanced copy, bounded draws and cleanup');
