@@ -1220,3 +1220,97 @@ translation or replace the experiment. Preserve the A/D/4/7 backs, reveal and
 conclusion gates, transfer/practice masks, first/later private-note flow, original
 source geometry/metadata, furniture, entrances and all walking clearances.
 Keep this library's new rack/guide and the fifteen earlier passes intact.
+
+## 2026-11-07 — Makers' Workshop: inspections and conclusions
+
+Criticism: makers-workshop at world (234, -58) already had a detailed workbench,
+two original books, an idea board, cabinet, tool wall, journal and working card
+experiment. It needed a visible connection between inspecting cards and keeping
+track of what those inspections establish. The shared journey was already
+four-language; this pass does not repeat its translation or replace the task.
+
+Added pale timber fascia/raking trim following the unchanged offset roof,
+window sill/header outside the opening, a rail/hooks behind the five existing
+tools, a cabinet plinth inside its footprint and four bench joint caps. A small
+two-slip inspection tray rests on the unchanged workbench without overlapping
+either original book. Four inset squares on one slip correspond to A/D/4/7 in
+the original order. Their fill follows only the existing revealed-card mask;
+the other slip carries a fork for a provisional explanation. The marks record
+inspections, not correctness, and introduce no separate answer, score or state.
+
+E on the tray opens an expanded guide in the existing learning dialog. The same
+disclosure is available while inside the workshop. New EN/DE/FA/CS reading asks
+visitors to separate what they saw from what follows, compare with the kept
+first plan, and name something still untested. Formal background distinguishes
+entailment from mere compatibility: a failed entailment does not establish its
+opposite. It cites forall x: Calgary, sections 12.4–12.6:
+https://forallx.openlogicproject.org/html/Ch12.html . The existing Eric Pacuit
+Reasoning Experiments source remains:
+https://logic-probability.pacuit.org/docs/reasoning/experiments/ . Both were
+opened and reviewed. The tray/reading are original city material, not a
+historical reconstruction or invented quotation. No hidden card back is added
+to the guide; the original inspection flow remains necessary.
+
+All new text/source labels support EN/DE/FA/CS, including Persian RTL. The
+two original bench books keep their existing reader and English text, as the
+guide discloses. Shared notebook/city controls still have English fallback;
+this is not complete city-wide Czech localization. Library detail/guide,
+source books, source makers scene, card fronts/backs, masks 9/6/12, all gates,
+first-plan immutability, private keys and explicit keep actions remain. The
+tray is readable before starting and after completing the journey without
+starting/resetting it or writing data. Geometry, colliders, openings, walking
+approaches, characters, fixed voices and recordings were not moved or replaced.
+
+Verification: all 69 release programs, build and whitespace checks passed on
+the final source. Source hash:
+fea176592a71ce40905eeee72f6468d4adfe5e1658b00cfaa7df1636d8763ad9
+(709 assets / 332,055,787 bytes). Scene checks compare every borrowed source
+mesh/transform/material/payload and original collider/book data with the
+pre-addition model. They verify supported tray bounds, clearance from both
+source books, every 16 reveal masks × 4 languages, rejection of invalid masks,
+unchanged input state and exact disposal of new geometry/materials/textures.
+
+The real UI fixture retains the complete four-language learning flow and adds
+workshop guide checks before start, during evidence gathering and after finish.
+Remote-room picks cannot open it. Read/locale changes leave both progress and
+storage unchanged. Original first/later notebook answers, private sentinel,
+exact draft spacing/caret, pressed selections and stable focus still pass.
+The original sixteen-mask transfer/practice and corrupt-save checks remain.
+
+Owned Playwright CLI browser at 1280 × 720 confirmed original welcome routing
+and physical entrance walking. After resetting through the existing public
+learning arrival, E on the actual tray opened the guide. Native controls showed
+empty marks, A/4, A/4/7 and all four inspected; the unchanged A/7 observation
+gate rejected the premature A/4-only conclusion. Space activated the original
+selected-card test. Roof/window details, tool rail, cabinet/bench and tray were
+visually checked. All four reading languages opened from the tray. German and
+Persian body client/scroll widths matched at 883 px; Persian reading was RTL.
+
+At 390 × 844, Czech body/guide widths matched at 339 / 307 px without horizontal
+overflow. Summary, close/test/conclusion controls were at least 44 px high;
+revealed card buttons were 115 px. The native Czech wrong/correct conclusion
+and Express/Blue-label transfer remained usable. An exact synthetic mixed-
+language draft survived all four locale changes/reopening through Continue.
+After explicit keep and full reload, Czech completion, original English A/4
+first plan and later Czech reasoning plus the synthetic reason remained in the
+existing notebook. No private text was translated. Browser console errors: zero.
+Screenshots of exterior, tool rail, guide languages/mobile and inspection states
+are in the originating chat's outputs. Hardware controller A was not exercised;
+the existing focused-button hook remains. This tray is a record of the existing
+teaching-card inspections, not a new physical measurement instrument.
+
+Branch/PR inspection found review head 2c0c6b7e and main b0d03a87 unchanged.
+The sixteen prior passes and main's seminar, City Map/facing, Babel, ocean-voyage
+and branding work remain. Other branches/PRs were preserved. Review only;
+nothing merged or deployed.
+
+Seventeen first detail/reading passes are now complete. Next useful house: the
+existing Makers' Dialogue House, id makers-dialogue, at world (225, -41).
+Inspect its hip roof, paired conversation chairs/tea table, discussion board,
+sofa/care book, reflection desk/journal/dialogue book, fireplace and plant in
+makers-city-scene.js. It is the existing journey's transfer/reflection stop;
+preserve those cards, masks, gates, first/later notes and private storage. The
+shared journey is already four-language. Add modest details and an original
+four-language companion without restarting/replacing it, moving source
+geometry/metadata/furniture or narrowing entrances and walking clearances.
+Preserve the Library rack/guide, Workshop tray/guide and all earlier passes.
