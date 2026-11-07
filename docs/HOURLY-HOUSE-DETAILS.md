@@ -1407,3 +1407,100 @@ existing interactions. Inspect actual language gaps before adding a modest
 four-language companion; do not claim the legacy catalog is fully translated.
 Keep existing house locations, source geometry, entrances and walking lanes.
 Preserve all three Makers' guides and the eighteen completed passes.
+
+## 2026-11-07 — Claude Monet: surfaces and reflections
+
+Criticism: the original Monet gallery at world (85, 82) already held six
+paintings, a bench, palette, brushes, worktable, planter and its resident. Its
+catalog/profile and private observation reader existed, but it lacked a scoped
+four-language looking companion and modest furniture/window/roof articulation.
+This is the original gallery, not the separate three working studios.
+
+Added pale trim along the unchanged gable and eaves, window sill/header outside
+the clear aperture, three supported bench slats and joint caps, a worktable
+apron and a small looking folio on the original tabletop. The folio has colour
+marks and broken reflection lines and clears the original palette and every
+brush instance. No original mesh, material, transform, artwork, resident,
+collider, plot, doorway, window or walking approach was changed. The folio is
+an original city schematic, not a Monet sketch or a historical reconstruction.
+
+A pointer pick on the folio opens an accessible companion. The same guide is
+available from a context button inside the original room and from Monet's card
+in the existing Artists' quarter directory. Six original looking prompts
+address edges, colour patches, movement, groups of marks and reflections.
+They correspond to the six retained work IDs: water-lilies, impression-sunrise,
+woman-with-a-parasol, poppy-field, japanese-footbridge and
+water-lilies-and-bridge. Inside-only viewpoint buttons reuse each original
+approach, yaw and look target. Original reader buttons hand off the exact work
+ID to the installed catalog/private-observation experience. The outside
+directory preview offers travel to the existing doorway, not a new location.
+
+Historical background links the actual Art Institute of Chicago record for
+Water Lilies, 1906, and the National Gallery of Art's account of its Japanese
+Footbridge, 1899, among twelve views from a single vantage point:
+https://api.artic.edu/api/v1/artworks/16568
+https://www.nga.gov/artworks/74796-japanese-footbridge
+Both museum records were opened and reviewed. The general Chicago web page
+returned 403, so the companion uses the museum's working API record already
+present in the original catalog. Activities and room details are original
+city writing, separate from historical claims; no quotations were invented.
+
+The companion, source labels, six prompts and associated controls support
+EN/DE/FA/CS, including Persian RTL. The original catalog/image bytes, aspect
+ratios, IDs, source/rights/citation metadata and original reader remain intact.
+The guide explicitly discloses the legacy language boundary: some catalog,
+original book and shared notebook/city text remains English. This is not
+complete city-wide Czech localization. The guide uses no private/lesson
+storage, note keys, score, answer or progress state. Existing language
+preference persistence and explicit observation-save actions remain.
+
+Verification: all 70 release programs, build and whitespace checks passed on
+the final source. Source hash:
+baecae3eb4f935f873b5c508e02c3325eb9ca15c38b8bd0edb29c32f179e5bb6
+(714 assets / 332,085,410 bytes). The new release test compares every borrowed
+scene node's transform, material, geometry, pick payload and visibility with
+the pre-addition scene, and checks unchanged catalog, colliders, entrances and
+all approaches. It verifies the folio's tabletop support and bounds, palette
+and all brush-instance clearances, physical pick ray, six retained work IDs,
+all six view/catalog handoffs in all four languages, outside-room pick gates,
+locale completeness/RTL, reopening at the top, zero storage access and exact
+owned resource disposal. Existing residents, artwork ratios/credits, source
+bytes, Makers' flows, advanced models and all earlier passes remain covered.
+
+Owned Playwright CLI review at 1280 x 720 confirmed the existing welcome and
+directory routes, the new outside guide-to-doorway action and physical walking
+through Monet's doorway. Gable/window, bench/table and the supported folio were
+visually inspected. A pointer pick on the visible folio opened the guide. The
+native context button also worked with keyboard Enter. All six native
+viewpoint buttons and original catalog selections worked. Water Lilies and
+Japanese Footbridge viewpoints were visually reviewed. Native E on the small
+folio and hardware controller A were not separately exercised; the inherited
+target/shared focused-button routes remain. Existing resident behavior was
+preserved.
+
+All four native guide languages were reviewed. Persian guide/body widths
+matched at 838 px and computed direction was RTL. At Czech 390 x 844, guide and
+body client/scroll widths matched at 354 px, with minimum button height 44 px.
+Reopening after scrolling and a full page reload started both Persian and
+Czech reading at scrollTop 0. A synthetic mixed-language draft with leading
+and trailing spaces survived all six original catalog selections and the
+EN/DE/FA/CS guide visits; no save action was taken. Console errors: zero.
+Exterior, room/folio, original viewpoints and EN/DE/FA/CS guide screenshots are
+in the originating chat's outputs. No signed-in account or service was used.
+
+Latest branch/PR inspection found review head 5a8e23aa and main b0d03a87
+unchanged before publication. All eighteen earlier passes, main's City
+Map/facing, Babel, voyage, branding and seminar houses remain. Other branches
+and PRs were preserved. Review only; nothing merged or deployed.
+
+Nineteen first detail/reading passes are complete. Next useful house: the
+existing Vincent van Gogh gallery, id van-gogh, at world (108, 84). Inspect the
+actual source scene/catalog, current quarter layout and installed reader
+before extending it additively. Preserve its six work IDs: starry-night,
+almond-blossom, sunflowers, rhone, bedroom and wheatfield; keep all images,
+ratios, rights/source/citation metadata, source geometry, furniture, resident,
+private observations and interactions. Its original approach already links
+the scholarly letters edition and explicitly avoids inventing the artist's
+voice. Inspect real language gaps before adding a modest four-language
+companion; do not claim full legacy catalog translation. Preserve Monet's
+folio, guide, six viewpoint/catalog handoffs and all nineteen completed passes.
