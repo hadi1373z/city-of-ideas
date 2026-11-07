@@ -5,6 +5,8 @@ import {buildFoundationHouses} from '../src/foundation-houses-scene.js';
 import {BORGES_ROOM} from '../src/borges-house-copy.js';
 import {ADA_ROOM} from '../src/ada-house-copy.js';
 import {adaTrace} from '../src/ada-house-model.js';
+import {CALVINO_ROOM} from '../src/calvino-house-copy.js';
+import {CALVINO_LENSES,calvinoViewingPose} from '../src/calvino-house-model.js';
 import {installHouseFoundations} from '../src/foundation-houses.js';
 const canvas=()=>({getContext:()=>new Proxy({},{get:()=>()=>{}})}),built=buildFoundationHouses(T,{canvas});assert.equal(built.houses.length,6);assert.equal(new Set(FOUNDATION_HOUSES.map(h=>h.style)).size,6);built.group.updateMatrixWorld(true);let draws=0;
 for(const h of built.houses){
@@ -57,5 +59,27 @@ const adaModel=api.built.houses.find(h=>h.data.id==='ada');
 const cards=[];adaModel.feature.traverse(n=>{if(n.userData.cardOperation)cards.push(n);});assert.equal(cards.length,2);assert(cards.every(n=>n.geometry.type==='ExtrudeGeometry'&&n.geometry.parameters.shapes.holes.length===8),'Cards have actual punched holes');
 for(const [x,z]of[[4.6,-3.4],[-4.6,-3.4]]){const p=houseWorld(adaModel.data,x,z);assert(!adaModel.canStand(p.x,p.z),'Both tables are solid');}
 for(let x=-7;x<=7;x+=.1){const p=houseWorld(adaModel.data,x,1.5);assert(adaModel.canStand(p.x,p.z),'A clear cross-aisle reaches both benches');}
+
+const calvinoModel=api.built.houses.find(h=>h.data.id==='calvino'),mark=calvinoViewingPose(calvinoModel.data);
+assert(calvinoModel.inside(mark.x,mark.z));assert(M.city.canStand(mark.x,mark.z));
+for(let t=0;t<=1;t+=.01){const a=calvinoModel.insideEntry;assert(M.city.canStand(a.x+(mark.x-a.x)*t,a.z+(mark.z-a.z)*t),'The walking approach to the mark is clear');}
+for(const [x,z]of[[-7.9,-2],[4.5,1],[4,-4.5]]){const p=houseWorld(calvinoModel.data,x,z);assert(!calvinoModel.canStand(p.x,p.z),'Calvino model, desk and bench are solid');}
+const modelGeometry=()=>{const shapes=[];calvinoModel.exhibit.buildings.traverse(n=>{if(n.isMesh)shapes.push([Array.from(n.geometry.attributes.position.array),n.position.toArray(),n.isInstancedMesh?Array.from(n.instanceMatrix.array):null]);});return shapes;};
+const fixedBuildings=modelGeometry();assert.equal(calvinoModel.exhibit.buildings.children[0].count,3,'One miniature city with three buildings');
+for(const id of CALVINO_LENSES){assert(calvinoModel.exhibit.setLens(id));assert.equal(calvinoModel.exhibit.lens,id);assert.deepEqual(modelGeometry(),fixedBuildings,'A reading changes emphasis, never model geometry');const colours=Object.fromEntries(CALVINO_LENSES.map(key=>[key,calvinoModel.exhibit.layers[key].children[0].material.color.getHex()]));assert.notEqual(colours[id],0xaaa38e);for(const key of CALVINO_LENSES.filter(k=>k!==id))assert.equal(colours[key],0xaaa38e);}
+assert(!calvinoModel.exhibit.setLens('__proto__'));
+api.visit('freud',true);api.open('calvino');
+const beforeView={x:M.player.x,z:M.player.z};allNodes(dialog).find(n=>n.dataset.houseFocus==='calvino-look').onclick();
+assert.deepEqual({x:M.player.x,z:M.player.z},beforeView,'Viewing mark cannot bypass the room entry guard');assert(dialog.open);dialog.close();
+for(const locale of['en','de','fa','cs']){
+ window.CITY_I18N.lang=locale;events.get('city-language')();api.visit('calvino',true);M.city.update(M.player,1);assert(!body.querySelector('#house-foundations-context').hidden);
+ assert(api.interact());assert(!api.interact(),'Do not open behind another dialog');const c=CALVINO_ROOM[locale];assert(dialog.textContent.includes(c.title));assert.equal(dialog.dir,locale==='fa'?'rtl':'ltr');
+ const control=key=>allNodes(dialog).find(n=>n.dataset.houseFocus===key);
+ for(const id of CALVINO_LENSES){control('calvino-'+id).focus();control('calvino-'+id).onclick();assert.equal(control('calvino-'+id).attributes['aria-pressed'],'true');assert(dialog.querySelector('#calvino-lens-reading').textContent.includes(c.views[id].story));assert.equal(calvinoModel.exhibit.lens,id);}
+ const compare=control('calvino-compare');if(compare.attributes['aria-pressed']==='true')compare.onclick();assert(dialog.querySelector('#calvino-comparison').hidden);compare.focus();compare.onclick();assert(!dialog.querySelector('#calvino-comparison').hidden);
+ events.get('city-language')();assert.equal(document.activeElement.dataset.houseFocus,'calvino-compare');assert(!dialog.querySelector('#calvino-comparison').hidden);assert.equal(calvinoModel.exhibit.lens,'measure');
+ assert(allNodes(dialog).find(n=>n.tagName==='a').href.startsWith('https://www.arsenal.arch.ethz.ch/'));
+ control('calvino-look').onclick();assert(!dialog.open);assert.equal(M.player.x,mark.x);assert.equal(M.player.z,mark.z);assert.equal(M.player.yaw,mark.yaw);assert.equal(M.player.pitch,mark.pitch);
+}
 events.get('pagehide')();assert.deepEqual(M.city.targets,[sentinel]);assert.deepEqual(M.city.buildingTargets,[sentinel]);assert.equal(M.scene.children.length,0);
 console.log('PASS six foundation houses: distinct roofs, readable/pickable names, clear rotated entrances and aisles, connected lanes, batched details, directory/entry routing, EN/DE/FA, delegated controls and owned cleanup');

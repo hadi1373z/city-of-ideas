@@ -98,3 +98,58 @@ Other city content still has partial Czech coverage. Changes remain for review.
 Next useful house: Calvino's vaulted room. Give the three existing nested viewing
 frames a reason to be there, with distinct views/readings of the same city and
 an accessible way to compare them. Preserve its plot, doorway and walking aisle.
+
+## 2026-11-07 — Calvino: one model, three readings
+
+Criticism: the three viewing frames stood empty in a largely bare vaulted room.
+They suggested perspective without giving the visitor anything specific to see
+or compare. Ada's completed work above was preserved and not repeated.
+
+Added a small original city model behind the unchanged frames: three permanent
+buildings, three doorsteps, a connected lane with three approaches, and a marked
+height ruler. The room also has a reading desk with an open folio, a bench, a
+floor viewing mark, and three curved timber ribs beneath the existing vault.
+The house plot, doors, frames, original geometry and walking axis remain fixed.
+New furniture is solid; the approach from the entrance to the mark is clear.
+
+Three original readings emphasize memory, routes and measure. Selecting a reading
+changes only the model's material emphasis and the matching frame inlay, never
+the positions or dimensions of the model buildings. A comparison section explains
+what each description leaves out. A separate explicit action takes a visitor
+already inside the room to the same safe viewing mark for every reading. It
+closes the dialog and faces the model through all three frames. From outside,
+the action asks the visitor to enter first. It is not automatic walking.
+
+The short source introduction is grounded in Calvino's own 1983 Columbia lecture,
+linked to the ETH Zürich archive. The descriptions and miniature city are new
+work, not quotations, a reconstruction of Calvino's house, or a model of a named
+city from his book. No book text or external image is copied into the repository.
+
+All readings, comparison text, actions and feedback support EN/DE/FA/CS. Persian
+retains RTL; other city content still has partial Czech coverage. Reading and
+comparison choices survive reopening/language changes in memory only. No new
+storage key, private-note edit, voice, recording or account change was added.
+
+Verification: all 67 release test programs, build and whitespace checks passed.
+Expanded house checks verify three fixed model buildings across all emphasis
+choices, unknown-choice rejection, solid furniture, a clear approach, a viewing
+mark inside the existing house, an outside-entry guard, four-language readings,
+pressed/live states, comparison visibility, focus/state retention, fixed viewing
+pose and owned disposal. Existing Borges and Ada checks remain in the same suite.
+Native browser at 1280 × 720 confirmed physical entrance walking, room details,
+E reading, all three readings via Enter/Space, comparison toggling, the actual
+view through the frames, and visibly different path/ruler emphasis. EN/DE/FA/CS
+switches retained choices. Persian RTL and no overflow passed. Czech at 390 × 844
+had equal 339 px client/scroll widths with its selected reading and comparison.
+No browser console errors were logged. Screenshots are in the originating chat's
+outputs. Hardware controller A was not directly exercised; it shares E's hook.
+
+Remaining weakness: the miniature city is intentionally small, and the three
+readings are a beginning, not a literary seminar or a city-generation system.
+The viewing action repositions the visitor explicitly within the room instead
+of animating a walk. No island or city-map layout is changed. Review only.
+
+Next useful house: Chomsky's light-filled study. Give the existing branching
+relief a clear linguistic example, readable explanation and reachable station,
+while preserving its doorway, window light, paths and fixed plot. Keep the
+separate House of Psychoanalysis at the design stage.

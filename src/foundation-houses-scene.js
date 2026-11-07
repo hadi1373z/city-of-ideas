@@ -30,7 +30,7 @@ export function buildFoundationHouses(T,{canvas=()=>document.createElement('canv
   }else{
    box(home,19.2,.2,17.2,0,4.5,0,roof);box(home,11,.14,9,0,5.8,0,roof);for(const x of[-5.2,5.2])for(const z of[-4.2,4.2])box(home,.14,1.18,.14,x,5.12,z,trim);
   }
-  const feature=new T.Group();feature.name=data.feature.en;home.add(feature);const furniture=(x,z,w,d)=>obstacle(x,z,w,d);
+  const feature=new T.Group();feature.name=data.feature.en;home.add(feature);const furniture=(x,z,w,d)=>obstacle(x,z,w,d);let exhibit=null;
   if(data.id==='freud'){
    const red=mat(0x8c3f3d);box(feature,3.8,.36,1.3,-4.6,.57,-3.2,red);box(feature,3.8,.72,.23,-4.6,.9,-3.8,red);for(const x of[-6.4,-2.8]){box(feature,.25,.62,1.4,x,.78,-3.2,red);for(const z of[-3.65,-2.75])box(feature,.10,.38,.10,x,.19,z,wood);}furniture(-4.6,-3.2,4.1,1.5);
   }else if(data.id==='chomsky'){
@@ -46,6 +46,29 @@ export function buildFoundationHouses(T,{canvas=()=>document.createElement('canv
    box(feature,3,.12,1.8,-4.5,1,-2.6,wood);for(const x of[-5.7,-3.3])for(const z of[-3.25,-1.95])box(feature,.12,.94,.12,x,.47,z,wood);const book=box(feature,.85,.08,.7,-4.5,1.1,-2.6,paper);book.rotation.y=.16;furniture(-4.5,-2.6,3,1.8);
   }else if(data.id==='calvino'){
    for(const x of[-4.5,-5.7,-6.9]){for(const z of[-3.7,-.3])box(feature,.12,3,.12,x,1.5,z,wood);for(const y of[.15,3])box(feature,.12,.12,3.55,x,y,-2,wood);}for(const z of[-3.7,-.3])box(feature,2.6,.08,.08,-5.7,3,z,wood);furniture(-5.7,-2,2.6,3.6);
+   // A small invented city behind the original frames: three permanent buildings,
+   // with different details emphasized by the reading controls. No city plot moves.
+   const layers={},materials={},colours={memory:0xc18a40,routes:0x2b7b62,measure:0x365d91};
+   for(const id of['memory','routes','measure']){layers[id]=new T.Group();layers[id].name='Calvino model · '+id;feature.add(layers[id]);materials[id]=mat(colours[id]);}
+   box(feature,1.35,.12,3.2,-7.9,1,-2,wood);for(const x of[-8.4,-7.4])for(const z of[-3.3,-.7])box(feature,.1,.94,.1,x,.47,z,wood);furniture(-7.9,-2,1.35,3.2);
+   const buildings=new T.Group();buildings.name='Calvino model · three fixed buildings';feature.add(buildings);
+   for(const [z,height]of[[-2.95,.55],[-2,1.15],[-1.05,.8]]){
+    box(buildings,.65,height,.6,-8,1.07+height/2,z,paper);
+    box(layers.memory,.025,.24,.18,-7.66,1.19,z,materials.memory);
+    box(layers.memory,.18,.025,.28,-7.58,1.085,z,materials.memory);
+    box(layers.routes,.3,.018,.09,-7.5,1.075,z,materials.routes);
+   }
+   box(layers.routes,.1,.018,2.9,-7.35,1.075,-2,materials.routes);
+   box(layers.measure,.06,1.4,.05,-8.4,1.77,-.55,materials.measure);
+   for(let i=0;i<7;i++)box(layers.measure,.08,.018,i%2?.12:.2,-8.35,1.1+i*.2,-.55,materials.measure);
+   for(const [i,x]of[-4.5,-5.7,-6.9].entries())box(layers[['memory','routes','measure'][i]],.14,.06,3.2,x,2.91,-2,materials[['memory','routes','measure'][i]]);
+   box(feature,.8,.014,.8,-2,.015,-2,brass);
+   // A small reading desk and bench leave the central and front cross-aisles clear.
+   box(feature,2.6,.12,1.6,4.5,1,1,wood);for(const x of[3.5,5.5])for(const z of[.45,1.55])box(feature,.1,.94,.1,x,.47,z,wood);furniture(4.5,1,2.6,1.6);
+   for(const side of[-1,1]){const page=box(feature,.65,.04,.8,4.5+side*.33,1.09,1,paper);page.rotation.z=side*.05;}
+   box(feature,3,.22,1,4,.5,-4.5,wood);for(const x of[2.8,5.2])box(feature,.14,.4,.7,x,.2,-4.5,wood);furniture(4,-4.5,3,1.1);
+   for(const z of[-5,0,5]){const curve=new T.CatmullRomCurve3(Array.from({length:25},(_,i)=>{const x=-8.8+i/24*17.6;return new T.Vector3(x,4.31+2.65*Math.sqrt(1-(x/9.5)**2),z);}));const rib=new T.Mesh(own(new T.TubeGeometry(curve,28,.065,6,false)),wood);rib.name='Calvino vault rib';feature.add(rib);}
+   let lens='memory';exhibit={layers,buildings,get lens(){return lens;},setLens(id){if(!Object.hasOwn(materials,id))return false;lens=id;for(const key of Object.keys(materials))materials[key].color.setHex(key===id?colours[key]:0xaaa38e);return true;}};exhibit.setLens(lens);
   }else if(data.id==='ada'){
    // A separate card table and wall diagram clarify the wheel's role without
    // reconstructing the historical Engine or moving the original workbench.
@@ -71,7 +94,7 @@ export function buildFoundationHouses(T,{canvas=()=>document.createElement('canv
   }
   feature.traverse(o=>{if(o.isMesh)o.userData={...o.userData,foundationHouse:data.id};});targets.push(feature);
   const local=(x,z)=>{const dx=x-data.x,dz=z-data.z;return{x:dx*Math.cos(data.turn)-dz*Math.sin(data.turn),z:dx*Math.sin(data.turn)+dz*Math.cos(data.turn)};};
-  let painted='';const model={data,group:home,feature,colliders,entry:houseEntry(data),insideEntry:houseInside(data),local,inside:(x,z)=>{const p=local(x,z);return Math.abs(p.x)<8.8&&Math.abs(p.z)<7.8;},canStand:(x,z)=>{const p=local(x,z);return!colliders.some(b=>Math.abs(p.x-b.x)<b.w/2+.22&&Math.abs(p.z-b.z)<b.d/2+.22);},paint(lang){if(painted===lang)return;painted=lang;const text=data.names[lang]||data.names.en,ctx=c.getContext('2d');ctx.fillStyle='#f0e7d1';ctx.fillRect(0,0,c.width,c.height);ctx.fillStyle='#30483d';ctx.textAlign='center';ctx.textBaseline='middle';ctx.direction=lang==='fa'?'rtl':'ltr';ctx.font='92px Tahoma';ctx.fillText(text,c.width/2,c.height/2,c.width-80);texture.needsUpdate=true;}};model.paint('en');batchBoxes(home);houses.push(model);
+  let painted='';const model={data,group:home,feature,colliders,exhibit,entry:houseEntry(data),insideEntry:houseInside(data),local,inside:(x,z)=>{const p=local(x,z);return Math.abs(p.x)<8.8&&Math.abs(p.z)<7.8;},canStand:(x,z)=>{const p=local(x,z);return!colliders.some(b=>Math.abs(p.x-b.x)<b.w/2+.22&&Math.abs(p.z-b.z)<b.d/2+.22);},paint(lang){if(painted===lang)return;painted=lang;const text=data.names[lang]||data.names.en,ctx=c.getContext('2d');ctx.fillStyle='#f0e7d1';ctx.fillRect(0,0,c.width,c.height);ctx.fillStyle='#30483d';ctx.textAlign='center';ctx.textBaseline='middle';ctx.direction=lang==='fa'?'rtl':'ltr';ctx.font='92px Tahoma';ctx.fillText(text,c.width/2,c.height/2,c.width-80);texture.needsUpdate=true;}};model.paint('en');batchBoxes(home);houses.push(model);
  }
  return{group,houses,targets,canStand:(x,z)=>houses.every(h=>h.canStand(x,z)),dispose(){group.removeFromParent();group.traverse(o=>{if(o.isInstancedMesh)o.dispose?.();});for(const r of owned)r.dispose();group.clear();}};
 }
