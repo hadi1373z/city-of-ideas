@@ -5,4 +5,4 @@ body[data-ocean-voyage] .visit-hud,body[data-ocean-voyage] .route-label,body[dat
 @media(max-width:760px){#ocean-board{bottom:218px;max-width:90%;white-space:normal;width:max-content}#ocean-voyage-controls{inset:auto 9px 9px;padding:9px 12px}#ocean-voyage-controls>span{font-size:11px}#ocean-voyage-controls button{padding:7px 10px;font-size:11px}#ocean-voyage-controls p{font-size:10px}#ocean-poem-veil{inset:16% 5% 37%}#ocean-poem-veil p{font-size:22px}}
 @media(prefers-reduced-motion:reduce){#ocean-poem-veil{transform:none}}
 
-body[data-ocean-voyage] .hint{display:none!important}
+body[data-ocean-voyage] .movement-help{display:none!important}
