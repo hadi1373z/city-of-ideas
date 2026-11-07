@@ -1,4 +1,5 @@
 import {QUARTER_ARTISTS,QUARTER_COPY} from './artist-quarter-data.js?v=artists2';
+import {installIdeaExhibitions} from './idea-exhibitions.js';
 import {buildArtistStudios,buildQuarterGarden} from './artist-quarter-scene.js?v=artists2';
 const PLAN=globalThis.ARTIST_QUARTER_PLAN;
 
@@ -50,9 +51,11 @@ export function installArtistQuarter(M,T){
  if(M.city.landmarks)M.city.landmarks.artists={...PLAN.arrival};
  M.startExtra=destination=>{if(['artists-quarter','artists'].includes(destination)){arrive(PLAN.arrival);return true;}const studio=houseFor(destination?.replace(/^artist:/,''));if(studio){arrive(studio.entry);return true;}return old.startExtra?.(destination);};
  M.city.update=(...args)=>{old.update(...args);const time=args[1];if(time-lastTime<.15)return;lastTime=time;const p=M.player,r=M.city.region(p.x,p.z),house=studios.houses.find(h=>h.inside(p.x,p.z)||Math.hypot(p.x-h.entry.x,p.z-h.entry.z)<6),near=house&&house.inside(p.x,p.z),b=PLAN.bounds,area=p.x>b.minX&&p.x<b.maxX&&p.z>b.minZ&&p.z<b.maxZ;const active=M.mode==='city'&&area&&(!r.artistId||!!house)&&!['escher','dali'].includes(r.artistId)&&!document.querySelector('dialog[open]');panel.hidden=!active;if(active){const key=(house?.artist.id||'garden')+':'+!!near+':'+lang();if(key!==lastKey){lastKey=key;contextRender(house,near);}}};
- const locale=()=>{launch.textContent=map.textContent=w().open;panel.dir=lang()==='fa'?'rtl':'ltr';lastKey='';if(dialog.open)render();};locale();addEventListener('city-language',locale);
+ let ideas=null;
+ const locale=()=>{launch.textContent=map.textContent=w().open;panel.dir=lang()==='fa'?'rtl':'ltr';lastKey='';if(dialog.open)render();ideas?.refresh();};locale();addEventListener('city-language',locale);
  const api={studios,garden,entry,open,reflect};M.artistQuarter=api;
- addEventListener('pagehide',()=>{removeEventListener('city-language',locale);dialog.remove();panel.remove();launch.remove();map.remove();for(const [o,v]of hidden)o.visible=v;for(const target of studios.targets){const i=M.city.targets.indexOf(target);if(i>=0)M.city.targets.splice(i,1);}for(const h of studios.houses){const i=M.city.buildingTargets.indexOf(h.group);if(i>=0)M.city.buildingTargets.splice(i,1);}studios.dispose();garden.dispose();},{once:true});
+ ideas=installIdeaExhibitions(M,T);
+ addEventListener('pagehide',()=>{ideas?.dispose();removeEventListener('city-language',locale);dialog.remove();panel.remove();launch.remove();map.remove();for(const [o,v]of hidden)o.visible=v;for(const target of studios.targets){const i=M.city.targets.indexOf(target);if(i>=0)M.city.targets.splice(i,1);}for(const h of studios.houses){const i=M.city.buildingTargets.indexOf(h.group);if(i>=0)M.city.buildingTargets.splice(i,1);}studios.dispose();garden.dispose();},{once:true});
  const query=new URLSearchParams(globalThis.location?.search||'');if(query.get('arrival')==='artists-quarter'){const court=PLAN.courts.find(c=>c.id===query.get('court'));if(court)arrive(court.arrival);else M.startExtra('artists-quarter');}
  return api;
 }
