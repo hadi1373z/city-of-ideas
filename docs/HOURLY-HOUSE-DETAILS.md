@@ -664,3 +664,81 @@ first passes. Next useful house: Confucius's existing Courtyard of Learning at
 (-242, -10). Inspect its conversation seats, roof, book, source and per-house
 notes before extending it with modest details and original sourced EN/DE/FA/CS
 reading about learning and relationships. Preserve its exhibits and entrances.
+
+## 2026-11-07 — Confucius: learning with another person
+
+Criticism: the Courtyard of Learning had two small seats, a layered roof and a
+short EN/FA guide, but little architectural detail or extended reading. The guide
+said the seats faced each other although their actual preserved poses are paired
+side by side. Corrected that descriptive phrase in EN/FA and used accurate DE/CS
+guide text; neither seat was moved or rotated.
+
+Kept the plot at (-242, -10), original seats and backs, pedestal, roof pieces,
+columns, original book/desk, other chairs, walls, entrance and paths. Added small
+seat supports, cushions and wooden trim, column bases inside the original post
+footprints, collars, roof brackets/rafter ends and a framed wall lattice. The
+lattice is a decorative panel on the existing solid wall, not a new window. A
+bound wooden folio sits beside the original book on the existing desk. Its three
+paper leaves have original abstract marks and one small marker, selected through
+three native controls. The folio rests on the desktop and adds no walking
+obstacle; existing cached resources and owned cleanup are reused.
+
+Three original scenes follow neighbours learning to read together: noticing
+different starting needs, trying a small helpful arrangement, and returning to
+what helped or interrupted them. Each moment has a scene, explanation, open
+question and small practice. Visitors can revisit the moments in any order.
+The text connects learning and practice with Analects 1.1 and learning/thinking
+with 2.15, linking James Legge's translation at Project Gutenberg:
+https://www.gutenberg.org/cache/epub/3330/pg3330-images.html . The existing Stanford
+source remains: https://plato.stanford.edu/entries/confucius/ . The introduction
+acknowledges the collection's complex transmission. These scenes and furniture
+are city interpretations, not historical lessons or invented quotations from
+Confucius. No Chinese writing, source image or passage was copied.
+
+New readings, source labels, controls and the in-room action support EN/DE/FA/CS,
+including Persian RTL. The shared philosopher controls remain translated;
+Czech is still partial elsewhere with English fallback. Existing visits, E/book
+actions and private per-house reflections remain. The in-room action hides
+outside this courtyard or behind a dialog. Choices last for the visit, without
+new storage keys. Earlier pose/case/setting/comparison states stay independent.
+Main and the review branch had not advanced since the previous run; main's map
+position/facing update, City Map, Babel, voyage and branding work are preserved.
+
+Verification: all 67 release test programs, build and whitespace checks passed.
+Expanded philosopher checks preserve snapshots of the four original seat/back
+meshes and twelve original roof pieces across all nine reading transitions.
+Exactly one leaf and one matching marker are visible, with fixed folio/marker
+positions and invalid-step rejection. All twelve original courtyard collision
+boxes match independently specified positions/sizes exactly; no new obstacles
+are introduced. The central/front aisles and all six shared road/entrance routes
+remain clear. Owned geometry/material disposal passes. The real UI fixture checks
+all three readings in four languages, pressed/live/source states, focus retention,
+context visibility, object-opening and reopening. Five independent synthetic note
+keys preserve exact mixed-language text/spacing and caret selection without
+writes on language/reading changes; explicit input still writes once to its
+unchanged key. Earlier house and map checks remain and pass.
+
+Native browser at 1280 × 720 confirmed the existing welcome/home visit action,
+physical doorway walking, in-room reading button and E opening of the house
+reader at the desk. Enter/Space and Escape worked. The folio's leaf markings and
+marker visibly changed while the original book and seats stayed fixed. German
+and Persian article client/scroll widths matched at 763 px; Persian was RTL.
+Czech at 390 × 844 showed all three controls at 47 px high, with equal article
+widths of 339 px and inner reading widths of 303 px, without horizontal overflow.
+A synthetic note survived EN/DE/FA/CS switches, reopening, visits to the other
+four developed philosopher readers and back, and reload. Czech selection survived
+reload; the new visit correctly began at the first moment. No browser console
+errors were logged. Courtyard, first/last folio state, Persian and Czech mobile
+screenshots are saved in the originating chat's outputs. Hardware controller A
+was not directly exercised; the established focused-button hook is reused.
+
+Remaining weakness: the folio changes immediately instead of animating a page
+turn, and its abstract marks carry no historical-script claim. The fictional
+meeting is a small reflection on learning/relationships rather than a survey of
+the Analects. Review only; nothing merged or deployed.
+
+The six foundation passes and the Plato, Aristotle, Epicurus, Hypatia and
+Confucius first passes are complete. Next useful house: Ibn Sina's existing
+House of Being and Thought at (-208, -10). Inspect its arch, book, source and
+per-house notes before extending it with visible details and original sourced
+EN/DE/FA/CS reading. Preserve its exhibits, entrance and walking clearances.

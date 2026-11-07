@@ -11,7 +11,7 @@ import {installLearningLab} from './learning-lab.js?v=learning1';
 import {installStudyHouses} from './study-houses.js?v=study1';
 import {installOrigamiHouse} from './origami-house.js?v=map-position1';
 import {artistLineOfSight} from './artist-line-of-sight.js';
-import {installPhilosopherQuarter} from './philosopher-ui.js?v=hypatia-details1';
+import {installPhilosopherQuarter} from './philosopher-ui.js?v=confucius-details1';
 import {installSocratesTour} from './socrates-tour.js';
 import {installOrigamiPark} from './origami-park.js';
 import {createExtraDistricts} from './extra-districts.js?v=island1';

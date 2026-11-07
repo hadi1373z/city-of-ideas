@@ -2,12 +2,13 @@ import {pickLanguage} from './philosopher-data.js';
 import {ARISTOTLE_FIELDS} from './aristotle-house-copy.js';
 import {EPICURUS_FIELDS} from './epicurus-house-copy.js';
 import {HYPATIA_FIELDS} from './hypatia-house-copy.js';
+import {CONFUCIUS_FIELDS} from './confucius-house-copy.js';
 export const PLATO_SOURCE = {url:'https://classics.mit.edu/Plato/republic.7.vi.html',label:'Plato · Republic, Book VI · Benjamin Jowett translation'};
 export const PLATO_FIELDS = {
   de: {name:'Platon',home:'Hof der Fragen',theme:'Erscheinung und Erkenntnis',intro:'Platons Dialoge untersuchen Gerechtigkeit, Erkenntnis und das gute Leben. Ein vertrautes Bild oder eine Antwort kann eine Untersuchung beginnen; ihre Begründung muss dennoch geprüft werden.',object:'Kreis und Schatten',idea:'Vergleiche den Messingkreis mit seiner Schattendarstellung. Wie unterscheidet sich ein sichtbares Beispiel von einer genauen Definition des Kreises?',reading:'Politeia, Buch VII: das Höhlengleichnis. Achte auf die Unterschiede zwischen Sehen, Glauben und Verstehen.',prompt:'Nenne eine Überzeugung, bei der du sicher bist. Welcher Beleg könnte sie ändern?'},
   cs: {name:'Platón',home:'Dvůr otázek',theme:'Zdání a poznání',intro:'Platónovy dialogy zkoumají spravedlnost, poznání a dobrý život. Známý obraz či odpověď mohou zahájit zkoumání; jejich zdůvodnění je však třeba prověřit.',object:'Kruh a stín',idea:'Porovnej mosazný kruh s jeho zobrazením stínu. Jak se viditelný příklad liší od přesné definice kruhu?',reading:'Ústava, kniha VII: podobenství o jeskyni. Sleduj rozdíly mezi viděním, přesvědčením a porozuměním.',prompt:'Uveď přesvědčení, kterým jsi si jistý. Jaký důkaz by je mohl změnit?'}
 };
-export const philosopherField=(home,field,language)=>(home.id==='plato'?PLATO_FIELDS:home.id==='aristotle'?ARISTOTLE_FIELDS:home.id==='epicurus'?EPICURUS_FIELDS:home.id==='hypatia'?HYPATIA_FIELDS:null)?.[language]?.[field]||pickLanguage(home[field],language);
+export const philosopherField=(home,field,language)=>(home.id==='plato'?PLATO_FIELDS:home.id==='aristotle'?ARISTOTLE_FIELDS:home.id==='epicurus'?EPICURUS_FIELDS:home.id==='hypatia'?HYPATIA_FIELDS:home.id==='confucius'?CONFUCIUS_FIELDS:null)?.[language]?.[field]||pickLanguage(home[field],language);
 export const PLATO_ROOM = {
   en: {
     open:'Read at the comparison stand',
