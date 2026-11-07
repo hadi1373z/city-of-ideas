@@ -5,6 +5,41 @@ An AI made city project under development.
 
 Live target: https://hadi1373z.github.io/city-of-ideas/
 
+## Day 1 · City Map 1.1
+
+Open **City overview** to explore the coastal map. Five numbered map buttons and
+an equivalent destination list select Zarathustra Gallery, Ideas Park, Socrates’
+House, the Artists’ Quarter garden court and Paper-Boat Lookout. Selection updates
+a live location-information panel; **Visit this place** uses the existing city
+travel controls. Selection alone never moves the visitor or writes saved data.
+
+The optional dashed walking guide follows existing paths from the gallery’s west
+approach to the artists’ garden court, retraces that short approach, and continues
+east past the House of Origami to the lookout. It is a map overlay, not automatic
+walking. The guide also has text directions. The other existing city destinations,
+six foundation houses, ocean voyage and 3D overview remain available below the map.
+
+English, German and Persian share the same physical coordinates. Persian controls
+use RTL layout while east and west remain fixed on the map. Native buttons support
+keyboard and controller focus; the dialog retains Escape/close and focus return.
+Selection and route visibility survive reopening and language changes for this
+visit. No new storage key is used.
+
+`src/coastal-map-data.js` owns the five existing anchors, guide and localized copy;
+`src/coastal-map.js` renders the controls inside the existing overview dialog.
+`src/coastal-city-plan.js` remains the source for all three SVGs; regenerate them
+with `node tools/render-coastal-plan.mjs`. Improved sea, shoreline and label styling
+does not alter any original shape, path, building or label position. The gallery
+remains `(460,460)` in the `920 × 920` viewBox, the island radius remains `399`, and
+the continuous promenade radius remains `375.2`.
+
+Run `node tools/check.cjs` and `node tools/build.cjs`. The release checks include
+`tests/coastal-map.mjs`, which pins all 97 original shape/label geometries to the
+pre-change map and samples the full overlay against the existing path network.
+`tests/origami-house-ui.mjs` covers all five selections in all three languages,
+pressed states, live information, guarded travel, guide toggling, focus/state
+retention, private-note preservation and the retained overview/house controls.
+
 
 The [ten-minute 3D film and room](https://hadi1373z.github.io/city-of-ideas/ramsey-film/) and [character studio](https://hadi1373z.github.io/city-of-ideas/ramsey-film/studio.html) are preserved as a separate edition. Source: `src/ramsey-film/`. Its README records character provenance and known visual limitations.
 # Learning in the Makers courtyard
