@@ -1,6 +1,6 @@
 export const colour=i=>(Math.floor(i/4)+i%4)%2;
 export const adjacent=(a,b)=>Math.abs(Math.floor(a/4)-Math.floor(b/4))+Math.abs(a%4-b%4)===1;
-export function neighbours(board,selection){return board.filter(i=>colour(i)===1&&selection.some(j=>adjacent(i,j)));}
+export function neighbours(board,selection){return board.filter(i=>selection.some(j=>adjacent(i,j)));}
 export function matching(board){
  const left=board.filter(i=>colour(i)===0),pairs=new Map();
  function augment(a,seen){for(const b of board.filter(b=>colour(b)===1&&adjacent(a,b))){if(seen.has(b))continue;seen.add(b);if(!pairs.has(b)||augment(pairs.get(b),seen)){pairs.set(b,a);return true;}}return false;}

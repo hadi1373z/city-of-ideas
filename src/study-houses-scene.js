@@ -1,5 +1,5 @@
 import {STUDY_HOUSES} from './study-houses-data.js';
-import {colour,neighbours,bayes} from './study-house-models.js';
+import {colour,neighbours,bayes} from './study-house-models.js?v=workbench1';
 export function buildStudyHouses(T,{canvas=()=>document.createElement('canvas')}={}){
  const group=new T.Group(),houses=[],targets=[],colliders=[],owned=new Set(),own=r=>(owned.add(r),r),material=c=>own(new T.MeshLambertMaterial({color:c}));group.name='Advanced study courtyard';
  const stone=material(0xc4bda6),wood=material(0x775c43),paper=material(0xe7dfc8),floor=material(0xb4a889),glass=own(new T.MeshLambertMaterial({color:0xb1c9c2,transparent:true,opacity:.13,depthWrite:false}));
@@ -35,7 +35,7 @@ export function buildStudyHouses(T,{canvas=()=>document.createElement('canvas')}
  let lastKey='';function update({lang='en',board,selection=[],prior=.01,repeats=1,independent=true,machine,showMatching=false,pairs=[]}){
   const key=JSON.stringify([lang,board,selection,prior,repeats,independent,machine?.steps,showMatching]);if(key===lastKey)return;lastKey=key;
   for(const h of houses)h.name.paint(h.data.names[lang]||h.data.names.en);
-  const proof=houses[0],near=neighbours(board,selection);proof.caption.paint('S and N(S) · '+selection.length+' / '+near.length);for(const[i,c]of proof.cells.entries()){c.visible=board.includes(i);const p=pairs.findIndex(p=>p.includes(i));c.material.color.setHex(selection.includes(i)?0xd7b857:near.includes(i)?0x79a6b5:showMatching&&p>=0?[0x8ebba8,0xb1a0c2,0xc7ae77,0x86a8bd][p%4]:colour(i)?0xe5d7b7:0x4c6257);}
+  const proof=houses[0],near=neighbours(board,selection);proof.caption.paint(showMatching?'Maximum matching · '+pairs.length+' dominoes':'S and N(S) · '+selection.length+' / '+near.length);for(const[i,c]of proof.cells.entries()){c.visible=board.includes(i);const p=pairs.findIndex(p=>p.includes(i));c.material.color.setHex(selection.includes(i)?0xd7b857:near.includes(i)?0x79a6b5:showMatching&&p>=0?[0x8ebba8,0xb1a0c2,0xc7ae77,0x86a8bd][p%4]:colour(i)?0xe5d7b7:0x4c6257);}
   for(const[i,link]of proof.links.entries()){const pair=pairs[i];link.visible=showMatching&&!!pair;if(pair){const[a,b]=pair;link.position.x=((a%4+b%4)/2-1.5)*.53;link.position.y=.02-((Math.floor(a/4)+Math.floor(b/4))/2-1.5)*.53;link.rotation.z=Math.floor(a/4)===Math.floor(b/4)?0:Math.PI/2;}}
   const uncertainty=houses[1],b=bayes(prior,.9,.05,repeats,independent);uncertainty.caption.paint('Share of flagged components / 100%');for(const[i,bar]of uncertainty.bars.entries()){const width=4.1*[b.hit,b.falseAlarm][i]/(b.hit+b.falseAlarm);bar.scale.x=Math.max(.002,width);bar.position.x=-2.05+width/2;}uncertainty.readout.paint(b.hit.toFixed(2)+' faulty · '+b.falseAlarm.toFixed(2)+' sound');
   const computation=houses[2];computation.caption.paint('Complete toy state · counter');if(machine){const digits=String(machine.counter).padStart(5,'0');computation.cells.forEach((c,i)=>c.paint(digits[i]));computation.readout.paint(machine.steps+' steps · '+(machine.halted?'HALTED':machine.repeated?'REPEATED STATE':'NOT YET HALTED'));}

@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import * as T from '../src/city-source-assets/home-tools/vendor/three.module.js';
 import {installStudyHouses} from '../src/study-houses.js';
 import {createVisitMemory} from '../src/visit-memory.js';
+import {WORKBENCH_TEXT} from '../src/room-workbench.js';
 import {STUDY_UI} from '../src/study-houses-data.js';
 class Element{
  constructor(tag){this.tagName=tag;this.children=[];this.dataset={};this.style={};this.attributes={};this.events={};this._text='';this.open=false;}
@@ -11,6 +12,7 @@ class Element{
  replaceChildren(...nodes){for(const c of this.children)c.parent=null;this.children=[];this._text='';this.append(...nodes);}
  setAttribute(k,v){this.attributes[k]=String(v);}getAttribute(k){return this.attributes[k]??null;}
  addEventListener(k,fn){this.events[k]=fn;}showModal(){this.open=true;}close(){this.open=false;this.events.close?.();}focus(){document.activeElement=this;}
+ setSelectionRange(start,end,direction){this.selectionStart=start;this.selectionEnd=end;this.selectionDirection=direction;}
  getContext(){return new Proxy({},{get:()=>()=>{}});}
  querySelectorAll(selector){const result=[];const visit=n=>{for(const c of n.children){if(c.tagName===selector)result.push(c);visit(c);}};visit(this);return result;}
  querySelector(selector){const matches=n=>selector.startsWith('#')?n.id===selector.slice(1):selector==='dialog[open]'?n.tagName==='dialog'&&n.open:selector.startsWith('.')?n.className===selector.slice(1):n.tagName===selector;const visit=n=>{for(const c of n.children){if(matches(c))return c;const r=visit(c);if(r)return r;}};return visit(this);}
@@ -27,6 +29,16 @@ try{
  click('Check my Hall obstruction');assert(dialog.textContent.includes('A valid certificate'));assert.equal(api.scene.houses[0].cells[8].material.color.getHex(),0xd7b857);click('A and B share one available room');assert(api.memory.get('proof').checks.includes('transfer'));write(copy.reflect,'The subset has two dark squares and one neighbour; parity alone was insufficient.');click(copy.reflect);assert.equal(store.state.questions[0].history.length,2);click(copy.notebook);assert.equal(opened,'advanced-proof');
  api.visit('uncertainty',true);api.open('uncertainty');const input=dialog.querySelector('input');input.value='15.38';input.oninput();click('Check my calculation');assert(dialog.textContent.includes('90 / (90 + 495)'));click('The same flag copied twice');click('1: it adds no new information');assert(api.memory.get('uncertainty').checks.includes('dependence'));
  api.visit('computation',true);api.open('computation');click('Load long');click('Run 16 steps');click('Check my trace evidence');assert(dialog.textContent.includes('inconclusive'));click('Load cycle');click('Run 16 steps');click('Check my trace evidence');assert(dialog.textContent.includes('future repeats forever'));click('Suppose H says halts');click('Suppose H says loops');click('No total correct decider works for every program and input');assert(api.memory.get('computation').checks.includes('diagonal'));
+ // Valid certificates are accepted on every preset, and matching never destroys a conjecture.
+ api.visit('proof',true);api.open('proof');click('Opposite corners removed');click('Choose light squares');
+ for(const tile of dialog.querySelectorAll('button').filter(b=>b.getAttribute('aria-label')?.endsWith('light selectable')&&!b.disabled)){tile.onclick();}
+ click('Check my Hall obstruction');assert(dialog.textContent.includes('|S| = 8 > |N(S)| = 6'));
+ click('Show a maximum matching');assert(api.scene.houses[0].links.some(n=>n.visible));assert.equal(document.activeElement.dataset.studyFocus,'matching');
+ click('Return to my selected subset');assert.equal(dialog.querySelectorAll('button').filter(b=>b.className?.includes('chosen')).length,8);assert(!api.scene.houses[0].links.some(n=>n.visible));
+ click('A tileable control');click('Check my Hall obstruction');assert(dialog.textContent.includes('does not establish tileability'));
+ const thought='A draft with a cursor in its middle.';write(copy.reflect,thought);let draft=dialog.querySelectorAll('textarea').find(n=>n.dataset.studyDraft==='reason-proof');draft.focus();draft.setSelectionRange(3,8,'forward');events.get('city-language')();draft=document.activeElement;assert.equal(draft.value,thought);assert.equal(draft.selectionStart,3);assert.equal(draft.selectionEnd,8);
+ for(const id of['proof','uncertainty','computation']){api.visit(id,true);M.showExtra({kind:'room'});assert.equal(dialog.dataset.workbench,'true');assert(!dialog.querySelector('textarea'));const position=[M.player.x,M.player.y,M.player.z];click(WORKBENCH_TEXT.en.face);assert.deepEqual([M.player.x,M.player.y,M.player.z],position);assert(Number.isFinite(M.player.pitch));click(WORKBENCH_TEXT.en.read);assert.equal(dialog.dataset.workbench,'false');assert(dialog.querySelector('textarea'));}
+ api.visit('proof',true);api.open('proof');assert.equal(dialog.querySelectorAll('textarea').find(n=>n.dataset.studyDraft==='reason-proof').value,thought);
  window.CITY_I18N.lang='fa';events.get('city-language')();assert.equal(dialog.dir,'rtl');assert(dialog.textContent.includes(STUDY_UI.fa.notice));assert.equal(dialog.querySelector('summary').tabIndex,0);assert.equal(dialog.children[0].children[1].dataset.close,'');assert.equal(values.get('private-note'),'Keep exactly');
 }finally{events.get('pagehide')();}
 assert.deepEqual(M.city.targets,[sentinel]);assert.deepEqual(M.city.buildingTargets,[sentinel]);assert.equal(M.scene.children.length,0);

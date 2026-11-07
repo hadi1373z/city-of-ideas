@@ -1,4 +1,4 @@
-import {installSeminarHouses} from './seminar-houses.js?v=1';
+import {installSeminarHouses} from './seminar-houses.js?v=workbench1';
 import {installBabelLibrary} from './babel-library.js';
 import {installOceanVoyage} from './ocean-voyage.js';
 import {installHouseFoundations} from './foundation-houses.js?v=foundations1';
@@ -9,7 +9,7 @@ import {installQuestionWalk} from './question-walk.js';
 import {installCityDiscoveries} from './city-discoveries.js?v=study1';
 import {installArtistQuarter} from './artist-quarter.js?v=artists2';
 import {installLearningLab} from './learning-lab.js?v=learning1';
-import {installStudyHouses} from './study-houses.js?v=study1';
+import {installStudyHouses} from './study-houses.js?v=workbench1';
 import {installOrigamiHouse} from './origami-house.js?v=seminar1';
 import {artistLineOfSight} from './artist-line-of-sight.js';
 import {installPhilosopherQuarter} from './philosopher-ui.js';

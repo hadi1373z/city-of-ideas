@@ -4,6 +4,7 @@ import {oscillator,diskGeodesic,diskDistance,chordLength,DISK_CASES,chanceScore}
 import {buildSeminarHouses} from '../src/seminar-houses-scene.js';
 import {SEMINAR_HOUSES,SEMINAR_PATHS,seminarWorld} from '../src/seminar-houses-data.js';
 import {SEMINAR_TEXT} from '../src/seminar-houses-copy.js';
+import {faceRoomWork} from '../src/room-workbench.js';
 import {buildArtCity} from '../src/city-source-assets/home-tools/art-city-scene.js';
 import {ARTISTS} from '../src/city-source-assets/home-tools/artist-catalog.js';
 import {createExtraDistricts} from '../src/extra-districts.js';
@@ -15,6 +16,13 @@ assert(Math.abs(diskDistance([0,0],[.5,0])-Math.log(3))<1e-12);assert(diskDistan
 for(let seed=1;seed<50;seed++){const s=chanceScore(seed);assert.equal(s.length,16);assert.deepEqual(s,chanceScore(seed));assert(s.every(v=>Number.isInteger(v)&&v>=0&&v<4));}assert.notDeepEqual(chanceScore(1),chanceScore(2));assert.throws(()=>chanceScore(0));
 const canvas=()=>({getContext:()=>new Proxy({},{get:()=>()=>{}})}),built=buildSeminarHouses(T,{canvas});assert.equal(built.houses.length,3);let draws=0;
 for(const h of built.houses){assert(h.inside(h.insideEntry.x,h.insideEntry.z));assert(!h.inside(h.entry.x,h.entry.z));for(let z=20;z>=-9;z-=.1){const p=seminarWorld(h.data,0,z);assert(built.canStand(p.x,p.z),'Entrance and aisle '+h.data.id);}for(const lang of['en','de','fa','cs']){h.paint(lang);const copy=SEMINAR_TEXT[lang].houses[h.data.id];assert(copy.level.length>15);assert.equal(copy.sections.length,5);assert(copy.sections.every(s=>s[0]&&s[1].length>80));assert(copy.challenge.length>80);}for(const broken of[false,true])for(const disk of[0,1,2])h.update({phase:.8,broken,disk,seed:2});h.group.traverse(o=>{if(o.isMesh||o.isLine){draws++;assert(o.geometry.attributes.position.array.every(Number.isFinite));}});}
+// Vector directions come from the differential equations, not the orbit's shape.
+ const noether=built.houses[0];noether.update({phase:Math.PI/8,broken:true,disk:1,seed:1});const s=oscillator(Math.PI/8,true);
+ for(const [name,dx,dy]of[['Velocity vector',s.vx,s.vy],['Restoring force vector',-s.x,-s.w*s.w*s.y]]){const arrow=noether.exhibit.getObjectByName(name),tip=new T.Vector3(0,1,0).applyQuaternion(arrow.quaternion);assert(tip.distanceTo(new T.Vector3(dx,dy,0).normalize())<1e-10);assert(Math.abs(arrow.position.x-s.x)<1e-10);}
+ const cursor=built.houses[2].exhibit.getObjectByName('Score playback cursor');built.houses[2].update({seed:1,playingSlot:7});assert(cursor.visible);assert.equal(cursor.position.x,-.23);built.houses[2].update({seed:1,playingSlot:-1});assert(!cursor.visible);
+// A modal pauses the root camera loop: the explicit look action must update the
+// real camera immediately, leave the visitor in place and put the work above the phone dock.
+for(const width of[390,1024]){globalThis.innerWidth=width;const camera=new T.PerspectiveCamera(66,width/844,.08,650),player={x:104,y:1.93,z:308,yaw:Math.PI,pitch:0},before={...player};camera.position.set(player.x,player.y,player.z);faceRoomWork({player,camera,clearMovement(){}},T,built.houses[2].exhibit);assert.deepEqual([player.x,player.y,player.z],[before.x,before.y,before.z]);const screen=built.houses[2].exhibit.getWorldPosition(new T.Vector3()).project(camera);assert(Math.abs(screen.x)<1e-9);assert(screen.y>0);assert.equal(camera.rotation.y,player.yaw);}delete globalThis.innerWidth;
 assert(draws<200,'Keep these detailed houses within a bounded draw budget');
 for(const route of SEMINAR_PATHS)for(let i=1;i<route.length;i++)for(let t=0;t<=1;t+=.005){const a=route[i-1],b=route[i];assert(built.canStand(a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t),'Garden routes stay clear');}
 // Actual source districts: new entrances and lanes must be free there too.

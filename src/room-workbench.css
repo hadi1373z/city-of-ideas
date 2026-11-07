@@ -1,0 +1,20 @@
+#seminar-houses[data-workbench=true],#study-houses[data-workbench=true]{position:fixed;inset:82px 18px auto auto;margin:0;width:356px;max-width:calc(100vw - 24px);max-height:calc(100dvh - 110px);box-shadow:0 10px 40px #102c2440;border-radius:12px;overflow:auto}
+#seminar-houses[data-workbench=true]::backdrop,#study-houses[data-workbench=true]::backdrop{background:transparent;backdrop-filter:none}
+#seminar-houses[data-workbench=true] header,#study-houses[data-workbench=true] header{padding:10px 14px;gap:8px}
+#seminar-houses[data-workbench=true] header,#study-houses[data-workbench=true] header{position:sticky;top:0;z-index:2;background:#244b4d;color:#fff6df}
+#seminar-houses[data-workbench=true] h2,#study-houses[data-workbench=true] h2{font-size:21px}
+#seminar-houses[data-workbench=true] main,#study-houses[data-workbench=true] .study-body{padding:10px 12px;max-height:none;overflow:visible;scrollbar-gutter:auto}
+#seminar-houses[data-workbench=true] .seminar-languages{padding:4px 8px;gap:0}
+#seminar-houses[data-workbench=true] button,#study-houses[data-workbench=true] button{padding:8px 10px;font-size:13px;margin:3px;min-height:44px}
+#seminar-houses[data-workbench=true] p,#study-houses[data-workbench=true] p{font-size:13px;line-height:1.65}
+#seminar-houses[data-workbench=true] h3,#study-houses[data-workbench=true] h3{font-size:20px;line-height:1.4;margin:12px 0}
+#seminar-houses[data-workbench=true] .seminar-experiment,#study-houses[data-workbench=true] .study-experiment{padding:8px;margin:10px 0}
+#seminar-houses[data-workbench=true] th,#seminar-houses[data-workbench=true] td,#study-houses[data-workbench=true] th,#study-houses[data-workbench=true] td{font-size:12px;padding:7px 4px}
+#seminar-houses[data-workbench=true] .seminar-diagram{display:none}
+#seminar-houses[data-workbench=true]>label[hidden],#seminar-houses[data-workbench=true]>button[hidden]{display:none}
+#seminar-houses[data-workbench=true]>p:empty{display:none}
+.seminar-score li[aria-current=true]{background:#254c4d;color:#fff6dd;outline:3px solid #bc8f40;outline-offset:1px}
+@media(max-width:800px){
+ #seminar-houses[data-workbench=true],#study-houses[data-workbench=true]{inset:auto 10px 10px 10px;width:auto;max-width:none;max-height:46dvh;scroll-padding-top:12px}
+ #seminar-houses[data-workbench=true] .seminar-languages{position:static}
+}
