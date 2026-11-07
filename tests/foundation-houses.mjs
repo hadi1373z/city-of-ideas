@@ -3,6 +3,8 @@ import * as T from '../src/city-source-assets/home-tools/vendor/three.module.js'
 import {FOUNDATION_HOUSES,FOUNDATION_ROUTES,FOUNDATION_COPY,houseWorld} from '../src/foundation-houses-data.js';
 import {buildFoundationHouses} from '../src/foundation-houses-scene.js';
 import {BORGES_ROOM} from '../src/borges-house-copy.js';
+import {ADA_ROOM} from '../src/ada-house-copy.js';
+import {adaTrace} from '../src/ada-house-model.js';
 import {installHouseFoundations} from '../src/foundation-houses.js';
 const canvas=()=>({getContext:()=>new Proxy({},{get:()=>()=>{}})}),built=buildFoundationHouses(T,{canvas});assert.equal(built.houses.length,6);assert.equal(new Set(FOUNDATION_HOUSES.map(h=>h.style)).size,6);built.group.updateMatrixWorld(true);let draws=0;
 for(const h of built.houses){
@@ -18,7 +20,7 @@ built.dispose();assert.equal(built.group.children.length,0);
 class Element{constructor(tag){this.tagName=tag;this.children=[];this.dataset={};this.attributes={};this.events={};this.open=false;this._text='';}set textContent(v){this._text=v;this.children=[];}get textContent(){return this._text+this.children.map(n=>n.textContent).join('');}append(...nodes){for(const n of nodes){n.parent=this;this.children.push(n);}}remove(){if(this.parent)this.parent.children=this.parent.children.filter(n=>n!==this);}replaceChildren(...nodes){this.children=[];this._text='';this.append(...nodes);}setAttribute(k,v){this.attributes[k]=v;}addEventListener(k,fn){this.events[k]=fn;}showModal(){this.open=true;}close(){this.open=false;this.events.close?.();}focus(){document.activeElement=this;}getContext(){return canvas().getContext();}querySelector(s){const visit=n=>{for(const c of n.children){if(s.startsWith('#')&&c.id===s.slice(1)||s.startsWith('.')&&c.className===s.slice(1)||s==='dialog[open]'&&c.tagName==='dialog'&&c.open)return c;const found=visit(c);if(found)return found;}};return visit(this);}}
 const body=new Element('body');for(const cls of['welcome-secondary','map-directions']){const n=new Element('div');n.className=cls;body.append(n);}globalThis.document={body,createElement:t=>new Element(t),querySelector:s=>body.querySelector(s)};globalThis.window={CITY_I18N:{lang:'en'}};const events=new Map();globalThis.addEventListener=(k,fn)=>events.set(k,fn);globalThis.removeEventListener=()=>{};const sentinel=new T.Group();let delegated=0;const M={scene:new T.Scene(),mode:'city',player:{x:0,z:0},clearMovement(){},arrive(p){Object.assign(this.player,p);},city:{targets:[sentinel],buildingTargets:[sentinel],canStand:()=>true,region:()=>({id:'old'}),targetInfo:()=>({kind:'old'}),update(){}},startExtra:()=>++delegated,showExtra:()=>++delegated};
 const api=installHouseFoundations(M,T),dialog=body.querySelector('#house-foundations');api.open();assert(dialog.textContent.includes(FOUNDATION_COPY.en.intro));assert(dialog.textContent.includes('Freud'));assert(api.visit('freud',true));assert.equal(M.city.region(M.player.x,M.player.z).houseId,'freud');M.city.update(M.player,1);assert.equal(body.querySelector('#house-foundations-context').hidden,true);M.showExtra({kind:'house-foundation',data:{foundationHouse:'ada'}});assert(dialog.textContent.includes('Ada Lovelace'));window.CITY_I18N.lang='fa';events.get('city-language')();assert.equal(dialog.dir,'rtl');assert(dialog.textContent.includes(FOUNDATION_HOUSES.find(h=>h.id==='ada').names.fa));M.startExtra('house:chomsky');assert.equal(M.city.region(M.player.x,M.player.z).id,'old');M.showExtra({kind:'other'});M.startExtra('other');assert.equal(delegated,2);
-api.visit('borges',true);assert.equal(api.interact(),true);assert.equal(api.interact(),false,'No interaction behind a modal');dialog.close();M.mode='aerial';assert.equal(api.interact(),false);M.mode='city';api.visit('ada',true);assert.equal(api.interact(),false,'Other houses retain their existing interactions');
+api.visit('borges',true);assert.equal(api.interact(),true);assert.equal(api.interact(),false,'No interaction behind a modal');dialog.close();M.mode='aerial';assert.equal(api.interact(),false);M.mode='city';api.visit('freud',true);assert.equal(api.interact(),false,'Other houses retain their existing interactions');
 const allNodes=(n)=>[n,...n.children.flatMap(allNodes)];
 for(const locale of ['en','de','fa','cs']){
  window.CITY_I18N.lang=locale;events.get('city-language')();api.visit('borges',true);M.city.update(M.player,1);
@@ -29,5 +31,31 @@ for(const locale of ['en','de','fa','cs']){
  const link=allNodes(dialog).find(n=>n.tagName==='a');assert(link.href.startsWith('https://'));assert.equal(link.rel,'noopener noreferrer');
 }
 allNodes(dialog).find(n=>n.tagName==='button'&&n.textContent===BORGES_ROOM.cs.babel).onclick();assert.equal(dialog.open,false);assert.equal(delegated,3,'Babel action delegates to the real existing entrance');
+
+assert.deepEqual(adaTrace('double-add',0),[2]);assert.deepEqual(adaTrace('double-add',1),[2,4]);assert.deepEqual(adaTrace('double-add'),[2,4,7]);assert.deepEqual(adaTrace('add-double'),[2,5,10]);
+for(const bad of[-1,3,1.5,NaN])assert.throws(()=>adaTrace('double-add',bad),RangeError);
+assert.throws(()=>adaTrace('__proto__'),RangeError);
+for(const locale of['en','de','fa','cs']){
+ window.CITY_I18N.lang=locale;events.get('city-language')();api.visit('ada',true);M.city.update(M.player,1);
+ assert.equal(body.querySelector('#house-foundations-context').hidden,false,'Ada reading is available inside the workshop');
+ assert(api.interact());assert(!api.interact(),'No interaction behind an open dialog');
+ const c=ADA_ROOM[locale];assert(dialog.textContent.includes(c.title));assert.equal(dialog.dir,locale==='fa'?'rtl':'ltr');assert.equal(dialog.lang,locale);
+ const control=key=>allNodes(dialog).find(n=>n.dataset.houseFocus===key);
+ const cells=()=>allNodes(dialog).filter(n=>n.tagName==='td').map(n=>n.textContent);
+ for(const [order,expected]of[['double-add',['2','4','7']],['add-double',['2','5','10']]]){
+  control(order).onclick();assert.equal(control(order).attributes['aria-pressed'],'true');
+  for(let step=0;step<2;step++)control('ada-next').onclick();
+  assert.deepEqual(cells().filter((_,i)=>i%2===1),expected,'The shown trace is the actual ordered calculation');
+  assert.equal(control('ada-next').attributes['aria-disabled'],'true');control('ada-next').onclick();assert.equal(cells().length,6,'Finished cards do not run again');
+ }
+ control('ada-reset').focus();control('ada-reset').onclick();assert.deepEqual(cells(),[c.start,'2']);
+ control('ada-next').focus();control('ada-next').onclick();events.get('city-language')();assert.equal(document.activeElement.dataset.houseFocus,'ada-next');assert.equal(cells().at(-1),'5','Language refresh retains current order and progress');
+ const link=allNodes(dialog).find(n=>n.tagName==='a');assert.equal(link.href,'https://psychclassics.yorku.ca/Lovelace/lovelace.htm');
+ assert.equal(link.rel,'noopener noreferrer');dialog.close();
+}
+const adaModel=api.built.houses.find(h=>h.data.id==='ada');
+const cards=[];adaModel.feature.traverse(n=>{if(n.userData.cardOperation)cards.push(n);});assert.equal(cards.length,2);assert(cards.every(n=>n.geometry.type==='ExtrudeGeometry'&&n.geometry.parameters.shapes.holes.length===8),'Cards have actual punched holes');
+for(const [x,z]of[[4.6,-3.4],[-4.6,-3.4]]){const p=houseWorld(adaModel.data,x,z);assert(!adaModel.canStand(p.x,p.z),'Both tables are solid');}
+for(let x=-7;x<=7;x+=.1){const p=houseWorld(adaModel.data,x,1.5);assert(adaModel.canStand(p.x,p.z),'A clear cross-aisle reaches both benches');}
 events.get('pagehide')();assert.deepEqual(M.city.targets,[sentinel]);assert.deepEqual(M.city.buildingTargets,[sentinel]);assert.equal(M.scene.children.length,0);
 console.log('PASS six foundation houses: distinct roofs, readable/pickable names, clear rotated entrances and aisles, connected lanes, batched details, directory/entry routing, EN/DE/FA, delegated controls and owned cleanup');

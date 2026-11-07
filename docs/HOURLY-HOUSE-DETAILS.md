@@ -50,3 +50,51 @@ Next useful house: Ada Lovelace's workshop. Make its existing wheel communicate
 a specific computational idea with a small accessible reading/exhibit, grounded
 in her Notes on the Analytical Engine. Keep its doorway and walking aisle clear.
 The separate House of Psychoanalysis remains at the design stage.
+
+## 2026-11-07 — Ada: mechanism and instruction order
+
+Criticism: Ada's workshop had one brass wheel, with no readable explanation of
+what distinguishes a mechanism from a procedure. The next house named above
+has now received its first detailed reading encounter.
+
+Added a separate solid worktable opposite the unchanged wheel, two extruded
+paper cards with actual holes, a framed two-sequence diagram, window ledges and
+timber crossbeams beneath the existing skylight. The original house, wheel,
+workbench, entrance, central aisle and coordinates are unchanged. Details use
+the existing batching/disposal system; the cross-aisle reaches both benches.
+
+The reading action remains visible inside Ada's house, and E uses the same
+interaction entry point as the existing controller action. Three original
+reading sections connect the visible objects to the distinction between
+instructions and quantities in Lovelace's 1843 Notes A and G. The source link is
+the York University transcription. No historical quotation is invented or copied.
+
+A small, explicitly modern exercise starts from 2 and applies two instruction
+cards one at a time: doubling then adding 3 gives 7; reversing them gives 10.
+The visible table records each computed value. Reset and order controls are
+reversible; the completed action stays focusable and cannot execute a third card.
+Progress survives opening/closing and language changes within the visit only.
+It is not an Analytical Engine emulator or a Bernoulli-number implementation.
+
+All new readings and controls support EN/DE/FA/CS. The existing selectable Czech
+support is reused, with the existing English-fallback disclosure for other city
+content. No storage keys, notes, voices, recordings or accounts were changed.
+
+Verification: all 67 release test programs and the build passed. Expanded house
+checks cover both arithmetic traces, invalid operations/step counts, four-language
+controls, retained state/focus, modal interaction guards, real card holes, solid
+tables, clear cross-aisles and owned cleanup. Browser at 1280 × 720 confirmed
+physical walking through the entrance, interior details, E reading, both orders
+with Enter/Space, Escape, and all four languages. Czech at 390 × 844 showed the
+computed 2 → 4 → 7 trace and no horizontal overflow (339 px client/scroll widths).
+Persian RTL and no horizontal overflow were checked too. No browser errors were
+logged. Screenshots were saved in the originating chat's outputs. Hardware
+controller A was not directly exercised; it shares the verified interaction hook.
+
+Remaining weakness: the wheel is static and the card program is deliberately
+small. The wall diagram is a modern illustration, not a historical apparatus.
+Other city content still has partial Czech coverage. Changes remain for review.
+
+Next useful house: Calvino's vaulted room. Give the three existing nested viewing
+frames a reason to be there, with distinct views/readings of the same city and
+an accessible way to compare them. Preserve its plot, doorway and walking aisle.

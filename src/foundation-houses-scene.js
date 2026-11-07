@@ -47,11 +47,29 @@ export function buildFoundationHouses(T,{canvas=()=>document.createElement('canv
   }else if(data.id==='calvino'){
    for(const x of[-4.5,-5.7,-6.9]){for(const z of[-3.7,-.3])box(feature,.12,3,.12,x,1.5,z,wood);for(const y of[.15,3])box(feature,.12,.12,3.55,x,y,-2,wood);}for(const z of[-3.7,-.3])box(feature,2.6,.08,.08,-5.7,3,z,wood);furniture(-5.7,-2,2.6,3.6);
   }else if(data.id==='ada'){
+   // A separate card table and wall diagram clarify the wheel's role without
+   // reconstructing the historical Engine or moving the original workbench.
+   const writing=new T.Group();writing.name='Ada instruction-card worktable';feature.add(writing);
+   box(writing,3.8,.15,2.2,4.6,1,-3.4,wood);
+   for(const x of[3.1,6.1])for(const z of[-4.2,-2.6])box(writing,.14,.94,.14,x,.47,z,wood);
+   furniture(4.6,-3.4,3.8,2.2);
+   for(const [index,x]of[[0,3.8],[1,5.3]]){
+    const shape=new T.Shape();shape.moveTo(-.48,-.7);shape.lineTo(.48,-.7);shape.lineTo(.48,.7);shape.lineTo(-.48,.7);shape.closePath();
+    for(let row=0;row<4;row++)for(let col=0;col<3;col++)if((row+col+index)%3!==0){const hole=new T.Path();hole.absellipse(-.25+col*.25,-.45+row*.3,.065,.065,0,Math.PI*2,true);shape.holes.push(hole);}
+    const card=new T.Mesh(own(new T.ExtrudeGeometry(shape,{depth:.025,bevelEnabled:false})),paper);card.name='Perforated instruction card '+(index+1);card.userData.cardOperation=index?'add':'double';card.rotation.x=-Math.PI/2;card.rotation.z=index?.12:-.12;card.position.set(x,1.1,-3.4);writing.add(card);
+   }
+   for(const x of[-8.7,8.7])box(feature,.44,.12,8.7,x,.98,0,trim);
+   for(const z of[-5,0,5])box(feature,17.8,.14,.18,0,4.35,z,wood);
+   const boardCanvas=canvas();boardCanvas.width=1024;boardCanvas.height=512;
+   const boardCtx=boardCanvas.getContext('2d');boardCtx.fillStyle='#f0e7d1';boardCtx.fillRect(0,0,1024,512);boardCtx.textAlign='center';boardCtx.textBaseline='middle';boardCtx.direction='ltr';boardCtx.font='bold 74px Tahoma';boardCtx.fillStyle='#285a49';boardCtx.fillText('2 → ×2 → +3 → 7',512,175);boardCtx.fillStyle='#963c26';boardCtx.fillText('2 → +3 → ×2 → 10',512,335);
+   const boardTex=own(new T.CanvasTexture(boardCanvas));boardTex.colorSpace=T.SRGBColorSpace;
+   box(feature,6.6,2.8,.14,0,2.6,-7.7,wood);
+   const diagram=new T.Mesh(own(new T.PlaneGeometry(6.2,2.4)),own(new T.MeshBasicMaterial({map:boardTex,toneMapped:false})));diagram.name='Two operation orders · modern teaching diagram';diagram.position.set(0,2.6,-7.61);feature.add(diagram);
    box(feature,3.8,.15,2,-4.6,1,-3.4,wood);for(const x of[-6.1,-3.1])for(const z of[-4.1,-2.7])box(feature,.15,.94,.15,x,.47,z,wood);box(feature,.2,1.2,.3,-4.6,1.65,-3.7,wood);beam(feature,[-4.6,2,-3.85],[-4.6,2,-3.25],.09,brass);const gear=new T.Group();gear.position.set(-4.6,2,-3.4);feature.add(gear);const rim=new T.Mesh(own(new T.TorusGeometry(.92,.08,8,40)),brass);gear.add(rim);for(let i=0;i<12;i++){const a=i/12*Math.PI*2,o=box(gear,.18,.25,.18,Math.cos(a)*1.02,Math.sin(a)*1.02,0,brass);o.rotation.z=a-Math.PI/2;}for(let i=0;i<6;i++){const a=i/6*Math.PI*2;beam(gear,[0,0,0],[.85*Math.cos(a),.85*Math.sin(a),0],.035,brass);}furniture(-4.6,-3.4,3.8,2);
   }else{
    const stone=mat(0x8e8c7a);const hearth=new T.Mesh(own(new T.TorusGeometry(.9,.13,8,32)),stone);hearth.rotation.x=Math.PI/2;hearth.position.set(-4,.14,-2);feature.add(hearth);for(const z of[-5,1]){box(feature,2.7,.3,.9,-4,.5,z,wood);for(const x of[-5,-3])box(feature,.12,.35,.65,x,.175,z,wood);furniture(-4,z,2.8,1);}furniture(-4,-2,2.2,2.2);
   }
-  feature.traverse(o=>{if(o.isMesh)o.userData={foundationHouse:data.id};});targets.push(feature);
+  feature.traverse(o=>{if(o.isMesh)o.userData={...o.userData,foundationHouse:data.id};});targets.push(feature);
   const local=(x,z)=>{const dx=x-data.x,dz=z-data.z;return{x:dx*Math.cos(data.turn)-dz*Math.sin(data.turn),z:dx*Math.sin(data.turn)+dz*Math.cos(data.turn)};};
   let painted='';const model={data,group:home,feature,colliders,entry:houseEntry(data),insideEntry:houseInside(data),local,inside:(x,z)=>{const p=local(x,z);return Math.abs(p.x)<8.8&&Math.abs(p.z)<7.8;},canStand:(x,z)=>{const p=local(x,z);return!colliders.some(b=>Math.abs(p.x-b.x)<b.w/2+.22&&Math.abs(p.z-b.z)<b.d/2+.22);},paint(lang){if(painted===lang)return;painted=lang;const text=data.names[lang]||data.names.en,ctx=c.getContext('2d');ctx.fillStyle='#f0e7d1';ctx.fillRect(0,0,c.width,c.height);ctx.fillStyle='#30483d';ctx.textAlign='center';ctx.textBaseline='middle';ctx.direction=lang==='fa'?'rtl':'ltr';ctx.font='92px Tahoma';ctx.fillText(text,c.width/2,c.height/2,c.width-80);texture.needsUpdate=true;}};model.paint('en');batchBoxes(home);houses.push(model);
  }
