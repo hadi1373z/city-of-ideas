@@ -281,3 +281,73 @@ without a first reading pass. Give its existing couch a quiet writing/reading
 corner and a clearly sourced historical encounter with dreams and memory.
 Preserve the couch, window, entrances, plot and walking space. Keep this city
 room distinct from the separate House of Psychoanalysis design project.
+
+## 2026-11-07 — Freud: a report and its questions
+
+Criticism: the small foundation study still had only its red couch and no
+reading encounter. This was the last of the six foundation houses without a
+first reading/detail pass. The separate House of Psychoanalysis remains design
+work; it was not implemented or changed here.
+
+Kept the original couch, window, house shell, doorway and coordinates. Added a
+bordered rug, three-tier book shelves, a side table with a book, and a writing
+desk/chair with a small lamp, ink bottle and pen. The desk folio contains two
+original illustrated sheets and a genuinely open question frame. New furniture
+is solid and leaves the central aisle, front cross-aisle and desk-side approach
+clear. Existing island, paths, entrances and other houses stay in place.
+
+The reading encounter separates a fixed fictional dream report, invented
+background and provisional questions. Any stage can be selected and revisited.
+The report page never moves or changes; background adds a second physical sheet,
+and the final stage also reveals the open frame. Returning to the report hides
+both additions. The original bridge/envelope/clock example and its illustrations
+are new writing and drawing, not Freud's own dream or a quotation. Clock faces
+have no hands because the report does not specify a time.
+
+A brief historical introduction cites Freud's Third Lecture (1910), discussing
+remembered dream content, latent dream-thoughts, condensation and displacement:
+https://psychclassics.yorku.ca/Freud/Origin/origin3.htm . The theory is explicitly
+attributed to Freud. The exercise is historical reading, not his clinical
+method, a personal dream interpreter, a diagnostic result or memory recovery.
+No visitor input, personal notes or account data is read or modified.
+
+All new readings, prompts, source notes and controls support EN/DE/FA/CS, with
+Persian RTL. Directory, in-room context and E/shared controller action reach
+the encounter. Stage survives reopening and language changes for the visit
+only, without a new storage key. Existing character appearances, voice settings
+and accepted recordings are untouched. Czech elsewhere remains partial.
+
+Verification: all 67 release test programs, build and whitespace checks passed.
+House checks cover all nine stage transitions, invalid stage rejection, fixed
+report/folio poses, original couch seat/back/arm transforms and its collider,
+solid shelves/tables/chair, clear rotated entrances/aisles/table approach,
+four-language report/stage text, background visibility, live/pressed states,
+focus/stage retention, source links, modal guards and owned cleanup. All earlier
+house checks remain. Paired decorative boxes now share the existing instancing
+pass too; accepted cloth-layer transforms are verified independently. Textured
+folio sheets each use one thin box. The six houses total 139 fixture draw objects,
+within the unchanged <140 budget; this is not an FPS or whole-city draw measurement.
+
+Native browser at 1280 × 720 confirmed doorway walking, the furnished room and
+the desk approach; inspected the illustrated sheets and open frame close up;
+used E, Enter/Space and Escape; saw the background/frame appear and disappear
+while the report stayed fixed. Stage survived reopening and EN/DE/FA/CS switches.
+German and Persian reading client/scroll widths were equal at 815 px; Persian
+direction was RTL. Czech at 390 × 844 supported all three stages and readable
+report/background/questions, with equal 311 px reading client/scroll widths and
+no horizontal overflow. No browser errors were logged. Interior, folio and Czech
+mobile screenshots are saved in the originating chat's outputs. Hardware
+controller A was not directly exercised; it shares the verified E hook.
+
+Remaining weakness: the example is intentionally small; it is not an introduction
+to every part of Freud's work. Sheets and frame appear immediately rather than
+through a page-turning animation. This is an imagined city room, not a historical
+reconstruction. Review only, with no merge or deployment.
+
+All six foundation first passes are now complete: Borges, Ada, Calvino, Chomsky,
+Ursula Le Guin and Freud. Do not restart those passes. Next useful house: Plato's
+existing Courtyard of Questions at (-242, -98), recorded in philosopher-data.js.
+Its brief EN/FA guide already introduces a brass circle and shadow. Inspect its
+actual scene and interactions before adding a modest visible comparison and
+original sourced EN/DE/FA/CS reading. Preserve its circle, plot, entrance and
+private writing, and prioritize other underdeveloped existing houses afterward.

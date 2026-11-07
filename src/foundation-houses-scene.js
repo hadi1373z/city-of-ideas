@@ -1,6 +1,7 @@
 import {FOUNDATION_HOUSES,houseWorld,houseEntry,houseInside} from './foundation-houses-data.js';
 import {CHOMSKY_GROUPINGS,chomskyWords,chomskyTree,paintChomskyDiagram} from './chomsky-house-model.js';
 import {buildLeguinTable} from './leguin-house-scene.js';
+import {buildFreudStudy} from './freud-house-scene.js';
 export function buildFoundationHouses(T,{canvas=()=>document.createElement('canvas')}={}){
  const group=new T.Group();group.name='Six first house studies on the island lanes';const owned=new Set(),own=r=>(owned.add(r),r),houses=[],targets=[];
  const mat=(color,options={})=>own(new T.MeshLambertMaterial({color,...options})),wood=mat(0x785d45),paper=mat(0xece1c9),brass=mat(0xb49357),glass=mat(0xb6d0d2,{transparent:true,opacity:.12,depthWrite:false,side:T.DoubleSide});
@@ -8,7 +9,7 @@ export function buildFoundationHouses(T,{canvas=()=>document.createElement('canv
  function beam(parent,a,b,r,m){const va=new T.Vector3(...a),vb=new T.Vector3(...b),d=vb.clone().sub(va),o=new T.Mesh(own(new T.CylinderGeometry(r,r,d.length(),8)),m);o.position.copy(va).add(vb).multiplyScalar(.5);o.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),d.normalize());parent.add(o);return o;}
  function surface(parent,vertices,indices,m){const g=own(new T.BufferGeometry());g.setAttribute('position',new T.Float32BufferAttribute(vertices,3));g.setIndex(indices);g.computeVertexNormals();const o=new T.Mesh(g,m);parent.add(o);return o;}
  const unitBox=own(new T.BoxGeometry(1,1,1));
- function batchBoxes(root){const parents=[];root.traverse(o=>parents.push(o));for(const parent of parents){const batches=new Map();for(const o of parent.children){if(o.geometry?.type!=='BoxGeometry')continue;const key=o.material.uuid+'|'+(o.userData.foundationHouse||'');if(!batches.has(key))batches.set(key,[]);batches.get(key).push(o);}for(const list of batches.values()){if(list.length<3)continue;const batch=new T.InstancedMesh(unitBox,list[0].material,list.length);batch.name='Batched architectural details';batch.userData={...list[0].userData};list.forEach((o,i)=>{o.updateMatrix();const p=o.geometry.parameters,m=o.matrix.clone().multiply(new T.Matrix4().makeScale(p.width,p.height,p.depth));batch.setMatrixAt(i,m);o.removeFromParent();owned.delete(o.geometry);o.geometry.dispose();});batch.instanceMatrix.needsUpdate=true;batch.computeBoundingBox?.();batch.computeBoundingSphere?.();parent.add(batch);}}}
+ function batchBoxes(root){const parents=[];root.traverse(o=>parents.push(o));for(const parent of parents){const batches=new Map();for(const o of parent.children){if(o.geometry?.type!=='BoxGeometry')continue;const key=o.material.uuid+'|'+(o.userData.foundationHouse||'');if(!batches.has(key))batches.set(key,[]);batches.get(key).push(o);}for(const list of batches.values()){if(list.length<2)continue;const batch=new T.InstancedMesh(unitBox,list[0].material,list.length);batch.name='Batched architectural details';batch.userData={...list[0].userData};list.forEach((o,i)=>{o.updateMatrix();const p=o.geometry.parameters,m=o.matrix.clone().multiply(new T.Matrix4().makeScale(p.width,p.height,p.depth));batch.setMatrixAt(i,m);o.removeFromParent();owned.delete(o.geometry);o.geometry.dispose();});batch.instanceMatrix.needsUpdate=true;batch.computeBoundingBox?.();batch.computeBoundingSphere?.();parent.add(batch);}}}
  for(const data of FOUNDATION_HOUSES){
   const home=new T.Group();home.name=data.names.en+' · first architectural study';home.position.set(data.x,.13,data.z);home.rotation.y=data.turn;home.userData.cityDestination='house:'+data.id;group.add(home);const wall=mat(data.wall),roof=mat(data.roof,{side:T.DoubleSide}),capMaterial=mat(data.wall,{side:T.DoubleSide}),trim=mat(data.id==='chomsky'?0x627a77:0x806a51),colliders=[];
   const obstacle=(x,z,w,d)=>colliders.push({x,z,w,d});
@@ -35,6 +36,7 @@ export function buildFoundationHouses(T,{canvas=()=>document.createElement('canv
   const feature=new T.Group();feature.name=data.feature.en;home.add(feature);const furniture=(x,z,w,d)=>obstacle(x,z,w,d);let exhibit=null;
   if(data.id==='freud'){
    const red=mat(0x8c3f3d);box(feature,3.8,.36,1.3,-4.6,.57,-3.2,red);box(feature,3.8,.72,.23,-4.6,.9,-3.8,red);for(const x of[-6.4,-2.8]){box(feature,.25,.62,1.4,x,.78,-3.2,red);for(const z of[-3.65,-2.75])box(feature,.10,.38,.10,x,.19,z,wood);}furniture(-4.6,-3.2,4.1,1.5);
+   exhibit=buildFreudStudy(T,{feature,own,mat,box,canvas,wood,paper,brass,red,furniture});
   }else if(data.id==='chomsky'){
    const branch=new T.Group();branch.position.set(0,2.5,-7.75);feature.add(branch);for(const[a,b]of[[[0,.9,0],[-1,0,0]],[[0,.9,0],[1,0,0]],[[-1,0,0],[-1.7,-.8,0]],[[-1,0,0],[-.3,-.8,0]],[[1,0,0],[.3,-.8,0]],[[1,0,0],[1.7,-.8,0]]])beam(branch,a,b,.055,wood);for(const[x,y]of[[0,.9],[-1,0],[1,0],[-1.7,-.8],[-.3,-.8],[.3,-.8],[1.7,-.8]])box(branch,.26,.18,.08,x,y,.04,brass);
    const boards=[],tiles=[];
