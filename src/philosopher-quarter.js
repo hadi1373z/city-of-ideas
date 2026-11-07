@@ -1,5 +1,6 @@
 import {PHILOSOPHERS,quarterPaths} from './philosopher-data.js';
 import {buildPlatoComparison} from './plato-house-scene.js';
+import {buildAristotlePorch} from './aristotle-house-scene.js';
 import {philosopherField,PHILOSOPHER_UI} from './plato-house-copy.js';
 
 // A single, additive ground-level district. No renderer, account or private archive.
@@ -35,7 +36,7 @@ export function createPhilosopherQuarter(T,{language=()=> 'en',canvas=()=>docume
   for(const x of [2.4,5.6])box(root,.15,1.1,1.4,x,.63,-6,wood);
   const book=action(box(root,1.15,.14,.85,3.4,1.36,-5.9,home.color),home,'reading');
   box(root,1.05,.08,.76,3.4,1.4,-5.9,0xf2e6ca);book.userData.label=home.reading[1];
-  label(root,()=>home.id==='plato'?(PHILOSOPHER_UI[language()]||PHILOSOPHER_UI.en).reading:language()==='fa'?'خواندن و اندیشیدن':'READ & REFLECT',4,2.35,-6.8,4.2);
+  label(root,()=>['plato','aristotle'].includes(home.id)?(PHILOSOPHER_UI[language()]||PHILOSOPHER_UI.en).reading:language()==='fa'?'خواندن و اندیشیدن':'READ & REFLECT',4,2.35,-6.8,4.2);
   for(let shelf=0;shelf<3;shelf++){
    box(root,4,.13,.6,-5,1+shelf*.65,-10.45,wood);
    for(let i=0;i<8;i++)box(root,.25,.4+(i%3)*.06,.38,-6.5+i*.43,1.27+shelf*.65,-10.4,[home.color,0x9d6c53,0x8d9d86][i%3]);
@@ -66,7 +67,7 @@ export function createPhilosopherQuarter(T,{language=()=> 'en',canvas=()=>docume
    for(const x of [-8,8]){cylinder(root,.22,3.5,x,1.88,7.5,wall);block(home,x,7.5,.6,.6);}const arch=ring(root,8,0,3.8,7.5,home.color);arch.scale.y=.27;
    const archIdea=action(ring(root,1,-5,1.7,-2,0xd6b66b),home,'idea');archIdea.scale.y=1.25;box(root,1.7,.08,1.2,-5,1,-2,home.color);
   }
-  const exhibit=home.id==='plato'?buildPlatoComparison(T,{root,home,box,cylinder,ring,block,action}):null;
+  const exhibit=home.id==='plato'?buildPlatoComparison(T,{root,home,box,cylinder,ring,block,action}):home.id==='aristotle'?buildAristotlePorch(T,{root,home,box,cylinder,block,action}):null;
   const bounds={minX:home.x-10,maxX:home.x+10,minZ:home.z-11,maxZ:home.z+11};
   homes.push({...home,group:root,bounds,exhibit,entry:{x:home.x,y:.13,z:home.z+13,yaw:0},study:{x:home.x,y:.13,z:home.z-4,yaw:0}});
  }

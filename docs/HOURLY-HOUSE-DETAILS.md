@@ -428,3 +428,76 @@ useful house: Aristotle's existing Porch of Habit and Virtue at (-208, -98).
 Inspect its balance, colonnade, book, reading and per-house notes before adding
 modest architectural details and an original sourced EN/DE/FA/CS encounter about
 practical judgment. Preserve the existing balance, location, entrances and notes.
+
+## 2026-11-07 — Aristotle: reasons before a verdict
+
+Criticism: the Porch of Habit and Virtue offered a balance, colonnade and short
+EN/FA guide, but no extended encounter with the circumstances of a choice. Its
+existing book, balance and private per-house reflection already worked.
+
+Kept the original balance, level beam, pans, pedestal, columns, books, desk,
+chairs, plot at (-208, -98), entrance and paths. Added column plinths within the
+original collider footprints and overhead collars, plus a solid discussion table
+with three paper cards: a miniature open doorway, facing seats and an open folio
+with ruled pages. A gold clip identifies the selected card without changing the
+balance or assigning a moral score. The central approach and front cross-aisle
+remain clear. New resources use the quarter's existing cache and disposal.
+
+Three original situations explore giving an invited observation, listening for
+a neighbour's reason and receiving a correction to one's own drawing. Each has
+a scene, interpretation, open question and small practice. They distinguish
+giving reasons and attending to circumstances from treating more speech or a
+numerical midpoint as automatically better. The historical introduction cites
+Aristotle's Nicomachean Ethics II.1 and II.6 in W. D. Ross's translation at MIT's
+Internet Classics Archive: https://classics.mit.edu/Aristotle/nicomachaen.2.ii.html .
+The original Stanford source remains. No quotation was copied or invented, and
+the room and situations do not claim to reconstruct Aristotle's school.
+
+The new reading, case controls and in-room action support EN/DE/FA/CS, retaining
+Persian RTL. Aristotle's existing EN/FA guide remains, with additive German and
+Czech guide fields. Czech remains partial elsewhere in the city, with English
+fallback. The original visit, book/object and per-house note interactions remain.
+The in-room reader hides outside Aristotle's house or while a dialog is open.
+Case choice persists for the visit only; no new storage key or input was added.
+Plato's comparison and its independent pose/note state are preserved.
+
+Concurrent work: main advanced to 12dff4dfc0645dab421cdb26bbe3d438faa86fb7 during
+this series. Its visitor-position/facing map changes were incorporated into the
+existing review branch, including the map-position asset versions. The existing
+Freud stylesheet version, Czech selection, City Map, Babel, voyage and branding
+work were retained. This does not merge the review PR into main or deploy it.
+
+Verification: all 67 release test programs, build and whitespace checks passed.
+The expanded philosopher checks snapshot the six original balance meshes,
+including exact beam/pan geometry and pose, across all nine case transitions.
+They check exactly one selected clip, fixed card positions, invalid-case
+rejection, solid furniture, the central/front aisles and original column-side
+clearance. Four-language UI checks cover all three readings, live/pressed/source
+states, focus retention, reopen/context behavior and independent Plato/Aristotle
+notes. Synthetic mixed-language text/spacing and caret selection survive locale
+refresh without writes; the original explicit input still writes once. Prior
+foundation-house, map-position and coastal-geometry checks also pass.
+
+Native browser at 1280 × 720 confirmed the existing welcome/home visit action,
+physical doorway entry, in-room reading action, Enter/Space selection and Escape.
+The selected gold clip visibly moved between the doorway and folio while the
+balance stayed level. German/Persian article client and scroll widths matched
+at 763 px; Persian reading was RTL. At 390 × 844, Czech showed all three native
+case buttons at 47 px high, with article widths of 339 px and inner reading
+widths of 303 px, without horizontal overflow. A synthetic test note survived
+EN/DE/FA/CS switches, reopening, switching to Plato and back, and reload. Czech
+selection survived reload, while the new visit correctly began at the first
+case. No browser console errors were logged. Porch, selected-card, Persian and
+Czech mobile screenshots are saved in the originating chat's outputs. This
+browser review used the in-room reader; E ray targeting and hardware controller
+A were not directly verified. Their established code/hooks remain unchanged.
+
+Remaining weakness: the table models are small symbolic exhibits, not a complete
+room-design activity. The three scenes invite discussion rather than supplying
+an ethical score or surveying Aristotle's ethics. Review only; no deployment.
+
+The six foundation passes, Plato and Aristotle are complete first passes. Next
+useful house: Epicurus's existing Garden of Friendship at (-242, -54). Inspect
+its bread-and-water table, garden, reading and per-house notes before adding
+modest visible details and original sourced EN/DE/FA/CS reading about friendship,
+desires and simple pleasures. Preserve the existing table, plot and entrance.

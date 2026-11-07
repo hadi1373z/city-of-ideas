@@ -44,7 +44,7 @@ export function installOrigamiHouse(M,T){
   delete document.body.dataset.coastalOverview;M.clearMovement();
   map.title.textContent=c.title;map.close.setAttribute('aria-label',w().close);
   map.d.lang=lang();map.d.dir=lang()==='fa'?'rtl':'ltr';map.body.replaceChildren();
-  mountCoastalMap(map.body,{language:lang(),state:mapState,onVisit:id=>{
+  mountCoastalMap(map.body,{language:lang(),state:mapState,visitor:{x:M.player.x,z:M.player.z,yaw:M.player.yaw,belowGround:!!M.babelLibrary?.active},onVisit:id=>{
    map.d.close();
    if(id==='shore')visit('shore');
    else M.quickStart(id==='artists'?'artists-quarter':id);

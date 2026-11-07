@@ -7,6 +7,7 @@ import {createPhilosopherQuarter} from '../src/philosopher-quarter.js';
 import {PLATO_POSES,platoAngle,platoCircle,platoDiagram} from '../src/plato-house-model.js';
 import {PLATO_ROOM,PHILOSOPHER_UI,PLATO_SOURCE,philosopherField} from '../src/plato-house-copy.js';
 import {installPhilosopherQuarter} from '../src/philosopher-ui.js';
+import {ARISTOTLE_CASES,ARISTOTLE_ROOM,ARISTOTLE_SOURCE} from '../src/aristotle-house-copy.js';
 const T={};vm.runInNewContext(await readFile(new URL('../src/assets/three.min.js',import.meta.url),'utf8'),{exports:T,module:{exports:T},console:{...console,warn(){}}});
 const context=new Proxy({},{get:()=>()=>{}}),canvas=()=>({getContext:()=>context});
 let language='en';const q=createPhilosopherQuarter(T,{language:()=>language,canvas});
@@ -36,6 +37,16 @@ for(const pose of PLATO_POSES){
 for(const bad of[null,undefined,'other','__proto__',60])assert.throws(()=>platoAngle(bad),RangeError);assert(!exhibit.setPose('__proto__'));assert.equal(exhibit.pose,'turned');
 assert(!q.canStand(plato.x+4,plato.z-1.8));assert(!q.canStand(plato.x-5,plato.z+6));walk({x:plato.x,z:plato.z+8},{x:plato.x,z:plato.z-8});walk({x:plato.x-7,z:plato.z+4.5},{x:plato.x+7,z:plato.z+4.5});
 for(const locale of['en','de','fa','cs']){language=locale;q.refreshLanguage();assert(q.region(-242,-102).title.includes(philosopherField(PHILOSOPHERS[0],'name',locale)));}
+const aristotle=q.homes.find(h=>h.id==='aristotle'),porch=aristotle.exhibit;
+const balanceParts=aristotle.group.children.filter(n=>n.material?.color.getHex()===0xb99b60);assert.equal(balanceParts.length,6);
+const snapshotBalance=()=>balanceParts.map(n=>[n.geometry.type,Array.from(n.position.toArray()),Array.from(n.rotation.toArray()),Array.from(n.geometry.attributes.position.array)]),fixedBalance=snapshotBalance();
+assert(balanceParts.some(n=>n.geometry.type==='BoxGeometry'&&n.geometry.parameters.width===2.1&&n.position.x===-5&&n.position.y===2.35&&n.position.z===-2&&n.rotation.z===0));
+for(const x of[-5.85,-4.15])assert(balanceParts.some(n=>n.geometry.parameters.radiusTop===.32&&n.geometry.parameters.height===.07&&n.position.x===x&&n.position.y===1.75));
+const fixedCards=porch.cards.map(n=>Array.from(n.position.toArray()));
+for(const from of ARISTOTLE_CASES)for(const to of ARISTOTLE_CASES){assert(porch.selectCase(from));assert(porch.selectCase(to));assert.equal(porch.caseId,to);assert.equal(porch.clips.filter(n=>n.visible).length,1);assert.equal(porch.clips[['discussion','listening','revision'].indexOf(to)].visible,true);assert.deepEqual(porch.cards.map(n=>Array.from(n.position.toArray())),fixedCards);assert.deepEqual(snapshotBalance(),fixedBalance);}
+for(const bad of[null,undefined,'__proto__','unknown'])assert(!porch.selectCase(bad));assert.equal(porch.caseId,'revision');
+assert(!q.canStand(aristotle.x+4.2,aristotle.z-1.8));walk({x:aristotle.x,z:aristotle.z+8},{x:aristotle.x,z:aristotle.z-8});walk({x:aristotle.x-7,z:aristotle.z+4.5},{x:aristotle.x+7,z:aristotle.z+4.5});
+for(const z of[-8,-4,0,4,8])assert(q.canStand(aristotle.x-7.74,aristotle.z+z),'New plinths preserve the original column-side clearance');
 q.dispose();
 
 // Minimal DOM fixture exercises the real installer and its private-note boundary.
@@ -52,7 +63,7 @@ class Element {
 }
 const body=new Element('body');for(const c of['welcome-secondary','visit-actions','map-directions']){const n=new Element('div');n.className=c;body.append(n);}const mapPanel=new Element('div');mapPanel.id='map-panel';body.append(mapPanel);
 globalThis.document={body,activeElement:body,createElement:t=>new Element(t),querySelector:s=>body.querySelector(s)};globalThis.window={CITY_I18N:{lang:'en'}};const events=new Map();globalThis.addEventListener=(k,fn)=>events.set(k,fn);globalThis.removeEventListener=()=>{};
-const noteKey='city-of-ideas:philosopher-reflection:v1:plato',sentinel='PRIVATE TEST · یادداشت <keep> český\n  same spacing  ',storage=new Map([[noteKey,sentinel]]);let writes=0;globalThis.localStorage={getItem:k=>storage.get(k)||null,setItem:(k,v)=>{storage.set(k,v);writes++;}};
+const noteKey='city-of-ideas:philosopher-reflection:v1:plato',sentinel='PRIVATE TEST · یادداشت <keep> český\n  same spacing  ',aristotleKey='city-of-ideas:philosopher-reflection:v1:aristotle',aristotleSentinel='PRIVATE ARISTOTLE · فارسی · český\n  keep spaces  ',storage=new Map([[noteKey,sentinel],[aristotleKey,aristotleSentinel]]);let writes=0;globalThis.localStorage={getItem:k=>storage.get(k)||null,setItem:(k,v)=>{storage.set(k,v);writes++;}};
 const M={scene:new T.Scene(),mode:'city',player:{x:-242,z:-94},city:{targets:[],buildingTargets:[],landmarks:{},region:()=>null,canStand:()=>true,targetInfo:()=>null,update(){}},clearMovement(){},arrive(p){Object.assign(this.player,p);},startExtra:()=>false,showExtra:()=>false,toolsExtra:()=>false,pointToward(){},quickStart(id){return this.startExtra(id);}};
 const installed=installPhilosopherQuarter(M,T),dialog=body.querySelector('#philosopher-dialog'),note=dialog.querySelector('textarea');installed.open('plato','reading');assert.equal(note.value,sentinel);
 const descendants=n=>[n,...n.children.flatMap(descendants)];
@@ -66,5 +77,15 @@ for(const locale of['en','de','fa','cs']){
 }
 dialog.close();M.player.x=0;M.player.z=94;M.city.update();assert(body.querySelector('#plato-house-context').hidden,'The reading action stays within Plato’s house');M.player.x=-242;M.player.z=-94;M.mode='aerial';M.city.update();assert(body.querySelector('#plato-house-context').hidden);M.mode='city';
 assert.equal(writes,0,'Language, pose and reopen do not write private notes');assert.equal(storage.get(noteKey),sentinel);installed.open('aristotle');assert(dialog.querySelector('.plato-details').hidden);installed.open('plato');assert.equal(note.value,sentinel);
+M.player.x=-208;M.player.z=-94;
+for(const locale of['en','de','fa','cs']){
+ window.CITY_I18N.lang=locale;installed.open('aristotle','reading');note.focus();note.setSelectionRange(3,15);events.get('city-language')();assert.equal(note.value,aristotleSentinel);assert.equal(note.selectionStart,3);assert.equal(note.selectionEnd,15);assert.equal(document.activeElement,note);assert.equal(dialog.dir,locale==='fa'?'rtl':'ltr');
+ const c=ARISTOTLE_ROOM[locale],control=id=>descendants(dialog).find(n=>n.dataset.aristotleFocus===id);assert(dialog.textContent.includes(c.title));assert(dialog.querySelector('.plato-details').hidden);assert(!dialog.querySelector('.aristotle-details').hidden);
+ for(const id of['discussion','listening','revision']){const b=control(id);b.focus();b.onclick();assert.equal(b.getAttribute('aria-pressed'),'true');assert.equal(b.getAttribute('aria-controls'),'aristotle-case-reading');const reading=dialog.querySelector('#aristotle-case-reading');assert.equal(reading.getAttribute('aria-live'),'polite');for(const text of Object.values(c.situations[id]))assert(reading.textContent.includes(text));assert.equal(installed.homes[1].exhibit.caseId,id);assert.equal(note.value,aristotleSentinel);}
+ events.get('city-language')();assert.equal(document.activeElement.dataset.aristotleFocus,'revision');assert.equal(installed.homes[1].exhibit.caseId,'revision');
+ assert(descendants(dialog).some(n=>n.tagName==='a'&&n.href===ARISTOTLE_SOURCE.url&&n.rel==='noopener noreferrer'));assert.equal(dialog.querySelector('.philosopher-source').href,PHILOSOPHERS[1].source);
+ M.city.update();assert(body.querySelector('#aristotle-house-context').hidden);dialog.close();M.city.update();assert(!body.querySelector('#aristotle-house-context').hidden);assert(body.querySelector('#plato-house-context').hidden);body.querySelector('#aristotle-house-context').children[0].onclick();assert(dialog.open);assert.equal(installed.homes[1].exhibit.caseId,'revision');assert.equal(note.value,aristotleSentinel);
+}
+assert.equal(writes,0);assert.equal(storage.get(aristotleKey),aristotleSentinel);installed.open('plato');assert.equal(note.value,sentinel);assert(dialog.querySelector('.aristotle-details').hidden);
 note.value=sentinel+'edited';note.events.input();assert.equal(storage.get(noteKey),sentinel+'edited');assert.equal(writes,1);installed.open('aristotle');installed.open('plato');assert.equal(note.value,sentinel+'edited','The existing per-house note interaction still works');events.get('pagehide')();
-console.log('PASS: six original philosopher homes and Plato’s four-language turning circle, exact original circle/patch, routes, projections, note/caret preservation and owned cleanup.');
+console.log('PASS: six original philosopher homes, Plato comparison and Aristotle cases in four languages; exact original exhibits, routes, independent note/caret preservation and owned cleanup.');
