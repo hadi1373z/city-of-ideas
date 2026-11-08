@@ -36,6 +36,7 @@ import {installEscherHouse} from './escher-house.js?v=escher-details1';
 import {installStudyBook} from './study-book.js';
 import {installSocratesStudy} from './socrates-study.js';
 import {installMathFoundations} from './math-foundations.js';
+import {installMathAlgebra} from './math-algebra.js';
 import {installCinematicIntro} from './cinematic-intro.js';
 import {installDiscoveryStory} from './discovery-story.js';
 const waitMain=()=>new Promise(resolve=>{if(window.CITY_MAIN?.city)resolve(window.CITY_MAIN);else addEventListener('gallery-ready',()=>resolve(window.CITY_MAIN),{once:true});});
@@ -112,6 +113,7 @@ try{
  M.studyBook=installStudyBook(M,T);
  M.socratesStudy=installSocratesStudy(M,T);
  M.mathFoundations=installMathFoundations(M,T,E);
+ M.mathAlgebra=installMathAlgebra(M,T,E);
  installQuestionWalk(M,T);
  installRamseyHouse(M,T);
  installRamseyRoom(M);
