@@ -2016,3 +2016,128 @@ walking lanes. Inspect real language gaps before a modest four-language
 companion; do not claim full catalog translation. Preserve Kandinsky's cards,
 guide, exact six handoffs and original lab, the four earlier gallery companions,
 all previous house/learning flows and the imported room workbenches.
+
+## 2026-11-08 — Hokusai: near, far and the printed sheet
+
+Completed the first detail/reading pass for the existing Katsushika Hokusai
+gallery, id hokusai, at world (181, 95). The source house, eaves roof, facade
+lattice, original catalog, quarter transforms, installed artist profile and
+original reader/Print room were inspected before adding owned detail groups.
+
+Pale edging follows the actual wide-eave roof vertices. Blue window sill/header,
+eight facade-lattice joint caps, a supported woven seat mat with stripes/tie
+pegs and a worktable apron add visible detail. The mat and lattice details
+retain their source profile interaction payloads. Selecting the mat still
+opens the original artist profile.
+
+A shallow, bracket-supported ledge below the front window holds a backed
+two-leaf viewing folio. Its backing rests on the ledge; spacers meet the wall.
+The folio shows a broad near post and a small distant mountain inside viewing
+corners, with a horizon and fold. It is an original city diagram, not a Hokusai
+print, historical-impression comparison, reconstructed room or symbol key.
+The ledge stays within the original wall clearance, below the window aperture
+and clear of the doorway, prints, worktable, approaches and walking lanes.
+
+Pointer selection or aiming and pressing E opens the new guide. It is also
+reachable from the inside context button and Hokusai's existing directory card.
+Outside it offers the original doorway. Inside, six viewpoint actions reuse
+the exact original approach/yaw/lookAt data, and six reader actions pass the
+unchanged artist/work IDs: great-wave, red-fuji, kajikazawa, ejiri, mishima,
+tsukuda. Accessible names include the individual work title.
+
+Original prompts trace foreground, middle distance, distant Fuji, water, wind,
+fishing lines and relative scale. The reading distinguishes a design from a
+particular printed sheet. The existing Print room presents six different
+designs, not six impressions of one design. Visitors are directed to the
+original reader's source/license records; a resized or cropped screen image
+alone does not establish worn blocks or trimmed paper.
+
+Historical background links the Met's Great Wave object record and V&A's
+Japanese woodblock-print account:
+https://www.metmuseum.org/art/collection/search/45434
+https://www.vam.ac.uk/articles/japanese-woodblock-prints-ukiyo-e
+Both primary museum pages were opened and read. The Met dates its impression
+to about 1830-32 within Thirty-six Views of Mount Fuji; V&A describes publisher,
+artist, block cutter and printer collaboration. This context does not replace
+the supplied images' impression-specific records or assert that every bundled
+reproduction depicts the cited Met object. No quotation, historical note,
+image, recording or artist voice was invented.
+
+The guide, six prompts, source labels and associated controls support
+EN/DE/FA/CS, with Persian RTL. The catalog, artist website and private tools
+keep their existing language handling; some original book/catalog and shared
+city/notebook text remains English. Atelier names/navigation support four
+languages, while its advanced lessons, instructions and problems remain
+English as disclosed. This is not full city-wide Czech localization. Guide
+rendering has no private/lesson storage access or new saved state; language
+preference persistence and explicit observation-save actions remain.
+
+Verification: all 77 release programs passed, followed by build and whitespace
+checks. Source hash:
+88dc25b01c7a068db618f50478325a4d21fb91940d6f6d85d182030f5d45c4fd
+(736 assets / 332,294,918 bytes). The new check compares all borrowed node
+transforms, geometry/material identity and values, vertices, payloads,
+visibility and original furniture/brush instance matrices. Original catalog,
+colliders, entries and approaches remain exact. It checks rake endpoints
+against source roof vertices, supported mat/folio/wall spacers, window/door/
+painting/walking clearance, inherited profile picks, a real Three.js pick ray,
+six exact IDs, all four-language viewpoint/reader routes, work-specific action
+names, remote-pick rejection, RTL/top-of-guide behavior, no storage access and
+owned resources disposed once. Earlier house, model, private-flow, source,
+cast/voice and island checks pass.
+
+Native Playwright CLI review at 1280 x 720 confirmed the welcome/directory
+route, Kandinsky's retained guide, the original Hokusai doorway and walking
+entrance. Roof/window/lattice/seat/table details and the supported ledge were
+visually reviewed with original prints and resident. The new mat opened the
+original physical artist profile. Pointer selection and native E opened the
+folio guide. All six original viewpoints and all six exact reader handoffs
+worked; Great Wave, Red Fuji and Tsukuda views were reviewed. The original
+reader retained artwork, impression-specific text, rights/source links and
+the private observation field.
+
+All four guide languages were visually reviewed. DE/FA/CS guide/body client
+and scroll widths matched at 838 px, opening at scrollTop zero; Persian
+computed direction was RTL. Czech at 390 x 844 had matching widths of 354 px
+and minimum button height 44 px. Introductory reading and scrolled controls
+were inspected. Keyboard Enter activated the last Czech viewpoint. Reopening
+after scrolling began at zero. A synthetic mixed-language Great Wave draft,
+including leading/trailing spaces, survived all six reader/viewpoint routes
+and the four-language visits, without any save action or private translation.
+
+The original reader's Explore the artist website link opened the retained
+offline site in a separate native tab. Print room retained all six original
+design links and its Next prints control advanced the horizontal gallery.
+Its design/impression explanation remains. Main city/guide console: zero
+errors. The separate unchanged legacy-site tab logged a missing root favicon
+(404). Hardware controller A was not separately exercised; existing shared
+focused-button support remains. No signed-in service or private account was
+used. Exterior, room/ledge, guide language/mobile/control, original-reader,
+print-view and original Print room screenshots are in this chat's outputs.
+
+Latest branch/PR inspection found review head
+02ab1c915d633a60a3693bdd7887d341098a488b and main
+e2598f0194f25800887a7b6e4290762a1df213fb unchanged. Main was already incorporated
+with both parents in the preceding review commit; this pass needs no new merge.
+Its six-workshop Proof Atelier, rear passage, shifted board, independent
+city-of-ideas:proof-atelier:v1 key, explicit argument saves and finite-certificate
+limits remain, with planning estimates and no timers. The classic translated
+readers, room workbenches, physical full-reader picks, Hall controls/focus,
+private drafts/carets and independently measured Proof shell baseline remain.
+All twenty-three previous passes, Makers' four-language journey, map/facing,
+Noether/Mirzakhani/Cage, City Map, Babel, ocean voyage and branding remain.
+Other branches and PRs are preserved. PR #5 remains unmerged; no deployment.
+
+Twenty-four first detail/reading passes are complete. Next useful house: the
+existing Auguste Rodin gallery, id rodin, world (203, 99). Inspect the actual
+source scene/catalog, hip roof, facade sculpture/plinth, furniture, quarter
+layout and installed profile/reader before an additive companion. Preserve
+thinker, eternal-spring, walking-man, age-of-bronze, madame-x and hand-of-god.
+Keep the distinction between conception/modeling and a particular cast or
+carving, its date, material, provenance and image rights. Do not substitute a
+different version or sculpture. Keep all supplied bytes/ratios/metadata,
+geometry, resident, private observations, openings and walking lanes. Inspect
+real language gaps before modest EN/DE/FA/CS reading and details; do not claim
+full catalog translation. Preserve Hokusai's new ledge/guide, exact six handoffs,
+design/impression boundary and original Print room, all five earlier gallery
+companions, earlier houses/learning flows and imported room workbenches.

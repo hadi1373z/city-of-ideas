@@ -10,6 +10,8 @@ import {installMorrisGallery} from './morris-gallery.js';
 import {MORRIS_COPY} from './morris-gallery-copy.js';
 import {installKandinskyGallery} from './kandinsky-gallery.js';
 import {KANDINSKY_COPY} from './kandinsky-gallery-copy.js';
+import {installHokusaiGallery} from './hokusai-gallery.js';
+import {HOKUSAI_COPY} from './hokusai-gallery-copy.js';
 import {buildArtistStudios,buildQuarterGarden} from './artist-quarter-scene.js?v=artists2';
 const PLAN=globalThis.ARTIST_QUARTER_PLAN;
 
@@ -35,7 +37,7 @@ export function installArtistQuarter(M,T){
    body.append(el('p',w().intro),button(w().walk,()=>M.startExtra('artists-quarter')));
    const mapImage=el('img');mapImage.className='quarter-plan';mapImage.src=new URL('./assets/artist-quarter-plan.svg?v=artists2',import.meta.url).href;mapImage.alt=w().title;body.append(mapImage);
    const places=[...M.city.art.houses.filter(h=>!h.editionId).map(h=>({id:h.artistId,name:h.name,title:h.artistId==='dali'?w().daliTitle:w().original})),{id:'escher',name:w().escher,title:w().escherTitle},...QUARTER_ARTISTS.map(a=>({id:a.id,name:a.name,title:pick(a.title),theme:pick(a.theme)}))];
-   for(const court of PLAN.courts){body.append(el('h3',pick(court.title)),button(pick(court.title)+' \u2192',()=>arrive(court.arrival)));const grid=el('div');grid.className='quarter-directory';for(const id of court.artists){const item=places.find(p=>p.id===id);if(!item)continue;const card=el('article');card.append(el('h4',item.name),el('p',item.title));if(item.theme)card.append(el('p',item.theme));const p=entry(item.id);if(p)card.append(button(w().visit,()=>arrive(p)));if(item.id==='monet'&&M.monetGallery)card.append(button((MONET_COPY[lang()]||MONET_COPY.en).open,()=>M.monetGallery.open()));if(item.id==='van-gogh'&&M.vanGoghGallery)card.append(button((VAN_GOGH_COPY[lang()]||VAN_GOGH_COPY.en).open,()=>M.vanGoghGallery.open()));if(item.id==='hilma-af-klint'&&M.hilmaGallery)card.append(button((HILMA_COPY[lang()]||HILMA_COPY.en).open,()=>M.hilmaGallery.open()));if(item.id==='morris'&&M.morrisGallery)card.append(button((MORRIS_COPY[lang()]||MORRIS_COPY.en).open,()=>M.morrisGallery.open()));if(item.id==='kandinsky'&&M.kandinskyGallery)card.append(button((KANDINSKY_COPY[lang()]||KANDINSKY_COPY.en).open,()=>M.kandinskyGallery.open()));grid.append(card);}body.append(grid);}
+   for(const court of PLAN.courts){body.append(el('h3',pick(court.title)),button(pick(court.title)+' \u2192',()=>arrive(court.arrival)));const grid=el('div');grid.className='quarter-directory';for(const id of court.artists){const item=places.find(p=>p.id===id);if(!item)continue;const card=el('article');card.append(el('h4',item.name),el('p',item.title));if(item.theme)card.append(el('p',item.theme));const p=entry(item.id);if(p)card.append(button(w().visit,()=>arrive(p)));if(item.id==='monet'&&M.monetGallery)card.append(button((MONET_COPY[lang()]||MONET_COPY.en).open,()=>M.monetGallery.open()));if(item.id==='van-gogh'&&M.vanGoghGallery)card.append(button((VAN_GOGH_COPY[lang()]||VAN_GOGH_COPY.en).open,()=>M.vanGoghGallery.open()));if(item.id==='hilma-af-klint'&&M.hilmaGallery)card.append(button((HILMA_COPY[lang()]||HILMA_COPY.en).open,()=>M.hilmaGallery.open()));if(item.id==='morris'&&M.morrisGallery)card.append(button((MORRIS_COPY[lang()]||MORRIS_COPY.en).open,()=>M.morrisGallery.open()));if(item.id==='kandinsky'&&M.kandinskyGallery)card.append(button((KANDINSKY_COPY[lang()]||KANDINSKY_COPY.en).open,()=>M.kandinskyGallery.open()));if(item.id==='hokusai'&&M.hokusaiGallery)card.append(button((HOKUSAI_COPY[lang()]||HOKUSAI_COPY.en).open,()=>M.hokusaiGallery.open()));grid.append(card);}body.append(grid);}
    body.append(el('p',w().fiction));
   }else{
    const a=selected,house=houseFor(a.id);body.append(button(w().back,()=>{selected=null;detail=false;render();}),el('p',pick(a.theme)));
@@ -70,7 +72,8 @@ export function installArtistQuarter(M,T){
  const hilma=installHilmaGallery(M,T);
  const morris=installMorrisGallery(M,T);
  const kandinsky=installKandinskyGallery(M,T);
- addEventListener('pagehide',()=>{kandinsky?.dispose();morris?.dispose();hilma?.dispose();vanGogh?.dispose();monet?.dispose();ideas?.dispose();removeEventListener('city-language',locale);dialog.remove();panel.remove();launch.remove();map.remove();for(const [o,v]of hidden)o.visible=v;for(const target of studios.targets){const i=M.city.targets.indexOf(target);if(i>=0)M.city.targets.splice(i,1);}for(const h of studios.houses){const i=M.city.buildingTargets.indexOf(h.group);if(i>=0)M.city.buildingTargets.splice(i,1);}studios.dispose();garden.dispose();},{once:true});
+ const hokusai=installHokusaiGallery(M,T);
+ addEventListener('pagehide',()=>{hokusai?.dispose();kandinsky?.dispose();morris?.dispose();hilma?.dispose();vanGogh?.dispose();monet?.dispose();ideas?.dispose();removeEventListener('city-language',locale);dialog.remove();panel.remove();launch.remove();map.remove();for(const [o,v]of hidden)o.visible=v;for(const target of studios.targets){const i=M.city.targets.indexOf(target);if(i>=0)M.city.targets.splice(i,1);}for(const h of studios.houses){const i=M.city.buildingTargets.indexOf(h.group);if(i>=0)M.city.buildingTargets.splice(i,1);}studios.dispose();garden.dispose();},{once:true});
  const query=new URLSearchParams(globalThis.location?.search||'');if(query.get('arrival')==='artists-quarter'){const court=PLAN.courts.find(c=>c.id===query.get('court'));if(court)arrive(court.arrival);else M.startExtra('artists-quarter');}
  return api;
 }

@@ -153,3 +153,22 @@
 #kandinsky-guide-context{position:fixed;inset-inline-start:24px;bottom:170px;z-index:18;max-width:min(310px,calc(100vw - 48px))}
 #kandinsky-guide-context[hidden]{display:none}
 @media(max-width:430px){#kandinsky-guide header{padding:14px}#kandinsky-guide .kandinsky-guide-body{padding:6px 14px 18px}#kandinsky-guide-context{inset-inline-start:12px;bottom:245px;max-width:220px}}
+
+/* The Hokusai companion keeps each original print/impression record intact. */
+#hokusai-guide{color:#304b5d;background:#f2ecdc;border:1px solid #aebac1;border-radius:16px;width:min(840px,calc(100vw - 28px));max-height:88dvh;padding:0;box-sizing:border-box}
+#hokusai-guide::backdrop{background:#253541b8}
+#hokusai-guide header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 22px;border-bottom:1px solid #c5c6b6}
+#hokusai-guide h2{font:normal clamp(22px,3vw,30px)/1.3 Georgia,serif;margin:0;overflow-wrap:anywhere}
+#hokusai-guide header button{min-width:44px;flex-shrink:0}
+#hokusai-guide .hokusai-guide-body{padding:8px 22px 24px;max-height:calc(88dvh - 130px);overflow:auto;overflow-wrap:anywhere}
+#hokusai-guide p{line-height:1.7;max-width:72ch}
+#hokusai-guide h3{font:normal 24px/1.3 Georgia,serif;margin:24px 0 12px}
+#hokusai-guide h4{font:normal 21px/1.35 Georgia,serif;margin:0}
+#hokusai-guide article{margin:14px 0;padding:16px;background:#fbf8ee;border:1px solid #cbd1d2;border-radius:9px}
+#hokusai-guide .hokusai-guide-actions{display:flex;gap:8px;flex-wrap:wrap}
+#hokusai-guide button,#hokusai-guide-context button{min-height:44px;padding:10px 14px;border:1px solid #6f8798;border-radius:7px;background:#3f6076;color:#fff9e8;line-height:1.4;white-space:normal}
+#hokusai-guide a{display:flex;align-items:center;min-height:44px;color:#3f6076}
+#hokusai-guide button:focus-visible,#hokusai-guide a:focus-visible,#hokusai-guide-context button:focus-visible{outline:3px solid #b28132;outline-offset:3px}
+#hokusai-guide-context{position:fixed;inset-inline-start:24px;bottom:170px;z-index:18;max-width:min(310px,calc(100vw - 48px))}
+#hokusai-guide-context[hidden]{display:none}
+@media(max-width:430px){#hokusai-guide header{padding:14px}#hokusai-guide .hokusai-guide-body{padding:6px 14px 18px}#hokusai-guide-context{inset-inline-start:12px;bottom:245px;max-width:220px}}
