@@ -12,7 +12,7 @@ export const MORISOT_COPY={
    'Room: use the original curtain control and compare its three positions. Notice which part of the window the cloth covers and what stays visible from where you stand. The portrait does not change. This website activity does not reconstruct Morisot’s window or simulate historical daylight.',
    'Return: use the near and far viewpoints, then return to the whole portrait. Which details remain distinct at a distance, and which gather into larger areas? Keep an observation separate from an imagined thought or feeling of the sitter.'
   ],
-  boundary:'The rail, tabs, settee cushion, joinery and cards belong to this fictional city studio. Reading or changing language does not slide the curtain or save progress. Existing question and notebook actions remain explicit. This studio’s reading and controls support English, German, Persian and Czech; Seurat’s own descriptions, original catalogs and some shared city/notebook text still use English.'
+  boundary:'The rail, tabs, settee cushion, joinery and cards belong to this fictional city studio. Reading or changing language does not slide the curtain or save progress. Existing question and notebook actions remain explicit. This studio’s reading and controls support English, German, Persian and Czech; original catalogs and some shared city/notebook text still use English.'
  },
  de:{
   open:'Morisot · Kanten und Raum',heading:'Wo eine Kante hält und wo sie sich öffnet',
@@ -25,7 +25,7 @@ export const MORISOT_COPY={
    'Raum: nutze die ursprüngliche Vorhangsteuerung und vergleiche ihre drei Positionen. Welche Fensterfläche verdeckt der Stoff, was bleibt von deinem Standort sichtbar? Das Porträt verändert sich nicht. Die Website-Übung rekonstruiert weder Morisots Fenster noch historisches Tageslicht.',
    'Rückkehr: nutze den nahen und den fernen Blickpunkt und kehre dann zum ganzen Porträt zurück. Welche Details bleiben aus der Ferne deutlich, welche sammeln sich zu größeren Flächen? Trenne Beobachtung von vorgestellten Gedanken oder Gefühlen der Dargestellten.'
   ],
-  boundary:'Schiene, Laschen, Sofapolster, Holzverbindungen und Karten gehören zu diesem erfundenen Stadtatelier. Lesen und Sprachwechsel verschieben den Vorhang nicht und speichern keinen Fortschritt. Die vorhandenen Frage- und Notizbuchaktionen bleiben ausdrücklich auszulösen. Lesen und Steuerung dieses Ateliers gibt es auf Englisch, Deutsch, Persisch und Tschechisch; Seurats eigene Beschreibungen, ursprüngliche Kataloge und manche gemeinsame Stadt-/Notizbuchtexte bleiben englisch.'
+  boundary:'Schiene, Laschen, Sofapolster, Holzverbindungen und Karten gehören zu diesem erfundenen Stadtatelier. Lesen und Sprachwechsel verschieben den Vorhang nicht und speichern keinen Fortschritt. Die vorhandenen Frage- und Notizbuchaktionen bleiben ausdrücklich auszulösen. Lesen und Steuerung dieses Ateliers gibt es auf Englisch, Deutsch, Persisch und Tschechisch; ursprüngliche Kataloge und manche gemeinsame Stadt-/Notizbuchtexte bleiben englisch.'
  },
  fa:{
   open:'موریزو · لبه‌ها و اتاق',heading:'لبه کجا پابرجاست و کجا باز می‌شود',
@@ -38,7 +38,7 @@ export const MORISOT_COPY={
    'اتاق: از کنترل اصلی پرده استفاده کن و سه جایگاهش را بسنج. پارچه کدام بخش پنجره را می‌پوشاند و از جای تو چه چیزی دیده می‌شود؟ پرتره تغییر نمی‌کند. این فعالیت وبگاه نه پنجرهٔ موریزو را بازسازی می‌کند و نه نور روز تاریخی را شبیه‌سازی می‌کند.',
    'بازگشت: از جایگاه‌های نزدیک و دور نگاه کن، سپس به پرترهٔ کامل برگرد. کدام جزئیات از دور جدا می‌مانند و کدام در سطح‌های بزرگ‌تر جمع می‌شوند؟ مشاهده را از فکر یا احساس خیالیِ فرد تصویر جدا نگه دار.'
   ],
-  boundary:'ریل، بندهای پرده، بالشتک مبل، اتصال‌های چوبی و کارت‌ها به این آتلیهٔ خیالی شهر تعلق دارند. خواندن یا تغییر زبان پرده را حرکت نمی‌دهد و پیشرفتی ذخیره نمی‌کند. کنش‌های موجود پرسش و دفترچه همچنان با انتخاب آشکار انجام می‌شوند. خواندن و کنترل‌های این آتلیه انگلیسی، آلمانی، فارسی و چکی‌اند؛ توضیح‌های خودِ سورا، فهرست‌های اصلی و برخی متن‌های مشترک شهر و دفترچه همچنان انگلیسی‌اند.'
+  boundary:'ریل، بندهای پرده، بالشتک مبل، اتصال‌های چوبی و کارت‌ها به این آتلیهٔ خیالی شهر تعلق دارند. خواندن یا تغییر زبان پرده را حرکت نمی‌دهد و پیشرفتی ذخیره نمی‌کند. کنش‌های موجود پرسش و دفترچه همچنان با انتخاب آشکار انجام می‌شوند. خواندن و کنترل‌های این آتلیه انگلیسی، آلمانی، فارسی و چکی‌اند؛ فهرست‌های اصلی و برخی متن‌های مشترک شهر و دفترچه همچنان انگلیسی‌اند.'
  },
  cs:{
   open:'Morisot · hrany a místnost',heading:'Kde hrana drží a kde se otevírá',
@@ -51,7 +51,7 @@ export const MORISOT_COPY={
    'Místnost: použij původní ovládání závěsu a porovnej jeho tři polohy. Kterou část okna látka zakrývá a co z tvého místa zůstává viditelné? Portrét se nemění. Aktivita webu nerekonstruuje Morisotino okno ani nesimuluje historické denní světlo.',
    'Návrat: použij blízký a vzdálený pohled a potom se vrať k celému portrétu. Které detaily zůstávají z dálky zřetelné a které splývají do větších ploch? Odděl pozorování od domnělých myšlenek či pocitů portrétované osoby.'
   ],
-  boundary:'Kolejnice, poutka závěsu, polštář pohovky, dřevěné spoje a karty patří tomuto smyšlenému městskému ateliéru. Čtení ani změna jazyka neposouvají závěs a neukládají postup. Stávající akce pro otázku a zápisník zůstávají výslovnou volbou. Čtení a ovládání tohoto ateliéru je dostupné anglicky, německy, persky a česky; Seuratovy vlastní popisy, původní katalogy a některé společné texty města a zápisníku zůstávají anglicky.'
+  boundary:'Kolejnice, poutka závěsu, polštář pohovky, dřevěné spoje a karty patří tomuto smyšlenému městskému ateliéru. Čtení ani změna jazyka neposouvají závěs a neukládají postup. Stávající akce pro otázku a zápisník zůstávají výslovnou volbou. Čtení a ovládání tohoto ateliéru je dostupné anglicky, německy, persky a česky; původní katalogy a některé společné texty města a zápisníku zůstávají anglicky.'
  }
 };
 export function appendMorisotReading(body,el,lang){

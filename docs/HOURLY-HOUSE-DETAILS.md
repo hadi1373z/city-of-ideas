@@ -2914,3 +2914,146 @@ openings, furniture and walking routes. Shared controls/court navigation have
 Czech; Seurat's own public copy/new reading still need a Czech pass. Keep
 Morisot's new fittings/rack/reading and original curtain cycle, Cézanne's study,
 all ten gallery companions and earlier learning/private/model work intact.
+
+## 2026-11-08 — Georges Seurat: marks and viewing distance
+
+Criticism: the existing working studio already had the credited preparatory
+painting, blue/yellow dot activity, floor viewpoints and private reflection
+desk. Its split roof and desk were comparatively bare, and its own public
+descriptions still fell back to English in Czech. Extend this experience;
+do not replace the painting, restart the experiment or translate private text.
+
+The studio stays at world (182, 196), with its opposite-row pi rotation.
+Owned fascias follow both source roof panels and their actual rotations. Four
+rails frame the original dot panel outside its occupied area; four spacers
+meet the unchanged wall. The frame belongs to the original study group and
+retains the activity target. Desk aprons and corner joints sit below the
+original top, clearing its sheet/reflection token. A small supported wall
+placard carries a dot, a square and blank reading rules on two paper cards.
+Its backing/spacers meet the solid wall, clear the experiment and openings,
+and stay inside existing walking clearances. These are original city symbols,
+not Seurat works, brushwork samples, calibration tools or historical objects.
+
+Pointer/E on the placard opens the existing studio panel. Inside context and
+a new directory reading action reach that same panel. The original whole/
+detail, near/far, spacing, question and notebook controls remain. There is no
+new reader, state variable, storage key or lesson flow. The original dot
+panel and its frame still invoke the spacing activity.
+
+Three original EN/DE/FA/CS reading steps distinguish the supplied painting
+from the city's separate panel, compare near/far views and return to the
+painting. The reading explicitly says that the near/far marks change angle
+as well as distance, while tighter dot spacing changes occupied area as well
+as gaps. It does not claim a controlled vision test, pigment mixing, a
+historical room or a measured optical law. The primary Met record was
+accessed successfully: https://www.metmuseum.org/art/collection/search/437658.
+The narrow attributed context is its 1884 oil-on-canvas preparatory study,
+whose small patchy strokes differ from the tighter dotlike marks of the
+later large painting. No quotation, voice or artist intention was invented.
+
+Work 437658, seurat.jpg, seurat-detail.jpg, their bytes/hashes, aspect ratio,
+supplied title, source/rights and attribution remain unchanged. The original
+blue/yellow panel retains all 36 x 24 = 864 instances, radius/colours and
+exact phase matrices. Its spacing factors remain 1 / .75 / .6 in the original
+three-phase cycle. No borrowed transform, geometry/material, vertex, payload,
+visibility, collider, entry, viewpoint or furniture was changed.
+
+Czech was added to Seurat's own title/theme/prompt/activity/public question
+and the new reading. Shared studio controls/court navigation already had
+Czech and remain. Existing EN/DE/FA strings remain and Persian retains RTL.
+All three working studios now have their own four-language public copy and
+reading; the earlier two studio disclosures were corrected accordingly.
+Original catalogs/books, some shared notebook/city copy and the Proof
+Atelier's advanced lessons still retain English. This is not city-wide Czech
+localization. Reading/locale rendering neither changes spacing nor writes
+private/lesson progress. The studio-seurat key, existing private questions,
+answers/drafts and explicit notebook/save actions remain unchanged.
+
+Verification: all 84 release programs, build and whitespace checks passed.
+Source hash 4dc7b6c82eb5b38b9ad8a3201dd257feb413d4cc5190ce4d322cc6903043ed73
+(754 assets / 332,457,684 bytes). The new test snapshots borrowed transforms,
+geometry/material identity, vertices, colours, payloads, visibility, colliders,
+entries/viewpoints and data. It independently reconstructs every instance
+matrix at all three factors, checks all dots clear the frame and verifies
+three actions restore the exact initial matrix set. Roof fit, wall/card
+contact, desk clearance, real Three.js ray interaction and owned cleanup
+exactly once across both detail groups are checked.
+
+The real shared controller is exercised in EN/DE/FA/CS for inside/outside
+gates, whole/detail, exact near/far position/yaw/pitch, physical placard
+routing, dictionary parity, RTL and private keys. A nonzero spacing phase
+is retained across reading/language visits; read/locale write counts remain
+unchanged. Existing private question/answer content survives explicit revisits.
+The other two studios' activities and all earlier house/learning/private,
+mathematical, source/cast/voice and island checks pass.
+
+Native Playwright CLI review at 1280 x 720 confirmed directory access,
+Morisot's retained reading, the original Seurat doorway and actual walking
+entry. Split-roof trim, dot frame, desk and placard were visually checked.
+Native E on the original panel and two subsequent original UI actions
+completed the original three-step spacing cycle. Near/far views were checked.
+Pointer and native E on the new placard opened the existing studio panel.
+Whole/detail retained seurat.jpg / seurat-detail.jpg and the Met link.
+
+All four reading languages were visually reviewed. Dialog client/scroll widths
+matched at 959 px and body widths at 943 px, opening at scrollTop zero with
+all six original inside controls. Persian computed direction was RTL. Czech
+at 390 x 844 had matching dialog widths 355 px and body widths 339 px, no
+horizontal overflow and minimum button height 44 px. The supplied whole
+painting loaded at its original 599 x 407 dimensions. Intro, scrolled controls
+and whole painting were reviewed. Keyboard Enter activated the original far
+view and reopening began at zero.
+
+The existing explicit Keep an unfinished question action was exercised in
+the isolated browser fixture. A synthetic mixed-language answer/revision-
+reason draft, including leading/trailing spaces, survived DE/FA/CS reading
+visits and return to the notebook. The answer-save action was not used.
+No signed-in service or private account was used. Hardware controller A
+was not separately exercised; shared focus/confirm support remains. Native
+city/reading/atelier consoles: zero errors, one existing Three.js warning.
+Exterior/interior, phase/near/far/placard, language/mobile, synthetic draft
+and atelier-resume screenshots are in the originating chat's outputs.
+
+Latest branch/PR inspection found review head
+98ac983635353d1568ae7a4c5f418175c56cb499 and new main
+7d9e752be35c7515e619a492763cbf16a3eeee72. The tested update incorporates main
+with both parents retained. Main's new atelier resume remembers the last
+actual workbench separately from the reading selection; a separate action
+goes to the next unfinished room. Legacy saves fall back to their reading
+selection; all-complete routes omit the unfinished action. The review's Czech
+dictionary, workshop names, classic translated readers, focus and private
+draft/caret handling were retained while reconciling the overlap. Czech
+resume/unfinished labels were added; advanced lessons remain English.
+
+The expanded atelier UI/model checks cover navigation, legacy/invalid values,
+completion and all four route-label languages. Native review visited workbench
+V, read room I and confirmed Resume still named and returned to V. The
+separate unfinished action and both Czech labels were visually checked.
+The six-workshop atelier keeps its real passage, shifted board, independent
+city-of-ideas:proof-atelier:v1 key, explicit saves, finite-certificate limits
+and absence of timers. Proof's independently measured e2598f0 geometry
+baseline remains appropriate; the new main change did not alter its shell.
+
+All thirty earlier passes remain: philosophers' comparisons/cases, three
+Makers' rooms and full four-language journey, ten original gallery companions,
+Cézanne's rotating study and Morisot's curtain/rack. Classic full/compact
+readers, Hall controls, Bayesian assumptions, Computation's timeout/repeated-
+complete-state distinction and same-step physical counter refresh remain.
+Noether/Mirzakhani/Cage, visitor/facing map, City Map, Babel, ocean voyage,
+branding, approved appearances, fixed voices and accepted recordings remain.
+The small Freud room remains distinct from the House of Psychoanalysis design.
+Other branches/PRs remain; PR #5 stays unmerged and nothing was deployed.
+
+Thirty-one first detail/reading passes are complete. Next useful house: the
+existing Emmy Noether seminar house, id noether, world (-104, 316), with pi
+rotation. Inspect seminar-houses-data.js, seminar-houses-scene.js,
+seminar-houses.js and seminar-house-models.js plus per-house notes and sources.
+It already has a circular wall/glazing, true entrance gap, annular roof/oculus,
+columns/ribs, paired benches, desk and oscillator exhibit. Its advanced
+reader/controls already support EN/DE/FA/CS; do not repeat their translation
+or replace the experiment. Add modest domestic detail and an original sourced
+four-language reading extension while preserving its phase/broken-symmetry
+toggle, exact equations/numerics, velocity versus restoring-force arrows,
+compact/full readers, explicit saves and seminar-noether private drafts/key.
+Follow the actual local/world transform and keep the opening, clearances,
+Mirzakhani/Cage and all earlier work intact. Do not claim a historical room.

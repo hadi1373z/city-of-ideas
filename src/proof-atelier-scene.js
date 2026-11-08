@@ -1,5 +1,5 @@
-import {WORKSHOPS} from './proof-atelier-content.js';
-import {TRAP,EXCHANGE,COMPLETE,COSTS,neighborhood,maximumMatching,pathStatus,priceStatus} from './proof-atelier-model.js';
+import {WORKSHOPS} from './proof-atelier-content.js?v=resume1';
+import {TRAP,EXCHANGE,COMPLETE,COSTS,neighborhood,maximumMatching,pathStatus,priceStatus} from './proof-atelier-model.js?v=resume1';
 import {BOARDS} from './study-house-models.js?v=workbench1';
 export function buildProofAtelier(T,{canvas=()=>document.createElement('canvas')}={}){
  const group=new T.Group();group.name='The Proof Atelier · six connected workshops';group.position.y=.13;

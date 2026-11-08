@@ -12,7 +12,7 @@ export const CEZANNE_COPY={
    'Overlap: enter the studio and use its near and far viewpoints around the fruit study. Which object hides part of another? Turn the still life once and compare again. The original three positions cycle; the fruit, cloth and bowl rotate as one group while their table stays still.',
    'Return: look at the painting again. Describe one relation that the movable study helped you notice, and one difference it cannot explain. A painted arrangement and a simple three-dimensional study need not give the same account of space.'
   ],
-  boundary:'This is an original city exercise, not a claim about Cézanne’s exact painting process. Reading and language changes do not turn the study or save anything. The existing question and notebook actions remain explicit. This studio’s reading and controls support English, German, Persian and Czech; other studio descriptions, catalog and shared city/notebook text may still use English.'
+  boundary:'This is an original city exercise, not a claim about Cézanne’s exact painting process. Reading and language changes do not turn the study or save anything. The existing question and notebook actions remain explicit. This studio’s reading and controls support English, German, Persian and Czech; original catalogs and some shared city/notebook text may still use English.'
  },
  de:{
   open:'Cézanne · Tische und Blickpunkte',heading:'Ein Tisch, mehrere Sichtweisen',
@@ -25,7 +25,7 @@ export const CEZANNE_COPY={
    'Überlagerung: betritt das Atelier und nutze die nahen und fernen Blickpunkte um die Obststudie. Welcher Gegenstand verdeckt einen anderen teilweise? Drehe das Stillleben einmal und vergleiche erneut. Die drei ursprünglichen Positionen wiederholen sich; Obst, Tuch und Schale drehen sich gemeinsam, während ihr Tisch stehen bleibt.',
    'Rückkehr: betrachte wieder das Gemälde. Beschreibe eine Beziehung, auf die dich die bewegliche Studie aufmerksam machte, und einen Unterschied, den sie nicht erklärt. Ein gemaltes Arrangement und eine einfache räumliche Studie müssen Raum nicht gleich darstellen.'
   ],
-  boundary:'Dies ist eine eigene Übung der Stadt, keine Behauptung über Cézannes genauen Malprozess. Lesen und Sprachwechsel drehen die Studie nicht und speichern nichts. Die vorhandenen Frage- und Notizbuchaktionen bleiben ausdrücklich auszulösen. Lesen und Steuerung dieses Ateliers gibt es auf Englisch, Deutsch, Persisch und Tschechisch; andere Atelierbeschreibungen, Katalog- und gemeinsame Stadt-/Notizbuchtexte können weiterhin englisch sein.'
+  boundary:'Dies ist eine eigene Übung der Stadt, keine Behauptung über Cézannes genauen Malprozess. Lesen und Sprachwechsel drehen die Studie nicht und speichern nichts. Die vorhandenen Frage- und Notizbuchaktionen bleiben ausdrücklich auszulösen. Lesen und Steuerung dieses Ateliers gibt es auf Englisch, Deutsch, Persisch und Tschechisch; ursprüngliche Kataloge und manche gemeinsame Stadt-/Notizbuchtexte können weiterhin englisch sein.'
  },
  fa:{
   open:'سزان · میزها و زاویه‌های دید',heading:'یک میز، چند شیوهٔ نگاه',
@@ -38,7 +38,7 @@ export const CEZANNE_COPY={
    'هم‌پوشانی: وارد آتلیه شو و از جایگاه‌های نزدیک و دور پیرامون تمرین میوه استفاده کن. کدام شیء بخشی از دیگری را می‌پوشاند؟ طبیعت بی‌جان را یک بار بچرخان و دوباره بسنج. سه حالت اصلی تکرار می‌شوند؛ میوه‌ها، پارچه و کاسه با هم می‌چرخند و میز ثابت می‌ماند.',
    'بازگشت: دوباره به نقاشی نگاه کن. رابطه‌ای را که تمرین متحرک توجهت را به آن جلب کرد و تفاوتی را که توضیح نمی‌دهد، شرح بده. چیدمان نقاشی‌شده و تمرین سادهٔ سه‌بعدی لازم نیست فضا را یکسان نشان دهند.'
   ],
-  boundary:'این تمرینی تازه برای شهر است، نه ادعایی دربارهٔ روند دقیق نقاشی سزان. خواندن و تغییر زبان، تمرین را نمی‌چرخاند و چیزی ذخیره نمی‌کند. کنش‌های موجود پرسش و دفترچه همچنان با انتخاب آشکار انجام می‌شوند. خواندن و کنترل‌های این آتلیه انگلیسی، آلمانی، فارسی و چکی‌اند؛ توضیح آتلیه‌های دیگر، فهرست و برخی متن‌های مشترک شهر و دفترچه ممکن است همچنان انگلیسی باشند.'
+  boundary:'این تمرینی تازه برای شهر است، نه ادعایی دربارهٔ روند دقیق نقاشی سزان. خواندن و تغییر زبان، تمرین را نمی‌چرخاند و چیزی ذخیره نمی‌کند. کنش‌های موجود پرسش و دفترچه همچنان با انتخاب آشکار انجام می‌شوند. خواندن و کنترل‌های این آتلیه انگلیسی، آلمانی، فارسی و چکی‌اند؛ فهرست‌های اصلی و برخی متن‌های مشترک شهر و دفترچه ممکن است همچنان انگلیسی باشند.'
  },
  cs:{
   open:'Cézanne · stoly a pohledy',heading:'Jeden stůl, několik pohledů',
@@ -51,7 +51,7 @@ export const CEZANNE_COPY={
    'Překrývání: vstup do ateliéru a použij blízký a vzdálený pohled kolem ovocné studie. Který předmět částečně zakrývá jiný? Jednou otoč zátiší a znovu porovnej. Tři původní polohy se opakují; ovoce, látka a miska se otáčejí společně, zatímco stůl stojí.',
    'Návrat: znovu se podívej na obraz. Popiš jeden vztah, kterého sis díky pohyblivé studii všiml, a jeden rozdíl, který nevysvětluje. Malované uspořádání a jednoduchá prostorová studie nemusí prostor vykládat stejně.'
   ],
-  boundary:'Jde o původní cvičení města, nikoli tvrzení o Cézannově přesném malířském postupu. Čtení a změna jazyka studii neotáčejí ani nic neukládají. Stávající akce pro otázku a zápisník zůstávají výslovnou volbou. Čtení a ovládání tohoto ateliéru je dostupné anglicky, německy, persky a česky; popisy jiných ateliérů, katalog a některé společné texty města a zápisníku mohou zůstat anglicky.'
+  boundary:'Jde o původní cvičení města, nikoli tvrzení o Cézannově přesném malířském postupu. Čtení a změna jazyka studii neotáčejí ani nic neukládají. Stávající akce pro otázku a zápisník zůstávají výslovnou volbou. Čtení a ovládání tohoto ateliéru je dostupné anglicky, německy, persky a česky; původní katalogy a některé společné texty města a zápisníku mohou zůstat anglicky.'
  }
 };
 export function appendCezanneReading(body,el,lang){

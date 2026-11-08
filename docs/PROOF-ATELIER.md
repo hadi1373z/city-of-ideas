@@ -57,6 +57,16 @@ add the reasoning to the existing personal notebook. A verified studio graph is
 kept as a separate finite certificate so subsequent edits do not change it.
 Existing private keys, voices, recordings and asset credits are unaffected.
 
+Resume remembers the last physical workbench separately from the chapter being
+read. Opening an earlier reading or the route directory does not change that
+destination. Its button names the destination before moving; a separate next
+unfinished-room button follows the learning sequence. The latter is absent when
+all arguments and milestones are kept. Earlier saves lack a workbench history,
+so their last selected chapter supplies the initial fallback without discarding
+notes, model state or certificates. New workbench visits establish the dedicated
+resume position. Reload, earlier-chapter reading, both navigation choices and
+legacy/invalid resume fields are covered by regression checks.
+
 Finite certificates are checked; free prose is not machine graded. This is not
 an arbitrary proof assistant, an unrestricted graph editor or a general Hungarian
 solver. A completed milestone records a past check; current model validity is
