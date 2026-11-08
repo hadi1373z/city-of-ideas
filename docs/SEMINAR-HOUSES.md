@@ -97,3 +97,33 @@ are verified separately before claiming the changes live.
 The hourly house-detail review series in PR #5 is separate and remains unmerged.
 Limitations: these are bounded seminar encounters, not complete courses, a full
 hyperbolic world, research-proof assistants or a reproduction of Cage's practice.
+
+## Noether detail pass — hourly review branch
+
+Noether's rotunda now has supported piped bench cushions/arms, desk aprons and
+joints, and small foot/capital collars on the original columns. Foot collars
+remain outside the original navigable disk; capitals are above head height.
+The shell, glazing, oculus, door gap, furniture positions and colliders remain.
+
+A supported two-card folio rests on the desk's back edge, clear of its original
+ruled sheet. The one-mark circle and two-mark ellipse depict equal-potential
+contours at one drawing scale, not bead trajectories, historic objects or
+physical measurements. Pointer/E opens the existing full reader. The original
+compact workbench, Read the full argument, context and directory routes remain.
+
+An original EN/DE/FA/CS desk reading separates a symmetric law from one orbit,
+explains the two contours, and points back to the existing case/phase controls.
+It links Noether's first theorem in Tavel's translation, §1:
+https://arxiv.org/html/physics/0503066v3#S1 . Both this text and the abstract
+record were accessed. No quotation or historical room was invented. The five
+original advanced sections, all their translations and the original source
+metadata remain unchanged. No new saved experiment or private-note state exists.
+
+All 86 release programs passed. New checks compare all original visuals and
+model phases against the unchanged builder, test contour levels, support and
+walking clearances, real folio rays/full-reader routing, four languages/RTL,
+held nonzero phase, private drafts/carets/first answers and owned cleanup.
+Native desktop/mobile review confirmed real entry walking, pointer/E, both
+oscillator cases, keyboard phase action, compact/full and directory routes,
+four-language reading and preserved unsaved mixed-language drafts. Full results
+and the next house are in HOURLY-HOUSE-DETAILS.md. PR #5 remains review only.

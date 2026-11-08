@@ -3107,3 +3107,127 @@ change was needed. Native consoles recorded no application errors. The new
 price/mobile/saved-CS and combined Seurat reading screenshots are in outputs.
 Noether remains the next useful house. The hourly cadence and review-only
 publication policy remain unchanged.
+
+## 2026-11-08 — Emmy Noether: the law and the path
+
+Criticism: the existing rotunda already had a complete five-section seminar in
+EN/DE/FA/CS, exact oscillator cases and distinct velocity/restoring-force arrows.
+Its benches and desk were sparse. Add domestic detail and a short bridge into
+the existing mathematics instead of repeating the translations or experiment.
+
+Noether remains at world (-104, 316), with its original pi rotation. Fifteen
+small foot collars stay in the wall band outside the navigable disk; fifteen
+capital collars meet the original columns above head height. Supported linen
+bench cushions carry muted piping, with supported wooden arms inside the
+existing furniture footprints. Desk joint caps and aprons meet the underside
+of the original top. The circular stone/glass shell, annular roof, open oculus,
+doorway, furniture positions, paths and walking/collider geometry remain fixed.
+
+A small backed folio rests on the original desk's back edge, clear of the
+ruled sheet. Its paper cards meet their backing, the backing/supports meet
+the base and the base meets the tabletop. One mark identifies a round contour;
+two marks identify a flattened ellipse. At a common reduced drawing scale,
+these represent V = 1/2 for V = (x^2 + omega^2 y^2)/2 in the original omega = 1
+and omega = 2 cases. They are fixed original city diagrams, not trajectories
+of the moving bead, physical measurements or historical Noether objects.
+They do not animate or introduce a separate phase or saved state.
+
+Pointer/E on the folio opens the existing full reader. Original exhibit picks
+and the room context retain compact controls. Read the full argument reaches
+the reading, and the existing three-house directory still reaches Noether.
+The new EN/DE/FA/CS desk section separates a rotationally symmetric law from
+one elliptical orbit, then guides visitors through the original case/phase
+actions. It distinguishes comparisons within a case from changing systems,
+and blue velocity from terracotta restoring force. The original five advanced
+sections, all translations, further challenge and source metadata remain.
+
+Primary source: Emmy Noether's 1918 Invariant Variation Problems, Theorem I
+in section 1, M. A. Tavel translation. The arXiv abstract and full HTML were
+accessed successfully:
+https://arxiv.org/abs/physics/0503066
+https://arxiv.org/html/physics/0503066v3#S1
+The narrow attributed context is the connection between continuous symmetries
+of variational problems and conservation relations. The drawings and guided
+activity are the city's own application of the existing model. No quotations,
+historical workshop, recordings or artist/scientist voice were invented.
+
+The exact oscillator formulas, phase and broken-symmetry actions, energy,
+angular momentum, torque, vector directions/display scale and original curves
+remain unchanged. Reading/language rendering does not advance phase or write
+private/lesson progress. No new storage key exists. The seminar-noether key,
+existing questions/answers, private drafts/carets and explicit saves remain.
+Earlier first answers survive explicit revisions in the real notebook fixture.
+Mirzakhani's metric experiment and Cage's score/audio-clock behavior remain.
+
+Verification: all 86 release programs, build and whitespace checks passed.
+Source hash ad33f04577fb95c2ea6b3b931b5e18cb1c62e45999ff0b40ff633f35aedc0ccb
+(756 assets / 332,477,097 bytes). The new test checks borrowed node parents,
+transforms, geometry/material and payload identities, visibility, data,
+entries and colliders. It compares every original visual with the unchanged
+builder across both cases and five phases, including the distinct arrows,
+and retains all three seminar houses' original model states. Each normalized
+card contour independently satisfies its stated potential level.
+
+Tests also cover tabletop/paper contact and clearance, cushion/arm support,
+the column/walking band, unchanged garden routes, a real Three.js ray at the
+desk, full-versus-compact handoffs, four-language key parity, RTL/LTR formulas,
+a held nonzero phase, private draft/caret and first-answer preservation,
+unrelated private text and owned resources disposed exactly once. Source
+resources are not released by the new detail disposer. All earlier house,
+learning/model/private, cast/voice/source, island and imported atelier checks
+pass. This fixture does not claim measured browser performance or learning.
+
+Native Playwright CLI review at 1280 x 720 began at the original doorway and
+walked through the true opening along the existing central aisle. Column
+fittings, desk joinery, supported folio, both contour cards and bench cushion/
+arms were visually checked. Pointer and native E on the folio opened the full
+reader. Existing room context, compact controls, Read the full argument and
+the original three-house directory all retained access and the same draft.
+
+All four reading languages were visually reviewed. Dialog and main client/
+scroll widths matched at 998 px. Persian direction was RTL; formula blocks
+remained LTR. Czech and Persian at 390 x 844 both had matching 354 px dialog/
+main widths, no horizontal overflow and minimum button height 44 px. There
+was no new language gate or repeated shell translation.
+
+The existing unequal case at phase pi/8 showed H = 12.5, J = 9.463, J(0) = 12
+and dJ/dt = -11.7591. These values survived four-language reading visits and
+return to English. Keyboard Enter on the original phase control also worked
+in the equal case, with H = 6.5, J = J(0) = 6 and dJ/dt = 0. Existing Face the
+work was used for viewing; its orientation-only position preservation remains
+covered by tests. A synthetic mixed-language unsaved draft, spaces/newline
+and selection range survived language, compact/full and directory visits.
+The native notebook-save action was not used. No signed-in service/private
+account was used. Hardware controller A was not separately exercised; its
+shared interaction/focused-confirm route remains. Console: zero application
+errors, one existing Three.js warning. Exterior/interior, desk/folio/bench,
+both cases, reading/language/mobile and synthetic draft screenshots are in
+the originating chat's outputs.
+
+Latest branch/PR inspection found review head
+5e725557d592cccd99fb1d54bf30c0a339bc111b and main
+d2133b48f9259f44f98bc8b6f0d59299c032208a unchanged. Main remains in the
+two-parent ancestry; this pass needs no new merge. Its English-first initial
+shell, saved EN/DE/FA/CS, Price of Choice ledger/diagnostics, greedy/floor/slack
+model, direct arrival, separate resume/next-unfinished and explicit arguments
+remain. Atelier advanced lessons remain English as disclosed. The thirty-one
+earlier detail/reading passes, all classic/Makers/gallery/studio behavior,
+map/facing, Babel, ocean voyage, branding, fixed voices and accepted recordings
+remain. Other branches and PR #2 remain. PR #5 stays unmerged; no deployment.
+
+Thirty-two first detail/reading passes are complete. Next useful house: the
+existing Maryam Mirzakhani House of Curved Space, id mirzakhani, at world
+(0, 345), with pi rotation. Inspect seminar-houses-data.js,
+seminar-houses-scene.js, seminar-houses.js, seminar-house-models.js, its
+source papers and private notes before an additive pass. Its turquoise
+vaulted ribbons, real glazing/door opening, benches, desk and upright disk
+already exist. Five advanced sections/controls already support EN/DE/FA/CS;
+do not repeat their translation or replace the experiment. Preserve all three
+endpoint cases, Poincare metric/curvature, exact distance, orthogonal-circle
+construction, dashed chord and numerical quadrature, compact/full readers
+and seminar-mirzakhani private drafts/explicit saves. Keep the disk model
+distinct from a closed hyperbolic surface and the actual Euclidean hall.
+Preserve Noether's new furnishings/folio/reading and exact oscillator, Cage's
+score/audio-clock, openings, walking routes and all earlier work. Add modest
+visible domestic detail and an original sourced reading extension; do not
+claim a historical room or a proof/count the model does not provide.
