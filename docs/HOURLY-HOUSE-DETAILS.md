@@ -2790,3 +2790,127 @@ activity/question and new reading still need a real Czech pass. Do not repeat
 the shared dictionary translation or replace its curtain experiment. Keep
 Cézanne's new details/reading and original live study, all ten gallery
 companions and earlier models/learning/private work intact.
+
+## 2026-11-08 — Berthe Morisot: edges and the room
+
+Continued feat/hourly-house-details from
+66e757df9baf2e5d553aa441a8b38fae5b529938 after reading the latest ledger,
+repository instructions, branches/PRs and actual studio scene/data/UI. The
+existing working studio remains at (196, 159), with its split roof, glazing,
+settee, movable curtain, reflection desk and Met portrait unchanged.
+
+Added owned perimeter fascias that copy each original roof panel's position
+and rotation, a rail with wall brackets above the original window aperture,
+and three tabs attached to the original moving curtain group. Tabs inherit
+its existing z positions -2.4 / 0 / 2.4 and return with it; they introduce no
+new phase or stored state. A supported piped settee cushion, arm supports/rails
+and desk leg stretchers/top joints/apron add domestic detail within existing
+furniture clearances. The original paper and reflection token stay clear.
+No borrowed node, material, vertex, transform, payload, visibility, collider,
+entry, viewpoint or source geometry was edited.
+
+A shallow wall-supported rack carries two paper cards. One has a continuous
+line and the other five separate segments spanning the same distance. Cards
+meet their backing and spacers meet the unchanged solid left wall; the rack
+stays within existing wall walking clearance, clear of portrait, curtain and
+reflection desk. Its diagrams are original city prompts, not Morisot brushwork
+samples, measurements of the painting or historical studio objects. Pointer
+selection and E open the existing studio panel. Its original inside context
+button and a new directory reading button reach the same experience.
+
+Original EN/DE/FA/CS reading compares boundaries, the surrounding room and a
+return to the portrait, using the existing whole/detail, near/far and curtain
+controls. The portrait does not change when the curtain moves. The reading
+does not claim to reconstruct Morisot's window, historical daylight or exact
+painting process, and separates visible marks from imagined sitter thoughts.
+
+The primary Met record was accessed successfully:
+https://www.metmuseum.org/art/collection/search/438009. It dates the oil-on-
+canvas portrait to about 1870 and describes several sittings. These narrow
+attributions are separate from the city's original prompts. No quotation,
+recording or artist voice was invented. Work 438009, morisot.jpg and its detail
+crop, ratio, supplied title, source/rights and credit metadata remain unchanged.
+
+Czech was added only to Morisot's existing title/theme/prompt/activity/public
+question and the new reading. Shared studio controls and court navigation
+already had Czech and were retained. Existing EN/DE/FA strings remain; Persian
+retains RTL. Seurat's own descriptions still fall back to English in Czech;
+original catalogs/books, some shared notebook/city text and atelier advanced
+lessons also retain disclosed English gaps. This is not full city localization.
+Reading/locale rendering does not slide the curtain or write private/lesson
+state. The studio-morisot key and existing private questions/answers/drafts and
+explicit notebook/save actions remain; private text is not translated.
+
+Verification: all 83 release programs, build and whitespace checks passed.
+Source hash baf88f7529f520c2a7e5c61ae8c55304c2020210f53cfefc3f4c0773ea963cd9
+(752 assets / 332,441,485 bytes). The new check compares original transforms,
+geometry/material identities, vertices, colours, payloads/visibility, colliders,
+entries/viewpoints and data before/after detailing. It checks source-fit roof
+frames, wall/card contact, equal line spans, supported cushion/arms, overhead
+brackets, tabs meeting the curtain/rail and inheriting all three actual phases,
+desk clearance, a real Three.js ray, original image/crop hashes and owned
+resource cleanup exactly once across both fixed and moving groups.
+
+The real shared controller is exercised in all four languages for inside/
+outside gates, whole/detail, exact near/far position/yaw/pitch, the original
+three-phase curtain cycle, physical rack routing, dictionary parity, RTL and
+private keys. Reading/locale actions keep state and write count unchanged.
+Existing private question/answer content survives explicit revisits. Cézanne's
+and Seurat's three-phase activities remain. Earlier house/model/private/source/
+cast/voice/island and imported atelier checks pass.
+
+Native Playwright CLI review at 1280 x 720 confirmed directory access and
+Cézanne's retained reading, then Morisot's original doorway and actual walking
+entry. Split-roof trim, curtain fittings, supported settee/arms, desk joinery
+and rack were visually checked. Three successive native curtain actions
+returned to the initial arrangement; the tabs followed the curtain. Original
+near/far portrait views worked. Pointer and native E on the rack opened the
+existing studio panel. Whole/detail kept the exact morisot.jpg / morisot-detail.jpg
+handoff and original Met attribution link.
+
+All four reading languages were visually reviewed. Dialog client/scroll widths
+matched at 959 px and body widths at 943 px, with opening scrollTop zero and
+all six original inside controls. Persian computed direction was RTL. Czech
+at 390 x 844 had matching dialog widths 355 px, body widths 339 px, no
+horizontal overflow and minimum button height 44 px. Introductory reading and
+scrolled controls were reviewed. Keyboard Enter activated the original far
+view; reopening began at zero.
+
+The existing explicit Keep an unfinished question action was exercised in the
+isolated browser fixture. A synthetic mixed-language answer and revision-reason
+draft, including leading/trailing spaces, survived DE/FA/CS reading visits and
+return to the original notebook. The answer-save action was not used. No
+signed-in service/private account was used. Hardware controller A was not
+separately exercised; shared focus/confirm support remains. Main city/reading
+console: zero errors, one existing warning. Exterior, room/rack/settee/fittings,
+near/far/curtain phases, four-language/mobile/control and synthetic draft
+screenshots are in this chat's outputs.
+
+Latest branch/PR inspection found review head
+66e757df9baf2e5d553aa441a8b38fae5b529938 and main
+e2598f0194f25800887a7b6e4290762a1df213fb unchanged. Main remains incorporated
+through the earlier two-parent ancestry; no new merge was needed. The Proof
+Atelier passage, shifted board, six workshops, independent key, explicit saves,
+finite-certificate limits and absence of timers remain; its advanced lessons
+remain English as disclosed. Classic translated readers/models, Hall controls,
+physical full-reader picks and private drafts/carets remain. All twenty-nine
+earlier passes, Makers' complete journey, ten original gallery companions,
+Cézanne's live study/reading, map/facing, Noether/Mirzakhani/Cage, City Map,
+Babel, ocean voyage and branding remain, with approved appearances, fixed
+voices and accepted recordings. Other branches/PRs remain. PR #5 stays
+unmerged; no deployment.
+
+Thirty first detail/reading passes are complete. Next useful house: the
+existing Georges Seurat working studio, id seurat, world (182, 196), with
+opposite-row pi rotation. Reinspect artist-quarter-data.js, artist-quarter-scene.js,
+layout and shared UI before extending. It already has a split roof/glazing,
+reflection desk, near/far floor marks and a credited Met preparatory Study for
+A Sunday on La Grande Jatte, work ID 437658. The separate original blue/yellow
+dot panel has 36 x 24 instances and three spacing factors 1 / .75 / .6; it is
+a city experiment, not part of the supplied painting. Preserve image/crop
+bytes, ratio/source/rights, instance count/colours/matrices and spacing cycle,
+near/far/detail actions, studio-seurat private question/drafts/save flow,
+openings, furniture and walking routes. Shared controls/court navigation have
+Czech; Seurat's own public copy/new reading still need a Czech pass. Keep
+Morisot's new fittings/rack/reading and original curtain cycle, Cézanne's study,
+all ten gallery companions and earlier learning/private/model work intact.
