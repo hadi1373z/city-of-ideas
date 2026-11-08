@@ -10,6 +10,12 @@
 #proof-atelier .proof-experiment{background:#e4e5ce;border:1px solid #b6c3aa;border-radius:10px;padding:14px}
 #proof-atelier .proof-board,#proof-atelier .proof-edge-grid{display:grid;grid-template-columns:repeat(4,minmax(44px,1fr));gap:4px;max-width:340px;margin:14px 0}
 #proof-atelier .proof-costs{display:grid;grid-template-columns:repeat(3,minmax(44px,1fr));gap:4px;margin:14px 0}
+#proof-atelier .proof-price-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:16px 0}
+#proof-atelier .proof-price-summary>div{border:1px solid #a4b59a;background:#f7f1dd;padding:10px 6px;text-align:center;border-radius:8px}
+#proof-atelier .proof-price-summary small{font-size:11px;line-height:1.4;margin:0 0 6px}#proof-atelier .proof-price-summary strong{font:normal 30px/1.2 Georgia,serif;font-variant-numeric:tabular-nums}
+#proof-atelier .proof-price-ledger table{border-collapse:collapse;width:100%;font:12px/1.5 Tahoma,Arial,sans-serif;font-variant-numeric:tabular-nums}
+#proof-atelier .proof-price-ledger caption{text-align:start;margin-bottom:10px}#proof-atelier .proof-price-ledger th,#proof-atelier .proof-price-ledger td{padding:8px 4px;text-align:start;border-bottom:1px solid #b3bda5}
+#proof-atelier .price-selected{background:#e0c782}#proof-atelier .price-tight{background:#c8d8b9;color:#243e36}#proof-atelier .price-violation{background:#efc4ae;color:#632d20}
 #proof-atelier .proof-board button,#proof-atelier .proof-edge-grid button,#proof-atelier .proof-costs button{margin:0;padding:8px 3px}
 #proof-atelier .proof-board .dark{background:#35524c}#proof-atelier .proof-board .light{background:#dfd4b7;color:#34483f}#proof-atelier .proof-board .paired{background:#c6aa61;color:#263a33}#proof-atelier .proof-board .pending{outline:3px solid #377f98}#proof-atelier .proof-board .missing{visibility:hidden}
 #proof-atelier .proof-vertices{display:flex;flex-wrap:wrap;gap:2px}#proof-atelier .proof-vertices button{min-width:44px;padding-inline:8px}

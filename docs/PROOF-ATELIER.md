@@ -88,3 +88,25 @@ shown by the current experiment. Progress without a kept argument remains open.
 
 The design supports a serious long visit. Enjoyment and actual time spent still
 need feedback from the user rather than being inferred from a test suite.
+
+## English-first price-room revision
+
+Fresh visitors enter in English without a language-choice gate. An explicit saved
+FA or DE preference is retained; existing translations remain available. Initial
+loading, identity and welcome copy are English before scripts finish. New
+price-room activities and explanations are authored in English.
+
+Room V now compares the row-order greedy assignment (cost 11) with a visitor’s
+own assignment. A separate row-minimum price experiment gives a feasible floor
+of 3 without solving the assignment. Live cost, proven floor and gap cards show
+what is known. A nine-cell ledger reports each cost, price sum and slack, with
+text labels as well as colour. Duplicate room assignments and individual violated
+constraints receive specific explanations. A feasible gap is decomposed into
+the three selected slacks. Zero-slack cells are checked for a Hall-deficient
+subset, connecting the room to the earlier bottleneck workshop. The physical
+matrix has row/column labels and displays cost / slack for every cell.
+
+These are finite checks of the existing 3×3 teaching instance. No solver result
+is substituted for the visitor’s proof, and no new completion requirement
+invalidates old progress. Presets affect only the assignment or prices they name;
+arguments, earlier experiments and saved certificates remain untouched.

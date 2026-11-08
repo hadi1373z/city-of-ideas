@@ -1,5 +1,5 @@
-import {WORKSHOPS} from './proof-atelier-content.js?v=resume1';
-import {TRAP,EXCHANGE,COMPLETE,COSTS,neighborhood,maximumMatching,pathStatus,priceStatus} from './proof-atelier-model.js?v=resume1';
+import {WORKSHOPS} from './proof-atelier-content.js?v=prices2';
+import {TRAP,EXCHANGE,COMPLETE,COSTS,neighborhood,maximumMatching,pathStatus,priceStatus} from './proof-atelier-model.js?v=prices2';
 import {BOARDS} from './study-house-models.js?v=workbench1';
 export function buildProofAtelier(T,{canvas=()=>document.createElement('canvas')}={}){
  const group=new T.Group();group.name='The Proof Atelier · six connected workshops';group.position.y=.13;
@@ -40,14 +40,14 @@ export function buildProofAtelier(T,{canvas=()=>document.createElement('canvas')
    for(let i=0;i<16;i++)tiles.push(box(p,.47,.47,.08,(i%4-1.5)*.52,.12-(Math.floor(i/4)-1.5)*.52,.09,i%2?chalk:teal));
    for(let i=0;i<8;i++){const d=box(p,.95,.42,.04,0,0,.16,brass);d.visible=false;dominoes.push(d);}
   }else if(data.id==='prices'){
-   for(let i=0;i<9;i++){const x=(i%3-1)*1.05,y=.15-(Math.floor(i/3)-1)*.66;tiles.push(box(p,.97,.56,.08,x,y,.09,chalk));const text=label(p,.85,.42,x,y,.14);text.paint(String(COSTS[Math.floor(i/3)][i%3]));labels.push(text);}
+   for(let i=0;i<9;i++){const x=(i%3-1)*1.05,y=.15-(Math.floor(i/3)-1)*.66;tiles.push(box(p,.97,.56,.08,x,y,.09,chalk));const text=label(p,.85,.42,x,y,.14);text.paint(String(COSTS[Math.floor(i/3)][i%3]));labels.push(text);} for(let i=0;i<3;i++){label(p,.5,.28,-1.77,.15-(i-1)*.66,.14).paint('L'+(i+1));label(p,.5,.28,(i-1)*1.05,1.14,.14).paint('R'+(i+1));}label(p,3.8,.25,0,-1.04,.14).paint('cost / slack · green = tight');
   }else{
    const point=v=>[v<4?-1.45:1.45,.98-(v%4)*.65,.1];
    for(let i=0;i<16;i++){const a=Math.floor(i/4),b=i%4;edges.push(beam(p,point(a),point(4+b),timber));}
    for(let v=0;v<8;v++){const o=new T.Mesh(sphere,v<4?brass:blue);o.position.set(...point(v));o.position.z=.14;p.add(o);nodes.push(o);const text=label(p,.45,.27,(v<4?-1.84:1.84),point(v)[1],.15);text.paint((v<4?'L':'R')+(v%4+1));}
   }
   p.traverse(o=>{o.userData={...o.userData,proofStation:data.id};});
-  const station={data,group:p,title,readout,edges,nodes,tiles,dominoes,view:{x:215,z:data.z,y:.13,yaw:data.side<0?Math.PI/2:-Math.PI/2},paint(lang){title.paint(data.number+' · '+(data.names[lang]||data.names.en));}};stations.push(station);
+  const station={data,group:p,title,readout,edges,nodes,tiles,labels,dominoes,view:{x:215,z:data.z,y:.13,yaw:data.side<0?Math.PI/2:-Math.PI/2},paint(lang){title.paint(data.number+' · '+(data.names[lang]||data.names.en));}};stations.push(station);
  }
  // Only fixed architecture is batched. All experiment meshes remain individually
  // addressable, so edits never depend on rebuilding a whole room.
@@ -58,7 +58,7 @@ export function buildProofAtelier(T,{canvas=()=>document.createElement('canvas')
   const key=JSON.stringify([s.board,s.tiling,s.repairEdges,s.subset,s.exchange,s.path,s.cover,s.assignment,s.u,s.v,s.capEdges,s.capS,s.capM,s.capCover,lang]);if(key===last)return;last=key;
   for(const h of stations){h.paint(lang);const id=h.data.id;
    if(id==='colour'){const board=BOARDS[s.board===0?2:0].cells;h.tiles.forEach((o,i)=>{o.visible=board.includes(i);o.material=(Math.floor(i/4)+i%4)%2?chalk:teal;});h.dominoes.forEach((o,i)=>{const pair=s.tiling[i];o.visible=!!pair&&pair.every(n=>board.includes(n));if(pair){const[a,b]=pair;o.position.x=((a%4+b%4)/2-1.5)*.52;o.position.y=.12-((Math.floor(a/4)+Math.floor(b/4))/2-1.5)*.52;o.rotation.z=Math.floor(a/4)===Math.floor(b/4)?0:Math.PI/2;}});h.readout.paint(s.tiling.length+' dominoes · '+board.length+' squares');}
-   else if(id==='prices'){const result=priceStatus(s.assignment,s.u,s.v);h.tiles.forEach((tile,i)=>{tile.material=result.violations.includes(i)?clay:s.assignment[Math.floor(i/3)]===i%3?brass:Math.abs(s.u[Math.floor(i/3)]+s.v[i%3]-COSTS[Math.floor(i/3)][i%3])<1e-9?green:chalk;});h.readout.paint('Cost '+(result.cost??'—')+' · bound '+result.bound+' · '+(result.feasible?'feasible':'infeasible'));}
+   else if(id==='prices'){const result=priceStatus(s.assignment,s.u,s.v);h.tiles.forEach((tile,i)=>{tile.material=result.violations.includes(i)?clay:s.assignment[Math.floor(i/3)]===i%3?brass:Math.abs(s.u[Math.floor(i/3)]+s.v[i%3]-COSTS[Math.floor(i/3)][i%3])<1e-9?green:chalk;});h.labels.forEach((text,i)=>{const c=COSTS[Math.floor(i/3)][i%3],slack=result.bound===null?'—':Math.round((c-s.u[Math.floor(i/3)]-s.v[i%3])*1e6)/1e6;text.paint(c+' / '+slack);});h.readout.paint('Cost '+(result.cost??'—')+' · floor '+(result.feasible?result.bound:'—')+' · gap '+(result.gap??'—'));}
    else{
     const graph=id==='hall'?s.repairEdges:id==='exchange'?EXCHANGE:id==='duality'?TRAP:s.capEdges;
     const matching=id==='exchange'?s.exchange:id==='duality'?maximumMatching(TRAP):id==='studio'?s.capM:[],subset=id==='hall'?s.subset:id==='studio'?s.capS:[],cover=id==='duality'?s.cover:id==='studio'?s.capCover:[],near=neighborhood(graph,subset),path=id==='exchange'?pathStatus(EXCHANGE,s.exchange,s.path).edges||[]:[];
