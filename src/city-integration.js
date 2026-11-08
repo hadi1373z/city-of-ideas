@@ -1,3 +1,4 @@
+import {installComputationLab} from './computation-lab.js?v=1';
 import {installProofAtelier} from './proof-atelier.js?v=prices2';
 import {installSeminarHouses} from './seminar-houses.js?v=workbench1';
 import {installBabelLibrary} from './babel-library.js';
@@ -10,7 +11,7 @@ import {installQuestionWalk} from './question-walk.js';
 import {installCityDiscoveries} from './city-discoveries.js?v=study1';
 import {installArtistQuarter} from './artist-quarter.js?v=artists2';
 import {installLearningLab} from './learning-lab.js?v=learning1';
-import {installStudyHouses} from './study-houses.js?v=atelier1';
+import {installStudyHouses} from './study-houses.js?v=computation1';
 import {installOrigamiHouse} from './origami-house.js?v=seminar1';
 import {artistLineOfSight} from './artist-line-of-sight.js';
 import {installPhilosopherQuarter} from './philosopher-ui.js';
@@ -107,6 +108,7 @@ try{
  installArtistQuarter(M,T);
  installLearningLab(M,T,E);
  installStudyHouses(M,T);
+ installComputationLab(M,T);
  installProofAtelier(M,T);
  installOrigamiHouse(M,T);
  installHouseFoundations(M,T);
