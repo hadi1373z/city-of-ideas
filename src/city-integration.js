@@ -1,6 +1,8 @@
 import {installConnectedJourney} from './connected-journey.js?v=1';
+import {installPaperMonitors} from './paper-monitors.js?v=1';
+import {HISTORIC_PAPERS} from './historic-papers-data.js';
 import {installPondWorldWindow} from './pond-world-window.js?v=1';
-import {installWorldCylinder} from './world-cylinder.js?v=polish1';
+import {installWorldCylinder} from './world-cylinder.js?v=papers1';
 import {installEscherDepth} from './escher-depth.js?v=1';
 import {installHouseInvestigations} from './house-investigations.js?v=1';
 import {installComputationLab} from './computation-lab.js?v=1';
@@ -17,7 +19,7 @@ import {installCityDiscoveries} from './city-discoveries.js?v=study1';
 import {installArtistQuarter} from './artist-quarter.js?v=dali-details1';
 import {installLearningLab} from './learning-lab.js?v=dialogue-details1';
 import {installStudyHouses} from './study-houses.js?v=computation-details1';
-import {installOrigamiHouse} from './origami-house.js?v=polish-reading1';
+import {installOrigamiHouse} from './origami-house.js?v=papers-reading1';
 import {artistLineOfSight} from './artist-line-of-sight.js';
 import {installPhilosopherQuarter} from './philosopher-ui.js?v=sina-details1';
 import {installSocratesTour} from './socrates-tour.js';
@@ -33,6 +35,7 @@ import {installIdeasGraveyard} from './ideas-graveyard.js?v=foundations1';
 import {installEscherHouse} from './escher-house.js?v=escher-details1';
 import {installStudyBook} from './study-book.js';
 import {installSocratesStudy} from './socrates-study.js';
+import {installMathFoundations} from './math-foundations.js';
 import {installCinematicIntro} from './cinematic-intro.js';
 import {installDiscoveryStory} from './discovery-story.js';
 const waitMain=()=>new Promise(resolve=>{if(window.CITY_MAIN?.city)resolve(window.CITY_MAIN);else addEventListener('gallery-ready',()=>resolve(window.CITY_MAIN),{once:true});});
@@ -108,6 +111,7 @@ try{
  M.storyJourney=installDiscoveryStory(M);
  M.studyBook=installStudyBook(M,T);
  M.socratesStudy=installSocratesStudy(M,T);
+ M.mathFoundations=installMathFoundations(M,T,E);
  installQuestionWalk(M,T);
  installRamseyHouse(M,T);
  installRamseyRoom(M);
@@ -125,9 +129,10 @@ try{
  installSeminarHouses(M,T);
  installEscherDepth(M,T);
  installWorldCylinder(M,T);
+ installPaperMonitors(M,T,{papers:HISTORIC_PAPERS});
  installPondWorldWindow(M,T);
  installConnectedJourney(M,T);
- const arrivalQuery=new URLSearchParams(location.search||''),faceArrival=arrivalQuery.get('arrival');if(faceArrival==='pond-crossing'){M.arrive(M.pondWorldWindow.pond.entry);M.player.pitch=-.33;}else if(faceArrival==='escher-depth')M.escherDepth.enter('gallery');else if(faceArrival==='math-entrance')M.startExtra('mathematics');
+ const arrivalQuery=new URLSearchParams(location.search||''),faceArrival=arrivalQuery.get('arrival');if(faceArrival==='pond-crossing'){M.arrive(M.pondWorldWindow.pond.entry);M.player.pitch=-.33;}else if(faceArrival==='escher-depth')M.escherDepth.enter('gallery');else if(faceArrival==='math-entrance')M.startExtra('mathematics');else if(faceArrival==='paper-monitors')M.startExtra('paper-monitors');
  M.status('ready');
  installCinematicIntro(M,T,socrates);
  // The bare city address opens at the approved volcanic reservoir in Babel.

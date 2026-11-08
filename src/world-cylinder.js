@@ -1,7 +1,7 @@
 import {WORLD_CYLINDER as W,isLowerCoordinate,lowerLocal,lowerPhysical,lowerRadius,lowerMatrix,canWalkLower,tunnelContains,GALLERY_TUNNEL} from './world-cylinder-model.js';
 import {buildWorldCylinder,mountLowerWorld} from './world-cylinder-scene.js?v=polish1';
 import {UPPER,LOWER,pointAt,headingAt,heightAt,surfaceAt as gallerySurface,walkGallery} from './two-face-gallery-model.js';
-import {buildTwoFaceGallery} from './two-face-gallery-scene.js';
+import {buildTwoFaceGallery} from './two-face-gallery-scene.js?v=papers1';
 import {LOWER_INLET} from './lower-landscape-model.js';
 import {buildMathFaculty} from './math-faculty-scene.js';
 export function installWorldCylinder(M,T){
@@ -36,10 +36,11 @@ export function installWorldCylinder(M,T){
  function visitGallery(){arrive({x:11.7,z:0,y:-24,yaw:-Math.PI/2});begin('upper',{x:11.7,z:0,y:-24,theta:0},'top');M.player.pitch=-.1;}
  const lowerArrival={x:W.lowerOrigin.x-52,z:W.lowerOrigin.z,y:.13,yaw:-Math.PI/2};
  function visitLower(){stop();arrive(lowerArrival);section='upper';scan();return true;}
+ function visitPapers(){const slot=M.paperMonitors?.slots[0];if(!slot)return false;stop();arrive({x:W.lowerOrigin.x+Math.cos(slot.angle)*52.5,z:W.lowerOrigin.z+Math.sin(slot.angle)*52.5,y:.13,yaw:-slot.angle-Math.PI/2});M.player.pitch=.14;section='upper';scan();return true;}
  function visitLandscape(which='overlook'){const a=built.lowerLandscape?.anchors[which];if(!a)return false;stop();arrive({x:W.lowerOrigin.x+a.x,z:W.lowerOrigin.z+a.z,y:.13,yaw:which==='overlook'?-Math.atan2(a.x,a.z):0});section='upper';scan();return true;}
  function overview(which='section'){stop();M.escherDepth?.stop?.();window.gallery.overview();document.body.dataset.coastalOverview='clear';section=which;M.clearMovement();}
  function scan(){const scanStart=performance.now();mountLowerWorld(T,M.scene,built.lowerFrame,{skip,records});const world=document.getElementById?.('world');if(world){world.dataset.lowerRootCount=String(records.length);world.dataset.lowerScanMs=(performance.now()-scanStart).toFixed(1);}for(const r of records)if(r.node.name==='Graveyard world · independent ground')r.node.visible=false;}
- function canLower(x,z){const q=lowerLocal({x,z}),feet=M.player.y-M.eye;if(Math.abs(feet-.13)<.5&&built.lowerLandscape&&!built.lowerLandscape.canStand(q.x,q.z))return false;if(!faculty.canStand(q.x,q.z,feet))return false;if(Math.abs(feet-.13)<.5&&built.lowerObstacles?.some(o=>Math.hypot(x-o.x,z-o.z)<o.radius+.28))return false;return canWalkLower(x,z,layout,prior.can);}
+ function canLower(x,z){const q=lowerLocal({x,z}),feet=M.player.y-M.eye;if(Math.abs(feet-.13)<.5&&built.lowerLandscape&&!built.lowerLandscape.canStand(q.x,q.z))return false;if(!faculty.canStand(q.x,q.z,feet)||M.paperMonitors?.canStand(q.x,q.z,feet)===false)return false;if(Math.abs(feet-.13)<.5&&built.lowerObstacles?.some(o=>Math.hypot(x-o.x,z-o.z)<o.radius+.28))return false;return canWalkLower(x,z,layout,prior.can);}
  M.city.canStand=(x,z)=>lowerPlayer()?canLower(x,z):prior.can(x,z);
  M.city.region=(x,z)=>{
   if(route)return{id:'through-gallery',title:route.side==='lower'?['floor','walkout'].includes(route.layer)?'Faculty of Mathematics · reading hall':'Mathematics · the through-gallery':'Gallery · below Babel',inside:true};
@@ -52,7 +53,7 @@ export function installWorldCylinder(M,T){
   }return base;
  };
  M.extraGround=(x,z)=>{if(lowerPlayer()&&lowerRadius(x,z)>58){const y=prior.extra?.(x,z);return Number.isFinite(y)?y:.13;}return prior.extra?.(x,z);};
- M.startExtra=id=>id==='lower-shore'?visitLandscape():id==='lower-inlet'?visitLandscape('inlet'):id==='escher-depth'?(M.escherDepth?.enter('gallery'),true):id==='world-section'?(overview('section'),true):id==='lower-face'?visitLower():id==='through-gallery'?(visitGallery(),true):prior.start?.(id);
+ M.startExtra=id=>id==='paper-monitors'?visitPapers():id==='lower-shore'?visitLandscape():id==='lower-inlet'?visitLandscape('inlet'):id==='escher-depth'?(M.escherDepth?.enter('gallery'),true):id==='world-section'?(overview('section'),true):id==='lower-face'?visitLower():id==='through-gallery'?(visitGallery(),true):prior.start?.(id);
  function switchHalf(){
   const from=M.camera.position.clone(),qfrom=M.camera.quaternion.clone(),oldSide=route.side,newSide=oldSide==='upper'?'lower':'upper',oldAuto=auto;
   arrive({x:newSide==='lower'?-2144:16,z:newSide==='lower'?-65:0,y:-48,yaw:newSide==='lower'?0:Math.PI});
@@ -75,7 +76,7 @@ export function installWorldCylinder(M,T){
    const steps=Math.max(1,Math.ceil(Math.hypot(d.dx,d.dz)/.1));for(let i=0;i<steps;i++){const x=local.x+d.dx/steps,z=local.z+d.dz/steps;if(tunnelContains(x,z)||gallerySurface(x,z,-40,{side:'upper',lastTheta:UPPER.spur.theta,layer:'spur'})){local.x=x;local.z=z;}}
    local.y=-40+M.eye;local.galleryTheta=UPPER.spur.theta;local.galleryLayer='spur';
    if(local.x>134&&Math.abs(local.z-115)<1.7){route=null;delete document.body.dataset.galleryPassage;M.escherDepth?.enter('gallery');return true;}
-  }else walkGallery(local,d.dx,d.dz,{side,eye:M.eye,lastTheta:route.theta,layer:route.layer,canStand:(x,z,y)=>side!=='lower'||faculty.canStand(x,z,y)});
+  }else walkGallery(local,d.dx,d.dz,{side,eye:M.eye,lastTheta:route.theta,layer:route.layer,canStand:(x,z,y)=>side!=='lower'||faculty.canStand(x,z,y)&&M.paperMonitors?.canStand(x,z,y)!==false});
   Object.assign(M.player,{x:local.x+(side==='lower'?-2160:0),z:local.z+(side==='lower'?-65:0),y:local.y});route.theta=local.galleryTheta;route.layer=local.galleryLayer;
   const inMiddle=Math.abs(local.y-M.eye+48)<.26&&Math.abs(local.z)<2.6&&local.x>17.7;
   if(inMiddle&&Math.hypot(d.dx,d.dz)>.01){switchHalf();return true;}

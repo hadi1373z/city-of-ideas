@@ -4112,3 +4112,133 @@ and books, explicit floor transfers, seats/colliders/approaches, original
 reader interactions and private questions/notes/imports. Inspect actual public
 language gaps before a modest sourced four-language reading/detail pass;
 do not translate private text or claim full legacy Atlas translation.
+
+## 2026-11-08 — Mathematics Foundations: what stays the same?
+
+The preceding Foundations suggestion is complete. This pass develops the
+original Mathematics Institute working wing's floor index 0, at logical
+(-2240, -65), rather than the new annular Faculty. Read
+`docs/MATH-FOUNDATIONS.md`. The source building has further undeveloped floors;
+this completion does not claim a detail or translation pass on all eight.
+
+Added eight table aprons, eight leg joints, two supported fitted linen chair
+pads with piping and a backed two-card rack on two table-supported posts.
+The original tables, chairs, sheet/open book, source displays and approaches
+remain in place. The cards touch the backing and their raised arrow strokes
+touch the cards. All details stay within existing furniture footprints.
+There are 49 owned meshes, no extra textures/point lights/colliders/assets.
+
+Both cards are fixed original city correspondence diagrams. Open circles on
+the left define the complete finite input domain; filled right circles are
+outputs. One card has two inputs, each pointing to a shared single output;
+the other has one input pointing to two outputs. Explicit arrowheads establish
+direction without relying on colour. These are not historical pages, measured
+room data or a new live experiment, and have no separate saved state.
+
+The original EN/DE/FA/CS companion distinguishes members from counts, numerical
+representations from quantities, and one output per input from one-to-one
+matching. Original city prompts compare groups, identify the whole behind a
+percentage, and mentally reverse the first card. Finite examples are not
+presented as a proof about all relations. No quotation is invented.
+The reading links successfully accessed OpenStax authored texts:
+Contemporary Mathematics 1.1 (Basic Set Concepts), Prealgebra 2e 6.1
+(Understand Percent), and College Algebra 2e 3.1 (Functions and Function Notation).
+The separate LTR equation explains the same half as fraction/decimal/percent;
+Persian prose remains RTL.
+
+Rack pointer/E, inside context, welcome Places and the root source-tools
+header reach this companion. Its three explicit actions delegate the exact
+original `sets`, `numbers` and `functions` physical-source payloads to the
+original reader. Ground-floor region/height guards remain; outside, the guide
+offers only the existing explicit approach to the working entrance. Reading
+does not move the visitor, select a floor, answer a question or write progress.
+Local language does not change the existing saved city preference.
+
+Opening from source tools retains the original iframe and private form.
+Closing reopens that same outer tools dialog, retaining raw drafts and caret.
+The companion does not inspect private memory/storage/inputs, translate private
+text or create a progress key. Original source reflections, discussion and
+explicit journal saves retain their behavior. The actual language boundary
+was inspected: the installed legacy Atlas language relay/localizer supports
+EN/DE/FA and falls back to English for Czech; the new companion/controls are
+four-language. The full legacy Mathematics/Atlas catalogue and paper scans
+were not translated.
+
+Original eight floors, 24 concept IDs, Atlas/books, native source instances,
+seats, colliders, source reader and lift/transfer metadata remain. New controls
+are hidden upstairs and during intermediate lift heights. The original folded
+Way out guide retains real partition openings, central front doorway and
+proximity-gated lift actions; windows remain solid. Lower coordinates remain
+logical. The detail child inherits the actual model's proper lower parent
+transform without moving source geometry, a house lot or private positions.
+
+### Concurrent paper-monitor reconciliation
+
+Main 8b9cac9a804ac595ca336213810be72cc6a29aa1 is now incorporated alongside
+previous review cfcf024, retaining both parents. Read its updated AGENTS.md,
+docs/PAPER-COLLECTION.md and docs/PAPER-MONITORS.md. Preserve eleven distinct
+genuine first-page/title-page scans and their exact image bytes, aspect ratios,
+editions/page selections, author/year, credit, source and reuse metadata.
+Their permanent 3D pages remain separate from the new city mapping diagrams.
+Both the annular and outdoor lower walkers keep their frame/pedestal colliders,
+clear west doorway and viewing aisle. Asynchronous loading/unavailable labels,
+placeholder/late-callback cleanup, source/PDF/license links, proximity/feet
+guards and 100/150/200% reader zoom remain. Map/explicit arrival access works;
+bare URL still starts at Babel. No scan is generated, redrawn or translated.
+The collection's existing English UI remains English. All earlier connected
+questions/startup/cylinder/landscape and completed house passes remain.
+
+### Verification
+
+All 112 release programs passed: previous 110, main's paper-monitor check and
+the new Mathematics Foundations program. The independent original 245-node
+floor fixture fingerprint is
+f02fa5b4332b6cdc13be90952657b95a09c3f80dd9851ec39ee1650e9adcbe8b.
+Original resources/data/parents/transforms/visibility/instance matrices,
+23 source colliders and 17 approaches remain. Tests preserve all eight floors,
+check 11,009 collision samples and the original entrance, actual logical and
+proper physical lower-frame rays, supported furniture/cards, both finite-map
+cases and owned cleanup/replacement. Real co-installed source-reader tests
+cover four languages/RTL, exact three handoffs, denied private access during
+reading, raw draft/caret preservation and the original explicit journal save.
+
+Native Chrome walked the original front doorway, central hall/partition opening
+and library-side route to the table. The rack, joinery and fitted pads were
+visually checked; physical pointer/E and all three original reader handoffs
+worked. Original exercises remain: the two supplied sets, half as decimal/
+percent, and the supplied square-function domain. A synthetic unsaved mixed
+language draft retained its exact spaces/newline across reading/language and
+all three source handoffs; closing from the companion retained selection 3–8.
+No private note/reflection was saved. Reading/local-language/reader handoffs
+left browser storage unchanged.
+
+EN/DE/FA/CS desktop readings and Czech/Persian mobile at 390 × 844 were visually
+checked with no horizontal overflow: desktop 758 px, mobile 354 px client/scroll
+widths. Persian retained its LTR equation. The source-return header fits mobile
+too. Saved city Czech survived reload and reached the reading; outside-directory
+reading did not move the visitor or expose the three original encounter actions.
+The explicit approach returned to the existing working entrance.
+
+The original lift reached Algebra at its real source height; the new ground
+controls were hidden. The existing upper Way out lift action returned to ground,
+where the reading context returned. All eleven original paper images loaded
+(11 ready, 0 errors); the real Euler page, 150% zoom and exact source/license
+links were checked in the preserved ring. Existing supplied scan provenance is
+retained; fresh external archive access for those scans is not claimed.
+Console: no application errors, the existing Three.js warning per root load.
+Hardware controller A was not separately tested. Screenshots/release log are in
+this chat's outputs. Final build/local asset verification is recorded in PR #5.
+No merge to main or deployment was performed.
+
+Forty first reading/detail passes are complete. Next useful undeveloped area:
+the same original working wing's Algebra floor, index 1, with `equations`,
+`polynomials` and `linear-systems`. Develop this new floor, not the completed
+Foundations pass. Inspect actual source geometry/readers/language gaps first.
+Use its original height 4 (logical feet 4.13 with the installed transform),
+source floor/lift metadata and proper lower parent frame. Preserve all original
+equation/root/system exercises, 24 IDs/eight floors, source Atlas/books,
+private reflections/imports/explicit saves, the completed ground companion and
+the folded exit guide. Do not place details in solid windows, the partition
+openings, stair landmark or lift approaches; do not translate private text or
+claim complete legacy Atlas translation. Preserve the distinct eleven-paper
+collection and all its source/rights/interaction/ownership contracts.
