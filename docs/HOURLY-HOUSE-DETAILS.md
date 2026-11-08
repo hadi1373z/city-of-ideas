@@ -2407,3 +2407,142 @@ and walking lanes. Inspect real language gaps before modest EN/DE/FA/CS
 details/reading; do not claim full catalog translation. Keep Mondrian's fixed
 interval tray/guide, all six handoffs and original 15-75/36:64 proportion lab,
 all earlier gallery companions, house/learning/private flows and workbenches.
+
+## 2026-11-08 — Lange: look, caption, return
+
+Completed the first detail/reading pass for the existing Dorothea Lange gallery,
+id lange, at world (182, 134). The source scene/catalog, hip roof, three-panel
+facade, opposite-row pi transform, quarter layout, installed profile/reader and
+original Field notes page were inspected first. Its existing visible-description,
+archival-caption and return-to-image approach remains.
+
+Pale hip ribs follow the actual three-dimensional roof vertices, with ridge/
+eave caps, dark window sill/header, a supported linen seat cover and seams,
+worktable apron/joints and twelve small clips on the existing facade frames.
+Seat details and clips inherit the original profile payloads. The window,
+doorway, original furnishings, resident, source geometry/materials, transforms,
+instance matrices and walking clearances remain.
+
+A shallow wall-supported rack beside the worktable carries three paper cards:
+an empty viewing frame, three unwritten record rules and a question mark.
+Cards meet the backing; spacers meet the unchanged side wall, and retaining
+lips/rails stay inside the existing wall clearance. It clears all photographs,
+table, palette and brushes. The symbols are original city material, not an
+archival caption, historical note, invented photograph, subject testimony or
+reconstructed room. There is no separate saved state.
+
+Pointer selection or aiming at the rack and pressing E opens an accessible
+guide. The inside context button and Lange's existing quarter-directory card
+also open it. Outside it offers the original doorway. Six inside viewpoints
+reuse exact source approach/yaw/lookAt data and six reader actions pass the
+original artist/work IDs: migrant-mother, toward-la, children-camp, dust-storm,
+pea-pickers-children and roadside-blythe. Accessible names include each title.
+The pi rotation and world location remain exact. Original photograph bytes,
+aspect ratios/framing, archival wording, creator/subject credits, dates,
+rights/source/citation metadata and private observations were not edited.
+
+The original reading asks visitors for one observable sentence, a checked
+record and an open question. Six individual prompts attend to gestures,
+placement, contrast, spacing, surroundings and what lies outside the frame.
+They separate what is visible, what the archive records and what remains
+unknown, without assigning thoughts, feelings, names or future lives to the
+photographed people. The original website's Field notes -> Photograph and
+caption page and its three readings remain; the companion adds to that flow.
+
+Archival background links the two supplied Library of Congress records:
+https://www.loc.gov/item/2017762891/
+https://www.loc.gov/item/2017769825/
+Primary catalog text was available through search-indexed LoC records and was
+read for the narrow date/creator/caption-card claims. It credits Dorothea Lange,
+dates the Nipomo record to March 1936 and Toward Los Angeles to March 1937, and
+notes the latter title/information comes from a caption card. Direct HTML
+requests returned 403 and the research-guide request returned 429 in this
+environment; this is not a claim that those live pages were fetched successfully.
+The reading treats archival attribution separately from subjects' speech.
+No new quotation, archival caption, name, subject testimony, photograph,
+recording or artist voice was invented. The supplied research/source links
+and existing archival unknowns remain.
+
+The guide, prompts, source labels and associated controls support EN/DE/FA/CS,
+including Persian RTL. Original catalog, archival wording, website and private
+tools retain their existing language handling; some original book/catalog and
+shared city/notebook text remains English. Atelier navigation/names support
+four languages while its advanced lessons/instructions/problems remain English
+as disclosed. This is not full city-wide Czech localization. Guide/locale
+rendering has no private/lesson storage access or new saved state. Existing
+language preference persistence and explicit observation-save behavior remain.
+
+Verification: all 80 release programs passed, followed by build and whitespace
+checks. Source hash:
+be83bc22d25ac061ef4e32285c61431f465582fb67cf8bff2afcbf795f04bf5f
+(745 assets / 332,381,670 bytes). The new check compares all borrowed node
+transforms, geometry/material identities and values, vertices, payloads,
+visibility and furniture/brush instance matrices, plus catalog, colliders,
+entries and approaches. It verifies the pi frame, wall contact, mounted cards/
+marks, three unwritten rules, five question-mark pieces, supported seat cover,
+twelve clips within their original facade frames, actual hip-roof endpoints,
+window/door/photo/furniture/walking clearances and inherited profile actions.
+A real Three.js ray selects the rack. Tests cover six exact IDs, all four-language
+view/reader routes, work-specific names, remote-pick rejection, RTL/top-of-guide
+behavior, no private storage and owned cleanup exactly once. Earlier house,
+model, source, private-flow, cast/voice and island checks pass.
+
+Native Playwright CLI review at 1280 x 720 confirmed welcome/directory access,
+Mondrian's retained guide, Lange's original doorway and physical walking entry.
+Roof/window/facade/seat/table details and the rack were visually reviewed with
+the original photographs and resident. The three symbols are visible and the
+rack clears the original worktable/tools. Pointer selection and native E opened
+the guide. All six native viewpoints and six exact original reader handoffs
+worked; Migrant Mother and Toward Los Angeles views were reviewed. The original
+reader retains artwork, source/image-license links and the observation field.
+
+All four guide languages were visually reviewed. DE/FA/CS dialog client/scroll
+widths matched at 839 px, body widths at 823 px, opening at scrollTop zero.
+Persian computed direction was RTL. Czech at 390 x 844 had matching dialog
+widths of 355 px and body widths of 339 px, no horizontal overflow and minimum
+button height 44 px. Introductory reading and scrolled controls were reviewed.
+Keyboard Enter activated the last Czech viewpoint; reopening after scrolling
+began at zero. A synthetic mixed-language Migrant Mother draft, including
+leading/trailing spaces, survived all six reader/viewpoint routes, four-language
+guide visits and the original website visit. No save action or private
+translation occurred. Hardware controller A was not separately exercised;
+shared focused-button support remains.
+
+The original reader's website link opened the retained offline site in a
+separate native tab. Field notes retained its three first/next/final readings,
+exact Toward Los Angeles handoff and Library of Congress research-guide URL.
+The local page and links were tested; the external guide was not loaded in
+the browser. Main city/guide console: zero errors. The separate unchanged
+legacy-site tab logged a missing root favicon (404). No signed-in service or
+private account was used. Exterior, room/rack, language/mobile/control,
+original-reader, photograph-view and Field notes screenshots are in this
+chat's outputs.
+
+Latest branch/PR inspection found review head
+7715ec4cfe92728ba33403510dc86e3a065c9c75 and main
+e2598f0194f25800887a7b6e4290762a1df213fb unchanged. Main is already incorporated
+through the earlier two-parent ancestry; this pass requires no new merge.
+Proof Atelier's passage, shifted board, six workbenches, independent key,
+explicit saves, finite-certificate limits and absence of timers remain. Classic
+translated readers/models, physical full-reader picks, Hall/focus controls and
+private drafts/carets remain. All twenty-six earlier passes, Makers' complete
+four-language journey, map/facing, Noether/Mirzakhani/Cage, City Map, Babel,
+ocean voyage and branding remain. Approved appearances, fixed voices and
+accepted recordings are preserved. Other branches/PRs remain. PR #5 is
+unmerged; no deployment.
+
+Twenty-seven first detail/reading passes are complete. Next useful house: the
+existing Paul Klee gallery, id klee, world (204, 137). Inspect its actual scene/
+catalog, offset roof, six-tile facade, opposite-row pi transform, quarter layout
+and installed profile/reader before an additive companion. Preserve senecio,
+twittering-machine, red-balloon, fish-magic, castle-and-sun and ancient-sound.
+Its original Notebook -> Rearrange the page is an editorial activity: works
+remain unchanged while their neighbours change. Preserve all six IDs/images,
+Rearrange the notebook and Original sequence controls, actual order restoration,
+source/rights/citation metadata, furniture, resident, private observations,
+openings and walking lanes. Do not present a shuffle as Klee's historical
+sequence or method. Inspect real language gaps before modest EN/DE/FA/CS
+details/reading; do not claim full legacy catalog translation. Keep Lange's
+three-card rack/guide, six exact handoffs and original Field notes/caption
+boundary, all earlier gallery companions, house/learning/private flows and
+imported room workbenches.

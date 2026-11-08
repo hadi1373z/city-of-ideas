@@ -210,3 +210,22 @@
 #mondrian-guide-context{position:fixed;inset-inline-start:24px;bottom:170px;z-index:18;max-width:min(310px,calc(100vw - 48px))}
 #mondrian-guide-context[hidden]{display:none}
 @media(max-width:430px){#mondrian-guide header{padding:14px}#mondrian-guide .mondrian-guide-body{padding:6px 14px 18px}#mondrian-guide-context{inset-inline-start:12px;bottom:245px;max-width:220px}}
+
+/* Lange's original city companion preserves supplied photographs and archival wording. */
+#lange-guide{color:#424f54;background:#f2ecdc;border:1px solid #aebac1;border-radius:16px;width:min(840px,calc(100vw - 28px));max-height:88dvh;padding:0;box-sizing:border-box}
+#lange-guide::backdrop{background:#253541b8}
+#lange-guide header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 22px;border-bottom:1px solid #c5c6b6}
+#lange-guide h2{font:normal clamp(22px,3vw,30px)/1.3 Georgia,serif;margin:0;overflow-wrap:anywhere}
+#lange-guide header button{min-width:44px;flex-shrink:0}
+#lange-guide .lange-guide-body{padding:8px 22px 24px;max-height:calc(88dvh - 130px);overflow:auto;overflow-wrap:anywhere}
+#lange-guide p{line-height:1.7;max-width:72ch}
+#lange-guide h3{font:normal 24px/1.3 Georgia,serif;margin:24px 0 12px}
+#lange-guide h4{font:normal 21px/1.35 Georgia,serif;margin:0}
+#lange-guide article{margin:14px 0;padding:16px;background:#fbf8ee;border:1px solid #cbd1d2;border-radius:9px}
+#lange-guide .lange-guide-actions{display:flex;gap:8px;flex-wrap:wrap}
+#lange-guide button,#lange-guide-context button{min-height:44px;padding:10px 14px;border:1px solid #6f8798;border-radius:7px;background:#485d65;color:#fff9e8;line-height:1.4;white-space:normal}
+#lange-guide a{display:flex;align-items:center;min-height:44px;color:#485d65}
+#lange-guide button:focus-visible,#lange-guide a:focus-visible,#lange-guide-context button:focus-visible{outline:3px solid #b28132;outline-offset:3px}
+#lange-guide-context{position:fixed;inset-inline-start:24px;bottom:170px;z-index:18;max-width:min(310px,calc(100vw - 48px))}
+#lange-guide-context[hidden]{display:none}
+@media(max-width:430px){#lange-guide header{padding:14px}#lange-guide .lange-guide-body{padding:6px 14px 18px}#lange-guide-context{inset-inline-start:12px;bottom:245px;max-width:220px}}
