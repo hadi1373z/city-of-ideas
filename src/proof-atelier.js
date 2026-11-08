@@ -1,6 +1,6 @@
-import {WORKSHOPS,ATELIER_UI} from './proof-atelier-content.js';
-import {TRAP,EXCHANGE,INITIAL_MATCHING,COSTS,COMPLETE,tilingStatus,neighborhood,validMatching,maximumMatching,coverStatus,alternatingReach,pathStatus,priceStatus,capstoneStatus,workshopMemory} from './proof-atelier-model.js';
-import {buildProofAtelier} from './proof-atelier-scene.js';
+import {WORKSHOPS,ATELIER_UI} from './proof-atelier-content.js?v=resume1';
+import {TRAP,EXCHANGE,INITIAL_MATCHING,COSTS,COMPLETE,tilingStatus,neighborhood,validMatching,maximumMatching,coverStatus,alternatingReach,pathStatus,priceStatus,capstoneStatus,workshopMemory} from './proof-atelier-model.js?v=resume1';
+import {buildProofAtelier} from './proof-atelier-scene.js?v=resume1';
 import {BOARDS,colour,adjacent} from './study-house-models.js?v=workbench1';
 import {faceRoomWork} from './room-workbench.js';
 export function installProofAtelier(M,T){
@@ -14,8 +14,8 @@ export function installProofAtelier(M,T){
  const edgeName=e=>'L'+(Math.floor(e/4)+1)+'R'+(e%4+1),vertexName=v=>(v<4?'L':'R')+(v%4+1);
  function change(fn,key){fn();memory.save();built.update(s,lang());render(key);}
  function mark(key,text){if(key==='capstone'&&capstoneStatus(s).valid)s.capstoneRecord=Object.fromEntries(['capEdges','capS','capM','capCover'].map(k=>[k,[...s[k]]]));memory.mark(s.active,key);feedback=text;built.update(s,lang());render();}
- function visit(i){dialog.close();M.clearMovement();s.active=i;memory.save();M.arrive(built.stations[i].view);faceRoomWork(M,T,built.stations[i].group);}
- function open(i=s.active,nextMode='route'){if(!dialog.open)opener=document.activeElement;if(Number.isInteger(i)&&i>=0&&i<6)s.active=i;mode=nextMode==='work'&&near(s.active)?'work':nextMode==='work'?'read':nextMode;feedback='';pending=null;M.clearMovement();if(mode==='work'){M.camera?.position.set(M.player.x,M.player.y,M.player.z);faceRoomWork(M,T,built.stations[s.active].group);}memory.save();render();if(!dialog.open)dialog.showModal();dialog.scrollTop=body.scrollTop=0;close.focus();}
+ function visit(i){dialog.close();M.clearMovement();s.active=i;s.lastWorkbench=i;memory.save();M.arrive(built.stations[i].view);faceRoomWork(M,T,built.stations[i].group);}
+ function open(i=s.active,nextMode='route'){if(!dialog.open)opener=document.activeElement;if(Number.isInteger(i)&&i>=0&&i<6)s.active=i;mode=nextMode==='work'&&near(s.active)?'work':nextMode==='work'?'read':nextMode;feedback='';pending=null;M.clearMovement();if(mode==='work'){s.lastWorkbench=s.active;M.camera?.position.set(M.player.x,M.player.y,M.player.z);faceRoomWork(M,T,built.stations[s.active].group);}memory.save();render();if(!dialog.open)dialog.showModal();dialog.scrollTop=body.scrollTop=0;close.focus();}
  function act(text,fn,key=text,parent=body){const b=button(text,()=>change(fn,key),key);parent.append(b);return b;}
  function choice(text,ok,key,good,bad,parent=body){parent.append(button(text,()=>ok?mark(key,good):(feedback=bad,render()),'choice-'+key+'-'+text));}
  function edgeGrid(edges,onToggle,parent=body,matching=[]){const grid=el('div');grid.className='proof-edge-grid';grid.dir='ltr';grid.setAttribute('aria-label','Available edges, row L and column R');for(let e=0;e<16;e++){const b=button(edgeName(e),()=>change(()=>onToggle(e),'edge-'+e),'edge-'+e);b.setAttribute('aria-pressed',String(edges.includes(e)));if(matching.includes(e))b.className='matched';grid.append(b);}parent.append(grid);}
@@ -71,7 +71,7 @@ export function installProofAtelier(M,T){
   dialog.dataset.workbench=String(mode==='work');dialog.lang=lang();dialog.dir=lang()==='fa'?'rtl':'ltr';heading.textContent=mode==='route'?w().title:WORKSHOPS[s.active].number+' · '+title(s.active);close.setAttribute('aria-label',w().close);body.replaceChildren();
   if(mode==='route'){
    body.append(el('h3',w().subtitle),el('p','A self-paced route for roughly two hours of careful work. Pause and return whenever you like, stay longer on a proof, or enter a later workshop directly.'),el('p','Prerequisites: sets, basic graphs and arithmetic. The later rooms develop augmenting paths, min–max certificates and dual prices. Twelve deeper problems add proof work beyond the live experiments.'),el('p',w().notice));
-   body.append(button(w().resume,()=>visit(Math.max(0,WORKSHOPS.findIndex((_,i)=>!complete(i))))));
+   body.append(button(w().resume+' · '+WORKSHOPS[s.lastWorkbench].number+' · '+title(s.lastWorkbench),()=>visit(s.lastWorkbench),'resume-workbench'));const next=WORKSHOPS.findIndex((_,i)=>!complete(i));if(next>=0)body.append(button(w().nextUnfinished,()=>visit(next),'next-unfinished'));
    for(let i=0;i<6;i++){const card=el('section');card.className='proof-route-card';card.append(el('small',WORKSHOPS[i].number+' · about '+WORKSHOPS[i].minutes+' min'),el('h3',title(i)),el('p',WORKSHOPS[i].goal),el('p',complete(i)?'Argument and milestones kept':(s.checks[i]||[]).length+' / '+WORKSHOPS[i].checks.length+' experimental milestones · '+(s.notes[i]?'argument kept':'argument still open')),button(w().read,()=>open(i,'read')),button(w().go,()=>visit(i)));body.append(card);}
    const kept=el('details');kept.append(el('summary','My kept arguments · private in this browser'));for(let i=0;i<6;i++)if(s.notes[i])kept.append(el('h4',title(i)),el('p',s.notes[i]));if(s.capstoneRecord)kept.append(el('h4','Kept studio graph certificate'),el('pre','Edges: '+s.capstoneRecord.capEdges.map(edgeName).join(', ')+'\nSubset: '+s.capstoneRecord.capS.map(vertexName).join(', ')+'\nMatching: '+s.capstoneRecord.capM.map(edgeName).join(', ')+'\nCover: '+s.capstoneRecord.capCover.map(vertexName).join(', ')));body.append(kept);
   }else{

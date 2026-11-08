@@ -46,12 +46,12 @@ export function priceStatus(choice,u,v,costs=COSTS){
  return {cost,bound,violations,feasible,gap:cost!==null&&feasible?cost-bound:null,optimal:cost!==null&&feasible&&Math.abs(cost-bound)<1e-9};
 }
 export function capstoneStatus(s){const edges=s.capEdges,near=neighborhood(edges,s.capS),m=s.capM,cover=coverStatus(edges,s.capCover,m);return {edges:edges.length,connected:connected(edges),shortage:s.capS.length>near.length,near,matching:validMatching(edges,m),cover,valid:edges.length===7&&connected(edges)&&s.capS.length>near.length&&m.length===3&&cover.optimal};}
-export function initialWorkshop(){return {active:0,board:0,tiling:[],repairEdges:[...TRAP],subset:[],exchange:[...INITIAL_MATCHING],path:[],cover:[],assignment:[-1,-1,-1],u:[0,0,0],v:[0,0,0],capEdges:[...COMPLETE],capS:[],capM:[],capCover:[],capstoneRecord:null,notes:{},checks:{},hints:{},revealed:[]};}
+export function initialWorkshop(){return {active:0,lastWorkbench:0,board:0,tiling:[],repairEdges:[...TRAP],subset:[],exchange:[...INITIAL_MATCHING],path:[],cover:[],assignment:[-1,-1,-1],u:[0,0,0],v:[0,0,0],capEdges:[...COMPLETE],capS:[],capM:[],capCover:[],capstoneRecord:null,notes:{},checks:{},hints:{},revealed:[]};}
 export function workshopMemory(storage){
  let saved=true,state=initialWorkshop();
  const ints=(a,max,length=32)=>Array.isArray(a)&&a.length<=length&&a.every(v=>Number.isInteger(v)&&v>=0&&v<max);
  try{const raw=JSON.parse(storage?.getItem(PROOF_KEY)||'null');if(raw?.version===1){const p=raw.state;if(p&&typeof p==='object'){
-  if(Number.isInteger(p.active)&&p.active>=0&&p.active<6)state.active=p.active;if(p.board===0||p.board===1)state.board=p.board;
+  if(Number.isInteger(p.active)&&p.active>=0&&p.active<6)state.active=p.active;state.lastWorkbench=Number.isInteger(p.lastWorkbench)&&p.lastWorkbench>=0&&p.lastWorkbench<6?p.lastWorkbench:state.active;if(p.board===0||p.board===1)state.board=p.board;
   for(const [k,max]of[['repairEdges',16],['subset',4],['exchange',16],['path',8],['cover',8],['capEdges',16],['capS',4],['capM',16],['capCover',8],['revealed',12]])if(ints(p[k],max))state[k]=unique(p[k]);
   if(Array.isArray(p.tiling)&&p.tiling.length<=8&&p.tiling.every(a=>ints(a,16,2)&&a.length===2&&Math.abs(Math.floor(a[0]/4)-Math.floor(a[1]/4))+Math.abs(a[0]%4-a[1]%4)===1)&&unique(p.tiling.flat()).length===p.tiling.length*2)state.tiling=p.tiling;
   if(Array.isArray(p.assignment)&&p.assignment.length===3&&p.assignment.every(v=>Number.isInteger(v)&&v>=-1&&v<3))state.assignment=p.assignment;

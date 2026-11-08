@@ -1,4 +1,4 @@
-import {installProofAtelier} from './proof-atelier.js';
+import {installProofAtelier} from './proof-atelier.js?v=resume1';
 import {installSeminarHouses} from './seminar-houses.js?v=workbench1';
 import {installBabelLibrary} from './babel-library.js';
 import {installOceanVoyage} from './ocean-voyage.js';
