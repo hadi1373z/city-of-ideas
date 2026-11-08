@@ -3057,3 +3057,53 @@ toggle, exact equations/numerics, velocity versus restoring-force arrows,
 compact/full readers, explicit saves and seminar-noether private drafts/key.
 Follow the actual local/world transform and keep the opening, clearances,
 Mirzakhani/Cage and all earlier work intact. Do not claim a historical room.
+
+### Concurrent main update before closing this run
+
+Final remote inspection found new main d2133b48f9259f44f98bc8b6f0d59299c032208a,
+whose parent is 7d9e752. It adds an English-first initial shell/arrival and a
+deeper existing Price of Choice workshop. Incorporate it with first parent
+64002c76482233982094c90236e4d4ed02db0db2, retaining both histories. No PR was
+merged into main and no deployment was triggered.
+
+The language overlap keeps main's English default and removes the forced
+first-visit modal while retaining selectable/saved CS alongside EN/DE/FA, the
+small Czech dictionary, English fallback and private-text boundaries. Initial
+HTML loading/identity/welcome copy remains English. The default-language test
+now checks saved Czech as well as main's fresh/invalid/denied-storage cases;
+the existing Czech shell test remains. Public-CS script order, all earlier
+style/module versions and the review's full release list remain.
+
+The imported price room keeps the original stipulated 3 x 3 costs, certificate
+requirements and private key. Its greedy assignment costs 11; row-minimum
+prices give a feasible floor of 3. The nine-cell cost/price/slack ledger,
+specific duplicate/constraint diagnostics, chosen-slack gap decomposition and
+zero-slack Hall shortage are retained. The physical board shows row/column
+labels and cost/slack values. Presets alter only their named assignment or
+prices, without replacing arguments, earlier experiments or completion rules.
+The direct prices-room arrival and deeper English lesson are retained. These
+advanced texts/controls remain English; translated navigation/names, resume,
+classic readers and private draft/caret behavior remain reconciled.
+
+The combined tree passed all 85 release programs, including expanded price
+model/UI tests, default language, Czech reload/fallback and all house checks.
+Build: 754 assets / 332,464,774 bytes, source hash
+c6e39acbf94710f0122e93ca37c11dc47d42130e522452844be8b09179dbd57e.
+This is the final combined artifact; the 84-check/hash record above describes
+the earlier Seurat-plus-resume verification before this concurrent update.
+Native review confirmed fresh English with no language gate, direct arrival
+at the prices workbench, greedy/row-minimum cost 11 / floor 3 / gap 8 and the
+tight-edge shortage {L1, L2} -> {R1}. All nine ledger rows plus their header
+were present. At 390 x 844 the compact price dialog/body client and scroll
+widths all matched 339 px. Czech remained selected after reload.
+
+The combined artifact's Seurat directory/reading was reopened in English,
+Persian RTL and Czech; all three reading steps remained. One additional
+screenshot attempt lost the owned two-tab browser session; a fresh single-tab
+session completed this review. An attempted outside-room context action
+timed out because the directory does not move the visitor into the room;
+the existing welcome directory was then used successfully. No product code
+change was needed. Native consoles recorded no application errors. The new
+price/mobile/saved-CS and combined Seurat reading screenshots are in outputs.
+Noether remains the next useful house. The hourly cadence and review-only
+publication policy remain unchanged.

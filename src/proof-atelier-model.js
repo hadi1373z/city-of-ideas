@@ -45,6 +45,16 @@ export function priceStatus(choice,u,v,costs=COSTS){
  const bound=finite?[...u,...v].reduce((a,b)=>a+b,0):null,feasible=finite&&!violations.length;
  return {cost,bound,violations,feasible,gap:cost!==null&&feasible?cost-bound:null,optimal:cost!==null&&feasible&&Math.abs(cost-bound)<1e-9};
 }
+// Explain the certificate without solving the visitor's assignment for them.
+export function priceInsight(choice,u,v,costs=COSTS){
+ const result=priceStatus(choice,u,v,costs),n=costs.length;
+ const cells=costs.flatMap((row,i)=>row.map((cost,j)=>({i,j,cost,price:result.bound===null?null:u[i]+v[j],slack:result.bound===null?null:cost-u[i]-v[j],selected:choice[i]===j})));
+ const missing=Array.from({length:n},(_,i)=>i).filter(i=>!Number.isInteger(choice[i])||choice[i]<0||choice[i]>=n),repeated=Array.from({length:n},(_,j)=>j).filter(j=>choice.filter(v=>v===j).length>1);
+ const terms=result.cost===null||result.bound===null?null:cells.filter(c=>c.selected).map(c=>c.slack);
+ let shortage=null;
+ if(result.feasible){const tight=cells.filter(c=>Math.abs(c.slack)<1e-9);for(let mask=1;mask<(1<<n);mask++){const rows=Array.from({length:n},(_,i)=>i).filter(i=>mask&(1<<i)),columns=unique(tight.filter(c=>rows.includes(c.i)).map(c=>c.j));if(rows.length>columns.length){shortage={rows,columns};break;}}}
+ return {...result,cells,missing,repeated,terms,shortage};
+}
 export function capstoneStatus(s){const edges=s.capEdges,near=neighborhood(edges,s.capS),m=s.capM,cover=coverStatus(edges,s.capCover,m);return {edges:edges.length,connected:connected(edges),shortage:s.capS.length>near.length,near,matching:validMatching(edges,m),cover,valid:edges.length===7&&connected(edges)&&s.capS.length>near.length&&m.length===3&&cover.optimal};}
 export function initialWorkshop(){return {active:0,lastWorkbench:0,board:0,tiling:[],repairEdges:[...TRAP],subset:[],exchange:[...INITIAL_MATCHING],path:[],cover:[],assignment:[-1,-1,-1],u:[0,0,0],v:[0,0,0],capEdges:[...COMPLETE],capS:[],capM:[],capCover:[],capstoneRecord:null,notes:{},checks:{},hints:{},revealed:[]};}
 export function workshopMemory(storage){
