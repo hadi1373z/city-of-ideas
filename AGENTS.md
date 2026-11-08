@@ -135,7 +135,10 @@ registers, contextual first conjectures and explicit private saves. Read
 
 The existing central volcano now sits above a contained inverted glass reservoir.
 Its r21 mouth aligns with the volcano and the central opening in Babel’s timber
-ceiling; its tip is Y−20 above the central book circle. Read
+ceiling; its tip meets the existing open book's centre seam at Y−25.651827.
+Keep the shared book/contact dimensions in babel-reading-book-model.js and the
+restrained static contact glow. The default view sits on the lowest terrace,
+slightly off-axis so a railing post does not hide the meeting point. Read
 `docs/BABEL-THERMAL-VAULT.md` before changing the cone, fluids or headroom.
 
 On 2026-11-08 the user made the Babel volcanic-reservoir view the default
