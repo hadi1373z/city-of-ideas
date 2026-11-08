@@ -137,3 +137,8 @@ The existing central volcano now sits above a contained inverted glass reservoir
 Its r21 mouth aligns with the volcano and the central opening in Babel’s timber
 ceiling; its tip is Y−20 above the central book circle. Read
 `docs/BABEL-THERMAL-VAULT.md` before changing the cone, fluids or headroom.
+
+On 2026-11-08 the user made the Babel volcanic-reservoir view the default
+arrival for the bare city address. Keep this start in city-integration.js after
+all scene/start-mode installers. Explicit arrival links retain their destination,
+and the desk-book introduction remains available from the city overview.

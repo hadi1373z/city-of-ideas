@@ -123,7 +123,10 @@ try{
  installEscherDepth(M,T);
  installWorldCylinder(M,T);
  installPondWorldWindow(M,T);
- const faceArrival=new URLSearchParams(location.search||'').get('arrival');if(faceArrival==='pond-crossing'){M.arrive(M.pondWorldWindow.pond.entry);M.player.pitch=-.33;}else if(faceArrival==='escher-depth')M.escherDepth.enter('gallery');
+ const arrivalQuery=new URLSearchParams(location.search||''),faceArrival=arrivalQuery.get('arrival');if(faceArrival==='pond-crossing'){M.arrive(M.pondWorldWindow.pond.entry);M.player.pitch=-.33;}else if(faceArrival==='escher-depth')M.escherDepth.enter('gallery');
  M.status('ready');
  installCinematicIntro(M,T,socrates);
+ // The bare city address opens at the approved volcanic reservoir in Babel.
+ // Explicit destination links and the optional book introduction retain their routes.
+ if(!arrivalQuery.has('arrival'))M.babelLibrary.visitThermal();
 }catch(error){document.body.classList.remove('cinematic-pending');console.error('Original district integration failed',error);M.status(error.message);}
