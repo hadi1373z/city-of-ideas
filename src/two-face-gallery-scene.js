@@ -1,9 +1,11 @@
 import {gallerySide,heightAt,pointAt,TWO_FACE_GALLERY_CONTRACT} from './two-face-gallery-model.js';
+import {paperMonitorSlots} from './paper-monitors-model.js';
 
 /** Builds only local +Y-up geometry. The caller owns the inverted lower frame. */
 export function buildTwoFaceGallery(T,{side='upper',lights=true}={}){
  const s=gallerySide(side),group=new T.Group(),walking=new T.Group(),lamps=new T.Group(),owned=new Set(),batches=new Map(),beams=new Map();group.name=`Central ${s.id} stone gallery`;walking.name='Exact gallery walking surfaces';lamps.name='Central gallery lighting';group.add(walking,lamps);const own=o=>(owned.add(o),o),mat=(c,o={})=>own(new T.MeshLambertMaterial({color:c,...o}));
- const stone=mat(0xafa68e),darkStone=mat(0x6b6e67),trim=mat(0xd0c6aa),brass=mat(0xab9459),ink=mat(0x303f43),glow=own(new T.MeshBasicMaterial({color:0xffdfaa}));
+ const paperSlots=s.floor?paperMonitorSlots():[];group.userData.paperSlots=paperSlots;
+ const stone=mat(0xafa68e),darkStone=mat(0x6b6e67),trim=mat(0xd0c6aa),brass=mat(0xab9459),glow=own(new T.MeshBasicMaterial({color:0xffdfaa}));
  const cube=own(new T.BoxGeometry(1,1,1)),cylinder=own(new T.CylinderGeometry(1,1,1,7)),sphere=own(new T.SphereGeometry(1,10,7));
  function box(w,h,d,x,y,z,m,yaw=0){if(!batches.has(m))batches.set(m,[]);batches.get(m).push({w,h,d,x,y,z,yaw});}
  function beam(a,b,r,m){const p=new T.Vector3(...a),q=new T.Vector3(...b),d=q.clone().sub(p);if(!beams.has(m))beams.set(m,[]);beams.get(m).push({p:p.add(q).multiplyScalar(.5),q:new T.Quaternion().setFromUnitVectors(new T.Vector3(0,1,0),d.clone().normalize()),r,length:d.length()});}
@@ -19,7 +21,9 @@ export function buildTwoFaceGallery(T,{side='upper',lights=true}={}){
  if(s.floor){const floor=band(s.floor.innerRadius,s.floor.outerRadius,s.floor.y,stone,'Lower face annular gallery floor',walking);floor.userData.gallerySurface='floor';band(19,19.3,s.floor.y+.012,brass,'Brass rim around the open well');for(const r of[24,39,54,57.5])band(r,r+.055,s.floor.y+.016,brass,'Inlaid concentric floor line');for(let i=0;i<40;i++){const a=i*Math.PI*2/40;if(Math.abs(Math.atan2(Math.sin(a-Math.PI),Math.cos(a-Math.PI)))<.10)continue;const r=57.8,h=7.2;box(.7,h,.72,Math.cos(a)*r,s.topY+h/2,Math.sin(a)*r,darkStone,-a);box(7.9,.32,.58,Math.cos(a)*r,s.topY+6.9,Math.sin(a)*r,trim,Math.PI/2-a);}
   // The west wall is a genuine doorway, with no rail or panel across its passage.
   for(const z of[-3.25,3.25])box(.85,5.8,.85,-57.9,s.topY+2.9,z,trim);box(.9,.65,7.35,-57.9,s.topY+6.05,0,trim);
-  for(let i=0;i<12;i++){const a=i*Math.PI/6+.16;if(Math.abs(Math.atan2(Math.sin(a-Math.PI),Math.cos(a-Math.PI)))<.22)continue;const r=56.1,cx=Math.cos(a)*r,cz=Math.sin(a)*r,radial=(t,up)=>[cx-Math.sin(a)*t,s.topY+up,cz+Math.cos(a)*t];box(2.8,3.1,.16,cx,s.topY+2.45,cz,ink,Math.PI/2-a);for(let j=0;j<5;j++){const t=(j-2)*.43,up=1.7+(j%3)*.52,p=radial(t,up);box(.12,.12,.14,...p,brass);if(j)beam(radial((j-3)*.43,1.7+((j-1)%3)*.52),p,.025,brass);}box(3.4,.22,.75,Math.cos(a)*55.7,s.topY+.65,Math.sin(a)*55.7,trim,Math.PI/2-a);}
+  // The original blank boards are now live first-page monitors. Retain the
+  // low stone stands; the runtime owns frames, readable pages and their actions.
+  for(const slot of paperSlots){const a=slot.angle;box(3.4,.22,.75,Math.cos(a)*55.7,s.topY+.65,Math.sin(a)*55.7,trim,Math.PI/2-a);}
  }
  // Slender rails follow both real stepped edges and remain open at all decks.
  for(const r of[s.innerRadius-.06,s.outerRadius+.06])for(let i=0;i<s.steps;i++){const a=i/s.steps*s.endTheta,b=(i+1)/s.steps*s.endTheta,y=heightAt((a+b)/2,s),nearPortal=a<.15||b>s.endTheta-.24||r>s.radius&&s.spur&&Math.abs((a+b)/2-s.spur.theta)<.15;if(nearPortal)continue;beam([Math.cos(a)*r,y+1.05,Math.sin(a)*r],[Math.cos(b)*r,y+1.05,Math.sin(b)*r],.035,brass);beam([Math.cos(a)*r,y-.16,Math.sin(a)*r],[Math.cos(b)*r,y-.16,Math.sin(b)*r],.085,darkStone);if(i%4===0)beam([Math.cos(a)*r,y,Math.sin(a)*r],[Math.cos(a)*r,y+1.05,Math.sin(a)*r],.035,brass);}
@@ -39,5 +43,5 @@ export function buildTwoFaceGallery(T,{side='upper',lights=true}={}){
  for(const[m,items]of beams){const inst=new T.InstancedMesh(cylinder,m,items.length);inst.name='Batched gallery rails and arch ribs';for(let i=0;i<items.length;i++){const v=items[i];dummy.position.copy(v.p);dummy.quaternion.copy(v.q);dummy.scale.set(v.r,v.length,v.r);dummy.updateMatrix();inst.setMatrixAt(i,dummy.matrix);}inst.instanceMatrix.needsUpdate=true;inst.computeBoundingSphere?.();group.add(inst);}
  const inst=new T.InstancedMesh(sphere,glow,globes.length);globes.forEach((p,i)=>{dummy.position.set(...p);dummy.rotation.set(0,0,0);dummy.scale.setScalar(.14);dummy.updateMatrix();inst.setMatrixAt(i,dummy.matrix);});inst.instanceMatrix.needsUpdate=true;lamps.add(inst);const ambient=new T.AmbientLight(0xe4d5ba,.62);lamps.add(ambient);for(let i=0;i<4;i++){const p=pointAt((i+.5)/4*s.endTheta,s),light=new T.PointLight(0xffd6a3,35,s.id==='lower'?70:36,1.5);light.position.set(p.x,p.y+3,p.z);lamps.add(light);}if(s.floor){const light=new T.PointLight(0xffe7bc,95,105,1.7);light.position.set(0,5,0);lamps.add(light);}lamps.visible=lights;
  const counts={treads:s.steps,arches:13,lamps:globes.length,walkingMeshes:walking.children.length,drawMeshes:0};group.traverse(o=>{if(o.isMesh)counts.drawMeshes++;});let disposed=false;
- return{group,walking,lamps,side:s.id,descriptor:s,contract:TWO_FACE_GALLERY_CONTRACT,counts,dispose(){if(disposed)return;disposed=true;group.removeFromParent();group.traverse(o=>{if(o.isInstancedMesh)o.dispose?.();});for(const resource of owned)resource.dispose();group.clear();}};
+ return{group,walking,lamps,paperSlots,side:s.id,descriptor:s,contract:TWO_FACE_GALLERY_CONTRACT,counts,dispose(){if(disposed)return;disposed=true;group.removeFromParent();group.traverse(o=>{if(o.isInstancedMesh&&owned.has(o.geometry))o.dispose?.();});for(const resource of owned)resource.dispose();group.clear();}};
 }

@@ -163,3 +163,24 @@ doors, upper floors use the lift. Keep solid laboratory windows distinct from
 the central doorway. No guide action moves the visitor or writes notes unless
 the visitor explicitly requests an existing interaction. Read docs/STARTUP.md,
 docs/CONNECTED-QUESTIONS.md and docs/lower-face-visuals.md before extending.
+
+## Original paper monitors
+
+The eleven former blank panels in the lower Mathematics reading hall now show
+permanent original first-page facsimiles. `historic-papers-data.js` keeps each
+work's image, edition/page choice, source links, author credit, reuse terms and
+English discussion question together. Preserve the genuine local scans and
+their attribution; do not replace them with generated paper pages or assume
+free access alone permits republication. Some historical works are monographs
+and their original title pages are identified honestly in the reader.
+
+`paper-monitors.js` owns page textures, frames, nearby actions and the zoomable
+reader. It loads the images asynchronously and releases loading textures as
+they are replaced. The pure gallery builder retains the stone pedestals and
+exposes the lower-local slots; keep its resource disposal scoped to its own
+geometry. Both lower walking and annular gallery walking must apply the monitor
+colliders while leaving the west doorway and viewing aisle clear. The map's
+Historic papers destination and `?arrival=paper-monitors` visit the real ring;
+the bare city address still defaults to Babel. Read docs/PAPER-MONITORS.md and
+docs/PAPER-COLLECTION.md before extending the collection. Voices, notes and
+account connections are unaffected.
