@@ -187,3 +187,12 @@ Historic papers destination and `?arrival=paper-monitors` visit the real ring;
 the bare city address still defaults to Babel. Read docs/PAPER-MONITORS.md and
 docs/PAPER-COLLECTION.md before extending the collection. Voices, notes and
 account connections are unaffected.
+
+The lower Mathematics rotunda hands movement to the ordinary lower grounds in
+the shared outer-floor band and west walkout overlap. Reuse the same handoff
+predicate when releasing a gallery route and at both controller capture sites;
+otherwise each frame can recapture the short deck and trap a visitor at its
+finite edge. Keep canLower collision checks on ground movement and capture.
+Regression checks must continue past local X -64, turn onto the covered walk,
+reach the working wing and return to the hall; stopping at the first route-null
+frame does not prove that a visitor can leave.

@@ -74,6 +74,20 @@ contract; ordinary movement cannot snap a player onto an overlapping route.
 The controller owns handoffs between Babel, spiral, tunnel, lower annulus and
 lower ground. Unrelated travel or leaving city mode must relinquish the route.
 
+The western exit overlaps the ordinary lower ground before the finite walkout
+deck ends. The shared exterior-handoff predicate releases gallery ownership
+there and prevents both automatic capture sites from immediately taking it back.
+This applies to the outer annular floor band too. In that overlap, ordinary
+lower-ground movement still passes through `canLower`, including the Faculty,
+paper monitors, landscape, original source walls and ocean boundary. An invalid
+central-gallery surface still blocks entry into the open well. Do not fix an
+exit trap by removing solid windows or disabling collision delegates.
+
+The regression walks beyond local X -64, turns past the deck's Z edge, follows
+the complete covered connector to the working Mathematics entrance and returns
+to the rotunda. A check that only reaches the first route-null frame misses the
+repeated-capture trap.
+
 The Faculty of Mathematics is the lower central annular building directly
 opposite the upper Gallery. `src/math-faculty-model.js` and
 `src/math-faculty-scene.js` add the central rotunda's annular roof and open oculus,

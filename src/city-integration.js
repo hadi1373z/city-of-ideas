@@ -2,7 +2,7 @@ import {installConnectedJourney} from './connected-journey.js?v=1';
 import {installPaperMonitors} from './paper-monitors.js?v=1';
 import {HISTORIC_PAPERS} from './historic-papers-data.js';
 import {installPondWorldWindow} from './pond-world-window.js?v=1';
-import {installWorldCylinder} from './world-cylinder.js?v=papers1';
+import {installWorldCylinder} from './world-cylinder.js?v=math-exit2';
 import {installEscherDepth} from './escher-depth.js?v=1';
 import {installHouseInvestigations} from './house-investigations.js?v=1';
 import {installComputationLab} from './computation-lab.js?v=1';

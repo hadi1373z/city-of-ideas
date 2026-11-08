@@ -104,6 +104,32 @@ check('Lower movement preserves logical positions, old collision contracts and c
  M.player.x=-2300;M.player.z=-65;const before={...M.player};M.player.yaw=Math.PI/2;api.step(.1,{forward:1});assert(M.player.x<before.x);near(M.player.y,1.93);assert.equal(f.privateAccess,0);f.events.get('pagehide')();
 });
 
+check('Mathematics exit continues past the finite deck, around the covered connector and back into the hall',()=>{
+ const f=fixture(),{M,api}=f,world=(x,z)=>[W.lowerOrigin.x+x,W.lowerOrigin.z+z];api.visitLower();
+ // The old handoff cleared route at x<-62, then recaptured the visitor every
+ // tick and trapped them at x=-63.9 or z=2.45. Continue well beyond both edges.
+ drive(f,...world(-66,0));assert.equal(api.route,null);assert(M.player.x<W.lowerOrigin.x-65.8);near(M.player.y,1.93);
+ for(const p of[[-64,0],[-64,8],[-64,26],[-80,26],[-80,9.6],[-80,35]])drive(f,...world(...p));
+ assert(M.player.z>W.lowerOrigin.z+34.8,'The visitor reaches the grounds beyond the working entrance');assert.equal(api.route,null);near(M.player.y,1.93);
+ for(const p of[[-80,26],[-64,26],[-64,0],[-52,0]])drive(f,...world(...p));
+ assert.equal(api.route?.side,'lower','Walking back into the reading hall rejoins its real gallery floor');assert.equal(api.route.layer,'floor');near(M.player.y,1.93);assert.equal(f.privateAccess,0);f.events.get('pagehide')();
+});
+
+check('Outdoor handoff and return keep the lower-ground collision guards active on the transition step',()=>{
+ const f=fixture(),{M,api}=f;api.visitLower();const landscape=api.built.lowerLandscape,original=landscape.canStand;let blocked=0;
+ // Stand in for a lower-land obstacle immediately beyond the release boundary.
+ // The gallery walker must consult this guard before taking that first step.
+ landscape.canStand=(x,z)=>{if(x< -62&&x> -62.6&&Math.abs(z)<.3){blocked++;return false;}return original(x,z);};
+ M.player.yaw=Math.PI/2;for(let i=0;i<100;i++)api.step(.1,{forward:1,boost:true});assert(blocked>0,'The outgoing deck step must consult the outdoor guard');assert(M.player.x>=W.lowerOrigin.x-62,'Releasing the route cannot step through an outdoor obstacle');assert.equal(api.route?.layer,'walkout');
+ landscape.canStand=original;drive(f,W.lowerOrigin.x-66,W.lowerOrigin.z);assert.equal(api.route,null);
+ // The candidate-position re-entry path must check the same guard before
+ // snapping a visitor from ordinary ground back onto the finite gallery.
+ M.arrive({x:W.lowerOrigin.x,z:W.lowerOrigin.z+57.4,y:.13,yaw:0});blocked=0;
+ landscape.canStand=(x,z)=>{if(z<57.2&&z>56.8&&Math.abs(x)<.3){blocked++;return false;}return original(x,z);};
+ for(let i=0;i<100;i++)api.step(.1,{forward:1});assert(blocked>0,'The return-to-floor candidate must consult the outdoor guard');assert(M.player.z>=W.lowerOrigin.z+57.2);assert.equal(api.route,null,'A blocked return step must not capture the visitor inside the obstacle');
+ landscape.canStand=original;drive(f,W.lowerOrigin.x,W.lowerOrigin.z+52);assert.equal(api.route?.layer,'floor');f.events.get('pagehide')();
+});
+
 check('Physical first-person, photo camera and lantern use the same proper lower frame',()=>{
  const f=fixture(),{M,api}=f;api.visitLower();const logical={x:-2318,y:1.93,z:-65},q=new T.Quaternion().setFromEuler(new T.Euler(.12,.3,0,'YXZ')),flip=new T.Quaternion().setFromAxisAngle(new T.Vector3(1,0,0),Math.PI);
  M.player={...logical,yaw:.3,pitch:.12};const photo=new T.PerspectiveCamera(66,1.5,.08,650);
