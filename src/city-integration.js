@@ -1,6 +1,6 @@
 import {installComputationLab} from './computation-lab.js?v=1';
 import {installProofAtelier} from './proof-atelier.js?v=prices2';
-import {installSeminarHouses} from './seminar-houses.js?v=noether-details1';
+import {installSeminarHouses} from './seminar-houses.js?v=mirzakhani-details1';
 import {installBabelLibrary} from './babel-library.js';
 import {installOceanVoyage} from './ocean-voyage.js';
 import {installHouseFoundations} from './foundation-houses.js?v=freud-details1';

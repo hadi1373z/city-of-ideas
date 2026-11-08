@@ -127,3 +127,27 @@ Native desktop/mobile review confirmed real entry walking, pointer/E, both
 oscillator cases, keyboard phase action, compact/full and directory routes,
 four-language reading and preserved unsaved mixed-language drafts. Full results
 and the next house are in HOURLY-HOUSE-DETAILS.md. PR #5 remains review only.
+
+## Mirzakhani ruler reading corner · 2026-11-08
+
+The original (0, 345), pi-rotated hall now has pale edging sampled directly
+from all five source roof ribbons, stone-band post joints, supported bench
+slats and desk joinery. A shallow wall-bracketed rack holds two equal-radius
+disk cards. Equal drawn gold lengths cross the centre on one card and lie
+near the rim on the other. These are fixed original city diagrams, not
+historical objects, new experiment presets or research-level counts/proofs.
+
+The EN/DE/FA/CS extension explains which ruler measures length, links
+Calegari section 1.2.6/equation 1.17 and both existing Mirzakhani papers,
+then returns to the original three-case geodesic/chord experiment. The five
+advanced readings, exact distance, orthogonal circles, numerical quadrature,
+sources and private saves remain. The real hall is Euclidean; the disk is
+not a closed hyperbolic surface. Rack pointer/E opens the existing full
+reader, while exhibit/context retain compact controls and directory access.
+Reading/locale does not select a case or save notes. Persian is RTL, with
+math in an LTR block; private drafts/carets/first answers remain unchanged.
+
+The combined review passes 89 release programs. Native desktop/mobile
+review checked actual walking, rack pointer/E, all cases, four languages,
+compact/full/directory and unsaved drafts. Full results, source links and
+Cage as the next house are in HOURLY-HOUSE-DETAILS.md. No merge/deployment.

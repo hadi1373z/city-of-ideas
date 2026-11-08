@@ -3290,3 +3290,96 @@ dialog widths 354 px with no horizontal overflow. Console: zero application
 errors, one existing Three.js warning. Added combined-model/journal/reading
 screenshots are in outputs. No native private-note save or account was used.
 Mirzakhani remains the next house, with the hourly/review-only policy unchanged.
+
+## 2026-11-08 · Mirzakhani's ruler reading corner
+
+Continued feat/hourly-house-details / PR #5 from 6cfdc1bd4defeea37dd7aa55340871f0c56d5fe5.
+Read repository/parent instructions, this ledger, seminar documentation and
+the actual scene/data/controller/models. Remote review head and main
+975ed0dcfed3ea4621e5ca3da02afd76874b493e were unchanged; PR #5/#2 remain open.
+
+The original House of Curved Space remains at (0, 345), pi-rotated. Ten pale
+edges follow the actual sampled vertices of its five turquoise roof ribbons.
+Twenty post joints stay on the stone bands, clear of glazing. Six pale bench
+slats rest on the original seats; desk aprons/joints meet the underside.
+A shallow two-card rack is bracketed to the solid rear wall, clear of furniture,
+central aisle, windows and door. Borrowed geometry/resources/transforms,
+furniture positions, entrance anchors, paths and colliders are unchanged.
+
+The rack's equal-radius disks show equal drawn lengths at normalized endpoints
+(-.1, 0)/(.1, 0) and (.7, 0)/(.9, 0). One/two marks identify the cards. These
+fixed original city diagrams are not Mirzakhani drawings, measurements,
+historical objects or new live cases; they have no separate stored state.
+Original EN/DE/FA/CS reading, "At the rack · which ruler?", explains the local
+scale 2/(1-r^2), returns to the existing geodesic/chord comparison in the same
+curvature -1 metric, and distinguishes open disk arcs from closed surfaces
+and research-level counts/volumes. The actual hall remains Euclidean; no
+count/proof or historical-room claim and no invented quotation is made.
+
+Primary sources successfully accessed for the narrow factual context:
+
+- Mirzakhani, Growth of the number of simple closed geodesics on hyperbolic
+  surfaces (2008), introduction/Theorem 1.1:
+  https://annals.math.princeton.edu/wp-content/uploads/annals-v168-n1-p03.pdf
+- Mirzakhani, Simple geodesics and Weil-Petersson volumes of moduli spaces of
+  bordered Riemann surfaces, introduction/Theorem 1.1, supplied 2005 preprint:
+  https://www.math.stonybrook.edu/~mlyubich/Archive/Geometry/Teichmuller%20Space/Mirz3.pdf
+- Calegari, Hyperbolic Geometry, section 1.2.6, equation 1.17, page 8:
+  https://math.uchicago.edu/~dannyc/courses/kleinian_groups_2015/kleinian_groups.pdf#page=8
+
+Rack pointer/E opens the existing full reader. Exhibit/context retain compact
+controls; Read the full argument and the three-house directory reach the same
+reading. Five advanced sections, all translations, three endpoint cases,
+exact distance, orthogonal-circle construction, chord quadrature and source
+records remain. Reading/locale changes neither case nor private/lesson state.
+Keep seminar-mirzakhani private questions/drafts/carets, immutable first answers
+and explicit saves. No private text is translated. Existing Czech controls
+were retained. Persian is RTL with a dedicated LTR formula block; native
+review caught and removed a reversed inline expression from Persian prose.
+Original catalogs/books, shared city/notebook and new Atelier/computation-lab
+advanced content retain disclosed English gaps; no full city translation.
+
+All 89 release programs passed. New tests compare all borrowed nodes and
+original scene states with the bare builder across all three disk cases and
+both oscillator cases, independently verify visible card endpoints/analytic
+metric lengths, exact ribbon fit, furniture/wall supports, actual rack ray,
+path/entrance/aisle clearances and owned disposal. Real controller/notebook
+tests retain every case through four languages, compact/full, private
+draft/caret and explicit first-answer-preserving revision. After the Persian
+prose fix, affected house/source checks passed again. Build: 763 assets /
+332,531,474 bytes; source hash
+171c9c2b6133b1bbcb33172da44a920fcec7e309898a10a62b4a98c66d8c8212.
+
+Native Chrome walked through the true door and aisle, checked roof/bench/desk,
+and used rack pointer/E plus context/compact/full/directory. Original
+geodesic/chord values were diameter 2.7726/2.7726, curved 2.5548/2.5907,
+near-boundary 4.2203/4.2778. Near-boundary remained selected through four
+languages and reading routes. A synthetic mixed-language draft with spaces,
+newline and selection 4..15 survived; reading/language left storage unchanged.
+No native note save/account was used. Desktop reader client/scroll widths
+matched 998 px; Czech/Persian at 390 x 844 matched 354 px, with 324 px reading
+content and LTR formulas. The corrected Persian build was reloaded/reviewed.
+Console: zero application errors, one existing Three.js warning per load.
+Hardware controller A was not separately exercised; shared confirm routes
+remain. Screenshots are in the originating chat's outputs.
+
+Main 975ed0d stays in the earlier two-parent ancestry: computation laboratory,
+moved desk/journal, separate stores, classic handoffs, English-first arrival,
+Proof Atelier/Price/resume and explicit saves remain. Noether's furnishings,
+all earlier houses/galleries/studios, Makers, map/facing, Babel, ocean voyage,
+branding, approved cast, fixed voices and recordings remain. PR #5 stays
+review only, unmerged; no deployment. The hourly cadence is unchanged.
+
+Thirty-three first passes are complete. Next useful house: John Cage's existing
+House of Listening, id cage, at (104, 316), pi-rotated. Inspect seminar source,
+models/controller, MoMA source and per-house notes. Its butterfly timber roof,
+underside fins, true glazing/door, benches/desk, sixteen-block score and five
+four-language advanced sections already exist; do not repeat translations
+or replace the experiment. Preserve exact seeded sixteen-slot rest/A3/C-sharp4/
+E4 sequence, four-second quarter-second audio-clock cursor, quiet opt-in
+synthesis, Play/Stop/close/leave/failure handling, compact/full and seminar-cage
+private drafts/explicit saves. It is an original bounded website activity,
+not Cage's composition or physical randomness. Keep chance composition,
+performer indeterminacy and environmental unpredictability distinct. Add
+modest supported domestic detail and an original sourced reading extension,
+preserving openings/routes, Mirzakhani's rack/metric and Noether's oscillator.
