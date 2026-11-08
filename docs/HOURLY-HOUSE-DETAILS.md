@@ -3615,3 +3615,117 @@ from historical Dali works or testimony. Inspect actual language gaps before
 an additive sourced EN/DE/FA/CS companion and modest supported room details;
 do not claim complete legacy catalog translation or change existing geometry,
 openings, routes, models, approved appearances or voices.
+
+## 2026-11-08 · Dali's observation and association rack
+
+Continued feat/hourly-house-details / PR #5 from
+93e540c8fe1814c0acb3174414be7c879b4143b7. Read the latest ledger, repository and
+parent instructions, source Dali house/data and painting-sources.json,
+installed district/reader/quarter layout, shared activities and per-house
+story/backlog notes. Branches and open PRs were inspected; main remains
+a909b7fd495167f9e158f6c0cbc26df206a55c73, already retained through the preceding
+two-parent review commit. No competing branch, merge to main or deployment.
+
+The installed house remains at world (220, 177), using the actual source
+house frame inside the 1.35-scale artist district. Four fascia strips copy
+the original offset roof transform, including its small z tilt. Two door
+joints stay within the original side walls, preserving the entire 3.6-unit
+opening. A linen pad/seams sit on the original dream-chair seat; a cornice
+meets the original cabinet top. Desk side aprons and leg joints remain
+within the original clock desk's footprint and clear of its soft clock.
+
+A shallow left-wall rack at local (-5.82, 1.65, 2.6) has a backing, two wall
+spacers, a ledge and two flush paper cards. All parts stay inside the old
+wall collision margin, clear of the egg pane, chair, paintings and doorway.
+One card has one outlined circle; the other repeats it beside a smaller
+connected mark. Blank rules suggest separating description and association.
+These are fixed original city symbols, not Dali artworks, historical notes,
+psychological tests or reconstructed furnishings. There is no new stored state.
+
+The EN/DE/FA/CS companion gives three original looking steps, useful readings
+for all five existing objects and a prompt for each of the four paintings.
+It links narrow historical facts to two successfully accessed primary pages:
+https://www.moma.org/collection/works/79018 and
+https://catalogues.salvador-dali.org/catalogues/en/heritageobject/54/ .
+The Foundation's Leda and Face records were also successfully inspected.
+The new facts concern the dates/media of the first two works, not invented
+artist intentions or quotations. Original city exercises remain distinct
+from museum records, historical Dali works and the real Portlligat house.
+
+Actual rack pointer/E, the inside context action and the existing quarter
+directory open the companion. All four languages have usable controls;
+Persian is RTL and original English work-title/date headings are LTR.
+Local companion language choices do not change the saved city preference.
+The existing Czech city selection also reaches this house's Czech guide
+and remains selected after reload. The original catalogue/activity readers
+keep their own languages, with English fallback in Czech: they were not
+fully translated. Their original private notebook/save actions remain.
+
+The four original painting IDs memory, galatea, leda and face retain exact
+image bytes, aspect ratios, titles, dates, rights, attribution, source and
+citation metadata. All four image hashes match painting-sources.json.
+The five original object IDs dream-chair, drawer-library, soft-clock,
+viewpoint and egg-window retain their geometry, payloads and activities.
+The nine spheres, original thirty-second observation prompt, furniture,
+resident, source geometry, colliders, paths and story/private flows remain.
+The new guide neither aligns spheres nor provides a timer or guaranteed face.
+
+A native check found an older activity dialog covering the subsequently
+requested painting. The original source pick adapter now closes only the
+competing world-guide/art-city dialog for a Dali work/object pick, then
+delegates the unchanged payload. Other artists keep their original route.
+This brings the requested reader forward without clearing, translating or
+saving its draft. No private-service connection or conversation was sent.
+
+### Verification
+
+All 96 release programs passed after the reader handoff fix (the preceding
+95 plus the new Dali program). New coverage includes borrowed parents,
+resources, transforms, payloads and visibility; exact image hashes/catalogue;
+unchanged colliders/entry/approaches; source-fit roof, supported pad/cornice/
+rack and real ray pick; four-language/RTL reader and all nine handoffs;
+saved-edition/remote-pick guards and idempotent owned cleanup. The actual
+companion controller is tested with private memory/storage access forbidden.
+The actual source pick adapter is exercised with synthetic drafts and both
+Dali reader directions, with other artists delegated unchanged.
+
+Build: 779 assets / 332,639,279 bytes; source hash
+27910873ea4c8dc8e0b873656f95fa03dbab16faf632c82c0803e266613d226b.
+Native Chrome used the existing quarter directory, approached and walked
+through the original doorway, inspected the new rack/chair/cabinet/desk,
+opened the rack by click and E, and walked back outside to check roof/entry.
+All four companion languages and Czech/Persian mobile layouts were visually
+checked; mobile client/scroll widths matched with no horizontal overflow.
+Reading/local-language switches left browser storage unchanged. Saved city
+Czech reached the new context/reader and persisted through reload.
+
+Native checks followed all four exact original image handoffs and all five
+object-reader handoffs. After the fix, alternating activity/painting readers
+closed the competing dialog and displayed the requested original reader.
+A synthetic unsaved mixed-language observation retained its spaces/newline
+through those handoffs. No observation or private note was saved. Console:
+zero application errors, one existing Three.js warning per root load.
+Hardware controller A was not separately exercised. Screenshots and the
+release log are retained in the originating chat's outputs.
+
+All 35 earlier house passes, classic/Atelier/computation models, Ada/Chomsky
+reconciliation, Babel descent, map/facing, ocean, branding, approved cast,
+fixed voices and recordings remain. Hourly frequency and review-only policy
+are unchanged; no complete city-wide Czech localization is claimed.
+
+Thirty-six first detail/reading passes are complete. Next useful house:
+the existing Ramsey House, region id ramsey, beside Mathematics in the
+separate Graveyard of Ideas. Its current centre is (-2401, 37), derived by
+ramseyPlacement(M.city.GRAVEYARD), not a new island lot. Inspect
+src/ramsey-house.js, ramsey-house.css, city.js, graveyard access, source link,
+tests and per-house notes. Preserve its six original citizens (Ramsey,
+Noether, Lovelace, Turing, Erdos, Khayyam), appearances, seats/poses, all
+fifteen binary edge colours/order, monochromatic-triangle model/proof and
+city-of-ideas:ramsey-table:v1 key. Preserve original discovery-on-open,
+explicit colour saves, notebook access, source geometry, entrances, routes
+and reduced motion. This is an original fictional gathering, distinct from
+the gallery's accepted Ramsey conversation/recordings. Its public reading/
+controls currently support EN/DE/FA with a real Czech gap. Add modest supported
+details and useful sourced four-language reading/controls without replacing
+the graph, writing private progress during reading/locale or changing actors,
+voices, recordings, the theorem's scope or the separate-world boundary.

@@ -1,0 +1,24 @@
+import {buildDaliDetails} from './dali-house-details.js';
+import {DALI_GUIDE_COPY,DALI_GUIDE_SOURCES,DALI_GUIDE_WORKS,DALI_GUIDE_OBJECTS} from './dali-house-copy.js';
+import {DALI_ARTIST} from './city-source-assets/home-tools/dali-data.js';
+export function installDaliGuide(M,T){
+ const house=M.city.art.houses.find(h=>h.artistId==='dali'&&!h.editionId);if(!house)return null;
+ const details=buildDaliDetails(T,house);M.city.targets.push(...details.targets);let localLanguage=null,opener=null,disposed=false;
+ const lang=()=>localLanguage||window.CITY_I18N?.lang||'en',copy=()=>DALI_GUIDE_COPY[lang()]||DALI_GUIDE_COPY.en;
+ const inside=()=>{const r=M.city.region(M.player.x,M.player.z);return M.mode==='city'&&r.artistId==='dali'&&!r.artistEditionId&&r.inside;};
+ const el=(tag,text)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;return n;},button=(text,fn)=>{const b=el('button',text);b.type='button';b.onclick=fn;return b;};
+ const dialog=el('dialog');dialog.id='dali-reading';dialog.dataset.confirmFocused='true';dialog.setAttribute('aria-labelledby','dali-reading-title');const header=el('header'),title=el('h2'),close=button('×',()=>dialog.close()),languages=el('nav'),body=el('main');title.id='dali-reading-title';close.dataset.close='';header.append(title,close);languages.className='dali-reading-languages';
+ for(const [id,label]of[['en','English'],['de','Deutsch'],['fa','فارسی'],['cs','Čeština']]){const b=button(label,()=>{localLanguage=id;render();});b.lang=id;b.dataset.daliLanguage=id;languages.append(b);}dialog.append(header,languages,body);document.body.append(dialog);
+ function handoff(data){dialog.close();M.clearMovement();M.homePick({artistId:'dali',...data});}
+ function render(){const c=copy();dialog.lang=DALI_GUIDE_COPY[lang()]?lang():'en';dialog.dir=lang()==='fa'?'rtl':'ltr';title.textContent=c.title;close.setAttribute('aria-label',c.close);languages.setAttribute('aria-label','Language / Sprache / زبان / Jazyk');for(const b of languages.children)b.setAttribute('aria-pressed',String(b.dataset.daliLanguage===lang()));body.replaceChildren(el('p',c.intro),el('h3',c.history),el('p',c.fact));
+  for(const [key,label]of[['memory',c.sourceMemory],['galatea',c.sourceGalatea]]){const a=el('a',label);a.href=DALI_GUIDE_SOURCES[key];a.target='_blank';a.rel='noopener noreferrer';body.append(a);}
+  body.append(el('h3',c.practice));const steps=el('ol');for(const s of c.steps)steps.append(el('li',s));body.append(steps,el('h3',c.objects));
+  for(const [i,id]of DALI_GUIDE_OBJECTS.entries()){const card=el('article');card.append(el('h4',c.objectTitles[i]),el('p',c.objectTexts[i]));const action=button(c.activity,()=>handoff({daliObjectId:id}));action.setAttribute('aria-label',c.activity+' · '+c.objectTitles[i]);card.append(action);body.append(card);}
+  body.append(el('h3',c.works));for(const [i,id]of DALI_GUIDE_WORKS.entries()){const work=DALI_ARTIST.works.find(w=>w.id===id),card=el('article'),heading=el('h4',work.title+' · '+work.date);heading.dir='ltr';card.append(heading,el('p',c.prompts[i]));const action=button(c.catalog,()=>handoff({workId:id}));action.setAttribute('aria-label',c.catalog+' · '+work.title);card.append(action);body.append(card);}body.append(el('small',c.boundary));
+ }
+ function open(){opener=document.activeElement;for(const d of document.querySelectorAll('dialog[open]'))if(d!==dialog)d.close();M.clearMovement();render();if(!dialog.open)dialog.showModal();dialog.scrollTop=0;close.focus();}
+ const panel=el('aside');panel.id='dali-reading-context';panel.hidden=true;const launch=button('',open);panel.append(launch);document.body.append(panel);
+ const old={target:M.city.targetInfo,show:M.showExtra,update:M.city.update};M.city.targetInfo=d=>d?.daliGuide?{kind:'dali-guide',data:d,title:copy().open}:old.target(d);M.showExtra=info=>info?.kind==='dali-guide'?(inside()&&open(),true):old.show?.(info);M.city.update=(...args)=>{old.update(...args);panel.hidden=!inside()||!!document.querySelector('dialog[open]');};
+ const locale=()=>{localLanguage=null;panel.lang=window.CITY_I18N?.lang||'en';panel.dir=panel.lang==='fa'?'rtl':'ltr';launch.textContent=(DALI_GUIDE_COPY[panel.lang]||DALI_GUIDE_COPY.en).open;if(dialog.open)render();};locale();addEventListener('city-language',locale);dialog.addEventListener('close',()=>{M.clearMovement();const parent=opener?.closest?.('dialog');if(opener?.isConnected&&(!parent||parent.open))opener.focus();else if(inside())launch.focus();});
+ const api={details,open,inside,get label(){return(DALI_GUIDE_COPY[window.CITY_I18N?.lang]||DALI_GUIDE_COPY.en).open;},dispose(){if(disposed)return;disposed=true;removeEventListener('city-language',locale);for(const t of details.targets){const i=M.city.targets.indexOf(t);if(i>=0)M.city.targets.splice(i,1);}details.dispose();dialog.remove();panel.remove();}};M.daliGuide=api;return api;
+}
