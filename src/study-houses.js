@@ -1,8 +1,9 @@
+import {COMPUTATION_NAV} from './computation-content.js';
 import {ATELIER_UI} from './proof-atelier-content.js';
 import {WORKBENCH_TEXT,faceRoomWork} from './room-workbench.js';
 import {STUDY_HOUSES,STUDY_UI} from './study-houses-data.js';
 import {BOARDS,colour,neighbours,matching,bayes,startMachine,stepMachine,diagonal,studyMemory} from './study-house-models.js?v=workbench1';
-import {buildStudyHouses} from './study-houses-scene.js?v=atelier-details1';
+import {buildStudyHouses} from './study-houses-scene.js?v=computation-details1';
 import {proofReading,proofWords} from './proof-house-copy.js';
 import {uncertaintyReading,uncertaintyWords} from './uncertainty-house-copy.js';
 import {computationReading,computationWords,computationState} from './computation-house-copy.js';
@@ -49,6 +50,7 @@ export function installStudyHouses(M,T){
   else{
    if(selected.id==='proof'&&M.proofAtelier)body.append(button((ATELIER_UI[lang()]||ATELIER_UI.en).open,()=>{dialog.close();M.proofAtelier.open();},'proof-atelier-open'));
    if(inside(selected.id))body.append(button(wb.work,()=>open(selected.id,true),'room-workbench'));
+   if(selected.id==='computation'&&M.computationLab){const nav=COMPUTATION_NAV[lang()]||COMPUTATION_NAV.en;body.append(button(nav.open,()=>{dialog.close();M.computationLab.open();},'computation-lab-open'),el('p',nav.notice));}
    const content=studyReading(selected);body.append(button(w().directory,()=>{selected=null;feedback='';render();},'directory'),el('p',w().notice));const intro=el('section');intro.lang=localized(selected.id)?lang():'en';intro.dir=intro.lang==='fa'?'rtl':'ltr';intro.append(el('h3',content.topic),el('p',content.level),el('p',content.prediction));body.append(intro);
    const e=memory.get(selected.id);if(e.prediction){const prediction=el('p',e.prediction);prediction.dir='auto';body.append(el('h4',w().prediction),prediction);}else if(inside(selected.id)){privateInput(w().prediction,'prediction-'+selected.id);body.append(button(w().predict,()=>{const text=drafts.get('prediction-'+selected.id)||'';if(!memory.predict(selected.id,text)){feedbackArea='prediction';feedback=()=>w().needed;render();return;}const store=M.visitorMemory?.store;store?.question('advanced-'+selected.id,'personal',selected.question);store?.answer('advanced-'+selected.id,text);feedback='';render();},'predict'));message('prediction');}
    if(inside(selected.id))experiment();else{body.append(el('p',w().inside),button(w().enter,()=>visit(selected.id,true),'enter'));}
@@ -58,7 +60,7 @@ export function installStudyHouses(M,T){
   }
   status.textContent=memory.saved&&M.visitorMemory?.store.saved!==false?w().stored:w().failed;visual();if(draft){const input=Array.from(body.querySelectorAll('textarea')).find(n=>n.dataset.studyDraft===draft);input?.focus({preventScroll:true});if(input&&caret)input.setSelectionRange?.(...caret);}else if(focus)[...body.querySelectorAll('button'),...body.querySelectorAll('input')].find(b=>b.dataset.studyFocus===focus)?.focus({preventScroll:true});
  }
- function open(id,compact=false){bench=compact&&inside(id);dialog.dataset.workbench=String(!!bench);selected=STUDY_HOUSES.find(d=>d.id===id)||null;feedback='';M.clearMovement();render();if(!dialog.open)dialog.showModal();close.focus();body.scrollTop=0;}
+ function open(id,compact=false){if(id==='computation'&&compact&&M.computationLab){dialog.close();return M.computationLab.open();}if(id==='computation')M.computationLab?.legacyBoard();bench=compact&&inside(id);dialog.dataset.workbench=String(!!bench);selected=STUDY_HOUSES.find(d=>d.id===id)||null;feedback='';M.clearMovement();render();if(!dialog.open)dialog.showModal();close.focus();body.scrollTop=0;}
  dialog.addEventListener('close',()=>M.clearMovement());const welcome=button('',()=>open()),map=button('',()=>open());document.querySelector('.welcome-secondary')?.append(welcome);document.querySelector('.map-directions')?.append(map);
  const panel=el('aside');panel.id='study-house-context';panel.hidden=true;const panelTitle=el('strong'),panelAction=button('',()=>open(scene.houses.find(h=>h.inside(M.player.x,M.player.z)||Math.hypot(M.player.x-h.entry.x,M.player.z-h.entry.z)<5)?.data.id,true));panel.append(panelTitle,panelAction);document.body.append(panel);
  const old={region:M.city.region,canStand:M.city.canStand,target:M.city.targetInfo,show:M.showExtra,start:M.startExtra,update:M.city.update};M.city.canStand=(x,z)=>scene.canStand(x,z)&&old.canStand(x,z);M.city.region=(x,z)=>{const h=scene.houses.find(h=>h.inside(x,z));return h?{id:'study-houses',studyHouse:h.data.id,title:name(h.data),inside:true,room:{id:'study-'+h.data.id,purpose:h.data.question}}:old.region(x,z);};M.city.targetInfo=d=>d?.studyHouse?{kind:'study-house',data:d,title:name(STUDY_HOUSES.find(h=>h.id===d.studyHouse))}:old.target(d);

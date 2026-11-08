@@ -9,6 +9,9 @@ import {computationWords,computationReading} from '../src/computation-house-copy
 import {bayes} from '../src/study-house-models.js';
 import {WORKBENCH_TEXT} from '../src/room-workbench.js';
 import {ATELIER_UI} from '../src/proof-atelier-content.js';
+import {installComputationLab} from '../src/computation-lab.js';
+import {COMPUTATION_NAV} from '../src/computation-content.js';
+import {LAB_KEY} from '../src/computation-models.js';
 class Element{
  constructor(tag){this.tagName=tag;this.children=[];this.dataset={};this.style={};this.attributes={};this.events={};this._text='';this.open=false;}
  set textContent(v){this._text=String(v);this.children=[];}get textContent(){return this._text+this.children.map(n=>n.textContent).join('');}
@@ -89,6 +92,20 @@ try{
  let atelierOpens=0;M.proofAtelier={open(){atelierOpens++;}};
  for(const language of['en','de','fa','cs']){window.CITY_I18N.lang=language;events.get('city-language')();for(const compact of[false,true]){api.open('proof',compact);const before=writes.length;click(ATELIER_UI[language].open);assert(!dialog.open);assert.equal(writes.length,before,'Atelier handoff does not save the old private reader');}}
  assert.equal(atelierOpens,8);
+ // Actual co-installation: journal/full reader, new models and both independent stores.
+ const studyTeardown=events.get('pagehide'),oldInterval=globalThis.setInterval,oldClear=globalThis.clearInterval;let labTeardown;
+ try{
+  globalThis.setInterval=()=>91;globalThis.clearInterval=()=>{};M.camera=new T.PerspectiveCamera();api.visit('computation',true);
+  const lab=installComputationLab(M,T);labTeardown=events.get('pagehide');const labDialog=body.querySelector('#computation-lab'),labButton=key=>labDialog.querySelectorAll('button').find(n=>n.dataset.computationFocus===key);
+  const privateField=key=>dialog.querySelectorAll('textarea').find(n=>n.dataset.studyDraft===key),classicButton=key=>dialog.querySelectorAll('button').find(n=>n.dataset.studyFocus===key),classic=JSON.stringify(api.memory.get('computation')),journal=api.scene.houses[2].journal.journal;
+  for(const language of['en','de','fa','cs']){
+   assert.deepEqual(Object.keys(COMPUTATION_NAV[language]).sort(),Object.keys(COMPUTATION_NAV.en).sort());window.CITY_I18N.lang=language;events.get('city-language')();lab.open('life');labButton('step').onclick();const generation=lab.memory.state.life.generation,labState=values.get(LAB_KEY),privateWrites=writes.length;
+   M.showExtra(M.city.targetInfo(journal.userData));assert(dialog.open);assert(!labDialog.open);assert.equal(dialog.dataset.workbench,'false');assert(dialog.textContent.includes(computationWords(language).workbench));assert(dialog.textContent.includes(COMPUTATION_NAV[language].notice));assert(api.scene.houses[2].exhibit.visible);assert(!lab.built.boards.tape.group.visible);assert.equal(values.get(LAB_KEY),labState);assert.equal(writes.length,privateWrites);assert.equal(JSON.stringify(api.memory.get('computation')),classic);
+   assert.equal(privateField('prediction-computation')?.value||api.memory.get('computation').prediction,'Initial computation · فارسی · český');const reason=privateField('reason-computation');reason.value='  Unsaved classic česky / فارسی  ';reason.oninput();reason.focus();reason.setSelectionRange(3,9,'backward');events.get('city-language')();assert.equal(privateField('reason-computation').value,reason.value);assert.equal(document.activeElement.selectionStart,3);assert.equal(values.get(LAB_KEY),labState);
+   classicButton('computation-lab-open').onclick();assert(labDialog.open);assert(!dialog.open);assert.equal(lab.memory.state.life.generation,generation);assert(!api.scene.houses[2].exhibit.visible);assert(lab.built.boards.tape.group.visible);assert(labDialog.textContent.includes(COMPUTATION_NAV[language].notice));assert.equal(labButton('legacy').textContent,COMPUTATION_NAV[language].legacy);labButton('legacy').onclick();assert(dialog.open);assert.equal(privateField('reason-computation').value,'  Unsaved classic česky / فارسی  ');assert.equal(JSON.stringify(api.memory.get('computation')),classic);
+  }
+  assert.equal(values.get('private-note'),'Keep exactly');
+ }finally{labTeardown?.();events.set('pagehide',studyTeardown);globalThis.setInterval=oldInterval;globalThis.clearInterval=oldClear;}
 }finally{events.get('pagehide')();}
 assert.deepEqual(M.city.targets,[sentinel]);assert.deepEqual(M.city.buildingTargets,[sentinel]);assert.equal(M.scene.children.length,0);
 console.log('PASS advanced house UI: actual entry gates, immutable conjectures, valid Hall certificate, Bayes/dependence feedback, bounded trace distinction, both diagonal branches, personal notebook, controller focus and RTL disclosure');

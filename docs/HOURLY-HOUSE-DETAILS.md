@@ -3231,3 +3231,62 @@ Preserve Noether's new furnishings/folio/reading and exact oscillator, Cage's
 score/audio-clock, openings, walking routes and all earlier work. Add modest
 visible domestic detail and an original sourced reading extension; do not
 claim a historical room or a proof/count the model does not provide.
+
+### Concurrent computation laboratory before closing this run
+
+Final remote inspection found main 975ed0dcfed3ea4621e5ca3da02afd76874b493e,
+parent d2133b4. It adds three working computation models inside the existing
+House of Computation. Incorporate it with Noether review
+4ac853dd60d52f4eaa689cabc4f739a487b891ec as first parent, retaining both
+histories. No PR was merged into main and no deployment was triggered.
+
+Preserved Conway Life on 24 x 16 cells, elementary automata on 61 cells with
+41 retained rows, unary/binary tape increment, all model controls/inspections,
+sources, original English investigations, fixed-boundary/repeat/budget limits,
+pause behavior and independent city-of-ideas:computation-lab:v1 persistence.
+The new room/board context opens this laboratory; the original classic
+countdown/cycle/long-run and both diagonal branches remain available separately.
+
+Main intentionally moves the computation desk to local (5, 4.3). The existing
+hourly run journal and leg joints now follow that desk, still supported by its
+original sheet/top. The journal retains its original symbols, marker and
+same-step classic counter refresh. Journal pointer/E opens the full original
+reader and restores its physical board. Returning to the laboratory restores
+the tape board and retains each new model's configuration. Classic language
+rendering does not write the laboratory key; private first predictions,
+questions, drafts/carets and existing explicit saves remain separate.
+
+The review retains all fifteen classic EN/DE/FA/CS advanced sections and their
+experiments. Only the open/legacy handoffs and English-content notice were
+localized for the new laboratory. Its model UI, instructions and investigations
+remain English, explicitly disclosed. No full lab or city translation is claimed.
+
+The computation shell/collider fingerprint was measured independently from
+the original 975ed0d source module/data/models before updating the test baseline:
+computation 6cf4dd61589b9725afcce2b819f57d8cb6009946874a321eb6314b2c8d01be00;
+combined colliders 405bed863b83960d578029befdcc1caba5865c63351e25ed9fa37aece77587ff.
+Proof's e2598f0 geometry baseline and Uncertainty's baseline remain unchanged.
+All existing private/model tests remain, with additional real co-installation
+checks for four-language handoffs/notices, journal/full-reader access, model
+retention, separate stores and classic private draft/caret/first predictions.
+
+The combined tree passed all 88 release programs. After making the language
+notice a separate paragraph, affected UI/source checks were rerun and passed.
+Build: 761 assets / 332,515,444 bytes; source hash
+82dbe43cc3a6ecafaccc498f51e87553b17ebe8bf5b8554e7b5a11bba2fe4841.
+This final combined artifact supersedes the earlier 86-check Noether-only
+artifact above; Noether's own furnishings and reading did not change.
+
+Native review entered the new laboratory through its public arrival route.
+Life's blinker repeated at period 2; Rule 90 reached generation 10; binary
+increment halted at head -1 after 8 transitions. All three rendered model
+boards were checked. At 390 x 844, laboratory dialog/main client and scroll
+widths matched 368 px. The explicit Czech legacy/new-lab handoffs retained
+the synthetic classic draft and model state. The relocated journal was
+visually checked on its sheet; pointer and native E both opened the Czech
+full reader rather than the new lab. The final combined Noether reading was
+reopened in Czech and Persian; mobile Persian remained RTL, formulas LTR and
+dialog widths 354 px with no horizontal overflow. Console: zero application
+errors, one existing Three.js warning. Added combined-model/journal/reading
+screenshots are in outputs. No native private-note save or account was used.
+Mirzakhani remains the next house, with the hourly/review-only policy unchanged.
