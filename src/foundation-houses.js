@@ -1,4 +1,4 @@
-import {FOUNDATION_HOUSES,FOUNDATION_COPY} from './foundation-houses-data.js';
+import {FOUNDATION_HOUSES,FOUNDATION_COPY} from './foundation-houses-data.js?v=labs2';
 import {BORGES_ROOM,BORGES_SOURCE} from './borges-house-copy.js';
 import {ADA_ROOM} from './ada-house-copy.js';
 import {mountAdaReading} from './ada-house-reading.js';
@@ -34,7 +34,7 @@ export function installHouseFoundations(M,T){
   const focus=document.activeElement?.dataset?.houseFocus;
   title.textContent=selected?name(selected):w().title;dialog.lang=lang();dialog.dir=lang()==='fa'?'rtl':'ltr';close.setAttribute('aria-label',w().close);body.replaceChildren();
   if(readingIds.includes(selected?.id)){
-   body.append(button(w().directory,()=>{selected=null;render();}),button(w().enter,()=>visit(selected.id,true)));
+   body.append(button(w().directory,()=>{selected=null;render();}),button(w().enter,()=>visit(selected.id,true)));if(M.houseInvestigations?.has(selected.id)){const labels=M.houseInvestigations.navigation();body.append(el('small',labels.english),button(labels.open,()=>{const id=selected.id;dialog.close();M.houseInvestigations.open(id);}));}
    if(selected.id==='borges')renderBorges();
    else if(selected.id==='ada')mountAdaReading(body,lang(),adaState,focus);
    else if(selected.id==='calvino')mountCalvinoReading(body,lang(),calvinoState,{focusKey:focus,onView:viewCalvino,onLens:id=>built.houses.find(h=>h.data.id==='calvino').exhibit.setLens(id)});
@@ -45,10 +45,10 @@ export function installHouseFoundations(M,T){
   }
   body.append(el('p',w().intro));const list=selected?[selected]:FOUNDATION_HOUSES;
   if(selected)body.append(button(w().directory,()=>{selected=null;render();}));
-  for(const h of list){const card=el('article');card.append(el('small',w().stage),el('h3',name(h)),el('p',w().feature+' · '+text(h.feature)),el('p',w().later+' · '+text(h.next)),button(w().approach,()=>visit(h.id)),button(w().enter,()=>visit(h.id,true)));body.append(card);}
+  for(const h of list){const card=el('article');card.append(el('small',M.houseInvestigations?.has(h.id)?M.houseInvestigations.navigation().english:w().stage),el('h3',name(h)),el('p',w().feature+' · '+text(h.feature)),el('p',w().later+' · '+text(h.next)),button(w().approach,()=>visit(h.id)),button(w().enter,()=>visit(h.id,true)));if(M.houseInvestigations?.has(h.id))card.append(button(M.houseInvestigations.navigation().open,()=>{dialog.close();M.houseInvestigations.open(h.id);}));body.append(card);}
   body.append(el('small',w().notice));
  }
- function open(id){selected=FOUNDATION_HOUSES.find(h=>h.id===id)||null;M.clearMovement();render();if(!dialog.open)dialog.showModal();body.scrollTop=0;close.focus();}
+ function open(id){M.houseInvestigations?.showClassic?.(id);selected=FOUNDATION_HOUSES.find(h=>h.id===id)||null;M.clearMovement();render();if(!dialog.open)dialog.showModal();body.scrollTop=0;close.focus();}
  const launch=button('',()=>open()),mapLaunch=button('',()=>open());launch.className=mapLaunch.className='glass';document.querySelector('.welcome-secondary')?.append(launch);document.querySelector('.map-directions')?.append(mapLaunch);
  const context=el('aside');context.id='house-foundations-context';context.hidden=true;const contextName=el('strong'),contextButton=button('',()=>open(context.dataset.house));context.append(contextName,contextButton);document.body.append(context);
  const old={canStand:M.city.canStand,region:M.city.region,target:M.city.targetInfo,show:M.showExtra,start:M.startExtra,update:M.city.update};
@@ -57,9 +57,9 @@ export function installHouseFoundations(M,T){
  M.city.targetInfo=d=>d?.foundationHouse?{kind:'house-foundation',data:d,title:name(FOUNDATION_HOUSES.find(h=>h.id===d.foundationHouse)||FOUNDATION_HOUSES[0])}:old.target(d);
  M.showExtra=info=>info?.kind==='house-foundation'?(open(info.data.foundationHouse),true):old.show?.(info);
  M.startExtra=id=>id==='new-houses'?(open(),true):typeof id==='string'&&id.startsWith('house:')?visit(id.slice(6)):old.start?.(id);
- M.city.update=(...args)=>{old.update(...args);const h=built.houses.find(h=>h.inside(M.player.x,M.player.z)||Math.hypot(M.player.x-h.entry.x,M.player.z-h.entry.z)<20),paused=!!document.querySelector('dialog[open]');context.hidden=M.mode!=='city'||!h||paused||(!readingIds.includes(h.data.id)&&h.inside(M.player.x,M.player.z));if(h){context.dataset.house=h.data.id;contextName.textContent=name(h.data);contextButton.textContent=readingIds.includes(h.data.id)?readLabel(h.data.id):w().stage;}};
+ M.city.update=(...args)=>{old.update(...args);const h=built.houses.find(h=>h.inside(M.player.x,M.player.z)||Math.hypot(M.player.x-h.entry.x,M.player.z-h.entry.z)<20),paused=!!document.querySelector('dialog[open]');context.hidden=M.mode!=='city'||!h||paused||!!(h&&M.houseInvestigations?.has(h.data.id)&&h.inside(M.player.x,M.player.z))||(!readingIds.includes(h.data.id)&&h.inside(M.player.x,M.player.z));if(h){context.dataset.house=h.data.id;contextName.textContent=name(h.data);contextButton.textContent=readingIds.includes(h.data.id)?readLabel(h.data.id):w().stage;}};
  const locale=()=>{launch.textContent=mapLaunch.textContent=w().title;context.dir=lang()==='fa'?'rtl':'ltr';for(const h of built.houses)h.paint(lang());if(dialog.open)render();};locale();addEventListener('city-language',locale);
- function interact(){const h=built.houses.find(h=>readingIds.includes(h.data.id)&&h.inside(M.player.x,M.player.z));if(M.mode!=='city'||document.querySelector('dialog[open]')||!h)return false;open(h.data.id);return true;}
+ function interact(){const h=built.houses.find(h=>readingIds.includes(h.data.id)&&!M.houseInvestigations?.has(h.data.id)&&h.inside(M.player.x,M.player.z));if(M.mode!=='city'||document.querySelector('dialog[open]')||!h)return false;open(h.data.id);return true;}
  const api={built,open,visit,interact};M.houseFoundations=api;window.CITY_HOUSE_FOUNDATIONS=api;
  const query=new URLSearchParams(globalThis.location?.search||'');if(query.get('arrival')==='new-houses')open();else if(query.get('arrival')?.startsWith('house:'))visit(query.get('arrival').slice(6));
  addEventListener('pagehide',()=>{removeEventListener('city-language',locale);for(const target of built.targets){const i=M.city.targets.indexOf(target);if(i>=0)M.city.targets.splice(i,1);}for(const h of built.houses){const i=M.city.buildingTargets.indexOf(h.group);if(i>=0)M.city.buildingTargets.splice(i,1);}built.dispose();for(const n of[dialog,launch,mapLaunch,context])n.remove();},{once:true});return api;

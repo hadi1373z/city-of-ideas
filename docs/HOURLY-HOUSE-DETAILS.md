@@ -3486,3 +3486,132 @@ earned. Its own public reader/control copy has EN/DE/FA and a real Czech gap.
 Add modest supported room details and useful sourced EN/DE/FA/CS reading/
 controls additively; do not spoil or bypass the hidden encounter, invent
 quotations or claim a historical room. Preserve all completed seminar work.
+
+## 2026-11-08 · Escher's edge reading rail
+
+Continued feat/hourly-house-details / PR #5 from b8923c9e87a4ce6fa66dbb11ba03c7353fd416aa.
+Read the ledger, repository/parent instructions, original Escher house/activity,
+artist-quarter layout/controller, image source record and per-house notes.
+The original installed house remains at (228, 115), unrotated; the builder's
+default (151.75, 108) was not substituted for the installed position.
+
+Modest door joints and four public-room roof fascias fit the existing surfaces.
+A shallow, wall-supported paper rail sits on the right wall, inside its
+original collision band, clear of paintings and perspective rays. One card
+has a continuous line, the other two pieces across the same span with a gap.
+They are fixed original city diagrams, not Escher works, historical tools or
+a reconstructed room. There is no new stored state or floor obstruction.
+
+The original EN/DE/FA/CS edge guide links these cards to looking/tracing/
+comparing, then hands off to the original print reader. Historical context
+uses the successfully accessed museum pages:
+https://www.escherinhetpaleis.nl/en/about-escher/masterpieces/relativity
+https://www.escherinhetpaleis.nl/en/about-escher/masterpieces/drawing-hands .
+The official gallery URL was also opened, but returned a sparse listing;
+the museum pages support the new factual prose. No quotation was invented.
+
+The guide is reachable by actual rail pointer/E, inside context, original
+print viewer and the existing quarter directory. It shows only the three
+public print handoffs while the original passage is locked. Waterfall is
+added only after that physical gate is earned; replay removes it again.
+The original viewer also rejects a direct locked Waterfall work payload,
+retaining the intended gate on every route. The guide supplies no correct
+floor-mark answer and never selects a viewpoint, opens a gate, accesses
+private memory/storage or saves a reflection.
+
+Filled real Czech gaps: the original house/sign name, all four print questions,
+close/next/source controls, perspective instructions/actions/status and progress
+accessibility label. Existing EN/DE/FA print questions/labels remain. A guide
+language carries through to its original-reader handoff without changing the
+global saved preference. Persian remains RTL. The original four work IDs,
+image bytes/ratios/titles/dates/credits/rights/source metadata remain:
+relativity, drawing-hands, ascending-descending, waterfall. No image was added
+or regenerated. The three real depth-separated stair fragments, floor marks,
+viewpoint/looking-direction/hold thresholds, shutter motion/collision gates,
+alcove and discovery/reflection/replay behavior remain, including
+escher-perspective / escher-waterfall and escher-viewpoint private notes.
+
+### Concurrent main and reconciliation
+
+Remote inspection found main a909b7fd495167f9e158f6c0cbc26df206a55c73, following
+26a0761, ahead of the previous incorporated 975ed0d. Retain b8923c9 as first
+parent and a909b7f as second parent in the combined review commit. No PR is
+merged into main and no deployment is triggered.
+
+Preserved main's forty-tread, shared snake-head descent beneath the gallery's
+existing stair footprint, matching width/tread depth, physical/navigable
+heights, opening/shaft/landing/terrace join, look direction, held movement,
+borrowed texture ownership and all five library terraces/finite catalogue.
+Read docs/BABEL-SNAKE-DESCENT.md; the old northern entry is not restored.
+
+Preserved main's Chomsky grammar/stack/parse investigations and Ada addition/
+interpolation/countermodel investigations, exact models, original wheel,
+contextual immutable first conjectures, explicit notes and independent
+city-of-ideas:house-investigations:v1 key. Read docs/HOUSE-INVESTIGATIONS.md.
+Their new advanced lessons/controls remain English; only handoffs and an
+English-content notice have EN/DE/FA/CS labels. No full lab translation.
+
+The new tables/diagrams overlap the earlier hourly features. Original guides
+and new investigations now switch their own presentation while keeping both
+experiences reachable. Ada's original card table is restored for its guide;
+the new bench is shown for the laboratory. Its new plot moves slightly
+forward only when the hourly diagram exists, so neither image is obscured.
+Chomsky's original grouping room is restored for its four-language guide;
+the laboratory retains main's live tree. Existing source colliders and all
+model/private keys remain. Hidden laboratory furniture does not retain an
+extra collider in the original-guide presentation. Small navigation labels
+connect both experiences without translating private text or saving drafts.
+Reading/locale in an original guide does not write the new investigation key.
+
+### Verification
+
+All 95 release programs passed: previous 90, main's three new programs,
+Escher's new detail/guide program and a real co-installation program. Escher
+checks borrowed parents/resources/transforms/payloads, original colliders,
+installed entry, real rail ray, supports, exact perspective behavior, gate/
+shutter states, four-language copy, locked/earned handoffs and owned cleanup.
+The actual guide controller is tested with private memory/storage access
+forbidden. Co-installation checks both earlier guides and new investigations,
+visibility/collision modes, retained models, independent keys and unsaved
+mixed-language drafts. Main's exhaustive stack/arithmetic and Babel tests pass.
+
+Build: 775 assets / 332,614,735 bytes; source hash
+951c4929edad4d9860a675e851ea2ab6c8090ecdc88d56a26d216cd5531c4afb.
+Native Chrome used the existing Escher welcome action, walked through the
+true entrance, viewed new details and used actual rail pointer/E. Four-language
+guide handoffs retained the exact three public print IDs/images and prompts;
+the original Czech Next cycle skipped Waterfall while locked. A wrong floor
+mark retained zero progress; the existing successful activity opened the
+passage, the fourth handoff appeared and walking into the alcove/E opened
+Waterfall in Czech. Replay closed the gate and removed its guide handoff.
+The quarter-directory and original-viewer guide routes both worked.
+
+At 1280 x 720, reader client/scroll widths matched 948 px. At 390 x 844,
+Czech/Persian matched 354 px, with RTL Persian. Reading/language/handoffs left
+local storage unchanged. No native private-note save/account was used.
+Hardware controller A was not separately exercised; shared confirm routes
+remain. Console: zero application errors, one existing Three.js warning per
+load. Screenshots are in the originating chat's outputs.
+
+Native combined review also opened both new investigations and original Czech
+guides. Ada's partial addition row and a synthetic unsaved mixed-language note
+survived the handoff; original-guide reading left its investigation key
+unchanged. Both room presentations were visually checked. The new Babel route
+was entered from the gallery on foot and continued to its first terrace.
+All earlier seminar/Makers/gallery/studio/classic studies, Price/Atelier/resume,
+computation lab, map/facing, ocean, branding, cast, voices and recordings remain.
+The hourly frequency and review-only policy stay unchanged.
+
+Thirty-five first detail/reading passes are complete. Next useful house:
+the existing Salvador Dali dream residence, id dali, at installed world
+(220, 177). Inspect artist-quarter-layout.js, city-source-assets/home-tools/
+dali-house-scene.js and dali-data.js, shared-activities.js, original reader/
+source metadata and per-house notes. Preserve four painting IDs memory,
+galatea, leda and face; exact image bytes/ratios/rights/citations and catalog
+handoffs; dream-chair, drawer-library, soft-clock, viewpoint and egg-window
+objects; all original furniture/resident, observation/association/viewpoint
+activities, navigation and private notes. Distinguish original city activities
+from historical Dali works or testimony. Inspect actual language gaps before
+an additive sourced EN/DE/FA/CS companion and modest supported room details;
+do not claim complete legacy catalog translation or change existing geometry,
+openings, routes, models, approved appearances or voices.

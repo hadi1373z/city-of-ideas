@@ -1,12 +1,12 @@
-import './babel-layout.js';
+import './babel-layout.js?v=snake2';
 export const BABEL=globalThis.CITY_BABEL_LAYOUT;
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n)),angleDistance=(a,b)=>Math.atan2(Math.sin(a-b),Math.cos(a-b));
 export const stairs=BABEL.levels.slice(0,-1).map((l,i)=>({i,a:l.angle,outer:l.r,inner:BABEL.levels[i+1].r,top:l.y,bottom:BABEL.levels[i+1].y,width:3.4,steps:24}));
-export function entryHeight(x,z){const f=BABEL.flight;if(Math.abs(z-f.z)>f.width/2-.23||x<f.x0-1.2||x>f.x1+.6)return null;const q=clamp((x-f.x0)/(f.x1-f.x0),0,1);return f.top-Math.ceil(q*f.steps)*(f.top-f.bottom)/f.steps;}
+export function entryHeight(x,z){const f=BABEL.flight;if(Math.abs(x-f.x)>f.width/2-.23||z>f.z0+1.2||z<f.z1-.2)return null;const q=clamp((f.z0-z)/(f.z0-f.z1),0,1);return f.top-Math.ceil(q*f.steps)*(f.top-f.bottom)/f.steps;}
 export function stairLocal(s,x,z){return{r:x*Math.cos(s.a)+z*Math.sin(s.a),side:-x*Math.sin(s.a)+z*Math.cos(s.a)};}
 export function surfaceAt(x,z,feet){
  const entry=entryHeight(x,z);if(entry!==null&&Math.abs(entry-feet)<.46)return entry;
- if(x>7.75&&x<12.25&&z>-49&&z<-43.65&&Math.abs(feet+8)<.32)return -8;
+ const landing=BABEL.landing;if(x>landing.minX+.23&&x<landing.maxX&&z>landing.minZ+.23&&z<landing.maxZ&&Math.hypot(x,z)<52.1&&Math.abs(feet-landing.y)<.32)return landing.y;
  for(const s of stairs){const p=stairLocal(s,x,z);if(Math.abs(p.side)<s.width/2-.23&&p.r<=s.outer+.18&&p.r>=s.inner-.18){const q=clamp((s.outer-p.r)/(s.outer-s.inner),0,1),y=s.top-Math.ceil(q*s.steps)*4/s.steps;if(Math.abs(y-feet)<.46)return y;}}
  const r=Math.hypot(x,z),a=Math.atan2(z,x);
  for(const l of BABEL.levels){if(Math.abs(feet-l.y)>.3||r<l.r-3.35||r>l.r+3.25)continue;if(l.id<4&&r<l.r+.15&&Math.abs(angleDistance(a,l.angle))<1.75/l.r)continue;

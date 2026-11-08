@@ -86,7 +86,7 @@ city travel. No character voice assignments or recordings are used or changed.
 
 ## Underground Library of Babel
 
-The gallery’s northern ground-floor stairwell leads to a five-terrace circular
+The gallery’s snake-head ground-floor stairwell leads to a five-terrace circular
 library below the same building. `babel-layout.js` supplies the bounds shared
 by the real gallery slab opening and the library navigation. Preserve the holes
 in the slab, floor-ink shader, gallery plinth, island foundation and lawn; do not
@@ -95,3 +95,14 @@ interpretation of the user-supplied circular library image; the image itself is
 not published. The interactive catalogue is explicitly a finite 4^6-symbol
 experiment, not all possible books. Keep its source attribution and restore
 surface lighting on exit. Voices and private notes remain untouched.
+
+The Babel entry is one additional flight directly beneath the existing gallery
+stairs, in the same x/z footprint. It descends from the ground-floor landing
+at z=11.2 to the underground floor at z=0. The old narrow northern stair is removed.
+`babel-layout.js` shares the opening, landing and walk geometry. Read
+`docs/BABEL-SNAKE-DESCENT.md` before changing this route.
+
+Chomsky and Ada Lovelace now have working English investigations in their
+existing foundation houses. Preserve the grammar/stack/parse models, addition
+registers, contextual first conjectures and explicit private saves. Read
+`docs/HOUSE-INVESTIGATIONS.md` before extending those rooms.
