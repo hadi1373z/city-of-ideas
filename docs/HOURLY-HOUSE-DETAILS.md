@@ -2546,3 +2546,130 @@ details/reading; do not claim full legacy catalog translation. Keep Lange's
 three-card rack/guide, six exact handoffs and original Field notes/caption
 boundary, all earlier gallery companions, house/learning/private flows and
 imported room workbenches.
+
+## 2026-11-08 — Paul Klee: unchanged works, new neighbours
+
+Continued the same review branch from
+88e097c871813d672132a509fdf05dbe5ab12d3a. The latest ledger, local instructions,
+branches and open PRs were read before editing. Klee was the remaining original
+gallery without a first companion pass. Its existing house remains at world
+(204, 137), with the opposite-row pi rotation and asymmetric offset roof.
+
+Added owned rakes following the actual three-dimensional roof vertices, an
+offset ridge cap and eave fascias, window sill/header, a supported woven seat
+cover with seams, table apron/joints and twelve small keepers on the six
+original facade tiles. Seat and facade details inherit their source profile
+actions. No original node, material, vertex, transform, visibility, furniture
+or brush instance matrix, collider, approach, entry or opening was changed.
+
+A shallow wall-supported board beside the worktable carries two paper rows.
+Each repeats the same red circle, blue square and ochre triangle, with the
+second row reordered. Shape sizes, colours and spacing remain fixed. Cards
+meet their backing and spacers meet the original wall; the board stays within
+the existing wall walking clearance, clear of paintings, table, palette,
+brushes and doorway. These fixed city diagrams are not Klee artworks, a
+historical notebook, symbol key or reconstruction of his working method.
+They have no separate saved state.
+
+The original EN/DE/FA/CS reading companion offers six individual comparison
+prompts, source links and exact existing viewpoint/reader handoffs for senecio,
+twittering-machine, red-balloon, fish-magic, castle-and-sun and ancient-sound.
+The board opens by pointer selection or native E while aiming at it; the
+inside context button and existing quarter-directory card also open it. From
+outside, the guide offers the original doorway. Painting viewpoints use the
+unchanged source approach/yaw/lookAt points and work-specific accessible names.
+
+Historical context was checked on the primary pages
+https://www.moma.org/collection/works/37347 and
+https://www.zpk.org/en/research. MoMA records Twittering Machine as 1922 and
+lists oil-transfer drawing, watercolour and ink among its materials. The
+Zentrum Paul Klee preserves teaching manuscripts from his Bauhaus years,
+1921–1931. These narrowly attributed facts are separate from the original
+city prompts and editorial notebook. Both primary pages were accessible in
+this run. No quotation, artist voice, recording or historical sequence was
+invented. The supplied work images, aspect ratios, IDs and attribution/rights/
+source/citation metadata remain byte-for-byte unchanged; the new guide does
+not replace the original catalog or its records.
+
+The retained website's Notebook -> Rearrange the page remains an editorial
+activity. Rearrange the notebook changes the six cards' neighbours, with all
+artworks unchanged; Original sequence restores the supplied collection order.
+Neither order is called Klee's historical sequence, notebook or method. The
+new guide explains the existing controls without changing, restarting or
+storing the activity.
+
+Guide copy, six prompts, source labels and associated controls support
+EN/DE/FA/CS, including Persian RTL. Original catalog, website, notebook controls
+and private tools retain their current language handling; some text remains
+English. This is not full city-wide Czech localization. Guide/locale rendering
+has no private/lesson storage access. Language preference persistence and
+explicit observation saves retain their existing behavior.
+
+Verification: all 81 release programs, build and whitespace checks passed.
+Source hash cc0f0208a6fc42d6d23038d52cf813f933cd27e1b6ea428296f8d4ea84bc9bf6
+(748 assets / 332,410,029 bytes). The new check compares borrowed transforms,
+geometry/material identities and values, vertices, payloads/visibility,
+instance matrices, catalog, colliders, entries and approaches. It tests the
+pi frame, actual offset-roof endpoints, window/door/painting/tool clearance,
+supported board/cards/seat, facade keepers and inherited actions. The two rows
+retain the same shape sizes/materials with different orders. A real Three.js
+ray selects the physical board. All four-language six-work routes, accessible
+names, outside gates, RTL/top-of-guide behavior, no private storage and owned
+cleanup exactly once pass. Existing mathematical, house/private, source,
+cast/voice, island and imported atelier checks pass.
+
+Native Playwright CLI review at 1280 x 720 confirmed directory access, Lange's
+retained guide, Klee's original doorway and physical walking entry. Exterior
+roof/window/facade details and interior seat/table/board were visually checked
+with original paintings and resident. Pointer selection and native E opened
+the board guide. All six native painting viewpoints and six exact reader
+handoffs passed; Senecio and Ancient Sound views were inspected. No observation
+save action was used.
+
+All four guide languages were visually reviewed. Dialog client/scroll widths
+matched at 839 px and body widths at 823 px, with opening scrollTop zero.
+Persian computed direction was RTL. Czech at 390 x 844 had matching dialog
+widths of 355 px and body widths of 339 px, no horizontal overflow and minimum
+button height 44 px. Scrolled controls were inspected, keyboard Enter activated
+the last Czech viewpoint and reopening began at zero. A synthetic mixed-
+language Senecio draft, including leading/trailing spaces, survived all six
+reader/viewpoint routes, four-language guide visits and the notebook visit.
+Hardware controller A was not separately exercised; shared focused-button
+support remains.
+
+The original reader's website link opened the retained offline site in a
+separate native tab. Its Notebook page kept all six original IDs. Keyboard
+Enter on Rearrange the notebook changed their order while every per-work image
+source and reader link remained identical. Original sequence restored the
+exact initial order. Main city/guide console: zero errors. The unchanged
+legacy-site tab logged two iframe warnings and a missing root favicon (404).
+Exterior, room/board, language/mobile/control, original-reader, painting-view
+and shuffled/restored notebook screenshots are in this chat's outputs.
+No signed-in service or private account was used.
+
+Latest branch/PR inspection found review head 88e097c871813d672132a509fdf05dbe5ab12d3a
+and main e2598f0194f25800887a7b6e4290762a1df213fb unchanged. Main is already
+incorporated through the earlier two-parent review ancestry; no new merge was
+needed. Preserve its Proof Atelier passage/shifted board/six workshops,
+independent key, explicit saves, finite-certificate limits and absence of
+timers; its advanced lessons remain English as disclosed. Classic translated
+readers/models, physical full-reader picks, Hall/focus controls, private drafts/
+carets, all twenty-seven earlier passes, the complete Makers' journey, map/
+facing, Noether/Mirzakhani/Cage, City Map, Babel, ocean voyage and branding
+remain. Approved appearances, fixed voices and accepted recordings remain.
+Other branches/PRs were preserved. PR #5 stays unmerged; no deployment.
+
+Twenty-eight first detail/reading passes are complete. Next useful house: the
+existing Paul Cézanne working studio, id cezanne, world (171, 161), distinct
+from the ten original galleries. Inspection of artist-quarter-data.js,
+artist-quarter-scene.js and artist-quarter.js shows a gable roof, real glazed
+openings, the credited Met Still Life with Apples and a Pot of Primroses
+(work ID 435882), a rotating original fruit/cloth/bowl study and a reflection
+desk. Existing studio copy/controls support EN/DE/FA and actually fall back to
+English for Czech. Before extending it, recheck the shared studio scene/UI,
+near/far viewpoints, three-phase rotation and private studio-cezanne reflection/
+explicit-save flow. Add modest details and useful EN/DE/FA/CS reading/controls;
+preserve its painting bytes/ratio/source/rights, existing activity and notes,
+openings, furniture and walking routes. Do not translate or overwrite private
+text, claim a historical room, or replace the live study. Keep all ten original
+gallery companions and earlier house/learning/model work intact.

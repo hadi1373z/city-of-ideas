@@ -229,3 +229,22 @@
 #lange-guide-context{position:fixed;inset-inline-start:24px;bottom:170px;z-index:18;max-width:min(310px,calc(100vw - 48px))}
 #lange-guide-context[hidden]{display:none}
 @media(max-width:430px){#lange-guide header{padding:14px}#lange-guide .lange-guide-body{padding:6px 14px 18px}#lange-guide-context{inset-inline-start:12px;bottom:245px;max-width:220px}}
+
+/* Klee's original city companion compares unchanged shapes and changing neighbours. */
+#klee-guide{color:#424f54;background:#f2ecdc;border:1px solid #aebac1;border-radius:16px;width:min(840px,calc(100vw - 28px));max-height:88dvh;padding:0;box-sizing:border-box}
+#klee-guide::backdrop{background:#253541b8}
+#klee-guide header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 22px;border-bottom:1px solid #c5c6b6}
+#klee-guide h2{font:normal clamp(22px,3vw,30px)/1.3 Georgia,serif;margin:0;overflow-wrap:anywhere}
+#klee-guide header button{min-width:44px;flex-shrink:0}
+#klee-guide .klee-guide-body{padding:8px 22px 24px;max-height:calc(88dvh - 130px);overflow:auto;overflow-wrap:anywhere}
+#klee-guide p{line-height:1.7;max-width:72ch}
+#klee-guide h3{font:normal 24px/1.3 Georgia,serif;margin:24px 0 12px}
+#klee-guide h4{font:normal 21px/1.35 Georgia,serif;margin:0}
+#klee-guide article{margin:14px 0;padding:16px;background:#fbf8ee;border:1px solid #cbd1d2;border-radius:9px}
+#klee-guide .klee-guide-actions{display:flex;gap:8px;flex-wrap:wrap}
+#klee-guide button,#klee-guide-context button{min-height:44px;padding:10px 14px;border:1px solid #6f8798;border-radius:7px;background:#485e6a;color:#fff9e8;line-height:1.4;white-space:normal}
+#klee-guide a{display:flex;align-items:center;min-height:44px;color:#485e6a}
+#klee-guide button:focus-visible,#klee-guide a:focus-visible,#klee-guide-context button:focus-visible{outline:3px solid #b28132;outline-offset:3px}
+#klee-guide-context{position:fixed;inset-inline-start:24px;bottom:170px;z-index:18;max-width:min(310px,calc(100vw - 48px))}
+#klee-guide-context[hidden]{display:none}
+@media(max-width:430px){#klee-guide header{padding:14px}#klee-guide .klee-guide-body{padding:6px 14px 18px}#klee-guide-context{inset-inline-start:12px;bottom:245px;max-width:220px}}
