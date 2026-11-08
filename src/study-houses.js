@@ -1,7 +1,7 @@
 import {WORKBENCH_TEXT,faceRoomWork} from './room-workbench.js';
 import {STUDY_HOUSES,STUDY_UI} from './study-houses-data.js';
 import {BOARDS,colour,neighbours,matching,bayes,startMachine,stepMachine,diagonal,studyMemory} from './study-house-models.js?v=workbench1';
-import {buildStudyHouses} from './study-houses-scene.js?v=workbench1';
+import {buildStudyHouses} from './study-houses-scene.js?v=atelier1';
 export function installStudyHouses(M,T){
  let storage;try{storage=localStorage;}catch{}const memory=studyMemory(storage),scene=buildStudyHouses(T);M.scene.add(scene.group);M.city.targets.push(...scene.targets);for(const h of scene.houses)M.city.buildingTargets.push(h.group);
  const lang=()=>window.CITY_I18N.lang,w=()=>STUDY_UI[lang()]||STUDY_UI.en,name=d=>d.names[lang()]||d.names.en;
@@ -38,8 +38,9 @@ export function installStudyHouses(M,T){
  function render(){
   const active=document.activeElement,focus=active?.dataset?.studyFocus,draftKey=active?.dataset?.studyDraft,range=draftKey?[active.selectionStart,active.selectionEnd,active.selectionDirection]:null,wb=WORKBENCH_TEXT[lang()]||WORKBENCH_TEXT.en;title.textContent=selected?name(selected):w().title;dialog.dir=lang()==='fa'?'rtl':'ltr';close.setAttribute('aria-label',w().close);body.replaceChildren();
   if(!selected){body.append(el('p',w().intro),el('p',w().notice));for(const d of STUDY_HOUSES){const card=el('article');card.append(el('h3',name(d)),el('p',d.topic),el('small',d.level),button(w().read,()=>{selected=d;feedback='';render();}),button(w().approach,()=>visit(d.id)));body.append(card);}body.append(el('h3','A question between houses'),el('p','Proof asks what must be true in every admissible arrangement. Bayesian inference asks what observations support under a model. Computability asks whether any effective universal decision procedure can exist. Carry the difference between evidence and proof into each house.'));}
-  else if(bench&&inside(selected.id)){body.append(button(wb.read,()=>open(selected.id)),button(wb.face,()=>faceRoomWork(M,T,house(selected.id).exhibit)),el('p',wb.hint));experiment();}
+  else if(bench&&inside(selected.id)){if(selected.id==='proof'&&M.proofAtelier)body.append(button('Begin the long workshop',()=>{dialog.close();M.proofAtelier.open();}));body.append(button(wb.read,()=>open(selected.id)),button(wb.face,()=>faceRoomWork(M,T,house(selected.id).exhibit)),el('p',wb.hint));experiment();}
   else{
+   if(selected.id==='proof'&&M.proofAtelier)body.append(button('Begin the long workshop',()=>{dialog.close();M.proofAtelier.open();}));
    if(inside(selected.id))body.append(button(wb.work,()=>open(selected.id,true)));
    body.append(button(w().directory,()=>{selected=null;feedback='';render();}),el('p',w().notice));const intro=el('section');intro.lang='en';intro.dir='ltr';intro.append(el('h3',selected.topic),el('p',selected.level),el('p',selected.prediction));body.append(intro);
    const e=memory.get(selected.id);if(e.prediction){body.append(el('h4',w().prediction),el('p',e.prediction));}else if(inside(selected.id)){privateInput(w().prediction,'prediction-'+selected.id);body.append(button(w().predict,()=>{const text=drafts.get('prediction-'+selected.id)||'';if(!memory.predict(selected.id,text)){feedbackArea='prediction';feedback=w().needed;render();return;}const store=M.visitorMemory?.store;store?.question('advanced-'+selected.id,'personal',selected.question);store?.answer('advanced-'+selected.id,text);feedback='';render();}));message('prediction');}

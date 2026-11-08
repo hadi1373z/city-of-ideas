@@ -1,0 +1,31 @@
+import assert from 'node:assert/strict';
+import * as T from '../src/city-source-assets/home-tools/vendor/three.module.js';
+import {TRAP,EXCHANGE,INITIAL_MATCHING,COSTS,PROOF_KEY,tilingStatus,neighborhood,validMatching,maximumMatching,coverStatus,alternatingReach,pathStatus,connected,assignmentCost,priceStatus,capstoneStatus,initialWorkshop,workshopMemory} from '../src/proof-atelier-model.js';
+import {WORKSHOPS} from '../src/proof-atelier-content.js';
+import {buildProofAtelier} from '../src/proof-atelier-scene.js';
+import {buildStudyHouses} from '../src/study-houses-scene.js';
+import {buildMakersCity} from '../src/city-source-assets/home-tools/makers-city-scene.js';
+// Independent enumeration, rather than testing an algorithm against itself.
+function brute(edges,n,row=0,used=0){if(row===n)return 0;let best=brute(edges,n,row+1,used);for(let j=0;j<n;j++)if(!(used&1<<j)&&edges.includes(row*n+j))best=Math.max(best,1+brute(edges,n,row+1,used|1<<j));return best;}
+for(let mask=0;mask<512;mask++){
+ const e=Array.from({length:9},(_,i)=>i).filter(i=>mask&1<<i),m=maximumMatching(e,3);assert(validMatching(e,m,3));assert.equal(m.length,brute(e,3));
+ let minimum=6;for(let c=0;c<64;c++){const cover=Array.from({length:6},(_,i)=>i).filter(i=>c&1<<i);if(e.every(k=>cover.includes(Math.floor(k/3))||cover.includes(3+k%3)))minimum=Math.min(minimum,cover.length);}assert.equal(m.length,minimum);assert(coverStatus(e,alternatingReach(e,m,3).cover,m,3).optimal);
+}
+assert(tilingStatus([2,3],[[2,3]]).complete);assert(!tilingStatus([2,3],[[0,1]]).valid);assert(!tilingStatus([2,3],[[2,3],[2,3]]).valid);
+assert.deepEqual(neighborhood(TRAP,[0,1]),[0]);assert.equal(maximumMatching(TRAP).length,3);assert.equal(maximumMatching([...TRAP,5]).length,4);assert.equal(maximumMatching([...TRAP,11]).length,3);
+const path=[1,4,0,5,2,6,3,7],aug=pathStatus(EXCHANGE,INITIAL_MATCHING,path);assert(aug.complete);assert.equal(aug.flipped.length,4);assert(validMatching(EXCHANGE,aug.flipped));for(let k=0;k<path.length;k++)assert(pathStatus(EXCHANGE,INITIAL_MATCHING,path.slice(0,k)).valid);for(const p of[[0],[1,5],[1,4,2],[1,4,0,4]])assert(!pathStatus(EXCHANGE,INITIAL_MATCHING,p).valid);assert(!pathStatus(EXCHANGE,INITIAL_MATCHING,[1,4]).complete);
+assert(coverStatus(TRAP,[4,2,3],maximumMatching(TRAP)).optimal);assert(!coverStatus(TRAP,[4,2],maximumMatching(TRAP)).valid);
+const permutations=[[0,1,2],[0,2,1],[1,0,2],[1,2,0],[2,0,1],[2,1,0]],best=Math.min(...permutations.map(p=>p.reduce((a,j,i)=>a+COSTS[i][j],0)));assert.equal(best,5);assert.equal(assignmentCost([0,0,2]),null);assert(priceStatus([1,0,2],[2,2,1],[-1,0,1]).optimal);assert(!priceStatus([1,0,2],[2,2,2],[-1,0,0]).feasible);
+for(let mask=0;mask<4096;mask++){const prices=Array.from({length:6},(_,i)=>(mask>>i*2&3)-1),r=priceStatus([1,0,2],prices.slice(0,3),prices.slice(3));if(r.feasible)assert(r.bound<=best);if(r.optimal)assert.equal(r.cost,best);}
+const s=initialWorkshop();Object.assign(s,{capEdges:[0,4,8,9,10,14,15],capS:[0,1],capM:[0,9,15],capCover:[4,2,3]});assert(connected(s.capEdges));assert(capstoneStatus(s).valid);assert(!capstoneStatus({...s,capEdges:s.capEdges.filter(e=>e!==8)}).valid);assert(!capstoneStatus({...s,capCover:[0,1,2]}).valid);
+const values=new Map([['private-note','Unchanged']]),storage={getItem:k=>values.get(k),setItem:(k,v)=>values.set(k,v)},memory=workshopMemory(storage);memory.state.notes[0]='My invariant argument';memory.state.capEdges=s.capEdges;memory.mark(0,'tile');memory.mark(0,'tile');assert.deepEqual(workshopMemory(storage).state.checks[0],['tile']);assert.equal(workshopMemory(storage).state.notes[0],'My invariant argument');assert.equal(values.get('private-note'),'Unchanged');values.set(PROOF_KEY,'{bad');assert.deepEqual(workshopMemory(storage).state,initialWorkshop());const unavailable=workshopMemory({getItem(){throw Error();},setItem(){throw Error();}});unavailable.mark(0,'tile');assert(!unavailable.saved);
+const canvas=()=>({getContext:()=>new Proxy({},{get:()=>()=>{}})}),built=buildProofAtelier(T,{canvas}),old=buildStudyHouses(T,{canvas});assert.equal(built.stations.length,6);built.update(s);let draws=0;built.group.traverse(o=>{if(o.isMesh){draws++;assert(o.geometry.attributes.position.array.every(Number.isFinite));}});assert(draws<350,'Bound the local room draw cost');
+// The first long layout overlapped the Makers' Library. Guard the real source
+// district bounds and all of its approach anchors, not only our own colliders.
+const makers=buildMakersCity(T),bounds=new T.Box3().setFromObject(built.group);assert(bounds.max.z<makers.bounds.minZ-50-.5);for(const h of makers.houses)for(const p of[h.entry,h.spawnInside,...h.approaches])assert(built.canStand(225+p.x,-50+p.z));makers.dispose();
+for(let z=-98;z<-68.5;z+=.05){assert(built.canStand(215,z),'Atelier spine');assert(old.canStand(215,z),'Original foyer opening');}
+for(const station of built.stations){assert(built.inside(station.view.x,station.view.z));assert(built.canStand(station.view.x,station.view.z));assert(old.canStand(station.view.x,station.view.z));for(let x=203.5;x<215;x+=.05)if(x>206.3&&x<223.7&&Math.abs(x-215)<1.5)assert(built.canStand(x,station.view.z));}
+for(let z=-111;z<-49;z+=.1)assert(built.canStand(203.5,z),'Existing approach lane stays clear');
+built.group.updateMatrixWorld(true);for(const station of built.stations){const origin=new T.Vector3(station.view.x,1.93,station.view.z),aim=station.group.getWorldPosition(new T.Vector3());assert(new T.Raycaster(origin,aim.sub(origin).normalize()).intersectObject(station.group,true).some(hit=>hit.object.userData.proofStation===station.data.id));}
+assert.equal(WORKSHOPS.reduce((a,h)=>a+h.minutes,0),120);assert.equal(WORKSHOPS.flatMap(h=>h.extensions).length,12);assert(WORKSHOPS.every(h=>h.reading.length>=4&&h.reading.every(a=>a[1].length>300)&&h.hints.length===3&&h.sources.length));built.dispose();old.dispose();assert.equal(built.group.children.length,0);
+console.log('PASS proof atelier: exhaustive small-graph matching/cover checks, exact exchanges and dual bounds, constructive capstone, isolated persistence, six physical workbenches, connected doorway/spine, bounded draws and twelve deeper problems');
