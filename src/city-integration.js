@@ -2,7 +2,7 @@ import {installHouseInvestigations} from './house-investigations.js?v=1';
 import {installComputationLab} from './computation-lab.js?v=1';
 import {installProofAtelier} from './proof-atelier.js?v=prices2';
 import {installSeminarHouses} from './seminar-houses.js?v=workbench1';
-import {installBabelLibrary} from './babel-library.js?v=snake2';
+import {installBabelLibrary} from './babel-library.js?v=snake3';
 import {installOceanVoyage} from './ocean-voyage.js';
 import {installHouseFoundations} from './foundation-houses.js?v=workshops2';
 import {installVisitMemory} from './visit-memory.js?v=discoveries1';
