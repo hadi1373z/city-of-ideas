@@ -2141,3 +2141,134 @@ real language gaps before modest EN/DE/FA/CS reading and details; do not claim
 full catalog translation. Preserve Hokusai's new ledge/guide, exact six handoffs,
 design/impression boundary and original Print room, all five earlier gallery
 companions, earlier houses/learning flows and imported room workbenches.
+
+## 2026-11-08 — Rodin: form, surface and object dates
+
+Completed the first detail/reading pass for the existing Auguste Rodin gallery,
+id rodin, at world (203, 99). The source scene/catalog, hip roof, facade study
+and plinth, quarter transforms, installed profile, reader and original Materials
+page were inspected first. This is an additive companion to that experience.
+
+Four pale hip ribs join the actual three-dimensional roof vertices. Ridge and
+eave caps, bronze-coloured window sill/header, three supported seat boards with
+small joints, a worktable apron and collars within the facade plinth's original
+clearance add detail. Seat boards and plinth collars inherit the original
+profile payloads. The original facade sculpture, furniture, photographs and
+resident remain intact.
+
+A shallow, wall-supported cabinet beside the worktable carries a dark ridged
+tile and a pale smooth tile above two ruled index cards. The tiles/cards meet
+their backing; spacers meet the unchanged wall. Its frame and retaining lips
+are solid, and it stays within the existing side-wall walking clearance,
+clear of the six photographs, table, palette, brushes and door. These are
+original digital surface studies, not Rodin works, historical material samples,
+tests of physical materials or a reconstructed workshop.
+
+Pointer selection or aiming at the cabinet and pressing E opens the accessible
+guide. The inside context button and Rodin's existing quarter-directory card
+also open it. Outside it offers the original doorway. Inside, six viewpoints
+reuse exact source approach/yaw/lookAt data; six reader actions pass unchanged
+artist/work IDs: thinker, eternal-spring, walking-man, age-of-bronze, madame-x,
+hand-of-god. Accessible action names include each work title. The images remain
+photographs of particular objects; no invented reverse views or replacement
+versions were added.
+
+Original prompts distinguish contours, contacts, gaps, surface and relative
+scale from object-specific material and production records. The reading asks
+visitors to retain separate modeling and cast/carving dates, leave absent data
+unspecified, and check original source/image-license links. A photograph's
+colour or highlight alone cannot establish material, a patina recipe or date.
+The original Materials page still explains Model, mold, cast and links its
+Walking Man record; the companion does not replace that page.
+
+Historical background links two primary Met records:
+https://www.metmuseum.org/art/collection/search/191811
+https://www.metmuseum.org/art/collection/search/193438
+Both were opened and read. The Thinker object 11.173.9 distinguishes modeling
+around 1880 from its cast around 1910; Eternal Spring 17.120.184 distinguishes
+modeling around 1881 from its 1907 marble carving. These identify particular
+objects, not every version. The original Walking Man source was also read and
+its bronze/green-patina record retained. No supplied image bytes, ratios,
+attribution/rights/source/citation metadata, sculpture version or original
+catalog prose was edited. No quotation, historical note, image, recording or
+artist voice was invented.
+
+The guide, prompts, source labels and associated controls support EN/DE/FA/CS,
+including Persian RTL. Original catalog, website and private tools retain their
+existing language handling; some original book/catalog and shared city/notebook
+text remains English. Atelier names/navigation support four languages while
+its advanced lessons/instructions/problems remain English as disclosed. This
+is not full city-wide Czech localization. Guide/locale rendering has no
+private/lesson storage access or new saved state. Existing language preference
+persistence and explicit observation-save behavior remain.
+
+Verification: all 78 release programs passed, followed by build and whitespace
+checks. Source hash:
+d73154c68c34bfae2ba4a0b8a887788b272c57a57562b803b09eea30226f65a3
+(739 assets / 332,322,512 bytes). The new check compares all borrowed node
+transforms, material/geometry identities and values, vertices, payloads,
+visibility and original furniture/brush instance matrices, plus exact catalog,
+colliders, entries and approaches. It checks hip-rib endpoints in all three
+dimensions against source roof vertices, supported seat boards, wall contact,
+mounted cards/tiles, ridges on the dark study only, inherited profile picks,
+window/door/photo/furniture/walking clearances, a real Three.js pick ray, six
+exact IDs and all four-language view/reader routes. It also checks accessible
+names, remote-pick rejection, RTL/top-of-guide behavior, no private storage
+access and owned disposal exactly once. All earlier house, model, private-flow,
+source, cast/voice and island checks pass.
+
+Native Playwright CLI review at 1280 x 720 confirmed welcome/directory access,
+Hokusai's retained guide, Rodin's original doorway and physical walking entrance.
+The roof/window/plinth/seat/table details and mounted cabinet were visually
+reviewed with original photographs and resident. Pointer selection and native
+E opened the cabinet guide. All six native viewpoints and six exact original
+reader handoffs worked; Thinker and Walking Man views were reviewed. The
+original reader retained object-specific explanation, source/image-license
+links and the observation field.
+
+All four guide languages were visually reviewed. DE/FA/CS dialog client/scroll
+widths matched at 839 px and body widths at 823 px, opening at scrollTop zero.
+Persian computed direction was RTL. Czech at 390 x 844 had dialog widths of
+355 px and body widths of 339 px, with no horizontal overflow and minimum
+button height 44 px. Introductory reading and scrolled controls were inspected.
+Keyboard Enter activated the last Czech viewpoint; reopening after scrolling
+began at zero. A synthetic mixed-language Thinker draft, including leading and
+trailing spaces, survived all six reader/viewpoint routes, four-language guide
+visits and the original website visit. No save action or private translation
+occurred. Hardware controller A was not separately exercised; shared focused
+button support remains.
+
+The original reader's website link opened the unchanged local site in a
+separate native tab. Materials retained its three model/translation/cast
+sections and exact Walking Man handoff. Main city/guide console: zero errors.
+The separate legacy-site tab reported the unchanged missing root favicon (404).
+No signed-in service or private account was used. Exterior, room/cabinet,
+language/mobile/control, original-reader, photograph-view and Materials
+screenshots are in the originating chat's outputs.
+
+Latest branch/PR inspection found review head
+e93dc9f548d2fec06a50ee8cb1972ed932d7cb72 and main
+e2598f0194f25800887a7b6e4290762a1df213fb unchanged. Main is already incorporated
+with the earlier two-parent ancestry; this pass requires no new merge. Its
+Proof Atelier, rear passage, shifted board, six workbenches, independent key,
+explicit argument saves, finite-certificate limits and absence of timers remain.
+The classic translated readers/models, physical full-reader picks, Hall/focus
+controls and private draft/caret behavior remain. All twenty-four earlier
+passes, Makers' complete four-language journey, map/facing, Noether/Mirzakhani/
+Cage, City Map, Babel, ocean voyage and branding remain. Approved appearances,
+fixed voices and accepted recordings are preserved. Other branches/PRs remain.
+PR #5 is unmerged; no deployment.
+
+Twenty-five first detail/reading passes are complete. Next useful house: the
+existing Piet Mondrian gallery, id mondrian, world (161, 132). Inspect its actual
+scene/catalog, gable roof, facade grid, opposite-row pi transform, quarter layout
+and installed profile/reader before an additive companion. Preserve gray-tree,
+red-tree, apple-tree, composition-red, composition-1921 and composition-1929.
+The original movable-dividing-line proportional exercise is designer-made,
+not a reproduction of a Mondrian painting. Preserve its actual controls and
+reset, original images/ratios/attribution/rights/source/citation metadata,
+furniture, resident, private observations, openings and walking lanes. Inspect
+real language gaps before modest EN/DE/FA/CS details/reading; do not claim full
+legacy catalog translation. Keep Rodin's digital cabinet/guide, exact six
+handoffs and model/cast/carving distinction, all earlier gallery companions,
+house/learning/private flows and imported room workbenches.
