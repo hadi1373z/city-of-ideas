@@ -2673,3 +2673,120 @@ preserve its painting bytes/ratio/source/rights, existing activity and notes,
 openings, furniture and walking routes. Do not translate or overwrite private
 text, claim a historical room, or replace the live study. Keep all ten original
 gallery companions and earlier house/learning/model work intact.
+
+## 2026-11-08 — Paul Cézanne: tables and viewpoints
+
+Continued feat/hourly-house-details from
+540dbb1b8f52f6923d5010dfda339a3f79a433bc after reading the latest ledger,
+repository instructions, branches, PRs and actual studio scene/data/UI. This
+is the existing working studio at (171, 161), not an original six-work gallery.
+Its gable, glazing, credited Met painting, live fruit/cloth/bowl study, near/far
+viewpoints and private studio-cezanne flow were inspected before extension.
+
+Added owned rakes meeting the actual gable vertices, ridge/eave caps, eight
+small front-window rail caps, still-life table aprons/joints and drawing-desk
+aprons/drawer face. No original geometry, material, vertex, transform, payload,
+visibility, collider, entry, viewpoint or study object was changed. Joinery
+clears the original paper, reflection token and live study. The painting's
+exact bytes, detail crop, aspect ratio, source/rights and credits remain.
+
+A shallow board is supported against the original solid left wall, within its
+existing walking clearance. Two supported paper cards carry a rectangle and a
+slanting quadrilateral. These are original city tabletop outlines, not measured
+projections of the painting, historical sketches or a reconstruction of the
+artist's room or method. They have no separate saved state. Pointer selection
+and E on the board open the existing studio panel. Its original inside context
+button and a new directory reading button reach the same experience; there
+is no second reader or replacement experiment.
+
+The new EN/DE/FA/CS reading follows an edge, compares overlap through the
+existing near/far and turn controls, and returns to the painted arrangement.
+The original study still cycles through phases 0, 1, 2, 0 at multiples of pi/5;
+fruit, cloth and bowl turn together while their table stays still. Looking at
+reading, whole/detail or changing language does not turn or restart it.
+
+The primary Met record was accessed successfully:
+https://www.metmuseum.org/art/collection/search/435882. It dates Still Life
+with Apples and a Pot of Primroses to about 1890, records oil on canvas and
+notes former ownership by Claude Monet. These narrowly attributed facts are
+separate from the city's original looking prompts. No quotation, recording,
+artist voice or historical painting-process claim was invented.
+
+Czech was added to Cézanne's existing title/theme/prompt/activity/public
+question, the complete shared studio-control dictionary and the three court
+navigation names. Existing EN/DE/FA strings and all coordinates remain. The
+studio panel/context now expose their actual language; Persian retains RTL.
+Morisot/Seurat per-house descriptions still fall back to English in Czech;
+original catalogs/books, shared notebook/city text and atelier advanced lessons
+also retain their disclosed English gaps. This is not full city localization.
+Reading/locale rendering does not write private or lesson state. Private
+questions/answers are never translated or replaced; existing explicit question,
+notebook and save actions retain the same keys and behavior.
+
+Verification: all 82 release programs, build and whitespace checks passed.
+Source hash 8b64ed384cdeebc8ea0f5cd2e5be4923c3bf603afb24cc57581e2badc6247675
+(750 assets / 332,426,349 bytes). The new check compares original transforms,
+geometry/material identities, vertices, colours, payloads/visibility, colliders,
+entries/viewpoints and source data before/after detailing. It tests roof
+endpoints, wall/card contact, outlines, window rail caps and table clearances,
+physical ray selection, original image/crop hashes and owned cleanup once.
+It exercises the real shared controller in all four languages: inside/outside
+gates, whole/detail, exact near/far positions/yaw/pitch, all three rotation phases,
+physical board routing, Czech dictionary parity, RTL and inherited private keys.
+Reading/locale actions leave saved state and write count unchanged; existing
+private question/answer content survives explicit revisits. Morisot/Seurat
+three-phase activities remain. Earlier house/model/source/cast/voice/island and
+imported atelier checks pass.
+
+Native Playwright CLI review at 1280 x 720 confirmed directory access and
+Klee's retained guide, then Cézanne's original doorway and actual walking
+entry. Roof/window details, table joinery, reflection-desk drawer and board
+were visually checked. Pointer and native E opened the original studio panel.
+The existing near/far views and three successive turns worked; the third
+returned to the initial arrangement. Whole/detail controls retained the exact
+cezanne.jpg / cezanne-detail.jpg handoff.
+
+All four reading languages were visually reviewed. Dialog client/scroll widths
+matched at 959 px and body widths at 943 px, with opening scrollTop zero and
+all six original inside controls. Persian computed direction was RTL. Czech
+at 390 x 844 had matching dialog widths 355 px, body widths 339 px, no
+horizontal overflow and minimum button height 44 px. Introductory reading and
+scrolled controls were reviewed. Keyboard Enter activated the original far
+view; reopening began at zero.
+
+The existing explicit Keep an unfinished question action was exercised in the
+isolated browser fixture. A synthetic mixed-language answer and revision-reason
+draft, including leading/trailing spaces, survived DE/FA/CS reading visits and
+return to the original notebook. The answer-save action was not used and
+private text was not translated. No signed-in service/private account was used.
+Hardware controller A was not separately exercised; shared focus/confirm
+support remains. Main city/reading console: zero errors, one existing warning.
+Exterior, studio/board/joinery, near/far/rotation, four-language/mobile/control
+and synthetic draft screenshots are in this chat's outputs.
+
+Latest branch/PR inspection found review head
+540dbb1b8f52f6923d5010dfda339a3f79a433bc and main
+e2598f0194f25800887a7b6e4290762a1df213fb unchanged. Main is already included
+through the preceding two-parent ancestry; no new merge was needed. The Proof
+Atelier passage, shifted board, six workshops, independent key, explicit saves,
+finite-certificate limits and absence of timers remain. Its advanced lessons
+remain English as disclosed. Classic translated readers/models, Hall controls,
+physical full-reader picks and private drafts/carets remain. All twenty-eight
+earlier passes, Makers' complete journey, ten original gallery companions,
+map/facing, Noether/Mirzakhani/Cage, City Map, Babel, ocean voyage and branding
+remain, along with approved appearances, fixed voices and accepted recordings.
+Other branches/PRs remain. PR #5 stays unmerged; no deployment.
+
+Twenty-nine first detail/reading passes are complete. Next useful house: the
+existing Berthe Morisot working studio, id morisot, world (196, 159). Inspect
+artist-quarter-data.js, artist-quarter-scene.js and the shared studio UI before
+extending it. Its split roof/glazing, settee, movable linen curtain, reflection
+desk and credited Met The Pink Dress (Albertie-Marguerite Carré), work ID
+438009, already exist. Preserve exact painting/crop bytes, ratio/source/rights,
+curtain positions -2.4 / 0 / 2.4, near/far/detail actions, studio-morisot private
+question/drafts/save flow, openings, furniture and walking routes. Shared
+controls/court navigation now have Czech; Morisot's own title/theme/prompt/
+activity/question and new reading still need a real Czech pass. Do not repeat
+the shared dictionary translation or replace its curtain experiment. Keep
+Cézanne's new details/reading and original live study, all ten gallery
+companions and earlier models/learning/private work intact.

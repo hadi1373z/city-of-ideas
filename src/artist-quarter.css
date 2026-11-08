@@ -248,3 +248,11 @@
 #klee-guide-context{position:fixed;inset-inline-start:24px;bottom:170px;z-index:18;max-width:min(310px,calc(100vw - 48px))}
 #klee-guide-context[hidden]{display:none}
 @media(max-width:430px){#klee-guide header{padding:14px}#klee-guide .klee-guide-body{padding:6px 14px 18px}#klee-guide-context{inset-inline-start:12px;bottom:245px;max-width:220px}}
+
+/* Cézanne reading stays in the original studio panel. */
+#artist-quarter .cezanne-reading{margin:24px 0;padding:18px;background:#fbf8ee;border:1px solid #b7b8a3;border-radius:9px}
+#artist-quarter .cezanne-reading p,#artist-quarter .cezanne-reading li{line-height:1.75;max-width:72ch}
+#artist-quarter .cezanne-reading li{margin:12px 0}
+#artist-quarter .cezanne-reading a{display:flex;align-items:center;min-height:44px;overflow-wrap:anywhere}
+#artist-quarter .cezanne-reading a:focus-visible{outline:3px solid #b28132;outline-offset:3px}
+@media(max-width:430px){#artist-quarter .cezanne-reading{padding:14px}}
