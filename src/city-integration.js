@@ -1,8 +1,12 @@
+import {installConnectedJourney} from './connected-journey.js?v=1';
+import {installPondWorldWindow} from './pond-world-window.js?v=1';
+import {installWorldCylinder} from './world-cylinder.js?v=polish1';
+import {installEscherDepth} from './escher-depth.js?v=1';
 import {installHouseInvestigations} from './house-investigations.js?v=1';
 import {installComputationLab} from './computation-lab.js?v=1';
 import {installProofAtelier} from './proof-atelier.js?v=prices2';
 import {installSeminarHouses} from './seminar-houses.js?v=cage-details1';
-import {installBabelLibrary} from './babel-library.js?v=snake3';
+import {installBabelLibrary} from './babel-library.js?v=two-faces2';
 import {installOceanVoyage} from './ocean-voyage.js';
 import {installHouseFoundations} from './foundation-houses.js?v=investigations-details1';
 import {installVisitMemory} from './visit-memory.js?v=discoveries1';
@@ -13,12 +17,12 @@ import {installCityDiscoveries} from './city-discoveries.js?v=study1';
 import {installArtistQuarter} from './artist-quarter.js?v=dali-details1';
 import {installLearningLab} from './learning-lab.js?v=dialogue-details1';
 import {installStudyHouses} from './study-houses.js?v=computation-details1';
-import {installOrigamiHouse} from './origami-house.js?v=reading1';
+import {installOrigamiHouse} from './origami-house.js?v=polish-reading1';
 import {artistLineOfSight} from './artist-line-of-sight.js';
 import {installPhilosopherQuarter} from './philosopher-ui.js?v=sina-details1';
 import {installSocratesTour} from './socrates-tour.js';
 import {installOrigamiPark} from './origami-park.js';
-import {createExtraDistricts} from './extra-districts.js?v=island1';
+import {createExtraDistricts} from './extra-districts.js?v=polish1';
 import {buildHome} from './home-editions-scene.js';
 import {buildArtistResidents} from './city-source-assets/home-tools/artist-residents.js';
 import {ARTISTS} from './city-source-assets/home-tools/artist-catalog.js';
@@ -28,6 +32,7 @@ import {createSharedActivities} from './shared-activities.js';
 import {installIdeasGraveyard} from './ideas-graveyard.js?v=foundations1';
 import {installEscherHouse} from './escher-house.js?v=escher-details1';
 import {installStudyBook} from './study-book.js';
+import {installSocratesStudy} from './socrates-study.js';
 import {installCinematicIntro} from './cinematic-intro.js';
 import {installDiscoveryStory} from './discovery-story.js';
 const waitMain=()=>new Promise(resolve=>{if(window.CITY_MAIN?.city)resolve(window.CITY_MAIN);else addEventListener('gallery-ready',()=>resolve(window.CITY_MAIN),{once:true});});
@@ -36,7 +41,7 @@ const reply=(d,value,error)=>frame().contentWindow?.postMessage({type:'city-home
 let E,mathJourney=null;const homeOwners=new Map();
 function current(x=M.player.x,z=M.player.z){let r=E?.region(x,z,{y:M.player.y-M.eye});if(r?.id==='mathematics'&&CITY_I18N.lang==='fa'){const names=['مبانی','جبر','هندسه','حسابان و تحلیل','ریاضیات گسسته','احتمال و آمار','توپولوژی','رصدخانهٔ منطق و محاسبه'];r={...r,title:r.inside?'اطلس ریاضیات · '+names[r.floor]:'مؤسسهٔ ریاضیات · میدان'};}if(r?.id==='makers'&&CITY_I18N.lang==='fa'){const halls={'makers-library':'کتابخانه','makers-workshop':'کارگاه','makers-dialogue':'خانهٔ گفت‌وگو'};r={...r,title:'شهر سازندگان · '+(halls[r.hallId]||'حیاط مشترک')};}if(r?.artistId==='dali'&&!r.artistEditionId&&CITY_I18N.lang==='fa')r={...r,title:'سالوادور دالی · اقامتگاه رؤیا'};if(!r?.homeId)return r;const owner=homeOwners.get(r.homeId);if(!owner)return r;const origin=E.toWorld('home',{x:0,y:0,z:0},{homeId:r.homeId}),roomId=owner.roomAt((x-origin.x)/1.35,(z-origin.z)/1.35,owner.floor);return{...r,floor:owner.floor,height:origin.y+owner.height*1.35,roomId,inside:!!roomId};}
 try{
- E=await createExtraDistricts(T,{scene:M.scene,city:M.city,buildHome:(T,house,options)=>{const priorFloor=homeOwners.get(options.homeId)?.floor||0,owner=buildHome(T,house,{...options,owner:originalHome,resolveAsset:id=>M.homeBridge.resolveAsset(id)});owner.setFloor(priorFloor);homeOwners.set(options.homeId,owner);owner.ready.then(()=>owner.group.traverse(o=>{if(o.userData.designId)o.userData={...o.userData,extraHomeId:options.homeId};}));return owner;}});window.CITY_EXTRAS=E;
+ E=await createExtraDistricts(T,{scene:M.scene,city:M.city,onProgress:stage=>window.CITY_STARTUP?.stage(stage),buildHome:(T,house,options)=>{const priorFloor=homeOwners.get(options.homeId)?.floor||0,owner=buildHome(T,house,{...options,owner:originalHome,resolveAsset:id=>M.homeBridge.resolveAsset(id)});owner.setFloor(priorFloor);homeOwners.set(options.homeId,owner);owner.ready.then(()=>owner.group.traverse(o=>{if(o.userData.designId)o.userData={...o.userData,extraHomeId:options.homeId};}));return owner;}});window.CITY_EXTRAS=E;
  CITY_HOME_SCENE.buildHouse=(house,walk,exterior,options)=>selectedEdition==='residence'?originalHome.buildHouse(house,walk,exterior,options):buildHome(T,house,{edition:selectedEdition,walk,exterior,owner:originalHome,...options});
  const oldRegion=M.city.region,oldCan=M.city.canStand,oldTarget=M.city.targetInfo,oldUpdate=M.city.update;
  const navigation=await createDistrictNavigation(E,{baseCanStand:oldCan});
@@ -102,6 +107,7 @@ try{
  installOrigamiPark(M,T);
  M.storyJourney=installDiscoveryStory(M);
  M.studyBook=installStudyBook(M,T);
+ M.socratesStudy=installSocratesStudy(M,T);
  installQuestionWalk(M,T);
  installRamseyHouse(M,T);
  installRamseyRoom(M);
@@ -117,6 +123,15 @@ try{
  installOceanVoyage(M,T);
  installBabelLibrary(M,T);
  installSeminarHouses(M,T);
+ installEscherDepth(M,T);
+ installWorldCylinder(M,T);
+ installPondWorldWindow(M,T);
+ installConnectedJourney(M,T);
+ const arrivalQuery=new URLSearchParams(location.search||''),faceArrival=arrivalQuery.get('arrival');if(faceArrival==='pond-crossing'){M.arrive(M.pondWorldWindow.pond.entry);M.player.pitch=-.33;}else if(faceArrival==='escher-depth')M.escherDepth.enter('gallery');else if(faceArrival==='math-entrance')M.startExtra('mathematics');
  M.status('ready');
  installCinematicIntro(M,T,socrates);
-}catch(error){document.body.classList.remove('cinematic-pending');console.error('Original district integration failed',error);M.status(error.message);}
+ // The bare city address opens at the approved volcanic reservoir in Babel.
+ // Explicit destination links and the optional book introduction retain their routes.
+ if(!arrivalQuery.has('arrival')){window.CITY_STARTUP?.stage('entrance');M.babelLibrary.visitThermal();}
+ window.CITY_STARTUP?.ready();
+}catch(error){window.CITY_STARTUP?.fail();document.body.classList.remove('cinematic-pending');console.error('Original district integration failed',error);M.status(error.message);}

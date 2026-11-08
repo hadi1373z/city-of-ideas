@@ -3986,3 +3986,129 @@ Inspect actual public-language gaps before a modest original sourced
 EN/DE/FA/CS companion; do not translate private text or replace the book/Socratic
 dialogue. Keep the study's public reading distinct from historical Socrates,
 the city-written opening, stored notes and the separate theatre/rehearsal.
+
+## 2026-11-08 — Socrates residence: claims and reasons
+
+The preceding suggestion is complete. The existing public Study, room `math`,
+remains under house transform (-96, 100), scale 1.7. There is no new lot.
+Read `docs/SOCRATES-STUDY.md` for source-room eligibility and lifecycle details.
+
+Added two desk aprons, four leg joints, four supported armchair joints and a
+backed two-card rack on two posts at the desk's rear edge. The rack clears the
+existing lamp, pencil cup, Zarathustra book/stand and front-left notebook.
+The rules and open bracket are fixed original city prompts, not ancient
+objects, a historical notation or a reconstructed room. No separate state.
+
+The additions own their geometries/materials in a separate scene group; they
+follow the actual desk/chair world matrices. Source owner disposal cannot
+release them accidentally. Owner replacement removes the old targets and
+disposes the additions once. Public room/door/residence/stair metadata, actual
+furniture transforms, top and book identity are verified. Missing/custom rooms
+and custom study idea/design displays are skipped; other floors hide additions.
+Private ideas/learning/resident values are never inspected. Source notes,
+imports and explicit save behavior are retained.
+
+The original EN/DE/FA/CS companion separates Plato's literary representations
+from a historical verbatim record. Its short paraphrases link successfully
+accessed MIT Classics Archive texts: Plato's Apology 21b–23b and Euthyphro
+6d–6e, in Jowett's translation. A separate city exercise gives a claim about
+quiet reading rooms, a reason, a dark-room countercase and a narrower revision.
+The revision is not claimed as proved. No quotation, score, stored answer or
+new private/progress key is invented.
+
+Rack pointer/aimed E, inside context, the original chapter reader footer and
+welcome Places controls reach the companion. The old book E capture yields
+only for an actual rack ray. The explicit retained book handoff opens its
+original reader; outside the verified Study it becomes the existing residence
+approach action. Closing a companion opened from the chapter reader restores
+that reader and its optional conversation control. Opening/localizing reading
+does not travel, start sound, answer a question or write progress.
+Local language does not change the saved city preference. Persian remains RTL.
+The original source tools, 81 Zarathustra chapters/editions, resident, fixed
+voice, accepted opening recordings, notebook and optional dialogue remain.
+The book/opening keep their own languages and disclosed Czech English fallback;
+the city-written opening and separate theatre/rehearsal remain distinct.
+
+### Concurrent main integration
+
+Main 352a230e386b8ed311ad2a0805d875bf7ea2ecdd, following b733a86, was inspected
+and incorporated with both parents retained alongside review 8282fd7. Its
+updated AGENTS.md supersedes the old physical separate-world presentation:
+the cylindrical world now has connected upper/lower faces. Logical lower
+coordinates, source boundaries and private positions stay unchanged. The
+proper half-turn maps the lower logical origin (-2160, -65) to physical (0, -96, 0).
+Keep this transform at the parent layer, not in individual houses or saved data.
+
+Preserved the 480-tread through-gallery and its real gravity turn/tunnel;
+Escher's depth museum and original upper perspective gate; live pond crossing
+with null optional video; lower annular Mathematics Faculty and source-compatible
+covered connector; original eight-floor wing now at logical (-2240, -65);
+Ramsey's derived placement at (-2281, -63); and Babel's contained r21 thermal
+vault/real ceiling aperture. The bare city URL now starts at Babel's reservoir,
+after all installers; explicit arrivals and the book introduction remain.
+The union retains all 98 earlier release programs plus main's eight new ones.
+
+Native QA exposed an explicit map-travel handoff from the new underground
+start: ordinary destinations inherited the old height and failed collision
+checks. The existing quick-start now probes the destination surface context,
+restores the old pose, then uses the normal arrival chain, preserving active
+room stop/lighting hooks. Blocked destinations retain their pose. This is
+explicit travel through the existing controls, not a new automatic route.
+
+During final publication review main advanced to
+dbad28c7454bdad884ce3dc359431127c252e83d. Its complete incremental patch was
+incorporated and the final merge parent advanced to that descendant of 352a230.
+Read its docs/STARTUP.md and docs/CONNECTED-QUESTIONS.md. Preserve real startup
+stages/preloads, nonblocking Dalí texture loading and private-home restoration;
+deep-Babel culling with the original stairwell overlook; the connected lower
+meadow/inlet/shore circuit and two actual level timber crossings; and the
+optional folded Connected questions guide. Its prediction/route dots are
+visit-only, never automatic travel or a private save. The original Mathematics
+exit uses the real central doorway on ground level and proximity-gated original
+lift actions upstairs, keeping solid windows distinct from doors. New connected
+guide/startup/landscape interface text remains English; no full translation is
+claimed. The final parents retain both prior review and latest main ancestry.
+
+### Verification
+
+All 110 release programs pass: the union of 106 above, the new Socrates
+study program and main dbad28c's three new checks. The independent original public interior baseline is
+692c09c8fda3d1cedddba0e925762ea79f7c5c849337e216bdd9155301182123.
+Its 289 original nodes keep resources, metadata, transforms, parents and
+visibility; original interactions/colliders remain unchanged. Tests cover
+supported furniture/rack fit, a real rack ray, once-only owned cleanup,
+replacement/missing/custom guards, private getter/storage/memory prohibition,
+four actual language renderings/RTL, retained chapter/conversation controls,
+and the real quick-start from underground/lower-face and blocked starts.
+
+Native Chrome walked through the original entrance hall and living room into
+the Study and visually checked the rack/furniture/book fit. Physical pointer/E,
+inside reading and the original book handoff/return worked. EN/DE/FA/CS desktop
+readings and Czech/Persian mobile at 390 × 844 were visually checked without
+horizontal overflow (desktop 723 px and mobile 354 px client/scroll widths).
+Local-language reading and book handoffs retained browser storage unchanged.
+No private text was translated or saved. Console: no application errors in
+the checked experience, with the existing Three.js warning. Hardware controller
+A was not separately exercised. Screenshots and release log are in this chat's
+outputs. The final native book return retains chapter text/title and its
+optional conversation control. Saved city Czech also reaches this companion
+after reload, while local guide language leaves that preference unchanged.
+The build contains 813 assets / 332,897,000 bytes, source hash
+07cf583e60a64da3e40b4c2eea2d51a03bec6b7afc5391da961a013aff68e392;
+final commit/local byte verification
+is recorded in PR #5. No merge to main or deployment was performed.
+
+Thirty-nine first reading/detail passes are complete. Next useful building:
+the existing original Mathematics Institute, building id mathematics-institute,
+region mathematics, beginning on its Foundations floor (index 0: sets, numbers,
+functions). It is the eight-floor source wing at logical (-2240, -65), distinct
+from main's new annular Mathematics Faculty. Inspect extra-districts.js,
+district-navigation.js, source home-tools/math-city-data.js and math-city-scene.js,
+shared-activities.js, the installed mathematics reader/tools, public locale
+adapters and per-house notes/tests before an additive pass. Use the proper
+lower parent transform. Read docs/CONNECTED-QUESTIONS.md and preserve the new
+folded exit guide, its source route/lift metadata and proximity gates. Preserve all eight floors, 24 concept IDs, source atlas
+and books, explicit floor transfers, seats/colliders/approaches, original
+reader interactions and private questions/notes/imports. Inspect actual public
+language gaps before a modest sourced four-language reading/detail pass;
+do not translate private text or claim full legacy Atlas translation.

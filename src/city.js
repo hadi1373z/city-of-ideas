@@ -10,7 +10,7 @@ window.createGalleryCity=function(T,ctx){
  const {scene,mesh,box,cylinder,torus,textSign,materials}=ctx,S=window.CITY_SOURCES;
  const city=new T.Group();city.name='Continuous Ideas City';scene.add(city);
  const path=window.createMountainPath(T),{A,MAX,radiusAt,heightAt,pointAt,polar}=path;
- const GRAVEYARD={x:-2360,z:-65,bounds:{minX:-2455,maxX:-2288,minZ:-225,maxZ:90},mathematics:{x:-2360,y:.13,z:35,scale:1},objects:{x:-2360,z:-160,scale:1.3},stations:{home:{x:-2310,z:5},artists:{x:-2310,z:-20},objects:{x:-2310,z:-45}}};
+ const GRAVEYARD={x:-2360,z:-65,bounds:{minX:-2455,maxX:-2200,minZ:-225,maxZ:90},mathematics:{x:-2240,y:.13,z:-65,scale:1},objects:{x:-2360,z:-160,scale:1.3},stations:{home:{x:-2310,z:5},artists:{x:-2310,z:-20},objects:{x:-2310,z:-45}}};
  const SOC={x:-96,z:100,scale:1.7},ART={x:118,z:108,scale:1.35},OBJ={...GRAVEYARD.objects},PARK={x:0,z:-330,scale:.65};
  const districts=[],targets=[],colliders=[],chapterMarkers=[],sourceItems=[],supports=[],buildingTargets=[];
  const chapterCounts=[23,22,16,20],chapterOffsets=[0,23,45,61],partColors=['#efbc6a','#ae91e8','#59c4be','#ed7d91'];

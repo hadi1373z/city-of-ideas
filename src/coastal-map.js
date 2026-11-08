@@ -1,4 +1,4 @@
-import {COAST_LANDMARKS, COAST_EXPLORER_COPY, coastMapPoint, coastWalkSvg} from './coastal-map-data.js?v=seminar1';
+import {COAST_LANDMARKS, COAST_EXPLORER_COPY, coastMapPoint, coastWalkSvg, coastFaceLinksSvg} from './coastal-map-data.js?v=worldlinks1';
 
 import {seminarPathsSvg} from './seminar-houses-data.js';
 import {coastVisitor,COAST_POSITION_COPY,coastPositionText,coastDistance} from './coastal-position.js';
@@ -40,7 +40,7 @@ export function mountCoastalMap(container, {language = 'en', state, onVisit, vis
   overlay.alt = '';
   overlay.setAttribute('aria-hidden', 'true');
   const gardenPaths=el('img','','coastal-seminar-paths');gardenPaths.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(seminarPathsSvg());gardenPaths.alt='';gardenPaths.setAttribute('aria-hidden','true');
-  stage.append(image, overlay, gardenPaths);
+  const faceLinks=el('img','','coastal-walk-overlay');faceLinks.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(coastFaceLinksSvg());faceLinks.alt='';faceLinks.setAttribute('aria-hidden','true');stage.append(image, overlay, gardenPaths,faceLinks);
   const list = el('div', '', 'coastal-place-list');
   list.setAttribute('role', 'group');
   list.setAttribute('aria-label', c.places);
