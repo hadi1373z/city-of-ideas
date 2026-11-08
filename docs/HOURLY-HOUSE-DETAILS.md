@@ -3729,3 +3729,126 @@ controls currently support EN/DE/FA with a real Czech gap. Add modest supported
 details and useful sourced four-language reading/controls without replacing
 the graph, writing private progress during reading/locale or changing actors,
 voices, recordings, the theorem's scope or the separate-world boundary.
+
+## 2026-11-08 — Ramsey: five can, six must
+
+Ramsey House has received its first visible detail and reading pass at the
+existing Graveyard centre (-2401, 37), separate from the circular island.
+The installed room is the native conversation house, rotated by pi. Its
+installer already retires the older six-citizen stand-in before showing the
+approved Socrates, Nietzsche, Zarathustra, Anonymous, Ramsey and Turing cast.
+The preceding queue description referred to that older builder. This pass
+attaches details after the native replacement and preserves the installed
+cast, seats, appearances, reduced motion, fixed voices and accepted recording.
+It does not restore the retired stand-in or change the separate-world boundary.
+
+The original native room now has four source-fit roof fascias, four door-post
+plates, four rear-window corner plates and four column capital collars.
+Twenty-four supported chair-leg joints follow the six actual chair transforms;
+two side-table aprons meet the lamp table's existing underside. None changes
+the source furniture, doorway, glazing, actors, colliders or walking clearance.
+A shallow backed rack at native local (-4.81, 1.7, -2.1), turned pi/2 against
+the front side wall, has two wall spacers, a supporting ledge and two cards.
+All new pieces and resources are separately owned and disposed.
+
+The left card colours all ten pairs of five marked vertices as two five-cycles:
+solid red perimeter and broken blue diagonals. Neither colour has a triangle.
+The right is a partial six-point fan showing only five rays, three red and two
+blue; links between outer points are unspecified. Crossings are not vertices.
+These are fixed original city diagrams, not historical Ramsey drawings, a
+reconstructed room, recorded conversation notation or extra live graph state.
+
+The original EN/DE/FA/CS companion explains the least guaranteed size R(3,3)=6,
+the five-point counterexample, both branches of the six-point proof and the
+distinction between checking one colouring and proving every colouring. It
+offers three readable looking/argument prompts and links the successfully
+accessed primary mathematical sources:
+https://math.mit.edu/classes/18.095/2012IAP/Lecture10_fox.pdf and
+https://math.mit.edu/~apost/courses/18.204_2018/ramsey-numbers.pdf (section 2.2).
+The original Cambridge Mathematical Gazette link remains. Its public landing
+page was accessible; this pass does not claim to have read the full article.
+All new prose is original; no quotation or actual social relationship is invented.
+
+The rack opens by physical pointer and aimed E. The inside context button,
+existing Graveyard guide footer, notebook house card and original puzzle reader
+also reach the companion. Its explicit action opens the existing two-colour
+puzzle with its selected person retained. E still toggles the native recording
+when the visitor is not aiming at the rack. The existing world-edge door and
+house route remain; the companion adds no island lot or travel shortcut.
+
+The older puzzle retains all six original fictional citizen IDs/lines, all
+fifteen binary edges in their original order, theorem/proof, discovery on an
+explicit open/person selection and explicit colour saves to
+city-of-ideas:ramsey-table:v1. Czech now covers its public text and controls.
+Its source builder, original EN/DE/FA lines, appearances and poses are unchanged,
+although the installed native room continues to retire that stand-in scene.
+
+Three experiences stay distinct: that complete two-colour puzzle; the native
+recording's separate paper, which follows the accepted audio clock and admits
+unknown grey-dashed links; and the existing Try the table / Sixth Guest lesson.
+The latter keeps its original gates, state and English fallback. The accepted
+two-part audio, 46 cues and transcript bytes, actor assets, timing, seeking,
+paper transitions, mute/play/pause/restart and leave handling are unchanged.
+Conversation controls now support EN/DE/FA/CS with an explicit English recording
+and transcript notice. Actual transcript lines, clock and slider stay LTR;
+Persian surrounding controls/prose are RTL. The transcript is not translated.
+
+Companion language selection is local and never changes the saved city language.
+The city preference keeps its existing persistence. Pure reading/locale renders
+do not access visitor memory or private/lesson storage, change colours, select
+a person, restart audio, save a note or record a discovery. Explicit puzzle
+entry/colour actions retain their prior behavior; existing modal pause applies.
+
+### Verification
+
+All 97 release programs passed, including the added Ramsey detail program and
+expanded actual native-presentation checks. The native geometry baseline
+b8a54f7a5389a9aa0856393285dda3389a80e3b7ee939822cbebf5636414c053 was independently
+measured from the unchanged native house/study/paper sources in review 6fc555d.
+Checks preserve borrowed resources, parents, matrices, materials, visibility,
+seats, entry, 1,485 collision samples and audio-paper states at four times.
+They verify actual supports/apertures/rack ray, all ten five-point triples,
+the five partial fan edges, original selected person/highlight/colour retention,
+real co-installation after stand-in disposal, four-language/RTL rendering,
+forbidden private-memory/storage access during reading and owned cleanup.
+
+Build: 782 assets / 332,667,040 bytes; source hash
+1d3aecdbd0228310371d5cb88fa1af43c65e0ff6d011ff3f4299d85efae8a164.
+The final cache-version change also passed the source guard and fresh build.
+Native Chrome used the world-edge door, existing notebook house route and
+accepted conversation link, walked the actual doorway, inspected the rack,
+chair/table supports and roof/door details, and opened the rack by pointer/E.
+All four companion languages and Czech/Persian mobile layouts were visually
+checked with no horizontal overflow. Pure reading/language actions left browser
+storage unchanged. The notebook reading route also passed without a save.
+
+Native Czech puzzle selection, one explicit edge-colour save and triangle
+highlight survived reading/local-language round trips. Native muted playback,
+pause and scrubbing to the five-point passage worked; all four control languages
+and companion entry preserved the paused time and exact English caption.
+Saved city Czech reached the reader and persisted through reload. No private
+observation/question was saved. Console: zero application errors and the existing
+Three.js warning per root load. Hardware controller A was not separately tested.
+Screenshots and release log are retained in the originating chat's outputs.
+
+All 36 earlier passes and reconciled main work remain, including Babel descent,
+Ada/Chomsky investigations, computation lab, Proof Atelier and its resume/prices,
+classic readers, studios, seminar models, map/facing, ocean and approved assets.
+No merge or deployment is authorized by this review pass. The hourly cadence
+and review-only policy continue. This is not complete city-wide Czech support.
+
+Thirty-seven first detail/reading passes are complete. Next useful house:
+the existing House of Origami, id origami-house at world (229, 76), distinct
+from the origami park. Inspect src/origami-house-math.js, origami-house-scene.js,
+origami-house.js, origami-house-copy.js, origami-lessons.js, source links,
+tests and per-house notes before an additive pass. Preserve folded roof plates,
+ridge/valleys, true glazing/doorway, central Miura table, side tables, benches,
+drawers, crane, all coastal routes and the shore-only boat launch. Keep exact
+rigid-parallelogram Miura coordinates, fold angle range 0-75 and conserved panel
+area; the three crease cases and local Kawasaki/Maekawa limits; the eight-step
+boat flow, water-following boat and reduced motion. Preserve
+city-of-ideas:house-of-origami:v1, city-of-ideas:origami-made:v1:boat compatibility,
+private reflection and explicit completion/save behavior. Own public copy has
+EN/DE/FA and a real Czech gap: inspect it before adding useful four-language
+reading/controls. Do not claim a global flat-folding guarantee, replace the live
+models, create a new lot or translate private text during locale rendering.

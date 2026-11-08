@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import * as T from '../src/city-source-assets/home-tools/vendor/three.module.js';
 import {installRamseyRoom} from '../src/ramsey-room.js';
+import {RAMSEY_AUDIO_COPY} from '../src/ramsey-house-copy.js';
 const elements=[],events=new Map(),tracks=[];
 class Element{
  constructor(tag){this.tagName=tag;this.attributes={};this.children=[];elements.push(this);}
@@ -43,5 +44,6 @@ try{
  seek.value='165';seek.oninput();update();room.toggle();await new Promise(setImmediate);
  Object.assign(player,{x:origin.x,z:origin.z+5});update();assert(!room.inside);assert(!room.state.playing);assert.equal(proof().vertices,5,'Leaving pauses the same proof without resetting it');
  Object.assign(player,{x:origin.x-2.5,z:origin.z+1});update();assert.equal(proof().vertices,5,'Returning preserves the paused proof');
+ const held=JSON.stringify(proof()),time=room.state.time,caption=elements.find(e=>e.tagName==='p'),cue=caption.textContent;for(const lang of ['en','de','fa','cs']){window.CITY_I18N.lang=lang;events.get('city-language')();assert.equal(room.state.time,time);assert.equal(room.state.playing,false);assert.equal(caption.textContent,cue);assert.equal(caption.dir,'ltr');assert.equal(caption.lang,'en');assert.equal(JSON.stringify(proof()),held);assert.equal(seek.getAttribute('aria-label'),RAMSEY_AUDIO_COPY[lang].time);assert.equal(seek.dir,'ltr');assert(elements.some(e=>e.tagName==='button'&&e.textContent===RAMSEY_AUDIO_COPY[lang].resume));}
 }finally{events.get('pagehide')?.();}
 console.log('PASS actual city installer: audio-driven table proof, pause, forward/backward seeking, restart, unknown edges and leave/return continuity');
