@@ -1,9 +1,10 @@
+import {installHouseInvestigations} from './house-investigations.js?v=1';
 import {installComputationLab} from './computation-lab.js?v=1';
 import {installProofAtelier} from './proof-atelier.js?v=prices2';
 import {installSeminarHouses} from './seminar-houses.js?v=workbench1';
-import {installBabelLibrary} from './babel-library.js';
+import {installBabelLibrary} from './babel-library.js?v=snake2';
 import {installOceanVoyage} from './ocean-voyage.js';
-import {installHouseFoundations} from './foundation-houses.js?v=foundations1';
+import {installHouseFoundations} from './foundation-houses.js?v=workshops2';
 import {installVisitMemory} from './visit-memory.js?v=discoveries1';
 import {installRamseyRoom} from './ramsey-room.js?v=ramsey-paper1';
 import {installRamseyHouse} from './ramsey-house.js';
@@ -112,6 +113,7 @@ try{
  installProofAtelier(M,T);
  installOrigamiHouse(M,T);
  installHouseFoundations(M,T);
+ installHouseInvestigations(M,T);
  installOceanVoyage(M,T);
  installBabelLibrary(M,T);
  installSeminarHouses(M,T);
