@@ -134,3 +134,22 @@
 #morris-guide-context{position:fixed;inset-inline-start:24px;bottom:170px;z-index:18;max-width:min(310px,calc(100vw - 48px))}
 #morris-guide-context[hidden]{display:none}
 @media(max-width:430px){#morris-guide header{padding:14px}#morris-guide .morris-guide-body{padding:6px 14px 18px}#morris-guide-context{inset-inline-start:12px;bottom:245px;max-width:220px}}
+
+/* The Kandinsky companion keeps the original composition lab intact. */
+#kandinsky-guide{color:#304652;background:#f3eddf;border:1px solid #aebac1;border-radius:16px;width:min(840px,calc(100vw - 28px));max-height:88dvh;padding:0;box-sizing:border-box}
+#kandinsky-guide::backdrop{background:#253541b8}
+#kandinsky-guide header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 22px;border-bottom:1px solid #c5c6b6}
+#kandinsky-guide h2{font:normal clamp(22px,3vw,30px)/1.3 Georgia,serif;margin:0;overflow-wrap:anywhere}
+#kandinsky-guide header button{min-width:44px;flex-shrink:0}
+#kandinsky-guide .kandinsky-guide-body{padding:8px 22px 24px;max-height:calc(88dvh - 130px);overflow:auto;overflow-wrap:anywhere}
+#kandinsky-guide p{line-height:1.7;max-width:72ch}
+#kandinsky-guide h3{font:normal 24px/1.3 Georgia,serif;margin:24px 0 12px}
+#kandinsky-guide h4{font:normal 21px/1.35 Georgia,serif;margin:0}
+#kandinsky-guide article{margin:14px 0;padding:16px;background:#fbf8ee;border:1px solid #cbd1d2;border-radius:9px}
+#kandinsky-guide .kandinsky-guide-actions{display:flex;gap:8px;flex-wrap:wrap}
+#kandinsky-guide button,#kandinsky-guide-context button{min-height:44px;padding:10px 14px;border:1px solid #6f8798;border-radius:7px;background:#3d5e76;color:#fff9e8;line-height:1.4;white-space:normal}
+#kandinsky-guide a{display:flex;align-items:center;min-height:44px;color:#3d5e76}
+#kandinsky-guide button:focus-visible,#kandinsky-guide a:focus-visible,#kandinsky-guide-context button:focus-visible{outline:3px solid #b28132;outline-offset:3px}
+#kandinsky-guide-context{position:fixed;inset-inline-start:24px;bottom:170px;z-index:18;max-width:min(310px,calc(100vw - 48px))}
+#kandinsky-guide-context[hidden]{display:none}
+@media(max-width:430px){#kandinsky-guide header{padding:14px}#kandinsky-guide .kandinsky-guide-body{padding:6px 14px 18px}#kandinsky-guide-context{inset-inline-start:12px;bottom:245px;max-width:220px}}

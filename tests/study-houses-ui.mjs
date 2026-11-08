@@ -8,6 +8,7 @@ import {uncertaintyWords,uncertaintyReading} from '../src/uncertainty-house-copy
 import {computationWords,computationReading} from '../src/computation-house-copy.js';
 import {bayes} from '../src/study-house-models.js';
 import {WORKBENCH_TEXT} from '../src/room-workbench.js';
+import {ATELIER_UI} from '../src/proof-atelier-content.js';
 class Element{
  constructor(tag){this.tagName=tag;this.children=[];this.dataset={};this.style={};this.attributes={};this.events={};this._text='';this.open=false;}
  set textContent(v){this._text=String(v);this.children=[];}get textContent(){return this._text+this.children.map(n=>n.textContent).join('');}
@@ -85,6 +86,9 @@ try{
   click(p.matching);assert.equal(dialog.querySelectorAll('button').filter(b=>b.className?.includes('chosen')).length,0);click(p.returnSelection);assert.equal(dialog.querySelectorAll('button').filter(b=>b.className?.includes('chosen')).length,8);assert(dialog.textContent.includes(p.restored));
   const position=[M.player.x,M.player.y,M.player.z];click(wb.face);assert.deepEqual([M.player.x,M.player.y,M.player.z],position);click(wb.read);assert.equal(dialog.dataset.workbench,'false');assert(dialog.textContent.includes(p.workbench));const before=writes.length;events.get('city-language')();assert.equal(writes.length,before);
  }
+ let atelierOpens=0;M.proofAtelier={open(){atelierOpens++;}};
+ for(const language of['en','de','fa','cs']){window.CITY_I18N.lang=language;events.get('city-language')();for(const compact of[false,true]){api.open('proof',compact);const before=writes.length;click(ATELIER_UI[language].open);assert(!dialog.open);assert.equal(writes.length,before,'Atelier handoff does not save the old private reader');}}
+ assert.equal(atelierOpens,8);
 }finally{events.get('pagehide')();}
 assert.deepEqual(M.city.targets,[sentinel]);assert.deepEqual(M.city.buildingTargets,[sentinel]);assert.equal(M.scene.children.length,0);
 console.log('PASS advanced house UI: actual entry gates, immutable conjectures, valid Hall certificate, Bayes/dependence feedback, bounded trace distinction, both diagonal branches, personal notebook, controller focus and RTL disclosure');

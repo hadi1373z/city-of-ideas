@@ -1854,3 +1854,165 @@ companion; do not claim full catalog translation. Preserve Morris's panel,
 guide, six handoffs and photograph-versus-tile boundary; Hilma's selected
 numbers and guide; Van Gogh's letters boundary; Monet's guide; all earlier
 house/learning flows and the newly incorporated room workbenches.
+
+## 2026-11-08 — Wassily Kandinsky: shapes and intervals
+
+Criticism: the original Kandinsky gallery at world (159, 98) already contained
+six paintings, an offset roof, geometric facade, bench, palette/brushes/worktable,
+resident and original catalog/private reader. Its existing Composition lab
+already moved a blue circle and explicitly identified the activity as a website
+design, not a Kandinsky artwork. This pass adds room detail and a four-language
+companion without replacing that experience.
+
+Pale ochre rake trim follows the actual asymmetric roof slopes and ridge at
+local x = 0.4. Eave fascia and a ridge cap remain attached to that roof.
+Blue window sill/header sit outside the original opening. Two supported blue/
+ochre bench pads have pale binding, with bench end joints and worktable apron/
+corner caps within the original furniture footprints. A shallow wall-supported
+panel holds two retained cream cards: each has an equal-size blue circle and
+ochre triangle, with a smaller or larger interval between them. Their shapes,
+colours and orientations remain the same. This is an original city diagram,
+not a historical Kandinsky study, symbol key or reconstructed room.
+
+The panel clears the original right-hand painting, palette, brushes and walking
+approaches. Borrowed meshes, transforms, geometry/material identities and
+values, vertex arrays, instance matrices, openings, colliders, furniture,
+resident and interactions remain. No original photograph, image aspect ratio,
+work ID or attribution/rights/source/citation metadata was edited.
+
+Pointer selection or aiming at the cards and pressing E opens an accessible
+guide. The inside context button and Kandinsky's existing quarter-directory
+card also open it. Outside, the guide offers the original doorway; inside, six
+viewpoint actions reuse the original source approach/yaw/lookAt points.
+Reader actions pass the exact existing artist/work IDs: composition-eight,
+composition-seven, yellow-red-blue, several-circles, black-and-violet and
+study-seven. Accessible action names include each work title.
+
+The original reading asks visitors to describe a line, overlap or interval
+before attaching a personal meaning. Six individual prompts cover geometric
+relations, quiet/dense passages, crossing lines, overlapping circles, dark
+forms/thin lines and a study-versus-final-painting comparison. The guide gives
+the actual original-reader/artist-website/Composition lab route, its keyboard
+slider and Restore the arrangement control, with the original 45% reset.
+The physical cards and online exercise remain city/website designs rather
+than works by Kandinsky; no universal colour/symbol interpretation is imposed.
+
+Historical background links Guggenheim Bilbao's Composition 8 guide and
+Lenbachhaus's Entwurf 2 zu Komposition VII record:
+https://www.guggenheim-bilbao.eus/en/learn/schools/teachers-guides/composition-8
+https://www.lenbachhaus.de/digital/sammlung-online/detail/entwurf-2-zu-komposition-vii-30018582
+Both primary pages were opened and read. The first supplies the July 1923 date
+and geometric-form discussion; the second identifies the 1913 preparatory oil
+study. No quotation, image, historical note, recording or artist voice was
+invented. New prose and physical diagrams are original city material.
+
+The guide, prompts, source labels and associated controls support EN/DE/FA/CS
+with Persian RTL. Directions retain the actual English labels of the legacy
+Composition lab. Original catalog, website and private controls keep their
+existing language handling; some original book/catalog and shared city/notebook
+text remains English. External sources have their own languages and need
+internet. This is not full city-wide Czech localization. Guide/locale rendering
+has no private/lesson storage access or new saved state; existing language
+preference persistence and explicit observation-save actions remain.
+
+Concurrent main advanced during validation to
+e2598f0194f25800887a7b6e4290762a1df213fb, adding the six-workshop Proof Atelier.
+That work is incorporated with its real rear passage, shifted old board,
+connected six-bay architecture, experiments, sources, independent storage key,
+explicit argument saves and bounded-certificate distinctions intact. Overlaps
+retain the review's four-language classic readers, source detail groups,
+physical full-reader picks, Hall controls, focus IDs and private drafts/carets.
+
+The classic Proof reader's atelier-launch control now uses the upstream
+navigation dictionary in all four languages. Czech names/navigation were added
+to that dictionary and the six workshop names; the new atelier's advanced
+lessons, experimental instructions and problems remain English, explicitly
+disclosed. This does not change the existing three classic houses' fifteen
+translated advanced sections. Current automated tests exercise all six imported
+workshop paths, locale/selection/caret retention without progress writes, and
+all eight full/compact classic-reader handoffs across EN/DE/FA/CS.
+
+Proof's intentionally changed shell/collider fingerprint was measured separately
+from main e2598f0's original source module and used as that house's new baseline.
+The other two house baselines remain unchanged. The retained additive detail
+groups remain excluded from the shell fingerprint, and the original desk
+sample, report cards, run journal and their reader routes remain.
+
+Verification: all 76 release programs passed on the reconciled source, including
+the final guide copy, followed by the build and whitespace checks. Source hash:
+3289d5a35cb510fc54463e4ddc23d899d54f866cf1e0d569cabe97444ec806e1
+(733 assets / 332,267,610 bytes). The new release check compares all borrowed
+node transforms, geometry/material identities and values, vertex arrays,
+payloads, visibility and furniture/brush instance matrices, plus original
+catalog/colliders/entries/approaches. It verifies rake endpoints against actual
+source roof vertices, unequal rake lengths, clear window aperture, supported
+bench pads within the seat, wall/painting/walking clearance, two matching
+shape pairs with different intervals, a real Three.js pick ray and exact
+retained work IDs. It also verifies all view/catalog handoffs in four languages,
+accessible work-specific names, remote-pick rejection, locale completeness/RTL,
+top-of-guide reopening, no storage access and exact owned disposal. All earlier
+house guides, advanced models/workbenches, source assets, private fixtures,
+cast/voices and island geometry checks pass.
+
+Native Playwright CLI review at 1280 x 720 confirmed welcome/directory access,
+Morris's still-working directory guide, Kandinsky's outside-guide doorway and
+walking through the original entrance. The offset roof/window trim, seat
+details, supported cards, clear artwork/worktable and unchanged resident were
+visually reviewed. Pointer selection and native E opened the guide.
+All six viewpoints and all six exact original reader handoffs worked.
+Composition VII and Study for Composition VII, No. 2 views were visually
+reviewed. The original reader retained image, rights/source links, observation
+field and the website-activity attribution.
+
+All four guide languages were visually reviewed. DE/FA/CS guide/body client
+and scroll widths matched at 838 px, with scrollTop 0 on opening; Persian
+computed direction was RTL. Czech at 390 x 844 had matching widths of 354 px
+and minimum button height 44 px. Introductory reading and scrolled work controls
+were inspected. Keyboard Enter activated a Czech viewpoint. Reopening after
+scrolling started at zero. A synthetic mixed-language Composition VIII draft,
+including leading/trailing spaces, survived all six reader/viewpoint routes
+and four-language guide visits. No save action or private translation occurred.
+Hardware controller A was not separately exercised; shared focused-button
+support remains.
+
+The actual original reader's Explore the artist website link opened the
+existing offline site in a new native tab. Its Composition lab still disclosed
+that the movable design was not a Kandinsky work. Keyboard ArrowRight changed
+the circle slider from 45 to 46; Restore the arrangement returned it to 45.
+The main city/guide console had zero errors. The separate legacy-site tab
+reported only the unchanged missing root favicon (404). No signed-in service
+or private account was used. Exterior, room/cards, guide language/mobile/control,
+original-reader, Composition VII/study viewpoint and Composition lab screenshots
+are in the originating chat's outputs.
+
+After integration, a fresh native city confirmed the old Proof reader's launch
+into the new atelier and unchanged unsaved mixed-language draft on return.
+Its five Czech reading sections and all six Czech workshop navigation entries
+remained available. Walking entered the atelier region through the foyer's
+rear passage, and the first workbench's physical exhibit, vault and furniture
+were visually reviewed using the existing route. Kandinsky's native E pick
+was repeated successfully on the integrated source. These checks cover the
+integration and first station; all six new experiments pass the automated UI
+paths and retain their author's prior native review.
+
+Latest branch/PR inspection found review head 40dda2c6 unchanged and main advanced
+to e2598f01. The review commit records both parents to retain that ancestry.
+Main's room workbenches, either-side Hall certificates, matching/selection
+restoration, physical full-reader picks, stable focus and private draft/caret
+handling remain. All twenty-two earlier passes, map/facing,
+Noether/Mirzakhani/Cage, City Map, Babel, ocean voyage and branding remain.
+Other branches/PRs are preserved. PR #5 remains unmerged; no deployment.
+
+Twenty-three first detail/reading passes are complete. Next useful house: the
+existing Katsushika Hokusai gallery, id hokusai, world (181, 95). Inspect the
+actual source scene/catalog, eaves roof, facade lattice, quarter layout and
+installed reader before extending it additively. Preserve its six work IDs:
+great-wave, red-fuji, kajikazawa, ejiri, mishima and tsukuda. Its original
+approach distinguishes a design from particular impressions, whose paper size,
+colour, wear, cropping and block condition can differ; preserve that boundary
+and the supplied impression's exact metadata. Keep image bytes/ratios, source
+geometry, furniture, resident, private observations, entrances, windows and
+walking lanes. Inspect real language gaps before a modest four-language
+companion; do not claim full catalog translation. Preserve Kandinsky's cards,
+guide, exact six handoffs and original lab, the four earlier gallery companions,
+all previous house/learning flows and the imported room workbenches.

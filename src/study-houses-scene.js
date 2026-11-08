@@ -14,7 +14,7 @@ export function buildStudyHouses(T,{canvas=()=>document.createElement('canvas')}
  for(const data of STUDY_HOUSES){
   const home=new T.Group();home.name=data.names.en;home.position.set(data.x,.13,data.z);home.rotation.y=data.turn;home.userData.cityDestination='study:'+data.id;group.add(home);const direction=data.turn?-1:1,trim=material(data.colour),dark=material(0x344d44);
   const world=(x,z)=>({x:data.x+direction*x,z:data.z+direction*z}),obstacle=(x,z,w,d)=>{const p=world(x,z);colliders.push({minX:p.x-w/2,maxX:p.x+w/2,minZ:p.z-d/2,maxZ:p.z+d/2,id:data.id});};
-  box(home,16,.10,12,0,-.05,0,floor);box(home,16,4.2,.22,0,2.1,-6,stone);obstacle(0,-6,16,.22);
+  box(home,16,.10,12,0,-.05,0,floor);if(data.id==='proof'){for(const x of[-4.9,4.9]){box(home,6.2,4.2,.22,x,2.1,-6,stone);obstacle(x,-6,6.2,.22);}box(home,3.6,.9,.22,0,3.75,-6,wood);const passage=label(home,3.3,.38,0,3.75,-5.84);passage.paint('Proof Atelier · six workshops');}else{box(home,16,4.2,.22,0,2.1,-6,stone);obstacle(0,-6,16,.22);}
   for(const x of[-8,8]){box(home,.22,1,12,x,.5,0,stone);box(home,.22,.9,12,x,3.75,0,stone);for(const z of[-4.5,4.5])box(home,.22,2.3,3,x,2.15,z,stone);box(home,.025,2.3,6,x,2.15,0,glass);for(const z of[-3,0,3])box(home,.12,2.4,.10,x-direction*.03,2.15,z,trim);obstacle(x,0,.22,12);}
   for(const x of[-4.8,4.8]){box(home,6.4,1,.22,x,.5,6,stone);box(home,6.4,.9,.22,x,3.75,6,stone);for(const side of[-1,1])box(home,.18,2.3,.22,x+side*3.1,2.15,6,stone);box(home,6,2.3,.025,x,2.15,6,glass);for(const dx of[-3,0,3])box(home,.08,2.4,.12,x+dx,2.15,6.1,trim);obstacle(x,6,6.4,.22);}
   // An open, wall-connected threshold; no floating door leaves or steps.
@@ -23,10 +23,10 @@ export function buildStudyHouses(T,{canvas=()=>document.createElement('canvas')}
   box(home,16,.12,12,0,4.15,0,paper);
   if(data.id==='proof'){for(const side of[-1,1]){const roof=box(home,8.7,.22,13,side*4,4.92,0,dark);roof.rotation.z=-side*.18;}}
   else{box(home,17,.22,13,0,4.35,0,trim);if(data.id==='uncertainty'){box(home,8,.65,3,0,4.8,-1,glass);box(home,8.4,.15,3.4,0,5.2,-1,wood);}else{for(let i=0;i<3;i++)box(home,5,.35,13,-5+i*5,4.55+i*.22,0,dark);}}
-  for(const x of[-5.8,5.8]){box(home,2.2,1.05,.45,x,.525,-5.5,wood);for(const row of[.35,.7,1.02])box(home,2.25,.06,.5,x,row,-5.5,trim);for(let j=0;j<6;j++)box(home,.18,.27,.27,x-.9+j*.34,.86,-5.4,j%2?paper:trim);obstacle(x,-5.5,2.25,.5);}
+  for(const x of[-5.8,5.8]){if(data.id==='proof'&&x<0)continue;box(home,2.2,1.05,.45,x,.525,-5.5,wood);for(const row of[.35,.7,1.02])box(home,2.25,.06,.5,x,row,-5.5,trim);for(let j=0;j<6;j++)box(home,.18,.27,.27,x-.9+j*.34,.86,-5.4,j%2?paper:trim);obstacle(x,-5.5,2.25,.5);}
   box(home,2.6,.1,1.25,5,1,-1,wood);for(const x of[3.9,6.1])for(const z of[-1.45,-.55])box(home,.1,.95,.1,x,.475,z,wood);box(home,1.4,.02,.7,5,1.06,-1,paper);obstacle(5,-1,2.6,1.25);
   for(const x of[-4.5,4.5]){box(home,2.4,.12,.65,x,.5,2,trim);box(home,2.4,.5,.1,x,.8,2.3,trim);for(const dx of[-1,1])box(home,.1,.44,.5,x+dx,.22,2,wood);obstacle(x,2,2.4,.8);}
-  const exhibit=new T.Group();exhibit.position.set(0,2.1,-5.78);exhibit.userData={studyHouse:data.id,dynamic:true};home.add(exhibit);box(exhibit,4.8,3.2,.08,0,0,0,wood);obstacle(0,-5.55,4.8,.6);
+  const exhibit=new T.Group();exhibit.position.set(data.id==='proof'?-4.6:0,2.1,-5.78);exhibit.userData={studyHouse:data.id,dynamic:true};home.add(exhibit);box(exhibit,4.8,3.2,.08,0,0,0,wood);obstacle(data.id==='proof'?-4.6:0,-5.55,4.8,.6);
   const caption=label(exhibit,4.5,.35,0,1.3,.06),cells=[],bars=[],links=[];let readout;
   if(data.id==='proof')for(let i=0;i<16;i++){const tile=box(exhibit,.47,.47,.07,(i%4-1.5)*.53,.02-(Math.floor(i/4)-1.5)*.53,.09,material(colour(i)?0xe5d7b7:0x4c6257));tile.userData={studyHouse:data.id,studyCell:i,dynamic:true};targets.push(tile);cells.push(tile);}
   else if(data.id==='uncertainty'){for(let i=0;i<2;i++){const bar=box(exhibit,1,.32,.09,-1.95,.45-i*.75,.1,material(i?0x9a7560:0x829e67));bars.push(bar);}readout=label(exhibit,4.4,.42,0,-1.03,.07);}

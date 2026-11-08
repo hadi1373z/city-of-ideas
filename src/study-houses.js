@@ -1,7 +1,8 @@
+import {ATELIER_UI} from './proof-atelier-content.js';
 import {WORKBENCH_TEXT,faceRoomWork} from './room-workbench.js';
 import {STUDY_HOUSES,STUDY_UI} from './study-houses-data.js';
 import {BOARDS,colour,neighbours,matching,bayes,startMachine,stepMachine,diagonal,studyMemory} from './study-house-models.js?v=workbench1';
-import {buildStudyHouses} from './study-houses-scene.js?v=workbench-details1';
+import {buildStudyHouses} from './study-houses-scene.js?v=atelier-details1';
 import {proofReading,proofWords} from './proof-house-copy.js';
 import {uncertaintyReading,uncertaintyWords} from './uncertainty-house-copy.js';
 import {computationReading,computationWords,computationState} from './computation-house-copy.js';
@@ -44,8 +45,9 @@ export function installStudyHouses(M,T){
  function render(){
   const active=document.activeElement,focus=active?.dataset?.studyFocus,draft=active?.dataset?.studyDraft,caret=draft?[active.selectionStart,active.selectionEnd,active.selectionDirection]:null,wb=WORKBENCH_TEXT[lang()]||WORKBENCH_TEXT.en;title.textContent=selected?name(selected):w().title;dialog.lang=lang();dialog.dir=lang()==='fa'?'rtl':'ltr';close.setAttribute('aria-label',w().close);body.replaceChildren();
   if(!selected){body.append(el('p',w().intro),el('p',w().notice));for(const d of STUDY_HOUSES){const content=studyReading(d),card=el('article');card.append(el('h3',name(d)),el('p',content.topic),el('small',content.level),button(w().read,()=>{selected=d;feedback='';render();},'read-'+d.id),button(w().approach,()=>visit(d.id),'approach-'+d.id));body.append(card);}const between=el('section');between.lang=lang();between.dir=lang()==='fa'?'rtl':'ltr';between.append(el('h3',w().betweenTitle),el('p',w().between));body.append(between);}
-  else if(bench&&inside(selected.id)){body.append(button(wb.read,()=>open(selected.id),'full-reading'),button(wb.face,()=>faceRoomWork(M,T,house(selected.id).exhibit),'face-work'),el('p',wb.hint));experiment();}
+  else if(bench&&inside(selected.id)){if(selected.id==='proof'&&M.proofAtelier)body.append(button((ATELIER_UI[lang()]||ATELIER_UI.en).open,()=>{dialog.close();M.proofAtelier.open();},'proof-atelier-open'));body.append(button(wb.read,()=>open(selected.id),'full-reading'),button(wb.face,()=>faceRoomWork(M,T,house(selected.id).exhibit),'face-work'),el('p',wb.hint));experiment();}
   else{
+   if(selected.id==='proof'&&M.proofAtelier)body.append(button((ATELIER_UI[lang()]||ATELIER_UI.en).open,()=>{dialog.close();M.proofAtelier.open();},'proof-atelier-open'));
    if(inside(selected.id))body.append(button(wb.work,()=>open(selected.id,true),'room-workbench'));
    const content=studyReading(selected);body.append(button(w().directory,()=>{selected=null;feedback='';render();},'directory'),el('p',w().notice));const intro=el('section');intro.lang=localized(selected.id)?lang():'en';intro.dir=intro.lang==='fa'?'rtl':'ltr';intro.append(el('h3',content.topic),el('p',content.level),el('p',content.prediction));body.append(intro);
    const e=memory.get(selected.id);if(e.prediction){const prediction=el('p',e.prediction);prediction.dir='auto';body.append(el('h4',w().prediction),prediction);}else if(inside(selected.id)){privateInput(w().prediction,'prediction-'+selected.id);body.append(button(w().predict,()=>{const text=drafts.get('prediction-'+selected.id)||'';if(!memory.predict(selected.id,text)){feedbackArea='prediction';feedback=()=>w().needed;render();return;}const store=M.visitorMemory?.store;store?.question('advanced-'+selected.id,'personal',selected.question);store?.answer('advanced-'+selected.id,text);feedback='';render();},'predict'));message('prediction');}
