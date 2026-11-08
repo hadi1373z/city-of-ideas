@@ -1719,3 +1719,138 @@ interactions. Inspect actual language gaps before a modest four-language
 companion; do not claim full legacy catalog translation. Preserve Hilma's
 numbered ledge, selected-six boundary, comparison guide and exact view/catalog
 handoffs, Monet and Van Gogh's guides, and all twenty-one completed passes.
+
+## 2026-11-08 — William Morris: motif and interval
+
+Criticism: the original Morris gallery at world (108, 115) already held six
+designs, an eaves roof, symbolic facade, bench, palette/brushes/worktable,
+resident and the original catalog/private reader. Its companion needed to make
+the repeated gaps as readable as the leaves and birds, while preserving the
+source website's explicit distinction between a repeated photograph and a
+production-ready, necessarily seamless textile tile. Its opposite-row pi turn
+remains.
+
+Added pale rake/fascia trim along the existing wide eaves, window sill/header
+outside the aperture, three supported bench slats with pegs and a worktable
+apron within the original footprint. A shallow wall-supported panel has six
+original city leaf-and-dot motifs, a three-by-two grid and retaining rails.
+The panel clears all original paintings, furniture and walking approaches.
+It is an original looking aid, not a Morris sample, historical printing block
+or reconstructed room. Source geometry, materials, transforms, openings,
+colliders, image bytes/ratios, work IDs, attribution/rights/source/citation
+metadata, resident and original interactions remain.
+
+Pointer selection or aiming at the panel and pressing E opens the accessible
+guide. The inside context button and Morris's existing quarter-directory card
+also open it. The outside guide offers the original doorway. Six viewpoint
+actions reuse the source approach/yaw/lookAt points, including the existing
+opposite-row rotation. Reader actions hand off the exact artist/work IDs:
+strawberry-thief, snakeshead, willow-boughs, trellis, daisy and acanthus.
+Accessible action names include the work title.
+
+Original reading distinguishes a motif, its interval and the edge of a displayed
+photograph. Six prompts cover birds/gaps, hanging flowers, branches/pale ground,
+lattice/stem, Daisy's intervals and broad Acanthus leaves. Trellis retains its
+original design/bird credits; the guide does not rewrite the catalog. The
+Pattern room's existing scale slider and repeated-photograph warning remain.
+The original six designs, photograph bytes and artist website were not edited.
+
+Historical background cites the V&A's 1883 Strawberry Thief date and
+indigo-discharge printing, and its account of experimentation with dye/mordant
+order. Both primary pages were opened and read:
+https://www.vam.ac.uk/articles/willam-morris-textiles/
+https://lookup.vam.ac.uk/east-storehouse/storagedisplays/USE2174/
+All new prose and diagrams are original city material. No quotation, historical
+handwriting, image, recording or factual claim about an actual room was invented.
+
+The complete companion, six prompts, source labels and associated controls
+support EN/DE/FA/CS, with Persian RTL. Original catalog/private controls retain
+their existing language handling; some catalog, book and shared city/notebook
+text remains English. External sources have their own languages and need
+internet. This is not full city-wide Czech localization. Guide/locale rendering
+has no private/lesson storage access or new saved state. Language preference
+persistence and explicit observation-save actions remain.
+
+Concurrent main advanced to c435f81d4866bbd922b08dfafbb683951ea0b0b9.
+Its six compact room workbenches, face-the-work camera action, Noether vectors,
+Mirzakhani metric work, Cage audio-clock cursor and either-side Hall certificates
+were incorporated into this review branch. The overlapping study integration
+was reconciled with the review's EN/DE/FA/CS advanced readers, stable control
+focus, private draft/caret handling, prior physical desk details and same-step
+Computation refresh. New Hall side/selection/matching labels are localized in
+all four languages; invalid certificates do not imply tileability. Physical
+sample/report/journal picks explicitly retain their full-reader route, while
+the experiment board and room context can open compact controls. Main's
+workbench source/design remains; no main branch or deployed site was changed.
+
+Verification: all 73 release programs, the build, the final Morris check and
+whitespace checks passed. Source hash:
+72fb0c88e61fe26ba69abc7abbff2b358c983ceef34f9d585f73582155d455ea
+(725 assets / 332,165,603 bytes). Morris's new check compares borrowed node
+transforms, materials/geometry identity, vertex arrays, material values, pick
+payloads and visibility, plus original catalog/colliders/entries/approaches.
+It checks the pi orientation, wall contact, window/painting/walking clearance,
+supported bench slats, an opposite-row physical pick ray, all six retained work
+IDs, every viewpoint/catalog handoff in four languages, work-specific accessible
+names, remote-pick rejection, locale completeness/RTL, top-of-guide reopening,
+zero storage access and exact owned disposal. Main's new model/seminar checks
+and the reconciled four-language Hall/workbench checks passed with the suite.
+All earlier house, model, source-preservation, cast/voice and island checks pass.
+
+Native Playwright CLI review at 1280 x 720 confirmed welcome/directory access,
+the outside doorway action and walking through the original entrance. Eaves,
+window trim, bench joinery, table apron, supported motif panel and clear original
+artwork/furniture were visually reviewed. Pointer selection and native E on
+the panel opened the guide. All six viewpoint actions and six exact original
+reader handoffs worked. Strawberry Thief and Acanthus views were visually
+reviewed; the original reader retained its photograph, rights/source links,
+observation field and repeated-photograph boundary.
+
+All four native guide languages were visually reviewed. Persian had RTL
+computed direction and matching guide/body client/scroll widths. Czech at
+390 x 844 had guide/body client and scroll widths of 354 px and minimum button
+height 44 px. Introductory reading and scrolled design controls were inspected.
+Keyboard Enter activated a Czech viewpoint. Reopening after scrolling started
+at scrollTop 0. A synthetic mixed-language Strawberry Thief draft, including
+leading/trailing spaces, survived six catalog handoffs, six viewpoints and
+EN/DE/FA/CS visits; no save action was taken. Hardware controller A was not
+separately exercised; the existing shared focused-button mechanism remains.
+
+The original offline artist website was also opened in a separate native tab.
+Its Pattern room displayed the supplied photograph and explicit non-seamless/
+non-production warning; changing Image width updated its repeat to 360 px.
+The main city/guide browser had zero console errors. The separate legacy-site
+tab logged only an unchanged missing root favicon (404); no source asset was
+modified to conceal it. No signed-in service or private account was used.
+
+Native review of the integrated Proof workbench confirmed the visible room,
+Face the work, all eight light squares on the opposite-corners board, the
+valid |S| = 8 > |N(S)| = 6 certificate, maximum-matching/selection round trip,
+full-reader switching and an unsaved mixed-language draft. Its Czech bottom
+dock at 390 x 844 was 370 px wide, with client/scroll widths of 368 px, and
+retained the draft plus all five localized advanced sections. These native
+checks cover Proof; the remaining five imported workbenches retain their
+author's prior native review and pass current automated checks. Exterior,
+room/panel, EN/DE/FA/CS reading/controls, original-reader/pattern-room, viewpoint
+and Proof workbench screenshots are in the originating chat's outputs.
+
+Latest branch/PR inspection found the prior review head 63b724e5 and main
+c435f81d unchanged before publication. The review commit records both parents
+so the imported main work retains its ancestry. Other branches/PRs remain.
+All twenty-one earlier passes and main's map/facing, seminar, Babel, voyage
+and branding work remain. PR #5 remains unmerged; no deployment was triggered.
+
+Twenty-two first detail/reading passes are complete. Next useful house: the
+existing Wassily Kandinsky gallery, id kandinsky, world (159, 98). Inspect the
+actual source scene/catalog, offset roof, quarter layout and installed reader
+before extending it additively. Preserve its six work IDs: composition-eight,
+composition-seven, yellow-red-blue, several-circles, black-and-violet and
+study-seven. The original movable-blue-circle composition is a website activity,
+not a Kandinsky artwork; preserve that distinction and its original controls.
+Keep image bytes/ratios/attribution/rights/source/citation metadata, source
+geometry, furniture, resident, private observations, entrances, windows and
+walking lanes. Inspect real language gaps before a modest four-language
+companion; do not claim full catalog translation. Preserve Morris's panel,
+guide, six handoffs and photograph-versus-tile boundary; Hilma's selected
+numbers and guide; Van Gogh's letters boundary; Monet's guide; all earlier
+house/learning flows and the newly incorporated room workbenches.

@@ -12,6 +12,6 @@ export function buildProofDetails(T,{home,box,wood,paper,trim,dark,targets}){
  box(sample,.014,.01,.34,0,.065,0,trim);
  const pencil=box(group,.065,.065,.75,5.98,1.0825,-1,trim);pencil.rotation.y=-.15;
  box(group,.055,.055,.09,5.92,1.0825,-.59,wood);
- sample.traverse(o=>o.userData={studyHouse:'proof',dynamic:true});targets.push(sample);
+ sample.traverse(o=>o.userData={studyHouse:'proof',studyReading:true,dynamic:true});targets.push(sample);
  return group;
 }

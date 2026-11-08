@@ -14,7 +14,7 @@ export function buildUncertaintyDetails(T,{home,box,wood,paper,trim,dark,targets
  function card(x){const c=new T.Group();c.position.x=x;reports.add(c);box(c,.56,.035,.56,0,.0175,0,wood);box(c,.50,.012,.50,0,.041,0,paper);box(c,.18,.012,.045,0,.053,.015,dark);box(c,.045,.012,.18,0,.053,.015,dark);return c;}
  const first=card(-.35),second=card(.35);box(first,.16,.012,.035,-.12,.053,-.18,trim);
  const copyMark=new T.Group(),separateMark=new T.Group();second.add(copyMark,separateMark);box(copyMark,.16,.012,.035,-.12,.053,-.18,trim);for(const x of[-.18,-.08])box(separateMark,.06,.012,.035,x,.053,-.18,trim);
- reports.traverse(o=>o.userData={studyHouse:'uncertainty',dynamic:true});targets.push(reports);
+ reports.traverse(o=>o.userData={studyHouse:'uncertainty',studyReading:true,dynamic:true});targets.push(reports);
  function setEvidence(repeats,independent){if(![1,2].includes(repeats)||typeof independent!=='boolean')return false;second.visible=repeats===2;copyMark.visible=!independent;separateMark.visible=independent;return true;}
  setEvidence(1,true);return{group,reports,first,second,copyMark,separateMark,setEvidence};
 }

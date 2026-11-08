@@ -13,7 +13,7 @@ export function buildComputationDetails(T,{home,box,wood,paper,trim,dark,accent,
  for(const x of[-.08,.08])box(journal,.035,.012,.195,x,.053,-.02,dark);for(const z of[-.10,.06])box(journal,.195,.012,.035,0,.053,z,dark);
  for(const x of[.26,.42])box(journal,.035,.012,.195,x,.053,-.02,dark);box(journal,.195,.012,.035,.34,.053,-.10,dark);
  const marker=box(journal,.22,.012,.04,.34,.053,.16,accent);
- journal.traverse(o=>o.userData={studyHouse:'computation',dynamic:true});targets.push(journal);
+ journal.traverse(o=>o.userData={studyHouse:'computation',studyReading:true,dynamic:true});targets.push(journal);
  function setMachine(machine){if(!machine||typeof machine.halted!=='boolean'||typeof machine.repeated!=='boolean'||machine.halted&&machine.repeated)return false;marker.position.x={halted:-.34,repeated:0,pending:.34}[computationState(machine)];return true;}
  return{group,journal,marker,setMachine};
 }

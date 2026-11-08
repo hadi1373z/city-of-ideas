@@ -7,6 +7,7 @@ import {proofWords,proofReading} from '../src/proof-house-copy.js';
 import {uncertaintyWords,uncertaintyReading} from '../src/uncertainty-house-copy.js';
 import {computationWords,computationReading} from '../src/computation-house-copy.js';
 import {bayes} from '../src/study-house-models.js';
+import {WORKBENCH_TEXT} from '../src/room-workbench.js';
 class Element{
  constructor(tag){this.tagName=tag;this.children=[];this.dataset={};this.style={};this.attributes={};this.events={};this._text='';this.open=false;}
  set textContent(v){this._text=String(v);this.children=[];}get textContent(){return this._text+this.children.map(n=>n.textContent).join('');}
@@ -32,6 +33,16 @@ try{
  click('Check my Hall obstruction');assert(dialog.textContent.includes('A valid certificate'));assert.equal(api.scene.houses[0].cells[8].material.color.getHex(),0xd7b857);click('A and B share one available room');assert(api.memory.get('proof').checks.includes('transfer'));write(copy.reflect,'The subset has two dark squares and one neighbour; parity alone was insufficient.');click(copy.reflect);assert.equal(store.state.questions[0].history.length,2);click(copy.notebook);assert.equal(opened,'advanced-proof');
  api.visit('uncertainty',true);api.open('uncertainty');const input=dialog.querySelector('input');input.value='15.38';input.oninput();click('Check my calculation');assert(dialog.textContent.includes('90 / (90 + 495)'));click('The same flag copied twice');click('1: it adds no new information');assert(api.memory.get('uncertainty').checks.includes('dependence'));
  api.visit('computation',true);api.open('computation');click('Load long');click('Run 16 steps');click('Check my trace evidence');assert(dialog.textContent.includes('inconclusive'));click('Load cycle');click('Run 16 steps');click('Check my trace evidence');assert(dialog.textContent.includes('future repeats forever'));click('No total correct decider works for every program and input');assert(dialog.textContent.includes('Inspect both hypothetical predictions first.'));click('Suppose H says halts');click('No total correct decider works for every program and input');assert(dialog.textContent.includes('Inspect both hypothetical predictions first.'));click('Suppose H says loops');click('No total correct decider works for every program and input');assert(api.memory.get('computation').checks.includes('diagonal'));
+ // Valid certificates are accepted on every preset, and matching never destroys a conjecture.
+ api.visit('proof',true);api.open('proof');click('Opposite corners removed');click('Choose light squares');
+ for(const tile of dialog.querySelectorAll('button').filter(b=>b.getAttribute('aria-label')?.endsWith('light selectable')&&!b.disabled)){tile.onclick();}
+ click('Check my Hall obstruction');assert(dialog.textContent.includes('|S| = 8 > |N(S)| = 6'));
+ click('Show a maximum matching');assert(api.scene.houses[0].links.some(n=>n.visible));assert.equal(document.activeElement.dataset.studyFocus,'proof-matching');
+ click('Return to my selected subset');assert.equal(dialog.querySelectorAll('button').filter(b=>b.className?.includes('chosen')).length,8);assert(!api.scene.houses[0].links.some(n=>n.visible));
+ click('A tileable control');click('Check my Hall obstruction');assert(dialog.textContent.includes('does not establish tileability'));
+ const thought='A draft with a cursor in its middle.';write(copy.reflect,thought);let draft=dialog.querySelectorAll('textarea').find(n=>n.dataset.studyDraft==='reason-proof');draft.focus();draft.setSelectionRange(3,8,'forward');events.get('city-language')();draft=document.activeElement;assert.equal(draft.value,thought);assert.equal(draft.selectionStart,3);assert.equal(draft.selectionEnd,8);
+ for(const id of['proof','uncertainty','computation']){api.visit(id,true);M.showExtra({kind:'room'});assert.equal(dialog.dataset.workbench,'true');assert(!dialog.querySelector('textarea'));const position=[M.player.x,M.player.y,M.player.z];click(WORKBENCH_TEXT.en.face);assert.deepEqual([M.player.x,M.player.y,M.player.z],position);assert(Number.isFinite(M.player.pitch));click(WORKBENCH_TEXT.en.read);assert.equal(dialog.dataset.workbench,'false');assert(dialog.querySelector('textarea'));}
+ api.visit('proof',true);api.open('proof');assert.equal(dialog.querySelectorAll('textarea').find(n=>n.dataset.studyDraft==='reason-proof').value,thought);
  window.CITY_I18N.lang='fa';events.get('city-language')();assert.equal(dialog.dir,'rtl');assert(dialog.textContent.includes(STUDY_UI.fa.notice));assert.equal(dialog.querySelector('summary').tabIndex,0);assert.equal(dialog.children[0].children[1].dataset.close,'');assert.equal(values.get('private-note'),'Keep exactly');
  {
  const keyButton=key=>dialog.querySelectorAll('button').find(b=>b.dataset.studyFocus===key),press=key=>{const b=keyButton(key);assert(b,'Missing control '+key);b.focus();b.onclick();},draft=key=>dialog.querySelectorAll('textarea').find(t=>t.dataset.studyDraft===key);
@@ -66,6 +77,13 @@ try{
   keyButton('machine-run-1').focus();const beforeLocale=writes.length;window.CITY_I18N.lang=language==='cs'?'en':'cs';events.get('city-language')();assert.equal(document.activeElement.dataset.studyFocus,'machine-run-1');assert.equal(writes.length,beforeLocale);assert(dialog.textContent.includes(computationWords(window.CITY_I18N.lang).diagonalGood));window.CITY_I18N.lang=language;events.get('city-language')();assert.equal(api.memory.get('computation').prediction,originalComputation);assert.equal(draft('reason-computation').value,sentinels.computation);
  }
  const reads=writes.length;dialog.close();M.showExtra({kind:'study-house',data:journal.journal.userData});assert(dialog.open);assert.equal(writes.length,reads);assert(dialog.textContent.includes(computationWords('cs').workbench));for(const id of['proof','uncertainty']){api.visit(id,true);api.open(id);assert.equal(draft('reason-'+id).value,sentinels[id]);}assert.equal(api.memory.get('computation').prediction,originalComputation);assert.equal(values.get('private-note'),'Keep exactly');
+ }
+ // Main's workbench and two-sided certificate controls retain all four locales.
+ for(const language of['en','de','fa','cs']){
+  window.CITY_I18N.lang=language;events.get('city-language')();api.visit('proof',true);api.open('proof',true);const p=proofWords(language),wb=WORKBENCH_TEXT[language];assert.equal(dialog.dataset.workbench,'true');assert(!dialog.querySelector('textarea'));
+  click(p.boards[0]);click(p.chooseLight);for(const tile of dialog.querySelectorAll('button').filter(b=>b.dataset.studyFocus?.startsWith('cell-')&&!b.disabled))tile.onclick();click(p.check);assert(dialog.textContent.includes('|S| = 8 > |N(S)| = 6'));assert(dialog.textContent.includes(p.good));
+  click(p.matching);assert.equal(dialog.querySelectorAll('button').filter(b=>b.className?.includes('chosen')).length,0);click(p.returnSelection);assert.equal(dialog.querySelectorAll('button').filter(b=>b.className?.includes('chosen')).length,8);assert(dialog.textContent.includes(p.restored));
+  const position=[M.player.x,M.player.y,M.player.z];click(wb.face);assert.deepEqual([M.player.x,M.player.y,M.player.z],position);click(wb.read);assert.equal(dialog.dataset.workbench,'false');assert(dialog.textContent.includes(p.workbench));const before=writes.length;events.get('city-language')();assert.equal(writes.length,before);
  }
 }finally{events.get('pagehide')();}
 assert.deepEqual(M.city.targets,[sentinel]);assert.deepEqual(M.city.buildingTargets,[sentinel]);assert.equal(M.scene.children.length,0);

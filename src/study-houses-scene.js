@@ -1,5 +1,5 @@
 import {STUDY_HOUSES} from './study-houses-data.js';
-import {colour,neighbours,bayes} from './study-house-models.js';
+import {colour,neighbours,bayes} from './study-house-models.js?v=workbench1';
 import {buildProofDetails} from './proof-house-scene.js';
 import {proofWords} from './proof-house-copy.js';
 import {buildUncertaintyDetails} from './uncertainty-house-scene.js';
@@ -44,7 +44,7 @@ export function buildStudyHouses(T,{canvas=()=>document.createElement('canvas')}
  let lastKey='';function update({lang='en',board,selection=[],prior=.01,repeats=1,independent=true,machine,showMatching=false,pairs=[]}){
   const key=JSON.stringify([lang,board,selection,prior,repeats,independent,machine?.kind,machine?.counter,machine?.steps,machine?.halted,machine?.repeated,showMatching]);if(key===lastKey)return;lastKey=key;
   for(const h of houses)h.name.paint(h.data.names[lang]||h.data.names.en);
-  const proof=houses[0],near=neighbours(board,selection);proof.caption.paint(proofWords(lang).wallCaption+' · '+selection.length+' / '+near.length);for(const[i,c]of proof.cells.entries()){c.visible=board.includes(i);const p=pairs.findIndex(p=>p.includes(i));c.material.color.setHex(selection.includes(i)?0xd7b857:near.includes(i)?0x79a6b5:showMatching&&p>=0?[0x8ebba8,0xb1a0c2,0xc7ae77,0x86a8bd][p%4]:colour(i)?0xe5d7b7:0x4c6257);}
+  const proof=houses[0],near=neighbours(board,selection);proof.caption.paint(showMatching?proofWords(lang).maximumCaption+' · '+pairs.length:proofWords(lang).wallCaption+' · '+selection.length+' / '+near.length);for(const[i,c]of proof.cells.entries()){c.visible=board.includes(i);const p=pairs.findIndex(p=>p.includes(i));c.material.color.setHex(selection.includes(i)?0xd7b857:near.includes(i)?0x79a6b5:showMatching&&p>=0?[0x8ebba8,0xb1a0c2,0xc7ae77,0x86a8bd][p%4]:colour(i)?0xe5d7b7:0x4c6257);}
   for(const[i,link]of proof.links.entries()){const pair=pairs[i];link.visible=showMatching&&!!pair;if(pair){const[a,b]=pair;link.position.x=((a%4+b%4)/2-1.5)*.53;link.position.y=.02-((Math.floor(a/4)+Math.floor(b/4))/2-1.5)*.53;link.rotation.z=Math.floor(a/4)===Math.floor(b/4)?0:Math.PI/2;}}
   const uncertainty=houses[1],b=bayes(prior,.9,.05,repeats,independent),u=uncertaintyWords(lang);uncertainty.evidence.setEvidence(repeats,independent);uncertainty.caption.paint(u.wallCaption);for(const[i,bar]of uncertainty.bars.entries()){const width=4.1*[b.hit,b.falseAlarm][i]/(b.hit+b.falseAlarm);bar.scale.x=Math.max(.002,width);bar.position.x=-2.05+width/2;}uncertainty.readout.paint(b.hit.toFixed(2)+' '+u.faulty+' · '+b.falseAlarm.toFixed(2)+' '+u.sound);
   const computation=houses[2],c=computationWords(lang);computation.caption.paint(c.wallCaption);if(machine){const digits=String(machine.counter).padStart(5,'0');computation.cells.forEach((cell,i)=>cell.paint(digits[i]));computation.journal.setMachine(machine);computation.readout.paint(machine.steps+' '+c.steps+' · '+c.statuses[computationState(machine)]);}
