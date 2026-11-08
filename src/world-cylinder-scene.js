@@ -1,12 +1,23 @@
+import {createOceanMaterial,updateOceanMaterial} from './ocean-surface.js';
 import {buildLowerLandscape} from './lower-landscape-scene.js';
 import {WORLD_CYLINDER as W,lowerMatrix,GALLERY_TUNNEL} from './world-cylinder-model.js';
 export function buildWorldCylinder(T){
  const group=new T.Group();group.name='One cylindrical world · two inhabited faces';group.userData.worldCylinder=true;
  const lowerFrame=new T.Group();lowerFrame.name='Other face · unchanged source-coordinate frame';lowerFrame.matrixAutoUpdate=false;lowerFrame.matrix.copy(lowerMatrix(T));group.add(lowerFrame);
  const owned=new Set(),own=o=>(owned.add(o),o),mat=(c,o={})=>own(new T.MeshLambertMaterial({color:c,...o}));
- const stone=mat(0xb4a58c,{side:T.DoubleSide}),edge=mat(0x86795e),grass=mat(0x586f59),sand=mat(0xc2b18c),water=mat(0x345d70,{side:T.DoubleSide}),brass=mat(0xbba56d),warm=own(new T.MeshBasicMaterial({color:0xe1c28d}));
+ const stone=mat(0xb4a58c,{side:T.DoubleSide}),edge=mat(0x86795e),grass=mat(0x586f59),sand=mat(0xc2b18c),brass=mat(0xbba56d),warm=own(new T.MeshBasicMaterial({color:0xe1c28d}));
+ const water=own(createOceanMaterial(T));
  const mesh=(g,m,parent=group)=>{const o=new T.Mesh(own(g),m);parent.add(o);return o;};
  const shell=mesh(new T.CylinderGeometry(570,570,96,192,1,true),stone);shell.position.y=-48;shell.name='96-metre inhabited cylinder wall';
+ // Real earth backs the central shaft below Babel. The middle layer leaves
+ // the existing Escher tunnel open instead of exposing the sky behind it.
+ const coreMaterial=mat(0x95836a,{side:T.DoubleSide}),earthCore=new T.Group();earthCore.name='Earth between Babel and the lower face';group.add(earthCore);
+ for(const[bottom,top,notch]of[[-95.9,-40.2,false],[-40.2,-34.7,true],[-34.7,-26.6,false]]){
+  const shape=new T.Shape(),outer=58,inner=21.7,half=2.3;
+  if(notch){const a=Math.asin(half/outer),b=Math.asin(half/inner);shape.absarc(0,0,outer,a,Math.PI*2-a,false);shape.lineTo(Math.sqrt(inner*inner-half*half),-half);shape.absarc(0,0,inner,Math.PI*2-b,b,true);shape.closePath();}
+  else{shape.absarc(0,0,outer,0,Math.PI*2,false);const hole=new T.Path();hole.absarc(0,0,inner,0,Math.PI*2,true);shape.holes.push(hole);}
+  const layer=mesh(new T.ExtrudeGeometry(shape,{depth:top-bottom,bevelEnabled:false,curveSegments:128}),coreMaterial,earthCore);layer.rotation.x=-Math.PI/2;layer.position.y=bottom;layer.name=notch?'Earth with real Escher tunnel cut':'Solid annular earth around the central stairwell';
+ }
  function band(ri,ro,y,m,parent=group){const o=mesh(new T.RingGeometry(ri,ro,192),m,parent);o.rotation.x=-Math.PI/2;o.position.y=y;return o;}
  for(const y of[-.3,-24,-48,-72,-95.9]){const b=mesh(new T.TorusGeometry(570,.16,5,192),edge);b.rotation.x=Math.PI/2;b.position.y=y;}
  // Broad, quiet mineral courses make the physical thickness readable from both
@@ -25,7 +36,7 @@ export function buildWorldCylinder(T){
  for(const x of[-569.92,-58.08,58.08,569.92])seams.push({x,y:-48,w:.16,h:96,d:.43});
  [...cutRows.map((rows,i)=>({rows,material:cutMaterials[i]})),{rows:seams,material:cutSeam}].forEach(({rows,material})=>{const batch=new T.InstancedMesh(cutGeo,material,rows.length);batch.name='Batched section mineral panels / seams';rows.forEach((p,i)=>{strataStamp.position.set(p.x,p.y,0);strataStamp.scale.set(p.w,p.h,p.d);strataStamp.updateMatrix();batch.setMatrixAt(i,strataStamp.matrix);});batch.instanceMatrix.needsUpdate=true;batch.computeBoundingSphere();sectionCut.add(batch);});
  const lowerGround=new T.Group();lowerGround.position.set(-2160,0,-65);lowerFrame.add(lowerGround);
- const land=band(58,552,.005,grass,lowerGround);land.name='Lower circular face · real central gallery aperture';band(552,570,.005,sand,lowerGround);band(570,3600,-.015,water,lowerGround);
+ const land=band(58,552,.005,grass,lowerGround);land.name='Lower circular face · real central gallery aperture';band(552,570,.005,sand,lowerGround);const sea=mesh(new T.RingGeometry(570,3600,256,100).rotateX(-Math.PI/2),water,lowerGround);sea.position.y=-.015;sea.frustumCulled=false;sea.name='Ocean surrounding all 360 degrees of the lower face';
  // A structural ocean volume wraps the circumference, between the water faces.
  const ocean=mesh(new T.CylinderGeometry(650,650,96,192,1,true),own(new T.MeshLambertMaterial({color:0x467d91,transparent:true,opacity:.20,depthWrite:false,side:T.DoubleSide})));ocean.position.y=-48;ocean.name='Ocean surrounding the outside of the cylinder';
  const lowerGuide=band(534,538,.018,mat(0xa6ae91),lowerGround);lowerGuide.name='Lower-face shore promenade';
@@ -83,7 +94,7 @@ export function buildWorldCylinder(T){
  const lowerLandscape=buildLowerLandscape(T,{parent:lowerGround,own,existingPaths:lowerPaths,existingObstacles:lowerObstacles});lowerPaths.push(...lowerLandscape.paths);lowerObstacles.push(...lowerLandscape.obstacles);
  // Lower-world lights point toward the lower face; upper cast lighting is retained.
  const lamps=new T.Group();lamps.name='Lower-face daylight';group.add(lamps);const hemi=new T.HemisphereLight(0xdde6df,0x5c5142,1.05);hemi.position.set(0,-200,0);lamps.add(hemi);const sun=new T.DirectionalLight(0xffe2b6,1.1);sun.position.set(170,-600,-250);sun.target.position.set(0,-96,0);lamps.add(sun,sun.target);lamps.visible=false;
- return{group,lowerFrame,lowerGround,lowerPatio,lowerObstacles,lowerPaths,lowerLandscape,sectionCut,lamps,shell,land,tunnel,owned,dispose(){lowerLandscape.dispose();group.removeFromParent();group.traverse(o=>{if(o.isInstancedMesh&&owned.has(o.geometry))o.dispose?.();});for(const r of owned)r.dispose();group.clear();}};
+ return{group,sea,updateOcean(time,options){updateOceanMaterial(water,time,options);},lowerFrame,lowerGround,lowerPatio,lowerObstacles,lowerPaths,lowerLandscape,sectionCut,lamps,shell,land,tunnel,owned,dispose(){lowerLandscape.dispose();group.removeFromParent();group.traverse(o=>{if(o.isInstancedMesh&&owned.has(o.geometry))o.dispose?.();});for(const r of owned)r.dispose();group.clear();}};
 }
 // Move only wholly remote subtrees. Shared source geometry/materials and all local
 // positions survive: source animation and private tool coordinates keep working.

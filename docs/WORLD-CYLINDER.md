@@ -74,6 +74,20 @@ contract; ordinary movement cannot snap a player onto an overlapping route.
 The controller owns handoffs between Babel, spiral, tunnel, lower annulus and
 lower ground. Unrelated travel or leaving city mode must relinquish the route.
 
+The western exit overlaps the ordinary lower ground before the finite walkout
+deck ends. The shared exterior-handoff predicate releases gallery ownership
+there and prevents both automatic capture sites from immediately taking it back.
+This applies to the outer annular floor band too. In that overlap, ordinary
+lower-ground movement still passes through `canLower`, including the Faculty,
+paper monitors, landscape, original source walls and ocean boundary. An invalid
+central-gallery surface still blocks entry into the open well. Do not fix an
+exit trap by removing solid windows or disabling collision delegates.
+
+The regression walks beyond local X -64, turns past the deck's Z edge, follows
+the complete covered connector to the working Mathematics entrance and returns
+to the rotunda. A check that only reaches the first route-null frame misses the
+repeated-capture trap.
+
 The Faculty of Mathematics is the lower central annular building directly
 opposite the upper Gallery. `src/math-faculty-model.js` and
 `src/math-faculty-scene.js` add the central rotunda's annular roof and open oculus,
@@ -196,3 +210,9 @@ Current local preview arrivals include `?arrival=babel-stairs`, `?arrival=babel`
 `?arrival=through-gallery`, `?arrival=lower-face`, `?arrival=world-section`,
 `?arrival=escher-depth` and `?arrival=pond-crossing`. The pond arrival stops beside
 the existing basin; crossing remains an explicit action.
+
+## Ocean consistency and central earth
+
+Upper and lower water use the same unlit ocean shader in ocean-surface.js, with identical shoreline palette, foam and fog handling. Each owns its material and time uniforms. World updates preserve reduced motion and the active scene fog.
+
+Below Babel, three closed annular earth layers occupy radii 21.7 to 58 from Y-26.6 to -95.9. The middle layer has a real east-facing rectangular cut at Z +/-2.3 and Y-40.2..-34.7 for the existing Escher corridor. The spiral well remains hollow inside r21.7; Babel and lower Faculty floors remain separate. These layers give the cutaway real earth behind the central shaft rather than exposing sky.

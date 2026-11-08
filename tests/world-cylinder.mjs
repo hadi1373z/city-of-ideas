@@ -1,3 +1,4 @@
+import {buildCityCoast} from '../src/coastal-city-scene.js';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import * as T from '../src/city-source-assets/home-tools/vendor/three.module.js';
@@ -39,6 +40,17 @@ check('Cylinder has two matching faces, a real lower aperture, enclosed tunnel a
  assert.equal(ray(133,-38.2,115,1,0,0,4).length,0,'The Escher handoff must be an open end');
  assert(ray(40,-38.2,0,0,0,1,3).length,'The straight tunnel has a real side wall');
  let disposed=0;b.shell.geometry.addEventListener('dispose',()=>disposed++);b.dispose();assert.equal(disposed,1);assert.equal(b.group.children.length,0);
+});
+
+check('Both oceans share their shader and fog; real central earth encloses the shaft without closing Escher',()=>{
+ const b=buildWorldCylinder(T),c=buildCityCoast(T,{naturalTrees:null});b.group.updateMatrixWorld(true);
+ assert.equal(b.sea.material.vertexShader,c.sea.material.vertexShader);assert.equal(b.sea.material.fragmentShader,c.sea.material.fragmentShader);
+ const fog={color:new T.Color(0xa5c1cc),density:.0007};b.updateOcean(12,{fog});c.update(12,{fog});
+ for(const name of ['time','fogDensity','islandRadius'])assert.equal(b.sea.material.uniforms[name].value,c.uniforms[name].value);assert(b.sea.material.uniforms.fogColor.value.equals(c.uniforms.fogColor.value));
+ b.updateOcean(90,{reduced:true,fog});c.update(90,{reduced:true,fog});assert.equal(c.uniforms.time.value,0);assert.equal(b.sea.material.uniforms.time.value,0);
+ const core=b.group.getObjectByName('Earth between Babel and the lower face');assert(core);
+ for(const y of [-30,-60,-90])for(let i=0;i<32;i++){const a=i*Math.PI/16,hits=new T.Raycaster(new T.Vector3(0,y,0),new T.Vector3(Math.cos(a),0,Math.sin(a)),0,60).intersectObject(core,true);assert(hits.length,'Earth must replace the sky outside the central stairwell');near(Math.hypot(hits[0].point.x,hits[0].point.z),21.7,.003);}
+ assert.equal(new T.Raycaster(new T.Vector3(22,-38,0),new T.Vector3(1,0,0),0,35).intersectObject(core,true).length,0,'The real Escher corridor must pass through the earth');b.dispose();c.dispose();
 });
 
 check('Reparenting preserves nested source animation coordinates, geometry and parent transforms',()=>{
@@ -102,6 +114,32 @@ check('Lower movement preserves logical positions, old collision contracts and c
  const f=fixture(),{M,api}=f;api.visitLower();near(M.player.x,-2212);near(M.player.z,-65);near(M.player.y,1.93);assert(api.lowerRoots.includes(f.garden));assert.equal(f.garden.position.x,-2360);assert.equal(f.dancer.position.x,3);assert.equal(f.ground.visible,false);
  assert.equal(M.city.canStand(-2360,-65),false);assert.equal(M.city.canStand(-2099.8,-65),false,'New rotunda wall must collide');assert(M.city.canStand(-2220.2,-65),'Western doorway stays open');const held={...M.player};f.reader.hidden=false;api.step(.1,{forward:1,boost:true});assert.deepEqual(M.player,held,'Reading pauses lower-face movement');f.reader.hidden=true;assert(M.city.canStand(-2250,-65));M.player.x=-2160+564.9;M.player.z=-65;M.player.yaw=-Math.PI/2;for(let i=0;i<20;i++)api.step(.1,{forward:1,boost:true});assert(lowerRadius(M.player.x,M.player.z)<=565);assert(lowerRadius(M.player.x,M.player.z)>564.8);
  M.player.x=-2300;M.player.z=-65;const before={...M.player};M.player.yaw=Math.PI/2;api.step(.1,{forward:1});assert(M.player.x<before.x);near(M.player.y,1.93);assert.equal(f.privateAccess,0);f.events.get('pagehide')();
+});
+
+check('Mathematics exit continues past the finite deck, around the covered connector and back into the hall',()=>{
+ const f=fixture(),{M,api}=f,world=(x,z)=>[W.lowerOrigin.x+x,W.lowerOrigin.z+z];api.visitLower();
+ // The old handoff cleared route at x<-62, then recaptured the visitor every
+ // tick and trapped them at x=-63.9 or z=2.45. Continue well beyond both edges.
+ drive(f,...world(-66,0));assert.equal(api.route,null);assert(M.player.x<W.lowerOrigin.x-65.8);near(M.player.y,1.93);
+ for(const p of[[-64,0],[-64,8],[-64,26],[-80,26],[-80,9.6],[-80,35]])drive(f,...world(...p));
+ assert(M.player.z>W.lowerOrigin.z+34.8,'The visitor reaches the grounds beyond the working entrance');assert.equal(api.route,null);near(M.player.y,1.93);
+ for(const p of[[-80,26],[-64,26],[-64,0],[-52,0]])drive(f,...world(...p));
+ assert.equal(api.route?.side,'lower','Walking back into the reading hall rejoins its real gallery floor');assert.equal(api.route.layer,'floor');near(M.player.y,1.93);assert.equal(f.privateAccess,0);f.events.get('pagehide')();
+});
+
+check('Outdoor handoff and return keep the lower-ground collision guards active on the transition step',()=>{
+ const f=fixture(),{M,api}=f;api.visitLower();const landscape=api.built.lowerLandscape,original=landscape.canStand;let blocked=0;
+ // Stand in for a lower-land obstacle immediately beyond the release boundary.
+ // The gallery walker must consult this guard before taking that first step.
+ landscape.canStand=(x,z)=>{if(x< -62&&x> -62.6&&Math.abs(z)<.3){blocked++;return false;}return original(x,z);};
+ M.player.yaw=Math.PI/2;for(let i=0;i<100;i++)api.step(.1,{forward:1,boost:true});assert(blocked>0,'The outgoing deck step must consult the outdoor guard');assert(M.player.x>=W.lowerOrigin.x-62,'Releasing the route cannot step through an outdoor obstacle');assert.equal(api.route?.layer,'walkout');
+ landscape.canStand=original;drive(f,W.lowerOrigin.x-66,W.lowerOrigin.z);assert.equal(api.route,null);
+ // The candidate-position re-entry path must check the same guard before
+ // snapping a visitor from ordinary ground back onto the finite gallery.
+ M.arrive({x:W.lowerOrigin.x,z:W.lowerOrigin.z+57.4,y:.13,yaw:0});blocked=0;
+ landscape.canStand=(x,z)=>{if(z<57.2&&z>56.8&&Math.abs(x)<.3){blocked++;return false;}return original(x,z);};
+ for(let i=0;i<100;i++)api.step(.1,{forward:1});assert(blocked>0,'The return-to-floor candidate must consult the outdoor guard');assert(M.player.z>=W.lowerOrigin.z+57.2);assert.equal(api.route,null,'A blocked return step must not capture the visitor inside the obstacle');
+ landscape.canStand=original;drive(f,W.lowerOrigin.x,W.lowerOrigin.z+52);assert.equal(api.route?.layer,'floor');f.events.get('pagehide')();
 });
 
 check('Physical first-person, photo camera and lantern use the same proper lower frame',()=>{

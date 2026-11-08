@@ -1,5 +1,5 @@
 import {BABEL,BABEL_COPY,entryHeight,surfaceAt,walkLibrary,babelDesk,pageAt,addressOf,prefixCount} from './babel-library-model.js?v=two-faces2';
-import {buildBabelLibrary} from './babel-library-scene.js?v=two-faces2';
+import {buildBabelLibrary} from './babel-library-scene.js?v=book-contact1';
 export function installBabelLibrary(M,T){
  const built=buildBabelLibrary(T,{drawing:M.snakeDrawing});M.scene.add(built.group);M.city.targets.push(...built.targets);let active=false,disposed=false,lastContext='',prefix='',address=0,lighting=null;
  const lang=()=>window.CITY_I18N.lang,w=()=>BABEL_COPY[lang()]||BABEL_COPY.en,el=(tag,text)=>{const n=document.createElement(tag);if(text)n.textContent=text;return n;},button=(text,fn)=>{const n=el('button',text);n.type='button';n.dataset.babelFocus=text;n.onclick=fn;return n;};
@@ -15,7 +15,7 @@ export function installBabelLibrary(M,T){
  function begin(point,{keepMovement=false}={}){M.cancelActivity?.();if(!keepMovement)M.clearMovement();active=true;M.setCityMode();Object.assign(M.player,point||{x:BABEL.flight.x,z:BABEL.flight.z0,y:BABEL.flight.top+M.eye,yaw:0,pitch:Number.isFinite(M.player.pitch)?M.player.pitch:-.55});document.body.dataset.babelLibrary='true';locale();return true;}
  function leave(){stop();M.clearMovement();M.arriveGallery(BABEL.entry);}
  function visitEntrance(){if(active)stop();M.arriveGallery(BABEL.entry);M.player.pitch=-.55;}
- function visitThermal(){M.arrive({x:-11,z:0,y:-24,yaw:-Math.PI/2});begin({...M.player,pitch:.28});}
+ function visitThermal(){const a=Math.PI-Math.PI/80,x=Math.cos(a)*9,z=Math.sin(a)*9;M.arrive({x,z,y:BABEL.levels[4].y,yaw:Math.atan2(x,z)});begin({...M.player,pitch:-.14});}
  function visitInside(){M.arrive({x:48,z:(BABEL.landing.minZ+BABEL.landing.maxZ)/2,y:-8,yaw:Math.PI/2});begin({...M.player,pitch:-.35});}
  M.arrive=p=>{if(active)stop();return old.arrive.call(M,p);};
  function guardGallery(previous){const p=M.player,b=BABEL.opening;if(p.y>4||p.x<b.minX||p.x>b.maxX||p.z<b.minZ||p.z>b.maxZ)return false;if(p.y-M.eye>BABEL.flight.top+.1||p.z<BABEL.flight.z1+.08)return false;if(previous.z>=BABEL.flight.z0-.01&&p.z<=BABEL.flight.z0+.08&&Math.abs(p.x-BABEL.flight.x)<BABEL.flight.width/2-.28){begin({...p,y:(entryHeight(p.x,p.z)??BABEL.flight.top)+M.eye},{keepMovement:true});return true;}Object.assign(p,previous);return true;}

@@ -1,4 +1,5 @@
-import {buildBabelThermalVault} from './babel-thermal-vault.js';
+import {buildBabelThermalVault} from './babel-thermal-vault.js?v=book-contact1';
+import {BABEL_READING_BOOK} from './babel-reading-book-model.js';
 import {buildBabelSnakeStairs} from './babel-snake-stairs.js?v=two-faces2';
 import {BABEL,stairs,babelDesk,BABEL_COPY} from './babel-library-model.js?v=two-faces2';
 export function buildBabelLibrary(T,{canvas=()=>document.createElement('canvas'),drawing=null}={}){
@@ -94,7 +95,7 @@ export function buildBabelLibrary(T,{canvas=()=>document.createElement('canvas')
  const plinth=mesh(new T.CylinderGeometry(1.12,1.27,.66,64),stone,0,BABEL.base+.33,0);plinth.name='Quiet circular reading plinth';
  const plinthTop=mesh(new T.CylinderGeometry(1.38,1.38,.075,64),oak,0,BABEL.base+.6975,0);plinthTop.name='Round oak reading surface';
  box(1.14,.045,.86,0,BABEL.base+.758,0,leather[1]);
- for(const side of[-1,1]){const leaf=mesh(new T.BoxGeometry(.52,.035,.76),pages,side*.255,BABEL.base+.805,0);leaf.rotation.z=-side*.10;leaf.name='Open book on the central reading plinth';}
+ const readingBook=BABEL_READING_BOOK;for(const side of[-1,1]){const leaf=mesh(new T.BoxGeometry(readingBook.leafWidth,readingBook.leafThickness,readingBook.leafDepth),pages,side*readingBook.offset,readingBook.leafY,0);leaf.rotation.z=-side*readingBook.leafTilt;leaf.name='Open book on the central reading plinth';}
  const lamps=new T.Group();lamps.name='Warm underground reading lights';group.add(lamps);const lampPositions=[];for(const l of BABEL.levels)for(let j=0;j<6;j++){const a=j*Math.PI/3+.3,x=Math.cos(a)*(l.r+4),z=Math.sin(a)*(l.r+4);box(.06,.8,.06,x,l.y+3.8,z,brass);lampPositions.push([x,l.y+4.32,z]);}
  const ambient=new T.AmbientLight(0xe4cfac,.8);ambient.userData.babelOwned=true;lamps.add(ambient);for(const p of[[0,-9,0],[30,-5,-20],[-25,-17,20]]){const light=new T.PointLight(0xffcf88,55,100,1.7);light.position.set(...p);light.userData.babelOwned=true;lamps.add(light);}lamps.visible=false;
  const object=new T.Object3D();const globes=new T.InstancedMesh(own(new T.SphereGeometry(.18,8,6)),glow,lampPositions.length);lampPositions.forEach((p,i)=>{object.position.set(...p);object.updateMatrix();globes.setMatrixAt(i,object.matrix);});globes.instanceMatrix.needsUpdate=true;lamps.add(globes);for(const[m,items]of beamBatches){const inst=new T.InstancedMesh(unitBeam,m,items.length);items.forEach((b,i)=>{object.position.copy(b.p);object.quaternion.copy(b.q);object.scale.set(b.w,b.length,b.w);object.updateMatrix();inst.setMatrixAt(i,object.matrix);});inst.instanceMatrix.needsUpdate=true;inst.computeBoundingSphere?.();group.add(inst);}object.rotation.set(0,0,0);object.scale.set(1,1,1);let meshes=0;for(const[m,items]of batches){const inst=new T.InstancedMesh(m===stamp?unitStamp:unit,m,items.length);inst.name=m===pages?'Bound pages':'Batched library books and joinery';for(const[p,t]of items.entries()){object.position.set(t.x,t.y,t.z);object.rotation.set(0,t.yaw,0);object.scale.set(t.w,t.h,m===stamp?1:t.d);object.updateMatrix();inst.setMatrixAt(p,object.matrix);}inst.instanceMatrix.needsUpdate=true;inst.computeBoundingSphere?.();group.add(inst);meshes++;}

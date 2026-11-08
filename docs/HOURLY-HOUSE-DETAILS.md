@@ -4465,3 +4465,121 @@ solid windows, stair landmark and proximity-gated exit guide. Follow the actual
 proper lower parent, with no new lot or annular-Faculty duplication. Preserve
 the eleven genuine paper monitors/exact scan/source/rights/ownership records;
 do not claim full legacy catalogue translation.
+
+## 2026-11-09 — Mathematics Calculus: value, rate and accumulation
+
+Developed floor index 3 (displayed Floor 4), Calculus & analysis, in the existing
+original Mathematics working wing at logical (-2240,-65). Its source height 12
+and installed logical feet 12.13 stay unchanged. The annular Faculty, paper ring
+and three completed working floors remain distinct. See `MATH-CALCULUS.md`.
+
+Eight aprons/eight leg joints meet both original table undersides. Two fitted
+linen chair pads/eight seams rest on original seats. Two lower laboratory-table
+stretchers meet the original legs; a cross stretcher meets those rails. A backed
+two-post folio rests on the original library table's rear edge, clear of its
+sheet/open book. Cards, strokes and filled points meet their supporting surfaces.
+There are 67 owned meshes/eight materials, no new textures/lights/image assets,
+colliders or saved state. Source height is applied once under the actual model
+and proper lower parent; original source/private coordinates are not baked.
+
+Fixed original city cards compare two finite chords sharing a curve point, then
+congruent positive/negative regions. Continuous/broken strokes distinguish the
+chords, without missing points; all three points are filled. Plus/minus marks
+and above/below position supplement colour. Signed contributions cancel while
+total geometric area remains positive. These are unscaled city prompts, not
+historical pages, copied textbook diagrams, measured source plots or live models.
+
+Original EN/DE/FA/CS reading distinguishes the excluded input one from limit two,
+finite square-function quotients at h=.1/.01 from their derivative limit, and
+signed accumulation from total area. The original integral f(x)=x on [0,2]
+remains nonnegative; the cancellation card does not measure it. The integral
+identity states continuity on a closed interval, ordered bounds and an
+antiderivative on the same interval. Three unscored prompts revisit the domain,
+two-sided limit and reversed integration bounds. All three formulas are LTR;
+Persian prose is RTL. No quotation or historical testimony is invented.
+
+Successfully accessed authored sources: OpenStax Calculus Volume 1, sections
+[2.2](https://openstax.org/books/calculus-volume-1/pages/2-2-the-limit-of-a-function),
+[3.1](https://openstax.org/books/calculus-volume-1/pages/3-1-defining-the-derivative) and
+[5.3](https://openstax.org/books/calculus-volume-1/pages/5-3-the-fundamental-theorem-of-calculus).
+
+Folio pointer/E, inside context, original tools header and welcome Places reach
+the companion. Explicit links retain the exact original `limits`, `derivatives`
+and `integrals` physical-source payloads/readers/exercises. Actual floor/inside/
+feet guards hide wrong-floor controls/encounters. Directory reading leaves pose
+and floor unchanged; only explicit approach uses the working entrance. The
+original guide/lift chooses floors; upper windows stay solid and the folded exit
+retains the real ground doorway/proximity-gated upper lift.
+
+Closing from source tools restores the same outer dialog, mounted iframe,
+source reader, raw draft and caret. Reading/locale does not inspect private
+fields, access storage/private memory, write progress, translate private text
+or change saved city language. Reflections, discussions, imports, journal saves
+and transfers remain explicit under source ownership. All eight floors/24 IDs,
+Atlas/books, seats/furniture/colliders/approaches and route/lift metadata remain.
+Owned targets/resources clean up once on missing/replaced owners. Foundations,
+Algebra and Geometry survive independently. Actual Math/Atlas adapters retain
+EN/DE/FA and disclosed Czech English fallback; no full legacy translation claim.
+
+Main advanced during this run. The reviewed candidate incorporates 461aff4
+(including c2ea9bf/4dec258), retaining 20c03ce and that latest main as ordered
+parents. The original shared book leaves/contact model, reservoir tip
+Y−25.651827, contained fluids/height uniforms, static contact glow and off-axis
+lowest-terrace default arrival remain. The common lower outdoor handoff stays
+at release and both capture sites, with canLower checks. Shared ocean shaders,
+separately owned uniforms/fog/reduced motion, three earth layers at radii
+21.7–58/Y−95.9..−26.6 and the real east Escher cut at Y−40.2..−34.7/Z±2.3 remain.
+Main's coast import is reconciled with Origami's completed reading/controls;
+both root preload/entry versions match. All eleven genuine paper scans,
+aspect ratios/editions/source/rights and local async ownership remain unchanged.
+Earlier integration ancestry, other branches and open PR #2 are preserved.
+The same feature branch/PR #5 continues; no PR merge or deploy.
+
+### Verification
+
+All 115 release programs passed after the later-main reconciliation; build
+contains 847 assets. Root control checks include the new installer and its
+original main/renderer/extra identity. The independently measured original
+241-node source fixture fingerprint is
+ba30ea15701a398c591e7cf08565fb5d11382ccd4c82f0915d16bdb9fba0e984.
+Tests retain source resources/parents/transforms/data/visibility/instances,
+16 colliders/16 approaches and 1,813 collision samples. They cover real
+partition openings/solid upper windows, logical/proper-lower folio rays,
+furniture/card/stretcher support, finite chords/equal signed regions, original
+domain/quotient/accumulation cases, four languages/RTL formulas, exact source
+payloads/exercises, raw private draft/caret, explicit source-only saves and
+once-only owner replacement. Reading/locale run with private getters, storage
+and visitor memory forbidden; all three lower companions survive cleanup.
+
+Native Chrome walking used the real entrance, original guide/lift and partition
+openings. Folio pointer/E and all three exact reader handoffs work. A synthetic
+unsaved multilingual note keeps spaces/newline and selection 3–8 across local
+language/close/source-header return, without a reflection save. All four desktop
+reading widths match at 743 px; Czech/Persian 390×844 mobile widths match at
+339 px and the original source header at 381 px. Persian prose is RTL, all three
+formulas LTR. The supported folio/pads/aprons/joints/lower braces and original
+book clearance were visually checked. Wrong-floor controls hide at index 4;
+the original folded lift returns to ground and Foundations returns.
+
+Saved global Czech survives reload. Outside directory reading stays Czech,
+leaves pose/storage/preference unchanged and offers only explicit approach to
+the actual working entrance. Native lower walking reaches the Faculty,
+continues west beyond local X−64 to X−66, turns past the finite deck's Z edge,
+reaches the covered connection/working entrance and local (-80,35), then returns
+to the hall. The new bare Babel arrival/book contact was visually checked.
+All eleven paper pages report ready; no fresh external archive fetch is claimed.
+No application errors were seen; the existing Three.js warning remains.
+Hardware controller A was not separately tested. Screenshots/release log are
+retained in this chat; final commit/build/local verification is recorded in PR #5.
+
+Forty-three first reading/detail passes are complete. Next useful undeveloped
+area: Discrete mathematics, floor index 4 of this original working wing,
+source height 16/logical feet 16.13. Inspect `graphs`, `counting`, `induction`,
+their actual source models/readers/public gaps and approaches before a modest
+sourced EN/DE/FA/CS pass. Preserve graph connections versus distances and the
+four-room route/cut-edge exercise, unordered teams versus ordered speaker pairs
+from A/B/C, and induction's base case/next-step proof for the positive-integer
+sum. Keep the four completed floors, all eight floors/24 IDs, Atlas/books,
+source activities/private reflections/imports/explicit saves, seats/colliders/
+routes/lift gates and solid windows. Inherit the actual lower transform, with
+no new lot or annular-Faculty duplication. Four working floors remain candidates.

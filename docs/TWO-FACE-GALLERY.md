@@ -25,6 +25,13 @@ The upper group remains at (0, 0, 0). The lower group is built around local (0, 
 
 The tunnel spur meets the host tunnel at `(22,-40,0)`. Its landing is on unwrapped angle `4π`. The main stair ends at `(16,-48,0)` with unwrapped angle `6π`. The lower walkout meets the host land at `(-64,.13,0)`. Deck rails have genuine gaps at tangential stair mouths, and the western doorway is physically open.
 
+The host relinquishes gallery ownership in the walkout's shared exterior area
+before its finite edge. Both automatic capture sites use that same handoff rule,
+allowing a visitor to continue west and turn onto the covered connector under
+ordinary lower-ground collision checks. Returning through the overlap captures
+the gallery again at its interior side. Tests must continue beyond the deck's
+X and Z bounds and return; reaching the first handoff frame alone is insufficient.
+
 The host must cut the **last Babel terrace's bookshelf bays beside angle zero**. On the current 30-bay shelf at radius 13, skipping bays with `abs(atan2(sin(a),cos(a))) < 3/13` removes the two bays centered near ±0.105 radians. This opens the bridge corridor through their full depth. Preserve the last terrace floor; it meets the bridge over X 9–13.4. Any Babel inner or outer rail intersecting this corridor must have the same gap.
 
 The old Babel pit floor at Y = −26.5 requires a real annular hole with inner radius 14 and outer radius 18. Keep both the central disk and the outer floor; neither may contain triangles spanning the hole. The host must also exclude the central shaft and the tunnel's envelope from the island's thickness filler. The gallery's shell is at radius 21.2, with an open positive-X slot wide enough for the 4-unit tunnel spur. Do not insert a foundation face or disk through either spiral or its middle landing.

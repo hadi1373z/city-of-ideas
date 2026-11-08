@@ -135,7 +135,10 @@ registers, contextual first conjectures and explicit private saves. Read
 
 The existing central volcano now sits above a contained inverted glass reservoir.
 Its r21 mouth aligns with the volcano and the central opening in Babel’s timber
-ceiling; its tip is Y−20 above the central book circle. Read
+ceiling; its tip meets the existing open book's centre seam at Y−25.651827.
+Keep the shared book/contact dimensions in babel-reading-book-model.js and the
+restrained static contact glow. The default view sits on the lowest terrace,
+slightly off-axis so a railing post does not hide the meeting point. Read
 `docs/BABEL-THERMAL-VAULT.md` before changing the cone, fluids or headroom.
 
 On 2026-11-08 the user made the Babel volcanic-reservoir view the default
@@ -184,3 +187,14 @@ Historic papers destination and `?arrival=paper-monitors` visit the real ring;
 the bare city address still defaults to Babel. Read docs/PAPER-MONITORS.md and
 docs/PAPER-COLLECTION.md before extending the collection. Voices, notes and
 account connections are unaffected.
+
+The lower Mathematics rotunda hands movement to the ordinary lower grounds in
+the shared outer-floor band and west walkout overlap. Reuse the same handoff
+predicate when releasing a gallery route and at both controller capture sites;
+otherwise each frame can recapture the short deck and trap a visitor at its
+finite edge. Keep canLower collision checks on ground movement and capture.
+Regression checks must continue past local X -64, turn onto the covered walk,
+reach the working wing and return to the hall; stopping at the first route-null
+frame does not prove that a visitor can leave.
+
+Both physical faces share ocean-surface.js for water colour, foam, waves and fog. Update both materials from the same scene fog and reduced-motion setting. The annular earth core below Babel (r21.7..58, Y-95.9..-26.6) encloses the stair shaft; retain the east Escher tunnel cut at Y-40.2..-34.7 and Z+/-2.3. Do not replace these earth walls with a sky-filled opening.
