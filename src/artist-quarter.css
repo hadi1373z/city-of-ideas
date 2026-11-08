@@ -191,3 +191,22 @@
 #rodin-guide-context{position:fixed;inset-inline-start:24px;bottom:170px;z-index:18;max-width:min(310px,calc(100vw - 48px))}
 #rodin-guide-context[hidden]{display:none}
 @media(max-width:430px){#rodin-guide header{padding:14px}#rodin-guide .rodin-guide-body{padding:6px 14px 18px}#rodin-guide-context{inset-inline-start:12px;bottom:245px;max-width:220px}}
+
+/* Mondrian's city interval tray preserves the original paintings and website experiment. */
+#mondrian-guide{color:#3a4d56;background:#f2ecdc;border:1px solid #aebac1;border-radius:16px;width:min(840px,calc(100vw - 28px));max-height:88dvh;padding:0;box-sizing:border-box}
+#mondrian-guide::backdrop{background:#253541b8}
+#mondrian-guide header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 22px;border-bottom:1px solid #c5c6b6}
+#mondrian-guide h2{font:normal clamp(22px,3vw,30px)/1.3 Georgia,serif;margin:0;overflow-wrap:anywhere}
+#mondrian-guide header button{min-width:44px;flex-shrink:0}
+#mondrian-guide .mondrian-guide-body{padding:8px 22px 24px;max-height:calc(88dvh - 130px);overflow:auto;overflow-wrap:anywhere}
+#mondrian-guide p{line-height:1.7;max-width:72ch}
+#mondrian-guide h3{font:normal 24px/1.3 Georgia,serif;margin:24px 0 12px}
+#mondrian-guide h4{font:normal 21px/1.35 Georgia,serif;margin:0}
+#mondrian-guide article{margin:14px 0;padding:16px;background:#fbf8ee;border:1px solid #cbd1d2;border-radius:9px}
+#mondrian-guide .mondrian-guide-actions{display:flex;gap:8px;flex-wrap:wrap}
+#mondrian-guide button,#mondrian-guide-context button{min-height:44px;padding:10px 14px;border:1px solid #6f8798;border-radius:7px;background:#3e5d70;color:#fff9e8;line-height:1.4;white-space:normal}
+#mondrian-guide a{display:flex;align-items:center;min-height:44px;color:#3e5d70}
+#mondrian-guide button:focus-visible,#mondrian-guide a:focus-visible,#mondrian-guide-context button:focus-visible{outline:3px solid #b28132;outline-offset:3px}
+#mondrian-guide-context{position:fixed;inset-inline-start:24px;bottom:170px;z-index:18;max-width:min(310px,calc(100vw - 48px))}
+#mondrian-guide-context[hidden]{display:none}
+@media(max-width:430px){#mondrian-guide header{padding:14px}#mondrian-guide .mondrian-guide-body{padding:6px 14px 18px}#mondrian-guide-context{inset-inline-start:12px;bottom:245px;max-width:220px}}

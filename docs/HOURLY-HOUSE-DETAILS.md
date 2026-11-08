@@ -2272,3 +2272,138 @@ real language gaps before modest EN/DE/FA/CS details/reading; do not claim full
 legacy catalog translation. Keep Rodin's digital cabinet/guide, exact six
 handoffs and model/cast/carving distinction, all earlier gallery companions,
 house/learning/private flows and imported room workbenches.
+
+## 2026-11-08 — Mondrian: branches, lines and intervals
+
+Completed the first detail/reading pass for the existing Piet Mondrian gallery,
+id mondrian, at world (161, 132). The source scene/catalog, gable roof, facade
+grid, opposite-row pi transform, quarter layout, installed profile/reader and
+original Proportion study were inspected first. Its six supplied paintings
+and original experiment remain the basis of the visit.
+
+Pale gable rakes follow the actual roof vertices in three dimensions, with
+ridge/eave caps, dark window sill/header, two supported linen seat pads and
+seams, a worktable apron/joints and small facade-grid corner caps. The seat
+and facade details inherit their original profile payloads. Borrowed meshes,
+geometry/material identities and values, transforms, vertices, visibility,
+furniture/brush instance matrices, openings and colliders remain exact.
+
+A narrow, railed tray rests on the front edge of the original worktable,
+clear of its palette and all three brushes. A paper sheet supports two ruled
+strips of equal width, with fixed markers at one third and two thirds. The
+tray stays within the tabletop footprint. It is an original city diagram,
+not a Mondrian painting, historical tool or reconstruction of his method.
+It has no separate stored state and does not change the website exercise.
+
+Pointer selection or aiming at the tray and pressing E opens an accessible
+guide. The inside context button and Mondrian's existing quarter-directory
+card also open it. Outside it offers the original doorway. Inside, six actions
+reuse the exact source approach/yaw/lookAt points and six original-reader
+handoffs pass unchanged artist/work IDs: gray-tree, red-tree, apple-tree,
+composition-red, composition-1921 and composition-1929. Accessible action names
+include the individual title. The house retains its pi rotation and original
+world location. Image bytes/ratios, attribution/rights/source/citation metadata,
+catalog prose, furniture, resident and private observation interactions remain.
+
+Original prompts follow branching/curved lines, adjacent spaces, coloured
+planes, white fields and black boundaries in each supplied painting. They
+invite comparison without calling one tree picture an unfinished version of
+another or making the later grids a recipe. The new physical fractions and
+website slider are not measurements of the paintings.
+
+Historical background links two primary Kunstmuseum Den Haag records:
+https://www.kunstmuseum.nl/en/collection/grey-tree
+https://www.kunstmuseum.nl/en/collection/flowering-apple-tree
+Both pages were opened and read. They date The Grey Tree to 1911 and Flowering
+Apple Tree to 1912 and identify both as oil on canvas. These provide context
+without replacing the supplied images' own metadata or approximate dimensions.
+The spelling Gray Tree remains in the original catalog and ID. No quotation,
+historical note, image, recording or artist voice was invented.
+
+The guide explains the original reader -> artist website -> Proportion study
+route and retains actual English control labels. The original Left-to-right
+proportion range is 15-75, starts at 36, and Restore 36 : 64 resets that one
+boundary. The exercise remains designer-made, not a Mondrian reproduction or
+simulation of his working method. No lab was replaced or restarted by guide
+rendering, and no private/lesson storage is read or written by the companion.
+
+The guide, six prompts, source labels and associated controls support
+EN/DE/FA/CS, with Persian RTL. The original catalog, artist website and private
+tools retain their existing language handling; some original book/catalog and
+shared city/notebook text remains English. Atelier navigation/names support
+four languages while its advanced lessons/instructions/problems remain English
+as disclosed. This is not full city-wide Czech localization. Existing language
+preference persistence and explicit observation-save behavior remain.
+
+Verification: all 79 release programs passed, followed by build and whitespace
+checks. Source hash:
+8f2ea338eda3242c99d43d26122da451cd892ccad898f5f15de5b1b8a1faf00d
+(742 assets / 332,351,754 bytes). The new check compares all borrowed node
+transforms, geometry/material identities and values, vertices, payloads,
+visibility and source furniture/brush instance matrices, plus original catalog,
+colliders, entries and approaches. It checks supported base/paper/diagram marks,
+tabletop footprint, equal strip spans with exact one-third/two-thirds divisions,
+brush clearances in the actual pi-rotated frame, supported pads, facade contact,
+three-dimensional rake endpoints, clear aperture/paintings/walking routes and
+inherited profile actions. A real Three.js ray selects the tray. Tests cover
+six exact IDs, all four-language viewpoints/reader routes, work-specific names,
+remote-pick rejection, RTL/top-of-guide behavior, no private storage and owned
+disposal once. Earlier house/model/private/source/cast/voice/island checks pass.
+
+Native Playwright CLI review at 1280 x 720 confirmed welcome/directory access,
+Rodin's retained guide, Mondrian's original doorway and physical walking entry.
+The gable/window/facade/seat/table details and tray were reviewed with original
+paintings and resident. The tray visibly clears the paint tools. Pointer
+selection and native E opened the guide. All six native viewpoints and six
+exact original reader handoffs worked; Gray Tree and the 1930 Composition views
+were visually reviewed. The original reader retained its image, source/rights
+links and observation field.
+
+All four guide languages were visually reviewed. DE/FA/CS dialog client/scroll
+widths matched at 839 px and body widths at 823 px, opening at scrollTop zero.
+Persian computed direction was RTL. Czech at 390 x 844 had matching dialog
+widths of 355 px and body widths of 339 px, with no horizontal overflow and
+minimum button height 44 px. Introductory reading and scrolled controls were
+reviewed. Keyboard Enter activated the last Czech viewpoint; reopening after
+scrolling began at zero. A synthetic mixed-language Gray Tree draft, including
+leading/trailing spaces, survived all six reader/viewpoint routes, four-language
+guide visits and the original website visit. No save action or private
+translation occurred. Hardware controller A was not separately exercised;
+shared focused-button support remains.
+
+The original reader's website link opened the retained offline site in a
+separate native tab. Proportion study retained its designer-made attribution.
+Keyboard ArrowRight changed 36 to 37, Home reached 15, End reached 75, and
+Restore 36 : 64 returned to 36. Main city/guide console: zero errors. The
+separate unchanged legacy-site tab reported the missing root favicon (404).
+No signed-in service or private account was used. Exterior, room/tray, guide
+language/mobile/control, original-reader, painting-view and proportion/reset
+screenshots are in the originating chat's outputs.
+
+Latest branch/PR inspection found review head
+1079e50961635f31a4e15b783d6bed891ef15259 and main
+e2598f0194f25800887a7b6e4290762a1df213fb unchanged. Main is already incorporated
+through the earlier two-parent ancestry; this pass requires no new merge.
+Proof Atelier's rear passage, shifted board, six workbenches, independent key,
+explicit saves, finite-certificate limits and absence of timers remain. Classic
+translated readers/models, physical full-reader picks, Hall/focus controls and
+private draft/caret behavior remain. All twenty-five previous passes, Makers'
+complete four-language journey, map/facing, Noether/Mirzakhani/Cage, City Map,
+Babel, ocean voyage and branding remain. Approved appearances, fixed voices and
+accepted recordings are preserved. Other branches/PRs remain. PR #5 is
+unmerged; no deployment.
+
+Twenty-six first detail/reading passes are complete. Next useful house: the
+existing Dorothea Lange gallery, id lange, world (182, 134). Inspect its actual
+scene/catalog, hip roof, three-panel photo facade, opposite-row pi transform,
+quarter layout and installed profile/reader before an additive companion.
+Preserve migrant-mother, toward-la, children-camp, dust-storm,
+pea-pickers-children and roadside-blythe. Its original approach separates visible
+description, the archival caption and a return to the image. Keep the supplied
+photographs, framing, archival wording, photographer/subject credits, dates,
+source/rights/citation metadata and unknowns; never invent captions, names or
+subject testimony. Preserve furniture, resident, private observations, openings
+and walking lanes. Inspect real language gaps before modest EN/DE/FA/CS
+details/reading; do not claim full catalog translation. Keep Mondrian's fixed
+interval tray/guide, all six handoffs and original 15-75/36:64 proportion lab,
+all earlier gallery companions, house/learning/private flows and workbenches.
