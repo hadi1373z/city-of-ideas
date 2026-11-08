@@ -1,4 +1,4 @@
-import './babel-layout.js?v=snake2';
+import './babel-layout.js?v=two-faces2';
 export const BABEL=globalThis.CITY_BABEL_LAYOUT;
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n)),angleDistance=(a,b)=>Math.atan2(Math.sin(a-b),Math.cos(a-b));
 export const stairs=BABEL.levels.slice(0,-1).map((l,i)=>({i,a:l.angle,outer:l.r,inner:BABEL.levels[i+1].r,top:l.y,bottom:BABEL.levels[i+1].y,width:3.4,steps:24}));

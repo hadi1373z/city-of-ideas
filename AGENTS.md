@@ -62,9 +62,35 @@ The character's established `bm_fable` voice remains fixed.
 
 ## Island layout and first house studies
 
-The public city is a circular island centred on Zarathustra Gallery at (0, 0),
-with ocean surrounding every side. Preserve this geometry and the separate
-Graveyard world. `src/island-layout.js` defines the island.
+The approved world is one circular cylinder with two physical inhabited faces,
+not a separate remote Graveyard world. Its radius is 570 m and thickness is 96 m,
+with Zarathustra Gallery at the upper centre (0, 0), ocean around the edge, and
+Babel in the shared central structure. Preserve the upper island geometry in
+`src/island-layout.js`. The lower face retains logical source coordinates around
+(−2160, −65); `src/world-cylinder-model.js` applies a proper rigid half-turn about
+X with physical mapping X=logicalX+2160, Y=−96−logicalY, Z=−logicalZ−65. Never bake
+this transform into individual buildings, voices, saved positions or notes.
+
+The Faculty of Mathematics occupies the lower central annulus directly opposite
+the upper Gallery. Its working eight-floor source wing is immediately west at
+logical (−2240, −65), connected by a real covered walk; Ramsey House remains
+beside that wing using its existing placement helper. Preserve the original
+mathematical floors, Atlas/actions, lift and lesson content. The central Faculty
+roof, oculus, shelves and shell are in `src/math-faculty-*.js`; do not duplicate
+the source interior or cover the central helical well.
+
+`src/world-cylinder.js` owns lower-frame mounting, physical camera/photo/lantern
+poses, reversible through-gallery navigation, the middle gravity turn and the
+live 3D pond crossing. The Gallery → Babel → central spiral → lower Faculty
+route and its Escher museum spur are physical connected routes. The park pond
+is a live render of the same lower face with original boats and basin preserved.
+Keep the through-gallery and pond marked on the map. Read
+`docs/WORLD-CYLINDER.md`, `docs/TWO-FACE-GALLERY.md`,
+`docs/ESCHER-DEPTH.md` and `docs/POND-WORLD-WINDOW.md` before changing these joins.
+The optional future crossing video is configured by `pondTransitionVideo` in
+`src/city-config.js`; null uses the live 3D journey. No new voice provider or
+recording is required. All established Kokoro voices and private data remain
+unchanged.
 
 The user requested new houses with only names and small features for now.
 `src/foundation-houses-data.js` records six first studies (Freud, Chomsky, Borges,
@@ -106,3 +132,8 @@ Chomsky and Ada Lovelace now have working English investigations in their
 existing foundation houses. Preserve the grammar/stack/parse models, addition
 registers, contextual first conjectures and explicit private saves. Read
 `docs/HOUSE-INVESTIGATIONS.md` before extending those rooms.
+
+The existing central volcano now sits above a contained inverted glass reservoir.
+Its r21 mouth aligns with the volcano and the central opening in Babel’s timber
+ceiling; its tip is Y−20 above the central book circle. Read
+`docs/BABEL-THERMAL-VAULT.md` before changing the cone, fluids or headroom.

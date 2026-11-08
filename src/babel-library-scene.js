@@ -1,5 +1,6 @@
-import {buildBabelSnakeStairs} from './babel-snake-stairs.js?v=snake2';
-import {BABEL,stairs,babelDesk,BABEL_COPY} from './babel-library-model.js?v=snake2';
+import {buildBabelThermalVault} from './babel-thermal-vault.js';
+import {buildBabelSnakeStairs} from './babel-snake-stairs.js?v=two-faces2';
+import {BABEL,stairs,babelDesk,BABEL_COPY} from './babel-library-model.js?v=two-faces2';
 export function buildBabelLibrary(T,{canvas=()=>document.createElement('canvas'),drawing=null}={}){
  const group=new T.Group();group.name='Beneath Zarathustra · circular Library of Babel';const owned=new Set(),own=v=>(owned.add(v),v),batches=new Map(),beamBatches=new Map(),labels=[],targets=[];
  const material=(color,opts={})=>own(new T.MeshLambertMaterial({color,...opts}));
@@ -11,15 +12,22 @@ export function buildBabelLibrary(T,{canvas=()=>document.createElement('canvas')
  function band(ri,ro,y,m,{gap=null}={}){const v=[],ix=[],n=480;for(let i=0;i<=n;i++){const a=i/n*Math.PI*2;for(const r of[ri,ro])v.push(Math.cos(a)*r,y,Math.sin(a)*r);}for(let i=0;i<n;i++){const a=(i+.5)/n*Math.PI*2,delta=gap?Math.atan2(Math.sin(a-gap.a),Math.cos(a-gap.a)):10;if(gap&&Math.abs(delta)<gap.half)continue;const k=i*2;ix.push(k,k+2,k+1,k+1,k+2,k+3);}const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(v,3));g.setIndex(ix);g.computeVertexNormals();return mesh(g,m);}
  function label(text,x,y,z,yaw,w=3.2,h=.6){const c=canvas();c.width=1024;c.height=192;const texture=own(new T.CanvasTexture(c));texture.colorSpace=T.SRGBColorSpace;const o=mesh(new T.PlaneGeometry(w,h),own(new T.MeshBasicMaterial({map:texture,side:T.DoubleSide})),x,y,z);o.rotation.y=yaw;labels.push({c,texture,text});return o;}
  // A real enclosed vault, physically underneath the gallery; the top stairwell is open.
- const wall=mesh(new T.CylinderGeometry(57.5,57.5,25,160,1,true),plaster,0,-15,0);wall.name='Earthen library vault';const shape=new T.Shape();shape.absarc(0,0,58,0,Math.PI*2,false);const h=new T.Path();const opening=BABEL.opening;h.moveTo(opening.minX,-opening.minZ);h.lineTo(opening.minX,-opening.maxZ);h.lineTo(opening.maxX,-opening.maxZ);h.lineTo(opening.maxX,-opening.minZ);h.closePath();shape.holes.push(h);const ceiling=mesh(new T.ExtrudeGeometry(shape,{depth:.5,bevelEnabled:false,curveSegments:120}),material(0x665743,{side:T.DoubleSide}),0,-2.8,0);ceiling.rotation.x=-Math.PI/2;ceiling.name='Vault ceiling with open gallery stairwell';
- const pit=mesh(new T.CircleGeometry(57.4,160),floor,0,BABEL.base,0);pit.rotation.x=-Math.PI/2;
- for(let i=0;i<24;i++){const a=i*Math.PI*2/24;box(.5,24,.6,Math.cos(a)*56.5,-14.8,Math.sin(a)*56.5,oak,-a);beam([0,-3.2,0],[Math.cos(a)*56.5,-3.2,Math.sin(a)*56.5],.16,edgeWood);}
+ const wall=mesh(new T.CylinderGeometry(57.5,57.5,25,160,1,true),plaster,0,-15,0);wall.name='Earthen library vault';const shape=new T.Shape();shape.absarc(0,0,58,0,Math.PI*2,false);const h=new T.Path();const opening={...BABEL.opening,minX:BABEL.opening.minX-1.15,maxX:BABEL.opening.maxX+1.15,minZ:BABEL.landing.minZ-.3};h.moveTo(opening.minX,-opening.minZ);h.lineTo(opening.minX,-opening.maxZ);h.lineTo(opening.maxX,-opening.maxZ);h.lineTo(opening.maxX,-opening.minZ);h.closePath();shape.holes.push(h);const centralRoofOpening=new T.Path();centralRoofOpening.absarc(0,0,21,0,Math.PI*2,true);shape.holes.push(centralRoofOpening);const ceiling=mesh(new T.ExtrudeGeometry(shape,{depth:.5,bevelEnabled:false,curveSegments:120}),material(0x665743,{side:T.DoubleSide}),0,-2.8,0);ceiling.rotation.x=-Math.PI/2;ceiling.name='Annular timber ceiling around the volcanic glass reservoir';const thermal=buildBabelThermalVault(T);group.add(thermal.group);
+ // The deeper through-gallery uses the annulus as a real shaft. The original
+ // book well keeps its complete base; no invisible floor remains across the walk.
+ const shaft={inner:13.9,outer:18.1},pit=mesh(new T.CircleGeometry(shaft.inner,160),floor,0,BABEL.base,0);pit.rotation.x=-Math.PI/2;pit.name='Book-well base inside the through-gallery shaft';
+ const outerPit=band(shaft.outer,57.4,BABEL.base,floor);outerPit.name='Library base outside the open annular shaft';
+ group.userData.throughGalleryShaft={...shaft,y:BABEL.base};
+ for(let i=0;i<24;i++){const a=i*Math.PI*2/24;box(.5,24,.6,Math.cos(a)*56.5,-14.8,Math.sin(a)*56.5,oak,-a);beam([Math.cos(a)*21,-3.2,Math.sin(a)*21],[Math.cos(a)*56.5,-3.2,Math.sin(a)*56.5],.16,edgeWood);}
  let bookCount=0;
  for(const l of BABEL.levels){
   const gap=l.id<4?{a:l.angle,half:1.9/l.r}:null;band(l.r-3.8,l.r,l.y,floor,{gap});band(l.r,l.r+4.4,l.y,floor);
   const count=Math.ceil(Math.PI*2*(l.r+4)/2.8),da=Math.PI*2/count,arc=(l.r+4)*da;
   for(let j=0;j<count;j++){
    const a=(j+.5)*da,R=l.r+4,x=Math.cos(a)*R,z=Math.sin(a)*R,incoming=l.id>0?stairs[l.id-1]:null,delta=incoming?Math.atan2(Math.sin(a-incoming.a),Math.cos(a-incoming.a)):10;if(incoming&&Math.abs(delta)<2.35/R)continue;
+   // Remove complete shelf bays at the final east aisle. Their joinery and books
+   // share the cut, leaving a clear doorway at least four metres wide to the bridge.
+   if(l.id===4&&Math.cos(a)>0&&Math.abs(z)<2+arc/2)continue;
    const yaw=Math.PI/2-a,point=(t,rad)=>({x:Math.cos(a)*(R+rad)-Math.sin(a)*t,z:Math.sin(a)*(R+rad)+Math.cos(a)*t});
    for(const t of[-arc/2+.06,arc/2-.06]){const p=point(t,0);box(.15,3.8,.95,p.x,l.y+1.9,p.z,oak,yaw);}
    for(let row=0;row<=5;row++)box(arc,.11,1.0,x,l.y+.12+row*.69,z,oak,yaw);
@@ -37,13 +45,60 @@ export function buildBabelLibrary(T,{canvas=()=>document.createElement('canvas')
   for(const sign of[-1,1]){const va=a.clone().addScaledVector(side,sign*(width/2-.1)),vb=b.clone().addScaledVector(side,sign*(width/2-.1));beam([va.x,top-.18,va.z],[vb.x,bottom-.18,vb.z],.15,oak);beam([va.x,top+1.03,va.z],[vb.x,bottom+1.03,vb.z],.035,brass);for(let i=0;i<=count;i+=4){const p=va.clone().lerp(vb,i/count),y=top-(top-bottom)*i/count;box(.05,1.08,.05,p.x,y+.5,p.z,brass);}}
  }
  for(const s of stairs)flight({start:[Math.cos(s.a)*s.outer,0,Math.sin(s.a)*s.outer],end:[Math.cos(s.a)*s.inner,0,Math.sin(s.a)*s.inner],width:s.width,top:s.top,bottom:s.bottom,steps:s.steps});
- const descent=buildBabelSnakeStairs(T,{drawing});group.add(descent.group);targets.push(descent.ramp);
- // Oversized volumes form the central book well, as in the supplied architectural reference.
- for(let i=0;i<18;i++){const a=i*2.399963,r=1+(i%4)*.7,x=Math.cos(a)*r,z=Math.sin(a)*r,h=2.5+(i%5)*.6,yaw=a*.5;box(.65,h,1.65,x,BABEL.base+h/2,z,leather[i%8],yaw);box(.5,h-.18,1.5,x,BABEL.base+h/2,z,pages,yaw);for(const side of[-1,1]){const dx=Math.cos(yaw)*side*.34,dz=-Math.sin(yaw)*side*.34;box(.06,h,1.7,x+dx,BABEL.base+h/2,z+dz,leather[i%8],yaw);}}
- const lamps=new T.Group();lamps.name='Warm underground reading lights';group.add(lamps);const glow=own(new T.MeshBasicMaterial({color:0xffdf9a})),lampPositions=[];for(const l of BABEL.levels)for(let j=0;j<6;j++){const a=j*Math.PI/3+.3,x=Math.cos(a)*(l.r+4),z=Math.sin(a)*(l.r+4);box(.06,.8,.06,x,l.y+3.8,z,brass);lampPositions.push([x,l.y+4.32,z]);}
+ const descent=buildBabelSnakeStairs(T,{drawing,landingMaterial:floor});group.add(descent.group);targets.push(descent.ramp);
+ // The descent belongs to the library: oak cheek walls support stepped bookcases,
+ // while the same floor and balustrade continue through the arrival overlook.
+ const glow=own(new T.MeshBasicMaterial({color:0xffdf9a}));
+ const f=BABEL.flight,rise=(f.top-f.bottom)/f.steps,tread=(f.z0-f.z1)/f.steps;
+ for(const sign of[-1,1])for(let i=0;i<f.steps;i++){
+  const y=f.top-(i+1)*rise,x=f.x+sign*(f.width/2+.42),z=f.z0-(i+.5)*tread;
+  box(.7,y-f.bottom+.18,tread+.012,x,(y+f.bottom)/2-.09,z,edgeWood);
+  box(.83,.10,tread+.016,x,y+.04,z,oak);
+ }
+ for(const sign of[-1,1])for(const i of[10,19,28,37]){
+  const y=f.top-(i+1)*rise,x=f.x+sign*(f.width/2+.42),z=f.z0-(i+.5)*tread;
+  for(const dz of[-.53,.53])box(.69,.84,.08,x,y+.49,z+dz,oak);
+  for(const dy of[.1,.53,.94])box(.72,.08,1.14,x,y+dy,z,oak);
+  for(let row=0;row<2;row++)for(let k=0;k<7;k++){
+   box(.42,.29+(k%3)*.035,.10,x-sign*.12,y+.29+row*.42,z+(k-3)*.14,leather[(i+k+row)%8]);
+   bookCount++;
+  }
+  box(.075,.12,.15,x-sign*.24,y+1.10,z,brass);
+  box(.14,.11,.21,x-sign*.24,y+1.19,z,glow);
+ }
+ // Oak reveals follow the shaft, rather than an unrelated dark rectangular lid.
+ for(const x of[BABEL.opening.minX-.22,BABEL.opening.maxX+.22]){
+  box(.3,.38,f.z0-BABEL.landing.minZ,x,-2.57,(f.z0+BABEL.landing.minZ)/2,oak);
+  box(.07,.045,f.z0-BABEL.landing.minZ,x,-2.35,(f.z0+BABEL.landing.minZ)/2,brass);
+ }
+ // A curving brass seam draws the arrival route into the circular balcony.
+ let last=[f.x,-8+.012,-.65];
+ for(let j=1;j<=32;j++){
+  const q=j/32,a=-.11*q,r=f.x+(48-f.x)*Math.sin(q*Math.PI/2),next=[Math.cos(a)*r,-8+.012,Math.sin(a)*r];
+  beam(last,next,.014,brass);last=next;
+ }
+ // Individual upright volumes form a legible circle around a quiet reading
+ // plinth. Their slim covers, cream fore-edges and outward spines stay well
+ // inside the last terrace's foot aisle and the deeper stair's annular shaft.
+ const ringCount=64,ringRadius=3.65,bookBase=BABEL.base+.10;
+ const ringFoot=band(3.12,4.20,BABEL.base+.055,oak);ringFoot.name='Circular footing beneath the upright book ring';
+ for(let i=0;i<ringCount;i++){
+  const a=i*Math.PI*2/ringCount,yaw=Math.PI/2-a,w=.16+(i%4)*.025,h=1.25+(i*7%9)*.10,d=.74+(i%5)*.035,x=Math.cos(a)*ringRadius,z=Math.sin(a)*ringRadius,m=leather[i%leather.length];
+  const point=(t,r)=>({x:x+Math.sin(a)*t+Math.cos(a)*r,z:z-Math.cos(a)*t+Math.sin(a)*r});
+  box(w-.052,h-.085,d-.055,x,bookBase+h/2,z,pages,yaw);
+  for(const side of[-1,1]){const p=point(side*(w/2-.012),0);box(.024,h+.025,d+.045,p.x,bookBase+h/2,p.z,m,yaw);}
+  const spine=point(0,d/2);box(w,h+.025,.055,spine.x,bookBase+h/2,spine.z,m,yaw);
+  for(const fraction of[.22,.76]){const p=point(0,d/2+.030);box(w*.76,.025,.010,p.x,bookBase+h*fraction,p.z,brass,yaw);}
+  bookCount++;
+ }
+ const plinth=mesh(new T.CylinderGeometry(1.12,1.27,.66,64),stone,0,BABEL.base+.33,0);plinth.name='Quiet circular reading plinth';
+ const plinthTop=mesh(new T.CylinderGeometry(1.38,1.38,.075,64),oak,0,BABEL.base+.6975,0);plinthTop.name='Round oak reading surface';
+ box(1.14,.045,.86,0,BABEL.base+.758,0,leather[1]);
+ for(const side of[-1,1]){const leaf=mesh(new T.BoxGeometry(.52,.035,.76),pages,side*.255,BABEL.base+.805,0);leaf.rotation.z=-side*.10;leaf.name='Open book on the central reading plinth';}
+ const lamps=new T.Group();lamps.name='Warm underground reading lights';group.add(lamps);const lampPositions=[];for(const l of BABEL.levels)for(let j=0;j<6;j++){const a=j*Math.PI/3+.3,x=Math.cos(a)*(l.r+4),z=Math.sin(a)*(l.r+4);box(.06,.8,.06,x,l.y+3.8,z,brass);lampPositions.push([x,l.y+4.32,z]);}
  const ambient=new T.AmbientLight(0xe4cfac,.8);ambient.userData.babelOwned=true;lamps.add(ambient);for(const p of[[0,-9,0],[30,-5,-20],[-25,-17,20]]){const light=new T.PointLight(0xffcf88,55,100,1.7);light.position.set(...p);light.userData.babelOwned=true;lamps.add(light);}lamps.visible=false;
  const object=new T.Object3D();const globes=new T.InstancedMesh(own(new T.SphereGeometry(.18,8,6)),glow,lampPositions.length);lampPositions.forEach((p,i)=>{object.position.set(...p);object.updateMatrix();globes.setMatrixAt(i,object.matrix);});globes.instanceMatrix.needsUpdate=true;lamps.add(globes);for(const[m,items]of beamBatches){const inst=new T.InstancedMesh(unitBeam,m,items.length);items.forEach((b,i)=>{object.position.copy(b.p);object.quaternion.copy(b.q);object.scale.set(b.w,b.length,b.w);object.updateMatrix();inst.setMatrixAt(i,object.matrix);});inst.instanceMatrix.needsUpdate=true;inst.computeBoundingSphere?.();group.add(inst);}object.rotation.set(0,0,0);object.scale.set(1,1,1);let meshes=0;for(const[m,items]of batches){const inst=new T.InstancedMesh(m===stamp?unitStamp:unit,m,items.length);inst.name=m===pages?'Bound pages':'Batched library books and joinery';for(const[p,t]of items.entries()){object.position.set(t.x,t.y,t.z);object.rotation.set(0,t.yaw,0);object.scale.set(t.w,t.h,m===stamp?1:t.d);object.updateMatrix();inst.setMatrixAt(p,object.matrix);}inst.instanceMatrix.needsUpdate=true;inst.computeBoundingSphere?.();group.add(inst);meshes++;}
  function paint(lang){const c=BABEL_COPY[lang]||BABEL_COPY.en;for(const l of labels){const ctx=l.c.getContext('2d');ctx.fillStyle='#dbcaa4';ctx.fillRect(0,0,1024,192);ctx.fillStyle='#332d24';ctx.textAlign='center';ctx.textBaseline='middle';ctx.direction=lang==='fa'?'rtl':'ltr';ctx.font='58px Tahoma';ctx.fillText(l.text==='entry'?c.title+' ↓':l.text,512,96,970);l.texture.needsUpdate=true;}}
  paint('en');group.visible=true;
- return{group,lamps,targets,bookCount,meshes,paint,dispose(){descent.dispose();group.removeFromParent();group.traverse(o=>{if(o.isInstancedMesh)o.dispose?.();});for(const r of owned)r.dispose();group.clear();}};
+ return{group,lamps,targets,bookCount,meshes,paint,thermal,dispose(){thermal.dispose();descent.dispose();group.removeFromParent();group.traverse(o=>{if(o.isInstancedMesh)o.dispose?.();});for(const r of owned)r.dispose();group.clear();}};
 }
