@@ -4352,3 +4352,116 @@ stair landmark and the proximity-gated exit guide. Follow the proper lower
 parent frame, not a new lot or annular-Faculty duplication. Preserve all eleven
 genuine paper monitors and their exact scan/source/rights/ownership contracts;
 do not claim full legacy catalogue translation.
+
+## 2026-11-08 — Mathematics Geometry: a route and its change
+
+The preceding Geometry suggestion is complete. This pass develops floor index
+2 (displayed Floor 3) of the original Mathematics Institute working wing at
+logical (-2240, -65), source height 8 and installed logical feet 8.13. Read
+`docs/MATH-GEOMETRY.md`. It does not duplicate the annular Faculty or repeat
+Foundations/Algebra. Five source floors remain undeveloped.
+
+Added eight table aprons/eight leg joints, two supported fitted linen chair
+pads/eight seam strips, eight chair foot collars on the original floor and a
+backed two-card folio on two original-table-supported posts. Original furniture,
+sheet/open book and approaches stay in place. Cards/strokes meet their backing/
+paper; printed marks sit at the card faces. All details fit existing furniture
+footprints: 56 owned meshes/six materials, no textures, lights, image assets or
+colliders. Source height is applied once under the actual model/proper lower
+parent; original logical source/private coordinates are not baked or moved.
+
+Fixed original city cards distinguish a two-leg right-angle route from its
+direct displacement, and a translated marked triangle from its congruent copy.
+The nonzero translation between copies does not preserve the whole bounded
+pair. Filled/open endpoints, a right-angle marker and matching corner dots
+support the prose without relying on colour alone. No scale, measured room
+data, live model, score or separate saved diagram state is added. These are not
+historical tools/pages, textbook illustrations or a reconstructed room.
+
+The original EN/DE/FA/CS reading joins the Euclidean/right-angle assumption,
+distance versus endpoint displacement, and rigid motion versus symmetry of the
+entire chosen figure including marks. Direction is stated for nonzero
+displacement, while an out-and-back prompt allows zero net displacement. Other
+unscored prompts vary one angle and add a distinctive corner to the original
+square. Both formulas are separate LTR blocks; Persian prose remains RTL.
+No quotation, historical testimony, theorem proof or island-geometry claim is
+invented. Sources successfully accessed: OpenStax Prealgebra 2e 9.3, Precalculus
+2e 8.8 and Contemporary Mathematics 10.5. All prose and diagrams are original.
+
+Folio pointer/E, inside context, original tools header and welcome Places reach
+the reading. Three explicit actions delegate exact original `pythagoras`,
+`vectors` and `symmetry` source-mesh payloads to their unchanged reader/exercises.
+Real floor/inside/height guards keep encounter actions inside Geometry. Outside
+or on another floor, only the existing explicit working-entrance approach is
+offered; reading/localization never moves the visitor or chooses a floor.
+
+Closing from source tools restores that same outer dialog, mounted iframe,
+source reader/input and caret. Reading/locale does not inspect private fields,
+access storage/private memory, create progress, translate private text or change
+saved city language. Source reflections/discussion/imports/journal saves and
+transfers remain explicit under their original owners. Local reading language
+stays in memory. The actual legacy Math/Atlas EN/DE/FA adapters and Czech English
+fallback remain disclosed; full source catalogues/exercises and paper scans/UI
+were not translated.
+
+All eight floors/24 concept IDs, source Atlas/books, seats/furniture, windows,
+partitions, stair landmark, source readers, private notes/imports and original
+lift/route metadata remain. The folded Way out still uses real openings/ground
+doorway or a proximity-gated original upper lift. Solid windows remain solid.
+Foundations and Algebra keep their supported details, reading, handoffs and
+owned cleanup. All eleven genuine paper monitors retain exact scans/provenance,
+owned loading/reader controls and prior source-access limits. Main remains
+8b9cac9 at the pre-publication refresh; its two-parent reconciliation through
+f972bae remains in review ancestry. Other branches/open PR #2 are untouched.
+The same feature branch and PR #5 continue; nothing is merged or deployed.
+
+### Verification
+
+All 114 release programs passed. The independently measured original 241-node
+fixture fingerprint is
+f4fa9fec5c0284cb2cb2e82b265bcb53d8f858b1c9f62918059f1be5e1f6bb2b.
+Source resources/parents/transforms/data/visibility/instance matrices, 16 source
+colliders and 16 approaches remain. Tests cover 1,813 collision samples, real
+partition routes, solid upper windows, logical/proper-lower-frame folio rays,
+furniture/card support, right-angle/displacement/zero-displacement mathematics,
+congruent copies and the whole-pair countercase. Other floors reject the builder;
+owned cleanup/replacement remains once-only. Actual co-installed Math UI tests
+retain exact three payloads/exercises, raw draft/caret and original explicit
+source-only saves. Reading/localizing is tested with private getters/storage/
+memory forbidden; Foundations/Algebra resources and controls survive cleanup.
+
+Native Chrome used the original entrance, guide/physical lift and actual upper
+partition openings to reach the folio. Pointer and E open it. Original exercise
+handoffs remain: perpendicular sides 3/4 and the non-right case; 3 east/4 north
+versus path 7; square mirror axes/rotations including unchanged. A synthetic
+unsaved multilingual draft retains exact spaces/newline and selection 3–8
+through reading/language/close. No private reflection is saved; storage stays
+unchanged across those actions. Supported chair pads/foot collars, table joinery,
+book clearance and both folio diagrams were visually checked.
+
+EN/DE/FA/CS desktop and Czech/Persian 390 × 844 mobile fit without horizontal
+overflow: client/scroll widths match at 743/339 px and 381 px for the original
+source header. Persian prose is RTL, both formulas LTR. The original upper lift
+hides Geometry controls on another floor; the folded Way out lift returns to
+settled ground height, where Foundations returns. Outside directory reading
+leaves pose unchanged and exposes only explicit working-entrance approach.
+Saved global Czech survives reload and local languages leave storage unchanged.
+All eleven paper pages remain
+ready with zero errors; no fresh external archive fetch is claimed. No application
+errors were seen; the existing Three.js warning remains. Hardware controller A
+was not separately tested. Screenshots/release log are retained in this chat;
+final commit/build/local asset verification is recorded in PR #5.
+
+Forty-two first reading/detail passes are complete. Next useful undeveloped
+area: Calculus & analysis, floor index 3 of the same original working wing,
+source height 12 and installed logical feet 12.13. Inspect `limits`,
+`derivatives`, `integrals`, source geometry/readers/public-language gaps and
+original lift/route metadata before a modest sourced EN/DE/FA/CS detail/reading
+pass. Preserve the excluded x=1 and limit distinction, original square-function
+quotients at h=0.1/0.01, signed accumulation on [0,2] and stated theorem conditions.
+Keep Foundations, Algebra and Geometry, all eight floors/24 IDs, Atlas/books,
+furniture/seats/colliders/approaches, private reflections/imports/explicit saves,
+solid windows, stair landmark and proximity-gated exit guide. Follow the actual
+proper lower parent, with no new lot or annular-Faculty duplication. Preserve
+the eleven genuine paper monitors/exact scan/source/rights/ownership records;
+do not claim full legacy catalogue translation.
