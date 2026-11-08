@@ -210,3 +210,9 @@ Current local preview arrivals include `?arrival=babel-stairs`, `?arrival=babel`
 `?arrival=through-gallery`, `?arrival=lower-face`, `?arrival=world-section`,
 `?arrival=escher-depth` and `?arrival=pond-crossing`. The pond arrival stops beside
 the existing basin; crossing remains an explicit action.
+
+## Ocean consistency and central earth
+
+Upper and lower water use the same unlit ocean shader in ocean-surface.js, with identical shoreline palette, foam and fog handling. Each owns its material and time uniforms. World updates preserve reduced motion and the active scene fog.
+
+Below Babel, three closed annular earth layers occupy radii 21.7 to 58 from Y-26.6 to -95.9. The middle layer has a real east-facing rectangular cut at Z +/-2.3 and Y-40.2..-34.7 for the existing Escher corridor. The spiral well remains hollow inside r21.7; Babel and lower Faculty floors remain separate. These layers give the cutaway real earth behind the central shaft rather than exposing sky.

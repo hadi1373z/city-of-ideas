@@ -1,3 +1,4 @@
+import {buildCityCoast} from '../src/coastal-city-scene.js';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import * as T from '../src/city-source-assets/home-tools/vendor/three.module.js';
@@ -39,6 +40,17 @@ check('Cylinder has two matching faces, a real lower aperture, enclosed tunnel a
  assert.equal(ray(133,-38.2,115,1,0,0,4).length,0,'The Escher handoff must be an open end');
  assert(ray(40,-38.2,0,0,0,1,3).length,'The straight tunnel has a real side wall');
  let disposed=0;b.shell.geometry.addEventListener('dispose',()=>disposed++);b.dispose();assert.equal(disposed,1);assert.equal(b.group.children.length,0);
+});
+
+check('Both oceans share their shader and fog; real central earth encloses the shaft without closing Escher',()=>{
+ const b=buildWorldCylinder(T),c=buildCityCoast(T,{naturalTrees:null});b.group.updateMatrixWorld(true);
+ assert.equal(b.sea.material.vertexShader,c.sea.material.vertexShader);assert.equal(b.sea.material.fragmentShader,c.sea.material.fragmentShader);
+ const fog={color:new T.Color(0xa5c1cc),density:.0007};b.updateOcean(12,{fog});c.update(12,{fog});
+ for(const name of ['time','fogDensity','islandRadius'])assert.equal(b.sea.material.uniforms[name].value,c.uniforms[name].value);assert(b.sea.material.uniforms.fogColor.value.equals(c.uniforms.fogColor.value));
+ b.updateOcean(90,{reduced:true,fog});c.update(90,{reduced:true,fog});assert.equal(c.uniforms.time.value,0);assert.equal(b.sea.material.uniforms.time.value,0);
+ const core=b.group.getObjectByName('Earth between Babel and the lower face');assert(core);
+ for(const y of [-30,-60,-90])for(let i=0;i<32;i++){const a=i*Math.PI/16,hits=new T.Raycaster(new T.Vector3(0,y,0),new T.Vector3(Math.cos(a),0,Math.sin(a)),0,60).intersectObject(core,true);assert(hits.length,'Earth must replace the sky outside the central stairwell');near(Math.hypot(hits[0].point.x,hits[0].point.z),21.7,.003);}
+ assert.equal(new T.Raycaster(new T.Vector3(22,-38,0),new T.Vector3(1,0,0),0,35).intersectObject(core,true).length,0,'The real Escher corridor must pass through the earth');b.dispose();c.dispose();
 });
 
 check('Reparenting preserves nested source animation coordinates, geometry and parent transforms',()=>{

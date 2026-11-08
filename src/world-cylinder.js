@@ -1,5 +1,5 @@
 import {WORLD_CYLINDER as W,isLowerCoordinate,lowerLocal,lowerPhysical,lowerRadius,lowerMatrix,canWalkLower,tunnelContains,GALLERY_TUNNEL} from './world-cylinder-model.js';
-import {buildWorldCylinder,mountLowerWorld} from './world-cylinder-scene.js?v=polish1';
+import {buildWorldCylinder,mountLowerWorld} from './world-cylinder-scene.js?v=ocean1';
 import {UPPER,LOWER,pointAt,headingAt,heightAt,surfaceAt as gallerySurface,walkGallery} from './two-face-gallery-model.js';
 import {buildTwoFaceGallery} from './two-face-gallery-scene.js?v=papers1';
 import {LOWER_INLET} from './lower-landscape-model.js';
@@ -128,7 +128,7 @@ export function installWorldCylinder(M,T){
  }
  function interact(){return false;}
  function update(...args){
-  restoreCulling();prior.update(...args);if(disposed)return;const time=args[1]||0;const structure=M.scene.children.length+':'+M.city.targets.length;if(structure!==lastStructure){scan();lastStructure=structure;}for(const r of records){r.wrapper.matrix.copy(r.parent.matrixWorld);r.wrapper.matrixWorldNeedsUpdate=true;if(r.node.name==='Graveyard world · independent ground')r.node.visible=false;}
+  restoreCulling();prior.update(...args);if(disposed)return;const time=args[1]||0;built.updateOcean(time,{reduced:globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches??false,fog:M.scene.fog});const structure=M.scene.children.length+':'+M.city.targets.length;if(structure!==lastStructure){scan();lastStructure=structure;}for(const r of records){r.wrapper.matrix.copy(r.parent.matrixWorld);r.wrapper.matrixWorldNeedsUpdate=true;if(r.node.name==='Graveyard world · independent ground')r.node.visible=false;}
   if(route&&M.mode!=='city')stop();const lowerActive=lowerPlayer(),under=M.mode==='city'&&(route||M.escherDepth?.active),paused=!!document.querySelector('dialog[open],#reader-panel:not([hidden])');
   built.lamps.visible=!!journey||lowerActive||M.mode==='overview'&&section!=='upper';upper.lamps.visible=!!route&&route.side==='upper'||M.mode==='overview'&&section==='section';lower.lamps.visible=lowerActive||M.mode==='overview'&&section!=='upper';built.shell.material.transparent=M.mode==='overview'&&section==='section';built.shell.material.opacity=built.shell.material.transparent?.65:1;built.shell.material.depthWrite=!built.shell.material.transparent;
   if(under&&!lightRestore){lightRestore=[];M.scene.traverse(o=>{if((o.isHemisphereLight||o.isDirectionalLight)&&!built.lamps.children.includes(o)){lightRestore.push([o,o.intensity]);o.intensity*=.28;}});}else if(!under)restoreLight();
