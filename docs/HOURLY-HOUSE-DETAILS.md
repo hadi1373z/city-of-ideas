@@ -3383,3 +3383,106 @@ not Cage's composition or physical randomness. Keep chance composition,
 performer indeterminacy and environmental unpredictability distinct. Add
 modest supported domestic detail and an original sourced reading extension,
 preserving openings/routes, Mirzakhani's rack/metric and Noether's oscillator.
+
+## 2026-11-08 · Cage's listening desk
+
+Continued feat/hourly-house-details / PR #5 from 8823c33d804a8abc086b467a2edc0544db23d514.
+Read repository/parent instructions, latest ledger, actual seminar scene/data/
+models/controller, existing four-language Cage reading, per-house documentation
+and MoMA's supplied source. Remote review head and main 975ed0d were unchanged;
+PR #5/#2 remain open. No competing branch was created.
+
+The existing House of Listening remains at (104, 316), with pi rotation.
+Four pale fascias follow the actual batched transforms of its two timber
+roof panels. Four sills stay on the stone bands below the glazing. Supported
+woven bench pads/seams and desk aprons/joints add domestic detail. A backed
+two-card folio rests on the rear edge of the original desk, clear of its
+ruled sheet. Original geometry, underside fins, furniture positions, entrances,
+glazing, paths and collider clearances remain unchanged.
+
+The left card's open circle and groups of one/two/three dots recall the
+existing rest and pitch choices; the right card has three curved strokes.
+These fixed original city symbols are not Cage notation, the current seeded
+sequence, a sound recording, measurement or historical object. They have no
+separate saved state. No image or score was reproduced.
+
+Original EN/DE/FA/CS reading, "At the desk · what did the score leave open?",
+compares fixed constraints, replay, a rest and the listening situation. Its
+three steps work with the original controls, with visual-only participation
+available. Historical context cites the successfully accessed MoMA record:
+https://www.moma.org/collection/works/163616 . The record dates the proportional
+notation version to 1952/1953 and describes spatial intervals representing
+duration. The city's four-second study remains distinct from Cage's work,
+performer indeterminacy and environmental unpredictability. No quotation,
+historical room or implementation of 4'33 is claimed.
+
+Folio pointer/E opens the existing full reader. Original exhibit/context
+retain compact controls, full-argument and directory access. All five earlier
+advanced sections and their four-language versions remain. The exact seeded
+sixteen-slot rest/A3/C-sharp4/E4 sequence, equal quarter-second slots, sine
+timbre, audio-clock cursor, Play/Stop/end/close/leave/failure behavior are
+unchanged. No new audio asset, recording, microphone or provider was added.
+Reading/language neither selects a seed nor starts/restarts playback or
+writes private/lesson state. Keep seminar-cage questions, drafts/carets,
+first answers and explicit saves; private text is not translated. Persian
+prose remains RTL and score order LTR. Existing Czech controls were retained;
+English gaps in original books/catalogs/shared text and advanced Atelier/
+computation-lab material remain disclosed.
+
+All 90 release programs passed. The new Cage test compares every borrowed
+node/resource/transform/payload and all original scene states against the bare
+builder across three seeds and stopped/playing cursor positions. It checks
+actual roof fit, card/support/desk clearances, a real folio ray, entrance/aisle/
+path samples and once-only owned disposal. Real controller/notebook tests
+check exact scheduled note frequencies/start/stop times/gain, held audio
+context and cursor through four-language/full/compact/folio rendering, stop/
+close/leave/unavailable-audio, private draft/caret and immutable first answers.
+The older seminar test now selects .seminar-score explicitly, preserving its
+16-slot/cursor assertions when the reader gains a separate three-step list.
+After spelling the Persian source dates with a word between the years to
+avoid bidirectional slash ambiguity, affected house/source checks passed again.
+Build: 765 assets / 332,545,198 bytes; source hash
+490f5818c455b37237dd5a41589d1cd1f49d02c9b8703f9430b1b7ab67fed5b0.
+
+Native Chrome walked through the real door and approached the original desk.
+Folio click and E opened the full reader, with inside context/compact/full/
+directory routes retained. Keyboard Enter selected another seed; seed 3's
+16 events survived all four languages and reading routes. Native Play showed
+an active slot/cursor, Czech switching retained the sequence, Stop worked,
+and replay ended automatically with no active slot. Face the work remained
+available. A synthetic mixed-language draft with spaces/newline and selection
+4..15 survived reading/language/directory/folio visits; locale/reading left
+local storage unchanged. No native private-note save/account was used.
+
+Desktop reader client/scroll widths matched 998 px; at 390 x 844, Czech and
+Persian matched 354 px, with 324 px reading content and LTR score order. The
+final Persian source wording was reloaded and visually checked. Roof, bench,
+desk, folio and playback screenshots are in the originating chat's outputs.
+Console: zero application errors, one existing Three.js warning per load.
+Hardware controller A was not separately exercised; shared confirm routes
+remain. No measured learning, listening perception or browser performance
+claim is made.
+
+Main 975ed0d remains in the earlier two-parent review ancestry; computation
+laboratory/moved desk/journal, independent stores, classic translated readers,
+English-first arrival, Price/Atelier/resume and explicit saves remain.
+Noether/Mirzakhani details and every earlier completed pass remain, along with
+Makers, map/facing, Babel, ocean voyage, branding, cast, voices and recordings.
+PR #5 stays review only, unmerged; no deployment. Hourly cadence unchanged.
+
+Thirty-four first detail/reading passes are complete. Next useful house:
+the existing M. C. Escher House of Perspective, id escher, at installed world
+(228, 115) in artist-quarter-layout.js. Inspect escher-house.js,
+escher-perspective.js, artist-quarter layout/controller, source metadata and
+per-house notes. Its four original work IDs are relativity, drawing-hands,
+ascending-descending and waterfall. The three depth-separated stair fragments,
+floor comparison marks, viewpoint/looking-direction/hold gates, moving shutters
+and hidden Waterfall alcove are existing interactions, not missing features
+to replace. Preserve exact image bytes/ratios/rights/sources, all original
+geometry/colliders/paths and explicit discovery/reflection/replay behavior,
+escher-perspective / escher-waterfall discoveries and escher-viewpoint private
+notes. Waterfall must stay unavailable until the original physical gate is
+earned. Its own public reader/control copy has EN/DE/FA and a real Czech gap.
+Add modest supported room details and useful sourced EN/DE/FA/CS reading/
+controls additively; do not spoil or bypass the hidden encounter, invent
+quotations or claim a historical room. Preserve all completed seminar work.

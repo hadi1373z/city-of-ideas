@@ -151,3 +151,27 @@ The combined review passes 89 release programs. Native desktop/mobile
 review checked actual walking, rack pointer/E, all cases, four languages,
 compact/full/directory and unsaved drafts. Full results, source links and
 Cage as the next house are in HOURLY-HOUSE-DETAILS.md. No merge/deployment.
+
+## Cage listening desk · 2026-11-08
+
+The original (104, 316), pi-rotated house now has four pale fascias fitted to
+its actual batched roof panels, stone-band sills, supported woven bench pads/
+seams and desk joinery. A backed folio rests on the desk's rear edge, clear
+of its original ruled sheet. Its rest/pitch reminder and three curved strokes
+are fixed original city symbols, not Cage notation, the generated sequence,
+a recording, measurement or historical object.
+
+The EN/DE/FA/CS extension asks what the score fixes and leaves open, with
+three reading/replay/listening prompts and the existing MoMA source. Folio
+pointer/E opens the original full reader; exhibit/context keep compact
+controls and directory access. Five earlier advanced sections, seeded
+sequence, quarter-second audio-clock cursor and explicit Play/Stop/end/close/
+leave/failure behavior remain. Reading/locale does not select a seed, start
+sound or save notes. Persian stays RTL, score order LTR, and private drafts/
+carets/first answers retain the existing explicit-save flow.
+
+All 90 release programs passed; native desktop/mobile checked actual walking,
+folio pointer/E, all reading routes, four languages, seed retention, playback/
+stop/end and unsaved drafts. The older UI check explicitly selects the score
+list after the new three-step reading list was added. Full results and Escher
+as the next house are in HOURLY-HOUSE-DETAILS.md. Review only, no deployment.
