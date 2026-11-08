@@ -1,3 +1,4 @@
+import {buildLowerLandscape} from './lower-landscape-scene.js';
 import {WORLD_CYLINDER as W,lowerMatrix,GALLERY_TUNNEL} from './world-cylinder-model.js';
 export function buildWorldCylinder(T){
  const group=new T.Group();group.name='One cylindrical world · two inhabited faces';group.userData.worldCylinder=true;
@@ -45,8 +46,8 @@ export function buildWorldCylinder(T){
  // coordinates below are local to the lower circular face: logical X+2160,Z+65.
  // Nothing here reparents, replaces or moves an existing house or marker.
  const lowerPatio=new T.Group();lowerPatio.name='Lower face · warm courts and planted walks';lowerGround.add(lowerPatio);
- const paving=mat(0xc7b99b),limestone=mat(0xa29378),timber=mat(0x65543f),clay=mat(0x8d775f),soil=mat(0x465440),leafDark=mat(0x36584a),leafSage=mat(0x5b7454);
- const disc=own(new T.CylinderGeometry(1,1,1,96,1)),pot=own(new T.CylinderGeometry(1,1,1,32,1)),trunk=own(new T.CylinderGeometry(.72,1,1,9,1)),crown=own(new T.IcosahedronGeometry(1,2)),decor=new Map(),lowerObstacles=[];
+ const paving=mat(0xc7b99b),limestone=mat(0xa29378),timber=mat(0x65543f),clay=mat(0x8d775f),soil=mat(0x465440),leafSage=mat(0x5b7454);
+ const disc=own(new T.CylinderGeometry(1,1,1,96,1)),pot=own(new T.CylinderGeometry(1,1,1,32,1)),crown=own(new T.IcosahedronGeometry(1,2)),decor=new Map(),lowerObstacles=[];
  const lowerPaths=[
   {id:'gallery-garden',width:8,points:[[-58,0],[-64,0],[-64,18],[-101,18],[-119,-10],[-174,-10],[-191,-4]]},
   {id:'garden-mathematics',width:7,points:[[-101,18],[-101,38],[-80,38],[-80,32.8]]},
@@ -66,8 +67,6 @@ export function buildWorldCylinder(T){
  for(const z of[26,51,76]){stamp(unit,paving,-149,.022,z,23,.035,11);walk([[-149,z],[-138,z]],5);}
  function bed(x,z,rx,rz){stamp(pot,clay,x,.21,z,rx,.4,rz);stamp(pot,soil,x,.419,z,rx-.18,.018,rz-.18);stamp(crown,leafSage,x,.62,z,rx*.82,.42,rz*.81);obstacle(x,z,Math.max(rx,rz)+.16,'planted bed');}
  for(const b of[[-242,-22,5.4,3.8],[-241,20,5.2,3.5],[-226,31,4.2,2.8],[-164,31,3.5,3],[-169,-34,4.2,2.9],[-127,99,5,3.4]])bed(...b);
- function tree(x,z,h,spread){stamp(trunk,timber,x,h*.34,z,.25,h*.68,.25);stamp(crown,leafDark,x,h*.77,z,spread,h*.31,spread*.85);stamp(crown,leafSage,x+spread*.48,h*.80,z-spread*.22,spread*.72,h*.24,spread*.67);stamp(crown,leafDark,x-spread*.36,h*.67,z+spread*.40,spread*.66,h*.23,spread*.68);obstacle(x,z,.66,'tree trunk');}
- for(const t of[[-277,-25,8.4,3.6],[-278,18,7.3,3.1],[-274,68,8.8,3.8],[-274,121,7.5,3.5],[-260,143,8.2,3.4],[-237,151,7.8,3.3],[-171,146,8.4,3.6],[-141,-84,8,3.4],[-132,-118,7.1,3.2],[-118,33,7.7,3.4],[-118,64,8.6,3.7],[-112,95,8,3.5],[-95,-30,7.5,3.4],[-78,-27,6.8,3]])tree(...t);
  // Open-sided shade structures frame real walks and existing reading places.
  // Their posts stay outside the route; slender top slats cast no navigational
  // barrier and add no placeholder room, billboard or duplicate house.
@@ -81,9 +80,10 @@ export function buildWorldCylinder(T){
  for(const{g,m,items}of decor.values()){const batch=new T.InstancedMesh(g,m,items.length);batch.name='Batched lower-face court / planting / shade';items.forEach((p,i)=>{o.position.set(p.x,p.y,p.z);o.rotation.set(0,p.yaw,0);o.scale.set(p.sx,p.sy,p.sz);o.updateMatrix();batch.setMatrixAt(i,o.matrix);});batch.instanceMatrix.needsUpdate=true;batch.computeBoundingSphere();lowerPatio.add(batch);}
  o.rotation.set(0,0,0);
  for(const[m,list]of boxes){const inst=new T.InstancedMesh(unit,m,list.length);list.forEach((p,i)=>{o.position.set(p.x,p.y,p.z);o.scale.set(p.w,p.h,p.d);o.updateMatrix();inst.setMatrixAt(i,o.matrix);});inst.instanceMatrix.needsUpdate=true;inst.computeBoundingSphere();inst.name='Batched cylinder galleries and reading lights';tunnel.add(inst);}
+ const lowerLandscape=buildLowerLandscape(T,{parent:lowerGround,own,existingPaths:lowerPaths,existingObstacles:lowerObstacles});lowerPaths.push(...lowerLandscape.paths);lowerObstacles.push(...lowerLandscape.obstacles);
  // Lower-world lights point toward the lower face; upper cast lighting is retained.
  const lamps=new T.Group();lamps.name='Lower-face daylight';group.add(lamps);const hemi=new T.HemisphereLight(0xdde6df,0x5c5142,1.05);hemi.position.set(0,-200,0);lamps.add(hemi);const sun=new T.DirectionalLight(0xffe2b6,1.1);sun.position.set(170,-600,-250);sun.target.position.set(0,-96,0);lamps.add(sun,sun.target);lamps.visible=false;
- return{group,lowerFrame,lowerGround,lowerPatio,lowerObstacles,lowerPaths,sectionCut,lamps,shell,land,tunnel,owned,dispose(){group.removeFromParent();group.traverse(o=>{if(o.isInstancedMesh)o.dispose?.();});for(const r of owned)r.dispose();group.clear();}};
+ return{group,lowerFrame,lowerGround,lowerPatio,lowerObstacles,lowerPaths,lowerLandscape,sectionCut,lamps,shell,land,tunnel,owned,dispose(){lowerLandscape.dispose();group.removeFromParent();group.traverse(o=>{if(o.isInstancedMesh&&owned.has(o.geometry))o.dispose?.();});for(const r of owned)r.dispose();group.clear();}};
 }
 // Move only wholly remote subtrees. Shared source geometry/materials and all local
 // positions survive: source animation and private tool coordinates keep working.

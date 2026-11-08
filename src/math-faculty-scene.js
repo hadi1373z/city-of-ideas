@@ -39,6 +39,25 @@ export function buildMathFaculty(T,{canvas=()=>document.createElement('canvas')}
  for(let floor=0;floor<8;floor++){const y=floor*4;for(const z of[-10.45,8.45]){box(25.4,.29,.52,-80,y+3.82,z,stone);for(const x of[-92.5,-87,-73,-67.5])box(.36,3.75,.45,x,y+1.99,z,pale);for(const x of[-89.5,-84.5,-75.5,-70.5]){box(4.42,1.92,.045,x,y+1.94,z,glass);box(4.55,.16,.55,x,y+.94,z,timber);box(.09,1.95,.13,x,y+1.95,z+.05,timber);}if(floor||z<0)box(3.5,1.94,.045,-80,y+1.94,z,glass);}
   for(const x of[-92.5,-67.5]){box(.48,.29,19.5,x,y+3.82,-1,stone);for(const z of[-8,-4,0,4]){box(.045,1.94,3.45,x,y+1.94,z,glass);box(.55,.16,3.58,x,y+.94,z,timber);}for(const z of[-10.4,-6,-2,2,6,8.4])box(.45,3.75,.34,x,y+1.99,z,pale);}}
  for(const x of[-83.8,-76.2])for(const z of[14,20])box(.34,3.8,.34,x,2.03,z,stone);box(8.6,.24,12.6,-80,4.06,15.2,timber);for(let z=9.5;z<=21;z+=1.3)box(8.8,.15,.20,-80,4.24,z,timber);
+ // The entrance is a real ground-level gap, distinct from the lab windows.
+ // Both leaves are held fully open parallel to travel; their frames, panels and
+ // pulls stay outside the tested three-metre clear passage into the source hall.
+ const entry=F.entrance;
+ for(const sign of[-1,1]){
+  box(.24,2.92,.26,entry.x+sign*2.08,1.59,entry.z,timber);
+  const x=entry.x+sign*entry.leafX,z=entry.leafCentreZ;
+  for(const end of[-1,1])box(.11,entry.leafHeight,.12,x,.13+entry.leafHeight/2,z+end*(entry.leafDepth/2-.06),timber);
+  for(const y of[.19,.79,2.63])box(.11,.12,entry.leafDepth,x,y,z,timber);
+  box(.065,.50,entry.leafDepth-.16,x,.49,z,timber);
+  box(.035,1.68,entry.leafDepth-.20,x,1.69,z,glass);
+  box(.06,.42,.06,x-sign*.095,1.42,z+.51,bronze);
+  // Narrow embedded guides lead to the open doorway, never to a glass bay.
+  box(.045,.008,7.2,entry.x+sign*1.54,.130,12.4,bronze);
+  // Continue above the source hall's existing .158m finish, visible on exit.
+  box(.045,.008,7.8,entry.x+sign*1.54,.162,6.6,bronze);
+ }
+ box(4.40,.23,.30,entry.x,3.00,entry.z,timber);
+ box(3.70,.045,.075,entry.x,2.85,entry.z+.17,glow);
  label('FACULTY OF MATHEMATICS',-80,3.40,9.65,0,7.2,.55);box(6.9,.08,.10,-80,3.03,9.67,glow);
  const rv=[[-93.4,32.2,-11.3],[-66.6,32.2,-11.3],[-66.6,32.2,9.3],[-93.4,32.2,9.3],[-80,35,-11.3],[-80,35,9.3]],faces=[[0,1,4],[1,2,5],[1,5,4],[2,3,5],[3,0,4],[3,4,5]],roofGeometry=new T.BufferGeometry();roofGeometry.setAttribute('position',new T.Float32BufferAttribute(faces.flatMap(f=>f.flatMap(i=>rv[i])),3));roofGeometry.computeVertexNormals();add(roofGeometry,roofMat,'West wing warm metal pitched roof');box(26.8,.25,20.6,-80,32.12,-1,stone);
  const dummy=new T.Object3D();for(const[m,items]of batches){const mesh=new T.InstancedMesh(unit,m,items.length);mesh.name='Batched faculty stone / timber / shelves';items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.rotation.set(0,b.yaw,b.roll);dummy.scale.set(b.w,b.h,b.d);dummy.updateMatrix();mesh.setMatrixAt(i,dummy.matrix);});mesh.instanceMatrix.needsUpdate=true;mesh.computeBoundingSphere?.();group.add(mesh);}

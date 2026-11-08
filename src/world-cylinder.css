@@ -8,3 +8,5 @@ body[data-escher-depth] #artist-quarter-context,body[data-gallery-passage] #arti
 @media(min-width:701px){#world-cylinder-context{bottom:160px}}
 
 body[data-coastal-overview="clear"] #world::after{background:none}
+
+#world-cylinder-context>summary{cursor:pointer;font:18px/1.4 Georgia,serif}#world-cylinder-context:not([open]){padding:11px 15px}#world-cylinder-context>summary:focus-visible{outline:2px solid #efbd6b;outline-offset:4px}

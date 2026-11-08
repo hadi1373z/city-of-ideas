@@ -142,3 +142,24 @@ On 2026-11-08 the user made the Babel volcanic-reservoir view the default
 arrival for the bare city address. Keep this start in city-integration.js after
 all scene/start-mode installers. Explicit arrival links retain their destination,
 and the desk-book introduction remains available from the city overview.
+
+## Connected exploration polish
+
+Startup feedback in startup-progress.js reports actual coordinator stages; keep
+head module preloads for the main graph and the five delayed source factories.
+Original Dalí pages load asynchronously through their existing texture loader.
+Do not restore a painting-byte gate or block private-home restoration on it.
+
+Deep Babel hides the concealed upper city only below the first terrace; the
+real stairwell overlook remains visible. Restore culling on every mode change.
+The lower landscape has a connected meadow circuit, inlet and two level timber
+crossings. Apply lowerLandscape.canStand alongside source/faculty collisions;
+keep the original shore promenade continuous and all walking feet at .13m.
+
+Connected questions is optional, folded and uses only real walkable routes.
+The Mathematics working-wing guide uses actual source floor models and lift
+metadata: ground-floor visitors exit through the central hall and open front
+doors, upper floors use the lift. Keep solid laboratory windows distinct from
+the central doorway. No guide action moves the visitor or writes notes unless
+the visitor explicitly requests an existing interaction. Read docs/STARTUP.md,
+docs/CONNECTED-QUESTIONS.md and docs/lower-face-visuals.md before extending.

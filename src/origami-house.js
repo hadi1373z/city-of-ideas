@@ -53,7 +53,7 @@ export function installOrigamiHouse(M,T){
    else M.quickStart(id==='artists'?'artists-quarter':id);
   }});
   const more=el('details');more.className='coastal-more';more.append(el('summary',c.more));
-  for(const[label,action]of[[M.babelLibrary?.copy().visit||'Library of Babel',()=>{map.d.close();M.startExtra('babel');}],[w().open,()=>visit('entry')],[M.oceanSailing?.copy().visit||w().shore,()=>{map.d.close();M.startExtra('ocean');}],[w().study,()=>{map.d.close();M.studyHouses?.open();}],[w().makers,()=>{map.d.close();M.startExtra('makers');}]])more.append(button(label,action));
+  for(const[label,action]of[[M.babelLibrary?.copy().visit||'Library of Babel',()=>{map.d.close();M.startExtra('babel');}],[w().open,()=>visit('entry')],[M.oceanSailing?.copy().visit||w().shore,()=>{map.d.close();M.startExtra('ocean');}],[w().study,()=>{map.d.close();M.studyHouses?.open();}],[w().makers,()=>{map.d.close();M.startExtra('makers');}],['Mathematics Faculty · lower face',()=>{map.d.close();M.worldCylinder?.visitLower();}],['Mathematics · working entrance',()=>{map.d.close();M.startExtra('mathematics');}],['Ocean walk · lower face',()=>{map.d.close();M.startExtra('lower-shore');}]])more.append(button(label,action));
   const future=el('details');future.append(el('summary',(FOUNDATION_COPY[lang()]||FOUNDATION_COPY.en).map));
   for(const h of FOUNDATION_HOUSES)future.append(button(h.names[lang()]||h.names.en,()=>{map.d.close();M.startExtra('house:'+h.id);}));
   more.append(future);map.body.append(more,button(w().city3d,()=>{document.body.dataset.coastalOverview='clear';map.d.close();}));

@@ -53,6 +53,8 @@ export async function createExtraDistricts(THREE,options={}){
  if(!THREE?.Group||String(THREE.REVISION)!=='160')throw Error('Use the principal city Three.js r160 instance.');
  const {scene,city}=options;
  if(!scene?.isObject3D||!city?.art?.group||!Array.isArray(city.art.houses))throw Error('Provide the existing shared scene and original artist city.');
+ const progress=stage=>options.onProgress?.(stage);
+ progress('source-modules');
  const sourceBase=new URL(options.sourceBaseUrl||'./city-source-assets/home-tools/',import.meta.url);
  const F=options.factories||await sourceFactories(sourceBase,options.importModule||((url)=>import(url)));
  for(const name of ['buildMathCity','buildMakersCity','addDaliHouse','buildArtistCityEditions','validateCityNetwork','validateNeighborhood','buildCityCargo','buildCityFacilities'])if(typeof F[name]!=='function')throw Error('Missing original source factory: '+name);
@@ -64,7 +66,6 @@ export async function createExtraDistricts(THREE,options={}){
  const originalArt=city.art,baseHouses=originalArt.houses.slice(),baseChildren=new Set(originalArt.group.children);
  let activeMathFloor=0,disposed=false,network=null,editions=null,cargoOwners=[],homeOwners=new Map(),homeLotIndices=new Map(),pendingNeighborhood=null,activeHomeId=null;
  let artStation=null,daliArt=null,artAggregate=null,makers=null,visualSignature=null,editionCatalog=F.ARTISTS;
- const studyBlobUrls=[];
  const roads=new THREE.Group();roads.name='Shared paths to appended originals';root.add(roads);
  const roadMaterial=new THREE.MeshLambertMaterial({color:0xd2c6af}),groundMaterial=new THREE.MeshLambertMaterial({color:0x556563}),roadGeometries=new Set();
  function road(points,width=6,parent=roads){const mesh=globalThis.createCityRoad(THREE,points,width,roadMaterial,parent);if(mesh)roadGeometries.add(mesh.geometry);}
@@ -83,9 +84,11 @@ export async function createExtraDistricts(THREE,options={}){
  const disposeOwned=owner=>{if(!owner)return;owner.group?.removeFromParent();owner.group?.traverse(o=>{if(o.isInstancedMesh)o.dispose?.();});owner.dispose?.();};
  const mathModels=[];
  try{
+  progress('mathematics');
   for(let floor=0;floor<8;floor++)mathModels.push(F.buildMathCity(THREE,{floor}));
   const mathDeduplication=removeRepeatedMathExterior(THREE,mathModels);
   for(const model of mathModels){model.group.name='Mathematics original level '+(model.floor+1);model.group.userData.cityDestination='mathematics';mount(model,transforms.mathematics);}
+  progress('studios');
   makers=mount(F.buildMakersCity(THREE),transforms.makers);makers.group.userData.cityDestination='makers';
   // Remove the obsolete travel gateway, including both boards and its blocking posts.
   const travelGate=[];makers.group.traverse(o=>{if(o.userData?.cityAction==='travel')travelGate.push(o);});
@@ -162,19 +165,13 @@ export async function createExtraDistricts(THREE,options={}){
   }
   const tagActivities=(group,cityId)=>group.traverse(o=>{if(o.userData.cityAction)o.userData={...o.userData,extraCityId:cityId};});
   tagActivities(makers.group,'makers');tagActivities(artStation.group,'artists');for(const model of mathModels)tagActivities(model.group,'mathematics');
-  async function ensureEditionStudies(list){
+  function prepareEditionStudies(list){
    if(!list.some(e=>e.artistId==='dali')||editionCatalog!==F.ARTISTS)return;
-   const urls=[];
-   try{
-    const works=[];
-    for(const work of F.DALI_ARTIST.works){
-     const response=await (options.fetch||globalThis.fetch)(assetUrl(work.imageUrl),{credentials:'omit'});
-     if(!response.ok)throw Error('The original Dalí study card could not be loaded: '+work.id);
-     const blob=await response.blob(),url=URL.createObjectURL(blob);urls.push(url);works.push({...work,imageUrl:url});
-    }
-    if(disposed)throw Error('The appended city layer has been disposed.');
-    editionCatalog=F.ARTISTS.map(a=>a.id==='dali'?{...a,works}:a);studyBlobUrls.push(...urls);
-   }catch(error){urls.forEach(url=>URL.revokeObjectURL(url));throw error;}
+   // The source loader accepts these original bundled relative image paths.
+   // Resolve through AssetThree and let its ready/unavailable callback handle
+   // each image. Painting bytes must not gate the complete city or private-home
+   // restoration, and no duplicate fetch/blob copy is needed.
+   editionCatalog=F.ARTISTS.map(a=>a.id==='dali'?{...a,works:F.DALI_ARTIST.works.map(work=>({...work}))}:a);
   }
   async function updateNetwork(input){
    if(disposed)throw Error('The appended city layer has been disposed.');
@@ -182,7 +179,7 @@ export async function createExtraDistricts(THREE,options={}){
    for(const prior of network?.artistHomes?.editions||[]){const retained=list.find(e=>e.id===prior.id);if(!retained||JSON.stringify(retained)!==JSON.stringify(prior))throw Error('Preserved artist editions cannot be removed or rewritten by a scene update. The current city is kept.');}
    const signature=JSON.stringify({editions:list,cargo:next.cargo,placements:next.placements});
    if(signature===visualSignature){network=next;return{artistEditions:editions.houses.length,cargoCopies:next.placements.length,geometryChanged:false,privateStateWritten:false};}
-   await ensureEditionStudies(list);
+   prepareEditionStudies(list);
    if(disposed)throw Error('The appended city layer has been disposed.');
    let nextEditions;const nextCargo=[];
    try{
@@ -243,13 +240,14 @@ export async function createExtraDistricts(THREE,options={}){
    if(disposed)return;disposed=true;
    cargoOwners.forEach(disposeOwned);disposeOwned(editions);disposeOwned(artStation);
    for(const owner of homeOwners.values())disposeOwned(owner.built);
-   staticOwners.forEach(disposeOwned);daliArt.dispose();for(const o of daliAdded)o.removeFromParent();studyBlobUrls.forEach(url=>URL.revokeObjectURL(url));
+   staticOwners.forEach(disposeOwned);daliArt.dispose();for(const o of daliAdded)o.removeFromParent();
    if(city.art===artAggregate)city.art=originalArt;
    for(const g of roadGeometries)g.dispose();roadMaterial.dispose();groundMaterial.dispose();root.removeFromParent();root.clear();
   }
   const api={group:root,mathModels,makers,daliHouse,transforms,source:{base:sourceBase.href,three:THREE.REVISION,mathFloors:8,mathConcepts:24,makerHalls:makers.houses.length,makerActions:makers.houses.reduce((n,h)=>n+h.approaches.length,0),daliStudies:F.DALI_ARTIST.works.length,daliActivities:F.DALI_OBJECTS.length},mathDeduplication,facilities:{artists:artStation},canStand,region,entryFor,targetInfo,toWorld,selectMathFloor,updateNetwork,updateNeighborhood,update,dispose,get activeMathFloor(){return activeMathFloor;},get bounds(){return bounds();},get art(){return artAggregate;},get neighborhoodStatus(){return{available:homeOwners.size,pending:pendingNeighborhood?.homes.length||0,activeHomeId};},get targets(){return[...mathModels.map(m=>m.group),makers.group,...daliAdded,editions?.group,artStation.group,...cargoOwners.map(o=>o.group),...homeOwners.values()].map(o=>o?.group||o).filter(Boolean);},get buildingTargets(){return[mathModels[0].group,...makers.houses.map(h=>h.group),daliHouse.group,...(editions?.houses||[]).map(h=>h.group),...homeOwners.values()].map(o=>o?.group||o);}};
   await updateNetwork(options.network||F.initialCityNetwork());
   if(options.neighborhood)await updateNeighborhood(options.neighborhood,options.activeHomeId);
+  progress('connected');
   return api;
  }catch(error){
   // Source failures never dispose the borrowed original ten houses.

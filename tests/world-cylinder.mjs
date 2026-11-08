@@ -129,6 +129,14 @@ check('Lower gallery floor returns through the real bridge, inverse gravity turn
  assert(upper,'The lower stair must reach the same shared middle in reverse');assert.equal(api.route,null);assert.equal(f.babelEntries,1);assert(M.babelLibrary.active);near(M.player.x,11.7);near(M.player.y,-24+M.eye);assert.equal(f.privateAccess,0);f.events.get('pagehide')();
 });
 
+check('Deep Babel hides the concealed upper city and restores the real entry overlook',()=>{
+ const f=fixture(),{M,api}=f,babel=new T.Group();babel.name='Actual Babel render owner';M.scene.add(babel);M.babelLibrary.built={group:babel};
+ Object.assign(M.player,{x:-11,z:0,y:-24+M.eye});M.babelLibrary.active=true;M.city.update(M.player,1);api.prepareScene();
+ assert.equal(f.foreign.visible,false,'Hidden upper buildings must not keep drawing in the deep library');assert.equal(babel.visible,true);assert.equal(M.lantern.visible,true);
+ Object.assign(M.player,{x:48,z:-3,y:-8+M.eye});M.city.update(M.player,2);api.prepareScene();assert.equal(f.foreign.visible,true,'The first terrace retains its real view through the gallery stairwell');
+ Object.assign(M.player,{x:0,z:100,y:1.93});M.babelLibrary.active=false;M.city.update(M.player,3);api.prepareScene();assert.equal(f.foreign.visible,true);f.events.get('pagehide')();
+});
+
 check('Cleanup restores original source parents, current animation pose, visibility, handlers and UI',()=>{
  const f=fixture(),{M,api,originals}=f;api.visitLower();f.dancer.position.x=7;api.visitGallery();M.city.update(M.player,1);assert(f.sun.intensity<2.8);assert(f.sky.intensity<1.7);assert.equal(f.privateAccess,0);
  f.events.get('pagehide')();assert.equal(f.garden.parent,f.scene);assert.equal(f.ground.parent,f.scene);assert.equal(f.ground.visible,true);near(f.garden.position.x,-2360);near(f.dancer.position.x,7);near(f.sun.intensity,2.8);near(f.sky.intensity,1.7);
