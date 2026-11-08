@@ -13,7 +13,7 @@ import {installCityDiscoveries} from './city-discoveries.js?v=study1';
 import {installArtistQuarter} from './artist-quarter.js?v=dali-details1';
 import {installLearningLab} from './learning-lab.js?v=dialogue-details1';
 import {installStudyHouses} from './study-houses.js?v=computation-details1';
-import {installOrigamiHouse} from './origami-house.js?v=seminar1';
+import {installOrigamiHouse} from './origami-house.js?v=reading1';
 import {artistLineOfSight} from './artist-line-of-sight.js';
 import {installPhilosopherQuarter} from './philosopher-ui.js?v=sina-details1';
 import {installSocratesTour} from './socrates-tour.js';

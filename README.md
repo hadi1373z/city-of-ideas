@@ -156,7 +156,10 @@ Sources attached to the house include Schenk & Guest (2013), Wei et al. (2013),
 Adachi/Ishibashi/Kume on flat folding, and the existing traditional boat guide.
 Existing folded-paper boat/crane builders and their credits are reused. No
 character geometry, accepted recordings or fixed Kokoro voice settings change.
-All new instruction and controls support English, German and Persian.
+The house's reading and controls support English, German, Persian and Czech,
+including Czech text for its original nine boat milestones. The separate
+paper-crane lesson retains its existing languages and may fall back to English
+in Czech. This does not imply complete city-wide Czech localization.
 
 `origami-house-math.js` owns coordinates and validated progress;
 `origami-house-scene.js` owns the ateliers; `coastal-city-scene.js` owns the sea

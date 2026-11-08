@@ -61,4 +61,22 @@
 .coastal-seminar-paths{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 
 .coastal-house-anchor{position:absolute;z-index:1;width:5px;height:5px;transform:translate(-50%,-50%);border:1px solid #fff9e8;border-radius:50%;background:#294f45;pointer-events:none}
+/* The companion reads without accessing the folding notebook. */
+#origami-house-reading{box-sizing:border-box;width:min(900px,calc(100vw - 28px));max-height:88dvh;overflow:auto;padding:0;background:#f3efdc;color:#29483c;border:1px solid #b4bd9f;border-radius:16px}
+#origami-house-reading::backdrop{background:#12392bc4;backdrop-filter:blur(5px)}
+#origami-house-reading header{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:18px 24px;border-bottom:1px solid #cbd1b9}
+#origami-house-reading h2{font:normal clamp(23px,3vw,32px)/1.4 Georgia,serif;margin:0}
+#origami-house-reading button{min-height:44px;max-width:100%;padding:10px 15px;margin:5px;background:#285a49;color:#fff9e8;border:1px solid #78917b;border-radius:7px;font:inherit;cursor:pointer}
+#origami-house-reading header button{flex:0 0 44px;margin:0;padding:8px}
+#origami-house-reading button[aria-pressed=true]{background:#dfc67e;color:#29483c}
+#origami-house-reading button:focus-visible,#origami-house-reading a:focus-visible{outline:3px solid #ac7c32;outline-offset:3px}
+.fold-reading-languages{display:flex;flex-wrap:wrap;padding:9px 19px;border-bottom:1px solid #cbd1b9}
+#origami-house-reading main{padding:20px 25px;font:17px/1.85 Georgia,serif;overflow-wrap:anywhere}
+#origami-house-reading h3{font:normal 25px/1.5 Georgia,serif;margin-top:27px}
+#origami-house-reading li{margin-block:14px;padding-inline-start:5px}
+#origami-house-reading a,#origami-house-reading small{display:block;line-height:1.8;margin-top:18px}
+#origami-house-reading a{color:#2e6c55;min-height:44px}
+#origami-house-reading .fold-reading-formula{text-align:center;white-space:nowrap;font:18px/2 Georgia,serif;overflow-wrap:normal}
+#origami-house-context button+button{display:block;margin-top:8px;max-width:100%}
+@media(max-width:620px){#origami-house-reading header,#origami-house-reading main{padding:16px}.fold-reading-languages{padding:8px 11px}#origami-house-reading main{font-size:16px}#origami-house-context{max-width:230px}}
 @media(max-width:480px){#coastal-city-map .coastal-landmark[data-landmark=noether]{transform:translate(calc(-50% - 17px),-50%)}#coastal-city-map .coastal-landmark[data-landmark=cage]{transform:translate(calc(-50% + 17px),-50%)}#coastal-city-map .coastal-landmark[data-landmark=mirzakhani]{transform:translate(-50%,calc(-50% + 20px))}#coastal-city-map .coastal-landmark[data-landmark=noether]::after,#coastal-city-map .coastal-landmark[data-landmark=cage]::after{content:"";position:absolute;top:12px;width:5px;height:1px;background:#294f45}#coastal-city-map .coastal-landmark[data-landmark=noether]::after{left:100%}#coastal-city-map .coastal-landmark[data-landmark=cage]::after{right:100%}#coastal-city-map .coastal-landmark[data-landmark=mirzakhani]::after{content:"";position:absolute;bottom:100%;left:12px;width:1px;height:8px;background:#294f45}}

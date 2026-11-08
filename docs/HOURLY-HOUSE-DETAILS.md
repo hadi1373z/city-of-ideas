@@ -3852,3 +3852,137 @@ private reflection and explicit completion/save behavior. Own public copy has
 EN/DE/FA and a real Czech gap: inspect it before adding useful four-language
 reading/controls. Do not claim a global flat-folding guarantee, replace the live
 models, create a new lot or translate private text during locale rendering.
+
+## 2026-11-08 — Origami: a face and its footprint
+
+The existing House of Origami at (229, 76), distinct from the origami park,
+has received its first detail/reading pass. The source house, folded plates,
+ridge/valleys, glazing, entrance, furniture, cranes, three live workstations,
+shore, island geometry and walking routes remain in their original locations.
+The source scene/math/lesson/boat modules are byte-unchanged from review 6c5c84d.
+
+Eight pale bindings follow the actual folded roof edges at both ends; nine
+beam joints meet the existing columns, with the central entrance still clear.
+Four narrow straps stay on the original door posts. Six supported pale seat
+slats and four leg caps fit the two existing benches. Three worktables retain
+their tops and objects, with twelve aprons and twelve leg joints supported by
+the old tops/legs. Two shallow drawer cornices meet the existing cabinets.
+No source resource, matrix, material, target payload or collider was changed.
+
+A shallow rack at native local (8.82, 2.15, 6.4), turned -pi/2 against the
+opaque front part of the right side wall, has a backing, two wall spacers,
+ledge and two cards. All parts remain within the existing wall collision band,
+clear of the side glazing, front door and bench passage. A filled parallelogram
+and a broken rectangle ask about a face and occupied space. They are fixed
+original city symbols, not a crease pattern, historical objects, measurements
+or extra live folding cases. They have no separate saved state.
+
+The original EN/DE/FA/CS companion explains fixed rigid-face area versus changing
+projected extent. It makes clear that width times the displayed finite length
+is a bounding rectangle, not the paper area; that length includes the existing
+end offset. A separate LTR area formula has a plain-language explanation.
+Three readable prompts lead back to the original Miura, crease and boat work.
+The local angle/count conditions remain distinct from a global foldability
+certificate, and the boat milestones remain distinct from layer simulation
+or a test of real paper on water. No quotation or historical room is invented.
+
+The reading cites the successfully accessed primary sources:
+https://softmath.seas.harvard.edu/wp-content/uploads/2019/10/2013-09.pdf
+(Wei and colleagues, first two pages, fixed rigid faces/deployment) and
+https://www.kurims.kyoto-u.ac.jp/~kyodo/kokyuroku/contents/pdf/2051-05.pdf
+(Adachi, Ishibashi and Kume, section 2, single-vertex results).
+All four original work-page source links remain, including Schenk/Guest and
+the traditional boat guide. The Cambridge Schenk/Guest PDF returned 502 during
+this pass; successful live access to that particular source is not claimed.
+
+The physical rack opens by pointer and aimed E. The existing inside context
+and every original work-page navigation also reach the reading. Four explicit
+handoffs open the retained Miura, crease, boat and shore pages. Outside the
+house, experiment handoffs still show the original entry guard; a reading
+does not travel, unfold, change a crease, finish a boat or launch one.
+Local companion language carries to the chosen work page without changing
+the saved city preference. The house keeps its existing global preference.
+New reading rendering has no private-memory/storage access or progress writes.
+
+The house's own Czech gap is now filled: public descriptions, equations,
+theorem scope/feedback, controls, reflection/save labels, coast/map entry names
+and all nine original boat milestone titles, instructions and checks. Those
+nine views keep eight advances and the separate explicit completion action.
+The original diagrams, milestone order and EN/DE/FA texts are unchanged.
+The separate park crane lesson retains its languages and disclosed Czech
+English fallback. Existing Czech map/navigation support is preserved; this
+is not a new claim of full city, park, book or catalogue translation.
+
+Persian prose remains RTL. The new reading formula, existing numeric dimension
+cells and fold slider retain LTR order. The new reading and work pages identify
+their actual language. Private reflections/questions and raw unsaved drafts
+are never translated. Original explicit reflection/notebook/save actions remain.
+
+The exact Miura coordinates, 32 rigid panels, angle range 0-75 and conserved
+paper area remain. All three crease cases, labels, tests and local theorem
+limits remain. The original paper colours, boat milestones and shore-only
+launch guard remain. city-of-ideas:house-of-origami:v1 and compatibility with
+city-of-ideas:origami-made:v1:boat remain; there is no new progress key.
+Water-following/reduced-motion behavior and the separate ocean voyage remain.
+Near the ocean boat, its original boarding button still hides the folding
+context; the original launch rest remains pointer-accessible and opens the
+folding shore page. This priority was inspected and retained, not replaced.
+
+### Verification
+
+All 98 release programs passed after the final reading clarification: the
+preceding 97 plus the new Origami detail program. The source geometry baseline
+faaa90f178336282017290915565fde728600b7bd9c2ff29d14e3876ccb1a778 was independently
+measured before editing, from the unchanged source at review 6c5c84d.
+Tests preserve all 181 original nodes/resources/transforms/visibility,
+17 source targets, 16 colliders and native views; 5,913 collision samples,
+the entrance route and a real rack ray pass. Roof-axis endpoints, supported
+slats/aprons/joints/rack and once-only owned disposal are checked.
+Live Miura/crease/released-boat outputs match a bare source house at five fold
+settings, including flat and 75 degrees. Existing full-range panel invariants,
+coastal/door routes, local theorem scope, save guards and boat compatibility
+checks also pass. The actual co-installed companion/work controller is tested
+in all four languages with private memory/storage forbidden during reading,
+raw saved/draft text retained, four guarded handoffs and Czech boat milestones.
+
+Build: 785 assets / 332,695,072 bytes; source hash
+f4c73165e15d0cf3da0515ddda6a6f037bdd75526a832e4afb9c97debe44583f.
+Native Chrome walked the original entry and bench passage, visually checked
+the rack, roof/door/table/cabinet/bench details and opened the rack by pointer/E.
+All four readings and Czech/Persian mobile layouts were visually checked,
+with no horizontal overflow; Czech boat mobile also passed. Reading/language
+switches and all four work-page handoffs left browser storage unchanged.
+Saved global Czech reached the reader and survived reload.
+
+Native Czech flat/75-degree buttons and keyboard slider worked, with paper
+area unchanged. All three crease cases remained available. Nine original
+boat milestones, explicit completion and paper selection worked in Czech.
+The launch action was absent in the house, then worked at the original shore
+rest; the digital boat appeared on the water. Reading did not alter the
+completed launch or fold state. A synthetic unsaved mixed-language reflection
+retained spaces/newline across reading/language/work/shore handoffs; no private
+reflection/question was saved. Console: zero application errors, the existing
+Three.js warning per root load. Hardware controller A was not separately tested.
+Screenshots and release log are retained in the originating chat's outputs.
+
+All 37 earlier passes and reconciled main work remain, including Ramsey's
+accepted cast/audio and separate puzzle/lesson, prior guides, private flows,
+Babel, investigations, computation lab, Proof Atelier, map/facing and branding.
+The hourly cadence and review-only policy continue; no merge or deployment.
+
+Thirty-eight first detail/reading passes are complete. Next useful house:
+the existing Socrates residence, region id socrates, at root transform
+(-96, 100), scale 1.7. Begin with its existing Study, room id math, rather
+than a new house lot. Inspect src/city.js, home-scene.js, home-bridge.js,
+study-book.js, opening-script.js, installed home owner/edition and the original
+home-tools model/interior/navigation/readers, plus per-house notes/tests.
+The home can rebuild or load another edition: attach additive supported
+details only to the verified public source room, guard missing/custom rooms
+and dispose on owner replacement. Preserve every room/floor/door, furniture,
+study desk approach, open Zarathustra book/stand, original notebook placement,
+81 chapter IDs and editions, resident appearances/voices, accepted opening
+recordings, source reader, private notes/imports and explicit interactions.
+Inspect actual public-language gaps before a modest original sourced
+EN/DE/FA/CS companion; do not translate private text or replace the book/Socratic
+dialogue. Keep the study's public reading distinct from historical Socrates,
+the city-written opening, stored notes and the separate theatre/rehearsal.
