@@ -7,13 +7,26 @@ export function buildMathFaculty(T,{canvas=()=>document.createElement('canvas')}
  const glass=mat(0x92b3ac,{transparent:true,opacity:.23,side:T.DoubleSide,depthWrite:false}),glow=own(new T.MeshBasicMaterial({color:0xdcc18d})),unit=own(new T.BoxGeometry(1,1,1));
  function box(w,h,d,x,y,z,m=stone,yaw=0,roll=0){if(!batches.has(m))batches.set(m,[]);batches.get(m).push({w,h,d,x,y,z,yaw,roll});}
  const add=(g,m,name)=>{const mesh=new T.Mesh(own(g),m);mesh.name=name;group.add(mesh);return mesh;};
- function band(ri,ro,yi,yo,m,name){const v=[],ix=[],n=192;for(let i=0;i<=n;i++){const a=i/n*Math.PI*2;v.push(Math.cos(a)*ri,yi,Math.sin(a)*ri,Math.cos(a)*ro,yo,Math.sin(a)*ro);}for(let i=0;i<n;i++){const k=i*2;ix.push(k,k+1,k+2,k+1,k+3,k+2);}const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(v,3));g.setIndex(ix);g.computeVertexNormals();return add(g,m,name);}
+ function band(ri,ro,yi,yo,m,name,depth=0){const v=[],ix=[],n=192;for(let i=0;i<=n;i++){const a=i/n*Math.PI*2;v.push(Math.cos(a)*ri,yi,Math.sin(a)*ri,Math.cos(a)*ro,yo,Math.sin(a)*ro);}const offset=v.length/3;if(depth)for(let i=0;i<offset;i++)v.push(v[i*3],v[i*3+1]-depth,v[i*3+2]);for(let i=0;i<n;i++){const k=i*2;if(!depth)ix.push(k,k+1,k+2,k+1,k+3,k+2);else ix.push(k,k+2,k+1,k+1,k+2,k+3,k+offset,k+1+offset,k+2+offset,k+1+offset,k+3+offset,k+2+offset,k+1,k+3,k+3+offset,k+1,k+3+offset,k+1+offset,k,k+offset,k+2+offset,k,k+2+offset,k+2);}const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(v,3));g.setIndex(ix);g.computeVertexNormals();return add(g,m,name);}
  function label(text,x,y,z,yaw,width,height,data){const c=canvas();c.width=1024;c.height=192;const ctx=c.getContext('2d');ctx.fillStyle='#354c48';ctx.fillRect(0,0,1024,192);ctx.fillStyle='#efe2bd';ctx.font='bold 52px Georgia';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(text,512,100,970);const tex=own(new T.CanvasTexture(c));tex.colorSpace=T.SRGBColorSpace;const mesh=add(new T.PlaneGeometry(width,height),own(new T.MeshBasicMaterial({map:tex,side:T.DoubleSide,toneMapped:false})),text);mesh.position.set(x,y,z);mesh.rotation.y=yaw;if(data){mesh.userData={...data,mathFaculty:true};targets.push(mesh);}return mesh;}
- // Reuse the existing r57.8 / 7.2m gallery columns. The new roof bears on their
- // lintel; no new column or floor is inserted into the helical well.
+ // Follow the actual 192-sided roof, not a different pitch between r22.1..59.4.
+ // The retained r57.8 gallery columns and west lintel carry short fitted bearings.
+ const roofSlope=(F.roofOuterY-F.roofInnerY)/(F.roofOuter-F.roofInner),sector=Math.PI*2/192;
+ const roofHeight=(r,a=0)=>F.roofInnerY+roofSlope*(r*Math.cos(a-(Math.floor(a/sector)+.5)*sector)/Math.cos(sector/2)-F.roofInner);
  band(F.roofInner,F.roofOuter,F.roofInnerY,F.roofOuterY,roofMat,'Annular timber roof · open central oculus');
- band(21.5,22.0,11.81,11.81,bronze,'Thin bronze oculus rim');band(60.4,61.1,7.69,7.69,bronze,'Rotunda eaves');
- for(let i=0;i<40;i++){const a=i/40*Math.PI*2,ri=22.1,ro=59.4,dy=F.roofOuterY-F.roofInnerY,len=ro-ri;box(Math.hypot(len,dy),.17,.16,Math.cos(a)*(ri+ro)/2,(F.roofInnerY+F.roofOuterY)/2-.13,Math.sin(a)*(ri+ro)/2,timber,-a,Math.atan2(dy,len));}
+ // A concealed .003m engagement avoids coincident visible underside faces.
+ band(21.5,22.0,roofHeight(21.5)+.032,roofHeight(22)+.032,bronze,'Thin bronze oculus rim',.035);band(60.4,61.1,roofHeight(60.4)+.032,roofHeight(61.1)+.032,bronze,'Rotunda eaves',.035);
+ const caps=[],capFaces=[];
+ for(let i=0;i<40;i++){
+  const a=i/40*Math.PI*2,ri=22.1,ro=59.4,len=ro-ri,dy=roofHeight(ro,a)-roofHeight(ri,a),slope=dy/len,normal=Math.hypot(1,slope),centre=roofHeight((ri+ro)/2,a)-.085*normal+.002;
+  box(Math.hypot(len,dy),.17,.16,Math.cos(a)*(ri+ro)/2,centre,Math.sin(a)*(ri+ro)/2,timber,-a,Math.atan2(dy,len));
+  // Base footprints meet the existing column tops, or the real west doorway's
+  // header. Sloping tops meet the rafter underside; nothing enters the well.
+  const base=i===20?6.505:7.33,under=roofHeight(57.8,a)-.17*normal+.002,k=caps.length/3;
+  for(const top of[false,true])for(const[r,t]of[[-.35,-.36],[.35,-.36],[.35,.36],[-.35,.36]])caps.push(Math.cos(a)*(57.8+r)-Math.sin(a)*t,top?under+slope*r:base,Math.sin(a)*(57.8+r)+Math.cos(a)*t);
+  for(const face of[[0,1,2,3],[4,7,6,5],[0,4,5,1],[1,5,6,2],[2,6,7,3],[3,7,4,0]])capFaces.push(k+face[0],k+face[1],k+face[2],k+face[0],k+face[2],k+face[3]);
+ }
+ const capGeometry=new T.BufferGeometry();capGeometry.setAttribute('position',new T.Float32BufferAttribute(caps,3));capGeometry.setIndex(capFaces);capGeometry.computeVertexNormals();add(capGeometry,stone,'Fitted roof bearings · retained columns and west lintel');
  // Exterior arcade behind the retained colonnade. Its western gap is real.
  const count=80,da=Math.PI*2/count;
  for(let i=0;i<count;i++){const a=(i+.5)*da;if(Math.abs(Math.atan2(Math.sin(a-Math.PI),Math.cos(a-Math.PI)))<.085)continue;const x=Math.cos(a)*60.25,z=Math.sin(a)*60.25,yaw=Math.PI/2-a,w=60.25*da+.04;box(w,.85,.38,x,.13+.425,z,stone,yaw);box(w,.22,.52,x,7.37,z,pale,yaw);box(w,5.55,.045,x,3.78,z,glass,yaw);}

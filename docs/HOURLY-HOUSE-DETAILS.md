@@ -5396,3 +5396,80 @@ covered connection, all eleven genuine paper monitors/rights/proximity gates,
 all47 readings and private/source/world ownership. Use real surfaces/bounds,
 inspect concurrent work first, and make a change only when justified; otherwise
 record a factual audit. No duplicate columns, new lot or invented first reading.
+
+## 2026-11-10 · Annular Faculty roof seated on its retained supports
+
+This architectural follow-up continues264f988 on the same
+`feat/hourly-house-details` branch and PR #5. The latest ledger, repository
+instructions, source/support/world/paper notes, branches/PRs and recent progress
+were inspected first. The worktree began clean; main remains3f4b377. All47 first
+readings and all eight working floors remain complete. No new lot, folio,
+historical reading, resident, voice, recording or private key is introduced.
+
+The actual annular roof has192 facets from radius21.5/Y11.8 to61/Y7.65. Its forty
+rafters previously applied the full4.15m roof fall over their shorter radius
+22.1..59.4 span. Native installed west-axis rays at radius57.8 found roofY7.986203
+but rafter top7.783541: a real .202662m gap. At radius59.2 the gap grew to.211337m;
+near radius22.5 the old rafter instead penetrated.016084m into the roof. The
+original39 gallery columns ended atY7.33; the real west doorway header ended
+at6.505. Neither met its rafter. See `MATH-FACULTY-ROOF.md`.
+
+The same forty rafters now follow the actual roof facets, with unchanged.17m
+depth/.16m width and.002m concealed top engagement. Thirty-nine fitted wedge
+bearings stand on the retained column tops; one stands on the real west lintel.
+Their sloping tops meet the rafter undersides, nowY7.817267 on the west axis.
+No duplicate floor column, aisle obstacle or geometry in the open well is added.
+The two original bronze edges become closed.035m roof-seated sections with.003m
+concealed engagement, removing the underside clash found in close native QA. The
+oculus footprint remains21.5..22; the eave remains60.4..61.1, including its existing
+.1m outer projection. The original roof surface/profile/triangles remain exact.
+
+The Faculty's existing owner merges40 bearings into one owned geometry with its
+existing stone material: one extra draw,32->33; instances stay1718. Only the forty
+enumerated rafter matrices and two existing bronze geometries change. No new
+material, texture, light, instance batch, collider, pick, listener, UI or state
+is allocated. All22 Faculty colliders,16 exact Atlas/floor targets, working-wing
+source ground24/upper15 colliders and approaches remain. Source/private poses,
+proper lower half-turn, gallery/world joins and owned cleanup stay intact.
+
+All121 release programs pass. The new roof helper runs from the existing
+Faculty test:3000 full-length/width roof-rafter probes,560 real base/underside
+contacts,1152 closed-rim contacts, clear oculus, inverted composition and exactly
+once disposal of the one added geometry. An independently measured264f988
+fingerprint preserves all1678 other Faculty instances. All1736 original lower
+gallery instances remain exact. The earlier20c7ad1 fingerprint remains with only
+the forty former rafters explicitly restored for that historical comparison;
+actual new profiles are tested independently, not called unchanged. Original
+roof geometry, colliders/targets,5565 covered-walk/turn samples,28296 source-room
+envelopes and44 actual source-ground bearing corners also pass. Earlier stairs,
+readers/private guards, scans/rights, voices and recordings remain in the suite.
+
+Independent native Chrome checks before/after roof/header views, a retained
+column bearing and the open oculus. Full-scene installed rays now give west
+rafter topY7.988203/roof7.986203/bearing top7.817267. Ordinary-key walking exits
+the real west doorway beyond localX-64 onto the covered walk with route=null,
+then returns to the original Faculty floor capture, all at logical feet.13.
+Existing EN/DE/FA/CS views retain unchanged pose; Persian remains RTL. All eleven
+genuine paper pages report ready. Separate headless key-pulse precision limits
+were resolved by checking actual boundary crossings; no application error or
+collision bypass is used. Before/after images and factual QA diagnostics are
+retained in this chat. The user's headed preview remains under their control.
+
+All47 readings, original source/legacy language boundaries, actual working-wing
+entrance/identity/roof and supported covered connection, genuine stairs/lift,
+eight floors/24 concepts, solid windows, rooms/furniture, original interactions,
+raw private drafts/carets/first answers and explicit saves remain. New geometry
+has no memory/storage/progress, language-write, experiment, discovery, audio,
+travel or floor-selection behavior. Existing Three.js warning and untested
+hardware-controller A limitation remain. Final commit/build/local asset checks
+are recorded in PR #5. No merge or deployment; City Map #4 and other work stay
+separate.
+
+Next useful architectural audit: inspect the annular Faculty's existing arcade,
+glazing-frame and arch-springing contacts against its retained colonnade and
+roof, keeping the real west opening and paper viewing aisle clear. Start from
+the actual installed surfaces and concurrent work; preserve the open well,
+480 treads/handoffs, all eleven genuine papers/rights, completed readings,
+working wing/covered route and source/private/resource ownership. Change only
+measured justified gaps; otherwise record a factual audit. No duplicate columns,
+new lot, certification claim or invented first reading.
