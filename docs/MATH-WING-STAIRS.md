@@ -94,9 +94,12 @@ On reaching an actual full-floor landing, the walker delegates the original
 public floor-selection method to keep source floor/cargo metadata coherent.
 It does not invoke the lift animation. Between floors, a distinct stair region
 hides wrong-floor companion encounters. The existing folded Way out guide
-retains its actual ground doorway and proximity-gated source lift; direction
-boards and the new four-language stair status make the walking alternative
-visible. The status keeps Persian prose RTL and level numbers in an LTR bdi.
+retains its actual ground doorway and proximity-gated source lift. Its later
+four-language circulation update offers a walking route to the current full-floor
+stair landing or a route to the original lift; see `CONNECTED-QUESTIONS.md`.
+Neither route moves the visitor or draws cues over the opening. Direction boards
+and the four-language stair status make the flights visible between floors.
+The status keeps Persian prose RTL and level numbers in an LTR bdi.
 
 An explicit arrival at an old flat-floor point now inside an unsupported opening
 uses the same floor's front landing at local (5.3,6.9). The input pose object and

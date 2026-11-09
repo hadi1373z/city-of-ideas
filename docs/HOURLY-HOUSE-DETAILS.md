@@ -5221,3 +5221,95 @@ source/floor/proximity metadata before any change. Preserve the real ground
 doorway, upstairs proximity-gated original lift, explicit actions/visit-only
 dots and no automatic movement, private access or saves. Do not repeat a floor
 folio or re-add a source-only gap already covered by the installed facade.
+
+## 2026-11-09 · Working-wing exits acknowledge the real stairs
+
+This circulation follow-up continues review ad0acc4 on the same
+`feat/hourly-house-details` branch and PR #5. All 47 first passes and all eight
+Mathematics floor companions remain complete. No new reading, historical
+quotation, lot, folio or architectural mesh is added.
+
+The optional upper-floor Way out previously instructed visitors to use only the
+lift. It now offers two public visit-only destinations: the actual current
+full-floor stair landing, or the original lift. Stairs are the default when the
+verified stair owner is installed; absent that owner, the original lift route
+remains. Choosing a destination does not show a hidden trail, move or turn the
+visitor, invoke arrival/floor selection, open a gate, read private state or save
+progress. Show/hide remains a separate explicit opt-in action.
+
+The stair route ends at source-local (6.2,6.9), derived from the actual
+`WING_STAIRS` descending-lane/front-landing bounds, on a supported full-floor
+surface. It does not draw a fictitious level path through the slab opening.
+Every segment retains live source/cargo and Faculty collision checks and now
+also rejects the real opening and guard bands. The lift route retains the exact
+source landing metadata and its nearby, matching-height original ground-floor
+action. Ground-floor routes still use the real partition openings, central
+hall/front doorway and covered connection. Solid windows remain solid.
+
+Original EN/DE/FA/CS Way out copy distinguishes the half-storey turning landing
+from a full-floor landing and tells visitors to descend the genuine flights
+themselves. Between source floors this guide/dots hide while the original stair
+status remains; source floor/cargo selection still belongs solely to the actual
+walking landing or an existing explicit lift action. The guide never invokes
+the same-floor explicit-arrival fallback. A small retained English lower-world
+hint also acknowledges walking stairs when their owner is present. Other
+Connected questions/startup/landscape copy retains its disclosed English scope;
+no full legacy catalogue, paper-reader or private-text translation is claimed.
+
+Persian prose is RTL. A measured header offset resolves an observed Czech mobile
+overlap: the guide begins eight pixels below the actual header. Existing folded
+behavior, maximum height/scrolling and opposite-side Math reading controls remain.
+Owned locale updates read only the public city language, and disposal removes
+their listener along with the existing owned panel/dots. No saved-language,
+private memory/storage, note, book-colour, import, experiment, discovery, voice
+or audio state is read or written by guidance/rendering.
+
+All 121 release programs pass on the final source. The existing connected-route
+test retains 7,861 original probes and adds 3,900 points across the installed
+stair composition, all eight source floors and both upper destinations. Ordinary
+`wingStep` traverses the routes without changing height. Checks reject the open
+well, guards and a live blocked landing, verify supported endpoints, unchanged
+approach payloads, source-only nearby lift delegation, missing-owner fallback,
+intermediate-floor hiding, four languages/RTL, no automatic trail or visitor/
+storage changes, and owned listener/resource cleanup. Earlier independent
+source fingerprints, all eight floor reader/privacy checks, genuine scan bytes/
+rights, voices/recordings and connected-world geometry still pass.
+
+Independent native Chrome used the actual doorway, Atlas and original Building
+guide to reach Logic. Both destination choices and show/hide leave position,
+source floor, language preference and storage unchanged. Native descent reaches
+feet28.13 ->26.13 ->24.13; index7 remains during the half landing, then the
+original walker selects Topology/index6 at the full landing and Way out resumes.
+The existing nearby lift returns to ground. Ordinary walking through the actual
+partition opening/hall/front doors reaches the plaza. No navigation is automated
+by the guide.
+
+Desktop EN/DE/FA/CS and Czech/Persian 390x844 layouts are visually checked.
+Mobile client/scroll width is308px, with guide top94/header bottom86 in Czech
+and top91/header bottom83 in Persian. A synthetic unsaved original Functions
+reflection retains raw spaces/newline, the same input and caret3–8 through
+direct guide rendering and local Czech/Persian companion/header return. Global
+city English stays unchanged by that local reading. Explicit global Czech
+survives a fresh document; all eleven genuine paper pages report ready.
+QA uses its own headless browser/preview, leaving the user's headed preview
+under their control. The existing Three.js warning/controller-A limitation
+remains; supported interaction results and separate test-harness diagnostics are
+retained with screenshots/logs in this chat. No private response was saved.
+
+Main remains 3f4b377; current PR #5 and branches were inspected and the working
+tree began clean. City Map #4 is merged separately; no competing branch or
+unrelated PR was changed. This revision retains the two-parent integrations and
+all 47 readers, actual stair/slab/guard/piers, supported entrance/roof contacts,
+room/furniture/seat layouts, original approaches, source/private coordinates,
+proper lower transform and source/world/resource ownership. See
+`CONNECTED-QUESTIONS.md`, `MATH-WING-STAIRS.md` and
+`MATH-WING-ENTRANCE.md`. Final commit/build/local asset verification is recorded
+in PR #5. Review only; no merge or deployment.
+
+Next useful architectural audit: inspect the existing covered connection between
+the original working wing and the annular Faculty, especially its actual roof/
+post contacts, intersections and continuous walking clearances. Read the latest
+ledger/support notes and inspect concurrent work first. Keep the same lot,
+entrance, lower transform, source/Faculty solids, real routes and completed
+readings; make a change only when actual installed geometry justifies it.
+Do not manufacture another first pass or add floating ornament.
