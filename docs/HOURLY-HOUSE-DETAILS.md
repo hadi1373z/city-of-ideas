@@ -5140,3 +5140,84 @@ Keep the actual lot, source rooms/windows/doors/paths, central 3m entrance,
 covered connection and real stairs/lift. Preserve all completed readings,
 private/source contracts and both lower/upper world joins. Choose any concrete
 change only after inspecting its actual supporting geometry and concurrent work.
+
+## 2026-11-09 · Installed working-wing porch and roof contacts
+
+This is an architectural pass on the existing original Mathematics working
+wing, not another first reading. All 47 first passes/eight floor companions
+remain complete. The review continues 07d0849 on the same branch/PR #5. See
+`MATH-WING-ENTRANCE.md` for exact source, installed-frame and ownership checks.
+
+Native inspection distinguished the original source canopy from the facade
+layer installed by `math-faculty-scene.js`. The bare source has a .04m interval
+between plinth and column bases, but the actual connector paving already fills
+it. The installed adapter adds no duplicate soles. A guarded standalone source
+fallback fills that source-only interval within the exact original footprints.
+Four fitted knee joints meet the original columns/header, stay above Y2.50 and
+clear the central three-metre doorway. No ground obstacle/collider is added.
+
+The source's two loose identity planes and the facade's overlapping English
+Faculty nameplate are replaced by one original EN/DE/FA/CS working-wing identity.
+Its backed 7.2 × .55 board is suspended from the actual porch roof (underside
+lower-local Y3.94); two lower clips connect the unchanged glow underline. The
+new front-only text surface has a .8mm rendering separation and Persian RTL
+shaping. Source/facade relative matrices locate it at the existing entrance;
+the proper lower half-turn is inherited once. Local guide choices leave its
+global language unchanged. No source texture/material or shared instance is
+rewritten; only those three enumerated visibility values are retired/restored.
+
+The active facade's warm-metal roof differs from the hidden original source
+roof. Its ceiling spans lower-local Y31.995..32.245, while the actual headers
+end at Y31.965. Four fitted stone bearing strips close the measured .03m
+interval, following the original header footprints and joining without
+overlapping visible faces. Roof pitch/profile, ceiling, facade bands, source
+rooms, solid windows and the entire walking/lift route remain. These are
+digital contact observations/details, not engineering certification or a
+historical reconstruction. No historical reading or quotation is invented.
+
+The installed layer has 14 draw meshes/six owned geometry/material/texture
+resources, with no new image asset, light, collider, instance batch, voice,
+recording, progress key or private-state access. Source and facade missing/
+custom/replacement guards include the actual installed source name and the
+real porch/header instances. Without a usable canvas it leaves identification
+intact. Disposal restores borrowed visibility, releases owned resources once
+and restores the update hook only while owned. The stair adapter still retires
+77 meshes; this layer retires three more, for 80 across both. Installed source
+colliders remain ground24/upper15 and all original approach arrays/payloads stay.
+
+All 121 release programs pass. The new test retains the independent bare
+floor-zero 245-node fingerprint
+`f02fa5b4332b6cdc13be90952657b95a09c3f80dd9851ec39ee1650e9adcbe8b`,
+23 source colliders/17 approaches before the separate architectural adapter,
+and 10,185 collision samples. It verifies actual `buildMathFaculty` composition,
+connector coverage, supported board/rail attachments, all four installed roof
+contacts without overlapping faces, knee endpoints, central approach/headroom,
+proper lower mapping, public languages, private getter denial and once-only
+owner replacement/cleanup. Borrowed source/facade resources, buffers, targets
+and navigation remain exact; earlier source fingerprints are not relaxed.
+
+Native comparison/close views inspect the installed board in all four languages,
+including Persian shaping. Central-door walking, original Atlas/guide/lift to
+Algebra, actual stair descent to ground and exit through the real doorway work.
+The unchanged Foundations -> original Functions handoff and source-header
+return preserve the same synthetic raw multilingual draft/caret (3–8), pose,
+storage and saved city language. A local Persian reading leaves the global
+English identity unchanged. Saved Czech survives reload; mobile Czech/Persian
+views work and all eleven genuine paper pages report ready. No application
+errors were seen; the existing Three.js warning and untested hardware-controller
+A limit remain. The user's headed preview stays under their control; independent
+QA screenshots/logs and final local artifact verification are kept in this chat.
+
+Main 3f4b377 and the prior two-parent ancestry/world/Studio/scan/voice/private
+contracts remain. Source note/import/save ownership, all eight exact concept
+triples/24 IDs, readers, folios, guides, directions, doors, covered connection,
+actual all-floor stair/lift route and default Babel arrival remain. No merge or
+deployment; other branches/PRs and City Map #4 stay separate. Final commit/build/
+explicit local verification are recorded in PR #5. First-pass count stays 47.
+
+Next useful circulation review: reconcile the optional Mathematics Way out
+guide with the continuous walking stairs. Inspect actual routes and live
+source/floor/proximity metadata before any change. Preserve the real ground
+doorway, upstairs proximity-gated original lift, explicit actions/visit-only
+dots and no automatic movement, private access or saves. Do not repeat a floor
+folio or re-add a source-only gap already covered by the installed facade.

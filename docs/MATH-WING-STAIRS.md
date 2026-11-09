@@ -124,3 +124,11 @@ in the isolated test session. The original lift, reader handoffs, Topology
 companion, four-language/mobile/RTL behavior and final artifact are checked in
 the hourly ledger and PR #5. Hardware controller A is not separately tested.
 No PR merge or deployment.
+
+The later installed-entrance/roof audit is in `MATH-WING-ENTRANCE.md`. It
+resolves the live facade's porch, paving and active roof alongside the source
+room: three noninteractive identity planes are replaced by one supported
+four-language board, and four thin header-to-ceiling bearing strips close the
+measured installed gap. The stair adapter's 77 retirements and collision
+contract stay unchanged; the two adapters together retire 80 name/slab/stand-in
+meshes. All 47 first readings and all eight walking floors remain.

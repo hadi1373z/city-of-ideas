@@ -44,6 +44,7 @@ import {installMathProbability} from './math-probability.js';
 import {installMathTopology} from './math-topology.js';
 import {installMathLogic} from './math-logic.js';
 import {installMathWingStairs} from './math-wing-stairs.js';
+import {installMathWingEntrance} from './math-wing-entrance.js';
 import {installCinematicIntro} from './cinematic-intro.js';
 import {installDiscoveryStory} from './discovery-story.js';
 const waitMain=()=>new Promise(resolve=>{if(window.CITY_MAIN?.city)resolve(window.CITY_MAIN);else addEventListener('gallery-ready',()=>resolve(window.CITY_MAIN),{once:true});});
@@ -148,6 +149,7 @@ try{
  installPondWorldWindow(M,T);
  installConnectedJourney(M,T);
  M.mathWingStairs=installMathWingStairs(M,T,E);
+ M.mathWingEntrance=installMathWingEntrance(M,T,E);
  const arrivalQuery=new URLSearchParams(location.search||''),faceArrival=arrivalQuery.get('arrival');if(faceArrival==='pond-crossing'){M.arrive(M.pondWorldWindow.pond.entry);M.player.pitch=-.33;}else if(faceArrival==='escher-depth')M.escherDepth.enter('gallery');else if(faceArrival==='math-entrance')M.startExtra('mathematics');else if(faceArrival==='paper-monitors')M.startExtra('paper-monitors');
  M.status('ready');
  installCinematicIntro(M,T,socrates);
