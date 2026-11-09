@@ -39,6 +39,7 @@ import {installMathFoundations} from './math-foundations.js';
 import {installMathAlgebra} from './math-algebra.js';
 import {installMathGeometry} from './math-geometry.js';
 import {installMathCalculus} from './math-calculus.js';
+import {installMathDiscrete} from './math-discrete.js';
 import {installCinematicIntro} from './cinematic-intro.js';
 import {installDiscoveryStory} from './discovery-story.js';
 const waitMain=()=>new Promise(resolve=>{if(window.CITY_MAIN?.city)resolve(window.CITY_MAIN);else addEventListener('gallery-ready',()=>resolve(window.CITY_MAIN),{once:true});});
@@ -118,6 +119,7 @@ try{
  M.mathAlgebra=installMathAlgebra(M,T,E);
  M.mathGeometry=installMathGeometry(M,T,E);
  M.mathCalculus=installMathCalculus(M,T,E);
+ M.mathDiscrete=installMathDiscrete(M,T,E);
  installQuestionWalk(M,T);
  installRamseyHouse(M,T);
  installRamseyRoom(M);

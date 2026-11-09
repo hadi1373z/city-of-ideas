@@ -4583,3 +4583,124 @@ sum. Keep the four completed floors, all eight floors/24 IDs, Atlas/books,
 source activities/private reflections/imports/explicit saves, seats/colliders/
 routes/lift gates and solid windows. Inherit the actual lower transform, with
 no new lot or annular-Faculty duplication. Four working floors remain candidates.
+
+## 2026-11-09 — Mathematics Discrete: connection, order and proof
+
+Developed Discrete mathematics, floor index 4 (displayed Floor 5), in the
+existing original Mathematics working wing at logical (-2240,-65). Source
+height 16 and installed feet 16.13 are unchanged. The annular Faculty, paper
+ring and four completed lower working floors remain distinct. See
+`MATH-DISCRETE.md`.
+
+Eight aprons/eight leg joints meet the two original table undersides. Two
+supported linen chair pads/eight seams clear the original backs. Two floor-
+supported bookcase plinths fit between existing uprights and against their
+backing, inside the original collision footprints. Visual review caught
+overlapping faces at their ends; the final fit meets upright inner faces and
+backing front without covering them. Two posts on the library table's rear
+edge support a backed folio, clear of the original sheet/open book. Cards,
+strokes and printed marks meet their backing. There are 56 owned meshes/six
+materials, no new textures/lights/images/colliders or saved diagram state.
+Source height is applied once under the original model/proper lower parent.
+
+Fixed original city cards show a four-disk graph with a triangle and single
+edge to a fourth vertex, then a bracketed circle/square group and its two
+opposite orders. Only filled disks are graph vertices. Mentally removing the
+joining edge isolates the fourth disk; removing a triangle edge leaves every
+vertex connected. The right card's arrows read left-first/right-second and
+represent ordered positions, not directions on the separate undirected graph.
+There is no scale, measured room data, historical object, copied source figure,
+live model or new score.
+
+Original sourced EN/DE/FA/CS reading connects adjacency/cut-edges, groups versus
+ordered choices, and induction's base/arbitrary conditional step. The original
+four-room design remains the visitor's own; the original counting exercise
+retains three people A/B/C, while the card uses only two abstract tokens. The
+positive-integer sum still starts at one. Its conditional step adds the next
+integer to the assumed sum and factors; numerical examples alone do not prove
+a general step. Three unscored prompts return to these distinctions. Three
+formula blocks remain LTR with line breaks; Persian prose stays RTL. No
+quotation, testimony, historical-room or island-geometry claim is invented.
+
+Successfully accessed authored references:
+[OpenStax Graph Basics 12.1](https://openstax.org/books/contemporary-mathematics/pages/12-1-graph-basics),
+[bridges/cut-edges in Euler Trails 12.6](https://openstax.org/books/contemporary-mathematics/pages/12-6-euler-trails),
+[Counting Principles 9.5](https://openstax.org/books/college-algebra-2e/pages/9-5-counting-principles) and
+[MIT OCW 6.042J, Fall 2005, Lecture 6](https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-fall-2005/resources/slides3w/).
+The MIT PDF's induction rule starts at zero; the reading explicitly uses the
+city sum task's positive-integer domain. No lecture example/image is copied.
+
+Folio pointer/E, inside context, tools header and welcome Places reach the
+reading. Explicit actions retain exact `graphs`, `counting`, `induction`
+physical-source payloads, summaries/questions/exercises and original reader
+ownership. Actual floor/inside/feet guards hide wrong-floor encounters. Reading
+never moves/selects a floor; only explicit approach uses the working entrance.
+The existing guide/lift chooses floors. Solid upper windows, real partition
+openings and the folded exit's ground doorway/proximity-gated lift remain.
+
+Source-header close restores the same outer dialog, mounted iframe, source
+reader, raw draft and caret. Reading/open/locale never inspect private fields,
+access storage/private memory, write progress, translate private text or change
+saved city language. Reflections/discussions/imports/journal saves/transfers stay
+explicit. All eight floors/24 IDs, Atlas/books, furniture/seats/colliders/
+approaches/lift metadata remain. Owned targets/resources clean up once on
+missing/replaced owners. All four lower companions survive independently.
+Actual Math/Atlas locale adapters retain EN/DE/FA and disclosed Czech English
+fallback; full legacy catalogue, private-writing and paper-UI translation are
+not claimed.
+
+This pass continues review 928cdc0; main 461aff4 remains in its two-parent
+ancestry and is unchanged at the pre-publication refresh. Shared book contact/
+reservoir tip, oceans/earth/Escher cut, Mathematics outdoor handoff and extended
+route checks remain. All eleven genuine scans/aspect ratios/editions/source/
+rights and owned async paper controls are unchanged. Other branches/open PR #2,
+approved characters/voices/recordings and all earlier integrations remain.
+Same feature branch/PR #5; no PR merge or deploy.
+
+### Verification
+
+All 116 release programs passed after the final plinth fit. Build has 851
+assets. The independently measured original 241-node fixture fingerprint is
+802f638dbf25dae6b07e4b3dd7fc73719184c5b3d63ed3ace767d3b4ccd2f2d0.
+Tests retain source resources/parents/transforms/payloads/visibility/instances,
+16 colliders/16 approaches and 1,813 collision samples, including real openings,
+solid upper windows and logical/proper-lower folio rays. Support checks include
+floor/upright/backing plinth joins, table undersides, seats and paper surfaces.
+Graph components after every edge removal, token reversal, original team/
+speaker counts and exact polynomial coefficients for the induction step pass;
+the step is checked algebraically rather than by sampling integers.
+
+Actual co-installed source UI tests retain exact three payloads/exercises,
+multilingual draft/caret and source-only explicit saves. Reading/open/locale
+run with private getters/storage/memory forbidden. Four languages/RTL formulas,
+other-floor rejection, once-only replacement and all four lower companions
+pass. Root controls retain main/renderer/extra identity and install the new guide.
+
+Native Chrome used the real entrance, guide/lift and partition openings to reach
+the folio. Pointer/E, all three exact original exercises and source-header return
+work. A synthetic unsaved multilingual note retains spaces/newline and selection
+3–8 through local language/close, with no reflection save or storage change.
+Four desktop reading widths match at 743 px; Czech/Persian 390×844 mobile at
+339 px and source header at 381 px. All formula blocks fit at 311 px on mobile,
+stay LTR and retain line breaks; Persian prose remains RTL. Folio/book clearance,
+pads/table support and final fitted plinths were visually checked.
+
+Wrong-floor controls hide at index 5; the original folded lift returns to ground,
+where Foundations returns. Saved global Czech survives reload. Outside directory
+reading stays Czech and leaves pose/storage/preference unchanged; only explicit
+approach uses the actual working entrance. All eleven genuine paper pages report
+ready; no fresh external archive fetch is claimed. No application errors were
+seen; the existing Three.js warning remains. Hardware controller A was not
+separately tested. Screenshots/release log remain in this chat; final commit/
+build/local asset verification is recorded in PR #5.
+
+Forty-four first reading/detail passes are complete. Next useful area:
+Probability & statistics, floor index 5 of this original working wing, source
+height 20/logical feet 20.13. Inspect `probability`, `conditional-probability`,
+`statistics`, their real source models/readers/public gaps/approaches and primary
+sources before a sourced EN/DE/FA/CS pass. Keep the original independent fair
+coin-toss model, fair-die conditioning and both data sets {4,5,6}/{1,5,9}, their
+equal means and different ranges. Preserve all five completed working floors,
+eight floors/24 IDs, Atlas/books, private reflections/imports/explicit saves,
+source geometry/seats/colliders/routes/lift gates/solid windows, proper lower
+transform and distinct Faculty/paper ring. Three working floors remain candidates.
