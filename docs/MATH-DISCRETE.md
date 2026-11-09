@@ -92,5 +92,11 @@ run with private getters/storage/visitor memory forbidden; all four lower
 companions survive. Full release/build/native verification is recorded in the
 hourly ledger and PR #5. Existing main 461aff4 and all earlier two-parent
 integrations, book contact/oceans/earth/navigation/paper contracts remain.
+Main then advanced to 3f4b377 after this pass was first published. Its read-only
+Studio comparison is reconciled in a follow-up two-parent review commit: added/
+removed edges, validity of the kept matching/cover and current neighbours of the
+kept subset are displayed without changing the kept record. A broken optimum
+witness alone does not show that the optimum changed. Drafts/arguments and both
+resume destinations remain independent; advanced text retains disclosed English.
 No PR merge or deployment. Next candidate: Probability & statistics, index 5,
 source height 20/logical feet 20.13.

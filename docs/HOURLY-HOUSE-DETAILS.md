@@ -4649,8 +4649,14 @@ Actual Math/Atlas locale adapters retain EN/DE/FA and disclosed Czech English
 fallback; full legacy catalogue, private-writing and paper-UI translation are
 not claimed.
 
-This pass continues review 928cdc0; main 461aff4 remains in its two-parent
-ancestry and is unchanged at the pre-publication refresh. Shared book contact/
+This pass first published as review 166b63d, continuing 928cdc0 and main 461aff4
+in its two-parent ancestry. Main then advanced to 3f4b377. The follow-up review
+retains 166b63d and that main as ordered parents, preserving its read-only
+Studio certificate comparison: added/removed edges, original matching/cover
+validity and current neighbours of the kept subset. A broken witness does not
+by itself prove a changed optimum. Kept records/drafts/arguments and both resume
+destinations remain independent; the advanced text retains disclosed English.
+Shared book contact/
 reservoir tip, oceans/earth/Escher cut, Mathematics outdoor handoff and extended
 route checks remain. All eleven genuine scans/aspect ratios/editions/source/
 rights and owned async paper controls are unchanged. Other branches/open PR #2,
@@ -4659,7 +4665,7 @@ Same feature branch/PR #5; no PR merge or deploy.
 
 ### Verification
 
-All 116 release programs passed after the final plinth fit. Build has 851
+All 116 release programs passed after the final plinth fit and Studio merge. Build has 851
 assets. The independently measured original 241-node fixture fingerprint is
 802f638dbf25dae6b07e4b3dd7fc73719184c5b3d63ed3ace767d3b4ccd2f2d0.
 Tests retain source resources/parents/transforms/payloads/visibility/instances,
@@ -4693,6 +4699,13 @@ ready; no fresh external archive fetch is claimed. No application errors were
 seen; the existing Three.js warning remains. Hardware controller A was not
 separately tested. Screenshots/release log remain in this chat; final commit/
 build/local asset verification is recorded in PR #5.
+
+After the Studio reconciliation, native desktop/mobile review also checks a
+valid kept seven-edge construction, an added uncovered edge and a removed
+matching edge. Matching/cover/shortage diagnostics distinguish broken witnesses
+from an unknown optimum; a synthetic draft is retained and the English LTR
+comparison fits at 297 px on mobile. Opening/localizing the Discrete directory
+afterward leaves all browser storage, including that kept proof, unchanged.
 
 Forty-four first reading/detail passes are complete. Next useful area:
 Probability & statistics, floor index 5 of this original working wing, source
