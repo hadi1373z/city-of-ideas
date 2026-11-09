@@ -5014,3 +5014,129 @@ and termination condition. Keep seven completed working floors, all 24 IDs,
 source/private readers/notes/imports/saves, walking stairs/lift/guards, solid
 windows, actual transforms and distinct Faculty/paper ring. One working floor
 remains for a first reading/detail pass.
+
+## 2026-11-09 · Logic & computation observatory
+
+The forty-seventh first reading/detail pass develops the existing original
+working wing's final floor: index 7/displayed Floor 8, source height 28/logical
+feet 28.13, building `mathematics-institute`, region `mathematics`, logical
+(-2240,-65). All eight working floors now have their first companions. The
+annular Faculty, genuine paper ring and seven earlier companions remain
+distinct. See `MATH-LOGIC.md`; the user-requested architectural correction in
+`MATH-WING-STAIRS.md` remains the functional foundation of this building.
+
+Eight table aprons/eight leg joints meet the two actual table undersides. Two
+fitted piped linen pads/eight seams rest on the original chairs; two low rear
+rungs meet the original rear leg centres inside their footprint. Two posts on
+the original library tabletop support a backed folio, clear of the original
+open book/sheet. Cards and raised marks meet their backing/paper. There are
+64 mesh draw objects/six materials, no textures/lights/images/instance batches/
+colliders. All additions stay clear of the real stair opening. Owned resources
+and picks clean up once on disposal or missing/replaced owners; borrowed
+source resources, payloads, matrices and private coordinates are unchanged.
+
+The left fixed card has nested rectangular frames: two round tokens belong to
+both; one square belongs only to the outer frame. These three supplied tokens
+are its complete finite domain. The square refutes the reverse inclusion, not
+the forward one. They are not a sample of all integers or private books. The
+right card prints the exact original Euclid pairs (18,12), (12,6), (6,0): upper
+bar first component/lower bar second, a common .025-per-unit scale, six-unit
+tick intervals, and an empty ring explicitly marking zero. The five positive
+bar lengths are .45/.30/.30/.15/.15, with 14 ticks. These are original city
+teaching diagrams, not historical objects, copied figures, room measurements,
+live algorithms or saved model state.
+
+Original EN/DE/FA/CS reading retains the general n=4k=2(2k) reason for the
+integer implication and two as a counterexample only to its converse. The
+material conditional is distinguished from causation. Negating the original
+hypothetical universal book claim requires one non-red book in the stated
+domain, not that no book is red. The companion never reads or infers private
+book colours/contents/imports. Euclid's update uses a nonnegative integer first
+component and positive integer second component: a=q·b+r, 0≤r<b. Both directions
+of the common-divisor invariant and well-founded integer descent justify the
+result and termination; the printed example alone does not. Three unscored
+questions return to the finite/general distinction, some/every and positive
+real halving versus integer descent. No quotations or testimony are invented.
+
+Successfully accessed authored references: OpenStax Contemporary Mathematics
+§2.4 (conditional), §2.5 (converse/equivalence), §2.1 (negating quantifiers),
+and Euclid's Elements VII.2 in D. E. Joyce's edition/guide (common measures and
+descending-chain discussion). The city's modern remainder notation is distinct
+from the historical repeated-subtraction presentation. Original exercise source
+links remain. Separate NIST DADS/MIT spring-2017 PDF attempts were inaccessible
+through the web tool and are not claimed as fetched evidence. Exact links and
+access limits are in `MATH-LOGIC.md` and the reading.
+
+Folio pointer/aimed E, inside context, original tools header and welcome Places
+reach the companion. Three explicit handoffs retain the exact `logic`,
+`quantifiers`, `algorithms` physical-source payloads/tasks. Actual floor/inside/
+feet guards hide wrong-floor/remote encounters. Outside directory reading never
+travels/selects floors; explicit approach alone uses the working entrance.
+Header close restores the same outer dialog, mounted iframe, source reader,
+raw draft and caret. Reading/locale never accesses private fields/storage/
+memory/progress, changes experiments/discoveries/audio, starts travel or writes
+saved city language. Original experiments/discussions/imports/notes/saves keep
+their owners. Persian prose is RTL and four formula blocks LTR; legacy Math/
+Atlas retains its disclosed Czech English fallback. Full city/catalogue/private
+writing or paper-reader translation is not claimed.
+
+All 120 release programs pass. The new test retains its independent 240-node
+original fingerprint
+`0845da108f68dd2194e3c675801e258e9b1a09f96993d51d60bacca63a719356`,
+16 original colliders/15 approaches and 1,813 collision samples before the
+existing architectural adapter. This top floor has one stair-transfer plaque,
+so one fewer node/approach than intervening floors. Checks cover source
+resources/parents/matrices/data/visibility/instances, furniture/card support,
+real partition openings/solid windows, proper lower-frame rays, stair clearance,
+finite containment/counterexample and exact bar/tick/zero data. Independent
+common-divisor enumeration checks 3,660 input pairs; finite tests are not the
+general proof. Synthetic truth assignments distinguish some non-red/none red
+without real book data. Seven prior companions, exact source UI tasks/payloads,
+private-getter-denied reading/locale, raw drafts/carets, source-only explicit
+saves, root hook identity and once-only replacement cleanup pass.
+
+Native Chrome entered through the central doorway, used the original guide/lift
+and followed actual partition openings to the folio. Physical pointer/aimed E,
+all three original reader handoffs and same-input header return passed. A
+synthetic unsaved multilingual note retained spaces/newline and selection 3–8,
+with no save or pose/storage/preference change. Desktop EN/DE/FA/CS fits at
+758 px client/scroll width; Czech/Persian 390×844 mobile fits at 354 px, with
+all four LTR formulas at 326 px and line counts 3/2/3/2. The folio, original
+book clearance, table apron, guards and actual top-floor circulation were
+visually checked; precise rung support is additionally checked geometrically.
+
+The real stair route descends from the top landing (feet 28.13) through the
+half-storey landing (26.13) to Topology (24.13), then returns. Source floor
+state updates only at the full landing; both companions hide between floors,
+Topology alone appears on index 6, Logic alone on index 7. Existing all-eight-
+floor/headroom tests still cover 2,356 samples and the exact architectural
+retirements/owned cleanup. The new controls do not obstruct circulation.
+At mobile width with Way out expanded, the guide ends at 331.25 px, the new
+reading control occupies 343.25–387.25 px and stair status starts at 415.25 px.
+
+Saved global Czech survives reload. Outside directory/local languages leave
+pose, floor, storage and city preference unchanged; only the explicit approach
+visits the original ground working entrance. All eleven genuine paper pages
+report ready. No application errors were seen; the existing Three.js warning
+remains. Hardware controller A is not separately tested. QA uses an independent
+browser; the user's existing headed preview remains under their control.
+Screenshots, release log, final commit/build and explicit local asset
+verification are retained in this chat and PR #5. Nothing is merged or deployed.
+
+Main 3f4b377 remains unchanged. This pass continues review e3230b4, with b9ca314,
+9cf624d's ordered 166b63d/3f4b377 parents and all earlier integrations preserved.
+The continuous stairs/slab openings/rails/piers/directions and original lift,
+all eight floors/24 IDs/source furniture/seats/approaches/solid windows remain.
+The proper lower transform, connected gallery/Escher/Babel/ocean/covered routes,
+source/private coordinates, all genuine scans/rights/ownership, Studio's kept/
+live comparison and all approved appearances/voices/recordings are unchanged.
+Other branches/PRs and City Map #4 remain separate. Same feature branch/PR #5.
+
+Forty-seven first passes are complete; none of the eight working floors needs
+another first folio. Next useful improvement: inspect the original wing's
+existing entrance/canopy and roof/facade support as an architectural review,
+prioritizing supported construction and clear circulation over more ornament.
+Keep the actual lot, source rooms/windows/doors/paths, central 3m entrance,
+covered connection and real stairs/lift. Preserve all completed readings,
+private/source contracts and both lower/upper world joins. Choose any concrete
+change only after inspecting its actual supporting geometry and concurrent work.

@@ -42,6 +42,7 @@ import {installMathCalculus} from './math-calculus.js';
 import {installMathDiscrete} from './math-discrete.js';
 import {installMathProbability} from './math-probability.js';
 import {installMathTopology} from './math-topology.js';
+import {installMathLogic} from './math-logic.js';
 import {installMathWingStairs} from './math-wing-stairs.js';
 import {installCinematicIntro} from './cinematic-intro.js';
 import {installDiscoveryStory} from './discovery-story.js';
@@ -125,6 +126,7 @@ try{
  M.mathDiscrete=installMathDiscrete(M,T,E);
  M.mathProbability=installMathProbability(M,T,E);
  M.mathTopology=installMathTopology(M,T,E);
+ M.mathLogic=installMathLogic(M,T,E);
  installQuestionWalk(M,T);
  installRamseyHouse(M,T);
  installRamseyRoom(M);
