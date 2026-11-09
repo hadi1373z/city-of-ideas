@@ -4833,3 +4833,184 @@ connectedness or claim physical island topology. Keep six completed working
 floors, eight floors/24 IDs, private reflections/imports/saves, source furniture/
 colliders/routes/lift gates/solid windows, proper lower transform and distinct
 Faculty/paper ring. Two working floors remain candidates.
+
+## 2026-11-09 · Working-wing architecture and Topology
+
+The user identified the original eight-floor Mathematics wing's architecture
+and stairs as the main problem, and confirmed this wing as the target. Functional
+circulation takes priority over more ornament. The same review branch/PR #5 now
+contains a continuous stairwell, a legible front stair bay and entry wayfinding,
+alongside the forty-sixth first reading/detail pass on Topology (index 6,
+displayed Floor 7, source height 24/logical feet 24.13). See
+`MATH-WING-STAIRS.md` and `MATH-TOPOLOGY.md`.
+
+### Architecture: real connections through the existing building
+
+The original five short decorative steps per level did not connect the
+four-metre storeys. Seven new two-flight connections now do. Each flight has
+eleven rises of 2/11 metres, ten .28-metre treads and 1.4-metre gross width;
+3.2 × 1.4-metre half-storey landings turn between flights. Full-floor landings
+join the original rooms/lift. There are 140 tread surfaces, 154 height changes,
+closed riser faces, supported side stringers, landing frames, handrails and
+guards. The gap and unavailable flight at the top/bottom are closed.
+
+Seven real slab openings occupy local x=3.6..7, z=2..6.2. Four bands surround
+each upper opening; the original ground slab remains. Shared surface boundaries
+use the highest reachable support. Movement substeps at most .06 metres and
+height increments at most .205 metres prevent skipped risers and remote floor
+jumps. These are digital design dimensions, not a building-code certification.
+
+Two continuous timber facade piers frame the actual stair bay at local x=2.2/7,
+z=8.68; stone feet meet the existing plaza and tops meet the retained soffit.
+Two ground pier colliders retain the three-metre central entrance/covered route.
+Eight ceiling-supported entry-facing boards direct visitors left to the library,
+right to stairs/lift. Own labels support EN/DE/FA/CS, with physical arrows retained
+and Persian shaping RTL. Front-only text prevents mirrored backside directions.
+The new status uses RTL Persian prose and LTR level numbers. Persian/mobile
+reading controls sit clear of the exit guide; narrow layouts follow its actual
+folded/unfolded bottom. These public layout updates do not read private text.
+
+This is an intentional, narrowly scoped architectural exception to earlier
+detail passes' solid slabs/decorative stair landmark. After exterior
+deduplication, 77 original meshes are retired: seven slabs, forty short steps,
+sixteen rails and fourteen old stair-transfer plaques. Eight landmark collider
+boxes are removed and two real ground pier boxes added: installed counts are
+24 on ground and 15 per upper floor. The original approach arrays, all floor/
+lift/reader payloads and eight-floor/24-concept inventory remain exact. Original
+source geometry/materials/textures/userData are not rewritten or disposed by
+the adapter. The earlier standalone source/detail fingerprints remain unrelaxed;
+the architectural test verifies these exact installed exceptions separately.
+
+The group inherits the mathematics source transform and proper lower parent;
+no transform is baked into saved coordinates. Only nearby stair movement is
+captured, before the existing lower walker; ordinary controls continue elsewhere.
+Each actual full-floor landing delegates the original source floor-selection
+method without firing the lift animation. Modals pause movement/turning.
+Reading/locale never moves, selects floors, starts sound or writes progress.
+An explicit arrival at an unsupported old point in the new opening uses the
+same floor's front landing, preserving the input pose object and all saved data.
+Cleanup restores only owned source visibility/collider adaptations and releases
+owned instance buffers/geometries/materials/textures once, including replacement
+or missing/custom-owner cases.
+
+The structure uses three instance batches; eight direction planes make eleven
+draw meshes. Language changes redraw existing textures. No image, recording,
+light, private-memory/storage API or new progress key is added. Original rooms,
+books/Atlas, seats/tables, solid windows, entrances, lift metadata, private
+imports/notes/drafts/carets/first answers and explicit saves remain. All earlier
+companions and interactions retain their owners. The annular Faculty, paper
+ring, connected gallery/Escher/Babel/ocean routes and world transforms remain.
+
+### Topology: supported details and sourced reading
+
+The existing library/lab tables receive eight aprons/eight leg joints and eight
+floor-supported table-foot collars within their original footprints. Two fitted
+blue-grey linen chair pads/eight seams clear the backs. Two tabletop-supported
+posts hold a backed two-card folio clear of the original sheet/open book. Cards
+and raised marks meet their surfaces; the reading/detail layer has 64 meshes/
+six materials and no textures/lights/images/colliders.
+
+The left card compares [0,3] above with [0,1] union [2,3] below on one drawing
+scale. Two upper ticks locate one/two; filled ends belong to the intervals.
+The lower gap omits every real input strictly between one and two. The right
+card shows [0,1] above/[0,2] below on one scale, with corresponding endpoints/
+midpoints and down-forward/up-inverse arrows. Marks and stroke thickness do
+not replace the real domains. These are fixed original city teaching diagrams,
+not copied figures, historical objects, live transformations, measurements or
+saved model state. The upper left comparison does not replace the source task.
+
+Original EN/DE/FA/CS reading preserves the square/jump comparison near zero,
+including the jump's value one at zero and unequal one-sided limits. Changing
+only that value cannot equalise those limits; a few samples are no proof.
+Connectedness uses usual real/subspace topology and a separation by open
+half-lines at one and a half. The two pieces are relatively open in the union,
+not open intervals in the entire real line. Path connectedness implies
+connectedness; the converse fails in general. The independent original mapping
+task keeps f(x)=2x, continuous inverse h(y)=y/2, both identity compositions and
+all real points of [0,1]/[0,2]. Length doubles while connectedness is preserved.
+Three unscored questions return to these distinctions. No historical-room,
+island-topology, quotation or testimony claim is invented.
+
+Successfully accessed primary authored sources: OpenStax Calculus 1 §2.4;
+Sergey Mozgovoy's MA2223 notes §2.4/p.22 (definition 2.24, example 2.25, lemma
+2.28); University of Chicago Point-Set Topology 2 §1 (definition 3/theorem 4);
+P. Karageorgis's MA2223 Chapter 2 slide/page 19 (homeomorphisms/theorem 2.21).
+Exact links are in `MATH-TOPOLOGY.md` and the reader. The original MIT OCW source
+link remains. An alternate 2024 MIT PDF returned 404 and the Morris PDF timed
+out; neither is claimed as fetched or used as evidence. Accessible MIT Notes C
+concerns the long line and is not used for these cards.
+
+Folio pointer/aimed E, inside context, source-tools header and welcome Places
+reach the reading. Explicit buttons retain exact `continuity`, `connectedness`,
+`homeomorphisms` source payloads/tasks. Actual floor/inside/feet guards hide
+wrong-floor encounters. Directory reading never travels/selects floors; only
+explicit approach uses the original working entrance. Source-header close
+retains the mounted iframe/reader, raw draft and caret. Reading/locale never
+inspects private fields, accesses storage/private memory, writes progress,
+changes experiments/audio or saved city language. Persian prose remains RTL;
+four formulas retain LTR order/line breaks. Legacy Math/Atlas retains its
+disclosed Czech English fallback; full catalogue/private-writing/paper-reader
+translation is not claimed.
+
+### Verification and continuation
+
+All 119 release programs pass. The Topology detail test retains its independent
+241-node original fingerprint
+`75a6c9d7c765f06f7e8ab3c3bbf45733b0546f0758c0f5dc3037d77fbbcfb6ae`,
+16 original colliders/16 approaches and 1,813 source collision samples before
+the intentional architectural adapter. It checks source resources/parents/
+matrices/data/visibility/instances, supported furniture/cards, exact interval
+scales/gap/marks/arrow directions, relative separation and algebraic affine
+inverse coefficients. Six older companions survive independently. Actual
+source UI tests retain three exact payloads/tasks, raw multilingual draft/caret
+and explicit source-only saves with private getters/storage/memory forbidden.
+
+The architectural test walks all eight levels up/down in 2,356 samples, checking
+every height increment, actual geometry headroom, slab openings, guards/closed
+ends, source-resource preservation/restoration, pier support, entrance clearance,
+proper lower frame, four-language direction arrows, one-sided signs, all 28
+owned geometry/material/texture releases, modal pause and safe arrival fallback.
+Root controls verify main/renderer/extra identity and hook installation. Original
+eight-floor source fingerprints/other release checks are not weakened.
+
+Final native reading widths are 758 px on desktop and 354 px at 390-px mobile;
+all four mobile formula blocks fit at 326 px. Physical pointer opens the folio.
+An expanded mobile Way out ends at 331.25 px and the reading control starts at
+343.25 px. Saved Czech survives reload; outside directory/local language changes
+leave pose, floor, storage and saved city language unchanged. All three exact
+source handoffs and same-reader raw draft/caret restoration pass. All eleven
+genuine paper pages report ready.
+
+Native WASD reaches all eight actual floor heights and returns to ground, with
+the correct original floor state at every landing. The isolated walking check
+leaves storage unchanged. Real guard/landing/slab geometry and EN/FA/CS signs
+were visually inspected; four-language arrow/texture behavior is also tested.
+The original source lift continues to reach Topology. Source/companion readers,
+four-language desktop/mobile/RTL, raw draft/caret and saved Czech checks are
+recorded with final commit/build/local asset verification in PR #5. No
+application errors were seen; the existing Three.js warning remains. Hardware
+controller A is not separately tested. The user's headed preview is left under
+their control; independent QA uses a separate browser session. Screenshots/logs
+remain in this chat.
+
+Main 3f4b377 is unchanged; b9ca314, 9cf624d's two-parent reconciliation and all
+earlier main/review integrations remain in ancestry. Studio's kept/live graph
+comparison, witness/optimum distinction, independent records/drafts/resume and
+English notice remain. Eleven genuine scan bytes/aspects/editions/source/rights,
+owned paper loading/readers, book contact, oceans/earth/Escher cut, lower outdoor
+handoff and extended covered-route tests remain. Other branches/PRs, approved
+characters/fixed voices/recordings and private accounts are untouched. Same
+feature branch/PR #5; no PR merge or deployment.
+
+Forty-six first reading/detail passes are complete. Preserve this functional
+architecture and prioritize architectural clarity over further ornament.
+Next useful reading area: Logic & computation observatory, floor index 7,
+source height 28/logical feet 28.13: `logic`, `quantifiers`, `algorithms`.
+Inspect actual source readers/public gaps/approaches and primary sources. Keep
+the integer divisible-by-four implication versus its converse, one non-red book
+as a counterexample to the universal claim (never infer private book colours),
+and Euclid's original (18,12) remainder trace, nonnegative decreasing remainders
+and termination condition. Keep seven completed working floors, all 24 IDs,
+source/private readers/notes/imports/saves, walking stairs/lift/guards, solid
+windows, actual transforms and distinct Faculty/paper ring. One working floor
+remains for a first reading/detail pass.
