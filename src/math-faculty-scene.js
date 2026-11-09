@@ -1,5 +1,5 @@
 import {MATH_FLOORS} from './city-source-assets/home-tools/math-city-data.js';
-import {MATH_FACULTY as F,facultyLibraryBays,facultyColliders,facultyCanStand,nativeMathShellNodes} from './math-faculty-model.js';
+import {MATH_FACULTY as F,facultyLibraryBays,facultyColliders,facultyCanStand,nativeMathShellNodes,connectorCornerPosts} from './math-faculty-model.js';
 export function buildMathFaculty(T,{canvas=()=>document.createElement('canvas')}={}){
  const group=new T.Group();group.name='Faculty of Mathematics · central rotunda and working west wing';group.userData.mathFaculty=true;
  const owned=new Set(),own=o=>(owned.add(o),o),mat=(color,more={})=>own(new T.MeshLambertMaterial({color,...more})),targets=[],batches=new Map();
@@ -32,8 +32,26 @@ export function buildMathFaculty(T,{canvas=()=>document.createElement('canvas')}
  }
  // A real, flush, five-metre covered walk turns into the source front entrance.
  const route=F.connector;for(let i=1;i<route.points.length;i++){const a=route.points[i-1],b=route.points[i],dx=b[0]-a[0],dz=b[1]-a[1],len=Math.hypot(dx,dz);box(len+route.width,.08,route.width,(a[0]+b[0])/2,.09,(a[1]+b[1])/2,pale,Math.atan2(-dz,dx));}
- for(const x of[-67.7,-60.3])for(const z of[11,22])box(.24,4.1,.24,x,2.18,z,timber);box(8.2,.22,26.5,-64,4.24,13,timber);for(let z=1;z<26;z+=1.6)box(8.1,.13,.19,-64,4.43,z,timber);box(7,.22,8.2,-61,4.24,0,timber);
- box(17,.22,7.3,-72,4.24,26,timber);for(let x=-80;x<=-64;x+=1.5)box(.17,.13,7.6,x,4.43,26,timber);
+ for(const x of[-67.7,-60.3])for(const z of[11,22])box(.24,4.1,.24,x,2.18,z,timber);box(8.2,.22,26.5,-64,4.24,13,timber);for(let z=1;z<26;z+=1.6)box(8.1,.13,.19,-64,4.41,z,timber);box(7,.22,8.2,-61,4.24,0,timber);
+ box(17,.22,7.3,-72,4.24,26,timber);for(let x=-80;x<=-64;x+=1.5)box(.17,.13,7.6,x,4.41,26,timber);
+ // Butt the missing outside corner panels to the existing roofs. Their
+ // footprints complete the actual walking turns without overlapping roof faces.
+ box(3.24,.22,3.85,-66.12,4.24,-2.175,timber); // Stops at the existing header band.
+ box(.48,.165,3.85,-67.5,4.0475,-2.175,stone); // Existing east facade header -> roof.
+ box(3.6,.22,3.4,-61.7,4.24,27.95,timber);
+ box(8.6,.24,.85,-80,4.06,21.925,timber);
+ box(3.8,.24,7.3,-82.4,4.06,26,timber);
+ // Rear portico columns carry the recessed bearers across the real porch gap.
+ box(.24,.22,6.24,-83.8,4.04,23,timber);box(.24,.22,2.74,-76.2,4.04,21.25,timber);
+ for(const x of[-83.8,-76.2])box(.34,.01,.34,x,3.935,14,stone);
+ for(const p of connectorCornerPosts()){
+  box(.5,.13-p.base,.5,p.x,(.13+p.base)/2,p.z,stone);
+  box(.24,p.top-.13,.24,p.x,(p.top+.13)/2,p.z,timber);
+ }
+ // Close the same source-court bearing gaps under the eight retained posts,
+ // entirely inside their existing footprints/collision bands.
+ for(const x of[-83.8,-76.2])for(const z of[14,20])box(.34,.0075,.34,x,.12625,z,stone);
+ for(const x of[-67.7,-60.3])for(const z of[11,22]){const base=x===-67.7?.1225:.09;box(.24,.13-base,.24,x,(.13+base)/2,z,stone);}
  // New warm stone / timber facade follows all eight native four-metre levels.
  // Every source room remains at its exact local coordinate behind this shell.
  for(let floor=0;floor<8;floor++){const y=floor*4;for(const z of[-10.45,8.45]){box(25.4,.29,.52,-80,y+3.82,z,stone);for(const x of[-92.5,-87,-73,-67.5])box(.36,3.75,.45,x,y+1.99,z,pale);for(const x of[-89.5,-84.5,-75.5,-70.5]){box(4.42,1.92,.045,x,y+1.94,z,glass);box(4.55,.16,.55,x,y+.94,z,timber);box(.09,1.95,.13,x,y+1.95,z+.05,timber);}if(floor||z<0)box(3.5,1.94,.045,-80,y+1.94,z,glass);}

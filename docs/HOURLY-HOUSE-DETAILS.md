@@ -5313,3 +5313,86 @@ ledger/support notes and inspect concurrent work first. Keep the same lot,
 entrance, lower transform, source/Faculty solids, real routes and completed
 readings; make a change only when actual installed geometry justifies it.
 Do not manufacture another first pass or add floating ornament.
+
+## 2026-11-10 · Continuous cover on the existing Mathematics connection
+
+This architectural follow-up continues 20c7ad1 on the existing
+`feat/hourly-house-details` branch and PR #5. Main/branches/PRs and recent
+progress were inspected; the working tree began clean. All47 first readings,
+including the original eight working floors, remain complete. No new lot,
+reading, folio, quotation, resident, voice or recording is introduced.
+
+The actual installed Faculty canopy had missing cover at its outside turns and
+a .85m gap between the wing porch end at Z21.5 and cross-canopy start at Z22.35.
+Native upward rays at lower-local(-80,22) and(-82,26) found no overhead cover.
+The27 original connector slats also sat .015m above their supporting roof.
+See `MATH-COVERED-WALK.md` for measured bounds and owner/source distinctions.
+
+Four fitted timber roof panels fill only the uncovered turns/join. They butt
+to existing roof edges without overlapping visible roof faces. The Faculty-side
+panel stops at the existing east-header band; a narrow stone bearing meets that
+header at Y3.965 and the roof underside at4.13. Two recessed bearers meet the
+original rear portico columns and the wing-turn supports; two head bearings
+connect the original front portico columns to the unchanged porch underside.
+The27 slats retain their dimensions/order/spacing and are lowered .02m to meet
+their actual roof top. No original roof/paving, room, window, entrance or route
+moves; the guarded working-wing identity/porch dimensions remain.
+
+Three .24m timber supports stand outside the existing5.6m walking band, with
+three matching conservative circle colliders. Their feet and eight retained-post
+bearing pads meet the actual original source Math court/plinth. A first
+landscape-only measurement was insufficient: native full-scene rays identify
+the higher original30x.035x27 court at installed Y.1225 and50x.12x54 plinth at
+Y.09, including the original .13 source offset. The feet end atY.13 where the
+shafts begin. All44 corners of these eleven bases are tested against the
+combined source-floor/landscape geometry through the proper lower half-turn.
+No duplicate pedestal is buried through the source paving.
+
+The existing Faculty owner adds23 simple instances to its current stone/timber
+batches. Mesh draws remain32; instances1695->1718. No new geometry/material/
+texture resource, light, pick target, listener, progress key or UI is allocated.
+All19 original Faculty colliders remain exact; adding the three genuine support
+obstacles makes22. Working-wing source colliders remain ground24/upper15.
+No wall/window/lower gallery handoff is removed, collision relaxed, or source/
+private coordinate/floor/save rewritten. Original cleanup and parent transforms
+retain ownership; no borrowed source resource is changed or disposed.
+
+All121 release programs pass on the final source. The independent20c7ad1
+fingerprints retain1,668 unchanged original instances, all19 old colliders and
+all16 exact Atlas/floor targets. Only the enumerated23 additions and27 slat
+heights differ. Tests check5,565 full-width/turn cover and walking-clearance
+samples,28,296 valid original room envelopes, all eleven source-ground contacts,
+header/roof joints, nonoverlapping new roof panels, the full three-metre door,
+clear oculus and proper lower mapping. Earlier source-reader/private-flow,
+stair/headroom, all47 companions, genuine scans/rights and accepted voices/
+recordings remain in the passing suite; fingerprints are not relaxed.
+
+Independent native Chrome walked from the annular Faculty beyond the finite
+west deck through the actual connection. The original explicit working-entrance
+approach, ordinary doorway walking and aimed E to the original Atlas/tool dialog
+work. Final installed upward rays now meet the Y3.94 canopy at the former gap
+and wing-side corner. Native full-scene source-ground rays agree with the
+court/plinth bearing levels. The entrance and staircase adapters remain active,
+with exact source collider counts. Four-language views preserve EN/DE/FA/CS
+identity/controls and Persian RTL; all eleven genuine paper pages report ready.
+The return walk is checked through the unchanged covered route back into the
+Faculty. Construction/rendering introduces no private-memory/storage, language,
+experiment, discovery, audio or automatic-movement behavior.
+
+The existing Way out choices, source/floor/inside/proximity gates, original lift,
+all eight floors/24 IDs, furniture/seats/approaches, raw drafts/carets/first answers,
+original explicit actions/saves and source/legacy language boundaries remain.
+No claim of full Czech city/catalogue translation or engineering certification
+is made. Independent before/after screenshots, release log, factual audit and
+final local artifact verification are retained in this chat and PR #5. The
+user's headed preview stays under their control. Existing Three.js warning and
+untested hardware-controller A limit remain. Review only; no merge/deployment.
+City Map #4 and other branches/PRs remain separate.
+
+Next useful architectural audit: inspect the annular Faculty's actual roof,
+colonnade/lintel and oculus support joins as composed with the original gallery.
+Preserve its open helical well,480 treads/physical handoffs, source working wing,
+covered connection, all eleven genuine paper monitors/rights/proximity gates,
+all47 readings and private/source/world ownership. Use real surfaces/bounds,
+inspect concurrent work first, and make a change only when justified; otherwise
+record a factual audit. No duplicate columns, new lot or invented first reading.

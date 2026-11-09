@@ -5,12 +5,16 @@ export const MATH_FACULTY=Object.freeze({floor:.13,wellRadius:21.5,outerRadius:6
  connector:{width:5.6,points:[[-58,0],[-64,0],[-64,26],[-80,26],[-80,9.6]]}
 });
 export function facultyLibraryBays(){return Array.from({length:8},(_,floor)=>{const angle=(floor+.5)/8*Math.PI*2;return{floor,angle,x:Math.cos(angle)*59.35,z:Math.sin(angle)*59.35,y:.13,width:5.6,depth:1.1,height:3.6};});}
+// The feet meet the installed original Math court/plinth, including its .13m
+// source offset, before the lower half-turn. All stay outside the 5.6m walk.
+export function connectorCornerPosts(){return[{x:-83.8,z:26,base:.1225,top:3.93},{x:-76.2,z:22.5,base:.1225,top:3.93},{x:-60.3,z:29.2,base:.09,top:4.23}];}
 export function facultyColliders(){
  const out=[];for(const sign of[-1,1])out.push({kind:'open entrance door',shape:'obb',x:-80+sign*1.99,z:9.48,angle:0,halfTangent:.86,halfRadius:.065,minY:.13,maxY:2.69});for(const b of facultyLibraryBays())out.push({kind:'library bay',shape:'obb',x:b.x,z:b.z,angle:b.angle,halfTangent:b.width/2,halfRadius:b.depth/2,minY:.13,maxY:3.73});
  // The ring retains a genuinely open western doorway, matching the gallery.
  out.push({kind:'rotunda wall',shape:'ring',inner:59.8,outer:60.7,gapZ:4.5,minY:.13,maxY:7.5});
  for(const x of[-83.8,-76.2])for(const z of[14,20])out.push({kind:'wing portico post',shape:'circle',x,z,radius:.36,minY:.13,maxY:3.9});
  for(const x of[-67.7,-60.3])for(const z of[11,22])out.push({kind:'connector post',shape:'circle',x,z,radius:.32,minY:.13,maxY:4.2});
+ for(const p of connectorCornerPosts())out.push({kind:'connector corner post',shape:'circle',x:p.x,z:p.z,radius:.36,minY:p.base,maxY:p.top});
  return out;
 }
 export function facultyCanStand(x,z,feetY=.13,{radius=.28,colliders=facultyColliders()}={}){
