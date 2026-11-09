@@ -110,3 +110,7 @@ These are finite checks of the existing 3×3 teaching instance. No solver result
 is substituted for the visitor’s proof, and no new completion requirement
 invalidates old progress. Presets affect only the assignment or prices they name;
 arguments, earlier experiments and saved certificates remain untouched.
+
+## Returning to a kept Studio proof
+
+Self-critique: the kept graph certificate was only a list in the route directory, making later graph edits hard to interpret. The Studio now places a read-only comparison beside the live graph: added/removed edges, validity of the original matching and cover, and the original subset's current neighbourhood. It distinguishes a broken proof from proof that the optimum changed. Visitors are invited to add an uncovered edge and remove a matched edge, then explain which witness fails. Kept certificates, drafts, arguments and both resume destinations remain separate and unchanged. Free arguments remain ungraded; this activity does not establish two hours of measured enjoyment.
