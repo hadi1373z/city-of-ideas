@@ -4717,3 +4717,119 @@ equal means and different ranges. Preserve all five completed working floors,
 eight floors/24 IDs, Atlas/books, private reflections/imports/explicit saves,
 source geometry/seats/colliders/routes/lift gates/solid windows, proper lower
 transform and distinct Faculty/paper ring. Three working floors remain candidates.
+
+## 2026-11-09 · Probability & statistics, original working wing
+
+The forty-fifth first reading/detail pass develops floor index 5 (displayed
+Floor 6) of `mathematics-institute`, region `mathematics`, logical (-2240,-65),
+source height 20/logical feet 20.13. This is the original eight-floor working
+wing, distinct from the annular Faculty and paper ring. See `MATH-PROBABILITY.md`.
+
+### Supported details and reading
+
+Eight aprons/eight leg joints meet the original library/lab tables. Two fitted
+linen pads/eight seams rest on the existing chairs, clear of their backs. Two
+front stretchers meet original chair-leg inner faces within their depth; four
+narrow shelf-front bindings meet source shelves between uprights and clear of
+books, within original collision bands. The library tabletop supports two posts
+and a backed two-card folio, clear of its original sheet/open book. Cards/marks
+meet their backing/paper; no overlapping visible support faces were introduced.
+
+The left card shows six die-result tiles: odds above, a frame around even results
+below, with four/six underlined. Each tile is one outcome; pips name its number,
+not probability weights or multiple outcomes. The right card uses the original
+{4,5,6}/{1,5,9} data on two identical one-to-nine scales: nine equally spaced ticks,
+longer middle five-tick, three dots and smallest-to-largest bracket per row.
+These are fixed original city teaching diagrams, not historical objects, copied
+figures, measurements, live models, random generators or separately saved state.
+
+Original EN/DE/FA/CS reading identifies H/T and first/second toss order, explains
+why fair independent tosses give four equal weights, and separates that model
+from a mental copied-result countercase with fair marginals but dependence.
+Fair-die conditioning retains A={4,5,6}, B={2,4,6}, positive P(B), two of three
+remaining equally weighted outcomes and the absence of another roll. A formula
+alone does not establish causation. Original data retain equal means five and
+ranges two/eight; mean uses sum/count, range only extremes. Neither summary is
+the full data or a probability law. Three unscored questions return to these
+distinctions. No quotation, testimony or historical-room claim is invented.
+
+Successfully accessed primary authored references: OpenStax Introductory
+Statistics 2e sections 3.1 Terminology, 3.3 Two Basic Rules of Probability and
+2.5 Measures of the Center; NIST/SEMATECH Measures of Scale supplies range's
+largest-minus-smallest definition. Exact links and access distinctions are in
+`MATH-PROBABILITY.md` and the companion. No source figures or scans are copied.
+
+Pointer/aimed E, inside context, source-tools header and welcome Places reach
+the reading. Three explicit links retain exact `probability`,
+`conditional-probability`, `statistics` source payloads/exercises. Actual
+floor/inside/feet guards hide wrong-floor encounters. Directory reading never
+travels/selects floors; only explicit approach uses the existing working
+entrance. Source-header close restores the same dialog/iframe/source reader,
+raw draft and caret. Reading/locale never inspects private fields, accesses
+storage/private memory, writes progress, changes experiments/discoveries/audio
+or saved city language. Original saves/imports/transfers remain explicit.
+
+All eight floors/24 IDs, Atlas/books/activities, furniture/seats/colliders/
+approaches/routes/lift metadata and solid upper windows remain. Source height
+is applied once; source/lower transforms are inherited, never baked into saves.
+Owned picks/instance buffers/geometries/materials clean up once on missing or
+replaced owners; five lower companions remain independent. Added geometry uses
+78 mesh draw objects/six materials, with three batches/45 pip/tick/dot instances,
+no textures/lights/images/colliders. Persian prose remains RTL and four formula
+blocks LTR. Legacy Math/Atlas retains disclosed Czech English fallback; full
+legacy catalogue/private-writing/paper-reader translation is not claimed.
+
+Main 3f4b377 is unchanged and remains in review 9cf624d's ordered two-parent
+ancestry beside 166b63d. Preserve its read-only Studio kept/live comparison,
+witness-versus-optimum distinction, kept records/drafts/arguments/resume and
+English notice. All earlier world/contact/ocean/earth/Escher/connected-route
+contracts, eleven genuine scan bytes/aspects/editions/source/rights, permanent
+pages/proximity controls/ownership, approved characters/voices/recordings and
+other branches/PRs remain. Same feature branch/PR #5; no PR merge or deploy.
+
+### Verification
+
+All 117 release programs passed. Build has 855 assets. Independently measured
+241-node original fingerprint:
+`e2764c0d3317a3f62dacd5fc5347bb4cd3450166996ef819d1d151cd78462a7c`.
+Source resources/parents/transforms/payloads/visibility/instances, 16 colliders/
+16 approaches and 1,813 collision samples remain. Tests check real partition
+openings/solid upper windows, logical/proper-lower folio rays, supported table/
+chair/shelf/post/card faces, exact pip/tick/data matrices, direct instance picks
+and once-only owned buffer release. Fair/independent/copied weights/marginals,
+conditional two-thirds/odd one-third/unconditioned one-half, means and ranges pass.
+
+Actual co-installed source UI tests preserve all three original payloads/tasks,
+raw multilingual draft/caret and explicit source-only saves. Reading/locale runs
+with private getters/storage/memory forbidden. All four language keysets/four
+LTR formulas, floor/replacement guards, five lower companions and root installer
+identity checks pass. No source/private/lesson keys are added; the diagrams have
+no saved state.
+
+Native Chrome used the real entrance/guide/lift/partition routes. Physical
+pointer/E, all three original reader handoffs and source-header return work.
+A synthetic unsaved note retains exact spaces/newline and selection 3–8 through
+local language changes/close, without a reflection save or storage change.
+Four desktop languages fit at 743 px; Czech/Persian 390×844 mobile at 339 px,
+source header 381 px, all four formula blocks 311 px/LTR. Folio/book clearance,
+the exact shared data scale/pips, pads, shelf bindings and chair/table supports
+were visually checked. Wrong-floor controls hide at index 6; the folded source
+lift returns to ground/Foundations. Saved global Czech survives reload. Outside
+directory/local languages preserve pose/storage/preference; only explicit
+approach uses the working entrance. All eleven genuine paper pages report ready.
+No fresh external archive fetch is claimed. No application errors were seen;
+the existing Three.js warning remains. Hardware controller A was not separately
+tested. Screenshots/release log remain in this chat; final commit/build/local
+asset verification is recorded in PR #5.
+
+Forty-five first reading/detail passes are complete. Next useful area: Topology,
+floor index 6 of this original working wing, source height 24/logical feet 24.13.
+Inspect `continuity`, `connectedness`, `homeomorphisms`, actual source readers/
+public gaps/approaches and primary sources. Preserve x-squared versus the jump
+function zero for negative inputs/one at nonnegative inputs, connected real
+intervals [0,1]/[2,3] versus their disconnected union, and f(x)=2x from [0,1] to
+[0,2] with continuous inverse x/2. Do not equate general connectedness with path
+connectedness or claim physical island topology. Keep six completed working
+floors, eight floors/24 IDs, private reflections/imports/saves, source furniture/
+colliders/routes/lift gates/solid windows, proper lower transform and distinct
+Faculty/paper ring. Two working floors remain candidates.
