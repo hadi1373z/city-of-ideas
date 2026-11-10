@@ -6,6 +6,7 @@ import {MATH_CONCEPTS} from '../src/city-source-assets/home-tools/math-city-data
 import {MATH_FACULTY as F,facultyCanStand,nativeMathShellNodes} from '../src/math-faculty-model.js';
 import {buildMathFaculty} from '../src/math-faculty-scene.js';
 import {verifyFacultyRoof} from './math-faculty-roof.mjs';
+import {verifyFacultyArcade} from './math-faculty-arcade.mjs';
 import {lowerMatrix,lowerPhysical} from '../src/world-cylinder-model.js';
 import {buildWorldCylinder} from '../src/world-cylinder-scene.js';
 const ctx=new Proxy({},{get:()=>()=>{}}),canvas=()=>({getContext:()=>ctx}),near=(a,b,e=1e-5)=>assert(Math.abs(a-b)<e,`${a} != ${b}`);
@@ -38,13 +39,14 @@ const timber=0x705b40,stone=0xc3b69a,addedSpecs=[
  ...[11,22].map(z=>[.24,.0075,.24,-67.7,.12625,z,stone]),...[11,22].map(z=>[.24,.04,.24,-60.3,.11,z,stone])
 ];
 const shape=r=>[r.matrix[0],r.matrix[5],r.matrix[10],r.matrix[12],r.matrix[13],r.matrix[14],r.color],matches=(r,s)=>shape(r).every((v,i)=>Math.abs(v-s[i])<2e-5),added=addedSpecs.map(s=>{const found=rows.filter(r=>matches(r,s));assert.equal(found.length,1,'One actual instance for each fitted part');return found[0];}),slats=rows.filter(r=>r.color===timber&&Math.abs(r.matrix[13]-4.41)<1e-5&&Math.abs(r.matrix[5]-.13)<1e-5);
-assert.equal(slats.length,27);assert.equal(draws,33);assert.equal(instances,1718);
-const {rafters,roofSamples,bearingSamples,rimSamples,assertRoofReleased}=verifyFacultyRoof(T,b,rows);
+assert.equal(slats.length,27);assert.equal(draws,33);assert.equal(instances,1989);
+const {baselineRows,baseProbes,glassProbes,springProbes,doorProbes,assertArcadeReleased}=verifyFacultyArcade(T,b,rows);
+const {rafters,roofSamples,bearingSamples,rimSamples,assertRoofReleased}=verifyFacultyRoof(T,b,baselineRows);
 // Retain the earlier independent fingerprint, restoring ONLY the forty former
 // rafter matrices for this historical comparison. Actual fitted profiles and
 // all 1,678 other current instances have a separate physical/baseline check.
 const oldRafters=[],oldPose=new T.Object3D();for(let i=0;i<40;i++){const a=i/40*Math.PI*2;oldPose.position.set(Math.cos(a)*40.75,9.595,Math.sin(a)*40.75);oldPose.rotation.set(0,-a,Math.atan2(-4.15,37.3));oldPose.scale.set(Math.hypot(37.3,4.15),.17,.16);oldPose.updateMatrix();oldRafters.push({color:timber,matrix:Array.from(new Float32Array(oldPose.matrix.elements))});}
-const unchanged=[...rows.filter(r=>!added.includes(r)&&!slats.includes(r)&&!rafters.includes(r)),...oldRafters].map(r=>JSON.stringify({color:r.color,matrix:r.matrix.map(round)})).sort();assert.equal(unchanged.length,1668);assert.equal(hash(unchanged),'6a9a527c496c092837ee85f233923131bae071a6e1c6df7ac42dd7f03945ad74','No unrelated original matrix/material changes');
+const unchanged=[...baselineRows.filter(r=>!added.includes(r)&&!slats.includes(r)&&!rafters.includes(r)),...oldRafters].map(r=>JSON.stringify({color:r.color,matrix:r.matrix.map(round)})).sort();assert.equal(unchanged.length,1668);assert.equal(hash(unchanged),'6a9a527c496c092837ee85f233923131bae071a6e1c6df7ac42dd7f03945ad74','No unrelated original matrix/material changes');
 const oldSolids=b.colliders.filter(c=>c.kind!=='connector corner post');assert.equal(hash(oldSolids),'b75bd2e076a3ec4caf1d111dddfa77f65323fdab2889563de28b6e35a7b170a0');assert.equal(b.colliders.length,22);assert.equal(hash(b.targets.map(o=>({name:o.name,data:o.userData,position:o.position.toArray()}))),'29e4a73c7cb930858590e6762bc661bea2717c4f84b2b7748d831f581b48ae19','All sixteen exact public Atlas/floor handoffs remain');
 const bounds=r=>{const m=r.matrix;return{minX:m[12]-m[0]/2,maxX:m[12]+m[0]/2,minY:m[13]-m[5]/2,maxY:m[13]+m[5]/2,minZ:m[14]-m[10]/2,maxZ:m[14]+m[10]/2};},inside=(p,x,z,e=2e-5)=>x>=p.minX-e&&x<=p.maxX+e&&z>=p.minZ-e&&z<=p.maxZ+e;
 const roofs=rows.filter(r=>r.color===timber&&Math.abs(r.matrix[13]-4.24)<1e-5&&Math.abs(r.matrix[5]-.22)<1e-5&&r.matrix[0]>3&&r.matrix[10]>.8||r.color===timber&&Math.abs(r.matrix[13]-4.06)<1e-5&&Math.abs(r.matrix[5]-.24)<1e-5).map(bounds);assert.equal(roofs.length,8);
@@ -81,5 +83,5 @@ const originalConcepts=new Set(source.flatMap(m=>m.approaches.map(a=>a.conceptId
 const shell=nativeMathShellNodes(source);assert(shell.length>200);assert(shell.every(o=>(o.userData.window===true||o.userData.roof===true)&&!o.userData.floorSurface&&!o.userData.mathAction));assert(shell.every(o=>!o.isInstancedMesh),'Mixed source instance batches must never be hidden');
 source.forEach((m,i)=>{assert.deepEqual(m.group.position,before[i].position);assert.deepEqual(m.group.children,before[i].children);assert.equal(JSON.stringify(m.colliders),before[i].colliders);assert.equal(JSON.stringify(m.approaches),before[i].approaches);});
 const frame=new T.Group();frame.matrixAutoUpdate=false;frame.matrix.copy(lowerMatrix(T));b.group.position.set(-2160,0,-65);frame.add(b.group);frame.updateMatrixWorld(true);const centre=b.group.localToWorld(new T.Vector3(0,0,0));near(centre.x,0);near(centre.y,-96);near(centre.z,0);const entry=b.group.localToWorld(new T.Vector3(-80,.13,9.6)),expected=lowerPhysical({x:-2240,y:.13,z:-55.4});near(entry.x,expected.x);near(entry.y,expected.y);near(entry.z,expected.z);
-b.dispose();b.dispose();assertRoofReleased();assert.equal(b.group.children.length,0);source.forEach(m=>m.dispose());
-console.log(`PASS mathematics faculty: ${draws} draws / ${instances} instances, ${coverageSamples} full-width cover/clearance and ${roomSamples} unchanged room-envelope samples, ${roofSamples} fitted-rafter/${bearingSamples} bearing/${rimSamples} seated-rim probes, 23 covered-walk parts/27 seated slats, scoped historical 1668 and unchanged 1678 instance fingerprints/19 original colliders/16 handoffs retained, eleven real ground-foot contacts and three-metre doorway, all 24 concepts, proper lower frame/clear oculus and owned cleanup`);
+b.dispose();b.dispose();assertRoofReleased();assertArcadeReleased();assert.equal(b.group.children.length,0);source.forEach(m=>m.dispose());
+console.log(`PASS mathematics faculty: ${draws} draws / ${instances} instances, ${coverageSamples} full-width cover/clearance and ${roomSamples} unchanged room-envelope samples, ${roofSamples} fitted-rafter/${bearingSamples} bearing/${rimSamples} seated-rim probes, ${baseProbes} jamb/${glassProbes} rail-glass/${springProbes} springing/${doorProbes} doorway probes, 271 supported frame/return instances with all original 1718 matrices and IDs intact, scoped historical 1668/1678 fingerprints/19 original colliders/16 handoffs retained, eleven real ground-foot contacts and three-metre doorway, all 24 concepts, proper lower frame/clear oculus and owned cleanup`);

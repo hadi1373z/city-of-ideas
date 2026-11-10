@@ -5473,3 +5473,84 @@ the actual installed surfaces and concurrent work; preserve the open well,
 working wing/covered route and source/private/resource ownership. Change only
 measured justified gaps; otherwise record a factual audit. No duplicate columns,
 new lot, certification claim or invented first reading.
+
+## 2026-11-10 · Faculty glazing seated and arch ends supported
+
+This architectural follow-up continues23ea90b on the same
+`feat/hourly-house-details` branch and PR #5. The latest ledger, repository
+instructions, source/support/world/paper notes, recent progress and actual
+branches/PRs were inspected first. The worktree began clean; main remains3f4b377.
+All47 first readings and eight original working floors remain complete. There
+is no new lot, first folio, historical reading, resident, voice or recording.
+
+The installed facade retains78 glass fields and18 decorative arches/216 pieces
+after its original west omissions. Glass bottomY1.005 sat.025m above the retained
+plinth top.98, with no vertical framing. The header begins at7.26; the existing
+.705m band above glass top6.555 stays open. Arch ends at nominalY5.05 lacked
+supports beneath them. Actual before rays and a native view confirm the missing
+frame/returns. See `MATH-FACULTY-ARCADE.md` for the measured contacts.
+
+Seventy-nine thin .10x.20 timber mullions now bear on the original wall plinth
+atY.98 and meet its header at7.26. They start above the wall base, not at floor
+level, and stay within the original solid wall band. The two west-end jambs
+follow the real end-panel planes: regular radial corners would overhang the
+retained plinth/header ends. Tests caught that geometry and the fitted jambs
+now have actual support at every tested corner without changing the doorway.
+
+Each existing pane receives a sill/transom pair,156 rails at its unchanged lower
+and upper edges. Their.06m height/.10m depth seats the glass; sill beds engage
+the stone by.005m, and rail ends are concealed in supported jambs. Thirty-six
+short pale returns span the measured.696800m from unchanged arch springings to
+adjacent mullions, with.04m concealed arch-end engagement. Points aroundY5.05
+intersect both actual old arch/new return and new return/mullion. Existing
+arches, glass, roof/rims/bearings, colonnade and window openings remain exact.
+
+All271 additions join the existing timber/pale batches. Draws remain33;
+instances1718->1989 stay within the existing unrelaxed2000 limit. All original
+1718 matrices and per-batch IDs/order remain exact, as does every noninstance
+geometry/pose. All22 Faculty colliders and16 exact public Atlas/floor targets
+remain; original working-wing source counts stay ground24/upper15. No new geometry
+or material resource, texture, light, instance batch, collider, pick, UI, listener, reading
+or private key is added. The original23 geometries/29 materials/17 textures and
+11 instance buffers each release once. All geometry inherits the proper lower
+half-turn once; source/private coordinates and original ownership remain.
+
+All121 release programs pass. The new helper runs through the existing Faculty
+check, with632 plinth/header corner contacts,6864 glass/rail/end-face contacts,
+216 actual springing joint points,63 west-door rays and180 viewing-aisle probes.
+Every new corner lies inside the retained wall band and outside the west gap.
+Independent23ea90b fingerprints retain original matrices, IDs and noninstance
+geometry; earlier20c7ad1/264f988/roof/source/paper/voice/private-flow checks remain.
+The final Faculty check also passes with resource-specific once-only assertions.
+Earlier5565 covered-walk/turn,28296 source-room,44 actual ground-bearing and all
+stair/headroom/source-reader checks stay in the passing suite.
+
+Independent native Chrome compares the bare and fitted arcade, walks the paper
+aisle, opens the original Atlas source-tools dialog by pointer after approaching
+its retained label, and closes it at the same pose. Existing EN/DE/FA/CS views
+keep pose; Persian stays RTL and disclosed English boundaries remain. All eleven
+genuine paper pages report ready. Ordinary keys leave through the actual west
+door beyond localX-64 with route=null, then return to the original Faculty floor
+capture, at logical feet.13. No collision gate, source action or pose is bypassed.
+The user's headed preview stays under their control; QA uses its own browser.
+
+All47 sourced readings, 480 treads/handoffs, original eight-floor rooms/24 IDs,
+real stairs/lift/entrance and repaired covered connection remain. Scans/editions/
+aspects/pages/credits/rights, approved appearances/voices/recordings, private
+drafts/carets/first answers/keys and original explicit actions/saves remain.
+New construction/rendering has no memory/storage/progress, saved-language-write,
+experiment, discovery, audio, travel or floor-selection behavior. Before/after
+images, release log, factual QA notes and final commit/build/local asset check
+are retained in this chat/PR #5. Existing Three.js warning and untested hardware
+controller A limit remain. Review only: no merge or deployment; other work and
+City Map #4 remain separate.
+
+Next useful architectural audit: inspect the existing eleven genuine paper
+displays' pedestal/frame support joins and viewing approaches in the original
+lower gallery. Read the paper ownership/source/rights notes and inspect actual
+installed surfaces/colliders and concurrent work first. Preserve every scan byte,
+aspect/page/edition/credit/source/right and original zoom/proximity/source UI,
+owned asynchronous cleanup, open well/480 treads, west exit/aisle, all47 readings,
+source working wing/covered route and private/source/world ownership. Make only
+measured justified support changes; otherwise record a factual audit. No new
+paper, generated facsimile, first folio, floor column, lot or certification claim.

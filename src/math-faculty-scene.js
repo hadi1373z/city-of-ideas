@@ -91,6 +91,19 @@ export function buildMathFaculty(T,{canvas=()=>document.createElement('canvas')}
  box(3.70,.045,.075,entry.x,2.85,entry.z+.17,glow);
  label('FACULTY OF MATHEMATICS',-80,3.40,9.65,0,7.2,.55);box(6.9,.08,.10,-80,3.03,9.67,glow);
  const rv=[[-93.4,32.2,-11.3],[-66.6,32.2,-11.3],[-66.6,32.2,9.3],[-93.4,32.2,9.3],[-80,35,-11.3],[-80,35,9.3]],faces=[[0,1,4],[1,2,5],[1,5,4],[2,3,5],[3,0,4],[3,4,5]],roofGeometry=new T.BufferGeometry();roofGeometry.setAttribute('position',new T.Float32BufferAttribute(faces.flatMap(f=>f.flatMap(i=>rv[i])),3));roofGeometry.computeVertexNormals();add(roofGeometry,roofMat,'West wing warm metal pitched roof');box(26.8,.25,20.6,-80,32.12,-1,stone);
+ // Seat the retained glazing and decorative arch ends on the existing wall
+ // plinth/header. These are narrow window frames inside the original solid
+ // wall band, not another colonnade. Append to retain all old instance IDs.
+ for(let i=0;i<count;i++){
+  const a=i*da;if(Math.abs(Math.atan2(Math.sin(a-Math.PI),Math.cos(a-Math.PI)))<.04)continue;
+  if(i===39||i===41){const side=i===39?-1:1,t=a+side*da/2,u=-side*((60.25*da+.04)/2-.05);box(.10,6.28,.20,Math.cos(t)*60.25-Math.sin(t)*u,4.12,Math.sin(t)*60.25+Math.cos(t)*u,timber,Math.PI/2-t);}
+  else box(.10,6.28,.20,Math.cos(a)*60.25,4.12,Math.sin(a)*60.25,timber,Math.PI/2-a);
+ }
+ for(let i=0;i<count;i++){const a=(i+.5)*da;if(Math.abs(Math.atan2(Math.sin(a-Math.PI),Math.cos(a-Math.PI)))<.085)continue;for(const y of[1.005,6.555])box(60.25*da+.02,.06,.10,Math.cos(a)*60.25,y,Math.sin(a)*60.25,timber,Math.PI/2-a);}
+ for(let i=0;i<20;i++){
+  const a=(i+.5)/20*Math.PI*2;if(Math.abs(Math.atan2(Math.sin(a-Math.PI),Math.cos(a-Math.PI)))<.18)continue;
+  for(const sign of[-1,1]){const x=Math.cos(a)*59.9-Math.sin(a)*sign*4.05,z=Math.sin(a)*59.9+Math.cos(a)*sign*4.05,t=a+sign*da,dx=Math.cos(t)*60.25-x,dz=Math.sin(t)*60.25-z,len=Math.hypot(dx,dz);box(len+.04,.15,.14,x+dx/2-dx/len*.02,5,z+dz/2-dz/len*.02,pale,Math.atan2(-dz,dx));}
+ }
  const dummy=new T.Object3D();for(const[m,items]of batches){const mesh=new T.InstancedMesh(unit,m,items.length);mesh.name='Batched faculty stone / timber / shelves';items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.rotation.set(0,b.yaw,b.roll);dummy.scale.set(b.w,b.h,b.d);dummy.updateMatrix();mesh.setMatrixAt(i,dummy.matrix);});mesh.instanceMatrix.needsUpdate=true;mesh.computeBoundingSphere?.();group.add(mesh);}
  const colliders=facultyColliders();let disposed=false;
  return{group,targets,colliders,contract:F,sourceWing:F.wing,nativeShellNodes:nativeMathShellNodes,canStand:(x,z,y=.13)=>facultyCanStand(x,z,y,{colliders}),dispose(){if(disposed)return;disposed=true;group.removeFromParent();group.traverse(o=>{if(o.isInstancedMesh)o.dispose?.();});for(const r of owned)r.dispose();group.clear();}};
