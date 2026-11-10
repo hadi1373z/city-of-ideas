@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {buildTwoFaceGallery} from '../src/two-face-gallery-scene.js';
 import {lowerMatrix} from '../src/world-cylinder-model.js';
+import {verifyPaperDisplaySupports} from './paper-display-supports.mjs';
 
 // Invoked by math-faculty.mjs on its actual builder, not a copied roof model.
 export function verifyFacultyRoof(T,b,rows){
@@ -14,8 +15,7 @@ export function verifyFacultyRoof(T,b,rows){
  const roof=b.group.getObjectByName('Annular timber roof · open central oculus'),caps=b.group.getObjectByName('Fitted roof bearings · retained columns and west lintel');
  assert(roof&&caps);assert.equal(hash({position:Array.from(roof.geometry.attributes.position.array),index:Array.from(roof.geometry.index.array)}),'d6957aaaedfb49dc4e275b234357b0aef7c3f2ed351c976e2e30b7278e722aee','Original roof profile, facets and aperture remain exact');
  assert.equal(caps.geometry.attributes.position.count,320);assert.equal(caps.geometry.index.count,1440);assert(caps.geometry.attributes.position.array.every(Number.isFinite));assert.equal(caps.material.color.getHex(),0xc3b69a);assert(!b.targets.includes(caps));
- const gallery=buildTwoFaceGallery(T,{side:'lower'}),originalGallery=[];
- gallery.group.updateMatrixWorld(true);gallery.group.traverse(o=>{if(o.isInstancedMesh)for(let i=0;i<o.count;i++){o.getMatrixAt(i,matrix);originalGallery.push(JSON.stringify({name:o.name,color:o.material.color?.getHex(),matrix:[...matrix.elements].map(round)}));}});
+ const gallery=buildTwoFaceGallery(T,{side:'lower'}),displaySupport=verifyPaperDisplaySupports(T,gallery),originalGallery=displaySupport.originalRows;
  assert.equal(originalGallery.length,1736);assert.equal(hash(originalGallery.sort()),'1d569525d51a3d005310dea83784d705dc7b7adec2c7a2298a5bdaa5f15b09ad','Reuse the exact original columns, west lintel, stairs, rails and pedestals');
  const timber=b.group.children.find(o=>o.isInstancedMesh&&o.material.color.getHex()===0x705b40),up=new T.Vector3(0,1,0),down=new T.Vector3(0,-1,0);
  const cast=(mesh,x,y,z,dir,far=20)=>new T.Raycaster(new T.Vector3(x,y,z),dir,0,far).intersectObject(mesh,true)[0];
@@ -39,7 +39,7 @@ export function verifyFacultyRoof(T,b,rows){
  // The real inverted composition keeps the bearing on the original column.
  const frame=new T.Group();frame.matrixAutoUpdate=false;frame.matrix.copy(lowerMatrix(T));b.group.position.set(-2160,0,-65);gallery.group.position.set(-2160,0,-65);frame.add(b.group,gallery.group);frame.updateMatrixWorld(true);
  for(const i of[0,1,19,20,21,39]){const a=i/40*Math.PI*2,p=b.group.localToWorld(new T.Vector3(Math.cos(a)*57.8,(i===20?6.505:7.33)-.1,Math.sin(a)*57.8)),hit=new T.Raycaster(p,new T.Vector3(0,-1,0),0,2).intersectObject(caps)[0];assert(hit);near(-96-hit.point.y,i===20?6.505:7.33);}
- b.group.removeFromParent();b.group.position.set(0,0,0);b.group.updateMatrixWorld(true);gallery.dispose();
+ b.group.removeFromParent();b.group.position.set(0,0,0);b.group.updateMatrixWorld(true);gallery.dispose();displaySupport.assertReleased();
  let released=0;caps.geometry.addEventListener('dispose',()=>released++);
  return{rafters,roofSamples,bearingSamples,rimSamples,assertRoofReleased:()=>assert.equal(released,1,'The one added bearing geometry is released once by its original Faculty owner')};
 }

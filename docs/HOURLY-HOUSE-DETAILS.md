@@ -5554,3 +5554,60 @@ owned asynchronous cleanup, open well/480 treads, west exit/aisle, all47 reading
 source working wing/covered route and private/source/world ownership. Make only
 measured justified support changes; otherwise record a factual audit. No new
 paper, generated facsimile, first folio, floor column, lot or certification claim.
+
+## 2026-11-10 — Lower gallery: grounded genuine-paper displays
+
+Architectural follow-up to59b8fa6; all47 first readings remain complete.
+Read `docs/PAPER-DISPLAY-SUPPORTS.md` with the existing paper ownership/source
+notes. Measured installed geometry had two real gaps: the retained stone slabs
+started atY.67 above the actual annular floorY.13, while the unchanged charcoal
+backings started at1.03 above slabtop.89 and extended beyond its rear edge.
+
+Each display now has a floor-supported3.4 x.54 x.87 low plinth core at
+radius55.76, a3.4 x.22 x.12 rear cap strip at56.135 and a2.9 x.14 x.16
+backing seat at56.1. Bounds meet atY.13/.67/.89/1.03. The old slabs remain
+exact; the rear strips butt their edges, the seats support the entire backing,
+and captions starting1.06 keep.03 clearance. Every new corner stays in the
+existing monitor solid band; no collider, room column or approach changes.
+
+All33 additions append to the original gallery trim batch:1736->1769 instances,
+19 draws unchanged, no new geometry/material/texture/light/batch/pick/UI/
+listener/reader/key. Every old instance matrix and per-batch ID, all noninstance
+geometry/poses and the upper gallery1460/13 remain exact. Gallery-owned17
+geometries/5 materials/5 instance buffers release once; borrowed paper ownership,
+parent-before-child and asynchronous/late-callback cleanup remain independent.
+Faculty1989/33,22 colliders/16 targets and sourcewingground24/upper15 remain.
+
+All121 release programs pass, including44 ground/88 cap/44 seat/44 backing
+contacts,264 solid-envelope corners and1050 approach/aisle/west-exit probes.
+Independent59b8fa6 original gallery/catalogue/slot/collider hashes and every
+scan byte are retained. All11 genuine pages total1,745,902 bytes/18,710,068
+decoded pixels; editions/pages/aspects/titles/authors/dates/credits/rights and
+permanent pages stay exact. No source-access success is newly asserted.
+
+Native independent QA compares before/after at the same pose and verifies exact
+backing matrices and fitted page positions/sizes/targets. All11 pages ready;
+installed rays meetY.13/.67/.89/1.03 on every display. The original nearby Euler
+reader retains edition/source/rights,100/150/200% zoom and same-pose close.
+Existing EN/DE/FA/CS shell selection keeps pose, Persian RTL; the original paper
+reader/hint and other legacy English gaps remain disclosed. Ordinary sideways
+walking clears the display; native west-door walking beyondlocalX-64 retains
+route=null and returns to the original floor capture atfeet.13. The user's
+headed preview is untouched; QA uses a separate browser. Existing Three warning/
+separately untested hardware-controller A limit remain. Final build and explicit
+869-asset local verification are recorded with the review in this chat/PR #5.
+
+All47 readings, original eight floors/24 concepts, real stair/lift/covered route,
+Faculty roof/arcade,480 treads/open well/handoffs, voices/recordings and every
+private draft/caret/first answer/key/explicit action remain. Rendering never
+accesses memory/storage/progress or changes language preference, experiments,
+discovery, audio, travel or floor selection. Same branch/PR #5; no merge/deploy.
+
+Next useful architectural audit: inspect the original helical gallery's arch
+feet and guard/landing support contacts along the retained lower240 treads and
+middle-deck handoff. Read the latest ledger, paper supports/ownership notes and
+world/gallery contracts first; inspect concurrent work and actual installed
+surfaces/bounds/lower transforms/walking clearances. Preserve both spirals/all480
+treads, well, west exit/aisle, wing/real stairs/lift/covered route, every genuine
+scan/right and all47 readings. Only measured justified changes; otherwise record
+a factual audit. No duplicate column, new lot/first folio or certification claim.
