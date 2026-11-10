@@ -5676,3 +5676,67 @@ handoff, upper Escher spur, well, paper approaches/west exit, source wing/
 stairs/lift/covered connection, scans/rights/private flows and all47 readings.
 Make only measured justified connections; otherwise record an audit. No duplicate
 column, new lot/reading/facsimile or certification claim.
+
+## 2026-11-10 — Lower helix: joined handrail and stringer runs
+
+Architectural follow-up to83a37ce; all47 first readings remain complete.
+Read `docs/HELICAL-GALLERY-RAILS.md`. Actual retained seven-sided cap vertices
+gave .131738..134048m handrail gaps and .033445..039055m stringer gaps at the
+.200542m centre drops. Each edge/profile retains234 segments, indices2..235;
+only233 internal joints per run are connected. First/last caps, portal masks,
+bridge and middle mouths stay open; upper/Escher geometry remains unchanged.
+
+466 .04-radius bronze sleeves, heightdrop+.08, enclose both original handrail
+caps and applicable post tops.466 .20tangent/.20radial stone housings,
+heightdrop+.20, enclose the retained stringer caps and engage the original
+tread-edge clips/shoes. End faces are fully inside the new solids; concealed
+engagement has no coincident visible faces. Four run components now have
+geometric paths to the existing grounded feet. Original stepped profiles stay;
+no smooth/code-certified handrail claim is made. New parts remain outside the
+14.455..17.545 walking band; body/headroom and mouth checks remain clear.
+
+All932 additions append to existing batches: stone273->739, bronze1045->1511;
+lower1911->2843 instances/19 draws, upper1460/13 unchanged. No new geometry/
+material/texture/light/batch/collider/pick/UI/listener/reader/key. Original17
+geometries/5 materials/5 instance buffers release once, with borrowed paper/
+late-callback ownership unchanged. Independent83a37ce preserves all1911 old
+matrices/IDs and noninstance profiles/poses. Older4b1af6a/59b8fa6 hashes remain;
+only independently validated new IDs are excluded from their comparisons.
+
+All121 release programs pass. New checks cover7456 handrail-cap/7456 stringer-
+cap/928 post-cap vertices,116 original clip roots,2160 body/headroom rays,
+52 actual lower-frame instance rays and6 retained mouth rays. Real seven-sided
+containment and rooted-component checks replace a circular assumption, without
+relaxing old fingerprints/budgets. Physical tests explicitly propagate temporary
+manual lower matrices. All earlier240+240 tread/reversible/coil/feet/source/
+wing/stair/covered-walk/Faculty/roof/arcade/paper/private/voice checks remain.
+
+Independent native before/after first-arch approaches show connected runs;
+all932 installed gap rays hit expected IDs. EN/DE/FA/CS retains pose/route,
+Persian RTL,11 genuine pages ready. Ordinary keys walk all3lower turns and
+original middle lower->upper->lower atfeet-48, without pose assignment,
+auto-tour or collision bypass. Original Euler reader retains edition/rights and
+same-pose close. No application errors; existing Three warning/controller-A
+testing limit remain. User's headed preview is untouched. Final build/explicit
+869-asset local verification are recorded with this chat/PR #5.
+
+All47 readings, source/private coordinates/lower half-turn, open well/handoffs,
+eight-floor working wing/24 IDs/real stairs/lift/covered route, Faculty/paper/
+west exit, genuine scan bytes/pages/aspects/credits/rights, approved voices/
+recordings and raw drafts/carets/first answers/keys/original actions remain.
+Rendering has no memory/storage/progress/preference-write/experiment/discovery/
+audio/travel/floor action. Own four-language controls and disclosed legacy
+English gaps remain. PR summary/validation is reconciled with the final
+architecture, preserving Houses and Concurrent work sections. Same branch/
+PR #5, no merge/deploy.
+
+Next useful architectural audit: upper helical arch/guard-foot and rail-end
+support joins at Babel, the Escher second-turn spur and middle landing. Read
+latest ledger/rail/foot/gallery/world/Escher/Babel/paper/Math contracts first;
+inspect concurrent work and actual installed owners/cap faces/support surfaces/
+lower transforms/walking joins. Use the upper .10m rise and masks, not copied
+lower .200542m joints. Preserve all480 treads/gates, completed lower repairs,
+open well/gravity handoff, source wing/stairs/lift/covered route, paper/west
+approaches, scans/rights/private flows and all47 readings. Only measured justified
+connections; otherwise a factual audit. No duplicate column, new lot/paper/
+facsimile/first folio or certification.

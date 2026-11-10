@@ -2,19 +2,20 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {LOWER} from '../src/two-face-gallery-model.js';
 import {lowerMatrix,WORLD_CYLINDER as W} from '../src/world-cylinder-model.js';
+import {verifyHelicalRails} from './helical-gallery-rails.mjs';
 const hash=v=>createHash('sha256').update(JSON.stringify(v)).digest('hex'),round=x=>Math.round(x*1e6)/1e6;
 
 // Independent 4b1af6a inventory, including its thirty-three display supports.
 // Return only physically verified appended IDs; earlier golden checks still
 // inspect every retained gallery/reading item without changing their hashes.
 export function verifyHelicalSupports(T,b){
- const lower=b.side==='lower',ignored=new Map(),rows=[],non=[],items=[],added=[],m=new T.Matrix4(),p=new T.Vector3(),q=new T.Quaternion(),s=new T.Vector3();
+ const rails=verifyHelicalRails(T,b),lower=b.side==='lower',ignored=new Map([...rails.ignored].map(([o,ids])=>[o,new Set(ids)])),rows=[],non=[],items=[],added=[],m=new T.Matrix4(),p=new T.Vector3(),q=new T.Quaternion(),s=new T.Vector3();
  b.group.updateWorldMatrix(true,true);
  function visit(o){if(o.userData.paperMonitors)return;if(o.isMesh){
   if(o.isInstancedMesh){
    const stone=lower&&o.geometry.type==='BoxGeometry'&&o.material.color.getHex()===0x6b6e67;
-   if(stone)assert.equal(o.count,273);const ids=new Set();
-   for(let i=0;i<o.count;i++){o.getMatrixAt(i,m);m.decompose(p,q,s);const item={mesh:o,index:i,matrix:m.clone(),p:p.clone(),q:q.clone(),s:s.clone()};
+   if(stone)assert.equal(o.count-(rails.ignored.get(o)?.size??0),273);const ids=ignored.get(o)??new Set();
+   for(let i=0;i<o.count;i++){if(rails.ignored.get(o)?.has(i))continue;o.getMatrixAt(i,m);m.decompose(p,q,s);const item={mesh:o,index:i,matrix:m.clone(),p:p.clone(),q:q.clone(),s:s.clone()};
     if(stone&&i>=131){added.push(item);ids.add(i);}else{items.push(item);rows.push(JSON.stringify({name:o.name,color:o.material.color?.getHex(),matrix:[...m.elements].map(round)}));}
    }if(ids.size)ignored.set(o,ids);
   }else non.push({name:o.name,position:o.position.toArray(),rotation:o.rotation.toArray(),data:o.userData,color:o.material.color?.getHex(),geometry:hash({position:Array.from(o.geometry.attributes.position.array),index:o.geometry.index?Array.from(o.geometry.index.array):null})});
@@ -89,7 +90,7 @@ export function verifyHelicalSupports(T,b){
  }
  // Actual parent half-turn: these remain local supports, not baked coordinates.
  const old=b.group.position.clone(),detached=!b.group.parent;let frame;
- if(detached){frame=new T.Group();frame.matrixAutoUpdate=false;frame.matrix.copy(lowerMatrix(T));b.group.position.set(W.lowerOrigin.x,0,W.lowerOrigin.z);frame.add(b.group);}
+ if(detached){frame=new T.Group();frame.matrixAutoUpdate=false;frame.matrix.copy(lowerMatrix(T));b.group.position.set(W.lowerOrigin.x,0,W.lowerOrigin.z);frame.add(b.group);frame.updateMatrixWorld(true);}
  b.group.updateWorldMatrix(true,true);
  for(const foot of feet){const local=foot.p.clone();local.y-=.14;const start=b.group.localToWorld(local.clone().add(new T.Vector3(0,.03,0))),direction=down.clone().transformDirection(b.group.matrixWorld),
   hit=new T.Raycaster(start,direction,0,.06).intersectObject(added[0].mesh)[0];assert(hit);near(b.group.worldToLocal(hit.point.clone()).y,local.y);physical++;}
