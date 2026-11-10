@@ -1,7 +1,7 @@
 import {WORLD_CYLINDER as W,isLowerCoordinate,lowerLocal,lowerPhysical,lowerRadius,lowerMatrix,canWalkLower,tunnelContains,GALLERY_TUNNEL} from './world-cylinder-model.js';
 import {buildWorldCylinder,mountLowerWorld} from './world-cylinder-scene.js?v=ocean1';
 import {UPPER,LOWER,pointAt,headingAt,heightAt,surfaceAt as gallerySurface,walkGallery} from './two-face-gallery-model.js';
-import {buildTwoFaceGallery} from './two-face-gallery-scene.js?v=helix-rails1';
+import {buildTwoFaceGallery} from './two-face-gallery-scene.js?v=upper-helix1';
 import {LOWER_INLET} from './lower-landscape-model.js';
 import {buildMathFaculty} from './math-faculty-scene.js';
 export function installWorldCylinder(M,T){

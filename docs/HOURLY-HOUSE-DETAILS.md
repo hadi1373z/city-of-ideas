@@ -5740,3 +5740,65 @@ open well/gravity handoff, source wing/stairs/lift/covered route, paper/west
 approaches, scans/rights/private flows and all47 readings. Only measured justified
 connections; otherwise a factual audit. No duplicate column, new lot/paper/
 facsimile/first folio or certification.
+
+## 2026-11-10 — Upper helix: fitted feet and handrail joints
+
+Architectural follow-up to687f351; all47 first readings remain complete.
+Read `docs/UPPER-GALLERY-SUPPORTS.md`. The actual .10m upper rise gives
+.031197..033508m handrail cap gaps, while stringer cap vertical ranges overlap
+.061485..067097m. No lower-rise stringer housings are copied. Original inner234/
+outer230 rail segments retain the Escher omission158..161, three separate runs,
+first/last caps and Babel/spur/middle mouths.
+
+26 .44tangent/.18high/.82radial shoes at14.13/17.87 spanH-.24..H-.06 against
+actual tread sides and retained arch plates.115 .16tangent/.24radial clips meet
+the original guard feet:91 at.14 depth and24 at.06 depth above arch shoes.
+The actual source arch at4pi+.32 remains shifted away from Escher.461 .04-radius/
+.18-high seven-sided bronze sleeves enclose the original handrail caps/post
+tops:233 inner/228 outer joints. Three handrail components reach the tread-
+supported feet. All shoes/clips have original-tread contacts; no duplicate
+column, overlapping new foot volumes, smooth-ramp or certification claim.
+
+All602 additions append existing upper stone92->233/bronze865->1326 batches:
+upper1460->2062 instances/13 draws; original11 geometries/5 materials/5 buffers.
+No new resource/texture/light/batch/collider/pick/UI/listener/reading/key/state.
+Shared fitting follows actual source arch/rail records and each real rise/mask.
+Independent687f351 retains every1460 old upper matrix/ID and noninstance profile.
+The entire lower2843/19 remains exact, with its own independent hashes. Earlier
+rail/foot/paper hashes remain; only verified new upper IDs are excluded. Owned
+resources release once and borrowed paper/async/late callbacks remain independent.
+
+All121 release programs pass, including104arch-foot/920guard-rim/282tread-anchor/
+96shared-seat/7376handrail-cap/920post-cap checks,2160body/headroom rays,14mouth
+rays and25 actual upper-owner rays. Real seven-sided containment/rooted graph
+and461 retained stringer range overlaps are verified. Earlier all480 tread/
+reversible/coil/feet/source/wing/Faculty/roof/arcade/covered-walk/paper/private/
+voice checks remain; no old fingerprint or budget is relaxed.
+
+Native nearby before/after first-arch views and all602 installed rays pass.
+EN/DE/FA/CS keeps pose/route, PersianRTL,11genuinepagesready. Ordinary keys walk
+Babel's bridge and all3upperturns, enter the Escher tunnel beyondX22 atfeet-40
+and return to the same unwrapped second turn, then use the original middle
+upper->lower->upper handoff atfeet-48. No pose assignments/auto-tour/bypass.
+Original Euler edition/rights/same-pose close remain. Existing Three warning/
+controller-A testing limit remain; no application errors. User's headed preview
+untouched; final build/explicit869-asset verification are recorded in this
+chat/PR #5.
+
+All47 readings, source/private coordinates, upper ownership/lower half-turn,
+well/480treads/handoffs, wing8floors24IDs/stairs/lift/covered route, Faculty/west
+exit/paper displays/scans/rights, approved voices/recordings and raw drafts/
+carets/first answers/keys/original actions remain. Rendering has no memory/
+storage/progress/preference-write/experiment/discovery/audio/travel/floor action.
+Own four-language controls and disclosed legacy English gaps remain.
+Same branch/PR #5, no merge/deploy.
+
+Next useful architectural audit: existing gallery-to-Escher tunnel roof/side-wall
+contacts, corner joins and walking clearances fromX22 through the original bends
+to vestibule135/115. Read latest ledger/upper/lower/gallery/world/Escher/Babel/
+Math/paper contracts first; inspect concurrent work and actual installed owners/
+cap faces/support surfaces/collision bands. Keep its4m route/turning gaps,
+earth cut, original museum/Escher gates, both spirals/middle, all completed
+Math/Faculty/paper work, source/private coordinates and all47 readings.
+Only measured justified changes; otherwise an audit. No new lot/column/paper/
+facsimile/first folio or certification claim.

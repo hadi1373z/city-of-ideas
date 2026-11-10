@@ -2,15 +2,16 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {LOWER} from '../src/two-face-gallery-model.js';
 import {lowerMatrix,WORLD_CYLINDER as W} from '../src/world-cylinder-model.js';
+import {verifyUpperGallery} from './upper-gallery-supports.mjs';
 const hash=v=>createHash('sha256').update(JSON.stringify(v)).digest('hex'),round=x=>Math.round(x*1e6)/1e6;
 export function verifyHelicalRails(T,b){
- const lower=b.side==='lower',ignored=new Map(),original=[],added=[],rows=[],non=[],m=new T.Matrix4(),p=new T.Vector3(),q=new T.Quaternion(),s=new T.Vector3();
+ const upper=verifyUpperGallery(T,b),lower=b.side==='lower',ignored=new Map([...upper.ignored].map(([o,ids])=>[o,new Set(ids)])),original=[],added=[],rows=[],non=[],m=new T.Matrix4(),p=new T.Vector3(),q=new T.Quaternion(),s=new T.Vector3();
  b.group.updateWorldMatrix(true,true);
  function visit(o){if(o.userData.paperMonitors)return;if(o.isMesh){
   if(o.isInstancedMesh){
    const box=lower&&o.geometry.type==='BoxGeometry'&&o.material.color.getHex()===0x6b6e67,cyl=lower&&o.geometry.type==='CylinderGeometry'&&o.material.color.getHex()===0xab9459,old=box?273:cyl?1045:o.count;
-   if(box||cyl)assert.equal(o.count,old+466);const ids=new Set();
-   for(let i=0;i<o.count;i++){o.getMatrixAt(i,m);m.decompose(p,q,s);const item={mesh:o,index:i,matrix:m.clone(),p:p.clone(),q:q.clone(),s:s.clone()};
+   if(box||cyl)assert.equal(o.count,old+466);const ids=ignored.get(o)??new Set();
+   for(let i=0;i<o.count;i++){if(upper.ignored.get(o)?.has(i))continue;o.getMatrixAt(i,m);m.decompose(p,q,s);const item={mesh:o,index:i,matrix:m.clone(),p:p.clone(),q:q.clone(),s:s.clone()};
     if(i>=old){added.push(item);ids.add(i);}else{original.push(item);rows.push(JSON.stringify({name:o.name,color:o.material.color.getHex(),matrix:[...m.elements].map(round)}));}
    }if(ids.size)ignored.set(o,ids);
   }else non.push({name:o.name,position:o.position.toArray(),rotation:o.rotation.toArray(),data:o.userData,color:o.material.color.getHex(),geometry:hash({position:Array.from(o.geometry.attributes.position.array),index:o.geometry.index?Array.from(o.geometry.index.array):null})});
