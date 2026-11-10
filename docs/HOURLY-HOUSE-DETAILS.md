@@ -5868,3 +5868,73 @@ experiment gates/readers/artwork/rights/private flows, tunnel/spirals/middle,
 Math/Faculty/papers and all47 readings. Only justified support connections;
 otherwise a factual audit. No copied helical joints, new lot/column across the
 route/paper/first folio or certification claim.
+
+## 2026-11-10 — Escher museum: recessed links at the existing stair rails
+
+This review continues `4da1f36`. All47 first reading passes remain complete.
+Read `ESCHER-STAIR-JOINS.md`. Actual source and installed owners retain the
+upper +Y identity frame, original48 treads/X181..188/Z132..156, .50m run/.125m
+rise and main-hallY-40/closed-loopY-46 landings. No helical dimensions are copied.
+
+The original .18-thick/.512-deep treads already join:47 overlaps of.012m along
+the stair/.055m vertically. Both original landing slabs engage the end treads
+by.006m/.18m across their7m span. All96 guard feet already meet actual treads
+and their own rails. No tread, floor, wall, post, roof or landing is replaced.
+
+The two48-segment .12-wide/.08-high/.50-long rail runs had94 actual .045m cap
+gaps, confirmed by native pre-edit rays.94 recessed bronze links now connect
+47 internal joints per side. Each is .10 x.185 x.10, centred between the old
+cap centres atZ132.5..155.5; height is actualrise+.06. Each end has.10 x.07 x.05
+concealed engagement with its neighbour. The .01m side recess avoids coplanar
+outer faces and keeps new joins inside the original guard bands. Links join
+the middle of old caps; this is not whole-cap enclosure, a smooth handrail or
+certification. Original first/last ends/landing apertures remain open.
+
+All94 boxes append to the existing bronze unit-box batch233->327. Every old
+matrix/per-batch ID/order and noninstance profile/pose remains exact. Pure
+fixture643->737 instances/32draws, same21 geometries/25materials/14textures/
+14buffers; installed credited-print owner649->743/42draws, same30geometries/
+34materials/23textures/15buffers. No new resource/light/batch/collider/pick/
+UI/listener/reader/key/model. Independent4da1f36 pure and actual installed
+fingerprints retain all643/649 old instances and32/42 mesh profiles/poses,
+excluding only the independently validated94 appended IDs. Model-file hash
+and all earlier world/tunnel/helix/wing/Faculty/paper baselines remain exact.
+
+All121 release programs pass. New checks cover188 real cap intersections,
+384 old foot-corner rays,47 tread overlaps/two landing overlaps,1,405 strict
+floor/overhead/standing-centre samples and94 expected gap rays. Three lanes
+walk all48 heights in both directions under original source navigation.
+Initial60 resources/14buffers and all62resources/17buffers over the existing
+explicit mosaic/loop replacement scenario release once. Original gate/mode/
+height/modal/physical-view/explicit experiment/private/voice checks remain.
+
+Native nearby before/after views show the recessed joins. All94 expected
+installed IDs hit; the complete pre-edit42-mesh/649-instance hash remains when
+only those94 IDs are excluded. Ordinary keys walk all the way down onto the
+lower room and back through the upper landing. A held-key return records all
+49 floor heights -46..-40 in.125m increments, without direct pose assignment,
+auto-tour or collision bypass. EN/DE/FA/CS keeps pose and exact public mosaic/
+loop geometry; PersianRTL/11 genuine pages ready remain. Final reader/artifact
+verification is recorded with the published review in this chat/PR #5.
+
+All47 readings, museum rooms/collision/navigation/experiment/surface-door/
+upper-Escher gates and artwork/readers/credits/rights/private flows remain.
+Both spirals/all480treads/middle/well, fitted tunnel/earth cut, eight-floor24ID
+wing/real stairs/lift/central3m entrance/covered route/Faculty/west exit/papers,
+genuine scan bytes/source/zoom UI, approved voices/recordings and raw drafts/
+carets/first answers/keys/original explicit actions remain. Rendering has no
+memory/storage/progress/preference-write/experiment/discovery/audio/travel/
+floor action. Own four-language controls and disclosed legacy English gaps
+remain; museum copy stays English. No new source-access/historical-copy/
+certification claim. User's headed preview untouched; samePR5/no merge/deploy.
+
+Next useful architectural audit: original Escher stair-portal frame feet and
+upright/lintel bearing contacts, especially the upper frame atZ132.24 beside
+the hall slab endingZ132. Inspect actual installed cap faces/support surfaces,
+collision/landing openings and owned resources before choosing a repair.
+This rail review does not claim those frame seats were repaired. Preserve all
+48treads/recessed rail links/landing apertures, museum experiments/rooms/gates/
+readers/artwork/rights/private flows, tunnel/spirals/middle, Math/Faculty/papers
+and all47readings. Only measured justified joins; otherwise a factual audit.
+No duplicate column/barrier/new lot/paper/first folio/historical copy or
+certification. Latest ledger governs; user's headed preview stays theirs.
