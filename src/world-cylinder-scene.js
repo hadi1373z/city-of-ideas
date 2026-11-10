@@ -47,10 +47,12 @@ export function buildWorldCylinder(T){
   add(stone,vertical?4:length+4,.25,vertical?length+4:4,cx,-35,cz);
   // Stop side walls short of each corner, leaving the actual turning space open.
   for(const sign of[-1,1])add(stone,vertical?.2:Math.max(0,length-4),5,vertical?Math.max(0,length-4):.2,cx+(vertical?sign*2:0),-37.5,cz+(vertical?0:sign*2));
-  for(let t=6;t<length-3;t+=11){const x=a[0]+dx*t/length,z=a[1]+dz*t/length;for(const sign of[-1,1]){
-   add(brass,vertical?.14:3.8,.1,vertical?3.8:.14,x,-35.22,z);
-   add(warm,.18,.16,.18,x+(vertical?sign*1.84:0),-36.8,z+(vertical?0:sign*1.84));
-  }}
+  for(let t=6;t<length-3;t+=11){const x=a[0]+dx*t/length,z=a[1]+dz*t/length;
+   // One longitudinal ceiling strip per station. Keep its original underside
+   // at -35.27; fill the .045m gap with .005m concealed roof engagement.
+   add(brass,vertical?.14:3.8,.15,vertical?3.8:.14,x,-35.195,z);
+   for(const sign of[-1,1])add(warm,.18,.16,.18,x+(vertical?sign*1.84:0),-36.8,z+(vertical?0:sign*1.84));
+  }
  }
  const unit=own(new T.BoxGeometry(1,1,1)),o=new T.Object3D();
  // A restrained garden campus surrounds the preserved buildings. All new

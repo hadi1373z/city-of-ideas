@@ -5802,3 +5802,69 @@ earth cut, original museum/Escher gates, both spirals/middle, all completed
 Math/Faculty/paper work, source/private coordinates and all47 readings.
 Only measured justified changes; otherwise an audit. No new lot/column/paper/
 facsimile/first folio or certification claim.
+
+## 2026-11-10 — Gallery to Escher: fitted ceiling strips and tunnel audit
+
+This review continues `90298b9`. All47 first reading passes remain complete.
+Read `ESCHER-TUNNEL-CONTACTS.md` for the actual surfaces and ownership contract.
+The original4m centreline `(22,0)->(70,0)->(70,115)->(135,115)` stays atY-40;
+its upper owner remains at identity, separate from the proper lower half-turn.
+
+Measured audit: the three original roof undersidesY-35.125 meet six side walls
+Y-40..-35 with.125m vertical engagement. Each .20m wall retains its original
+.10m inner bearing on the slab edge; this is not a full-width bearing claim.
+Original floor/roof slabs overlap across4x4m bend squares. Their wall setbacks
+and turning spaces stay open. All12 original stone instances remain exact.
+The40 original warm lamps already intersect their walls and remain exact too.
+
+Twenty longitudinal bronze ceiling strips had actual .0450012m roof gaps,
+and each was stamped twice at the same transform. One now remains per station:
+original3.8m length/.14m width, horizontal pose/order and undersideY-35.27 stay;
+height.10->.15, centreY-35.22->-35.195, topY-35.12 engages the roof by.005m.
+The20 duplicate stamps are removed. These are fitted ceiling trim, not new
+transverse beams or certification. No new floor/wall/roof panel or column.
+
+Tunnel92->72 instances/three draws; pure world builder7,687->7,667 instances/
+47 draws. Same33 geometries/34 materials/26 instance buffers, with67 owned
+resources and all26 buffers releasing once. No new geometry/material/texture/
+light/batch/collider/pick/UI/listener/reader/key. Independent90298b9 hashes
+retain all44 non-tunnel mesh geometries/poses and7,595 instances, plus exact
+original stone/lamp matrices and per-batch IDs/order. Earth cut, lower source
+frame and landscape remain; no old helix/paper/Faculty fingerprint is relaxed.
+
+All121 release programs pass:48 wall contacts,80 strip-top corners,40 lamp
+contacts,2,439 floor/cover/body-clearance samples,18 mouth/earth-cut rays,
+original station/underside/duplicate checks and exact owned release. Existing
+reversible controller/museum gate/stair/experiment/private/voice checks remain.
+Minimum strip headroom stays4.73m. All480 treads, completed upper/lower support
+repairs, middle handoff, eight working floors/24IDs/real stairs/lift/central3m
+entrance/covered route, Faculty roof/arcade/west exit and paper aisle remain.
+
+Independent native nearby before/after views and all20 installed strip rays
+pass: underside-35.2699997, roof-35.125, engagement.0050003m. Ordinary keys
+walk from Escher's actual vestibule through both bends, crossX22 and rejoin
+the original second coil at theta12.563921/feet-39.9 (the adjacent .10m tread),
+then reverse through both bends to the original museum arrival136.4/115/
+feet-40, museum active and gallery route null. No direct pose assignments,
+guide auto-tour or collision bypass. EN/DE/FA/CS keeps pose/route, PersianRTL
+and11 genuine pages ready. The user's headed preview stays under their control.
+Final reader/artifact verification is recorded with the published review in
+this chat/PR #5; existing Three warning/controller-A test limit remain.
+
+All47 sourced readings, source/private coordinates, genuine scan bytes/aspects/
+editions/pages/credits/rights/proximity/zoom/source UI, approved appearances/
+voices/recordings, raw drafts/carets/first answers/keys and original explicit
+actions remain. Construction/rendering has no memory/storage/progress access,
+preference-write/experiment/discovery/audio/travel/floor action. Own four-language
+controls/FA RTL and disclosed legacy English gaps remain; no new source fetch
+or historical-copy/certification claim. Same branch/PR #5, no merge/deploy.
+
+Next useful architectural audit: Escher museum's existing48-tread main-hall
+Y-40 to closed-loop Y-46 stair, its actual tread/guard support contacts, rail
+ends, headroom and both landing joins. Read latest ledger/tunnel/world/gallery/
+Escher contracts and inspect concurrent work/actual installed owners first.
+Measure its own geometry/rise; preserve original rooms, collisions, navigation/
+experiment gates/readers/artwork/rights/private flows, tunnel/spirals/middle,
+Math/Faculty/papers and all47 readings. Only justified support connections;
+otherwise a factual audit. No copied helical joints, new lot/column across the
+route/paper/first folio or certification claim.
