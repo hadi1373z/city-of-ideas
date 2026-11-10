@@ -5611,3 +5611,68 @@ surfaces/bounds/lower transforms/walking clearances. Preserve both spirals/all48
 treads, well, west exit/aisle, wing/real stairs/lift/covered route, every genuine
 scan/right and all47 readings. Only measured justified changes; otherwise record
 a factual audit. No duplicate column, new lot/first folio or certification claim.
+
+## 2026-11-10 — Lower helix: tread-supported arch and guard feet
+
+Architectural follow-up to4b1af6a; all47 first readings remain complete.
+Read `docs/HELICAL-GALLERY-SUPPORTS.md`. The actual lower stair spans
+radius14.4..17.6. Its26 retained arch feet at13.95/18.05 stood beyond the
+treads; their .30-square plates also missed the walking geometry. Its116
+stair-guard feet at14.34/17.66, radius.035, stopped .025m beyond the tread edges.
+All142 pre-repair foot-centre rays missed. The20 existing middle-deck guard
+centres already meetY-48 and remain unchanged.
+
+Twenty-six .44-tangential/.18-high/.82-radial dark-stone shoes at radii14.13/
+17.87 spanH-.24..H-.06, meeting original arch-plate bottoms and the actual
+faceted tread sides.116 .16-tangential/.24-radial clips at the real tread edges
+meet the unchanged guard feet.92 clips are.14 deep;24 above arch shoes are.06
+deep and butt their tops. All142 additions attach to original tread sides;
+new parts do not overlap visible volumes. They remain below walking height,
+inside the13.7..18.3 stair/portal zone, leaving the well/middle mouths clear.
+Original stepped handrail/stringer profiles remain exact; their end connections
+are a separate next audit, not a completed continuous-rail claim.
+
+All142 boxes append to the old dark-stone batch131->273: lower1769->1911
+instances,19 draws unchanged; upper1460/13 remains. No new geometry/material
+resource, texture, light, batch, collider, pick, UI, listener, reader or key.
+All17 gallery geometries/5 materials/5 instance buffers release once, retaining
+independent borrowed-paper/late-callback ownership. Independent4b1af6a retains
+all1769 old matrices/IDs and every noninstance geometry/pose. Earlier59b8fa6
+fingerprints still verify1736 originals; only independently verified new142 IDs
+are excluded. Paper supports/scans/catalogue/slots/colliders remain exact.
+
+All121 release programs pass, including104 arch-foot/928 guard-rim contacts,
+284 real tread-side anchors,96 shared-seat corners,2160 walking/headroom probes,
+1136 support bounds,20 original middle bases and26 physical-frame rays. Final
+focused paper check also passes after adding well bounds. All480 tread and
+reversible route/coil/feet/bridge/spur/mid/source/roof/arcade/covered-walk/paper/
+private-flow/voice checks remain.
+
+Independent native QA walks the annular approach and all three lower turns,
+then the original middle gravity handoff lower->upper->lower atfeet-48 with
+ordinary keys. No direct pose assignment, auto-tour or collision bypass. Nearby
+before/after arch views and142 installed foot rays show support, with vertical
+differences below.000004m. EN/DE/FA/CS selection keeps pose/route; Persian RTL,
+all11 genuine pages ready. Original Euler reader keeps edition/rights and
+same-pose close. Original paper/guide English boundaries remain. No application
+errors; existing Three warning/controller-A testing limit remain. User's headed
+preview untouched. Final build/explicit869-asset local verification are recorded
+with the review in this chat/PR #5.
+
+All47 readings, source/private coordinates, proper lower half-turn, eight-floor
+wing/24 IDs/stairs/lift/covered route, Faculty roof/arcade, paper aisle/west exit,
+open well/handoffs, voices/scans/rights and every raw draft/caret/first answer/
+private key/original explicit action remain. Geometry/rendering has no memory/
+storage/progress/preference-write/experiment/discovery/audio/travel/floor action.
+Same branch/PR #5, no merge/deploy.
+
+Next useful architectural audit: inspect the lower helical stair's retained
+stepped handrail and edge-stringer segment end connections at the actual
+first/last tread, portal and middle mouths. Read the latest ledger and helix/
+gallery/world/paper/working-wing contracts; inspect concurrent work and actual
+installed end faces/support paths/lower transforms first. Keep both spirals/
+all480 treads, navigation/coil/feet gates, foot repairs, original middle gravity
+handoff, upper Escher spur, well, paper approaches/west exit, source wing/
+stairs/lift/covered connection, scans/rights/private flows and all47 readings.
+Make only measured justified connections; otherwise record an audit. No duplicate
+column, new lot/reading/facsimile or certification claim.

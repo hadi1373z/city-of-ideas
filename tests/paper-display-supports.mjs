@@ -4,6 +4,7 @@ import {readFileSync} from 'node:fs';
 import {HISTORIC_PAPERS} from '../src/historic-papers-data.js';
 import {paperMonitorSlots,paperMonitorColliders,paperMonitorsCanStand,nearPaper} from '../src/paper-monitors-model.js';
 import {lowerMatrix,WORLD_CYLINDER as W} from '../src/world-cylinder-model.js';
+import {verifyHelicalSupports} from './helical-gallery-supports.mjs';
 
 const hash=v=>createHash('sha256').update(typeof v==='string'||Buffer.isBuffer(v)?v:JSON.stringify(v)).digest('hex'),round=x=>Math.round(x*1e6)/1e6;
 const baseline={
@@ -23,6 +24,7 @@ export function verifyPaperInventory(){
 // Checks the actual gallery instance matrices. Optional installed frames/pages
 // belong to the independent paper runtime; never register their resources here.
 export function verifyPaperDisplaySupports(T,b,{frames=null,pages=null}={}){
+ const helix=verifyHelicalSupports(T,b);
  const expected=baseline[b.side],originalRows=[],non=[],batches=[],added=[],geometries=new Set(),materials=new Set(),textures=new Set(),buffers=new Set();
  const near=(a,c,tol=6e-5)=>assert(Math.abs(a-c)<tol,`${a} != ${c}`),m=new T.Matrix4();
  let draws=0;
@@ -33,8 +35,8 @@ export function verifyPaperDisplaySupports(T,b,{frames=null,pages=null}={}){
    for(const mat of Array.isArray(o.material)?o.material:[o.material]){materials.add(mat);if(mat.map)textures.add(mat.map);}
    if(o.isInstancedMesh){
     buffers.add(o);const count=expected.counts[batches.length];assert(Number.isInteger(count),'No new instance batch');
-    assert.equal(o.count,count+(b.side==='lower'&&o.material.color.getHex()===0xd0c6aa&&o.geometry.type==='BoxGeometry'?33:0));
-    const batch=[];for(let i=0;i<o.count;i++){o.getMatrixAt(i,m);const row={name:o.name,color:o.material.color?.getHex(),matrix:[...m.elements].map(round)};
+    assert.equal(o.count-(helix.ignored.get(o)?.size??0),count+(b.side==='lower'&&o.material.color.getHex()===0xd0c6aa&&o.geometry.type==='BoxGeometry'?33:0));
+    const batch=[];for(let i=0;i<o.count;i++){if(helix.ignored.get(o)?.has(i))continue;o.getMatrixAt(i,m);const row={name:o.name,color:o.material.color?.getHex(),matrix:[...m.elements].map(round)};
      const item={mesh:o,index:i,matrix:m.clone(),row};batch.push(item);if(i<count)originalRows.push(JSON.stringify(row));else added.push(item);
     }batches.push(batch);
    }else non.push({name:o.name,position:o.position.toArray(),rotation:o.rotation.toArray(),data:o.userData,color:o.material.color?.getHex(),geometry:hash({position:Array.from(o.geometry.attributes.position.array),index:o.geometry.index?Array.from(o.geometry.index.array):null})});
