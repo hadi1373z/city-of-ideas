@@ -11,7 +11,7 @@ class Element{
  remove(){if(this.parent)this.parent.children=this.parent.children.filter(n=>n!==this);this.parent=null;}
  replaceChildren(...nodes){for(const c of this.children)c.parent=null;this.children=[];this._text='';this.append(...nodes);}
  setAttribute(k,v){this.attributes[k]=String(v);}getAttribute(k){return this.attributes[k]??null;}
- addEventListener(k,fn){this.events[k]=fn;}showModal(){this.open=true;}close(){this.open=false;this.events.close?.();}focus(){document.activeElement=this;}
+ addEventListener(k,fn){this.events[k]=fn;}show(){this.open=true;}showModal(){this.open=true;}close(){this.open=false;this.events.close?.();}focus(){document.activeElement=this;}
  setSelectionRange(start,end,direction){this.selectionStart=start;this.selectionEnd=end;this.selectionDirection=direction;}
  getContext(){return new Proxy({},{get:()=>()=>{}});}
  querySelectorAll(selector){const result=[];const visit=n=>{for(const c of n.children){if(c.tagName===selector)result.push(c);visit(c);}};visit(this);return result;}

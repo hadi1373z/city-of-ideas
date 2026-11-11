@@ -2,7 +2,7 @@ import {WORKSHOPS,ATELIER_UI} from './proof-atelier-content.js?v=hall-bounds1';
 import {TRAP,EXCHANGE,INITIAL_MATCHING,COSTS,COMPLETE,tilingStatus,neighborhood,validMatching,hallInsight,maximumMatching,coverStatus,alternatingReach,pathStatus,priceStatus,priceInsight,capstoneStatus,workshopMemory} from './proof-atelier-model.js?v=hall-bounds1';
 import {buildProofAtelier} from './proof-atelier-scene.js?v=hall-bounds1';
 import {BOARDS,colour,adjacent} from './study-house-models.js?v=workbench1';
-import {faceRoomWork} from './room-workbench.js';
+import {faceRoomWork,showRoomDialog} from './room-workbench.js?v=touch1';
 export function installProofAtelier(M,T){
  let storage;try{storage=localStorage;}catch{}const memory=workshopMemory(storage),s=memory.state,built=buildProofAtelier(T);M.scene.add(built.group);M.city.targets.push(...built.targets);M.city.buildingTargets.push(built.group);
  const el=(tag,text)=>{const n=document.createElement(tag);if(text)n.textContent=text;if(['p','small','pre','summary'].includes(tag))n.dir='auto';return n;},lang=()=>window.CITY_I18N.lang,w=()=>ATELIER_UI[lang()]||ATELIER_UI.en,title=i=>WORKSHOPS[i].names[lang()]||WORKSHOPS[i].names.en;
@@ -15,7 +15,7 @@ export function installProofAtelier(M,T){
  function change(fn,key){fn();memory.save();built.update(s,lang());render(key);}
  function mark(key,text){if(key==='capstone'&&capstoneStatus(s).valid)s.capstoneRecord=Object.fromEntries(['capEdges','capS','capM','capCover'].map(k=>[k,[...s[k]]]));memory.mark(s.active,key);feedback=text;built.update(s,lang());render();}
  function visit(i){dialog.close();M.clearMovement();s.active=i;s.lastWorkbench=i;memory.save();M.arrive(built.stations[i].view);faceRoomWork(M,T,built.stations[i].group);}
- function open(i=s.active,nextMode='route'){if(!dialog.open)opener=document.activeElement;if(Number.isInteger(i)&&i>=0&&i<6)s.active=i;mode=nextMode==='work'&&near(s.active)?'work':nextMode==='work'?'read':nextMode;feedback='';pending=null;M.clearMovement();if(mode==='work'){s.lastWorkbench=s.active;M.camera?.position.set(M.player.x,M.player.y,M.player.z);faceRoomWork(M,T,built.stations[s.active].group);}memory.save();render();if(!dialog.open)dialog.showModal();dialog.scrollTop=body.scrollTop=0;close.focus();}
+ function open(i=s.active,nextMode='route'){if(!dialog.open)opener=document.activeElement;if(Number.isInteger(i)&&i>=0&&i<6)s.active=i;mode=nextMode==='work'&&near(s.active)?'work':nextMode==='work'?'read':nextMode;feedback='';pending=null;M.clearMovement();if(mode==='work'){s.lastWorkbench=s.active;M.camera?.position.set(M.player.x,M.player.y,M.player.z);faceRoomWork(M,T,built.stations[s.active].group);}memory.save();render();showRoomDialog(dialog,mode==='work');dialog.scrollTop=body.scrollTop=0;close.focus();}
  function act(text,fn,key=text,parent=body){const b=button(text,()=>change(fn,key),key);parent.append(b);return b;}
  function choice(text,ok,key,good,bad,parent=body){parent.append(button(text,()=>ok?mark(key,good):(feedback=bad,render()),'choice-'+key+'-'+text));}
  function edgeGrid(edges,onToggle,parent=body,matching=[]){const grid=el('div');grid.className='proof-edge-grid';grid.dir='ltr';grid.setAttribute('aria-label','Available edges, row L and column R');for(let e=0;e<16;e++){const b=button(edgeName(e),()=>change(()=>onToggle(e),'edge-'+e),'edge-'+e);b.setAttribute('aria-pressed',String(edges.includes(e)));if(matching.includes(e))b.className='matched';grid.append(b);}parent.append(grid);}
@@ -99,7 +99,7 @@ export function installProofAtelier(M,T){
    const kept=el('details');kept.append(el('summary','My kept arguments · private in this browser'));for(let i=0;i<6;i++)if(s.notes[i])kept.append(el('h4',title(i)),el('p',s.notes[i]));if(s.capstoneRecord)kept.append(el('h4','Kept studio graph certificate'),el('pre','Edges: '+s.capstoneRecord.capEdges.map(edgeName).join(', ')+'\nSubset: '+s.capstoneRecord.capS.map(vertexName).join(', ')+'\nMatching: '+s.capstoneRecord.capM.map(edgeName).join(', ')+'\nCover: '+s.capstoneRecord.capCover.map(vertexName).join(', ')));body.append(kept);
   }else{
    body.append(button(w().route,()=>open(s.active,'route')),button(mode==='work'?w().read:w().work,()=>mode==='work'?open(s.active,'read'):near(s.active)?open(s.active,'work'):visit(s.active)));
-   if(mode==='work'){body.append(button(w().face,()=>faceRoomWork(M,T,built.stations[s.active].group)));if(s.active!==4)body.append(el('small','The exhibit stays visible. Close these controls to move.'),el('small',w().notice));experiment();notes();}
+   if(mode==='work'){body.append(button(w().face,()=>faceRoomWork(M,T,built.stations[s.active].group)));if(s.active!==4)body.append(el('small','The exhibit stays visible. Tap a walking arrow to leave these controls; your draft stays here.'),el('small',w().notice));experiment();notes();}
    else{body.append(el('p',w().notice));reading();}
   }
   status.textContent=memory.saved?'Progress is kept locally. Drafts save only when you choose “Keep my argument”.':'Storage unavailable: this visit still works, but copy your argument before leaving.';built.update(s,lang());
@@ -115,7 +115,7 @@ export function installProofAtelier(M,T){
  M.startExtra=id=>id==='proof-atelier'?(M.arrive(built.entry),open(s.active,'route'),true):old.start?.(id);
  M.toolsExtra=()=>inside()?(open(s.active,'route'),true):old.tools?.();
  M.city.update=(...args)=>{old.update(...args);const foyer=M.mode==='city'&&M.studyHouses?.scene.houses[0].inside(M.player.x,M.player.z),nearby=WORKSHOPS.map((_,i)=>i).filter(near);context.hidden=!!document.querySelector('dialog[open]')||!inside()&&!foyer;const key=String(foyer)+nearby.join(',')+lang();if(key!==contextKey){contextKey=key;context.replaceChildren(el('strong',w().title));if(nearby.length)for(const i of nearby)context.append(button(WORKSHOPS[i].number+' · '+title(i),()=>open(i,'work')));else context.append(button(w().route,()=>open(s.active,'route')));}};
- const locale=()=>{contextKey='';built.update(s,lang());if(dialog.open)render();};addEventListener('city-language',locale);dialog.addEventListener('close',()=>{M.clearMovement();opener?.focus?.();});built.update(s,lang());
+ const locale=()=>{contextKey='';built.update(s,lang());if(dialog.open)render();};addEventListener('city-language',locale);dialog.addEventListener('close',()=>{if(dialog.returnValue!=='movement'){M.clearMovement();opener?.focus?.();}});built.update(s,lang());
  const api={open,visit,built,memory};M.proofAtelier=api;const query=new URLSearchParams(globalThis.location?.search||'');if(query.get('arrival')==='proof-atelier'){const room=WORKSHOPS.findIndex(h=>h.id===query.get('workshop'));if(room>=0){visit(room);open(room,'work');}else{M.arrive(built.entry);open(s.active,'route');}}
  addEventListener('pagehide',()=>{removeEventListener('city-language',locale);for(const target of built.targets){const i=M.city.targets.indexOf(target);if(i>=0)M.city.targets.splice(i,1);}const i=M.city.buildingTargets.indexOf(built.group);if(i>=0)M.city.buildingTargets.splice(i,1);built.dispose();dialog.remove();context.remove();},{once:true});return api;
 }

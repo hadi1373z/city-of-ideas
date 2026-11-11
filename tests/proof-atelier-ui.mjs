@@ -7,7 +7,7 @@ class Element{
  constructor(tag){this.tagName=tag.toUpperCase();this.children=[];this.dataset={};this.attributes={};this.style={};this.events={};this._text='';this.value='';this.open=false;}
  set textContent(v){this._text=String(v);this.children=[];}get textContent(){return this._text+this.children.map(n=>n.textContent).join('');}
  append(...nodes){for(const n of nodes){n.parent=this;this.children.push(n);}}replaceChildren(...nodes){this.children=[];this._text='';this.append(...nodes);}remove(){if(this.parent)this.parent.children=this.parent.children.filter(n=>n!==this);}
- setAttribute(k,v){this.attributes[k]=String(v);}getAttribute(k){return this.attributes[k]??null;}addEventListener(k,fn){this.events[k]=fn;}showModal(){this.open=true;}close(){const was=this.open;this.open=false;if(was)this.events.close?.();}focus(){document.activeElement=this;}setSelectionRange(a,b,c){this.selectionStart=a;this.selectionEnd=b;this.selectionDirection=c;}
+ setAttribute(k,v){this.attributes[k]=String(v);}getAttribute(k){return this.attributes[k]??null;}addEventListener(k,fn){this.events[k]=fn;}show(){this.open=true;}showModal(){this.open=true;}close(){const was=this.open;this.open=false;if(was)this.events.close?.();}focus(){document.activeElement=this;}setSelectionRange(a,b,c){this.selectionStart=a;this.selectionEnd=b;this.selectionDirection=c;}
  getContext(){return new Proxy({},{get:()=>()=>{}});}
  querySelectorAll(selector){const selectors=selector.split(',');return all(this).slice(1).filter(n=>selectors.some(s=>s.startsWith('#')?n.id===s.slice(1):s==='dialog[open]'?n.tagName==='DIALOG'&&n.open:n.tagName===s.toUpperCase()));}querySelector(s){return this.querySelectorAll(s)[0];}
 }

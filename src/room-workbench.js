@@ -15,8 +15,16 @@ export function faceRoomWork(M,T,object){
  // Aim below the work so it remains above the compact controls on a phone.
  const drop=globalThis.innerWidth<=800?1.4:.7;
  p.pitch=Math.max(-.8,Math.min(.75,Math.atan2(target.y-drop-p.y,distance)));
- // Walking is paused by the dialog, so the normal camera update is paused too.
+ // Set the camera immediately when opening the controls.
  M.camera?.rotation.set(p.pitch,p.yaw,0,'YXZ');
  M.camera?.updateMatrixWorld();
  M.clearMovement();
+}
+
+// Compact work controls must not put the browser's modal layer over walking arrows.
+export function showRoomDialog(dialog,workbench){
+ const presentation=workbench?'workbench':'reading';
+ if(dialog.open&&dialog.dataset.roomPresentation!==presentation)dialog.close();
+ dialog.returnValue='';dialog.dataset.roomPresentation=presentation;
+ if(!dialog.open){if(workbench)dialog.show();else dialog.showModal();}
 }
