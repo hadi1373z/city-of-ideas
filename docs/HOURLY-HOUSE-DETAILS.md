@@ -6571,3 +6571,90 @@ book/well, entry descent, through-gallery doorway and all prior contracts.
 Only measured justified joins; otherwise factual audit. No new column, barrier,
 light, room, lot, paper/folio, historical copy or certification. Latest ledger
 governs; user's headed preview stays theirs.
+
+## 2026-11-11 — Babel radial flights: connected joints, unresolved side clearance
+
+This review continues `39d594b`; all47 first reading passes remain complete.
+Read `BABEL-RADIAL-CONTACTS.md`. No production source, geometry or runtime
+behavior changes. The four original24-tread flights already have connected
+tread/stringer/guard assemblies. This audit records their contacts and an
+existing edge-clearance problem; it does not claim full-width clearance.
+
+All96 plates keep .4166667m run/1/6m rise/.18m depth/3.4m width.92 internal
+tread joints already have .014m along-flight/.0133333m vertical overlaps,
+verified by736 actual joint vertices.192 tread/stringer cores contain positive
+.01m cubes/1536 vertices.16 terminal cores lie inside original end treads.
+Actual seven-sided stringer cap faces are recessed .0416045..0485443m below
+terrace planes; they are not asserted direct floor bearings. No copied support
+or terminal closure is added.40 internal guard feet engage higher adjacent
+treads;16 end-post bodies intersect their terrace planes .04m above foot
+bottoms.56 post/rail joints retain448 positive-core vertices, without a whole-
+cap enclosure claim.12 original lower-landing contact samples pass.
+
+Important unresolved finding: 15 of864 sampled standing positions intersect
+original geometry;849 are clear, including all288 centre samples. Flight1
+has8 obstructed probes and flight2 has7; sampled flights3/4 have none. One
+negative-side flight1 probe hits original dark fascia box147 atY-8.36, about
+1.307m above its tread. Fourteen positive-side probes around original treads
+14..16 intersect incoming shelves/bindings, including oak box1461..1464 and
+2270..2273. Some recorded first surfaces are only about.11m above the tread.
+These are existing body/overhead conflicts, not missing support contacts.
+
+The regression explicitly retains the15 known flight/tread/lane/sample records;
+passing it does not mean those positions are clear. No hit is filtered out
+and no original strict entry/thermal clearance check is relaxed. A targeted
+landing-mouth review is next. Original profiles/openings, all96treads and
+navigation remain exact. Extra support parts would not solve these clashes.
+
+Independent39d594b snapshots keep every65-mesh/41048-instance pure/native
+geometry/profile/pose/matrix/ID with no exclusions. Purehash8f17b68a/nativehash
+357a4d91 remain. Completed4-mesh/141-instance entry descent/brackets and exact
+source slab/finish profiles remain; upper identity owner/proper lower frame
+and source/private coordinates stay unchanged. No new part/resource/material/
+texture/light/batch/collider/target/UI/listener/reader/model/key/state. Normal
+parent/child cleanup releases84 traversed resources/22buffers once; earlier
+entry7-resource/2buffer and borrowed drawing/floor checks remain independent.
+
+All121 release programs pass. Added factual checks include92 tread joints,
+192 stringer joints/16 cap faces,56 rail joints,40 internal feet/16 landing
+post intersections/12 lower seats and864 physical tread rays.864 body probes
+report both clear and blocked positions. All earlier budgets, source geometry,
+thermal/entry/well/Math/Faculty/covered-walk/Escher/paper/private/voice checks
+remain unrelaxed. App r160 and source-tools r186 fixture distinctions remain.
+
+Native checks confirm all contacts/cap recesses and the same15 side obstructions.
+Ordinary keys/pointer looking walk all four centre routes down fromfeet-8 to
+-24 and back through all96 treads, with25 observed heights per flight/direction.
+Original first/second/fourth landing views were inspected. This centre-route
+check is not a full-width clearance or certification claim. No direct pose
+assignment, automatic tour or collision bypass is used. Original catalogue/
+source/reader/same-pose close, EN/DE/FA/CS pose/page0/aaaaaa/empty prefix, Persian
+RTL and11 ready genuine pages remain. Babel Czech retains its original English
+fallback. Complete native library/entry/slab fingerprints remain exact after
+locale checks. Explicit869-asset local verification accompanies the final
+review in PR#5; source bytes/hash remain unchanged. Existing Three warning/
+separately untested hardware-controller A limit remains; no application errors.
+
+All47 readings/raw drafts/carets/first answers/keys/explicit actions, original
+five terraces/catalogue desks/finite4^6 experiment,40entrytreads/28guardbrackets,
+reservoir/book/well/default arrival, through-gallery doorway,480gallerytreads/
+middle/tunnel/earth cut, Math8floors24IDs/stairs/lift/central3mdoor/Faculty/
+covered walk, Escher contracts and11 genuine scans/source/rights/zoom remain.
+Approved cast/fixed voices/recordings/private flows remain. No rendering
+memory/storage/progress access or preference-write/experiment/discovery/audio/
+travel/floor action. No new reading/paper/folio/historical object/quotation/
+testimony/source-fetch/certification. Concurrent main Hall/mobile work and
+PR#2 remain separate; same branch/PR#5, no merge/deploy, user's preview untouched.
+
+Next useful review: measure exact outgoing balcony-fascia ends and incoming
+bookshelf/binding edges at the first two radial mouths against the retained
+walking band and the recorded side-lane conflicts. Read BABEL-RADIAL-CONTACTS,
+BABEL-ENTRY-GUARDS/BABEL-SNAKE-DESCENT/BABEL-THERMAL-VAULT/WORLD-CYLINDER and
+prior contracts. Inspect actual owned records, full edge envelopes, floor
+heights/body/head clearance/cleanup before proposing a bounded correction.
+Preserve original treads/routes/source-private coordinates/terraces/catalogue/
+assets/rights and all prior contracts. Only measured justified work within
+those preservation constraints; otherwise factual audit. No new column,
+barrier/light/room/lot/paper/folio/historical copy/certification. The present
+audit does not claim the15 blocked side samples are repaired. Latest ledger
+governs; user's headed preview stays theirs.
