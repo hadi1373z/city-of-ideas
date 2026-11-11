@@ -58,8 +58,10 @@ export function buildEscherDepth(T,{canvas=()=>document.createElement('canvas'),
  // Illumination is switched on only while visiting; it never owns surface lights.
  const ambient=new T.AmbientLight(0xdce7df,.65);ambient.userData.escherDepthOwned=true;lamps.add(ambient);
  for(const x of[141,153]){for(const z of[105.43,124.57]){box(.15,.9,.11,x,-35.6,z,timber);box(.08,.5,.12,x,-35.55,z+(z<115?.07:-.07),glow);}const light=new T.PointLight(0xffd0a2,30,23,1.7);light.position.set(x,-34.7,115);light.userData.escherDepthOwned=true;lamps.add(light);}
+ const ceilingPanels=[];
  for(const [x,y,z]of[[176,-32,115],[213,-32,115],[213,-32,82],[250,-32,115],[184,-34,144],[196,-38,171]]){
   box(2.4,.12,.8,x,y,z,glow);const light=new T.PointLight(0xffdfb7,40,35,1.7);light.position.set(x,y-.2,z);light.userData.escherDepthOwned=true;lamps.add(light);
+  ceilingPanels.push({x,y,z,top:y+.06});
  }
  // Append only internal rail-end links, keeping every original batch ID. Their
  // .10m section is recessed inside the .12m rails; ends engage the existing caps
@@ -74,6 +76,12 @@ export function buildEscherDepth(T,{canvas=()=>document.createElement('canvas'),
   if(WALLS.some(w=>Math.min(maxX,w.maxX)-Math.max(minX,w.minX)>.001&&Math.min(maxZ,w.maxZ)-Math.max(minZ,w.minZ)>.001&&Math.min(y+.0275,w.y+w.height)-Math.max(y-.0275,w.y)>.001))continue;
   const jambInner=f.width/2+.37+.18-.14,span=(half+jambInner)/2,length=jambInner-half+.02;
   for(const sign of[-1,1])box(f.alongX?.04:length,.035,f.alongX?length:.04,f.x+(f.alongX?.24:sign*span),y,f.z+(f.alongX?sign*span:.24),brass);
+ }
+ // Suspend the retained panels from their actual room or stair roof. Both
+ // ends engage by .01m; append after earlier joins to retain every old ID.
+ for(const p of ceilingPanels){
+  const room=D.rooms.find(r=>p.x>r.minX&&p.x<r.maxX&&p.z>r.minZ&&p.z<r.maxZ),top=(room?.id==='loop'?D.lowerCeiling:D.ceiling)+.01,bottom=p.top-.01;
+  for(const offset of[-.85,.85])box(.04,top-bottom,.04,p.x+offset,(top+bottom)/2,p.z,brass);
  }
  obj.quaternion.identity();obj.scale.set(1,1,1);for(const [parent,materials]of batches)for(const[m,items]of materials){const mesh=new T.InstancedMesh(unit,m,items.length);mesh.name='Batched Escher masonry / joinery';items.forEach((b,i)=>{obj.position.set(b.x,b.y,b.z);obj.rotation.set(0,b.yaw,0);obj.scale.set(b.w,b.h,b.d);obj.updateMatrix();mesh.setMatrixAt(i,obj.matrix);});mesh.instanceMatrix.needsUpdate=true;mesh.computeBoundingSphere?.();parent.add(mesh);}
  const tess=new T.Group(),loop=new T.Group();tess.name='Live edge-pairing mosaic';loop.name='Live closed-loop stair model';interior.add(tess,loop);let tileGeo=null,loopGeo=null;

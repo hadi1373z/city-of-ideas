@@ -6091,3 +6091,77 @@ artwork/rights/private flows and gallery/Math/Faculty/paper contracts. Only
 measured justified joins; otherwise record a factual audit. No new light,
 floor column, barrier, room, lot, paper/first folio, historical copy or
 certification. Latest ledger governs; user's headed preview stays theirs.
+
+## 2026-11-11 — Escher museum: suspension of retained overhead panels
+
+This review continues `7c1f0f2`. All47 first reading passes remain complete.
+Read `ESCHER-LIGHT-PANEL-SUPPORTS.md`. Actual original/installed owners retain
+upper +Y identity. Six original2.4 x.12 x.8m glowing panels lacked solid
+contacts: five had2.94m roof gaps; the stair panel had4.94m to itsY-29 roof.
+Native pre-edit rays and original box-contact checks confirm those values.
+
+Two .04m-square bronze stems now suspend each original panel, at its centre
+X+/-.85m/originalZ. Five pairs are2.96m long, the stair pair4.96m; both ends
+engage the original panel/roof by.01m. All12 parts stay above original panel
+undersides, with concealed joins/no coplanar outer faces. No new floor column,
+barrier or canopy. The builder records the actual original panel positions
+and derives the correct room/stair ceiling. All six panels and nine lights
+keep exact geometry/poses/colours/intensities/ranges/decay. Existing four
+vestibule wall lamps remain exact and are not part of this suspension repair.
+
+Append bronze IDs339..350 only,339->351: pure749->761 instances/32draws,
+installed credited-print owner755->767/42draws. Same21geometries/25materials/
+14textures/14buffers pure and30/34/23/15 installed. No new resource, light,
+instance batch, collider, pick, UI, listener, reader, model or key. Original
+initial60-resource/14-buffer and explicit model-replacement62-resource/
+17-buffer lifetimes retain once-only release, no borrowed disposal.
+
+Independent7c1f0f2 pure/native snapshots preserve all749/755 earlier instances
+and32/42 mesh geometries/profiles/poses/IDs. Only the independently validated
+12 appended supports are excluded. Nine-light hash, model/source matrices,
+all earlier stair/portal/ceiling/world/helix/wing/Faculty/paper fingerprints
+and unrelaxed budgets remain. Seven roof bearings/four wall corners and the
+original6m roof-height change atZ156/5.55m open high step remain; no sealed-roof
+claim or new panel closes that opening.
+
+All121 release programs pass. New checks cover24 positive contacts/192 contact
+vertices,12 gap rays/24 end rays/12 roof rays/12 panel rays,18 original rod
+sightlines from all three source marks and100 valid floor/overhead/standing-
+centre samples, minimum7.94m at original panels. Earlier48treads/96 guard
+feet/94 rail links/12 portal clips/all seven frames,1,405 stair/849 ceiling
+samples and original6.0525m portal clearance remain. Source navigation/gates/
+modal pause/retained public models/explicit experiments/private/voice and
+owned-release checks remain.
+
+Native all12 expected installed IDs and24 actual contact volumes pass; all
+nine original light settings and old42-mesh/755-instance hash remain exact.
+Nearby before/after ordinary walking views show the hall suspension; stair
+and lower-room views show their actual roof contacts. Ordinary keys descend
+all48 treads tofeet-46 and return to the hall atfeet-40, active/route=null,
+without pose assignment/auto-tour/collision bypass. EN/DE/FA/CS keeps pose and
+exact public mosaic/loop geometry; PersianRTL/11 ready genuine pages and the
+original Euler edition/credits/rights/source/zoom/same-pose close remain.
+Final869-asset local verification accompanies this published review in PR #5. Existing
+Three warning/controller-A testing limit remain; user's headed preview stays
+theirs.
+
+All47 readings, original museum rooms/three experiments/retained public models/
+English notices/surface doors/upper Escher gates/artwork/readers/credits/rights/
+private flows remain. Tunnel4m route/earth cut/turning gaps, both spirals/all480
+treads/middle/well, eight-floor24IDwing/stairs/lift/central3m doorway/covered
+route/Faculty/west exit/paper aisle, eleven genuine scans/source/zoom, approved
+appearances/voices/recordings and raw drafts/carets/first answers/keys/original
+explicit actions remain. Rendering has no memory/storage/progress access or
+preference-write/experiment/discovery/audio/travel/floor action. EN/DE/FA/CS/
+PersianRTL and disclosed English gaps remain; no new historical object,
+quotation/testimony/source-fetch/certification claim. Main922f0bc Hall-room
+work/PR #2 stay separate. Same feat/hourly-house-details/PR #5, no merge/deploy.
+
+Next useful architectural audit: original four vestibule wall lamps and actual
+wall contacts. Inspect installed backing faces/supports, clearances, artwork/
+door approaches, ownership and release first. Preserve these six suspensions,
+all lights/roof profiles/open high step/frames/48treads, museum gates/models/
+experiments/readers/rights/private flows and all prior contracts. Only measured
+justified joins; otherwise a factual audit. No new light/floor column/barrier/
+room/lot/paper/first folio/historical copy/certification. Latest ledger governs;
+user's headed preview stays theirs.

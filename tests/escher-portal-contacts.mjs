@@ -1,22 +1,25 @@
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {depthFloorAt,canWalkDepth} from '../src/escher-depth-model.js';
+import {validateEscherPanelSupports} from './escher-panel-supports.mjs';
 
 const near=(a,b,e=2e-5)=>assert(Math.abs(a-b)<e,`${a} != ${b}`);
 const hash=v=>createHash('sha256').update(JSON.stringify(v)).digest('hex');
 export function validateEscherPortalContacts(T,b){
  b.group.updateMatrixWorld(true);assert(b.group.matrixWorld.equals(new T.Matrix4()));
- const brass=b.interior.children.find(o=>o.isInstancedMesh&&o.geometry.type==='BoxGeometry'&&o.material.color.getHex()===0xaa9868);assert.equal(brass.count,339);
+ const panels=validateEscherPanelSupports(T,b);
+ const brass=b.interior.children.find(o=>o.isInstancedMesh&&o.geometry.type==='BoxGeometry'&&o.material.color.getHex()===0xaa9868);assert.equal(brass.count,339+panels.added);
  const matrices=o=>Array.from({length:o.count},(_,i)=>{const m=new T.Matrix4();o.getMatrixAt(i,m);return m.toArray();});
  const records=[];let instances=0;
  b.group.traverse(o=>{if(o.isMesh){let rows=o.isInstancedMesh?matrices(o):null;if(rows)instances+=rows.length;if(o===brass)rows=rows.slice(0,327);records.push({name:o.name,matrix:o.matrix.toArray(),world:o.matrixWorld.toArray(),geometry:{type:o.geometry.type,index:o.geometry.index?Array.from(o.geometry.index.array):null,attributes:Object.fromEntries(Object.entries(o.geometry.attributes).map(([k,a])=>[k,Array.from(a.array)]))},color:o.material.color?.getHex(),instances:rows});}});
  // Independent 2d39630 source snapshot, including all 94 completed rail links.
- // Only the twelve independently checked new clip IDs are excluded.
- assert.equal(records.length,32);assert.equal(instances,749);
+ // The new panel supports are validated first. This older snapshot then
+ // excludes the twelve separately checked portal clips, retaining all old IDs.
+ assert.equal(records.length,32);assert.equal(instances,749+panels.added);
  assert.equal(hash(records),'071fdefde6a169d7aade28d6590549c3abe5e9c669800aab5a3dfe293348e847');
  const boxes=o=>matrices(o).map((a,id)=>{const m=new T.Matrix4().fromArray(a),p=new T.Vector3(),s=new T.Vector3();m.decompose(p,new T.Quaternion(),s);return{id,p,s,box:new T.Box3().setFromBufferAttribute(o.geometry.attributes.position).applyMatrix4(m)};});
  const batch=color=>b.interior.children.find(o=>o.isInstancedMesh&&o.geometry.type==='BoxGeometry'&&o.material.color.getHex()===color);
- const bronze=boxes(brass),sage=boxes(batch(0x71867c)),timber=boxes(batch(0x3c5149)),walls=boxes(batch(0xa4afa3)).slice(0,28),floors=boxes(batch(0x8e968b)),clips=bronze.slice(327);
+ const bronze=boxes(brass),sage=boxes(batch(0x71867c)),timber=boxes(batch(0x3c5149)),walls=boxes(batch(0xa4afa3)).slice(0,28),floors=boxes(batch(0x8e968b)),clips=bronze.slice(327,339);
  const frames=[[135.24,115,-40,true,6],[160.24,115,-40,true,6],[194.24,115,-40,true,6],[232.24,115,-40,true,6],[213,98.24,-40,false,6],[184.5,132.24,-40,false,7],[184.5,156.24,-46,false,7]];
  const intersection=(a,c)=>a.box.clone().intersect(c.box).getSize(new T.Vector3());
  const positive=(a,c)=>{const s=intersection(a,c);assert(Math.min(s.x,s.y,s.z)>1e-5,'Real positive-volume contact');return s;};
@@ -66,5 +69,5 @@ export function validateEscherPortalContacts(T,b){
  });
  assert.equal(clips.length,12);assert.equal(used.size,12);assert.equal(flooredJambs,24);assert.equal(wallMountedUpperJambs,4);
  for(let i=0;i<clips.length;i++)for(let j=i+1;j<clips.length;j++)assert(Math.min(...intersection(clips[i],clips[j]).toArray())<=0,'New clips never overlap one another');
- return{added:12,sageWallRoots,timberRoots,lintelContacts,flooredJambs,wallMountedUpperJambs,stripWallContacts,clipContacts,clipRays,clearance};
+ return{panels,added:12,sageWallRoots,timberRoots,lintelContacts,flooredJambs,wallMountedUpperJambs,stripWallContacts,clipContacts,clipRays,clearance};
 }

@@ -1,16 +1,19 @@
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {depthFloorAt,canWalkDepth} from '../src/escher-depth-model.js';
+import {validateEscherPanelSupports} from './escher-panel-supports.mjs';
 
 const near=(a,b,e=2e-5)=>assert(Math.abs(a-b)<e,`${a} != ${b}`);
 export function validateEscherCeilingContacts(T,b){
  b.group.updateMatrixWorld(true);assert(b.group.matrixWorld.equals(new T.Matrix4()),'Original upper +Y owner');
+ const panels=validateEscherPanelSupports(T,b),brass=b.interior.children.find(o=>o.isInstancedMesh&&o.geometry.type==='BoxGeometry'&&o.material.color.getHex()===0xaa9868);
  const matrices=o=>Array.from({length:o.count},(_,i)=>{const m=new T.Matrix4();o.getMatrixAt(i,m);return m.toArray();});
  const records=[];let instances=0;
- b.group.traverse(o=>{if(o.isMesh){const rows=o.isInstancedMesh?matrices(o):null;if(rows)instances+=rows.length;records.push({name:o.name,matrix:o.matrix.toArray(),world:o.matrixWorld.toArray(),geometry:{type:o.geometry.type,index:o.geometry.index?Array.from(o.geometry.index.array):null,attributes:Object.fromEntries(Object.entries(o.geometry.attributes).map(([k,a])=>[k,Array.from(a.array)]))},color:o.material.color?.getHex(),instances:rows});}});
+ b.group.traverse(o=>{if(o.isMesh){let rows=o.isInstancedMesh?matrices(o):null;if(rows)instances+=rows.length;if(o===brass)rows=rows.slice(0,339);records.push({name:o.name,matrix:o.matrix.toArray(),world:o.matrixWorld.toArray(),geometry:{type:o.geometry.type,index:o.geometry.index?Array.from(o.geometry.index.array):null,attributes:Object.fromEntries(Object.entries(o.geometry.attributes).map(([k,a])=>[k,Array.from(a.array)]))},color:o.material.color?.getHex(),instances:rows});}});
  // Independent 2cdd64c snapshot, including every rail link and portal clip.
- // This is an audit only: no old or new instance is excluded from the hash.
- assert.equal(records.length,32);assert.equal(instances,749);
+ // All old IDs remain; exclude only the newer supports independently checked
+ // above. No original roof, wall, tread, rail link or portal clip is excluded.
+ assert.equal(records.length,32);assert.equal(instances,749+panels.added);
  assert.equal(createHash('sha256').update(JSON.stringify(records)).digest('hex'),'7784bd064e2abc0d1dd98f9a54028987920857d36cb675b8d2e91bd09d994de0');
  const batch=color=>b.interior.children.find(o=>o.isInstancedMesh&&o.geometry.type==='BoxGeometry'&&o.material.color.getHex()===color);
  const roofs=batch(0x596b63),masonry=batch(0xa4afa3);
