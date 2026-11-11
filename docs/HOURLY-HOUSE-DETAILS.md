@@ -6018,3 +6018,76 @@ gates/readers/artwork/rights/private flows and all gallery/Math/Faculty/paper
 contracts. Only measured justified joins; otherwise record a factual audit.
 No duplicate column/new barrier/room/lot/paper/first folio/historical copy or
 certification. Latest ledger governs; user's headed preview stays theirs.
+
+## 2026-11-11 — Escher museum: factual ceiling and wall-contact audit
+
+This review continues `2cdd64c`. All47 first reading passes remain complete.
+Read `ESCHER-CEILING-CONTACTS.md`. Existing stairwell/lower-room roof bearings
+and wall corners already meet, so no geometry repair is added. Every source
+file remains unchanged; no cache/entry query, model, collider, room or opening
+is changed.
+
+Original hall roof1 and stair roof6 butt atZ132 across7m width/.45m thickness,
+undersideY-29. Stair and lower-room roof5 edges shareZ156 with no horizontal
+coverage gap. Their undersides remain6m apart, atY-29/-35. The5.55m high band
+between lower-roof top and stair-roof underside remains open. This is the
+original roof step, not a direct roof-to-roof join or sealed-envelope claim.
+No closing panel, lowered roof or new barrier is justified by this contact audit.
+
+Stair roof6 meets walls21/22 over.18 x24m each. Lower-room roof5 meets front
+walls23/24 over21 x.18m/44 x.18m, side walls25/26 over.18 x28m each and rear
+wall27 over72 x.18m. These seven existing bearing faces cover half of the
+centred .36m wall thickness; no full-width bearing/structural-capacity claim.
+Stair walls21/22 already engage both hall returns7/8 and lower returns23/24:
+four positive-volume corners of.18 x11 x.18m. Source butt planes have under
+.000002m actual float error, retained with.00002m test tolerance and a complete
+independent scene hash. No fitted bridge is added for numeric rounding.
+
+The independent2cdd64c pure snapshot retains every32 mesh/749 instance,
+geometry/profile/pose/matrix/ID with no exclusion. Installed credited-print
+owner remains42 draws/755 instances; complete native fingerprint remains
+exact too. Same21geometries/25materials/14textures/14buffers pure and30/34/23/15
+installed. No new resource, texture, light, batch, collider, target, listener,
+UI, model, reader, public copy or key. Existing once-only60-resource/14-buffer
+fixture and62-resource/17-buffer explicit model-replacement cleanup remain.
+
+All121 release programs pass. New validator within the existing Escher runtime
+covers seven bearing faces/126 real roof-wall rays, four corner volumes/32
+corner vertices,18 hall/stair roof-seam rays,15 retained high-step-opening rays
+and849 strict floor/overhead/standing-centre samples. Minimum measured overhead
+clearance is6.0525m at the original cross-strip. Earlier48treads/96guard feet/
+94rail links/12portal clips, all original frames/floor/landing/model hashes,
+three-lane walking/mode/height/modal/experiment/private/voice contracts remain.
+
+Native installed126 contact rays pass under the actual upper identity owner.
+Two ordinary walking/looking views inspect the original ceiling step and lower
+return. Ordinary keys descend all48 stairs to the lower room atfeet-46 and
+return to the main hall atfeet-40, museum active/route=null. No pose assignment,
+auto-tour or collision bypass. All42 meshes/755 instances remain in the exact
+native hash. EN/DE/FA/CS retains pose and exact public mosaic/loop geometry,
+PersianRTL and11 ready genuine pages. Original reader/rights/same-pose-close
+and final869-asset local artifact verification accompany the published review
+in this chat/PR #5. Existing Three warning/controller-A testing limit remain.
+
+All47 sourced readings, original museum rooms/three experiments/retained public
+models/English notices/surface doors/upper Escher gates/artwork/readers/credits/
+rights/private flows remain. Tunnel4m route/earth cut/turning gaps, both spirals/
+all480treads/middle/well, eight-floor24IDwing/real stairs/lift/central3m door/
+covered connection/Faculty/west exit/paper aisle, eleven genuine scan bytes/
+source/zoom, approved appearances/voices/recordings and raw drafts/carets/first
+answers/keys/original explicit actions remain. No new rendering behavior or
+memory/storage/progress/preference-write/experiment/discovery/audio/travel/
+floor action. Own EN/DE/FA/CS/RTL and disclosed English gaps remain; no new
+historical object, source-fetch or certification claim. User's headed preview
+stays theirs; separate main922f0bc Hall-room work and PR #2 remain untouched.
+Same feat/hourly-house-details/PR #5, no merge/deploy.
+
+Next useful architectural audit: original six rectangular overhead light panels
+and actual room/stair ceiling mounts. Measure installed fixture faces, roof
+distances, existing supports, clearance, ownership and release before editing.
+Preserve the original high roof-step opening, ceiling/wall profiles/bearings,
+48treads/rail links/portal clips, all museum gates/models/experiments/readers/
+artwork/rights/private flows and gallery/Math/Faculty/paper contracts. Only
+measured justified joins; otherwise record a factual audit. No new light,
+floor column, barrier, room, lot, paper/first folio, historical copy or
+certification. Latest ledger governs; user's headed preview stays theirs.
