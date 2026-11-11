@@ -6485,3 +6485,89 @@ clearance/cleanup first; this is an audit of retained connections, not a new
 descent or first reading pass. Only measured justified joins; otherwise factual
 audit. No new column, barrier, light, room, lot, paper/folio, historical copy
 or certification. Latest ledger governs; user's headed preview stays theirs.
+
+## 2026-11-11 — Babel entry guards: twenty-eight slab-edge foot brackets
+
+This review continues `72d2ab2`; all 47 first reading passes remain complete.
+Read `BABEL-ENTRY-GUARDS.md`. The original forty-tread Gallery-to-Babel route
+is retained. Fourteen level opening-guard posts on each side stood .08m inside
+the real gallery slab cut, so their .025-radius foot caps had no floor seats.
+They already met the level rails at their tops; that was not a floor bearing.
+The first two .028-radius sloping posts share the same initial locations.
+
+Twenty-eight eight-sided bronze brackets extend from .035m inside each post
+centre to .06m beyond the actual slab-opening edge: .175m long/.04m radius,
+centreY.375 and sectionY.335..415. They enclose every existing foot cap and
+rise .02m above foot level. A .01m positive cube at each outer end lies inside
+the unchanged finishY.37..395; the section also reaches the main slab below
+its retainedY.35 top. Installed source faces, not floor ink or shelf tops,
+confirm both original floor profiles. No new floor column or guard is added.
+
+The other 26 sloping-post feet already meet higher adjacent tread surfaces.
+Eleven original overlook-post contact samples and 68 post/rail/corner contacts
+pass without additional shoes or end closures. Original coincident corner
+posts, rails, terrace opening and all40treads/nosings/risers remain exact.
+These are geometric joins, not an engineered load or certification claim.
+
+Only original bronze IDs73..100 append: batch73->101, gold40 unchanged;
+descent113->141instances/4draws and full library41020->41048/65draws. Same
+seven owned entry resources/two instance buffers, with no new geometry,
+material, texture, light, batch, collider, pick, UI, listener, reader, model
+or key. Entry cleanup is now idempotent; constructor instrumentation includes
+the otherwise unused stone material and verifies all7resources/2buffers release
+once on repeated cleanup. Borrowed snake drawing and optional landing floor
+material stay with their callers; normal parent/child library cleanup remains.
+
+Independent72d2ab2 complete pure and native snapshots retain every original
+mesh profile/pose/matrix/ID in the four-mesh/113-instance descent and65/41020
+library. Only the 28 separately validated appended IDs are excluded. Complete
+installed slab/finish hash7c1b1038 remains exact with no exclusions. The app's
+bundledr160 triangulator builds that actual slab fixture; the separate source-
+tools test renderer isr186. No guessed plane replaces a hole and no original
+fingerprint, collision check or budget is relaxed. All source/private
+coordinates, upper identity owner and proper lower half-turn stay unchanged.
+
+All121 release programs pass. Added checks cover240 actual foot-cap vertices,
+448 slab-root rays,28 expected-ID bracket rays,26 old sloping seats,11 overlook
+contacts,68 rail contacts and360 strict three-lane body/head samples. New
+solids stay outside the original .23m inset walking band; existing all-width
+reversible walking, shafts/thermal headroom/terrace joins/catalogue/ownership
+checks remain. Full earlier Math/Faculty/covered-walk/gallery/Escher/paper/
+private/voice checks pass. No new source-fetch success is claimed.
+
+Native all28IDs/240capvertices/448actualslab-root rays pass, with every earlier
+library/slab profile exact. Original pointer-look views inspect the fitted feet.
+Ordinary keys descend all40treads through41 observed floor heights tofeet-8,
+walk the original first terrace to its catalogue desk, return across the
+overlook and climb back through the original gallery handoff atfeet.395.
+No direct pose assignment, automatic tour or collision bypass is used.
+Original finite4^6 catalogue/source/reader/same-pose close pass. EN/DE/FA/CS
+keeps pose, page0/aaaaaa/prefix empty and11 genuine pages ready; PersianRTL
+remains. Babel's original own Czech copy still falls back to English; no
+city-wide or new Babel Czech translation is claimed. Final console has0
+application errors; existing Three warning/controller-A testing limit remains.
+Explicit869-asset local verification accompanies the final review in PR#5.
+
+Keep40entrytreads/.28run/.209875rise, ground/ink/plinth/lawn/shaft/vault cuts,
+6.4m overlook/curved first-terrace join, oak cheeks/books/lamps, held input/look
+and original height/modal/entry/return gates. All five terraces/four radial
+flights/catalogue desks/finite experiment, reservoir/book contact/default
+arrival, original explicit actions,480gallerytreads/middle/well/tunnel/earth
+cut/Math8floors24IDs/stairs/lift/central3mdoor/coveredwalk/Faculty and earlier
+Escher/eleven genuine scans/artwork/rights/zoom remain. All47readings/rawdrafts/
+carets/firstanswers/keys/voices/recordings/privateflows are retained. Rendering
+adds no private-memory/storage/progress access or preference-write/experiment/
+discovery/audio/travel/floor action. No new reading/folio/paper/historical
+object/quotation/testimony/certification. Concurrent main Hall/mobile work and
+PR#2 remain separate. Same branch/PR#5, no merge/deploy; user's preview untouched.
+
+Next useful audit: original guard feet, rail/post joints and stringer/tread/
+landing contacts on Babel's four24-tread radial flights between five terraces.
+Read BABEL-ENTRY-GUARDS/BABEL-SNAKE-DESCENT/BABEL-THERMAL-VAULT/WORLD-CYLINDER
+and prior gallery/Babel contracts. Inspect actual owners/profiles/supports/
+mouth openings/clearance/cleanup before editing. Preserve all96 internal
+treads/navigation, five terraces/catalogue desks/finite experiment, reservoir/
+book/well, entry descent, through-gallery doorway and all prior contracts.
+Only measured justified joins; otherwise factual audit. No new column, barrier,
+light, room, lot, paper/folio, historical copy or certification. Latest ledger
+governs; user's headed preview stays theirs.

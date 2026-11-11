@@ -17,6 +17,10 @@ export function buildBabelSnakeStairs(T,{drawing=null,landingMaterial=null}={}){
  for(const x of[left,right]){beam([x,f.top+1.08,f.z0],[x,f.bottom+1.08,f.z1],.045);beam([x,f.top+1.08,f.z0],[x,f.top+1.08,f.z1],.035);for(let i=0;i<=f.steps;i+=3){const z=f.z0-i*tread,y=f.top-i*rise;beam([x,y,z],[x,y+1.08,z],.028);beam([x,f.top,z],[x,f.top+1.08,z],.025);}}
  for(let i=0;i<f.steps;i++)beam([left,f.top-(i+1)*rise+.008,f.z0-i*tread],[right,f.top-(i+1)*rise+.008,f.z0-i*tread],.014,gold);
  const northEnd=Math.sqrt(inner**2-l.minZ**2);beam([l.minX,l.y+1.08,l.minZ],[northEnd,l.y+1.08,l.minZ],.035);beam([l.minX,l.y+1.08,l.minZ],[l.minX,l.y+1.08,l.maxZ],.035);for(let x=l.minX;x<northEnd;x+=1.4)beam([x,l.y,l.minZ],[x,l.y+1.08,l.minZ],.025);for(const z of[l.minZ,l.maxZ])beam([l.minX,l.y,z],[l.minX,l.y+1.08,z],.025);
+ // The level opening guards stand .08m inside the real gallery slab cut.
+ // Recessed lateral brackets seat their existing feet into that slab edge;
+ // append after all original bronze IDs, without changing the stair aperture.
+ for(const sign of[-1,1]){const x=sign<0?left:right,edge=sign<0?BABEL.opening.minX:BABEL.opening.maxX;for(let i=0;i<=f.steps;i+=3){const z=f.z0-i*tread;beam([x-sign*.035,f.top-.02,z],[edge+sign*.06,f.top-.02,z],.04);}}
  const cylinder=own(new T.CylinderGeometry(1,1,1,8)),object=new T.Object3D();for(const[mat,list]of beams){const inst=new T.InstancedMesh(cylinder,mat,list.length);list.forEach((b,i)=>{object.position.copy(b.p);object.quaternion.copy(b.q);object.scale.set(b.r,b.length,b.r);object.updateMatrix();inst.setMatrixAt(i,object.matrix);});inst.instanceMatrix.needsUpdate=true;inst.computeBoundingSphere?.();group.add(inst);}
- return {group,ramp,landing,dispose(){group.removeFromParent();group.traverse(o=>{if(o.isInstancedMesh)o.dispose?.();});for(const r of owned)r.dispose();group.clear();}};
+ let disposed=false;return {group,ramp,landing,dispose(){if(disposed)return;disposed=true;group.removeFromParent();group.traverse(o=>{if(o.isInstancedMesh)o.dispose?.();});for(const r of owned)r.dispose();group.clear();}};
 }
