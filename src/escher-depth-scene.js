@@ -45,9 +45,10 @@ export function buildEscherDepth(T,{canvas=()=>document.createElement('canvas'),
  DEPTH_TRIANGLE.forEach(([a,b],i)=>{const av=new T.Vector3(a.x,a.y,a.z),bv=new T.Vector3(b.x,b.y,b.z),delta=bv.clone().sub(av);obj.position.copy(av.clone().add(bv).multiplyScalar(.5));obj.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),delta.clone().normalize());obj.scale.set(1,delta.length(),1);obj.updateMatrix();rods.setMatrixAt(i,obj.matrix);});rods.instanceMatrix.needsUpdate=true;interior.add(rods);
  for(const x of[209.5,213,216.5]){box(.9,.025,.9,x,-39.98,124,brass);box(.55,.03,.55,x,-39.96,124,ink);}
  label('Compare the three brass floor marks',213,-39.05,130.7,18,.6,interior,Math.PI);
- const landingMarkers={park:[170,114],study:[260,121],escher:[240,115]};
+ const landingMarkers={park:[170,114],study:[260,121],escher:[240,115]},surfaceFrames=[];
  for(const p of D.portals){
   const w=p.id==='escher'?2.4:3.3,h=p.id==='escher'?3.5:4.4;
+  surfaceFrames.push({p,w});
   for(const sign of[-1,1])box(.22,h,.38,p.x+sign*w/2,p.y+h/2,p.z,stone,surface);
   box(w+.2,.25,.38,p.x,p.y+h,p.z,stone,surface);box(w-.28,h-.1,.08,p.x,p.y+h/2,p.z,ink,surface);
   const door=new T.Mesh(own(new T.PlaneGeometry(w-.28,h-.1)),ink);door.position.set(p.x,p.y+h/2,p.z+.055);door.userData.escherDepthDoor=p.id;surface.add(door);targets.push(door);
@@ -94,6 +95,15 @@ export function buildEscherDepth(T,{canvas=()=>document.createElement('canvas'),
   if(!wall)continue;
   const start=p.z+.055-.01,end=wall.minZ+.01;
   box(.10,.70,end-start,p.x,p.y,(start+end)/2,timber);
+ }
+ // Only the study-lane feet miss their installed path (.018) and lawn (.005).
+ // Recess each bearing inside its old jamb footprint; root .002 into the lawn
+ // and engage the original foot by .01. Park/Escher already have full seats.
+ // Append to the existing surface stone batch, retaining every original ID.
+ for(const {p,w}of surfaceFrames){
+  if(p.id!=='study')continue;
+  const bottom=.003,top=p.y+.01;
+  for(const sign of[-1,1])box(.18,top-bottom,.34,p.x+sign*w/2,(top+bottom)/2,p.z,stone,surface);
  }
  obj.quaternion.identity();obj.scale.set(1,1,1);for(const [parent,materials]of batches)for(const[m,items]of materials){const mesh=new T.InstancedMesh(unit,m,items.length);mesh.name='Batched Escher masonry / joinery';items.forEach((b,i)=>{obj.position.set(b.x,b.y,b.z);obj.rotation.set(0,b.yaw,0);obj.scale.set(b.w,b.h,b.d);obj.updateMatrix();mesh.setMatrixAt(i,obj.matrix);});mesh.instanceMatrix.needsUpdate=true;mesh.computeBoundingSphere?.();parent.add(mesh);}
  const tess=new T.Group(),loop=new T.Group();tess.name='Live edge-pairing mosaic';loop.name='Live closed-loop stair model';interior.add(tess,loop);let tileGeo=null,loopGeo=null;

@@ -3,7 +3,7 @@ import {installPaperMonitors} from './paper-monitors.js?v=1';
 import {HISTORIC_PAPERS} from './historic-papers-data.js';
 import {installPondWorldWindow} from './pond-world-window.js?v=1';
 import {installWorldCylinder} from './world-cylinder.js?v=tunnel-contacts1';
-import {installEscherDepth} from './escher-depth.js?v=wall-lamp-supports1';
+import {installEscherDepth} from './escher-depth.js?v=surface-feet1';
 import {installHouseInvestigations} from './house-investigations.js?v=1';
 import {installComputationLab} from './computation-lab.js?v=1';
 import {installProofAtelier} from './proof-atelier.js?v=certificate1';

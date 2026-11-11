@@ -6251,3 +6251,80 @@ north artwork/lamp arrangement, all prior contracts and separate main work.
 Only measured justified joins; otherwise factual audit. No new column, barrier,
 light, room, lot, paper/first folio, historical copy or certification. Latest
 ledger governs; user's headed preview stays theirs.
+
+## 2026-11-11 — Escher surface thresholds: recessed study-lane foot bearings
+
+This review continues `7a415ff`; all47 first passes remain complete. Read
+`ESCHER-SURFACE-CONTACTS.md`. Actual installed upper identity owner/ground
+rays confirm all three original thresholds. All six existing upright/header
+contacts already meet over.21 x.125 x.38m and remain exact. Escher feet at
+X226.8/229.2,Z104 already engage original alcove floorY.14 by.01m. Park feet
+atX-85.65/-82.35,Z-110 already meet original connected pavingY.13 across their
+full footprints. Neither receives an additional part.
+
+Only study feet atX254.35/257.65,Z-112 had.112m gaps above actual pathY.018,
+with original lawnY.005 beneath. Navigation feetY.13 and foundationY-.10 are
+not their physical support faces. Two .18 x.137 x.34m recessed stone bearings
+at originalX/Z andY.0715 spanY.003..14: .002m lawn engagement, path crossing,
+and.01m engagement into each unchanged jamb. Every horizontal edge stays.02m
+inside the old.22 x.38m footprint. This is a central seat, not a full-footprint
+or engineered-bearing claim. No solid enters the approach/aperture and no
+frame, ground, path, original header/pick plane/label or source/private
+coordinate moves.
+
+Only existing surface-stone IDs9..10 append: batch9->11, pure763->765instances/
+32draws, installed769->771/42. Same21geometries/25materials/14textures/14buffers
+pure and30/34/23/15 installed; no new resource/light/batch/collider/pick/UI/
+listener/reader/model/key. Original60-resource/14-buffer initial and62/17
+model-replacement release remain once-only; credited geometry fixture87/15
+release remains. Borrowed artwork/paper/source resources stay with their owners.
+
+Independent7a415ff snapshots retain all763/769 old instance matrices/IDs and
+32/42 entire mesh geometries/profiles/poses, excluding only these two separately
+validated new surface-stone IDs. Four actual ground-owner source files also
+keep exact independent hashes. All earlier lamp/panel/ceiling/portal/stair/
+model/world/gallery/wing/Faculty/paper/private/voice hashes and unrelaxed budgets
+remain. Original three destination payloads, upper Escher puzzle gate,
+surface-height/mode gates, return-height/cooldown and explicit actions remain.
+These are linked thresholds, not unmodelled forty-metre staircases.
+
+All121 release programs pass. New checks cover six retained header contacts,
+36 complete existing foot seats,90 floor/path/lawn rays, two new positive
+jamb contacts/16 joint vertices, two expected-ID gap rays,100 strict approach
+samples and nine original pick-plane rays. Original coast, connected paving
+and Escher-house geometry supply the test support faces. Synthetic textures
+enable geometry only, not a remote-fetch claim. Original model/height/mode/
+modal/gate/cooldown/experiment/private/source/resource programs remain.
+
+Native both appended IDs, both jamb contact volumes and36 path/lawn root rays
+pass. Full old42-mesh/769-instance hash remains exact, including both earlier
+wall-lamp bearings. Before/after walking/pointer-look views inspect the study
+feet. Original connected-room routes retain their real walls/cases/openings;
+source Study/Park entry and return actions remain. Locked upper Escher entry
+is rejected with unchanged pose. EN/DE/FA/CS retains pose and exact public
+mosaic/loop geometry; PersianRTL and11 ready genuine pages remain. Original
+reader/rights/zoom/same-pose close and explicit869-asset local verification
+accompany the final review in PR #5. User's headed preview stays theirs;
+existing Three warning/controller-A test limit remain.
+
+All47 readings, source/private coordinates, raw drafts/carets/first answers/
+keys/explicit saves, museum rooms/three experiments/public models/English
+notices/upper Escher gates/artwork/readers/rights and approved voices/recordings
+remain. Preserve unresolved north print/lamp gaps, two south lamp bearings,
+six panel suspensions/nine lights, roofs/open high step/48treads/94rail links/
+12portal clips, tunnel/earth cut/both helices/480treads/middle/well/eight-floor
+24IDwing/stairs/lift/central3m door/covered connection/Faculty/11 genuine scans/
+source/zoom. Rendering has no private-memory/storage/progress access or
+preference-write/experiment/discovery/audio/travel/floor action. Own EN/DE/FA/
+CS/PersianRTL and disclosed English gaps remain. No historical object, new
+paper/folio, quotation/testimony/source-fetch/certification claim. Concurrent
+main Hall/mobile work and PR #2 stay separate. Same branch/PR #5, no merge/deploy.
+
+Next useful audit: original three surface-threshold ESCHER BELOW identity
+planes and actual attachments to their existing headers. Inspect installed
+front/back faces, label bounds, existing contacts, doorway/head clearance,
+owners and cleanup before editing. Preserve destinations, puzzle gate,
+labels/English notices, all frame seats and prior contracts. Only measured
+justified support joins; otherwise factual audit. No new column, barrier,
+light, room, lot, reader/paper/first folio, historical copy or certification.
+Latest ledger governs; user's headed preview stays theirs.

@@ -11,12 +11,13 @@ export function validateEscherPanelSupports(T,b){
  const batch=color=>b.interior.children.find(o=>o.isInstancedMesh&&o.geometry.type==='BoxGeometry'&&o.material.color.getHex()===color);
  const brass=batch(0xaa9868),roof=batch(0x596b63),glow=batch(0xffe2b9),timber=batch(0x3c5149);assert.equal(brass.count,351);
  const matrices=o=>Array.from({length:o.count},(_,i)=>{const m=new T.Matrix4();o.getMatrixAt(i,m);return m.toArray();});
+ const surfaceStone=b.surface.children.find(o=>o.isInstancedMesh&&o.material.color.getHex()===0xa4afa3);
  const records=[];let instances=0;
- b.group.traverse(o=>{if(o.isMesh){let rows=o.isInstancedMesh?matrices(o):null;if(rows)instances+=rows.length;if(o===brass)rows=rows.slice(0,339);if(o===timber)rows=rows.slice(0,sconces.oldTimber);records.push({name:o.name,matrix:o.matrix.toArray(),world:o.matrixWorld.toArray(),geometry:{type:o.geometry.type,index:o.geometry.index?Array.from(o.geometry.index.array):null,attributes:Object.fromEntries(Object.entries(o.geometry.attributes).map(([k,a])=>[k,Array.from(a.array)]))},color:o.material.color?.getHex(),instances:rows});}});
+ b.group.traverse(o=>{if(o.isMesh){let rows=o.isInstancedMesh?matrices(o):null;if(rows)instances+=rows.length;if(o===brass)rows=rows.slice(0,339);if(o===timber)rows=rows.slice(0,sconces.oldTimber);if(o===surfaceStone)rows=rows.slice(0,sconces.thresholds.oldSurfaceStone);records.push({name:o.name,matrix:o.matrix.toArray(),world:o.matrixWorld.toArray(),geometry:{type:o.geometry.type,index:o.geometry.index?Array.from(o.geometry.index.array):null,attributes:Object.fromEntries(Object.entries(o.geometry.attributes).map(([k,a])=>[k,Array.from(a.array)]))},color:o.material.color?.getHex(),instances:rows});}});
  // Independent 7c1f0f2 pre-edit snapshot: retain all 749 old instances and
- // every mesh/profile/pose. The two timber bearings are validated above;
+ // every mesh/profile/pose. Timber bearings and surface feet are validated above;
  // this older snapshot also excludes the twelve measured panel stems.
- assert.equal(records.length,32);assert.equal(instances,761+sconces.added);
+ assert.equal(records.length,32);assert.equal(instances,761+sconces.added+sconces.thresholds.added);
  assert.equal(hash(records),'7784bd064e2abc0d1dd98f9a54028987920857d36cb675b8d2e91bd09d994de0');
  const lights=[];b.lamps.traverse(o=>{if(o.isLight)lights.push({type:o.type,matrix:o.matrix.toArray(),color:o.color.getHex(),intensity:o.intensity,distance:o.distance??null,decay:o.decay??null});});
  assert.equal(lights.length,9);assert.equal(hash(lights),'f238339aa65cfe4e935e616087f4c78f01f391a34f50118424f70693d4232d7d');

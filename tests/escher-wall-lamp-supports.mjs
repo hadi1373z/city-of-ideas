@@ -1,20 +1,23 @@
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
+import {validateEscherSurfaceContacts} from './escher-surface-contacts.mjs';
 import {buildEscherDepth} from '../src/escher-depth-scene.js';
 import {depthFloorAt,canWalkDepth} from '../src/escher-depth-model.js';
 
 const near=(a,b,e=2e-5)=>assert(Math.abs(a-b)<e,`${a} != ${b}`);
 const hash=v=>createHash('sha256').update(JSON.stringify(v)).digest('hex');
 export function validateEscherWallLampSupports(T,b){
+ const thresholds=validateEscherSurfaceContacts(T,b);
  const batch=(owner,color)=>owner.interior.children.find(o=>o.isInstancedMesh&&o.geometry.type==='BoxGeometry'&&o.material.color.getHex()===color);
  const matrices=o=>Array.from({length:o.count},(_,i)=>{const m=new T.Matrix4();o.getMatrixAt(i,m);return m.toArray();});
  const boxes=o=>matrices(o).map((a,id)=>{const m=new T.Matrix4().fromArray(a),p=new T.Vector3(),s=new T.Vector3();m.decompose(p,new T.Quaternion(),s);return{id,p,s,box:new T.Box3().setFromBufferAttribute(o.geometry.attributes.position).applyMatrix4(m)};});
- const snapshot=(owner,oldTimber)=>{owner.group.updateMatrixWorld(true);const wood=batch(owner,0x3c5149),records=[];let instances=0;owner.group.traverse(o=>{if(o.isMesh){let rows=o.isInstancedMesh?matrices(o):null;if(rows)instances+=rows.length;if(o===wood)rows=rows.slice(0,oldTimber);records.push({name:o.name,matrix:o.matrix.toArray(),world:o.matrixWorld.toArray(),geometry:{type:o.geometry.type,index:o.geometry.index?Array.from(o.geometry.index.array):null,attributes:Object.fromEntries(Object.entries(o.geometry.attributes).map(([k,a])=>[k,Array.from(a.array)]))},color:o.material.color?.getHex(),instances:rows});}});return{hash:hash(records),meshes:records.length,instances};};
+ const snapshot=(owner,oldTimber)=>{owner.group.updateMatrixWorld(true);const wood=batch(owner,0x3c5149),surfaceStone=owner.surface.children.find(o=>o.isInstancedMesh&&o.material.color.getHex()===0xa4afa3),records=[];let instances=0;owner.group.traverse(o=>{if(o.isMesh){let rows=o.isInstancedMesh?matrices(o):null;if(rows)instances+=rows.length;if(o===wood)rows=rows.slice(0,oldTimber);if(o===surfaceStone)rows=rows.slice(0,thresholds.oldSurfaceStone);records.push({name:o.name,matrix:o.matrix.toArray(),world:o.matrixWorld.toArray(),geometry:{type:o.geometry.type,index:o.geometry.index?Array.from(o.geometry.index.array):null,attributes:Object.fromEntries(Object.entries(o.geometry.attributes).map(([k,a])=>[k,Array.from(a.array)]))},color:o.material.color?.getHex(),instances:rows});}});return{hash:hash(records),meshes:records.length,instances};};
  const timber=batch(b,0x3c5149),wood=boxes(timber),walls=boxes(batch(b,0xa4afa3)).slice(0,28),glow=boxes(batch(b,0xffe2b9)),supports=wood.slice(81);
  assert.equal(timber.count,83);assert.equal(supports.length,2);
  // Independent 517b140 full snapshot: all 761 earlier instances remain,
  // including every panel stem, rail link, portal clip and original fixture.
- const old=snapshot(b,81);assert.equal(old.hash,'4198c0a962692ac6c92d68e4361de83adfd9a5c866e451a2ab27551c12b7975c');assert.equal(old.meshes,32);assert.equal(old.instances,763);
+ // The newer surface feet are independently checked before this comparison.
+ const old=snapshot(b,81);assert.equal(old.hash,'4198c0a962692ac6c92d68e4361de83adfd9a5c866e451a2ab27551c12b7975c');assert.equal(old.meshes,32);assert.equal(old.instances,763+thresholds.added);
  assert(b.group.matrixWorld.equals(new T.Matrix4()),'Original upper identity owner');
  const lamps=wood.slice(0,81).filter(r=>Math.abs(r.s.x-.15)<1e-5&&Math.abs(r.s.y-.9)<1e-5&&Math.abs(r.s.z-.11)<1e-5);assert.equal(lamps.length,4);
  const ray=(owner,p,d,far)=>new T.Raycaster(p,d,0,far).intersectObject(owner,true);
@@ -41,7 +44,7 @@ export function validateEscherWallLampSupports(T,b){
  // this is a geometry fixture, not a claim that any remote scan was fetched.
  const ctx=new Proxy({measureText:t=>({width:t.length*12})},{get:(o,k)=>o[k]??(()=>{})}),credited=buildEscherDepth(T,{canvas:()=>({getContext:()=>ctx}),loadTexture:()=>new T.Texture()});
  try{
-  const captured=snapshot(credited,84);assert.equal(captured.hash,'afe8df7f72526642e75f7fd509376aab3beeb946376939a70e6700655a9f8046');assert.equal(captured.meshes,42);assert.equal(captured.instances,769);
+  validateEscherSurfaceContacts(T,credited);const captured=snapshot(credited,84);assert.equal(captured.hash,'afe8df7f72526642e75f7fd509376aab3beeb946376939a70e6700655a9f8046');assert.equal(captured.meshes,42);assert.equal(captured.instances,769+thresholds.added);
   const cw=batch(credited,0x3c5149),cb=boxes(cw),added=cb.slice(84),prints=credited.interior.children.filter(o=>o.userData.escherPrint);assert.equal(prints.length,3);assert.equal(added.length,2);assert.deepEqual(added.map(p=>p.id),[84,85]);
   for(const lamp of cb.slice(80,84)){
    const north=lamp.p.z<115,sign=north?-1:1,start=new T.Vector3(lamp.p.x,lamp.p.y,lamp.p.z+sign*.056),hit=ray(credited.interior,start,new T.Vector3(0,0,sign),.3)[0];assert(hit);
@@ -52,5 +55,5 @@ export function validateEscherWallLampSupports(T,b){
   const resources=new Map(),buffers=new Map(),watch=(r,map)=>{if(!r||map.has(r))return;map.set(r,0);r.addEventListener('dispose',()=>map.set(r,map.get(r)+1));};credited.group.traverse(o=>{watch(o.geometry,resources);if(o.isInstancedMesh)watch(o,buffers);for(const m of[o.material].flat().filter(Boolean)){watch(m,resources);for(const v of Object.values(m))if(v?.isTexture)watch(v,resources);}});
   assert.equal(resources.size,87);assert.equal(buffers.size,15);credited.dispose();for(const n of[...resources.values(),...buffers.values()])assert.equal(n,1,'Credited fixture releases owned resources and buffers once');
  }finally{if(credited.group.children.length)credited.dispose();}
- assert.equal(printConflicts,2);assert.equal(clearPrintApproaches,9);return{added:2,oldTimber:81,measuredGaps,glowContacts,contacts,vertices,gapRays,endRays,clearance,printConflicts,clearPrintApproaches};
+ assert.equal(printConflicts,2);assert.equal(clearPrintApproaches,9);return{thresholds,added:2,oldTimber:81,measuredGaps,glowContacts,contacts,vertices,gapRays,endRays,clearance,printConflicts,clearPrintApproaches};
 }

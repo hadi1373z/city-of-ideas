@@ -11,12 +11,13 @@ export function validateEscherPortalContacts(T,b){
  const brass=b.interior.children.find(o=>o.isInstancedMesh&&o.geometry.type==='BoxGeometry'&&o.material.color.getHex()===0xaa9868);assert.equal(brass.count,339+panels.added);
  const matrices=o=>Array.from({length:o.count},(_,i)=>{const m=new T.Matrix4();o.getMatrixAt(i,m);return m.toArray();});
  const timberBatch=b.interior.children.find(o=>o.isInstancedMesh&&o.geometry.type==='BoxGeometry'&&o.material.color.getHex()===0x3c5149);
+ const surfaceStone=b.surface.children.find(o=>o.isInstancedMesh&&o.material.color.getHex()===0xa4afa3);
  const records=[];let instances=0;
- b.group.traverse(o=>{if(o.isMesh){let rows=o.isInstancedMesh?matrices(o):null;if(rows)instances+=rows.length;if(o===brass)rows=rows.slice(0,327);if(o===timberBatch)rows=rows.slice(0,panels.sconces.oldTimber);records.push({name:o.name,matrix:o.matrix.toArray(),world:o.matrixWorld.toArray(),geometry:{type:o.geometry.type,index:o.geometry.index?Array.from(o.geometry.index.array):null,attributes:Object.fromEntries(Object.entries(o.geometry.attributes).map(([k,a])=>[k,Array.from(a.array)]))},color:o.material.color?.getHex(),instances:rows});}});
+ b.group.traverse(o=>{if(o.isMesh){let rows=o.isInstancedMesh?matrices(o):null;if(rows)instances+=rows.length;if(o===brass)rows=rows.slice(0,327);if(o===timberBatch)rows=rows.slice(0,panels.sconces.oldTimber);if(o===surfaceStone)rows=rows.slice(0,panels.sconces.thresholds.oldSurfaceStone);records.push({name:o.name,matrix:o.matrix.toArray(),world:o.matrixWorld.toArray(),geometry:{type:o.geometry.type,index:o.geometry.index?Array.from(o.geometry.index.array):null,attributes:Object.fromEntries(Object.entries(o.geometry.attributes).map(([k,a])=>[k,Array.from(a.array)]))},color:o.material.color?.getHex(),instances:rows});}});
  // Independent 2d39630 source snapshot, including all 94 completed rail links.
- // The new timber bearings and panel supports are validated first. This snapshot
+ // Surface feet, timber bearings and panel supports are validated first. This snapshot
  // excludes the twelve separately checked portal clips, retaining all old IDs.
- assert.equal(records.length,32);assert.equal(instances,749+panels.added+panels.sconces.added);
+ assert.equal(records.length,32);assert.equal(instances,749+panels.added+panels.sconces.added+panels.sconces.thresholds.added);
  assert.equal(hash(records),'071fdefde6a169d7aade28d6590549c3abe5e9c669800aab5a3dfe293348e847');
  const boxes=o=>matrices(o).map((a,id)=>{const m=new T.Matrix4().fromArray(a),p=new T.Vector3(),s=new T.Vector3();m.decompose(p,new T.Quaternion(),s);return{id,p,s,box:new T.Box3().setFromBufferAttribute(o.geometry.attributes.position).applyMatrix4(m)};});
  const batch=color=>b.interior.children.find(o=>o.isInstancedMesh&&o.geometry.type==='BoxGeometry'&&o.material.color.getHex()===color);
