@@ -7,6 +7,7 @@ import {buildBabelSnakeStairs} from '../src/babel-snake-stairs.js';
 import {buildBabelLibrary} from '../src/babel-library-scene.js';
 import {validateBabelEntryGuards} from './babel-entry-guards.mjs';
 import {validateBabelRadialContacts} from './babel-radial-contacts.mjs';
+import {validateBabelMouthClearance,validateMouthCleanup} from './babel-mouth-clearance.mjs';
 const w={};vm.runInNewContext(await readFile(new URL('../src/gallery-spiral.js',import.meta.url),'utf8'),{window:w});const up=w.createGallerySpiral(T),f=BABEL.flight,l=BABEL.landing;
 assert.equal(f.x,up.centerX);assert.equal(f.width,up.headWidth);assert.equal(f.z1,up.pointAt(0).z);assert.equal(f.z0,up.run);assert.deepEqual(BABEL.opening,{...up.opening});assert.equal(f.top,up.pointAt(0).y);assert.equal((f.z0-f.z1)/f.steps,up.tread);assert(Math.abs((f.top-f.bottom)/f.steps-up.rise)<.011);assert.equal(f.bottom,BABEL.levels[0].y);
 const entryOwned=new Set(),entryBuffers=new Set(),entryReleased=new Map();
@@ -17,6 +18,7 @@ for(let i=0;i<f.steps;i++){const z=f.z0-(i+.5)*up.tread,feet=entryHeight(f.x,z),
 const canvas=()=>({getContext:()=>new Proxy({},{get:()=>()=>{}})}),library=buildBabelLibrary(T,{canvas,drawing});library.group.updateMatrixWorld(true);for(let z=f.z0-.1;z>f.z1;z-=.12){const feet=entryHeight(f.x,z),hits=new T.Raycaster(new T.Vector3(f.x,feet+.02,z),new T.Vector3(0,1,0),0,2.1).intersectObject(library.group,true);assert(!hits.some(h=>Math.abs(h.face?.normal.y||h.face?.normal.z||0)>.8),'Two metres of clear headroom below the shared shaft');}
 console.log('PASS measured Babel entry-guard brackets: '+JSON.stringify(await validateBabelEntryGuards(T,built,library)));
 const radial=validateBabelRadialContacts(T,library);console.log('PASS factual Babel radial-flight contacts: '+JSON.stringify(radial));
+console.log('PASS installed Babel mouth fitting: '+JSON.stringify(validateBabelMouthClearance(T,library)));console.log('PASS mouth ownership cleanup programs: '+validateMouthCleanup(T));
 for(const offset of[-f.width/2+.4,0,f.width/2-.4]){let p={x:f.x+offset,z:f.z0,y:f.top+1.8};for(let z=f.z0-.01;z>=f.z1;z-=.06)walkLibrary(p,0,z-p.z);walkLibrary(p,0,f.z1-p.z);assert(Math.abs(p.y-1.8-f.bottom)<1e-6);for(let z=f.z1;z>l.minZ+.6;z-=.06)walkLibrary(p,0,z-p.z);for(let x=p.x;x<49;x+=.06)walkLibrary(p,x-p.x,0);assert(p.x>48.8,'The full-width flight reaches the original ring through its landing');assert.equal(surfaceAt(p.x,p.z,-8),-8);}
 // The last aisle has a physical doorway through the shelf joinery, with the
 // original catalogue and five terraces retained around it.

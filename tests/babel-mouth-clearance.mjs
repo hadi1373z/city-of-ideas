@@ -1,0 +1,46 @@
+import assert from 'node:assert/strict';
+import {fitBabelMouths} from '../src/babel-mouth-clearance.js';
+import {buildBabelLibrary} from '../src/babel-library-scene.js';
+import {stairs} from '../src/babel-library-model.js';
+import {babelGuardSnapshot} from './babel-entry-guards.mjs';
+
+const near=(a,b,e=2e-5)=>assert(Math.abs(a-b)<e,`${a} != ${b}`);
+export function validateBabelMouthClearance(T,built){
+ const root=built.group,scene=new T.Scene();scene.add(root);const original=[];root.traverse(o=>original.push(o));const before=babelGuardSnapshot(T,root),originalDispose=built.dispose,oldLamps=built.lamps.visible;built.lamps.visible=true;
+ assert.equal(before.hash,'8f17b68a21bb9777ee6ae73ccd86e056d82b89123256dd3f587f533aeb734eae');
+ const denied=()=>{throw Error('Fitting may not allocate render resources or read private state');},names=['localStorage','sessionStorage'],prior=names.map(k=>Object.getOwnPropertyDescriptor(globalThis,k));for(const name of names)Object.defineProperty(globalThis,name,{configurable:true,get:denied});
+ const cloneEvents=new Map(),fittingT={...T,MeshLambertMaterial:denied,ShaderMaterial:denied,BoxGeometry:denied,PlaneGeometry:denied,Texture:denied,InstancedMesh:class extends T.InstancedMesh{constructor(...a){super(...a);cloneEvents.set(this,0);this.addEventListener('dispose',()=>cloneEvents.set(this,cloneEvents.get(this)+1));}}};
+ let f;try{f=fitBabelMouths(fittingT,built);f.sync();}finally{for(let i=0;i<names.length;i++)if(prior[i])Object.defineProperty(globalThis,names[i],prior[i]);else delete globalThis[names[i]];}
+ assert.equal(f.fits.length,3);assert.equal(f.changes.length,199);assert.equal(f.bindings.length,12);assert.deepEqual(f.fits.map(x=>[x.kind,x.members.length]),[['case',98],['case',98],['fascia',3]]);
+ assert.deepEqual(f.fits.map(x=>Math.round(x.scale*1e6)),[743329,735755,538591]);
+ const rawView={updateMatrixWorld:()=>root.updateMatrixWorld(true),traverse:fn=>original.forEach(fn)};assert.deepEqual(babelGuardSnapshot(T,rawView),before,'Every original source mesh/matrix/ID remains exact, with no source exclusions');
+ let retained=0,changed=0,fitVertices=0,fixedEndVertices=0;const borrowed=new Set(),disposedBorrowed=new Map();
+ for(const binding of f.bindings){const {source,clone}=binding;assert.equal(source.visible,false);assert.equal(clone.geometry,source.geometry);assert.equal(clone.material,source.material);assert.equal(clone.count,source.count);borrowed.add(source.geometry);borrowed.add(source.material);
+  for(let i=0;i<source.count;i++){const a=new T.Matrix4(),b=new T.Matrix4();source.getMatrixAt(i,a);clone.getMatrixAt(i,b);const c=f.changes.find(c=>c.owner===source&&c.id===i);if(!c){assert.deepEqual(b.toArray(),a.toArray());retained++;}else{assert.deepEqual(a.toArray(),c.before.toArray());assert(b.elements.every(Number.isFinite));assert(b.determinant()>0);const fit=f.fits.find(p=>p.members.some(r=>r.color===source.material.color.getHex()&&r.type===source.geometry.type&&r.id===i)),normal=new T.Vector3(...fit.normal),axis=new T.Vector3(...fit.axis),attr=source.geometry.attributes.position;
+    for(let v=0;v<attr.count;v++){const p=new T.Vector3().fromBufferAttribute(attr,v),old=p.clone().applyMatrix4(a),now=p.clone().applyMatrix4(b);assert(now.dot(normal)>=1.72498,'Complete fitted edge stays outside the gross stair width');near(now.y,old.y);near(now.clone().sub(axis.clone().multiplyScalar(now.dot(axis))).distanceTo(old.clone().sub(axis.clone().multiplyScalar(old.dot(axis)))),0);if(Math.abs(old.dot(axis)-fit.pin)<2e-5){near(now.distanceTo(old),0);fixedEndVertices++;}fitVertices++;}changed++;}
+  }
+ }
+ assert.equal(changed,199);for(const r of borrowed)r.addEventListener('dispose',()=>disposedBorrowed.set(r,(disposedBorrowed.get(r)||0)+1));
+ root.updateMatrixWorld(true);const active=[];root.traverse(o=>{if(!o.isMesh)return;for(let p=o;p;p=p.parent)if(!p.visible)return;active.push(o);});assert.equal(active.length,65);assert.equal(active.reduce((n,o)=>n+(o.isInstancedMesh?o.count:0),0),41048);
+ let bodySamples=0,treadSamples=0,oldSamples=0;const lanes=[-1.46,-1.3,-.65,0,.65,1.3,1.46],floorBatch=root.children.find(o=>o.isInstancedMesh&&o.geometry.type==='BoxGeometry'&&o.material.color.getHex()===0xc5b28b);
+ for(const s of stairs.slice(0,2))for(let i=0;i<24;i++)for(const u of[.1,.5,.9])for(const lane of lanes){const r=s.outer-(i+u)*(s.outer-s.inner)/24,y=s.top-(i+1)/6,p=new T.Vector3(Math.cos(s.a)*r-Math.sin(s.a)*lane,y,Math.sin(s.a)*r+Math.cos(s.a)*lane),body=new T.Raycaster(p.clone().add(new T.Vector3(0,.08,0)),new T.Vector3(0,1,0),0,2.02).intersectObjects(active,false);assert.equal(body.length,0,'Actual visible geometry clears the retained walking band');bodySamples++;const hit=new T.Raycaster(p.clone().add(new T.Vector3(0,.1,0)),new T.Vector3(0,-1,0),0,.2).intersectObject(floorBatch)[0];assert.equal(hit?.instanceId,s.i*24+i);near(hit.point.y,y);treadSamples++;if(Math.abs(lane)===1.3||lane===0)oldSamples++;}
+ // Affine fitting preserves each complete case assembly, including all 100
+ // bindings and 80 attached stamps. Original corner contacts map together.
+ let joints=0,feet=0,farJoints=0;const floors=original.filter(o=>o.isMesh&&!o.isInstancedMesh&&o.material.color?.getHex()===0x9c8965&&o.geometry.type==='BufferGeometry');for(const fit of f.fits.filter(p=>p.kind==='case')){const selected=f.changes.filter(c=>fit.members.some(m=>m.color===c.owner.material.color.getHex()&&m.type===c.owner.geometry.type&&m.id===c.id)),posts=selected.filter(c=>c.owner.material.color.getHex()===0x765238&&Math.hypot(c.before.elements[4],c.before.elements[5],c.before.elements[6])>3),shelves=selected.filter(c=>c.owner.material.color.getHex()===0x765238&&!posts.includes(c));assert.equal(posts.length,2);assert.equal(shelves.length,6);
+  for(const shelf of shelves)for(const post of posts){const a=new T.Vector3(0,0,0).applyMatrix4(post.before),y=shelf.before.elements[13],p=a.clone().setY(y),map=post.after.clone().multiply(post.before.clone().invert()),q=p.clone().applyMatrix4(map),local=q.clone().applyMatrix4(shelf.after.clone().invert());assert(Math.max(Math.abs(local.x),Math.abs(local.y),Math.abs(local.z))<.501);joints++;}
+  for(const post of posts){const p=new T.Vector3(0,-.5,0).applyMatrix4(post.after),hit=new T.Raycaster(p.clone().add(new T.Vector3(0,.1,0)),new T.Vector3(0,-1,0),0,.2).intersectObjects(floors,false)[0];assert(hit);near(hit.point.y,p.y);feet++;}
+ }
+ for(const c of f.changes.filter(c=>c.kind==='fascia')){const p=new T.Vector3(.49,0,0).applyMatrix4(c.after),adjacent=[];for(let i=0;i<c.owner.count;i++){if(i===c.id)continue;const m=new T.Matrix4();c.owner.getMatrixAt(i,m);const q=p.clone().applyMatrix4(m.clone().invert());if(Math.max(Math.abs(q.x),Math.abs(q.y),Math.abs(q.z))<.4999)adjacent.push(m);}assert(adjacent.length,'Retained far fascia/rail joint remains connected');farJoints++;}
+ f.dispose();f.dispose();assert.equal(f.group.parent,null);assert.equal(built.dispose,originalDispose);for(const b of f.bindings)assert.equal(b.source.visible,b.visible);for(const n of cloneEvents.values())assert.equal(n,1);for(const r of borrowed)assert.equal(disposedBorrowed.get(r)||0,0);assert.deepEqual(babelGuardSnapshot(T,root),before);built.lamps.visible=oldLamps;scene.remove(root);
+ return{changes:changed,retainedCloneMatrices:retained,fitVertices,fixedEndVertices,bodySamples,treadSamples,oldSamples,caseJoints:joints,caseFeet:feet,farJoints,draws:65,instances:41048,ownedBuffers:f.bindings.length,newGeometryMaterialsTextures:0};
+}
+
+export function validateMouthCleanup(T){
+ const canvas=()=>({getContext:()=>new Proxy({},{get:()=>()=>{}})});let programs=0;
+ for(const mode of['parent','missing','replaced','buffer','hidden']){const b=buildBabelLibrary(T,{canvas}),scene=new T.Scene();scene.add(b.group);const originalDispose=b.dispose;if(mode==='hidden')b.group.children.find(o=>o.isInstancedMesh&&o.material.color.getHex()===0x765238).visible=false;const f=fitBabelMouths(T,b),counts=new Map();for(const {clone}of f.bindings){counts.set(clone,0);clone.addEventListener('dispose',()=>counts.set(clone,counts.get(clone)+1));}
+  const borrowed=new Set(f.bindings.flatMap(b=>[b.geometry,b.material])),disposed=new Map();for(const r of borrowed)r.addEventListener('dispose',()=>disposed.set(r,(disposed.get(r)||0)+1));let retired;
+  if(mode==='missing'){b.group.removeFromParent();f.sync();}else if(mode==='replaced'){retired=f.bindings[0].source;const replacement=new T.InstancedMesh(retired.geometry,retired.material,retired.count);replacement.instanceMatrix.array.set(retired.instanceMatrix.array);retired.removeFromParent();b.group.add(replacement);f.sync();}else if(mode==='buffer'){f.bindings[0].source.instanceMatrix.needsUpdate=true;f.sync();}else if(mode==='hidden')f.dispose();else b.dispose();
+  f.dispose();for(const n of counts.values())assert.equal(n,1);for(const binding of f.bindings)assert.equal(binding.source.visible,binding.visible);if(mode!=='parent'){for(const r of borrowed)assert.equal(disposed.get(r)||0,0);assert.equal(b.dispose,originalDispose);b.dispose();}for(const r of borrowed)assert.equal(disposed.get(r),1);retired?.dispose();programs++;
+ }
+ const invalid=buildBabelLibrary(T,{canvas});invalid.group.name='Custom private display';assert.equal(fitBabelMouths(T,invalid).group,null);invalid.dispose();return programs+1;
+}

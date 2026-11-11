@@ -6658,3 +6658,88 @@ those preservation constraints; otherwise factual audit. No new column,
 barrier/light/room/lot/paper/folio/historical copy/certification. The present
 audit does not claim the15 blocked side samples are repaired. Latest ledger
 governs; user's headed preview stays theirs.
+
+## 2026-11-11 — Babel radial mouths: fitted casework clears the two side routes
+
+This review continues `ab34a96`; all47 first reading passes and all eight
+original Mathematics working floors remain complete. The installed Babel
+model now clears the15 recorded side-position conflicts at the first two
+radial stair mouths. Read docs/BABEL-MOUTH-CLEARANCE.md. This is a bounded
+installed architectural correction, not a change to original source geometry,
+source/private coordinates, treads, routes or navigation gates.
+
+Two complete incoming case assemblies at radii43/33 each retain two uprights,
+six shelves,50 decorative bindings and40 attached brass stamps. Positive
+tangential fits of.7433290893/.7357551983 pin each far end and retain height,
+radial depth, shelf/upright joints and grounded feet. Original dark fascia147
+and matching brass strips343/344 receive one.5385910008 tangential fit, keeping
+their far-end joins. All199 fitted records have corner envelopes outside the
+appropriate signed1.725m side plane. The original tread half-width1.7 and.23m
+navigation inset remain. No book, stamp or rail segment is omitted; these are
+generic city volumes, not resized genuine scans/artwork/authored pages.
+
+The adapter follows the original upper-owned Babel root. Twelve source display
+batches become inactive while twelve owned copies borrow the exact source
+geometry/materials and preserve instance counts, IDs and ordering. Only199
+displayed matrices differ:40,385 copied matrices and464 other source instances
+remain exact, totaling40,849 unaffected active matrices. Active rendering stays
+65 mesh draws/41,048 instances. The adapter owns12 instance buffers containing
+40,584 records, with no new geometry/material/texture/light/collider/pick/UI/
+listener/reader/model/key. All original source matrices/resources remain exact;
+the source-only builder is unchanged and retains the15 known conflicts as an
+independent negative control. No source fingerprint or strict test is relaxed.
+
+Cleanup restores all12 borrowed visibility values and releases only12 owned
+buffers once. Parent-before-child cleanup delegates the original source cleanup
+after detaching copies. Missing/replaced root/batch/resource/buffer ownership,
+buffer version/count changes and custom layouts release or reject the fitting.
+API identity is checked before reading a foreign replacement. Borrowed source
+resources, drawings, floors, entry brackets and their cleanup stay independent.
+The fitting inherits culling/parent transforms without baking coordinates into
+source objects, houses or saves. No ray exclusion or shader mask clears a hit.
+
+All121 release programs pass. New checks verify3,176 fitted vertices,60 fixed
+far-end vertices,24 shelf/upright joints,four actual terrace-floor contacts and
+three retained fascia/rail joins. All1,008 standing probes and1,008 matching
+tread rays over seven lanes of the first two flights are clear; they include
+all15 previously blocked locations. Six ownership programs cover parent-first,
+missing/replaced owner, buffer invalidation, pre-hidden batches and custom
+layouts. Private-storage getters and new geometry/material/texture constructors
+are denied during fitting. Earlier source-only864 probes and every original
+tread/stringer/rail/floor join remain unchanged, including their15 recorded
+obstructions. App r160/source-tool fixture distinctions remain disclosed.
+
+Independent native QA confirms1,008 active-geometry probes clear and all11
+genuine pages ready. Ordinary keys/pointer looking traverse both side lanes
+down/up the first two flights, with real terrace approaches and unchanged floor
+heights. No direct pose assignment, auto-tour or collision bypass is used.
+First/second mouth views were inspected. EN/DE/FA/CS catalogue opening/closing
+keeps the same pose,page0/aaaaaa/empty prefix/source link; Persian remains RTL.
+Babel's Czech retains its original English fallback. Native original-source
+library hash357a4d91, entry hash139ef073 and slab/finish hash7c1b1038 remain exact
+with every source ID included; owned copies are checked separately. No browser
+application errors; the existing Three warning/controller-A testing limit
+remains. Explicit870-asset local verification accompanies the final PR review.
+These are measured standing/walking checks, not a building-code certification.
+
+All47 readings, finite catalogue/explicit experiment actions, raw drafts/carets/
+first answers/private keys, approved cast/fixed voices/recordings, genuine scan/
+artwork bytes/credits/rights/source/zoom remain. Five terraces/96 internal treads,
+40 entry treads/28 brackets, reservoir/book/well/default arrival,480 gallery
+treads/middle/tunnel/earth cut, Math8floors24IDs/stairs/lift/central3mdoor/Faculty/
+covered connection and Escher contracts remain. Rendering adds no private
+memory/storage/progress access or preference-write/experiment/discovery/audio/
+travel/floor action. No new reading/paper/folio/historical object/quotation/
+testimony/source-fetch/certification. Concurrent main Hall/mobile work and PR#2
+stay separate; same branch/PR#5, no merge/deploy, user's headed preview untouched.
+
+Next useful review: audit the24 original outer vault columns and timber ceiling
+spokes, measuring actual floor feet, column/beam end bearings and relation to
+the actual annular ceiling. Read this ledger, BABEL-MOUTH-CLEARANCE and prior
+Babel/world/gallery/Math/Faculty/covered-walk/paper contracts. Inspect actual
+installed records/owners/clearance/cleanup first, including unchanged column
+copies in this adapter. Preserve fitted mouths, reservoir/book/collar/apertures,
+five terraces/96 internal and40 entry treads/catalogue/source-private coordinates
+and all earlier contracts. Only measured justified joins; otherwise factual
+audit. No new column/barrier/light/room/lot/paper/folio/historical copy or
+certification. The user's headed preview stays under their control.

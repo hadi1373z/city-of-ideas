@@ -1,5 +1,9 @@
 # Babel radial stairs · factual contact and clearance audit
 
+The installed follow-up in [BABEL-MOUTH-CLEARANCE.md](BABEL-MOUTH-CLEARANCE.md)
+clears the recorded 15 conflicts using owned fitted copies. The source-only
+audit below remains unchanged as the independent historical control.
+
 This review continues `39d594b`. All 47 first reading passes remain complete.
 The four original 24-tread flights already have connected tread, stringer and
 guard assemblies. No production source, geometry, resource or runtime behavior
