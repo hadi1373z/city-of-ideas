@@ -1,19 +1,22 @@
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {DEPTH_TRIANGLE,depthFloorAt,canWalkDepth} from '../src/escher-depth-model.js';
+import {validateEscherWallLampSupports} from './escher-wall-lamp-supports.mjs';
 
 const near=(a,b,e=2e-5)=>assert(Math.abs(a-b)<e,`${a} != ${b}`);
 const hash=v=>createHash('sha256').update(JSON.stringify(v)).digest('hex');
 export function validateEscherPanelSupports(T,b){
+ const sconces=validateEscherWallLampSupports(T,b);
  b.group.updateMatrixWorld(true);assert(b.group.matrixWorld.equals(new T.Matrix4()),'Original upper +Y owner');
  const batch=color=>b.interior.children.find(o=>o.isInstancedMesh&&o.geometry.type==='BoxGeometry'&&o.material.color.getHex()===color);
- const brass=batch(0xaa9868),roof=batch(0x596b63),glow=batch(0xffe2b9);assert.equal(brass.count,351);
+ const brass=batch(0xaa9868),roof=batch(0x596b63),glow=batch(0xffe2b9),timber=batch(0x3c5149);assert.equal(brass.count,351);
  const matrices=o=>Array.from({length:o.count},(_,i)=>{const m=new T.Matrix4();o.getMatrixAt(i,m);return m.toArray();});
  const records=[];let instances=0;
- b.group.traverse(o=>{if(o.isMesh){let rows=o.isInstancedMesh?matrices(o):null;if(rows)instances+=rows.length;if(o===brass)rows=rows.slice(0,339);records.push({name:o.name,matrix:o.matrix.toArray(),world:o.matrixWorld.toArray(),geometry:{type:o.geometry.type,index:o.geometry.index?Array.from(o.geometry.index.array):null,attributes:Object.fromEntries(Object.entries(o.geometry.attributes).map(([k,a])=>[k,Array.from(a.array)]))},color:o.material.color?.getHex(),instances:rows});}});
+ b.group.traverse(o=>{if(o.isMesh){let rows=o.isInstancedMesh?matrices(o):null;if(rows)instances+=rows.length;if(o===brass)rows=rows.slice(0,339);if(o===timber)rows=rows.slice(0,sconces.oldTimber);records.push({name:o.name,matrix:o.matrix.toArray(),world:o.matrixWorld.toArray(),geometry:{type:o.geometry.type,index:o.geometry.index?Array.from(o.geometry.index.array):null,attributes:Object.fromEntries(Object.entries(o.geometry.attributes).map(([k,a])=>[k,Array.from(a.array)]))},color:o.material.color?.getHex(),instances:rows});}});
  // Independent 7c1f0f2 pre-edit snapshot: retain all 749 old instances and
- // every mesh/profile/pose. Only these twelve separately checked IDs differ.
- assert.equal(records.length,32);assert.equal(instances,761);
+ // every mesh/profile/pose. The two timber bearings are validated above;
+ // this older snapshot also excludes the twelve measured panel stems.
+ assert.equal(records.length,32);assert.equal(instances,761+sconces.added);
  assert.equal(hash(records),'7784bd064e2abc0d1dd98f9a54028987920857d36cb675b8d2e91bd09d994de0');
  const lights=[];b.lamps.traverse(o=>{if(o.isLight)lights.push({type:o.type,matrix:o.matrix.toArray(),color:o.color.getHex(),intensity:o.intensity,distance:o.distance??null,decay:o.decay??null});});
  assert.equal(lights.length,9);assert.equal(hash(lights),'f238339aa65cfe4e935e616087f4c78f01f391a34f50118424f70693d4232d7d');
@@ -49,5 +52,5 @@ export function validateEscherPanelSupports(T,b){
   const start=new T.Vector3(x,-38.2,124),delta=new T.Vector3(endpoint.x,endpoint.y,endpoint.z).sub(start);
   assert.equal(ray(brass,start,delta.clone().normalize(),delta.length()).filter(h=>h.instanceId>=339).length,0);viewRays++;
  }
- assert(clearance>50);return{added:12,panels:6,contacts,contactVertices,gapRays,endRays,roofRays,panelRays,viewRays,clearance,minHeadroom};
+ assert(clearance>50);return{sconces,added:12,panels:6,contacts,contactVertices,gapRays,endRays,roofRays,panelRays,viewRays,clearance,minHeadroom};
 }

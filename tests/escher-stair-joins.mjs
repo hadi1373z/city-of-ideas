@@ -13,13 +13,14 @@ export function validateEscherStairJoins(T,b){
  const brass=b.interior.children.find(o=>o.isInstancedMesh&&o.geometry.type==='BoxGeometry'&&o.material.color.getHex()===0xaa9868);
  assert.equal(brass.count,327+portal.added+portal.panels.added);
  const matrices=o=>Array.from({length:o.count},(_,i)=>{const m=new T.Matrix4();o.getMatrixAt(i,m);return m.toArray();});
+ const timber=b.interior.children.find(o=>o.isInstancedMesh&&o.geometry.type==='BoxGeometry'&&o.material.color.getHex()===0x3c5149);
  const records=[];let instances=0;
- b.group.traverse(o=>{if(o.isMesh){let rows=o.isInstancedMesh?matrices(o):null;if(rows)instances+=rows.length;if(o===brass)rows=rows.slice(0,233);records.push({name:o.name,matrix:o.matrix.toArray(),world:o.matrixWorld.toArray(),geometry:{type:o.geometry.type,index:o.geometry.index?Array.from(o.geometry.index.array):null,attributes:Object.fromEntries(Object.entries(o.geometry.attributes).map(([k,a])=>[k,Array.from(a.array)]))},color:o.material.color?.getHex(),instances:rows});}});
+ b.group.traverse(o=>{if(o.isMesh){let rows=o.isInstancedMesh?matrices(o):null;if(rows)instances+=rows.length;if(o===brass)rows=rows.slice(0,233);if(o===timber)rows=rows.slice(0,portal.panels.sconces.oldTimber);records.push({name:o.name,matrix:o.matrix.toArray(),world:o.matrixWorld.toArray(),geometry:{type:o.geometry.type,index:o.geometry.index?Array.from(o.geometry.index.array):null,attributes:Object.fromEntries(Object.entries(o.geometry.attributes).map(([k,a])=>[k,Array.from(a.array)]))},color:o.material.color?.getHex(),instances:rows});}});
  // Independent 4da1f36 pre-edit snapshot, no image-loader stand-ins. The portal
- // audit first validates the panel supports and its twelve newer clips. This comparison
+ // audit first validates timber bearings, panel supports and portal clips. This comparison
  // then excludes the 94 measured rail links, retaining all 643 original
  // instances and every noninstance profile/pose in their original order.
- assert.equal(records.length,32);assert.equal(instances,737+portal.added+portal.panels.added);
+ assert.equal(records.length,32);assert.equal(instances,737+portal.added+portal.panels.added+portal.panels.sconces.added);
  assert.equal(hash(records),'dce0c53eb9eb4ab81a43e5249d18128ea07585e4f57af0b6325ca1bbdd7abb2c');
  const boxes=o=>matrices(o).map((a,id)=>{const m=new T.Matrix4().fromArray(a),p=new T.Vector3(),s=new T.Vector3();m.decompose(p,new T.Quaternion(),s);return{id,p,s,box:new T.Box3().setFromBufferAttribute(o.geometry.attributes.position).applyMatrix4(m)};});
  const rows=boxes(brass),rails=rows.slice(0,233).filter(r=>Math.abs(r.s.x-.12)<1e-5&&Math.abs(r.s.y-.08)<1e-5&&Math.abs(r.s.z-.5)<1e-5),posts=rows.slice(0,233).filter(r=>Math.abs(r.s.x-.06)<1e-5&&Math.abs(r.s.y-1.1)<1e-5),links=rows.slice(233,327);

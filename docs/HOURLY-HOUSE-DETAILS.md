@@ -6172,3 +6172,82 @@ experiments/readers/rights/private flows and all prior contracts. Only measured
 justified joins; otherwise a factual audit. No new light/floor column/barrier/
 room/lot/paper/first folio/historical copy/certification. Latest ledger governs;
 user's headed preview stays theirs.
+
+## 2026-11-11 — Escher vestibule: two clear wall-lamp bearings and artwork audit
+
+This review continues `517b140`. All47 first passes remain complete. Read
+`ESCHER-WALL-LAMP-SUPPORTS.md`. The original upper identity owner retains all
+four .15 x.90 x.11m timber lamp backs atX141/153,Y-35.6,Z105.43/124.57.
+Every wallward back has an actual .195m gap to original wall faces105.18/124.82.
+All four luminous faces already engage their original backs by .045m.
+
+The two north fixtures are directly in front of credited Relativity and
+Drawing Hands. Actual installed rays hit the corresponding picture planes
+atZ105.275 before the wall. A straight spacer would pierce those pictures.
+Those two gaps/fixtures and all artwork remain exact: this is explicitly
+not a claim that all four lamps now have wall support. No picture, fixture,
+caption, frame or source/private coordinate moves to conceal the conflict.
+
+Two .10 x.70 x.215m timber bearings join only the clear south fixtures flanking
+Ascending and Descending. At originalX/Y andZ124.7225 they span124.615..124.83,
+engaging both old back and actual wall by .01m. Recesses are .025m per side/
+.10m per end; undersideY-35.95 stays4.05m above floor and above old fixture
+bottom. No coplanar outer faces, new floor posts or walking barriers.
+
+Only existing timber batch IDs81..82 append in the pure fixture,84..85 in the
+installed credited-print owner. Three original print frames explain the ID
+difference. Pure761->763instances/32draws; installed767->769/42. Same21geometry/
+25material/14texture/14buffer pure and30/34/23/15 installed. No new geometry,
+material, texture, light, batch, collider, pick, listener, UI, reader, model or
+key. Initial60resources/14buffers and explicit model-replacement62/17 cleanup
+remain once-only; the credited geometry fixture also releases87/15 once.
+No borrowed paper/artwork/source resource is disposed.
+
+Independent517b140 full snapshots retain all761/767 earlier instances and32/42
+mesh geometries/profiles/poses/matrices/IDs, excluding only the two separately
+validated timber additions. Exact nine-light hash, earlier panel/ceiling/
+portal/stair/model/world/gallery/wing/Faculty/paper hashes and unrelaxed budgets
+remain. Six panels/12 bronze stems339..350,48treads/96guardfeet/94rail links/
+12portal clips/all seven frames, roofs/bearings/corners and original6m ceiling
+change/5.55m open high step remain.
+
+All121 release programs pass. New checks cover four measured gaps/four existing
+glow contacts, four positive support contacts/32 joint vertices, two gap rays/
+four end rays,72 vestibule standing-centre samples, two original print-conflict
+rays and nine clear lower-picture approach rays. The credited geometry fixture
+uses an explicit synthetic texture loader, not a remote-source success claim.
+Earlier source/private/voice/mode/gate/modal/experiment/resource checks remain.
+
+Native rays hit both expected installed IDs and all four actual contact
+volumes. Complete old42-mesh/767-instance hash and nine light records stay
+exact. Ordinary walking before/after views show the fitted joints and original
+print. Four selectable languages retain pose/public mosaic-loop geometry,
+PersianRTL and11 ready genuine pages. Ordinary keys descend all48 stairs to
+feet-46, return tofeet-40, leave through the west aperture to the real gallery
+and return, active/route=null. No pose assignment/auto-tour/collision bypass.
+Original Euler Latin edition/date distinction, credits/rights/source,
+100/150/200% zoom and same-pose close pass. Explicit local869-asset verification
+passes; final review identity accompanies PR #5. Existing Three warning and
+controller-A testing limit remain; user's headed preview stays theirs.
+
+All47 readings, original museum rooms/three experiments/retained public models/
+English notices/surface doors/upper Escher gates/artwork/readers/rights/private
+flows remain. Tunnel4m route/earth cut/turning gaps, both helices/all480treads/
+middle/well, eight-floor24IDwing/real stairs/lift/central3m door/covered route/
+Faculty/11 genuine scan bytes/editions/sources/zoom, approved appearances/voices/
+recordings and raw drafts/carets/first answers/keys/explicit source actions stay.
+Rendering has no memory/storage/progress access or preference-write/experiment/
+discovery/audio/travel/floor action. Own EN/DE/FA/CS/RTL and English gaps remain;
+no new historical object, quotation/testimony/source-fetch/certification claim.
+Separate main922f0bc Hall work and430e8c mobile controls/PR #2 stay untouched.
+Same feat/hourly-house-details/PR #5; no merge/deploy.
+
+Next useful audit: original three museum surface-threshold frame feet and
+upright/header joints against actual installed support surfaces. Inspect live
+owners, ground contacts, doorway approaches and cleanup first. Preserve linked
+thresholds/source coordinates/upper puzzle gate/return-height-cooldown guards;
+no unmodelled forty-metre stair claim. Retain these two bearings and unresolved
+north artwork/lamp arrangement, all prior contracts and separate main work.
+Only measured justified joins; otherwise factual audit. No new column, barrier,
+light, room, lot, paper/first folio, historical copy or certification. Latest
+ledger governs; user's headed preview stays theirs.

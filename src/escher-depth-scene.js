@@ -57,7 +57,8 @@ export function buildEscherDepth(T,{canvas=()=>document.createElement('canvas'),
  }
  // Illumination is switched on only while visiting; it never owns surface lights.
  const ambient=new T.AmbientLight(0xdce7df,.65);ambient.userData.escherDepthOwned=true;lamps.add(ambient);
- for(const x of[141,153]){for(const z of[105.43,124.57]){box(.15,.9,.11,x,-35.6,z,timber);box(.08,.5,.12,x,-35.55,z+(z<115?.07:-.07),glow);}const light=new T.PointLight(0xffd0a2,30,23,1.7);light.position.set(x,-34.7,115);light.userData.escherDepthOwned=true;lamps.add(light);}
+ const wallLamps=[];
+ for(const x of[141,153]){for(const z of[105.43,124.57]){box(.15,.9,.11,x,-35.6,z,timber);box(.08,.5,.12,x,-35.55,z+(z<115?.07:-.07),glow);wallLamps.push({x,y:-35.6,z});}const light=new T.PointLight(0xffd0a2,30,23,1.7);light.position.set(x,-34.7,115);light.userData.escherDepthOwned=true;lamps.add(light);}
  const ceilingPanels=[];
  for(const [x,y,z]of[[176,-32,115],[213,-32,115],[213,-32,82],[250,-32,115],[184,-34,144],[196,-38,171]]){
   box(2.4,.12,.8,x,y,z,glow);const light=new T.PointLight(0xffdfb7,40,35,1.7);light.position.set(x,y-.2,z);light.userData.escherDepthOwned=true;lamps.add(light);
@@ -82,6 +83,17 @@ export function buildEscherDepth(T,{canvas=()=>document.createElement('canvas'),
  for(const p of ceilingPanels){
   const room=D.rooms.find(r=>p.x>r.minX&&p.x<r.maxX&&p.z>r.minZ&&p.z<r.maxZ),top=(room?.id==='loop'?D.lowerCeiling:D.ceiling)+.01,bottom=p.top-.01;
   for(const offset of[-.85,.85])box(.04,top-bottom,.04,p.x+offset,(top+bottom)/2,p.z,brass);
+ }
+ // Only the two lamps flanking the south print have a clear wall bearing.
+ // The north lamps face original credited prints: straight spacers there
+ // would pierce those pictures. Leave those fixtures and pictures exact.
+ // Append recessed bearings after earlier work, engaging each end by .01m.
+ for(const p of wallLamps){
+  if(p.z<115)continue;
+  const wall=WALLS.find(w=>p.x>w.minX&&p.x<w.maxX&&w.minZ>p.z&&w.maxZ<p.z+1);
+  if(!wall)continue;
+  const start=p.z+.055-.01,end=wall.minZ+.01;
+  box(.10,.70,end-start,p.x,p.y,(start+end)/2,timber);
  }
  obj.quaternion.identity();obj.scale.set(1,1,1);for(const [parent,materials]of batches)for(const[m,items]of materials){const mesh=new T.InstancedMesh(unit,m,items.length);mesh.name='Batched Escher masonry / joinery';items.forEach((b,i)=>{obj.position.set(b.x,b.y,b.z);obj.rotation.set(0,b.yaw,0);obj.scale.set(b.w,b.h,b.d);obj.updateMatrix();mesh.setMatrixAt(i,obj.matrix);});mesh.instanceMatrix.needsUpdate=true;mesh.computeBoundingSphere?.();parent.add(mesh);}
  const tess=new T.Group(),loop=new T.Group();tess.name='Live edge-pairing mosaic';loop.name='Live closed-loop stair model';interior.add(tess,loop);let tileGeo=null,loopGeo=null;
