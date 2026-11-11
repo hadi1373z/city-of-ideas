@@ -1,5 +1,9 @@
 # Babel vault columns and inner spoke mounts
 
+The installed follow-up in [BABEL-VAULT-PERIMETER.md](BABEL-VAULT-PERIMETER.md)
+adds one separate base-floor strip/geometry/draw. Every column/spoke/mount and
+the historical 66-mesh/41,072-instance fixture below remain unchanged.
+
 This review continues `8f9c02a`. All 47 first reading passes remain complete.
 The 24 retained outer columns and all original spokes/ceiling profiles stay
 exact. Twenty-four small timber mounts now join the spokes near their inner

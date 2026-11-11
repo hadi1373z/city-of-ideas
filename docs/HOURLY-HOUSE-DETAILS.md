@@ -6836,3 +6836,90 @@ fitted mouths/glass/reservoir/book/collar/apertures/five terraces/96internal/
 Only measured justified joins; otherwise factual audit. No new column/barrier/
 light/room/lot/paper/folio/historical copy/certification. User's preview remains
 under their control.
+
+## 2026-11-12 — Babel vault perimeter: floor fitted to the actual wall facets
+
+This review continues `baaa410`; all47 first reading passes and all eight
+Mathematics working floors remain complete. Read docs/BABEL-VAULT-PERIMETER.md.
+A narrow installed strip joins the original base-floor edge to the actual
+faceted wall. Original source floor/wall/ceiling profiles and coordinates stay
+exact; the new surface creates no walking destination, room or floor selection.
+
+The original160-facet wall stands at radius57.5/Y-27.5..-2.5; the480-segment
+base-floor outer edge is nominally57.4/Y-26.5. Actual source rays measure
+.09014486..10000334m gaps. Installed inspection confirms the existing earth
+atY-26.59999962, about.10m below that seam. The ceiling joint already meets:
+walltop-2.5 lies.30m above underside-2.8 and.20m below ceilingtop-2.3. All480
+wall/roof stations retain real ceiling. No roof closure or duplicate wall/post.
+
+The strip copies480 unique original floor vertices and160 original wall X/Z
+stations directly, at the unchanged floorY-26.5. One640-vertex/640-triangle
+annulus has area33.723119m² within the existing vault perimeter. It follows
+the true chords, without moving/resampling any original source vertex/index.
+The original cyclic Float32 closing differences remain approximately1e-14m;
+the new geometry uses the unique source rings. All640 triangle centroids stay
+outside the old floor and inside every wall facet. All102,400 half-plane checks
+and the independent polygon/triangulated area comparison pass. No overlapping
+floor interior or aperture closure; this is not a thick slab/engineered footing.
+
+The adapter owns one BufferGeometry/mesh and borrows the exact floor material.
+Active Babel becomes67meshes/41,072instances from66/41,072; no instance buffer,
+material, texture, light, collider, pick, UI, listener, reader, model or key.
+Complete prior66/41,072 fixture hashd3a619ae and every old source profile/matrix/
+ID remain exact with no original-source exclusions. Prior24mounts/199mouth
+records/100bindings/80stamps remain; earlier source-only15-hit negative control
+and all old budgets/fingerprints stay unrelaxed. New owned geometry is checked
+separately. The group inherits the original upper parent without baked source/
+private coordinates or changes to lower-frame mapping.
+
+Fourteen ownership/custom-layout programs cover repeat/parent-first cleanup,
+missing/replaced source group/floor/wall, attribute/index versions, changed
+poses, hidden owners and invalid/missing data/material. The adapter releases
+only its geometry once and delegates the prior cleanup chain. Borrowed floor
+material remains source-owned; source visibility values are never written.
+Foreign API identity is checked before fields. Private-storage getters and
+new material/texture/instance constructors are denied during construction/sync.
+
+New tests verify4,320 filled-gap rays and4,320 original-floor misses,480 wall/
+roof rays, exact480/160 boundaries and all640 positive-area upward triangles.
+All4,539 established thermal/terrace/entry/shelf/deep-gallery positions clear
+the strip, and all1,008 complete active-geometry stair body probes remain clear.
+The existing navigation model still rejects radius57.45/Y-26.5; this visible
+base-floor join does not add a standable route. All121 release programs pass;
+explicit872-asset LOCAL verification accompanies the final PR#5 review.
+
+Independent native QA confirms4,320 gap hits/zero old-floor overlaps,480 original
+wall/roof contacts, exact480/160 boundaries,67 active meshes/41,072instances,
+24mounts/199mouth records and11 ready genuine pages. Before/after and ceiling
+views use separate cameras without moving the visitor. Original Return action,
+ordinary40-tread entry descent/first-terrace catalogue approach/ascent and
+ground receiver at feet.395/Z12 pass; no pose assignment, automatic tour or
+collision bypass. EN/DE/FA/CS keeps pose/page0/aaaaaa/empty prefix/source-reader
+and same-pose close; PersianRTL remains and Babel Czech retains English fallback.
+Raw native source hashes357a4d91/139ef073/7c1b1038 remain exact. App r160 and
+source-tool r186 distinctions remain. Final console/local asset results
+accompany PR#5; hardware controller A remains separately untested. These are
+geometric joins/clearance checks, not certification or historical reconstruction.
+
+All47 sourced readings/raw drafts/carets/first answers/private keys/explicit
+actions, approved cast/fixed voices/recordings/genuine artwork/scans/credits/
+rights/source/zoom remain. Preserve five terraces/96internal/40entrytreads/
+28entrybrackets/24mounts/fitted mouths/reservoir/book/collar/well/default arrival,
+480gallerytreads/middle/tunnel/earth cut/eight-floor24IDwing/stairs/lift/central3m
+door/Faculty/covered connection and prior contracts. Rendering adds no private
+memory/storage/progress access or preference-write/experiment/discovery/audio/
+travel/floor action. No new reading/paper/folio/historical object/quotation/
+testimony/source-fetch. Concurrent main Hall/mobile work and PR#2 stay separate;
+same branch/PR#5, no merge/deploy, user's headed preview untouched.
+
+Next useful review: audit the two original oak reveal beams and their brass
+caps along the entry shaft, including actual end seats/ceiling-cut/cheek-wall
+contacts. Read this ledger, BABEL-VAULT-PERIMETER and prior Babel/world/gallery/
+Math/Faculty/covered-walk/paper contracts. Inspect installed owners, complete
+profiles, headroom and cleanup first. Preserve original enlarged roof/slab cuts,
+40treads/risers/width/overlook/held movement-height gates, exact source reveals,
+new perimeter/mounts/fitted mouths/glass/reservoir/book/collar/five terraces/
+96internaltreads/catalogue/source-private coordinates and all prior contracts.
+Only measured justified joins; otherwise factual audit. No new column/barrier/
+light/room/lot/paper/folio/historical copy/descent/certification. User's headed
+preview remains under their control.
