@@ -5938,3 +5938,83 @@ readers/artwork/rights/private flows, tunnel/spirals/middle, Math/Faculty/papers
 and all47readings. Only measured justified joins; otherwise a factual audit.
 No duplicate column/barrier/new lot/paper/first folio/historical copy or
 certification. Latest ledger governs; user's headed preview stays theirs.
+
+## 2026-11-11 — Escher museum: portal contacts and seated cross-strips
+
+This review continues `2d39630`. All47 first reading passes remain complete.
+Read `ESCHER-PORTAL-CONTACTS.md`. The actual original and installed upper +Y
+identity owners retain all seven double frames, room/floor/roof/wall profiles,
+apertures, targets, transforms, resources and original per-batch IDs/order.
+
+The upper stair frame atZ132.24 extends beyond the hall slab endingZ132, but
+its four jambs already have real wall-backed connections. All14 pale jambs
+engage original walls; all14 timber jambs engage the pale layer by.10m along
+the frame/.06m normal/6.35m height. The other24 jambs have full original floor
+seats. All14 lintels meet their two jambs by.11m vertically,28 contacts. No
+duplicate column or sole is justified. This measures geometric contact, not
+structural capacity or full-width bearing.
+
+The upper stair bronze cross-strip already intersects original stair walls
+21/22 and remains exact. The other six cross-strips lacked solid contacts:
+each end stopped.035m short of its timber jamb. Twelve recessed bronze clips,
+.055m along the frame/.035high/.04normal, now bridge those measured gaps.
+Each has.01 x.035 x.03m concealed strip engagement and.01 x.035 x.02m timber
+engagement, with.01m top/bottom recess. Actual retained wall bounds determine
+which strips need clips. No original frame part moves; no new walking barrier
+or overlapping clip volume. This is city trim, not a historical object or
+engineered-beam/certification claim.
+
+The twelve boxes append only bronze IDs327..338:327->339. Pure737->749
+instances/32draws, same21geometries/25materials/14textures/14buffers; actual
+credited-print owner743->755/42draws, same30geometries/34materials/23textures/
+15buffers. No new geometry/material/texture/light/batch/collider/pick/UI/
+listener/reader/key/model. Independent2d39630 pure and installed fingerprints
+retain every737/743 earlier instance and32/42 mesh profiles/poses, excluding
+only the independently validated twelve new IDs. The original model hash,
+94 recessed rail links/48 treads/96 guard feet, all prior source/world/tunnel/
+helix/wing/Faculty/paper fingerprints and unrelaxed budgets remain exact.
+
+All121 release programs pass. The portal validator checks14 pale wall roots,
+14 timber roots,28 lintel contacts,24 original floored jambs/four wall-mounted
+upper jambs, two retained upper-strip wall contacts,24 clip contacts,12
+expected-ID rays and231 strict floor/overhead/standing-centre aperture samples.
+Earlier188 rail-cap/384 guard-foot/47 tread/two landing/1,405 clearance probes,
+94 rail-link rays and three-lane reversible walking remain. Initial60 owned
+resources/14buffers and62resources/17buffers over explicit original model
+replacement release once; no borrowed asset is disposed.
+
+Native pre-edit bounds confirm the six unsupported strips and upper wall
+contacts. All12 installed rays hit exact IDs; the pre-edit42-mesh/743-instance
+fingerprint remains after excluding those12 IDs. Nearby before/after views
+use ordinary walking approaches, not identical camera poses. Ordinary keys
+walk down all48 stairs onto the closed-loop room and back through the upper
+portal to the hall atfeet-40, museum active/route=null. No pose assignment,
+guide auto-tour or collision bypass. EN/DE/FA/CS retains pose and exact public
+mosaic/loop geometry; PersianRTL and11 genuine pages ready remain. The original
+Euler reader retains the Latin edition/date distinction, credits, rights and
+source/zoom controls; close keeps the same pose. No application errors; existing
+Three warning/controller-A testing limit remain. Final869-asset local artifact
+verification is recorded with the published review in this chat/PR #5.
+
+All47 sourced readings, museum rooms/three experiments/retained public models/
+English notices/surface doors/upper Escher gates/artwork/readers/credits/rights/
+private flows remain. Tunnel4m route/earth cut/turning gaps, both spirals/all480
+treads/middle/well, eight-floor24IDwing/real stairs/lift/central3m door/covered
+connection/Faculty/west exit/paper aisle, eleven genuine scan bytes/source/zoom,
+approved appearances/voices/recordings, raw drafts/carets/first answers/keys and
+original explicit actions remain. Construction/rendering has no memory/storage/
+progress access or preference/experiment/discovery/audio/travel/floor action.
+Own EN/DE/FA/CS/PersianRTL and disclosed English gaps remain; no new reading,
+source-fetch/historical-copy/certification claim. User's headed preview stays
+theirs. Concurrent main's Hall-room work in922f0bc remains separate; same
+feat/hourly-house-details/PR #5, no merge/deploy.
+
+Next useful architectural audit: the original Escher stairwell-to-closed-loop
+room ceiling and wall corner joins nearZ156, where stairwell roofY-29 meets
+lower-room roofY-35. Inspect actual installed faces, wall support, overhead
+clearance, owners and cleanup before editing. Preserve original room/floor/roof
+profiles/openings,48treads/rail links/portal seats, model/collision/experiment
+gates/readers/artwork/rights/private flows and all gallery/Math/Faculty/paper
+contracts. Only measured justified joins; otherwise record a factual audit.
+No duplicate column/new barrier/room/lot/paper/first folio/historical copy or
+certification. Latest ledger governs; user's headed preview stays theirs.

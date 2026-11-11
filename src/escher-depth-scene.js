@@ -17,9 +17,10 @@ export function buildEscherDepth(T,{canvas=()=>document.createElement('canvas'),
  // free-standing props in the visitor's route. All relief stays in wall space.
  for(const b of WALLS){const x=(b.minX+b.maxX)/2,z=(b.minZ+b.maxZ)/2,top=b.y+b.height;box(b.maxX-b.minX+.12,.16,b.maxZ-b.minZ+.12,x,top-.22,z,timber);box(b.maxX-b.minX+.09,.055,b.maxZ-b.minZ+.09,x,b.y+1.05,z,sage);}
  for(const r of D.rooms){const top=r.id==='loop'?D.lowerCeiling:D.ceiling,spacing=r.id==='vestibule'?6.4:8.5;for(let x=r.minX+3;x<r.maxX-1;x+=spacing){box(.14,.16,r.maxZ-r.minZ-.5,x,top-.08,(r.minZ+r.maxZ)/2,timber);for(const z of[r.minZ+.55,r.maxZ-.55])box(.4,.32,.5,x,top-.16,z,sage);}for(const z of[r.minZ+1.0,r.maxZ-1.0])box(r.maxX-r.minX-.7,.08,.085,(r.minX+r.maxX)/2,top-.04,z,brass);}
- // Recessed double frames mark real six-metre apertures. Their jambs remain
- // entirely inside the existing solid wall strips; their lintels have 6m+ clearance.
- function portalFrame(x,z,y,alongX=true,width=6){for(let layer=0;layer<2;layer++){const material=layer?timber:sage,depth=layer?.16:.28,spread=width/2+.37+layer*.18,height=6.35+layer*.35,offset=layer?.16:0;for(const sign of[-1,1])box(alongX?depth:.28,height,alongX?.28:depth,x+(alongX?offset:sign*spread),y+height/2,z+(alongX?sign*spread:offset),material);box(alongX?depth:width+1.25,.22,alongX?width+1.25:depth,x+(alongX?offset:0),y+height,z+(alongX?0:offset),material);}box(alongX?.08:width+.75,.055,alongX?width+.75:.08,x+(alongX?.27:0),y+6.08,z+(alongX?0:.27),brass);}
+ // Laminated jambs engage the original wall-backed frames. The upper stair
+ // frame is wall-supported beyond the hall slab; no extra floor columns.
+ const portalFrames=[];
+ function portalFrame(x,z,y,alongX=true,width=6){for(let layer=0;layer<2;layer++){const material=layer?timber:sage,depth=layer?.16:.28,spread=width/2+.37+layer*.18,height=6.35+layer*.35,offset=layer?.16:0;for(const sign of[-1,1])box(alongX?depth:.28,height,alongX?.28:depth,x+(alongX?offset:sign*spread),y+height/2,z+(alongX?sign*spread:offset),material);box(alongX?depth:width+1.25,.22,alongX?width+1.25:depth,x+(alongX?offset:0),y+height,z+(alongX?0:offset),material);}box(alongX?.08:width+.75,.055,alongX?width+.75:.08,x+(alongX?.27:0),y+6.08,z+(alongX?0:.27),brass);portalFrames.push({x,z,y,alongX,width});}
  for(const x of[135.24,160.24,194.24,232.24])portalFrame(x,115,-40,true);portalFrame(213,98.24,-40,false);portalFrame(184.5,132.24,-40,false,7);portalFrame(184.5,156.24,-46,false,7);
  const s=D.stair,railCentre=1.08;for(let i=0;i<s.steps;i++){const z=s.minZ+(i+.5)*(s.maxZ-s.minZ)/s.steps,y=s.top+(i+1)*(s.bottom-s.top)/s.steps;box(s.maxX-s.minX,.18,(s.maxZ-s.minZ)/s.steps+.012,(s.minX+s.maxX)/2,y-.09,z,stone);for(const x of[s.minX+.22,s.maxX-.22]){box(.06,1.1,.06,x,y+.55,z,brass);box(.12,.08,.50,x,y+railCentre,z,brass);}}
  box(7,.45,24,184.5,-28.775,144,roof);
@@ -65,6 +66,15 @@ export function buildEscherDepth(T,{canvas=()=>document.createElement('canvas'),
  // without coplanar outer faces. The actual .125m stair rise stays authoritative.
  const rise=(s.top-s.bottom)/s.steps;
  for(let i=1;i<s.steps;i++){const upper=s.top-i*rise+railCentre,lower=upper-rise,z=s.minZ+i*(s.maxZ-s.minZ)/s.steps;for(const x of[s.minX+.22,s.maxX-.22])box(.10,rise+.06,.10,x,(upper+lower)/2,z,brass);}
+ // Fit only cross-strips without an existing wall contact. The upper stair
+ // strip already passes through both stair walls and needs no redundant clip.
+ // Recessed clips bridge the actual .035m end gaps, engaging each end by .01m.
+ for(const f of portalFrames){
+  const half=f.width/2+.375,y=f.y+6.08,minX=f.alongX?f.x+.23:f.x-half,maxX=f.alongX?f.x+.31:f.x+half,minZ=f.alongX?f.z-half:f.z+.23,maxZ=f.alongX?f.z+half:f.z+.31;
+  if(WALLS.some(w=>Math.min(maxX,w.maxX)-Math.max(minX,w.minX)>.001&&Math.min(maxZ,w.maxZ)-Math.max(minZ,w.minZ)>.001&&Math.min(y+.0275,w.y+w.height)-Math.max(y-.0275,w.y)>.001))continue;
+  const jambInner=f.width/2+.37+.18-.14,span=(half+jambInner)/2,length=jambInner-half+.02;
+  for(const sign of[-1,1])box(f.alongX?.04:length,.035,f.alongX?length:.04,f.x+(f.alongX?.24:sign*span),y,f.z+(f.alongX?sign*span:.24),brass);
+ }
  obj.quaternion.identity();obj.scale.set(1,1,1);for(const [parent,materials]of batches)for(const[m,items]of materials){const mesh=new T.InstancedMesh(unit,m,items.length);mesh.name='Batched Escher masonry / joinery';items.forEach((b,i)=>{obj.position.set(b.x,b.y,b.z);obj.rotation.set(0,b.yaw,0);obj.scale.set(b.w,b.h,b.d);obj.updateMatrix();mesh.setMatrixAt(i,obj.matrix);});mesh.instanceMatrix.needsUpdate=true;mesh.computeBoundingSphere?.();parent.add(mesh);}
  const tess=new T.Group(),loop=new T.Group();tess.name='Live edge-pairing mosaic';loop.name='Live closed-loop stair model';interior.add(tess,loop);let tileGeo=null,loopGeo=null;
  function discard(g){for(const m of [...g.children]){m.dispose?.();g.remove(m);}}

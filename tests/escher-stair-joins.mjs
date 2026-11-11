@@ -2,24 +2,27 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {readFileSync} from 'node:fs';
 import {ESCHER_DEPTH as D,depthFloorAt,canWalkDepth,walkDepth} from '../src/escher-depth-model.js';
+import {validateEscherPortalContacts} from './escher-portal-contacts.mjs';
 
 const near=(a,b,e=5e-6)=>assert(Math.abs(a-b)<e,`${a} != ${b}`);
 const hash=v=>createHash('sha256').update(JSON.stringify(v)).digest('hex');
 export function validateEscherStairJoins(T,b){
  b.group.updateMatrixWorld(true);assert(b.group.matrixWorld.equals(new T.Matrix4()),'Original upper +Y frame');
+ const portal=validateEscherPortalContacts(T,b);
  assert.equal(createHash('sha256').update(readFileSync(new URL('../src/escher-depth-model.js',import.meta.url),'utf8').replace(/\r\n/g,'\n')).digest('hex'),'57bb3a803e8c3870efae87bcb9000bc4e52ab08de6c452b009b2677e41ab4b39');
  const brass=b.interior.children.find(o=>o.isInstancedMesh&&o.geometry.type==='BoxGeometry'&&o.material.color.getHex()===0xaa9868);
- assert.equal(brass.count,327);
+ assert.equal(brass.count,327+portal.added);
  const matrices=o=>Array.from({length:o.count},(_,i)=>{const m=new T.Matrix4();o.getMatrixAt(i,m);return m.toArray();});
  const records=[];let instances=0;
  b.group.traverse(o=>{if(o.isMesh){let rows=o.isInstancedMesh?matrices(o):null;if(rows)instances+=rows.length;if(o===brass)rows=rows.slice(0,233);records.push({name:o.name,matrix:o.matrix.toArray(),world:o.matrixWorld.toArray(),geometry:{type:o.geometry.type,index:o.geometry.index?Array.from(o.geometry.index.array):null,attributes:Object.fromEntries(Object.entries(o.geometry.attributes).map(([k,a])=>[k,Array.from(a.array)]))},color:o.material.color?.getHex(),instances:rows});}});
- // Independent 4da1f36 pre-edit snapshot, no image-loader stand-ins. Only the
- // exact 94 appended IDs are removed; all 643 original instances and every
- // noninstance profile/pose retain their original order and fingerprint.
- assert.equal(records.length,32);assert.equal(instances,737);
+ // Independent 4da1f36 pre-edit snapshot, no image-loader stand-ins. The portal
+ // audit above first validates its twelve newer IDs. This earlier comparison
+ // then excludes the 94 measured rail links, retaining all 643 original
+ // instances and every noninstance profile/pose in their original order.
+ assert.equal(records.length,32);assert.equal(instances,737+portal.added);
  assert.equal(hash(records),'dce0c53eb9eb4ab81a43e5249d18128ea07585e4f57af0b6325ca1bbdd7abb2c');
  const boxes=o=>matrices(o).map((a,id)=>{const m=new T.Matrix4().fromArray(a),p=new T.Vector3(),s=new T.Vector3();m.decompose(p,new T.Quaternion(),s);return{id,p,s,box:new T.Box3().setFromBufferAttribute(o.geometry.attributes.position).applyMatrix4(m)};});
- const rows=boxes(brass),rails=rows.slice(0,233).filter(r=>Math.abs(r.s.x-.12)<1e-5&&Math.abs(r.s.y-.08)<1e-5&&Math.abs(r.s.z-.5)<1e-5),posts=rows.slice(0,233).filter(r=>Math.abs(r.s.x-.06)<1e-5&&Math.abs(r.s.y-1.1)<1e-5),links=rows.slice(233);
+ const rows=boxes(brass),rails=rows.slice(0,233).filter(r=>Math.abs(r.s.x-.12)<1e-5&&Math.abs(r.s.y-.08)<1e-5&&Math.abs(r.s.z-.5)<1e-5),posts=rows.slice(0,233).filter(r=>Math.abs(r.s.x-.06)<1e-5&&Math.abs(r.s.y-1.1)<1e-5),links=rows.slice(233,327);
  assert.equal(rails.length,96);assert.equal(posts.length,96);assert.equal(links.length,94);
  const stone=b.interior.children.find(o=>o.isInstancedMesh&&o.material.color.getHex()===0xa4afa3),treads=boxes(stone).filter(r=>Math.abs(r.s.x-7)<1e-5&&Math.abs(r.s.y-.18)<1e-5&&Math.abs(r.s.z-.512)<1e-5).sort((a,b)=>a.p.z-b.p.z);
  assert.equal(treads.length,48);
@@ -63,7 +66,7 @@ export function validateEscherStairJoins(T,b){
   assert(p.z>157);near(p.y-1.8,-46);for(let i=1;i<=48;i++)assert(visited.has(-40-i*.125));
   for(let i=0;i<300;i++){const old=p.y;walkDepth(p,0,-.09);assert(Math.abs(p.y-old)<=.125001);}assert(p.z<132);near(p.y-1.8,-40);
  }
- return{capContacts,footContacts,treadJoins,landingJoins,headroom,gapRays,runs:2,oldInstances:643,added:94};
+ return{portal,capContacts,footContacts,treadJoins,landingJoins,headroom,gapRays,runs:2,oldInstances:643,added:94};
 }
 
 export function watchEscherResources(b){
