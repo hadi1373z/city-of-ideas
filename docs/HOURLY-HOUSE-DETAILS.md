@@ -6157,6 +6157,13 @@ PersianRTL and disclosed English gaps remain; no new historical object,
 quotation/testimony/source-fetch/certification claim. Main922f0bc Hall-room
 work/PR #2 stay separate. Same feat/hourly-house-details/PR #5, no merge/deploy.
 
+The app now limits scheduled instructions to10,000 tokens. The complete extended
+preservation list is retained in `HOURLY-PRESERVATION-CONTRACTS.md`, including all
+prior architectural, reading, locale, private-flow, voice and source contracts.
+Only the live review/next-work handoff stays in the short automation prompt;
+the latest ledger still governs completed/next areas. No product behavior or
+preservation requirement changes.
+
 Next useful architectural audit: original four vestibule wall lamps and actual
 wall contacts. Inspect installed backing faces/supports, clearances, artwork/
 door approaches, ownership and release first. Preserve these six suspensions,
