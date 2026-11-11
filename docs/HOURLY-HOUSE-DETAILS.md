@@ -6412,3 +6412,76 @@ models/readers/private flows and all prior contracts. Only measured justified
 joins; otherwise factual audit. No duplicate column, barrier, light, room, lot,
 paper/first folio, historical copy or certification. Latest ledger governs;
 user's headed preview stays theirs.
+
+## 2026-11-11 — Escher ceiling ribs: factual roof-contact audit, no added parts
+
+This review continues `2a0d9bb`; all47 first reading passes remain complete.
+Read `ESCHER-CEILING-RIBS.md`. No production source file or scene geometry
+changes. All28 original timber ribs(IDs28..55) and56 pale end blocks
+(IDs28..83) already have full upper faces at their own room roofs:84 retained
+roof contacts. Five upper rooms each keep4 ribs/8 blocks at roofY-29; the
+closed-loop chamber keeps8/16 atY-35. Original .14 x.16 rib sections/room-depth-
+minus.5 lengths and .4 x.32 x.5 block profiles stay exact.
+
+All56 rib/block joints retain positive .14 x.16 x.50m overlaps. Across54 ends
+facing actual wall bands, block-to-wall gaps remainabout.12m and rib-end gaps
+about.07m. The other two end blocks atX214,Z98.55/97.45 align with the actual
+six-metre tessellation doorwayX210..216, where no corresponding wall band
+exists. These are ceiling-mounted contacts, not newly asserted wall bearings.
+No spacer, duplicated corbel, floor column or doorway/roof closure is added;
+there is no structural/certification claim.
+
+Complete independent2a0d9bb snapshots retain every32-mesh/769-instance pure
+and42-mesh/775-instance installed geometry/profile/pose/matrix/ID, with no
+excluded IDs. Upper identity owner, roof profiles/step/opening and source/
+private coordinates remain. No new instance/resource/material/texture/light/
+batch/collider/pick/listener/UI/reader/model/key/state. Same21geometry/25material/
+14texture/14buffer pure and30/34/23/15 installed,60/14 initial and62/17 explicit
+model-replacement owned release; credited fixture87/15 cleanup remains.
+Borrowed artwork/paper/source resources stay with their owners. All source
+files retain their bytes/content hash; the change is tests/documentation only.
+
+All121 release programs pass. New checks in the existing Escher runtime cover
+84 original roof contacts/336 cap vertices/1512 exact-owner cap rays,56 positive
+joints/448 joint vertices,54 actual wall gaps/two doorway ends and588 valid
+floor/overhead/body samples, in both pure and credited geometry fixtures.
+Body rays start above retained low bronze/ink floor marks; older strict
+source collision checks remain. Minimum in these samples is6.24m; earlier
+stair/ceiling checks retain the independent6.0525m portal minimum. No earlier
+hash or budget is relaxed. Synthetic textures enable geometry only, not a
+remote-source fetch claim. Existing owned-release/private/gate/mode/height/
+modal/cooldown/experiment/voice programs remain.
+
+Native1512 roof/member rays/all56 joints and complete42-mesh/775-instance hash
+pass. Original vestibule/end-block/lower-room views were visually inspected.
+Ordinary keys walk all48 source stairs down tofeet-46 and back tofeet-40,
+museum active/route=null; no pose assignment/auto-tour/collision bypass.
+EN/DE/FA/CS retains pose and exact public mosaic/loop geometry, PersianRTL
+and11 ready genuine pages. Original reader/source/rights/zoom/same-pose close
+and explicit869-asset local verification accompany the final review in PR #5.
+User's headed preview stays theirs; existing Three warning/controller-A
+testing limit remains. All47 sourced readings remain complete.
+
+Preserve all earlier sign tabs/study feet/south lamp bearings/north print-lamp
+gaps/panel suspensions/nine lights, rooms/frames/thresholds/gates/artwork/
+readers/rights/retained experiments/English notices/private flows/voices.
+All source/private coordinates/raw drafts/carets/first answers/keys/explicit
+saves, tunnel/earth cut/480gallerytreads/middle/well/eight-floor24IDwing/stairs/
+lift/central3m door/covered walk/Faculty/eleven genuine scans/source/zoom remain.
+No rendering behavior or memory/storage/progress access, preference-write/
+experiment/discovery/audio/travel/floor action changes. Own EN/DE/FA/CS/RTL
+and disclosed English gaps remain. No new first folio/paper/reading/historical
+object/quotation/testimony/certification. Concurrent main Hall/mobile work
+and PR #2 stay separate; same branch/PR #5, no merge/deploy.
+
+Next useful audit: original guard-post feet, handrail/post joints and landing
+contacts on the forty-tread Gallery-to-Babel entry descent. Read the existing
+BABEL-SNAKE-DESCENT/BABEL-THERMAL-VAULT/WORLD-CYLINDER/gallery/Babel contracts.
+Preserve accepted treads/risers/footprint/shaft/overlook/first-terrace join,
+held movement/look/reversible routes, five terraces/finite catalogue, source/
+private coordinates, borrowed snake texture/landing material, default reservoir
+arrival and explicit book/return actions. Inspect actual profiles/feet/owners/
+clearance/cleanup first; this is an audit of retained connections, not a new
+descent or first reading pass. Only measured justified joins; otherwise factual
+audit. No new column, barrier, light, room, lot, paper/folio, historical copy
+or certification. Latest ledger governs; user's headed preview stays theirs.

@@ -6,6 +6,7 @@ import {buildEscherDepth} from '../src/escher-depth-scene.js';
 import {installEscherDepth} from '../src/escher-depth.js';
 import {validateEscherStairJoins,watchEscherResources} from './escher-stair-joins.mjs';
 import {validateEscherCeilingContacts} from './escher-ceiling-contacts.mjs';
+import {validateEscherCeilingRibs} from './escher-ceiling-ribs.mjs';
 
 const near=(a,b,eps=1e-5)=>assert(Math.abs(a-b)<eps,`${a} ≠ ${b}`);
 const context=new Proxy({measureText:t=>({width:t.length*12})},{get:(o,k)=>o[k]??(()=>{})});
@@ -19,6 +20,10 @@ built.group.traverse(o=>{
 assert(draws<60,`Museum geometry uses ${draws} draws, including its surface doors and labels`);assert(instances>300,'Masonry, stairs and exhibits use real batched geometry');
 console.log('PASS measured Escher stair joins: '+JSON.stringify(validateEscherStairJoins(T,built)));
 console.log('PASS original Escher ceiling contacts: '+JSON.stringify(validateEscherCeilingContacts(T,built)));
+console.log('PASS factual Escher ceiling-rib audit: '+JSON.stringify(validateEscherCeilingRibs(T,built)));
+// Synthetic textures enable the original credited-print geometry only.
+const ribCredited=buildEscherDepth(T,{canvas,loadTexture:()=>new T.Texture()});
+try{console.log('PASS complete credited Escher rib snapshot: '+JSON.stringify(validateEscherCeilingRibs(T,ribCredited)));}finally{ribCredited.dispose();}
 const resources=watchEscherResources(built);
 const ray=(x,y,z,dx,dy,dz,far=80)=>new T.Raycaster(new T.Vector3(x,y,z),new T.Vector3(dx,dy,dz),0,far).intersectObject(built.interior,true);
 for(const [x,z]of[[140,115],[177,120],[225,125],[225,75],[264,124],[174,170]]){
