@@ -48,11 +48,11 @@ export function buildEscherDepth(T,{canvas=()=>document.createElement('canvas'),
  const landingMarkers={park:[170,114],study:[260,121],escher:[240,115]},surfaceFrames=[];
  for(const p of D.portals){
   const w=p.id==='escher'?2.4:3.3,h=p.id==='escher'?3.5:4.4;
-  surfaceFrames.push({p,w});
   for(const sign of[-1,1])box(.22,h,.38,p.x+sign*w/2,p.y+h/2,p.z,stone,surface);
   box(w+.2,.25,.38,p.x,p.y+h,p.z,stone,surface);box(w-.28,h-.1,.08,p.x,p.y+h/2,p.z,ink,surface);
   const door=new T.Mesh(own(new T.PlaneGeometry(w-.28,h-.1)),ink);door.position.set(p.x,p.y+h/2,p.z+.055);door.userData.escherDepthDoor=p.id;surface.add(door);targets.push(door);
-  label('ESCHER · BELOW',p.x,p.y+h+.45,p.z+.23,w+1,.5,surface);
+  const identity=label('ESCHER · BELOW',p.x,p.y+h+.45,p.z+.23,w+1,.5,surface);
+  surfaceFrames.push({p,w,identity,headerTop:p.y+h+.125});
   const [x,z]=landingMarkers[p.id];box(3,.025,2,x,-39.98,z,brass);box(2.7,.03,1.7,x,-39.96,z,ink);
   label(p.name+' ↑',x,-37.2,z-.9,7,.65);
  }
@@ -104,6 +104,14 @@ export function buildEscherDepth(T,{canvas=()=>document.createElement('canvas'),
   if(p.id!=='study')continue;
   const bottom=.003,top=p.y+.01;
   for(const sign of[-1,1])box(.18,top-bottom,.34,p.x+sign*w/2,(top+bottom)/2,p.z,stone,surface);
+ }
+ // The alcove identity plane already meets both original side walls. Retain
+ // all three double-sided graphics; small tabs touch only the blank lower
+ // edges of the two free signs. Each tab engages its old header by .01m.
+ for(const {p,identity,headerTop}of surfaceFrames){
+  if(p.id==='escher')continue;
+  const bottom=headerTop-.01,top=identity.position.y-identity.geometry.parameters.height/2+.01;
+  for(const offset of[-.85,.85])box(.04,top-bottom,.08,p.x+offset,(top+bottom)/2,identity.position.z-.015,stone,surface);
  }
  obj.quaternion.identity();obj.scale.set(1,1,1);for(const [parent,materials]of batches)for(const[m,items]of materials){const mesh=new T.InstancedMesh(unit,m,items.length);mesh.name='Batched Escher masonry / joinery';items.forEach((b,i)=>{obj.position.set(b.x,b.y,b.z);obj.rotation.set(0,b.yaw,0);obj.scale.set(b.w,b.h,b.d);obj.updateMatrix();mesh.setMatrixAt(i,obj.matrix);});mesh.instanceMatrix.needsUpdate=true;mesh.computeBoundingSphere?.();parent.add(mesh);}
  const tess=new T.Group(),loop=new T.Group();tess.name='Live edge-pairing mosaic';loop.name='Live closed-loop stair model';interior.add(tess,loop);let tileGeo=null,loopGeo=null;

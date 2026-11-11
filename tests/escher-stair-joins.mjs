@@ -21,7 +21,7 @@ export function validateEscherStairJoins(T,b){
  // audit first validates surface feet, timber bearings, panel stems and clips. This comparison
  // then excludes the 94 measured rail links, retaining all 643 original
  // instances and every noninstance profile/pose in their original order.
- assert.equal(records.length,32);assert.equal(instances,737+portal.added+portal.panels.added+portal.panels.sconces.added+portal.panels.sconces.thresholds.added);
+ assert.equal(records.length,32);assert.equal(instances,737+portal.added+portal.panels.added+portal.panels.sconces.added+portal.panels.sconces.thresholds.added+portal.panels.sconces.thresholds.signs.added);
  assert.equal(hash(records),'dce0c53eb9eb4ab81a43e5249d18128ea07585e4f57af0b6325ca1bbdd7abb2c');
  const boxes=o=>matrices(o).map((a,id)=>{const m=new T.Matrix4().fromArray(a),p=new T.Vector3(),s=new T.Vector3();m.decompose(p,new T.Quaternion(),s);return{id,p,s,box:new T.Box3().setFromBufferAttribute(o.geometry.attributes.position).applyMatrix4(m)};});
  const rows=boxes(brass),rails=rows.slice(0,233).filter(r=>Math.abs(r.s.x-.12)<1e-5&&Math.abs(r.s.y-.08)<1e-5&&Math.abs(r.s.z-.5)<1e-5),posts=rows.slice(0,233).filter(r=>Math.abs(r.s.x-.06)<1e-5&&Math.abs(r.s.y-1.1)<1e-5),links=rows.slice(233,327);

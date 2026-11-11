@@ -17,7 +17,7 @@ export function validateEscherWallLampSupports(T,b){
  // Independent 517b140 full snapshot: all 761 earlier instances remain,
  // including every panel stem, rail link, portal clip and original fixture.
  // The newer surface feet are independently checked before this comparison.
- const old=snapshot(b,81);assert.equal(old.hash,'4198c0a962692ac6c92d68e4361de83adfd9a5c866e451a2ab27551c12b7975c');assert.equal(old.meshes,32);assert.equal(old.instances,763+thresholds.added);
+ const old=snapshot(b,81);assert.equal(old.hash,'4198c0a962692ac6c92d68e4361de83adfd9a5c866e451a2ab27551c12b7975c');assert.equal(old.meshes,32);assert.equal(old.instances,763+thresholds.added+thresholds.signs.added);
  assert(b.group.matrixWorld.equals(new T.Matrix4()),'Original upper identity owner');
  const lamps=wood.slice(0,81).filter(r=>Math.abs(r.s.x-.15)<1e-5&&Math.abs(r.s.y-.9)<1e-5&&Math.abs(r.s.z-.11)<1e-5);assert.equal(lamps.length,4);
  const ray=(owner,p,d,far)=>new T.Raycaster(p,d,0,far).intersectObject(owner,true);
@@ -44,7 +44,7 @@ export function validateEscherWallLampSupports(T,b){
  // this is a geometry fixture, not a claim that any remote scan was fetched.
  const ctx=new Proxy({measureText:t=>({width:t.length*12})},{get:(o,k)=>o[k]??(()=>{})}),credited=buildEscherDepth(T,{canvas:()=>({getContext:()=>ctx}),loadTexture:()=>new T.Texture()});
  try{
-  validateEscherSurfaceContacts(T,credited);const captured=snapshot(credited,84);assert.equal(captured.hash,'afe8df7f72526642e75f7fd509376aab3beeb946376939a70e6700655a9f8046');assert.equal(captured.meshes,42);assert.equal(captured.instances,769+thresholds.added);
+  validateEscherSurfaceContacts(T,credited);const captured=snapshot(credited,84);assert.equal(captured.hash,'afe8df7f72526642e75f7fd509376aab3beeb946376939a70e6700655a9f8046');assert.equal(captured.meshes,42);assert.equal(captured.instances,769+thresholds.added+thresholds.signs.added);
   const cw=batch(credited,0x3c5149),cb=boxes(cw),added=cb.slice(84),prints=credited.interior.children.filter(o=>o.userData.escherPrint);assert.equal(prints.length,3);assert.equal(added.length,2);assert.deepEqual(added.map(p=>p.id),[84,85]);
   for(const lamp of cb.slice(80,84)){
    const north=lamp.p.z<115,sign=north?-1:1,start=new T.Vector3(lamp.p.x,lamp.p.y,lamp.p.z+sign*.056),hit=ray(credited.interior,start,new T.Vector3(0,0,sign),.3)[0];assert(hit);

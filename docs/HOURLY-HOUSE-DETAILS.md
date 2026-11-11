@@ -6328,3 +6328,87 @@ labels/English notices, all frame seats and prior contracts. Only measured
 justified support joins; otherwise factual audit. No new column, barrier,
 light, room, lot, reader/paper/first folio, historical copy or certification.
 Latest ledger governs; user's headed preview stays theirs.
+
+## 2026-11-11 — Escher surface identities: four small header retaining tabs
+
+This review continues `da49a9d`; all47 first reading passes remain complete.
+Read `ESCHER-SURFACE-SIGNS.md`. All three original ESCHER BELOW planes stay
+exact: centres(228,4.08,104.23),(-84,4.98,-109.77),(256,4.98,-111.77),
+height.5m,width3.4/4.3/4.3m, same English canvases/double-sided materials.
+Each original sheet bottom sits.075m above its header top and.04m forward
+of the header face. The alcove sheet already meets both original Escher
+side walls over.18 x.50m planar seats and receives no additional part.
+
+Only the park/study sheets lack those wall contacts. Four.04 x.095 x.08m
+stone tabs atX+/-.85m spanY4.645..4.74, centred.015m behind each plane.
+Every tab has a.04 x.01 x.015m positive-volume header joint and.04 x.01m
+planar contact with only the lower.01m blank sheet edge. Its front projects
+.025m past that plane. This is an edge retainer for the unchanged zero-
+thickness graphic, not a backing-board/thick-panel/engineering claim.
+
+Native pre-edit public-canvas probes sample384 pixels in the prospective
+contact rectangles: all are original plain background, none lettering.
+All three complete RGBA canvas hashes remain identical before/after and
+across four selectable languages. Original middle text bands retain18
+front/back reading rays and the existing mirrored rear graphics. No wording,
+canvas, material side, label pose/bounds, header, frame, path, floor, source/
+private coordinate or doorway/pick plane changes. Tabs stay above original
+header undersides; no solid enters the aperture or approach. Upper identity
+owner and proper lower/source mapping remain.
+
+Only surface-stone IDs11..14 append after both study foot bearings: batch
+11->15; pure765->769instances/32draws, installed771->775/42. Same21geometry/
+25material/14texture/14buffer pure and30/34/23/15 installed. No new resource,
+texture/light/batch/collider/pick/UI/listener/reader/model/key. Original60/14
+initial and62/17 explicit model-replacement once-only release and credited
+geometry fixture87/15 release remain; borrowed paper/artwork/source resources
+stay with their original owners.
+
+Independent da49a9d snapshots retain all765/771 old instance matrices/IDs and
+32/42 complete mesh geometries/profiles/poses, including all earlier feet/
+lamp/panel/portal/rail joins. Only these four independently measured new IDs
+are excluded. All earlier hashes and budgets remain unrelaxed. Original
+ground/Escher-house/model source profiles and all world/gallery/Babel/Math/
+Faculty/paper/private/voice baselines remain.
+
+All121 release programs pass. New checks cover three original gaps, two
+existing alcove wall seats, four header contacts/32 joint vertices, four
+planar sheet contacts/16 sheet corners, four exact-ID gap rays,18 text-band
+front/back rays and200 strict approach/head samples. Original public Escher
+geometry supplies the wall seats with explicitly synthetic textures, not a
+remote-fetch claim. Source modes/heights/modal pause/gates/cooldown/returns/
+retained experiments/private flows and resource programs remain.
+
+Native all four new IDs/header/sheet contacts pass. Full old42-mesh/771-instance
+hash and all original canvas hashes stay exact. Park/study views use original
+explicit arrivals plus ordinary keys/pointer looking. Original explicit park/
+study entry/return destinations keep feet-40/.13; locked upper Escher entry
+rejects with the same pose. EN/DE/FA/CS retains pose/public mosaic-loop geometry,
+PersianRTL and11 ready genuine pages. Original Euler Latin edition/date
+distinction, credits/rights/source,100/150/200% zoom and same-pose close pass.
+Explicit869-asset local verification and final review identity accompany
+PR #5. User's headed preview stays theirs; existing Three warning/controller-A
+test limit remain. No application error on the final fresh document.
+
+All47 readings, raw drafts/carets/first answers/keys/explicit saves, surface
+threshold payloads/gates/English notices, museum rooms/three experiments/
+retained public models/artwork/readers/rights and approved voices/recordings
+remain. Keep the north print/lamp gaps unresolved, two south bearings/six panel
+suspensions/nine lights, roof step/openings/48treads/94rail links/12portal clips,
+tunnel/earth cut/480gallerytreads/middle/well/eight-floor24IDwing/real stairs/
+lift/central3m door/covered walk/Faculty/11 genuine scans/source/zoom. Rendering
+has no private-memory/storage/progress access or preference-write/experiment/
+discovery/audio/travel/floor action. Own EN/DE/FA/CS/RTL and English gaps remain;
+surface identities retain English. No new reading/folio/paper, quotation/
+testimony/historical object/source-fetch/certification. Concurrent main Hall/
+mobile work and PR #2 remain separate; same branch/PR #5, no merge/deploy.
+
+Next useful audit: original museum ceiling ribs and paired end corbels against
+actual room roofs/wall faces, starting at the vestibule. Retained roof contacts
+may already suffice; do not assume every end needs another wall connection.
+Measure installed faces/bearings/head clearance/owners/cleanup before editing.
+Preserve profiles, roof step/openings, rooms/frames/thresholds/stairs/gates/
+models/readers/private flows and all prior contracts. Only measured justified
+joins; otherwise factual audit. No duplicate column, barrier, light, room, lot,
+paper/first folio, historical copy or certification. Latest ledger governs;
+user's headed preview stays theirs.

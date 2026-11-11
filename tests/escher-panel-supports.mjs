@@ -17,7 +17,7 @@ export function validateEscherPanelSupports(T,b){
  // Independent 7c1f0f2 pre-edit snapshot: retain all 749 old instances and
  // every mesh/profile/pose. Timber bearings and surface feet are validated above;
  // this older snapshot also excludes the twelve measured panel stems.
- assert.equal(records.length,32);assert.equal(instances,761+sconces.added+sconces.thresholds.added);
+ assert.equal(records.length,32);assert.equal(instances,761+sconces.added+sconces.thresholds.added+sconces.thresholds.signs.added);
  assert.equal(hash(records),'7784bd064e2abc0d1dd98f9a54028987920857d36cb675b8d2e91bd09d994de0');
  const lights=[];b.lamps.traverse(o=>{if(o.isLight)lights.push({type:o.type,matrix:o.matrix.toArray(),color:o.color.getHex(),intensity:o.intensity,distance:o.distance??null,decay:o.decay??null});});
  assert.equal(lights.length,9);assert.equal(hash(lights),'f238339aa65cfe4e935e616087f4c78f01f391a34f50118424f70693d4232d7d');

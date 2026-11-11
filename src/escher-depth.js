@@ -1,5 +1,5 @@
 import {ESCHER_DEPTH as D,DEPTH_VIEW,DEPTH_FOCUS,depthFloorAt,depthRoomAt,walkDepth,atGalleryHandoff,perspectiveAligned,tileMismatch,loopResult} from './escher-depth-model.js';
-import {buildEscherDepth} from './escher-depth-scene.js?v=surface-feet1';
+import {buildEscherDepth} from './escher-depth-scene.js?v=surface-signs1';
 
 const ROOM_NAMES={vestibule:'Gallery passage',hall:'Hall of connected views',perspective:'Perspective chamber',tessellation:'Tessellation chamber',reading:'Room of three doors',stair:'Stair to the loop chamber',loop:'Closed-loop chamber'};
 export function installEscherDepth(M,T,{onGalleryExit=null}={}){

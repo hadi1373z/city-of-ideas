@@ -15,7 +15,7 @@ export function validateEscherCeilingContacts(T,b){
  // Independent 2cdd64c snapshot, including every rail link and portal clip.
  // All old IDs remain; exclude only the newer supports independently checked
  // above. No original roof, wall, tread, rail link or portal clip is excluded.
- assert.equal(records.length,32);assert.equal(instances,749+panels.added+panels.sconces.added+panels.sconces.thresholds.added);
+ assert.equal(records.length,32);assert.equal(instances,749+panels.added+panels.sconces.added+panels.sconces.thresholds.added+panels.sconces.thresholds.signs.added);
  assert.equal(createHash('sha256').update(JSON.stringify(records)).digest('hex'),'7784bd064e2abc0d1dd98f9a54028987920857d36cb675b8d2e91bd09d994de0');
  const batch=color=>b.interior.children.find(o=>o.isInstancedMesh&&o.geometry.type==='BoxGeometry'&&o.material.color.getHex()===color);
  const roofs=batch(0x596b63),masonry=batch(0xa4afa3);

@@ -17,7 +17,7 @@ export function validateEscherPortalContacts(T,b){
  // Independent 2d39630 source snapshot, including all 94 completed rail links.
  // Surface feet, timber bearings and panel supports are validated first. This snapshot
  // excludes the twelve separately checked portal clips, retaining all old IDs.
- assert.equal(records.length,32);assert.equal(instances,749+panels.added+panels.sconces.added+panels.sconces.thresholds.added);
+ assert.equal(records.length,32);assert.equal(instances,749+panels.added+panels.sconces.added+panels.sconces.thresholds.added+panels.sconces.thresholds.signs.added);
  assert.equal(hash(records),'071fdefde6a169d7aade28d6590549c3abe5e9c669800aab5a3dfe293348e847');
  const boxes=o=>matrices(o).map((a,id)=>{const m=new T.Matrix4().fromArray(a),p=new T.Vector3(),s=new T.Vector3();m.decompose(p,new T.Quaternion(),s);return{id,p,s,box:new T.Box3().setFromBufferAttribute(o.geometry.attributes.position).applyMatrix4(m)};});
  const batch=color=>b.interior.children.find(o=>o.isInstancedMesh&&o.geometry.type==='BoxGeometry'&&o.material.color.getHex()===color);
