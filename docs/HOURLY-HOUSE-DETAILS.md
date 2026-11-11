@@ -6743,3 +6743,96 @@ five terraces/96 internal and40 entry treads/catalogue/source-private coordinate
 and all earlier contracts. Only measured justified joins; otherwise factual
 audit. No new column/barrier/light/room/lot/paper/folio/historical copy or
 certification. The user's headed preview stays under their control.
+
+## 2026-11-11 — Babel vault: inner spokes mounted to the actual ceiling
+
+This review continues `8f9c02a`; all47 first reading passes and all eight
+Mathematics working floors remain complete. Read docs/BABEL-VAULT-CONTACTS.md.
+Twenty-four small timber ceiling mounts now join the retained spokes near their
+inner ends, clear of the glass collar/aperture and the entry opening. Original
+columns/spokes/roof/floors/source-private coordinates remain exact.
+
+All24 original .5x24x.6 columns at radius56.5 already cross the actual outer
+floor planeY-26.5 by.30m; their bottoms remainY-26.80000019. Complete upper
+footprints meet ceiling undersideY-2.8 within float precision, and192 actual
+outer-spoke cap vertices lie within the columns. These need no duplicate foot,
+column or outer bearing. The24 seven-sided spokes keep.16radius/Y-3.2/r21..56.5.
+Their real upper faces at radius21.3 were.24000005..25584503 below the ceiling.
+Eight nominal inner cap centres coincide with collar station lines;16 retain
+.00359678..00359941 radial gaps to the faceted glass. These are not complete
+cap bearings. Keep all original glass/cap profiles and gaps, with no load or
+engineering claim through the collar.
+
+Each new .08square timber mount stands.30m along its original spoke from the
+inner end. BottomY-3.10000005 engages the actual faceted beam; topY-2.79 engages
+the real ceiling by.01. Height is approximately.31000005. All96 bottom corners
+are inside retained beams, and96 top corners meet actual ceiling faces. Every
+new corner stays outside radius21.25 and the entry cut. No slab or post fills
+either opening; original spokes still span their original routes.
+
+The installed adapter borrows the original unit box geometry/dark timber
+material and owns one24-instance batch/buffer. Active Babel becomes66 meshes/
+41,072 instances from65/41,048. No new geometry/material/texture/light/collider/
+pick/UI/listener/reader/model/key. The entire prior65-mesh/41,048-instance active
+mouth fitting stays exact, including199 fitted records and100bindings/80stamps;
+its12buffers remain separate. Original raw source65/41,048 matrices/IDs/profiles
+are exact with no source exclusions; source-only15-hit control and all earlier
+strict fingerprints/budgets remain. The new owned group is checked separately.
+
+Repeated mount cleanup removes only its group and releases its one buffer once;
+parent-first cleanup delegates prior mouth/source ownership without borrowed
+resource disposal. Missing/replaced source/roof owners, changed geometry/
+material/buffer ownership/version/count and roof pose release it. Noncanonical
+roof/spoke dimensions reject mounting. Eight cleanup/custom-layout programs
+and foreign-private-API identity checks pass. Mount construction/sync deny
+private-storage getters and new geometry/material/texture constructors. The
+group inherits the original upper parent; no baked source/private transform.
+
+All121 release programs pass. Added geometry checks cover216 floor samples,
+216 column-roof samples,192 outer-cap vertices,96 mount-foot/96 roof corners,
+192 aperture/envelope corners and unchanged complete raw/prior-active snapshots.
+The prior borrowed-drawing active hash3875c49d remains distinct from no-drawing
+fallback02e59c94; no old source hash is rebaselined. All4,539 original thermal/
+terrace/entry/shelf/deep-gallery sample positions clear the new mounts. All1,008
+full active-geometry stair body samples remain clear. Earlier Math/Faculty/
+covered-walk/gallery/Escher/paper/voice/private checks remain unrelaxed.
+
+Native QA confirms24 expected mount IDs,216 floor/216 roof samples,96 foot/
+96 ceiling-cap corners and1,008 clear body rays. Two r160 floor rays land on
+exact triangle edges; actual face distance is below1e-9m and both +/- .1mm
+neighboring rays meet the same original floor. They remain disclosed edge
+contacts, not dropped probes or an invented floor. Separate close-up cameras
+inspect inner before/after, outer bearing and floor foot without moving the
+visitor. Ordinary keyboard/pointer walking retains the40-tread entry and
+first-terrace route to its original catalogue, then returns through all40
+treads/41 observed heights each way and the original ground arrival receiver
+at feet.395/Z12. No pose assignment, auto-tour or collision bypass. EN/DE/FA/CS
+keeps pose/page0/
+aaaaaa/empty prefix/source-reader-close; PersianRTL and11 ready genuine pages
+remain. Babel Czech keeps its English fallback. Original native source hashes
+357a4d91/139ef073/7c1b1038 remain exact. Explicit871-asset LOCAL verification and
+final native walking results accompany PR#5. No application errors; the existing
+Three warning remains. Hardware controller A remains separately untested.
+These are measured joins/clearance checks, not certification.
+
+All47 readings/raw drafts/carets/first answers/private keys/explicit actions,
+approved cast/fixed voices/recordings/genuine artwork/scans/credits/rights/source/
+zoom remain. Five terraces/96 internal treads/40entrytreads/28entrybrackets,
+fitted mouth clearances/reservoir/book/collar/well/default arrival,480 gallery
+treads/middle/tunnel/earth cut, eight-floor24IDwing/stairs/lift/central3mdoor/
+Faculty/covered connection and prior house contracts remain. No rendering
+memory/storage/progress access or preference-write/experiment/discovery/audio/
+travel/floor action. No new reading/paper/folio/historical object/quotation/
+testimony/source-fetch/certification. Concurrent main Hall/mobile work and PR#2
+stay separate; same branch/PR#5, no merge/deploy, user's headed preview untouched.
+
+Next useful review: inspect the original cylindrical vault wall where it meets
+the outer base floor and annular ceiling, measuring actual facets/profiles and
+retained entry cut boundaries first. Read this ledger, BABEL-VAULT-CONTACTS and
+prior Babel/world/gallery/Math/Faculty/covered-walk/paper contracts. Inspect
+installed owners/clearance/cleanup; preserve new mounts, exact columns/spokes,
+fitted mouths/glass/reservoir/book/collar/apertures/five terraces/96internal/
+40entrytreads/catalogue/source-private coordinates and all earlier contracts.
+Only measured justified joins; otherwise factual audit. No new column/barrier/
+light/room/lot/paper/folio/historical copy/certification. User's preview remains
+under their control.

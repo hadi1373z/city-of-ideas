@@ -1,5 +1,9 @@
 # Babel stair mouths · fitted clearance correction
 
+The installed follow-up in [BABEL-VAULT-CONTACTS.md](BABEL-VAULT-CONTACTS.md)
+adds one separate 24-instance ceiling-mount batch. Every fitted mouth record
+and the historical 65-mesh/41,048-instance baseline below remain unchanged.
+
 This review continues `ab34a96`. All 47 first reading passes remain complete.
 The installed model now clears the 15 recorded standing-position conflicts
 at the first two radial stair mouths. The original source builder, all 96
