@@ -6923,3 +6923,75 @@ new perimeter/mounts/fitted mouths/glass/reservoir/book/collar/five terraces/
 Only measured justified joins; otherwise factual audit. No new column/barrier/
 light/room/lot/paper/folio/historical copy/descent/certification. User's headed
 preview remains under their control.
+
+## 2026-11-12 — Babel entry reveals: lower roof seats and recessed cap beds
+
+Architectural follow-up to5823ac6; all47 first reading passes/eight Mathematics
+working floors remain complete. Read BABEL-ENTRY-REVEALS.md alongside the
+perimeter/vault/mouth/entry-guard and preservation contracts. Original source
+builder, roof/slab cuts,40entrytreads/risers/width/overlook/movement-height gates,
+five terraces/96internal treads/catalogue/default arrival remain exact.
+
+Measured original oak3077/3078 atX32.063732/46.838230,Y-2.57,Z2.4 have
+.30x.38x17.60m profiles. Original brass2800/2801 sits.0075000301m above oak.
+Actual lower roof-cutZ-6.699999809 tobeamZ-6.400000095 leaves.299999714m.
+Fifteen original cheek walls per side already overlap oak;13per side cover
+the cap gap continuously fromZ7.553999811 through the upper end. Those30oak/
+26cap contacts and the original.079999447m upper roof gap remain exact.
+
+Four fitted timber boxes: two.18square/.339999714m lower-end connectors engage
+actual roof and oak by.02m; two.05x.0175000301x13.943999907m recessed cap beds
+engage oak/brass by.005m. Beds keep.01side/.02lower-end recess and enter the
+first already covering cheek by.01m, avoiding duplicate upper3.636m support.
+No column, barrier, terminal closure or whole-cap enclosure claim.
+
+The installed upper-owned adapter borrows existing unit-box/oak resources,
+owns one four-instance batch/buffer and no geometry/material/texture. Active
+67/41072->68meshes/41076instances. No new light/collider/pick/UI/listener/reader/
+model/key/state. Complete prior67fixture hash0cb0d0f9 and every raw source/
+old fitted matrix/profile/ID stay exact, no original-source exclusions or
+relaxed source-only15-conflict control/budgets. Earlier24mounts/199mouth
+records/100bindings/80stamps/perimeter and original resources remain.
+
+Fifteen ownership/custom-layout programs cover repeat/parent-first cleanup,
+missing/replaced owner/group/buffer/count/attribute/index/roof pose, hidden
+owners and invalid/missing source data/material. Only the new buffer releases
+once; borrowed resources and source visibility remain with original owners.
+Existing API identity is checked before foreign fields. Private storage and
+new geometry/material/texture constructors are denied during fitting/sync.
+
+All121 release programs pass. Focused checks:16roof-core/16old-beam-core/
+8bed-foot/8cap-corner/16wall-core vertices,30oak-wall/26cap-wall contacts,
+162cap-gap/2lower-end expected rays. All4539 original thermal/terrace/entry/
+shelf/deep-gallery positions clear the new joins;360complete active entry-body
+and1008radial-body probes remain clear. Native checks retain the same contacts/
+rays/body samples,68/41076,24mounts/199mouth records and11ready genuine pages.
+
+Matched before/after inspection cameras preserve visitor pose. Original Return,
+ordinary40-tread descent/first-terrace catalogue route/ascent and original
+gallery receiverfeet.395/Z12 pass; no pose assignment/auto-tour/bypass.
+EN/DE/FA/CS retains pose/page0/aaaaaa/empty prefix/source/same-pose close,
+PersianRTL; Babel Czech retains English fallback. Native rawsource/entry/slab
+hashes357a4d91/139ef073/7c1b1038 stay exact. Explicit873-asset LOCAL verification
+and final console results accompany PR#5; hardware controllerA remains
+separately untested. These are geometry/clearance checks, not certification.
+
+All47 sourced readings/private flows/raw drafts/carets/first answers/keys/
+explicit experiments/saves, cast/fixed voices/recordings, genuine scans/
+artwork/credits/rights/source/zoom and prior world/gallery/Escher/Math/Faculty/
+covered-walk contracts remain. Rendering adds no private-memory/storage/
+progress access or preference-write/experiment/discovery/audio/travel/floor
+action. No new reading/paper/folio/historical copy/quotation/testimony/source
+fetch. Concurrent main Hall/mobile work and PR#2 remain separate; user's
+headed preview untouched. Same branch/PR#5, no merge/deploy.
+
+Next useful review: audit the original descent cheek walls and oak cap boards
+against actual Main/gallery slab, tread-side and overlook surfaces. Read this
+ledger, BABEL-ENTRY-REVEALS.md and prior Babel/world/gallery/Math/Faculty/
+covered-walk/paper contracts. Inspect installed owners/profiles/positive
+contacts/openings/headroom/cleanup first. Do not assume flat floor across the
+shaft or duplicate feet on already connected walls. Preserve all original
+cuts/treads/width/height gates/overlook/fitted mouths/mounts/perimeter/reveals/
+reservoir/book/collar/five terraces/catalogue/source-private coordinates and
+all prior contracts. Only measured justified joins; otherwise factual audit.
+No new column/barrier/light/room/lot/paper/folio/descent/certification.

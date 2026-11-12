@@ -1,5 +1,9 @@
 # Babel vault perimeter · fitted base-floor join
 
+The later [entry-reveal review](BABEL-ENTRY-REVEALS.md) preserves this complete
+67-mesh/41,072-instance fixture and adds four separately owned timber joins
+in one draw. The perimeter geometry and navigation boundary remain exact.
+
 This review continues `baaa410`; all 47 first reading passes remain complete.
 A narrow installed strip now joins the original outer base-floor edge to the
 actual faceted vault wall. The original floor/wall/ceiling profiles, columns,
