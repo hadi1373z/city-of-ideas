@@ -7056,3 +7056,65 @@ profiles/clearance/owners/cleanup first. Preserve all supplied books/bindings/
 lights/original interactions and every prior geometry/private/voice/reading
 contract. Only measured justified joins; otherwise factual audit. No new light/
 column/barrier/room/lot/paper/folio/first reading/historical copy/certification.
+
+## 2026-11-12 — Babel entry bookcases: eight recessed original-lamp seats
+
+Architectural follow-up to c503f97; all47 readings/eight Mathematics working
+floors remain complete. BABEL-ENTRY-BOOKCASES.md records measured contacts.
+All48 original shelf/upright joints already meet (.07/.08/.01m at lower/mid/top);
+eight lower shelves engage cap boards by.03m. Original112book volumes/casework/
+bronze/glow profiles and matrices remain exact; no duplicate upright/foot.
+
+Eight existing bronze bases had.0599998496..0600003265m top-shelf gaps.
+Eight new.055wide/.10deep/~.08high timber seats engage shelf and bronze by.01m
+each, with.01side/.025end recess inside bronze footprints. Original bronze/glow
+overlap~.025m already meets. Seats lie over source shelves/inside unchanged
+case envelopes/outside entry walking band; no new light/glow/collider/target/
+reading/UI/state. Source builder,40entrytreads/width/risers/cuts/overlook/height
+gates/five terraces/96internal treads/catalogue stay exact.
+
+One owned8-instance batch/buffer borrows original unit-box/oak resources:
+active68/41076->69meshes/41084instances, no new geometry/material/texture.
+Complete prior c503f97r186hash492dfb14/r160hash56807240 and raw8f17b68a/
+357a4d91/entry139ef073/slab7c1b1038 remain exact without exclusions. All old
+budgets/source-only15-conflict control and owned adapters remain unrelaxed.
+Seventeen repeat/parent/missing/replaced owner/group/buffer/version/count/
+geometry/material/position/index/pose/hidden/custom-data programs pass.
+Only own buffer releases once; borrowed resources/source visibility stay
+owned by source. Existing API identity guard precedes foreign fields;
+private-storage/new geometry/material/texture constructors are denied.
+
+All121 release programs pass. New64shelf/64bronze/384case-joint/64cap-seat/
+64glow core vertices,72expected-ID rays,112retained book records,4539new-seat
+headroom samples and360full-active Babel+Main-slab body probes pass.
+Native contacts/rays/body/counts/borrowed resources and before-after inspection
+cameras preserve visitor pose. Original ordinary40tread down-up/catalogue/
+groundreceiverfeet.395Z12 walking and EN-DE-FA-CS samepose/page0/aaaaaa/empty
+prefix/source/same-pose close pass, PersianRTL/11genuine pages remain.
+Babel Czech keeps English fallback. Explicit874assetLOCAL verification and
+final console results accompany PR#5; existing controllerA limit remains.
+
+Concurrent main2176dde stair-finish/rail/floor work was inspected and remains
+separate/unmerged/unmodified. An isolated exact-main source fixture has the
+same8case/lamp gaps; this new adapter fits it while retaining all65meshes/
+41893instances/sourcehash7b21ef65. Own buffer releases once/borrowed0.
+This does not claim older mouth/perimeter/reveal adapters work with the new
+main source; their integration is the next audit. No competing branch.
+
+All47 sourced readings/private drafts/carets/first answers/keys/explicit
+experiments/saves, cast/voices/recordings/genuine scans/artwork/rights/source/
+zoom and prior world/gallery/Math/Faculty/covered-walk/Escher contracts remain.
+No rendering private-memory/storage/progress/preference-write/experiment/
+discovery/audio/travel/floor action, new reading/paper/folio/historical object/
+quotation/testimony/source-fetch/certification. User's headed preview
+untouched; same branch/PR#5/no merge/deploy.
+
+Next useful review: audit the existing owned Babel adapters against main's
+new stair-finish source/runtime owners, especially mouth/rail fitting,
+floor-perimeter sampling and retired reveal assumptions. Read this ledger,
+BABEL-ENTRY-BOOKCASES.md and all prior Babel/world/gallery/Math/Faculty/
+covered-walk/paper contracts. Preserve independent historical source controls,
+new seats, supplied books/lights/interactions and every private/voice contract.
+Inspect real faces/openings/clearance/owners/cleanup before preparing a narrow
+documented reconciliation. No merge of main, ref changes outside this branch,
+deployment, competing branch, new room/light/paper/first reading/certification.

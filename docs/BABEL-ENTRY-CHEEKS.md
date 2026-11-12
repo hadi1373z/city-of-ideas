@@ -1,5 +1,9 @@
 # Babel entry cheek walls · factual contact audit
 
+The later [bookcase/lamp review](BABEL-ENTRY-BOOKCASES.md) preserves this
+complete 68-mesh/41,076-instance fixture and adds eight separately owned lamp
+seats. Every wall/cap contact and open seam below remains unchanged.
+
 This follow-up to `cbd92c3` adds no scene part. All 47 first reading passes
 remain complete. The original stair-side wall panels and oak cap boards already
 form two connected assemblies that reach the actual gallery slab. This review
