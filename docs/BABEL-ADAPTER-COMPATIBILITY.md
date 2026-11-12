@@ -1,5 +1,10 @@
 # Babel adapters · revised-source compatibility
 
+The later [third-mouth review](BABEL-THIRD-MOUTH.md) clears the fifteen
+recorded third-flight contacts in the installed complete fitting. Every
+historical two-mouth/reference result below remains its standalone control;
+source profiles, resources and navigation remain unchanged.
+
 This review continues 90fcb41 on feat/hourly-house-details / PR #5.
 All 47 first readings and all eight Mathematics working floors remain complete.
 Two owned fitting adapters now recognize the independently revised public

@@ -7195,3 +7195,86 @@ bindings/stamps, treads/rails/landings/navigation, existing fittings/seats/
 reveals and main's separate revised source. Only measured justified joins or
 a factual audit; no book omission/ray mask/new light/column/barrier/room/
 paper/first reading/certification. No merge of main or other ref writes.
+
+## 2026-11-12 — Babel third radial mouth: fifteen standing contacts cleared
+
+Architectural follow-up to d915a0c; all47 first readings/all8working Math floors
+remain complete. BABEL-THIRD-MOUTH.md records actual profiles and limits.
+Two whole radius23 bays at angles.6645676569/.9062286699 and fascia495 at
+radius25.2/angle.719948315 caused the15 third-flight(index2) contacts at
+steps9/13..15/offsets+/-1.46. Each bay retains2uprights/6shelves/50bindings/
+40stamps. Whole prefit envelope reached1.32077885m from centre; fascia
+reached1.30378712m. No omitted book, ray mask or private-book inspection.
+
+Positive tangent fits .8550461416 for both complete bays and .3789976986
+for fascia/matching rails retain actual far ends/Y/perpendicular depth/joints.
+All fitted corners lie>=1.725m from centreline. Original3.4width/.23nav inset/
+96radial treads/rails/stringers/landings/height gates/source arrays remain exact.
+Actual specific new fascia guard is.30minimum; old.40guard is unchanged.
+Generic decorative bindings/stamps follow whole bays; no scan/page is resized.
+
+Runtime imports fitBabelRadialMouths, sharing the same implementation/12copies/
+12ownedbuffers/source visibility/guard/disposal chain. No second fitting owner.
+Existing fitBabelMouths keeps the strict standalone historical two-mouth API:
+old199maps and full69/41084/r1869260ef4e/native4401bd8a remain independently
+exact. Runtime now fits398records (fourbays/twofascia-rail groups), adding199
+without changing previous199. Active69meshes/41084instances, resources86/
+37buffers and all earlier separate fits remain; no new draw/buffer/resource/
+light/collider/pick/UI/reader/model/key/state. Missing/custom/duplicate/mixed
+profiles reject; borrowed resources remain source-owned.
+
+Raw65/41048/r1868f17b68a/native357a4d91/entry139ef073/slab7c1b1038 remain exact.
+Only restoring new199owned matrices reproduces entire preceding fingerprint
+with no source/unaffected exclusion. New full r186c9b50169/native7e9c0ca3.
+Existing immutable standalone reference remains explicitly labelled historical,
+retaining fifteen wider third-flight contacts and the separate original
+raw15-conflict8/7/0/0 control on864samples. Neither negative control is relaxed.
+
+All121release programs pass plus11new cleanup/custom programs. New installed
+checks6352fitted/120fixed-end vertices,48shelf-upright joints/8post-foot centres/
+6far joints,2016all-four-flight body and tread samples pass. Each of the15
+exact negative locations hits before fitting. No new render-resource/private-
+storage access during construction/sync; own12buffers release once, borrowed
+resources only release through original source owner. All previous owner/
+buffer/version/count/geometry/material/visibility/private guards remain.
+
+Immutable main2176dde builder + retained feature28entrybrackets/idempotence
+keeps raw65/41893/7b21ef65. Restoring new199maps recovers prior68/41925/cd9fe0ca;
+new00134a70 passes same2016samples/48joints/8foot centres/6far joints.
+Separate main Hall/mobile/stair-finish work remains unmerged/unmodified.
+This is a bounded source fixture, never a merged/full-main runtime claim.
+
+Native actualcurrent scene repeats3176new corners/60fixed vertices, all2016
+Babel body/tread probes and504third-flight body probes against the full visible
+scene. All clear. Before-after cameras preserve visitor pose. Ordinary pointer/
+held-key walking passes first/second radial flights down-up and third flight
+down-up at lanes0/-1.3/+1.3, capturing25heights in all10traversals. The original
+40tread gallery exit captures41heights tofeet.395/Z12. No pose assignments,
+auto-tour, collision bypass or new floor action. Exact catalogue page0/aaaaaa/
+empty prefix/source/samepose close throughEN-DE-FA-CS/FA RTL and11ready
+genuine scans remain; Babel Czech retains English fallback. Native pristine
+main retains raw65/41865/9d9dfbe1 ->68/41897/69c95524, passes2016body/tread/
+2880perimeter/4source roof contacts, releases86resources/36buffers once with
+borrowed drawing0; old reveal fitting stays inactive. Its scene is isolated,
+not merged-main navigation. Final874asset explicitLOCAL verification accompanies
+PR#5. Existing Three warning/controllerA separately untested remain.
+
+All earlier world-cylinder/lower-transform/gallery480treads/middle/well/tunnel/
+earth cut/Math8floor24IDwing/stairs/lift/central3mdoor/Faculty/covered route/
+Escher/private/voice/paper contracts remain. All47sourced readings, raw drafts/
+carets/first answers/private keys/original explicit actions/saves, cast/fixed
+voices/recordings/scans/artwork/rights/source/zoom remain. Rendering adds no
+private-memory/storage/progress/preference-write/experiment/discovery/audio/
+travel/floor action. No new reading/paper/folio/historical object/quotation/
+testimony/source-fetch/certification. User headed preview untouched.
+Same branch/PR#5; preserve exact PR Houses/Concurrent sections; no merge/deploy.
+
+Next useful review: audit the five original rectangular Babel terrace catalogue
+desks: pedestal-to-floor/tabletop contacts, book/cover seating and clear original
+approach. Read this ledger, BABEL-THIRD-MOUTH.md and all prior Babel/world/
+gallery/Math/Faculty/covered-walk/paper contracts. Inspect public installed
+faces/profiles/owners/cleanup and concurrent work before editing. Preserve exact
+book targets/finite catalogue/floor access, all treads/fittings/source profiles/
+private data/voices/scans/rights. Only measured justified support joins or
+factual audit. No new desk/column/light/barrier/room/paper/first reading,
+historical copy or certification; no merge of main or other ref writes.
