@@ -1,4 +1,4 @@
-import {WORKBENCH_TEXT,faceRoomWork,showRoomDialog} from './room-workbench.js?v=touch1';
+import {WORKBENCH_TEXT,faceRoomWork,showRoomDialog,consumeRoomPresentationClose} from './room-workbench.js?v=merge-presentation1';
 import {SEMINAR_HOUSES} from './seminar-houses-data.js';
 import {SEMINAR_TEXT} from './seminar-houses-copy.js';
 import {buildSeminarHouses} from './seminar-houses-scene.js?v=workbench1';
@@ -46,7 +46,7 @@ export function installSeminarHouses(M,T){
  M.startExtra=id=>id==='seminar-houses'?(show(),true):typeof id==='string'&&id.startsWith('seminar:')?visit(id.slice(8)):old.start?.(id);
  M.toolsExtra=()=>inside()?(show(inside().data.id,true),true):old.tools?.();
  M.city.update=(...args)=>{old.update(...args);const h=M.mode==='city'?built.houses.find(h=>h.inside(M.player.x,M.player.z)||Math.hypot(M.player.x-h.entry.x,M.player.z-h.entry.z)<12):null;context.hidden=!h||!!document.querySelector('dialog[open]');if(h){context.dataset.house=h.data.id;contextTitle.textContent=name(h.data);contextButton.textContent=h.inside(M.player.x,M.player.z)?(WORKBENCH_TEXT[lang()]||WORKBENCH_TEXT.en).work:c().read;}if(audio){if(inside()?.data.id!=='cage')stopSound();else if(playStart!==null){const slot=Math.floor((audio.currentTime-playStart)/.25),next=slot>=0&&slot<16?slot:-1;if(next!==playingSlot)setPlayback(next);}}};
- const locale=()=>{readingLang=null;launch.textContent=c().title;for(const h of built.houses)h.paint(lang());if(dialog.open)render();};locale();addEventListener('city-language',locale);dialog.addEventListener('close',()=>{stopSound();if(dialog.returnValue!=='movement'){M.clearMovement();opener?.focus?.();}});updateModel();
+ const locale=()=>{readingLang=null;launch.textContent=c().title;for(const h of built.houses)h.paint(lang());if(dialog.open)render();};locale();addEventListener('city-language',locale);dialog.addEventListener('close',()=>{if(consumeRoomPresentationClose(dialog))return;stopSound();if(dialog.returnValue!=='movement'){M.clearMovement();opener?.focus?.();}});updateModel();
  const api={built,open:show,visit,get title(){return c().title;}};M.seminarHouses=api;const query=new URLSearchParams(globalThis.location?.search||'');if(query.get('arrival')==='seminar-houses')show();else if(query.get('arrival')?.startsWith('seminar:'))visit(query.get('arrival').slice(8));
  addEventListener('pagehide',()=>{if(disposed)return;disposed=true;stopSound();removeEventListener('city-language',locale);for(const target of [...built.targets,...noether.targets,...mirzakhani.targets,...cage.targets]){const i=M.city.targets.indexOf(target);if(i>=0)M.city.targets.splice(i,1);}for(const h of built.houses){const i=M.city.buildingTargets.indexOf(h.group);if(i>=0)M.city.buildingTargets.splice(i,1);}noether.dispose();mirzakhani.dispose();cage.dispose();built.dispose();for(const n of[dialog,context,launch])n.remove();},{once:true});return api;
 }

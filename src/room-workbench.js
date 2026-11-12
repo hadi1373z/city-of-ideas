@@ -22,9 +22,11 @@ export function faceRoomWork(M,T,object){
 }
 
 // Compact work controls must not put the browser's modal layer over walking arrows.
+const presentationCloses=new WeakMap();
+export function consumeRoomPresentationClose(dialog){const pending=presentationCloses.get(dialog)||0;if(!pending)return false;if(pending===1)presentationCloses.delete(dialog);else presentationCloses.set(dialog,pending-1);return true;}
 export function showRoomDialog(dialog,workbench){
  const presentation=workbench?'workbench':'reading';
- if(dialog.open&&dialog.dataset.roomPresentation!==presentation)dialog.close();
+ if(dialog.open&&dialog.dataset.roomPresentation!==presentation){presentationCloses.set(dialog,(presentationCloses.get(dialog)||0)+1);dialog.close();}
  dialog.returnValue='';dialog.dataset.roomPresentation=presentation;
  if(!dialog.open){if(workbench)dialog.show();else dialog.showModal();}
 }

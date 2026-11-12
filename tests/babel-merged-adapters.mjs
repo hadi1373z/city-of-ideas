@@ -3,7 +3,7 @@ import * as T from '../src/city-source-assets/home-tools/vendor/three.module.js'
 import {buildBabelLibrary} from '../src/babel-library-scene.js';
 import {stairs} from '../src/babel-library-model.js';
 import {babelGuardSnapshot} from './babel-entry-guards.mjs';
-const names=[['babel-mouth-clearance','fitBabelMouths'],['babel-spoke-mounts','mountBabelSpokes'],['babel-vault-perimeter','fitBabelPerimeter'],['babel-entry-reveals','fitBabelEntryReveals'],['babel-entry-bookcases','seatBabelEntryLamps']];
+const names=[['babel-mouth-clearance','fitBabelRadialMouths'],['babel-spoke-mounts','mountBabelSpokes'],['babel-vault-perimeter','fitBabelPerimeter'],['babel-entry-reveals','fitBabelEntryReveals'],['babel-entry-bookcases','seatBabelEntryLamps']];
 const mods=await Promise.all(names.map(async([file,name])=>({name,fn:(await import('../src/'+file+'.js'))[name]}))),canvas=()=>({getContext:()=>new Proxy({},{get:()=>()=>{}})});
 function inspect(build,label,pipeline=mods){const resources=new Map(),buffers=new Map(),G={...T};for(const key of Object.keys(T))if(/Geometry$|Material$|Texture$/.test(key)&&typeof T[key]==='function')G[key]=class extends T[key]{constructor(...a){super(...a);resources.set(this,0);this.addEventListener('dispose',()=>resources.set(this,resources.get(this)+1));}};G.InstancedMesh=class extends T.InstancedMesh{constructor(...a){super(...a);buffers.set(this,0);this.addEventListener('dispose',()=>buffers.set(this,buffers.get(this)+1));}};
  const drawing=new T.Texture();let borrowed=0;drawing.addEventListener('dispose',()=>borrowed++);const b=build(G,{canvas,drawing}),root=b.group,scene=new T.Scene();scene.add(root);root.updateMatrixWorld(true);const nodes=[];root.traverse(o=>nodes.push(o));const raw=babelGuardSnapshot(T,root),vis=nodes.filter(o=>o.isMesh).map(o=>[o,o.visible]),targets=[...b.targets],resourceCount=resources.size,bufferCount=buffers.size,adapters=pipeline.map(m=>({name:m.name,value:m.fn(G,b)}));root.updateMatrixWorld(true);
@@ -14,6 +14,6 @@ function inspect(build,label,pipeline=mods){const resources=new Map(),buffers=ne
 
 const r=inspect(buildBabelLibrary,'merged production builder');
 assert.equal(r.raw.hash,'7b21ef65631174a885fd0333480d32cab44193e1afc96a3c595d55e21e3bde66');
-assert.equal(r.samples,2016);assert.equal(r.body.filter(h=>h.flight<2).length,0);assert.equal(r.body.length,15,'Retain independently audited later-flight source contacts');assert.equal(r.treadMisses.length,0);
+assert.equal(r.samples,2016);assert.equal(r.body.filter(h=>h.flight<2).length,0);assert.equal(r.body.length,0,'The current four-mouth fitter clears all four flights');assert.equal(r.treadMisses.length,0);
 assert.deepEqual(r.status.map(s=>s.installed),[true,true,true,false,true]);assert.equal(r.targetChanged,false);assert.equal(r.borrowedDisposals,0);assert(r.ownedResourcesReleasedOnce&&r.ownedBuffersReleasedOnce);
-console.log('PASS merged Babel adapters: 2016 full-width tread/body probes, unchanged source/targets, real main profiles, retained known later-flight contacts and exactly-once owned cleanup.');
+console.log('PASS merged Babel adapters: 2016 full-width tread/body probes, unchanged source/targets, real main profiles, all four flights clear and exactly-once owned cleanup.');

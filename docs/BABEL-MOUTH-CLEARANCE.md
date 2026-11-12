@@ -1,5 +1,10 @@
 # Babel stair mouths · fitted clearance correction
 
+The installed [third-mouth follow-up](BABEL-THIRD-MOUTH.md) reuses these same
+twelve copies for four complete bays and two fascia/rail assemblies. Its
+additional 199 records leave all earlier fitted matrices exact. The original
+two-mouth API and all independent historical checks below remain unchanged.
+
 The [revised-source compatibility review](BABEL-ADAPTER-COMPATIBILITY.md)
 retains every historical result below. It adds unique public-profile selection
 when source IDs shift, recognizes the actual revised bronze/oak rail pair,
