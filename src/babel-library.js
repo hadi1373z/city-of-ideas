@@ -1,5 +1,5 @@
 import {BABEL,BABEL_COPY,entryHeight,surfaceAt,walkLibrary,babelDesk,pageAt,addressOf,prefixCount} from './babel-library-model.js?v=two-faces2';
-import {buildBabelLibrary} from './babel-library-scene.js?v=book-contact1';
+import {buildBabelLibrary} from './babel-library-scene.js?v=finishes1';
 export function installBabelLibrary(M,T){
  const built=buildBabelLibrary(T,{drawing:M.snakeDrawing});M.scene.add(built.group);M.city.targets.push(...built.targets);let active=false,disposed=false,lastContext='',prefix='',address=0,lighting=null;
  const lang=()=>window.CITY_I18N.lang,w=()=>BABEL_COPY[lang()]||BABEL_COPY.en,el=(tag,text)=>{const n=document.createElement(tag);if(text)n.textContent=text;return n;},button=(text,fn)=>{const n=el('button',text);n.type='button';n.dataset.babelFocus=text;n.onclick=fn;return n;};
