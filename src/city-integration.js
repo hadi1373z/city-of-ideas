@@ -1,14 +1,40 @@
+import {installConnectedJourney} from './connected-journey.js?v=1';
+import {installPaperMonitors} from './paper-monitors.js?v=1';
+import {HISTORIC_PAPERS} from './historic-papers-data.js';
+import {installPondWorldWindow} from './pond-world-window.js?v=1';
+import {installWorldCylinder} from './world-cylinder.js?v=finishes1';
+import {installEscherDepth} from './escher-depth.js?v=1';
+import {installHouseInvestigations} from './house-investigations.js?v=1';
+import {installComputationLab} from './computation-lab.js?v=1';
+import {installProofAtelier} from './proof-atelier.js?v=touch1';
+import {installSeminarHouses} from './seminar-houses.js?v=touch1';
+import {installBabelLibrary} from './babel-library.js?v=finishes1';
+import {installOceanVoyage} from './ocean-voyage.js';
+import {installHouseFoundations} from './foundation-houses.js?v=workshops2';
+import {installVisitMemory} from './visit-memory.js?v=discoveries1';
+import {installRamseyRoom} from './ramsey-room.js?v=ramsey-paper1';
+import {installRamseyHouse} from './ramsey-house.js';
+import {installQuestionWalk} from './question-walk.js';
+import {installCityDiscoveries} from './city-discoveries.js?v=study1';
+import {installArtistQuarter} from './artist-quarter.js?v=artists2';
+import {installLearningLab} from './learning-lab.js?v=learning1';
+import {installStudyHouses} from './study-houses.js?v=touch1';
+import {installOrigamiHouse} from './origami-house.js?v=ocean1';
 import {artistLineOfSight} from './artist-line-of-sight.js';
 import {installPhilosopherQuarter} from './philosopher-ui.js';
 import {installSocratesTour} from './socrates-tour.js';
 import {installOrigamiPark} from './origami-park.js';
-import {createExtraDistricts} from './extra-districts.js';
+import {createExtraDistricts} from './extra-districts.js?v=polish1';
 import {buildHome} from './home-editions-scene.js';
 import {buildArtistResidents} from './city-source-assets/home-tools/artist-residents.js';
 import {ARTISTS} from './city-source-assets/home-tools/artist-catalog.js';
 import {createDistrictNavigation} from './district-navigation.js';
 import {createSharedResidents} from './shared-residents.js';
 import {createSharedActivities} from './shared-activities.js';
+import {installIdeasGraveyard} from './ideas-graveyard.js?v=foundations1';
+import {installEscherHouse} from './escher-house.js?v=artists2';
+import {installStudyBook} from './study-book.js';
+import {installCinematicIntro} from './cinematic-intro.js';
 import {installDiscoveryStory} from './discovery-story.js';
 const waitMain=()=>new Promise(resolve=>{if(window.CITY_MAIN?.city)resolve(window.CITY_MAIN);else addEventListener('gallery-ready',()=>resolve(window.CITY_MAIN),{once:true});});
 const M=await waitMain(),T=window.THREE,frame=()=>CITY_TOOL_FRAMES.get('home'),originalHome={...window.CITY_HOME_SCENE};let selectedEdition='residence';
@@ -16,7 +42,7 @@ const reply=(d,value,error)=>frame().contentWindow?.postMessage({type:'city-home
 let E,mathJourney=null;const homeOwners=new Map();
 function current(x=M.player.x,z=M.player.z){let r=E?.region(x,z,{y:M.player.y-M.eye});if(r?.id==='mathematics'&&CITY_I18N.lang==='fa'){const names=['مبانی','جبر','هندسه','حسابان و تحلیل','ریاضیات گسسته','احتمال و آمار','توپولوژی','رصدخانهٔ منطق و محاسبه'];r={...r,title:r.inside?'اطلس ریاضیات · '+names[r.floor]:'مؤسسهٔ ریاضیات · میدان'};}if(r?.id==='makers'&&CITY_I18N.lang==='fa'){const halls={'makers-library':'کتابخانه','makers-workshop':'کارگاه','makers-dialogue':'خانهٔ گفت‌وگو'};r={...r,title:'شهر سازندگان · '+(halls[r.hallId]||'حیاط مشترک')};}if(r?.artistId==='dali'&&!r.artistEditionId&&CITY_I18N.lang==='fa')r={...r,title:'سالوادور دالی · اقامتگاه رؤیا'};if(!r?.homeId)return r;const owner=homeOwners.get(r.homeId);if(!owner)return r;const origin=E.toWorld('home',{x:0,y:0,z:0},{homeId:r.homeId}),roomId=owner.roomAt((x-origin.x)/1.35,(z-origin.z)/1.35,owner.floor);return{...r,floor:owner.floor,height:origin.y+owner.height*1.35,roomId,inside:!!roomId};}
 try{
- E=await createExtraDistricts(T,{scene:M.scene,city:M.city,buildHome:(T,house,options)=>{const priorFloor=homeOwners.get(options.homeId)?.floor||0,owner=buildHome(T,house,{...options,owner:originalHome,resolveAsset:id=>M.homeBridge.resolveAsset(id)});owner.setFloor(priorFloor);homeOwners.set(options.homeId,owner);owner.ready.then(()=>owner.group.traverse(o=>{if(o.userData.designId)o.userData={...o.userData,extraHomeId:options.homeId};}));return owner;}});window.CITY_EXTRAS=E;
+ E=await createExtraDistricts(T,{scene:M.scene,city:M.city,onProgress:stage=>window.CITY_STARTUP?.stage(stage),buildHome:(T,house,options)=>{const priorFloor=homeOwners.get(options.homeId)?.floor||0,owner=buildHome(T,house,{...options,owner:originalHome,resolveAsset:id=>M.homeBridge.resolveAsset(id)});owner.setFloor(priorFloor);homeOwners.set(options.homeId,owner);owner.ready.then(()=>owner.group.traverse(o=>{if(o.userData.designId)o.userData={...o.userData,extraHomeId:options.homeId};}));return owner;}});window.CITY_EXTRAS=E;
  CITY_HOME_SCENE.buildHouse=(house,walk,exterior,options)=>selectedEdition==='residence'?originalHome.buildHouse(house,walk,exterior,options):buildHome(T,house,{edition:selectedEdition,walk,exterior,owner:originalHome,...options});
  const oldRegion=M.city.region,oldCan=M.city.canStand,oldTarget=M.city.targetInfo,oldUpdate=M.city.update;
  const navigation=await createDistrictNavigation(E,{baseCanStand:oldCan});
@@ -75,8 +101,38 @@ try{
  addEventListener('pagehide',()=>{activities.dispose();socrates.dispose();residents.dispose();E.dispose();M.homeBridge?.dispose();},{once:true});
  if(!frame().hasAttribute('src'))frame().src=new URL('./city-source-assets/home-tools/index.html?lang='+CITY_I18N.lang,import.meta.url).href;
  installPhilosopherQuarter(M,T);
+ installIdeasGraveyard(M,T);
+ installVisitMemory(M);
+ installEscherHouse(M,T);
  installSocratesTour(M,T,socrates);
  installOrigamiPark(M,T);
  M.storyJourney=installDiscoveryStory(M);
+ M.studyBook=installStudyBook(M,T);
+ installQuestionWalk(M,T);
+ installRamseyHouse(M,T);
+ installRamseyRoom(M);
+ installCityDiscoveries(M,T);
+ installArtistQuarter(M,T);
+ installLearningLab(M,T,E);
+ installStudyHouses(M,T);
+ installComputationLab(M,T);
+ installProofAtelier(M,T);
+ installOrigamiHouse(M,T);
+ installHouseFoundations(M,T);
+ installHouseInvestigations(M,T);
+ installOceanVoyage(M,T);
+ installBabelLibrary(M,T);
+ installSeminarHouses(M,T);
+ installEscherDepth(M,T);
+ installWorldCylinder(M,T);
+ installPaperMonitors(M,T,{papers:HISTORIC_PAPERS});
+ installPondWorldWindow(M,T);
+ installConnectedJourney(M,T);
+ const arrivalQuery=new URLSearchParams(location.search||''),faceArrival=arrivalQuery.get('arrival');if(faceArrival==='pond-crossing'){M.arrive(M.pondWorldWindow.pond.entry);M.player.pitch=-.33;}else if(faceArrival==='escher-depth')M.escherDepth.enter('gallery');else if(faceArrival==='math-entrance')M.startExtra('mathematics');else if(faceArrival==='paper-monitors')M.startExtra('paper-monitors');
  M.status('ready');
-}catch(error){console.error('Original district integration failed',error);M.status(error.message);}
+ installCinematicIntro(M,T,socrates);
+ // The bare city address opens at the approved volcanic reservoir in Babel.
+ // Explicit destination links and the optional book introduction retain their routes.
+ if(!arrivalQuery.has('arrival')){window.CITY_STARTUP?.stage('entrance');M.babelLibrary.visitThermal();}
+ window.CITY_STARTUP?.ready();
+}catch(error){window.CITY_STARTUP?.fail();document.body.classList.remove('cinematic-pending');console.error('Original district integration failed',error);M.status(error.message);}

@@ -1,70 +1,243 @@
 # City of Ideas
 
-A Persian/English/German walking city containing the four-floor Zarathustra gallery, a mountain ascent with 81 stations, Socrates’ house, the artists’ neighborhood, Mathematics Institute, Makers’ City, the object market, and Ideas Park.
-
-The philosophers’ quarter adds six explorable homes for Plato, Aristotle, Epicurus, Hypatia, Confucius and Ibn Sina. Choose **Philosophers’ homes** on the welcome screen, **Philosophers** while walking, or follow the western path from the object market. Each imagined home contains a concept object, a bilingual reading guide with an attributed source, and an independent browser-local reflection. The city map includes the quarter and its connecting paths.
-
-Choose **Summit story** before starting the mountain to play the child’s crawl, leap into the crater, and the Übermensch’s emergence. The event has optional camera following, skip/replay controls and reduced-motion support. **Free exploration** retains the original roof invitation. The quieter mountain paving, mineral retaining faces, softer bronze and grouped entrance planting preserve the symmetrical bridge. See [Summit story and design update](docs/SUMMIT-STORY.md).
-
-The gallery has two opposite ground-level entrances, including one facing the mountain. The final roof stair has a longer opening with clear headroom; all flights are centered on the snake head. The raised volcano keeps the child’s landing and figure reveal aligned with its brighter crater.
-
-Use **Fast** for quicker movement, **Light** to hide or restore the following lantern, and **Music** to choose one of the ten existing instrumental compositions. Keyboard shortcuts are **F**, **L**, and **M**. Controller D-pad or left stick selects controls in an open panel; the bottom face button activates and the right face button closes the innermost panel. **Menu** enters or leaves control selection. If the view drifts, open Help, release the sticks, and select **Center controller**; calibration lasts for that connection. Text entry and some embedded tools still require their own keyboard controls.
+An AI made city project under development.
 
 
 Live target: https://hadi1373z.github.io/city-of-ideas/
 
-The repository’s `src/` is the explicit, reviewed source snapshot. GitHub Actions checks it, builds `_site/`, publishes that artifact, then compares the live version and asset hashes. It does not fetch or automatically synchronize a different Sites project or a different chat’s workspace.
+## Southern garden · form and listening
 
-## Run and publish
+Visit `?arrival=seminar-houses` or map markers 6–8 for Noether’s rotunda,
+Mirzakhani’s ribbon-roof house and Cage’s listening room. Each has a physical
+experiment, five reading sections, primary sources and a further challenge in
+EN/DE/FA/CS. [Design, content and verification](docs/SEMINAR-HOUSES.md).
 
-Requires Node.js 22 or newer; the site build has no dependency installation step.
+## Day 1 · City Map 1.1
 
-```powershell
-node tests/check-source.cjs
-node tools/build.cjs
-node tools/preview.cjs
-```
+Open **City overview** to explore the coastal map. Five numbered map buttons and
+an equivalent destination list select Zarathustra Gallery, Ideas Park, Socrates’
+House, the Artists’ Quarter garden court and Paper-Boat Lookout. Selection updates
+a live location-information panel; **Visit this place** uses the existing city
+travel controls. Selection alone never moves the visitor or writes saved data.
 
-The preview uses `/city-of-ideas/`, matching the GitHub Pages base path. After reviewing an approved source update, commit and push to `main`; the Pages workflow runs. Its deployment must pass `tools/verify-live.cjs` against the exact commit.
+The optional dashed walking guide follows existing paths from the gallery’s west
+approach to the artists’ garden court, retraces that short approach, and continues
+east past the House of Origami to the lookout. It is a map overlay, not automatic
+walking. The guide also has text directions. The other existing city destinations,
+six foundation houses, ocean voyage and 3D overview remain available below the map.
 
-To import a new, stable builder snapshot, run `node tools/import-source.cjs <absolute-dist-directory>`. The transfer hashes source before and after copying, rejects changes during transfer, excludes credentials and project identity state, and preserves the previous snapshot in a local backup. Review the resulting diff before committing. This transfer is intentional; cloud edits do not magically reach GitHub.
+English, German and Persian share the same physical coordinates. Persian controls
+use RTL layout while east and west remain fixed on the map. Native buttons support
+keyboard and controller focus; the dialog retains Escape/close and focus return.
+Selection and route visibility survive reopening and language changes for this
+visit. No new storage key is used.
 
-Original artwork, model, music and book source credits remain beside the source assets. Private user notes, histories, authentication, local storage exports and credentials are never repository content. See `docs/` for verified function coverage and data migration constraints.
+`src/coastal-map-data.js` owns the five existing anchors, guide and localized copy;
+`src/coastal-map.js` renders the controls inside the existing overview dialog.
+`src/coastal-city-plan.js` remains the source for all three SVGs; regenerate them
+with `node tools/render-coastal-plan.mjs`. Improved sea, shoreline and label styling
+does not alter any original shape, path, building or label position. The gallery
+remains `(460,460)` in the `920 × 920` viewBox, the island radius remains `399`, and
+the continuous promenade radius remains `375.2`.
 
-Public controls support Persian, English and German. The book reader offers the full German original, Thomas Common English, and a clearly labelled Persian AI draft, with chapter comparison and translation notes. Some imported articles retain their source language. Private authored text stays unchanged when the interface language changes. See docs/TRANSLATION-CREDITS.md.
+Run `node tools/check.cjs` and `node tools/build.cjs`. The release checks include
+`tests/coastal-map.mjs`, which pins all 97 original shape/label geometries to the
+pre-change map and samples the full overlay against the existing path network.
+`tests/origami-house-ui.mjs` covers all five selections in all three languages,
+pressed states, live information, guarded travel, guide toggling, focus/state
+retention, private-note preservation and the retained overview/house controls.
 
-The original private House service has an installed authenticated popup bridge. Connecting a live account requires explicit consent in that original service window; publication does not grant account access. No live-account save test is claimed by the automated fixture checks.
 
-Choose **Walk with Socrates** for a warm illustrated guide and seven episode rehearsals with captions, camera framing and optional browser speech. Ideas Park has two flying birds made only from folded paper, with a seven-step bird lesson and retained dog/cat lessons, before/after diagrams and fold checkpoints. The gallery entrance is on its western outside face, opposite the mountain entrance on the eastern outside face. The snake-head landing leads to four straight stair flights connecting the four book levels and roof. Each flight has 40 actual steps and is the same width as the head contour, aligned with the snake’s direction and carrying its original drawing across the steps. Floor landings link the flights, with manual walking and a guided climb.
+The [ten-minute 3D film and room](https://hadi1373z.github.io/city-of-ideas/ramsey-film/) and [character studio](https://hadi1373z.github.io/city-of-ideas/ramsey-film/studio.html) are preserved as a separate edition. Source: `src/ramsey-film/`. Its README records character provenance and known visual limitations.
+# Learning in the Makers courtyard
 
-The five city utility buttons have been removed from the lower toolbar. Origami lessons open when you meet a bird. The four-turn mountain trail begins at (179.5, 0), joins the hillside with stone embankments, and passes above the separate camel and lion terraces with clear underpasses. A summit landing joins the shared infinity roof. The infant crawls straight west from (125, 0) to (24.75, 0), facing the gallery opening and its enlarged luminous figure. The final stairwell is capped below the crawling route while retaining headroom and roof access. Both outer radii remain 58; the return lift stays off the central route.
+`?arrival=learning-lab` opens **The counterexample walk**, a self-paced Library →
+Workshop → Dialogue House journey. Visitors first choose checks for a one-way
+rule, reveal physical hinged cards, explain the counterexample, then transfer
+the method to shuffled parcel cards. An optional framed-art problem provides
+fresh practice. The 10–15 minute label is a suggested exploration pace, not a
+measured completion time or enforced timer.
 
-## Controller preview
+The Library book and both experiment boards are additive objects in the existing
+Makers houses. Source furniture, residents and private notes are preserved.
+`learning-lab-state.js` owns validated local progress; `learning-lab-scene.js`
+owns removable geometry; `learning-lab.js` connects physical room entry, keyboard
+and controller-accessible dialogs, and the existing private notebook. The first
+test plan remains beside the later explanation. No reflections leave browser
+storage; no voice identity, recording or provider changes accompany this lesson.
 
-The root walking scene supports a connected browser gamepad: left stick moves, right stick looks, left-stick click runs, the bottom face button opens the nearby interaction, and Start enters the city from the welcome view. Face-button labels depend on the controller mode. Movement uses the same collision paths as keyboard/touch, with an 18% stick dead zone and analog speed. Input is suspended while readers, exhibit panels, dialogs, or lift transitions are active. Close panels with touch/keyboard. Embedded tools keep their own controls.
+Teaching references: [forall x: Calgary, Truth-functional connectives](https://forallx.openlogicproject.org/html/Ch10.html)
+and [Eric Pacuit, Reasoning Experiments](https://logic-probability.pacuit.org/docs/reasoning/experiments/).
+The four-card selection format is established; card backs, parcel/practice cases
+and lesson wording are original. The explanation distinguishes a material
+conditional from its converse, a finite test from a universal claim, and formal
+rules from richer everyday uses of “if”. There are no empirical performance or
+diagnostic claims. English, German and Persian teaching copy lives separately in
+`learning-lab-copy.js`. State/geometry and room-to-notebook flow are covered by
+`tests/learning-lab.mjs` and `tests/learning-lab-ui.mjs` in the release checks.
 
-Pair the controller before opening the city, enter walking mode, then press a button to expose the controller to the browser. Hardware testing on Android with an 8BitDo Pro 2 remains required. Button remapping and new puzzle rooms are not part of this first patch. Run `node tests/gamepad-input.cjs` for synthetic input checks.
+## Advanced study houses
 
-### Playable houses and summit route
+`?arrival=advanced-study` visits three new, walkable houses north of the Makers
+courtyard. Use `&house=proof`, `&house=uncertainty`, or `&house=computation` for
+a particular entrance. These are additive buildings in the same city scene,
+connected to the existing western Makers approach by smooth garden routes.
 
-The question room now has two seats at a shared table, and study desks reserve a reachable standing aisle. In the House tools navigation (or Socrates’ conversation panel in the original edition), **Examine a claim** opens a four-step, explicitly scripted exercise in English, German or Persian. Its conclusion is saved locally in this browser and can be revisited there; it is separate from private conversation history.
+- **Proof:** colouring invariants, an equal-colour connected board with a genuine
+  Hall obstruction, an actual maximum bipartite matching, the quantified theorem,
+  an alternating-path proof sketch, and a seminar-to-room transfer problem.
+- **Uncertainty:** expected-frequency bars and computed posterior odds, variable
+  priors, conditional independence versus an exact copied report, log odds, and
+  scrutiny of the likelihood model. All rates describe fictional components.
+- **Computation:** bounded, deterministic toy-program execution, explicit halting
+  and repeated-state evidence, both branches of a hypothetical diagonal decider,
+  recognition versus decision, and a dovetailing question. No arbitrary code is
+  executed; a timeout is never presented as proof of non-halting.
 
-Dalí’s four frames now contain catalogue-sourced painting images, fitted to their original aspect ratios. Source URLs and SHA-256 checksums are recorded in `src/city-source-assets/home-tools/dali-house/painting-sources.json`; attribution remains in the work inspector. A **Look → notice → record** action leads into the existing learning-journal form. Artist sculptures use smoother surfaces and a finer Dalí moustache.
+Each house has five reading sections, experiment feedback, sources and an open
+reflection. There is no completion badge or claim of automatic essay grading.
+First conjectures and later reasoning are separate in the existing private
+notebook. Additional local state uses `city-of-ideas:advanced-houses:v1`; it does
+not rewrite existing personal notes. Controls and house names support English,
+German and Persian; advanced reading is explicitly labelled as English for now.
+There is no generated speech or change to the saved six-character voice cast.
 
-The connected roofs have a warm straight route inlay using the same snake-skin pattern, with deeper bridge edges. At the roof or summit, **Begin the child’s journey to the volcano** starts the crawl/leap/emergence event without resetting a crawl already in progress.
+The original explanations and board cases are in `study-houses-data.js`.
+References include Hirata's MIT matching notes and the formal mathlib Hall
+statement, Imai's probability lectures and Harvard Stat 110, Turing's 1936 paper
+and Aaronson's MIT computability notes. Exact source links are attached to each
+house. `study-house-models.js` contains testable mathematical operations;
+`study-houses-scene.js` owns the geometry; `study-houses.js` owns the additive UI
+and interaction hooks. `tests/study-houses.mjs` independently checks matching
+against exact search and walks routes against the real source district layer;
+`tests/study-houses-ui.mjs` checks physical entry, experiments, private notebook
+history, focus, language disclosure and removal of only owned objects.
 
-Music: **V**, **R2**, or **Play/Mute music** toggles playback directly; **M / Music** opens track selection. Starting playback requires an intentional action. Standard L2 remains unassigned; the reported language change still needs reproduction on the physical controller.
+## Circular island and House of Origami
 
-### Rooftop simplification
+`?arrival=island` opens the unobstructed full-island overview.
+The public city is one circular island centred on Zarathustra Gallery at world (0, 0).
+`src/island-layout.js` owns its 570 m shoreline, 552 m lawn, 565 m walking limit,
+536 m shoreline loop and the eastern paper-boat lookout. Ocean surrounds all
+360 degrees. The previous offset land disc and straight eastern coast are removed.
+The overview fits the entire circle in portrait and landscape and uses a separate
+near plane for stable ground depth at that distance; walking restores the close
+near plane. Private notes, existing house coordinates and the separate graveyard
+world are preserved. New woodland avoids the park, paths and western home lots.
 
-The infinity-shaped elevated loops and their collision surfaces have been removed. The gallery roof, summit terrace, direct bridge and baby-to-volcano path remain. The return lift now lands within the straight bridge, and the aerial controls use plain roof-view labels.
+`?arrival=origami-house` approaches a new paper atelier between the artists'
+quarter and the eastern ocean. `?arrival=coast` visits its paper-boat lookout.
+The existing Zarathustra gallery stays at the civic centre (world 0,0). City
+Overview now offers a gallery-centred coastal plan; its 3D view also faces the
+gallery. The small city map uses the same centre and includes the ocean. The
+separate Graveyard of Ideas retains its own map and world visibility rules.
 
-### Origami flock
+The house has a supported folded-plate roof, clear central doorway, real window
+openings, suspended paper cranes and three working stations. Its Miura model is
+a finite, zero-thickness patch of 32 rigid parallelograms controlled by one fold
+tilt. Coordinates preserve all panel edge lengths, angles and areas; this is a
+kinematic model, not a paper-stiffness or collision solver. The crease lab keeps
+Kawasaki–Justin's unassigned single-vertex angle condition separate from
+Maekawa's necessary mountain/valley count and from global foldability. The boat
+workshop reuses the saved multilingual traditional-boat milestones, explicitly
+labelled as sketches rather than a continuous layer simulation.
 
-Eight differently coloured single-sheet paper birds fly around the park entrance in separate short routes, with varied sizes, folded wing poses and animation timing. They have no added bodies, eyes, legs or other attachments. Approaching any bird opens the existing paper-bird folding lesson; the dog and cat lessons remain available in that guide. Reduced-motion mode holds the paper poses still.
+After the boat sequence, visitors can release their paper boat at the ocean
+lookout. Completed boat work from the existing park guide counts too. The boat
+follows the same analytic water height as the sea shader. Reduced motion freezes
+the water and boat and applies fold changes immediately. The digital voyage is
+identified as art, not a claim that ordinary paper survives indefinitely in water.
+Personal folds, colour, launch state and reflection use the new local key
+`city-of-ideas:house-of-origami:v1`; existing private notes and original lesson
+completion keys are preserved. Reflections also enter the existing notebook.
 
-### Crane and butterfly additions
+The new architecture, coast, map and mathematical geometry are original code.
+Sources attached to the house include Schenk & Guest (2013), Wei et al. (2013),
+Adachi/Ishibashi/Kume on flat folding, and the existing traditional boat guide.
+Existing folded-paper boat/crane builders and their credits are reused. No
+character geometry, accepted recordings or fixed Kokoro voice settings change.
+All new instruction and controls support English, German and Persian.
 
-The park now also has two paper cranes and three paper butterflies: 13 creatures across three 3D types. Cranes glide slowly with occasional wing folds; butterflies follow compact loops with faster wing opening and closing. All visible shapes are connected folded-paper panels, without added animal bodies, eyes, legs or antennae. These are stylized folded surfaces, not a physical square-to-model simulator.
+`origami-house-math.js` owns coordinates and validated progress;
+`origami-house-scene.js` owns the ateliers; `coastal-city-scene.js` owns the sea
+and route geometry; `origami-house.js` connects them to the existing city.
+`node tools/render-coastal-plan.mjs` regenerates the three map SVGs from the
+actual artist-quarter plan and study-house coordinates. Release tests verify
+rigid-fold invariants across the full tilt range, source-clear walking routes,
+saved lesson compatibility, physical entry and launch guards, local notes,
+theorem feedback, map identity, language parity and owned-resource cleanup.
 
-Approaching a new creature opens its corresponding English/German/Persian folding guide. The crane has twelve milestones and the butterfly ten; the original sketches are orientation aids, explicitly distinct from the simulated flat folds in the simpler lessons. Full illustrated traditional instructions remain linked from [Origami-Fun’s crane guide](https://www.origami-fun.com/origami-crane.html) and [butterfly guide](https://www.origami-fun.com/origami-butterfly.html). Movement pauses near visitors, during a lesson, and in reduced-motion mode.
+## Exhibitions of Ideas
+
+`?arrival=ideas-gallery` opens four curated, idea-led exhibitions without
+replacing any existing artist house. A question and an artwork lead to a real
+walkable stop; the visitor can retain each open question in the existing private
+notebook. The theme names and visitor prompts are available in English, German
+and Persian.
+
+- **Philosophy — Giorgio de Chirico, *Le trouble du philosophe* (1925–26).**
+  `?arrival=philosophy-art` approaches the *Metaphysical shore* in the artists’
+  quarter, an original three-dimensional scene with anonymous figures, columns,
+  a miniature city, and a place to reconsider the view. The 1926 painting is held
+  by the Museo del Novecento in Milan. An external attribution link opens a
+  reference page; its reproduction is not copied into the public site.
+- **Time — Salvador Dalí, *The Persistence of Memory* (1931).**
+  The exhibition visits the already existing dream residence.
+- **Perception — Georges Seurat, *Study for “A Sunday on La Grande Jatte”*
+  (1884).** The existing colour-distance experiment remains interactive.
+- **Representation — Paul Cézanne, *Still Life with Apples and a Pot of
+  Primroses* (ca. 1890).** The existing still-life rotation activity remains
+  interactive.
+
+New scene and its source/rights disclosure live in `de-chirico-exhibit.js`;
+curation, keyboard-accessible dialog, routes, source links, and private question
+hooks live in `idea-exhibitions.js`. Both are additive to
+`artist-quarter.js`. Release checks include
+`tests/idea-exhibitions.mjs` and `tests/artist-quarter-ui.mjs`.
+
+## New house foundations
+
+The six houses in `src/foundation-houses-data.js` are deliberately first-stage
+architectural shells, not completed learning experiences or reconstructions of
+real buildings. Each has a localised name, an open entrance, a single original
+feature and a saved direction for later development:
+
+| House | First feature | Later direction |
+| --- | --- | --- |
+| Freud | Red couch and window | Dreams and memory |
+| Chomsky | Wooden branching relief | Language and argument |
+| Borges | Small library and desk book | Branching reading journeys |
+| Calvino | Vault and nested viewing frames | Different readings of one city |
+| Ada Lovelace | Skylight and mounted brass wheel | Patterns and computation |
+| Ursula Le Guin | Open courtyard and two seats at a hearth | Imagined societies |
+
+The west arc joins the existing western island road; the east arc joins the
+origami-to-shore route. Every house faces the gallery. `?arrival=new-houses`
+opens the directory; `?arrival=house:freud` (and each of the other stable IDs)
+approaches its front. The island map and small walking map use the same layout.
+Static details are batched, plot clearings exclude trees, and tests sample the
+rotated entrances and both lanes against original district collisions.
+
+The separate House of Psychoanalysis remains a design study. This small city
+room does not implement its underground or therapeutic experience. No cast,
+recording, private-note or account-connection data is changed by these shells.
+
+
+### The paper sea
+
+A large embarkable origami boat waits at the eastern landing, reached from the city map or `?arrival=ocean`. Board there with E, controller A, or the shore button. The connected folded-paper hull reuses `src/origami-boat.js`; no sail or mast has been added. It floats, leaves a wake and carries the first-person view across the ocean. W / up accelerates, S / down slows, A / D or the controller left stick steers, and normal drag/right-stick controls look around. On-screen steering is available on touch screens. The return control (or controller B) takes the visitor safely back to the landing.
+
+Six original short poems for City of Ideas drift across the view in English, Persian or German, following sailing time. They can be hidden, and sailing can be paused to read. Reduced-motion preferences remove text drift and boat rocking. These poems are original project writing, not attributed quotations or translations of a historical poet. There is no added narration and the fixed Kokoro cast is unchanged. No notes, accounts or persistent visitor records are written by this voyage.
+
+Sailing is limited to the surrounding sea, with the island excluded and an outer current boundary. Navigation to another city destination cancels the voyage instead of moving the visitor back onto the boat. Sailing state remains local to the current visit; boats are not synchronized between visitors.
+
+
+### Library of Babel beneath Zarathustra Gallery
+
+The gallery now has a real stairwell on its northern ground-floor ring, opening into a five-terrace circular underground library. The shape is an original interpretation of the visitor’s supplied concentric-library illustration and Borges’ library idea, not a reconstruction of Borges’ fictional architecture. The reference picture is not bundled or used as a texture. The library remains physically under the gallery at the island centre, with continuous stairs in both directions; existing upper gallery floors, the ocean voyage, houses and source districts remain in place.
+
+`src/babel-layout.js` supplies the shared stairwell bounds; `babel-library-model.js` defines walkable terraces, reversible stair heights and a small finite combination library; `babel-library-scene.js` creates the vault, balconies, dense book bindings, reading desks and stair geometry with shared instanced meshes. The gallery slab, ouroboros ink layer and old solid plinth all leave the stairwell open. Island ground and foundation leave the gallery footprint hollow above the vault.
+
+Use **Library of Babel** in the city map to reach its gallery entrance; walk down, or use E/controller A at the entrance. The direct `?arrival=babel` link begins on the first underground balcony. Walk between rings using their actual stairs; the return button is an additional way back to the gallery. Nearby reading desks open a catalogue experiment: four symbols in six places generate 4,096 unique pages, with a reversible address and prefix filtering. The bindings are architectural scenery; this demonstration does not claim to contain all possible literature. The explanatory text is original and links to [Jonathan Basile’s digital Library of Babel](https://libraryofbabel.info/About.html) for further reading. No Borges prose or other protected book text is reproduced.
+
+UI is available in English, Persian and German. Prefix experiments remain in session memory; this feature does not modify personal notes or accounts. The six established Kokoro voices and recordings are unchanged. Underground lighting is restored when leaving or travelling elsewhere.

@@ -1,0 +1,23 @@
+#learning-lab{width:min(900px,calc(100vw - 24px));max-height:90dvh;padding:0;background:#f4f0df;color:#233d33;border:1px solid #a9bba4;border-radius:16px}
+#learning-lab::backdrop{background:#102c24b8;backdrop-filter:blur(4px)}
+#learning-lab header{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:20px 24px;border-bottom:1px solid #d0d5bf}
+#learning-lab h2{font:normal clamp(24px,3vw,34px) Georgia,serif;margin:0}
+#learning-lab header button{width:44px;flex:0 0 44px;padding:8px}
+#learning-lab .learning-body{max-height:calc(90dvh - 145px);overflow:auto;padding:14px 24px 22px;scrollbar-gutter:stable}
+#learning-lab p,#learning-lab li,#learning-lab label{font-size:15px;line-height:1.7;max-width:75ch}
+#learning-lab h3{font:normal 25px/1.3 Georgia,serif;margin:22px 0 14px}
+#learning-lab button{background:#285646;color:#fff8e7;border:1px solid #688373;border-radius:8px;min-height:44px;padding:11px 16px;line-height:1.4;cursor:pointer;margin:5px 8px 5px 0}
+#learning-lab button:focus-visible,#learning-lab textarea:focus-visible,#learning-lab summary:focus-visible{outline:3px solid #b98531;outline-offset:3px}
+#learning-lab button[aria-pressed=true]{background:#e4c779;color:#233d33;border-color:#8b6a2f}
+#learning-lab .learning-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:16px 0}
+#learning-lab .learning-cards button{margin:0;min-height:90px;font-size:20px}
+#learning-lab strong{display:block;margin-top:7px}
+#learning-lab .learning-route{display:flex;flex-wrap:wrap;gap:8px 26px;padding-inline-start:20px;color:#526958}
+#learning-lab textarea{display:block;width:100%;box-sizing:border-box;background:#fffdf2;color:#243d34;border:1px solid #9ba993;border-radius:7px;padding:12px;margin-top:8px;font:inherit}
+#learning-lab .learning-feedback{background:#e3e9d5;border-inline-start:4px solid #53775c;padding:14px}
+#learning-lab>p{padding:8px 24px;margin:0;border-top:1px solid #d0d5bf;font-size:12px}
+#learning-lab summary{padding:14px 0;min-height:44px;cursor:pointer;box-sizing:border-box}
+#learning-lab a{display:block;color:#2d634f;min-height:44px;line-height:1.6}
+#learning-lab-tracker{position:fixed;left:20px;bottom:170px;z-index:19;background:#1f4438ed;color:#f4ead2;border:1px solid #78957a;padding:15px;border-radius:10px;max-width:270px}
+#learning-lab-tracker[hidden]{display:none}#learning-lab-tracker strong{display:block;font:normal 21px Georgia,serif;margin-bottom:10px}#learning-lab-tracker button{min-height:44px;background:#e6ca7d;color:#263b30;border:0;padding:10px 14px;border-radius:6px}
+@media(max-width:620px){#learning-lab .learning-cards{grid-template-columns:repeat(2,minmax(0,1fr))}#learning-lab header{padding:15px}#learning-lab .learning-body{padding:10px 15px 16px}#learning-lab>p{padding:8px 15px}#learning-lab-tracker{left:12px;bottom:245px;max-width:210px}}

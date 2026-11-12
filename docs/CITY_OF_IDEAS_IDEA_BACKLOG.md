@@ -281,3 +281,54 @@ The sections above preserve the supplied design notes. This dated section distin
 5. Only then prototype one short ceremony with a remembered consequence. Keep free exploration available.
 
 Offline-first remains a design direction. Browser-local notes do not by themselves make the website installable or fully usable without a network. Cinematic narration, AI residents, arbitrary image/model generation and multiplayer remain proposals.
+
+
+### Main-city cinematic opening — 19 October 2026
+
+The cinematic introduction is implemented directly to the main city independently of draft PR #2: begin alone with Zarathustra, reveal the existing study, meet an illustrated Socrates and enter the wider city. Authored EN/DE/FA narration and twelve packaged neural voice recordings are separate from scene code. See `docs/CINEMATIC_OPENING.md` for editing and verification. This implements a draft introduction; the script remains revisable, and no live AI resident is implied.
+
+Persian naming: use **زرتشت** in ordinary text and **زَرْتُشْتْ** as the user-supplied pronunciation in spoken scripts. The opening audio uses this vocalization.
+
+
+### Ground coherence and physical desk opening — 19 October 2026
+
+The user clarified that coherence concerns the ground shapes and their relationship to buildings throughout the city. Removed the empty circular plaza and large Continuous city / Ideas Park sign. Replaced separate road boxes with joined paving strips, connected the civic street to real entrances and district branches, and routed the makers approach around the mountain. Building positions and personal home editions are preserved. Further planting, signage and whole-city composition still need visual refinement; connected paving alone does not complete that design.
+
+The opening now frames a physical localized Zarathustra book on Socrates’ actual desk. The camera remains aligned when the source home restores, pulls back into the study, and leaves the visitor there to walk out. The nearby book opens the complete reader, with an optional discussion action into the existing discovery journey. Completion no longer teleports to the former center. Persian display remains زرتشت; the authored voice script retains زَرْتُشْتْ.
+
+
+### Western Graveyard of Ideas and Escher house — 19 October 2026
+
+Implemented a quiet western district around x=-360, z=-65, with six authored markers for retired or unfinished ideas. Mathematics moves to (-360,35), the Object Market to (-360,-160), and all three public travel pavilions to the eastern edge of that district. Their source identities, eight mathematics floors, source actions and carried-copy placements remain intact. The ground stays unpaved.
+
+Escher’s House of Perspective occupies the former artists’ travel-station site, with four locally packaged official-gallery study images: Relativity (1953), Drawing Hands (1948), Ascending and Descending (1960), and Waterfall (1961). The house/relief are original interpretations. Image sources and reserved rights are recorded in src/assets/escher/SOURCES.md; observation prompts support EN/DE/FA. This adds a dedicated study house, not a generated Escher resident.
+
+Removed the large Artists’ neighborhood board and House of Ideas return gateway/sign. Gallery doorway gaps exist only on the ground floor, with recognizable open double doors and continuous upper-floor glazing. The four freestanding return-lift poles are removed.
+
+The city now opens at the overview on every visit. The desk-book cinematic is an explicit optional choice.
+
+
+### Fountain paper boats
+- Replaced all three floating bird shapes with connected, open paper-boat hulls, pointed ends and a central paper fold. No attached sails, masts or animal parts.
+- Boats sit at the fountain waterline, drift slowly and bob gently; flying origami keep exploring the park.
+- Selecting a boat opens its own nine-step rectangular-paper guide in English, Persian and German.
+- Verified all three hulls stay inside the basin and touch the water throughout their drifting motion.
+
+
+### Separate Graveyard world and two starting modes
+- Graveyard of Ideas is a separate bounded world, outside the main overview and map. Mathematics, the Object Market and all three travel stations remain there.
+- A framed door at the western city edge leads there; a return door leads back. Walk through or use the nearby keyboard/controller/button interaction. Other places > Visit the door at the world’s edge provides a convenient approach.
+- The start screen offers exactly two opening modes: Explore the city, or Begin with the book. Existing mountain/story and destination options sit under a secondary disclosure.
+- Removed the full-height return-lift glass screen. Kept the functioning return platform.
+- Door glazing now shares the facade glass, facet width, radius and thickness. Entrance glass facets align with the actual opposite entrances; ground-floor columns keep both entry axes clear. Gallery doors are retained: the user clarified that the requested removal concerned the two trees in Dalí’s house.
+- Removed the two landscape trees intersecting Dalí’s residence and their collision circles.
+
+
+### Escher viewpoint journey and a returning city
+- Three physically separate stair profiles occupy different depths. Their projected endpoints align from the middle floor mark; looking away or comparing side marks does not solve the puzzle. Hold the view briefly to open a real passage.
+- Waterfall is now the hidden fourth print, behind a collision-gated reading alcove. The original three front-room prints remain available. The print browser skips Waterfall until the passage opens.
+- Visitors can walk between viewing marks or use the next-mark and look controls with keyboard/controller. Replay returns the visitor to the entry before closing the passage; it preserves discoveries and notes.
+- The notebook stores unfinished questions, first answers, revised answers and reasons locally in this browser. The original book journey is linked from the notebook without replacing its saved pages. No answers are inferred from puzzle completion.
+- Revisited Socrates, Dalí and Escher locations acknowledge prior visits and discoveries. The Socrates conversation also uses this context. The open passage and reflection history survive reload.
+- Large freestanding destination boards and their supports are removed from the city, philosophers' quarter, graveyard garden, park districts and idea grove. The park entrance banner is removed; architectural arches, painting displays, person labels and interaction labels remain.
+- Verification: screen-space geometry tests; blocked/open passage and replay tests; persistence/validation/storage-failure tests; isolated-browser completion, physical passage traversal, Waterfall inspection, saved revisions and reload/revisit checks.

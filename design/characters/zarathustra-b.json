@@ -1,0 +1,33 @@
+{
+  "character": "zarathustra",
+  "persianName": "زرتشت",
+  "selectedByUser": "B — Persian scholar",
+  "selectedOn": "2026-11-06",
+  "selectionIsSettled": true,
+  "ageDirection": "Around thirty",
+  "face": "Young adult, ancient Iranian inspired, warm olive complexion, natural proportions and brown eyes; an artistic interpretation, not a historical reconstruction",
+  "hair": "Dark, swept-back, wavy, approximately shoulder-length; natural hairy eyebrows",
+  "beard": "Short, neatly shaped, textured",
+  "costume": "Ivory woven tunic and indigo mantle with a restrained woven border; no crown or royal jewellery",
+  "construction": "Use a properly credited existing GLB as an anatomical base; keep head, neck and shoulders coherent; verify front, profile and rear views",
+  "voice": {
+    "provider": "Existing free local Kokoro cast",
+    "id": "bm_fable",
+    "changeRequested": false,
+    "authoritativeRecord": "src/ramsey-film/assets/voice-cast.json"
+  },
+  "status": {
+    "directionApproved": true,
+    "replacementProductionReady": false,
+    "liveCastReplaced": false,
+    "firstStudy": "A scan-based local construction test was inspected and rejected for publication because its face and hair do not sufficiently match option B. Experimental mesh files remain outside the application repository."
+  },
+  "anatomicalBaseResearch": {
+    "title": "Infinite, 3D Head Scan",
+    "author": "Lee Perry-Smith / Infinite-Realities",
+    "license": "CC-BY-3.0",
+    "source": "https://github.com/mrdoob/three.js/tree/r160/examples/models/gltf/LeePerrySmith",
+    "licenseSource": "https://raw.githubusercontent.com/mrdoob/three.js/r160/examples/models/gltf/LeePerrySmith/LeePerrySmith_License.txt",
+    "assessment": "Actual downloadable GLB, useful anatomical reference; the source has closed eyes and requires substantial adaptation. Not approved as the final character likeness."
+  }
+}

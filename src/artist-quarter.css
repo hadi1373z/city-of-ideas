@@ -1,0 +1,60 @@
+/* The inline Ramsey link used to overlap the collapsed places summary. */
+.welcome .city-other-places summary{min-height:44px;padding:10px 0;line-height:24px;box-sizing:border-box}
+#ramsey-film-link{display:flex;align-items:center;width:fit-content;min-height:44px;box-sizing:border-box;margin-top:12px}
+#artist-quarter{color:#243c34;background:#f2efdd;border:1px solid #b8c1aa;border-radius:18px;width:min(960px,calc(100vw - 28px));max-height:88dvh;padding:0;box-shadow:0 24px 80px #102a2355}
+#artist-quarter::backdrop{background:#102a23b8;backdrop-filter:blur(5px)}
+#artist-quarter header{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:22px 26px 14px;border-bottom:1px solid #ccd2bd}
+#artist-quarter h2{font:normal clamp(24px,3vw,34px)/1.2 Georgia,serif;margin:0}
+#artist-quarter header button{min-width:44px;min-height:44px;padding:8px;flex:0 0 auto}
+#artist-quarter .quarter-body{padding:10px 26px 26px;overflow:auto;max-height:calc(88dvh - 104px)}
+#artist-quarter p{font-size:15px;line-height:1.65;max-width:75ch}
+#artist-quarter .quarter-directory{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+#artist-quarter article{display:flex;flex-direction:column;background:#fbf9ec;border:1px solid #d3d6c2;border-radius:10px;padding:18px;min-width:0}
+#artist-quarter h3{margin:26px 0 12px;font:normal 24px Georgia,serif}
+#artist-quarter h4{font:normal 22px Georgia,serif;margin:0}
+#artist-quarter article p{margin:10px 0 15px}
+#artist-quarter article button{margin-top:auto;align-self:start}
+#artist-quarter button,#artist-quarter a{min-height:44px}
+#artist-quarter button{background:#285646;color:#fff9e8;border:1px solid #557565;border-radius:7px;padding:11px 15px;line-height:1.35}
+#artist-quarter button:focus-visible,#artist-quarter summary:focus-visible,#artist-quarter a:focus-visible{outline:3px solid #b28132;outline-offset:3px}
+#artist-quarter .quarter-buttons{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0}
+#artist-quarter figure{margin:20px 0}
+#artist-quarter .quarter-art{height:min(46vh,410px);overflow:hidden;background:#dedac8;display:flex;align-items:center;justify-content:center;border-radius:5px}
+#artist-quarter img{width:100%;height:100%;object-fit:contain;display:block}
+#artist-quarter img.quarter-plan{height:auto;max-height:480px;margin:20px 0}
+#artist-quarter .quarter-detail img{object-fit:cover;transform:scale(1.55);transform-origin:50% 55%}
+#artist-quarter figcaption{font-size:13px;line-height:1.5;margin-top:10px}
+#artist-quarter summary{cursor:pointer;padding:14px 0;min-height:44px;box-sizing:border-box}
+#artist-quarter a{color:#2b5d4b;display:inline-flex;align-items:center}
+#artist-quarter-context{position:fixed;left:24px;bottom:170px;z-index:18;background:#183b31ed;color:#f6edd7;max-width:320px;padding:16px 18px;border-radius:12px;border:1px solid #63816a}
+#artist-quarter-context[hidden]{display:none}
+#artist-quarter-context strong{font:normal 22px Georgia,serif}
+#artist-quarter-context p{font-size:13px;line-height:1.5;margin:8px 0 12px}
+#artist-quarter-context[data-location="garden"] p{display:none}
+#artist-quarter-context>div{display:flex;gap:8px;flex-wrap:wrap}
+#artist-quarter-context button{min-height:44px}
+@media(max-width:760px){#artist-quarter .quarter-directory{grid-template-columns:repeat(2,minmax(0,1fr))}#artist-quarter header{padding:16px}#artist-quarter .quarter-body{padding:8px 16px 20px}#artist-quarter-context{left:12px;bottom:215px;max-width:250px;padding:12px}#artist-quarter-context p{display:none}}
+@media(max-width:430px){#artist-quarter .quarter-directory{grid-template-columns:1fr}#artist-quarter-context{bottom:245px;max-width:215px}#artist-quarter-context strong{font-size:18px}}
+
+/* Idea-led exhibitions: separate from artist homes and reachable on small screens. */
+#idea-exhibitions{color:#273a34;background:#f3efdf;border:1px solid #b9bba9;border-radius:16px;width:min(940px,calc(100vw - 24px));max-height:88dvh;padding:0;box-shadow:0 24px 80px #102a2355}
+#idea-exhibitions::backdrop{background:#102a23b8;backdrop-filter:blur(5px)}
+#idea-exhibitions header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 24px 16px;border-bottom:1px solid #c6cab6}
+#idea-exhibitions h2{font:normal clamp(24px,3vw,34px)/1.2 Georgia,serif;margin:0}
+#idea-exhibitions header button{min-width:44px;min-height:44px;padding:8px;flex:0 0 auto}
+#idea-exhibitions .idea-exhibitions-body{overflow:auto;max-height:calc(88dvh - 103px);padding:14px 24px 28px}
+#idea-exhibitions .idea-exhibitions-body>p{max-width:72ch;line-height:1.6}
+#idea-exhibitions .idea-exhibitions-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:20px}
+#idea-exhibitions .idea-exhibitions-card{min-width:0;background:#fcf9ed;border:1px solid #d4d4c3;border-radius:12px;padding:20px}
+#idea-exhibitions .idea-exhibitions-kicker{font:600 12px/1.5 system-ui,sans-serif;letter-spacing:.09em;text-transform:uppercase;color:#5d7368;margin:0 0 4px}
+#idea-exhibitions h3{font:normal 27px/1.2 Georgia,serif;margin:0}
+#idea-exhibitions h4{font:normal 19px/1.25 Georgia,serif;margin:7px 0 14px;color:#50665a}
+#idea-exhibitions .idea-exhibitions-attribution{font-size:13px;font-weight:600}
+#idea-exhibitions .idea-exhibitions-card p{line-height:1.55}
+#idea-exhibitions blockquote{margin:15px 0;padding:12px 16px;border-inline-start:3px solid #8d957c;background:#f3f0e2;font:italic 17px/1.5 Georgia,serif}
+#idea-exhibitions .idea-exhibitions-actions{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 0}
+#idea-exhibitions button{background:#285646;color:#fff9e8;border:1px solid #557565;border-radius:7px;padding:10px 14px;min-height:44px;line-height:1.4}
+#idea-exhibitions a{color:#2b5d4b;display:inline-flex;align-items:center;min-height:44px;padding:0 8px}
+#idea-exhibitions button:focus-visible,#idea-exhibitions a:focus-visible{outline:3px solid #b28132;outline-offset:3px}
+#idea-exhibitions [role="status"]{font-size:13px;color:#395a49}
+@media(max-width:760px){#idea-exhibitions .idea-exhibitions-grid{grid-template-columns:1fr}#idea-exhibitions header{padding:16px}#idea-exhibitions .idea-exhibitions-body{padding:10px 16px 20px}}

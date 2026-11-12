@@ -48,6 +48,7 @@ window.buildIdeaPark=function(THREE){
     m.position.set(x, y, z);
     m.castShadow = shadow;
     m.receiveShadow = true;
+    if(material===mats.path&&parent===scene&&y<.2)m.visible=window.CITY_CONFIG?.showGroundPaving!==false;
     parent.add(m);
     return m;
   }
@@ -372,19 +373,16 @@ window.buildIdeaPark=function(THREE){
     const material = accent(district.color);
     colors.set(district.id, material);
     const garden = new THREE.Group(); garden.position.set(x, 0, z); scene.add(garden);
-    cylinder(0, .09, 0, 34.5, .18, mats.path, garden, false);
+    cylinder(0, .09, 0, 34.5, .18, mats.path, garden, false).visible=window.CITY_CONFIG?.showGroundPaving!==false;
     cylinder(0, .2, 0, 30.3, .12, index % 2 ? mats.grassDark : mats.grass, garden, false);
-    ring(0, .26, 0, 31.4, 1.2, mats.path, garden);
+    ring(0, .26, 0, 31.4, 1.2, mats.path, garden).visible=window.CITY_CONFIG?.showGroundPaving!==false;
     ring(0, .29, 0, 34, .28, mats.cream, garden);
-    ring(0, .3, 0, 23, 2.7, mats.path, garden);
+    ring(0, .3, 0, 23, 2.7, mats.path, garden).visible=window.CITY_CONFIG?.showGroundPaving!==false;
     const pavilionGroup = new THREE.Group(); garden.add(pavilionGroup);
     pavilion(pavilionGroup, district.id, material);
     mark(pavilionGroup, 'district', district.id);
     const inward = Math.atan2(-x, -z);
-    const sign = new THREE.Group(); garden.add(sign); sign.position.set(Math.sin(inward) * 31, 0, Math.cos(inward) * 31); sign.rotation.y = inward;
-    box(-5.7, 2.7, 0, .27, 5.4, .27, mats.bronze, sign); box(5.7, 2.7, 0, .27, 5.4, .27, mats.bronze, sign);
-    plaque(district.name || district.id, '', district.color || '#42574e', 0, 4.5, 0, 13.6, 3, 0, sign);
-    mark(sign, 'district', district.id);
+    // District names remain in the park interface; no freestanding signboards.
     for (let j = 0; j < 3; j++) {
       const ba = inward + Math.PI + (j - 1) * .7;
       bench(Math.sin(ba) * 29, Math.cos(ba) * 29, ba + Math.PI, garden);
@@ -417,7 +415,6 @@ window.buildIdeaPark=function(THREE){
     sphere(side * 13, 11, 0, 1.2, 1.2, 1.2, mats.terra, entrance);
   }
   box(0, 10.2, 0, 29, 1.1, 2, mats.cream, entrance);
-  plaque('ATLAS · IDEAS PARK', '', '#486256', 0, 10.25, 1.02, 23, 2.1, 0, entrance);
   for (let i = 0; i < 48; i++) {
     const a = i * Math.PI * 2 / 48;
     const r = 146;
@@ -494,10 +491,7 @@ window.buildIdeaPark=function(THREE){
   cylinder(42, .12, 38, 19, .24, mats.path, scene, false);
   cylinder(42, .26, 38, 16.8, .12, mats.grassDark, scene, false);
   ring(42, .3, 38, 17.8, .65, mats.cream);
-  const groveSign = new THREE.Group(); groveSign.position.set(42, 0, 57); scene.add(groveSign);
-  box(-4.5, 2.1, 0, .22, 4.2, .22, mats.bronze, groveSign); box(4.5, 2.1, 0, .22, 4.2, .22, mats.bronze, groveSign);
-  plaque('Your idea grove', 'Plant a question. Let it grow.', '#7d8058', 0, 3.4, 0, 11, 2.8, 0, groveSign);
-  mark(groveSign, 'landmark', 'grove'); landmarks.set('grove', { x: 42, z: 38 });
+  landmarks.set('grove', { x: 42, z: 38 });
   bench(57, 42, -Math.PI / 2); bench(33, 49, -.5);
 
 

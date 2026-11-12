@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "A continuous Persian/English City of Ideas",
+  "description": "",
   "scripts": {
     "build": "node tools/build.cjs",
     "check": "node tools/check.cjs",

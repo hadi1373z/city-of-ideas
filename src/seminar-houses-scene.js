@@ -1,0 +1,59 @@
+import {SEMINAR_HOUSES,SEMINAR_PATHS,seminarWorld,seminarEntry} from './seminar-houses-data.js';
+import {oscillator,DISK_CASES,diskGeodesic,chanceScore} from './seminar-house-models.js';
+export function buildSeminarHouses(T,{canvas=()=>document.createElement('canvas')}={}){
+ const root=new T.Group();root.name='Southern garden · form and listening';const owned=new Set(),own=r=>(owned.add(r),r),mat=(colour,extra={})=>own(new T.MeshLambertMaterial({color:colour,...extra}));
+ const stone=mat(0xd9cfb7,{side:T.DoubleSide}),wood=mat(0x765039),ink=mat(0x28494c),gold=mat(0xb79548),paper=mat(0xf4ead2),glass=mat(0xa7c9c4,{transparent:true,opacity:.13,depthWrite:false,side:T.DoubleSide}),houses=[],targets=[],chordMat=own(new T.LineDashedMaterial({color:0x54717a,dashSize:.13,gapSize:.10}));
+ const box=(p,w,h,d,x,y,z,m)=>{const o=new T.Mesh(own(new T.BoxGeometry(w,h,d)),m);o.position.set(x,y,z);p.add(o);return o;};
+ const cylinder=(p,r,h,x,y,z,m,segments=24)=>{const o=new T.Mesh(own(new T.CylinderGeometry(r,r,h,segments)),m);o.position.set(x,y,z);p.add(o);return o;};
+ const beam=(p,a,b,r,m)=>{const v=new T.Vector3(...a),w=new T.Vector3(...b),d=w.clone().sub(v),o=new T.Mesh(own(new T.CylinderGeometry(r,r,d.length(),10)),m);o.position.copy(v).add(w).multiplyScalar(.5);o.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),d.normalize());p.add(o);return o;};
+ const tube=(p,points,r,m)=>{const curve=new T.CatmullRomCurve3(points.map(a=>new T.Vector3(...a))),o=new T.Mesh(own(new T.TubeGeometry(curve,Math.max(24,points.length),r,6,false)),m);p.add(o);return o;};
+ const unit=own(new T.BoxGeometry(1,1,1));
+ function batch(parent){for(const child of [...parent.children])batch(child);const groups=new Map();for(const o of parent.children){if(o.geometry?.type!=='BoxGeometry'||o.userData.dynamic)continue;const key=o.material.uuid;if(!groups.has(key))groups.set(key,[]);groups.get(key).push(o);}for(const list of groups.values()){if(list.length<3)continue;const mesh=new T.InstancedMesh(unit,list[0].material,list.length);mesh.userData={...list[0].userData};mesh.name='Batched architectural details';list.forEach((o,i)=>{o.updateMatrix();const g=o.geometry.parameters;mesh.setMatrixAt(i,o.matrix.clone().multiply(new T.Matrix4().makeScale(g.width,g.height,g.depth)));o.removeFromParent();owned.delete(o.geometry);o.geometry.dispose();});mesh.instanceMatrix.needsUpdate=true;mesh.computeBoundingSphere?.();parent.add(mesh);}}
+ for(const data of SEMINAR_HOUSES){
+  const home=new T.Group();home.name=data.names.en;home.position.set(data.x,.13,data.z);home.rotation.y=Math.PI;home.userData.cityDestination='seminar:'+data.id;root.add(home);const accent=mat(data.colour),colliders=[],obstacle=(x,z,w,d)=>colliders.push({x,z,w,d}),floor=data.id==='noether'?cylinder(home,14.2,.1,0,-.05,0,stone,72):box(home,27,.1,23,0,-.05,0,stone);
+  if(data.id==='noether'){
+   const wall=new T.Mesh(own(new T.CylinderGeometry(13.2,13.2,1,64,1,true,.26,Math.PI*2-.52)),stone);wall.position.y=.5;home.add(wall);const upper=wall.clone();upper.geometry=own(new T.CylinderGeometry(13.2,13.2,1.35,64,1,true,.26,Math.PI*2-.52));upper.position.y=4.63;home.add(upper);const window=wall.clone();window.geometry=own(new T.CylinderGeometry(13.2,13.2,2.95,64,1,true,.26,Math.PI*2-.52));window.material=glass;window.position.y=2.475;home.add(window);
+   const annulus=new T.Mesh(own(new T.RingGeometry(6.8,14.3,72)),mat(0xe6dcc3,{side:T.DoubleSide}));annulus.rotation.x=-Math.PI/2;annulus.position.y=5.35;home.add(annulus);const rim=new T.Mesh(own(new T.TorusGeometry(6.8,.1,8,72)),gold);rim.rotation.x=Math.PI/2;rim.position.y=5.43;home.add(rim);
+   for(let i=1;i<16;i++){const a=i/16*Math.PI*2,x=Math.sin(a)*12.9,z=Math.cos(a)*12.9;cylinder(home,.15,5.3,x,2.65,z,accent);beam(home,[Math.sin(a)*6.8,5.45,Math.cos(a)*6.8],[Math.sin(a)*14.2,5.45,Math.cos(a)*14.2],.045,gold);}
+   for(const x of[-3.4,3.4])box(home,.2,5.3,.3,x,2.65,12.65,accent);box(home,6.95,.25,.35,0,5.18,12.65,accent);
+  }else{
+   box(home,26,5.2,.25,0,2.6,-11,stone);obstacle(0,-11,26,.25);
+   for(const x of[-13,13]){box(home,.25,1.1,22,x,.55,0,stone);box(home,.25,1.1,22,x,4.65,0,stone);box(home,.04,3,22,x,2.6,0,glass);for(const z of[-10,-5,0,5,10])box(home,.24,5.2,.2,x,2.6,z,accent);obstacle(x,0,.25,22);}
+   for(const x of[-7.85,7.85]){box(home,10.3,1.1,.25,x,.55,11,stone);box(home,10.3,1.1,.25,x,4.65,11,stone);box(home,10.3,3,.04,x,2.6,11,glass);obstacle(x,11,10.3,.25);}for(const x of[-2.7,2.7])box(home,.2,5.2,.3,x,2.6,11,accent);box(home,5.6,.55,.35,0,4.93,11,accent);
+   if(data.id==='mirzakhani'){
+    for(const x of[-13,13])for(const z of[-10,0,10])cylinder(home,.13,.65,x,5.525,z,accent);
+    for(let strip=0;strip<5;strip++){const vertices=[],indices=[];for(let i=0;i<=32;i++){const x=-14+i/32*28,y=5.25+2.6*Math.sin(i/32*Math.PI);for(const z of[-11.7+strip*4.8,-7.8+strip*4.8])vertices.push(x,y+.3*Math.sin(strip),z);if(i<32){const k=i*2;indices.push(k,k+1,k+2,k+1,k+3,k+2);}}const g=own(new T.BufferGeometry());g.setAttribute('position',new T.Float32BufferAttribute(vertices,3));g.setIndex(indices);g.computeVertexNormals();home.add(new T.Mesh(g,mat(strip%2?0x8bb6b6:0x4a818b,{side:T.DoubleSide,emissive:strip%2?0x213c3c:0x173039})));}
+   }else{
+    for(const x of[-12.8,12.8])for(const z of[-10,0,10])cylinder(home,.15,6.9,x,3.45,z,wood);
+    for(const side of[-1,1]){const roof=box(home,14.5,.22,24,side*6.7,6.2,0,wood);roof.rotation.z=side*.12;}
+    for(let i=0;i<23;i++){const x=-12.1+i*1.1,fin=box(home,.12,.48,23,x,5.06+Math.abs(x)*.12,0,accent);fin.rotation.z=x<0?-.12:.12;}
+   }
+  }
+  const nameCanvas=canvas();nameCanvas.width=1536;nameCanvas.height=160;const tex=own(new T.CanvasTexture(nameCanvas));tex.colorSpace=T.SRGBColorSpace;const sign=new T.Mesh(own(new T.PlaneGeometry(5.1,.53)),own(new T.MeshBasicMaterial({map:tex,toneMapped:false})));sign.position.set(0,data.id==='noether'?5.15:4.93,data.id==='noether'?12.85:11.2);home.add(sign);targets.push(sign);
+  // Furniture stays away from the central two-metre walking aisle.
+  for(const x of[-6.8,6.8]){box(home,3.6,.18,1.3,x,.55,4,wood);box(home,3.6,.7,.15,x,.95,4.55,accent);for(const dx of[-1.5,1.5])box(home,.16,.48,1,x+dx,.24,4,wood);obstacle(x,4,3.7,1.5);}
+  box(home,3.6,.16,2.3,6.3,1,-4,wood);for(const x of[4.8,7.8])for(const z of[-4.8,-3.2])box(home,.14,.92,.14,x,.46,z,wood);box(home,1.8,.06,1.3,6.3,1.12,-4,paper);for(let i=0;i<8;i++)box(home,1.3,.012,.025,6.3,1.16,-4.5+i*.14,ink);obstacle(6.3,-4,3.7,2.4);
+  const exhibit=new T.Group();exhibit.name='Interactive study · '+data.id;exhibit.position.set(-5,2.8,-4);home.add(exhibit);targets.push(exhibit);let moving,wire,disc,endpoints,tiles,velocity,force,playhead;
+  if(data.id==='noether'){
+   const arrow=colour=>{const g=new T.Group(),m=mat(colour),shaft=new T.Mesh(own(new T.CylinderGeometry(.035,.035,1,8)),m),tip=new T.Mesh(own(new T.ConeGeometry(.11,.25,10)),m);g.add(shaft,tip);exhibit.add(g);g.userData.arrowParts={shaft,tip};return g;};velocity=arrow(0x387fbb);velocity.name='Velocity vector';force=arrow(0xb5553b);force.name='Restoring force vector';
+   cylinder(home,2.2,.25,-5,.125,-4,accent);beam(home,[-5,.25,-4],[-5,1,-4],.12,gold);wire=tube(exhibit,Array.from({length:97},(_,i)=>{const s=oscillator(i/96*Math.PI*2);return[s.x,s.y,0];}),.045,gold);moving=new T.Mesh(own(new T.SphereGeometry(.22,16,12)),ink);exhibit.add(moving);obstacle(-5,-4,6.5,1.1);
+  }else if(data.id==='mirzakhani'){
+   exhibit.position.y=3.35;
+   cylinder(home,2.2,.25,-5,.125,-4,accent);beam(home,[-5,.25,-4],[-5,1,-4],.13,accent);disc=new T.Mesh(own(new T.CircleGeometry(3,80)),paper);exhibit.add(disc);const rim=new T.Mesh(own(new T.TorusGeometry(3,.08,8,80)),accent);exhibit.add(rim);endpoints=[0,1].map(()=>{const p=new T.Mesh(own(new T.SphereGeometry(.09,12,8)),ink);exhibit.add(p);return p;});obstacle(-5,-4,6.2,1.1);
+  }else{
+   exhibit.position.set(-5,1.08,-3);box(home,8,.16,2,-5,1,-3,wood);for(const x of[-8.5,-1.5])for(const z of[-3.65,-2.35])box(home,.14,.92,.14,x,.46,z,wood);tiles=Array.from({length:16},(_,i)=>{const tile=box(exhibit,.35,.2,.8,(i-7.5)*.46,.1,0,i%2?gold:ink);tile.userData.dynamic=true;return tile;});playhead=box(exhibit,.35,.06,.16,0,.03,.68,paper);playhead.name='Score playback cursor';playhead.userData.dynamic=true;playhead.visible=false;obstacle(-5,-3,8.1,2.1);
+  }
+  home.traverse(o=>{if(o.isMesh||o.isLine)o.userData={...o.userData,seminarHouse:data.id};});
+  const local=(x,z)=>({x:data.x-x,z:data.z-z}),inside=(x,z)=>{const p=local(x,z);return data.id==='noether'?Math.hypot(p.x,p.z)<12.6:Math.abs(p.x)<12.7&&Math.abs(p.z)<10.7;};let previous='',dynamic=[];
+  const replaceCurves=items=>{for(const o of dynamic){o.removeFromParent();owned.delete(o.geometry);o.geometry.dispose();}dynamic=items;for(const o of dynamic)o.userData={seminarHouse:data.id,dynamic:true};};
+  const model={data,group:home,exhibit,inside,local,colliders,entry:seminarEntry(data),insideEntry:{...seminarWorld(data,0,data.id==='cage'?9.6:8),y:.13,yaw:Math.PI,pitch:-.1},canStand(x,z){const p=local(x,z),r=Math.hypot(p.x,p.z);if(data.id==='noether'&&r>12.72&&r<13.65&&!(p.z>0&&Math.abs(p.x)<3.15))return false;return !colliders.some(b=>Math.abs(p.x-b.x)<b.w/2+.24&&Math.abs(p.z-b.z)<b.d/2+.24);},paint(lang){const ctx=nameCanvas.getContext('2d');ctx.fillStyle='#f1e5c9';ctx.fillRect(0,0,1536,160);ctx.fillStyle='#274b49';ctx.textAlign='center';ctx.textBaseline='middle';ctx.direction=lang==='fa'?'rtl':'ltr';ctx.font='54px Tahoma';ctx.fillText(data.names[lang]||data.names.en,768,80,1450);tex.needsUpdate=true;},update(state){
+   if(data.id==='noether'){const s=oscillator(state.phase,state.broken),key=String(state.broken);if(previous!==key){previous=key;replaceCurves([tube(exhibit,Array.from({length:97},(_,i)=>{const q=oscillator(i/96*Math.PI*2,state.broken);return[q.x,q.y,.03];}),.045,gold)]);wire.visible=false;}moving.position.set(s.x,s.y,.08);for(const [arrow,dx,dy]of[[velocity,s.vx,s.vy],[force,-s.x,-s.w*s.w*s.y]]){const length=Math.hypot(dx,dy)*.4;arrow.visible=length>.001;if(!arrow.visible)continue;arrow.position.set(s.x,s.y,.18);arrow.rotation.z=-Math.atan2(dx,dy);const {shaft,tip}=arrow.userData.arrowParts,stem=Math.max(.01,length-.25);shaft.scale.y=stem;shaft.position.y=stem/2;tip.position.y=stem+.125;}}
+   else if(data.id==='mirzakhani'){if(previous===String(state.disk))return;previous=String(state.disk);const {a,b}=DISK_CASES[state.disk],geo=diskGeodesic(a,b),goldCurve=tube(exhibit,geo.points.map(([x,y])=>[x*3,y*3,.1]),.035,gold),g=own(new T.BufferGeometry().setFromPoints([new T.Vector3(a[0]*3,a[1]*3,.07),new T.Vector3(b[0]*3,b[1]*3,.07)])),line=new T.Line(g,chordMat);line.computeLineDistances();exhibit.add(line);replaceCurves([goldCurve,line]);endpoints.forEach((p,i)=>p.position.set([a,b][i][0]*3,[a,b][i][1]*3,.15));}
+   else{const slot=state.playingSlot??-1;playhead.visible=slot>=0&&slot<16;if(playhead.visible)playhead.position.x=(slot-7.5)*.46;const score=chanceScore(state.seed);tiles.forEach((tile,i)=>{const h=score[i]===0?.06:.2+score[i]*.2;tile.scale.y=h/.2;tile.position.y=h/2;});}
+  }};model.paint('en');batch(home);houses.push(model);
+ }
+ for(const points of SEMINAR_PATHS)for(let i=1;i<points.length;i++){const a=points[i-1],b=points[i],d=Math.hypot(a[0]-b[0],a[1]-b[1]),p=new T.Mesh(own(new T.PlaneGeometry(4.4,d+.03)),mat(0xb1b196));p.rotation.x=-Math.PI/2;p.rotation.z=-Math.atan2(b[0]-a[0],b[1]-a[1]);p.position.set((a[0]+b[0])/2,.135,(a[1]+b[1])/2);p.name='Southern garden path';root.add(p);}
+ // Shared garden seats and low planters give the three thresholds one address.
+ for(const x of[-52,52]){box(root,6,.5,1.6,x,.25,276,stone);box(root,5.4,.12,1.2,x,.55,276,wood);}
+ return {group:root,houses,targets,paths:SEMINAR_PATHS,canStand:(x,z)=>houses.every(h=>h.canStand(x,z))&&![ -52,52].some(a=>Math.abs(x-a)<3.2&&Math.abs(z-276)<1.05),dispose(){root.removeFromParent();root.traverse(o=>{if(o.isInstancedMesh)o.dispose?.();});for(const r of owned)r.dispose();root.clear();}};
+}

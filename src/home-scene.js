@@ -322,7 +322,7 @@ function architecture(group,house,enclosed,obstacles=[]){
  if(floor===0)box(group,b.w+.22,.2,b.d+.22,b.cx,-.15,b.cz,mat('#bdb09b'));
  let door=null;
  if(floor===0){
-  box(group,3.1,.12,1.6,e.x,-.01,e.z+.8,mat('#c6bda8'));for(let n=0;n<12;n++)box(group,1.5,.04,.6,e.x,-.06,e.z+1.9+n*.62,mat('#c6bda8'));
+  box(group,3.1,.12,1.6,e.x,-.01,e.z+.8,mat('#c6bda8'));if(!house.sharedCityApproach)for(let n=0;n<12;n++)box(group,1.5,.04,.6,e.x,-.06,e.z+1.9+n*.62,mat('#c6bda8'),{entrancePaver:true});
   plant(group,e.x-1.3,e.z+.9,.52);plant(group,e.x+1.3,e.z+.9,.52);obstacles.push({minX:e.x-1.58,maxX:e.x-1.02,minZ:e.z+.62,maxZ:e.z+1.18,label:'Porch planter'},{minX:e.x+1.02,maxX:e.x+1.58,minZ:e.z+.62,maxZ:e.z+1.18,label:'Porch planter'});
   if(enclosed){const leaf=new THREE.Group();leaf.position.set(e.x-.74,0,e.z+.075);group.add(leaf);box(leaf,1.43,2.13,.095,.715,1.065,0,mat('#58614c'));box(leaf,1.08,.37,.028,.715,1.77,.061,mat('#ccd9d5'));sphere(leaf,.05,1.2,1.08,.1,mat('#c4ad74'));leaf.traverse(o=>o.userData={door:true,label:'Front door'});door={leaf,x:e.x,z:e.z+.075,open:false};physicalPlaque(group,'Socrates · House of Ideas',1.9,e.x+1.75,1.5,e.z+.13);}
  }

@@ -1,33 +1,61 @@
 <!doctype html>
-<html lang="fa" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#151c21">
-  <meta name="description" content="قدم زدن در گالری حلقه‌ای چهارطبقهٔ زرتشت، همراه با فانوسی آویخته از سقف؛ یک طرح معماری قابل گردش برای خانهٔ کتاب.">
+  <meta name="description" content="Explore the City of Ideas: Zarathustra Gallery, artist houses and hands-on rooms for discovery and learning.">
   <title>City of Ideas · شهر ایده‌ها</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="startup-progress.css?v=1">
+  <link rel="modulepreload" href="city-integration.js?v=finishes1">
+  <link rel="modulepreload" href="city-source-assets/home-tools/math-city-scene.js">
+  <link rel="modulepreload" href="city-source-assets/home-tools/makers-city-scene.js">
+  <link rel="modulepreload" href="city-source-assets/home-tools/dali-house-scene.js">
+  <link rel="modulepreload" href="city-source-assets/home-tools/artist-city-editions.js">
+  <link rel="modulepreload" href="city-source-assets/home-tools/neighborhood.js">
+  <link rel="stylesheet" href="style.css?v=discoveries1">
   <link rel="stylesheet" href="philosophers.css">
   <link rel="stylesheet" href="socrates.css">
   <link rel="stylesheet" href="origami.css">
   <link rel="stylesheet" href="book-reader.css">
 <link rel="stylesheet" href="integration.css">
 <link rel="stylesheet" href="summit-story.css">
+<link rel="stylesheet" href="cinematic-intro.css">
+<link rel="stylesheet" href="visit-experiences.css"><link rel="stylesheet" href="question-walk.css?v=1"><link rel="stylesheet" href="city-discoveries.css?v=1"><link rel="stylesheet" href="ramsey-house.css?v=1">
+<link rel="stylesheet" href="artist-quarter.css?v=artists2">
+<link rel="stylesheet" href="learning-lab.css">
+<link rel="stylesheet" href="study-houses.css?v=workbench1">
+<link rel="stylesheet" href="origami-house.css?v=seminar1">
+<link rel="stylesheet" href="seminar-houses.css?v=1">
+<link rel="stylesheet" href="room-workbench.css?v=1">
+<link rel="stylesheet" href="proof-atelier.css?v=certificate1">
+<link rel="stylesheet" href="computation-lab.css?v=1">
+<link rel="stylesheet" href="house-investigations.css?v=1">
+<link rel="stylesheet" href="foundation-houses.css?v=foundations1">
+<link rel="stylesheet" href="ocean-voyage.css?v=sailing2">
+<link rel="stylesheet" href="babel-library.css?v=1">
+<link rel="stylesheet" href="escher-depth.css?v=1"><link rel="stylesheet" href="world-cylinder.css?v=polish1">
+<link rel="stylesheet" href="pond-world-window.css?v=1">
+<link rel="stylesheet" href="connected-journey.css?v=1">
+<link rel="stylesheet" href="paper-monitors.css?v=1">
+<link rel="stylesheet" href="mobile-controls.css?v=dismiss1">
 </head>
-<body>
-<main id="world" aria-label="نمای سه‌بعدی گالری چهارطبقه"></main>
-<div id="loading" role="status"><span class="ring-mark"></span><p>خانه‌ای برای یک کتاب</p></div>
+<body class="cinematic-pending">
+<main id="world" aria-label="Three-dimensional City of Ideas"></main>
+<div id="loading" role="status"><span class="ring-mark"></span><p>City of Ideas</p></div>
+<script src="startup-progress.js?v=1"></script>
 <header class="masthead">
-  <a class="identity" href="#" aria-label="بازگشت به نمای شهر"><span class="ring-mark"></span><span><strong>گالری زرتشت در شهر</strong><small>مارپیچ شدن · خانه‌ای برای یک کتاب</small></span></a>
-  <div class="header-actions"><button id="city-exit" class="glass" hidden>بازگشت به شهر</button><button id="overview" class="glass">نمای شهر</button><button data-set-language="fa" class="glass" lang="fa">FA</button><button data-set-language="en" class="glass" lang="en">EN</button><button data-set-language="de" class="glass" lang="de">DE</button><button id="help" class="icon-button" aria-label="راهنمای گردش">؟</button></div>
+  <a class="identity" href="#" aria-label="Return to the city overview"><span class="ring-mark"></span><span><strong>City of Ideas</strong><small>Zarathustra Gallery and the Mountain of Becoming</small></span></a>
+  <div class="header-actions"><button id="city-exit" class="glass" hidden>Return to city</button><button id="overview" class="glass">City overview</button><button data-set-language="fa" class="glass" lang="fa">FA</button><button data-set-language="en" class="glass" lang="en">EN</button><button data-set-language="de" class="glass" lang="de">DE</button><button id="help" class="icon-button" aria-label="Walking help">?</button></div>
 </header>
 <section class="welcome" id="welcome">
-  <p class="eyebrow">مرکز شهر ایده‌ها • چهار دور، هشتاد و یک ایستگاه</p>
-  <h1>فصل به فصل.<br>حلقه به حلقه.<br><em>تا ارتفاعِ شدن.</em></h1>
-  <p class="intro">از کفِ مارگونه بالا بروید. در پایان هر فصل کمی بالاتر بایستید؛ سپس به میدان بازگردید و قدم‌زنان وارد خانهٔ سقراط، محلهٔ هنرمندان و گالری اشیا شوید.</p>
-  <button id="enter" class="primary">آغاز مسیر مارپیچ <span aria-hidden="true">←</span></button>
-  <div class="welcome-secondary"><button id="enter-gallery" class="glass">گالری چهارطبقه</button><button id="enter-city" class="glass">قدم‌زدن در شهر</button></div>
-  <span class="small-note">یک شهر قابل قدم‌زدن؛ چیدمان عمومی خانه‌ها و آثارِ منبع، در همین صحنه.</span>
+  <p class="eyebrow">The city core · Four turns, eighty-one stations</p>
+  <h1>Chapter by chapter.<br>From foot to summit.<br><em>The child of becoming.</em></h1>
+  <p class="intro">Follow the rising gallery, then explore the city, visit its houses and work through an idea for yourself.</p>
+  <button id="enter" class="primary">Begin the mountain <span aria-hidden="true">→</span></button>
+  <div class="welcome-secondary"><button id="enter-gallery" class="glass">Four-level gallery</button><button id="enter-city" class="glass">Walk in the city</button></div>
+  <a class="glass" href="ramsey-film/" id="ramsey-film-link">10-minute 3D conversation</a>
+  <span class="small-note">One walkable city, with original content and tools in this experience.</span>
 </section>
 <aside class="floor-nav" aria-label="چهار بخش کتاب">
   <div class="nav-caption">چهار طبقه / چهار بخش</div>
@@ -53,11 +81,13 @@
 <div id="fallback" hidden><h2>گالری برای نمایش سه‌بعدی آماده است.</h2><p>این مرورگر نمایش سه‌بعدی را اجرا نمی‌کند. با مرورگر دیگری وارد شوید، یا بخش‌های کتاب را از فهرست چهار طبقه ببینید.</p></div>
 <dialog id="language-choice" class="language-choice"><p>زبان تجربه را انتخاب کنید.</p><p lang="en" dir="ltr">Choose your language.</p><button data-set-language="fa" class="primary">فارسی</button><button data-set-language="en" class="primary" lang="en">English</button><button data-set-language="de" class="primary" lang="de">Deutsch</button></dialog>
 <dialog id="source-tools-dialog" class="source-tools-dialog"><div class="source-tools-head"><strong id="source-tools-title"></strong><button id="close-source-tools" class="glass">بستن</button></div><span id="home-scene-status" role="status"></span><iframe id="source-tools-frame" title="Original city content and tools"></iframe></dialog>
-<script src="city-config.js"></script><script src="assets/three.min.js"></script><script src="content.js"></script><script src="public-de.js"></script><script src="i18n.js"></script><script src="city-sources.js"></script><script src="home-scene.js"></script><script src="city-book.js"></script><script src="artist-sites.js"></script><script src="object-tools.js"></script><script src="park-data.js"></script><script src="city-source-assets/park-tools/public-fa.js"></script><script src="city-source-assets/park-tools/reader-public-fa.js"></script><script src="world-public-language.js"></script><script src="park.js"></script><script src="mountain-path.js"></script><script src="mountain-art.js"></script><script src="city.js"></script><script src="home-bridge.js"></script><script src="tool-frames.js"></script><script src="book-reader.js"></script><script src="gallery-spiral.js"></script><script src="roof-connection.js"></script><script src="city-landscape.js"></script><script src="gamepad-input.js"></script><script src="summit-story.js"></script><script src="gallery.js"></script>
+<script src="city-config.js"></script><script src="assets/three.min.js"></script><script src="content.js"></script><script src="public-de.js"></script><script src="i18n.js?v=english1"></script><script src="city-sources.js"></script><script src="home-scene.js"></script><script src="city-book.js"></script><script src="artist-sites.js"></script><script src="object-tools.js"></script><script src="park-data.js"></script><script src="city-source-assets/park-tools/public-fa.js"></script><script src="city-source-assets/park-tools/reader-public-fa.js"></script><script src="world-public-language.js"></script><script src="park.js"></script><script src="mountain-path.js"></script><script src="mountain-art.js"></script><script src="city-road-surface.js"></script><script src="artist-quarter-layout.js?v=artists2"></script><script src="babel-layout.js?v=two-faces2"></script><script src="city.js?v=two-faces2"></script><script src="home-bridge.js"></script><script src="tool-frames.js"></script><script src="book-reader.js"></script><script src="gallery-spiral.js"></script><script src="roof-connection.js"></script><script src="city-landscape.js"></script><script src="gamepad-input.js?v=photo2"></script><script src="scene-photo.js?v=photo2"></script><script src="summit-story.js"></script><script src="gallery-entrance.js?v=entrance1"></script><script src="gallery.js?v=two-faces2"></script>
 <script src="city-idea-link.js"></script>
 <script src="progress.js"></script>
 <script src="version-info.js"></script>
-<script type="module" src="city-integration.js"></script>
+<script src="mobile-controls.js?v=1"></script>
+<script src="notice-dismiss.js?v=1"></script>
+<script type="module" src="city-integration.js?v=finishes1"></script>
 <script type="module" src="service-init.js"></script>
 <script type="module" src="rendering-init.js"></script>
 </body>

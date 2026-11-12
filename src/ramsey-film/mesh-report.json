@@ -1,0 +1,127 @@
+{
+  "turing": {
+    "bytes": 11708504,
+    "bones": 13,
+    "meshes": 26,
+    "triangles": 144920,
+    "morphs": [
+      "blinkLeft",
+      "blinkRight",
+      "jawOpen",
+      "seatedDrape",
+      "smile"
+    ],
+    "animations": [
+      "Standing idle",
+      "Seated at hexagonal table",
+      "Blink"
+    ],
+    "wardrobe": "Charcoal slim suit, muted green tie",
+    "wardrobeTriangles": 83484,
+    "garmentMorphs": [
+      "seatedDrape"
+    ],
+    "wardrobeSource": "https://sketchfab.com/3d-models/man-black-business-suit-7a669a06fb954d459985ccaa98672177"
+  },
+  "ramsey": {
+    "bytes": 14733892,
+    "bones": 14,
+    "meshes": 33,
+    "triangles": 164300,
+    "morphs": [
+      "blinkLeft",
+      "blinkRight",
+      "jawOpen",
+      "seatedDrape",
+      "smile"
+    ],
+    "animations": [
+      "Standing idle",
+      "Seated at hexagonal table",
+      "Blink"
+    ],
+    "wardrobe": "Navy three-piece, burgundy tie",
+    "wardrobeTriangles": 83484,
+    "garmentMorphs": [
+      "seatedDrape"
+    ],
+    "wardrobeSource": "https://sketchfab.com/3d-models/man-black-business-suit-7a669a06fb954d459985ccaa98672177"
+  },
+  "socrates": {
+    "bytes": 3444272,
+    "bones": 0,
+    "meshes": 298,
+    "triangles": 121640,
+    "morphs": [],
+    "animations": [
+      "standing",
+      "seated"
+    ],
+    "assetType": "Restored illustrated geometry with two baked poses; no skin rig or facial morphs. Gameplay retains original procedural gestures.",
+    "runtime": "Preserved illustrated procedural actor; GLB is the archived two-pose export."
+  },
+  "nietzsche": {
+    "bytes": 19267864,
+    "bones": 13,
+    "meshes": 20,
+    "triangles": 192486,
+    "morphs": [
+      "seatedDrape"
+    ],
+    "animations": [
+      "Standing idle",
+      "Seated at hexagonal table"
+    ],
+    "assetType": "User-supplied textured head and neck on weighted body; no facial morphs",
+    "headTriangles": 89748,
+    "textures": 4,
+    "textureResolution": 2048,
+    "wardrobe": "Near-black long jacket, warm waistcoat and linen",
+    "wardrobeTriangles": 83058,
+    "garmentMorphs": [
+      "seatedDrape"
+    ],
+    "wardrobeSource": "https://sketchfab.com/3d-models/man-black-business-suit-7a669a06fb954d459985ccaa98672177",
+    "lowerFaceCorrection": {
+      "yawAlignmentDegrees": 10,
+      "region": "lower lip and chin beneath the moustache",
+      "modifiedVertices": 4037,
+      "meanMirrorDistanceBeforeMm": 5.110339641571045,
+      "meanMirrorDistanceAfterMm": 1.9364935159683228,
+      "maxSculptDisplacementMm": 8.197040557861328,
+      "limit": "Original baked texture shading remains naturally asymmetric; source face is static."
+    },
+    "facialAnimation": "Static source portrait; head and body gestures only.",
+    "neckTriangles": 14400,
+    "neckTextures": 3,
+    "neckRefit": "neck-fit-report.json",
+    "headScale": 0.792,
+    "wholeCharacterScale": 1.1
+  },
+  "zarathustra": {
+    "bytes": 1964712,
+    "bones": 0,
+    "meshes": 177,
+    "triangles": 67432,
+    "morphs": [],
+    "animations": [
+      "standing",
+      "seated"
+    ],
+    "assetType": "Restored illustrated geometry with two baked poses; no skin rig or facial morphs. Gameplay retains original procedural gestures.",
+    "runtime": "Preserved illustrated procedural actor; GLB is the archived two-pose export."
+  },
+  "anonymous": {
+    "bytes": 4983896,
+    "bones": 11,
+    "meshes": 13,
+    "triangles": 63756,
+    "morphs": [],
+    "garmentMorphs": [],
+    "animations": [
+      "Standing idle",
+      "Seated at hexagonal table"
+    ],
+    "identity": "Rigid white mask and black hood"
+  }
+}

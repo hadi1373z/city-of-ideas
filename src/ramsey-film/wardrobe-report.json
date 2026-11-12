@@ -1,0 +1,239 @@
+{
+  "edition": 14,
+  "reference": {
+    "author": "Style3D CG (https://sketchfab.com/Style3DMeta)",
+    "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+    "source": "https://sketchfab.com/3d-models/man-black-business-suit-7a669a06fb954d459985ccaa98672177",
+    "title": "Man Black Business Suit"
+  },
+  "assets": [
+    {
+      "id": "turing",
+      "variant": "Charcoal slim suit, muted green tie",
+      "kept": [
+        "turing-continuous-face-neck",
+        "turing-sculpted-continuous-hair",
+        "turing-anatomical-eye-0",
+        "turing-tapered-brow-0",
+        "turing-anatomical-eye-1",
+        "turing-tapered-brow-1",
+        "turing-material-batch-9_1",
+        "turing-relaxed-open-hands"
+      ],
+      "newTriangles": 83484,
+      "bytes": 11708504
+    },
+    {
+      "id": "ramsey",
+      "variant": "Navy three-piece, burgundy tie",
+      "kept": [
+        "ramsey-continuous-face-neck",
+        "ramsey-sculpted-continuous-hair",
+        "ramsey-anatomical-eye-0",
+        "ramsey-tapered-brow-0",
+        "ramsey-anatomical-eye-1",
+        "ramsey-tapered-brow-1",
+        "Rounded_earpiece_0",
+        "Clear_fitted_lens_0",
+        "Rounded_earpiece_1",
+        "Clear_fitted_lens_1",
+        "Nose_pad_-1",
+        "Nose_pad_1",
+        "ramsey-material-batch-6",
+        "ramsey-material-batch-15_1",
+        "ramsey-relaxed-open-hands"
+      ],
+      "newTriangles": 83484,
+      "bytes": 14733892
+    },
+    {
+      "id": "nietzsche",
+      "variant": "Near-black long jacket, warm waistcoat and linen",
+      "kept": [
+        "turing-material-batch-9_1",
+        "turing-relaxed-open-hands",
+        "nietzsche-supplied-head-neck",
+        "nietzsche-continuous-neck-extension"
+      ],
+      "newTriangles": 83058,
+      "bytes": 19267864
+    }
+  ],
+  "changes": "Geometry, garment fit, palette, rig weights and seated morphs; existing heads, facial morphs, spectacles, skin hands and shoes retained.",
+  "additionalStyleReference": {
+    "author": "Pixel_Monster (https://sketchfab.com/ar.jethin)",
+    "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+    "source": "https://sketchfab.com/3d-models/indian-man-in-suit-985dd9756d89464b9380414b5b12d8aa",
+    "title": "Indian Man in suit",
+    "use": "Shoulder and sleeve fit and a restrained shirt/jacket palette; no identity or head imported."
+  },
+  "neckFix": "Portrait clothing and artificial collar base removed first. Original face/neck fitted 45 mm lower, actual skin contour extended into the restored business-suit collar. Boundary weights and skin shading blend continuously.",
+  "lowerFaceCorrection": {
+    "yawAlignmentDegrees": 10,
+    "region": "lower lip and chin beneath the moustache",
+    "modifiedVertices": 4037,
+    "meanMirrorDistanceBeforeMm": 5.110339641571045,
+    "meanMirrorDistanceAfterMm": 1.9364935159683228,
+    "maxSculptDisplacementMm": 8.197040557861328,
+    "limit": "Original baked texture shading remains naturally asymmetric; source face is static."
+  },
+  "preservedHeadAttributes": {
+    "turing": {
+      "turing-continuous-face-neck": {
+        "POSITION": "63a62788abbbade0b3092fbd9ab87ec4c0c19edfd2ea4c6debc9936bfda273d1",
+        "NORMAL": "37bf8bb2af6d00a066ce08d03e85689e5cdf9a34184036e6614d08d62fdb1147",
+        "TEXCOORD_0": "21eb2aa0e987147f4ccb680cd62b76ec12e925df89ccf277572421207c5ce3f3",
+        "COLOR_0": "31249c26df830f9b66c656b4fe973a72d197743610522f8c2191217f2b9baec0",
+        "JOINTS_0": "f2a2cc717f4223367a0d569d4f354aa50d5fd974e72ade27c318a9f6ff52365d",
+        "WEIGHTS_0": "f2aafdca5296d701425ed90561bee550ef908d45b31bf8c7519e32087c2bc504"
+      },
+      "turing-sculpted-continuous-hair": {
+        "POSITION": "4a5b48e7196571ae2d9a3286ef6d1de66244a7f0b69af1f54ba5ac7704a47e06",
+        "NORMAL": "558cd30436efd00065e6d81bca41dc9c4875efe55af0142f1447b92d3a11dcc8",
+        "TEXCOORD_0": "6293176a36a1b9cb4460a6711abc6c51dbc14ea3d167a62dda925b35ba246489",
+        "COLOR_0": "b64dce4e5180261ed11593f81743d3fea102332a547d6e21f92841ecce2cc786",
+        "JOINTS_0": "4baf3ccf09333c184526dc33cf0a7da92060fd19cc62c5d8ef3a7b3a59d502bf",
+        "WEIGHTS_0": "d722897414d13c6cd7c69dc8f25c7471b0521154453096a44e45b7daa89df921"
+      },
+      "turing-anatomical-eye-0": {
+        "POSITION": "efe0242e98d11836dcbd245060ff1badb6febd4c23d1ba22132ac3ce694f2459",
+        "NORMAL": "d1379ba76f67f880cc38317133066d0310d7bcd8dd46f0193f55d2dafc1362f8",
+        "TEXCOORD_0": "bc92f048d86d6297aa031daff32b44b90056c85fd98ea8b6b20bf9b2c1fe41dc",
+        "COLOR_0": "86c2c47846c7df952669b11bc5c15446f07a64a7e6fe377da7208d391c2127e7",
+        "JOINTS_0": "ddeea2006f7184dc0f5f710b974604818c3d07e5fe90dd9152126e8af5072593",
+        "WEIGHTS_0": "15e9daae58bb1c72f358e418e2a4ef9df4d1821e45d2c0e23f5c34a1b3d2d29c"
+      },
+      "turing-tapered-brow-0": {
+        "POSITION": "4db5ee87fd0fefdf15851087d2a1307f989b66457ce00e0b37e66a14f488fa79",
+        "NORMAL": "c7c3fcdcef6208829a7d070a82be2a8b49fa8321d37ac86c3623846cc57b5777",
+        "JOINTS_0": "30c72ad339ed98c31e9934e98ae8c8fdf725511b0a3ecf5aec8bdd67e45e80d9",
+        "WEIGHTS_0": "f5493a8482cbceb1f0f0e207e962c44c17ea57f709976776f0ec7cfd34dab34f"
+      },
+      "turing-anatomical-eye-1": {
+        "POSITION": "b27ca06a40ab754d9149c66f63afc1cda810182cf22f89abf09e3db0d1f86961",
+        "NORMAL": "d1379ba76f67f880cc38317133066d0310d7bcd8dd46f0193f55d2dafc1362f8",
+        "TEXCOORD_0": "bc92f048d86d6297aa031daff32b44b90056c85fd98ea8b6b20bf9b2c1fe41dc",
+        "COLOR_0": "86c2c47846c7df952669b11bc5c15446f07a64a7e6fe377da7208d391c2127e7",
+        "JOINTS_0": "cae6eea2b9d8973116afe51007e15acf2db2fe45adfa7e7a6e09871c28991930",
+        "WEIGHTS_0": "15e9daae58bb1c72f358e418e2a4ef9df4d1821e45d2c0e23f5c34a1b3d2d29c"
+      },
+      "turing-tapered-brow-1": {
+        "POSITION": "7041f2a672752fd6b47aa3964a6f2787c75b3933e3f5a77f66d880230b2c92f1",
+        "NORMAL": "57b35198aa171a1c6d10a72d4c8dd85de4f97bf7a74044ce3c90edc215d4d55d",
+        "JOINTS_0": "30c72ad339ed98c31e9934e98ae8c8fdf725511b0a3ecf5aec8bdd67e45e80d9",
+        "WEIGHTS_0": "f5493a8482cbceb1f0f0e207e962c44c17ea57f709976776f0ec7cfd34dab34f"
+      }
+    },
+    "ramsey": {
+      "ramsey-continuous-face-neck": {
+        "POSITION": "3b8b117b4a2e5b5fdd1dddb1b67cdb1336f91476c7d2521ce33302ec94237e18",
+        "NORMAL": "adeebabf046c480b63055712505901d50da8ac60e5783a11028facdc77c09201",
+        "TEXCOORD_0": "a31a2410fc581f711817e79f73fb1e527331b56b3f32316f2c575d1064bb0500",
+        "COLOR_0": "9b2938122c816517355c8908569e428a722851dbfb6b3b5129455c744b408e51",
+        "JOINTS_0": "f48b184edda6eb2bbfa7ae161ba39b56aa5d450f4354fefc1881dd1d9f4cf64c",
+        "WEIGHTS_0": "3adbf6434ec8281f1dae55f140337f7cc70dfce9ea11d5bd9be963f470e3f91b"
+      },
+      "ramsey-sculpted-continuous-hair": {
+        "POSITION": "1810da5de713b3bf56b70a1c73eeaacca00a8a7939aab03d00ccf9ededd2088b",
+        "NORMAL": "3e98970dea3236f1d04378a4b4025828f6c626712af03779fb2cc8891316f39b",
+        "TEXCOORD_0": "6293176a36a1b9cb4460a6711abc6c51dbc14ea3d167a62dda925b35ba246489",
+        "COLOR_0": "ea5eadc0e64d0e549eac4768a9fd1cf4963a8d9df09207b487b52afa7b0f7bf5",
+        "JOINTS_0": "4baf3ccf09333c184526dc33cf0a7da92060fd19cc62c5d8ef3a7b3a59d502bf",
+        "WEIGHTS_0": "d722897414d13c6cd7c69dc8f25c7471b0521154453096a44e45b7daa89df921"
+      },
+      "ramsey-anatomical-eye-0": {
+        "POSITION": "2e0ebdecb02ceede621d78d68724c7f53ad5d7344f1d7099744de1971bc95bd4",
+        "NORMAL": "d1379ba76f67f880cc38317133066d0310d7bcd8dd46f0193f55d2dafc1362f8",
+        "TEXCOORD_0": "bc92f048d86d6297aa031daff32b44b90056c85fd98ea8b6b20bf9b2c1fe41dc",
+        "COLOR_0": "86c2c47846c7df952669b11bc5c15446f07a64a7e6fe377da7208d391c2127e7",
+        "JOINTS_0": "ddeea2006f7184dc0f5f710b974604818c3d07e5fe90dd9152126e8af5072593",
+        "WEIGHTS_0": "15e9daae58bb1c72f358e418e2a4ef9df4d1821e45d2c0e23f5c34a1b3d2d29c"
+      },
+      "ramsey-tapered-brow-0": {
+        "POSITION": "4ea7e9418e5b250a9e15c7ed93f87b4b301880a5f0dd6656b1e5a2ae9771945b",
+        "NORMAL": "9997031af133b2c69f4f49dfdd35e47384f7fb8059603b1abaf9f25d4b0be0b4",
+        "JOINTS_0": "30c72ad339ed98c31e9934e98ae8c8fdf725511b0a3ecf5aec8bdd67e45e80d9",
+        "WEIGHTS_0": "f5493a8482cbceb1f0f0e207e962c44c17ea57f709976776f0ec7cfd34dab34f"
+      },
+      "ramsey-anatomical-eye-1": {
+        "POSITION": "f3a4c4b04cd4c137628e514943a0e01d68efeead07a77f200b281ea1e871ac2d",
+        "NORMAL": "d1379ba76f67f880cc38317133066d0310d7bcd8dd46f0193f55d2dafc1362f8",
+        "TEXCOORD_0": "bc92f048d86d6297aa031daff32b44b90056c85fd98ea8b6b20bf9b2c1fe41dc",
+        "COLOR_0": "86c2c47846c7df952669b11bc5c15446f07a64a7e6fe377da7208d391c2127e7",
+        "JOINTS_0": "cae6eea2b9d8973116afe51007e15acf2db2fe45adfa7e7a6e09871c28991930",
+        "WEIGHTS_0": "15e9daae58bb1c72f358e418e2a4ef9df4d1821e45d2c0e23f5c34a1b3d2d29c"
+      },
+      "ramsey-tapered-brow-1": {
+        "POSITION": "4e2afebe000525643097c3d3ffd51d5951e1f4a64eb68b2dfe195de86ed773ab",
+        "NORMAL": "4b861e61332f7e900b8fe78fa867355c11b111a80d59b263fbc203b31a55559b",
+        "JOINTS_0": "30c72ad339ed98c31e9934e98ae8c8fdf725511b0a3ecf5aec8bdd67e45e80d9",
+        "WEIGHTS_0": "f5493a8482cbceb1f0f0e207e962c44c17ea57f709976776f0ec7cfd34dab34f"
+      },
+      "Rounded earpiece 0": {
+        "POSITION": "b51f547f55402ce12b32e0b2a5a0d39e98457e2f6b9e137983eaaff9d224b0a6",
+        "NORMAL": "7b389d837cfd5d2f04a4ee10b8adc3cc31f5112e3dbd8af511d24c6ee18b0f97",
+        "TEXCOORD_0": "74ee0acd411d63f74fe6c7ab338b67827baeec3d8ad8822c7f8ecb6024f6706e",
+        "JOINTS_0": "95dc4a70f9238d73b34c3e25a5abf1312e278480923aeca2a64d0b98eca407e6",
+        "WEIGHTS_0": "a5d8b252a696dfec49d3cb29bfe200c679ec2d56fbf2c0bdb4f64eab87fd42c1"
+      },
+      "Clear fitted lens 0": {
+        "POSITION": "f02366ae7ea729867af450d808d34b762fbc58066ace362645c1c6e6c34307df",
+        "NORMAL": "58fda835aa4bf05defc7b8c27d02d683a751abf6d0a62275cd4f04a14a522942",
+        "JOINTS_0": "d6a7fdf479807b6fa30caad8cf14537ed7ff9e7258867510e2898a63bf1f3063",
+        "WEIGHTS_0": "0fb7850b2d5e658c358f7c29fe6ae7443ad74ef85dcca742c1de15274a481e78"
+      },
+      "Rounded earpiece 1": {
+        "POSITION": "29ce6f07ec209a0fb4b96efbb7c108e74d476e16ea4df543f74011d5b3aad138",
+        "NORMAL": "9e8126126621bfe2a6c71dea63c4a24aee6454fc332cfaaffb3f1c68c5fc7918",
+        "TEXCOORD_0": "74ee0acd411d63f74fe6c7ab338b67827baeec3d8ad8822c7f8ecb6024f6706e",
+        "JOINTS_0": "95dc4a70f9238d73b34c3e25a5abf1312e278480923aeca2a64d0b98eca407e6",
+        "WEIGHTS_0": "a5d8b252a696dfec49d3cb29bfe200c679ec2d56fbf2c0bdb4f64eab87fd42c1"
+      },
+      "Clear fitted lens 1": {
+        "POSITION": "991ff4ce57a08c6a40577e1e477280978c03f60bed11269a3841a29d0d799ac3",
+        "NORMAL": "1c62a10a3630a2dc1d115062591be70d671b1d3c2eaa959eaa2c64bd73d15a53",
+        "JOINTS_0": "d6a7fdf479807b6fa30caad8cf14537ed7ff9e7258867510e2898a63bf1f3063",
+        "WEIGHTS_0": "0fb7850b2d5e658c358f7c29fe6ae7443ad74ef85dcca742c1de15274a481e78"
+      },
+      "Nose pad -1": {
+        "POSITION": "346740b7095ff2e30df2ec91e908c9eaa57fe3fb544b9be084eb052432da4365",
+        "NORMAL": "67ba3adc2e41e9256d7019f5e4efbbadbe725b8bd2fb1b98aae654e65b994fc2",
+        "TEXCOORD_0": "d12ec377a8a637ff625e5b338c19ff47113f577d536a33c7669e5222e746927a",
+        "JOINTS_0": "a373444dc79af1b6978880b154121c57d85036f728b6497b34c274f7698283d3",
+        "WEIGHTS_0": "c86dbcbd288b78ae63688912da86e9e102205c6ec569ccec4725029482998767"
+      },
+      "Nose pad 1": {
+        "POSITION": "e43a96ce203c877c1b738880613d9947d28fbe08dee7a1d7e4feea637cf4d4ad",
+        "NORMAL": "67ba3adc2e41e9256d7019f5e4efbbadbe725b8bd2fb1b98aae654e65b994fc2",
+        "TEXCOORD_0": "d12ec377a8a637ff625e5b338c19ff47113f577d536a33c7669e5222e746927a",
+        "JOINTS_0": "a373444dc79af1b6978880b154121c57d85036f728b6497b34c274f7698283d3",
+        "WEIGHTS_0": "c86dbcbd288b78ae63688912da86e9e102205c6ec569ccec4725029482998767"
+      },
+      "ramsey-material-batch-6": {
+        "POSITION": "610899de1c6fd5cb09a7aea915ff43fd1d1eafa88b49a022d1795813e2a93b78",
+        "NORMAL": "84cbadccb283e735dd73cead3a732dd7a690410f9383b23dc1e8049631e5fa27",
+        "TEXCOORD_0": "f6de1574763fe0efcc3b5cb1a0eb6b4f670bc17b522bd592202fb8ba7734cc42",
+        "JOINTS_0": "20bd4b18bb41780af9c567321d87be95264ee86c018f5d074b0a3579339de172",
+        "WEIGHTS_0": "1dc983e22930ead05b02066cf3803e45186427683d983ab1ef10fa63157dbd75"
+      }
+    }
+  },
+  "neckRefit": "neck-fit-report.json",
+  "headProportions": {
+    "character": "nietzsche",
+    "uniformScale": 0.792,
+    "anchor": [
+      0,
+      1.475,
+      0.015
+    ],
+    "fit": "Resized portrait uniformly around the neck; extension rebuilt to the same suit collar"
+  },
+  "wholeCharacterFit": {
+    "character": "nietzsche",
+    "uniformScale": 1.1,
+    "internalHeadScale": 0.792,
+    "anchor": "Feet in standing pose; seated hip in table pose",
+    "intent": "Match cast size while preserving the approved portrait-to-suit proportions"
+  }
+}

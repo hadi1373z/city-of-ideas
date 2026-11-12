@@ -76,7 +76,7 @@ g.mountSummitStoryUI=function(story,{language,getPlayer,getVisitMode,isPaused=()
  function update(){const s=story.state,p=getPlayer(),visit=getVisitMode(),w=words[language()]||words.en;
   
   const near=Math.abs(p.y-34.195)<3&&(Math.hypot(p.x-125,p.z)<25||Math.hypot(p.x,p.z)<55);
-  const renderKey=[language(),s.mode,s.phase,s.waiting,s.following,visit,near,isPaused(),Math.hypot(p.x-125,p.z)<8].join(':');if(renderKey===uiKey)return;uiKey=renderKey;legend.textContent=w.legend;options.explore.textContent=w.explore;options.story.textContent=w.story;document.getElementById('enter').textContent=s.mode==='story'?w.begin:g.CITY_I18N.t('enter');
+  const renderKey=[language(),s.mode,s.phase,s.waiting,s.following,visit,near,isPaused(),Math.hypot(p.x-125,p.z)<8].join(':');if(renderKey===uiKey)return;uiKey=renderKey;legend.textContent=w.legend;options.explore.textContent=w.explore;options.story.textContent=w.story;if(!document.getElementById('city-start-modes'))document.getElementById('enter').textContent=s.mode==='story'?w.begin:g.CITY_I18N.t('enter');
   document.body.dataset.storyFollowing=String(s.following);document.body.dataset.storyActive=String(s.active);
   const canBegin=['roof','peak'].includes(visit)&&s.mode==='explore';begin.hidden=!canBegin;begin.textContent=language()==='fa'?'کودک را تا آتشفشان همراهی کن':language()==='de'?'Das Kind zum Vulkan begleiten':'Begin the child’s journey to the volcano';for(const input of choice.querySelectorAll('input'))input.checked=input.value===s.mode;
   panel.hidden=isPaused()||!canBegin&&s.mode!=='story'||visit==='overview'||visit==='aerial'||visit==='return'||!(canBegin||s.active||s.phase==='complete'&&near);document.body.dataset.storyPanel=String(!panel.hidden);

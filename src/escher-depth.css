@@ -1,0 +1,22 @@
+#escher-depth-context{position:fixed;z-index:35;right:20px;bottom:90px;width:min(410px,calc(100vw - 40px));padding:16px 19px;background:rgba(24,44,46,.95);color:#f3ecd5;border:1px solid #b7a46d;border-radius:12px;box-shadow:0 8px 32px #0005;font:14px/1.5 Georgia,serif;pointer-events:auto}
+#escher-depth-context[hidden],#escher-depth-enter[hidden]{display:none}
+#escher-depth-context strong,#escher-depth-context span{display:block}
+#escher-depth-context strong{font-size:18px;color:#e1ce96}
+#escher-depth-context span{margin:3px 0 8px;color:#d6ddd6}
+#escher-depth-context p{margin:8px 0}
+#escher-depth-context [role=status]{color:#f5d69a}
+#escher-depth-context>div{display:flex;flex-wrap:wrap;gap:7px}
+#escher-depth-context button,#escher-depth-enter{font:13px/1.4 system-ui,sans-serif;white-space:normal}
+#escher-depth-enter{position:fixed;z-index:36;bottom:100px;left:50%;transform:translateX(-50%);max-width:calc(100vw - 32px);padding:14px 20px;color:#f6edcf;background:#254044f2;border:1px solid #c5b578}
+#escher-depth-enter:disabled{opacity:.9;color:#d8ceb5}
+#escher-depth-experiment{max-width:740px;width:calc(100vw - 42px);max-height:85vh;overflow:auto;background:#eee7d1;color:#223d40;border:1px solid #89947e;border-radius:14px;padding:24px;font:17px/1.65 Georgia,serif}
+#escher-depth-experiment::backdrop{background:#101f24b8}
+#escher-depth-experiment header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;border-bottom:1px solid #aeb3a1;margin-bottom:16px}
+#escher-depth-experiment h2{margin:0 0 15px;font-size:28px;line-height:1.2}
+#escher-depth-experiment button{margin:4px 7px 6px 0;background:#314f50;color:#f9f0d9;border:1px solid #657b70;font:14px/1.4 system-ui,sans-serif}
+#escher-depth-experiment button[aria-pressed=true]{background:#73673f;border-color:#b99545}
+#escher-depth-experiment p[role=status]{padding:12px;background:#dce0c9;border-left:4px solid #53694e}
+body[data-escher-depth=true] #escher-perspective{display:none}
+@media(max-width:650px){#escher-depth-context{right:10px;bottom:96px;width:min(330px,calc(100vw - 20px));padding:10px 13px;font-size:12px}#escher-depth-context strong{font-size:15px}#escher-depth-context p{margin:5px 0}#escher-depth-context button{font-size:12px;padding:6px 8px}#escher-depth-experiment{padding:18px;font-size:16px}}
+
+@media(min-width:701px){#escher-depth-context{bottom:160px}}@media(max-width:700px){#escher-depth-context{bottom:218px}}

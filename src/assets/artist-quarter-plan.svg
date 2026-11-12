@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 780" role="img" aria-labelledby="title desc">
+<title id="title">Artists’ quarter: three connected courtyards</title>
+<desc id="desc">Fifteen houses around a garden court, a form and perspective court, and a studio court. The walking route forms a continuous loop.</desc>
+<rect width="1000" height="780" rx="18" fill="#e8eddc"/>
+<text x="34" y="34" font-family="Georgia,serif" font-size="22" fill="#294639">Artists’ quarter · three connected courtyards</text>
+<polyline points="108.2,243.6 98.8,196.6 202.2,187.2 343.2,215.4 432.5,271.8 568.8,271.8 709.8000000000001,281.20000000000005 822.6,318.8" fill="none" stroke="#b5c79f" stroke-width="18.8" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="554.7,271.8 554.7,422.2 484.2,422.2 484.2,567.9000000000001 606.4,567.9000000000001 733.3000000000001,605.5 827.3000000000001,605.5" fill="none" stroke="#b5c79f" stroke-width="18.8" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="822.6,318.8 888.4,408.1 888.4,605.5 827.3000000000001,605.5" fill="none" stroke="#b5c79f" stroke-width="18.8" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="150.5,135.47650000000004 150.5,187.2" fill="none" stroke="#b5c79f" stroke-width="11.75" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="258.6,144.87650000000002 258.6,187.2" fill="none" stroke="#b5c79f" stroke-width="11.75" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="145.8,229.52349999999998 145.8,187.2" fill="none" stroke="#b5c79f" stroke-width="11.75" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="258.6,243.62349999999998 258.6,187.2" fill="none" stroke="#b5c79f" stroke-width="11.75" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="498.3,210.67650000000003 498.3,271.8" fill="none" stroke="#b5c79f" stroke-width="11.75" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="601.7,196.57650000000004 601.7,271.8" fill="none" stroke="#b5c79f" stroke-width="11.75" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="705.1,215.37650000000002 705.1,281.20000000000005" fill="none" stroke="#b5c79f" stroke-width="11.75" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="507.7,323.5235 507.7,271.8" fill="none" stroke="#b5c79f" stroke-width="11.75" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="606.4,332.9235 606.4,271.8" fill="none" stroke="#b5c79f" stroke-width="11.75" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="709.8000000000001,347.0235 709.8000000000001,281.20000000000005" fill="none" stroke="#b5c79f" stroke-width="11.75" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="822.6,306.58000000000004 822.6,318.8" fill="none" stroke="#b5c79f" stroke-width="14.100000000000001" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="785,595.301 785,605.5" fill="none" stroke="#b5c79f" stroke-width="14.100000000000001" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="554.7,511.5 554.7,567.9000000000001" fill="none" stroke="#b5c79f" stroke-width="14.100000000000001" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="672.2,502.1 672.2,567.9000000000001" fill="none" stroke="#b5c79f" stroke-width="14.100000000000001" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="606.4,619.6 606.4,567.9000000000001" fill="none" stroke="#b5c79f" stroke-width="14.100000000000001" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 202.2 138.9 l -7 10 5 -1 -5 8 14 0 -5 -8 5 1 Z" fill="#7c956f"/>
+<path d="M 202.2 223.5 l -7 10 5 -1 -5 8 14 0 -5 -8 5 1 Z" fill="#7c956f"/>
+<path d="M 347.90000000000003 185.9 l -7 10 5 -1 -5 8 14 0 -5 -8 5 1 Z" fill="#7c956f"/>
+<path d="M 427.8 218.8 l -7 10 5 -1 -5 8 14 0 -5 -8 5 1 Z" fill="#7c956f"/>
+<path d="M 554.7 218.8 l -7 10 5 -1 -5 8 14 0 -5 -8 5 1 Z" fill="#7c956f"/>
+<path d="M 658.1 228.20000000000002 l -7 10 5 -1 -5 8 14 0 -5 -8 5 1 Z" fill="#7c956f"/>
+<path d="M 564.1 317.5 l -7 10 5 -1 -5 8 14 0 -5 -8 5 1 Z" fill="#7c956f"/>
+<path d="M 667.5 322.2 l -7 10 5 -1 -5 8 14 0 -5 -8 5 1 Z" fill="#7c956f"/>
+<path d="M 503 533.7 l -7 10 5 -1 -5 8 14 0 -5 -8 5 1 Z" fill="#7c956f"/>
+<path d="M 615.8000000000001 524.3 l -7 10 5 -1 -5 8 14 0 -5 -8 5 1 Z" fill="#7c956f"/>
+<path d="M 714.5 547.8 l -7 10 5 -1 -5 8 14 0 -5 -8 5 1 Z" fill="#7c956f"/>
+<path d="M 846.1 496.1 l -7 10 5 -1 -5 8 14 0 -5 -8 5 1 Z" fill="#7c956f"/>
+<path d="M 850.8000000000001 627.7 l -7 10 5 -1 -5 8 14 0 -5 -8 5 1 Z" fill="#7c956f"/>
+<g data-artist="monet" data-x="85" data-z="82"><rect x="128.2925" y="92.965" width="44.415" height="38.07" rx="2" fill="#fff9e9" stroke="#536f62" stroke-width="2"/><path d="M 146.5 131.035 h 8" stroke="#a77d48" stroke-width="4"/><text x="150.5" y="116" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#263e35">Monet</text></g>
+<g data-artist="van-gogh" data-x="108" data-z="84"><rect x="236.3925" y="102.36500000000001" width="44.415" height="38.07" rx="2" fill="#fff9e9" stroke="#536f62" stroke-width="2"/><path d="M 254.60000000000002 140.435 h 8" stroke="#a77d48" stroke-width="4"/><text x="258.6" y="125.4" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#263e35">Van Gogh</text></g>
+<g data-artist="hilma-af-klint" data-x="84" data-z="112"><rect x="123.59250000000002" y="233.965" width="44.415" height="38.07" rx="2" fill="#fff9e9" stroke="#536f62" stroke-width="2"/><path d="M 141.8 233.965 h 8" stroke="#a77d48" stroke-width="4"/><text x="145.8" y="257" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#263e35">Hilma af Klint</text></g>
+<g data-artist="morris" data-x="108" data-z="115"><rect x="236.3925" y="248.06500000000003" width="44.415" height="38.07" rx="2" fill="#fff9e9" stroke="#536f62" stroke-width="2"/><path d="M 254.60000000000002 248.06500000000003 h 8" stroke="#a77d48" stroke-width="4"/><text x="258.6" y="271.1" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#263e35">Morris</text></g>
+<g data-artist="kandinsky" data-x="159" data-z="98"><rect x="476.09250000000003" y="168.165" width="44.415" height="38.07" rx="2" fill="#fff9e9" stroke="#536f62" stroke-width="2"/><path d="M 494.3 206.23499999999999 h 8" stroke="#a77d48" stroke-width="4"/><text x="498.3" y="191.2" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#263e35">Kandinsky</text></g>
+<g data-artist="hokusai" data-x="181" data-z="95"><rect x="579.4925000000001" y="154.06500000000003" width="44.415" height="38.07" rx="2" fill="#fff9e9" stroke="#536f62" stroke-width="2"/><path d="M 597.7 192.13500000000002 h 8" stroke="#a77d48" stroke-width="4"/><text x="601.7" y="177.10000000000002" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#263e35">Hokusai</text></g>
+<g data-artist="rodin" data-x="203" data-z="99"><rect x="682.8925" y="172.865" width="44.415" height="38.07" rx="2" fill="#fff9e9" stroke="#536f62" stroke-width="2"/><path d="M 701.1 210.935 h 8" stroke="#a77d48" stroke-width="4"/><text x="705.1" y="195.9" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#263e35">Rodin</text></g>
+<g data-artist="mondrian" data-x="161" data-z="132"><rect x="485.4925" y="327.965" width="44.415" height="38.07" rx="2" fill="#fff9e9" stroke="#536f62" stroke-width="2"/><path d="M 503.7 327.965 h 8" stroke="#a77d48" stroke-width="4"/><text x="507.7" y="351" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#263e35">Mondrian</text></g>
+<g data-artist="lange" data-x="182" data-z="134"><rect x="584.1925" y="337.365" width="44.415" height="38.07" rx="2" fill="#fff9e9" stroke="#536f62" stroke-width="2"/><path d="M 602.4 337.365 h 8" stroke="#a77d48" stroke-width="4"/><text x="606.4" y="360.40000000000003" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#263e35">Lange</text></g>
+<g data-artist="klee" data-x="204" data-z="137"><rect x="687.5925000000001" y="351.465" width="44.415" height="38.07" rx="2" fill="#fff9e9" stroke="#536f62" stroke-width="2"/><path d="M 705.8000000000001 351.465 h 8" stroke="#a77d48" stroke-width="4"/><text x="709.8000000000001" y="374.5" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#263e35">Klee</text></g>
+<g data-artist="escher" data-x="228" data-z="115"><rect x="803.8000000000001" y="206" width="37.6" height="94" rx="2" fill="#fff9e9" stroke="#536f62" stroke-width="2"/><path d="M 818.6 300 h 8" stroke="#a77d48" stroke-width="4"/><text x="822.6" y="257" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#263e35">Escher</text></g>
+<g data-artist="dali" data-x="220" data-z="177"><rect x="746.93" y="526.775" width="76.14" height="63.45" rx="2" fill="#fff9e9" stroke="#536f62" stroke-width="2"/><path d="M 781 590.225 h 8" stroke="#a77d48" stroke-width="4"/><text x="785" y="562.5" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#263e35">Dalí</text></g>
+<g data-artist="cezanne" data-x="171" data-z="161"><rect x="521.8000000000001" y="455.1" width="65.8" height="56.400000000000006" rx="2" fill="#fff9e9" stroke="#536f62" stroke-width="2"/><path d="M 550.7 511.5 h 8" stroke="#a77d48" stroke-width="4"/><text x="554.7" y="487.3" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#263e35">Cézanne</text></g>
+<g data-artist="morisot" data-x="196" data-z="159"><rect x="639.3000000000001" y="445.70000000000005" width="65.8" height="56.400000000000006" rx="2" fill="#fff9e9" stroke="#536f62" stroke-width="2"/><path d="M 668.2 502.1 h 8" stroke="#a77d48" stroke-width="4"/><text x="672.2" y="477.90000000000003" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#263e35">Morisot</text></g>
+<g data-artist="seurat" data-x="182" data-z="196"><rect x="573.5" y="619.6" width="65.8" height="56.400000000000006" rx="2" fill="#fff9e9" stroke="#536f62" stroke-width="2"/><path d="M 602.4 619.6 h 8" stroke="#a77d48" stroke-width="4"/><text x="606.4" y="651.8000000000001" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#263e35">Seurat</text></g>
+<text x="202.2" y="187.2" text-anchor="middle" font-family="sans-serif" font-size="12" letter-spacing="1" fill="#294639">GARDEN</text>
+<text x="568.8" y="257.70000000000005" text-anchor="middle" font-family="sans-serif" font-size="12" letter-spacing="1" fill="#294639">FORM &amp; PERSPECTIVE</text>
+<text x="615.8000000000001" y="558.5" text-anchor="middle" font-family="sans-serif" font-size="12" letter-spacing="1" fill="#294639">WORKING STUDIOS</text>
+<path d="M 944 100 V 65 m -6 8 6 -8 6 8" fill="none" stroke="#294639" stroke-width="2"/><text x="944" y="57" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#294639">N</text>
+<text x="34" y="754" font-family="sans-serif" font-size="13" fill="#536756">Open doorways face the courts · the same arrangement is built in the walkable city</text>
+</svg>

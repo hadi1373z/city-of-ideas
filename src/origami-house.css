@@ -1,0 +1,64 @@
+#origami-house,#coastal-city-map{width:min(980px,calc(100vw - 24px));max-height:90dvh;padding:0;background:#f3efdc;color:#29483c;border:1px solid #b4bd9f;border-radius:16px}
+#origami-house::backdrop,#coastal-city-map::backdrop{background:#12392bc4;backdrop-filter:blur(5px)}
+#origami-house header,#coastal-city-map header{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:18px 24px;border-bottom:1px solid #cbd1b9}
+#origami-house h2,#coastal-city-map h2{font:normal clamp(24px,3vw,34px) Georgia,serif;margin:0}#origami-house h3{font:normal 27px/1.4 Georgia,serif}
+#origami-house header button,#coastal-city-map header button{width:44px;flex:0 0 44px;padding:8px}.fold-house-body{max-height:calc(90dvh - 146px);overflow:auto;padding:18px 24px;scrollbar-gutter:stable}
+#origami-house p,#origami-house label,#coastal-city-map p{font-size:15px;line-height:1.8;max-width:78ch}#origami-house button,#coastal-city-map button{background:#285a49;color:#fff9e8;border:1px solid #78917b;border-radius:8px;min-height:44px;line-height:1.5;padding:11px 16px;cursor:pointer;margin:5px 8px 5px 0}
+#origami-house button[aria-pressed=true]{background:#dfc67e;color:#29483c}#origami-house button:focus-visible,#origami-house input:focus-visible,#origami-house textarea:focus-visible,#origami-house summary:focus-visible,#coastal-city-map button:focus-visible{outline:3px solid #ac7c32;outline-offset:3px}
+#origami-house nav{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:18px}#origami-house nav button{margin:0;font-size:13px}#origami-house table{border-collapse:collapse;width:100%;font-size:15px;margin:18px 0}#origami-house td,#origami-house th{text-align:start;padding:10px;border-bottom:1px solid #c0cbb2}#origami-house th{font-weight:normal}
+#origami-house input[type=range]{display:block;width:100%;min-height:44px;accent-color:#956c32}#origami-house textarea{display:block;box-sizing:border-box;width:100%;font:inherit;color:#29483c;background:#fffbee;border:1px solid #a4b294;border-radius:7px;padding:12px;margin:8px 0 12px}
+.fold-house-diagrams{display:grid;grid-template-columns:1fr 1fr;gap:18px}.fold-house-diagrams figure{margin:0;background:#fff9e9;padding:14px;border:1px solid #d2cfb6;border-radius:9px}.fold-house-diagrams img{display:block;width:100%;height:220px;object-fit:contain}.fold-house-diagrams figcaption{font-size:12px;text-align:center;line-height:1.6;margin-top:8px}
+#origami-house summary{font:normal 21px/1.5 Georgia,serif;min-height:44px;padding:13px 0;cursor:pointer}#origami-house a{display:block;min-height:44px;color:#2e6c55;line-height:1.7;margin:9px 0}#origami-house>p,#coastal-city-map>p{padding:8px 24px;margin:0;border-top:1px solid #cbd1b9;font-size:12px}
+.crease-readout,.fold-feedback{padding:12px 18px;background:#e4e8cf;border-inline-start:4px solid #758e65;margin:18px 0}.coastal-plan{display:block;width:100%;height:auto;border-radius:12px;margin:18px 0}
+#origami-house-context{position:fixed;left:20px;bottom:170px;z-index:19;background:#20483cec;color:#f5edda;border:1px solid #8d9d7b;padding:15px;border-radius:11px;max-width:275px}#origami-house-context[hidden]{display:none}#origami-house-context strong{display:block;font:normal 22px Georgia,serif;margin-bottom:10px}#origami-house-context button{min-height:44px;background:#e2c67b;color:#29483c;border:0;padding:10px 14px;border-radius:6px}
+@media(max-width:620px){#origami-house header,#coastal-city-map header,.fold-house-body{padding:14px}.fold-house-diagrams{gap:8px}.fold-house-diagrams figure{padding:8px}.fold-house-diagrams img{height:160px}#origami-house-context{left:12px;bottom:245px;max-width:220px}}
+
+@media(max-width:760px){body[data-mode=city] .visit-actions{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}body[data-mode=city] .visit-actions .glass{min-height:44px;padding:8px 5px;font-size:11px;line-height:1.4}}
+
+#coastal-city-map{width:min(1240px,calc(100vw - 24px))}
+#coastal-city-map .coastal-intro{margin:0 0 16px}
+.coastal-explorer-layout{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(270px,1fr);gap:22px;align-items:start}
+.coastal-map-figure{margin:0;min-width:0}
+.coastal-map-stage{position:relative;aspect-ratio:1;isolation:isolate;border-radius:12px;background:#365f72}
+#coastal-city-map .coastal-plan{display:block;width:100%;height:auto;aspect-ratio:1;margin:0;border-radius:12px}
+.coastal-walk-overlay{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.coastal-walk-overlay[hidden]{display:none}
+#coastal-city-map .coastal-landmark{position:absolute;transform:translate(-50%,-50%);z-index:1;box-sizing:border-box;width:32px;height:32px;min-height:32px;margin:0;padding:0;border:2px solid #fff9e8;border-radius:50%;background:#234f43;color:#fff9e8;font:700 14px/1 Tahoma,Arial,sans-serif;box-shadow:0 2px 5px #173c4055}
+#coastal-city-map .coastal-landmark[aria-pressed=true]{background:#963c26;outline:2px solid #fff9e8;outline-offset:2px;z-index:2}
+#coastal-city-map .coastal-landmark:focus-visible{outline:3px solid #182c39;outline-offset:4px;z-index:3}
+.coastal-map-figure figcaption{font-size:12px;padding-top:8px;color:#486152}
+.coastal-map-sidebar{min-width:0}
+.coastal-map-sidebar h3{font:normal 23px/1.35 Georgia,serif;margin:0 0 12px}
+.coastal-place-list{display:grid;gap:6px}
+#coastal-city-map .coastal-place-list button{margin:0;text-align:start;background:#e6e8d3;color:#29483c;border-color:#a5b599;font-size:14px}
+#coastal-city-map .coastal-place-list button[aria-pressed=true]{background:#285a49;color:#fff9e8;border-inline-start:5px solid #c8994d}
+.coastal-location-info{margin-top:20px;padding:16px;background:#fff9e9;border:1px solid #cecdb4;border-radius:10px}
+#coastal-city-map .coastal-location-info p{margin:6px 0;font-size:14px}
+#coastal-city-map .coastal-location-info .coastal-kicker{font-size:11px;color:#536b59;margin:0 0 7px}
+.coastal-location-info .coastal-location-area{font-weight:600}
+.coastal-route{margin-top:20px;border-top:1px solid #c1c9ae;padding-top:12px}
+#coastal-city-map .coastal-route button{margin-inline-end:12px}
+#coastal-city-map .coastal-route button[aria-pressed=true]{background:#963c26;color:#fff9e8}
+.coastal-route-status{font-size:13px}
+.coastal-route ol{padding-inline-start:24px;margin:10px 0;max-width:80ch}
+.coastal-route li{padding-inline-start:4px;margin-block:8px;font-size:14px;line-height:1.65}
+.coastal-more{border-top:1px solid #c1c9ae;margin-top:18px;padding-block:12px}
+#coastal-city-map summary{cursor:pointer;min-height:44px;align-content:center;line-height:1.5}
+#coastal-city-map summary:focus-visible{outline:3px solid #ac7c32;outline-offset:3px}
+@media(max-width:760px){.coastal-explorer-layout{grid-template-columns:1fr;gap:16px}.coastal-place-list{grid-template-columns:repeat(2,minmax(0,1fr))}#coastal-city-map .coastal-landmark{width:28px;height:28px;min-height:28px;font-size:12px}.coastal-route-status{display:block;margin-block:6px}.coastal-location-info{margin-top:16px}}
+@media(max-width:380px){.coastal-place-list{grid-template-columns:1fr}}
+@media(max-width:760px){body[data-mode=city] .route-label{bottom:152px}#origami-house-context{bottom:212px;max-width:220px;padding:12px}}
+
+#coastal-map-return{display:none;position:fixed;left:20px;bottom:24px;z-index:20;min-height:44px;padding:12px 18px;border:1px solid #8d9d7b;border-radius:8px;background:#20483cec;color:#fff9e8;font:inherit;cursor:pointer}body[data-mode=overview][data-coastal-overview=clear] #welcome{display:none}body[data-mode=overview][data-coastal-overview=clear] #coastal-map-return{display:block}#coastal-map-return:focus-visible{outline:3px solid #e2c67b;outline-offset:3px}
+
+/* A hollow compass halo leaves the numbered destination beneath it usable. */
+.coastal-visitor-position{position:absolute;z-index:4;pointer-events:none;box-sizing:border-box;width:44px;height:44px;transform:translate(-50%,-50%);transform-origin:center;border:3px solid #125c86;border-radius:50%;box-shadow:0 0 0 2px #fff9e8;background:transparent}
+.coastal-visitor-position[data-heading=true]::before{content:"";position:absolute;left:11px;top:-13px;border-left:8px solid transparent;border-right:8px solid transparent;border-bottom:12px solid #125c86;filter:drop-shadow(0 -1px 1px #fff9e8)}
+.coastal-visitor-position[data-underground=true]{border-style:dashed}
+#coastal-city-map .coastal-position-summary{font-size:13px;line-height:1.65;margin:10px 0;padding-inline-start:16px;border-inline-start:4px solid #125c86}
+#coastal-city-map .coastal-location-info .coastal-position-distance{border-top:1px solid #cecdb4;padding-top:10px;margin-top:12px;font-size:13px}
+
+.coastal-seminar-paths{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+
+.coastal-house-anchor{position:absolute;z-index:1;width:5px;height:5px;transform:translate(-50%,-50%);border:1px solid #fff9e8;border-radius:50%;background:#294f45;pointer-events:none}
+@media(max-width:480px){#coastal-city-map .coastal-landmark[data-landmark=noether]{transform:translate(calc(-50% - 17px),-50%)}#coastal-city-map .coastal-landmark[data-landmark=cage]{transform:translate(calc(-50% + 17px),-50%)}#coastal-city-map .coastal-landmark[data-landmark=mirzakhani]{transform:translate(-50%,calc(-50% + 20px))}#coastal-city-map .coastal-landmark[data-landmark=noether]::after,#coastal-city-map .coastal-landmark[data-landmark=cage]::after{content:"";position:absolute;top:12px;width:5px;height:1px;background:#294f45}#coastal-city-map .coastal-landmark[data-landmark=noether]::after{left:100%}#coastal-city-map .coastal-landmark[data-landmark=cage]::after{right:100%}#coastal-city-map .coastal-landmark[data-landmark=mirzakhani]::after{content:"";position:absolute;bottom:100%;left:12px;width:1px;height:8px;background:#294f45}}

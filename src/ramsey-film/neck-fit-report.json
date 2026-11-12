@@ -1,0 +1,38 @@
+{
+  "sourceSha256": "d3fac5d1def30b1e08fb5cfbbaff8ba298935a323611b6eb9440ca8233bb0a0b",
+  "removed": "Original portrait clothing below the anatomical neck contour, and nietzsche-supplied-head-neck-collar-base",
+  "cut": {
+    "plane": "y = 1.532 + .17 * (z + .04)",
+    "contourVertices": 450,
+    "originalTriangles": 106602,
+    "retainedTriangles": 89748
+  },
+  "headAlignmentY": -0.045,
+  "headScale": 0.792,
+  "scaleAnchor": [
+    0,
+    1.475,
+    0.015
+  ],
+  "extension": {
+    "name": "nietzsche-continuous-neck-extension",
+    "bottomY": 1.38,
+    "rows": 16,
+    "triangles": 14400,
+    "material": "Baked boundary-to-original-neck skin transition; no stretched portrait clothing",
+    "weights": "Original boundary weights to Spine, blended across the neck"
+  },
+  "restoredSuitCollarVertices": 1546,
+  "preserved": [
+    "Portrait shape and maps above cut (uniform scale and vertical alignment only)",
+    "Existing business suit outside its previously compressed collar",
+    "Hands, shoes, skeleton and animation clips",
+    "All six fixed voice recordings"
+  ],
+  "wholeCharacterScale": 1.1,
+  "wholeCharacterFit": {
+    "standingY": -0.006730000000000006,
+    "seatedY": -0.05600000000000006,
+    "reference": "Overall standing scale of Ramsey and Turing; seated hip remains at chair height"
+  }
+}
