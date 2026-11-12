@@ -20,7 +20,7 @@ export function verifyHelicalRails(T,b){
  assert.equal(rows.length,lower?1911:1460);
  assert.equal(hash(rows),lower?'1c0c4875be9b7e087e44ca2ce62695c5353f3d2d10612fbeedfc088ab15631e7':'9d096f9bad3988fc6d31f666d4bd9dc87cc6d36e6b2915e22295c1af7dc9e5b6','Independent 83a37ce per-batch IDs/order and every earlier matrix');
  assert.equal(hash([...rows].sort()),lower?'1731a9186ee8a907e5847aba3900de5f2a42a67fa4acb094f89be58351f9d440':'5cc7764898f9f663d1bbae21faeaaa3b55e45e9197b66d21650be35052a90026');
- assert.equal(hash(non),lower?'8d404e8c1569aa4458c0473bd02d82a014d146eca5cc6c3e50fa0045065c6520':'320847feff889d378bdf008ae56847e2128d5e7b5f833d5bc032c7581aa0e2e5','Every original walking/noninstance surface and pose stays exact');
+ assert.equal(hash(non),lower?'8d404e8c1569aa4458c0473bd02d82a014d146eca5cc6c3e50fa0045065c6520':'c5874bed8646a8f6b8883d99423058f3e8200c2a5d38f792ca8dbfac650e715d','Every original walking/noninstance surface and pose stays exact');
  if(!lower){assert.equal(added.length,0);return{ignored};}
  const near=(a,c,t=6e-5)=>assert(Math.abs(a-c)<t,`${a} != ${c}`),is=(a,c)=>Math.abs(a-c)<1e-5,rise=48.13/240,
   tops=added.filter(a=>a.mesh.geometry.type==='CylinderGeometry'),housings=added.filter(a=>a.mesh.geometry.type==='BoxGeometry');

@@ -47,3 +47,12 @@ Geometry checks raycast the complete annular opening and the four-metre doorway,
 verify shared overlook/floor and lamp materials, and verify each owned geometry,
 material and label texture is disposed exactly once. The borrowed snake drawing
 and optional borrowed landing material remain owned by their callers.
+
+
+## Finished opening and single-owner landings
+
+The oak reveal follows the actual widened rectangular ceiling cut on all four sides. A pitched oak soffit and side bearers finish the visible underside of the first upper gallery flight, without moving any of its original treads or the snake drawing. All headroom probes and the reversible stair footprint remain required. Balcony rails now have an oak grip, a lower brass rail and wider posts seated on low footings; radial stair rails have continuous upper/lower members and post feet.
+
+At the last terrace, the outer floor is geometrically clipped at the through-gallery bridge rectangle (X9..18, Z±1.8), so the bridge alone supplies that surface. The last tread of each original radial flight is supplied by its existing lower terrace rather than a coplanar extra box. Flat bands use 320 angular segments to retain the established 65-draw / 380k-triangle budget with the stronger rail joinery. No polygon-offset decal or raised walking surface hides the overlap.
+
+The same repair covers the gallery–Escher corridor: its floor and ceiling rectangles are partitioned into a non-overlapping union. The floor begins at the central gallery spur endpoint and ends exactly at the museum vestibule floor boundary. Collision models, transfers, room locations, notes and voices are unchanged. tests/library-surface-joins.mjs rays the combined scenes so a duplicate floor cannot be concealed by testing each builder alone.

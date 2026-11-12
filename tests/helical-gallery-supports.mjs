@@ -24,7 +24,7 @@ export function verifyHelicalSupports(T,b){
  assert.equal(rows.length,lower?1769:1460);
  assert.equal(hash(rows),lower?'b9bd0a8c6a657ea647274b6ee2d187b66a3e8ca76040595933b86e738878f6b3':'9d096f9bad3988fc6d31f666d4bd9dc87cc6d36e6b2915e22295c1af7dc9e5b6','Every pre-repair matrix and per-batch ID/order remains exact');
  assert.equal(hash([...rows].sort()),lower?'c6a470d0d0a0c3360789b8a5dde58a51442c0fadd5026bad4ee3eddac2dca170':'5cc7764898f9f663d1bbae21faeaaa3b55e45e9197b66d21650be35052a90026');
- assert.equal(hash(non),lower?'8d404e8c1569aa4458c0473bd02d82a014d146eca5cc6c3e50fa0045065c6520':'320847feff889d378bdf008ae56847e2128d5e7b5f833d5bc032c7581aa0e2e5','Every tread, opening, bridge, deck and noninstance profile/pose remains exact');
+ assert.equal(hash(non),lower?'8d404e8c1569aa4458c0473bd02d82a014d146eca5cc6c3e50fa0045065c6520':'c5874bed8646a8f6b8883d99423058f3e8200c2a5d38f792ca8dbfac650e715d','Every tread, opening, bridge, deck and noninstance profile/pose remains exact');
  if(!lower){assert.equal(added.length,0);return{ignored};}
  const near=(a,c,tol=6e-5)=>assert(Math.abs(a-c)<tol,`${a} != ${c}`),is=(a,c)=>Math.abs(a-c)<1e-5,down=new T.Vector3(0,-1,0),
   shoes=added.filter(a=>is(a.s.x,.44)&&is(a.s.y,.18)&&is(a.s.z,.82)),clips=added.filter(a=>is(a.s.x,.16)&&[.06,.14].some(h=>is(a.s.y,h))&&is(a.s.z,.24)),

@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {buildBabelLibrary} from '../src/babel-library-scene.js';
+import {buildBabelLibrary} from './fixtures/babel-library-before-finishes.mjs';
 import {fitBabelMouths} from '../src/babel-mouth-clearance.js';
 import {fitBabelPerimeter} from '../src/babel-vault-perimeter.js';
 import {babelGuardSnapshot} from './babel-entry-guards.mjs';

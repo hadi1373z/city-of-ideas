@@ -9,7 +9,7 @@ import {verifyHelicalSupports} from './helical-gallery-supports.mjs';
 const hash=v=>createHash('sha256').update(typeof v==='string'||Buffer.isBuffer(v)?v:JSON.stringify(v)).digest('hex'),round=x=>Math.round(x*1e6)/1e6;
 const baseline={
  lower:{counts:[13,131,79,1045,468],instances:1736,ordered:'d018be0b1c2cff7d94894008db19b89d9163f9070e0b22cde01dd29678683d5b',sorted:'1d569525d51a3d005310dea83784d705dc7b7adec2c7a2298a5bdaa5f15b09ad',non:'8d404e8c1569aa4458c0473bd02d82a014d146eca5cc6c3e50fa0045065c6520',resources:[17,5,0,5],draws:19},
- upper:{counts:[13,26,92,865,464],instances:1460,ordered:'9d096f9bad3988fc6d31f666d4bd9dc87cc6d36e6b2915e22295c1af7dc9e5b6',sorted:'5cc7764898f9f663d1bbae21faeaaa3b55e45e9197b66d21650be35052a90026',non:'320847feff889d378bdf008ae56847e2128d5e7b5f833d5bc032c7581aa0e2e5',resources:[11,5,0,5],draws:13}
+ upper:{counts:[13,26,92,865,464],instances:1460,ordered:'9d096f9bad3988fc6d31f666d4bd9dc87cc6d36e6b2915e22295c1af7dc9e5b6',sorted:'5cc7764898f9f663d1bbae21faeaaa3b55e45e9197b66d21650be35052a90026',non:'c5874bed8646a8f6b8883d99423058f3e8200c2a5d38f792ca8dbfac650e715d',resources:[11,5,0,5],draws:13}
 };
 
 // Independent 59b8fa6 inventory, including the particular supplied editions/pages.

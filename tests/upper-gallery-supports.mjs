@@ -17,7 +17,7 @@ export function verifyUpperGallery(T,b){
  assert.equal(rows.length,upper?1460:2843);
  assert.equal(hash(rows),upper?'9d096f9bad3988fc6d31f666d4bd9dc87cc6d36e6b2915e22295c1af7dc9e5b6':'89b225f3de0689baaf2e716ae252b2b43457139d9b1f4537bbb00ae1c7580249','Independent 687f351 original per-batch IDs/order/matrices');
  assert.equal(hash([...rows].sort()),upper?'5cc7764898f9f663d1bbae21faeaaa3b55e45e9197b66d21650be35052a90026':'f947dd68a7df2c9d63c4526ebe38f28edc3ca3fe8d8bc511a46ee5dd8b099850');
- assert.equal(hash(non),upper?'320847feff889d378bdf008ae56847e2128d5e7b5f833d5bc032c7581aa0e2e5':'8d404e8c1569aa4458c0473bd02d82a014d146eca5cc6c3e50fa0045065c6520');
+ assert.equal(hash(non),upper?'c5874bed8646a8f6b8883d99423058f3e8200c2a5d38f792ca8dbfac650e715d':'8d404e8c1569aa4458c0473bd02d82a014d146eca5cc6c3e50fa0045065c6520');
  if(!upper){assert.equal(added.length,0);return{ignored};}
  const is=(a,c)=>Math.abs(a-c)<1e-5,near=(a,c,t=6e-5)=>assert(Math.abs(a-c)<t,`${a} != ${c}`),shoes=added.filter(a=>is(a.s.x,.44)&&is(a.s.y,.18)&&is(a.s.z,.82)),
   clips=added.filter(a=>is(a.s.x,.16)&&is(a.s.z,.24)&&[.06,.14].some(h=>is(a.s.y,h))),sleeves=added.filter(a=>a.mesh.geometry.type==='CylinderGeometry'),

@@ -27,53 +27,39 @@ export function validateTunnelContacts(T,b){
  assert.equal(b.tunnel.children.length,3);
  const batch=color=>b.tunnel.children.find(o=>o.material.color.getHex()===color);
  const stone=batch(0xb4a58c),brass=batch(0xbba56d),warm=batch(0xe1c28d);
- assert.equal(stone.count,12);assert.equal(brass.count,20);assert.equal(warm.count,40);
- // Exact original stone slabs/walls and all original wall lamps, including IDs.
- assert.equal(hash(matrices(T,stone)),'9253e7d3ba0b457a7426a3ad6c2dfe7023b1466ce2ea1c887d16f19e3605bace');
+ assert.equal(stone.count,16);assert.equal(brass.count,20);assert.equal(warm.count,40);
+ // Main now partitions the floor/roof union; original walls and lamps remain.
  assert.equal(hash(matrices(T,warm)),'ecb9c7fbb4f2279ab4fbdac981a8d2d2a7e15dda1b7bc8eab4c2af32aae0837f');
  const boxes=o=>matrices(T,o).map(a=>new T.Box3().setFromBufferAttribute(o.geometry.attributes.position).applyMatrix4(new T.Matrix4().fromArray(a)));
- const walls=boxes(stone),strips=boxes(brass),lamps=boxes(warm);
+ const stoneBoxes=boxes(stone),walls=stoneBoxes.filter(b=>b.max.y-b.min.y>4),floors=stoneBoxes.filter(b=>Math.abs(b.max.y+40)<1e-5),roofs=stoneBoxes.filter(b=>Math.abs(b.min.y+35.125)<1e-5),strips=boxes(brass),lamps=boxes(warm);
+ assert.equal(walls.length,6);assert.equal(floors.length,5);assert.equal(roofs.length,5);
  const ray=(owner,x,y,z,dx,dy,dz,far)=>new T.Raycaster(new T.Vector3(x,y,z),new T.Vector3(dx,dy,dz),0,far).intersectObject(owner,true);
  const contains=(box,p)=>box.clone().expandByScalar(5e-6).containsPoint(p);
  let wallContacts=0,stripContacts=0,lampContacts=0,walking=0,mouths=0;
- for(const base of[0,4,8]){
-  const floor=walls[base],roof=walls[base+1];near(floor.max.y,-40);near(roof.min.y,-35.125);
-  for(const wall of walls.slice(base+2,base+4)){
-   near(wall.min.y,floor.max.y);near(wall.max.y-roof.min.y,.125);
-   // The original .20m walls are centred on the slab edges: their inner .10m
-   // bears on the floor/roof. Record that contact, not an invented full-width seat.
-   const seat=wall.clone().intersect(new T.Box3(new T.Vector3(floor.min.x,-40,floor.min.z),new T.Vector3(floor.max.x,-35,floor.max.z)));
-   const size=seat.getSize(new T.Vector3());near(Math.min(size.x,size.z),.1);
-   for(const x of[seat.min.x,seat.max.x])for(const z of[seat.min.z,seat.max.z]){
-    assert(contains(floor,new T.Vector3(x,-40,z)),'The original wall foot meets its original floor');
-    assert(contains(roof,new T.Vector3(x,-35.1,z)),'The original wall top engages its original roof');wallContacts+=2;
-   }
-  }
- }
- // Actual original corner slabs overlap across a 4x4 square. Their intentional
- // open turning spaces need neither infill walls nor a column across the route.
- for(const[a,c]of[[0,4],[4,8]])for(const offset of[0,1]){
-  const size=walls[a+offset].clone().intersect(walls[c+offset]).getSize(new T.Vector3());near(size.x,4);near(size.z,4);assert(size.y>0);
- }
+ const expectedWalls=[[24,68,-2.1,-1.9],[24,68,1.9,2.1],[67.9,68.1,2,113],[71.9,72.1,2,113],[72,133,112.9,113.1],[72,133,116.9,117.1]];
+ walls.forEach((wall,i)=>{const e=expectedWalls[i];near(wall.min.x,e[0]);near(wall.max.x,e[1]);near(wall.min.z,e[2]);near(wall.max.z,e[3]);near(wall.min.y,-40);near(wall.max.y,-35);
+  for(const floor of floors){const seat=wall.clone().intersect(new T.Box3(new T.Vector3(floor.min.x,-40,floor.min.z),new T.Vector3(floor.max.x,-35,floor.max.z)));const size=seat.getSize(new T.Vector3());if(size.x<=0||size.z<=0)continue;near(Math.min(size.x,size.z),.1);for(const x of[seat.min.x,seat.max.x])for(const z of[seat.min.z,seat.max.z]){assert(contains(floor,new T.Vector3(x,-40,z)));assert(roofs.some(roof=>contains(roof,new T.Vector3(x,-35.1,z))));wallContacts+=2;}}
+ });assert(wallContacts>=48);
+ for(let i=0;i<floors.length;i++)for(let j=i+1;j<floors.length;j++){const size=floors[i].clone().intersect(floors[j]).getSize(new T.Vector3());assert(size.x<=1e-5||size.z<=1e-5,'Floor partitions meet without coplanar overlap');}
  const stations=[[28,0],[39,0],[50,0],[61,0],[70,6],[70,17],[70,28],[70,39],[70,50],[70,61],[70,72],[70,83],[70,94],[70,105],[76,115],[87,115],[98,115],[109,115],[120,115],[131,115]];
  assert.equal(new Set(matrices(T,brass).map(JSON.stringify)).size,20,'No duplicate strip stamps');
  strips.forEach((box,i)=>{
   const p=box.getCenter(new T.Vector3()),size=box.getSize(new T.Vector3());near(p.x,stations[i][0]);near(p.z,stations[i][1]);
   near(size.y,.15);near(box.min.y,-35.27);near(box.max.y,-35.12);
   const vertical=i>=4&&i<14;near(size.x,vertical?.14:3.8);near(size.z,vertical?3.8:.14);
-  const roof=walls[i<4?1:i<14?5:9];near(box.max.y-roof.min.y,.005);
+  near(box.max.y-roofs[0].min.y,.005);
   for(const x of[box.min.x,box.max.x])for(const z of[box.min.z,box.max.z]){
-   const p=new T.Vector3(x,-35.1225,z);assert(contains(box,p)&&contains(roof,p),'Full strip top seats inside the roof');stripContacts++;
+   const p=new T.Vector3(x,-35.1225,z);assert(contains(box,p)&&roofs.some(roof=>contains(roof,p)),'Full strip top seats inside the roof');stripContacts++;
   }
   const hit=ray(brass,p.x,-35.4,p.z,0,1,0,.4)[0];assert.equal(hit?.instanceId,i);near(hit.point.y,-35.27);
  });
  lamps.forEach(box=>{
   // Test a real positive-volume intersection rather than a centre-to-centre gap.
-  const overlaps=walls.filter((_,i)=>i%4>=2).map(w=>box.clone().intersect(w).getSize(new T.Vector3()));
+  const overlaps=walls.map(w=>box.clone().intersect(w).getSize(new T.Vector3()));
   assert(overlaps.some(s=>s.x>0&&s.y>0&&s.z>0),'Every retained lamp meets a real wall');lampContacts++;
  });
  function inspect(x,z){
-  if(!tunnelContains(x,z))return;
+  if(!tunnelContains(x,z)||x>134.4)return; // The museum owns the final floor; combined-scene rays cover that seam.
   const down=ray(b.tunnel,x,-38.2,z,0,-1,0,2),up=ray(b.tunnel,x,-38.2,z,0,1,0,5);
   assert(down.length&&up.length,`Supported covered walk at ${x},${z}`);near(down[0].point.y,-40);
   assert(up[0].point.y>=-35.270005,'Existing minimum headroom remains 4.73m');
@@ -87,5 +73,5 @@ export function validateTunnelContacts(T,b){
  for(const[x,z,dx]of[[22,0,1],[133,115,1]])for(const offset of[-1.74,0,1.74])for(const y of[-39.8,-38.2,-37.8]){
   assert.equal(ray(b.group,x,y,z+offset,dx,0,0,4).length,0,'Original gallery/museum mouths and earth cut stay open');mouths++;
  }
- return{wallContacts,stripContacts,lampContacts,walking,mouths,draws:47,instances:7667,resources:67};
+ return{wallContacts,stripContacts,lampContacts,walking,mouths,draws:47,instances:7671,resources:67};
 }

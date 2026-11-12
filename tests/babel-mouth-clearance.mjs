@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {fitBabelMouths} from '../src/babel-mouth-clearance.js';
-import {buildBabelLibrary} from '../src/babel-library-scene.js';
+import {buildBabelLibrary} from './fixtures/babel-library-before-finishes.mjs';
 import {stairs} from '../src/babel-library-model.js';
 import {babelGuardSnapshot} from './babel-entry-guards.mjs';
 

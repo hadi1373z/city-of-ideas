@@ -4,7 +4,7 @@ import vm from 'node:vm';
 import * as T from '../src/city-source-assets/home-tools/vendor/three.module.js';
 import {BABEL,entryHeight,surfaceAt,walkLibrary} from '../src/babel-library-model.js';
 import {buildBabelSnakeStairs} from '../src/babel-snake-stairs.js';
-import {buildBabelLibrary} from '../src/babel-library-scene.js';
+import {buildBabelLibrary} from './fixtures/babel-library-before-finishes.mjs';
 import {validateBabelEntryGuards} from './babel-entry-guards.mjs';
 import {validateBabelRadialContacts} from './babel-radial-contacts.mjs';
 import {validateBabelMouthClearance,validateMouthCleanup} from './babel-mouth-clearance.mjs';

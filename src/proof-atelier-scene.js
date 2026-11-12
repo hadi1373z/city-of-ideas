@@ -1,5 +1,5 @@
-import {WORKSHOPS} from './proof-atelier-content.js?v=prices2';
-import {TRAP,EXCHANGE,COMPLETE,COSTS,neighborhood,maximumMatching,pathStatus,priceStatus} from './proof-atelier-model.js?v=prices2';
+import {WORKSHOPS} from './proof-atelier-content.js?v=hall-bounds1';
+import {TRAP,EXCHANGE,COMPLETE,COSTS,neighborhood,maximumMatching,pathStatus,priceStatus,hallInsight} from './proof-atelier-model.js?v=hall-bounds1';
 import {BOARDS} from './study-house-models.js?v=workbench1';
 export function buildProofAtelier(T,{canvas=()=>document.createElement('canvas')}={}){
  const group=new T.Group();group.name='The Proof Atelier · six connected workshops';group.position.y=.13;
@@ -55,15 +55,15 @@ export function buildProofAtelier(T,{canvas=()=>document.createElement('canvas')
  for(const [material,list]of byMaterial){if(list.length<3)continue;const batch=new T.InstancedMesh(cube,material,list.length);batch.name='Fixed atelier furniture and walls';list.forEach((o,i)=>{o.updateMatrix();batch.setMatrixAt(i,o.matrix);o.removeFromParent();});batch.instanceMatrix.needsUpdate=true;batch.computeBoundingSphere?.();group.add(batch);batches.push(batch);}
  const entry={x:215,z:-86.5,y:.13,yaw:Math.PI};let last='';
  function update(s,lang='en'){
-  const key=JSON.stringify([s.board,s.tiling,s.repairEdges,s.subset,s.exchange,s.path,s.cover,s.assignment,s.u,s.v,s.capEdges,s.capS,s.capM,s.capCover,lang]);if(key===last)return;last=key;
+  const key=JSON.stringify([s.board,s.tiling,s.repairEdges,s.subset,s.hallMatching,s.exchange,s.path,s.cover,s.assignment,s.u,s.v,s.capEdges,s.capS,s.capM,s.capCover,lang]);if(key===last)return;last=key;
   for(const h of stations){h.paint(lang);const id=h.data.id;
    if(id==='colour'){const board=BOARDS[s.board===0?2:0].cells;h.tiles.forEach((o,i)=>{o.visible=board.includes(i);o.material=(Math.floor(i/4)+i%4)%2?chalk:teal;});h.dominoes.forEach((o,i)=>{const pair=s.tiling[i];o.visible=!!pair&&pair.every(n=>board.includes(n));if(pair){const[a,b]=pair;o.position.x=((a%4+b%4)/2-1.5)*.52;o.position.y=.12-((Math.floor(a/4)+Math.floor(b/4))/2-1.5)*.52;o.rotation.z=Math.floor(a/4)===Math.floor(b/4)?0:Math.PI/2;}});h.readout.paint(s.tiling.length+' dominoes · '+board.length+' squares');}
    else if(id==='prices'){const result=priceStatus(s.assignment,s.u,s.v);h.tiles.forEach((tile,i)=>{tile.material=result.violations.includes(i)?clay:s.assignment[Math.floor(i/3)]===i%3?brass:Math.abs(s.u[Math.floor(i/3)]+s.v[i%3]-COSTS[Math.floor(i/3)][i%3])<1e-9?green:chalk;});h.labels.forEach((text,i)=>{const c=COSTS[Math.floor(i/3)][i%3],slack=result.bound===null?'—':Math.round((c-s.u[Math.floor(i/3)]-s.v[i%3])*1e6)/1e6;text.paint(c+' / '+slack);});h.readout.paint('Cost '+(result.cost??'—')+' · floor '+(result.feasible?result.bound:'—')+' · gap '+(result.gap??'—'));}
    else{
     const graph=id==='hall'?s.repairEdges:id==='exchange'?EXCHANGE:id==='duality'?TRAP:s.capEdges;
-    const matching=id==='exchange'?s.exchange:id==='duality'?maximumMatching(TRAP):id==='studio'?s.capM:[],subset=id==='hall'?s.subset:id==='studio'?s.capS:[],cover=id==='duality'?s.cover:id==='studio'?s.capCover:[],near=neighborhood(graph,subset),path=id==='exchange'?pathStatus(EXCHANGE,s.exchange,s.path).edges||[]:[];
+    const matching=id==='hall'?(s.hallMatching||[]):id==='exchange'?s.exchange:id==='duality'?maximumMatching(TRAP):id==='studio'?s.capM:[],subset=id==='hall'?s.subset:id==='studio'?s.capS:[],cover=id==='duality'?s.cover:id==='studio'?s.capCover:[],near=neighborhood(graph,subset),path=id==='exchange'?pathStatus(EXCHANGE,s.exchange,s.path).edges||[]:[];
     h.edges.forEach((o,i)=>{o.visible=graph.includes(i);o.material=path.includes(i)?blue:matching.includes(i)?brass:timber;o.scale.x=o.scale.z=matching.includes(i)||path.includes(i)?2.4:1;});
-    h.nodes.forEach((o,i)=>{o.material=cover.includes(i)?green:i<4&&subset.includes(i)?brass:i>=4&&near.includes(i-4)?blue:chalk;});h.readout.paint(id==='hall'?'|S| '+subset.length+' · |N(S)| '+near.length:id==='exchange'?'Matching '+matching.length+' · path '+s.path.length:id==='duality'?'Matching 3 · cover '+cover.length:graph.length+' edges · matching '+matching.length);
+    h.nodes.forEach((o,i)=>{o.material=cover.includes(i)?green:i<4&&subset.includes(i)?brass:i>=4&&near.includes(i-4)?blue:chalk;});h.readout.paint(id==='hall'?'Matching '+matching.length+' ≤ maximum ≤ '+hallInsight(graph,subset,matching).upper:id==='exchange'?'Matching '+matching.length+' · path '+s.path.length:id==='duality'?'Matching 3 · cover '+cover.length:graph.length+' edges · matching '+matching.length);
    }
   }
  }

@@ -1,5 +1,5 @@
 import {BABEL,BABEL_COPY,entryHeight,surfaceAt,walkLibrary,babelDesk,pageAt,addressOf,prefixCount} from './babel-library-model.js?v=two-faces2';
-import {buildBabelLibrary} from './babel-library-scene.js?v=book-contact1';
+import {buildBabelLibrary} from './babel-library-scene.js?v=merge-finishes1';
 import {fitBabelMouths} from './babel-mouth-clearance.js';
 import {mountBabelSpokes} from './babel-spoke-mounts.js';
 import {fitBabelPerimeter} from './babel-vault-perimeter.js';
