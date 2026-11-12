@@ -7278,3 +7278,80 @@ book targets/finite catalogue/floor access, all treads/fittings/source profiles/
 private data/voices/scans/rights. Only measured justified support joins or
 factual audit. No new desk/column/light/barrier/room/paper/first reading,
 historical copy or certification; no merge of main or other ref writes.
+
+## 2026-11-13 — Babel catalogue desks: factual seating and approach audit
+
+Continues published431038c after its concurrent88cfb27 reconciliation through
+main2176dde and retention of8701145. This review preserves that already-published
+history; local feature checkout fast-forwards without creating a merge. PR#5
+remains unmerged into main. Read BABEL-CATALOGUE-DESKS.md for measured scope.
+All47first readings/eightMath workingfloors remain complete; no new first pass.
+
+All five original rectangular terrace catalogue desks already meet. At feet
+-8/-12/-16/-20/-24, original.32x.90x.32pedestals reach actual walking floors
+within -.000000178814..+.000000774860m sourceFloat32 roundoff. Twenty-five
+samples over each complete footface hit its original floor:125support rays.
+Pedestal/table overlap.019999988377m, cover/table .029499810457..
+.029500764132m, book/cover .007999999702m. Fifteen joints retain120positive
+core vertices; all40book/cover footprint corners remain inside original
+supporting covers/tabletops. No added feet, leg, cap or duplicate support.
+
+Actual active tabletop IDs1207/2211/3039/3679/4128 and pedestal347/700/1053/
+1400/1761 are in existing fitted display copies; each matrix equals its raw
+source record exactly. Ten original book/cover targets/ordering/babelBook0..4/
+geometry/poses remain; descent target and separate central circular plinth stay.
+No production file, source/installed mesh/matrix/resource/collider/pick/UI/
+reader/model/private key or behavior changes in this factual audit.
+
+The original front corridor at distances1.4..3.0m and tangent offsets
+-.45..+.45m has315supported model/physical-floor samples and315clear standing
+rays. All remain inside original<4m reading gate/outside1.25m desk exclusion.
+Native actual-scene repeats125foot rays/120core vertices/40footprint corners/
+315floor/body samples against all visible meshes. Five separate inspection
+cameras show original seats while preserving visitor pose.
+
+Complete current production snapshots stay exact with no exclusions:
+raw65meshes/41893instances/r1867b21ef65/nativebfee858c; installed68/41925/
+r18600134a70/nativef1b47297. Every old source node, copied instance and
+noninstance profile/pose stays unchanged. Published pre-finish fixture and
+all original negative controls remain strict, distinct from current production.
+Do not restore retired reveals/duplicate treads or overlapping source floors.
+
+All124current release programs pass, including new desk audit in the existing
+actual-production adapter program. Entire owner86resources/36instancebuffers
+release once under parent/repeated cleanup; borrowed drawing0. Existing
+owner-replacement/private/voice/language checks remain. Original main
+Hall/mobile/notice/playback/single-owner world joins remain untouched.
+
+Native ordinary pointer/W walking visits every desk via four source radial
+descents,25heights each. Pointer and E both open original catalogue on each
+terrace:10same-pose close/handoffs. EN/DE/FA/CS retains page0/aaaaaa/empty
+prefix/exact source/PersianRTL; Czech retains disclosed English fallback.
+Eleven genuine scans remain ready. Original explicit Return to the gallery
+button reachesfeet.395/Z12, with no pose assignment, automatic travel or
+claimed walked ascent. Final877asset explicitLOCAL verification accompanies
+PR#5; existing Three warning/controllerA separately untested remain.
+
+All earlier island/Zarathustra/source-private coordinates/lower half-turn/
+both galleries480treads/middle/well/tunnel/earth cut/Math8floor24IDwing/
+stairs/lift/central3mdoor/Faculty/covered route/Escher/house/private/voice/scan/
+rights/zoom contracts remain. All47sourced readings, raw drafts/carets/
+immutable first answers/private keys/original explicit saves, approved cast/
+fixed voices/recordings and original interactions remain. No new reading/
+paper/folio/scan/historical object/quotation/testimony/source-fetch claim,
+new render-resource/listener/state or memory/storage/progress/preference-write/
+experiment/discovery/audio/travel/floor behavior. User's headed preview
+untouched; exact PR Houses/Concurrent sections retained. Same branch/PR#5,
+no new merge or deployment.
+
+Next useful review: audit the thirty original terrace globe fixtures and
+their.06square stems: actual stem/globe and stem/shelf contacts, retained
+incoming-flight shelf gaps and overhead standing clearance. Read this ledger,
+BABEL-CATALOGUE-DESKS.md and every earlier Babel/world/gallery/Math/Faculty/
+covered-walk/paper contract. Inspect actual installed sphere/stem faces,
+supports/source profiles/owners/cleanup and concurrent work before editing.
+Preserve thirty glow spheres/four shared actual lights, all shelf assemblies/
+treads/fittings/reader payloads/source/private/voice/scan contracts. Only
+measured justified joins or factual audit; no new light/globe/column/barrier/
+room/paper/first reading/historical copy/certification or merge/ref write
+outside this feature branch.

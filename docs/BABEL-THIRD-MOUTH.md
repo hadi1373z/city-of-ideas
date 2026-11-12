@@ -1,5 +1,9 @@
 # Babel third radial mouth · complete-bay clearance
 
+The later [catalogue-desk audit](BABEL-CATALOGUE-DESKS.md) preserves the
+published main reconciliation and complete installed third-mouth fitting.
+All five original desk assemblies already meet; no extra support is added.
+
 This review continues d915a0c. All 47 first reading passes and all eight
 Mathematics working floors remain complete. The measured third-flight
 contacts now receive a bounded installed fit. Original source geometry,
