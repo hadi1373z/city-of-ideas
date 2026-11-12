@@ -1,5 +1,10 @@
 # Babel vault perimeter · fitted base-floor join
 
+The [revised-source compatibility review](BABEL-ADAPTER-COMPATIBILITY.md)
+preserves the exact historical 480-segment result below and additionally
+fits the actual canonical 320-segment source floor. The latter copies its
+320 floor and 160 wall vertices; no source resampling or navigation change.
+
 The later [entry-reveal review](BABEL-ENTRY-REVEALS.md) preserves this complete
 67-mesh/41,072-instance fixture and adds four separately owned timber joins
 in one draw. The perimeter geometry and navigation boundary remain exact.

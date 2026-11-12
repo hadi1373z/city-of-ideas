@@ -13,6 +13,7 @@ import {validateBabelPerimeter,validatePerimeterCleanup} from './babel-vault-per
 import {validateBabelEntryReveals,validateRevealCleanup} from './babel-entry-reveals.mjs';
 import {validateBabelEntryCheeks} from './babel-entry-cheeks.mjs';
 import {validateBabelEntryBookcases,validateEntryLampCleanup} from './babel-entry-bookcases.mjs';
+import {validateBabelAdapterProfiles} from './babel-adapter-profiles.mjs';
 const w={};vm.runInNewContext(await readFile(new URL('../src/gallery-spiral.js',import.meta.url),'utf8'),{window:w});const up=w.createGallerySpiral(T),f=BABEL.flight,l=BABEL.landing;
 assert.equal(f.x,up.centerX);assert.equal(f.width,up.headWidth);assert.equal(f.z1,up.pointAt(0).z);assert.equal(f.z0,up.run);assert.deepEqual(BABEL.opening,{...up.opening});assert.equal(f.top,up.pointAt(0).y);assert.equal((f.z0-f.z1)/f.steps,up.tread);assert(Math.abs((f.top-f.bottom)/f.steps-up.rise)<.011);assert.equal(f.bottom,BABEL.levels[0].y);
 const entryOwned=new Set(),entryBuffers=new Set(),entryReleased=new Map();
@@ -29,6 +30,7 @@ console.log('PASS fitted Babel base-floor perimeter: '+JSON.stringify(validateBa
 console.log('PASS Babel entry reveal joins: '+JSON.stringify(validateBabelEntryReveals(T,library)));console.log('PASS entry reveal cleanup programs: '+validateRevealCleanup(T));
 console.log('PASS factual Babel entry cheek/cap contacts: '+JSON.stringify(await validateBabelEntryCheeks(T,library)));
 console.log('PASS original Babel case/lamp seats: '+JSON.stringify(await validateBabelEntryBookcases(T,library)));console.log('PASS entry lamp cleanup programs: '+validateEntryLampCleanup(T));
+console.log('PASS Babel source-profile compatibility: '+JSON.stringify(validateBabelAdapterProfiles(T)));
 for(const offset of[-f.width/2+.4,0,f.width/2-.4]){let p={x:f.x+offset,z:f.z0,y:f.top+1.8};for(let z=f.z0-.01;z>=f.z1;z-=.06)walkLibrary(p,0,z-p.z);walkLibrary(p,0,f.z1-p.z);assert(Math.abs(p.y-1.8-f.bottom)<1e-6);for(let z=f.z1;z>l.minZ+.6;z-=.06)walkLibrary(p,0,z-p.z);for(let x=p.x;x<49;x+=.06)walkLibrary(p,x-p.x,0);assert(p.x>48.8,'The full-width flight reaches the original ring through its landing');assert.equal(surfaceAt(p.x,p.z,-8),-8);}
 // The last aisle has a physical doorway through the shelf joinery, with the
 // original catalogue and five terraces retained around it.

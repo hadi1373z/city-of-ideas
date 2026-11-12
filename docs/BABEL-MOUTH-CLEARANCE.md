@@ -1,5 +1,10 @@
 # Babel stair mouths · fitted clearance correction
 
+The [revised-source compatibility review](BABEL-ADAPTER-COMPATIBILITY.md)
+retains every historical result below. It adds unique public-profile selection
+when source IDs shift, recognizes the actual revised bronze/oak rail pair,
+and records the wider later-flight contacts separately. No legacy fit changes.
+
 The installed follow-up in [BABEL-VAULT-CONTACTS.md](BABEL-VAULT-CONTACTS.md)
 adds one separate 24-instance ceiling-mount batch. Every fitted mouth record
 and the historical 65-mesh/41,048-instance baseline below remain unchanged.

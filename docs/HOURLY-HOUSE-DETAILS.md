@@ -7118,3 +7118,80 @@ new seats, supplied books/lights/interactions and every private/voice contract.
 Inspect real faces/openings/clearance/owners/cleanup before preparing a narrow
 documented reconciliation. No merge of main, ref changes outside this branch,
 deployment, competing branch, new room/light/paper/first reading/certification.
+
+## 2026-11-12 — Babel adapters: revised public source profiles
+
+Architectural compatibility follow-up to 90fcb41; all47 first readings and
+all8 working Mathematics floors remain complete. BABEL-ADAPTER-COMPATIBILITY.md
+records measured scope, source references and next contacts. Main2176dde
+remains separate/unmerged; no source builder/model/world owner is changed.
+
+Two existing owned adapters recognize the revised public geometry. Mouth
+selection verifies unique case/fascia profiles when IDs shift, plus the
+actual revised bronze/oak rail pair. Existing positive tangent fits still
+change199 records in12owned display copies, retaining far ends/Y/depth/
+100bindings/80stamps and every source matrix/resource/ID. Missing/duplicate/
+mixed profiles reject. Perimeter derives canonical320or480segment counts:
+legacy640vertices/640triangles exact, revised320floor+160wall vertices and
+480triangles. No source resampling or new navigation floor. Old reveal fitting
+correctly stays inactive on retired main beam/cap profiles; source new4roof
+frames/cornices remain. Legacy four reveal joins remain on current feature.
+
+Complete old90fcb41 feature rendering is identical with no exclusions:
+69meshes/41084instances/r1869260ef4e/r1604401bd8a. Raw65/41048
+8f17b68a/357a4d91, entry139ef073 and slab7c1b1038 remain independently exact.
+Revised builder + retained feature28entrybrackets/idempotence is the proposed
+reconciliation: raw65/41893/r1867b21ef65 -> installed68/41925/cd9fe0ca.
+This dependency scope clarifies the preceding isolated-main summaries.
+Separate pristine-main snake reference lacks those28brackets: native raw
+65/41865 ->68/41897. Neither fixture is a merged or whole-main app claim.
+
+Manual immutable90fcb41/2176dde reference checks cover all4radial flights,
+2016standing/tread samples. Old adapters leave30first-two-mouth contacts
+on revised source; recognized fits clear all1008targeted samples. Every
+sampled tread retains support. Wider lanes +/-1.46 identify15existing
+third-flight(index2) shelf/balcony contacts at steps9/13..15, unchanged in
+old/new feature and proposed reconciliation. They remain recorded; no
+whole-four-flight clearance claim. Distinct original raw15-conflict
+8/7/0/0 control on864samples remains unrelaxed, never relabelled.
+
+All121release programs pass. New reordered-ID fixture retains every original
+matrix and verifies199fits/12buffer releases; exact source-derived320floor
+hash7c332c06,320floor/160wall vertices,480upward triangles and2880seam hits/
+oldfloor misses pass. Complete actual-source/target identities and visibility
+restore. Full legacy86owned resources/37buffers and revised86/36 release once;
+borrowed drawing0. No extra resource/draw on current feature path. Existing
+owner-replacement/custom/private-denial and independent cleanup stay.
+
+Native current feature source/hash/360entry body probes and ordinary40tread
+down-up/catalogue route/gallery receiverfeet.395Z12 pass with41heights eachway.
+EN-DE-FA-CS retains page0/aaaaaa/empty prefix/exact source/samepose close,
+PersianRTL and11ready genuine scans; Babel Czech English fallback remains.
+Native proposed/pristine fixtures each pass1008targeted body/tread and2880
+seam probes,4actual source frame/ceiling probes, source/target/pose preservation
+and86resource/36buffer once-only release/borrowed0. Independent before-after
+mouth/perimeter/native reader views inspected. Final874asset explicitLOCAL
+verification accompanies PR#5; zero app errors/one existing Three warning,
+hardware controllerA separately untested. User's headed preview untouched.
+
+All prior source/private coordinates/rooms/stairs/lifts/paths/entrances/
+world-cylinder/lower transform/gallery480treads/middle/well/tunnel/earthcut/
+eightfloor24IDwing/Faculty/coveredroute/Escher/voices/scans/rights/zoom/
+all47readings/private drafts/carets/first answers/keys/explicit actions remain.
+Rendering adds no private-memory/storage/progress/preference-write/experiment/
+discovery/audio/travel/floor action. No new light/column/barrier/room/lot/paper/
+folio/historical copy/quotation/testimony/source-fetch/certification.
+Same branch/PR#5, no merge/deploy or ref change outside this feature branch.
+PR Houses/Concurrent sections remain exact.
+
+Next useful review: audit the15 measured third radial-flight(index2) standing
+contacts, especially shelf/balcony instances at steps9/13..15 and offsets
++/-1.46. Read this ledger, BABEL-ADAPTER-COMPATIBILITY.md,
+BABEL-RADIAL-CONTACTS.md, BABEL-MOUTH-CLEARANCE.md and all earlier contracts.
+Inspect actual installed faces/supports/standing clearance/far-end joints/
+owners/cleanup and concurrent work first. Preserve independent historical
+negative controls, full source/installed fingerprints, all book assemblies/
+bindings/stamps, treads/rails/landings/navigation, existing fittings/seats/
+reveals and main's separate revised source. Only measured justified joins or
+a factual audit; no book omission/ray mask/new light/column/barrier/room/
+paper/first reading/certification. No merge of main or other ref writes.
