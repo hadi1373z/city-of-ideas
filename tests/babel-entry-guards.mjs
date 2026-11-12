@@ -13,13 +13,7 @@ export function babelGuardSnapshot(T,root,stripBrackets=false){
  });return{hash:createHash('sha256').update(JSON.stringify(rows)).digest('hex'),meshes:rows.length,instances};
 }
 
-export async function validateBabelEntryGuards(T,built,library){
- const f=BABEL.flight,l=BABEL.landing,g=built.group,bronze=g.children.find(o=>o.isInstancedMesh&&o.material.color.getHex()===0x786946),gold=g.children.find(o=>o.isInstancedMesh&&o.material.color.getHex()===0xe2c47e);
- g.updateMatrixWorld(true);library.group.updateMatrixWorld(true);assert(g.matrixWorld.equals(new T.Matrix4()));assert.equal(bronze.count,101);assert.equal(gold.count,40);
- // Independently captured complete 72d2ab2 fixtures. Only the 28 separately
- // measured appended brackets are omitted; every earlier profile/ID stays exact.
- assert.deepEqual(babelGuardSnapshot(T,g,true),{hash:'18f107cd92e34bd6f6f84c7916b0186597ba914f25bdb4e1456ef20263f1a142',meshes:4,instances:113});
- assert.deepEqual(babelGuardSnapshot(T,library.group,true),{hash:'e3b91773c61da8f5ba32f7e570e34be8246ccffca2c693a27766febb28c0b318',meshes:65,instances:41020});
+export async function babelSlabFixture(T){
  const src=await readFile(new URL('../src/gallery.js',import.meta.url),'utf8'),factory=src.match(/^function galleryRing\([^\n]+/m)?.[0];assert(factory);
  // Use the app's bundled r160 slab triangulator, rather than the separate r186
  // source-tools test renderer. Execute the retained source builder and upper
@@ -29,6 +23,17 @@ export async function validateBabelEntryGuards(T,built,library){
  const context={THREE:S,inner:28,outer:58,window:{CITY_BABEL_LAYOUT:BABEL},mainBuildingTargets:[],mesh};vm.runInNewContext(factory+';this.ring=galleryRing',context);
  const slab=context.ring(0,slabMaterial,0),finish=context.ring(.37,finishMaterial,0,.025),rotation=new S.Matrix4().makeRotationY(Math.PI/2);for(const o of[slab,finish])o.applyMatrix4(rotation);floorGroup.updateMatrixWorld(true);
  assert.equal(babelGuardSnapshot(T,floorGroup).hash,'7c1b103871a02f9562bf37e91f4b0dc9cfebdc6fe7961e0136be5e0d1abbd54f','Unchanged actual installed ground slab/finish profiles');
+ return{floorGroup,slab,finish,dispose(){for(const o of[slab,finish])o.geometry.dispose();slabMaterial.dispose();finishMaterial.dispose();}};
+}
+
+export async function validateBabelEntryGuards(T,built,library){
+ const f=BABEL.flight,l=BABEL.landing,g=built.group,bronze=g.children.find(o=>o.isInstancedMesh&&o.material.color.getHex()===0x786946),gold=g.children.find(o=>o.isInstancedMesh&&o.material.color.getHex()===0xe2c47e);
+ g.updateMatrixWorld(true);library.group.updateMatrixWorld(true);assert(g.matrixWorld.equals(new T.Matrix4()));assert.equal(bronze.count,101);assert.equal(gold.count,40);
+ // Independently captured complete 72d2ab2 fixtures. Only the 28 separately
+ // measured appended brackets are omitted; every earlier profile/ID stays exact.
+ assert.deepEqual(babelGuardSnapshot(T,g,true),{hash:'18f107cd92e34bd6f6f84c7916b0186597ba914f25bdb4e1456ef20263f1a142',meshes:4,instances:113});
+ assert.deepEqual(babelGuardSnapshot(T,library.group,true),{hash:'e3b91773c61da8f5ba32f7e570e34be8246ccffca2c693a27766febb28c0b318',meshes:65,instances:41020});
+ const{floorGroup,slab,finish,dispose}=await babelSlabFixture(T);
  const m=i=>{const a=new T.Matrix4();bronze.getMatrixAt(i,a);return a;},at=(i,y)=>new T.Vector3(0,y,0).applyMatrix4(m(i)),up=new T.Vector3(0,1,0),down=new T.Vector3(0,-1,0),ray=(objects,p,d,far)=>new T.Raycaster(p,d,0,far).intersectObjects(objects,true);
  function contained(i,p){const q=p.clone().applyMatrix4(m(i).invert());assert(Math.abs(q.y)<=.50003);for(let k=0;k<8;k++){const a=(k+.5)*Math.PI/4;assert(q.x*Math.sin(a)+q.z*Math.cos(a)<=Math.cos(Math.PI/8)+3e-4,'Actual eight-sided cylinder contains contact');}}
  let footVertices=0,rootRays=0,gapRays=0,slopingSeats=0,landingSeats=0,railContacts=0,bodySamples=0;
@@ -58,5 +63,5 @@ export async function validateBabelEntryGuards(T,built,library){
   }
   assert.equal(footVertices,240);assert.equal(rootRays,448);assert.equal(gapRays,28);assert.equal(slopingSeats,26);assert.equal(landingSeats,11);assert.equal(railContacts,68);assert.equal(bodySamples,360);
   return{addedBrackets:28,footVertices,rootRays,gapRays,slopingSeats,landingSeats,railContacts,bodySamples,stairs:babelGuardSnapshot(T,g),library:babelGuardSnapshot(T,library.group)};
- }finally{for(const o of[slab,finish])o.geometry.dispose();slabMaterial.dispose();finishMaterial.dispose();}
+ }finally{dispose();}
 }

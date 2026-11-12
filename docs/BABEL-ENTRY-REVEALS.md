@@ -1,5 +1,9 @@
 # Babel entry reveals · measured roof and cap joins
 
+The later [cheek-wall contact audit](BABEL-ENTRY-CHEEKS.md) preserves all four
+joins and every source profile. It adds no geometry and records the existing
+slab roots, wall/cap contacts and open tread/overlook seams.
+
 This architectural follow-up continues `5823ac6`. All 47 first reading passes
 remain complete. Four small installed timber parts join the original two oak
 reveals to the actual lower ceiling-cut face and seat the unsupported length

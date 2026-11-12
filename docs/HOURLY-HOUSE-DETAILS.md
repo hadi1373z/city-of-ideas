@@ -6995,3 +6995,64 @@ cuts/treads/width/height gates/overlook/fitted mouths/mounts/perimeter/reveals/
 reservoir/book/collar/five terraces/catalogue/source-private coordinates and
 all prior contracts. Only measured justified joins; otherwise factual audit.
 No new column/barrier/light/room/lot/paper/folio/descent/certification.
+
+## 2026-11-12 — Babel entry cheek walls: factual slab/cap/contact audit
+
+Continues cbd92c3; all47 first reading passes/eight Mathematics floors remain
+complete. BABEL-ENTRY-CHEEKS.md records actual installed contacts. No scene part,
+source/profile/matrix/ID, resource, navigation, UI, reader or state changes.
+
+Original dark wall IDs1177..1216/1217..1256 form two forty-panel chains; oak
+caps2957..2996/2997..3036 retain exact source/active-mouth-copy matrices.
+All78 adjacent wall joints overlap.012m longitudinally with positive height;
+all80 caps meet their own wall by.01m (.70x.01x.292m intersection). Actual
+Main slab facesY0/.35 contain positive.01m cubes at upper wall1177/1217,
+whose topY.185124874 already crosses its lower face outside the real X cut.
+The160node/158edge wall-cap graph has two components, both reaching those
+actual slab contacts. Geometric connectivity only, no engineered load claim.
+
+The original right-hand station footprints meet first-terraceY-8 about.18m
+above wallbases-8.18; finalwall top agrees within.00000015m Float32 rounding.
+The left40 footprints have no terrace there; do not invent flat floor beneath
+the shaft or duplicate feet. Original wall-to-tread gaps.07000008..07000199m
+and cap-to-tread gaps.00500008..00500199m stay open, including lower-left
+overlook side plane. No direct lower-left wall/floor-seat or sealed-seam claim.
+Keep original guards/brackets/width/treads/risers/cuts/overlook/height gates.
+Original lower-left cap2996 also engages overlook guard72; eight native core
+vertices lie inside both the cap and actual octagonal post. This separate
+guard contact stays exact and does not close the floor seam.
+
+New checks:640cap-seat/624wall-joint/16slab-core vertices,32real slab-face
+rays,160right-floor hits/160left-floor misses,80paired seam measurements,
+360strict full-active Babel+Main slab body/head probes. Native repeats the
+contacts/graph and160exact source/active matrices, plus independent views.
+Complete cbd92c3 fixture remains68meshes/41076instances with no exclusions:
+r186hash492dfb14/r160hash56807240. Raw8f17b68a/357a4d91,entry139ef073,
+slab7c1b1038 remain exact. Shared actualr160 slab fixture retains its independent
+old profile hash/cleanup. No earlier source fingerprint, strict budget or
+source-only15-conflict control is relaxed.
+
+All121 release programs pass. Existing four reveal joins/24mounts/199mouth
+records/perimeter/owned-once/borrowed-resource/privacy contracts remain.
+Ordinary native down-up40tread/first-terrace catalogue/groundreceiverfeet.395Z12
+walking passes without pose assignment/auto-tour/bypass. EN-DE-FA-CS keeps
+pose/page0/aaaaaa/empty prefix/source/same-pose close, PersianRTL; Babel Czech
+keeps English fallback.11genuinepages remain ready. Explicit873asset LOCAL
+verification/final console results accompany PR#5; controllerA untested remains.
+
+All47 readings/raw private drafts/carets/first answers/keys/explicit experiments/
+saves, cast/fixed voices/recordings/scans/artwork/credits/rights/source/zoom and
+prior world/gallery/Math/Faculty/covered-walk/Escher contracts remain. No
+rendering/private-memory/storage/progress/preference-write/experiment/discovery/
+audio/travel/floor action, new reading/paper/folio/historical copy/quotation/
+testimony/source-fetch. Main Hall/mobile work and PR#2 remain separate, user's
+headed preview untouched. Same branch/PR#5, no merge/deploy or certification.
+
+Next useful review: audit the eight original tiered bookcases beside Babel's
+entry descent, including upright/shelf-to-cap-board and existing small lamp-base
+contacts. Read this ledger, BABEL-ENTRY-CHEEKS.md and prior Babel/world/gallery/
+Math/Faculty/covered-walk/paper contracts. Inspect actual installed supports/
+profiles/clearance/owners/cleanup first. Preserve all supplied books/bindings/
+lights/original interactions and every prior geometry/private/voice/reading
+contract. Only measured justified joins; otherwise factual audit. No new light/
+column/barrier/room/lot/paper/folio/first reading/historical copy/certification.
