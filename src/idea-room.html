@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#111d25">
+<title>First Imagine · City of Ideas</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,Arial,sans-serif;color:#f3ecd9;background:#111d25}
+*{box-sizing:border-box}body{margin:0;overflow:hidden}
+#world{position:fixed;inset:0}canvas{display:block;touch-action:none}
+aside{position:fixed;top:16px;left:16px;z-index:5;width:min(365px,calc(100vw - 32px));max-height:calc(100dvh - 32px);overflow:auto;background:#132128ee;border:1px solid #cfb77a70;padding:18px;border-radius:12px;box-shadow:0 15px 60px #0008}
+h1{font:normal 26px Georgia,serif;margin:8px 0}p{line-height:1.5;color:#d9d5c9;font-size:13px}label{display:block;margin-top:12px;font-size:12px;color:#dcc597}
+textarea{display:block;width:100%;resize:vertical;min-height:68px;background:#26343b;color:#fff;border:1px solid #718089;border-radius:6px;padding:10px;font:13px/1.5 system-ui}
+button,a.action{font:12px system-ui;color:#f4eedf;border:1px solid #a99b72;background:#34443f;padding:9px 11px;border-radius:6px;cursor:pointer;text-decoration:none;display:inline-block}
+button:hover,a.action:hover{background:#486052}button:focus-visible,a:focus-visible,textarea:focus-visible{outline:2px solid #f4cd82}
+.actions{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+small{color:#c8baa0}#status{border-top:1px solid #69747a;margin-top:12px;padding-top:10px;min-height:43px}
+#hud{position:fixed;right:12px;top:16px;background:#111d25d9;padding:12px;border:1px solid #bca56e;z-index:4;border-radius:8px;font:12px system-ui}
+#pad{position:fixed;bottom:16px;right:16px;z-index:5;display:grid;grid-template-columns:repeat(3,43px);grid-template-rows:repeat(2,43px);gap:4px;direction:ltr}
+#pad button{padding:0;font-size:19px;background:#1b3335db;touch-action:none}
+#pad [data-move="forward"]{grid-column:2}#pad [data-move="left"]{grid-column:1;grid-row:2}
+#pad [data-move="back"]{grid-column:2;grid-row:2}#pad [data-move="right"]{grid-column:3;grid-row:2}
+@media(max-width:680px){aside{top:10px;left:10px;max-height:53dvh;width:calc(100vw - 20px);padding:12px}aside h1{font-size:21px}#hud{top:auto;bottom:18px;right:159px;font-size:10px}#pad{right:10px;bottom:10px}textarea{min-height:48px}.actions{gap:4px}.actions button,.actions a{padding:7px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto;transition:none!important}}
+</style>
+</head>
+<body>
+<main id="world" aria-label="Interactive three-dimensional imagined room and street"></main>
+<aside aria-label="Idea to world studio">
+<small>City of Ideas / first playable experiment</small><h1>First imagine. Then experience.</h1>
+<p>Describe a person and a room. Build a simple scene, meet its reader, carry one thought through the door, and enter the existing city street.</p>
+<label for="description">Your imagined room</label>
+<textarea id="description" maxlength="400">A solitary reader in a quiet study, an open notebook on a wooden desk, and a window toward the mountains.</textarea>
+<div class="actions"><button id="imagine">Imagine room</button><button id="reader">Talk to reader</button><button id="notebook">Open notebook</button></div>
+<label for="thought">One idea to carry into the world</label>
+<textarea id="thought" maxlength="350" placeholder="What did you discover or question?"></textarea>
+<div class="actions"><button id="save">Keep this idea</button><button id="share">Share room description</button><button id="light">Time: evening</button></div>
+<div class="actions"><button id="street">Walk to street</button><a class="action" href="index.html?from=idea-room">Enter City of Ideas</a></div>
+<p id="status" role="status">WASD / arrows to move; drag the scene to look. Walk forward through the room's open door toward the street.</p>
+</aside>
+<div id="hud"><div id="place">Imagined study</div><div>Journey <output id="elapsed">00:00</output></div><div id="local-time"></div></div>
+<div id="pad" aria-label="Touch movement"><button data-move="forward" aria-label="Forward">↑</button><button data-move="left" aria-label="Left">←</button><button data-move="back" aria-label="Back">↓</button><button data-move="right" aria-label="Right">→</button></div>
+<script src="assets/three.min.js"></script><script src="idea-room.js"></script>
+</body></html>
