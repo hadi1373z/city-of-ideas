@@ -1,5 +1,9 @@
 # Babel fitted binding beds · twenty appended rows
 
+The later [shelf-display follow-up](BABEL-SHELF-DISPLAYS.md) preserves this
+complete 1,830-bed result and appends 43 recessed seats in the same batch.
+This document retains its original independent 20-row scope and controls.
+
 This bounded follow-up to 77fa55b completes the 200 decorative binding volumes
 in four already-fitted incoming bays. The preceding 1,810 beds, all original
 source/display records and every stair-mouth affine map remain exact.

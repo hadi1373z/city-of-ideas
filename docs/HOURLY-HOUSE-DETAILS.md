@@ -7815,3 +7815,85 @@ Houses-Concurrent text; separate main Proof work/conflict remains. No new
 merge/reconciliation/deploy. User's headed preview untouched.
 
 Next useful review: audit the existing flat decorative covers and pale page blocks on Babel's shelf tops: actual shelf/cover/page contacts, source-versus-fitted display owners and clearance. Preserve every existing profile/matrix/ID/order, all completed binding beds and mouths, source/private coordinates, catalogue/readers and eleven genuine scans as distinct objects. Use public static faces only; no book-colour/private-import/note access. Only measured justified joins or factual audit; no new book, paper, facsimile, first reading, light, room, barrier, historical copy or certification.
+
+## 2026-11-13 — Babel shelf-top displays: forty-three recessed block seats
+
+Follow-up to d9cc3af6fdbfa069d403acc04a459c1c027a2771; full measurements,
+ownership and limits live in docs/BABEL-SHELF-DISPLAYS.md. All47first readings/
+all8working floors remain complete. Only measured support joins are new.
+
+All43original flat covers already meet their actual top shelves: maximum
+Float32 plane error .000000611m, all172corners inside with>=.073826244m recess.
+No duplicate cover footing. The43pale blocks have actual .007499084..007500038m
+gaps above covers, with all172corners inside and>=.029999979m recess.
+387cover/shelf and387block/cover projections supplement complete convex
+corner containment; sample counts are not an area estimator. All original
+gaps remain independently tested without moving source/display records.
+
+Actual owners matter:43covers use existing mouth copies with matrices equal
+to original source;43pale blocks use the unchanged original107-record batch
+outside mouth copies. That batch includes64separate central-ring fore-edges.
+The source terrace distribution stays14/11/9/6/3, with original .12rad turn.
+
+43timber seats append ONLYIDs1830..1872 to SAME existing support batch.
+Each is about.74x.0115x.65m: actual page plan minus.04/gap+.004, with.02edge
+recess and.002concealed engagement each end.43cover/seat and43seat/block
+.001m cube cores check all8vertices;172lower/172upper corners stay inside.
+Measured cover engagement .001999389..001999866m and block engagement
+.002000134..002000611m are positive. No coincident exposed faces or moved
+source object. This is a geometric join, not full-bottom bearing/capacity/
+historical construction/certification.
+
+Complete projected edges including interiors retain>=.384066713m beyond
+the original outer walking-centre bound.4128new full-width original tread
+standing-prism pairs clear throughfeet+2.10; earlier175680pairs/2016whole-scene
+body/tread probes remain. No floor/route/tread/rail/landing/mouth/bridge/
+collider/model/walking-width/height-gate changes.
+
+Explicit seatBabelShelfSupports installs1873parts; first1830matrices/IDs
+stay bit-exact. Historical1810-only and1830-complete APIs keep their scopes,
+snapshots,22lifecycle programs and old-gap controls. Same70draws/86resources/
+38buffers;43759->43802instances. No new batch/draw/geometry/material/texture/
+image/light/target/UI/listener/reader/private key/saved diagram.
+New28lifecycle/private/custom-layout programs watch actual page owner/
+buffer/array/version/count/geometry/material/pose. Missing/replaced owners
+release owned batch once, without reading foreign fields. Hidden original
+page owner hides/restores dependent own group without source visibility
+writes. All86resources/38buffers release once/borrowed drawing0.
+Document/storage/fetch/new-render-resource denial remains.
+
+Raw65/41893 stays r1867b21ef65/nativebfee858c with NO exclusion.
+Omitting ONLY43appended owned IDs restores complete d9cc70/43759
+r1865863d785/nativee4be53da, every old node/ID/profile/pose. Full new70/43802
+r1860a98c523/nativee2e1369d is independently locked. All398mouth maps/
+12copies/far ends/18300row volumes/1830beds/31globe lifecycle programs/
+partial guard-casework footprints/entry-perimeter/historical negatives and
+unrelaxed budgets remain.
+
+All124release programs pass. Native43whole-scene expected-ID rays/
+86positive cores/4128prisms/source-prior-new full hashes pass.12matched
+1000x700macro/assembly before-after views onterraces0/2/4 were visually
+checked; before omits only43newIDs, restores1873count/renderer/pose.
+Ordinary pointer/W walks all4radial descents,25floor heights each tofeet-24.
+Ten first/bottom pointer/E catalogue handoffs retain page0/aaaaaa/empty
+prefix/exact original source/same-pose close, EN-DE-FA-CS/PersianRTL/Czech
+English fallback and11ready genuine pages. Original explicit exit reaches
+feet.395/Z12 with owners mounted. No walked-ascent/pose assignment/bypass/
+autotravel claim.1280x720/.35QA restores1; final hashes pass after photos.
+Zero app errors/one existing Three warning/controllerA separately untested.
+Final explicitLOCAL879asset verification accompanies PR#5.
+
+Preserve all47sourced readings/exact routes/raw drafts/carets/first answers/
+keys/explicit saves/local-global-saved preferences/EN-DE-FA-CS/RTL/English
+gaps, island/Zarathustra/source-private coordinates/proper lower half-turn/
+480gallerytreads/middle/well/tunnel/earth cut/eightfloor24IDwing/realstairs/
+lift/central3mdoor/Faculty/covered route/Escher/models/experiments/artwork/
+11genuine scan bytes/editions/rights/source/zoom/approved cast/fixed voices/
+recordings/all full contracts. Construction/rendering adds no private-memory/
+storage/progress/preference-write/experiment/discovery/audio/travel/floor
+action. No new book/page/paper/first reading/historical copy/quotation/
+testimony/source-fetch/certification claim. Samebranch/PR5/exact Houses-
+Concurrent text; separate main Proof work/conflict stays. No new merge/
+reconciliation/deploy. User's headed preview untouched.
+
+Next useful review: audit the original 64 upright decorative volumes and circular footing in Babel's central book ring: complete bottom, fore-edge, cover/spine and footing contacts, actual source/display owners and clearance. Keep the central open reading book/reservoir tip Y-25.651827, glass/fluids/glow, annular shaft, all completed shelf supports, terraces/routes/catalogue and eleven genuine scans distinct and exact. Use public static faces only, never book colours/private imports/notes. Only measured justified joins or factual audit; no new book/page/paper/first reading/light/column/barrier/historical copy/certification.

@@ -8,7 +8,10 @@ export function seatBabelTerraceBindings(T, built, mouths) {
 export function seatBabelCompleteTerraceBindings(T,built,mouths) {
   return seatBindings(T,built,mouths,true);
 }
-function seatBindings(T,built,mouths,includeFitted) {
+export function seatBabelShelfSupports(T,built,mouths) {
+  return seatBindings(T,built,mouths,true,true);
+}
+function seatBindings(T,built,mouths,includeFitted,includeDisplays=false) {
   const data=(o,k)=>o&&Object.getOwnPropertyDescriptor(o,k)?.value;
   const root=data(built,'group'),fit=data(mouths,'group'),bindings=data(mouths,'bindings');
   const empty=()=>({group:null,parts:[],frames:[],sync(){},dispose(){}});
@@ -134,7 +137,51 @@ function seatBindings(T,built,mouths,includeFitted) {
       parts.push({matrix});frames.push({...frame,part:parts.length-1,gap,fitted:true});
     }
   }
-  const expectedParts=includeFitted?1830:1810;
+  const displayFrames=[],pageOwners=[];
+  if(includeDisplays){
+    // These original pale blocks are outside the mouth copies. Select their
+    // public shape, never a colour, imported book, reader or private record.
+    const pages=[];
+    for(const source of root.children.filter(o=>o.isInstancedMesh&&o.geometry===unit&&
+        !boxes.some(b=>b.source===o))){
+      if(!local(source).equals(identity)||source.instanceMatrix?.itemSize!==16)return empty();
+      for(let id=0;id<source.count;id++){
+        const m=new T.Matrix4(),p=new T.Vector3(),s=new T.Vector3();source.getMatrixAt(id,m);
+        m.decompose(p,new T.Quaternion(),s);
+        if(near(s.x,.78)&&near(s.y,.045)&&near(s.z,.69))pages.push({source,owner:source,id,m,p,s});
+      }
+    }
+    const expected=[14,11,9,6,3];
+    for(const level of BABEL.levels){
+      const covers=rows.filter(r=>near(r.s.x,.9)&&near(r.s.y,.11)&&near(r.s.z,.75)&&
+        near(r.p.y,level.y+3.68)&&near(Math.hypot(r.p.x,r.p.z),level.r+4));
+      if(covers.length!==expected[level.id])return empty();
+      for(const cover of covers){
+        const matching=pages.filter(p=>near(p.p.x,cover.p.x)&&near(p.p.z,cover.p.z)&&
+          near(p.p.y,level.y+3.765));
+        if(cover.changed||matching.length!==1)return empty();
+        const page=matching[0],cp=new T.Vector3(),cs=new T.Vector3();cover.m.decompose(cp,new T.Quaternion(),cs);
+        const top=cp.y+cs.y/2,bottom=page.p.y-page.s.y/2,gap=bottom-top;
+        if(gap<.00749||gap>.00751)return empty();
+        const matrix=new T.Matrix4().compose(new T.Vector3(page.p.x,(top+bottom)/2,page.p.z),
+          new T.Quaternion().setFromRotationMatrix(new T.Matrix4().extractRotation(page.m)),
+          new T.Vector3(page.s.x-.04,gap+.004,page.s.z-.04));
+        matrix.fromArray(new Float32Array(matrix.elements));
+        const corePoint=(a,b,y)=>[-.0005,.0005].every(x=>[-.0005,.0005].every(dy=>[-.0005,.0005].every(z=>{
+          const p=new T.Vector3(page.p.x+x,y+dy,page.p.z+z);return inside(a,p)&&inside(b,p);
+        })));
+        if(!corePoint(cover.m,matrix,top-.001)||!corePoint(page.m,matrix,bottom+.001))return empty();
+        for(const x of[-.5,.5])for(const z of[-.5,.5]){
+          if(!inside(cover.m,new T.Vector3(x,-.5,z).applyMatrix4(matrix))||
+              !inside(page.m,new T.Vector3(x,.5,z).applyMatrix4(matrix)))return empty();
+        }
+        parts.push({matrix});displayFrames.push({level:level.id,cover,page,top,bottom,gap,part:parts.length-1});
+        if(!pageOwners.includes(page.source))pageOwners.push(page.source);
+      }
+    }
+    if(displayFrames.length!==43||pageOwners.length!==1||pageOwners[0].count!==107)return empty();
+  }
+  const expectedParts=includeDisplays?1873:includeFitted?1830:1810;
   const group=new T.Group();group.name=name;group.userData.babelBindingBeds=true;
   const mesh=new T.InstancedMesh(unit,timber.source.material,parts.length);
   mesh.name='Recessed beds below unchanged terrace bindings';
@@ -143,7 +190,7 @@ function seatBindings(T,built,mouths,includeFitted) {
   parts.forEach((p,i)=>mesh.setMatrixAt(i,p.matrix));
   mesh.instanceMatrix.needsUpdate=true;mesh.computeBoundingSphere?.();group.add(mesh);root.add(group);
   const ownBuffer=mesh.instanceMatrix,ownArray=ownBuffer.array,ownVersion=ownBuffer.version;
-  const records=boxes.flatMap(b=>[b.source,b.clone]).map(o=>({o,parent:o.parent,
+  const records=[...boxes.flatMap(b=>[b.source,b.clone]),...pageOwners].map(o=>({o,parent:o.parent,
     geometry:o.geometry,material:o.material,buffer:o.instanceMatrix,array:o.instanceMatrix.array,
     version:o.instanceMatrix.version,count:o.count,pose:local(o).clone()}));
   const geometry={index:unit.index,indexArray:unit.index.array,indexVersion:unit.index.version,
@@ -172,7 +219,7 @@ function seatBindings(T,built,mouths,includeFitted) {
           unit.attributes[r.k]!==r.a||r.a.array!==r.array||r.a.version!==r.version)){
       dispose();return;
     }
-    group.visible=root.visible&&fit.visible&&records.every(r=>r.parent===root||r.o.visible);
+    group.visible=root.visible&&fit.visible&&records.every(r=>r.parent===root||r.o.visible)&&pageOwners.every(o=>o.visible);
   }
-  return {group,mesh,parts,frames,sync,dispose,get disposed(){return disposed;}};
+  return {group,mesh,parts,frames,displayFrames,sync,dispose,get disposed(){return disposed;}};
 }
