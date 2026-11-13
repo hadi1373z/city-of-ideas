@@ -7446,3 +7446,90 @@ private coordinates/treads/rails/width/height gates/allfittings. Keep this
 independent negative fixture and strict historical checks. No new light,
 globe, floor column, barrier, shelf across a gap, room, paper/first reading,
 historical reconstruction or certification; only measured justified work.
+
+## 2026-11-13 — Babel terrace globes: two raised supports and cleared low ends
+
+This repair continues09ce2a and the published431038c/main2176dde/8701145
+reconciliation. See `docs/BABEL-GLOBE-MOUNTS.md`. All47 first readings and
+all8 original Mathematics working floors remain complete. Same branch/PR#5;
+PR#2/CityMap#4 stay separate. No new merge/deployment/other branch write.
+
+Concurrent main later advanced to d447235 (Proof Atelier coordinated-exchange
+visibility). PR#5 already reported a conflict before this repair's publication.
+This review preserves that separate work without merging/reconciling it.
+
+The previous audit's two low stems are corrected together with their missing
+mounts. Displayed brass stems1966/1975 shorten from.8 to.160000622m while
+their upper faces remain bit-exact, preserving original faceted-globe contact.
+Raw source arrays remain exact. Other28stems/all30globe transforms/profiles/
+materials/fouractual reading lights remain unchanged.
+
+Four small brass boxes join the two short stems to actual fitted oak uprights
+2732/3752. Each fixture has a.06square upright extension and a.06high/.10wide
+raised arm, gross lengths.654881/1.714043m. Extensions engage old post tops
+by.04m; short-stem/rise caps end.02m inside the arm, with.05m end recess.
+These are concealed positive joins without coincident exposed cap faces.
+Both roots stand outside original3.4m gross flight width; no floor column,
+replacement shelf across a mouth, new light/globe/collider/pick/reader/key.
+Both lowest arms are2.519999m above their actual affected treadfeet-14.5/-22.5.
+
+`babel-globe-mounts.js` owns one4-instance batch/buffer and borrows original
+box geometry/brass material. Current display68/41925->69meshes/41929instances;
+owned resources86 unchanged/buffers36->37. Only2existing display-copy matrix
+height/centre-Y entries change. All398earlier fitting records/12copies/targets/
+models/source-private coordinates/borrowed cached bounds remain. No new DOM,
+listener/texture/image/light/UI/state. Constructor validates public owners/
+profiles/records; sync is read-only. Missing/replaced owners remove owned
+parts and restore only unchanged owned edits in original borrowed arrays.
+Concurrent changed rows and foreign replacement data/resources stay untouched.
+Parent-first/repeated cleanup releases all86resources/37buffers once; borrowed
+snake drawing0.31lifecycle/custom-layout programs exercise replacements,
+versions/arrays/counts/poses/foreign buffers/private/missing source guards.
+
+Independent09ce2a FIVE-adapter fixture remains a historical negative control,
+still detecting two unsupported/low stems and retaining28positive shelf
+contacts. Its source/raw shelf2739-versus-fitted edge distinction stays exact.
+The new SIX-adapter scene restores ONLY2documented display matrices and omits
+ONLY4owned parts to reproduce complete68/41925 r18600134a70/nativef1b47297,
+without excluding any unaffected node/ID/profile. Native restored snapshot
+does not write live borrowed buffers. New69/41929 r1863a06700f/native32aee5f3;
+raw65/41893 r1867b21ef65/nativebfee858c unchanged. Historical pre-finish
+fixtures, masks, collision budgets and all2016old seven-lane sites remain strict.
+
+All124release programs pass.64positive joint-core vertices/32complete cap
+corners/576whole-box standing-prism pairs across96treads/full3.4m width,
+50floor footprint rays/233body rays pass. Native checks use all visible
+scene meshes. Both former lower stem segments are absent. Eight matched
+before/after inspection-camera views show route/joint conditions; the separate
+reference build reproduces complete prior native hash and visitor pose stays.
+
+Recorded ordinary-key entry walk captures41heights. Following a preview reset,
+fresh original explicit Babel arrival then ordinary pointer/W walking captures
+25heights in each of4radial descents. All5desks pointer/E give10same-pose
+handoffs throughEN-DE-FA-CS-EN, page0/aaaaaa/empty prefix/exact source/FA RTL
+and disclosed Czech English fallback. Original explicit Return to gallery
+reachesfeet.395/Z12; no walked-ascent/automatic-travel/pose-assignment/bypass
+claim.11genuine pages stay ready. Native final69/41929 hash remains exact.
+Independent1280x720CSS routeQA uses.6 then.35canvasratio; original1 restored.
+ExplicitLOCAL878asset verification accompanies publication. Zero app errors,
+one existing Threewarning/controllerA separately untested remain.
+
+Original five terraces/finite catalogue/pointer-E-context/page-prefix-source
+payloads/explicit actions/eleven genuine scans/editions/credits/rights/zoom,
+raw drafts/carets/immutable first answers/keys and all47sourced reading routes
+remain. No construction/rendering private-memory/storage/progress/preference
+write/experiment/discovery/audio/travel/floor action, new reading/paper/folio/
+historical copy/quotation/testimony/source-fetch success/certification claim.
+EN-DE-FA-CS/PersianRTL/disclosed Czech English gaps remain. Cylinder/proper
+lowerhalfturn/source-private coordinates/480gallerytreads/middle/well/tunnel/
+earth cut/eightfloor24IDwing/real stairs/lift/central3mdoor/Faculty/covered
+route/Escher gates-models-experiments/artwork/approved cast/fixed voices/
+recordings and all earlier contracts remain. User's headed preview untouched.
+
+Next useful review: audit original Babel annular balcony guard feet and
+internal rail/fascia joints away from the four already-fitted radial mouths.
+Inspect actual displayed copies, complete deck/rim support faces, preserved
+entry/flight breaks, resources and once-only cleanup first. Do not repeat
+repaired radial-mouth/globe contacts. Only measured justified joins or factual
+audit. No barrier across an opening, duplicate column, new light/room/reading
+or certification. Full preservation contracts remain mandatory.

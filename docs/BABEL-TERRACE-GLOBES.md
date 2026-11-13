@@ -1,5 +1,10 @@
 # Babel terrace globes · factual mount and headroom audit
 
+The later [two-mount repair](BABEL-GLOBE-MOUNTS.md) addresses both low ends
+through a separate owned adapter, preserving this audit as a strict historical
+five-adapter negative control. The unrepaired statements below describe 09ce2a,
+before that correction; the raw source remains unchanged.
+
 This review continues 0c8542a and the already-published 431038c reconciliation.
 All 47 first readings and all eight Mathematics working floors remain complete.
 No production file, source profile, displayed matrix, resource, light, collider,

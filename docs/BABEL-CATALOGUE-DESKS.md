@@ -2,7 +2,9 @@
 
 The later [terrace-globe audit](BABEL-TERRACE-GLOBES.md) retains this entire
 desk result. It records twenty-eight existing shelf contacts and two original
-unsupported, low stem ends over incoming flights; those remain unrepaired.
+unsupported, low stem ends over incoming flights. The subsequent bounded
+[two-mount repair](BABEL-GLOBE-MOUNTS.md) corrects their displayed mounts/low
+ends while retaining that historical negative control and this entire desk audit.
 
 This review continues published head 431038c. That concurrent reconciliation
 already includes main2176dde and the retained third-mouth fix; this audit
