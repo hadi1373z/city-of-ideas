@@ -1,8 +1,14 @@
-import {BABEL} from './babel-library-model.js?v=two-faces2';
+import {BABEL,stairs} from './babel-library-model.js?v=two-faces2';
 
 // Recessed beds join public decorative volumes to existing shelves. The four
 // fitted incoming bays keep their separate, unchanged clearance contract.
 export function seatBabelTerraceBindings(T, built, mouths) {
+  return seatBindings(T,built,mouths,false);
+}
+export function seatBabelCompleteTerraceBindings(T,built,mouths) {
+  return seatBindings(T,built,mouths,true);
+}
+function seatBindings(T,built,mouths,includeFitted) {
   const data=(o,k)=>o&&Object.getOwnPropertyDescriptor(o,k)?.value;
   const root=data(built,'group'),fit=data(mouths,'group'),bindings=data(mouths,'bindings');
   const empty=()=>({group:null,parts:[],frames:[],sync(){},dispose(){}});
@@ -38,7 +44,7 @@ export function seatBabelTerraceBindings(T, built, mouths) {
     raw.decompose(p,new T.Quaternion(),s);
     rows.push({binding,id,raw,m,p,s,changed:!raw.equals(m)});
   }
-  const parts=[],frames=[],counts=[5950,4800,3700,2550,1300],fitted=[0,50,50,100,0];
+  const parts=[],frames=[],pending=[],counts=[5950,4800,3700,2550,1300],fitted=[0,50,50,100,0];
   let timber=null;
   const inside=(m,p)=>p.clone().applyMatrix4(m.clone().invert()).toArray().every(v=>Math.abs(v)<.500005);
   const core=(a,b,p)=>[-.003,.003].every(x=>[-.003,.003].every(y=>[-.003,.003].every(z=>{
@@ -68,7 +74,7 @@ export function seatBabelTerraceBindings(T, built, mouths) {
       const {shelf,books,row}=frame;
       if(books.length!==10)return empty();
       const changed=books.filter(b=>b.changed).length;
-      if(shelf.changed||changed){if(!shelf.changed||changed!==10)return empty();continue;}
+      if(shelf.changed||changed){if(!shelf.changed||changed!==10)return empty();if(includeFitted)pending.push({level:level.id,row,shelf,books});continue;}
       const inverse=shelf.m.clone().invert(),localFeet=[];
       let minBottom=Infinity,maxBottom=-Infinity;
       for(const book of books)for(const x of[-.5,.5])for(const z of[-.5,.5]){
@@ -94,6 +100,41 @@ export function seatBabelTerraceBindings(T, built, mouths) {
     }
   }
   if(parts.length!==1810||!timber)return empty();
+  // Append only the twenty remaining rows. The original 1810 matrices/IDs
+  // remain bit-exact, and the standalone historical API keeps its old scope.
+  if(includeFitted){
+    if(pending.length!==20)return empty();
+    for(const frame of pending){
+      const {shelf,books,level}=frame,position=new T.Vector3(),size=new T.Vector3();
+      shelf.m.decompose(position,new T.Quaternion(),size);
+      const inverse=shelf.m.clone().invert(),feet=[];
+      let minBottom=Infinity,maxBottom=-Infinity;
+      for(const record of [shelf,...books]){
+        const m=record.m,x=new T.Vector3().setFromMatrixColumn(m,0).normalize(),z=new T.Vector3().setFromMatrixColumn(m,2).normalize();
+        if(Math.abs(x.dot(z))>1e-6||m.determinant()<=0||
+            [1,4,6,9].some(i=>Math.abs(m.elements[i])>1e-7))return empty();
+      }
+      for(const book of books)for(const x of[-.5,.5])for(const z of[-.5,.5]){
+        const p=new T.Vector3(x,-.5,z).applyMatrix4(book.m),q=p.clone().applyMatrix4(inverse);
+        if(Math.abs(q.x)>.499||Math.abs(q.z)>.499)return empty();
+        minBottom=Math.min(minBottom,p.y);maxBottom=Math.max(maxBottom,p.y);feet.push(q);
+      }
+      const top=position.y+size.y/2,gap=minBottom-top;
+      if(gap<.05499||gap>.05501||maxBottom-minBottom>2e-6||!near(size.z,1)||!near(size.y,.11))return empty();
+      const lo=Math.min(...feet.map(p=>p.x))*size.x+.015,hi=Math.max(...feet.map(p=>p.x))*size.x-.015;
+      const centre=new T.Vector3((lo+hi)/2/size.x,((top+minBottom)/2-position.y)/size.y,0).applyMatrix4(shelf.m);
+      const matrix=new T.Matrix4().compose(centre,new T.Quaternion().setFromRotationMatrix(
+        new T.Matrix4().extractRotation(shelf.m)),new T.Vector3(hi-lo,gap+.02,.60));
+      matrix.fromArray(new Float32Array(matrix.elements));
+      if(!core(shelf.m,matrix,new T.Vector3(0,.5-.005/size.y,0).applyMatrix4(shelf.m)))return empty();
+      for(const book of books){const p=new T.Vector3(0,-.5,0).applyMatrix4(book.m);p.y+=.005;if(!core(book.m,matrix,p))return empty();}
+      const flight=stairs[level-1],normal=new T.Vector3(-Math.sin(flight.a),0,Math.cos(flight.a));
+      for(const x of[-.5,.5])for(const z of[-.5,.5])if(Math.abs(
+        new T.Vector3(x,0,z).applyMatrix4(matrix).dot(normal))<1.725)return empty();
+      parts.push({matrix});frames.push({...frame,part:parts.length-1,gap,fitted:true});
+    }
+  }
+  const expectedParts=includeFitted?1830:1810;
   const group=new T.Group();group.name=name;group.userData.babelBindingBeds=true;
   const mesh=new T.InstancedMesh(unit,timber.source.material,parts.length);
   mesh.name='Recessed beds below unchanged terrace bindings';
@@ -119,7 +160,7 @@ export function seatBabelTerraceBindings(T, built, mouths) {
     if(data(built,'group')!==root||data(mouths,'group')!==fit||!root.parent||
         fit.parent!==root||group.parent!==root||mesh.parent!==group||
         !local(fit).equals(identity)||!local(group).equals(identity)||!local(mesh).equals(identity)||
-        mesh.geometry!==unit||mesh.material!==timber.source.material||mesh.count!==1810||
+        mesh.geometry!==unit||mesh.material!==timber.source.material||mesh.count!==expectedParts||
         data(mesh,'instanceMatrix')!==ownBuffer||data(ownBuffer,'array')!==ownArray||
         ownBuffer.version!==ownVersion||
         records.some(r=>r.o.parent!==r.parent||r.o.geometry!==r.geometry||

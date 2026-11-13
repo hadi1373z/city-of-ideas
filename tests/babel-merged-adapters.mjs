@@ -9,7 +9,8 @@ import {validateBabelGlobeMounts,validateBabelGlobeMountLifecycle} from './babel
 import {mountBabelTerraceGlobes} from '../src/babel-globe-mounts.js';
 import {validateBabelBalconyGuards} from './babel-balcony-guards.mjs';
 import {validateBabelTerraceCasework} from './babel-terrace-casework.mjs';
-import {seatBabelTerraceBindings} from '../src/babel-terrace-bindings.js';
+import {seatBabelCompleteTerraceBindings as seatBabelTerraceBindings} from '../src/babel-terrace-bindings.js';
+import {validateFittedBindingBeds,validateFittedBindingLifecycle} from './babel-fitted-binding-beds.mjs';
 import {validateBabelTerraceBindings,validateBabelBindingLifecycle} from './babel-terrace-bindings.mjs';
 const names=[['babel-mouth-clearance','fitBabelRadialMouths'],['babel-spoke-mounts','mountBabelSpokes'],['babel-vault-perimeter','fitBabelPerimeter'],['babel-entry-reveals','fitBabelEntryReveals'],['babel-entry-bookcases','seatBabelEntryLamps']];
 const mods=await Promise.all(names.map(async([file,name])=>({name,fn:(await import('../src/'+file+'.js'))[name]}))),canvas=()=>({getContext:()=>new Proxy({},{get:()=>()=>{}})});
@@ -35,3 +36,5 @@ console.log('PASS original Babel annular balcony guard contacts (partial floor s
 console.log('PASS original Babel terrace casework (whole foot polygons/actual floor triangles, partial footprints retained): '+JSON.stringify(validateBabelTerraceCasework(T)));
 console.log('PASS recessed Babel binding beds (18100 original volumes; 200 fitted-bay controls remain unchanged): '+JSON.stringify(validateBabelTerraceBindings(T)));
 console.log('PASS Babel binding-bed ownership programs: '+JSON.stringify(validateBabelBindingLifecycle(T)));
+console.log('PASS fitted Babel binding beds (200 retained volumes; 20 appended beds; old complete scene recovered): '+JSON.stringify(validateFittedBindingBeds(T)));
+console.log('PASS complete Babel binding-bed ownership programs: '+JSON.stringify(validateFittedBindingLifecycle(T)));

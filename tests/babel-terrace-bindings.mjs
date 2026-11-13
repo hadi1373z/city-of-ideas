@@ -101,7 +101,7 @@ export function measureBindingBeds(T,bed){
  }
  return{shelfCores,bindingCores,bottomCorners,boxCorners,prismPairs,minWalkingMargin,minShelfEngagement,maxShelfEngagement,minBindingEngagement,maxBindingEngagement,failures};
 }
-export function validateBabelBindingLifecycle(T){
+export function validateBabelBindingLifecycle(T,seat=seatBabelTerraceBindings){
  const mutations=[
   ['detached root',f=>{f.b.group.removeFromParent();return()=>f.scene.add(f.b.group);}],
   ['foreign built API',f=>{const old=f.b.group;f.b.group=new Proxy({},{get(){throw Error('Foreign group inspected');}});return()=>f.b.group=old;}],
@@ -124,9 +124,9 @@ export function validateBabelBindingLifecycle(T){
   ['copy foreign array',f=>{const a=f.bed.frames[0].shelf.binding.clone.instanceMatrix,v=a.array;a.array=new Proxy({},{get(){throw Error('Foreign array inspected');}});return()=>a.array=v;}]
  ];
  const results=[];
- for(const[name,mutate]of mutations){const f=build(T);f.bed=seatBabelTerraceBindings(T,f.b,f.adapters[0]);assert(f.bed.group);let released=0;f.bed.mesh.addEventListener('dispose',()=>released++);const restore=mutate(f);f.bed.sync();assert(f.bed.disposed,name);assert.equal(released,1,name);restore();f.bed.dispose();f.b.dispose();for(const a of f.adapters)a.dispose();f.drawing.dispose();assert.equal(released,1,name);results.push(name);}
- const f=build(T),source=f.adapters[0].bindings[0].source;const original=source.count;source.count--;const rejected=seatBabelTerraceBindings(T,f.b,f.adapters[0]);source.count=original;assert.equal(rejected.group,null);f.b.dispose();f.drawing.dispose();
- const guarded={get group(){throw Error('Private replacement getter');}};assert.equal(seatBabelTerraceBindings(T,guarded,guarded).group,null);
- const privateGroup=new Proxy({},{get(){throw Error('Private root inspected');}});assert.equal(seatBabelTerraceBindings(T,{group:privateGroup},{group:privateGroup}).group,null);
+ for(const[name,mutate]of mutations){const f=build(T);f.bed=seat(T,f.b,f.adapters[0]);assert(f.bed.group);let released=0;f.bed.mesh.addEventListener('dispose',()=>released++);const restore=mutate(f);f.bed.sync();assert(f.bed.disposed,name);assert.equal(released,1,name);restore();f.bed.dispose();f.b.dispose();for(const a of f.adapters)a.dispose();f.drawing.dispose();assert.equal(released,1,name);results.push(name);}
+ const f=build(T),source=f.adapters[0].bindings[0].source;const original=source.count;source.count--;const rejected=seat(T,f.b,f.adapters[0]);source.count=original;assert.equal(rejected.group,null);f.b.dispose();f.drawing.dispose();
+ const guarded={get group(){throw Error('Private replacement getter');}};assert.equal(seat(T,guarded,guarded).group,null);
+ const privateGroup=new Proxy({},{get(){throw Error('Private root inspected');}});assert.equal(seat(T,{group:privateGroup},{group:privateGroup}).group,null);
  return{programs:results.length+3,cases:results,invalidProfileRejected:true,foreignGetterDenied:true};
 }

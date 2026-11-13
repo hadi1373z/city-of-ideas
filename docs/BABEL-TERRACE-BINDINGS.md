@@ -1,5 +1,10 @@
 # Babel terrace bindings · recessed shelf beds
 
+The later [fitted-bay follow-up](BABEL-FITTED-BINDING-BEDS.md) preserves this
+entire standalone 1,810-bed fixture and appends twenty rows in the installed
+complete path. The 200 unseated controls below remain the historical scope
+of this review; no original gap or fingerprint is relaxed.
+
 This measured repair follows 1f93077. All 47 first readings and eight working
 Mathematics floors remain complete. The original decorative binding volumes
 hovered about .055 m above their actual shelf tops. Recessed timber beds now
