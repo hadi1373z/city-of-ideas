@@ -1,5 +1,9 @@
 # Babel shelf-top displays · recessed page-block seats
 
+The later [central-ring support repair](BABEL-BOOK-RING.md) preserves this
+complete scene and all 1,873 supports. This document keeps its independent
+43-seat scope and predecessor controls.
+
 This follow-up to d9cc3af joins the original 43 pale display blocks to their
 retained flat covers. All 47 first readings and eight Mathematics working
 floors remain complete. These fixed city shapes remain distinct from the

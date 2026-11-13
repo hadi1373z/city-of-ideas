@@ -7897,3 +7897,96 @@ Concurrent text; separate main Proof work/conflict stays. No new merge/
 reconciliation/deploy. User's headed preview untouched.
 
 Next useful review: audit the original 64 upright decorative volumes and circular footing in Babel's central book ring: complete bottom, fore-edge, cover/spine and footing contacts, actual source/display owners and clearance. Keep the central open reading book/reservoir tip Y-25.651827, glass/fluids/glow, annular shaft, all completed shelf supports, terraces/routes/catalogue and eleven genuine scans distinct and exact. Use public static faces only, never book colours/private imports/notes. Only measured justified joins or factual audit; no new book/page/paper/first reading/light/column/barrier/historical copy/certification.
+
+## 2026-11-13 — Babel central book ring: grounded footing and sixty-four pads
+
+Follow-up to c904f0129b426a6b928b589c9e446f5c66af5356; complete measurements/
+ownership/limits live in docs/BABEL-BOOK-RING.md. All47first readings/all8
+working floors remain complete. The64volumes are original fixed city shapes,
+distinct from catalogue/open reading book/historical books/11genuine scans.
+
+All384original ring parts stay exact:64page blocks in original107-record
+source;128covers/64spines/128marks in existing mouth-owned copies. Every
+source/display matrix/ID/order/profile stays. Source-only negatives retain
+the real .055000305m footing/floor gap and .032498956..032500446m cover/spine
+foot gaps.192whole foot polygons/768corners project completely inside the
+actual640-triangle footing, which projects inside the original160-triangle
+well floor. Projection coverage never substitutes for missing vertical contact.
+Original page/spine complete back faces meet within.000000286m Float32
+tolerance/.125819994..359595002square metres;128cover/spine and128mark/spine
+positive.001cube cores already meet. Page lower recess/.002lateral gaps stay.
+
+64recessed timber pads join192cover/spine feet. Actual width-.008/depth+.035/
+gap+.004 give about.152..227wide/.775..915deep/.0365high, with.004tangential/
+.005cover-end/.010spine-rear recess.192positive.001cube cores check8vertices;
+upper engagement .001999225..002000954m/lower .001999047..002000775m.
+256pad corners hit both source footing/floor; whole pad polygons project
+fully inside actual footing triangles. Contact with original feet is partial;
+no complete-bottom/capacity/historical-construction/certification claim.
+
+One merged geometry supplies ONLY640vertical side quads/1280triangles under
+the original320-facet inner/outer footing edges.3840vertices meet unchanged
+footY-26.444999695/floorY-26.5 exactly;640source edges/1920base rays pass.
+Original footing stays sole top/floor supplies bottom; no new horizontal
+face/coincident exposed plane/floor extension/central closure.2016pad-pair
+separations/6144full-width tread-prism pairs pass. Pads stay>=2.410498861m
+below lowest terrace feet. Full pad edges remainr>=3.192499906/corners<=
+4.109067882; footingr3.12..4.20 keeps1.45m to original5.65walking-centre bound.
+No floor/tread/rail/landing/mouth/bridge/shaft/collider/model/gate changes.
+
+New seatBabelBookRing follows original source and actual mouth-copy owners,
+inheriting their existing parent. Two owned draw meshes:64-pad batch borrows
+unit box/timber material; one owned side geometry borrows same material.
+70->72draws/43802->43866instances/86->87resources/38->39buffers. This is the
+eighth pipeline adapter; retired reveal fitter stays inactive. No new material/
+texture/image/light/target/UI/listener/reader/private key/saved diagram.
+All1873earlier supports and strict1810/1830/1873APIs/22-22-28programs remain.
+
+48new ownership/private/custom-layout programs cover38invalidations/six
+visibility cases/duplicate/custom pose/unknown private owner/proper rigid
+parent mapping. Source/copy/page/foot/floor/buffer/array/geometry/material/
+version/count/pose guards retire own work once; visibility restores without
+source writes. Owned references restore before renderer disposal; foreign
+replacement fields/resources stay untouched. All87resources/39buffers release
+once/borrowed drawing0. DOM/storage/fetch/colour getters/new material-texture-
+light constructors are denied during construction/sync.
+
+Raw65/41893 stays r1867b21ef65/nativebfee858c with NO exclusions. Omitting
+ONLYnew owned group recovers complete c90470/43802 r1860a98c523/nativee2e1369d,
+every old node/ID/profile/pose. New complete72/43866 r186f2299842/native14163b69
+is independently locked. All398mouth maps/12copies/far ends,18300rowvolumes/
+1873supports/two raised globes/31globe programs/partial guard-casework feet/
+entry-perimeter/historical negatives/unrelaxed budgets remain.
+
+All124release programs pass plus final actual-production Babel rerun after
+cleanup hardening. Native64pad IDs/64side-face whole-scene rays, complete
+contacts/coverage/prisms/full fingerprints pass.12matched1000x700foot/pad/
+assembly before-after views atvolumes0/23 visually checked; only own group
+omitted before, restored visibility/64pads/1873old supports/renderer/pose.
+Live WebGL foreign-attribute/buffer replacement releases geometry/buffer once,
+geometry count drops1/borrowed0/foreignreads0/source-prior hashes exact.
+Fresh document restores full new scene; final hashes pass after photos.
+
+Ordinary pointer/W walks all4radial descents/25floor heights each tofeet-24.
+Ten first/bottom pointer/E reader handoffs retain page0/aaaaaa/empty prefix/
+exact original source/same-pose close, EN-DE-FA-CS/PersianRTL/Czech English
+fallback and11ready genuine pages. Original explicit exit reachesfeet.395/Z12;
+no new walked-ascent/pose assignment/bypass/autotour claim.1280x720/.35QA
+restores1. Zero app errors/one existing Threewarning/controllerA untested.
+Final explicitLOCAL880asset verification accompanies PR#5.
+
+Preserve shared central book leaves/contact tipY-25.651827/glass/fluids/glow/
+terraces/annular shaft/all480gallerytreads/middle/well/tunnel/earth cut/
+eightfloor24IDwing/realstairs/lift/central3mdoor/Faculty/covered route/Escher
+models/experiments/artwork/gates/11genuine scan bytes/editions/rights/source/
+zoom/island/Zarathustra/source-private coordinates/proper lower half-turn/
+approved cast/fixed voices/recordings/all full contracts. All47sourced readings/
+exact routes/raw drafts/carets/first answers/keys/explicit saves/EN-DE-FA-CS/
+RTL/formulaLTR/local-global-saved preferences/English gaps stay. Construction/
+rendering adds no private-memory/storage/progress/preference-write/experiment/
+discovery/audio/travel/floor action. No new book/page/paper/first reading/
+historical copy/quotation/testimony/source-fetch/certification claim. Same
+branch/PR5/exact Houses-Concurrent text; main Proof work/conflict separate.
+No new merge/reconciliation/deploy; user's headed preview untouched.
+
+Next useful review: audit the original quiet central reading plinth, round oak surface and lower book-cover bearing contacts in Babel. Keep both tilted leaves and the shared reservoir contact tip Y-25.651827, glass/fluids/glow, the newly supported 64-volume ring, all shelf supports, annular shaft, routes/catalogue and eleven genuine scans exact and distinct. Use public static faces/owners only; preserve profiles/source-private coordinates/clearances/cleanup. Only measured justified joins or factual audit; no new book/page/paper/first reading/light/column/barrier/historical copy/certification.
