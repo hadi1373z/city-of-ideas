@@ -8,7 +8,7 @@ import {installHouseInvestigations} from './house-investigations.js?v=1';
 import {installComputationLab} from './computation-lab.js?v=1';
 import {installProofAtelier} from './proof-atelier.js?v=merge-details1';
 import {installSeminarHouses} from './seminar-houses.js?v=merge-details1';
-import {installBabelLibrary} from './babel-library.js?v=reading-plinth1';
+import {installBabelLibrary} from './babel-library.js?v=flight-bearings1';
 import {installOceanVoyage} from './ocean-voyage.js';
 import {installHouseFoundations} from './foundation-houses.js?v=investigations-details1';
 import {installVisitMemory} from './visit-memory.js?v=discoveries1';

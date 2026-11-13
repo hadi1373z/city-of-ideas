@@ -8081,3 +8081,94 @@ certification claim. Samebranch/PR5/exact Houses-Concurrent text; user's
 headed preview untouched. No other branch write.
 
 Next useful review: audit the retained pitched soffit and two side bearers beneath the first upper Gallery flight beside Babel's entry: actual end-bearing faces, source/Gallery owners, joins and overhead clearance. Read BABEL-SNAKE-DESCENT.md and the current ledger; preserve all original upper-flight and forty Babel-entry treads, snake drawing, slab/ceiling openings, mounted reveals/guards/cases, the supported central reading assembly/ring and all earlier contracts. Do not repeat completed inner-spoke/outer-column or perimeter audits. Use public static faces only; measured justified joins or factual audit, with no source/private-coordinate change, duplicate column, barrier, new reading/paper, historical copy or certification.
+
+## 2026-11-13 — Gallery first upper-flight bearer joints
+
+Follow-up to5b37c1b286832ee1c972af8e83c631f5d681be02. Full faces/ownership/
+limits in docs/GALLERY-FLIGHT-BEARINGS.md. All47first readings/all8working
+floors remain complete; no new reading/book/page/paper/historical object.
+
+Retain original pitched soffit/source1902/actual matching mouth copy and
+oak bearerIDs8/9 in original10-record seven-sided cylinder batch. Six
+positive.002cube cores/48vertices already join bearers/soffit atZ.28/5.6/10.92.
+Original end-region gaps: atZ.14 beamtop.141080583446/treadbottom.215000003576
+gap.073919420130m; atZ11.06 beamtop7.941080716279/treadbottom8.015000343323
+gap.073919627043m, both sides. Source-only negatives stay strict.
+
+Four fitted.10square oak patches have actual sloped bearer-facet bottoms,
+flat tread-underside tops/.005concealed engagement each end. Stored variable
+height.048205122..119634151m. All16lower corners stay in actual finite
+seven-sided bearers/all16upper corners in original tread solids/projected
+underside triangles. Eight positive.002cube cores/64vertices pass. Upper
+patches stop>=.011m before original bearer cap; partial patches, no whole-cap/
+full-foot/capacity/historical-construction/certification claim. Six part
+separations/552full-width entry body rays pass. Parts stay>=.069999m inside
+old width/>=.060000m outside.23nav band/>=5.615241m above projected2.1m body.
+
+New mountBabelFlightBearings follows actual Babel source/copy and original
+Gallery owners in shared proper rigid frame. Existing8adapter slots remain;
+new ninth owner adds one48triangle/144vertex merged geometry/one draw using
+borrowed oak.72->73meshes/43867instances unchanged/87->88resources/39buffers
+unchanged. No new material/texture/image/light/instance batch/buffer/collider/
+pick/UI/listener/reader/key/saved diagram or source-private coordinate edit.
+
+Complete160upper treads/3200vertices/4800indices and all290original Gallery
+meshes stayexact r186/nativeade8ee63. Forty Babel entry treads/gates/widths/
+slab-ceiling openings/drawing/soffit/2bearers/caps/terminal breaks stay exact.
+Raw65/41893 r1867b21ef65/nativebfee858c with NO exclusions. Omitting ONLYnew
+owned group recovers complete5b72/43867 r18652609e62/natived474e2fd, every
+earlier node/ID/profile/pose. New73/43867 r186c3043b56/native7448aaec locked.
+Older65part ring/64pads/384parts/1873shelf supports/1810-1830-1873APIs,
+398fits/12copies/far ends/globes/partial feet/historical negatives/unrelaxed
+source budgets and all earlier full contracts remain.
+
+40ownership/private/custom programs:29invalidations/6visibility/duplicate/
+rigid-parent/custom-tread/missing-Gallery/unknown-private-owner. Visible
+actual owners govern own display; hidden borrowed sources stay unchanged.
+Owner/geometry/material/buffer/array/version/count/pose replacement retires
+only own join once. Own attribute/index/morph/draw-range refs restore before
+renderer disposal. Borrowed assets/foreign fields/resources untouched.
+Construction/sync deny DOM/storage/fetch/colour getters/new material-texture-
+light constructors. All88resources/39buffers once/borrowed drawing-Gallery0
+before original owner cleanup.
+
+All124release programs pass plus final focused rerun with6retained cores.
+Native4expected mesh rays/full contacts/full hashes/11ready genuine pages
+and8matched1000x700views pass; before hides ONLYnew owned group, restores
+visibility/renderer/pose. Live WebGL foreign bags/index cleanup releases
+owngeometry once/cache3144->3143/borrowed0/foreignreads0/source-prior-Gallery
+hashes exact. Fresh document restores full owner/explicit savedCzech; final
+contacts/hashes pass/own QAfields removed/ratio1.
+
+Original explicit entrance +ordinary W walks40Babel steps/41heights.395->-8.
+Eight EN-DE-FA-CS pointer/E first catalogue readers keep page0/aaaaaa/empty
+prefix/exact source/same-pose close/FA RTL/Czech English fallback/11pages.
+Original explicit exitfeet.395/Z12. Ordinary walk around opening/angled
+upper entry/full40-step up-down records41heights.395..8.395 each. No pose
+assignment/auto-tour/bypass or main e646 walking-exit/Controls claim.
+1280x720/.35walking QA restores1; zeroapp errors/one existing Threewarning/
+controllerA untested. Own browserclosed/user's headedpreview untouched.
+Explicit LOCAL881-asset verification accompanies PR#5.
+
+Factual circulation limit: direct frontal W stopped atX39.333829619/
+Z-.052319856/feet.395. Original guardGallery precedes Gallery entry and
+rejects a frame-sized step crossing Z0...08. Same guard remains on main
+e646bb2. Angled walking succeeds; frontal limitation remains unresolved.
+No movement/arrival/CSS/gate/model edit; prioritize handoff review next.
+
+Preserve all47readings/exact routes/raw drafts/carets/first answers/keys/
+explicit saves/EN-DE-FA-CS/RTL/formulaLTR/local-global-saved preferences/
+English gaps, supported reading book/ring/tipY-25.651826792546203/fluids/glow,
+terraces/shaft/480helical-gallerytreads/middle/well/tunnel/earth cut/eightfloor
+24IDwing/realstairs/lift/central3mdoor/Faculty/coveredwalk/Escher models/gates/
+artwork/experiments/11genuine scan bytes/editions/rights/source/zoom/island/
+Zarathustra/properlowerframe/source-private coordinates/approvedcast/fixed
+voices/recordings/all full contracts. No rendering private-memory/storage/
+progress/preference-write/experiment/discovery/audio/travel/floor action.
+No new historical copy/quotation/testimony/source-fetch/certification.
+
+Samebranch/PR5/exactHouses-Concurrent text. Main e646bb2's separate Babel
+upstairs/Controls/help/dock/mobile and earlier Proof work stay intact and
+unintegrated; existing conflict separate. No new merge/reconciliation/deploy.
+
+Next useful review: audit the original frontal walking entry from the Gallery ground floor onto its first upper flight before further ornament. Native frontal W stopped at Z-.052319856/feet.395; guardGallery runs before the Gallery entry and can reject a step that crosses the narrow Z0...08 allowance. The same guard remains on separate main e646bb2. Inspect the live handoff, previous/current poses, frame-sized moves, upper/Babel direction gates and existing explicit actions; preserve all treads, openings, source/private coordinates, new bearer joints, all earlier owner/reading/private contracts and separate main work. Record measured behavior and a bounded correction within the retained direction gates; no automatic tour/travel, broad collision bypass, unrelated rail ornament, merge or reconciliation.

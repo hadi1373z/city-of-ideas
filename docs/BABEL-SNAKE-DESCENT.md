@@ -56,3 +56,8 @@ The oak reveal follows the actual widened rectangular ceiling cut on all four si
 At the last terrace, the outer floor is geometrically clipped at the through-gallery bridge rectangle (X9..18, Z±1.8), so the bridge alone supplies that surface. The last tread of each original radial flight is supplied by its existing lower terrace rather than a coplanar extra box. Flat bands use 320 angular segments to retain the established 65-draw / 380k-triangle budget with the stronger rail joinery. No polygon-offset decal or raised walking surface hides the overlap.
 
 The same repair covers the gallery–Escher corridor: its floor and ceiling rectangles are partitioned into a non-overlapping union. The floor begins at the central gallery spur endpoint and ends exactly at the museum vestibule floor boundary. Collision models, transfers, room locations, notes and voices are unchanged. tests/library-surface-joins.mjs rays the combined scenes so a duplicate floor cannot be concealed by testing each builder alone.
+
+The measured first-upper-flight follow-up in [GALLERY-FLIGHT-BEARINGS.md](GALLERY-FLIGHT-BEARINGS.md)
+adds four small bearer/tread contact patches without moving the soffit or source stairs.
+It also records the existing frontal upper-entry guard limitation separately from
+successful angled walking; movement code remains unchanged in that support review.
