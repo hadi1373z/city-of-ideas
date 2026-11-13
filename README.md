@@ -156,7 +156,10 @@ Sources attached to the house include Schenk & Guest (2013), Wei et al. (2013),
 Adachi/Ishibashi/Kume on flat folding, and the existing traditional boat guide.
 Existing folded-paper boat/crane builders and their credits are reused. No
 character geometry, accepted recordings or fixed Kokoro voice settings change.
-All new instruction and controls support English, German and Persian.
+The house's reading and controls support English, German, Persian and Czech,
+including Czech text for its original nine boat milestones. The separate
+paper-crane lesson retains its existing languages and may fall back to English
+in Czech. This does not imply complete city-wide Czech localization.
 
 `origami-house-math.js` owns coordinates and validated progress;
 `origami-house-scene.js` owns the ateliers; `coastal-city-scene.js` owns the sea
@@ -241,3 +244,13 @@ The gallery now has a real stairwell on its northern ground-floor ring, opening 
 Use **Library of Babel** in the city map to reach its gallery entrance; walk down, or use E/controller A at the entrance. The direct `?arrival=babel` link begins on the first underground balcony. Walk between rings using their actual stairs; the return button is an additional way back to the gallery. Nearby reading desks open a catalogue experiment: four symbols in six places generate 4,096 unique pages, with a reversible address and prefix filtering. The bindings are architectural scenery; this demonstration does not claim to contain all possible literature. The explanatory text is original and links to [Jonathan Basile’s digital Library of Babel](https://libraryofbabel.info/About.html) for further reading. No Borges prose or other protected book text is reproduced.
 
 UI is available in English, Persian and German. Prefix experiments remain in session memory; this feature does not modify personal notes or accounts. The six established Kokoro voices and recordings are unchanged. Underground lighting is restored when leaving or travelling elsewhere.
+
+## House detail review series
+
+The unpublished `feat/hourly-house-details` series starts with Borges’ reading
+room: shelf returns, desk furnishings, three sourced reading sections and a
+two-context interpretation exercise in EN/DE/FA/CS. Czech is selectable for these
+house readings and controls; untranslated city content uses English.
+Open `?arrival=house:borges`, enter the house and choose **Read at the desk**.
+The room can explicitly travel to the existing Babel stairwell. No notes or
+recordings are changed. See `docs/HOURLY-HOUSE-DETAILS.md` for scope and next work.

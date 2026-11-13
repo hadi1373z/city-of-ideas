@@ -2,7 +2,7 @@ import {WORKSHOPS,ATELIER_UI} from './proof-atelier-content.js?v=hall-bounds1';
 import {TRAP,EXCHANGE,INITIAL_MATCHING,COSTS,COMPLETE,tilingStatus,neighborhood,validMatching,hallInsight,maximumMatching,coverStatus,alternatingReach,pathStatus,priceStatus,priceInsight,capstoneStatus,workshopMemory} from './proof-atelier-model.js?v=hall-bounds1';
 import {buildProofAtelier} from './proof-atelier-scene.js?v=hall-bounds1';
 import {BOARDS,colour,adjacent} from './study-house-models.js?v=workbench1';
-import {faceRoomWork,showRoomDialog} from './room-workbench.js?v=touch1';
+import {faceRoomWork,showRoomDialog,consumeRoomPresentationClose} from './room-workbench.js?v=merge-presentation1';
 export function installProofAtelier(M,T){
  let storage;try{storage=localStorage;}catch{}const memory=workshopMemory(storage),s=memory.state,built=buildProofAtelier(T);M.scene.add(built.group);M.city.targets.push(...built.targets);M.city.buildingTargets.push(built.group);
  const el=(tag,text)=>{const n=document.createElement(tag);if(text)n.textContent=text;if(['p','small','pre','summary'].includes(tag))n.dir='auto';return n;},lang=()=>window.CITY_I18N.lang,w=()=>ATELIER_UI[lang()]||ATELIER_UI.en,title=i=>WORKSHOPS[i].names[lang()]||WORKSHOPS[i].names.en;
@@ -115,7 +115,7 @@ export function installProofAtelier(M,T){
  M.startExtra=id=>id==='proof-atelier'?(M.arrive(built.entry),open(s.active,'route'),true):old.start?.(id);
  M.toolsExtra=()=>inside()?(open(s.active,'route'),true):old.tools?.();
  M.city.update=(...args)=>{old.update(...args);const foyer=M.mode==='city'&&M.studyHouses?.scene.houses[0].inside(M.player.x,M.player.z),nearby=WORKSHOPS.map((_,i)=>i).filter(near);context.hidden=!!document.querySelector('dialog[open]')||!inside()&&!foyer;const key=String(foyer)+nearby.join(',')+lang();if(key!==contextKey){contextKey=key;context.replaceChildren(el('strong',w().title));if(nearby.length)for(const i of nearby)context.append(button(WORKSHOPS[i].number+' · '+title(i),()=>open(i,'work')));else context.append(button(w().route,()=>open(s.active,'route')));}};
- const locale=()=>{contextKey='';built.update(s,lang());if(dialog.open)render();};addEventListener('city-language',locale);dialog.addEventListener('close',()=>{if(dialog.returnValue!=='movement'){M.clearMovement();opener?.focus?.();}});built.update(s,lang());
+ const locale=()=>{contextKey='';built.update(s,lang());if(dialog.open)render();};addEventListener('city-language',locale);dialog.addEventListener('close',()=>{if(consumeRoomPresentationClose(dialog))return;if(dialog.returnValue!=='movement'){M.clearMovement();opener?.focus?.();}});built.update(s,lang());
  const api={open,visit,built,memory};M.proofAtelier=api;const query=new URLSearchParams(globalThis.location?.search||'');if(query.get('arrival')==='proof-atelier'){const room=WORKSHOPS.findIndex(h=>h.id===query.get('workshop'));if(room>=0){visit(room);open(room,'work');}else{M.arrive(built.entry);open(s.active,'route');}}
  addEventListener('pagehide',()=>{removeEventListener('city-language',locale);for(const target of built.targets){const i=M.city.targets.indexOf(target);if(i>=0)M.city.targets.splice(i,1);}const i=M.city.buildingTargets.indexOf(built.group);if(i>=0)M.city.buildingTargets.splice(i,1);built.dispose();dialog.remove();context.remove();},{once:true});return api;
 }

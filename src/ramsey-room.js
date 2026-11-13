@@ -1,5 +1,6 @@
 import {buildNativeRamseyHouse} from './ramsey-native-house.js?v=proportion14b';
 import {createConversation} from './ramsey-conversation.js';
+import {RAMSEY_AUDIO_COPY} from './ramsey-house-copy.js';
 
 const CAST=[['socrates','Socrates'],['nietzsche','Nietzsche'],['zarathustra','Zarathustra · زرتشت'],['anonymous','Anonymous'],['ramsey','Frank Ramsey'],['turing','Alan Turing']];
 const scripts=new Map();
@@ -18,14 +19,15 @@ export function installRamseyRoom(M,T=window.THREE){
  const title=document.createElement('strong'),caption=document.createElement('p'),controls=document.createElement('div'),play=document.createElement('button'),restart=document.createElement('button'),mute=document.createElement('button'),seek=document.createElement('input'),clock=document.createElement('span'),note=document.createElement('small');
  title.textContent='Ramsey House';caption.textContent='The conversation is getting ready…';play.textContent='Loading conversation…';play.disabled=true;restart.textContent='Restart';mute.textContent='Voice on';mute.setAttribute('aria-pressed','false');
  for(const b of [play,restart,mute])b.className='glass';
- seek.type='range';seek.min='0';seek.max='600';seek.step='.1';seek.value='0';seek.setAttribute('aria-label','Conversation time');seek.disabled=true;
+ caption.dir='ltr';caption.lang='en';clock.dir='ltr';seek.dir='ltr';seek.type='range';seek.min='0';seek.max='600';seek.step='.1';seek.value='0';seek.setAttribute('aria-label','Conversation time');seek.disabled=true;
  note.textContent='Red: acquainted / Blue: not acquainted / Gray dashes: unknown · E / A: start or pause · Keep walking to explore · Leaving pauses the conversation';controls.append(play,restart,mute,clock);panel.append(title,caption,controls,seek,note);document.body.append(panel);
+ const a=()=>RAMSEY_AUDIO_COPY[window.CITY_I18N.lang]||RAMSEY_AUDIO_COPY.en;
  const format=t=>Math.floor(t/60)+':'+String(Math.floor(t%60)).padStart(2,'0');
- function updateCaption(state){play.textContent=state.playing?'Pause conversation':state.time>=600?'Replay conversation':state.time>0?'Resume conversation':'Start conversation';clock.textContent=format(state.time)+' / 10:00';if(document.activeElement!==seek)seek.value=String(state.time);if(state.cue!==lastCue){lastCue=state.cue;title.textContent=CAST.find(([id])=>id===state.cue?.speaker)?.[1]||'Ramsey House';caption.textContent=state.cue?.text||'Take a place by the table.';}}
+ function updateCaption(state){caption.dir=state.cue?'ltr':panel.dir;caption.lang=state.cue?'en':panel.lang;play.textContent=state.playing?a().pause:state.time>=600?a().replay:state.time>0?a().resume:a().start;clock.textContent=format(state.time)+' / 10:00';if(document.activeElement!==seek)seek.value=String(state.time);if(state.cue!==lastCue){lastCue=state.cue;title.textContent=CAST.find(([id])=>id===state.cue?.speaker)?.[1]||'Ramsey House';caption.textContent=state.cue?.text||a().ready;}}
  function pause(){conversation?.pause();if(musicWasPlaying){document.querySelector('#music-toggle')?.click();musicWasPlaying=false;}}
  function toggle(){if(!inside||!ready)return;if(!conversation.state.playing){musicWasPlaying=document.querySelector('#music-toggle')?.getAttribute('aria-pressed')==='true';if(musicWasPlaying)document.querySelector('#music-toggle').click();}void conversation.toggle();}
  play.onclick=()=>ready?toggle():void load();restart.onclick=()=>{conversation?.pause();conversation?.seek(0);};seek.oninput=()=>conversation?.seek(seek.value);
- mute.onclick=()=>{const muted=mute.getAttribute('aria-pressed')!=='true';mute.setAttribute('aria-pressed',String(muted));mute.textContent=muted?'Voice off':'Voice on';conversation?.mute(muted);};
+ mute.onclick=()=>{const muted=mute.getAttribute('aria-pressed')!=='true';mute.setAttribute('aria-pressed',String(muted));mute.textContent=muted?a().voiceOff:a().voiceOn;conversation?.mute(muted);};
  const base=new URL('./ramsey-film/assets/',import.meta.url);
  async function load(){
   if(loading)return loading;
@@ -42,9 +44,9 @@ export function installRamseyRoom(M,T=window.THREE){
     }));
     if(disposed){loaded.forEach(a=>a.actor.dispose());return;}
     for(const [i,a]of loaded.entries()){const seat=house.study.seats[i];a.actor.group.position.set(seat.x,0,seat.z);a.actor.group.rotation.y=seat.yaw;a.actor.group.traverse(o=>{o.userData.animated=true;});house.group.add(a.actor.group);a.actor.animate(0,{seated:true,reducedMotion:true});actors.push(a);}
-    conversation=createConversation({tracks:[1,2].map(i=>new Audio(new URL('conversation-'+i+'.mp3?v=kokoro-1',base).href)),cues:data.cues,onChange:updateCaption,onError:()=>{caption.textContent='Audio could not start. Press Start conversation to try again.';}});
+    conversation=createConversation({tracks:[1,2].map(i=>new Audio(new URL('conversation-'+i+'.mp3?v=kokoro-1',base).href)),cues:data.cues,onChange:updateCaption,onError:()=>{caption.textContent=a().error;}});
     ready=true;play.disabled=false;seek.disabled=false;conversation.update();
-   }catch(error){caption.textContent=error.message+' You can still walk through the house.';play.textContent='Retry loading conversation';play.disabled=false;loading=null;}
+   }catch(error){caption.textContent=error.message+' '+a().walk;play.textContent=a().retry;play.disabled=false;loading=null;}
   })();return loading;
  }
  // Load the detailed cast when approaching or visiting Ramsey House.
@@ -72,9 +74,9 @@ export function installRamseyRoom(M,T=window.THREE){
  function visit(){void load();document.querySelector('#welcome')?.setAttribute('hidden','');M.arrive(house.entry);M.pointToward(house.origin);}
  const link=document.querySelector('#ramsey-film-link');if(link){link.href='#ramsey-house';link.onclick=e=>{e.preventDefault();visit();};}
  const map=document.createElement('button');map.onclick=()=>{document.querySelector('#map-panel').hidden=true;visit();};document.querySelector('.map-directions')?.append(map);
- function locale(){const lang=window.CITY_I18N.lang;map.textContent=lang==='fa'?'خانهٔ رمزی':lang==='de'?'Ramsey-Haus':'Ramsey House';if(link)link.textContent=lang==='fa'?'دیدار از گفت‌وگوی رمزی':lang==='de'?'Ramsays Gespräch besuchen':'Visit Ramsey’s conversation';}
+ function locale(){const c=a();map.textContent=c.house;if(link)link.textContent=c.link;panel.lang=RAMSEY_AUDIO_COPY[window.CITY_I18N.lang]?window.CITY_I18N.lang:'en';panel.dir=panel.lang==='fa'?'rtl':'ltr';restart.textContent=c.restart;mute.textContent=mute.getAttribute('aria-pressed')==='true'?c.voiceOff:c.voiceOn;seek.setAttribute('aria-label',c.time);note.textContent=c.note+' · '+c.english;if(ready){const s=conversation.state;play.textContent=s.playing?c.pause:s.time>=600?c.replay:s.time>0?c.resume:c.start;caption.lang='en';caption.dir='ltr';}else{play.textContent=play.disabled?c.loading:c.retry;if(play.disabled){caption.textContent=c.gettingReady;caption.lang=panel.lang;caption.dir=panel.dir;}}}
  addEventListener('city-language',locale);locale();
- const api={house,actors,visit,toggle,pause,get inside(){return inside;},get near(){return near;},get ready(){return ready;},get state(){return conversation?.state;}};M.ramseyRoom=api;
+ const api={house,actors,visit,toggle,pause,get inside(){return inside;},get near(){return near;},get ready(){return ready;},get state(){return conversation?.state;}};M.ramseyRoom=api;previous.attachReading?.(house);
  if(new URLSearchParams(location.search).get('arrival')==='ramsey')visit();
  addEventListener('pagehide',()=>{disposed=true;conversation?.dispose();actors.forEach(a=>a.actor.dispose());house.dispose();panel.remove();removeEventListener('city-language',locale);},{once:true});
  return api;

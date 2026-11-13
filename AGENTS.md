@@ -162,7 +162,9 @@ keep the original shore promenade continuous and all walking feet at .13m.
 Connected questions is optional, folded and uses only real walkable routes.
 The Mathematics working-wing guide uses actual source floor models and lift
 metadata: ground-floor visitors exit through the central hall and open front
-doors, upper floors use the lift. Keep solid laboratory windows distinct from
+doors; upper floors offer the installed walking stairs and the original lift.
+The optional stair route ends at the current full-floor landing, not on a tread
+or over the open well. Keep solid laboratory windows distinct from
 the central doorway. No guide action moves the visitor or writes notes unless
 the visitor explicitly requests an existing interaction. Read docs/STARTUP.md,
 docs/CONNECTED-QUESTIONS.md and docs/lower-face-visuals.md before extending.

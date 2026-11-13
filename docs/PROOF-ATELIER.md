@@ -43,7 +43,7 @@ problems. No timer or waiting gate inflates the session.
 All examples, explanations and architecture are original teaching material.
 Primary further readings link to Jonathan Hirata's MIT matching notes, Michel
 Goemans's MIT bipartite-matching notes, and Lau–Ravi–Singh's author-hosted book.
-The advanced text is English; English/German/Persian names and navigation follow
+The advanced text is English; English/German/Persian/Czech names and navigation follow
 the city language, with an explicit language disclosure. Text direction is kept
 separate for English mathematics and Persian navigation.
 
@@ -92,7 +92,7 @@ need feedback from the user rather than being inferred from a test suite.
 ## English-first price-room revision
 
 Fresh visitors enter in English without a language-choice gate. An explicit saved
-FA or DE preference is retained; existing translations remain available. Initial
+FA, DE or CS preference is retained; existing translations remain available. Initial
 loading, identity and welcome copy are English before scripts finish. New
 price-room activities and explanations are authored in English.
 

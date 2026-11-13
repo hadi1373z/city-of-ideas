@@ -44,6 +44,7 @@ the curved geodesic and optional score playback. Narrow-screen inspection checke
 the bottom dock and the visible room; temporary viewport settings were restored.
 
 Remaining limits: the older three study houses still have simple rectangular
-interiors. Their advanced reading and experiments remain English, with the
-existing language disclosure. These are bounded experiments, not proof checking
+interiors. Their advanced readings and experiments retain the hourly review branch’s
+English, German, Persian and Czech coverage. Some shared notebook/city text still
+uses English fallback. These are bounded experiments, not proof checking
 for arbitrary graphs, an unrestricted program runner or complete courses.

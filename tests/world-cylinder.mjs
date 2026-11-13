@@ -6,6 +6,7 @@ import {WORLD_CYLINDER as W,isLowerCoordinate,lowerLocal,lowerPhysical,physicalT
 import {buildWorldCylinder,mountLowerWorld} from '../src/world-cylinder-scene.js';
 import {installWorldCylinder} from '../src/world-cylinder.js';
 import {UPPER,LOWER,pointAt,heightAt} from '../src/two-face-gallery-model.js';
+import {validateTunnelContacts} from './tunnel-contacts.mjs';
 
 const near=(a,b,e=1e-5)=>assert(Math.abs(a-b)<e,`${a} differs from ${b}`),vec=(a,b,e=1e-5)=>{near(a.x,b.x,e);near(a.y,b.y,e);near(a.z,b.z,e);};
 const failures=[];function check(name,fn){try{fn();console.log('PASS '+name);}catch(e){failures.push(name);console.error('FAIL '+name+': '+e.message);}}
@@ -39,7 +40,12 @@ check('Cylinder has two matching faces, a real lower aperture, enclosed tunnel a
  }
  assert.equal(ray(133,-38.2,115,1,0,0,4).length,0,'The Escher handoff must be an open end');
  assert(ray(40,-38.2,0,0,0,1,3).length,'The straight tunnel has a real side wall');
+ console.log('PASS tunnel roof/wall/strip contacts, original-owner fingerprints and clear bends: '+JSON.stringify(validateTunnelContacts(T,b)));
+ const releases=new Map([...b.owned].map(r=>[r,0])),buffers=new Map();
+ for(const r of b.owned)r.addEventListener('dispose',()=>releases.set(r,releases.get(r)+1));
+ b.group.traverse(o=>{if(o.isInstancedMesh){buffers.set(o,0);o.addEventListener('dispose',()=>buffers.set(o,buffers.get(o)+1));}});
  let disposed=0;b.shell.geometry.addEventListener('dispose',()=>disposed++);b.dispose();assert.equal(disposed,1);assert.equal(b.group.children.length,0);
+ assert.equal(buffers.size,26);for(const count of [...releases.values(),...buffers.values()])assert.equal(count,1,'Original owned resources/buffers release once');
 });
 
 check('Both oceans share their shader and fog; real central earth encloses the shaft without closing Escher',()=>{

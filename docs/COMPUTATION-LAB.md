@@ -59,3 +59,27 @@ increment inputs. UI checks exercise actual controls, persistence, pause paths,
 legacy study and disposal. Geometry checks bound added draws, verify physical
 targets and ensure the centre and side approach lines stay clear. Browser QA
 checks rendered boards, models, input handling, walking and small-screen fit.
+
+## House-detail review reconciliation
+
+The review branch retains the three classic houses' fifteen EN/DE/FA/CS advanced
+sections, experiments, first predictions, private drafts/carets and existing
+notebook keys. Computation's hourly run journal and leg joints now follow main's
+desk relocation to local (5, 4.3); the journal remains on the original sheet.
+Its symbols/marker still follow only the classic countdown/cycle/long-run state.
+
+Journal picks open the full original reader and restore its physical board;
+room work and new model boards open this laboratory. The explicit legacy action
+and the original-reader handoff retain each model's configuration and unsaved
+classic drafts. Original-reader language changes do not write the lab key.
+
+Only the open/legacy handoffs and English-content notice support EN/DE/FA/CS.
+The new model UI, instructions and investigations remain English. This does not
+claim full lab or city localization. The laboratory retains its separate key
+and main's explicit experiment/save/pause behavior. Co-installation tests cover
+all four handoff languages, model retention, journal/full-reader routing,
+separate stores and unchanged classic first predictions/drafts/carets.
+
+The computation shell/collider baseline was independently measured from main
+975ed0dcfed3ea4621e5ca3da02afd76874b493e, including its intentional desk move.
+Proof's e2598f0 baseline and Uncertainty's baseline remain unchanged.

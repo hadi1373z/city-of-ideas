@@ -32,12 +32,79 @@ Inside the original Mathematics working wing, the folded guide is labelled
 **Way out · Mathematics**. Its ground-floor exit is the real central hall and
 front doorway. Side-room routes pass through their middle partition opening;
 the new open door leaves and covered-connector posts also constrain the route.
-Upper floors lead to their actual lift. **Take the lift to ground floor** is
-offered only near that floor's real lift anchor, at the matching floor height,
-and delegates the original source floor action. It never moves a visitor
-automatically or treats a window as an exit. The guide uses the current source
+Upper floors offer the installed walking stairs or the original lift. The
+default walking route ends at the current full-floor stair landing, before the
+descending flight. A separate choice shows the route to the actual lift.
+**Take the lift to ground floor** is offered only near that floor's real lift
+anchor, at the matching floor height, and delegates the original source floor
+action. It never moves a visitor automatically or treats a window as an exit.
+The guide uses the current source
 model, original transform and live collision callback from `CITY_EXTRAS`; a
 missing model or a height between source floors supplies no invented route.
+
+## Working-wing stairs and exit guidance
+
+`math-wing-wayfinding-copy.js` supplies EN/DE/FA/CS copy for the Mathematics
+Way out panel only; Persian prose is RTL. The remaining Connected questions
+sequence and lower-world overview keep their disclosed English copy. No legacy
+Math lesson, catalogue, paper reader, imported text or private note is translated.
+
+When `mathWingStairs.built` is present, an upper floor offers **Route to stair
+landing** and **Route to lift**. Choosing either changes only the visit's route
+destination. **Show route** remains a separate opt-in action; neither choice
+moves, turns, starts a lift, selects a floor or enables a hidden trail. Without
+the installed stair owner the guide retains only the original lift route.
+The existing nearby lift action remains available with either route selected.
+
+The stair destination is the centre of the descending lane on the current
+full-floor landing, source-local `(6.2, 6.9)`, derived from `WING_STAIRS` bounds.
+It is an actual supported floor-landing surface. Cues lead through the original
+partition openings and stop there, rather than drawing a flat path across the
+new slab opening. The live source/cargo collision callback, Faculty solids,
+stair opening and actual guard bands are checked for every segment. The lift
+destination retains the original floor's landing metadata. Ground-floor cues
+retain the real doorway and covered connection.
+
+Instructions distinguish the broad half-storey turning landing from a full-floor
+landing. Visitors descend the real flights themselves. Between source floors
+this panel and its dots hide; the existing four-language stair status remains
+the guide. At the next full-floor landing the original walker updates the source
+floor/cargo owner, and Way out can offer that floor's route. Guidance never
+invokes this update or the same-floor explicit-arrival fallback.
+
+The route destination is visit-only and the existing explicit show/hide state
+remains visit-only. Locale events read just the public city language and redraw
+public copy; they do not write the saved preference, read storage/private memory,
+inspect book colours, change experiments/discoveries/audio or alter raw drafts,
+carets, first answers, imports or saves. Disposal removes the owned locale
+listener along with the original owned panel/dot resources. Other owners remain.
+
+`tests/connected-journey.mjs` now composes the actual stair adapter and checks
+3,900 additional installed route points across all eight floors and both upper
+destinations, alongside 7,861 original physical probes. Ordinary `wingStep`
+traverses each path without a height jump. Stair routes end on verified full-floor
+landings; voids, guards, solid windows and a blocked live landing reject invalid
+cues. Four languages, destination choice without movement or automatic trail,
+missing-owner lift fallback, intermediate-floor hiding, unchanged source payloads,
+nearby-only lift delegation, denied private/storage access and owned cleanup pass.
+
+The panel follows the measured bottom of the real header with an eight-pixel
+gap, including wrapped Czech mobile controls. Existing maximum height and
+scrolling remain, and Math reading/stair controls continue below the actual
+expanded guide. At 390×844, Czech begins at 94px after an 86px header; Persian
+begins at 91px after an 83px header. Both have 308px client/scroll width.
+
+All 121 release programs pass. Independent Chrome checks both choices without
+movement or storage writes, visible four-language desktop copy, Czech/Persian
+mobile and RTL, and ordinary descent from Logic (feet28.13) through the turning
+landing (26.13) to Topology (24.13). The source floor remains index7 between
+floors, then becomes index6 at the real full-floor landing. The original nearby
+lift returns to ground; original partition openings and the central front doors
+still provide the exit. A synthetic unsaved Functions reflection retains the
+same input, raw text and caret3–8 through direct guide rendering and a local
+Czech/Persian companion return. Global city English remains unchanged by that
+local reading. Explicit global Czech survives a fresh document, and all eleven
+genuine pages report ready. The user's headed preview is not controlled by QA.
 
 ## Integration and maintenance
 

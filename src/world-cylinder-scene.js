@@ -48,10 +48,12 @@ export function buildWorldCylinder(T){
   tunnelRects.push({minX:Math.max(GALLERY_TUNNEL.points[0][0],cx-(vertical?2:length/2+2)),maxX:Math.min(ESCHER_DEPTH.rooms[0].minX,cx+(vertical?2:length/2+2)),minZ:cz-(vertical?length/2+2:2),maxZ:cz+(vertical?length/2+2:2)});
   // Stop side walls short of each corner, leaving the actual turning space open.
   for(const sign of[-1,1])add(stone,vertical?.2:Math.max(0,length-4),5,vertical?Math.max(0,length-4):.2,cx+(vertical?sign*2:0),-37.5,cz+(vertical?0:sign*2));
-  for(let t=6;t<length-3;t+=11){const x=a[0]+dx*t/length,z=a[1]+dz*t/length;for(const sign of[-1,1]){
-   add(brass,vertical?.14:3.8,.1,vertical?3.8:.14,x,-35.22,z);
-   add(warm,.18,.16,.18,x+(vertical?sign*1.84:0),-36.8,z+(vertical?0:sign*1.84));
-  }}
+  for(let t=6;t<length-3;t+=11){const x=a[0]+dx*t/length,z=a[1]+dz*t/length;
+   // One longitudinal ceiling strip per station. Keep its original underside
+   // at -35.27; fill the .045m gap with .005m concealed roof engagement.
+   add(brass,vertical?.14:3.8,.15,vertical?3.8:.14,x,-35.195,z);
+   for(const sign of[-1,1])add(warm,.18,.16,.18,x+(vertical?sign*1.84:0),-36.8,z+(vertical?0:sign*1.84));
+  }
  }
  // A partition of the route union gives each floor/ceiling point one owner.
  const xs=[...new Set(tunnelRects.flatMap(r=>[r.minX,r.maxX]))].sort((a,b)=>a-b),zs=[...new Set(tunnelRects.flatMap(r=>[r.minZ,r.maxZ]))].sort((a,b)=>a-b);

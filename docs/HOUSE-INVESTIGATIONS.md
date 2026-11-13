@@ -64,3 +64,20 @@ and precedence, 625 cubic families through twelve rows, partial arithmetic state
 countermodels, corrupt saves, explicit private writes, physical controls, geometry,
 doorway/aisle clearance, solid furniture and cleanup. Browser checks separately
 inspect both rooms and the compact layout.
+
+## Combined house-details review
+
+The review branch also retains the earlier four-language Ada and Chomsky
+guides and their physical comparisons. Each original guide links to its new
+investigation; each investigation links back. These navigation labels and the
+notice that advanced content is English support EN/DE/FA/CS. The new models,
+lessons and experiment controls remain English.
+
+The two presentations share their original room. Opening a classic guide
+restores Ada's instruction-card table or Chomsky's grouping feature and hides
+the overlapping laboratory furniture and its extra colliders. Opening the
+investigation restores the live bench/tree. Ada's new plot is slightly forward
+of the earlier diagram only when that diagram is present. Neither handoff
+restarts a model, translates private text or saves an unsaved draft. Rendering
+an original guide or changing its language does not write the investigation
+key. Co-installation checks and native room/draft checks cover these handoffs.

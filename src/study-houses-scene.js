@@ -1,5 +1,11 @@
 import {STUDY_HOUSES} from './study-houses-data.js';
 import {colour,neighbours,bayes} from './study-house-models.js?v=workbench1';
+import {buildProofDetails} from './proof-house-scene.js';
+import {proofWords} from './proof-house-copy.js';
+import {buildUncertaintyDetails} from './uncertainty-house-scene.js';
+import {uncertaintyWords} from './uncertainty-house-copy.js';
+import {buildComputationDetails} from './computation-house-scene.js';
+import {computationWords,computationState} from './computation-house-copy.js';
 export function buildStudyHouses(T,{canvas=()=>document.createElement('canvas')}={}){
  const group=new T.Group(),houses=[],targets=[],colliders=[],owned=new Set(),own=r=>(owned.add(r),r),material=c=>own(new T.MeshLambertMaterial({color:c}));group.name='Advanced study courtyard';
  const stone=material(0xc4bda6),wood=material(0x775c43),paper=material(0xe7dfc8),floor=material(0xb4a889),glass=own(new T.MeshLambertMaterial({color:0xb1c9c2,transparent:true,opacity:.13,depthWrite:false}));
@@ -27,18 +33,21 @@ export function buildStudyHouses(T,{canvas=()=>document.createElement('canvas')}
   else{for(let i=0;i<5;i++){box(exhibit,.72,.9,.08,(i-2)*.82,0,.09,paper);cells.push(label(exhibit,.67,.78,(i-2)*.82,0,.14));}readout=label(exhibit,4.4,.43,0,-.95,.08);}
   if(data.id==='proof')for(let i=0;i<8;i++){const domino=box(exhibit,.95,.41,.035,0,0,.15,material([0x8ebba8,0xb1a0c2,0xc7ae77,0x86a8bd][i%4]));domino.visible=false;domino.userData={studyHouse:data.id,dynamic:true};links.push(domino);}
   exhibit.traverse(o=>o.userData={studyHouse:data.id,dynamic:true,...o.userData});
+  if(data.id==='proof')buildProofDetails(T,{home,box,wood,paper,trim,dark,targets});
+  const evidence=data.id==='uncertainty'?buildUncertaintyDetails(T,{home,box,wood,paper,trim,dark,targets}):null;
+  const journal=data.id==='computation'?buildComputationDetails(T,{home,box,wood,paper,trim,dark,accent:material(0xd7b857),targets,deskZ}):null;
   targets.push(exhibit);const inside=(x,z)=>Math.abs(x-data.x)<7.8&&Math.abs(z-data.z)<5.8;
-  houses.push({data,group:home,name,exhibit,caption,cells,bars,links,readout,inside,entry:{...world(0,8),y:.13,yaw:data.turn},insideEntry:{...world(0,3.9),y:.13,yaw:data.turn},view:{...world(0,.5),y:.13,yaw:data.turn,pitch:-.1},world});
+  houses.push({data,group:home,name,exhibit,caption,cells,bars,links,readout,evidence,journal,inside,entry:{...world(0,8),y:.13,yaw:data.turn},insideEntry:{...world(0,3.9),y:.13,yaw:data.turn},view:{...world(0,.5),y:.13,yaw:data.turn,pitch:-.1},world});
  }
  const paths=[[[203.5,-50],[203.5,-112],[243,-112]],[[215,-112],[215,-100]],[[243,-112],[243,-100]],[[229,-112],[229,-123]]];
  for(const points of paths)for(let i=1;i<points.length;i++){const a=points[i-1],b=points[i],length=Math.hypot(b[0]-a[0],b[1]-a[1]),m=new T.Mesh(own(new T.PlaneGeometry(3.5,length+.01)),material(0x6e8268));m.rotation.x=-Math.PI/2;m.rotation.z=-Math.atan2(b[0]-a[0],b[1]-a[1]);m.position.set((a[0]+b[0])/2,.012,(a[1]+b[1])/2);m.name='Smooth study garden route';group.add(m);}
  let lastKey='';function update({lang='en',board,selection=[],prior=.01,repeats=1,independent=true,machine,showMatching=false,pairs=[]}){
-  const key=JSON.stringify([lang,board,selection,prior,repeats,independent,machine?.steps,showMatching]);if(key===lastKey)return;lastKey=key;
+  const key=JSON.stringify([lang,board,selection,prior,repeats,independent,machine?.kind,machine?.counter,machine?.steps,machine?.halted,machine?.repeated,showMatching]);if(key===lastKey)return;lastKey=key;
   for(const h of houses)h.name.paint(h.data.names[lang]||h.data.names.en);
-  const proof=houses[0],near=neighbours(board,selection);proof.caption.paint(showMatching?'Maximum matching · '+pairs.length+' dominoes':'S and N(S) · '+selection.length+' / '+near.length);for(const[i,c]of proof.cells.entries()){c.visible=board.includes(i);const p=pairs.findIndex(p=>p.includes(i));c.material.color.setHex(selection.includes(i)?0xd7b857:near.includes(i)?0x79a6b5:showMatching&&p>=0?[0x8ebba8,0xb1a0c2,0xc7ae77,0x86a8bd][p%4]:colour(i)?0xe5d7b7:0x4c6257);}
+  const proof=houses[0],near=neighbours(board,selection);proof.caption.paint(showMatching?proofWords(lang).maximumCaption+' · '+pairs.length:proofWords(lang).wallCaption+' · '+selection.length+' / '+near.length);for(const[i,c]of proof.cells.entries()){c.visible=board.includes(i);const p=pairs.findIndex(p=>p.includes(i));c.material.color.setHex(selection.includes(i)?0xd7b857:near.includes(i)?0x79a6b5:showMatching&&p>=0?[0x8ebba8,0xb1a0c2,0xc7ae77,0x86a8bd][p%4]:colour(i)?0xe5d7b7:0x4c6257);}
   for(const[i,link]of proof.links.entries()){const pair=pairs[i];link.visible=showMatching&&!!pair;if(pair){const[a,b]=pair;link.position.x=((a%4+b%4)/2-1.5)*.53;link.position.y=.02-((Math.floor(a/4)+Math.floor(b/4))/2-1.5)*.53;link.rotation.z=Math.floor(a/4)===Math.floor(b/4)?0:Math.PI/2;}}
-  const uncertainty=houses[1],b=bayes(prior,.9,.05,repeats,independent);uncertainty.caption.paint('Share of flagged components / 100%');for(const[i,bar]of uncertainty.bars.entries()){const width=4.1*[b.hit,b.falseAlarm][i]/(b.hit+b.falseAlarm);bar.scale.x=Math.max(.002,width);bar.position.x=-2.05+width/2;}uncertainty.readout.paint(b.hit.toFixed(2)+' faulty · '+b.falseAlarm.toFixed(2)+' sound');
-  const computation=houses[2];computation.caption.paint('Complete toy state · counter');if(machine){const digits=String(machine.counter).padStart(5,'0');computation.cells.forEach((c,i)=>c.paint(digits[i]));computation.readout.paint(machine.steps+' steps · '+(machine.halted?'HALTED':machine.repeated?'REPEATED STATE':'NOT YET HALTED'));}
+  const uncertainty=houses[1],b=bayes(prior,.9,.05,repeats,independent),u=uncertaintyWords(lang);uncertainty.evidence.setEvidence(repeats,independent);uncertainty.caption.paint(u.wallCaption);for(const[i,bar]of uncertainty.bars.entries()){const width=4.1*[b.hit,b.falseAlarm][i]/(b.hit+b.falseAlarm);bar.scale.x=Math.max(.002,width);bar.position.x=-2.05+width/2;}uncertainty.readout.paint(b.hit.toFixed(2)+' '+u.faulty+' · '+b.falseAlarm.toFixed(2)+' '+u.sound);
+  const computation=houses[2],c=computationWords(lang);computation.caption.paint(c.wallCaption);if(machine){const digits=String(machine.counter).padStart(5,'0');computation.cells.forEach((cell,i)=>cell.paint(digits[i]));computation.journal.setMachine(machine);computation.readout.paint(machine.steps+' '+c.steps+' · '+c.statuses[computationState(machine)]);}
  }
  return{group,houses,targets,colliders,paths,update,canStand:(x,z)=>Number.isFinite(x)&&Number.isFinite(z)&&!colliders.some(b=>x>b.minX-.22&&x<b.maxX+.22&&z>b.minZ-.22&&z<b.maxZ+.22),dispose(){group.removeFromParent();for(const r of owned)r.dispose();group.clear();}};
 }
