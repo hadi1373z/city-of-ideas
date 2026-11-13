@@ -1,5 +1,9 @@
 # Babel terrace catalogue desks · factual contact audit
 
+The later [terrace-globe audit](BABEL-TERRACE-GLOBES.md) retains this entire
+desk result. It records twenty-eight existing shelf contacts and two original
+unsupported, low stem ends over incoming flights; those remain unrepaired.
+
 This review continues published head 431038c. That concurrent reconciliation
 already includes main2176dde and the retained third-mouth fix; this audit
 preserves it. The local feature checkout advances to the existing published

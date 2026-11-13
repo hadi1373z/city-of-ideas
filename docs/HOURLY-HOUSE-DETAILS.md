@@ -7355,3 +7355,94 @@ treads/fittings/reader payloads/source/private/voice/scan contracts. Only
 measured justified joins or factual audit; no new light/globe/column/barrier/
 room/paper/first reading/historical copy/certification or merge/ref write
 outside this feature branch.
+
+## 2026-11-13 — Babel terrace globes: contacts and two retained low stems
+
+Factual architectural audit after0c8542a; the published431038c/main2176dde
+reconciliation remains. Read BABEL-TERRACE-GLOBES.md for actual installed
+profiles, negative measurements and next work. All47 first readings/eight
+Mathematics working floors remain complete; no additional first pass.
+
+All30 original faceted globes meet their.06x.8x.06 brass stems. Actual
+stem-top/globe-bottom overlap .059999555349..060000509024m;120top-cap corners
+and240positive core vertices lie inside the original sphere triangle planes.
+All30 source stem IDs1949..1978 and sphere IDs0..29 remain exact in their
+actual current display owners. Original ambient/three point-light records
+retain every position/colour/intensity/distance/decay. No new light or glow.
+
+Twenty-eight stems intersect complete.11m top-shelf thicknesses, verified
+by224positive core vertices and252footprint rays. Their lower tips extend
+below shelf undersides: these are side intersections, not shelf-top feet.
+Two stems remain over the original incoming-flight shelf gaps. Eighteen
+projected footprint rays find no shelf seat. No replacement shelf, upright
+or floor column is added to those deliberately open mouths.
+
+Raw source shelf2739 meets stem1966 before the retained whole-bay mouth
+fit moves its edge away; all9raw footprint rays hit. Stem1975 has no raw
+shelf seat; its9raw rays miss. Both original low stem ends remain exact.
+Independent raw/current checks distinguish that installed-support consequence
+from the already omitted final-flight bay; no source record changes.
+
+Globe17/stem1966 at(24.208675,-22.426323), sourcelevel2/incomingflight1,
+lies over actual treadfeet-14.5 atside+1.260314/r32.975924. Globe26/stem1975
+at(-9.536751,8.834612), sourcelevel4/incomingflight3, lies over treadfeet
+-22.5 atside+.496487/r12.990515. Both are inside the retained walking band.
+Their bottoms are1.900000185/1.899999231m above those treads; globes start
+about2.64m above. Eighteen actual tread/model rays and18full-scene body rays
+confirm those original low-stem intersections. These two fixtures remain
+unsupported/low in this audit; this is not an all-fixture headroom pass.
+Another bar alone would leave the original low stem ends in place.
+
+All2016 prior seven-lane standing/tread samples remain exact and pass.
+Those points do not cover the two narrow stem footprints at these lateral
+coordinates. The audit adds explicit negative measurements without relaxing
+the old samples, masks, source controls, collision rules or budgets. Test
+output now states that retained sample scope explicitly.
+
+No production file, source/display matrix/profile/resource/collider/pick/UI/
+reader/model/key/behavior changes. Complete current raw65/41893/r1867b21ef65/
+nativebfee858c and installed68/41925/r18600134a70/nativef1b47297 remain exact
+without exclusions. All86owned resources/36buffers release once; borrowed
+drawing0. Five existing adapters/398fitted records/12copies/entry seats/
+perimeter/retired-reveal guards and independent pre-finish controls remain.
+
+Native current-scene probes repeat all30sphere joints/28shelf joints/
+two missing seats/18incoming tread and body negative samples. Four separate
+inspection-camera views show ordinary mounts and both gaps, preserving
+visitor pose.
+
+All124release programs pass; the affected actual-production adapter program
+also passes the final independent raw/current-source checks. Native ordinary
+pointer/W walking captures41entry heights and25heights in each of4radial
+descents. Pointer and E open the original catalogue at all5desks:10same-pose
+handoffs, page0/aaaaaa/empty prefix/exact source throughEN-DE-FA-CS/FA RTL;
+Czech English fallback remains. Original explicit Return to gallery reaches
+feet.395/Z12, with no claimed walked ascent/pose assignment/automatic travel.
+Eleven genuine scans remain ready.877asset explicitLOCAL verification and
+final console results accompany PR#5; existing Three warning/controllerA
+separately untested remain. Independent route QA uses a.6canvas pixel ratio
+at1280x720CSS; original ratio1 is restored. Contact views are1000x700.
+
+All earlier island/Zarathustra/source-private coordinates/proper lower
+half-turn/both galleries480treads/middle/well/tunnel/earth cut/Math8floor24IDs/
+real stairs/lift/central3mdoor/Faculty/covered route/Escher/house contracts
+remain. Original rooms/shelf bays/books/lights/treads/rails/landings/height
+gates, catalogue/reader payloads, eleven genuine scans/editions/credits/
+rights/source/zoom, approved cast/fixed voices/recordings and explicit
+experiments/saves remain. No construction/rendering private-memory/storage/
+progress/preference-write/experiment/discovery/audio/travel/floor action,
+new reading/paper/folio/historical copy/quotation/testimony/source-fetch
+or certification claim. Raw drafts/carets/immutable first answers/keys and
+all47sourced reading routes remain. EN-DE-FA-CS/PersianRTL/disclosed English
+gaps stay. User's headed preview untouched; same branch/PR#5, exact Houses/
+Concurrent sections retained, no new merge/deployment/other branch write.
+
+Next useful review: prepare a bounded correction for the two unsupported
+low-stem pairs17/1966 and26/1975. Inspect actual neighboring shelf/upright
+faces, preserved incoming-flight gaps, complete standing envelope and current
+copy/source owners/cleanup first. Address both mount and low end; retain30
+globe profiles/positions/four actual lights/28other fixtures/source records/
+private coordinates/treads/rails/width/height gates/allfittings. Keep this
+independent negative fixture and strict historical checks. No new light,
+globe, floor column, barrier, shelf across a gap, room, paper/first reading,
+historical reconstruction or certification; only measured justified work.
