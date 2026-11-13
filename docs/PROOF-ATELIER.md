@@ -127,3 +127,8 @@ The optional matching restores from the existing local record only when legal fo
 ## Exchange preview
 
 Self-critique: the Exchange Engine accepted a path and replaced the matching in one jump, hiding the coordinated reassignment that makes the example educational. A live preview now lists added and removed assignments, explains the free endpoints and the one-edge gain, and paints removals terracotta and additions blue on the real 3D graph. Unchanged matched edges remain brass. Detailed steps are folded so controls remain easier to reach. The preview never applies a flip or awards progress on its own; undo, reset and the original checked flip remain explicit. It uses the existing path validator and adds no save fields, tracking or completion gates. UI regressions check partial/invalid paths, undo, before/after colours, the unchanged original matching and private draft preservation. Actual learning duration and enjoyment remain unmeasured.
+
+
+## Exchange completion and onward route
+
+Self-critique: after finding a perfect matching the room still asked for another improvement, although none was possible. It now explains the four-left-vertex upper bound, removes impossible vertex choices, disables flipping until a complete augmenting path exists, and offers an explicit visit to the matching-cover room. Reset remains available. The next-room action records that deliberate workbench visit without changing the separate next-unfinished navigation. Drafts and milestones are preserved. UI checks cover incomplete/complete paths, returning to the solved room, onward travel and private draft retention. The remaining example is fixed; replay is not a fresh generated problem.

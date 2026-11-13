@@ -6,7 +6,7 @@ import {installWorldCylinder} from './world-cylinder.js?v=finishes1';
 import {installEscherDepth} from './escher-depth.js?v=1';
 import {installHouseInvestigations} from './house-investigations.js?v=1';
 import {installComputationLab} from './computation-lab.js?v=1';
-import {installProofAtelier} from './proof-atelier.js?v=exchange1';
+import {installProofAtelier} from './proof-atelier.js?v=completion1';
 import {installSeminarHouses} from './seminar-houses.js?v=touch1';
 import {installBabelLibrary} from './babel-library.js?v=finishes1';
 import {installOceanVoyage} from './ocean-voyage.js';
