@@ -7675,3 +7675,74 @@ order/cases/globe anchors/routes/catalogue/readers/genuine papers and their
 distinct identities. Only measured justified joins or factual audit; no new
 book/paper/facsimile/first reading/historical object/light/barrier/room/
 certification.
+
+## 2026-11-13 — Babel decorative bindings: recessed shelf beds outside fitted bays
+
+This measured repair follows1f93077. Read `docs/BABEL-TERRACE-BINDINGS.md`.
+All47 first readings/all8 Mathematics working floors remain complete.
+Original public decorative binding bottoms have.054998256266..055001623929m
+gaps above actual shelf tops. Shape/relative placement identifies them without
+book colours/private imports/notes/progress. Original-gap negative controls
+retain18300gaps/73200foot corners/164700projected samples; min shelf-edge
+recess.146299876m. The200fitted-bay volumes remain unchanged and unseated by
+this adapter; this is not an all-bindings-seated claim.
+
+New1810recessed timber beds connect18100unchanged volumes outside4fitted bays:
+595/475/365/245/130beds on source terraces0..4. Each joins10volumes, has actual
+row-gap+.02height(about.075),.60depth/.02front-back recess/.015end recess.
+Concealed engagement is about.01at shelf and binding; no coincident exposed
+faces or whole-bottom enclosure/capacity claim. No old binding/stamp/shelf/
+upright/top-display/profile/matrix/ID/order moves or new book/page is added.
+Earlier upright feet remain partial; no floor extension/sole/duplicate column.
+
+All1810shelf and18100binding cores contain positive.006m eight-vertex cubes.
+Shelf engagement.009999185801..010000869632m; binding.009997658432..010000817478m.
+7240bed-foot corners meet shelves;14480box corners stay in unchanged shelf
+plan envelopes. True closest projected edge leaves.449997743m beyond original
+outer walking-centre boundary. All173760box/full-width tread standing-prism
+pairs clear through feet+2.10m; current7adapter scene retains2016full-scene
+tread/body probes. No route/tread/rail/landing/width/floor/mouth/bridge/collision/
+height-gate change.200bindings in four fitted incoming bays stay separate.
+
+One owned1810instance borrowed-resource batch adds1draw/1buffer:
+69/41929 ->70/43739. Same86geometry-material-texture resources,38buffers
+release once/borrowed drawing0. No new geometry/material/texture/image/light/
+collider/pick/UI/listener/reader/model/key. New owner validates canonical
+source/copy shapes/identities/profiles/gaps/counts before allocating; no book
+colour/private data reads. Missing/replaced owners/buffers/arrays/versions/
+counts/geometry/attributes/index/poses release only own batch; foreign fields
+are not inspected.22ownership/custom-layout programs pass. No borrowed
+matrix/array/visibility/bounds write or resource disposal.
+
+Raw65/41893 r1867b21ef65/nativebfee858c remains exact without exclusions.
+Omitting ONLY1810new owned IDs reproduces complete preceding69/41929
+r1863a06700f/native32aee5f3; every old node/ID/profile/pose stays.
+New full70/43739 hashes r1865df9b9b3/native0bb2fec6 are independently locked.
+All6prior adapters/398mouth records/12copies/two globe mounts/31globe
+lifecycle cases/guard-casework audits/entry-perimeter/historical controls remain.
+
+All124release programs pass. Native actual5terrace gaps/positive cores/bounds/
+prism/source-prior-new hashes pass,1810expected ID rays and49whole-scene rays.
+Twelve matched1000x700before-after foot/row views on0/2/4 preserve pose,
+visibility and renderer state; surface light follows original explicit exit.
+Ordinary pointer/W first outer aisle atR52/feet-8 reaches original desk.
+EN-DE-FA-CS pointer/E retains8same-pose handoffs/page0/aaaaaa/empty prefix/
+exact source/FA RTL/Czech English fallback. Original explicit Return to gallery
+reachesfeet.395/Z12; no new descent/ascent/pose assignment/bypass/autotravel.
+1280x720/.35QA restores1;11genuine pages ready. Existing Threewarning/
+controllerA separately untested remain. ExplicitLOCAL879asset verification
+accompanies PR#5. User's headed preview untouched.
+
+Keep all47readings/routes/raw drafts/carets/immutable first answers/keys/
+explicit saves, EN-DE-FA-CS/RTL/formulaLTR/English gaps/local-global-saved
+language boundaries, island/Zarathustra/source-private coords/proper lower
+transform/480gallerytreads/middle/well/tunnel/earth cut/eightfloor24IDwing/
+realstairs/lift/central3mdoor/Faculty/covered route/Escher/publicmodels/
+experiments/artwork/genuine scans/rights/source/zoom/approved cast/fixed voices/
+recordings/all preservation contracts. No rendering private-memory/storage/
+progress/preference-write/experiment/discovery/audio/travel/floor/saved-diagram
+behavior or new reading/book/paper/folio/historical copy/quotation/testimony/
+source-fetch/certification claim. Samebranch/PR5/exact Houses-Concurrent text;
+separate main Proof work/conflict remain. No new merge/reconciliation/deploy.
+
+Next useful review: audit the 200 original decorative bindings in the four fitted incoming bays. Inspect their actual affine display faces, shelf contacts and full-width standing envelopes before proposing any recessed bed. Preserve all 398 existing fitted records, exact far ends, bindings/stamps, globe-anchor posts, 1.725 m corner clearance, treads/rails/landings and source/private coordinates. Do not change the mouth fitter, fill a route or relax a historical control. Only measured justified joins or factual audit; no new book, paper, first reading, light, room or certification.
