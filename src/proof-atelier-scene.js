@@ -62,8 +62,8 @@ export function buildProofAtelier(T,{canvas=()=>document.createElement('canvas')
    else{
     const graph=id==='hall'?s.repairEdges:id==='exchange'?EXCHANGE:id==='duality'?TRAP:s.capEdges;
     const matching=id==='hall'?(s.hallMatching||[]):id==='exchange'?s.exchange:id==='duality'?maximumMatching(TRAP):id==='studio'?s.capM:[],subset=id==='hall'?s.subset:id==='studio'?s.capS:[],cover=id==='duality'?s.cover:id==='studio'?s.capCover:[],near=neighborhood(graph,subset),path=id==='exchange'?pathStatus(EXCHANGE,s.exchange,s.path).edges||[]:[];
-    h.edges.forEach((o,i)=>{o.visible=graph.includes(i);o.material=path.includes(i)?blue:matching.includes(i)?brass:timber;o.scale.x=o.scale.z=matching.includes(i)||path.includes(i)?2.4:1;});
-    h.nodes.forEach((o,i)=>{o.material=cover.includes(i)?green:i<4&&subset.includes(i)?brass:i>=4&&near.includes(i-4)?blue:chalk;});h.readout.paint(id==='hall'?'Matching '+matching.length+' ≤ maximum ≤ '+hallInsight(graph,subset,matching).upper:id==='exchange'?'Matching '+matching.length+' · path '+s.path.length:id==='duality'?'Matching 3 · cover '+cover.length:graph.length+' edges · matching '+matching.length);
+    h.edges.forEach((o,i)=>{o.visible=graph.includes(i);o.material=path.includes(i)?(matching.includes(i)?clay:blue):matching.includes(i)?brass:timber;o.scale.x=o.scale.z=matching.includes(i)||path.includes(i)?2.4:1;});
+    h.nodes.forEach((o,i)=>{o.material=cover.includes(i)?green:i<4&&subset.includes(i)?brass:i>=4&&near.includes(i-4)?blue:chalk;});h.readout.paint(id==='hall'?'Matching '+matching.length+' ≤ maximum ≤ '+hallInsight(graph,subset,matching).upper:id==='exchange'?(pathStatus(EXCHANGE,s.exchange,s.path).complete?'Preview '+matching.length+' → '+pathStatus(EXCHANGE,s.exchange,s.path).flipped.length:'Matching '+matching.length+' · path '+s.path.length):id==='duality'?'Matching 3 · cover '+cover.length:graph.length+' edges · matching '+matching.length);
    }
   }
  }

@@ -1,5 +1,7 @@
 # One house for a long learning visit
 
+
+
 The House of Proof now opens into the Proof Atelier: six connected workbenches
 on one level, in the same city scene. This develops one substantial destination
 rather than adding six small houses. Entry remains through the existing house
@@ -121,3 +123,7 @@ Self-critique: the kept graph certificate was only a list in the route directory
 Self-critique: the Bottleneck Room accepted a shortage and announced a repaired matching, but did not let a visitor prove how many assignments could coexist before a repair. That made the connection to the later min–max room feel abrupt. The same physical graph now accepts a visitor-built matching and compares its lower bound with the chosen subset's ceiling min(4,4−|S|+|N(S)|). The display distinguishes a guaranteed loss from an exact optimum, a weak subset from a failed matching, and the disappearance of one obstruction from a complete repair. It performs no optimum or strongest-subset search for these bounds. Thick brass edges follow the visitor's matching on the real exhibit. The original repair check and milestones stay available; no new completion gate invalidates old progress.
 
 The optional matching restores from the existing local record only when legal for the saved graph. Removing a graph edge removes that edge from the working matching; restoring the original bottleneck explicitly resets this experiment. Arguments, private drafts, kept Studio certificates and the separate resume/next-unfinished destinations are preserved. Exhaustive checks compare every three-by-three graph and every left subset with an independent optimum enumeration. Native browser inspection covers the bound closing, a repair reopening it, endpoint rejection and a reload. Free prose remains ungraded; no enjoyment duration has been measured. PR #5 remains separate.
+
+## Exchange preview
+
+Self-critique: the Exchange Engine accepted a path and replaced the matching in one jump, hiding the coordinated reassignment that makes the example educational. A live preview now lists added and removed assignments, explains the free endpoints and the one-edge gain, and paints removals terracotta and additions blue on the real 3D graph. Unchanged matched edges remain brass. Detailed steps are folded so controls remain easier to reach. The preview never applies a flip or awards progress on its own; undo, reset and the original checked flip remain explicit. It uses the existing path validator and adds no save fields, tracking or completion gates. UI regressions check partial/invalid paths, undo, before/after colours, the unchanged original matching and private draft preservation. Actual learning duration and enjoyment remain unmeasured.
