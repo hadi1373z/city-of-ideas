@@ -7603,3 +7603,75 @@ incoming bays. Earlier centre-only samples do not establish full-foot seats.
 Preserve all shelf/book profiles/gaps/globe-anchor posts/IDs/resources/
 targets/private flows. Only measured justified joins or factual audit;
 no duplicate upright, shelf across a route, new light/room/reading/certification.
+
+## 2026-11-13 — Babel terrace casework: complete-foot and shelf-end audit
+
+This factual review follows242d45e. Read `docs/BABEL-TERRACE-CASEWORK.md`.
+All47 first readings/all8 Mathematics working floors remain complete.
+No production source/display matrix/profile/resource/collider/pick/UI/reader/
+model/handler/private key changes. Positive contacts and partial footprint
+limits are recorded; no duplicate support, floor extension or sole is added.
+
+Five terraces retain119/96/74/51/26bays,238/192/148/102/52uprights and
+714/576/444/306/156shelf boards. New scope:724unchanged feet/4344shelf joints
+away from the4fitted incoming bays. Their8feet/48joints remain separate
+consistency controls; all prior fits/far ends/globe anchors stay exact.
+
+Each complete actual foot polygon is clipped against actual floor triangles:
+640each on first4terraces,942on the retained fifth-terrace bridge cut.
+Unchanged-foot projected coverage85.373428..90.298664%; fitted controls
+88.021002..91.513898%. All732footprints are partial, nonezero/full.
+Rear-corner overhang reaches.145755m(.117693in fitted controls). Plane error
+<=.000000358m from sourceFloat32. No full-foot bearing/capacity/certification
+claim. Nine-ray cross-checks give6hits/3rear misses perfoot:6588rays,
+4392hits/2196misses. Ray counts are NOT an area estimate; no miss is omitted.
+
+All2196shelves meet both uprights:4392positive.006m eight-vertex cores.
+Unchanged4344joints have actual horizontal sections.12824788...12825298m2;
+old48fitted controls.09436042...10966035m2. Source end/depth overhangs remain;
+no whole-cap enclosure claim or new member. Closest complete box point is
+.249998m beyond unchanged outer walking-centre boundary. Full projected
+edges, including interior points, are checked; corners alone would overstate
+that distance.23424corners remain recorded. All floors/mouths/bridge/treads/
+walking widths/height gates/collision rules remain.
+
+Six independent analytic clipping controls pass. Complete raw65/41893/
+r1867b21ef65/nativebfee858c and installed69/41929/r1863a06700f/native32aee5f3
+stay exact, NO node/ID/matrix/profile/pose exclusion. All6adapters/398mouth
+records/12copies/globe mounts/guard contacts/entry/perimeter/visibility
+restoration and strict historical controls remain. All86resources/37buffers
+release once; borrowed drawing0. Document/storage/fetch and new rendering
+resource constructors are denied during measurement; complete before/after
+snapshots/targets/allocation counts remain. No production state behavior.
+
+All124release programs pass. Native whole-polygon/actual5floor/joint/control
+measurements retain full scene hash and visitor pose. Six independent
+1000x700rear-toe/case-end views on terraces0/2/4 preserve pose/renderer state;
+final views use surface lighting restored by the original exit. Ordinary
+pointer/W first-outer-aisle walking atR52/feet-8 reaches original catalogue.
+EN-DE-FA-CS pointer/E retain8same-pose handoffs, page0/aaaaaa/empty prefix/
+exact source/FA RTL/Czech English fallback. Original explicit Return to
+gallery reachesfeet.395/Z12; no new descent/ascent/pose assignment/bypass/
+automatic-travel claim.11genuine pages stay ready;1280x720/.35QA restores1.
+ExplicitLOCAL878asset verification/old Threewarning/controllerA separately
+untested remain. User's headed preview stays under their control.
+
+Keep all47readings/routes/local-global-saved language boundaries/EN-DE-FA-CS/
+RTL/English gaps/private raw drafts/carets/immutable first answers/keys/
+explicit saves, source-private coordinates/proper lower transform/island/
+Zarathustra/480gallerytreads/middle/well/tunnel/earth cut/eightfloor24IDwing/
+stairs/lift/central3mdoor/Faculty/covered route/Escher/scans/rights/source/zoom/
+approved cast/fixed voices/recordings/all prior contracts. No new reading/
+paper/folio/image/historical copy/quotation/testimony/source-fetch/certification
+or private-memory/storage/progress/preference-write/experiment/discovery/
+audio/travel/floor behavior. Samebranch/PR5/exact Houses-Concurrent text;
+main's separate Proof work/PR#5 conflict remain separate. No new merge,
+reconciliation/deployment/other branch write.
+
+Next useful review: audit original fixed decorative binding bottoms against
+actual shelf surfaces, away from fitted bays. Only public static faces;
+never private imports/book colours. Preserve all bindings/stamps/profiles/
+order/cases/globe anchors/routes/catalogue/readers/genuine papers and their
+distinct identities. Only measured justified joins or factual audit; no new
+book/paper/facsimile/first reading/historical object/light/barrier/room/
+certification.
