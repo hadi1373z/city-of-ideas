@@ -1,5 +1,9 @@
 # Babel central book ring · grounded footing and recessed pads
 
+The later [reading-cover seat](BABEL-READING-PLINTH.md) preserves this complete
+64-pad scene and appends one instance in the same batch. This document and
+its standalone API keep their independent 64-part/48-program scope.
+
 This measured follow-up to c904f0129b426a6b928b589c9e446f5c66af5356
 supports the existing 64-volume display. All 47 first readings and eight
 Mathematics working floors remain complete. These are original fixed city

@@ -11,8 +11,9 @@ import {validateBabelBalconyGuards} from './babel-balcony-guards.mjs';
 import {validateBabelTerraceCasework} from './babel-terrace-casework.mjs';
 import {seatBabelShelfSupports as seatBabelTerraceBindings} from '../src/babel-terrace-bindings.js';
 import {validateShelfDisplays,validateDisplayLifecycle} from './babel-shelf-displays.mjs';
-import {seatBabelBookRing} from '../src/babel-book-ring.js';
+import {seatBabelReadingPlinth as seatBabelBookRing} from '../src/babel-book-ring.js';
 import {validateBabelBookRing,validateBabelBookRingLifecycle} from './babel-book-ring.mjs';
+import {validateReadingPlinth,validateReadingPlinthLifecycle} from './babel-reading-plinth.mjs';
 import {validateFittedBindingBeds,validateFittedBindingLifecycle} from './babel-fitted-binding-beds.mjs';
 import {validateBabelTerraceBindings,validateBabelBindingLifecycle} from './babel-terrace-bindings.mjs';
 const names=[['babel-mouth-clearance','fitBabelRadialMouths'],['babel-spoke-mounts','mountBabelSpokes'],['babel-vault-perimeter','fitBabelPerimeter'],['babel-entry-reveals','fitBabelEntryReveals'],['babel-entry-bookcases','seatBabelEntryLamps']];
@@ -45,3 +46,5 @@ console.log('PASS Babel shelf-display seats (43 original displays; 1830 prior su
 console.log('PASS Babel shelf-display ownership programs: '+JSON.stringify(validateDisplayLifecycle(T)));
 console.log('PASS Babel central book-ring supports: '+JSON.stringify(validateBabelBookRing(T)));
 console.log('PASS Babel central book-ring ownership programs: '+JSON.stringify(validateBabelBookRingLifecycle(T)));
+console.log('PASS original Babel reading-plinth contacts and single cover seat: '+JSON.stringify(validateReadingPlinth(T)));
+console.log('PASS complete Babel reading-plinth ownership programs: '+JSON.stringify(validateReadingPlinthLifecycle(T)));

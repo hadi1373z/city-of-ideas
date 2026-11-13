@@ -7,7 +7,7 @@ import {fitBabelEntryReveals} from './babel-entry-reveals.js';
 import {seatBabelEntryLamps} from './babel-entry-bookcases.js';
 import {mountBabelTerraceGlobes} from './babel-globe-mounts.js';
 import {seatBabelShelfSupports as seatBabelTerraceBindings} from './babel-terrace-bindings.js?v=shelf-displays1';
-import {seatBabelBookRing} from './babel-book-ring.js?v=2';
+import {seatBabelReadingPlinth as seatBabelBookRing} from './babel-book-ring.js?v=reading-plinth1';
 export function installBabelLibrary(M,T){
  const built=buildBabelLibrary(T,{drawing:M.snakeDrawing});M.scene.add(built.group);const mouthClearance=fitBabelMouths(T,built),spokeMounts=mountBabelSpokes(T,built),vaultPerimeter=fitBabelPerimeter(T,built),entryReveals=fitBabelEntryReveals(T,built),entryBookcases=seatBabelEntryLamps(T,built),terraceGlobes=mountBabelTerraceGlobes(T,built,mouthClearance),terraceBindings=seatBabelTerraceBindings(T,built,mouthClearance),bookRing=seatBabelBookRing(T,built,mouthClearance);M.city.targets.push(...built.targets);let active=false,disposed=false,lastContext='',prefix='',address=0,lighting=null;
  const lang=()=>window.CITY_I18N.lang,w=()=>BABEL_COPY[lang()]||BABEL_COPY.en,el=(tag,text)=>{const n=document.createElement(tag);if(text)n.textContent=text;return n;},button=(text,fn)=>{const n=el('button',text);n.type='button';n.dataset.babelFocus=text;n.onclick=fn;return n;};

@@ -3,6 +3,12 @@ import {BABEL} from './babel-library-model.js?v=two-faces2';
 // Public static display supports. Original books, footing and well floor stay
 // owned by Babel; the only new geometry is the footing's two vertical sides.
 export function seatBabelBookRing(T,built,mouths){
+ return seatBookSupports(T,built,mouths,false);
+}
+export function seatBabelReadingPlinth(T,built,mouths){
+ return seatBookSupports(T,built,mouths,true);
+}
+function seatBookSupports(T,built,mouths,includeReadingCover){
  const data=(o,k)=>o&&Object.getOwnPropertyDescriptor(o,k)?.value;
  const root=data(built,'group'),fit=data(mouths,'group'),bindings=data(mouths,'bindings');
  const empty=()=>({group:null,parts:[],frames:[],sync(){},dispose(){}});
@@ -45,7 +51,7 @@ export function seatBabelBookRing(T,built,mouths){
  if(rows.length!==384||pages.length!==64||pages.some(p=>p.owner!==p.source||p.source.count!==107)||
    new Set(pages.map(p=>p.source)).size!==1)return empty();
  const inside=(m,p)=>p.clone().applyMatrix4(m.clone().invert()).toArray().every(v=>Math.abs(v)<.500005);
- const parts=[],frames=[],used=new Set([foot,base]);
+ const parts=[],frames=[],used=new Set([foot,base]),readingOwners=new Set();let readingCover=null;
  for(const page of pages){
   const w=page.s.x+.052,h=page.s.y+.085,d=page.s.z+.055,
    tangent=new T.Vector3().setFromMatrixColumn(page.m,0).normalize(),radial=new T.Vector3().setFromMatrixColumn(page.m,2).normalize(),
@@ -71,7 +77,47 @@ export function seatBabelBookRing(T,built,mouths){
   for(const f of [...feet,page]){used.add(f.source);used.add(f.owner);}
   parts.push({matrix:m});frames.push({page,covers:feet.slice(0,2),spine:feet[2],bottoms,part:parts.length-1});
  }
- const vertices=[];
+ if(includeReadingCover){
+  const plinth=root.children.find(o=>data(o,'name')==='Quiet circular reading plinth'),
+   surface=root.children.find(o=>data(o,'name')==='Round oak reading surface');
+  if(data(plinth,'isMesh')!==true||data(surface,'isMesh')!==true||
+    plinth.geometry?.type!=='CylinderGeometry'||surface.geometry?.type!=='CylinderGeometry'||
+    !local(plinth).equals(new T.Matrix4().makeTranslation(0,BABEL.base+.33,0))||
+    !local(surface).equals(new T.Matrix4().makeTranslation(0,BABEL.base+.6975,0))||
+    !near(plinth.geometry.parameters.radiusTop,1.12)||!near(plinth.geometry.parameters.radiusBottom,1.27)||
+    !near(plinth.geometry.parameters.height,.66)||plinth.geometry.parameters.radialSegments!==64||
+    !near(surface.geometry.parameters.radiusTop,1.38)||!near(surface.geometry.parameters.radiusBottom,1.38)||
+    !near(surface.geometry.parameters.height,.075)||surface.geometry.parameters.radialSegments!==64)return empty();
+  const heights=o=>{const p=o.geometry.attributes.position,m=local(o),ys=Array.from({length:p.count},(_,i)=>new T.Vector3().fromBufferAttribute(p,i).applyMatrix4(m).y);return{min:Math.min(...ys),max:Math.max(...ys)};},
+   ph=heights(plinth),sh=heights(surface),candidates=[];
+  if(!near(ph.min,baseY,1e-6)||!near(ph.max,sh.min,1e-6))return empty();
+  for(const b of boxes)for(let id=0;id<b.source.count;id++){
+   const raw=new T.Matrix4();b.source.getMatrixAt(id,raw);if(Math.hypot(raw.elements[12],raw.elements[14])>1e-5)continue;
+   const p=new T.Vector3(),s=new T.Vector3();raw.decompose(p,new T.Quaternion(),s);
+   if(near(p.y,BABEL.base+.758)&&near(s.x,1.14)&&near(s.y,.045)&&near(s.z,.86)){
+    const m=new T.Matrix4();b.clone.getMatrixAt(id,m);candidates.push({source:b.source,owner:b.clone,id,raw,m,p,s});
+   }
+  }
+  if(candidates.length!==1||!candidates[0].m.equals(candidates[0].raw))return empty();
+  const cover=candidates[0],coverBottom=cover.p.y-cover.s.y/2,gap=coverBottom-sh.max;
+  if(gap<.00049||gap>.00051)return empty();
+  const bottom=sh.max-.0002,top=coverBottom+.0002,matrix=new T.Matrix4().compose(
+   cover.p.clone().setY((top+bottom)/2),new T.Quaternion().setFromRotationMatrix(new T.Matrix4().extractRotation(cover.m)),
+   new T.Vector3(cover.s.x-.02,top-bottom,cover.s.z-.02));
+  matrix.fromArray(new Float32Array(matrix.elements));
+  const inSurface=p=>p.y>=sh.min&&p.y<=sh.max&&Math.hypot(p.x,p.z)<1.38*Math.cos(Math.PI/64);
+  for(const [y,contains]of[[sh.max-.0001,inSurface],[coverBottom+.0001,p=>inside(cover.m,p)]])
+   for(const x of[-.00005,.00005])for(const dy of[-.00005,.00005])for(const z of[-.00005,.00005]){
+    const p=new T.Vector3(x,y+dy,z);if(!inside(matrix,p)||!contains(p))return empty();
+   }
+  for(const x of[-.5,.5])for(const z of[-.5,.5]){
+   if(!inSurface(new T.Vector3(x,-.5,z).applyMatrix4(matrix))||
+     !inside(cover.m,new T.Vector3(x,.5,z).applyMatrix4(matrix)))return empty();
+  }
+  readingCover={plinth,surface,cover,surfaceTop:sh.max,coverBottom,gap,part:parts.length};parts.push({matrix});
+  for(const o of[plinth,surface,cover.source,cover.owner])used.add(o);readingOwners.add(plinth);readingOwners.add(surface);
+ }
+ const expectedParts=includeReadingCover?65:64,vertices=[];
  for(let i=0;i<320;i++)for(const side of[0,1]){
   const a=new T.Vector3().fromBufferAttribute(fp,i*2+side),b=new T.Vector3().fromBufferAttribute(fp,(i+1)*2+side),
    c=b.clone().setY(baseY),d=a.clone().setY(baseY),points=side?[a,b,c,a,c,d]:[a,d,c,a,c,b];
@@ -88,7 +134,7 @@ export function seatBabelBookRing(T,built,mouths){
  const records=[...used].map(o=>({o,parent:o.parent,geometry:o.geometry,material:o.material,
   buffer:o.isInstancedMesh?o.instanceMatrix:null,array:o.isInstancedMesh?o.instanceMatrix.array:null,
   version:o.isInstancedMesh?o.instanceMatrix.version:null,count:o.count,pose:local(o).clone()}));
- const visibility=records.filter(r=>r.parent===fit||r.o===pages[0].source||r.o===foot||r.o===base).map(r=>r.o);
+ const visibility=records.filter(r=>r.parent===fit||r.o===pages[0].source||r.o===foot||r.o===base||readingOwners.has(r.o)).map(r=>r.o);
  const geometries=[...new Set([...records.map(r=>r.geometry),geometry])].map(g=>({g,attributeObject:g.attributes,index:g.index,
   indexArray:g.index?.array,indexVersion:g.index?.version,attributes:Object.entries(g.attributes).map(([k,a])=>({k,a,array:a.array,version:a.version}))}));
  const previous=built.dispose;let disposed=false;const wrapped=function(...args){dispose();return previous.apply(this,args);};built.dispose=wrapped;
@@ -107,7 +153,7 @@ export function seatBabelBookRing(T,built,mouths){
     group.parent!==root||mesh.parent!==group||footing.parent!==group||
     !local(fit).equals(identity)||!local(group).equals(identity)||!local(mesh).equals(identity)||!local(footing).equals(identity)||
     mesh.geometry!==unit||mesh.material!==material||footing.geometry!==geometry||footing.material!==material||
-    mesh.count!==64||data(mesh,'instanceMatrix')!==ownBuffer||data(ownBuffer,'array')!==ownArray||ownBuffer.version!==ownVersion||
+    mesh.count!==expectedParts||data(mesh,'instanceMatrix')!==ownBuffer||data(ownBuffer,'array')!==ownArray||ownBuffer.version!==ownVersion||
     records.some(r=>r.o.parent!==r.parent||r.o.geometry!==r.geometry||r.o.material!==r.material||
      data(r.o,'instanceMatrix')!==(r.buffer||undefined)||(r.buffer&&(data(r.buffer,'array')!==r.array||r.buffer.version!==r.version||r.o.count!==r.count))||!local(r.o).equals(r.pose))||
     geometry.morphAttributes!==ownMorphAttributes||
@@ -116,5 +162,5 @@ export function seatBabelBookRing(T,built,mouths){
   group.visible=root.visible&&fit.visible&&visibility.every(o=>o.visible);
  }
  sync();
- return{group,mesh,footing,geometry,parts,frames,foot,base,footY,baseY,sync,dispose,get disposed(){return disposed;}};
+ return{group,mesh,footing,geometry,parts,frames,readingCover,foot,base,footY,baseY,sync,dispose,get disposed(){return disposed;}};
 }

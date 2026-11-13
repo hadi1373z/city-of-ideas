@@ -7990,3 +7990,94 @@ branch/PR5/exact Houses-Concurrent text; main Proof work/conflict separate.
 No new merge/reconciliation/deploy; user's headed preview untouched.
 
 Next useful review: audit the original quiet central reading plinth, round oak surface and lower book-cover bearing contacts in Babel. Keep both tilted leaves and the shared reservoir contact tip Y-25.651827, glass/fluids/glow, the newly supported 64-volume ring, all shelf supports, annular shaft, routes/catalogue and eleven genuine scans exact and distinct. Use public static faces/owners only; preserve profiles/source-private coordinates/clearances/cleanup. Only measured justified joins or factual audit; no new book/page/paper/first reading/light/column/barrier/historical copy/certification.
+
+## 2026-11-13 — Babel central reading plinth: one recessed cover seat
+
+Follow-up to7f9b70ed3135a8694f3aacb038dfcaa1d4c865e0; complete measurements/
+ownership/limits in docs/BABEL-READING-PLINTH.md. All47first readings/all8
+working floors remain complete. No new reading/book/page/paper/folio.
+
+Original64-facet plinth foot5.058939113square metres meets original160-triangle
+well floor within-.000000013113m/complete projected coverage. Original
+3.934486438square metre plinth cap meets oak underside within-.000000014603m,
+inside original5.973242861square metre surface. Preserve65.868516139% projected
+underside support/.26m overhang; no duplicate foot/column/edge prop or
+complete-bottom/capacity claim. Profiles/poses stay exact.
+
+Original lower cover uses actual mouth copy, matrix bit-exact to source.
+Complete.980400004square metre footprint projects inside oak top. Actual
+coverbottomY-25.764500580728/topY-25.764999998510 leave.000499417782m gap.
+This source-only negative remains strict. Both original tilted leaves retain
+two positive.006cube cover contacts, lowestY-25.738369261221 and unchanged
+shared seam/tipY-25.651826792546203; upper-plane errors<4e-15m. No leaf/
+cover/vessel/glass/fluid/glow dimension/pose/uniform changes.
+
+One timber seat appends ONLYID64 to existing ring batch. Actualwidth/depth
+minus.02/gap+.0004 give1.120000005x.000899418x.840000033m, .009999990m edge
+recess. Lower/upper embed .000199237/.000200763m; two positive.0001cube cores
+check8vertices each. Four lower/upper corners inside actual64-sided oak/
+cover;95.960836143% cover-plan bearing is partial. No coincident exposed face.
+Maximumradius.700000012m/top1.764299818m below lowestfeet/.112473026m below
+unchanged reservoir tip; all96original tread envelopes clear by vertical
+separation. No floor/stair/rail/landing/mouth/shaft/collider/model/gate change.
+
+Explicit seatBabelReadingPlinth installs65parts; standalone seatBabelBookRing
+keeps64parts/48programs independently, every earlier matrix/ID/side-geometry
+profile exact.72draws/87resources/39buffers unchanged;43866->43867instances.
+No additional draw/batch/geometry/material/texture/image/light/pick/UI/listener/
+reader/private key/saved diagram. Uses existing unit box/timber; historical
+group/mesh names stay. Older1810/1830/1873APIs and all controls stay strict.
+
+59ownership/private/custom-layout programs include48earlier cases/eight
+reading-owner invalidations/two visibility cases/unsupported-gap and usable
+legacy-ring control. Plinth/surface/source-copy/geometry/attribute-array/
+version/material/count/pose ownership guards; visibility without source
+writes. Own references restore before disposal; foreign replacements untouched.
+All87resources/39buffers once/borrowed drawing0. Construction/sync deny DOM/
+storage/fetch/colour getters/new material-texture-light constructors.
+
+Raw65/41893 stays r1867b21ef65/nativebfee858c with NO exclusions. Virtual
+omission of ONLYnew ownedID64 recovers complete7f72/43866 r186f2299842/
+native14163b69, every earlier node/ID/profile/pose, without live count edits.
+Full new72/43867 r18652609e62/natived474e2fd locked. All398mouth fits/12copies/
+far ends/18300rowvolumes/1873shelf supports/64ringpads/footing/globes/31cases/
+partial guard-casework feet/entry-perimeter/historical negatives/unrelaxed
+budgets remain. No old-node/ID/profile exclusion or restored retired stand-in.
+
+All124release programs pass. Native4whole-scene expected-ID rays, static
+contacts/coverage/leaf/seam checks/full fingerprints and8matched1000x700
+front-side macros/assembly/seam before-after views pass. Before omits onlyID64;
+restores65count/64prior ringpads/1873shelf supports/renderer/pose. Live WebGL
+foreign-attribute/buffer cleanup releases own geometry/buffer once, cache
+drops1/borrowed0/foreignreads0/source-retained data exact; fresh document
+restores complete new scene. Final hashes pass after photos.
+
+Ordinary pointer/W walks all4radial descents/25floor heights each tofeet-24.
+Ten first/bottom pointer/E readers retain page0/aaaaaa/empty prefix/exact
+source/same-pose close, EN-DE-FA-CS/PersianRTL/Czech English fallback/11ready
+genuine pages. Original explicit exitfeet.395/Z12;1280x720/.35QA restores1.
+No new walked-ascent/pose assignment/bypass/autotour claim. Zero app errors/
+one existing Three warning/controllerA separately untested. ExplicitLOCAL
+880asset verification accompanies PR#5.
+
+Main advanced separately toe646bb23787e127a1b922e367d7816645db4ffd3 during
+this review: Babel walking exit keeps pose/yaw/pitch/held movement through
+arriveGallery keepMovement, explicit return faces away, and Controls/help/
+dock/mobile layout return. This and earlier Proof workthroughf7b295 remain
+unmodified/unintegrated on main. Existing PR conflict stays separate; this
+review makes no upstairs/Controls verification or new merge/reconciliation/
+deployment claim. Preserve e646bb2 in any later authorized integration.
+
+Preserve all47sourced readings/exact routes/raw drafts/carets/first answers/
+keys/explicit saves/EN-DE-FA-CS/RTL/formulaLTR/local-global-saved preferences/
+English gaps, island/Zarathustra/source-private coordinates/proper lower
+half-turn/480gallerytreads/middle/well/tunnel/earth cut/eightfloor24IDwing/
+realstairs/lift/central3mdoor/Faculty/covered walk/Escher/models/experiments/
+artwork/gates/11genuine scan bytes/editions/rights/source/zoom/approved cast/
+fixed voices/recordings/all full contracts. Construction/rendering has no
+private-memory/storage/progress/preference-write/experiment/discovery/audio/
+travel/floor action. No historical copy/quotation/testimony/source-fetch/
+certification claim. Samebranch/PR5/exact Houses-Concurrent text; user's
+headed preview untouched. No other branch write.
+
+Next useful review: audit the retained pitched soffit and two side bearers beneath the first upper Gallery flight beside Babel's entry: actual end-bearing faces, source/Gallery owners, joins and overhead clearance. Read BABEL-SNAKE-DESCENT.md and the current ledger; preserve all original upper-flight and forty Babel-entry treads, snake drawing, slab/ceiling openings, mounted reveals/guards/cases, the supported central reading assembly/ring and all earlier contracts. Do not repeat completed inner-spoke/outer-column or perimeter audits. Use public static faces only; measured justified joins or factual audit, with no source/private-coordinate change, duplicate column, barrier, new reading/paper, historical copy or certification.
