@@ -7,6 +7,7 @@ import {validateBabelCatalogueDesks} from './babel-catalogue-desks.mjs';
 import {validateBabelTerraceGlobes} from './babel-terrace-globes.mjs';
 import {validateBabelGlobeMounts,validateBabelGlobeMountLifecycle} from './babel-globe-mounts.mjs';
 import {mountBabelTerraceGlobes} from '../src/babel-globe-mounts.js';
+import {validateBabelBalconyGuards} from './babel-balcony-guards.mjs';
 const names=[['babel-mouth-clearance','fitBabelRadialMouths'],['babel-spoke-mounts','mountBabelSpokes'],['babel-vault-perimeter','fitBabelPerimeter'],['babel-entry-reveals','fitBabelEntryReveals'],['babel-entry-bookcases','seatBabelEntryLamps']];
 const mods=await Promise.all(names.map(async([file,name])=>({name,fn:(await import('../src/'+file+'.js'))[name]}))),canvas=()=>({getContext:()=>new Proxy({},{get:()=>()=>{}})});
 function inspect(build,label,pipeline=mods){const resources=new Map(),buffers=new Map(),G={...T};for(const key of Object.keys(T))if(/Geometry$|Material$|Texture$/.test(key)&&typeof T[key]==='function')G[key]=class extends T[key]{constructor(...a){super(...a);resources.set(this,0);this.addEventListener('dispose',()=>resources.set(this,resources.get(this)+1));}};G.InstancedMesh=class extends T.InstancedMesh{constructor(...a){super(...a);buffers.set(this,0);this.addEventListener('dispose',()=>buffers.set(this,buffers.get(this)+1));}};
@@ -27,3 +28,4 @@ console.log('PASS historical five-adapter Babel globe negative control (28 shelf
 console.log('PASS two supported Babel globe mounts: '+JSON.stringify(validateBabelGlobeMounts(T)));
 
 console.log('PASS Babel globe mount ownership/custom-layout programs: '+JSON.stringify(validateBabelGlobeMountLifecycle(T)));
+console.log('PASS original Babel annular balcony guard contacts (partial floor seats retained; no new part): '+JSON.stringify(validateBabelBalconyGuards(T)));
