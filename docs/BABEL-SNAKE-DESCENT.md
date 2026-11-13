@@ -29,6 +29,10 @@ landing preserves a held movement key. The same route can be climbed back.
 The explicit return button and direct library preview remain available.
 Lighting restoration and existing book interaction gates are preserved.
 
+Walking back upstairs preserves the exact exit position, yaw, pitch and held movement through the root gallery arrival callback (`keepMovement`). It must not reuse the entrance pose that faces downstairs: a held forward stick would immediately descend again. Explicit return still clears input, but faces away from the stairwell. Regression checks use the actual root arrival implementation, cross the exit in three lanes at 30/60/120 fps, and continue beyond it without recapture.
+
+Babel retains the ordinary action dock and desktop movement guide. Its context card offers an explicit localized Controls / help button and sits above the dock. On phones, the existing shared mobile layout reserves separate guide, arrow and horizontally scrolling action zones. Browser inspection covers the help dialog, narrow-phone layout and a continuous upstairs handoff. No stair geometry, private saves, voices or source credits change.
+
 Checks compare the upper/lower footprint and head measurements, every new physical
 tread against navigation height, shaft headroom, left/centre/right descent, the
 landing-to-ring connection, original reversible flights, floor holes, borrowed
