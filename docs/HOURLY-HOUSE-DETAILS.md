@@ -8525,3 +8525,48 @@ Main6cab1c9 Proof/e646bb2 exit-Controls remain separate/unintegrated; samebranch
 PR5/exactHouses-Concurrent text/existingconflict, no merge/reconciliation/deploy.
 
 Next useful review: audit the original four upper Gallery annular inner balcony guards: complete post feet, floor-cap contacts and actual post/upper/middle-rail joints, distinct from completed helical/Babel guards. Preserve all documented column/spoke gaps, lift access limits, apertures, well, terminal breaks, source profiles/private coordinates/resources and original actions. Only measured justified existing-face correction or factual audit; no new part, closure across a route, widened boundary, automatic travel, ornament, historical copy or certification.
+
+## 2026-11-14 — PR #5 merge-conflict repair, explicitly requested by the user
+
+The user requested resolving PR #5 against current main, committing and
+pushing the fix. This authorizes this reconciliation and supersedes the prior
+hourly no-reconciliation instruction for this repair. It does not authorize
+merging PR #5 into main or deploying.
+
+GitHub CLI confirmed headb0d7c173b33420dc93c7c58bff122c4fcde9cb1a,
+CONFLICTING/DIRTY. A fresh Git fetch confirmed current main
+6cab1c9b0c7694fbbf73f1d549ce9219228d244e; PR metadata's older base OID was
+2176dde. The clean existing feat/hourly-house-details worktree was used.
+A normal merge preserves both published histories; no rebase or force push.
+
+Four conflicted text files were resolved with apply_patch:
+src/babel-library.js retains all nine detail installers and main's new model
+copy/Controls handoff; src/city-integration.js and src/index.html use combined,
+matching loading versions while keeping Czech and the supported roof script;
+tests/babel-library.mjs retains both the real held-input arrival regression
+and the detail branch's foreign-owner/cleanup checks. Main's Proof exchange,
+matching/cover feedback, Babel walking-exit/facing, help/dock/mobile changes
+are now integrated. Earlier descriptions of6cab1c9/e646bb2 as unintegrated are
+historical; this entry governs the current branch.
+
+Nine targeted programs pass: Babel library/current merged adapters,
+Proof Atelier model/UI, Gallery doors/spiral, mobile controls, default language
+and import/build. No source geometry fingerprint or old budget was relaxed.
+Native forty-step descent/ascent retains41heights each. Held W continues to
+galleryZ14.1004 with yaw/pitch unchanged and no re-entry; explicit Return
+facespi atfeet.395/Z12. EN/DE/FA/CS Controls/help keeps pose and pauses held W;
+Persian mobile/context and walking-exit views were visually inspected.
+Czech retains Babel's English fallback. Eleven genuine pages remain ready.
+
+Final source/installed/prior/Gallery fingerprints, owned resources, fresh
+saved Czech, ratio1/own-field/browser cleanup and explicit LOCAL committed-build
+asset verification accompany PR #5. The user's headed preview is untouched.
+No invented reading, historical object, quotation, testimony or source-fetch
+claim; all47 readings/eight Math floors/24IDs/stairs/lift/480helical treads/
+source-private coordinates/drafts/carets/first answers/keys/voices/scans/rights
+remain. Column/spoke gaps and six guarded book-floor gaps remain unrepaired.
+Construction/companion/locale rendering retains all read-only boundaries.
+
+The next hourly architecture review remains the four original upper Gallery
+annular inner balcony guards, as specified above. No guard geometry or first
+reading was added during this conflict repair. No PR merge or deployment.

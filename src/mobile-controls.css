@@ -7,7 +7,7 @@
  body.inside #visit-hud .touch-pad>button{display:block;margin:0 auto 6px}
  body.inside #visit-hud .touch-pad>div{display:flex;gap:6px;justify-content:center}
  body.inside #visit-hud .visit-actions{left:var(--city-touch-left);right:var(--city-touch-right);bottom:calc(8px + env(safe-area-inset-bottom,0px));width:auto;max-width:none;height:52px;box-sizing:border-box;flex-wrap:nowrap;gap:6px;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;touch-action:pan-x;scrollbar-width:thin;z-index:40;direction:ltr}
- body.inside:not([data-babel-library]):not([data-ocean-voyage]):not([data-story-following=true]) #visit-hud .visit-actions{display:flex!important}
+ body.inside:not([data-ocean-voyage]):not([data-story-following=true]) #visit-hud .visit-actions{display:flex!important}
  body.inside #visit-hud .visit-actions button{flex:0 0 auto;min-width:48px;min-height:44px;height:44px;margin:0;padding:8px 11px;font-size:11px;white-space:nowrap}
  body.inside #visit-hud .movement-help{display:none}
  body.inside #visit-hud .route-label{left:var(--city-touch-left);right:auto;bottom:var(--city-touch-bottom);top:auto;max-width:calc(100vw - 204px - var(--city-touch-left) - var(--city-touch-right));max-height:114px;box-sizing:border-box;overflow:hidden;padding:9px;font-size:11px;line-height:1.5;pointer-events:none;z-index:4;white-space:normal}
