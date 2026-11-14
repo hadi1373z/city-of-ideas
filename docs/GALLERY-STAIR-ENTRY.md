@@ -112,4 +112,9 @@ fixed voices/recordings and every full preservation contract.
 Same branch / PR #5. Exact Houses/Concurrent text and existing conflict stay;
 no new merge, reconciliation or deployment. User's headed preview is untouched.
 
-Next useful review: audit the remaining upper Gallery landing approaches with small frame-sized movements, especially the original .08 m hole margin and .02 m entry tolerance. Inspect actual support faces, previous/current poses and forward/reverse gates across all four retained flights before editing. Preserve this frontal fix, all 160 upper and forty Babel treads, bearer joints, source/private coordinates, original explicit actions and separate main work. Only a bounded correction within the existing physical route or a factual audit; no automatic tour/travel, broad collision bypass, extra geometry or unrelated ornament.
+Next review recorded at 44ef6dc (completed by the landing audit): audit the remaining upper Gallery landing approaches with small frame-sized movements, especially the original .08 m hole margin and .02 m entry tolerance. Inspect actual support faces, previous/current poses and forward/reverse gates across all four retained flights before editing. Preserve this frontal fix, all 160 upper and forty Babel treads, bearer joints, source/private coordinates, original explicit actions and separate main work. Only a bounded correction within the existing physical route or a factual audit; no automatic tour/travel, broad collision bypass, extra geometry or unrelated ornament.
+
+[GALLERY-LANDING-APPROACHES.md](GALLERY-LANDING-APPROACHES.md) corrects the
+supported roof strip and records the six different book-floor gaps. The ground
+frontal correction, original gates and every geometry/resource remain exact.
+The latest ledger governs the next review.

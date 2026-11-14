@@ -8239,3 +8239,73 @@ Samebranch/PR5/exactHouses-Concurrent text; main Proof/Babel work/conflict
 separate. No new merge/reconciliation/deploy.
 
 Next useful review: audit the remaining upper Gallery landing approaches with small frame-sized movements, especially the original .08 m hole margin and .02 m entry tolerance. Inspect actual support faces, previous/current poses and forward/reverse gates across all four retained flights before editing. Preserve this frontal fix, all 160 upper and forty Babel treads, bearer joints, source/private coordinates, original explicit actions and separate main work. Only a bounded correction within the existing physical route or a factual audit; no automatic tour/travel, broad collision bypass, extra geometry or unrelated ornament.
+
+## 2026-11-14 — Supported Gallery roof landing opened; book-floor gaps audited
+
+Follow-up to44ef6dc2c8489bfadd08c3dbe2318861df145c7d.
+Full measured scope: docs/GALLERY-LANDING-APPROACHES.md. All47first readings/
+all8Mathworking floors remain complete; Gallery book floors are distinct.
+
+Original roof landing already spansZ11.10..12.60/topY32.395/fullstairwidth.
+Its .10deep box atcentre39.450980392156865/32.345/11.85 bridges roof-opening
+endmargin11.20..11.28. Old canWalk rejected holeAt before its own landing
+predicate. Factor/reuse that exact .35side-inset/Z>=run/Z<run+1.4 predicate
+through the guard. Only actual supported .08strip becomes walkable; original
+entry/exit owns heights/floors/modes. Interior/side guards/gardens/infant/
+roof edges remain. No new geometry/draw/resource/buffer/light/collider/pick/
+UI/listener/reader/key/model/state, turn/placement/auto-tour/travel/broad bypass.
+Gallery frontal precheck/Babelmovement/guards/controls and integrationkeys exact;
+only roofscriptcachekey advances.
+
+New actual-runtime/actual-roof regression first fails against old guard despite
+real support. Passes205supported points/75small descending entries/75onward
+roof exits/fivelanes/.005-.1m moves/threephases/21rejected guardband points/
+private-storage-progress-resident-memory-DOM denial/unchanged yaw-pitch/
+touringoff/original receiver. All124release programs pass, including175original
+frontal crossings. Complete old roof32meshes/1328instances exact, no exclusion:
+nodebf79c347b5b1b090afaf7708c62eca9de9a0dfa21ea1067c279b3c57d7d113c1;
+nativec4eb5b6831ca068e2304c4d9a7eae6d32dfca404b9dc3177a9d76c260177ebf4.
+
+Factual remaining limit: three Gallery book floors/index1..3/feet8.395/
+16.395/24.395 retain .08m front/back gaps between original floorcutZ-.08/
+11.28 and treads0..11.20. Sixactual cap misses at-.04/11.24; twelve native
+probes retain adjacent floor hits. No rooflandingbox there. Of120selected
+entry cases102stop/18enter; larger frame steps may cross in some phases.
+No all-approaches-clear or repaired-book-floor claim; no guard relaxation over
+unsupported strips, added support/floor extension or changed opening/profile.
+
+Native original floor/stair UI +pointer/W ascends fourth40steps/all41heights
+24.395..32.395. Simulated standard stick through original browser poll checks
+three roof-mouth descents/returns at small steps, never assigns visitor pose.
+Temporary stricter old guard stopsZ11.204568; restoring original corrected
+function atsamepose allows11.233548 on landing. Nine named installed landing
+rays hitY32.395000000745064; old/current native builder hashes match fully.
+EN-DE-FA-CS samepose/PersianRTL; four real old-stop/strip/aperture/FA views
+visually checked. HardwarecontrollerA separately untested. Own input mock,
+method, renderer and QAfields restore; user's headedpreview untouched.
+
+All47readings/exact interactions/raw drafts/carets/first answers/keys/explicit
+saves/experiments/EN-DE-FA-CS/RTL/formulaLTR/local-global-saved languages/English
+gaps stay. Rendering/reading/locale no private memory/storage/progress/write/
+experiment/discovery/audio/travel/floor action. All160upper/40Babel/480helical
+treads, source hashes/resources/once-only cleanup/nineadapters/398fits/12copies/
+1873supports/65part ring/soffit/2bearers/4joints remain. Preserve book/tip/
+fluids/glow/source-private coordinates/proper lower frame/island/Zarathustra/
+eightfloor24IDwing/realstairs/lift/Faculty/coveredwalk/Escher models/gates/
+experiments/artwork/11genuine scan bytes/editions/rights/source/zoom/fixedvoices/
+recordings/full preservation contracts. No new reading/historical copy/
+quotation/testimony/source-fetch/capacity/certification claim.
+
+Main6cab1c9 newer Proof matching-cover feedback and e646bb2 Babelexit/Controls
+remain separate/unintegrated. Samefeaturebranch/PR5/exactHouses-Concurrent
+text/existingconflict; no merge/reconciliation/deploy. Original explicit40-step Babel descent retains41heights.395..-8; eight EN-DE-FA-CS
+pointer/E catalogue readers retainpage0/aaaaaa/empty prefix/exact source/samepose
+close/FA RTL/held-Wmodalpause/CzechEnglishfallback. Explicit returnfeet.395/Z12.
+Fresh document retains explicit savedCzech/11ready genuine pages/ratio1, all
+own fields removed/ownbrowserclosed. Raw65/41893nativebfee858c/complete73/43867
+native7448aaec/full upper290/0ade8ee63 remain exact; all88resources/39buffers/
+32bearingcorners/8positive+6retainedcores/552bodyrays/four expected mesh rays
+pass. Zeroapp errors/one existing Threewarning; explicit LOCAL committed-build
+asset verification accompanies PR#5.
+
+Next useful review: audit the original Gallery floor-lift side landings and door approaches on the three upper book floors, using actual installed faces, ordinary walking and original explicit transfers. Keep the six measured .08 m stair-end gaps disclosed and their guards intact; do not claim a book-floor gap repair or invent support. Preserve the ground frontal-entry and supported roof-landing corrections, all source/private coordinates, geometry and earlier contracts. No extra geometry, automatic travel, broad void bypass or unrelated ornament; otherwise record a factual audit.

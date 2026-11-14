@@ -36,8 +36,10 @@ g.createRoofConnection=function(T,{scene,city,stairs,tiles=null}){
  function inGarden(x,z){return plantedZones.some(g=>{const dx=x-g.cx,dz=z-g.cz,r=Math.hypot(dx,dz),angle=(Math.atan2(dz,dx)+Math.PI*2)%(Math.PI*2);return r>g.ri-.35&&r<g.ro+.35&&angle>g.a-.025&&angle<g.b+.025;});}
  const rails=new T.InstancedMesh(new T.CylinderGeometry(.045,.045,1,6),bronze,railTransforms.length);railTransforms.forEach((m,i)=>rails.setMatrixAt(i,m));rails.name='Batched roof and bridge guards';group.add(rails);
  function onBridge(x,z,margin=.35){return x>=deck.minX&&x<=deck.maxX-margin&&z>=deck.minZ+margin&&z<=deck.maxZ-margin;}
- function baseCanWalk(x,z){const r=Math.hypot(x,z);return x>=137&&x<=145&&z> -3.15&&z<5.15||onBridge(x,z)||Math.hypot(x-125,z)<=summitRadius-.65||r>=16.15&&r<=56.3&&!stairs.holeAt(x,z,4)||Math.abs(x-stairs.centerX)<half-.35&&z>=stairs.run&&z<stairs.run+1.4;}
- function canWalk(x,z){if(stairs.holeAt(x,z,4))return false;return baseCanWalk(x,z);}
+ function onStairLanding(x,z){return Math.abs(x-stairs.centerX)<half-.35&&z>=stairs.run&&z<stairs.run+1.4;}
+ function baseCanWalk(x,z){const r=Math.hypot(x,z);return x>=137&&x<=145&&z> -3.15&&z<5.15||onBridge(x,z)||Math.hypot(x-125,z)<=summitRadius-.65||r>=16.15&&r<=56.3&&!stairs.holeAt(x,z,4)||onStairLanding(x,z);}
+ // The existing stone landing bridges the opening's .08 m end margin.
+ function canWalk(x,z){if(stairs.holeAt(x,z,4)&&!onStairLanding(x,z))return false;return baseCanWalk(x,z);}
  function canVisit(x,z){if(!canWalk(x,z)||inGarden(x,z))return false;const baby=city.mountain.infant;if(!baby.visible||Math.abs(baby.position.y-height)>3)return true;const dx=x-(city.A.x+baby.position.x),dz=z-(city.A.z+baby.position.z),c=Math.cos(baby.rotation.y),s=Math.sin(baby.rotation.y),lx=c*dx-s*dz,lz=s*dx+c*dz,nearest=Math.max(-3.6,Math.min(1.5,lx));return Math.hypot(lx-nearest,lz)>=3.15;}
  let progress=0,target=0,lastTime=null,moving=false,waiting=false,crawlSpeed=2.2;const lengths=route.slice(1).map((p,i)=>Math.hypot(p.x-route[i].x,p.z-route[i].z)),total=lengths.reduce((a,b)=>a+b,0);
  function pointAt(distance){let remaining=Math.max(0,Math.min(total,distance));for(let i=0;i<lengths.length;i++){if(remaining<=lengths[i]||i===lengths.length-1){const u=remaining/lengths[i],a=route[i],b=route[i+1];return{x:a.x+(b.x-a.x)*u,z:a.z+(b.z-a.z)*u,dx:(b.x-a.x)/lengths[i],dz:(b.z-a.z)/lengths[i]};}remaining-=lengths[i];}}

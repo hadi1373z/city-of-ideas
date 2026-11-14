@@ -2,6 +2,12 @@
 
 The mountain retains exactly four complete turns (8 pi radians). Its summit and the gallery roof share elevation 32.395. The original entrance alignment and chapter IDs remain unchanged.
 
+The later [supported roof landing review](GALLERY-LANDING-APPROACHES.md) fixes
+small-step entry/exit across the existing landing at Z11.20..11.28. It adds no
+geometry and preserves this roof, infant, gardens and original stair gates.
+That review separately records six unsupported book-floor end strips; it does
+not claim that every original book-floor walking approach is clear.
+
 The gallery now has four straight flights of 40 physical treads: ground to book levels 2, 3, 4, then roof. All four flights keep the snake direction, the original drawing and one snake-head width. The roof slab has a matching stairwell opening and an accessible landing.
 
 A single centered terrace replaces the two parallel bridges, including their dividing rails and overhead track. Its edges lie equally on either side of the straight crawling axis. The former projecting side apron is removed; the return lift fits within the existing rounded infinity crossing. Guards follow the combined outer boundary. Visitors can walk in both directions and descend through the roof stairwell. “Stairs to roof” stages the last stair flight and follows it to the rooftop; the roof exit control stages the descent.
