@@ -104,4 +104,8 @@ Main6cab1c9 Proof feedback and e646bb2 Babel exit/Controls remain separate.
 Same branch/PR#5/exact Houses-Concurrent text/existing conflict; no merge,
 reconciliation or deployment. User's headed preview stays under their control.
 
-Next useful review: audit the original Gallery lift shaft frame/glass and fixed landing bearing contacts, from actual installed box faces and existing owners. Keep this factual access distinction: explicit transfers end at supported interior (54.2,12), while upper side landings remain beyond the retained ring limit and continuous glazing. Preserve all source profiles/windows/resources, both walking fixes, six disclosed stair-end gaps and original explicit actions. No new geometry, widened boundary, doorway cut, automatic travel or ornament; only justified existing-face corrections or a factual audit.
+The next review recorded here at5680426 is now complete: see
+[Gallery lift frame and landing contacts](GALLERY-LIFT-FRAME.md). It records
+actual glass/upright cap containment, side-face contacts, partial annular-floor
+embedding and retained clearances, with no production geometry or access change.
+The latest hourly ledger governs the next area.

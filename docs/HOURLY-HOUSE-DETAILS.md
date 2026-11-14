@@ -8373,3 +8373,77 @@ upper290/0 hashade8ee63/88resources/39buffers/32corners/8positive+6retainedcores
 Threewarning. Explicit LOCAL committed-build verification accompanies PR#5.
 
 Next useful review: audit the original Gallery lift shaft frame/glass and fixed landing bearing contacts, from actual installed box faces and existing owners. Keep this factual access distinction: explicit transfers end at supported interior (54.2,12), while upper side landings remain beyond the retained ring limit and continuous glazing. Preserve all source profiles/windows/resources, both walking fixes, six disclosed stair-end gaps and original explicit actions. No new geometry, widened boundary, doorway cut, automatic travel or ornament; only justified existing-face corrections or a factual audit.
+
+## 2026-11-14 — Gallery lift frame and landing contacts: factual audit
+
+Follow-up to568042602f57871760c137df48e820dccaf18f8f.
+Full contract: docs/GALLERY-LIFT-FRAME.md. All47 first readings/all8 Math
+working floors remain complete. Tests/documentation only; no production
+source/CSS/asset/geometry/collision/UI/language/resource/state change.
+
+Actual quarter-turned architecture retains four .10x32.1x.10 uprights,
+three glass panes and four fixed side landings: eleven static meshes.
+Post boundsY-.049999237..32.049999237; glassY0..32. Six complete narrow glass
+edge caps/24corners and six positive2mm cores/48vertices meet existing posts.
+Eight inner-post/landing joints have .018000001m2 side-face overlap and
+-.00000009611249m signed separation from Float32 rounding. No shared2mm
+core: side contacts are not bearing seats. Eight outer-post gaps.750000095m
+and twelve pane gaps(eight.032499905/four.782500095m) remain exact.
+No filler/duplicate post/overhead cap/door/floor extension/boundary widening.
+
+Fixed landings partly embed in original annular floor body/cap:
+24positive2mm cores/192vertices atX55.6/Z10,12,14 andYfloor+.315/.3825.
+This establishes sampled positive embedding, not whole-underside coverage
+or capacity. Native36footprint rays hit retained visible layer1 lawnY.005;
+post caps embed.054999237m below that surface, not a foundation proof or
+highest-surface claim. Open frame top and all original profiles remain.
+
+Shared fixture extraction leaves original target3 scope26/286hash512f8d8d
+and every old lift assertion exact:3transfers/177timedsamples/27supports/
+36glazing rays/5058moves. Eleven static meshes retain full Node/native
+SHA256:f1401ad0cf6b1ec59d2f20767f3aa85d865855f28e91254daa2cc8c7f2c14f05,
+no omission/exclusion/relaxed profile/ID/budget. Model measurement denies
+DOM/storage/fetch; pure native inspection leaves pose/resources untouched.
+Fixture cleanup owns only synthetic resources. All124release programs pass.
+
+Native all contacts/gaps/eleven-mesh hash/36lawn rays agree. Original floor
+button still arrives54.2/12/feet24.395; ordinary pointer/W reaches frame
+views and climbs all41 top-flight heights24.395..32.395. Four actual ground/
+side-contact/open-top/FA images visually inspected. Four-language samepose/
+PersianRTL/11ready genuine pages pass. No pose assignment/autotour/bypass;
+hardwarecontrollerA remains separately untested; user's headedpreview untouched.
+
+Original explicit Babel descent retains41heights.395..-8. Eight original
+EN-DE-FA-CS pointer/E catalogue handoffs keep page0/aaaaaa/empty prefix/
+exact source/samepose close/FA RTL/held-Wmodalpause/CzechEnglishfallback.
+Explicit returnfeet.395/Z12; fresh document retains explicit savedCzech/
+11ready genuine pages/ratio1 and removes own QA fields. Native full raw
+65/41893 hashbfee858c/prior72/43867 hashd474e2fd/complete73/43867 hash7448aaec/
+upper290/0ade8ee63/88resources/39buffers/32bearingcorners/8positive+
+6retainedcores/552bodyrays/four expected IDs remain exact. Own browser
+closed; zero app errors/one existing Threewarning. Explicit LOCAL
+committed-build verification accompanies PR#5; no public verification.
+
+Explicit upper lift transfers remain supported interior arrivals, not
+physical facade doors. Continuous upper glazing/radius56.3/six guarded
+unrepaired.08m book-floor stair gaps/both walking corrections remain exact.
+Preserve all47readings/exact pointer-E-context-header-footer-Places-directory-
+reader routes/raw drafts/carets/immutable first answers/keys/explicit actions/
+EN-DE-FA-CS/RTL/formulaLTR/saved-local-global languages/disclosed English gaps.
+Rendering/reading/locale has no private-memory/storage/progress access or
+preference-write/experiment/discovery/audio/travel/floor action.
+
+All source/private coordinates/proper lower half-turn/island/Zarathustra/
+160upper+40Babel+480helical treads/middle/well/tunnel/earthcut/rooflanding/
+soffit/2bearers/4joints/book/ring/leaf/tip/fluids/glow/raw and installed
+resources/once-only cleanup/borrowed0/eightfloor24IDMath/stairs/lift/central
+door/Faculty/covered route/Escher rooms/models/gates/experiments/artwork/
+11genuine scans/editions/credits/rights/source/zoom/cast/fixedvoices/
+recordings and full preservation contracts remain. No new reading/part/
+paper/history/quotation/testimony/source-fetch/whole-bearing/certification.
+
+Main6cab1c9 Proof feedback/e646bb2 Babel exit-Controls remain separate and
+unintegrated. Samebranch/PR5/exactHouses-Concurrent text/existingconflict;
+no merge/reconciliation/deploy.
+
+Next useful review: audit original upper Gallery outer-column tops and ceiling-spoke/slab bearing contacts across the retained book levels, using actual installed owners and faces. Preserve the lift access distinction, all source profiles/windows/resources, both walking corrections, six guarded stair gaps, original explicit actions and the full preservation contracts. No new geometry, doorway/boundary bypass, automatic travel or ornament; only a measured justified existing-face correction or a factual audit.

@@ -3,6 +3,7 @@ import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
 import * as T from '../src/city-source-assets/home-tools/vendor/three.module.js';
 import {auditGalleryLiftLandings} from './gallery-lift-landings.mjs';
+import {auditGalleryLiftFrame} from './gallery-lift-frame.mjs';
 const source=readFileSync(new URL('../src/gallery.js',import.meta.url),'utf8'),start=source.indexOf('function buildArchitecture(){'),end=source.indexOf('function buildOuroborosFloors()',start),scene=new T.Scene(),material=new T.MeshBasicMaterial(),materials=Object.fromEntries(['dark','water','metal','stone','warm','rail','wall','glass','plinth'].map(k=>[k,material])),batches=[];
 const box=(w,h,d,m,x,y,z,parent=scene)=>{const o=new T.Mesh(new T.BoxGeometry(w,h,d),m);o.position.set(x,y,z);parent.add(o);return o;},cylinder=(a,b,h,m,x=0,y=0,z=0,parent=scene)=>{const o=new T.Mesh(new T.CylinderGeometry(a,b,h,12),m);o.position.set(x,y,z);parent.add(o);return o;},instances=(geo,m,list)=>{const o=new T.InstancedMesh(geo,m,list.length);o.userData.placements=list;batches.push(o);scene.add(o);return o;},sign=(text,color,w,h,parent=scene)=>{const o=new T.Mesh(new T.PlaneGeometry(w,h),material);parent.add(o);return o;},floors=Array.from({length:4},()=>({color:'#abcdef',title:'Synthetic floor',exhibits:Array.from({length:3},()=>({shape:'none',title:'Synthetic exhibit'}))}));
 const window={};vm.runInNewContext(readFileSync(new URL('../src/gallery-entrance.js',import.meta.url),'utf8'),{window});
@@ -30,3 +31,4 @@ for(const door of doors){
 }
 console.log('PASS: facade-connected glazed sliding entrances, body-width clearance on both sides, readable one-sided interior/exterior labels and continuous upper-floor glazing.');
 console.log('PASS factual Gallery lift landing audit: '+JSON.stringify(await auditGalleryLiftLandings(T)));
+console.log('PASS factual Gallery lift frame contacts: '+JSON.stringify(await auditGalleryLiftFrame(T)));

@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';import vm from 'node:vm';import{readFile}from'node:fs/promises';import{createHash}from'node:crypto';import{BABEL}from'../src/babel-library-model.js';
-export async function auditGalleryLiftLandings(T){
+export async function buildGalleryLiftAuditFixture(T){
  const [source,stairsCode,entranceCode,babel]=await Promise.all(['gallery.js','gallery-spiral.js','gallery-entrance.js','babel-library.js'].map(p=>readFile(new URL('../src/'+p,import.meta.url),'utf8'))),w={};
  vm.runInNewContext(stairsCode+'\n'+entranceCode,{window:w});const route=w.createGallerySpiral(T),scene=new T.Scene(),material=new T.MeshBasicMaterial({side:T.DoubleSide}),materials=Object.fromEntries(['dark','water','metal','stone','warm','rail','wall','glass','plinth'].map(k=>[k,material])),
  c={THREE:T,scene,materials,inner:28,outer:58,spacing:8,eye:1.8,exhibitRadius:52,liftRadius:60.65,walkInner:29.5,walkOuter:56.3,gallerySpiral:route,mainBuildingTargets:[],floorLights:[],exhibitMeshes:[],exhibitRoots:[],createGalleryEntrance:w.createGalleryEntrance,createSnakeSkinTiles:()=>material,sculpture:()=>new T.Group(),textSign(text,color,width,height,parent=scene){const o=new T.Mesh(new T.PlaneGeometry(width,height),material);parent.add(o);return o;},floors:Array.from({length:4},()=>({title:'Synthetic public floor',color:'#abcdef',exhibits:Array.from({length:3},()=>({title:'Synthetic public display',shape:'none'}))})),window:{CITY_BABEL_LAYOUT:BABEL,CITY_MAIN:{babelLibrary:{guardGallery:previous=>c.guardGallery(previous)}}}};
@@ -7,6 +7,10 @@ export async function auditGalleryLiftLandings(T){
  const a=source.indexOf('function buildArchitecture(){'),b=source.indexOf('function buildOuroborosFloors()',a);assert(a>=0&&b>a);vm.createContext(c);
  vm.runInContext(['mesh','box','cylinder','torus','annulus','galleryRing','galleryCeilingArc','polar','instances'].map(take).join('\n')+'\n'+source.slice(a,b)+'\nbuildArchitecture();',c);
  const rotation=new T.Matrix4().makeRotationY(Math.PI/2);for(const o of scene.children)o.applyMatrix4(rotation);scene.updateMatrixWorld(true);
+ return{source,babel,route,scene,material,c,take};
+}
+export async function auditGalleryLiftLandings(T){
+ const{source,babel,route,scene,material,c,take}=await buildGalleryLiftAuditFixture(T);
  const boxes=[],windows=[],caps=[];scene.traverse(o=>{if(!o.isMesh)return;const p=o.geometry.parameters;if(o.isInstancedMesh&&o.geometry.type==='BoxGeometry'&&p.height===6.5)windows.push(o);if(o.geometry.type==='BoxGeometry'&&p.width===4.3&&p.height===.18&&p.depth===6.2&&Math.abs(new T.Box3().setFromObject(o).getCenter(new T.Vector3()).z-12)<1e-5)boxes.push(o);if(o.geometry.type==='ExtrudeGeometry'&&o.userData.cityDestination==='gallery')caps.push(o);});
  assert.deepEqual(windows.map(o=>o.count),[70,72,72,72]);assert.equal(boxes.length,4);
  const platform=scene.getObjectByName('lift-platform');assert(platform);
