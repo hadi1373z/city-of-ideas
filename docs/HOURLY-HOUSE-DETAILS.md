@@ -8447,3 +8447,81 @@ unintegrated. Samebranch/PR5/exactHouses-Concurrent text/existingconflict;
 no merge/reconciliation/deploy.
 
 Next useful review: audit original upper Gallery outer-column tops and ceiling-spoke/slab bearing contacts across the retained book levels, using actual installed owners and faces. Preserve the lift access distinction, all source profiles/windows/resources, both walking corrections, six guarded stair gaps, original explicit actions and the full preservation contracts. No new geometry, doorway/boundary bypass, automatic travel or ornament; only a measured justified existing-face correction or a factual audit.
+
+## 2026-11-14 — Gallery column tops and ceiling spokes: factual bearing audit
+
+Follow-up to98b75032699ef3f78bc8c57b5eb325a1d49d5ad2.
+Full contract: docs/GALLERY-CEILING-BEARINGS.md. All47 first readings/all8
+Math working floors remain complete. Tests/documentation only; no production
+source/CSS/asset/geometry/matrix/resource/collision/UI/language/state change.
+
+Original12mesh/338instance scope retains174columns(42/44/44/44),
+164spokes(41perlevel) and10floor body/cap meshes. Whole174foot and174upper-cap
+projections clip against actual slab triangles, maxcoverage error9.67e-13;
+2088triangles per cap set/2262foot+2262upper rays. Feet meet original bodies
+within Float32 roundoff;174positive2mm core cubes engage original finish.
+
+All174 tops endYfloor+7.650000095 below actual next slabYfloor+8:
+.349999904633m gaps remain UNREPAIRED. Projected coverage is not a bearing.
+All1476actual upper spoke-facet/slab probes retain.749999694526..763364334409m
+gaps, also UNREPAIRED.163outer caps/1793vertices lie inside existing columns;
+163recessed positive2mm cores join them. Total337cores/2696vertices. Ground
+spokeID30 at(-57.300001144,7.179999828,0) has no matching outer column beside
+the west door. No invented post/support/closure/barrier/profile correction.
+
+Complete column plans remain.719999236m beyond original radius56.3 walking-
+centre limit. Spoke bottoms clear the projected2.10m floor standing envelope
+by4.614999828m. No whole-building clearance/complete bearing/capacity claim.
+
+Strict twelve-owner full geometry/index/matrix/instance fingerprints:
+r186 6dc4df6f5e051fd77905fe1f3a83584b3a559523c32d10c87f483b9209b1a737;
+native160 ee0ddad8717b597ad05ff56d69af071fb5d1c0cf24e43d8491d5bc1839e7971a.
+Retained per-floor triangulations differ(5436vs5460vertices each); no old
+triangle/ID/profile/budget/mask/ray is omitted or relaxed. All measured
+contacts/gaps agree. Native24rays through all10472visible meshes confirm
+next slabsY8/16/24/32 are first overhead hits at selected sites, same pose.
+
+Pure model measurement denies DOM/storage/fetch and render-resource
+constructors; fixture cleanup owns only synthetic resources. All124release
+programs pass, including prior source/private/cleanup controls and all old
+lift/frame/floor/stair assertions. No production owner/release change.
+
+Native original floor transfers retain interior54.2/12 arrivals/feet.395,
+8.395,16.395,24.395; ordinary walking reaches four inspection views.
+Original fourth-flight up/down each records all41heights24.395..32.395;
+four-language samepose/FA RTL/11ready genuine pages pass. Five actual native
+floor/FA views and two separate-camera cap/west-end close views visually
+inspected. Inspection renderer/function/ratio and visitor pose restore.
+The original dock overlaps parts of two lower floor buttons at1280x720;
+actual exposed-edge pointer clicks pass, without force or an all-controls-
+clear/UI-repair claim. Original look bounds-.8..+.75 remain; no pose
+assignment/autotour/collision bypass. HardwarecontrollerA separately untested.
+
+Original explicit40-step Babel descent retains41heights.395..-8. Eight
+EN-DE-FA-CS pointer/E catalogue readers keep page0/aaaaaa/empty prefix/
+exact source/samepose close/FA RTL/held-Wmodalpause/CzechEnglishfallback.
+Explicit returnfeet.395/Z12; fresh savedCzech/11pages/full raw65-41893/
+prior72-43867/installed73-43867/upper290-0 fingerprints and88resources/
+39buffers/bearing cores/body rays remain exact. Own fields/ratio/browser
+cleanup and explicit LOCAL committed-build verification accompany PR#5;
+zero app errors/one existing Threewarning, user's headedpreview untouched.
+
+Lift interior-transfer/closed exterior distinction, original glazing/
+radius56.3/both walking corrections/six guarded unrepaired.08m book-floor
+stair-end gaps remain. All47readings/exact pointer-E-context-header-footer-
+Places-directory-reader routes/raw drafts/carets/immutable first answers/
+keys/original explicit experiments-saves/EN-DE-FA-CS/PersianRTL/formulaLTR/
+saved-local-global languages/disclosed English gaps remain. Construction/
+rendering/reading/locale adds no private-memory/storage/progress access or
+preference-write/experiment/discovery/audio/travel/floor action.
+
+Preserve source/private coordinates/proper lower half-turn/island/Zarathustra/
+book-ring-leaf-tip-fluids-glow/160upper+40Babel+480helical treads/middle/well/
+tunnel/earthcut/eightfloor24IDMath/stairs/lift/central door/Faculty/covered
+route/Escher rooms-models-gates-experiments-artwork/11genuine scans/editions/
+credits/rights/source/zoom/cast/fixedvoices/accepted recordings/full contracts.
+No new part/reading/paper/history/quotation/testimony/source-fetch/certification.
+Main6cab1c9 Proof/e646bb2 exit-Controls remain separate/unintegrated; samebranch/
+PR5/exactHouses-Concurrent text/existingconflict, no merge/reconciliation/deploy.
+
+Next useful review: audit the original four upper Gallery annular inner balcony guards: complete post feet, floor-cap contacts and actual post/upper/middle-rail joints, distinct from completed helical/Babel guards. Preserve all documented column/spoke gaps, lift access limits, apertures, well, terminal breaks, source profiles/private coordinates/resources and original actions. Only measured justified existing-face correction or factual audit; no new part, closure across a route, widened boundary, automatic travel, ornament, historical copy or certification.

@@ -133,10 +133,8 @@ Main6cab1c9 Proof feedback and e646bb2 Babel exit/Controls remain separate and
 unintegrated. Same branch/PR #5, exact Houses/Concurrent text and existing
 conflict remain; no merge, reconciliation or deployment.
 
-Next useful review: audit original upper Gallery outer-column tops and
-ceiling-spoke/slab bearing contacts across the retained book levels, using
-actual installed owners and faces. Preserve the lift access distinction,
-all source profiles/windows/resources, both walking corrections, six guarded
-stair gaps, original explicit actions and the full preservation contracts.
-No new geometry, doorway/boundary bypass, automatic travel or ornament;
-only a measured justified existing-face correction or a factual audit.
+The next review recorded here at98b7503 is now complete: see
+[Gallery column and ceiling bearings](GALLERY-CEILING-BEARINGS.md). It retains
+all source profiles, records the actual upper gaps and existing lower/outer
+joints, and introduces no production geometry or access change. The latest
+hourly ledger governs the next area.
