@@ -8309,3 +8309,67 @@ pass. Zeroapp errors/one existing Threewarning; explicit LOCAL committed-build
 asset verification accompanies PR#5.
 
 Next useful review: audit the original Gallery floor-lift side landings and door approaches on the three upper book floors, using actual installed faces, ordinary walking and original explicit transfers. Keep the six measured .08 m stair-end gaps disclosed and their guards intact; do not claim a book-floor gap repair or invent support. Preserve the ground frontal-entry and supported roof-landing corrections, all source/private coordinates, geometry and earlier contracts. No extra geometry, automatic travel, broad void bypass or unrelated ornament; otherwise record a factual audit.
+
+## 2026-11-14 — Gallery lift landings and facade access: factual audit
+
+Follow-up to26f9120509bf5bf927daed67f92d487e255957d9.
+Full contract: docs/GALLERY-LIFT-LANDINGS.md. All47first readings/all8Math
+working floors remain complete; three Gallery book floors are distinct.
+No production source/CSS/geometry/collision/UI/resource/state change.
+
+Original floorbuttons stageX60.65/Z12, ease1450ms, then original terminal
+receiver transfersX54.2/Z12/feet8.395,16.395,24.395. This6.45m endhandoff is
+explicit transfer, not ordinary walking through a facade opening. All three
+interior arrivals have real annular support and ordinary inward walking.
+
+Fixed side landings remainX55.550000095..61.749999905/
+Z9.849999905..14.150000095/topfloor+.460000004, .065000004m above floorfeet.
+Original walkingradius56.3 reachesX55.006272370 atZ12, before landingedge.
+Allthree upperglassbatches retain72panels;36bodyrays hit exact IDs20/21,
+X56.326390..56.635560 across3lanes/4heights. Transparency is not an opening.
+No new doorway/extra support/floor extension/widened limit/changedpane/profile.
+Older GALLERY-ROOF-CRAWLING side-opening claim is corrected. Ground sliding
+doors, original explicit lift and both stair fixes remain exact; six .08m
+book-floor stair-end gaps remain disclosed/guarded/unrepaired.
+
+Regression executes actual architecture builder/quarterturn/changeFloor/
+terminal animation/constrain/Babelguard:3transfers/177timed platform-height
+samples/27arrival supports/36glazing bodyrays/5058movement samples, inputidentity
+retained and private-memory-storage-progress-resident-DOM getters denied.
+Controlled structural scope after original target3 transfer:26meshes/
+286instances, SHA256:512f8d8df0aeb48d3243b0b97af983d77be1566aa7a1afdf8a140ec4b31baacb.
+All124release programs pass, no old source fingerprint/budget/mask/ID relaxed.
+Native original three floorbutton transfers finish at same supported points;
+100staged samples keep platform/feet error<=7.5e-10m.27installed arrival
+support rays/36actual glazing rays, inward W and retained radial boundary
+walking all pass. Fourlanguage changes retain samepose/FA RTL/11ready pages.
+Three real lift/facade/FA screenshots visually checked; no pose assignment/
+autotour/bypass. Own fields/renderer restore; user's headedpreview untouched.
+HardwarecontrollerA remains separately untested.
+
+Keep all47readings/exact pointer-E-context-header-footer-Places-directory-reader
+payloads/raw drafts/carets/first answers/keys/explicit saves/experiments/
+EN-DE-FA-CS/RTL/formulaLTR/saved-local-global languages/English gaps. No
+rendering-reading-locale memory/storage/progress/preference-write/experiment/
+discovery/audio/travel/floor action. All160upper/40Babel/480helical treads/
+middle/well/tunnel/earthcut/rooflanding/soffit/2bearers/4joints/398fits/12copies/
+1873supports/65part ring/book/tip/fluids/glow/raw65-41893/complete73-43867/
+88resources/39buffers/nineadapters/once-only cleanup/borrowed0 remain.
+Preserve source-private coordinates/proper lower parent/island/Zarathustra/
+eightfloor24IDwing/stairs/lift/Faculty/coveredwalk/Escher rooms/models/gates/
+experiments/artwork/11genuine scans/editions/credits/rights/source/zoom/cast/
+fixedvoices/recordings/full preservation contracts. No new guide/paper/
+historical copy/quotation/testimony/source-fetch/capacity/certification claim.
+
+Main6cab1c9 Proof feedback/e646bb2 exit-Controls remain separate/unintegrated.
+Samebranch/PR5/exactHouses-Concurrent text/conflict, no merge/reconcile/deploy.
+Native target3 scope26/286d6e91d42; original Babel40steps/41heights.395..-8,
+eight EN-DE-FA-CS pointer/E readers keep page0/aaaaaa/empty prefix/exact source/
+sameposeclose/FA RTL/held-Wmodalpause/CzechEnglishfallback. Explicit exit.395/Z12.
+Fresh document retains explicit savedCzech/11ready genuine pages/ratio1; own
+fields removed/browserclosed. Raw65/41893 hashbfee858c/complete73/43867 hash7448aaec/
+upper290/0 hashade8ee63/88resources/39buffers/32corners/8positive+6retainedcores/
+552bodyrays/four expected bearing IDs remain exact. Zeroapp errors/oneexisting
+Threewarning. Explicit LOCAL committed-build verification accompanies PR#5.
+
+Next useful review: audit the original Gallery lift shaft frame/glass and fixed landing bearing contacts, from actual installed box faces and existing owners. Keep this factual access distinction: explicit transfers end at supported interior (54.2,12), while upper side landings remain beyond the retained ring limit and continuous glazing. Preserve all source profiles/windows/resources, both walking fixes, six disclosed stair-end gaps and original explicit actions. No new geometry, widened boundary, doorway cut, automatic travel or ornament; only justified existing-face corrections or a factual audit.
