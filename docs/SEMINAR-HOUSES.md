@@ -97,3 +97,81 @@ are verified separately before claiming the changes live.
 The hourly house-detail review series in PR #5 is separate and remains unmerged.
 Limitations: these are bounded seminar encounters, not complete courses, a full
 hyperbolic world, research-proof assistants or a reproduction of Cage's practice.
+
+## Noether detail pass — hourly review branch
+
+Noether's rotunda now has supported piped bench cushions/arms, desk aprons and
+joints, and small foot/capital collars on the original columns. Foot collars
+remain outside the original navigable disk; capitals are above head height.
+The shell, glazing, oculus, door gap, furniture positions and colliders remain.
+
+A supported two-card folio rests on the desk's back edge, clear of its original
+ruled sheet. The one-mark circle and two-mark ellipse depict equal-potential
+contours at one drawing scale, not bead trajectories, historic objects or
+physical measurements. Pointer/E opens the existing full reader. The original
+compact workbench, Read the full argument, context and directory routes remain.
+
+An original EN/DE/FA/CS desk reading separates a symmetric law from one orbit,
+explains the two contours, and points back to the existing case/phase controls.
+It links Noether's first theorem in Tavel's translation, §1:
+https://arxiv.org/html/physics/0503066v3#S1 . Both this text and the abstract
+record were accessed. No quotation or historical room was invented. The five
+original advanced sections, all their translations and the original source
+metadata remain unchanged. No new saved experiment or private-note state exists.
+
+All 86 release programs passed. New checks compare all original visuals and
+model phases against the unchanged builder, test contour levels, support and
+walking clearances, real folio rays/full-reader routing, four languages/RTL,
+held nonzero phase, private drafts/carets/first answers and owned cleanup.
+Native desktop/mobile review confirmed real entry walking, pointer/E, both
+oscillator cases, keyboard phase action, compact/full and directory routes,
+four-language reading and preserved unsaved mixed-language drafts. Full results
+and the next house are in HOURLY-HOUSE-DETAILS.md. PR #5 remains review only.
+
+## Mirzakhani ruler reading corner · 2026-11-08
+
+The original (0, 345), pi-rotated hall now has pale edging sampled directly
+from all five source roof ribbons, stone-band post joints, supported bench
+slats and desk joinery. A shallow wall-bracketed rack holds two equal-radius
+disk cards. Equal drawn gold lengths cross the centre on one card and lie
+near the rim on the other. These are fixed original city diagrams, not
+historical objects, new experiment presets or research-level counts/proofs.
+
+The EN/DE/FA/CS extension explains which ruler measures length, links
+Calegari section 1.2.6/equation 1.17 and both existing Mirzakhani papers,
+then returns to the original three-case geodesic/chord experiment. The five
+advanced readings, exact distance, orthogonal circles, numerical quadrature,
+sources and private saves remain. The real hall is Euclidean; the disk is
+not a closed hyperbolic surface. Rack pointer/E opens the existing full
+reader, while exhibit/context retain compact controls and directory access.
+Reading/locale does not select a case or save notes. Persian is RTL, with
+math in an LTR block; private drafts/carets/first answers remain unchanged.
+
+The combined review passes 89 release programs. Native desktop/mobile
+review checked actual walking, rack pointer/E, all cases, four languages,
+compact/full/directory and unsaved drafts. Full results, source links and
+Cage as the next house are in HOURLY-HOUSE-DETAILS.md. No merge/deployment.
+
+## Cage listening desk · 2026-11-08
+
+The original (104, 316), pi-rotated house now has four pale fascias fitted to
+its actual batched roof panels, stone-band sills, supported woven bench pads/
+seams and desk joinery. A backed folio rests on the desk's rear edge, clear
+of its original ruled sheet. Its rest/pitch reminder and three curved strokes
+are fixed original city symbols, not Cage notation, the generated sequence,
+a recording, measurement or historical object.
+
+The EN/DE/FA/CS extension asks what the score fixes and leaves open, with
+three reading/replay/listening prompts and the existing MoMA source. Folio
+pointer/E opens the original full reader; exhibit/context keep compact
+controls and directory access. Five earlier advanced sections, seeded
+sequence, quarter-second audio-clock cursor and explicit Play/Stop/end/close/
+leave/failure behavior remain. Reading/locale does not select a seed, start
+sound or save notes. Persian stays RTL, score order LTR, and private drafts/
+carets/first answers retain the existing explicit-save flow.
+
+All 90 release programs passed; native desktop/mobile checked actual walking,
+folio pointer/E, all reading routes, four languages, seed retention, playback/
+stop/end and unsaved drafts. The older UI check explicitly selects the score
+list after the new three-step reading list was added. Full results and Escher
+as the next house are in HOURLY-HOUSE-DETAILS.md. Review only, no deployment.

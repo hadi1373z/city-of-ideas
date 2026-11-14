@@ -1,0 +1,4 @@
+:is(#math-foundations-context,#math-algebra-context,#math-geometry-context,#math-calculus-context,#math-discrete-context,#math-probability-context,#math-topology-context,#math-logic-context){inset-inline-end:auto;left:auto;right:18px}
+#math-wing-stairs-context{position:fixed;right:18px;left:auto;top:164px;z-index:23;max-width:min(360px,82vw);padding:12px 15px;box-sizing:border-box;border:1px solid #b3a584;border-radius:9px;background:#ede8d7;color:#273b36;font-size:.92rem;line-height:1.55;pointer-events:none}
+#math-wing-stairs-context[hidden]{display:none}
+@media(max-width:600px){:is(#math-foundations-context,#math-algebra-context,#math-geometry-context,#math-calculus-context,#math-discrete-context,#math-probability-context,#math-topology-context,#math-logic-context){top:var(--math-connected-bottom,140px)}#math-wing-stairs-context{top:calc(var(--math-connected-bottom,140px) + 72px);max-width:65vw;font-size:.78rem}}

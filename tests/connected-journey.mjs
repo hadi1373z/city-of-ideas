@@ -8,6 +8,9 @@ import {facultyCanStand} from '../src/math-faculty-model.js';
 import {buildMathCity} from '../src/city-source-assets/home-tools/math-city-scene.js';
 import {connectedContext,connectedRoute,museumRoute} from '../src/connected-journey-model.js';
 import {installConnectedJourney} from '../src/connected-journey.js';
+import {buildMathWingStairs} from '../src/math-wing-stairs-scene.js';
+import {inStairOpening,stairBarrier,stairSurface,wingStep} from '../src/math-wing-stairs-model.js';
+import {mathWayfindingCopy} from '../src/math-wing-wayfinding-copy.js';
 const near=(a,b,e=.001)=>assert(Math.abs(a-b)<e,`${a} != ${b}`),distance=(a,b)=>Math.hypot(a.x-b.x,a.z-b.z);
 const make=(player,extra={})=>connectedContext({mode:'city',eye:1.8,player,...extra});
 let samples=0;
@@ -50,6 +53,27 @@ for(const model of mathModels)for(const[x,z]of[[8,5],[-8,5],[8,-7.4],[-8,-7.4],[
 assert.equal(make({x:-2232,z:-60,y:1.93},{region:{id:'mathematics',floor:0}}),null,'Missing native source navigation fails closed rather than drawing a rotunda route through the wing');
 assert.equal(make({x:-2232,z:-60,y:4.8},{region:{id:'mathematics',floor:1},mathematics:{model:mathModels[1],transform:mathTransform,floor:1}}),null,'A floor-transfer height between levels cannot acquire a working-floor route');
 
+// Compose the actual architectural adapter. Cues end at a real full-floor
+// landing, and cannot use the former solid slab or cross the new guards.
+const stairs=buildMathWingStairs(T,mathModels,{canvas:()=>null});assert(stairs);
+const approaches=mathModels.map(m=>JSON.stringify(m.approaches));let wingSamples=0;
+for(const model of mathModels)for(const exitVia of['stairs','lift'])for(const[x,z]of[[8,5],[-8,5],[8,-7.4],[-8,-7.4],[5,7.3],[0,5.3],...(model.floor?[[6.2,6.9]]:[])]){
+ const mathematics={model,transform:mathTransform,floor:model.floor,stairs:true,exitVia,canStandLocal:model.canStand},c=make({x:mathTransform.x+x,z:mathTransform.z+z,y:.13+model.height+1.8},{region:{id:'mathematics',floor:model.floor},mathematics}),path=connectedRoute(c);
+ assert(path.length>0,`Installed ${exitVia} route on ${model.floor} from ${x},${z}`);
+ const walk={x,z,y:model.height+1.8};
+ for(const point of path){const q=physicalToLower(point),sx=q.x-mathTransform.x,sz=q.z-mathTransform.z;assert(!inStairOpening(sx,sz));assert(!stairBarrier(sx,sz,model.height));assert(model.canStand(sx,sz));near(q.y,.13+model.height);
+  wingStep(walk,sx-walk.x,sz-walk.z,{canStand:model.canStand});near(walk.x,sx);near(walk.z,sz);near(walk.y,model.height+1.8);wingSamples++;
+ }
+ const end=physicalToLower(path.at(-1));if(model.floor){near(end.x-mathTransform.x,exitVia==='stairs'?6.2:9.6);near(end.z-mathTransform.z,exitVia==='stairs'?6.9:5);if(exitVia==='stairs')assert.equal(stairSurface(walk.x,walk.z,model.height).kind,'floor-landing');}
+ else{near(end.x,-2218);near(end.z,-65);}
+}
+const topMath={model:mathModels[7],transform:mathTransform,floor:7,stairs:true,exitVia:'stairs'};
+assert.equal(connectedRoute(make({x:-2240+5.3,z:-65+5,y:29.93},{region:{id:'mathematics',floor:7},mathematics:topMath})).length,0,'No flat-floor cues over the actual open stairwell');
+assert.equal(connectedRoute(make({x:-2240,z:-65+5.3,y:29.93},{region:{id:'mathematics',floor:7},mathematics:{...topMath,canStandLocal:(x,z)=>mathModels[7].canStand(x,z)&&Math.hypot(x-6.2,z-6.9)>.8}})).length,0,'A live source/cargo obstruction cannot be bypassed at the landing');
+for(let i=0;i<8;i++)assert.equal(JSON.stringify(mathModels[i].approaches),approaches[i]);
+for(const lang of['en','de','fa','cs'])for(const state of[{floor:0},{floor:7,stairs:true},{floor:7,stairs:true,exitVia:'lift'},{floor:7,stairs:false}]){const copy=mathWayfindingCopy(lang,state);assert.equal(copy.lang,lang);assert.equal(copy.dir,lang==='fa'?'rtl':'ltr');for(const key of['summary','title','question','route','show','hide','stairs','lift','takeLift'])assert(copy[key].trim().length>3);assert.equal(copy.destination,state.floor===0?'exit':state.stairs&&state.exitVia!=='lift'?'stairs':'lift');}
+assert.equal(mathWayfindingCopy('unknown').lang,'en');
+
 class Element{
  constructor(tag){this.tagName=tag;this.children=[];this.dataset={};this.attributes={};this.events={};this.hidden=false;this.open=false;this.textContent='';}
  append(...nodes){for(const n of nodes){n.parent=this;this.children.push(n);}}remove(){if(this.parent)this.parent.children=this.parent.children.filter(n=>n!==this);}setAttribute(k,v){this.attributes[k]=String(v);}addEventListener(k,fn){this.events[k]=fn;}
@@ -57,6 +81,7 @@ class Element{
 }
 const body=new Element('body'),book=new Element('dialog');book.id='babel-library-book';body.append(book);globalThis.document={body,hidden:false,createElement:t=>new Element(t),querySelector:s=>body.querySelector(s)};const events={};globalThis.addEventListener=(k,fn)=>events[k]=fn;
 globalThis.localStorage=new Proxy({},{get(){throw Error('The guide must not access private storage');}});globalThis.sessionStorage=globalThis.localStorage;
+globalThis.removeEventListener=(name,fn)=>{if(events[name]===fn)delete events[name];};
 const scene=new T.Scene(),world=new T.Group();scene.add(world);let oldTicks=0,reads=0,clears=0;const M={scene,eye:1.8,mode:'city',player:{x:-11,z:0,y:-22.2,yaw:-Math.PI/2,pitch:.28},clearMovement(){clears++;},city:{update(){oldTicks++;},region:()=>({id:'babel-library'})},babelLibrary:{active:true,openBook(){reads++;book.open=true;return true;}},escherDepth:{active:false,progress:{perspective:false,loop:false}},worldCylinder:{built:{group:world,lowerLandscape:{anchors:{overlook:shore}}},faculty:{targets:[]},route:null}};
 const original=M.city.update,api=installConnectedJourney(M,T),before={...M.player},buttons=()=>api.panel.children.flatMap(n=>n.tagName==='div'?n.children:[]).filter(n=>n.tagName==='button'),getButton=part=>buttons().find(n=>n.textContent.includes(part));assert(!api.panel.hidden);assert.equal(api.group.parent,world,'The trail survives the host underground culling owner');assert(!api.panel.open);assert.equal(api.panel.children[0].tabIndex,0,'Controller Menu can select the folded summary');assert.equal(api.group.visible,false);assert.equal(api.interact(),false,'A distant catalogue cannot be opened');assert.equal(reads,0);
 api.panel.open=true;api.panel.events.toggle();getButton('Show walking route').onclick();assert(api.group.visible);assert(api.group.children[0].count>5);assert.deepEqual(M.player,before,'Showing directions does not move or turn the visitor');
@@ -65,6 +90,15 @@ M.babelLibrary.active=false;Object.assign(M.player,{x:-1640,z:69,y:1.93});api.re
 let groundTransfers=0,delivered=null,region={id:'mathematics',floor:7};globalThis.window={CITY_EXTRAS:{mathModels,transforms:{mathematics:mathTransform},canStand(x,z,{floor,y}){near(y,.13+mathModels[floor].height);return mathModels[floor].canStand(x-mathTransform.x,z-mathTransform.z);}}};M.city.region=()=>region;M.city.targetInfo=data=>({kind:'home-source',data});M.showExtra=info=>{groundTransfers++;delivered=info.data;return true;};Object.assign(M.player,{x:-2240,z:-65+5.3,y:.13+28+1.8});api.render(true);assert.equal(api.context.place,'lift');assert(api.panel.children[0].textContent.includes('Way out'));assert.equal(api.interact(),false,'A distant lift cannot transfer a visitor');
 Object.assign(M.player,{x:-2240+9.6,z:-65+5});api.render(true);assert.equal(getButton('Take the lift').hidden,false);assert(api.interact());assert.equal(groundTransfers,1);assert.equal(delivered,mathModels[7].approaches.find(d=>d.mathAction==='floor'&&d.targetFloor===0),'The action delegates exact existing source metadata');
 region={id:'mathematics',floor:0};Object.assign(M.player,{x:-2240+8,z:-65+5,y:1.93});api.render(true);assert.equal(api.context.place,'working');assert(api.panel.children[0].textContent.includes('Way out'));assert.equal(api.interact(),false,'Ground-floor route never offers a floor transfer');assert.equal(groundTransfers,1);
-let disposedGeometry=0,disposedMaterial=0;api.group.children[0].geometry.addEventListener('dispose',()=>disposedGeometry++);api.group.children[0].material.addEventListener('dispose',()=>disposedMaterial++);api.dispose();api.dispose();assert.equal(M.city.update,original);assert.equal(world.children.length,0);assert.equal(disposedGeometry,1);assert.equal(disposedMaterial,1);assert.equal(M.connectedJourney,undefined);
+Object.defineProperty(M,'visitorMemory',{get(){throw Error('Exit guidance read private memory');}});Object.defineProperty(M.city,'house',{get(){throw Error('Exit guidance inspected private book colours');}});
+M.mathWingStairs={built:stairs};region={id:'mathematics',floor:7,inside:true};Object.assign(M.player,{x:-2240,z:-65+5.3,y:29.93});api.render(true);
+const byId=id=>buttons().find(n=>n.id===id),route=byId('connected-journey-route'),stairChoice=byId('connected-journey-stairs'),liftChoice=byId('connected-journey-lift');
+assert.equal(api.panel.dataset.routeDestination,'stairs');assert(!stairChoice.parent.hidden);if(api.routeVisible)route.onclick();assert(!api.routeVisible);
+const still={...M.player},clearBefore=clears;liftChoice.onclick();assert.equal(api.panel.dataset.routeDestination,'lift');assert(!api.routeVisible,'Choosing a destination does not enable the optional trail');stairChoice.onclick();assert.equal(api.panel.dataset.routeDestination,'stairs');assert(!api.routeVisible);assert.deepEqual(M.player,still);assert.equal(clears,clearBefore);assert.equal(groundTransfers,1);
+route.onclick();assert(api.routeVisible);assert(api.group.visible);for(const lang of['en','de','fa','cs']){globalThis.CITY_I18N={lang};events['city-language']();assert.equal(api.panel.lang,lang);assert.equal(api.panel.dir,lang==='fa'?'rtl':'ltr');assert.equal(stairChoice.attributes['aria-pressed'],'true');assert.deepEqual(M.player,still);assert.equal(groundTransfers,1);assert.equal(clears,clearBefore);}
+region={id:'mathematics-stairs',floor:7,inside:true};M.player.y=27.93;api.render(true);assert(api.panel.hidden,'Between full floors the existing stair status owns guidance');assert(!api.group.visible);assert.equal(api.interact(),false);
+region={id:'mathematics',floor:7};Object.assign(M.player,still);M.mathWingStairs.built=null;api.render(true);assert.equal(api.panel.dataset.routeDestination,'lift');assert(stairChoice.parent.hidden,'Missing architectural owner offers only the original source route');M.mathWingStairs.built=stairs;
+region={id:'mathematics',floor:0};Object.assign(M.player,{x:-2240,z:-65+5.3,y:1.93});api.render(true);assert.equal(api.panel.dataset.routeDestination,'exit');assert(stairChoice.parent.hidden);assert.equal(api.interact(),false);
+let disposedGeometry=0,disposedMaterial=0;api.group.children[0].geometry.addEventListener('dispose',()=>disposedGeometry++);api.group.children[0].material.addEventListener('dispose',()=>disposedMaterial++);api.dispose();api.dispose();assert.equal(M.city.update,original);assert.equal(world.children.length,0);assert.equal(disposedGeometry,1);assert.equal(disposedMaterial,1);assert.equal(M.connectedJourney,undefined);assert.equal(events['city-language'],undefined);stairs.dispose();
 mathModels.forEach(m=>m.dispose());
-console.log(`PASS connected questions: ${samples} physical floor/tread probes, all eight original working floors and real exits/lift, reversible tunnel directions, museum solids, lower Logic bay, exact shore anchor, proximity-only source actions, no camera/storage changes, folded UI/modal pause and owned cleanup`);
+console.log(`PASS connected questions: ${samples} original probes and ${wingSamples} installed exit/landing probes, all eight working floors, four-language stairs/lift choice without movement or private access, real exits/solid windows/guards, original proximity-only lift, tunnel/museum/shore routes, modal pause and owned cleanup`);

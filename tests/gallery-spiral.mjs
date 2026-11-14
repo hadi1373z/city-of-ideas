@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';import vm from 'node:vm';import{readFile}from'node:fs/promises';
+import {validateGalleryFrontalEntry} from './gallery-frontal-entry.mjs';
 const T={};vm.runInNewContext(await readFile(new URL('../src/assets/three.min.js',import.meta.url),'utf8'),{exports:T,module:{exports:T},console:{...console,warn(){}}});const w={};vm.runInNewContext(await readFile(new URL('../src/gallery-spiral.js',import.meta.url),'utf8'),{window:w});const route=w.createGallerySpiral(T);
 assert.equal(route.levels.length,5);assert.equal(route.entrance.x,-58);assert.equal(route.entrance.z,0);assert.equal(route.width,route.headWidth);assert.equal(route.headingAt(0),Math.PI);assert.equal(route.direction.z,1);assert.equal(route.steps,40);assert.equal(route.rise,.2);
 let built,scene;for(let floor=0;floor<4;floor++){
@@ -18,3 +19,4 @@ assert.equal(route.floorAt(route.max),4);assert(Math.abs(route.pointAt(route.max
 assert.equal(route.centerX,(306-(29+80)/2)/612*96,'Stair center matches the snake head drawing midpoint');
 assert(route.roofOpeningStart<7.5,'Roof opening starts earlier along the last flight');
 for(let z=0;z<route.roofOpeningStart;z+=.01){const p=route.pointAt(route.starts[3]+z);assert(32-p.y>=route.roofHeadroom-1e-6,'Covered approach has generous head clearance');}
+console.log('PASS bounded Gallery/Babel entry handoff: '+JSON.stringify(await validateGalleryFrontalEntry(T)));

@@ -1,0 +1,30 @@
+import {buildMathFoundationsDetails} from './math-foundations-scene.js';
+import {FOUNDATION_COPY as COPY,FOUNDATION_SOURCES as SOURCES} from './math-foundations-copy.js';
+export function installMathFoundations(M,T,E){
+ let owner=null,details=null,language=null,opener=null,returnTools=false,disposed=false;const original=new Map();
+ const lang=()=>COPY[language||window.CITY_I18N?.lang]?language||window.CITY_I18N?.lang:'en',copy=()=>COPY[lang()];
+ const el=(tag,text)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;return n;},button=(text,fn)=>{const n=el('button',text);n.type='button';n.onclick=fn;return n;};
+ const dialog=el('dialog');dialog.id='math-foundations-reading';dialog.dataset.confirmFocused='true';const header=el('header'),title=el('h2'),close=button('×',()=>dialog.close()),languages=el('nav'),body=el('main');title.id='math-foundations-title';dialog.setAttribute('aria-labelledby',title.id);header.append(title,close);
+ for(const[id,label]of[['en','English'],['de','Deutsch'],['fa','فارسی'],['cs','Čeština']]){const b=button(label,()=>{language=id;render();});b.lang=id;b.dataset.foundationLanguage=id;languages.append(b);}dialog.append(header,languages,body);document.body.append(dialog);
+ const context=button('',()=>open());context.id='math-foundations-context';context.hidden=true;document.body.append(context);
+ const directory=button('',()=>open());directory.id='math-foundations-directory';document.querySelector('.welcome-secondary')?.append(directory);
+ const readerLink=button('',()=>open());readerLink.id='math-foundations-reader-link';readerLink.className='glass';readerLink.hidden=true;document.querySelector('.source-tools-head')?.append(readerLink);
+ function clear(){if(details){for(const t of details.targets){const i=M.city.targets.indexOf(t);if(i>=0)M.city.targets.splice(i,1);}details.dispose();}details=null;original.clear();}
+ function sync(){if(disposed||owner===E.mathModels?.[0])return;clear();owner=E.mathModels?.[0];if(!owner)return;
+  // Source payloads are retained verbatim. No source model, progress or private text is rewritten.
+  owner.group.traverse(o=>{const d=o.userData;if(o.isMesh&&d.mathAction==='concept'&&['sets','numbers','functions'].includes(d.conceptId)&&!original.has(d.conceptId))original.set(d.conceptId,d);});details=buildMathFoundationsDetails(T,owner);if(details)M.city.targets.push(...details.targets);
+ }
+ function inside(){if(!details||M.mode!=='city')return false;const r=M.city.region(M.player.x,M.player.z),t=E.transforms.mathematics,feet=M.player.y-M.eye;return r?.id==='mathematics'&&r.floor===0&&r.inside&&Math.abs(feet-t.y)<.3;}
+ function handoff(id){sync();if(!inside()||!original.has(id)){render();return;}const payload=original.get(id);dialog.close();M.clearMovement();M.showExtra(M.city.targetInfo(payload));}
+ function render(){const c=copy();dialog.lang=lang();dialog.dir=lang()==='fa'?'rtl':'ltr';title.textContent=c.title;close.setAttribute('aria-label',c.close);languages.setAttribute('aria-label','Language / Sprache / زبان / Jazyk');for(const b of languages.children)b.setAttribute('aria-pressed',String(b.dataset.foundationLanguage===lang()));body.replaceChildren(el('p',c.intro),el('h3',c.sets),el('p',c.setsText),el('h3',c.numbers),el('p',c.numbersText));const formula=el('p','1/2 = 0.5 = 50/100 = 50%');formula.dir='ltr';formula.className='foundation-formula';body.append(formula,el('p',c.formulaHelp),el('h3',c.functions),el('p',c.functionsText),el('h3',c.practice));const steps=el('ol');for(const text of c.steps)steps.append(el('li',text));body.append(steps,el('p',c.scope),el('h3',c.original));
+  if(inside())for(const id of['sets','numbers','functions'])body.append(button(c[id+'Action'],()=>handoff(id)));else body.append(el('p',c.outside),button(c.approach,()=>{returnTools=false;dialog.close();M.startExtra('mathematics');}));
+  for(const id of['sets','numbers','functions']){const a=el('a',c['source'+id[0].toUpperCase()+id.slice(1)]);a.href=SOURCES[id];a.target='_blank';a.rel='noopener noreferrer';body.append(a);}body.append(el('small',c.legacy),el('small',c.private));
+ }
+ function open(nextLanguage=null){if(disposed)return;sync();language=nextLanguage;opener=document.activeElement;const tools=document.getElementById('source-tools-dialog');returnTools=!!tools?.open;for(const d of document.querySelectorAll('dialog[open]'))if(d!==dialog)d.close();M.clearMovement();render();if(!dialog.open)dialog.showModal();dialog.scrollTop=0;close.focus();}
+ const old={target:M.city.targetInfo,show:M.showExtra,update:M.city.update};const target=d=>d?.mathFoundationsReading?{kind:'math-foundations-reading',data:d,title:copy().open}:old.target(d),show=info=>info?.kind==='math-foundations-reading'?(inside()&&open(),true):old.show?.(info);M.city.targetInfo=target;M.showExtra=show;
+ const update=(...args)=>{old.update(...args);sync();const here=inside();context.hidden=!here||!!document.querySelector('dialog[open],#reader-panel:not([hidden]),#exhibit-panel:not([hidden])');readerLink.hidden=!here;};M.city.update=update;
+ function locale(){language=null;for(const b of[context,directory,readerLink])b.textContent=copy().open;if(dialog.open)render();}
+ dialog.addEventListener('close',()=>{M.clearMovement();if(returnTools&&inside()){const tools=document.getElementById('source-tools-dialog');if(tools&&!tools.open)tools.showModal();}returnTools=false;const parent=opener?.closest?.('dialog');if(opener?.isConnected&&(!parent||parent.open))opener.focus();else if(inside())context.focus();});
+ function dispose(){if(disposed)return;disposed=true;clear();for(const n of[dialog,context,directory,readerLink])n.remove();removeEventListener('city-language',locale);if(M.city.targetInfo===target)M.city.targetInfo=old.target;if(M.showExtra===show)M.showExtra=old.show;if(M.city.update===update)M.city.update=old.update;}
+ sync();locale();addEventListener('city-language',locale);addEventListener('pagehide',dispose,{once:true});return{open,sync,inside,dispose,get details(){return details;}};
+}

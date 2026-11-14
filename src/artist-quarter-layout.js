@@ -2,9 +2,9 @@
 (function(g){'use strict';
  const galleries={monet:[85,82],'van-gogh':[108,84],'hilma-af-klint':[84,112],morris:[108,115],kandinsky:[159,98],hokusai:[181,95],rodin:[203,99],mondrian:[161,132],lange:[182,134],klee:[204,137]};
  const plan={version:2,galleries,escher:{x:228,z:115},dali:{x:220,z:177},studios:{cezanne:{x:171,z:161,turn:0},morisot:{x:196,z:159,turn:0},seurat:{x:182,z:196,turn:Math.PI}},bounds:{minX:70,maxX:249,minZ:72,maxZ:211},arrival:{x:96,z:98,y:.13,yaw:0},
-  courts:[{id:'garden',title:{en:'The garden court',de:'Der Gartenhof',fa:'حیاط باغ'},artists:['monet','van-gogh','hilma-af-klint','morris'],arrival:{x:96,z:98,y:.13,yaw:0}},
-   {id:'form',title:{en:'The form and perspective court',de:'Der Hof für Form und Perspektive',fa:'حیاط فرم و پرسپکتیو'},artists:['kandinsky','hokusai','rodin','mondrian','lange','klee','escher'],arrival:{x:174,z:116,y:.13,yaw:0}},
-   {id:'studio',title:{en:'The studio court',de:'Der Atelierhof',fa:'حیاط آتلیه‌ها'},artists:['cezanne','morisot','seurat','dali'],arrival:{x:184,z:179,y:.13,yaw:0}}],
+  courts:[{id:'garden',title:{en:'The garden court',de:'Der Gartenhof',fa:'حیاط باغ',cs:"Zahradní dvůr"},artists:['monet','van-gogh','hilma-af-klint','morris'],arrival:{x:96,z:98,y:.13,yaw:0}},
+   {id:'form',title:{en:'The form and perspective court',de:'Der Hof für Form und Perspektive',fa:'حیاط فرم و پرسپکتیو',cs:"Dvůr tvaru a perspektivy"},artists:['kandinsky','hokusai','rodin','mondrian','lange','klee','escher'],arrival:{x:174,z:116,y:.13,yaw:0}},
+   {id:'studio',title:{en:'The studio court',de:'Der Atelierhof',fa:'حیاط آتلیه‌ها',cs:"Dvůr ateliérů"},artists:['cezanne','morisot','seurat','dali'],arrival:{x:184,z:179,y:.13,yaw:0}}],
   routes:[[[76,110],[74,100],[96,98],[126,104],[145,116],[174,116],[204,118],[228,126]],[[171,116],[171,148],[156,148],[156,179],[182,179],[209,187],[229,187]],[[228,126],[242,145],[242,187],[229,187]]],
   plants:[[96,91],[96,105],[171,108],[193,110],[173,125],[195,126],[184,173],[205,178],[179,184],[236,169]],
   seats:[[96,93],[97,104],[193,111],[174,126],[185,173],[205,180],[237,160]],

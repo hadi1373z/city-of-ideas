@@ -194,7 +194,7 @@ window.CITY_HOME_TOOLS={
  readState:()=>({house:clone(house),neighborhood:neighborhood?clone(neighborhood):null,cityNetwork:clone(getCityNetwork()),revision,loaded,saving,mode:isBrowserMode()?'browser-local':'original-private-service'}),
  reload:()=>{localSettings=null;return load({readOnly:true});},
  setCityContext:context=>{scene?.setCityContext?.(context);render();},
- pick:data=>scene?.pick?.(data),
+ pick:data=>{if(data?.artistId==='dali'){if(data.workId)$('world-guide-dialog')?.close();else if(data.daliObjectId)$('art-city-dialog')?.close();}return scene?.pick?.(data);},
  open(tool,payload={}){
   if(payload.context)scene?.setCityContext?.(payload.context);
   if(payload.pick){scene?.pick?.(payload.pick);return;}

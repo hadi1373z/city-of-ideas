@@ -3,6 +3,7 @@ import {UPPER,LOWER,pointAt} from './two-face-gallery-model.js';
 import {ESCHER_DEPTH as D,depthRoomAt,depthFloorAt,canWalkDepth} from './escher-depth-model.js';
 import {lowerLocal,lowerPhysical,GALLERY_TUNNEL,tunnelContains} from './world-cylinder-model.js';
 import {MATH_FACULTY as F,facultyCanStand,facultyColliders} from './math-faculty-model.js';
+import {WING_STAIRS as S,inStairOpening,stairBarrier} from './math-wing-stairs-model.js';
 
 const distance=(a,b)=>Math.hypot(a.x-b.x,a.z-b.z),angle=(a,b)=>Math.atan2(Math.sin(b-a),Math.cos(b-a));
 const nearFloor=(p,y,eye)=>Math.abs(p.y-eye-y)<.5;
@@ -72,16 +73,16 @@ const wingGraphCache=new WeakMap();
 function clearWing(a,b,canStand){return line(a,b,.16).every(p=>canStand(p.x,p.z));}
 function wingGraph(model){
  let cached=wingGraphCache.get(model);if(cached)return cached;
- const coords=[[0,-7.3],[0,-1],[0,0],[0,5.3],[0,7.3],[-10.8,-7.3],[-10.8,0],[-10.8,5.5],[-10.8,7.3],[-5,0],[-5,5.5],[-5,7.3],[10.5,-7.3],[10.5,-2.6],[10.5,0],[9.6,0],[9.6,2.8],[9.6,5],[9.6,7.3],[5,0],[5,2.8],[5,7.3],...(model.floor===0?[[0,9.6],[0,26],[16,26],[16,0],[22,0],[24,0]]:[])];
+ const coords=[[0,-7.3],[0,-1],[0,0],[0,5.3],[0,7.3],[-10.8,-7.3],[-10.8,0],[-10.8,5.5],[-10.8,7.3],[-5,0],[-5,5.5],[-5,7.3],[10.5,-7.3],[10.5,-2.6],[10.5,0],[9.6,0],[9.6,2.8],[9.6,5],[9.6,7.3],[5,0],[5,2.8],[5,7.3],[(S.right.minX+S.right.maxX)/2,(S.front+S.end)/2],...(model.floor===0?[[0,9.6],[0,26],[16,26],[16,0],[22,0],[24,0]]:[])];
  const nodes=coords.map(([x,z])=>({x,z,y:model.height})).filter(p=>model.canStand(p.x,p.z)),edges=nodes.map(()=>[]);
  for(let a=0;a<nodes.length;a++)for(let b=a+1;b<nodes.length;b++)if(clearWing(nodes[a],nodes[b],model.canStand)){const d=distance(nodes[a],nodes[b]);edges[a].push({j:b,d});edges[b].push({j:a,d});}
  cached={nodes,edges};wingGraphCache.set(model,cached);return cached;
 }
 export function workingWingRoute(c){
- const math=c.mathematics;if(!math?.model?.canStand)return[];const t=math.transform,s=t.scale??1,model=math.model,start={x:(c.player.x-t.x)/s,z:(c.player.z-t.z)/s,y:model.height},nativeCan=math.canStandLocal??model.canStand,facultySolids=facultyColliders(),canStand=(x,z)=>nativeCan(x,z)&&facultyCanStand(t.x+x*s+2160,t.z+z*s+65,t.y+model.height*s,{colliders:facultySolids});
+ const math=c.mathematics;if(!math?.model?.canStand)return[];const t=math.transform,s=t.scale??1,model=math.model,start={x:(c.player.x-t.x)/s,z:(c.player.z-t.z)/s,y:model.height},nativeCan=math.canStandLocal??model.canStand,facultySolids=facultyColliders(),canStand=(x,z)=>nativeCan(x,z)&&(!math.stairs||!inStairOpening(x,z)&&!stairBarrier(x,z,model.height))&&facultyCanStand(t.x+x*s+2160,t.z+z*s+65,t.y+model.height*s,{colliders:facultySolids});
  if(!canStand(start.x,start.z))return[];
  const connector=[...F.connector.points].reverse().map(([x,z])=>({x:x-F.wing.x,z:z-F.wing.z,y:0})),inside=start.x>-12&&start.x<12&&start.z>-10&&start.z<8;
- let goal,tail=[];if(math.floor>0)goal={x:model.landings?.[math.floor]?.x??9.6,z:model.landings?.[math.floor]?.z??5,y:model.height};
+ let goal,tail=[];if(math.floor>0)goal=math.stairs&&math.exitVia!=='lift'?{x:(S.right.minX+S.right.maxX)/2,z:(S.front+S.end)/2,y:model.height}:{x:model.landings?.[math.floor]?.x??9.6,z:model.landings?.[math.floor]?.z??5,y:model.height};
  else{let index=0;if(!inside){let best=Infinity;connector.forEach((p,i)=>{const d=distance(start,p);if(d<best&&clearWing(start,p,canStand)){best=d;index=i;}});}goal=connector[index];tail=connector.slice(index+1);}
  const base=wingGraph(model),nodes=[...base.nodes,start],edges=[...base.edges,nodes.slice(0,-1).flatMap((p,j)=>clearWing(start,p,canStand)?[{j,d:distance(start,p)}]:[])],target=nodes.findIndex(p=>distance(p,goal)<.02),cost=nodes.map(()=>Infinity),prev=[],queue=new Set(nodes.map((_,i)=>i));if(target<0)return[];cost[nodes.length-1]=0;
  while(queue.size){let i=-1;for(const j of queue)if(i<0||cost[j]<cost[i])i=j;if(!Number.isFinite(cost[i]))break;queue.delete(i);if(i===target)break;for(const e of edges[i])if(cost[i]+e.d<cost[e.j]&&clearWing(nodes[i],nodes[e.j],canStand)){cost[e.j]=cost[i]+e.d;prev[e.j]=i;}}

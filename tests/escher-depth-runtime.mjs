@@ -4,6 +4,9 @@ import * as T from '../src/city-source-assets/home-tools/vendor/three.module.js'
 import {ESCHER_DEPTH as D,depthFloorAt,DEPTH_VIEW} from '../src/escher-depth-model.js';
 import {buildEscherDepth} from '../src/escher-depth-scene.js';
 import {installEscherDepth} from '../src/escher-depth.js';
+import {validateEscherStairJoins,watchEscherResources} from './escher-stair-joins.mjs';
+import {validateEscherCeilingContacts} from './escher-ceiling-contacts.mjs';
+import {validateEscherCeilingRibs} from './escher-ceiling-ribs.mjs';
 
 const near=(a,b,eps=1e-5)=>assert(Math.abs(a-b)<eps,`${a} ≠ ${b}`);
 const context=new Proxy({measureText:t=>({width:t.length*12})},{get:(o,k)=>o[k]??(()=>{})});
@@ -15,6 +18,13 @@ built.group.traverse(o=>{
  if(o.isInstancedMesh){instances+=o.count;assert(o.instanceMatrix.array.every(Number.isFinite),'Every instance transform is finite');}
 });
 assert(draws<60,`Museum geometry uses ${draws} draws, including its surface doors and labels`);assert(instances>300,'Masonry, stairs and exhibits use real batched geometry');
+console.log('PASS measured Escher stair joins: '+JSON.stringify(validateEscherStairJoins(T,built)));
+console.log('PASS original Escher ceiling contacts: '+JSON.stringify(validateEscherCeilingContacts(T,built)));
+console.log('PASS factual Escher ceiling-rib audit: '+JSON.stringify(validateEscherCeilingRibs(T,built)));
+// Synthetic textures enable the original credited-print geometry only.
+const ribCredited=buildEscherDepth(T,{canvas,loadTexture:()=>new T.Texture()});
+try{console.log('PASS complete credited Escher rib snapshot: '+JSON.stringify(validateEscherCeilingRibs(T,ribCredited)));}finally{ribCredited.dispose();}
+const resources=watchEscherResources(built);
 const ray=(x,y,z,dx,dy,dz,far=80)=>new T.Raycaster(new T.Vector3(x,y,z),new T.Vector3(dx,dy,dz),0,far).intersectObject(built.interior,true);
 for(const [x,z]of[[140,115],[177,120],[225,125],[225,75],[264,124],[174,170]]){
  const floor=depthFloorAt(x,z),roof=floor===D.lowerFloor?D.lowerCeiling:D.ceiling;
@@ -33,9 +43,12 @@ for(const z of[110,120])assert(ray(134,-38.2,z,1,0,0,2.5).length,'Masonry flanks
 assert.equal(built.targets.filter(o=>o.userData.escherDepthDoor).length,3);
 const oldTile=built.group.getObjectByName('Live edge-pairing mosaic').children[0].geometry;let tileDisposed=0;oldTile.addEventListener('dispose',()=>tileDisposed++);
 built.setTessellation({motif:1,pairX:true,pairZ:true});assert.equal(tileDisposed,1,'Changing a mosaic disposes its old owned geometry');
+resources.scan();
 const oldLoop=built.group.getObjectByName('Live closed-loop stair model').children[0].geometry;let loopDisposed=0;oldLoop.addEventListener('dispose',()=>loopDisposed++);
 built.setLoop([-1,-1,1,1]);assert.equal(loopDisposed,1);
+resources.scan();
 built.dispose();assert.equal(built.group.children.length,0);
+resources.assertReleased();
 
 // A small DOM supplies only browser interfaces used by the installer. Selector
 // matching includes paused readers and open dialogs, so pause tests are real.

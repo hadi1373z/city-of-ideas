@@ -1,0 +1,39 @@
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+import {lowerMatrix} from '../src/world-cylinder-model.js';
+
+// Physical checks on the actual builder; imported by math-faculty.mjs.
+export function verifyFacultyArcade(T,b,rows){
+ const hash=x=>createHash('sha256').update(JSON.stringify(x)).digest('hex'),round=x=>Math.round(x*1e6)/1e6,near=(a,c,e=6e-5)=>assert(Math.abs(a-c)<e,`${a} != ${c}`),matrix=new T.Matrix4(),p=new T.Vector3(),q=new T.Quaternion(),scale=new T.Vector3();
+ const describe=r=>{matrix.fromArray(r.matrix).decompose(p,q,scale);return{row:r,p:p.clone(),s:scale.clone(),m:matrix.clone()};};
+ const described=rows.map(describe),at=(a,c)=>Math.abs(a-c)<3e-5;
+ const jambs=described.filter(v=>v.row.color===0x705b40&&at(v.s.x,.1)&&at(v.s.y,6.28)&&at(v.s.z,.2)),rails=described.filter(v=>v.row.color===0x705b40&&at(v.s.y,.06)&&at(v.s.z,.1)&&(at(v.p.y,1.005)||at(v.p.y,6.555))),returns=described.filter(v=>v.row.color===0xd1c6ab&&at(v.s.y,.15)&&at(v.s.z,.14)&&at(v.p.y,5));
+ assert.equal(jambs.length,79);assert.equal(rails.length,156);assert.equal(returns.length,36);
+ const added=[...jambs,...rails,...returns],newRows=new Set(added.map(v=>v.row)),baselineRows=rows.filter(r=>!newRows.has(r)),canonical=r=>JSON.stringify({color:r.color,matrix:r.matrix.map(round)});
+ assert.equal(baselineRows.length,1718);assert.equal(hash(baselineRows.map(canonical).sort()),'2c0d81c36d3258f04528530290953886172d857974e7d0dbf300ec37c9782aba','Every original instance, including all 216 arch pieces and 78 panes, is unchanged');
+ const counts={5401701:136,6518154:136,7363392:316,8680799:136,9270353:40,9614252:223,10582872:136,10980694:6,12826266:129,13747883:458,14467469:2},prefix=[];
+ b.group.traverse(o=>{if(!o.isInstancedMesh)return;const color=o.material.color.getHex();assert(counts[color]);for(let i=0;i<counts[color];i++){o.getMatrixAt(i,matrix);prefix.push(canonical({color,matrix:[...matrix.elements]}));}});
+ assert.equal(hash(prefix),'6945878f0fbd2527158d6d45b99a9810944df74928e8a22163114e46f03f8d04','Original per-batch instance IDs/order remain exact');
+ const non=[],geometries=new Set(),materials=new Set(),textures=new Set(),buffers=[];
+ b.group.traverse(o=>{if(!o.isMesh)return;geometries.add(o.geometry);materials.add(o.material);if(o.material.map)textures.add(o.material.map);if(o.isInstancedMesh)buffers.push(o);else non.push({name:o.name,position:o.position.toArray(),rotation:o.rotation.toArray(),data:o.userData,color:o.material.color?.getHex(),geometry:{position:Array.from(o.geometry.attributes.position.array),index:o.geometry.index?Array.from(o.geometry.index.array):null}});});
+ assert.equal(hash(non),'048f11cc7ecc91a5b1c038ae18297b6dd2e3b158b865f3a5f2e48ffcd9e95c5c','Roof, rims, bearings, labels and every noninstance geometry/pose remain exact');assert.deepEqual([geometries.size,materials.size,textures.size,buffers.length],[23,29,17,11]);
+ const unit=b.group.children.find(o=>o.isInstancedMesh).geometry,materialFor=color=>b.group.children.find(o=>o.isInstancedMesh&&o.material.color.getHex()===color).material;
+ const mesh=v=>{const o=new T.Mesh(unit,materialFor(v.row.color));o.matrixAutoUpdate=false;o.matrix.copy(v.m);o.updateMatrixWorld(true);return o;},temporary=new T.Group();for(const v of added)temporary.add(mesh(v));temporary.updateMatrixWorld(true);
+ const old=described.filter(v=>!newRows.has(v.row)),plinths=new T.Group(),headers=new T.Group();for(const v of old){if(v.row.color===0xc3b69a&&at(v.s.y,.85)&&at(v.p.y,.555))plinths.add(mesh(v));if(v.row.color===0xd1c6ab&&at(v.s.y,.22)&&at(v.p.y,7.37))headers.add(mesh(v));}plinths.updateMatrixWorld(true);headers.updateMatrixWorld(true);assert.equal(plinths.children.length,78);assert.equal(headers.children.length,78);
+ const cast=(object,p,dir,far)=>new T.Raycaster(p,dir,0,far).intersectObject(object,true)[0],up=new T.Vector3(0,1,0),down=new T.Vector3(0,-1,0),inside=(v,point,e=2e-5)=>{const n=point.clone().applyMatrix4(v.m.clone().invert());return Math.max(Math.abs(n.x),Math.abs(n.y),Math.abs(n.z))<=.5+e;};
+ let baseProbes=0,glassProbes=0,springProbes=0,doorProbes=0;
+ for(const v of jambs)for(const x of[-.49,.49])for(const z of[-.49,.49]){const point=new T.Vector3(x,-.5,z).applyMatrix4(v.m);near(point.y,.98);const bottom=cast(plinths,point.clone().add(new T.Vector3(0,.1,0)),down,.3),top=cast(headers,point.clone().setY(7.1),up,.5);assert(bottom&&top,`Every mullion corner bears on the original wall plinth/header: ${point.toArray()} bottom=${!!bottom} top=${!!top}`);near(bottom.point.y,.98);near(top.point.y,7.26);baseProbes+=2;}
+ const panes=old.filter(v=>v.row.color===0x92b3ac&&at(v.s.y,5.55));assert.equal(panes.length,78);
+ for(const pane of panes)for(const y of[-.5,.5])for(let sample=0;sample<=17;sample++)for(const z of[-.5,.5]){const point=new T.Vector3(sample/17-.5,y,z).applyMatrix4(pane.m);assert([...rails,...jambs].some(v=>inside(v,point)),'Each unchanged glazing edge is seated in a real frame, including its jamb corners');glassProbes++;}
+ for(const rail of rails)for(const x of[-.5,.5])for(const y of[-.49,.49])for(const z of[-.49,.49]){const point=new T.Vector3(x,y,z).applyMatrix4(rail.m);assert(point.y<.98?old.some(v=>v.row.color===0xc3b69a&&at(v.s.y,.85)&&inside(v,point)):jambs.some(v=>inside(v,point)),`Rail end faces are concealed inside a supported mullion or the retained sill bed: ${point.toArray()}`);glassProbes++;}
+ const arches=old.filter(v=>v.row.color===0xd1c6ab&&at(v.s.y,.19)&&at(v.s.z,.24));assert.equal(arches.length,216);
+ for(let i=0;i<20;i++){const a=(i+.5)/20*Math.PI*2;if(Math.abs(Math.atan2(Math.sin(a-Math.PI),Math.cos(a-Math.PI)))<.18)continue;for(const sign of[-1,1])for(const y of[5.045,5.05,5.055]){const p=new T.Vector3(Math.cos(a)*59.9-Math.sin(a)*sign*4.05,y,Math.sin(a)*59.9+Math.cos(a)*sign*4.05),t=a+sign*Math.PI/40,end=new T.Vector3(Math.cos(t)*60.25,y,Math.sin(t)*60.25);assert(arches.some(v=>inside(v,p))&&returns.some(v=>inside(v,p)),`Each return meets the unchanged actual arch springing: ${i}/${sign}/${y}`);assert(jambs.some(v=>inside(v,end))&&returns.some(v=>inside(v,end)),'Each return is anchored inside a supported mullion');springProbes+=2;}}
+ // Existing collision bands contain every added part; the open west gate and
+ // viewing aisle acquire no new body obstacle or relaxed collider.
+ for(const v of added)for(const x of[-.5,.5])for(const y of[-.5,.5])for(const z of[-.5,.5]){const point=new T.Vector3(x,y,z).applyMatrix4(v.m),r=Math.hypot(point.x,point.z);assert(r>59.8&&r<60.7);assert(!(point.x<0&&Math.abs(point.z)<4.5),'Do not close the actual west doorway');}
+ for(let z=-2.5;z<=2.501;z+=.25)for(const y of[.4,1.8,2.1]){assert.equal(cast(temporary,new T.Vector3(-56,y,z),new T.Vector3(-1,0,0),10),undefined);doorProbes++;}
+ for(let i=0;i<180;i++){const a=i/180*Math.PI*2;assert.equal(cast(temporary,new T.Vector3(Math.cos(a)*52,1.93,Math.sin(a)*52),up,10),undefined,'Keep paper viewing aisle free');}
+ const frame=new T.Group();frame.matrixAutoUpdate=false;frame.matrix.copy(lowerMatrix(T));temporary.position.set(-2160,0,-65);frame.add(temporary);frame.updateMatrixWorld(true);for(const index of[0,20,39,40,78]){const v=jambs[index],point=temporary.localToWorld(new T.Vector3(v.p.x,.8,v.p.z)),hit=cast(temporary.children[index],point,new T.Vector3(0,-1,0),.5);assert(hit);near(-96-hit.point.y,.98);}
+ temporary.removeFromParent();temporary.clear();plinths.clear();headers.clear();const all=[...geometries,...materials,...textures,...buffers],released=new Map(all.map(r=>[r,0]));for(const r of all)r.addEventListener('dispose',()=>released.set(r,released.get(r)+1));
+ return{baselineRows,baseProbes,glassProbes,springProbes,doorProbes,assertArcadeReleased:()=>{assert.equal(released.size,80);assert([...released.values()].every(n=>n===1),'Each of 69 original resources and 11 instance buffers releases once; no new resource allocation');}};
+}

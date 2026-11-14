@@ -2,11 +2,12 @@ import assert from 'node:assert/strict';
 import * as T from '../src/city-source-assets/home-tools/vendor/three.module.js';
 import {UPPER,LOWER,GALLERY_THICKNESS,GRAVITY_TURN_Y,TWO_FACE_GALLERY_CONTRACT,pointAt,headingAt,heightAt,nearestTheta,surfaceAt,walkGallery} from '../src/two-face-gallery-model.js';
 import {buildTwoFaceGallery} from '../src/two-face-gallery-scene.js';
+import {verifyPaperDisplaySupports} from './paper-display-supports.mjs';
 
 assert.equal(GALLERY_THICKNESS,96);assert.equal(GRAVITY_TURN_Y,-48);assert.equal(TWO_FACE_GALLERY_CONTRACT.stepsPerSide,240);
 const close=(a,b,tol=1e-7)=>assert(Math.abs(a-b)<tol,`${a} != ${b}`);
 for(const s of[UPPER,LOWER]){
- const built=buildTwoFaceGallery(T,{side:s.id});built.group.updateMatrixWorld(true);assert.equal(built.counts.treads,240);assert.equal(built.counts.arches,13);assert(built.counts.drawMeshes<25);assert.equal(built.descriptor,s);assert.equal(built.contract,TWO_FACE_GALLERY_CONTRACT);
+ const built=buildTwoFaceGallery(T,{side:s.id});built.group.updateMatrixWorld(true);const displaySupport=verifyPaperDisplaySupports(T,built);assert.equal(built.counts.treads,240);assert.equal(built.counts.arches,13);assert(built.counts.drawMeshes<25);assert.equal(built.descriptor,s);assert.equal(built.contract,TWO_FACE_GALLERY_CONTRACT);
  let geometries=0,triangles=0;built.group.traverse(o=>{if(o.geometry){geometries++;assert(o.geometry.attributes.position.array.every(Number.isFinite));triangles+=(o.geometry.index?o.geometry.index.count:o.geometry.attributes.position.count)/3*(o.count??1);}});assert(geometries<25);assert(triangles<250000);
  const rayY=(x,z,y,distance=.10)=>new T.Raycaster(new T.Vector3(x,y+.04,z),new T.Vector3(0,-1,0),0,distance).intersectObject(built.walking,true).map(h=>h.point.y);
  const clearLine=(a,b)=>{const start=new T.Vector3(...a),delta=new T.Vector3(...b).sub(start);assert.equal(new T.Raycaster(start,delta.clone().normalize(),.001,delta.length()-.001).intersectObject(built.group,true).length,0,`${s.id} deck mouth must not contain a rail or arch post`);};
@@ -31,7 +32,7 @@ for(const s of[UPPER,LOWER]){
  const middle={x:16,z:0,y:-48+1.8,galleryTheta:s.endTheta,galleryLayer:'spiral'};assert(!walkGallery(middle,2,1,{side:s}).blocked);assert.equal(middle.galleryLayer,'mid');close(middle.y-1.8,-48);assert(rayY(middle.x,middle.z,-48).some(y=>Math.abs(y+48)<2e-5));assert(!walkGallery(middle,-2,-1,{side:s}).blocked);close(middle.galleryTheta,s.endTheta);
  const edge=pointAt(1,s),barrier={...edge,y:edge.y+1.8,galleryTheta:1,galleryLayer:'spiral'};assert(walkGallery(barrier,Math.cos(1)*10,Math.sin(1)*10,{side:s}).blocked);assert(Math.hypot(barrier.x,barrier.z)<s.outerRadius);
  // Owned meshes, geometries and materials are disposed once; no caller resources.
- let disposed=0;built.group.traverse(o=>{if(o.geometry)o.geometry.addEventListener('dispose',()=>disposed++);});const parent=new T.Group();parent.add(built.group);built.dispose();assert.equal(parent.children.length,0);assert(disposed>0);const first=disposed;built.dispose();assert.equal(disposed,first);
+ let disposed=0;built.group.traverse(o=>{if(o.geometry)o.geometry.addEventListener('dispose',()=>disposed++);});const parent=new T.Group();parent.add(built.group);built.dispose();assert.equal(parent.children.length,0);assert(disposed>0);const first=disposed;built.dispose();assert.equal(disposed,first);displaySupport.assertReleased();
 }
 
 // The upper route meets the Babel bay, and its second-turn spur meets the tunnel.
