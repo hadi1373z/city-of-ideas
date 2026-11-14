@@ -132,3 +132,8 @@ Self-critique: the Exchange Engine accepted a path and replaced the matching in 
 ## Exchange completion and onward route
 
 Self-critique: after finding a perfect matching the room still asked for another improvement, although none was possible. It now explains the four-left-vertex upper bound, removes impossible vertex choices, disables flipping until a complete augmenting path exists, and offers an explicit visit to the matching-cover room. Reset remains available. The next-room action records that deliberate workbench visit without changing the separate next-unfinished navigation. Drafts and milestones are preserved. UI checks cover incomplete/complete paths, returning to the solved room, onward travel and private draft retention. The remaining example is fixed; replay is not a fresh generated problem.
+
+
+## Cover-room bounds and failed certificates
+
+Self-critique: choosing vertices only changed an uncovered-edge count, so visitors could chase a success message without seeing why the cover was evidence. The same room now shows the matching floor, a cover ceiling only when every edge is covered, and the remaining gap. Uncovered edges turn terracotta on the physical graph. A folded endpoint ledger explains exactly which chosen vertices cover each edge, while the inequality argument connects to the previous exchange room. No completion gate, solver, save field or automatic notebook entry is added. UI checks distinguish an invalid three-vertex selection, a valid four-vertex cover and a tight three-vertex certificate, while preserving a private draft. Remaining limit: the graph is fixed, so transfer to a new graph still requires the deeper problems rather than a generated instance.
