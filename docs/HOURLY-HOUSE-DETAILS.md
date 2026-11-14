@@ -8172,3 +8172,70 @@ upstairs/Controls/help/dock/mobile and earlier Proof work stay intact and
 unintegrated; existing conflict separate. No new merge/reconciliation/deploy.
 
 Next useful review: audit the original frontal walking entry from the Gallery ground floor onto its first upper flight before further ornament. Native frontal W stopped at Z-.052319856/feet.395; guardGallery runs before the Gallery entry and can reject a step that crosses the narrow Z0...08 allowance. The same guard remains on separate main e646bb2. Inspect the live handoff, previous/current poses, frame-sized moves, upper/Babel direction gates and existing explicit actions; preserve all treads, openings, source/private coordinates, new bearer joints, all earlier owner/reading/private contracts and separate main work. Record measured behavior and a bounded correction within the retained direction gates; no automatic tour/travel, broad collision bypass, unrelated rail ornament, merge or reconciliation.
+
+## 2026-11-13 — Gallery frontal upper-stair entry restored
+
+Follow-up tof9c204807db5eeb9b73735a27a25175bdc06ace1; full bounded handoff and
+verification in docs/GALLERY-STAIR-ENTRY.md. All47readings/all8Mathworking
+floors remain complete; no new first reading/geometry/UI/model/saved state.
+
+Actual f9 constrain/guard functions reproduce nativeX39.333829619/
+Z-.052319856/feet.395 stall: normal.2m move proposesZ.147680144, Babelguard
+restores previouspose before original valid Gallery entry is considered.
+Same old guard remains on separate main e646bb2.
+
+Three-line Gallery precheck delegates to original updateGalleryAscent only
+for currentFloor0/feet within.01m ofbase.395/positiveZmotion/original
+entryAt finite position. Original .28side inset/strict run/previous tolerance
+stay. The admitted rectangle lies within unchanged annular walking bounds.
+Height/progress/floor updates remain original controller; no turn/centering/
+pose assignment/auto-tour/travel or broad collision bypass. Unmatched moves
+retain original Babel/other Gallery checks; static restoration does not
+qualify. Babel begin/step/leave/guards/held input/look and separate main's
+e646upstairs/Controls/help/dock/mobile work stay unchanged/unintegrated.
+
+New regression executes actual constrain/ascent/guard/begin/route. Fails
+before correction; passes175frontal crossings/five lanes/frame1/120..1s,
+nine void-height-floor-direction-standstill controls/six other-floor entries/
+twenty Babel descents withkeepMovement/look retained/original explicit stair
+start with touringoff/five complete up-down source walks41heights each.
+Upper entry invokes no Babel begin/cancel/clear/travel/locale; private
+storage/progress/resident/memory/DOM getters denied.
+
+All124release programs pass. Native three direct frontal lanes/normal pointer-W
+walk full first upper40steps up/down with41heights.395..8.395 each, no angled
+workaround/pose assignment/tour/bypass. Original explicit entrance/40Babel
+steps/41heights.395->-8 and explicit exitfeet.395/Z12 retained. Eight four-
+language pointer/E first-catalogue readers retainpage0/aaaaaa/empty prefix/
+exact source/sameposeclose/FA RTL/held-Wmodalpause/Czech English fallback.
+Fresh document retains explicit savedCzech/11ready genuine pages/ratio1;
+own QAfields removed/ownbrowserclosed/userheadedpreviewuntouched.
+Three actual ground/first-tread/FA reader screenshots visually checked.
+Zeroapp errors/one existing Threewarning/controllerA separately untested.
+Explicit LOCAL881asset committed verification accompanies PR#5.
+
+Geometry/resources exact without exclusions: raw65/41893 r1867b21ef65/
+nativebfee858c; complete73/43867 r186c3043b56/native7448aaec; full upper290/0
+r186/nativeade8ee63. All160upper/40Babel treads/slab-ceiling cuts/soffit/
+2bearers/4fitted joints/88resources/39buffers/nine adapters/far ends/398fits/
+12copies/1873shelf supports/65part ring owner/all old source hashes/budgets/
+masks/rays/cleanup/historical negatives remain. Four expected new-bearing
+mesh rays and complete contact/core/fingerprint checks still pass after
+fresh document. No new resource/draw/buffer/light/collider/pick/UI/listener/
+private key or source/private coordinate change.
+
+All47readings/exact handoffs/raw drafts/carets/first answers/keys/explicit
+saves/experiments/EN-DE-FA-CS/RTL/formulaLTR/local-global-saved preferences/
+English gaps remain. Construction/companion/locale/rendering no private-
+memory/storage/progress/preference-write/experiment/discovery/audio/travel/
+floor action. Movement handoff runs only for original deliberate walking.
+Preserve connected cylinder/proper lower parent/island/Zarathustra/Babelbook-
+ring-tip-fluids-glow/480helical treads/middle/well/tunnel/earth cut/eightfloor
+24IDwing/realstairs/lift/central3mdoor/Faculty/coveredwalk/Escher/models/gates/
+experiments/artwork/11genuine scan bytes/editions/rights/source/zoom/approved
+cast/fixed voices/recordings/all full contracts. No new book/page/paper/
+historical copy/quotation/testimony/source-fetch/certification claim.
+Samebranch/PR5/exactHouses-Concurrent text; main Proof/Babel work/conflict
+separate. No new merge/reconciliation/deploy.
+
+Next useful review: audit the remaining upper Gallery landing approaches with small frame-sized movements, especially the original .08 m hole margin and .02 m entry tolerance. Inspect actual support faces, previous/current poses and forward/reverse gates across all four retained flights before editing. Preserve this frontal fix, all 160 upper and forty Babel treads, bearer joints, source/private coordinates, original explicit actions and separate main work. Only a bounded correction within the existing physical route or a factual audit; no automatic tour/travel, broad collision bypass, extra geometry or unrelated ornament.

@@ -126,7 +126,7 @@ the opening, an angled upper-flight entry and its full up/down walk record
 all 41 heights .395..8.395 each way. No pose assignment, automatic tour,
 collision bypass or main e646 walking-exit/Controls verification claim.
 
-Factual circulation limit: an ordinary frontal W approach stopped at
+Factual circulation limit recorded at f9c2048: an ordinary frontal W approach stopped at
 X39.333829619 / Z-.052319856 / feet .395. The original guardGallery precedes
 Gallery entry and can restore the previous pose when a frame-sized step
 crosses the narrow Z0...08 allowance. The same guard remains on main e646bb2.
@@ -162,4 +162,11 @@ changes no Gallery movement/arrival code, Babel leave/step/entry logic or CSS.
 No main walking-exit/Controls verification, new merge, reconciliation or
 deployment is claimed. PR #5's existing conflict stays separate.
 
-Next useful review: audit the original frontal walking entry from the Gallery ground floor onto its first upper flight before further ornament. Native frontal W stopped at Z-.052319856/feet.395; guardGallery runs before the Gallery entry and can reject a step that crosses the narrow Z0...08 allowance. The same guard remains on separate main e646bb2. Inspect the live handoff, previous/current poses, frame-sized moves, upper/Babel direction gates and existing explicit actions; preserve all treads, openings, source/private coordinates, new bearer joints, all earlier owner/reading/private contracts and separate main work. Record measured behavior and a bounded correction within the retained direction gates; no automatic tour/travel, broad collision bypass, unrelated rail ornament, merge or reconciliation.
+## Frontal entry follow-up
+
+[GALLERY-STAIR-ENTRY.md](GALLERY-STAIR-ENTRY.md) corrects the frontal handoff
+recorded above, using the original upper stair gate and ascent receiver before
+Babel's void guard. All bearing geometry, resources and fingerprints remain exact.
+The ledger and that later review govern the next circulation audit.
+
+Next review recorded at f9c2048 (completed by the frontal-entry follow-up above): audit the original frontal walking entry from the Gallery ground floor onto its first upper flight before further ornament. Native frontal W stopped at Z-.052319856/feet.395; guardGallery runs before the Gallery entry and can reject a step that crosses the narrow Z0...08 allowance. The same guard remains on separate main e646bb2. Inspect the live handoff, previous/current poses, frame-sized moves, upper/Babel direction gates and existing explicit actions; preserve all treads, openings, source/private coordinates, new bearer joints, all earlier owner/reading/private contracts and separate main work. Record measured behavior and a bounded correction within the retained direction gates; no automatic tour/travel, broad collision bypass, unrelated rail ornament, merge or reconciliation.

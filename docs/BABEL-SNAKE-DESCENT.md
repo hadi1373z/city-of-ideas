@@ -61,3 +61,7 @@ The measured first-upper-flight follow-up in [GALLERY-FLIGHT-BEARINGS.md](GALLER
 adds four small bearer/tread contact patches without moving the soffit or source stairs.
 It also records the existing frontal upper-entry guard limitation separately from
 successful angled walking; movement code remains unchanged in that support review.
+
+The later [Gallery entry follow-up](GALLERY-STAIR-ENTRY.md) restores a direct
+frontal upper-flight approach through the original gate and controller. The
+original Babel descent guard and all physical stair/opening geometry stay exact.

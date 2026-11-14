@@ -171,6 +171,9 @@ function enter(){currentFloor=Math.min(3,currentFloor);setVisitMode('gallery');t
 function overview(){returnApproach=null;returnLift=null;rampTarget=null;transition=null;touring=false;setVisitMode('overview');floorButtons.forEach(b=>b.disabled=false);$('floor-transition').hidden=true;$('tour-toggle').textContent=CITY_I18N.t('tour')}
 function changeFloor(f){if(visitMode==='roof')setVisitMode('gallery');f=Math.max(0,Math.min(3,f));if(transition)return;if(!inside){currentFloor=f;enter();return}if(f===currentFloor)return;touring=false;$('tour-toggle').textContent=CITY_I18N.t('tour');closeExhibit();gallerySpiralTheta=null;player.x=liftRadius;player.z=12;player.yaw=Math.PI/2;player.pitch=0;transition={from:player.y,to:f*spacing+eye+.395,start:performance.now(),duration:1450,target:f};$('transition-name').textContent=tx('بخش '+['نخست','دوم','سوم','چهارم'][f],'Part '+(f+1));$('floor-transition').hidden=false;floorButtons.forEach(b=>b.disabled=true)}
 function constrain(previous={x:player.x,z:player.z}){
+ // Let the original upper stair own a forward crossing of its ground entry.
+ const upperEntry=currentFloor===0&&Math.abs(player.y-eye-gallerySpiral.base)<.01&&player.z>previous.z?gallerySpiral.entryAt(player.x,player.z,currentFloor,previous):null;
+ if(Number.isFinite(upperEntry)){updateGalleryAscent(upperEntry);return;}
  if(window.CITY_MAIN?.babelLibrary?.guardGallery(previous))return;
  const r=Math.hypot(player.x,player.z);
  if(gallerySpiralTheta!==null){const exit=gallerySpiral.exitAt(player.x,player.z,gallerySpiralTheta);if(exit!==null){currentFloor=exit;gallerySpiralTheta=null;if(exit===4){setVisitMode('roof');player.y=roofConnection.height+eye;updateFloorUI();return;}player.y=currentFloor*spacing+eye+.395;updateFloorUI();}else{const p=gallerySpiral.resolve(player.x,player.z,gallerySpiralTheta,previous);Object.assign(player,{x:p.x,z:p.z,y:p.y+eye});updateGalleryAscent(p.theta);return;}}
