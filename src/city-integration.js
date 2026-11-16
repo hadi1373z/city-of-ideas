@@ -34,7 +34,7 @@ import {createSharedActivities} from './shared-activities.js';
 import {installIdeasGraveyard} from './ideas-graveyard.js?v=foundations1';
 import {installEscherHouse} from './escher-house.js?v=house-link1';
 import {installStudyBook} from './study-book.js';
-import {installCinematicIntro} from './cinematic-intro.js';
+import {installCinematicIntro} from './cinematic-intro.js?v=edition2';
 import {installDiscoveryStory} from './discovery-story.js';
 const waitMain=()=>new Promise(resolve=>{if(window.CITY_MAIN?.city)resolve(window.CITY_MAIN);else addEventListener('gallery-ready',()=>resolve(window.CITY_MAIN),{once:true});});
 const M=await waitMain(),T=window.THREE,frame=()=>CITY_TOOL_FRAMES.get('home'),originalHome={...window.CITY_HOME_SCENE};let selectedEdition='residence';

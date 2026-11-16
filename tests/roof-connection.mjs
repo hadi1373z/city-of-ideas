@@ -28,3 +28,5 @@ scene.updateMatrixWorld(true);
 for(let z=stairs.roofOpeningStart+.1;z<stairs.run-.1;z+=.25)for(const offset of[-stairs.width/2+.7,0,stairs.width/2-.7]){const p=stairs.pointAt(stairs.starts[3]+z),ray=new T.Raycaster(new T.Vector3(stairs.centerX+offset,p.y+.1,z),new T.Vector3(0,1,0),0,4.2);const hit=ray.intersectObject(roof.group,true);assert(!hit.length,'Roof connector must not cover the stair opening: '+JSON.stringify({z,offset,hit:hit[0]?.object.name}));}
 
 roof.dispose();mountain.dispose();console.log('PASS: continuous roof connector, fourth stair landing, four articulated crawl limbs, roof arrival and mountain return, visitor yielding and reduced-motion arrival.');
+
+const v2=w.createRoofConnection(T,{scene:new T.Scene(),city:{...city,mountainEnabled:false},stairs});assert(!v2.canWalk(80,0));assert(!v2.canVisit(125,0));assert(v2.canWalk(46,-12));const guard=v2.group.getObjectByName('Version 2 gallery roof perimeter');assert(guard.visible&&guard.children.length>180);assert(v2.group.getObjectByName('Unified roof terrace').visible===false);v2.dispose();

@@ -1,4 +1,4 @@
-import {installStartModes} from './start-modes.js';
+import {installStartModes} from './start-modes.js?v=edition2';
 import {OPENING_SCRIPT} from './opening-script.js';
 import {buildSocratesGuide} from './socrates-character.js';
 import {findHostSpot} from './socrates-tour.js';

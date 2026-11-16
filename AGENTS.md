@@ -198,3 +198,7 @@ reach the working wing and return to the hall; stopping at the first route-null
 frame does not prove that a visitor can leave.
 
 Both physical faces share ocean-surface.js for water colour, foam, waves and fog. Update both materials from the same scene fog and reduced-motion setting. The annular earth core below Babel (r21.7..58, Y-95.9..-26.6) encloses the stair shaft; retain the east Escher tunnel cut at Y-40.2..-34.7 and Z+/-2.3. Do not replace these earth walls with a sky-filled opening.
+
+## City version 2
+
+On 2026-11-16 the user requested a new default version without the mountain, retaining version 1 in code. Git tag `city-v1-before-mountain-removal` preserves the complete prior city. Keep `CITY_CONFIG.edition=2` and `mountainEnabled=false` for current development. Do not restore the mountain, its automatic climbing capture or summit bridge to the live city. The gallery, central volcano, Babel, lower face and all existing houses remain. See docs/CITY-VERSIONS.md for restoration.
