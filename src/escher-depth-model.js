@@ -10,7 +10,7 @@ export const ESCHER_DEPTH=Object.freeze({
  ]),
  stair:Object.freeze({minX:181,maxX:188,minZ:132,maxZ:156,top:-40,bottom:-46,steps:48}),
  portals:Object.freeze([
-  Object.freeze({id:'escher',name:'Escher’s rear alcove',x:228,z:104,y:.13,gated:true,landing:{x:240,z:115,y:-40,yaw:-Math.PI/2}}),
+  Object.freeze({id:'escher',name:'Escher House · entrance pavilion',x:228,z:104,y:.13,gated:true,landing:{x:240,z:115,y:-40,yaw:-Math.PI/2}}),
   Object.freeze({id:'park',name:'Park approach',x:-84,z:-110,y:.13,landing:{x:174,z:114,y:-40,yaw:-Math.PI/2}}),
   Object.freeze({id:'study',name:'Study-house lane',x:256,z:-112,y:.13,landing:{x:260,z:121,y:-40,yaw:Math.PI/2}})
  ]),

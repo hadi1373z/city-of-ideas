@@ -1,5 +1,5 @@
-import {ESCHER_DEPTH as D,DEPTH_VIEW,DEPTH_FOCUS,depthFloorAt,depthRoomAt,walkDepth,atGalleryHandoff,perspectiveAligned,tileMismatch,loopResult} from './escher-depth-model.js';
-import {buildEscherDepth} from './escher-depth-scene.js';
+import {ESCHER_DEPTH as D,DEPTH_VIEW,DEPTH_FOCUS,depthFloorAt,depthRoomAt,walkDepth,atGalleryHandoff,perspectiveAligned,tileMismatch,loopResult} from './escher-depth-model.js?v=house-link1';
+import {buildEscherDepth} from './escher-depth-scene.js?v=house-link1';
 
 const ROOM_NAMES={vestibule:'Gallery passage',hall:'Hall of connected views',perspective:'Perspective chamber',tessellation:'Tessellation chamber',reading:'Room of three doors',stair:'Stair to the loop chamber',loop:'Closed-loop chamber'};
 export function installEscherDepth(M,T,{onGalleryExit=null}={}){
@@ -38,7 +38,7 @@ export function installEscherDepth(M,T,{onGalleryExit=null}={}){
  function enter(id='gallery'){
   if(disposed||blocked())return false;const p=D.portals.find(p=>p.id===id);if(id!=='gallery'&&(!p||!gateOpen(p)))return false;
   M.cancelActivity?.();if(active)stop();const landing=p?.landing??{x:136.4,z:115,y:-40,yaw:-Math.PI/2};
-  M.arrive({...landing});M.setCityMode();M.clearMovement();M.player.pitch=0;active=true;if(p)lastDoor=p.id;hold=0;document.body.dataset.escherDepth='true';setLight();renderPanel();return true;
+  M.arrive({...landing});M.setCityMode();M.clearMovement();M.player.pitch=0;active=true;if(p)lastDoor=p.id;hold=0;document.body.dataset.escherDepth='true';portalButton.hidden=true;setLight();renderPanel();return true;
  }
  function leave(id=lastDoor){
   if(!active)return false;const p=D.portals.find(p=>p.id===id)??D.portals[1];stop();cooldown=lastTime+1.5;M.clearMovement();M.arrive({x:p.x,z:p.z+2.35,y:M.cityGroundHeight?.(p.x,p.z+2.35)??p.y,yaw:Math.PI});return true;
@@ -56,8 +56,8 @@ export function installEscherDepth(M,T,{onGalleryExit=null}={}){
  }
  function checkPortals(time=0){
   if(disposed)return false;if(Number.isFinite(time))lastTime=time;
-  if(active){if(!valid()){stop();return false;}renderPanel();return handoff();}
-  const p=nearestSurfaceDoor(),paused=blocked();portalButton.hidden=!p||paused;portalButton.disabled=!!p&&!gateOpen(p);portalButton.textContent=p&&!gateOpen(p)?'First align the stair in Escher’s house':p?'Enter Escher · Depth & Pattern — '+p.name:'Enter the underground museum';
+  if(active){portalButton.hidden=true;if(!valid()){stop();return false;}renderPanel();return handoff();}
+  const p=nearestSurfaceDoor(),paused=blocked();portalButton.hidden=!p||paused;portalButton.disabled=!!p&&!gateOpen(p);portalButton.textContent=p&&!gateOpen(p)?'Align the house stair to reveal the museum entrance':p?.id==='escher'?'Continue from Escher House into the museum · E / A':p?'Enter Escher · Depth & Pattern — '+p.name:'Enter the underground museum';
   if(p&&!paused&&gateOpen(p)&&time>=cooldown&&distance(p)<.68)return enter(p.id);return false;
  }
  function step(dt,{forward=0,strafe=0,turn=0,boost=false}={}){

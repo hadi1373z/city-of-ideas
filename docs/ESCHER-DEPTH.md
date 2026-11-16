@@ -132,3 +132,7 @@ aperture, walls, voids and large movements; verifies projective alignment and
 geometric edge pairing; and exhausts all sixteen loop choices. Runtime checks
 cover scene geometry, real floor/roof and tread rays, shared interior entry,
 gates, mode/height guards, modal pauses, return handoff, lighting and owned cleanup.
+
+## House as museum entrance pavilion
+
+The surface house keeps its footprint, four credited prints, alignment puzzle and saved passage. An open ribbed canopy, inset alternating floor and brass alcove inlays establish a single entrance axis. A wall-mounted route names the three museum investigations. The Escher threshold has an open frame rather than an opaque slab hiding the rear print; proximity and E/A still activate the existing shared underground interior after solving the house puzzle. Returning uses the same alcove with the existing cooldown. This is a linked threshold, not a modelled forty-metre stair. The surface puzzle panel is now height-gated so it cannot appear over the museum below.

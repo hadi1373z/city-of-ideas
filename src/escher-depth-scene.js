@@ -1,4 +1,4 @@
-import {ESCHER_DEPTH as D,ESCHER_DEPTH_WALLS as WALLS,DEPTH_TRIANGLE,tilePolygon,loopResult} from './escher-depth-model.js';
+import {ESCHER_DEPTH as D,ESCHER_DEPTH_WALLS as WALLS,DEPTH_TRIANGLE,tilePolygon,loopResult} from './escher-depth-model.js?v=house-link1';
 
 export function buildEscherDepth(T,{canvas=()=>document.createElement('canvas'),loadTexture=typeof globalThis.document?.createElementNS==='function'?url=>new T.TextureLoader().load(url):null}={}){
  const group=new T.Group();group.name='Escher · connected underground museum';group.userData.escherDepth=true;
@@ -48,8 +48,8 @@ export function buildEscherDepth(T,{canvas=()=>document.createElement('canvas'),
  for(const p of D.portals){
   const w=p.id==='escher'?2.4:3.3,h=p.id==='escher'?3.5:4.4;
   for(const sign of[-1,1])box(.22,h,.38,p.x+sign*w/2,p.y+h/2,p.z,stone,surface);
-  box(w+.2,.25,.38,p.x,p.y+h,p.z,stone,surface);box(w-.28,h-.1,.08,p.x,p.y+h/2,p.z,ink,surface);
-  const door=new T.Mesh(own(new T.PlaneGeometry(w-.28,h-.1)),ink);door.position.set(p.x,p.y+h/2,p.z+.055);door.userData.escherDepthDoor=p.id;surface.add(door);targets.push(door);
+  box(w+.2,.25,.38,p.x,p.y+h,p.z,stone,surface);if(p.id!=='escher')box(w-.28,h-.1,.08,p.x,p.y+h/2,p.z,ink,surface);
+  const door=new T.Mesh(own(new T.PlaneGeometry(w-.28,h-.1)),ink);door.position.set(p.x,p.y+h/2,p.z+.055);if(p.id==='escher')door.visible=false;door.userData.escherDepthDoor=p.id;surface.add(door);targets.push(door);
   label('ESCHER · BELOW',p.x,p.y+h+.45,p.z+.23,w+1,.5,surface);
   const [x,z]=landingMarkers[p.id];box(3,.025,2,x,-39.98,z,brass);box(2.7,.03,1.7,x,-39.96,z,ink);
   label(p.name+' ↑',x,-37.2,z-.9,7,.65);

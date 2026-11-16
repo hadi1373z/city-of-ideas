@@ -86,7 +86,7 @@ foreignDialog.showModal();body.append(foreignDialog);api.step(.1,{forward:1,turn
 M.city.update(M.player,6);assert(updates);assert.equal(M.city.region(M.player.x,M.player.z).id,'escher-depth');
 assert(api.leave());assert(!api.active);restoreChecked();near(M.player.z,D.portals[1].z+2.35);
 surface('escher');assert.equal(api.checkPortals(10),false);assert(api.interact());assert(!api.active);assert.equal(api.enter('escher'),false,'The existing Escher passage gates its rear alcove');
-window.CITY_ESCHER.passageOpen=true;assert(api.checkPortals(11));assert.equal(api.built.interior,interior);near(M.player.x,240);assert(api.leave());restoreChecked();
+window.CITY_ESCHER.passageOpen=true;assert(api.checkPortals(11));assert.equal(api.built.interior,interior);near(M.player.x,240);assert(body.querySelector('#escher-depth-enter').hidden,'Surface entry control hides as soon as the museum owns movement');assert(api.leave());restoreChecked();
 surface('study');assert(api.checkPortals(20));assert.equal(api.built.interior,interior);near(M.player.x,260);near(M.player.z,121);assert(api.leave());restoreChecked();
 surface('park');assert(api.checkPortals(30));assert.equal(api.built.interior,interior);assert(api.leave());
 assert.equal(scene.children.filter(o=>o.userData.escherDepth).length,1,'All three doors share exactly one built interior');
