@@ -2,6 +2,7 @@ import {QUARTER_ARTISTS,QUARTER_COPY} from './artist-quarter-data.js?v=city-nigh
 import {installIdeaExhibitions} from './idea-exhibitions.js?v=city-night-20261117';
 import {buildArtistStudios,buildQuarterGarden} from './artist-quarter-scene.js?v=city-night-20261117';
 const PLAN=globalThis.ARTIST_QUARTER_PLAN;
+const nearCourt=(x,z)=>PLAN.courts.some(c=>Math.hypot(x-c.arrival.x,z-c.arrival.z)<68);
 
 export function installArtistQuarter(M,T){
  const studios=buildArtistStudios(T),garden=buildQuarterGarden(T,M.city.art);M.scene.add(studios.group,garden.group);M.city.targets.push(...studios.targets);M.city.buildingTargets.push(...studios.houses.map(h=>h.group));
@@ -45,12 +46,12 @@ export function installArtistQuarter(M,T){
  function contextRender(house,near){panel.dataset.location=house?'studio':'garden';name.textContent=house?house.artist.name:w().garden;hint.textContent=house?pick(house.artist.theme):'';context.replaceChildren(button(w().open,()=>open()));if(house)context.prepend(button(near?w().look:w().enter,()=>near?open(house.artist.id):arrive(house.insideEntry)));}
  const old={canStand:M.city.canStand,region:M.city.region,targetInfo:M.city.targetInfo,showExtra:M.showExtra,startExtra:M.startExtra,update:M.city.update};
  M.city.canStand=(x,z)=>studios.canStand(x,z)&&!garden.colliders.some(b=>x>b.minX-.22&&x<b.maxX+.22&&z>b.minZ-.22&&z<b.maxZ+.22)&&old.canStand(x,z);
- M.city.region=(x,z)=>{const house=studios.houses.find(h=>h.inside(x,z));if(house)return{id:'artists',artistId:house.artist.id,title:house.artist.name+' · '+pick(house.artist.title),inside:true};const r=old.region(x,z);return r.id==='city'&&x>PLAN.bounds.minX&&x<PLAN.bounds.maxX&&z>PLAN.bounds.minZ&&z<PLAN.bounds.maxZ?{id:'artists',title:w().garden,inside:false}:r;};
+ M.city.region=(x,z)=>{const house=studios.houses.find(h=>h.inside(x,z));if(house)return{id:'artists',artistId:house.artist.id,title:house.artist.name+' · '+pick(house.artist.title),inside:true};const r=old.region(x,z);return r.id==='city'&&nearCourt(x,z)?{id:'artists',title:w().garden,inside:false}:r;};
  M.city.targetInfo=data=>data?.quarterArtist?{kind:'artist-quarter',data,title:QUARTER_ARTISTS.find(a=>a.id===data.quarterArtist)?.name}:old.targetInfo(data);
  M.showExtra=info=>{if(info?.kind!=='artist-quarter')return old.showExtra?.(info);const id=info.data.quarterArtist;if(!inside(id))return true;if(info.data.quarterAction==='activity'){houseFor(id).change();M.clearMovement();return true;}if(info.data.quarterAction==='reflect'){reflect(id);M.visitorMemory?.open('studio-'+id);return true;}open(id);return true;};
  if(M.city.landmarks)M.city.landmarks.artists={...PLAN.arrival};
  M.startExtra=destination=>{if(['artists-quarter','artists'].includes(destination)){arrive(PLAN.arrival);return true;}const studio=houseFor(destination?.replace(/^artist:/,''));if(studio){arrive(studio.entry);return true;}return old.startExtra?.(destination);};
- M.city.update=(...args)=>{old.update(...args);const time=args[1];if(time-lastTime<.15)return;lastTime=time;const p=M.player,r=M.city.region(p.x,p.z),house=studios.houses.find(h=>h.inside(p.x,p.z)||Math.hypot(p.x-h.entry.x,p.z-h.entry.z)<6),near=house&&house.inside(p.x,p.z),b=PLAN.bounds,area=p.x>b.minX&&p.x<b.maxX&&p.z>b.minZ&&p.z<b.maxZ;const active=M.mode==='city'&&area&&(!r.artistId||!!house)&&!['escher','dali'].includes(r.artistId)&&!document.querySelector('dialog[open]');panel.hidden=!active;if(active){const key=(house?.artist.id||'garden')+':'+!!near+':'+lang();if(key!==lastKey){lastKey=key;contextRender(house,near);}}};
+ M.city.update=(...args)=>{old.update(...args);const time=args[1];if(time-lastTime<.15)return;lastTime=time;const p=M.player,r=M.city.region(p.x,p.z),house=studios.houses.find(h=>h.inside(p.x,p.z)||Math.hypot(p.x-h.entry.x,p.z-h.entry.z)<6),near=house&&house.inside(p.x,p.z),area=nearCourt(p.x,p.z);const active=M.mode==='city'&&area&&(!r.artistId||!!house)&&!['escher','dali'].includes(r.artistId)&&!document.querySelector('dialog[open]');panel.hidden=!active;if(active){const key=(house?.artist.id||'garden')+':'+!!near+':'+lang();if(key!==lastKey){lastKey=key;contextRender(house,near);}}};
  let ideas=null;
  const locale=()=>{launch.textContent=map.textContent=w().open;panel.dir=lang()==='fa'?'rtl':'ltr';lastKey='';if(dialog.open)render();ideas?.refresh();};locale();addEventListener('city-language',locale);
  const api={studios,garden,entry,open,reflect};M.artistQuarter=api;

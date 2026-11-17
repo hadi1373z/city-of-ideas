@@ -1,15 +1,17 @@
 /* One spatial plan for every public artist home. Saved designs are not rewritten. */
 (function(g){'use strict';
- const galleries={monet:[88,80],'van-gogh':[116,80],'hilma-af-klint':[88,112],morris:[116,112],kandinsky:[176,82],hokusai:[202,82],rodin:[244,104],mondrian:[176,126],lange:[202,146],klee:[244,146]};
- const fronts={monet:[88,96],'van-gogh':[116,96],'hilma-af-klint':[88,96],morris:[116,96],kandinsky:[176,104],hokusai:[202,104],rodin:[244,126],mondrian:[176,104],lange:[202,126],klee:[244,126],escher:[228,126],dali:[250,216],cezanne:[176,216],morisot:[208,216],seurat:[192,216]};
- const plan={version:3,galleries,fronts,escher:{x:228,z:115},dali:{x:250,z:198},studios:{cezanne:{x:176,z:194,turn:0},morisot:{x:208,z:194,turn:0},seurat:{x:192,z:234,turn:Math.PI}},bounds:{minX:70,maxX:284,minZ:70,maxZ:246},arrival:{x:96,z:98,y:.13,yaw:0},
-  courts:[{id:'garden',title:{en:'The garden court',de:'Der Gartenhof',fa:'حیاط باغ'},artists:['monet','van-gogh','hilma-af-klint','morris'],arrival:{x:96,z:98,y:.13,yaw:0}},
-   {id:'form',title:{en:'The form and perspective court',de:'Der Hof für Form und Perspektive',fa:'حیاط فرم و پرسپکتیو'},artists:['kandinsky','hokusai','rodin','mondrian','lange','klee','escher'],arrival:{x:190,z:104,y:.13,yaw:0}},
-   {id:'studio',title:{en:'The studio court',de:'Der Atelierhof',fa:'حیاط آتلیه‌ها'},artists:['cezanne','morisot','seurat','dali'],arrival:{x:208,z:216,y:.13,yaw:0}}],
-  routes:[[[74,110],[74,96],[96,98],[138,96],[160,96],[176,104],[204,104],[216,126],[228,126],[254,126],[280,126]],[[160,96],[160,216],[250,216],[280,216]],[[160,160],[280,160],[280,216]],[[280,126],[280,76]],[[202,126],[216,126]]],
-  plants:[[102,88],[102,105],[188,96],[188,115],[238,133],[190,207],[226,210]],
-  seats:[[102,90],[102,105],[188,96],[188,115],[238,132],[188,207],[226,212]],
-  trees:[[102,87],[102,108],[138,106],[152,120],[152,144],[152,166],[190,92],[190,116],[238,135],[270,142],[190,188],[236,229],[176,231],[250,234]]};
+ const garden={x:-398.3716857408417,z:138},form={x:398.3716857408417,z:-138},studio={x:159.3486742963367,z:276};
+ const galleries={monet:[garden.x-18,114],'van-gogh':[garden.x+18,114],'hilma-af-klint':[garden.x-18,162],morris:[garden.x+18,162],kandinsky:[form.x-30,-162],hokusai:[form.x,-162],rodin:[form.x+30,-162],mondrian:[form.x-30,-114],lange:[form.x,-114],klee:[form.x+30,-114]};
+ const fronts=Object.fromEntries(Object.entries(galleries).map(([id,[x,z]])=>[id,[x,id==='monet'||id==='van-gogh'||id==='hilma-af-klint'||id==='morris'?138:-138]]));
+ Object.assign(fronts,{escher:[228,126],dali:[studio.x,276],cezanne:[studio.x-30,276],morisot:[studio.x+30,276],seurat:[studio.x,276]});
+ const plan={version:4,galleries,fronts,escher:{x:228,z:115},dali:{x:studio.x,z:246},studios:{cezanne:{x:studio.x-30,z:246,turn:0},morisot:{x:studio.x+30,z:246,turn:0},seurat:{x:studio.x,z:310,turn:Math.PI}},bounds:{minX:-480,maxX:480,minZ:-200,maxZ:330},arrival:{x:garden.x,z:138,y:.13,yaw:0},
+ courts:[{id:'garden',title:{en:'The garden court',de:'Der Gartenhof',fa:'حیاط باغ'},artists:['monet','van-gogh','hilma-af-klint','morris'],arrival:{x:garden.x,z:138,y:.13,yaw:0}},
+ {id:'form',title:{en:'The form court',de:'Der Formhof',fa:'حیاط فرم'},artists:['kandinsky','hokusai','rodin','mondrian','lange','klee','escher'],arrival:{x:form.x,z:-138,y:.13,yaw:0}},
+ {id:'studio',title:{en:'The studio court',de:'Der Atelierhof',fa:'حیاط آتلیه‌ها'},artists:['cezanne','morisot','seurat','dali'],arrival:{x:studio.x,z:276,y:.13,yaw:0}}],
+ routes:[[[garden.x-79.67433714816835,138],[garden.x+45,138]],[[form.x-45,-138],[form.x+79.67433714816835,-138]],[[studio.x-79.67433714816835,276],[studio.x+45,276]],[[228,126],[239.023011444505,138],[318.6973485926734,138]]],
+ plants:[[garden.x,124],[garden.x,152],[form.x-15,-151],[form.x+15,-125],[studio.x-15,262],[studio.x+15,290]],
+ seats:[[garden.x,122],[garden.x,154],[form.x-15,-153],[form.x+15,-123],[studio.x-15,260],[studio.x+15,292]],
+ trees:[[garden.x-48,114],[garden.x+48,162],[form.x-55,-162],[form.x+55,-114],[studio.x-55,246],[studio.x+55,310]]};
  g.ARTIST_QUARTER_PLAN=plan;
  function moveHouse(h,dx,dz){h.cx+=dx;h.cz+=dz;h.minX+=dx;h.maxX+=dx;h.minZ+=dz;h.maxZ+=dz;h.group.position.x+=dx;h.group.position.z+=dz;for(const p of[h.entry,h.spawnInside,...h.approaches]){p.x+=dx;p.z+=dz;if(p.lookAt){p.lookAt.x+=dx;p.lookAt.z+=dz;}}}
  g.layoutArtistQuarter=function(T,art){
@@ -25,8 +27,8 @@
   for(const collider of art.colliders){const m=owner((collider.minX+collider.maxX)/2,(collider.minZ+collider.maxZ)/2);if(m){collider.minX+=m.dx;collider.maxX+=m.dx;collider.minZ+=m.dz;collider.maxZ+=m.dz;}}
   for(const {h,dx,dz}of moves)moveHouse(h,dx,dz);
   Object.assign(art.bounds,{minX:Math.min(...art.houses.map(h=>h.minX))-2,maxX:Math.max(...art.houses.map(h=>h.maxX))+2,minZ:Math.min(...art.houses.map(h=>h.minZ))-2,maxZ:Math.max(...art.houses.map(h=>h.maxZ))+2});
-  Object.assign(art.spawn,{x:(plan.arrival.x-118)/1.35,z:(plan.arrival.z-108)/1.35,yaw:plan.arrival.yaw});Object.assign(art.guideAnchor,{x:(96-118)/1.35,z:(98-108)/1.35});art.bounds.minX=Math.min(art.bounds.minX,art.spawn.x-2);
-  art.quarterLayout={version:3,plan};art.group.updateMatrixWorld(true);return art;
+  Object.assign(art.spawn,{x:(plan.arrival.x-118)/1.35,z:(plan.arrival.z-108)/1.35,yaw:plan.arrival.yaw});Object.assign(art.guideAnchor,{x:(plan.arrival.x-118)/1.35,z:(plan.arrival.z-108)/1.35});art.bounds.minX=Math.min(art.bounds.minX,art.spawn.x-2);
+  art.quarterLayout={version:4,plan};art.group.updateMatrixWorld(true);return art;
  };
  g.layoutArtistDali=function(T,art){
   const h=art.houses.find(h=>h.artistId==='dali');if(!h||h.quarterRelocated)return;
@@ -34,6 +36,7 @@
   for(const c of art.colliders)if(c.artistId==='dali'){c.minX+=dx;c.maxX+=dx;c.minZ+=dz;c.maxZ+=dz;}
   moveHouse(h,dx,dz);h.quarterRelocated=true;
   art.bounds.minX=Math.min(art.bounds.minX,h.minX-2);art.bounds.maxX=Math.max(art.bounds.maxX,h.maxX+2);art.bounds.minZ=Math.min(art.bounds.minZ,h.minZ-2);art.bounds.maxZ=Math.max(art.bounds.maxZ,h.maxZ+2);
+  art.bounds.minZ=Math.min(art.bounds.minZ,...art.houses.map(h=>h.minZ-2));art.bounds.maxZ=Math.max(art.bounds.maxZ,...art.houses.map(h=>h.maxZ+2));
   art.group.updateMatrixWorld(true);
  };
 })(typeof window!=='undefined'?window:globalThis);

@@ -54,6 +54,6 @@ export function buildSeminarHouses(T,{canvas=()=>document.createElement('canvas'
  }
  for(const points of SEMINAR_PATHS)for(let i=1;i<points.length;i++){const a=points[i-1],b=points[i],d=Math.hypot(a[0]-b[0],a[1]-b[1]),p=new T.Mesh(own(new T.PlaneGeometry(4.4,d+.03)),mat(0xb1b196));p.rotation.x=-Math.PI/2;p.rotation.z=-Math.atan2(b[0]-a[0],b[1]-a[1]);p.position.set((a[0]+b[0])/2,.135,(a[1]+b[1])/2);p.name='Southern garden path';root.add(p);}
  // Shared garden seats and low planters give the three thresholds one address.
- for(const x of[-80,80]){box(root,6,.5,1.6,x,.25,254,stone);box(root,5.4,.12,1.2,x,.55,254,wood);}
- return {group:root,houses,targets,paths:SEMINAR_PATHS,canStand:(x,z)=>houses.every(h=>h.canStand(x,z))&&![ -80,80].some(a=>Math.abs(x-a)<3.2&&Math.abs(z-254)<1.05),dispose(){root.removeFromParent();root.traverse(o=>{if(o.isInstancedMesh)o.dispose?.();});for(const r of owned)r.dispose();root.clear();}};
+ for(const x of[194.023011444505,284.023011444505]){box(root,6,.5,1.6,x,.25,120,stone);box(root,5.4,.12,1.2,x,.55,120,wood);}
+ return {group:root,houses,targets,paths:SEMINAR_PATHS,canStand:(x,z)=>houses.every(h=>h.canStand(x,z))&&![194.023011444505,284.023011444505].some(a=>Math.abs(x-a)<3.2&&Math.abs(z-120)<1.05),dispose(){root.removeFromParent();root.traverse(o=>{if(o.isInstancedMesh)o.dispose?.();});for(const r of owned)r.dispose();root.clear();}};
 }

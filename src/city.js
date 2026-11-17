@@ -21,14 +21,12 @@ window.createGalleryCity=function(T,ctx){
  function plaque(){}
 
  const islandShape=new T.Shape();islandShape.absarc(0,0,552,0,Math.PI*2,false);const galleryVoid=new T.Path();galleryVoid.absarc(0,0,58,0,Math.PI*2,true);islandShape.holes.push(galleryVoid);if(window.CITY_CONFIG?.houseWell){const p=window.CITY_CONFIG.houseWell,h=new T.Path();h.absarc(p.x,-p.z,p.radius,0,Math.PI*2,true);islandShape.holes.push(h);}const islandBase=mesh(new T.ExtrudeGeometry(islandShape,{depth:.24,bevelEnabled:false,curveSegments:160}),new T.MeshLambertMaterial({color:0x7c8868}),0,-.34,0,city);islandBase.rotation.x=-Math.PI/2;islandBase.name='Circular island foundation centred on Zarathustra Gallery';
- // One civic street follows the front doors; branches meet it at shared junctions.
- road([[-97.7,110],[0,110],[82.9,110]],9);
- road([[-97.7,110],[-97.7,103.8]],4.2);road([[82.9,110],[82.9,108]],4.2);
- road([[0,110],[0,94]],6);
- road([[-97.7,110],[-76,110],[-76,0],[-84,0],[-84,-32],[-138,-32]],6);
- road([[-76,0],[-64,0]],5);
- road([[-84,-32],[-84,-110],[0,-185],[0,-195]],7);road([[-138,-32],[-138,-150],[0,-185]],6);
- road([[A.x,A.radius+10],[156,76],[156,108]],5);
+ // Retain only true source threshold approaches. The new block-edge city
+ // owns the outward street network; retired diagonal lanes are not built.
+ road([[-64,0],[-76,0],[-76,110],[-97.7,110],[-97.7,103.8]],5.2);
+ road([[-97.7,110],[0,110]],5.2);
+ road([[0,94],[0,110],[74,100],[74,76],[200,76],[203.5,65],[203.5,-50],[211.5,-50]],5.2);
+ road([[-76,0],[-84,0],[-84,-32],[-138,-32],[-138,-150],[0,-185],[0,-195]],5.2);
  const landscape=createCityLandscape(T,{parent:city,tiles:ctx.siteTiles,outerRadius:A.outerRadius});
  plaque('گالری زرتشت',-65,9,4.6);plaque('کوهِ شدن · چهار دور',190,9,4.6);
  plaque('خانهٔ سقراط',-109,107.3,5);plaque('گالری اشیا · بازار روباز',OBJ.x,OBJ.z+50,14);
@@ -83,5 +81,5 @@ window.createGalleryCity=function(T,ctx){
  function chapterAt(theta){const part=Math.min(3,Math.floor(Math.max(0,theta)/(Math.PI*2))),fraction=Math.min(1,Math.max(0,theta/(Math.PI*2)-part)),local=Math.min(chapterCounts[part]-1,Math.floor(fraction*chapterCounts[part])),index=chapterOffsets[part]+local;return{part:part+1,index,ordinal:index+1,chapter:chapters[index],completed:chapterMarkers.filter(m=>theta>=m.theta-.0001).length,progress:T.MathUtils.clamp(theta/MAX,0,1),height:heightAt(theta),nextTheta:chapterMarkers[index]?.theta??MAX}}
  const resolveRamp=path.resolveRamp;
  function targetInfo(data){if(data.select)return{kind:'park',selection:data.select};if(data.homeAction||data.ideaId||data.designId||data.bookId)return{kind:'home',data,title:data.label||data.homeAction};if(data.cityChapter!==undefined)return{kind:'chapter',index:data.cityChapter};if(data.citySocrates)return{kind:'socrates'};if(data.artistId&&data.artAction!=='enter'){const artist=S.ARTISTS.find(a=>a.id===data.artistId),work=artist?.works.find(w=>w.id===data.workId);return{kind:'art',artist,work,title:work?.title||artist?.name,body:work?.description||artist?.approach,source:work?.source||work?.sourceUrl||artist?.websiteUrl}}if(data.storeObjectId){const item=(window.CITY_OBJECT_TOOLS?.OBJECTS||S.OBJECTS).find(o=>o.id===data.storeObjectId);return{kind:'object',item,title:item?.title,body:item?.description||item?.note||'یکی از اشیای واقعیِ مجموعهٔ منبع.',source:item?.sourceUrl||item?.source}}return null}
- return{group:city,mountainEnabled,landscape,A,MAX,radiusAt,headingAt:path.headingAt,toMountainLocal:path.toLocal,liftPoint:path.lift,startGate:path.startGate,peakBounds:path.peak,mountain,chapterCounts,chapterMarkers,districts,targets,buildingTargets,get house(){return house},get homeBuilt(){return homeBuilt},get resident(){return resident},setHome,art,market,park,SOC,ART,OBJ,PARK,GRAVEYARD,pointAt,heightAt,resolveRamp,chapterAt,region,canStand,update,targetInfo,liftCab,landmarks:{plaza:{x:0,z:94},spiral:{x:A.x+A.radius+7,z:A.z},socrates:{x:-97.7,z:108},artists:{x:82.9,z:108},objects:{x:OBJ.x,z:OBJ.z+37*OBJ.scale},park:{x:0,z:-177}},sourceReady:!!S};
+ return{group:city,mountainEnabled,landscape,A,MAX,radiusAt,headingAt:path.headingAt,toMountainLocal:path.toLocal,liftPoint:path.lift,startGate:path.startGate,peakBounds:path.peak,mountain,chapterCounts,chapterMarkers,districts,targets,buildingTargets,get house(){return house},get homeBuilt(){return homeBuilt},get resident(){return resident},setHome,art,market,park,SOC,ART,OBJ,PARK,GRAVEYARD,pointAt,heightAt,resolveRamp,chapterAt,region,canStand,update,targetInfo,liftCab,landmarks:{plaza:{x:0,z:94},spiral:{x:A.x+A.radius+7,z:A.z},socrates:{x:-97.7,z:108},artists:{x:-398.3716857408417,z:138},objects:{x:OBJ.x,z:OBJ.z+37*OBJ.scale},park:{x:0,z:-177}},sourceReady:!!S};
 };

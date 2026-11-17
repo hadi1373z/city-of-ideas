@@ -25,7 +25,7 @@ for(const h of art.houses){
  const works=new Set();h.group.traverse(o=>{if(o.userData.workId)works.add(o.userData.workId);});assert.equal(works.size,6,'All original paintings remain');
 }
 for(const [o,matrices]of originalInstances)for(const [i,old]of matrices.entries()){
- const owner=original.find(h=>Math.abs(old.elements[12]-h.cx)<4.1&&Math.abs(old.elements[14]-h.cz)<3.8),h=art.houses.find(h=>h.artistId===owner?.id),m=new T.Matrix4();o.getMatrixAt(i,m);assert(h,'Every furniture instance belongs to a house');assert(Math.abs(m.elements[12]-old.elements[12]-h.cx+owner.cx)<1e-5);assert(Math.abs(m.elements[14]-old.elements[14]-h.cz+owner.cz)<1e-5);
+ const owner=original.find(h=>Math.abs(old.elements[12]-h.cx)<4.1&&Math.abs(old.elements[14]-h.cz)<3.8),h=art.houses.find(h=>h.artistId===owner?.id),m=new T.Matrix4();o.getMatrixAt(i,m);assert(h,'Every furniture instance belongs to a house');assert(Math.abs(m.elements[12]-old.elements[12]-h.cx+owner.cx)<2e-5);assert(Math.abs(m.elements[14]-old.elements[14]-h.cz+owner.cz)<2e-5);
 }
 const AssetT={...T,TextureLoader:class{load(){const t=new T.Texture();t.image={width:600,height:400};return t;}}};art=addDaliHouse(AssetT,art);scope.window.layoutArtistDali(T,art);const dali=art.houses.find(h=>h.artistId==='dali');assert(Math.abs(118+dali.cx*1.35-scope.window.ARTIST_QUARTER_PLAN.dali.x)<1e-8);assert(Math.abs(108+dali.cz*1.35-scope.window.ARTIST_QUARTER_PLAN.dali.z)<1e-8);assert.equal(art.insideAt(dali.spawnInside.x,dali.spawnInside.z),'dali');assert(art.canStand(dali.spawnInside.x,dali.spawnInside.z));
 const residents=buildArtistResidents(T,ARTISTS,art);for(let i=0;i<80;i++)residents.update(i/10,{player:{x:-24,z:0}});

@@ -23,6 +23,7 @@ let opened,delegated=0;const M={scene:new T.Scene(),player:{x:0,z:0},eye:1.65,mo
 const api=installArtistQuarter(M,T),dialog=body.querySelector('#artist-quarter'),copy=QUARTER_COPY.en;
 const findButton=text=>{const scan=n=>{if(n.tagName==='button'&&n.textContent===text)return n;for(const c of n.children){const b=scan(c);if(b)return b;}};return scan(dialog);};
 try{
+ assert.equal(M.city.region(0,0).id,'city','Distant artist collections must not label the intervening central city as an art court');M.city.update(M.player,1);assert(body.querySelector('#artist-quarter-context').hidden,'Court notifications stay away from the city centre');
  assert.equal(M.city.canStand(0,0),false,'Prior collision restrictions remain');assert.equal(M.city.targetInfo({}).kind,'old');M.showExtra({kind:'other'});assert.equal(delegated,1);M.startExtra('other');assert.equal(delegated,2);
  assert.equal(api.reflect('cezanne'),false,'Cannot collect a question remotely');api.open('cezanne');assert(dialog.open);assert(!findButton(copy.reflect));findButton(copy.enter).onclick();assert(!dialog.open);assert.equal(M.city.region(M.player.x,M.player.z).artistId,'cezanne');
  api.open('cezanne');findButton(copy.reflect).onclick();assert.equal(store.state.questions.length,1);findButton(copy.reflect).onclick();assert.equal(store.state.questions.length,1,'Revisits reuse the same question');findButton(copy.note).onclick();assert.equal(opened,'studio-cezanne');assert.equal(values.get('private-note'),'Keep exactly');
