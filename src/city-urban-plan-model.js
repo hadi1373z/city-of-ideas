@@ -7,6 +7,7 @@ import {STUDY_HOUSES,STUDY_PATHS} from './study-houses-data.js?v=city-night-2026
 import {PAVILIONS,pavilionTurn} from './mathematical-pavilions-model.js?v=city-night-20261117';
 import {PHILOSOPHERS,quarterPaths} from './philosopher-data.js?v=city-night-20261117';
 import {COAST_ROUTES,HOUSE_ORIGAMI} from './origami-house-math.js?v=city-night-20261117';
+import {COAST_MAIN_PATHS} from './coastal-map-data.js?v=city-night-20261117';
 
 // A regular city fabric joins the original inhabited districts. Private homes
 // retain source-local designs and now occupy the lower face.
@@ -29,14 +30,13 @@ const RETAINED_URBAN_STREETS=[
  {id:'civic-philosophers-link',width:6,points:[vertices[3],[-144,-50],[-170,-32]]},
  {id:'civic-park-link',width:6,points:[vertices[4],[-36,-145],[0,-185]]},
  {id:'civic-pattern-link',width:6,points:[vertices[5],[64,-104],[64,-160]]},
- {id:'civic-circuit',width:7,points:[[-170,-160],[64,-160],[184,-160],[280,-180],[280,76],[280,236],[204,360],[-30,360],[-30,270],[-30,110],[-170,110],[-170,-32],[-170,-160]]},
  {id:'gallery-west',width:7,points:[[-64,0],[-170,0]]},
- {id:'park-approach',width:7,points:[[-170,-160],[-138,-150],[0,-185],[0,-195]]},
+ {id:'park-approach',width:6,points:[[-138,-150],[0,-185],[0,-195]]},
  {id:'east-garden-avenue',width:6,points:[[64,0],[62.5,-46],[64,-160]]},
- {id:'study-approach',width:4,points:[[184,-160],[203.5,-160],[203.5,-112]]},
- {id:'study-east-link',width:4,points:[[256,-112],[280,-112]]},
  {id:'southern-learning-walk',width:6,points:[[0,110],[0,220]]},
- {id:'southern-garden-link',width:5,points:[[-30,220],[0,220],[0,276]]}
+ {id:'southern-garden-link',width:5,points:[[0,220],[0,276]]},
+ // Real retained campus approaches also feed gate clipping and reachability.
+ ...COAST_MAIN_PATHS.map((points,i)=>({id:'campus-approach-'+i,width:5.2,points}))
 ];
 export const URBAN_COURTS=[
  ...CIVIC_PAIRED_COURTS,
@@ -52,13 +52,13 @@ export function urbanBuildingFootprints(plan=globalThis.ARTIST_QUARTER_PLAN){ret
  ...FOUNDATION_HOUSES.map(h=>rect(h.id,h.x,h.z,h.width,h.depth,h.turn,{category:'letters',label:h.names.en})),
  ...PHILOSOPHERS.map(h=>rect(h.id,h.x,h.z,20,22,0,{category:'philosopher',label:h.name[1]})),
  ...STUDY_HOUSES.map(h=>rect(h.id,h.x,h.z,16,12,h.turn,{category:'study',label:h.names.en})),
- rect('proof-atelier',215,-78,18,20,0,{category:'study',label:'Proof Atelier · six workshops'}),
+ rect('proof-atelier',215,-78,18,20,0,{category:'study',label:'Proof Atelier Â· six workshops'}),
  ...SEMINAR_HOUSES.map(h=>h.id==='noether'?{id:h.id,x:h.x,z:h.z,shape:'circle',radius:14.2,category:'seminar',label:h.names.en}:rect(h.id,h.x,h.z,27,23,Math.PI,{category:'seminar',label:h.names.en})),
  ...PAVILIONS.map(h=>({id:h.id,x:h.x,z:h.z,shape:'polygon',points:Array.from({length:6},(_,i)=>{const t=-pavilionTurn(h)+i*Math.PI/3;return[h.x+13.4*Math.cos(t),h.z+13.4*Math.sin(t)];}),category:'pattern',label:h.name})),
  {id:'transformations',x:125,z:0,shape:'polygon',points:Array.from({length:6},(_,i)=>[125+23*Math.cos(i*Math.PI/3),23*Math.sin(i*Math.PI/3)]),category:'pattern',label:'House of Transformations'},
  ...Object.entries(plan?.galleries||{}).map(([id,[x,z]])=>rect(id,x,z,9.45,8.1,0,{category:'artist',label:id.replaceAll('-',' '),front:[x,z+Math.sign((plan.fronts?.[id]?.[1]??z+1)-z)*4.05]})),
  ...Object.entries(plan?.studios||{}).map(([id,h])=>rect(id,h.x,h.z,14,12,h.turn,{category:'artist',label:id})),
- ...(plan?[rect('dali',plan.dali.x,plan.dali.z,16.2,13.5,0,{category:'artist',label:'Dalí’s dream residence'}),{id:'escher',x:plan.escher.x,z:plan.escher.z,shape:'polygon',points:[[-4,7],[4,7],[4,-7],[1.6,-7],[1.6,-13],[-1.6,-13],[-1.6,-7],[-4,-7]].map(([x,z])=>[x+plan.escher.x,z+plan.escher.z]),front:[plan.escher.x,plan.escher.z+7],category:'artist',label:'Escher · perspective house'}]:[]),
+ ...(plan?[rect('dali',plan.dali.x,plan.dali.z,16.2,13.5,0,{category:'artist',label:'DalÃ­â€™s dream residence'}),{id:'escher',x:plan.escher.x,z:plan.escher.z,shape:'polygon',points:[[-4,7],[4,7],[4,-7],[1.6,-7],[1.6,-13],[-1.6,-13],[-1.6,-7],[-4,-7]].map(([x,z])=>[x+plan.escher.x,z+plan.escher.z]),front:[plan.escher.x,plan.escher.z+7],category:'artist',label:'Escher Â· perspective house'}]:[]),
  rect('origami',HOUSE_ORIGAMI.x,HOUSE_ORIGAMI.z,HOUSE_ORIGAMI.width,HOUSE_ORIGAMI.depth,0,{category:'making',label:'House of Origami'})
  ];}
 export function segmentDistance(x,z,a,b){const dx=b[0]-a[0],dz=b[1]-a[1],u=Math.max(0,Math.min(1,((x-a[0])*dx+(z-a[1])*dz)/(dx*dx+dz*dz||1)));return Math.hypot(x-a[0]-dx*u,z-a[1]-dz*u);}
@@ -70,7 +70,7 @@ export function urbanLots(plan=globalThis.ARTIST_QUARTER_PLAN){return[
  ...Object.entries(plan?.galleries||{}).map(([id,[x,z]])=>({id,x,z,radius:9})),...Object.entries(plan?.studios||{}).map(([id,h])=>({id,...h,radius:12})),...(plan?[{...plan.escher,radius:17,id:'escher'},{...plan.dali,radius:18,id:'dali'}]:[])
  ];}
 export function urbanEntries(){return[...FOUNDATION_HOUSES.map(h=>({id:h.id,...houseEntry(h)})),...SEMINAR_HOUSES.map(h=>({id:h.id,...seminarEntry(h)})),...STUDY_HOUSES.map(h=>({id:h.id,x:h.x,z:h.z+(h.turn?-10.7:10.7)})),...PHILOSOPHERS.map(h=>({id:h.id,x:h.x,z:h.z+13})),...Object.entries(globalThis.ARTIST_QUARTER_PLAN?.fronts||{}).map(([id,[x,z]])=>({id,x,z})),{id:'origami',...HOUSE_ORIGAMI.entry}];}
-export function urbanPlanting(plan=globalThis.ARTIST_QUARTER_PLAN){const routes=urbanRoutes(plan),lots=urbanLots(plan),points=[];for(const route of [...URBAN_STREETS,...FOUNDATION_ROUTES.filter(r=>r.width>=5)])for(let i=1;i<route.points.length;i++){const a=route.points[i-1],b=route.points[i],dx=b[0]-a[0],dz=b[1]-a[1],length=Math.hypot(dx,dz);for(let d=12;d<length-7;d+=23)for(const side of[-1,1]){const offset=route.width/2+4.5,x=a[0]+dx*d/length-dz/length*offset*side,z=a[1]+dz*d/length+dx/length*offset*side;if(inPrivateHomeReserve(x,z,3)||lots.some(h=>Math.hypot(x-h.x,z-h.z)<h.radius+3)||routes.some(r=>r.points.slice(1).some((q,j)=>segmentDistance(x,z,r.points[j],q)<r.width/2+3))||points.some(p=>Math.hypot(x-p.x,z-p.z)<9))continue;points.push({x,z});}}return points;}
+export function urbanPlanting(plan=globalThis.ARTIST_QUARTER_PLAN){const routes=urbanRoutes(plan),lots=urbanLots(plan),points=[];for(const route of [...URBAN_STREETS,...FOUNDATION_ROUTES.filter(r=>r.width>=5)])for(let i=1;i<route.points.length;i++){const a=route.points[i-1],b=route.points[i],dx=b[0]-a[0],dz=b[1]-a[1],length=Math.hypot(dx,dz);for(let d=12;d<length-7;d+=23)for(const side of[-1,1]){const offset=route.width/2+4.5,x=a[0]+dx*d/length-dz/length*offset*side,z=a[1]+dz*d/length+dx/length*offset*side;if(inPrivateHomeReserve(x,z,3)||HONEYCOMB_CITY.walls.some(w=>segmentDistance(x,z,w.a,w.b)<1.5)||lots.some(h=>Math.hypot(x-h.x,z-h.z)<h.radius+3)||routes.some(r=>r.points.slice(1).some((q,j)=>segmentDistance(x,z,r.points[j],q)<r.width/2+3))||points.some(p=>Math.hypot(x-p.x,z-p.z)<9))continue;points.push({x,z});}}return points;}
 
 // The new physical honeycomb uses the same source footprints as the map.
 const retainedRoutes=[...RETAINED_URBAN_STREETS,...FOUNDATION_ROUTES,...COAST_ROUTES.map(points=>({points,width:4})),...SEMINAR_PATHS.map(points=>({points,width:4.4})),...STUDY_PATHS.map(points=>({points,width:3.5})),...quarterPaths.map(points=>({points,width:4.6})),...(globalThis.ARTIST_QUARTER_PLAN?.routes||[]).map(points=>({points,width:4}))];
@@ -78,5 +78,5 @@ const retainedFurniture=[...(globalThis.ARTIST_QUARTER_PLAN?.seats||[]).map(([x,
 export const honeycombInputs=()=>({footprints:[...urbanBuildingFootprints(),...retainedFurniture],retainedRoutes});
 export const HONEYCOMB_CITY=BUILT_HONEYCOMB_LAYOUT;
 export const URBAN_STREETS=[...RETAINED_URBAN_STREETS,...HONEYCOMB_CITY.roads];
-export const CITY_UNDERGROUND_LINKS=Object.freeze([{id:'babel-transformations',name:'Babel — House of Transformations',floorY:-40,points:[[22,0],[70,0],[125,0]],kind:'physical',description:'The existing real underground corridor and both stair routes.'},{id:'escher-museum-spur',name:'Escher museum passage',floorY:-40,points:[[70,0],[70,115],[135,115]],kind:'physical',description:'The real museum corridor beneath the artist courts.'}]);
+export const CITY_UNDERGROUND_LINKS=Object.freeze([{id:'babel-transformations',name:'Babel â€” House of Transformations',floorY:-40,points:[[22,0],[70,0],[125,0]],kind:'physical',description:'The existing real underground corridor and both stair routes.'},{id:'escher-museum-spur',name:'Escher museum passage',floorY:-40,points:[[70,0],[70,115],[135,115]],kind:'physical',description:'The real museum corridor beneath the artist courts.'}]);
 for(const c of HONEYCOMB_CITY.nodes)if(Math.hypot(c.x,c.z)>350)URBAN_COURTS.push({id:c.id+'-crossing',x:c.walk[0],z:c.walk[1],shape:'hex',radius:8.5,turn:Math.PI/6,tone:'garden'});

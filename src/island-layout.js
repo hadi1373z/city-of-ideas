@@ -6,8 +6,7 @@ export const coastX=z=>Math.sqrt(Math.max(0,CITY_ISLAND.radius**2-z**2));
 export const SHORE={x:coastX(76)-9,z:76,y:.13,yaw:-Math.PI/2};
 export const ringPoint=(angle,r=CITY_ISLAND.promenadeRadius)=>[Math.cos(angle)*r,Math.sin(angle)*r];
 export const ISLAND_ROUTES=[
- {id:'east',width:6,points:[[256.5,76],[350,76],ringPoint(Math.asin(76/CITY_ISLAND.promenadeRadius)),[SHORE.x,76]]},
- {id:'north',width:5,points:[[0,-486],[0,-536]]},
- {id:'west',width:5,points:[[-138,-32],[-170,-32],[-170,80],[-350,80],[-Math.sqrt(536**2-80**2),80]]},
- {id:'south',width:5,points:[[182,210],[182,310],[182,Math.sqrt(536**2-182**2)]]}
+ // The real paper-boat launch retains its source approach. Six deliberate
+ // honeycomb gates replace the former unrelated north/west/south spokes.
+ {id:'east',width:6,points:[[256.5,76],[350,76],ringPoint(Math.asin(76/CITY_ISLAND.promenadeRadius)),[SHORE.x,76]]}
 ];
