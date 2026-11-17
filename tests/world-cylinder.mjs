@@ -30,7 +30,7 @@ check('World frame preserves handedness and exactly inverts logical lower coordi
 check('Cylinder has two matching faces, a real lower aperture, enclosed tunnel and finite batched geometry',()=>{
  const b=buildWorldCylinder(T);b.group.updateMatrixWorld(true);let draws=0,instances=0;
  b.group.traverse(o=>{if(o.isMesh){draws++;assert(o.geometry.attributes.position.array.every(Number.isFinite));}if(o.isInstancedMesh){instances+=o.count;assert(o.instanceMatrix.array.every(Number.isFinite));}});
- assert(draws<50,`Cylinder uses ${draws} meshes`);assert(instances>80);near(b.shell.geometry.parameters.height,W.thickness);near(b.shell.geometry.parameters.radiusTop,W.radius);near(b.shell.position.y,-48);
+ let tileDraws=0;b.metamorphosis.group.traverse(o=>{if(o.isMesh)tileDraws++;});assert(draws-tileDraws<50,`Core cylinder uses ${draws-tileDraws} meshes`);assert(tileDraws<=43,'Local relief resources stay bounded');let visibleWallDraws=0;b.metamorphosis.group.traverse(o=>{if(o.isMesh&&o.visible)visibleWallDraws++;});assert(visibleWallDraws<=7,'At most one physically sliced relief band is submitted');assert(instances>80);near(b.shell.geometry.parameters.height,W.thickness);near(b.shell.geometry.parameters.radiusTop,W.radius);near(b.shell.position.y,-48);
  const ray=(x,y,z,dx,dy,dz,far=20)=>new T.Raycaster(new T.Vector3(x,y,z),new T.Vector3(dx,dy,dz),0,far).intersectObject(b.group,true);
  assert.equal(ray(0,-110,0,0,1,0,18).length,0,'The lower central gallery aperture must remain open');
  const land=ray(100,-110,0,0,1,0,20);assert(land.length);near(land[0].point.y,-96.005);
@@ -44,7 +44,7 @@ check('Cylinder has two matching faces, a real lower aperture, enclosed tunnel a
 
 check('Both oceans share their shader and fog; real central earth encloses the shaft without closing Escher',()=>{
  const b=buildWorldCylinder(T),c=buildCityCoast(T,{naturalTrees:null});b.group.updateMatrixWorld(true);
- assert.equal(b.sea.material.vertexShader,c.sea.material.vertexShader);assert.equal(b.sea.material.fragmentShader,c.sea.material.fragmentShader);
+ assert.equal(b.sea.material.vertexShader,c.sea.material.vertexShader);assert.equal(b.sea.material.fragmentShader.replace('uniform float faceNight;\n','').replace('col=mix(col,col*vec3(.14,.24,.40),faceNight);',''),c.sea.material.fragmentShader);assert.equal(b.sea.material.uniforms.faceNight.value,1,'Only the lower instance applies fixed night exposure to the shared ocean palette');
  const fog={color:new T.Color(0xa5c1cc),density:.0007};b.updateOcean(12,{fog});c.update(12,{fog});
  for(const name of ['time','fogDensity','islandRadius'])assert.equal(b.sea.material.uniforms[name].value,c.uniforms[name].value);assert(b.sea.material.uniforms.fogColor.value.equals(c.uniforms.fogColor.value));
  b.updateOcean(90,{reduced:true,fog});c.update(90,{reduced:true,fog});assert.equal(c.uniforms.time.value,0);assert.equal(b.sea.material.uniforms.time.value,0);
@@ -95,6 +95,36 @@ function fixture(){
  return{M,api,body,reader,events,scene,sun,sky,lantern,foreign,garden,dancer,ground,originals,originalMap,get privateAccess(){return privateAccess;},get escherEntries(){return escherEntries;},get babelEntries(){return babelEntries;}};
 }
 function drive(f,x,z,max=1500){const p=f.M.player;for(let i=0;i<max;i++){const d=Math.hypot(x-p.x,z-p.z);if(d<.12)return;const n=Math.min(.1,d/7);p.yaw=Math.atan2(-(x-p.x),-(z-p.z));assert(f.api.step(n,{forward:1,boost:true}));}throw Error(`Controller stuck at (${p.x.toFixed(2)},${p.z.toFixed(2)}) aiming for (${x},${z})`);}
+
+check('Bird-transition arrival stands on the actual lower spiral, faces the peeling wall and leaves movement manual',()=>{
+ const previous=globalThis.location;let f;try{globalThis.location={search:'?arrival=bird-transition'};f=fixture();}finally{globalThis.location=previous;}const{M,api}=f;assert.equal(api.route.side,'lower');assert.equal(api.route.layer,'spiral');near(api.route.theta,Math.PI*1.25+LOWER.endTheta/(LOWER.steps*2));const q=pointAt(api.route.theta,'lower'),feet=lowerPhysical({x:M.player.x,z:M.player.z,y:M.player.y-M.eye});near(M.player.x,q.x-2160);near(M.player.z,q.z-65);near(feet.y,-96-q.y);assert(feet.y>-87&&feet.y<-85);near(-Math.sin(M.player.yaw-.65),Math.cos(q.theta));near(-Math.cos(M.player.yaw-.65),Math.sin(q.theta));near(M.player.pitch,0);M.city.update(M.player,1);api.prepareScene();api.built.group.updateMatrixWorld(true);const hit=new T.Raycaster(new T.Vector3(feet.x,feet.y-.25,feet.z),new T.Vector3(0,1,0),0,.4).intersectObject(api.lower.group,true);assert(hit.length,'The arrival must rest on actual existing tread geometry');near(hit[0].point.y,feet.y);const before={...M.player};for(let i=0;i<10;i++)api.step(.1,{forward:0});near(M.player.x,before.x);near(M.player.y,before.y);near(M.player.z,before.z);M.player.yaw=Math.atan2(Math.sin(q.theta),-Math.cos(q.theta));api.step(.05,{forward:1});assert(Math.hypot(M.player.x-before.x,M.player.z-before.z)>.1,'Normal manual walking continues from the destination');assert(api.route);f.events.get('pagehide')();
+});
+
+check('Relief follows physical visitor height on both coordinate faces and overview uses only the proxy',()=>{
+ const f=fixture(),{M,api}=f;M.babelLibrary.active=true;Object.assign(M.player,{x:0,z:0,y:-55});M.city.update(M.player,1);let band=api.built.metamorphosis.activeBand;assert(band&&band.bottom<=-55&&band.top>=-55);assert(api.built.metamorphosis.counts.activeReliefTriangles<60000);
+ Object.assign(M.player,{x:-2160,z:-65,y:-11});M.city.update(M.player,2);band=api.built.metamorphosis.activeBand;const physical=lowerPhysical(M.player);assert(band&&band.bottom<=physical.y&&band.top>=physical.y,'Lower logical heights must be converted before choosing the physical wall slab');assert(physical.y===-85);M.mode='overview';M.city.update(M.player,3);assert.equal(api.built.metamorphosis.activeBand,null);assert.equal(api.built.metamorphosis.counts.activeReliefTriangles,0);assert(api.built.metamorphosis.proxy.visible);f.events.get('pagehide')();
+});
+
+check('Upper daylight and lower night remain fixed across visits, overview, photos and cleanup',()=>{
+ const f=fixture(),{M,api}=f,daySky=new T.Color(0xc2d6df),dayFog=new T.FogExp2(0xc2d6df,.0012);M.scene.background=daySky;M.scene.fog=dayFog;
+ M.city.update(M.player,1);assert.equal(M.scene.background,daySky);assert.equal(M.scene.fog,dayFog);near(f.sun.intensity,2.8);
+ api.visitLower();M.city.update(M.player,2);const sky=M.scene.background,fog=M.scene.fog;assert.equal(sky.getHex(),0x091522);assert.equal(fog.color.getHex(),0x091522);near(fog.density,.00065);near(f.sun.intensity,0);near(f.sky.intensity,0);assert(api.built.lamps.visible&&api.lower.lamps.visible);
+ const moon=api.built.lamps.children.find(n=>n.isDirectionalLight),warm=api.built.lamps.children.filter(n=>n.isPointLight);near(moon.intensity,.56);assert.equal(warm.length,2);assert(warm.every(n=>n.color.r>n.color.b&&n.position.y<-96));
+ for(const time of[300,86400,172800]){M.city.update(M.player,time);assert.equal(M.scene.background.getHex(),0x091522);near(moon.intensity,.56);near(f.sun.intensity,0);}
+ const photo=M.camera.clone();for(const cam of[M.camera,photo]){cam.position.set(M.player.x,M.player.y,M.player.z);cam.quaternion.identity();api.prepareCamera(cam);}assert.equal(M.scene.background.getHex(),0x091522);near(M.camera.quaternion.angleTo(photo.quaternion),0);
+ api.overview('lower');M.city.update(M.player,4);assert.equal(M.scene.background.getHex(),0x091522);near(M.scene.fog.density,.00016);M.scene.background=daySky;M.scene.fog=dayFog;api.prepareScene();assert.equal(M.scene.background.getHex(),0x091522,'The final render hook retains lower night after other overview hooks');api.overview('upper');M.city.update(M.player,5);assert.equal(M.scene.background,daySky);assert.equal(M.scene.fog,dayFog);near(f.sun.intensity,2.8);near(f.sky.intensity,1.7);assert(!api.built.lamps.visible);near(dayFog.density,.0012);
+ api.visitLower();M.city.update(M.player,6);M.arrive({x:100,z:100,y:.13});assert.equal(M.scene.background,daySky);assert.equal(M.scene.fog,dayFog);near(f.sun.intensity,2.8);
+ api.travelFromPond();M.city.update(M.player,7);api.prepareCamera(M.camera);assert.equal(M.scene.background.getHex(),0x091522,'Completing even a reduced-motion crossing must not flash the daytime sky');near(f.sun.intensity,0);f.events.get('pagehide')();assert.equal(M.scene.background,daySky);assert.equal(M.scene.fog,dayFog);near(f.sun.intensity,2.8);
+});
+
+check('Lower capture environment restores upper sky, fog, water and lamps after success or error',()=>{
+ const f=fixture(),{M,api}=f,sky=new T.Color(0xc2d6df),fog=new T.FogExp2(0xc2d6df,.0012);M.scene.background=sky;M.scene.fog=fog;api.lower.lamps.visible=false;const water=api.built.sea.material.uniforms,color=water.fogColor.value.clone(),density=water.fogDensity.value;
+ const capture=()=>{assert.equal(M.scene.background.getHex(),0x091522);assert.equal(M.scene.fog.color.getHex(),0x091522);assert(api.lower.lamps.visible);near(water.fogDensity.value,.00065);return 'captured';};assert.equal(api.withLowerEnvironment(capture),'captured');assert.throws(()=>api.withLowerEnvironment(()=>{capture();throw Error('capture failed');}),/capture failed/);assert.equal(M.scene.background,sky);assert.equal(M.scene.fog,fog);assert(!api.lower.lamps.visible);assert(water.fogColor.value.equals(color));near(water.fogDensity.value,density);f.events.get('pagehide')();
+});
+
+check('A connected lower-floor controller can release gallery ownership without changing the visitor pose',()=>{
+ const f=fixture();f.api.visitGallery();const pose={...f.M.player};assert(f.api.route);f.api.releaseGalleryRoute();assert.equal(f.api.route,null);assert.deepEqual(f.M.player,pose);assert.equal(f.body.dataset.galleryPassage,undefined);f.events.get('pagehide')();
+});
 
 check('Controller walks the actual gallery–Escher tunnel in both directions and rejoins the spiral',()=>{
  const f=fixture(),{M,api}=f;M.arrive({x:23,z:0,y:-40,yaw:-Math.PI/2});assert(api.step(.01,{}));
@@ -173,6 +203,12 @@ check('Deep Babel hides the concealed upper city and restores the real entry ove
  assert.equal(f.foreign.visible,false,'Hidden upper buildings must not keep drawing in the deep library');assert.equal(babel.visible,true);assert.equal(M.lantern.visible,true);
  Object.assign(M.player,{x:48,z:-3,y:-8+M.eye});M.city.update(M.player,2);api.prepareScene();assert.equal(f.foreign.visible,true,'The first terrace retains its real view through the gallery stairwell');
  Object.assign(M.player,{x:0,z:100,y:1.93});M.babelLibrary.active=false;M.city.update(M.player,3);api.prepareScene();assert.equal(f.foreign.visible,true);f.events.get('pagehide')();
+});
+
+check('The completed library is culled only below its opaque floor and restores at its upper overlook, cutaway and cleanup',()=>{
+ const f=fixture(),{M,api}=f,babel=new T.Group();babel.name='Actual complete Babel root';M.babelLibrary.built={group:babel};M.scene.add(babel);api.visitGallery();Object.assign(M.player,{y:-30+M.eye});M.city.update(M.player,1);api.prepareScene();assert(babel.visible,'The upper stair overlook still shows the real library');
+ Object.assign(M.player,{y:-33+M.eye});M.city.update(M.player,2);api.prepareScene();assert(!babel.visible,'The opaque library floor hides Babel from the deeper shaft');api.prepareScene();assert(!babel.visible,'A second photo preparation keeps the scoped hidden state');Object.assign(M.player,{y:-30+M.eye});M.city.update(M.player,3);api.prepareScene();assert(babel.visible,'Photo preparation must not overwrite the original visible state');
+ api.overview('section');M.city.update(M.player,4);api.prepareScene();assert(babel.visible,'Cutaway retains the complete Babel assembly');api.enterTunnel();M.city.update(M.player,5);api.prepareScene();assert(!babel.visible);f.events.get('pagehide')();assert(babel.visible,'Teardown restores the original library visibility');
 });
 
 check('Cleanup restores original source parents, current animation pose, visibility, handlers and UI',()=>{

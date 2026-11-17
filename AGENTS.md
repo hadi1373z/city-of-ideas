@@ -169,7 +169,7 @@ docs/CONNECTED-QUESTIONS.md and docs/lower-face-visuals.md before extending.
 
 ## Original paper monitors
 
-The eleven former blank panels in the lower Mathematics reading hall now show
+The original eleven former blank panels in the lower Mathematics reading hall now show
 permanent original first-page facsimiles. `historic-papers-data.js` keeps each
 work's image, edition/page choice, source links, author credit, reuse terms and
 English discussion question together. Preserve the genuine local scans and
@@ -206,3 +206,22 @@ On 2026-11-16 the user requested a new default version without the mountain, ret
 ## House of Transformations
 
 Keep the three hexagonal mathematical pavilions. The separate solid house at (125,0) occupies the retired mountain site, with eight floors and a real stair to the -40 tunnel and existing route to the lower face. Read docs/HOUSE-OF-TRANSFORMATIONS.md before changing its ground cut, floor/stair joins, secret bookcase or navigation handoff. Do not restore the mountain over this house.
+
+
+## Tiling, night face and four reading floors
+
+The upper city is permanently day; the lower CITY face is permanently night. This does not make the new House of Transformations a night-world. Keep its Light-Well Observatory on the upper side. World-cylinder owns navy lower sky/fog, moonlight, warm campus lights and scoped lower pond captures; restore upper state after every crossing and render pass.
+
+The house now has full matched Penrose rhomb floors, shallow vaulted ceilings, an unfolded continuous wall field across all 48 panels and fine inlays on its 448 tread caps. Each room landing has four flat cap sectors and sixty supported risers per turn; preserve the exact flat landing profile and continuous rounded guard joins. Preserve true door/window apertures, floor/stair heights, open wells and original quiet trim. Nearby shelf/pendulum operations require physical proximity; passing a floor height on a stair does not enter that room.
+
+The retaining cylinder below Babel carries original interlocking bird tiles that gradually separate into an articulated flock. This is original geometry, not a copied Escher print. Preserve opaque earth behind it, all stair/door clearances, reduced-motion poses and batched rendering.
+
+Twenty-seven credited genuine historical/publisher opening pages now occupy four actual connected lower reading floors: foundations (6), geometry/analysis/symmetry (8), computation (6), probability/learning (7). Preserve the original eleven full scans byte-for-byte; their reduced display derivatives are separate. The glazed mezzanines retain stone bearing bands and safe physical walk surfaces. Preserve stable paperId binding and slot floorY gates. The original lower through-gallery and west exit stay intact. Read docs/PAPER-GALLERY.md before changing the new rising stair, mezzanines, raised Faculty roof or controller handoff.
+
+The lower rotunda now has a curved glass roof and a real central observatory deck at localY22.13, reached by80 supported stairs above the highest paper floor. Keep the old well and reversible controller handoff open. Read docs/NIGHT-OBSERVATORY.md and docs/NIGHT-SKY-SOURCES.md before changing it. The real2848-star HYGv4.1 adaptation retains its CC BY-SA4.0 credit/license/source/modification notice. Chart seasons change only the stated Earth teaching sky, never the city’s permanent day/night rule.
+
+The lower observatory has a professional articulated reflector, real catalogue study and an optional immersive telescope view. Preserve the physical station gate, fixed player position while observing, FOV/photo agreement, scene restoration and asynchronous fullscreen ownership handling. The simultaneous cylinder cutaway renders upper daylight and lower night in clipped passes, restoring all renderer state. Do not paint the lower ocean across the upper horizon.
+
+The city centre has a sixfold civic structure: circular Gallery promenade, rotated hexagonal walk, six view axes and paired hexagonal courts. Keep all existing destinations connected and actual house footprints reflected in the EN/DE/FA maps. New houses such as Maps, Light, Faraday, Topology, Darwin Glasshouse and Commons remain proposals until built with meaningful content; do not claim these proposals are present.
+
+The wall-to-flock transition includes 279 retained paper-thin hinged motifs before the 64 source cells become fully volumetric birds. Keep this intermediate stage and its matching proxy suppression. Close relief is submitted only in the camera-height band; the faithful proxy covers other heights. Do not restore the entire relief mesh as one always-submitted batch. Read docs/CYLINDER-BIRD-TRANSITION.md for the band/wing/flight ownership and budgets.

@@ -1,4 +1,4 @@
-// The gallery is the origin of one circular island. The graveyard remains a separate world.
+// The gallery is the origin of one circular world with two inhabited faces.
 export const CITY_ISLAND=Object.freeze({x:0,z:0,radius:570,lawnRadius:552,walkRadius:565,promenadeRadius:536});
 export const islandRadius=(x,z)=>Math.hypot(x-CITY_ISLAND.x,z-CITY_ISLAND.z);
 export const onCityIsland=(x,z)=>Number.isFinite(x)&&Number.isFinite(z)&&islandRadius(x,z)<=CITY_ISLAND.walkRadius;

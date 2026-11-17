@@ -1,5 +1,5 @@
-import {CITY_ISLAND} from './island-layout.js';
-import {coastMapPoint} from './coastal-map-data.js';
+import {CITY_ISLAND} from './island-layout.js?v=city-night-20261117';
+import {coastMapPoint} from './coastal-map-data.js?v=city-night-20261117';
 
 // A fresh, in-memory plan-view snapshot whenever the overview is opened.
 // Never clamp a remote world or sailing location onto the island edge.

@@ -1,5 +1,5 @@
-import {FOUNDATION_HOUSES,FOUNDATION_COPY} from './foundation-houses-data.js?v=labs1';
-import {buildFoundationHouses} from './foundation-houses-scene.js';
+import {FOUNDATION_HOUSES,FOUNDATION_COPY} from './foundation-houses-data.js?v=city-night-20261117';
+import {buildFoundationHouses} from './foundation-houses-scene.js?v=city-night-20261117';
 export function installHouseFoundations(M,T){
  const built=buildFoundationHouses(T);M.scene.add(built.group);M.city.targets.push(...built.targets);M.city.buildingTargets.push(...built.houses.map(h=>h.group));
  const lang=()=>window.CITY_I18N.lang,w=()=>FOUNDATION_COPY[lang()]||FOUNDATION_COPY.en,name=h=>h.names[lang()]||h.names.en,text=o=>o[lang()]||o.en;

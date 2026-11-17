@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import * as Three from '../src/city-source-assets/home-tools/vendor/three.module.js';
 import {installArtistQuarter} from '../src/artist-quarter.js';
 import {createVisitMemory} from '../src/visit-memory.js';
-import {QUARTER_COPY} from '../src/artist-quarter-data.js';
+import {QUARTER_COPY,QUARTER_ARTISTS} from '../src/artist-quarter-data.js';
 import {IDEA_EXHIBITIONS,IDEA_EXHIBITION_COPY} from '../src/idea-exhibitions.js';
 class Element{
  constructor(tag){this.tagName=tag;this.children=[];this.dataset={};this.style={};this.attributes={};this.events={};this._text='';this.open=false;}
@@ -40,7 +40,7 @@ try{
  assert.equal(store.state.questions.length,2,'Theme reflection should enter existing private notebook');
  assert.equal(values.get('private-note'),'Keep exactly');
  M.startExtra('idea:philosophy');assert(!ideaDialog.open);assert.equal(M.player.x,226);assert.equal(M.player.z,191);
- M.startExtra('idea:perception');assert.equal(M.player.x,182);
+ M.startExtra('idea:perception');assert.equal(M.player.x,QUARTER_ARTISTS.find(h=>h.id==='seurat').x);
  window.CITY_I18N.lang='fa';events.get('city-language')();
  M.startExtra('ideas-gallery');assert.equal(ideaDialog.dir,'rtl');
  assert(ideaDialog.textContent.includes(IDEA_EXHIBITION_COPY.fa.visit));ideaDialog.close();

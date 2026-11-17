@@ -1,8 +1,8 @@
-import {BABEL,babelDesk,surfaceAt as babelSurface,walkLibrary} from './babel-library-model.js?v=two-faces2';
-import {UPPER,LOWER,pointAt} from './two-face-gallery-model.js';
-import {ESCHER_DEPTH as D,depthRoomAt,depthFloorAt,canWalkDepth} from './escher-depth-model.js';
-import {lowerLocal,lowerPhysical,GALLERY_TUNNEL,tunnelContains} from './world-cylinder-model.js';
-import {MATH_FACULTY as F,facultyCanStand,facultyColliders} from './math-faculty-model.js';
+import {BABEL,babelDesk,surfaceAt as babelSurface,walkLibrary} from './babel-library-model.js?v=city-night-20261117';
+import {UPPER,LOWER,pointAt} from './two-face-gallery-model.js?v=city-night-20261117';
+import {ESCHER_DEPTH as D,depthRoomAt,depthFloorAt,canWalkDepth} from './escher-depth-model.js?v=city-night-20261117';
+import {lowerLocal,lowerPhysical,GALLERY_TUNNEL,tunnelContains} from './world-cylinder-model.js?v=city-night-20261117';
+import {MATH_FACULTY as F,facultyCanStand,facultyColliders} from './math-faculty-model.js?v=city-night-20261117';
 
 const distance=(a,b)=>Math.hypot(a.x-b.x,a.z-b.z),angle=(a,b)=>Math.atan2(Math.sin(b-a),Math.cos(b-a));
 const nearFloor=(p,y,eye)=>Math.abs(p.y-eye-y)<.5;

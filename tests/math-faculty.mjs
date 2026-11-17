@@ -12,7 +12,7 @@ b.group.traverse(o=>{if(o.isMesh){draws++;assert(o.geometry.attributes.position.
 assert.equal(F.wellRadius,21.5);assert.equal(F.wing.x,-80);assert.equal(F.wing.logicalX,-2240);assert.equal(F.wing.entry.z,9.6);assert.equal(F.wing.spawn.z,32.8);assert.equal(F.wing.lift.x,-70.4);
 const ray=(x,y,z,dx,dy,dz,far=50)=>new T.Raycaster(new T.Vector3(x,y,z),new T.Vector3(dx,dy,dz),0,far).intersectObject(b.group,true);
 for(const r of[0,14.4,16,17.6,19,21.2])for(let i=0;i<12;i++){const a=i*Math.PI/6;assert.equal(ray(Math.cos(a)*r,.2,Math.sin(a)*r,0,1,0,40).length,0,'The faculty must leave the complete central well/oculus physically clear');}
-const roof=ray(35,1.93,0,0,1,0,20);assert(roof.length&&roof[0].point.y>7.5&&roof[0].point.y<12,'Existing gallery columns receive a real annular roof');
+const roof=ray(35,1.93,0,0,1,0,24).filter(h=>h.object.name==='Annular timber roof · open central oculus');assert(roof.length,'The four-storey colonnade receives a real annular roof');near(roof[0].point.y,F.roofInnerY+(F.roofOuterY-F.roofInnerY)*(35-F.roofInner)/(F.roofOuter-F.roofInner),.005);assert(F.roofOuterY>12.13+3.5,'The top collection retains comfortable clear headroom');assert(ray(58,14,8,1,0,0,8).length,'The raised facade encloses the upper collection');
 assert.equal(ray(-56,1.93,0,-1,0,0,10).length,0,'The lower west doorway remains genuinely open');assert(ray(58,1.93,8,1,0,0,8).length,'The rotunda has a real exterior facade');
 const route=F.connector;for(let i=1;i<route.points.length;i++)for(let j=0;j<=30;j++){
  const a=route.points[i-1],c=route.points[i],x=a[0]+(c[0]-a[0])*j/30,z=a[1]+(c[1]-a[1])*j/30;

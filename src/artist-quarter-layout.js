@@ -1,14 +1,15 @@
 /* One spatial plan for every public artist home. Saved designs are not rewritten. */
 (function(g){'use strict';
- const galleries={monet:[85,82],'van-gogh':[108,84],'hilma-af-klint':[84,112],morris:[108,115],kandinsky:[159,98],hokusai:[181,95],rodin:[203,99],mondrian:[161,132],lange:[182,134],klee:[204,137]};
- const plan={version:2,galleries,escher:{x:228,z:115},dali:{x:220,z:177},studios:{cezanne:{x:171,z:161,turn:0},morisot:{x:196,z:159,turn:0},seurat:{x:182,z:196,turn:Math.PI}},bounds:{minX:70,maxX:249,minZ:72,maxZ:211},arrival:{x:96,z:98,y:.13,yaw:0},
+ const galleries={monet:[88,80],'van-gogh':[116,80],'hilma-af-klint':[88,112],morris:[116,112],kandinsky:[176,82],hokusai:[202,82],rodin:[244,104],mondrian:[176,126],lange:[202,146],klee:[244,146]};
+ const fronts={monet:[88,96],'van-gogh':[116,96],'hilma-af-klint':[88,96],morris:[116,96],kandinsky:[176,104],hokusai:[202,104],rodin:[244,126],mondrian:[176,104],lange:[202,126],klee:[244,126],escher:[228,126],dali:[250,216],cezanne:[176,216],morisot:[208,216],seurat:[192,216]};
+ const plan={version:3,galleries,fronts,escher:{x:228,z:115},dali:{x:250,z:198},studios:{cezanne:{x:176,z:194,turn:0},morisot:{x:208,z:194,turn:0},seurat:{x:192,z:234,turn:Math.PI}},bounds:{minX:70,maxX:284,minZ:70,maxZ:246},arrival:{x:96,z:98,y:.13,yaw:0},
   courts:[{id:'garden',title:{en:'The garden court',de:'Der Gartenhof',fa:'حیاط باغ'},artists:['monet','van-gogh','hilma-af-klint','morris'],arrival:{x:96,z:98,y:.13,yaw:0}},
-   {id:'form',title:{en:'The form and perspective court',de:'Der Hof für Form und Perspektive',fa:'حیاط فرم و پرسپکتیو'},artists:['kandinsky','hokusai','rodin','mondrian','lange','klee','escher'],arrival:{x:174,z:116,y:.13,yaw:0}},
-   {id:'studio',title:{en:'The studio court',de:'Der Atelierhof',fa:'حیاط آتلیه‌ها'},artists:['cezanne','morisot','seurat','dali'],arrival:{x:184,z:179,y:.13,yaw:0}}],
-  routes:[[[76,110],[74,100],[96,98],[126,104],[145,116],[174,116],[204,118],[228,126]],[[171,116],[171,148],[156,148],[156,179],[182,179],[209,187],[229,187]],[[228,126],[242,145],[242,187],[229,187]]],
-  plants:[[96,91],[96,105],[171,108],[193,110],[173,125],[195,126],[184,173],[205,178],[179,184],[236,169]],
-  seats:[[96,93],[97,104],[193,111],[174,126],[185,173],[205,180],[237,160]],
-  trees:[[96,89],[96,107],[127,99],[144,106],[171,106],[193,108],[173,127],[195,128],[160,173],[184,171],[205,176],[233,165],[234,193]]};
+   {id:'form',title:{en:'The form and perspective court',de:'Der Hof für Form und Perspektive',fa:'حیاط فرم و پرسپکتیو'},artists:['kandinsky','hokusai','rodin','mondrian','lange','klee','escher'],arrival:{x:190,z:104,y:.13,yaw:0}},
+   {id:'studio',title:{en:'The studio court',de:'Der Atelierhof',fa:'حیاط آتلیه‌ها'},artists:['cezanne','morisot','seurat','dali'],arrival:{x:208,z:216,y:.13,yaw:0}}],
+  routes:[[[74,110],[74,96],[96,98],[138,96],[160,96],[176,104],[204,104],[216,126],[228,126],[254,126],[280,126]],[[160,96],[160,216],[250,216],[280,216]],[[160,160],[280,160],[280,216]],[[280,126],[280,76]],[[202,126],[216,126]]],
+  plants:[[102,88],[102,105],[188,96],[188,115],[238,133],[190,207],[226,210]],
+  seats:[[102,90],[102,105],[188,96],[188,115],[238,132],[188,207],[226,212]],
+  trees:[[102,87],[102,108],[138,106],[152,120],[152,144],[152,166],[190,92],[190,116],[238,135],[270,142],[190,188],[236,229],[176,231],[250,234]]};
  g.ARTIST_QUARTER_PLAN=plan;
  function moveHouse(h,dx,dz){h.cx+=dx;h.cz+=dz;h.minX+=dx;h.maxX+=dx;h.minZ+=dz;h.maxZ+=dz;h.group.position.x+=dx;h.group.position.z+=dz;for(const p of[h.entry,h.spawnInside,...h.approaches]){p.x+=dx;p.z+=dz;if(p.lookAt){p.lookAt.x+=dx;p.lookAt.z+=dz;}}}
  g.layoutArtistQuarter=function(T,art){
@@ -25,7 +26,7 @@
   for(const {h,dx,dz}of moves)moveHouse(h,dx,dz);
   Object.assign(art.bounds,{minX:Math.min(...art.houses.map(h=>h.minX))-2,maxX:Math.max(...art.houses.map(h=>h.maxX))+2,minZ:Math.min(...art.houses.map(h=>h.minZ))-2,maxZ:Math.max(...art.houses.map(h=>h.maxZ))+2});
   Object.assign(art.spawn,{x:(plan.arrival.x-118)/1.35,z:(plan.arrival.z-108)/1.35,yaw:plan.arrival.yaw});Object.assign(art.guideAnchor,{x:(96-118)/1.35,z:(98-108)/1.35});art.bounds.minX=Math.min(art.bounds.minX,art.spawn.x-2);
-  art.quarterLayout={version:2,plan};art.group.updateMatrixWorld(true);return art;
+  art.quarterLayout={version:3,plan};art.group.updateMatrixWorld(true);return art;
  };
  g.layoutArtistDali=function(T,art){
   const h=art.houses.find(h=>h.artistId==='dali');if(!h||h.quarterRelocated)return;

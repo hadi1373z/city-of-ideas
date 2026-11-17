@@ -1,4 +1,4 @@
-import './city-road-surface.js';
+import './city-road-surface.js?v=city-night-20261117';
 /* Additive source-authentic geometry for the principal City of Ideas scene.
    Copy this module to src/extra-districts.js when its controller hooks are wired. */
 const copy=value=>JSON.parse(JSON.stringify(value));
@@ -71,7 +71,7 @@ export async function createExtraDistricts(THREE,options={}){
  function road(points,width=6,parent=roads){const mesh=globalThis.createCityRoad(THREE,points,width,roadMaterial,parent);if(mesh)roadGeometries.add(mesh.geometry);}
  road(city.GRAVEYARD?[[transforms.mathematics.x+50,-65],[transforms.mathematics.x+50,65],[transforms.mathematics.x,65],[transforms.mathematics.x,transforms.mathematics.z+9.6]]:[[-97.7,110],[-125,110],[-125,140],[-215,140],[-215,104.6]],7);
  road([[74,110],[74,76],[200,76],[203.5,65],[203.5,-50],[211.5,-50]],6);
- road([[84.5,108],[84.5,85.05],[118,85.05],[118,82.08]],3);
+ road([[74,110],[74,96],[88,96]],3);
  const assetUrl=value=>{
   if(/^(?:data:|blob:)/i.test(value))return value;
   if(options.assetUrl)return options.assetUrl(value,sourceBase.href);

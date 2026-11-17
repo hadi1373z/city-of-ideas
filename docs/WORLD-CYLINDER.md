@@ -26,6 +26,36 @@ It is not a negative-scale reflection. The logical lower origin maps to physical
 `(0,-96,0)`; a lower floor at logical Y=.13 renders at physical Y=−96.13.
 `lowerPhysical`, `physicalToLower`, `lowerLocal` and `lowerMatrix` must agree.
 
+## Permanent day and night
+
+The upper city remains in daylight; the lower inhabited face is permanently
+night. This is a property of the two faces, not a clock, visitor setting, or a
+night mode inside the House of Transformations. The lower face uses fixed navy
+sky and fog, cool moonlight, warm campus lights and a darker exposure of the
+shared ocean shader. Interior reading lights and original paper pages remain
+readable. Changing face, leaving overview, and a reduced-motion crossing restore
+the upper environment without retaining the lower fog or light intensities.
+
+`withLowerEnvironment(render)` scopes the lower sky/fog and reading lights for
+the live pond render, restoring the upper scene even when rendering throws.
+The pond remains an actual view of the same night face, surrounded by the
+daylight park.
+
+## Wall becoming birds
+
+`cylinder-metamorphosis-scene.js` adds an original interlocking bird relief to
+the inside of the retaining cylinder beneath Babel. Its master polygon is made
+by exchanging opposite edges of a unit square. The planar tile has matching
+translated edges; its horizontal repeat wraps the cylinder. This is an original
+Escher-inspired construction, not a reproduction of a print.
+
+The lower rows progressively separate and lead to a flock with articulated
+wings. Relief and motion remain outside the stone stair and arches, clear of
+the east doorway and middle platform. Reduced motion freezes the flock at a
+deliberate pose. The opaque earth core remains behind the relief. The module
+owns its geometry, animation and disposal; it does not modify navigation,
+recordings, personal storage or asset credits.
+
 Do not translate individual source meshes or rewrite stored positions to physical
 coordinates. `mountLowerWorld` identifies wholly remote scene subtrees, preserves
 their original parents and parent-world transforms in wrappers, and mounts those

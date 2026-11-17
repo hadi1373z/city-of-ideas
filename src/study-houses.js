@@ -1,7 +1,7 @@
-import {WORKBENCH_TEXT,faceRoomWork,showRoomDialog} from './room-workbench.js?v=touch1';
-import {STUDY_HOUSES,STUDY_UI} from './study-houses-data.js';
-import {BOARDS,colour,neighbours,matching,bayes,startMachine,stepMachine,diagonal,studyMemory} from './study-house-models.js?v=workbench1';
-import {buildStudyHouses} from './study-houses-scene.js?v=computation1';
+import {WORKBENCH_TEXT,faceRoomWork,showRoomDialog} from './room-workbench.js?v=city-night-20261117';
+import {STUDY_HOUSES,STUDY_UI} from './study-houses-data.js?v=city-night-20261117';
+import {BOARDS,colour,neighbours,matching,bayes,startMachine,stepMachine,diagonal,studyMemory} from './study-house-models.js?v=city-night-20261117';
+import {buildStudyHouses} from './study-houses-scene.js?v=city-night-20261117';
 export function installStudyHouses(M,T){
  let storage;try{storage=localStorage;}catch{}const memory=studyMemory(storage),scene=buildStudyHouses(T);M.scene.add(scene.group);M.city.targets.push(...scene.targets);for(const h of scene.houses)M.city.buildingTargets.push(h.group);
  const lang=()=>window.CITY_I18N.lang,w=()=>STUDY_UI[lang()]||STUDY_UI.en,name=d=>d.names[lang()]||d.names.en;

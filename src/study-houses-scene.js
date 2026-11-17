@@ -1,5 +1,5 @@
-import {STUDY_HOUSES} from './study-houses-data.js';
-import {colour,neighbours,bayes} from './study-house-models.js?v=workbench1';
+import {STUDY_HOUSES,STUDY_PATHS} from './study-houses-data.js?v=city-night-20261117';
+import {colour,neighbours,bayes} from './study-house-models.js?v=city-night-20261117';
 export function buildStudyHouses(T,{canvas=()=>document.createElement('canvas')}={}){
  const group=new T.Group(),houses=[],targets=[],colliders=[],owned=new Set(),own=r=>(owned.add(r),r),material=c=>own(new T.MeshLambertMaterial({color:c}));group.name='Advanced study courtyard';
  const stone=material(0xc4bda6),wood=material(0x775c43),paper=material(0xe7dfc8),floor=material(0xb4a889),glass=own(new T.MeshLambertMaterial({color:0xb1c9c2,transparent:true,opacity:.13,depthWrite:false}));
@@ -30,7 +30,7 @@ export function buildStudyHouses(T,{canvas=()=>document.createElement('canvas')}
   targets.push(exhibit);const inside=(x,z)=>Math.abs(x-data.x)<7.8&&Math.abs(z-data.z)<5.8;
   houses.push({data,group:home,name,exhibit,caption,cells,bars,links,readout,inside,entry:{...world(0,8),y:.13,yaw:data.turn},insideEntry:{...world(0,3.9),y:.13,yaw:data.turn},view:{...world(0,.5),y:.13,yaw:data.turn,pitch:-.1},world});
  }
- const paths=[[[203.5,-50],[203.5,-112],[243,-112]],[[215,-112],[215,-100]],[[243,-112],[243,-100]],[[229,-112],[229,-123]]];
+ const paths=STUDY_PATHS;
  for(const points of paths)for(let i=1;i<points.length;i++){const a=points[i-1],b=points[i],length=Math.hypot(b[0]-a[0],b[1]-a[1]),m=new T.Mesh(own(new T.PlaneGeometry(3.5,length+.01)),material(0x6e8268));m.rotation.x=-Math.PI/2;m.rotation.z=-Math.atan2(b[0]-a[0],b[1]-a[1]);m.position.set((a[0]+b[0])/2,.012,(a[1]+b[1])/2);m.name='Smooth study garden route';group.add(m);}
  let lastKey='';function update({lang='en',board,selection=[],prior=.01,repeats=1,independent=true,machine,showMatching=false,pairs=[]}){
   const key=JSON.stringify([lang,board,selection,prior,repeats,independent,machine?.steps,showMatching]);if(key===lastKey)return;lastKey=key;

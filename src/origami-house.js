@@ -1,13 +1,13 @@
-import {FOUNDATION_HOUSES,FOUNDATION_COPY,FOUNDATION_ROUTES} from './foundation-houses-data.js';
-import {CITY_ISLAND as ISLAND,onCityIsland,islandRadius} from './island-layout.js';
-import {buildOrigamiHouse} from './origami-house-scene.js';
-import {buildCityCoast} from './coastal-city-scene.js?v=transformation-house1';
-import {foldHouseMemory,HOUSE_ORIGAMI as P,miura,vertexTests,CREASE_CASES,coastX,COAST_ROUTES} from './origami-house-math.js';
-import {FOLD_COPY} from './origami-house-copy.js';
-import {ORIGAMI_LESSONS,paperDiagram} from './origami-lessons.js';
-import {mountCoastalMap} from './coastal-map.js?v=worldlinks1';
-import {COAST_EXPLORER_COPY} from './coastal-map-data.js?v=worldlinks1';
-import {SEMINAR_HOUSES} from './seminar-houses-data.js';
+import {FOUNDATION_HOUSES,FOUNDATION_COPY,FOUNDATION_ROUTES} from './foundation-houses-data.js?v=city-night-20261117';
+import {CITY_ISLAND as ISLAND,onCityIsland,islandRadius} from './island-layout.js?v=city-night-20261117';
+import {buildOrigamiHouse} from './origami-house-scene.js?v=city-night-20261117';
+import {buildCityCoast} from './coastal-city-scene.js?v=city-night-20261117';
+import {foldHouseMemory,HOUSE_ORIGAMI as P,miura,vertexTests,CREASE_CASES,coastX,COAST_ROUTES} from './origami-house-math.js?v=city-night-20261117';
+import {FOLD_COPY} from './origami-house-copy.js?v=city-night-20261117';
+import {ORIGAMI_LESSONS,paperDiagram} from './origami-lessons.js?v=city-night-20261117';
+import {mountCoastalMap} from './coastal-map.js?v=city-night-20261117';
+import {COAST_EXPLORER_COPY} from './coastal-map-data.js?v=city-night-20261117';
+import {SEMINAR_HOUSES} from './seminar-houses-data.js?v=city-night-20261117';
 export function installOrigamiHouse(M,T){
  const cityPaths=[],hiddenRoutes=[];M.scene.traverse(o=>{const r=o.userData;if(r?.groundRoute&&r.points?.every(([x,z])=>Math.hypot(x,z)<ISLAND.radius))cityPaths.push({points:r.points,width:r.width});if(o.name==='Mown lawn route · no raised paving'){hiddenRoutes.push([o,o.visible]);o.visible=false;}});for(const p of M.city.landscape?.paths||[])cityPaths.push({points:p.points.map(q=>[q.x,q.z]),width:p.width});cityPaths.push(...(M.artistQuarter?.garden.paths||[]));
  let storage;try{storage=localStorage;}catch{}const memory=foldHouseMemory(storage),house=buildOrigamiHouse(T),coast=buildCityCoast(T,{cityPaths,heightAt:(x,z)=>M.city.landscape?.groundHeight(x,z)}),boatLesson=ORIGAMI_LESSONS.find(l=>l.id==='boat');M.scene.add(house.group,house.released.group,coast.group);M.city.targets.push(...house.targets,coast.launch);M.city.buildingTargets.push(house.group);

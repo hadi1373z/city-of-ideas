@@ -1,5 +1,5 @@
-import {SEMINAR_HOUSES,SEMINAR_PATHS,seminarWorld,seminarEntry} from './seminar-houses-data.js';
-import {oscillator,DISK_CASES,diskGeodesic,chanceScore} from './seminar-house-models.js';
+import {SEMINAR_HOUSES,SEMINAR_PATHS,seminarWorld,seminarEntry} from './seminar-houses-data.js?v=city-night-20261117';
+import {oscillator,DISK_CASES,diskGeodesic,chanceScore} from './seminar-house-models.js?v=city-night-20261117';
 export function buildSeminarHouses(T,{canvas=()=>document.createElement('canvas')}={}){
  const root=new T.Group();root.name='Southern garden · form and listening';const owned=new Set(),own=r=>(owned.add(r),r),mat=(colour,extra={})=>own(new T.MeshLambertMaterial({color:colour,...extra}));
  const stone=mat(0xd9cfb7,{side:T.DoubleSide}),wood=mat(0x765039),ink=mat(0x28494c),gold=mat(0xb79548),paper=mat(0xf4ead2),glass=mat(0xa7c9c4,{transparent:true,opacity:.13,depthWrite:false,side:T.DoubleSide}),houses=[],targets=[],chordMat=own(new T.LineDashedMaterial({color:0x54717a,dashSize:.13,gapSize:.10}));

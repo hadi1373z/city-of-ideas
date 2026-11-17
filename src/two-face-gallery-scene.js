@@ -1,5 +1,5 @@
-import {gallerySide,heightAt,pointAt,TWO_FACE_GALLERY_CONTRACT} from './two-face-gallery-model.js';
-import {paperMonitorSlots} from './paper-monitors-model.js';
+import {gallerySide,heightAt,pointAt,TWO_FACE_GALLERY_CONTRACT} from './two-face-gallery-model.js?v=city-night-20261117';
+import {paperMonitorSlots} from './paper-monitors-model.js?v=city-night-20261117';
 
 /** Builds only local +Y-up geometry. The caller owns the inverted lower frame. */
 export function buildTwoFaceGallery(T,{side='upper',lights=true}={}){
@@ -18,12 +18,12 @@ export function buildTwoFaceGallery(T,{side='upper',lights=true}={}){
  function deck(p,name){const material=s.id==='upper'&&name==='top'?mat(0x9c8965):stone;const o=mesh(new T.BoxGeometry(p.maxX-p.minX,.24,p.maxZ-p.minZ),material,name,walking);o.position.set((p.minX+p.maxX)/2,p.y-.12,(p.minZ+p.maxZ)/2);o.userData.gallerySurface=name;return o;}
  deck(s.topBridge,'top');deck(s.mid,'mid');if(s.spur)deck(s.spur,'spur');if(s.walkout)deck(s.walkout,'walkout');
  function band(ri,ro,y,m,name,parent=group,{gapAngle=null,gapHalf=0}={}){const v=[],ix=[],count=480;for(let i=0;i<=count;i++){const a=i/count*Math.PI*2;for(const r of[ri,ro])v.push(Math.cos(a)*r,y,Math.sin(a)*r);}for(let i=0;i<count;i++){const a=(i+.5)/count*Math.PI*2,d=gapAngle===null?10:Math.atan2(Math.sin(a-gapAngle),Math.cos(a-gapAngle));if(Math.abs(d)<gapHalf)continue;const k=i*2;ix.push(k,k+2,k+1,k+1,k+2,k+3);}const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(v,3));g.setIndex(ix);g.computeVertexNormals();return mesh(g,m,name,parent);}
- if(s.floor){const floor=band(s.floor.innerRadius,s.floor.outerRadius,s.floor.y,stone,'Lower face annular gallery floor',walking);floor.userData.gallerySurface='floor';band(19,19.3,s.floor.y+.012,brass,'Brass rim around the open well');for(const r of[24,39,54,57.5])band(r,r+.055,s.floor.y+.016,brass,'Inlaid concentric floor line');for(let i=0;i<40;i++){const a=i*Math.PI*2/40;if(Math.abs(Math.atan2(Math.sin(a-Math.PI),Math.cos(a-Math.PI)))<.10)continue;const r=57.8,h=7.2;box(.7,h,.72,Math.cos(a)*r,s.topY+h/2,Math.sin(a)*r,darkStone,-a);box(7.9,.32,.58,Math.cos(a)*r,s.topY+6.9,Math.sin(a)*r,trim,Math.PI/2-a);}
+ if(s.floor){const floor=band(s.floor.innerRadius,s.floor.outerRadius,s.floor.y,stone,'Lower face annular gallery floor',walking);floor.userData.gallerySurface='floor';band(19,19.3,s.floor.y+.012,brass,'Brass rim around the open well');for(const r of[24,39,54,57.5])band(r,r+.055,s.floor.y+.016,brass,'Inlaid concentric floor line');for(let i=0;i<40;i++){const a=i*Math.PI*2/40;if(Math.abs(Math.atan2(Math.sin(a-Math.PI),Math.cos(a-Math.PI)))<.10)continue;const r=57.8,h=16.05;box(.7,h,.72,Math.cos(a)*r,s.topY+h/2,Math.sin(a)*r,darkStone,-a);box(7.9,.32,.58,Math.cos(a)*r,s.topY+15.75,Math.sin(a)*r,trim,Math.PI/2-a);}
   // The west wall is a genuine doorway, with no rail or panel across its passage.
   for(const z of[-3.25,3.25])box(.85,5.8,.85,-57.9,s.topY+2.9,z,trim);box(.9,.65,7.35,-57.9,s.topY+6.05,0,trim);
   // The original blank boards are now live first-page monitors. Retain the
   // low stone stands; the runtime owns frames, readable pages and their actions.
-  for(const slot of paperSlots){const a=slot.angle;box(3.4,.22,.75,Math.cos(a)*55.7,s.topY+.65,Math.sin(a)*55.7,trim,Math.PI/2-a);}
+  for(const slot of paperSlots){const a=slot.angle;box(3.4,.22,.75,slot.x-Math.cos(a)*.4,(slot.floorY??s.topY)+.65,slot.z-Math.sin(a)*.4,trim,Math.PI/2-a);}
  }
  // Slender rails follow both real stepped edges and remain open at all decks.
  for(const r of[s.innerRadius-.06,s.outerRadius+.06])for(let i=0;i<s.steps;i++){const a=i/s.steps*s.endTheta,b=(i+1)/s.steps*s.endTheta,y=heightAt((a+b)/2,s),nearPortal=a<.15||b>s.endTheta-.24||r>s.radius&&s.spur&&Math.abs((a+b)/2-s.spur.theta)<.15;if(nearPortal)continue;beam([Math.cos(a)*r,y+1.05,Math.sin(a)*r],[Math.cos(b)*r,y+1.05,Math.sin(b)*r],.035,brass);beam([Math.cos(a)*r,y-.16,Math.sin(a)*r],[Math.cos(b)*r,y-.16,Math.sin(b)*r],.085,darkStone);if(i%4===0)beam([Math.cos(a)*r,y,Math.sin(a)*r],[Math.cos(a)*r,y+1.05,Math.sin(a)*r],.035,brass);}

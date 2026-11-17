@@ -1,5 +1,5 @@
-import {CITY_ISLAND,coastX,SHORE,ISLAND_ROUTES} from './island-layout.js';
-export {coastX} from './island-layout.js';
+import {CITY_ISLAND,coastX,SHORE,ISLAND_ROUTES} from './island-layout.js?v=city-night-20261117';
+export {coastX} from './island-layout.js?v=city-night-20261117';
 export const HOUSE_ORIGAMI={x:229,z:76,width:18,depth:16,entry:{x:229,z:99,y:.13,yaw:0,pitch:.06},threshold:{x:229,z:87},insideEntry:{x:229,z:81.5,y:.13,yaw:0},shore:{...SHORE}};
 export const PAPER_COLOURS=['#e9dcb9','#92b9c5','#cc9584'];
 const LOCAL_ROUTES=[[[215,116],[215,90],[229,90],[229,84]],[[229,99],[229,84]],[[229,90],[249,90],[256.5,76]],[[243,-112],[256,-112],[256,65],[256.5,76],[256,160],[242,160]],[[203.5,65],[215,65],[249,65],[256.5,76]]];

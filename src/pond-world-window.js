@@ -1,7 +1,7 @@
-import {POND_WORLD_WINDOW,pondDescriptor,pondToLower,besidePond} from './pond-world-window-model.js';
-import {lowerPhysical} from './world-cylinder-model.js';
-import {replaceFountainCenter} from './pond-world-window-center.js';
-export {POND_WORLD_WINDOW,pondDescriptor} from './pond-world-window-model.js';
+import {POND_WORLD_WINDOW,pondDescriptor,pondToLower,besidePond} from './pond-world-window-model.js?v=city-night-20261117';
+import {lowerPhysical} from './world-cylinder-model.js?v=city-night-20261117';
+import {replaceFountainCenter} from './pond-world-window-center.js?v=city-night-20261117';
+export {POND_WORLD_WINDOW,pondDescriptor} from './pond-world-window-model.js?v=city-night-20261117';
 
 /** A projective water portal into the real, live lower-frame scene. */
 export function installPondWorldWindow(M,T,{resolution=384,interval=100,now=()=>performance.now(),document:doc=globalThis.document,events=globalThis}={}){
@@ -32,7 +32,7 @@ export function installPondWorldWindow(M,T,{resolution=384,interval=100,now=()=>
   const oldTarget=renderer.getRenderTarget(),oldFace=renderer.getActiveCubeFace?.()??0,oldMip=renderer.getActiveMipmapLevel?.()??0,oldViewport=renderer.getViewport(viewport).clone(),oldScissor=renderer.getScissor(scissor).clone(),oldScissorTest=renderer.getScissorTest(),oldClearColor=renderer.getClearColor(clearColor).clone(),oldClearAlpha=renderer.getClearAlpha(),oldAutoClear=renderer.autoClear,oldXR=renderer.xr?.enabled,oldShadow=renderer.shadowMap?.autoUpdate;
   virtualCamera.copy(camera,false);virtualCamera.position.copy(camera.position).applyMatrix4(portal);virtualCamera.quaternion.copy(camera.quaternion).premultiply(flip);virtualCamera.up.set(0,-1,0);virtualCamera.scale.set(1,1,1);virtualCamera.near=Math.min(.2,Math.max(.04,camera.near));virtualCamera.far=Math.max(camera.far,4000);virtualCamera.updateProjectionMatrix();virtualCamera.updateMatrixWorld(true);textureMatrix.copy(bias).multiply(virtualCamera.projectionMatrix).multiply(virtualCamera.matrixWorldInverse).multiply(portal);
   rendering=true;
-  try{isolate(scene);for(const node of M.worldCylinder.lowerRoots??[]){if(!/^(Ramsey House|Return door)/.test(node.name))continue;visibility.push([node,node.visible]);node.visible=true;}if(renderer.xr)renderer.xr.enabled=false;if(renderer.shadowMap)renderer.shadowMap.autoUpdate=false;renderer.autoClear=true;renderer.setRenderTarget(target);renderer.setViewport(0,0,size,size);renderer.setScissorTest(false);renderer.clear(true,true,true);renderer.render(scene,virtualCamera);material.uniforms.ready.value=1;lastRender=time;frames++;forceNext=false;return true;}
+  try{isolate(scene);for(const node of M.worldCylinder.lowerRoots??[]){if(!/^(Ramsey House|Return door)/.test(node.name))continue;visibility.push([node,node.visible]);node.visible=true;}if(renderer.xr)renderer.xr.enabled=false;if(renderer.shadowMap)renderer.shadowMap.autoUpdate=false;renderer.autoClear=true;renderer.setRenderTarget(target);renderer.setViewport(0,0,size,size);renderer.setScissorTest(false);const capture=()=>{renderer.clear(true,true,true);renderer.render(scene,virtualCamera);};if(M.worldCylinder.withLowerEnvironment)M.worldCylinder.withLowerEnvironment(capture);else capture();material.uniforms.ready.value=1;lastRender=time;frames++;forceNext=false;return true;}
   finally{for(const[node,visible]of visibility)node.visible=visible;renderer.setRenderTarget(oldTarget,oldFace,oldMip);renderer.setViewport(oldViewport);renderer.setScissor(oldScissor);renderer.setScissorTest(oldScissorTest);renderer.setClearColor(oldClearColor,oldClearAlpha);renderer.autoClear=oldAutoClear;if(renderer.xr)renderer.xr.enabled=oldXR;if(renderer.shadowMap)renderer.shadowMap.autoUpdate=oldShadow;rendering=false;}
  }
  function dispose(){if(disposed)return;disposed=true;if(M.city.update===update)M.city.update=priorUpdate;group.removeFromParent();geometry.dispose();material.dispose();target.dispose();fountainCenter.dispose();group.clear();panel?.remove();if(M.pondWorldWindow===api)delete M.pondWorldWindow;events.removeEventListener?.('pagehide',dispose);}

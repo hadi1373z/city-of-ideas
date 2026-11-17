@@ -1,26 +1,33 @@
 import {coastVisitor,COAST_POSITION_COPY,coastPositionText,coastDistance} from '../src/coastal-position.js';
 import assert from 'node:assert/strict';
-import {createHash} from 'node:crypto';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
 import {coastalPlanSvg} from '../src/coastal-city-plan.js';
 import {COAST_LANDMARKS, COAST_EXPLORER_COPY, COAST_WALK, coastMapPoint, coastWalkSvg} from '../src/coastal-map-data.js';
+import {FOUNDATION_HOUSES,houseWorld} from '../src/foundation-houses-data.js';
+import {SEMINAR_HOUSES} from '../src/seminar-houses-data.js';
+import {CIVIC_PAIRED_COURTS,URBAN_COURTS,urbanBuildingFootprints,urbanCourtOutline} from '../src/city-urban-plan-model.js';
 
 const scope = {window: {}};
 vm.runInNewContext(readFileSync(new URL('../src/artist-quarter-layout.js', import.meta.url), 'utf8'), scope);
 const plan = scope.window.ARTIST_QUARTER_PLAN;
-// Recorded from all 97 original shapes/labels at main 0d2cf6a68b1f6aad1dee4c4f62b943bafa2b00d7.
-// Ignore paint/text content, but preserve every shape and all geometry/label anchors.
-const geometry = svg => [...svg.matchAll(/<(rect|circle|polyline|path|text)\b([^>]*)>/g)].map(m => [
+// The approved city rearranges public houses. Its fixed island, central gallery,
+// park, existing Socrates entrance and shore remain the geographic anchors.
+const geometry = svg => [...svg.matchAll(/<(rect|circle|polygon|polyline|path|text)\b([^>]*)>/g)].map(m => [
   m[1], [...m[2].matchAll(/(?:^|\s)(x|y|cx|cy|r|width|height|rx|ry|d|points|transform)="([^"]*)"/g)].map(a => [a[1], a[2]])
 ]);
-const originalHash = '191a91baa69e18aad54e4d05b856f44ff06833b094a0220b397430afe0e7d727';
 for (const lang of ['en', 'de', 'fa']) {
   const svg = readFileSync(new URL('../src/assets/city-coast-' + lang + '.svg', import.meta.url), 'utf8');
   assert.equal(svg, coastalPlanSvg(plan, lang), 'Committed SVG must match its generator');
   const shapes = geometry(svg);
-  assert.equal(shapes.length, 97);
-  assert.equal(createHash('sha256').update(JSON.stringify(shapes)).digest('hex'), originalHash, 'Original island, buildings, paths and labels must not move');
+  assert(shapes.length>105,'The map includes the planned civic circuit and inhabited courts');
+  assert(svg.includes('data-transformation-house="true"'));assert(!svg.includes('Mountain of Becoming'),'Version 2 map must show the retained house, not the removed mountain');
+  const project=points=>points.map(p=>coastMapPoint(...p).map(n=>n.toFixed(1)).join(',')).join(' ');
+  for(const h of FOUNDATION_HOUSES){const footprint=[[-9,-8],[9,-8],[9,8],[-9,8]].map(([x,z])=>{const p=houseWorld(h,x,z);return[p.x,p.z];});assert(svg.includes('data-house="'+h.id+'" points="'+project(footprint)+'"'),'Each inward-facing public home must show its actual rotated 18 × 16 m floor');}
+  for(const h of urbanBuildingFootprints(plan)){assert.equal([...svg.matchAll(new RegExp('data-building-footprint="'+h.id+'"','g'))].length,1,'Every existing public floor has one map outline');assert(svg.includes('data-centre="'+h.x+','+h.z+'"'));if(h.points)assert(svg.includes('points="'+project(h.points)+'"'));}
+  for(const c of URBAN_COURTS)assert(svg.includes('data-civic-court="'+c.id+'"'));
+  for(const c of CIVIC_PAIRED_COURTS)assert(svg.includes('data-civic-court="'+c.id+'" points="'+project(urbanCourtOutline(c))+'"'));
+  assert.equal((svg.match(/data-street="civic-view-/g)||[]).length,6);assert(svg.includes('data-street="sixfold-hexagon"'));assert(svg.includes('data-private-home-reserve="true"'));assert(!svg.includes('NaN'));
   assert(svg.includes('data-gallery-centre="true" cx="460" cy="460"'));
   assert(svg.includes('data-island="true" cx="460" cy="460" r="399"'));
   assert(svg.includes('cx="460" cy="460" r="375.2"'), 'Continuous coastal promenade');
@@ -34,8 +41,9 @@ for (const lang of ['en', 'de', 'fa']) {
   assert.equal(copy.steps.length, 3);
   assert(svg.includes('lang="' + lang + '"'));
 }
+const generated=['en','de','fa'].map(lang=>geometry(coastalPlanSvg(plan,lang)));assert.deepEqual(generated[0],generated[1],'Translated copy cannot alter island coordinates or mirror the map');assert.deepEqual(generated[0],generated[2]);
 assert.deepEqual(COAST_LANDMARKS.map(p => coastMapPoint(...p.point)), [
-  [460,460], [460,229.00000000000003], [392.8,530], [527.2,528.6], [849.1374286786722,513.2], [387.2,681.2], [460,701.5], [532.8,681.2]
+  [460,460], [460,229.00000000000003], [392.8,530], [527.2,528.6], [849.1374286786722,513.2], ...SEMINAR_HOUSES.map(h=>coastMapPoint(h.x,h.z))
 ]);
 assert.deepEqual(COAST_LANDMARKS.find(p => p.id === 'artists').point, Array.from([plan.arrival.x, plan.arrival.z]));
 
@@ -58,7 +66,7 @@ for (let i = 1; i < COAST_WALK.length; i++) {
   }
 }
 assert(coastWalkSvg().includes('stroke-dasharray'), 'Route is identifiable without colour alone');
-console.log('PASS coastal map: original 97-shape geometry fingerprint, exact centre and landmark anchors, deterministic EN/DE/FA SVGs/copy, and every walking-route segment on existing paths');
+console.log('PASS coastal map: retained island/central anchors, actual relocated public houses and civic courts, deterministic EN/DE/FA SVGs/copy, and every walking-route segment on existing paths');
 
 // Visitor position comes from the same world projection, never the chosen landmark.
 assert.deepEqual(coastVisitor({x:0,z:0,yaw:0}).point,[460,460]);

@@ -1,6 +1,6 @@
-import {QUARTER_ARTISTS,QUARTER_COPY} from './artist-quarter-data.js?v=artists2';
-import {installIdeaExhibitions} from './idea-exhibitions.js';
-import {buildArtistStudios,buildQuarterGarden} from './artist-quarter-scene.js?v=artists2';
+import {QUARTER_ARTISTS,QUARTER_COPY} from './artist-quarter-data.js?v=city-night-20261117';
+import {installIdeaExhibitions} from './idea-exhibitions.js?v=city-night-20261117';
+import {buildArtistStudios,buildQuarterGarden} from './artist-quarter-scene.js?v=city-night-20261117';
 const PLAN=globalThis.ARTIST_QUARTER_PLAN;
 
 export function installArtistQuarter(M,T){
@@ -23,7 +23,7 @@ export function installArtistQuarter(M,T){
   dialog.dir=lang()==='fa'?'rtl':'ltr';close.setAttribute('aria-label',w().close);body.replaceChildren();heading.textContent=selected?selected.name+' · '+pick(selected.title):w().title;
   if(!selected){
    body.append(el('p',w().intro),button(w().walk,()=>M.startExtra('artists-quarter')));
-   const mapImage=el('img');mapImage.className='quarter-plan';mapImage.src=new URL('./assets/artist-quarter-plan.svg?v=artists2',import.meta.url).href;mapImage.alt=w().title;body.append(mapImage);
+   const mapImage=el('img');mapImage.className='quarter-plan';mapImage.src=new URL('./assets/artist-quarter-plan.svg?v=city-night-20261117',import.meta.url).href;mapImage.alt=w().title;body.append(mapImage);
    const places=[...M.city.art.houses.filter(h=>!h.editionId).map(h=>({id:h.artistId,name:h.name,title:h.artistId==='dali'?w().daliTitle:w().original})),{id:'escher',name:w().escher,title:w().escherTitle},...QUARTER_ARTISTS.map(a=>({id:a.id,name:a.name,title:pick(a.title),theme:pick(a.theme)}))];
    for(const court of PLAN.courts){body.append(el('h3',pick(court.title)),button(pick(court.title)+' \u2192',()=>arrive(court.arrival)));const grid=el('div');grid.className='quarter-directory';for(const id of court.artists){const item=places.find(p=>p.id===id);if(!item)continue;const card=el('article');card.append(el('h4',item.name),el('p',item.title));if(item.theme)card.append(el('p',item.theme));const p=entry(item.id);if(p)card.append(button(w().visit,()=>arrive(p)));grid.append(card);}body.append(grid);}
    body.append(el('p',w().fiction));

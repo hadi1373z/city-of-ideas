@@ -1,5 +1,6 @@
-import {MATH_FLOORS} from './city-source-assets/home-tools/math-city-data.js';
-import {MATH_FACULTY as F,facultyLibraryBays,facultyColliders,facultyCanStand,nativeMathShellNodes} from './math-faculty-model.js';
+import {MATH_FLOORS} from './city-source-assets/home-tools/math-city-data.js?v=city-night-20261117';
+import {MATH_FACULTY as F,facultyLibraryBays,facultyColliders,facultyCanStand,nativeMathShellNodes} from './math-faculty-model.js?v=city-night-20261117';
+import {PAPER_GALLERY_FLOORS} from './paper-gallery-model.js?v=city-night-20261117';
 export function buildMathFaculty(T,{canvas=()=>document.createElement('canvas')}={}){
  const group=new T.Group();group.name='Faculty of Mathematics · central rotunda and working west wing';group.userData.mathFaculty=true;
  const owned=new Set(),own=o=>(owned.add(o),o),mat=(color,more={})=>own(new T.MeshLambertMaterial({color,...more})),targets=[],batches=new Map();
@@ -12,22 +13,22 @@ export function buildMathFaculty(T,{canvas=()=>document.createElement('canvas')}
  // Reuse the existing r57.8 / 7.2m gallery columns. The new roof bears on their
  // lintel; no new column or floor is inserted into the helical well.
  band(F.roofInner,F.roofOuter,F.roofInnerY,F.roofOuterY,roofMat,'Annular timber roof · open central oculus');
- band(21.5,22.0,11.81,11.81,bronze,'Thin bronze oculus rim');band(60.4,61.1,7.69,7.69,bronze,'Rotunda eaves');
+ band(21.5,22.0,F.roofInnerY+.01,F.roofInnerY+.01,bronze,'Thin bronze oculus rim');band(60.4,61.1,F.roofOuterY+.04,F.roofOuterY+.04,bronze,'Rotunda eaves');
  for(let i=0;i<40;i++){const a=i/40*Math.PI*2,ri=22.1,ro=59.4,dy=F.roofOuterY-F.roofInnerY,len=ro-ri;box(Math.hypot(len,dy),.17,.16,Math.cos(a)*(ri+ro)/2,(F.roofInnerY+F.roofOuterY)/2-.13,Math.sin(a)*(ri+ro)/2,timber,-a,Math.atan2(dy,len));}
  // Exterior arcade behind the retained colonnade. Its western gap is real.
- const count=80,da=Math.PI*2/count;
- for(let i=0;i<count;i++){const a=(i+.5)*da;if(Math.abs(Math.atan2(Math.sin(a-Math.PI),Math.cos(a-Math.PI)))<.085)continue;const x=Math.cos(a)*60.25,z=Math.sin(a)*60.25,yaw=Math.PI/2-a,w=60.25*da+.04;box(w,.85,.38,x,.13+.425,z,stone,yaw);box(w,.22,.52,x,7.37,z,pale,yaw);box(w,5.55,.045,x,3.78,z,glass,yaw);}
+ const count=40,da=Math.PI*2/count;
+ for(const floor of PAPER_GALLERY_FLOORS)for(let i=0;i<count;i++){const a=(i+.5)*da;if(Math.abs(Math.atan2(Math.sin(a-Math.PI),Math.cos(a-Math.PI)))<.085)continue;const x=Math.cos(a)*60.25,z=Math.sin(a)*60.25,yaw=Math.PI/2-a,w=60.25*da+.04;box(w,.45,.38,x,floor.y+.225,z,stone,yaw);box(w,.22,.52,x,floor.y+3.7,z,pale,yaw);box(w,2.95,.045,x,floor.y+1.98,z,glass,yaw);}
  // Twenty shallow arches articulate the circular facade between the existing
  // columns. They add framing rather than a second thick ring of columns.
- for(let i=0;i<20;i++){const a=(i+.5)/20*Math.PI*2;if(Math.abs(Math.atan2(Math.sin(a-Math.PI),Math.cos(a-Math.PI)))<.18)continue;const r=59.9,w=8.1;for(let j=0;j<12;j++){const t=j/12*Math.PI,t1=(j+1)/12*Math.PI,u0=Math.cos(t)*w/2,u1=Math.cos(t1)*w/2,h0=5.05+Math.sin(t)*1.75,h1=5.05+Math.sin(t1)*1.75,u=(u0+u1)/2,h=(h0+h1)/2,x=Math.cos(a)*r-Math.sin(a)*u,z=Math.sin(a)*r+Math.cos(a)*u;box(Math.hypot(u1-u0,h1-h0)+.035,.19,.24,x,h,z,pale,-a-Math.PI/2,Math.atan2(h1-h0,u1-u0));}}
+ for(const floor of[PAPER_GALLERY_FLOORS[0],PAPER_GALLERY_FLOORS[3]])for(let i=0;i<20;i++){const a=(i+.5)/20*Math.PI*2;if(Math.abs(Math.atan2(Math.sin(a-Math.PI),Math.cos(a-Math.PI)))<.18)continue;const r=59.9,w=8.1;for(let j=0;j<6;j++){const t=j/6*Math.PI,t1=(j+1)/6*Math.PI,u0=Math.cos(t)*w/2,u1=Math.cos(t1)*w/2,h0=floor.y+2.4+Math.sin(t)*1.1,h1=floor.y+2.4+Math.sin(t1)*1.1,u=(u0+u1)/2,h=(h0+h1)/2,x=Math.cos(a)*r-Math.sin(a)*u,z=Math.sin(a)*r+Math.cos(a)*u;box(Math.hypot(u1-u0,h1-h0)+.035,.19,.24,x,h,z,pale,-a-Math.PI/2,Math.atan2(h1-h0,u1-u0));}}
  // The eight original disciplines give this rotunda real reader/floor actions.
  // These are links into the preserved Atlas, never substitute lesson text.
  for(const b of facultyLibraryBays()){
   const a=b.angle,tangent=[-Math.sin(a),Math.cos(a)],radial=[Math.cos(a),Math.sin(a)],yaw=-a-Math.PI/2,p=(t,r,y)=>[b.x+tangent[0]*t+radial[0]*r,y,b.z+tangent[1]*t+radial[1]*r];
   for(const t of[-2.8,2.8])box(.16,3.6,.85,...p(t,0,1.93),timber,yaw);for(let row=0;row<=4;row++)box(5.6,.10,.85,...p(0,0,.23+row*.82),shelf,yaw);
   for(let row=0;row<4;row++)for(let k=0;k<17;k++){const h=.48+(k%4)*.045;box(.22,h,.36,...p((k-8)*.303,-.20,.30+row*.82+h/2),books[(row+k+b.floor)%books.length],yaw);}
-  const topic=MATH_FLOORS.find(f=>f.index===b.floor)?.name||'Mathematics',front=p(0,-.49,4.02);
-  label((b.floor+1)+' · '+topic,...front,yaw,6,.55,{mathAction:'atlas',mathFloor:b.floor,floorIndex:b.floor,label:'Explore '+topic+' in the original Atlas'});
+  const topic=MATH_FLOORS.find(f=>f.index===b.floor)?.name||'Mathematics',front=p(0,-.49,3.48);
+  label((b.floor+1)+' · '+topic,...front,yaw,6,.45,{mathAction:'atlas',mathFloor:b.floor,floorIndex:b.floor,label:'Explore '+topic+' in the original Atlas'});
   const transfer=p(0,-.50,.87);label('Visit the working floor  →',...transfer,yaw,4.8,.40,{mathAction:'floor',mathFloor:b.floor,targetFloor:b.floor,label:'Visit '+topic+' · working west wing'});
  }
  // A real, flush, five-metre covered walk turns into the source front entrance.

@@ -1,6 +1,6 @@
-import {HOUSE_ORIGAMI as P,PAPER_COLOURS,miura,CREASE_CASES,releasedBoatPose} from './origami-house-math.js';
-import {buildPaperBoat} from './origami-boat.js';
-import {buildPaperCrane} from './origami-creatures.js';
+import {HOUSE_ORIGAMI as P,PAPER_COLOURS,miura,CREASE_CASES,releasedBoatPose} from './origami-house-math.js?v=city-night-20261117';
+import {buildPaperBoat} from './origami-boat.js?v=city-night-20261117';
+import {buildPaperCrane} from './origami-creatures.js?v=city-night-20261117';
 export function buildOrigamiHouse(T,{canvas=()=>document.createElement('canvas')}={}){
  const group=new T.Group();group.name='House of Origami · folded roof and paper ateliers';group.position.set(P.x,.13,P.z);group.userData.cityDestination='origami-house';const owned=new Set(),own=r=>(owned.add(r),r),mat=(c,options={})=>own(new T.MeshLambertMaterial({color:c,...options})),targets=[],colliders=[],labels=[];
  const wall=mat(0xd8d1b8),wood=mat(0x806347),trim=mat(0x4d6971),floor=mat(0xc4b18d),paper=mat(0xefe7ce),glass=mat(0xa9c4c5,{transparent:true,opacity:.13,depthWrite:false,side:T.DoubleSide});

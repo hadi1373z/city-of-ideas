@@ -1,8 +1,10 @@
 // Curated landmarks, not a ranking of the greatest papers. These are genuine
 // first pages from the credited historical editions or publisher PDFs.
+import {MODERN_PAPERS} from './historic-papers-modern-data.js?v=city-night-20261117';
+import {CLASSICAL_PAPERS} from './historic-papers-classical-data.js?v=city-night-20261117';
 const pdm = 'https://creativecommons.org/publicdomain/mark/1.0/';
 const image = id => `./assets/papers/${id}.webp`;
-const paper = data => Object.freeze({ imageUrl: image(data.id), ...data });
+const paper = data => Object.freeze({ imageUrl: image(data.id), displayImageUrl: `./assets/papers/${data.id}.display.webp`, ...data });
 
 export const HISTORIC_PAPERS = Object.freeze([
   paper({
@@ -131,5 +133,7 @@ export const HISTORIC_PAPERS = Object.freeze([
     why: 'Randomly removing units during training can improve generalization. Why does deliberate disruption help, and when does the ensemble analogy stop being exact?',
     page1based: 1, printedPage: '1929',
     scanNote: 'Actual publisher first page, including abstract and original copyright attribution.'
-  })
+  }),
+  ...CLASSICAL_PAPERS.map(paper),
+  ...MODERN_PAPERS.map(paper)
 ]);

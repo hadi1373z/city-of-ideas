@@ -1,8 +1,8 @@
-import {WORKBENCH_TEXT,faceRoomWork,showRoomDialog} from './room-workbench.js?v=touch1';
-import {SEMINAR_HOUSES} from './seminar-houses-data.js';
-import {SEMINAR_TEXT} from './seminar-houses-copy.js';
-import {buildSeminarHouses} from './seminar-houses-scene.js?v=workbench1';
-import {oscillator,DISK_CASES,diskGeodesic,diskDistance,chordLength,chanceScore,SCORE_FREQUENCIES} from './seminar-house-models.js';
+import {WORKBENCH_TEXT,faceRoomWork,showRoomDialog} from './room-workbench.js?v=city-night-20261117';
+import {SEMINAR_HOUSES} from './seminar-houses-data.js?v=city-night-20261117';
+import {SEMINAR_TEXT} from './seminar-houses-copy.js?v=city-night-20261117';
+import {buildSeminarHouses} from './seminar-houses-scene.js?v=city-night-20261117';
+import {oscillator,DISK_CASES,diskGeodesic,diskDistance,chordLength,chanceScore,SCORE_FREQUENCIES} from './seminar-house-models.js?v=city-night-20261117';
 export function installSeminarHouses(M,T){
  const built=buildSeminarHouses(T);M.scene.add(built.group);M.city.targets.push(...built.targets);M.city.buildingTargets.push(...built.houses.map(h=>h.group));
  let bench=false,playStart=null,playingSlot=-1,scoreCells=[],selected=null,readingLang=null,opener=null,phase=0,broken=false,disk=1,seed=1,audio=null,soundTimer=null,disposed=false,statusKey='';const drafts=new Map();

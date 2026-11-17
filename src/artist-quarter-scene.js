@@ -1,4 +1,4 @@
-import {QUARTER_ARTISTS} from './artist-quarter-data.js?v=artists2';
+import {QUARTER_ARTISTS} from './artist-quarter-data.js?v=city-night-20261117';
 const PLAN=globalThis.ARTIST_QUARTER_PLAN;
 
 export function buildArtistStudios(T,{loadTexture=url=>new T.TextureLoader().load(url),canvas=()=>document.createElement('canvas')}={}){
@@ -74,18 +74,17 @@ export function buildArtistStudios(T,{loadTexture=url=>new T.TextureLoader().loa
 
 export function buildQuarterGarden(T,art,{naturalTrees=globalThis.window?.buildNaturalCityTrees,plan=PLAN}={}){
  const group=new T.Group();group.name='Artists’ connected garden lanes';const owned=new Set(),paths=[],colliders=[];
- const mat=c=>{const m=new T.MeshLambertMaterial({color:c});owned.add(m);return m;},lawn=mat(0x6b8069),wood=mat(0x8b765d),leaf=mat(0x7b8b6b);
+ const mat=c=>{const m=new T.MeshLambertMaterial({color:c});owned.add(m);return m;},lawn=mat(0xc4b99a),wood=mat(0x8b765d),leaf=mat(0x7b8b6b);
  function box(w,h,d,x,y,z,m){const g=new T.BoxGeometry(w,h,d);owned.add(g);const o=new T.Mesh(g,m);o.position.set(x,y,z);group.add(o);return o;}
  function path(points,width=3){paths.push({points,width});for(let i=1;i<points.length;i++){const a=points[i-1],b=points[i],length=Math.hypot(b[0]-a[0],b[1]-a[1]),geo=new T.PlaneGeometry(width,length+.015);owned.add(geo);const mesh=new T.Mesh(geo,lawn);mesh.rotation.x=-Math.PI/2;mesh.rotation.z=-Math.atan2(b[0]-a[0],b[1]-a[1]);mesh.position.set((a[0]+b[0])/2,.012,(a[1]+b[1])/2);mesh.name='Mown lawn route · no raised paving';group.add(mesh);}}
  for(const points of plan.routes)path(points,4);
  for(const h of art.houses.filter(h=>h.artistId!=='dali'&&!h.editionId)){
   const p={x:118+h.entry.x*1.35,z:108+h.entry.z*1.35};
-  const court=plan.courts.find(c=>c.artists.includes(h.artistId)),end=court?.id==='garden'?98:['rodin','klee'].includes(h.artistId)?118:116;
-  path([[p.x,p.z],[p.x,end]],2.5);
+  path([[p.x,p.z],plan.fronts[h.artistId]],2.5);
  }
- const dali=art.houses.find(h=>h.artistId==='dali');if(dali){const p={x:118+dali.entry.x*1.35,z:108+dali.entry.z*1.35};path([[p.x,p.z],[p.x,187]],3);}
- path([[plan.escher.x,plan.escher.z+8.4],[plan.escher.x,126]],3);
- for(const h of QUARTER_ARTISTS){const front=h.z+(h.turn?-6:6);path([[h.x,front],[h.x,179]],3);}
+ const dali=art.houses.find(h=>h.artistId==='dali');if(dali){const p={x:118+dali.entry.x*1.35,z:108+dali.entry.z*1.35};path([[p.x,p.z],plan.fronts.dali],3);}
+ path([[plan.escher.x,plan.escher.z+8.4],plan.fronts.escher],3);
+ for(const h of QUARTER_ARTISTS){const front=h.z+(h.turn?-6:6);path([[h.x,front],plan.fronts[h.id]],3);}
  for(const [x,z]of plan.plants){const bed=box(1.65,.16,1.15,x,.04,z,leaf);bed.name='Low garden planting';}
  for(const [x,z]of plan.seats){
   box(2.6,.12,.65,x,.52,z,wood);box(2.6,.5,.1,x,.84,z+.3,wood);for(const dx of[-1.05,1.05])box(.1,.46,.46,x+dx,.23,z,wood);colliders.push({minX:x-1.35,maxX:x+1.35,minZ:z-.4,maxZ:z+.4,label:'Garden seat'});

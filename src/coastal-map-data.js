@@ -1,5 +1,5 @@
-import {SEMINAR_HOUSES} from './seminar-houses-data.js';
-import {SHORE} from './island-layout.js';
+import {SEMINAR_HOUSES} from './seminar-houses-data.js?v=city-night-20261117';
+import {SHORE} from './island-layout.js?v=city-night-20261117';
 
 // The same world-to-SVG projection used by the original coastal plan.
 export const coastMapPoint = (x, z) => [460 + x * .7, 460 + z * .7];

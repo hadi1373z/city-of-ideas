@@ -1,13 +1,18 @@
-import {ESCHER_DEPTH} from './escher-depth-model.js';
-import {createOceanMaterial,updateOceanMaterial} from './ocean-surface.js';
-import {buildLowerLandscape} from './lower-landscape-scene.js';
-import {WORLD_CYLINDER as W,lowerMatrix,GALLERY_TUNNEL} from './world-cylinder-model.js';
+import {ESCHER_DEPTH} from './escher-depth-model.js?v=city-night-20261117';
+import {createOceanMaterial,updateOceanMaterial} from './ocean-surface.js?v=city-night-20261117';
+import {buildLowerLandscape} from './lower-landscape-scene.js?v=city-night-20261117';
+import {buildCylinderMetamorphosis} from './cylinder-metamorphosis-scene.js?v=city-night-20261117';
+import {WORLD_CYLINDER as W,lowerMatrix,GALLERY_TUNNEL} from './world-cylinder-model.js?v=city-night-20261117';
 export function buildWorldCylinder(T){
  const group=new T.Group();group.name='One cylindrical world · two inhabited faces';group.userData.worldCylinder=true;
+ const metamorphosis=buildCylinderMetamorphosis(T,{birdCount:0});group.add(metamorphosis.group);
  const lowerFrame=new T.Group();lowerFrame.name='Other face · unchanged source-coordinate frame';lowerFrame.matrixAutoUpdate=false;lowerFrame.matrix.copy(lowerMatrix(T));group.add(lowerFrame);
  const owned=new Set(),own=o=>(owned.add(o),o),mat=(c,o={})=>own(new T.MeshLambertMaterial({color:c,...o}));
  const stone=mat(0xb4a58c,{side:T.DoubleSide}),edge=mat(0x86795e),grass=mat(0x586f59),sand=mat(0xc2b18c),brass=mat(0xbba56d),warm=own(new T.MeshBasicMaterial({color:0xe1c28d}));
  const water=own(createOceanMaterial(T));
+ // Keep the shared wave/foam palette, with a fixed night exposure on this face.
+ // The water shader is unlit, so moonlight alone cannot darken its daytime sea.
+ water.uniforms.faceNight={value:1};water.fragmentShader='uniform float faceNight;\n'+water.fragmentShader.replace('float fog=','col=mix(col,col*vec3(.14,.24,.40),faceNight);float fog=');
  const mesh=(g,m,parent=group)=>{const o=new T.Mesh(own(g),m);parent.add(o);return o;};
  const shell=mesh(new T.CylinderGeometry(570,570,96,192,1,true),stone);shell.position.y=-48;shell.name='96-metre inhabited cylinder wall';
  // Real earth backs the central shaft below Babel. The middle layer leaves
@@ -96,9 +101,11 @@ export function buildWorldCylinder(T){
  o.rotation.set(0,0,0);
  for(const[m,list]of boxes){const inst=new T.InstancedMesh(unit,m,list.length);list.forEach((p,i)=>{o.position.set(p.x,p.y,p.z);o.scale.set(p.w,p.h,p.d);o.updateMatrix();inst.setMatrixAt(i,o.matrix);});inst.instanceMatrix.needsUpdate=true;inst.computeBoundingSphere();inst.name='Batched cylinder galleries and reading lights';tunnel.add(inst);}
  const lowerLandscape=buildLowerLandscape(T,{parent:lowerGround,own,existingPaths:lowerPaths,existingObstacles:lowerObstacles});lowerPaths.push(...lowerLandscape.paths);lowerObstacles.push(...lowerLandscape.obstacles);
- // Lower-world lights point toward the lower face; upper cast lighting is retained.
- const lamps=new T.Group();lamps.name='Lower-face daylight';group.add(lamps);const hemi=new T.HemisphereLight(0xdde6df,0x5c5142,1.05);hemi.position.set(0,-200,0);lamps.add(hemi);const sun=new T.DirectionalLight(0xffe2b6,1.1);sun.position.set(170,-600,-250);sun.target.position.set(0,-96,0);lamps.add(sun,sun.target);lamps.visible=false;
- return{group,sea,updateOcean(time,options){updateOceanMaterial(water,time,options);},lowerFrame,lowerGround,lowerPatio,lowerObstacles,lowerPaths,lowerLandscape,sectionCut,lamps,shell,land,tunnel,owned,dispose(){lowerLandscape.dispose();group.removeFromParent();group.traverse(o=>{if(o.isInstancedMesh&&owned.has(o.geometry))o.dispose?.();});for(const r of owned)r.dispose();group.clear();}};
+ // Permanent night: cool, readable moonlight and two pooled campus lights.
+ // These are physical lower-face lights, independent of the visitor's clock.
+ const lamps=new T.Group();lamps.name='Lower face · permanent moonlight and campus lanterns';group.add(lamps);const hemi=new T.HemisphereLight(0xa4bce2,0x202b35,.50);hemi.position.set(0,-200,0);lamps.add(hemi);const moon=new T.DirectionalLight(0xb2caff,.56);moon.position.set(170,-600,-250);moon.target.position.set(0,-96,0);lamps.add(moon,moon.target);
+ for(const[x,y,z]of[[-196,6,0],[-113,5,20]]){const light=new T.PointLight(0xffd29a,90,110,1.35);light.position.set(x,-96-y,-z);light.name='Warm lower-campus pool';lamps.add(light);}for(const light of lamps.children)if(light.isLight)light.userData.babelOwned=true;lamps.visible=false;
+ return{group,sea,metamorphosis,updateOcean(time,options={}){updateOceanMaterial(water,time,options);metamorphosis.update(time,options);},lowerFrame,lowerGround,lowerPatio,lowerObstacles,lowerPaths,lowerLandscape,sectionCut,lamps,shell,land,tunnel,owned,dispose(){metamorphosis.dispose();lowerLandscape.dispose();group.removeFromParent();group.traverse(o=>{if(o.isInstancedMesh&&owned.has(o.geometry))o.dispose?.();});for(const r of owned)r.dispose();group.clear();}};
 }
 // Move only wholly remote subtrees. Shared source geometry/materials and all local
 // positions survive: source animation and private tool coordinates keep working.

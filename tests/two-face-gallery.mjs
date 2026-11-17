@@ -6,7 +6,7 @@ import {buildTwoFaceGallery} from '../src/two-face-gallery-scene.js';
 assert.equal(GALLERY_THICKNESS,96);assert.equal(GRAVITY_TURN_Y,-48);assert.equal(TWO_FACE_GALLERY_CONTRACT.stepsPerSide,240);
 const close=(a,b,tol=1e-7)=>assert(Math.abs(a-b)<tol,`${a} != ${b}`);
 for(const s of[UPPER,LOWER]){
- const built=buildTwoFaceGallery(T,{side:s.id});built.group.updateMatrixWorld(true);assert.equal(built.counts.treads,240);assert.equal(built.counts.arches,13);assert(built.counts.drawMeshes<25);assert.equal(built.descriptor,s);assert.equal(built.contract,TWO_FACE_GALLERY_CONTRACT);
+ const built=buildTwoFaceGallery(T,{side:s.id});built.group.updateMatrixWorld(true);assert.equal(built.counts.treads,240);assert.equal(built.counts.arches,13);assert(built.counts.drawMeshes<25);assert.deepEqual(built.descriptor,s);assert.deepEqual(built.contract,TWO_FACE_GALLERY_CONTRACT);
  let geometries=0,triangles=0;built.group.traverse(o=>{if(o.geometry){geometries++;assert(o.geometry.attributes.position.array.every(Number.isFinite));triangles+=(o.geometry.index?o.geometry.index.count:o.geometry.attributes.position.count)/3*(o.count??1);}});assert(geometries<25);assert(triangles<250000);
  const rayY=(x,z,y,distance=.10)=>new T.Raycaster(new T.Vector3(x,y+.04,z),new T.Vector3(0,-1,0),0,distance).intersectObject(built.walking,true).map(h=>h.point.y);
  const clearLine=(a,b)=>{const start=new T.Vector3(...a),delta=new T.Vector3(...b).sub(start);assert.equal(new T.Raycaster(start,delta.clone().normalize(),.001,delta.length()-.001).intersectObject(built.group,true).length,0,`${s.id} deck mouth must not contain a rail or arch post`);};

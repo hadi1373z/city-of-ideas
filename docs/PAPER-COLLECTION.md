@@ -1,16 +1,32 @@
 # Faculty first-page collection
 
-The eleven lower-gallery panels display a curated selection of mathematical and
-computational landmarks. The selection is not a claim to identify the eleven
-greatest papers. It mixes original articles, short monographs, and two modern
+The 27 lower-gallery panels display a curated selection of mathematical and
+computational landmarks across four physical floors (6 / 8 / 6 / 7). The
+selection is not a claim to identify the greatest papers. It mixes original
+articles, historical editions and short monographs, and modern
 computer-science articles. `src/historic-papers-data.js` is the shared record for
 titles, author credits, editions, discussion questions, source links and rights.
+It retains the original eleven catalogue records, then appends
+`historic-papers-classical-data.js` and `historic-papers-modern-data.js`.
 
 The images in `src/assets/papers/` are faithful scan/PDF renderings, converted to
 WebP. No generated cover or invented first-page text is used. Original title
 pages are explicitly identified as title pages in the record; they are not
 presented as an article's abstract. German, French and Latin originals are left
 intact, with English contextual questions outside the facsimile.
+
+The table below records the preserved initial eleven works. The classical
+extension adds Frege, Peano, Bolzano and Hilbert to foundations, and a historical
+Euclid edition, Euler on polyhedra, Gauss and Klein to geometry. Its individual
+records identify the exact original editions, selected leaves and public-domain
+reuse sources. The modern extension adds kernel ICA, LIBLINEAR, AdaGrad and
+SDCA to computation; LDA, feature selection, forest consistency and the kernel
+two-sample test to learning. Each JMLR first page retains author attribution and
+copyright under the publisher's CC BY policy; no licence version is invented.
+
+Every work has a separate compact `.display.webp` for its permanent 3D frame.
+The full first-page asset and original-work link remain available in the reader.
+Compact adaptation changes image resolution only, preserving all page content.
 
 | ID | Work / edition | Selected original page | Primary source and reuse record |
 | --- | --- | --- | --- |

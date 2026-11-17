@@ -1,4 +1,4 @@
-import './artist-quarter-layout.js?v=artists2';
+import './artist-quarter-layout.js?v=city-night-20261117';
 const PLAN=globalThis.ARTIST_QUARTER_PLAN;
 // Fictional studios, with public-domain paintings from the Met's Open Access collection.
 export const QUARTER_ARTISTS=[
