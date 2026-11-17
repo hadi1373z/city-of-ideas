@@ -67,7 +67,15 @@ blanket claim of global area minimality. No museum image/model was copied.
 **Möbius band and ant:** a solid, original parametric ribbon sits opposite the
 Enneper patch on the geometry floor. Its ideal middle surface is
 `((R+v*cos(u/2))*cos(u), v*sin(u/2), (R+v*cos(u/2))*sin(u))`, with display
-radius 1.65 m, half-width .58 m and a 55 mm physical thickness. The shell is
+local radius 1.65 m, half-width .58 m and a 55 mm physical thickness. A separate
+uniform 0.84 display scale and 50° rigid tilt turn the opening toward the inner
+viewing aisle, centred 2 m above the floor. The band remains recognisable from
+ordinary standing height rather than appearing edge-on. These placement
+transforms act identically on the ribbon, ant frame and curved-foot contact;
+they do not alter the mathematical surface or its one-sidedness. Two upright
+bronze supports meet the placed lower rim. The plinth, plaque and court stay
+upright; the ribbon, supports and moving ant fit between .36 m and 3.8 m
+above this floor. The shell is
 closed across the reversed seam, with one continuous gold boundary. The small
 physical thickness is explicitly distinguished from the ideal one-sided surface.
 
@@ -147,7 +155,8 @@ and volume, likelihood Hessian/information, exact duplicate-evidence behavior,
 finite geometry/headroom, the nineteen-object budget, a watertight twisted
 ribbon seam with outward normals, the ant’s continuous orientation double
 cover and exact curved-foot contact, shared-clock pause/reduced-motion/hidden
-state behavior, clear physical routes,
+state behavior, identical mathematical-to-display placement for the ribbon and
+ant, inward-facing opening, supported lower rim and swept headroom, clear physical routes,
 real gallery collision composition, proximity-gated controls, curation identity
 and owned cleanup without private-data access.
 

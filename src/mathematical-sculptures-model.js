@@ -17,12 +17,18 @@ export function likelihoodPatch(n=4,rho=.6,{rings=32,sectors=64}={}){if(!Number.
 // The solid ribbon is original geometry. Its continuous centreline normal
 // returns reversed after 2π; position and orientation both return after 4π.
 export const MOBIUS=Object.freeze({radius:1.65,halfWidth:.58,thickness:.055,lift:1.65,cycleSeconds:32});
+// Rigid museum placement is separate from the surface equations: the opening
+// faces the inner viewing aisle instead of being edge-on at standing eye level.
+export const MOBIUS_DISPLAY=Object.freeze({tilt:50*Math.PI/180,scale:.84,centreY:2,angle:SCULPTURE_COURTS.find(c=>c.id==='mobius').angle});
 const unit=p=>{const n=Math.hypot(p.x,p.y,p.z);return{x:p.x/n,y:p.y/n,z:p.z/n};};
 const cross=(a,b)=>({x:a.y*b.z-a.z*b.y,y:a.z*b.x-a.x*b.z,z:a.x*b.y-a.y*b.x});
+export function mobiusDisplayVector(p){const D=MOBIUS_DISPLAY,a={x:-Math.sin(D.angle),y:0,z:Math.cos(D.angle)},c=Math.cos(D.tilt),s=Math.sin(D.tilt),k=cross(a,p),d=a.x*p.x+a.z*p.z;return{x:p.x*c+k.x*s+a.x*d*(1-c),y:p.y*c+k.y*s,z:p.z*c+k.z*s+a.z*d*(1-c)};}
+export function mobiusDisplayPoint(p){const D=MOBIUS_DISPLAY,q=mobiusDisplayVector({x:p.x,y:p.y-MOBIUS.lift,z:p.z});return{x:D.scale*q.x,y:D.centreY+D.scale*q.y,z:D.scale*q.z};}
 export function mobiusPoint(u,v=0){if(!Number.isFinite(u)||!Number.isFinite(v))throw new RangeError('Finite ribbon parameters required.');const q=MOBIUS.radius+v*Math.cos(u/2);return{x:q*Math.cos(u),y:MOBIUS.lift+v*Math.sin(u/2),z:q*Math.sin(u)};}
 export function mobiusDifferential(u,v=0){const c=Math.cos(u/2),s=Math.sin(u/2),cu=Math.cos(u),su=Math.sin(u),q=MOBIUS.radius+v*c,du={x:-v*s*.5*cu-q*su,y:v*c*.5,z:-v*s*.5*su+q*cu},dv={x:c*cu,y:s,z:c*su};return{du,dv,normal:unit(cross(du,dv))};}
 export function mobiusAntPose(u){if(!Number.isFinite(u))throw new RangeError('Finite ant phase required.');const p=mobiusPoint(u),tangent={x:-Math.sin(u),y:0,z:Math.cos(u)},across={x:Math.cos(u/2)*Math.cos(u),y:Math.sin(u/2),z:Math.cos(u/2)*Math.sin(u)},normal=cross(tangent,across),offset=MOBIUS.thickness/2+.012;return{u,position:{x:p.x+normal.x*offset,y:p.y+normal.y*offset,z:p.z+normal.z*offset},surface:p,tangent,across,normal};}
 export function mobiusFootPoint(phase,across,along,lift=0){const u=phase+along/(MOBIUS.radius+across*Math.cos(phase/2)),p=mobiusPoint(u,across),n=mobiusDifferential(u,across).normal,offset=MOBIUS.thickness/2+.007+lift;return{x:p.x+n.x*offset,y:p.y+n.y*offset,z:p.z+n.z*offset};}
+export function mobiusSupportPoints(){return[-.72,.72].map(delta=>{const u=MOBIUS_DISPLAY.angle+Math.PI+delta,candidates=[];for(const v of[-MOBIUS.halfWidth,MOBIUS.halfWidth]){const p=mobiusPoint(u,v),n=mobiusDifferential(u,v).normal;for(const side of[-1,1])candidates.push(mobiusDisplayPoint({x:p.x+side*MOBIUS.thickness/2*n.x,y:p.y+side*MOBIUS.thickness/2*n.y,z:p.z+side*MOBIUS.thickness/2*n.z}));}return candidates.sort((a,b)=>a.y-b.y)[0];});}
 export function mobiusRibbon({segments=128,widthSegments=16}={}){
  if(!Number.isInteger(segments)||segments<32||segments>192||!Number.isInteger(widthSegments)||widthSegments<4||widthSegments>24)throw new RangeError('Use a bounded, smooth ribbon mesh.');
  const positions=[],normals=[],colors=[],indices=[],push=(p,n,c)=>{positions.push(p.x,p.y,p.z);normals.push(n.x,n.y,n.z);colors.push(...c);},w=MOBIUS.halfWidth,h=MOBIUS.thickness/2;
