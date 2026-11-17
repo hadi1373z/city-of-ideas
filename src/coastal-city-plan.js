@@ -5,7 +5,7 @@ import {coastX,HOUSE_ORIGAMI,COAST_ROUTES} from './origami-house-math.js?v=city-
 import {SEMINAR_HOUSES,SEMINAR_PATHS} from './seminar-houses-data.js?v=city-night-20261117';
 import {STUDY_PATHS} from './study-houses-data.js?v=city-night-20261117';
 import {COAST_MAIN_PATHS} from './coastal-map-data.js?v=city-night-20261117';
-import {URBAN_STREETS,ARCADE_STREETS,URBAN_COURTS,PRIVATE_HOME_RESERVE,HONEYCOMB_CITY,CITY_UNDERGROUND_LINKS,urbanCourtOutline,urbanBuildingFootprints,urbanLawnCells} from './city-urban-plan-model.js?v=city-night-20261117';
+import {URBAN_STREETS,ARCADE_STREETS,URBAN_COURTS,PRIVATE_HOME_RESERVE,HONEYCOMB_CITY,CITY_UNDERGROUND_LINKS,urbanCourtOutline,urbanBuildingFootprints,urbanLawnCells,urbanRoutes} from './city-urban-plan-model.js?v=city-night-20261117';
 export const COAST_MAP_COPY={en:{title:'An island around Zarathustra',gallery:'Zarathustra Gallery',ocean:'Surrounding ocean',park:'Ideas Park',artists:'Artists’ quarter',socrates:'Socrates',philosophers:'Philosophers’ quarter',makers:'Makers’ courtyard',study:'Advanced study houses',origami:'House of Origami',mountain:'Mountain of Becoming',shore:'Paper-boat lookout',note:'One circular island. The gallery at its centre. Ocean all around.'},de:{title:'Eine Insel um Zarathustra',gallery:'Zarathustra-Galerie',ocean:'Umliegender Ozean',park:'Ideenpark',artists:'Künstlerviertel',socrates:'Sokrates',philosophers:'Philosophenviertel',makers:'Hof der Schaffenden',study:'Vertiefte Lernhäuser',origami:'Haus des Origami',mountain:'Berg des Werdens',shore:'Papierboot-Aussicht',note:'Eine kreisrunde Insel. Die Galerie im Mittelpunkt. Rundum Ozean.'},fa:{title:'جزیره‌ای پیرامون زرتشت',gallery:'گالری زرتشت',ocean:'اقیانوس پیرامون جزیره',park:'پارک ایده‌ها',artists:'محلهٔ هنرمندان',socrates:'سقراط',philosophers:'محلهٔ فیلسوفان',makers:'حیاط سازندگان',study:'خانه‌های مطالعهٔ پیشرفته',origami:'خانهٔ اوریگامی',mountain:'کوه شدن',shore:'تماشای قایق کاغذی',note:'جزیره‌ای دایره‌ای؛ گالری در مرکز و اقیانوس در پیرامون.'}};
 const escape=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
 export function coastalPlanSvg(plan,lang='en'){
@@ -18,10 +18,7 @@ export function coastalPlanSvg(plan,lang='en'){
  parts.push(text(0,-610,c.ocean,21,'#f3f2df'));
  for(const cell of PARK_HEX_CELLS)parts.push('<polygon data-garden-cell="'+cell.q+','+cell.r+'" points="'+points(Array.from({length:6},(_,i)=>[cell.x+CITY_HEX.side*Math.cos(Math.PI/6+i*Math.PI/3),cell.z+CITY_HEX.side*Math.sin(Math.PI/6+i*Math.PI/3)]))+'" fill="#aabf94"/>');
  parts.push(text(0,-325,c.park,21));
- for(const p of[...(plan?.routes||[]),...COAST_ROUTES])parts.push(path(p,'#b2a585',2.5));
- for(const p of[...SEMINAR_PATHS,...STUDY_PATHS])parts.push(path(p,'#b2a585',2.5));
- for(const r of FOUNDATION_ROUTES)parts.push(path(r.points,'#b2a585',r.width*s));
- for(const r of URBAN_STREETS){const core=r.id==='sixfold-hexagon'||r.id.startsWith('civic-view-')||r.id==='gallery-promenade';parts.push(path(r.points,core?'#8b7856':r.kind==='lane'?'#a5ad94':'#b2a585',r.width*s+(core?1:0),'data-street="'+r.id+'"'));if(core)parts.push(path(r.points,'#e0d4b3',Math.max(.7,r.width*s-1.4)));}
+ for(const[rIndex,r]of urbanRoutes(plan).entries()){const id=r.id||'source-'+rIndex,core=id==='sixfold-hexagon'||id.startsWith('civic-view-')||id==='gallery-promenade';parts.push(path(r.points,core?'#8b7856':r.kind==='lane'?'#a5ad94':'#b2a585',r.width*s+(core?1:0),'data-street="'+id+'"'));if(core)parts.push(path(r.points,'#e0d4b3',Math.max(.7,r.width*s-1.4)));}
  for(const arcade of ARCADE_STREETS)parts.push(path(arcade.points,'#795d45',6.2*s,'data-inhabited-arcade="'+arcade.id+'"'));
  for(const wall of HONEYCOMB_CITY.walls)parts.push(path([wall.a,wall.b],'#967744',1.4,'data-honeycomb-wall="true"'));
  for(const route of CITY_UNDERGROUND_LINKS)parts.push(path(route.points,'#517d88',2,'data-underground-link="'+route.id+'" stroke-dasharray="4 4"'));

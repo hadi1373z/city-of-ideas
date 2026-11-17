@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import * as T from '../src/city-source-assets/home-tools/vendor/three.module.js';
 import '../src/artist-quarter-layout.js';
 import {HONEYCOMB_CITY,ARCADE_STREETS,honeycombInputs,CITY_UNDERGROUND_LINKS,CIVIC_CORE,CIVIC_CORE_STREETS,CIVIC_PAIRED_COURTS,URBAN_STREETS,URBAN_COURTS,urbanRoutes,urbanEntries,urbanPlanting,inPrivateHomeReserve,urbanCourtOutline,urbanBuildingFootprints} from '../src/city-urban-plan-model.js';
+import {buildCityCoast} from '../src/coastal-city-scene.js';
 import {buildCityUrbanPlan} from '../src/city-urban-plan-scene.js';
 import {buildFoundationHouses} from '../src/foundation-houses-scene.js';
 import {buildStudyHouses} from '../src/study-houses-scene.js';
@@ -35,6 +36,9 @@ assert.equal(HONEYCOMB_CITY.cells.length,37);assert(HONEYCOMB_CITY.connected);fo
 for(const c of HONEYCOMB_CITY.cells){for(let i=0;i<6;i++){const a=c.vertices[i],b=c.vertices[(i+1)%6];assert(Math.abs(Math.hypot(a[0]-b[0],a[1]-b[1])-92)<1e-8,'Every cell stays a true regular hexagon');}assert(c.vertices.every(p=>Math.hypot(...p)<570));}
 for(const road of [...HONEYCOMB_CITY.roads,...ARCADE_STREETS])for(let i=1;i<road.points.length;i++){const a=road.points[i-1],b=road.points[i],dx=b[0]-a[0],dz=b[1]-a[1],length=Math.hypot(dx,dz),n=Math.ceil(length/.6);for(let j=0;j<=n;j++)for(const side of[-1,0,1]){const x=a[0]+dx*j/n-dz/length*side*road.width/2,z=a[1]+dz*j/n+dx/length*side*road.width/2;assert(owners.every(o=>o.canStand(x,z))&&urban.canStand(x,z)&&PAVILIONS.every(h=>pavilionCanStand(h,x,z))&&sourceArtistClear(x,z)&&!inHex(x-125,z,23.4),`Honeycomb street ${road.id} blocked at${x},${z}`);}}
 
+// Render the same composed road geometry as the live city. Hidden source
+// paving cannot leave a metadata-only walk to a real house doorway.
+const coast=buildCityCoast(T,{naturalTrees:null}),paving=coast.group.children.filter(o=>o.isMesh&&o.name.endsWith('paving batch'));assert.equal(paving.length,2);assert(paving.every(o=>o.visible));for(const route of coast.pavedRoutes)for(let i=1;i<route.points.length;i++){const a=route.points[i-1],b=route.points[i],steps=Math.max(1,Math.ceil(Math.hypot(a[0]-b[0],a[1]-b[1])/2));for(let j=0;j<=steps;j++){const t=Math.min(.99999,Math.max(.00001,j/steps)),x=a[0]+(b[0]-a[0])*t,z=a[1]+(b[1]-a[1])*t;assert(new T.Raycaster(new T.Vector3(x,1,z),new T.Vector3(0,-1,0),0,2).intersectObjects(paving,false).some(h=>Math.abs(h.point.y-.018)<1e-5),'A real rendered doorway/street strip is missing at '+x+','+z);}}coast.dispose();
 // The actual lawn batch cannot cap any protected central/pond opening.
 const field=urban.group.getObjectByName('Regular outer honeycomb lawn courts · one protected surface batch');assert(field);for(const p of[[0,0],[125,0],[0,-330]])assert.equal(new T.Raycaster(new T.Vector3(p[0],1,p[1]),new T.Vector3(0,-1,0),0,2).intersectObject(field).length,0,'No new lawn surface may bridge an existing well or the pond');
 for(const e of HONEYCOMB_CITY.edges){assert.equal(e.points.length,2);assert(Math.abs(Math.hypot(e.points[0][0]-e.points[1][0],e.points[0][1]-e.points[1][1])-92)<1e-8,'Every new street is an actual regular hexagon edge, not a cell-centre web');}
