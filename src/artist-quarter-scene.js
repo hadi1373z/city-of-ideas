@@ -1,4 +1,4 @@
-import {QUARTER_ARTISTS} from './artist-quarter-data.js?v=city-night-20261117';
+import {QUARTER_ARTISTS} from './artist-quarter-data.js?v=honeycomb-facts-20261118';
 const PLAN=globalThis.ARTIST_QUARTER_PLAN;
 
 export function buildArtistStudios(T,{loadTexture=url=>new T.TextureLoader().load(url),canvas=()=>document.createElement('canvas')}={}){

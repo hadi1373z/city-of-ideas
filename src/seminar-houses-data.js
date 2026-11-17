@@ -1,4 +1,4 @@
-import {HEX_DISTRICTS} from './city-hex-layout.js?v=honeycomb-sky-20261118';
+import {HEX_DISTRICTS} from './city-hex-layout.js?v=honeycomb-facts-20261118';
 export const SEMINAR_HOUSES=[
  {id:'noether',x:HEX_DISTRICTS.symmetry.x-45,z:168,names:{en:'Emmy Noether · House of Symmetry',de:'Emmy Noether · Haus der Symmetrie',fa:'امی نوتر؛ خانهٔ تقارن',cs:'Emmy Noether · Dům symetrie'},colour:0xa58245,style:'oculus',sources:[['Emmy Noether · Invariant Variation Problems (1918), M. A. Tavel translation','https://arxiv.org/abs/physics/0503066']]},
  {id:'mirzakhani',x:HEX_DISTRICTS.curvedSpace.x,z:168,names:{en:'Maryam Mirzakhani · House of Curved Space',de:'Maryam Mirzakhani · Haus des gekrümmten Raums',fa:'مریم میرزاخانی؛ خانهٔ فضای خمیده',cs:'Maryam Mirzakhani · Dům zakřiveného prostoru'},colour:0x48848c,style:'ribbon',sources:[['Maryam Mirzakhani · Growth of the number of simple closed geodesics (2008)','https://annals.math.princeton.edu/wp-content/uploads/annals-v168-n1-p03.pdf'],['Maryam Mirzakhani · Simple geodesics and Weil–Petersson volumes','https://www.math.stonybrook.edu/~mlyubich/Archive/Geometry/Teichmuller%20Space/Mirz3.pdf']]},

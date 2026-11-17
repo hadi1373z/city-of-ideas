@@ -1,6 +1,6 @@
-import {QUARTER_ARTISTS,QUARTER_COPY} from './artist-quarter-data.js?v=city-night-20261117';
-import {installIdeaExhibitions} from './idea-exhibitions.js?v=city-night-20261117';
-import {buildArtistStudios,buildQuarterGarden} from './artist-quarter-scene.js?v=city-night-20261117';
+import {QUARTER_ARTISTS,QUARTER_COPY} from './artist-quarter-data.js?v=honeycomb-facts-20261118';
+import {installIdeaExhibitions} from './idea-exhibitions.js?v=honeycomb-facts-20261118';
+import {buildArtistStudios,buildQuarterGarden} from './artist-quarter-scene.js?v=honeycomb-facts-20261118';
 const PLAN=globalThis.ARTIST_QUARTER_PLAN;
 const nearCourt=(x,z)=>PLAN.courts.some(c=>Math.hypot(x-c.arrival.x,z-c.arrival.z)<68);
 
