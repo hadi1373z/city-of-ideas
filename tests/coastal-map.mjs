@@ -5,6 +5,7 @@ import vm from 'node:vm';
 import {coastalPlanSvg} from '../src/coastal-city-plan.js';
 import {COAST_LANDMARKS, COAST_EXPLORER_COPY, COAST_WALK, coastMapPoint, coastWalkSvg} from '../src/coastal-map-data.js';
 import {FOUNDATION_HOUSES,houseWorld} from '../src/foundation-houses-data.js';
+import {PARK_HEX_CELLS,CITY_HEX} from '../src/city-hex-layout.js';
 import {SEMINAR_HOUSES} from '../src/seminar-houses-data.js';
 import {CIVIC_PAIRED_COURTS,URBAN_COURTS,urbanBuildingFootprints,urbanCourtOutline} from '../src/city-urban-plan-model.js';
 
@@ -23,8 +24,9 @@ for (const lang of ['en', 'de', 'fa']) {
   assert(shapes.length>105,'The map includes the planned civic circuit and inhabited courts');
   assert(svg.includes('data-transformation-house="true"'));assert(!svg.includes('Mountain of Becoming'),'Version 2 map must show the retained house, not the removed mountain');
   const project=points=>points.map(p=>coastMapPoint(...p).map(n=>n.toFixed(1)).join(',')).join(' ');
-  for(const h of FOUNDATION_HOUSES){const footprint=[[-9,-8],[9,-8],[9,8],[-9,8]].map(([x,z])=>{const p=houseWorld(h,x,z);return[p.x,p.z];});assert(svg.includes('data-house="'+h.id+'" points="'+project(footprint)+'"'),'Each inward-facing public home must show its actual rotated 18 × 16 m floor');}
+  for(const h of FOUNDATION_HOUSES){const footprint=[[-9,-8],[9,-8],[9,8],[-9,8]].map(([x,z])=>{const p=houseWorld(h,x,z);return[p.x,p.z];});assert(svg.includes('data-house="'+h.id+'" points="'+project(footprint)+'"'),'Each inward-facing public home must show its actual rotated 18 Ã— 16 m floor');}
   for(const h of urbanBuildingFootprints(plan)){assert.equal([...svg.matchAll(new RegExp('data-building-footprint="'+h.id+'"','g'))].length,1,'Every existing public floor has one map outline');assert(svg.includes('data-centre="'+h.x+','+h.z+'"'));if(h.points)assert(svg.includes('points="'+project(h.points)+'"'));}
+  assert.equal((svg.match(/data-garden-cell=/g)||[]).length,5);for(const c of PARK_HEX_CELLS)assert(svg.includes('data-garden-cell="'+c.q+','+c.r+'" points="'+project(Array.from({length:6},(_,i)=>[c.x+CITY_HEX.side*Math.cos(Math.PI/6+i*Math.PI/3),c.z+CITY_HEX.side*Math.sin(Math.PI/6+i*Math.PI/3)]))+'"'),'The map must show the actual connected park lawns');
   for(const c of URBAN_COURTS)assert(svg.includes('data-civic-court="'+c.id+'"'));
   for(const c of CIVIC_PAIRED_COURTS)assert(svg.includes('data-civic-court="'+c.id+'" points="'+project(urbanCourtOutline(c))+'"'));
   assert.equal((svg.match(/data-street="civic-view-/g)||[]).length,6);assert(svg.includes('data-street="sixfold-hexagon"'));assert(!svg.includes('data-private-home-reserve="true"'),'Personal homes now occupy the night face, not a blank upper reserve');assert(svg.includes('data-honeycomb-wall="true"'));assert(svg.includes('data-underground-link="babel-transformations"'));assert(!svg.includes('NaN'));
@@ -50,7 +52,7 @@ assert.deepEqual(COAST_LANDMARKS.find(p => p.id === 'artists').point, Array.from
 // Independently sample the overlay against the committed base map's real path
 // network. The route may retrace a lane, but may never draw a new shortcut.
 const svg = coastalPlanSvg(plan);
-const paths = [...svg.matchAll(/<polyline points="([^"]+)"[^>]*stroke-width="(?:3\.5|2\.5)"/g)]
+const paths = [...svg.matchAll(/<polyline points="([^"]+)"([^>]*)>/g)].filter(m=>!m[2].includes('data-honeycomb-wall')&&!m[2].includes('data-underground-link'))
   .map(m => m[1].split(' ').map(p => p.split(',').map(Number)));
 const segments = paths.flatMap(p => p.slice(1).map((b, i) => [p[i], b]));
 function distance(p, a, b) {

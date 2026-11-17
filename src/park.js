@@ -154,9 +154,14 @@ window.buildIdeaPark=function(THREE){
     return p;
   }
 
-  // A 480 metre park, with broad promenades and nine quiet circular gardens.
-  const terrain = cylinder(0, -.75, 0, 240, 1.5, mats.grass, scene, false);
-  terrain.receiveShadow = true;
+  // Five connected regular city courts frame the original garden. Only the
+  // grass substrate changes: pond, planted gardens and saved seeds stay in
+  // their source frame, mounted at (0,-330) with scale .65 by city.js.
+  const terrain = new THREE.Group(); terrain.name = 'Five connected honeycomb garden lawns'; scene.add(terrain);
+  for (const [q,r] of [[0,-2],[1,-2],[2,-2],[1,-3],[2,-3]]) {
+    const lawn = mesh(geometry(new THREE.CylinderGeometry(92/.65,92/.65,1.5,6)), mats.grass, Math.sqrt(3)*92*(q+r/2)/.65, -.75, (138*r+330)/.65, terrain, false);
+    lawn.receiveShadow = true;
+  }
 
   box(0, .08, 0, 12, .16, 12, mats.path, scene, false);
 

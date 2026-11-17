@@ -3,9 +3,23 @@
 The approved A layout is now a physical neighbourhood fabric around the retained
 Gallery, rather than a second schematic map. Thirty-seven exact pointy-top
 hexagons of side92m fit the570m circular island. The Gallery and northern park
-remain open protected spaces;33 walk courts form a connected graph with41
-shared gate passages and alternate loops. Fourteen clear coastal approaches
-join the continuous promenade;24 checked links meet the existing campus roads.
+remain protected spaces;33 walk courts form a connected graph with41
+shared gate passages and alternate loops. Exactly six axial coastal approaches
+join the continuous promenade; six deliberate gateways meet real retained
+campus roads. The replaced irregular outer circuit and obsolete north, west
+and south coastal spokes are removed from the physical route authorities.
+
+The neighbourhood lanes are3.2m wide, with quiet grey-green paving. The5.2m
+gateways and uninterrupted coast promenade use lighter stone. Warm wall
+copings make the exact regular courts clearer than their inner paths. The
+route hierarchy is shared by actual geometry, tree clearance, gate clipping
+and the three generated maps; it is not a map drawn over obsolete streets.
+
+Five contiguous regular hexagonal lawns replace the park's isolated circular
+grass disc. The existing pond, nine garden collections, people, tools, seeds
+and source-local saved positions retain their original transforms. Only the
+grass substrate extends into the northern city courts. The map uses the same
+five92m cells; the pond still looks into the real night face.
 
 Low stone walls and warm copings follow the hexagon edges. Their real solid
 colliders have the same gate gaps as the paving. A retained doorway or street
@@ -52,16 +66,17 @@ therefore no longer reserves an empty southwest home block.
 `city-hex-layout.js` supplies the regular grid and public district anchors.
 `honeycomb-city-model.js` constructs the graph, checks full-width routes against
 source building/furniture footprints and clips real gate intervals. That solve
-is not performed on the visitor's loading path. Its65.7kB generated result is
+is not performed on the visitor's loading path. Its generated result is
 committed in`honeycomb-city-layout.js`; regenerate it after source placements
 change with`node tools/render-honeycomb-layout.mjs`, then regenerate the three
 maps with`node tools/render-coastal-plan.mjs`.
 
 An independent source-consistency check hashes the regenerated plan and the
 committed static plan after checking its physical geometry. On the development
-machine the module import measured about15–23ms and street planting about23ms;
-these are local timings, not a performance guarantee on every device. Paving
-for all coastal/urban strips uses one geometry batch. Hex courts, seats, walls
+machine the refined module import measured about34ms and planting about26ms
+for610 street trees. These are local timings, not a performance guarantee on
+every device. Paving uses two geometry batches for the two street ranks.
+Hex courts, seats, walls
 and copings use eight draw meshes; natural tree foliage/branches retain their
 shared instanced rendering. No new per-court or per-home lights were added.
 
@@ -70,7 +85,11 @@ shared instanced rendering. No new per-court or per-home lights were added.
 `tests/city-urban-plan.mjs` tests exact regular cells, a connected graph with
 loops, source door connectivity from the real Gallery west entrance, full-width
 walking against real artist/author/philosopher/seminar architecture and maze
-solids, protected central/pond routes, finite geometry and owned disposal.
+solids, exactly six physical campus/coast gateways, protected central/pond
+routes, trees clear of walls, finite geometry and owned disposal.
 The source-specific foundation, philosopher and seminar suites test their real
 entries and furniture; coastal-map and Origami tests verify the generated maps
-and retained shoreline route. The full city release check remains required.
+and retained shoreline route. The pond suite also measures the actual batched
+grass area and corner coordinates against the five mapped hexagonal lawns,
+while retaining all original fountain and borrowed-geometry ownership checks.
+The full city release check remains required.
