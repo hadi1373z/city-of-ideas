@@ -52,13 +52,13 @@ export function urbanBuildingFootprints(plan=globalThis.ARTIST_QUARTER_PLAN){ret
  ...FOUNDATION_HOUSES.map(h=>rect(h.id,h.x,h.z,h.width,h.depth,h.turn,{category:'letters',label:h.names.en})),
  ...PHILOSOPHERS.map(h=>rect(h.id,h.x,h.z,20,22,0,{category:'philosopher',label:h.name[1]})),
  ...STUDY_HOUSES.map(h=>rect(h.id,h.x,h.z,16,12,h.turn,{category:'study',label:h.names.en})),
- rect('proof-atelier',215,-78,18,20,0,{category:'study',label:'Proof Atelier Â· six workshops'}),
+ rect('proof-atelier',215,-78,18,20,0,{category:'study',label:'Proof Atelier · six workshops'}),
  ...SEMINAR_HOUSES.map(h=>h.id==='noether'?{id:h.id,x:h.x,z:h.z,shape:'circle',radius:14.2,category:'seminar',label:h.names.en}:rect(h.id,h.x,h.z,27,23,Math.PI,{category:'seminar',label:h.names.en})),
  ...PAVILIONS.map(h=>({id:h.id,x:h.x,z:h.z,shape:'polygon',points:Array.from({length:6},(_,i)=>{const t=-pavilionTurn(h)+i*Math.PI/3;return[h.x+13.4*Math.cos(t),h.z+13.4*Math.sin(t)];}),category:'pattern',label:h.name})),
  {id:'transformations',x:125,z:0,shape:'polygon',points:Array.from({length:6},(_,i)=>[125+23*Math.cos(i*Math.PI/3),23*Math.sin(i*Math.PI/3)]),category:'pattern',label:'House of Transformations'},
  ...Object.entries(plan?.galleries||{}).map(([id,[x,z]])=>rect(id,x,z,9.45,8.1,0,{category:'artist',label:id.replaceAll('-',' '),front:[x,z+Math.sign((plan.fronts?.[id]?.[1]??z+1)-z)*4.05]})),
  ...Object.entries(plan?.studios||{}).map(([id,h])=>rect(id,h.x,h.z,14,12,h.turn,{category:'artist',label:id})),
- ...(plan?[rect('dali',plan.dali.x,plan.dali.z,16.2,13.5,0,{category:'artist',label:'DalÃ­â€™s dream residence'}),{id:'escher',x:plan.escher.x,z:plan.escher.z,shape:'polygon',points:[[-4,7],[4,7],[4,-7],[1.6,-7],[1.6,-13],[-1.6,-13],[-1.6,-7],[-4,-7]].map(([x,z])=>[x+plan.escher.x,z+plan.escher.z]),front:[plan.escher.x,plan.escher.z+7],category:'artist',label:'Escher Â· perspective house'}]:[]),
+ ...(plan?[rect('dali',plan.dali.x,plan.dali.z,16.2,13.5,0,{category:'artist',label:'Dalí’s dream residence'}),{id:'escher',x:plan.escher.x,z:plan.escher.z,shape:'polygon',points:[[-4,7],[4,7],[4,-7],[1.6,-7],[1.6,-13],[-1.6,-13],[-1.6,-7],[-4,-7]].map(([x,z])=>[x+plan.escher.x,z+plan.escher.z]),front:[plan.escher.x,plan.escher.z+7],category:'artist',label:'Escher · perspective house'}]:[]),
  rect('origami',HOUSE_ORIGAMI.x,HOUSE_ORIGAMI.z,HOUSE_ORIGAMI.width,HOUSE_ORIGAMI.depth,0,{category:'making',label:'House of Origami'})
  ];}
 export function segmentDistance(x,z,a,b){const dx=b[0]-a[0],dz=b[1]-a[1],u=Math.max(0,Math.min(1,((x-a[0])*dx+(z-a[1])*dz)/(dx*dx+dz*dz||1)));return Math.hypot(x-a[0]-dx*u,z-a[1]-dz*u);}
@@ -78,5 +78,5 @@ const retainedFurniture=[...(globalThis.ARTIST_QUARTER_PLAN?.seats||[]).map(([x,
 export const honeycombInputs=()=>({footprints:[...urbanBuildingFootprints(),...retainedFurniture],retainedRoutes});
 export const HONEYCOMB_CITY=BUILT_HONEYCOMB_LAYOUT;
 export const URBAN_STREETS=[...RETAINED_URBAN_STREETS,...HONEYCOMB_CITY.roads];
-export const CITY_UNDERGROUND_LINKS=Object.freeze([{id:'babel-transformations',name:'Babel â€” House of Transformations',floorY:-40,points:[[22,0],[70,0],[125,0]],kind:'physical',description:'The existing real underground corridor and both stair routes.'},{id:'escher-museum-spur',name:'Escher museum passage',floorY:-40,points:[[70,0],[70,115],[135,115]],kind:'physical',description:'The real museum corridor beneath the artist courts.'}]);
+export const CITY_UNDERGROUND_LINKS=Object.freeze([{id:'babel-transformations',name:'Babel — House of Transformations',floorY:-40,points:[[22,0],[70,0],[125,0]],kind:'physical',description:'The existing real underground corridor and both stair routes.'},{id:'escher-museum-spur',name:'Escher museum passage',floorY:-40,points:[[70,0],[70,115],[135,115]],kind:'physical',description:'The real museum corridor beneath the artist courts.'}]);
 for(const c of HONEYCOMB_CITY.nodes)if(Math.hypot(c.x,c.z)>350)URBAN_COURTS.push({id:c.id+'-crossing',x:c.walk[0],z:c.walk[1],shape:'hex',radius:8.5,turn:Math.PI/6,tone:'garden'});
