@@ -27,7 +27,7 @@ for (const lang of ['en', 'de', 'fa']) {
   for(const h of urbanBuildingFootprints(plan)){assert.equal([...svg.matchAll(new RegExp('data-building-footprint="'+h.id+'"','g'))].length,1,'Every existing public floor has one map outline');assert(svg.includes('data-centre="'+h.x+','+h.z+'"'));if(h.points)assert(svg.includes('points="'+project(h.points)+'"'));}
   for(const c of URBAN_COURTS)assert(svg.includes('data-civic-court="'+c.id+'"'));
   for(const c of CIVIC_PAIRED_COURTS)assert(svg.includes('data-civic-court="'+c.id+'" points="'+project(urbanCourtOutline(c))+'"'));
-  assert.equal((svg.match(/data-street="civic-view-/g)||[]).length,6);assert(svg.includes('data-street="sixfold-hexagon"'));assert(svg.includes('data-private-home-reserve="true"'));assert(!svg.includes('NaN'));
+  assert.equal((svg.match(/data-street="civic-view-/g)||[]).length,6);assert(svg.includes('data-street="sixfold-hexagon"'));assert(!svg.includes('data-private-home-reserve="true"'),'Personal homes now occupy the night face, not a blank upper reserve');assert(svg.includes('data-honeycomb-wall="true"'));assert(svg.includes('data-underground-link="babel-transformations"'));assert(!svg.includes('NaN'));
   assert(svg.includes('data-gallery-centre="true" cx="460" cy="460"'));
   assert(svg.includes('data-island="true" cx="460" cy="460" r="399"'));
   assert(svg.includes('cx="460" cy="460" r="375.2"'), 'Continuous coastal promenade');

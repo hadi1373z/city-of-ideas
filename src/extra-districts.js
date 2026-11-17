@@ -1,4 +1,5 @@
 import './city-road-surface.js?v=city-night-20261117';
+import {nightHomeTransform,nightHomeAccess,nightHomeRoadSegments} from './night-home-layout.js';
 /* Additive source-authentic geometry for the principal City of Ideas scene.
    Copy this module to src/extra-districts.js when its controller hooks are wired. */
 const copy=value=>JSON.parse(JSON.stringify(value));
@@ -65,7 +66,8 @@ export async function createExtraDistricts(THREE,options={}){
  if(city.GRAVEYARD)Object.assign(baseWorldBounds,union(baseWorldBounds,city.GRAVEYARD.bounds));
  const originalArt=city.art,baseHouses=originalArt.houses.slice(),baseChildren=new Set(originalArt.group.children);
  let activeMathFloor=0,disposed=false,network=null,editions=null,cargoOwners=[],homeOwners=new Map(),homeLotIndices=new Map(),pendingNeighborhood=null,activeHomeId=null;
- let artStation=null,daliArt=null,artAggregate=null,makers=null,visualSignature=null,editionCatalog=F.ARTISTS;
+ let artStation=null,daliArt=null,artAggregate=null,makers=null,visualSignature=null,editionCatalog=F.ARTISTS,geometryVersion=0,homePaths=[];
+ const geometryListeners=new Set(),geometryChanged=()=>{geometryVersion++;for(const listener of geometryListeners)listener();};
  const roads=new THREE.Group();roads.name='Shared paths to appended originals';root.add(roads);
  const roadMaterial=new THREE.MeshLambertMaterial({color:0xd2c6af}),groundMaterial=new THREE.MeshLambertMaterial({color:0x556563}),roadGeometries=new Set();
  function road(points,width=6,parent=roads){const mesh=globalThis.createCityRoad(THREE,points,width,roadMaterial,parent);if(mesh)roadGeometries.add(mesh.geometry);}
@@ -195,7 +197,7 @@ export async function createExtraDistricts(THREE,options={}){
    artAggregate={...daliArt,houses:[...daliArt.houses,...editions.houses],bounds:union(daliArt.bounds,editions.bounds),colliders:[...daliArt.colliders,...editions.colliders,...(artStation.transform?[]:artStation.obstacles),...(artStation.transform?[]:(ownerCargo('artists')?.obstacles||[]))],insideAt:(x,z)=>editions.insideAt(x,z),entryFor:(artistId,editionId)=>editionId?editions.entryFor(artistId,editionId):daliArt.entryFor(artistId),canStand:artLocalCanStand};
    city.art=artAggregate;
    disposeOwned(previousEditions);previousCargo.forEach(disposeOwned);
-   return{artistEditions:editions.houses.length,cargoCopies:next.placements.length,geometryChanged:true,privateStateWritten:false};
+   geometryChanged();return{artistEditions:editions.houses.length,cargoCopies:next.placements.length,geometryChanged:true,privateStateWritten:false};
   }
   function selectMathFloor(floor){
    if(disposed)throw Error('The appended city layer has been disposed.');
@@ -221,7 +223,7 @@ export async function createExtraDistricts(THREE,options={}){
      const built=await buildHome(THREE,copy(record.house),{edition:record.edition,homeId:record.id,walk:true});
      if(!built?.group?.isObject3D||typeof built.canStand!=='function'||!built.bounds||(!built.entry&&!built.entryFor)){disposeOwned(built);throw Error('Home factory must return source geometry, bounds, canStand and an entry for '+record.id);}
      if(!homeLotIndices.has(record.id))homeLotIndices.set(record.id,homeLotIndices.size);
-     const lot=homeLotIndices.get(record.id),transform={x:-170+(lot%3)*50,y:.13,z:170+Math.floor(lot/3)*48,scale:1.35};
+     const lot=homeLotIndices.get(record.id),transform=nightHomeTransform(lot);
      built.group.userData.cityDestination='home:'+record.id;built.group.traverse(o=>{if(hasAction(o.userData)||o.userData.roomId)o.userData={...o.userData,extraHomeId:record.id};});disableLights(built.group);
      next.set(record.id,{built,group:built.group,record,transform,worldBounds:transformedBounds(built.bounds,transform)});
     }
@@ -229,22 +231,29 @@ export async function createExtraDistricts(THREE,options={}){
    for(const [key,owner]of next)if(owner!==homeOwners.get(key)){mount(owner.built,owner.transform);const previous=homeOwners.get(key);if(previous)disposeOwned(previous.built);}
    homeOwners=next;
    // Roads and parcel ground expand exactly with the preserved source lots.
-   homeRoads.traverse(o=>{if(o.geometry){o.geometry.dispose();roadGeometries.delete(o.geometry);}});homeRoads.clear();
-   // Personal-home lanes branch from the same west street as the institute.
-   for(const owner of homeOwners.values()){const b=owner.worldBounds,g=new THREE.BoxGeometry(b.maxX-b.minX+6,.16,b.maxZ-b.minZ+6);roadGeometries.add(g);const parcel=new THREE.Mesh(g,groundMaterial);parcel.position.set((b.minX+b.maxX)/2,-.12,(b.minZ+b.maxZ)/2);homeRoads.add(parcel);const entry=entryFor('home:'+owner.record.id);if(entry)road([[-195,140],[-195,owner.transform.z+18],[entry.x,owner.transform.z+18],[entry.x,entry.z]],4,homeRoads);}
-   return{status:'ready',homes:homeOwners.size,activeHomeId,privateStateWritten:false};
+   homeRoads.traverse(o=>{if(o.isInstancedMesh)o.dispose?.();if(o.geometry){o.geometry.dispose();roadGeometries.delete(o.geometry);}});homeRoads.clear();
+   // Local designs stay untouched. Only their presentation parcels move to the
+   // permanently night face, reached along clear ground from the meadow loop.
+   homePaths=[];
+   const plotGeometry=new THREE.BoxGeometry(1,1,1);roadGeometries.add(plotGeometry);const plots=new THREE.InstancedMesh(plotGeometry,groundMaterial,homeOwners.size),stamp=new THREE.Object3D();plots.name='Preserved night-home parcels · one batch';homeRoads.add(plots);let plotIndex=0;
+   for(const owner of homeOwners.values()){const b=owner.worldBounds;stamp.position.set((b.minX+b.maxX)/2,-.12,(b.minZ+b.maxZ)/2);stamp.scale.set(b.maxX-b.minX+6,.16,b.maxZ-b.minZ+6);stamp.updateMatrix();plots.setMatrixAt(plotIndex++,stamp.matrix);const entry=entryFor('home:'+owner.record.id);if(entry)homePaths.push(nightHomeAccess(homeLotIndices.get(owner.record.id),entry));}plots.instanceMatrix.needsUpdate=true;plots.computeBoundingSphere();
+   const roadParts=new THREE.Group(),positions=[],normals=[],segments=nightHomeRoadSegments(homePaths);
+   for(const points of segments){const mesh=globalThis.createCityRoad(THREE,points,4,roadMaterial,roadParts);if(!mesh)continue;positions.push(...mesh.geometry.attributes.position.array);normals.push(...mesh.geometry.attributes.normal.array);mesh.geometry.dispose();}
+   if(positions.length){const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));geometry.setAttribute('normal',new THREE.Float32BufferAttribute(normals,3));geometry.computeBoundingSphere();roadGeometries.add(geometry);const mesh=new THREE.Mesh(geometry,roadMaterial);mesh.name='Connected night-home access walks · one deduplicated batch';mesh.userData={groundRoute:true,nightHomeRoutes:true,segments:segments.length};homeRoads.add(mesh);}roadParts.clear();
+   geometryChanged();return{status:'ready',homes:homeOwners.size,activeHomeId,privateStateWritten:false};
   }
-  const bounds=()=>{let result=union(baseWorldBounds,union(mathBounds,makerBounds));result=union(result,transformedBounds(artAggregate?.bounds||daliArt.bounds,transforms.artists));for(const owner of homeOwners.values())result=union(result,{minX:Math.min(-197,owner.worldBounds.minX-3),maxX:owner.worldBounds.maxX+3,minZ:145,maxZ:owner.worldBounds.maxZ+20});return result;};
+  const bounds=()=>{let result=union(baseWorldBounds,union(mathBounds,makerBounds));result=union(result,transformedBounds(artAggregate?.bounds||daliArt.bounds,transforms.artists));for(const owner of homeOwners.values())result=union(result,{minX:owner.worldBounds.minX-3,maxX:owner.worldBounds.maxX+3,minZ:owner.worldBounds.minZ-3,maxZ:owner.worldBounds.maxZ+3});return result;};
   function update(){if(disposed)return;/* Static source districts share the principal renderer and its lighting. */}
   function dispose(){
-   if(disposed)return;disposed=true;
+   if(disposed)return;disposed=true;geometryListeners.clear();
    cargoOwners.forEach(disposeOwned);disposeOwned(editions);disposeOwned(artStation);
    for(const owner of homeOwners.values())disposeOwned(owner.built);
+   homeRoads.traverse(o=>{if(o.isInstancedMesh)o.dispose?.();});
    staticOwners.forEach(disposeOwned);daliArt.dispose();for(const o of daliAdded)o.removeFromParent();
    if(city.art===artAggregate)city.art=originalArt;
    for(const g of roadGeometries)g.dispose();roadMaterial.dispose();groundMaterial.dispose();root.removeFromParent();root.clear();
   }
-  const api={group:root,mathModels,makers,daliHouse,transforms,source:{base:sourceBase.href,three:THREE.REVISION,mathFloors:8,mathConcepts:24,makerHalls:makers.houses.length,makerActions:makers.houses.reduce((n,h)=>n+h.approaches.length,0),daliStudies:F.DALI_ARTIST.works.length,daliActivities:F.DALI_OBJECTS.length},mathDeduplication,facilities:{artists:artStation},canStand,region,entryFor,targetInfo,toWorld,selectMathFloor,updateNetwork,updateNeighborhood,update,dispose,get activeMathFloor(){return activeMathFloor;},get bounds(){return bounds();},get art(){return artAggregate;},get neighborhoodStatus(){return{available:homeOwners.size,pending:pendingNeighborhood?.homes.length||0,activeHomeId};},get targets(){return[...mathModels.map(m=>m.group),makers.group,...daliAdded,editions?.group,artStation.group,...cargoOwners.map(o=>o.group),...homeOwners.values()].map(o=>o?.group||o).filter(Boolean);},get buildingTargets(){return[mathModels[0].group,...makers.houses.map(h=>h.group),daliHouse.group,...(editions?.houses||[]).map(h=>h.group),...homeOwners.values()].map(o=>o?.group||o);}};
+  const api={onGeometryChanged(listener){if(typeof listener!=='function')throw Error('Provide a geometry listener.');geometryListeners.add(listener);return()=>geometryListeners.delete(listener);},get geometryVersion(){return geometryVersion;},get homeLayout(){return{face:'lower',paths:homePaths.map(p=>p.map(q=>[...q])),lots:[...homeOwners.values()].map(o=>({x:o.transform.x,z:o.transform.z,bounds:{...o.worldBounds}}))};},group:root,mathModels,makers,daliHouse,transforms,source:{base:sourceBase.href,three:THREE.REVISION,mathFloors:8,mathConcepts:24,makerHalls:makers.houses.length,makerActions:makers.houses.reduce((n,h)=>n+h.approaches.length,0),daliStudies:F.DALI_ARTIST.works.length,daliActivities:F.DALI_OBJECTS.length},mathDeduplication,facilities:{artists:artStation},canStand,region,entryFor,targetInfo,toWorld,selectMathFloor,updateNetwork,updateNeighborhood,update,dispose,get activeMathFloor(){return activeMathFloor;},get bounds(){return bounds();},get art(){return artAggregate;},get neighborhoodStatus(){return{available:homeOwners.size,pending:pendingNeighborhood?.homes.length||0,activeHomeId};},get targets(){return[...mathModels.map(m=>m.group),makers.group,...daliAdded,editions?.group,artStation.group,...cargoOwners.map(o=>o.group),...homeOwners.values()].map(o=>o?.group||o).filter(Boolean);},get buildingTargets(){return[mathModels[0].group,...makers.houses.map(h=>h.group),daliHouse.group,...(editions?.houses||[]).map(h=>h.group),...homeOwners.values()].map(o=>o?.group||o);}};
   await updateNetwork(options.network||F.initialCityNetwork());
   if(options.neighborhood)await updateNeighborhood(options.neighborhood,options.activeHomeId);
   progress('connected');

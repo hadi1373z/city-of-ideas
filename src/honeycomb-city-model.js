@@ -1,0 +1,29 @@
+import {CITY_HEX as H,hexCentre} from './city-hex-layout.js';
+
+const TAU=Math.PI*2,near=(a,b,e=1e-6)=>Math.hypot(a[0]-b[0],a[1]-b[1])<e;
+export const HONEYCOMB_RULES=Object.freeze({side:H.side,rings:H.rings,streetWidth:5.2,gateWidth:10,wallHeight:1.55,wallThickness:.36,coastRadius:536,protectedCore:173,parkRadius:181});
+export function honeycombCells(){const cells=[];for(let q=-H.rings;q<=H.rings;q++)for(let r=-H.rings;r<=H.rings;r++){if(Math.max(Math.abs(q),Math.abs(r),Math.abs(q+r))>H.rings)continue;const p=hexCentre(q,r);cells.push({id:'hex-'+q+'-'+r,q,r,...p,vertices:Array.from({length:6},(_,i)=>[p.x+H.side*Math.cos(Math.PI/6+i*TAU/6),p.z+H.side*Math.sin(Math.PI/6+i*TAU/6)])});}return cells;}
+export function pointSegmentDistance(x,z,a,b){const dx=b[0]-a[0],dz=b[1]-a[1],u=Math.max(0,Math.min(1,((x-a[0])*dx+(z-a[1])*dz)/(dx*dx+dz*dz||1)));return Math.hypot(x-a[0]-dx*u,z-a[1]-dz*u);}
+const inside=(p,polygon,margin=0)=>{let sign=0;for(let i=0;i<polygon.length;i++){const a=polygon[i],b=polygon[(i+1)%polygon.length],c=(b[0]-a[0])*(p[1]-a[1])-(b[1]-a[1])*(p[0]-a[0]);if(Math.abs(c)<1e-9)continue;if(sign&&Math.sign(c)!==sign)return false;sign=Math.sign(c);}return margin<=0||polygon.every((a,i)=>pointSegmentDistance(...p,a,polygon[(i+1)%polygon.length])>=margin);};
+export function footprintBlocked(x,z,footprints,margin=0){return footprints.some(h=>h.shape==='circle'?Math.hypot(x-h.x,z-h.z)<h.radius+margin:inside([x,z],h.points)||h.points.some((a,i)=>pointSegmentDistance(x,z,a,h.points[(i+1)%h.points.length])<margin));}
+export function makeHoneycombCity({footprints=[],retainedRoutes=[]}={}){
+ const C=HONEYCOMB_RULES,cells=honeycombCells(),byId=new Map(cells.map(c=>[c.q+','+c.r,c])),blocked=(x,z,margin=3.1)=>Math.hypot(x,z)<C.protectedCore||Math.hypot(x,z+330)<C.parkRadius||footprintBlocked(x,z,footprints,margin);
+ const clear=(a,b,margin=3.1)=>{const n=Math.max(1,Math.ceil(Math.hypot(a[0]-b[0],a[1]-b[1])/1.2));for(let i=0;i<=n;i++)if(blocked(a[0]+(b[0]-a[0])*i/n,a[1]+(b[1]-a[1])*i/n,margin))return false;return true;};
+ for(const c of cells){const choices=[[c.x,c.z],...Array.from({length:18},(_,i)=>{const r=i<6?14:i<12?28:40,a=(i%6)*TAU/6;return[c.x+r*Math.cos(a),c.z+r*Math.sin(a)];})];c.walk=choices.find(p=>inside(p,c.vertices,8)&&!blocked(...p));c.active=!!c.walk;}
+ const routeWithin=(c,to)=>{if(clear(c.walk,to))return[c.walk,to];for(const radius of[20,35,52])for(let i=0;i<12;i++){const a=i*TAU/12,p=[c.x+radius*Math.cos(a),c.z+radius*Math.sin(a)];if(inside(p,c.vertices,6)&&clear(c.walk,p)&&clear(p,to))return[c.walk,p,to];}return null;};
+ const candidates=[];for(const c of cells.filter(c=>c.active))for(const[dq,dr]of[[1,0],[0,1],[-1,1]]){const d=byId.get((c.q+dq)+','+(c.r+dr));if(!d?.active)continue;const gate=[(c.x+d.x)/2,(c.z+d.z)/2],a=routeWithin(c,gate),b=routeWithin(d,gate);if(a&&b)candidates.push({id:c.id+'--'+d.id,a:c.id,b:d.id,gate,points:[...a,...b.slice(0,-1).reverse()],width:C.streetWidth});}
+ const nodes=cells.filter(c=>c.active),connected=edges=>{if(!nodes.length)return true;const seen=new Set([nodes[0].id]);let changed=true;while(changed){changed=false;for(const e of edges)if(seen.has(e.a)!==seen.has(e.b)){seen.add(e.a);seen.add(e.b);changed=true;}}return seen.size===nodes.length;};
+ // Remove redundant gates, retaining loops and at least two exits from every
+ // court. This creates exploration choices without empty one-way cul-de-sacs.
+ let edges=[...candidates];for(const e of [...candidates].sort((a,b)=>((a.a+a.b).length*17+a.a.charCodeAt(5))%13-((b.a+b.b).length*17+b.a.charCodeAt(5))%13)){if(edges.length<=nodes.length+8)break;const degree=id=>edges.filter(x=>x.a===id||x.b===id).length;if(degree(e.a)<=2||degree(e.b)<=2)continue;const next=edges.filter(x=>x!==e);if(connected(next))edges=next;}
+ const roads=edges.map(e=>({id:'honeycomb-'+e.id,points:e.points,width:e.width}));
+ const coastLinks=[];for(const c of nodes){if(Math.max(Math.abs(c.q),Math.abs(c.r),Math.abs(c.q+c.r))!==H.rings)continue;const a=Math.atan2(c.z,c.x),p=[C.coastRadius*Math.cos(a),C.coastRadius*Math.sin(a)];if(clear(c.walk,p)){const road={id:'honeycomb-coast-'+c.id,points:[c.walk,p],width:5.2};roads.push(road);coastLinks.push(road);}}
+ // Connect the new regular fabric to the real existing campus paths. The
+ // connector is accepted only when its complete width clears architecture.
+ const joins=[];for(const c of nodes){let best=null;for(const route of retainedRoutes)for(const p of route.points){const d=Math.hypot(c.walk[0]-p[0],c.walk[1]-p[1]);if(d>210||best&&d>=best.d)continue;if(clear(c.walk,p))best={d,p};}if(best&&best.d>1){const r={id:'honeycomb-campus-'+c.id,width:4.2,points:[c.walk,best.p]};joins.push(r);roads.push(r);}}
+ // Shared hex edges are stored once. A gate is also cut wherever an actual
+ // retained or new street crosses a wall, so old door approaches stay open.
+ const allRoutes=[...retainedRoutes,...roads],wallEdges=new Map();for(const c of cells)for(let i=0;i<6;i++){const a=c.vertices[i],b=c.vertices[(i+1)%6],key=[a,b].map(p=>p.map(n=>n.toFixed(4)).join(',')).sort().join('|');if(!wallEdges.has(key))wallEdges.set(key,{a,b});}
+ const walls=[];for(const{a,b}of wallEdges.values()){const length=Math.hypot(a[0]-b[0],a[1]-b[1]),steps=Math.ceil(length/.7);let start=null;for(let i=0;i<=steps;i++){const t=i/steps,p=[a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t],open=blocked(...p,4.2)||allRoutes.some(r=>r.points.slice(1).some((q,k)=>pointSegmentDistance(...p,r.points[k],q)<r.width/2+2.2));if(!open&&start===null)start=t;if((open||i===steps)&&start!==null){const end=open?Math.max(start,(i-1)/steps):t;if((end-start)*length>1.5)walls.push({a:[a[0]+(b[0]-a[0])*start,a[1]+(b[1]-a[1])*start],b:[a[0]+(b[0]-a[0])*end,a[1]+(b[1]-a[1])*end],height:C.wallHeight,thickness:C.wallThickness});start=null;}}}
+ return{rules:C,cells,nodes,edges,roads,coastLinks,joins,walls,connected:connected(edges),clear,contains:inside};
+}
