@@ -182,6 +182,10 @@ check('Cleanup restores original source parents, current animation pose, visibil
  assert.equal(window.CITY_GRAVEYARD.drawActiveMap,f.originalMap);assert.equal(f.body.querySelector('.map-directions').children.length,0);assert.equal(f.body.querySelector('#world-cylinder-context'),null);assert.deepEqual(M.city.targets,[f.foreign]);assert(f.scene.children.includes(f.foreign));
 });
 
+check('Transformation-house passage hands off in both directions without recapture',()=>{
+ const f=fixture(),{M,api}=f;let entered=null;M.transformationHouse={active:false,built:{group:new T.Group()},enterFromPassage(p){entered=p;this.active=true;Object.assign(M.player,p,{y:p.y+M.eye});}};M.scene.add(M.transformationHouse.built.group);
+ api.enterFromHouse({x:70.95,z:0,y:-40,yaw:Math.PI/2,pitch:0});assert(api.route);for(let i=0;i<20;i++)api.step(.05,{forward:1});assert(M.player.x<70);assert(!entered);M.player.yaw=-Math.PI/2;for(let i=0;i<30&&!entered;i++)api.step(.05,{forward:1});assert(entered);assert.equal(api.route,null);assert(entered.x>71.25);M.city.update(M.player,3);api.prepareScene();assert(M.transformationHouse.built.group.visible);f.events.get('pagehide')();
+});
 const root=await readFile(new URL('../src/gallery.js',import.meta.url),'utf8');
 check('Root renders physical lower poses for normal and photographic frames after lantern update',()=>{
  const lantern=root.lastIndexOf('updateLantern(t)'),scene=root.indexOf('worldCylinder?.prepareScene()',lantern),camera=root.indexOf('worldCylinder?.prepareCamera(camera)',scene),photo=root.indexOf('worldCylinder?.prepareCamera(photoCamera)',camera),render=root.indexOf('renderer.render(scene,photoCamera)',photo);

@@ -202,3 +202,7 @@ Both physical faces share ocean-surface.js for water colour, foam, waves and fog
 ## City version 2
 
 On 2026-11-16 the user requested a new default version without the mountain, retaining version 1 in code. Git tag `city-v1-before-mountain-removal` preserves the complete prior city. Keep `CITY_CONFIG.edition=2` and `mountainEnabled=false` for current development. Do not restore the mountain, its automatic climbing capture or summit bridge to the live city. The gallery, central volcano, Babel, lower face and all existing houses remain. See docs/CITY-VERSIONS.md for restoration.
+
+## House of Transformations
+
+Keep the three hexagonal mathematical pavilions. The separate solid house at (125,0) occupies the retired mountain site, with eight floors and a real stair to the -40 tunnel and existing route to the lower face. Read docs/HOUSE-OF-TRANSFORMATIONS.md before changing its ground cut, floor/stair joins, secret bookcase or navigation handoff. Do not restore the mountain over this house.
