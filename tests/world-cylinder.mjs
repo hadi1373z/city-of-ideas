@@ -6,6 +6,7 @@ import {WORLD_CYLINDER as W,isLowerCoordinate,lowerLocal,lowerPhysical,physicalT
 import {buildWorldCylinder,mountLowerWorld} from '../src/world-cylinder-scene.js';
 import {installWorldCylinder} from '../src/world-cylinder.js';
 import {UPPER,LOWER,pointAt,heightAt} from '../src/two-face-gallery-model.js';
+import {GRAVITY_STAIR as G,gravityStairPose} from '../src/gravity-stair-model.js';
 
 const near=(a,b,e=1e-5)=>assert(Math.abs(a-b)<e,`${a} differs from ${b}`),vec=(a,b,e=1e-5)=>{near(a.x,b.x,e);near(a.y,b.y,e);near(a.z,b.z,e);};
 const failures=[];function check(name,fn){try{fn();console.log('PASS '+name);}catch(e){failures.push(name);console.error('FAIL '+name+': '+e.message);}}
@@ -186,6 +187,24 @@ check('Full through-gallery tour crosses the gravity turn and walks out onto the
  const f=fixture(),{M,api}=f;api.visitGallery();const tour=f.body.querySelector('#world-cylinder-context').querySelectorAll('button').find(n=>n.textContent==='Follow the gallery route');assert(tour);tour.onclick();let crossed=false;
  for(let i=0;i<2000&&api.route;i++){api.step(.1,{});if(api.route?.side==='lower')crossed=true;}
  assert(crossed,'The tour must pass the shared middle landing');assert.equal(api.route,null,'The route exits at the lower west doorway');assert(isLowerCoordinate(M.player));near(M.player.y,1.93);near(M.player.x,-2183);assert.equal(f.privateAccess,0);f.events.get('pagehide')();
+});
+
+check('The gradual turn follows held movement, pauses in place, reverses, and shares photo and lantern frames',()=>{
+ const f=fixture(),{M,api}=f;api.visitGravityTurn();const start={...M.player};assert.equal(api.upper.counts.treads,200);assert.equal(api.lower.counts.treads,200);assert(!api.upper.walking.getObjectByName('mid'));assert(!api.lower.walking.getObjectByName('mid'));
+ let last=null,entered=false,samples=0,maxJump=0;
+ for(let i=0;i<240;i++){
+  api.step(.05,{forward:1});if(api.route?.side!=='turn')continue;entered=true;samples++;const pose=gravityStairPose(api.route.progress,api.route.offset,M.eye),normal=M.camera,photo=normal.clone();
+  for(const camera of[normal,photo]){camera.position.set(M.player.x,M.player.y,M.player.z);camera.rotation.set(M.player.pitch,M.player.yaw,0,'YXZ');api.prepareCamera(camera);vec(camera.position,pose.eye);vec(camera.up,pose.up);}
+  near(normal.quaternion.angleTo(photo.quaternion),0);if(last){maxJump=Math.max(maxJump,normal.position.distanceTo(last.position));assert(normal.quaternion.angleTo(last.quaternion)<.04,'Rotation follows small walking steps, with no timed half-turn');}last={position:normal.position.clone(),quaternion:normal.quaternion.clone()};
+  if(api.route.progress>.38)break;
+ }
+ assert(entered&&samples>100);assert(maxJump<.35);assert(api.route.progress>.38&&api.route.progress<.42);const held={...M.player},progress=api.route.progress;
+ for(let i=0;i<50;i++)api.step(.1,{});near(api.route.progress,progress);assert.deepEqual(M.player,held,'No key input means no camera turn or displacement');
+ f.reader.hidden=false;api.step(.1,{forward:1});near(api.route.progress,progress);f.reader.hidden=true;
+ const pose=gravityStairPose(progress,api.route.offset,M.eye),localOffset=new T.Vector3(3,-M.eye,-4.7),basis=new T.Matrix4().makeBasis(new T.Vector3(pose.right.x,pose.right.y,pose.right.z),new T.Vector3(pose.up.x,pose.up.y,pose.up.z),new T.Vector3(-pose.forward.x,-pose.forward.y,-pose.forward.z)),q=new T.Quaternion().setFromRotationMatrix(basis);M.lantern.position.set(M.player.x+3,M.player.y-M.eye,M.player.z-4.7);M.lantern.quaternion.identity();api.prepareScene();vec(M.lantern.position,localOffset.applyQuaternion(q).add(new T.Vector3(M.player.x,M.player.y,M.player.z)));near(M.lantern.quaternion.angleTo(q),0);
+ for(let i=0;i<300&&api.route?.side==='turn';i++)api.step(.05,{forward:-1});assert.equal(api.route.side,'upper','Reversing midway returns to the original physical upper helix');assert(api.route.theta<G.joinTheta);assert(Math.hypot(M.player.x-start.x,M.player.z-start.z)<1.5);const theta=api.route.theta;for(let i=0;i<5;i++)api.step(.05,{forward:-1});assert(api.route.theta<theta,'The reverse join cannot recapture a retired middle platform');
+ api.visitGravityTurn();for(let i=0;i<700&&api.route?.side!=='lower';i++)api.step(.05,{forward:1});assert.equal(api.route.side,'lower');assert(api.route.theta<G.joinTheta);const lowerTheta=api.route.theta;for(let i=0;i<5;i++)api.step(.05,{forward:1});assert(api.route.theta<lowerTheta,'Holding forward continues toward the night face after the rotated join');
+ assert.equal(f.privateAccess,0);f.events.get('pagehide')();
 });
 
 check('Lower gallery floor returns through the real bridge, inverse gravity turn and Babel landing',()=>{

@@ -88,14 +88,32 @@ clear of the final terrace aisle and the spiral shaft. The upper overlook uses
 the first terrace's floor material and keeps its exact gallery stair opening.
 See `BABEL-SNAKE-DESCENT.md` for that join and borrowed-resource ownership.
 
-`src/two-face-gallery-model.js` defines both helical routes. Each has 240 real
-steps, three turns, radius 16 and width 3.2; the walk lies inside r14.4..17.6.
-The upper half starts at `(16,-24,0)` heading toward +Z and descends to the broad
-middle landing at Y−48. The lower half is built in local +Y-up coordinates from
-its annular floor at Y=.13 to the same middle at local Y−48. After the host
-half-turn, the middle platforms coincide physically. The host changes gravity
-only at that broad supported landing and interpolates the physical camera turn.
-The route can be walked in either direction.
+`src/two-face-gallery-model.js` retains the original complete three-turn,
+240-step helices as an inspection model. The live controller and scene use only
+their first **200 treads, through angle 5π**, radius 16 and width 3.2. The upper
+half begins at `(16,-24,0)`. The lower half retains local +Y-up coordinates and
+the same rigid physical frame as all other lower rooms. The two retired last
+half-turns and coincident middle rectangles are absent from the live scene and
+cannot be acquired by the live controller.
+
+`gravity-stair-model.js` and `gravity-stair-scene.js` join the two retained
+helices with **240 shallow, gradually tilted planar treads** and closed risers.
+The route circles the shaft once, from physical `(-16,-44,0)` to
+`(-16,-56.0216667,0)`, with matched approach slopes. Its width remains 3.2 m.
+The approximately 101 m walk gradually rolls the local up vector from +Y to −Y;
+quintic roll easing has zero speed at both joins. Continuous rounded handrails
+follow that same moving frame and meet the existing r14.34/r17.66 rails. The
+old timed 850 ms camera flip and relocation at the middle plane are removed.
+
+Walking distance controls roll: stopping holds the current position and angle,
+and reversing retraces them. Keys and touch/gamepad inputs share local forward
+and strafe movement, bounded inside the real rails. Yaw and pitch remain free
+in the moving frame. The first-person camera, photo camera and live lantern use
+the same frame; the night environment blends by passage progress. On either
+exit the physical eye position and look are converted back to the original
+rigid side without resetting pitch or turning the visitor around. A short
+supported approach overlap retains the actual old tread heights, so capture
+does not snap the visitor ahead. Modal readers pause the walk normally.
 
 The model retains feet height, unwrapped angle, side and surface layer when
 choosing a tread. A shared X/Z position is insufficient to change floors or pick
@@ -194,7 +212,7 @@ moves. Do not change upper east/west orientation for RTL interface text.
 | --- | --- |
 | `world-cylinder-model.js` | Dimensions, proper lower transform, lower bounds and tunnel centreline |
 | `world-cylinder-scene.js` | Cylinder, lower land/ocean/aperture, tunnel, landscape, lower mounting and owned resources |
-| `world-cylinder.js` | Navigation ownership, middle handoff, lower collision composition, source mounting lifecycle, camera/photo/lantern transforms, world overview, journey, map and lighting restoration |
+| `world-cylinder.js` | Navigation ownership, supported gradual gravity stair, lower collision composition, source mounting lifecycle, camera/photo/lantern transforms, world overview, journey, map and lighting restoration |
 | `two-face-gallery-model.js` / `two-face-gallery-scene.js` | Matching helical surfaces, bridge/spur/platform geometry, rails, floor and reversible route contract |
 | `babel-layout.js` / `babel-library*.js` | Original gallery opening, upper descent, five terraces/catalogue, real pit/shelf cuts and Babel entry/return ownership |
 | `math-faculty-model.js` / `math-faculty-scene.js` | Central annulus, wing shell/covered join, discipline actions, exact native shell selection and new solid colliders |
@@ -225,7 +243,7 @@ and the mathematical/library explanations and links.
 
 ## Verification and previews
 
-Relevant checks are `tests/world-cylinder.mjs`, `tests/two-face-gallery.mjs`,
+Relevant checks are `tests/world-cylinder.mjs`, `tests/gravity-stair.mjs`, `tests/two-face-gallery.mjs`,
 `tests/babel-snake-descent.mjs`, `tests/babel-library.mjs`,
 `tests/escher-depth-model.mjs`, `tests/escher-depth-runtime.mjs`,
 `tests/pond-world-window.mjs`, `tests/math-faculty.mjs` and
@@ -236,7 +254,7 @@ cleanup. The full project check remains required before release. Browser review
 covers picking, keyboard/controller travel, physical camera turn, cutaway
 readability, live pond parallax, the centre book ring and source-room UI.
 
-Current local preview arrivals include `?arrival=babel-stairs`, `?arrival=babel`,
+Current local preview arrivals include `?arrival=gravity-turn`, `?arrival=babel-stairs`, `?arrival=babel`,
 `?arrival=through-gallery`, `?arrival=lower-face`, `?arrival=world-section`,
 `?arrival=escher-depth` and `?arrival=pond-crossing`. The pond arrival stops beside
 the existing basin; crossing remains an explicit action.

@@ -1,5 +1,36 @@
 # Central gallery through the island
 
+## Live gradual inversion
+
+The current live host builds this module with `endTheta:5*Math.PI`. That retains
+the first **200 treads** on each side and omits both obsolete middle rectangles,
+their last forty treads, arches and associated end rails. The untrimmed default
+remains an explicit geometry diagnostic; it is not the live route. Navigation
+capture in `world-cylinder.js` rejects `mid` and every theta beyond 5π.
+
+The replacement `gravity-stair-model.js` / `gravity-stair-scene.js` joins the two
+retained ends with one full circular, 3.2 m wide, **240-tread** stair. Treads are
+planar in their gradually rotated local frame, with shallow closed risers.
+Rails use the same smooth frame and exact old r14.34/r17.66 endpoints. Normal
+walking takes approximately 29 seconds through its 101 m length. Its quintic
+roll turns the whole stair and camera up from +Y to −Y, with zero endpoint roll
+speed. No timer locks movement or teleports between middle decks. Stopping,
+turning, looking and reversing all continue to work.
+
+The host owns the temporary `side:'turn'` route, storing physical eye coordinates
+only while that route is active. All existing upper/lower logical coordinates
+and private saves stay unchanged. Local yaw/pitch, photo pose and lantern use
+the same moving basis. `visitGravityTurn()` and `?arrival=gravity-turn` start on
+the supported upper approach. `#world` exposes `data-gravity-turn-progress` and
+`data-gravity-turn-degrees` during the turn for read-only browser diagnostics.
+
+Run `node tests/gravity-stair.mjs` for actual tread/body rays through the combined
+geometry, endpoint normals, removed old slabs, bounded reversible movement and
+owned cleanup. `tests/world-cylinder.mjs` checks held-key crossing, stopping,
+reader pauses, reversal, pose continuity, photo/lantern agreement and continued
+movement after both joins. The original complete-model checks below still
+describe and verify the reusable untrimmed inspection mode.
+
 The central shaft continues the last Babel terrace into the island's thickness. The island is 96 units thick. The handoff between the two gravity frames is the plane at physical Y = −48. This module does not move the player between frames or install itself in Babel; the host controller owns those transitions.
 
 `src/two-face-gallery-model.js` is the geometry authority. `UPPER` and `LOWER` share a radius of 16, a width of 3.2, three complete turns and 240 real stone treads each. Their walkable radial interval is 14.455–17.545, leaving a small inset inside the geometry at 14.4–17.6 and its rails. The upper route runs from Y = −24 to −48. The lower route uses **local +Y-up coordinates** and runs from Y = 0.13 to −48. At each tread boundary the height changes by one rise; `heightAt` returns the actual flat tread height. The final endpoint belongs to the middle platform. Passing `{continuous:true}` to `heightAt` or `pointAt` returns the underlying helical profile for inspection only.
