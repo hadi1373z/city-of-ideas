@@ -1,4 +1,4 @@
-import {GRAVITY_STAIR as G,gravityStairFrame,gravityStairCenter,gravityStairTread} from './gravity-stair-model.js';
+import {GRAVITY_STAIR as G,gravityStairFrame,gravityStairCenter,gravityStairTread} from './gravity-stair-model.js?v=gravity-ant-20261117';
 
 /** Original full-turn ribbon, planar treads and rails roll through a half-turn. */
 export function buildGravityStair(T){

@@ -1,5 +1,5 @@
-import {SCULPTURE_COURTS,SCULPTURE_LESSONS,PAPER_CURATION,CURATED_FLOOR_PATHS,nearSculpture,sculptureCanStand,subsetName,likelihoodInformation,MOBIUS} from './mathematical-sculptures-model.js?v=city-night-20261117';
-import {buildMathematicalSculptures} from './mathematical-sculptures-scene.js?v=city-night-20261117';
+import {SCULPTURE_COURTS,SCULPTURE_LESSONS,PAPER_CURATION,CURATED_FLOOR_PATHS,nearSculpture,sculptureCanStand,subsetName,likelihoodInformation,MOBIUS} from './mathematical-sculptures-model.js?v=gravity-ant-20261117';
+import {buildMathematicalSculptures} from './mathematical-sculptures-scene.js?v=gravity-ant-20261117';
 import {PAPER_GALLERY_FLOORS} from './paper-gallery-model.js?v=city-night-20261117';
 import {HISTORIC_PAPERS} from './historic-papers-data.js?v=city-night-20261117';
 import {WORLD_CYLINDER as W,isLowerCoordinate,lowerLocal} from './world-cylinder-model.js?v=city-night-20261117';
