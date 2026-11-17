@@ -21,9 +21,11 @@ once by the host; card text never receives an additional inversion.
 
 Radii 19–25 and 51–58 stay plain and calm. The existing r39 brass inlay passes
 through the deliberately empty gap between each diagram and its body text.
-All diagrams and the short body text are original City of Ideas drawings and
-wording; no source image, recording or external mesh is used. The canvas is
-redrawn only when the selected fact changes. Automatic changes fade the card
+Each floor card uses one 12–20-word hook and an original diagram. The full
+35–50-word qualified explanation remains in the optional reader. All drawings and
+wording are original City of Ideas material; no source image, recording or external mesh is used. The canvas is
+redrawn only when the selected fact changes. Floor hooks use at most three
+large lines with generous empty space; the floor is not a paragraph-sized carpet. Automatic changes fade the card
 through its own background, without animating the walking surface.
 
 ## Facts, qualifications and sources
@@ -68,8 +70,9 @@ The sequence runs only on the actual lower ground floor, with a visible page
 and no reader/map/modal/immersive-sky view. Hidden or off-floor time cannot
 catch up through missed cards. Reduced motion defaults to manual changes.
 
-A compact **Read the floor** button appears near a card, above the reserved
-mobile movement zone. Its close button dismisses this optional hint. The
+A compact **Read the floor** button appears near a card, above the folded
+reading guide and reserved mobile movement zone. Its width follows the label
+rather than forcing the label to wrap. Its close button dismisses this optional hint. The
 optional DOM reader presents the same full text, a question and source links,
 plus Pause/Play and Next. It never opens automatically or announces a changing
 fact every 36 seconds. Existing original-paper and sculpture actions retain
