@@ -55,6 +55,12 @@ combines the retained threshold roads with the new block-edge network. The same
 route set governs paving, tree clearance, wall gates and generated map geometry.
 The source artist map fits its new three separated court bounds.
 
+The actual shared paving builder consumes the complete `urbanRoutes()` authority,
+including philosopher lanes/thresholds, seminar and study approaches and the exact
+artist doorway spurs. Hiding retired source paving therefore cannot hide the new
+door paths. The scene suite raycasts the two real visible road meshes along every
+composed route, rather than accepting route metadata as proof of rendered paving.
+
 The dashed underground routes are the existing physicalY−40 Babel/Transformations
 corridor and its Escher museum spur. A surface linked threshold is not described
 as a physical staircase. Personal homes occupy the night face without rewriting
