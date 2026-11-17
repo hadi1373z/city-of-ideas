@@ -1,4 +1,4 @@
-import {buildBirdFlight} from './bird-flight-scene.js?v=bird-peel-20261117b';
+import {buildBirdFlight} from './bird-flight-scene.js?v=ceiling-20261117';
 /** No input, storage, account or independent render loop. */
 export function installBirdFlight(M,T,{events=globalThis,...options}={}){
  const parent=M.worldCylinder?.built?.group;if(!parent?.isObject3D)throw Error('The connected world must exist before its observatory flight');

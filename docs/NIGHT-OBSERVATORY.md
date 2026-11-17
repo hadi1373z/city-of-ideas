@@ -42,3 +42,8 @@ No voices, accounts, location permissions or private storage are used.
 ## Immersive telescope
 
 The study reader offers an optional full-screen sky view. It preserves the real player position, uses the same measured catalogue, and offers a 12–100 degree field of view, removable guide lines, study and photo actions. Arrows/left stick pan the optical view; drag/right stick retain normal look control. Returning restores the physical observatory and normal camera. Native browser fullscreen is requested only by that explicit button and falls back to a viewport-filling view if unavailable. The code retains user-owned fullscreen and compensates for a request resolving after exit/disposal. The immersive scene hides architecture only during its own render and restores previous visibility before the next scene update and on exit.
+
+The structural deck thickness is shared in NIGHT_OBSERVATORY.deckThickness.
+Its underside now carries the bird ceiling mosaic atY21.875 and radius7.16.
+The mosaic faces visitors below the deck; the telescope floor remains stone.
+The flock approaches from beneath rather than crossing through the platform.

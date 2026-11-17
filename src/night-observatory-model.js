@@ -1,7 +1,7 @@
 // All coordinates are ordinary lower-local +Y-up. The existing world frame
 // supplies the physical half-turn, including the skyward direction.
 const TAU=Math.PI*2,clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
-export const NIGHT_OBSERVATORY=Object.freeze({baseY:12.13,deckY:22.13,steps:80,rise:.125,endTheta:TAU,landingEnd:.18,
+export const NIGHT_OBSERVATORY=Object.freeze({baseY:12.13,deckY:22.13,deckThickness:.24,steps:80,rise:.125,endTheta:TAU,landingEnd:.18,
  stairRadius:16,stairInner:14.4,stairOuter:17.6,navInset:.055,feetTolerance:.27,maxThetaDelta:.28,
  deckRadius:7.2,deckWalkRadius:6.86,bridgeInner:6.65,bridgeOuter:14.4,bridgeHalfWidth:1.6,
  roofOuter:61,roofJoin:21.5,roofOuterY:16.4,roofJoinY:20.55,roofApex:29,

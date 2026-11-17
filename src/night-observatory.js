@@ -1,6 +1,6 @@
-import {NIGHT_OBSERVATORY as C,observatorySurface,walkObservatory} from './night-observatory-model.js?v=city-night-20261117';
-import {buildNightObservatory} from './night-observatory-scene.js?v=city-night-20261117';
-import {WORLD_CYLINDER as W,isLowerCoordinate,lowerLocal} from './world-cylinder-model.js?v=city-night-20261117';
+import {NIGHT_OBSERVATORY as C,observatorySurface,walkObservatory} from './night-observatory-model.js?v=ceiling-20261117';
+import {buildNightObservatory} from './night-observatory-scene.js?v=ceiling-20261117';
+import {WORLD_CYLINDER as W,isLowerCoordinate,lowerLocal} from './world-cylinder-model.js?v=ceiling-20261117';
 
 export function installNightObservatory(M,T){
  const world=M.worldCylinder;if(!world?.lower?.group)throw Error('Install the lower gallery before the central observatory.');

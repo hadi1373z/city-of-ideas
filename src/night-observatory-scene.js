@@ -1,4 +1,4 @@
-import {NIGHT_OBSERVATORY as C,observatoryRoofY,observatoryStairY} from './night-observatory-model.js?v=city-night-20261117';
+import {NIGHT_OBSERVATORY as C,observatoryRoofY,observatoryStairY} from './night-observatory-model.js?v=ceiling-20261117';
 
 export function buildNightObservatory(T){
  const group=new T.Group(),walking=new T.Group(),lamps=new T.Group(),owned=new Set(),own=o=>(owned.add(o),o),batches=new Map();group.name='Central observatory · a real stair under the curved glass sky';walking.name='Observatory deck, inner bridge and 80 real rising treads';group.add(walking,lamps);
@@ -11,11 +11,11 @@ export function buildNightObservatory(T){
  for(let i=0;i<C.steps;i++)cap(i/C.steps*2*Math.PI,(i+1)/C.steps*2*Math.PI,observatoryStairY(i/C.steps*2*Math.PI));
  cap(0,C.landingEnd,C.deckY);
  const stairGeo=own(new T.BufferGeometry());stairGeo.setAttribute('position',new T.Float32BufferAttribute(vertices,3));stairGeo.setIndex(indices);stairGeo.computeVertexNormals();const stair=mesh(stairGeo,stone,'80 real observatory treads and the exact post-turn landing',walking);
- const deck=mesh(new T.CylinderGeometry(C.deckRadius,C.deckRadius,.24,128),stone,'Central walkable observatory deck',walking);deck.position.y=C.deckY-.12;
+ const deck=mesh(new T.CylinderGeometry(C.deckRadius,C.deckRadius,C.deckThickness,128),stone,'Central walkable observatory deck',walking);deck.position.y=C.deckY-C.deckThickness/2;
  const shape=new T.Shape(),a=Math.asin(C.bridgeHalfWidth/C.bridgeOuter);shape.moveTo(C.bridgeInner,-C.bridgeHalfWidth);shape.lineTo(Math.sqrt(C.bridgeOuter**2-C.bridgeHalfWidth**2),-C.bridgeHalfWidth);shape.absarc(0,0,C.bridgeOuter,-a,a,false);shape.lineTo(C.bridgeInner,C.bridgeHalfWidth);shape.closePath();
  const bridge=mesh(new T.ExtrudeGeometry(shape,{depth:.22,bevelEnabled:false,curveSegments:32}),stone,'Inner bridge with exact circular stair join',walking);bridge.rotation.x=-Math.PI/2;bridge.position.y=C.deckY-.22;
- // Floor is structural stone here; the original bird-flight installation can
- // lay its reassembled mosaic at y22.15 without changing these support surfaces.
+ // The deck remains structural stone. Birds reassemble on its underside,
+ // 15mm below this slab, leaving its walking surface and clear sky unchanged.
  const rim=mesh(new T.TorusGeometry(C.deckRadius-.04,.075,8,128),brass,'Thin bronze edge of the central deck');rim.rotation.x=Math.PI/2;rim.position.y=C.deckY-.015;
  for(let i=0;i<96;i++){const a=i*Math.PI/48,b=(i+1)*Math.PI/48;if(Math.abs(Math.atan2(Math.sin((a+b)/2),Math.cos((a+b)/2)))<.25)continue;const p=t=>[7.15*Math.cos(t),C.deckY+1.04,7.15*Math.sin(t)];beam(p(a),p(b),.035);if(i%4===0)beam([7.15*Math.cos(a),C.deckY,7.15*Math.sin(a)],p(a),.032);}
  for(const z of[-C.bridgeHalfWidth,C.bridgeHalfWidth]){beam([7.25,C.deckY+1.04,z],[14.0,C.deckY+1.04,z],.035);for(const x of[7.35,9.5,11.65,13.8])beam([x,C.deckY,z],[x,C.deckY+1.04,z],.032);}

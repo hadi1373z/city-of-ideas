@@ -228,7 +228,7 @@ The wall-to-flock transition uses one continuous painted field, an ordered wave
 of full-size curved relief skins and 64 live source cells. Static relief/proxy
 must omit the live source cells: each flying bird owns its own flat wall pose.
 The same closed skin bends only its wings, pins the original head/beak, grows
-volume and returns exactly to its floor outline. Do not restore the old two
+volume and returns exactly to its ceiling outline. Do not restore the old two
 hinged halves, separate spherical head, random shrinking stickers or long black
 quill strokes. Production uses the continuous painted field instead of visible
 horizontal LOD bands. Read docs/CYLINDER-BIRD-TRANSITION.md for ownership,
@@ -237,3 +237,7 @@ clearances, source-size preservation and render budgets.
 The House of Transformations well also cuts the main gallery plinth in gallery.js, whose 153 m outer radius reaches beneath this house. Preserve the exact localXY/worldXZ mapping of the additional houseWell hole; cutting only city/coast grounds leaves a dark cap at Y -.25. Tests must raycast the actual root annulus helper and transformed plinth with the house, not only the standalone house.
 
 City redesign studies from 17 November 2026: A is a sixfold garden-city framework; B uses woven concentric rings; C uses two connected Archimedean spirals; D uses Penrose courtyards. The user requested brainstorming first, so these studies do not change the live arrangement. Keep the central Gallery/Babel/observatory axis, circular ocean boundary and existing personal homes in the comparison. These letters refer to city layouts, separately from Zarathustra character choice B.
+
+The bird destination is now the observatory CEILING underside, not its walking floor. Preserve the downward normals, shared slab thickness, 15mm reveal and upward settlement beneath the real deck. All64 birds use the same ceiling tile mapping and colour; final routes remain below the platform. The glass roof and real star sky remain clear. Use ?arrival=ceiling-mosaic for the looking-up preview.
+
+For the A city-layout study, the user rejected both distorted hexagons and an overly compact central plan. The revised proposal should spread regular honeycomb neighbourhoods across the usable island. The user permits reshaping P (park) and moving H (homes) to the other, night face; H is not to be deleted. These are design directions, not a migration of private data or a completed live rearrangement. Preserve home contents and the pond crossing when later implementing the approved layout.
