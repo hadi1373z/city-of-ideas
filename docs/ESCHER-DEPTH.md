@@ -136,3 +136,7 @@ gates, mode/height guards, modal pauses, return handoff, lighting and owned clea
 ## House as museum entrance pavilion
 
 The surface house keeps its footprint, four credited prints, alignment puzzle and saved passage. An open ribbed canopy, inset alternating floor and brass alcove inlays establish a single entrance axis. A wall-mounted route names the three museum investigations. The Escher threshold has an open frame rather than an opaque slab hiding the rear print; proximity and E/A still activate the existing shared underground interior after solving the house puzzle. Returning uses the same alcove with the existing cooldown. This is a linked threshold, not a modelled forty-metre stair. The surface puzzle panel is now height-gated so it cannot appear over the museum below.
+
+## Print-to-experiment journeys
+
+Each upper-house print now offers a specific study prompt. Following a print selects an in-memory question and points toward the existing rear threshold; it neither transports the visitor nor bypasses the alignment puzzle. Museum guidance names the physical route. Ascending and Descending leads to the signed-flight model with a four-up reset; Waterfall and Relativity lead to the separated-depth projection experiment (which does not model different gravity fields); Drawing Hands leads to a two-task dependency experiment at the reading desk. These are original finite models, with their limits stated. No new achievements or automatic private-note writes are introduced.

@@ -18,7 +18,7 @@ export const ESCHER_DEPTH=Object.freeze({
   Object.freeze({id:'perspective',name:'One triangle, several depths',x:213,z:124,y:-40}),
   Object.freeze({id:'tessellation',name:'Edges that agree',x:213,z:73,y:-40}),
   Object.freeze({id:'loop',name:'Can every flight rise?',x:197,z:163,y:-46}),
-  Object.freeze({id:'reading',name:'A note on the experiments',x:251,z:116,y:-40})
+  Object.freeze({id:'reading',name:'Which hand comes first?',x:251,z:116,y:-40})
  ])
 });
 

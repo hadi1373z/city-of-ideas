@@ -1,9 +1,10 @@
+import {installMathematicalPavilions} from './mathematical-pavilions.js?v=1';
 import {installConnectedJourney} from './connected-journey.js?v=1';
 import {installPaperMonitors} from './paper-monitors.js?v=1';
 import {HISTORIC_PAPERS} from './historic-papers-data.js';
 import {installPondWorldWindow} from './pond-world-window.js?v=1';
 import {installWorldCylinder} from './world-cylinder.js?v=babel-floor1-finishes1';
-import {installEscherDepth} from './escher-depth.js?v=house-link1';
+import {installEscherDepth} from './escher-depth.js?v=print-studies1';
 import {installHouseInvestigations} from './house-investigations.js?v=1';
 import {installComputationLab} from './computation-lab.js?v=1';
 import {installProofAtelier} from './proof-atelier.js?v=cover-bounds1';
@@ -32,7 +33,7 @@ import {createDistrictNavigation} from './district-navigation.js';
 import {createSharedResidents} from './shared-residents.js';
 import {createSharedActivities} from './shared-activities.js';
 import {installIdeasGraveyard} from './ideas-graveyard.js?v=foundations1';
-import {installEscherHouse} from './escher-house.js?v=house-link1';
+import {installEscherHouse} from './escher-house.js?v=print-studies1';
 import {installStudyBook} from './study-book.js';
 import {installCinematicIntro} from './cinematic-intro.js?v=edition2';
 import {installDiscoveryStory} from './discovery-story.js';
@@ -123,12 +124,13 @@ try{
  installOceanVoyage(M,T);
  installBabelLibrary(M,T);
  installSeminarHouses(M,T);
+ installMathematicalPavilions(M,T);
  installEscherDepth(M,T);
  installWorldCylinder(M,T);
  installPaperMonitors(M,T,{papers:HISTORIC_PAPERS});
  installPondWorldWindow(M,T);
  installConnectedJourney(M,T);
- const arrivalQuery=new URLSearchParams(location.search||''),faceArrival=arrivalQuery.get('arrival');if(faceArrival==='pond-crossing'){M.arrive(M.pondWorldWindow.pond.entry);M.player.pitch=-.33;}else if(faceArrival==='escher-depth')M.escherDepth.enter('gallery');else if(faceArrival==='math-entrance')M.startExtra('mathematics');else if(faceArrival==='paper-monitors')M.startExtra('paper-monitors');
+ const arrivalQuery=new URLSearchParams(location.search||''),faceArrival=arrivalQuery.get('arrival');if(faceArrival?.startsWith('math-pavilion:'))M.startExtra(faceArrival);else if(faceArrival==='pond-crossing'){M.arrive(M.pondWorldWindow.pond.entry);M.player.pitch=-.33;}else if(faceArrival==='escher-depth')M.escherDepth.enter('gallery');else if(faceArrival==='math-entrance')M.startExtra('mathematics');else if(faceArrival==='paper-monitors')M.startExtra('paper-monitors');
  M.status('ready');
  installCinematicIntro(M,T,socrates);
  // The bare city address opens at the approved volcanic reservoir in Babel.
