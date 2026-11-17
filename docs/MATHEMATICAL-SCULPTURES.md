@@ -1,11 +1,11 @@
-# Four sculptures, four reading paths
+# Five sculptures, four reading paths
 
-The Mathematics reading hall now has one original procedural sculpture on each
-of its four real floors. This adds a reason to compare the papers rather than
+The Mathematics reading hall has an original procedural sculpture on each
+of its four real floors, plus a Möbius band with a walking ant on the geometry floor. This adds a reason to compare the papers rather than
 another display of unrelated objects. The existing eleven licensed original
 first-page images, stable paper identifiers, edition notes and source/rights
-records are preserved. No image, sculpture mesh, narration or private save is
-downloaded or created by this module.
+records are preserved. No external image or sculptural mesh is downloaded. No narration or private
+save is created by this module.
 
 ## Selection and sequence
 
@@ -64,6 +64,33 @@ Before the display scale, `E=G=(1+u²+v²)²`, `F=0`, `H=0` and
 `K=-4/(1+u²+v²)^4`. Zero mean curvature is not zero Gaussian curvature or a
 blanket claim of global area minimality. No museum image/model was copied.
 
+**Möbius band and ant:** a solid, original parametric ribbon sits opposite the
+Enneper patch on the geometry floor. Its ideal middle surface is
+`((R+v*cos(u/2))*cos(u), v*sin(u/2), (R+v*cos(u/2))*sin(u))`, with display
+radius 1.65 m, half-width .58 m and a 55 mm physical thickness. The shell is
+closed across the reversed seam, with one continuous gold boundary. The small
+physical thickness is explicitly distinguished from the ideal one-sided surface.
+
+A red ant has six articulated legs, two feelers, three body segments and two
+eyes. Each stance foot follows the actual curved ribbon rather than a flat
+moving frame. Its oriented centreline frame uses continuous tangent, width
+vector and surface normal: after `2π` the centreline position returns and the
+normal is reversed; after `4π` the entire frame returns. A two-circuit journey
+takes 32 seconds. This makes one-sidedness inspectable as movement instead of
+an unexplained flip or teleport.
+
+The sculpture's English study action offers pause/resume, quarter-lap stepping
+and restart. The mathematical question asks visitors to derive
+`X(u+2π,v)=X(u,−v)` and compare a full-twist band. Reduced motion freezes
+automatic walking while retaining explicit quarter-lap steps. Hidden documents
+and open study panels pause the same shared city-clock simulation; there is no
+second animation loop and no accumulated jump after returning to the tab.
+
+The artistic reference is the museum's account of
+[Escher's Möbius Strip II (1963)](https://www.escherinhetpaleis.nl/en/about-escher/masterpieces/mobius-strip-ii).
+No print, image, museum mesh or external model is copied. This is original
+mathematical teaching geometry, not a reproduction of the artwork.
+
 **Finite Menger sponge:** split each cube into twenty-seven cubelets, omit the
 centre and six face centres, and recurse in each survivor. Orders zero, one
 and two contain 1, 20 and 400 cubes. The retained-volume fraction is
@@ -93,16 +120,18 @@ would invalidate an apparent gain in information.
 ## Architecture, interaction and bounds
 
 Each court lies at radius 38 m, 0.55 radians from its floor’s radial stair
-landing. A low 2.9-metre-radius plinth supports its object. The maximum court
+landing. The additional Möbius court mirrors the Enneper court across the
+geometry floor’s radial landing (−0.55 instead of +0.55 radians). A low 2.9-metre-radius plinth supports its object. The maximum court
 collider radius is 3.4 m, plus the walking margin; all central stairs, the
 inner circulation circuit, the r52 paper-viewing aisle and the western ground
 exit remain open. Every sculpture stays below 3.8 m above its own floor.
 Small 2.8×0.585 m plinth labels replace large freestanding signboards.
 
-`buildMathematicalSculptures` adds exactly thirteen renderable objects and no
-lights. The 400 sponge cubes, graph nodes/edges and four plinths use instancing.
-Controls update actual geometry or instance state, then close the reader so
-the visitor sees the result. Nothing animates continuously or advances itself.
+`buildMathematicalSculptures` adds exactly nineteen renderable objects and no
+lights. The 400 sponge cubes, graph nodes/edges, five plinths, ant body, eyes,
+limbs and two ribbon supports use instancing. Controls update actual geometry
+or instance state, then close the reader so the visitor sees the result. Only
+the ant advances continuously, using the existing city update clock.
 The visit state is in memory only; the module never reads browser storage.
 
 Install `installMathematicalSculptures(M,T)` after the paper gallery and monitors.
@@ -115,6 +144,26 @@ buttons cannot change a sculpture from another floor.
 `tests/mathematical-sculptures.mjs` checks the graph degrees/ranks and 24 maximal
 chains, independent differential geometry, disjoint recursive cube interiors
 and volume, likelihood Hessian/information, exact duplicate-evidence behavior,
-finite geometry/headroom, the thirteen-object budget, clear physical routes,
+finite geometry/headroom, the nineteen-object budget, a watertight twisted
+ribbon seam with outward normals, the ant’s continuous orientation double
+cover and exact curved-foot contact, shared-clock pause/reduced-motion/hidden
+state behavior, clear physical routes,
 real gallery collision composition, proximity-gated controls, curation identity
 and owned cleanup without private-data access.
+
+
+## Further sculpture candidates — not built
+
+These references are design candidates, not claims that their objects or art
+are in the city. Each needs a mathematical investigation and an original model
+or separately licensed asset before implementation.
+
+- **The Eightfold Way / Klein quartic:** a finite sculpture leading to a study
+  of symmetry, genus and the relation between a hyperbolic tiling and its
+  compact quotient. Start from [Carlo Séquin's account of the sculpture and
+  its mathematics](https://people.eecs.berkeley.edu/~sequin/PAPERS/2008_G4G8_8foldWay.pdf).
+- **Gyroid labyrinth:** inspect the two intertwined channels and distinguish
+  a useful trigonometric approximation from an exact minimal surface. The
+  artist's [Gyroid commission](https://www.bathsheba.com/gallery/commissions/gyroid-rust/)
+  is a reference for sculpture at architectural scale; its geometry or images
+  are not licensed assets for this project by default.
