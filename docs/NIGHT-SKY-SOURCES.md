@@ -83,3 +83,9 @@ about inference or projection. Scorpius deliberately exposes the latitude limit:
 some selected southern tail stars never rise at Prague's latitude. Endpoints
 below the horizon stay below it; a whole figure is never forced into the dome.
 Changing chart time or reading a guide touches no private data or fixed voices.
+
+## Changing constellation highlights
+
+The ambient sequence changes one original line figure about every 24 seconds on the same dated sky. It never changes star coordinates, chart date, player position or camera direction automatically. A figure needs at least three above-horizon guide stars, two complete visible edges and a focus above 5 degrees. The default chart provides Orion, Cassiopeia, the Big Dipper guide and Cygnus; the initial high-sky figure is Cassiopeia. A direction/altitude cue helps visitors find patterns outside their current view.
+
+Pause/Play and Next are available while walking on the lower face and in telescope mode. Manual pattern or season selection pauses automatic changes; hiding lines stays respected. Readers, maps, hidden pages and travel off the lower face hold the sequence without catch-up. Reduced motion uses manual Next with no automatic fades. The 24-second dwell has 1.2-second line fades, using one line buffer and a material-opacity update; the star buffer stays unchanged. The sequence reads no private storage and adds no astronomy assets or external requests.
