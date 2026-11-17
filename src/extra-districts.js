@@ -1,5 +1,5 @@
 import './city-road-surface.js?v=city-night-20261117';
-import {nightHomeTransform,nightHomeAccess,nightHomeRoadSegments} from './night-home-layout.js';
+import {nightHomeTransform,nightHomeAccess,nightHomeRoadSegments} from './night-home-layout.js?v=honeycomb-sky-20261118';
 /* Additive source-authentic geometry for the principal City of Ideas scene.
    Copy this module to src/extra-districts.js when its controller hooks are wired. */
 const copy=value=>JSON.parse(JSON.stringify(value));

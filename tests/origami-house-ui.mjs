@@ -26,14 +26,14 @@ try{
  click(w.crease);click(w.cases[1]);assert(dialog.textContent.includes(w.fail));click(w.cases[0]);click(w.answers[0]);assert(dialog.textContent.includes(w.incorrect));click(w.answers[1]);assert(api.memory.state.creaseUnderstood);const first=api.memory.state.mountains[0];M.showExtra({kind:'origami-house',data:{origamiHouse:'crease',creaseIndex:0}});assert.notEqual(api.memory.state.mountains[0],first);
  click(w.boat);for(let i=0;i<8;i++)click(w.next);click(w.finish);assert(api.memory.state.boatDone);assert.equal(dialog.querySelectorAll('img').length,2);assert(dialog.querySelector('img').src.startsWith('data:image/svg+xml'));click(w.shore);assert(!find(w.launch));api.visit('shore');api.open('shore');click(w.launch);assert(api.memory.state.launched);M.city.update(M.player,2,'city');assert(api.house.released.group.visible);assert.equal(M.city.region(M.player.x,M.player.z).id,'coast');
  const input=dialog.querySelector('textarea');input.value='A fold turns a geometric constraint into a motion.';input.oninput();assert.equal(input.dataset.privateText,'');click(w.save);assert.equal(store.state.questions[0].history[0].answer,input.value);click(w.notebook);assert.equal(opened,'house-origami');assert.equal(values.get('private-note'),'Preserve this thought');
- overview.onclick();assert.equal(nativeOverview,1);assert(map.open);assert.equal(map.querySelector('img').src.endsWith('city-coast-en.svg'),true);assert(find(w.open,map));
+ overview.onclick();assert.equal(nativeOverview,1);assert(map.open);assert.equal(new URL(map.querySelector('img').src).pathname.endsWith('city-coast-en.svg'),true);assert(new URL(map.querySelector('img').src).searchParams.has('v'),'Updated map images carry a release cache key');assert(find(w.open,map));
  const mapControl=key=>map.querySelectorAll('button').find(n=>n.dataset.coastFocus===key);
  const selectMap=key=>{const n=mapControl(key);assert(n,key);n.focus();n.onclick();};
  const beforeMap=new Map(values),beforeTravel=travels.length;
  for(const language of['en','de','fa']){
   window.CITY_I18N.lang=language;events.get('city-language')();const c=COAST_EXPLORER_COPY[language];
   assert.equal(map.dir,language==='fa'?'rtl':'ltr');assert.equal(map.lang,language);
-  assert(map.querySelector('img').src.endsWith('city-coast-'+language+'.svg'));
+  assert(new URL(map.querySelector('img').src).pathname.endsWith('city-coast-'+language+'.svg'));
   for(const p of COAST_LANDMARKS){
    selectMap('marker-'+p.id);assert.equal(map.querySelector('#coastal-location-name').textContent,c.landmarks[p.id].name);
    assert.equal(mapControl('place-'+p.id).getAttribute('aria-pressed'),'true');

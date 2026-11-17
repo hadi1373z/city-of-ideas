@@ -1,4 +1,4 @@
-import {SEMINAR_HOUSES} from './seminar-houses-data.js?v=city-night-20261117';
+import {SEMINAR_HOUSES} from './seminar-houses-data.js?v=honeycomb-sky-20261118';
 import {SHORE} from './island-layout.js?v=city-night-20261117';
 
 // The same world-to-SVG projection used by the original coastal plan.

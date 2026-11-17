@@ -1,4 +1,4 @@
-import {HEX_DISTRICTS} from './city-hex-layout.js';
+import {HEX_DISTRICTS} from './city-hex-layout.js?v=honeycomb-sky-20261118';
 const court=HEX_DISTRICTS.philosophers;
 // Original bilingual study guides. Architecture is an imaginative interpretation.
 export const PHILOSOPHERS = [

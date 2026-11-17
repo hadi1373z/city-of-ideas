@@ -1,11 +1,11 @@
 import './artist-quarter-layout.js';
-import {BUILT_HONEYCOMB_LAYOUT} from './honeycomb-city-layout.js';
-import {HEX_DISTRICTS} from './city-hex-layout.js';
-import {FOUNDATION_HOUSES,FOUNDATION_ROUTES,houseEntry} from './foundation-houses-data.js?v=city-night-20261117';
-import {SEMINAR_HOUSES,SEMINAR_PATHS,seminarEntry} from './seminar-houses-data.js?v=city-night-20261117';
+import {BUILT_HONEYCOMB_LAYOUT} from './honeycomb-city-layout.js?v=honeycomb-sky-20261118';
+import {HEX_DISTRICTS} from './city-hex-layout.js?v=honeycomb-sky-20261118';
+import {FOUNDATION_HOUSES,FOUNDATION_ROUTES,houseEntry} from './foundation-houses-data.js?v=honeycomb-sky-20261118';
+import {SEMINAR_HOUSES,SEMINAR_PATHS,seminarEntry} from './seminar-houses-data.js?v=honeycomb-sky-20261118';
 import {STUDY_HOUSES,STUDY_PATHS} from './study-houses-data.js?v=city-night-20261117';
 import {PAVILIONS,pavilionTurn} from './mathematical-pavilions-model.js?v=city-night-20261117';
-import {PHILOSOPHERS,quarterPaths} from './philosopher-data.js?v=city-night-20261117';
+import {PHILOSOPHERS,quarterPaths} from './philosopher-data.js?v=honeycomb-sky-20261118';
 import {COAST_ROUTES,HOUSE_ORIGAMI} from './origami-house-math.js?v=city-night-20261117';
 
 // A regular city fabric joins the original inhabited districts. Private homes

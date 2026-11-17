@@ -1,4 +1,4 @@
-import {URBAN_COURTS,HONEYCOMB_CITY,urbanPlanting,urbanRoutes,segmentDistance} from './city-urban-plan-model.js?v=city-night-20261117';
+import {URBAN_COURTS,HONEYCOMB_CITY,urbanPlanting,urbanRoutes,segmentDistance} from './city-urban-plan-model.js?v=honeycomb-sky-20261118';
 export function buildCityUrbanPlan(T,{naturalTrees=globalThis.window?.buildNaturalCityTrees}={}){
  const group=new T.Group();group.name='Honeycomb city · gated mathematical courts and connected learning houses';const owned=new Set(),own=x=>(owned.add(x),x),box=own(new T.BoxGeometry(1,1,1)),stamp=new T.Object3D(),batches=new Map(),colliders=[],treePositions=urbanPlanting(),routes=urbanRoutes();
  const mats={paving:own(new T.MeshLambertMaterial({color:0xc5baa1})),edge:own(new T.MeshLambertMaterial({color:0xaaa58d})),wood:own(new T.MeshLambertMaterial({color:0x795d45})),leaf:own(new T.MeshLambertMaterial({color:0x667d5d}))};
