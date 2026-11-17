@@ -40,7 +40,7 @@ for (const lang of ['en', 'de', 'fa']) {
     assert(Object.values(place).every(s => typeof s === 'string' && s.length > 0));
     assert(place.description.length > 50);
   }
-  assert.equal(copy.steps.length, 3);
+  assert.equal(copy.steps.length, 3);assert(copy.route.includes(lang==='fa'?'اوریگامی':'Origami'),'The guide names the real Origami/coast route');assert(!copy.route.includes(lang==='en'?'Artists':lang==='de'?'Künstler':'هنرمندان'),'The guide must not claim to pass the separate western art court');
   assert(svg.includes('lang="' + lang + '"'));
 }
 const generated=['en','de','fa'].map(lang=>geometry(coastalPlanSvg(plan,lang)));assert.deepEqual(generated[0],generated[1],'Translated copy cannot alter island coordinates or mirror the map');assert.deepEqual(generated[0],generated[2]);
