@@ -1,6 +1,6 @@
 import './artist-quarter-layout.js';
 import {BUILT_HONEYCOMB_LAYOUT} from './honeycomb-city-layout.js';
-import {HEX_DISTRICTS} from './city-hex-layout.js';
+import {HEX_DISTRICTS,INHABITED_BLOCKS} from './city-hex-layout.js';
 import {FOUNDATION_HOUSES,FOUNDATION_ROUTES,houseEntry} from './foundation-houses-data.js?v=city-night-20261117';
 import {SEMINAR_HOUSES,SEMINAR_PATHS,seminarEntry} from './seminar-houses-data.js?v=city-night-20261117';
 import {STUDY_HOUSES,STUDY_PATHS} from './study-houses-data.js?v=city-night-20261117';
@@ -20,29 +20,13 @@ export const CIVIC_CORE_STREETS=Object.freeze([
  ...axes.map((a,i)=>({id:'civic-view-'+(i+1),width:CIVIC_CORE.avenueWidth,points:[polar(CIVIC_CORE.promenadeRadius,a),vertices[i]]}))
 ]);
 export const CIVIC_PAIRED_COURTS=Object.freeze(axes.flatMap((angle,axis)=>[-1,1].map(side=>({id:'paired-court-'+axis+'-'+(side<0?'left':'right'),axis,side,shape:'hex',radius:CIVIC_CORE.courtRadius,x:CIVIC_CORE.courtDistance*Math.cos(angle)-side*CIVIC_CORE.courtOffset*Math.sin(angle),z:CIVIC_CORE.courtDistance*Math.sin(angle)+side*CIVIC_CORE.courtOffset*Math.cos(angle),turn:angle+Math.PI/6,tone:'civic'}))));
-const RETAINED_URBAN_STREETS=[
- ...CIVIC_CORE_STREETS,
- // The six exact civic views end before established buildings. Their outward
- // continuations bend to actual district streets rather than cut through homes.
- {id:'civic-artists-link',width:6,points:[vertices[0],[132,48],[160,76],[160,96]]},
- {id:'civic-learning-link',width:6,points:[vertices[1],[28,140],[0,166],[0,220]]},
- {id:'civic-socrates-link',width:6,points:[vertices[2],[-52,90],[-30,110]]},
- {id:'civic-philosophers-link',width:6,points:[vertices[3],[-144,-50],[-170,-32]]},
- {id:'civic-park-link',width:6,points:[vertices[4],[-36,-145],[0,-185]]},
- {id:'civic-pattern-link',width:6,points:[vertices[5],[64,-104],[64,-160]]},
- {id:'gallery-west',width:7,points:[[-64,0],[-170,0]]},
- {id:'park-approach',width:6,points:[[-138,-150],[0,-185],[0,-195]]},
- {id:'east-garden-avenue',width:6,points:[[64,0],[62.5,-46],[64,-160]]},
- {id:'southern-learning-walk',width:6,points:[[0,110],[0,220]]},
- {id:'southern-garden-link',width:5,points:[[0,220],[0,276]]},
- // Real retained campus approaches also feed gate clipping and reachability.
- ...COAST_MAIN_PATHS.map((points,i)=>({id:'campus-approach-'+i,width:5.2,points}))
-];
+export const ARCADE_STREETS=INHABITED_BLOCKS.map((c,i)=>({id:'arcade-'+i,width:3.2,kind:'lane',points:Array.from({length:7},(_,j)=>[c.x+82.5*Math.cos(Math.PI/6+j*Math.PI/3),c.z+82.5*Math.sin(Math.PI/6+j*Math.PI/3)])}));
+const RETAINED_URBAN_STREETS=[...CIVIC_CORE_STREETS,...ARCADE_STREETS,{id:'gallery-west',width:5.2,points:[[-64,0],[-170,0]]},{id:'park-approach',width:5.2,points:[[-138,-150],[0,-185],[0,-195]]},{id:'east-garden-avenue',width:5.2,points:[[64,0],[62.5,-46],[64,-160]]},{id:'southern-learning-walk',width:5.2,points:[[0,110],[0,220]]},...COAST_MAIN_PATHS.map((points,i)=>({id:'campus-approach-'+i,width:5.2,points}))];
 export const URBAN_COURTS=[
  ...CIVIC_PAIRED_COURTS,
- ...FOUNDATION_HOUSES.map(h=>({id:h.id+'-forecourt',x:h.x+(h.x<0?22:-22),z:h.z,width:20,depth:30,tone:h.x<0?'letters':'making'})),
+ ...FOUNDATION_HOUSES.map(h=>({id:h.id+'-forecourt',x:houseEntry(h).x,z:h.z,width:15,depth:26,tone:'letters'})),
  {id:'study-court',x:229,z:-112,width:54,depth:13,tone:'making'},
- ...SEMINAR_HOUSES.map(h=>({id:h.id+'-hex-court',x:h.x,z:276,shape:'hex',radius:18,turn:Math.PI/6,tone:'garden'}))
+ ...SEMINAR_HOUSES.map(h=>({id:h.id+'-hex-court',x:h.x,z:138,shape:'hex',radius:18,turn:Math.PI/6,tone:'garden'}))
 ];
 const rect=(id,x,z,width,depth,turn=0,extra={})=>({id,x,z,shape:'polygon',width,depth,turn,points:[[-width/2,-depth/2],[width/2,-depth/2],[width/2,depth/2],[-width/2,depth/2]].map(([a,b])=>[x+a*Math.cos(turn)+b*Math.sin(turn),z+b*Math.cos(turn)-a*Math.sin(turn)]),front:[x+Math.sin(turn)*depth/2,z+Math.cos(turn)*depth/2],...extra});
 export function urbanCourtOutline(c){if(c.shape==='hex')return Array.from({length:6},(_,i)=>[c.x+c.radius*Math.cos(c.turn+i*Math.PI/3),c.z+c.radius*Math.sin(c.turn+i*Math.PI/3)]);return[[c.x-c.width/2,c.z-c.depth/2],[c.x+c.width/2,c.z-c.depth/2],[c.x+c.width/2,c.z+c.depth/2],[c.x-c.width/2,c.z+c.depth/2]];}
@@ -74,9 +58,10 @@ export function urbanPlanting(plan=globalThis.ARTIST_QUARTER_PLAN){const routes=
 
 // The new physical honeycomb uses the same source footprints as the map.
 const retainedRoutes=[...RETAINED_URBAN_STREETS,...FOUNDATION_ROUTES,...COAST_ROUTES.map(points=>({points,width:4})),...SEMINAR_PATHS.map(points=>({points,width:4.4})),...STUDY_PATHS.map(points=>({points,width:3.5})),...quarterPaths.map(points=>({points,width:4.6})),...(globalThis.ARTIST_QUARTER_PLAN?.routes||[]).map(points=>({points,width:4}))];
-const retainedFurniture=[...(globalThis.ARTIST_QUARTER_PLAN?.seats||[]).map(([x,z],i)=>rect('artist-seat-'+i,x,z,2.7,.8)),...(globalThis.ARTIST_QUARTER_PLAN?.trees||[]).map(([x,z],i)=>({id:'artist-tree-'+i,x,z,shape:'circle',radius:.7})),...[-80,80].map(x=>rect('seminar-seat-'+x,x,254,6.4,2.1))];
+const retainedFurniture=[...(globalThis.ARTIST_QUARTER_PLAN?.seats||[]).map(([x,z],i)=>rect('artist-seat-'+i,x,z,2.7,.8)),...(globalThis.ARTIST_QUARTER_PLAN?.trees||[]).map(([x,z],i)=>({id:'artist-tree-'+i,x,z,shape:'circle',radius:.7})),...[194.023011444505,284.023011444505].map(x=>rect('seminar-seat-'+x,x,120,6.4,2.1))];
 export const honeycombInputs=()=>({footprints:[...urbanBuildingFootprints(),...retainedFurniture],retainedRoutes});
 export const HONEYCOMB_CITY=BUILT_HONEYCOMB_LAYOUT;
 export const URBAN_STREETS=[...RETAINED_URBAN_STREETS,...HONEYCOMB_CITY.roads];
 export const CITY_UNDERGROUND_LINKS=Object.freeze([{id:'babel-transformations',name:'Babel — House of Transformations',floorY:-40,points:[[22,0],[70,0],[125,0]],kind:'physical',description:'The existing real underground corridor and both stair routes.'},{id:'escher-museum-spur',name:'Escher museum passage',floorY:-40,points:[[70,0],[70,115],[135,115]],kind:'physical',description:'The real museum corridor beneath the artist courts.'}]);
-for(const c of HONEYCOMB_CITY.nodes)if(Math.hypot(c.x,c.z)>350)URBAN_COURTS.push({id:c.id+'-crossing',x:c.walk[0],z:c.walk[1],shape:'hex',radius:8.5,turn:Math.PI/6,tone:'garden'});
+
+export function urbanLawnCells(){const h=HONEYCOMB_CITY;return h.cells.filter(c=>[[0,0,h.rules.protectedCore],[0,-330,h.rules.parkRadius]].every(([x,z,r])=>Math.hypot(c.x-x,c.z-z)>r&&c.vertices.every((a,i)=>segmentDistance(x,z,a,c.vertices[(i+1)%6])>r)));}

@@ -45,7 +45,7 @@ for (const lang of ['en', 'de', 'fa']) {
 }
 const generated=['en','de','fa'].map(lang=>geometry(coastalPlanSvg(plan,lang)));assert.deepEqual(generated[0],generated[1],'Translated copy cannot alter island coordinates or mirror the map');assert.deepEqual(generated[0],generated[2]);
 assert.deepEqual(COAST_LANDMARKS.map(p => coastMapPoint(...p.point)), [
-  [460,460], [460,229.00000000000003], [392.8,530], [527.2,528.6], [849.1374286786722,513.2], ...SEMINAR_HOUSES.map(h=>coastMapPoint(h.x,h.z))
+  [460,460], [460,229.00000000000003], [392.8,530], coastMapPoint(plan.arrival.x,plan.arrival.z), [849.1374286786722,513.2], ...SEMINAR_HOUSES.map(h=>coastMapPoint(h.x,h.z))
 ]);
 assert.deepEqual(COAST_LANDMARKS.find(p => p.id === 'artists').point, Array.from([plan.arrival.x, plan.arrival.z]));
 

@@ -2,7 +2,7 @@ import {CITY_ISLAND,coastX,SHORE,ISLAND_ROUTES} from './island-layout.js?v=city-
 export {coastX} from './island-layout.js?v=city-night-20261117';
 export const HOUSE_ORIGAMI={x:229,z:76,width:18,depth:16,entry:{x:229,z:99,y:.13,yaw:0,pitch:.06},threshold:{x:229,z:87},insideEntry:{x:229,z:81.5,y:.13,yaw:0},shore:{...SHORE}};
 export const PAPER_COLOURS=['#e9dcb9','#92b9c5','#cc9584'];
-const LOCAL_ROUTES=[[[215,116],[215,90],[229,90],[229,84]],[[229,99],[229,84]],[[229,90],[249,90],[256.5,76]],[[243,-112],[256,-112],[256,65],[256.5,76],[256,160],[242,160]],[[203.5,65],[215,65],[249,65],[256.5,76]]];
+const LOCAL_ROUTES=[[[215,116],[215,90],[229,90],[229,84]],[[229,99],[229,84]],[[229,90],[249,90],[256.5,76]],[[243,-112],[256,-112],[256,65],[256.5,76],[256,138],[318.6973485926734,138]],[[203.5,65],[215,65],[249,65],[256.5,76]]];
 export const COAST_ROUTES=[...LOCAL_ROUTES,...ISLAND_ROUTES.map(r=>r.points)];
 export const waterHeight=(x,z,time=0)=>-.015+.024*Math.min(1,Math.max(0,(Math.hypot(x,z)-CITY_ISLAND.radius)/12))*(Math.sin(x*.11+z*.17-time*.7)+.4*Math.sin(z*.32-time*.45));
 // Compatible Miura coordinates; every face stays the same rigid parallelogram.

@@ -1,95 +1,86 @@
 # The inhabited honeycomb city
 
-The approved A layout is now a physical neighbourhood fabric around the retained
-Gallery, rather than a second schematic map. Thirty-seven exact pointy-top
-hexagons of side92m fit the570m circular island. The Gallery and northern park
-remain protected spaces;33 walk courts form a connected graph with41
-shared gate passages and alternate loops. Exactly six axial coastal approaches
-join the continuous promenade; six deliberate gateways meet real retained
-campus roads. The replaced irregular outer circuit and obsolete north, west
-and south coastal spokes are removed from the physical route authorities.
+The approved regular honeycomb now changes the actual city streets and the
+placement of working buildings. It is not a decorative graph over the old city.
+Thirty-seven exact92m hexagons fit inside the570m circular island.106 retained
+shared block EDGES form the new5.5m street network, with83 real junctions,
+alternate loops, six clear campus gateways and six symmetric coastal approaches.
+The previous centre-to-centre triangular web, outer irregular circuit and retired
+legacy source road calls are removed. The source-defined door approaches remain.
 
-The neighbourhood lanes are3.2m wide, with quiet grey-green paving. The5.2m
-gateways and uninterrupted coast promenade use lighter stone. Warm wall
-copings make the exact regular courts clearer than their inner paths. The
-route hierarchy is shared by actual geometry, tree clearance, gate clipping
-and the three generated maps; it is not a map drawn over obsolete streets.
+## Six inhabited collections
 
-Five contiguous regular hexagonal lawns replace the park's isolated circular
-grass disc. The existing pond, nine garden collections, people, tools, seeds
-and source-local saved positions retain their original transforms. Only the
-grass substrate extends into the northern city courts. The map uses the same
-five92m cells; the pond still looks into the real night face.
+Twenty-nine original public buildings now occupy six compact street blocks:
 
-Low stone walls and warm copings follow the hexagon edges. Their real solid
-colliders have the same gate gaps as the paving. A retained doorway or street
-cuts an actual gap through the wall field. Walls stop around the pond/park and
-central Gallery/Transformation complex. The walls stay1.55m high, preserving
-sight of the Gallery and nearby roofs above them.
+| Collection | Real source buildings | Block centre X,Z |
+| --- | --- | --- |
+| Questions | Six philosopher homes | −318.697,0 |
+| Stories and language | Six foundation houses facing a shared courtyard | −159.349,276 |
+| Garden galleries | Monet, Van Gogh, Hilma af Klint, Morris | −398.372,138 |
+| Form galleries | Kandinsky, Hokusai, Rodin, Mondrian, Lange, Klee |398.372,−138 |
+| Working studios | Dalí, Cézanne, Morisot, Seurat |159.349,276 |
+| Advanced seminars | Noether, Mirzakhani, Cage |239.023,138 |
 
-## Learning destinations inside the plan
+These are their original content-bearing rooms, artwork, residents, furniture,
+study models and doorway interactions, relocated through their placement owners.
+IDs, saved study keys, private editions and source artwork credits remain stable.
+The original source Dalí adapter assumed that no northern galleries could occur
+below its old minimumZ; the public layout wrapper now recomputes that bound from
+all actual houses. Artist courtyard notifications are limited to the three real
+courts, rather than the large bounding rectangle between disjoint collections.
 
-Fifteen existing public houses have moved as complete source-owned interiors:
+Each inhabited block has a substantial covered hexagonal perimeter arcade:
+82.5m side length, a6.2m-wide roof band, paired columns and a real3.2m pedestrian
+loop. Supports avoid all street/door routes; central passages remain open.
+The arcades frame occupied collections and provide covered walking space; they
+are not empty teaching-room shells. Low walls sit inside the other street blocks,
+with source-clipped gate gaps, a warm coping and a flush2.4m-wide stone foot.
+Alternating lawn tones make23 wholly clear outer cells legible at overview scale.
+No lawn surface crosses the protected Gallery/Babel/Transformation or pond areas.
 
-- Freud, Chomsky and Borges face the western Court of Stories and Language.
-- Calvino, Ada Lovelace and Le Guin face the matching eastern court.
-- The six philosopher homes share the western regular Court of Questions.
-- Noether, Mirzakhani and Cage face three connected southern hexagonal courts.
+The original Gallery/Babel/observatory axis, House of Transformations, substantial
+Proof Atelier and saved workbenches, Escher's real museum/tunnel anchor and Origami
+house remain fixed. Their true source approaches meet the new street network.
+Five connected hexagonal park lawns retain the original pond, nine garden
+collections, people, tools, planted seeds and source-local coordinates. Only the
+grass substrate changes. The pond continues to show the same real night face.
 
-Their actual source authorities supply the geometry, entrance/spawn positions,
-collisions, study gates, directory visits and map outlines. House IDs, lesson
-content, local experiments and saved study keys remain stable. The substantial
-Proof Atelier and its saved workbenches, Escher's house/museum, original artist
-studios, Origami house, Penrose pavilions and House of Transformations keep their
-connected working interiors.
+## Source authority and private data
 
-This is a city of courts and alternate paths, not a locked puzzle maze. The
-coast promenade and sixfold Gallery campus provide orientation. A road ends at
-a real existing doorway or meets another path; anonymous unused streets are not
-presented as new teaching houses.
+`city-hex-layout.js` records the regular grid and inhabited block anchors.
+Foundation, philosopher, seminar and artist placement authorities own their real
+rooms, doors, colliders, spawn points and map outlines. Source rooms are not copied.
+`city.js` no longer creates the retired diagonal outer roads; `buildCityCoast`
+combines the retained threshold roads with the new block-edge network. The same
+route set governs paving, tree clearance, wall gates and generated map geometry.
+The source artist map fits its new three separated court bounds.
 
-## Real underground routes
+The dashed underground routes are the existing physicalY−40 Babel/Transformations
+corridor and its Escher museum spur. A surface linked threshold is not described
+as a physical staircase. Personal homes occupy the night face without rewriting
+source designs, documents or contents; seeNIGHT-HOME-NEIGHBOURHOOD.md.
 
-The dashed map passages identify actual existing walkable corridors atY−40:
-the Babel/central-gallery route to the House of Transformations and its Escher
-museum spur. These are the selected C-style connections through the thickness
-of the island. The map does not invent a staircase beneath a threshold portal.
-The source Escher surface threshold retains its explicit linked-entry behaviour.
+## Startup, rendering and checks
 
-Personal homes now mount on the night face without rewriting their source
-designs or stored contents. SeeNIGHT-HOME-NEIGHBOURHOOD.md for bounded lots,
-real access paths, collision composition and rebuild ownership. The upper map
-therefore no longer reserves an empty southwest home block.
+The builder solves public street/source-footprint clearance offline. Its generated
+result is committed in`honeycomb-city-layout.js`; run
+`node tools/render-honeycomb-layout.mjs`, `node tools/render-coastal-plan.mjs` and
+`node tools/render-artist-quarter-plan.cjs` after relevant placement changes.
+An independent consistency check regenerates the graph and compares its hash.
+A local measurement gave22ms module import and22ms layout of395 street trees;
+these are development-machine timings, not a promise for every visitor.
 
-## Startup and rendering
+Two shared paving batches remain. Urban courts, walls, copings/feet, lawn field,
+seats and all six arcades use nine draw meshes. Natural trees retain shared
+instanced foliage/branch geometry. No per-block or per-home point lights were added.
 
-`city-hex-layout.js` supplies the regular grid and public district anchors.
-`honeycomb-city-model.js` constructs the graph, checks full-width routes against
-source building/furniture footprints and clips real gate intervals. That solve
-is not performed on the visitor's loading path. Its generated result is
-committed in`honeycomb-city-layout.js`; regenerate it after source placements
-change with`node tools/render-honeycomb-layout.mjs`, then regenerate the three
-maps with`node tools/render-coastal-plan.mjs`.
-
-An independent source-consistency check hashes the regenerated plan and the
-committed static plan after checking its physical geometry. On the development
-machine the refined module import measured about34ms and planting about26ms
-for610 street trees. These are local timings, not a performance guarantee on
-every device. Paving uses two geometry batches for the two street ranks.
-Hex courts, seats, walls
-and copings use eight draw meshes; natural tree foliage/branches retain their
-shared instanced rendering. No new per-court or per-home lights were added.
-
-## Verification
-
-`tests/city-urban-plan.mjs` tests exact regular cells, a connected graph with
-loops, source door connectivity from the real Gallery west entrance, full-width
-walking against real artist/author/philosopher/seminar architecture and maze
-solids, exactly six physical campus/coast gateways, protected central/pond
-routes, trees clear of walls, finite geometry and owned disposal.
-The source-specific foundation, philosopher and seminar suites test their real
-entries and furniture; coastal-map and Origami tests verify the generated maps
-and retained shoreline route. The pond suite also measures the actual batched
-grass area and corner coordinates against the five mapped hexagonal lawns,
-while retaining all original fountain and borrowed-geometry ownership checks.
-The full city release check remains required.
+`tests/city-urban-plan.mjs` independently checks every real junction/door reaches
+the Gallery, every street is a true92m hexagon edge, all six arcade walks and new
+streets across their full width against source buildings and posts, protected
+floor holes by actual rays, regular civic symmetry, finite geometry and exactly
+once disposal. The artist suite verifies actual relocated furniture, resident
+navigation, original artwork, source editions and all door/walking routes.
+Coastal/artist map generation, Origami, foundation, philosopher and seminar suites
+cover their source-specific entry and geometry contracts. The pond suite measures
+actual batched park area/corners while retaining original fountain ownership.
+The full city release suite and integrated browser inspection remain required.

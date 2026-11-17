@@ -8,24 +8,19 @@ export const COAST_LANDMARKS = [
   {id: 'park', number: 2, point: [0, -330]},
   {id: 'socrates', number: 3, point: [-96, 100]},
   // The existing garden-court arrival, rather than a new district position.
-  {id: 'artists', number: 4, point: [96, 98]},
+  {id: 'artists', number: 4, point: [-398.3716857408417, 138]},
   {id: 'shore', number: 5, point: [SHORE.x, SHORE.z]}
 ];
 
 export const COAST_MAIN_PATHS = [
-  [[-64,0],[-76,0],[-76,110],[0,110],[74,100],[96,98]],
-  [[-76,0],[-84,0],[-84,-32],[-84,-110],[0,-185],[0,-195]],
-  [[74,100],[74,76],[200,76],[203.5,65],[203.5,-50],[211.5,-50]],
-  [[-84,-32],[-138,-32],[-138,-150],[0,-185]]
+ [[-64,0],[-76,0],[-76,110],[-97.7,110],[-97.7,103.8]],
+ [[-76,0],[-84,0],[-84,-32],[-138,-32],[-138,-150],[0,-185],[0,-195]],
+ [[-97.7,110],[0,110]],
+ [[0,94],[0,110],[74,100],[74,76],[200,76],[203.5,65],[203.5,-50],[211.5,-50]]
 ];
-
 // One guided walk on existing paths only. Visit the artists' garden court,
 // retrace the short approach, then continue along the existing eastern lane.
-export const COAST_WALK = [
-  ...COAST_MAIN_PATHS[0], [74,100], [74,76], [200,76], [203.5,65],
-  [215,65], [249,65], [256.5,76], [350,76],
-  [Math.sqrt(536 ** 2 - 76 ** 2),76], [SHORE.x,76]
-];
+export const COAST_WALK = [[-64,0],[-76,0],[-76,110],[0,110],[74,100],[74,76],[200,76],[203.5,65],[215,65],[249,65],[256.5,76],[350,76],[Math.sqrt(536**2-76**2),76],[SHORE.x,76]];
 
 export function coastWalkSvg() {
   const points = COAST_WALK.map(p => coastMapPoint(...p).map(n => n.toFixed(1)).join(',')).join(' ');
