@@ -34,14 +34,27 @@ function local(x,z){drive(W.lowerOrigin.x+x,W.lowerOrigin.z+z);}
 world.visitLower();local(-40,0);assert(gallery.active);assert.equal(world.route,null,'The connected controller releases the original ground-floor route');
 const guide=body.querySelector('#paper-gallery-guide'),summary=guide.querySelector('summary'),close=new Element('button');close.textContent='Close notification';summary.append(close);for(let i=0;i<5;i++)M.city.update(M.player,i,'city');assert(summary.children.includes(close),'Updating guidance preserves the dismissal control');assert(!guide.open);assert(guide.textContent.includes('What makes a definition support a proof?'));
 // Go around the open well to the east landing, then follow every real tread.
-for(let a=Math.PI;a>0;a-=.025)local(26*Math.cos(a),26*Math.sin(a));local(16,0);
+for(let a=Math.PI;a>0;a-=.025)local(26*Math.cos(a),26*Math.sin(a));local(26,0);
+// The two solid sculpture courts leave the floor's radial landing clear.
+// Reach the r44.9 front reading circuit on that radial line; a diagonal from
+// r26 to an off-axis paper would instead cross a sculpture court at r38.
+const visitedPapers=new Set();
+function polarWalk(radius,angle){local(radius*Math.cos(angle),radius*Math.sin(angle));}
+function arc(radius,from,to){const steps=Math.max(1,Math.ceil(Math.abs(to-from)/.02));for(let i=1;i<=steps;i++)polarWalk(radius,from+(to-from)*i/steps);}
+function visitEveryPaper(f){
+ const rows=papers.pages.filter(r=>r.slot.floor===f.index).sort((a,b)=>a.slot.angle-b.slot.angle);polarWalk(44.9,f.angle);let angle=f.angle;
+ for(const row of rows){arc(44.9,angle,row.slot.angle);angle=row.slot.angle;near(M.player.y,f.y+M.eye);assert.equal(gallery.place.floor,f.index);assert(papers.open(row.paper.id),'Reach the original first page through the physical reading aisle: '+row.paper.id);visitedPapers.add(row.paper.id);const dialog=body.querySelector('#paper-monitor-reader');assert(dialog.open);assert.equal(papers.current,row.paper.id);const before={...M.player};assert(tick(.1,{forward:1}));assert.deepEqual(M.player,before,'Reading a paper pauses physical movement');dialog.close();
+  if(f.index>0){const feet=M.player.y-M.eye;M.player.y=feet-4+M.eye;assert.equal(papers.open(row.paper.id),false,'A lower-floor visitor cannot activate this first page through the slab');M.player.y=feet+M.eye;}
+ }
+ for(const row of [...rows].reverse().slice(1)){arc(44.9,angle,row.slot.angle);angle=row.slot.angle;}arc(44.9,angle,f.angle);polarWalk(26,f.angle);near(M.player.y,f.y+M.eye);
+}
 let theta=0;function follow(end){const direction=Math.sign(end-theta);for(let t=theta+direction*.012;direction>0?t<end:t>end;t+=direction*.012){const p=paperStairPoint(t);local(p.x,p.z);let actual=Math.atan2(-(M.player.z-W.lowerOrigin.z),M.player.x-W.lowerOrigin.x);if(actual<0)actual+=2*Math.PI;near(M.player.y,paperStairY(actual)+M.eye,1e-7);}const p=paperStairPoint(end);local(p.x,p.z);assert(Math.abs(M.player.y-p.y-M.eye)<=.125001,'The final supported tread is at most one rise from the landing');theta=end;}
+visitEveryPaper(FLOORS[0]);local(16,0);
 for(const f of FLOORS.slice(1)){
  follow(f.theta);local(26*Math.cos(f.angle),26*Math.sin(f.angle));near(M.player.y,f.y+M.eye);M.city.update(M.player,f.index,'city');assert.equal(gallery.place.floor,f.index);assert(gallery.place.title.includes(f.name));
- const row=papers.pages.find(r=>r.slot.floor===f.index),r=44.9;local(r*Math.cos(row.slot.angle),r*Math.sin(row.slot.angle));assert(papers.open(row.paper.id));const dialog=body.querySelector('#paper-monitor-reader');assert(dialog.open);const before={...M.player};assert(tick(.1,{forward:1}));assert.deepEqual(M.player,before,'Reading a paper pauses physical movement');dialog.close();
- const feet=M.player.y-M.eye;M.player.y=feet-4+M.eye;assert.equal(papers.open(row.paper.id),false,'A lower-floor visitor cannot activate this first page through the slab');M.player.y=feet+M.eye;
- local(26*Math.cos(f.angle),26*Math.sin(f.angle));local(16*Math.cos(f.angle),16*Math.sin(f.angle));
+ visitEveryPaper(f);local(16*Math.cos(f.angle),16*Math.sin(f.angle));
 }
+assert.deepEqual([...visitedPapers].sort(),HISTORIC_PAPERS.map(p=>p.id).sort(),'All27 original monitors are physically reachable, not just the first item on each floor');
 // Keep the production controller order while crossing the new shared endpoint.
 // These are ordinary held movement inputs; no visit action jumps to the dome.
 let observatoryTheta=0;
@@ -55,4 +68,4 @@ local(-80,26);local(-64,26);local(-64,0);local(-52,0);assert(gallery.active,'The
 // Ground east landing can still descend the original route instead of bouncing.
 for(let a=Math.PI;a>0;a-=.025)local(26*Math.cos(a),26*Math.sin(a));local(16,0);const lowerStep={x:16*Math.cos(.18),z:16*Math.sin(.18)};local(lowerStep.x,lowerStep.z);assert.equal(world.route?.side,'lower');assert(!gallery.active);assert(M.player.y<1.93,'The original through-gallery first steps remain descending');
 assert(M.startExtra('paper-gallery:computation'));near(M.player.y,8.13+M.eye);assert.equal(gallery.place.floor,2);assert.equal(M.startExtra('paper-gallery:missing'),false);M.city.update(M.player,20,'city');assert.equal(gallery.built.lamps.children.filter(g=>g.visible).length,1,'Only the current collection lights are active');
-M.arrive({x:0,z:0,y:.13});assert(!gallery.active);assert(!observatory.active);assert.equal(privateAccess,0);sculptures.dispose();papers.dispose();observatory.dispose();gallery.dispose();for(const fn of events.get('pagehide')??[])fn();console.log('PASS paper gallery runtime: real four-level ascent with sculpture collisions and curated paper paths, all eighty observatory treads and inner bridge to telescope, reversible shared landing without recapture, stable dismissal, id-bound readers/modal pause, complete paper descent and west-connector exit/return, original downward route, focused lighting and private-data-safe cleanup.');
+M.arrive({x:0,z:0,y:.13});assert(!gallery.active);assert(!observatory.active);assert.equal(privateAccess,0);sculptures.dispose();papers.dispose();observatory.dispose();gallery.dispose();for(const fn of events.get('pagehide')??[])fn();console.log('PASS paper gallery runtime: real four-level ascent with solid sculpture courts, reversible r44.9 front reading circuit to all27 original pages, all eighty observatory treads and inner bridge to telescope, reversible shared landing without recapture, stable dismissal, id-bound readers/modal pause, complete paper descent and west-connector exit/return, original downward route, focused lighting and private-data-safe cleanup.');

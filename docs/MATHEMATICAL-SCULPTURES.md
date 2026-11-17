@@ -133,7 +133,9 @@ geometry floor’s radial landing (−0.55 instead of +0.55 radians). A low 2.9-
 collider radius is 3.4 m, plus the walking margin; all central stairs, the
 inner circulation circuit, the r52 paper-viewing aisle and the western ground
 exit remain open. Every sculpture stays below 3.8 m above its own floor.
-Small 2.8×0.585 m plinth labels replace large freestanding signboards.
+The clear radial landing leads to the r44.9 front reading circuit, which
+connects every monitor without crossing a sculpture court. Small 2.8×0.585 m
+plinth labels replace large freestanding signboards.
 
 `buildMathematicalSculptures` adds exactly nineteen renderable objects and no
 lights. The 400 sponge cubes, graph nodes/edges, five plinths, ant body, eyes,
