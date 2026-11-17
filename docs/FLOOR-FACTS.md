@@ -14,8 +14,9 @@ disposed. The new material includes the renderer's standard clipping hooks,
 including `mvPosition`, so cylinder section passes can still clip the floor.
 
 One 1024×768 CanvasTexture is sampled in four repeated radial cards centred at
-radius 40 m. Each card is 20 m across and 13.5 m deep; its complete corners stay
-within radii 30–48 m. The top of each card points outward and reads from the
+radius 40 m. Each card is 16 m across and 10 m deep; its complete corners stay
+within radii 35–46 m. Shader uniforms use the same dimensions as the placement
+model, so the visual and proximity mapping cannot drift apart. The top of each card points outward and reads from the
 inner circulation aisle. The existing proper lower-world half-turn is applied
 once by the host; card text never receives an additional inversion.
 
@@ -81,7 +82,7 @@ actual floor is also a normal picking target for controller fallback.
 
 API: `M.floorFacts.visit()`, `.open()` / `.interact()`, `.next()`,
 `.setPlaying(boolean)`, `.fact`, `.playing`, `.near`, and `.dispose()`.
-`visit()` uses a real safe ground-floor pose at radius 29 m looking outward.
+`visit()` uses a real safe ground-floor pose at radius 29 m looking outward and downward at pitch −.42.
 Disposal restores the borrowed material/metadata and previous hooks, releases
 only the owned material/texture, removes targets/controls/listeners and restores
 diagnostic attributes. No personal storage, account, voice or catalogue asset
