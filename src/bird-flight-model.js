@@ -1,4 +1,4 @@
-import {BIRD_TILE_OUTLINE,createCylinderMetamorphosisLayout,cylinderTilePoint,cylinderDepartureCell} from './cylinder-metamorphosis-scene.js?v=city-night-20261117';
+import {BIRD_TILE_OUTLINE,createCylinderMetamorphosisLayout,cylinderTilePoint,cylinderDepartureCell} from './cylinder-metamorphosis-scene.js?v=bird-peel-20261117b';
 const TAU=2*Math.PI,clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)),smooth=x=>{x=clamp(x);return x*x*x*(10+x*(-15+6*x));},mix=(a,b,t)=>a+(b-a)*t;
 export const BIRD_FLIGHT=Object.freeze({coordinateSpace:'lower-local +Y up; physical wrapper (0,-96,0), rotation X=PI',count:64,duration:96,floorY:22.15,deckY:22.13,floorRadius:6.5,tileSize:.9,tileScale:.986,gateY:-8,coreRadius:11,cruiseY:25.4,telescope:{x:0,z:-2.5,radius:1.8},seat:{x:-4.8,z:3.5,radius:1.7}});
 export function birdFloorPoint(tile,p){const s=tile.size*tile.scale;return{x:tile.x+(p[0]-.5)*s,y:BIRD_FLIGHT.floorY,z:tile.z-(p[1]-.5)*s};}
@@ -17,8 +17,9 @@ export function createBirdFlightLayout({count=BIRD_FLIGHT.count,duration=BIRD_FL
 const vectorMix=(a,b,t)=>({x:mix(a.x,b.x,t),y:mix(a.y,b.y,t),z:mix(a.z,b.z,t)});
 export function birdFlightPosition(bird,phase){
  const C=BIRD_FLIGHT,p=clamp(phase),s=bird.source,d=bird.tile.landing,radius=bird.coreRadius??C.coreRadius;
- if(p<=.06)return{...s};
- if(p<.28){const u=smooth((p-.06)/.22),turn=TAU+(bird.sourceAngle%TAU+TAU)%TAU,a=bird.sourceAngle-turn*u,r=mix(Math.hypot(s.x,s.z),20,smooth((p-.06)/.05));return{x:r*Math.cos(a),y:mix(s.y,C.gateY,u),z:r*Math.sin(a)};}
+ if(p<=.035)return{...s};
+ if(p<.11){const u=smooth((p-.035)/.075),r=mix(Math.hypot(s.x,s.z),20.10,u);return{x:r*Math.cos(bird.sourceAngle),y:s.y,z:r*Math.sin(bird.sourceAngle)};}
+ if(p<.28){const u=smooth((p-.11)/.17),turn=TAU+(bird.sourceAngle%TAU+TAU)%TAU,a=bird.sourceAngle-turn*u,r=mix(20.10,20,smooth((p-.11)/.05));return{x:r*Math.cos(a),y:mix(s.y,C.gateY,u),z:r*Math.sin(a)};}
  if(p<.40){const u=smooth((p-.28)/.12),r=mix(20,radius,u);return{x:r,y:C.gateY,z:0};}
  if(p<.48){const u=smooth((p-.40)/.08),a=-u*Math.PI*1.5;return{x:radius*Math.cos(a),y:mix(C.gateY,-4,u),z:radius*Math.sin(a)};}
  // The complete flock makes a visible cylindrical ribbon, never a vertical
@@ -30,8 +31,11 @@ export function birdFlightPosition(bird,phase){
  return{...d};
 }
 export function birdFlightPose(bird,time=0,{duration=BIRD_FLIGHT.duration,reduced=false,phase:fixedPhase}={}){
- const seconds=Number.isFinite(time)?time:0,p=fixedPhase??((seconds/duration+bird.offset)%1+1)%1,position=birdFlightPosition(bird,p),previous=birdFlightPosition(bird,Math.max(.06,p-.008)),next=birdFlightPosition(bird,Math.min(.96,p+.008)),v={x:next.x-previous.x,y:next.y-previous.y,z:next.z-previous.z},length=Math.hypot(v.x,v.y,v.z);
- const departure=smooth((p-.06)/.05),landing=smooth((p-.89)/.06),opacity=reduced?0:smooth(p/.025)*(1-smooth((p-.975)/.025)),flapWeight=departure*(1-landing),scale=mix(1.12,bird.tile.size*bird.tile.scale,smooth((p-.75)/.20));
- const arrival={x:bird.tile.landing.x,y:-1.805,z:bird.tile.landing.z-(bird.coreRadius??C.coreRadius)},arrivalLength=Math.hypot(arrival.x,arrival.y,arrival.z),tangent=length>1e-8?{x:v.x/length,y:v.y/length,z:v.z/length}:{x:1,y:0,z:0},align=smooth((p-.872)/.018),aim={x:mix(tangent.x,arrival.x/arrivalLength,align),y:mix(tangent.y,arrival.y/arrivalLength,align),z:mix(tangent.z,arrival.z/arrivalLength,align)},aimLength=Math.hypot(aim.x,aim.y,aim.z),direction={x:aim.x/aimLength,y:aim.y/aimLength,z:aim.z/aimLength},wallBank=p<.28?1:p<.4?1-smooth((20-Math.hypot(position.x,position.z)-.4)/1.4):0;
- return{...position,phase:p,direction,departure,landing,wallBank,opacity,bodyOpacity:opacity*departure*(1-landing),fold:flapWeight*(.40+.32*Math.sin((seconds%(TAU/4.1))*4.1+bird.phase)),scale,scaleX:mix(bird.sourceTile.width*bird.sourceTile.scale,scale,departure),scaleY:mix(bird.sourceTile.height*bird.sourceTile.scale,scale,departure),stage:p<.06?'wall':p<.28?'wall-flight':p<.40?'gate':p<.48?'core-turn':p<.80?'ascent':p<.89?'over-deck':p<.96?'landing':'floor'};
+ const seconds=Number.isFinite(time)?time:0,p=fixedPhase??((seconds/duration+bird.offset)%1+1)%1,position=birdFlightPosition(bird,p),previous=birdFlightPosition(bird,Math.max(.11,p-.008)),next=birdFlightPosition(bird,Math.min(.96,p+.008)),v={x:next.x-previous.x,y:next.y-previous.y,z:next.z-previous.z},length=Math.hypot(v.x,v.y,v.z);
+ // First the skin lifts in its own wall frame, then takes its first stroke.
+ // Resizing waits until it is clear of the wall and continues across the orbit.
+ const peel=smooth((p-.035)/.075),departure=smooth((p-.11)/.055),landing=smooth((p-.89)/.06),resize=smooth((p-.14)/.23),floorScale=bird.tile.size*bird.tile.scale,scale=mix(1.12,floorScale,smooth((p-.75)/.20)),sourceX=bird.sourceTile.width*bird.sourceTile.scale,sourceY=bird.sourceTile.height*bird.sourceTile.scale;
+ const opacity=reduced?0:smooth(p/.025)*(1-smooth((p-.975)/.025)),flap=smooth((p-.09)/.045)*(1-landing),fold=(.40*peel+flap*.20*Math.sin((seconds%(TAU/3.3))*3.3+bird.phase))*(1-landing),inflate=smooth((p-.055)/.085)*(1-landing);
+ const arrival={x:bird.tile.landing.x,y:-1.805,z:bird.tile.landing.z-(bird.coreRadius??BIRD_FLIGHT.coreRadius)},arrivalLength=Math.hypot(arrival.x,arrival.y,arrival.z),tangent=length>1e-8?{x:v.x/length,y:v.y/length,z:v.z/length}:{x:1,y:0,z:0},align=smooth((p-.872)/.018),aim={x:mix(tangent.x,arrival.x/arrivalLength,align),y:mix(tangent.y,arrival.y/arrivalLength,align),z:mix(tangent.z,arrival.z/arrivalLength,align)},aimLength=Math.hypot(aim.x,aim.y,aim.z),direction={x:aim.x/aimLength,y:aim.y/aimLength,z:aim.z/aimLength},wallBank=p<.28?1:p<.4?1-smooth((20-Math.hypot(position.x,position.z)-.4)/1.4):0;
+ return{...position,phase:p,direction,peel,departure,landing,wallBank,opacity,bodyOpacity:opacity*inflate,inflate,fold,scale,scaleX:mix(sourceX,scale,resize),scaleY:mix(sourceY,scale,resize),curveWeight:1-peel,stage:p<.035?'wall':p<.11?'peel':p<.28?'wall-flight':p<.40?'gate':p<.48?'core-turn':p<.80?'ascent':p<.89?'over-deck':p<.96?'landing':'floor'};
 }

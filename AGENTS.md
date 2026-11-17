@@ -224,4 +224,16 @@ The lower observatory has a professional articulated reflector, real catalogue s
 
 The city centre has a sixfold civic structure: circular Gallery promenade, rotated hexagonal walk, six view axes and paired hexagonal courts. Keep all existing destinations connected and actual house footprints reflected in the EN/DE/FA maps. New houses such as Maps, Light, Faraday, Topology, Darwin Glasshouse and Commons remain proposals until built with meaningful content; do not claim these proposals are present.
 
-The wall-to-flock transition includes 279 retained paper-thin hinged motifs before the 64 source cells become fully volumetric birds. Keep this intermediate stage and its matching proxy suppression. Close relief is submitted only in the camera-height band; the faithful proxy covers other heights. Do not restore the entire relief mesh as one always-submitted batch. Read docs/CYLINDER-BIRD-TRANSITION.md for the band/wing/flight ownership and budgets.
+The wall-to-flock transition uses one continuous painted field, an ordered wave
+of full-size curved relief skins and 64 live source cells. Static relief/proxy
+must omit the live source cells: each flying bird owns its own flat wall pose.
+The same closed skin bends only its wings, pins the original head/beak, grows
+volume and returns exactly to its floor outline. Do not restore the old two
+hinged halves, separate spherical head, random shrinking stickers or long black
+quill strokes. Production uses the continuous painted field instead of visible
+horizontal LOD bands. Read docs/CYLINDER-BIRD-TRANSITION.md for ownership,
+clearances, source-size preservation and render budgets.
+
+The House of Transformations well also cuts the main gallery plinth in gallery.js, whose 153 m outer radius reaches beneath this house. Preserve the exact localXY/worldXZ mapping of the additional houseWell hole; cutting only city/coast grounds leaves a dark cap at Y -.25. Tests must raycast the actual root annulus helper and transformed plinth with the house, not only the standalone house.
+
+City redesign studies from 17 November 2026: A is a sixfold garden-city framework; B uses woven concentric rings; C uses two connected Archimedean spirals; D uses Penrose courtyards. The user requested brainstorming first, so these studies do not change the live arrangement. Keep the central Gallery/Babel/observatory axis, circular ocean boundary and existing personal homes in the comparison. These letters refer to city layouts, separately from Zarathustra character choice B.

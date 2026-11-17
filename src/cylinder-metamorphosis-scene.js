@@ -1,3 +1,4 @@
+import {createBirdMorphGeometry,createBirdMorphMaterial,birdMorphPoint} from './bird-morph-geometry.js?v=bird-peel-20261117b';
 // Original geometric birds, built by exchanging opposite edges of a unit square.
 // No Escher artwork or historical print is reproduced. The uncurved master tile
 // is a translational tessellation; the cylinder is its periodic horizontal wrap.
@@ -24,7 +25,6 @@ export function createBirdWallPixels(size=512){
     const place=p=>[column+.5+(p[0]-.5)*.986,row+.5+(p[1]-.5)*.986],colour=rgb(palette[((column+row)%3+3)%3]),ink=rgb(0x283e43);
     fill(BIRD_TILE_OUTLINE.map(place),colour);
     fill([[1.025,.52],[1.057,.54],[1.026,.56]].map(place),ink);
-    for(const[a,b,w]of[[[.407,.87],[.40,1.34],.009],[[.18,.79],[.72,.63],.008]]){const dx=b[0]-a[0],dy=b[1]-a[1],d=Math.hypot(dx,dy),n=[-dy/d*w,dx/d*w];fill([[a[0]+n[0],a[1]+n[1]],[a[0]-n[0],a[1]-n[1]],[b[0]-n[0],b[1]-n[1]],[b[0]+n[0],b[1]+n[1]]].map(place),ink);}
   }
   const pixels=new Uint8Array(size*size*4);for(let y=0;y<size;y++)for(let x=0;x<size;x++)for(let channel=0;channel<4;channel++){let sum=0;for(let sy=0;sy<scale;sy++)for(let sx=0;sx<scale;sx++)sum+=data[((y*scale+sy)*res+x*scale+sx)*4+channel];pixels[(y*size+x)*4+channel]=Math.round(sum/(scale*scale));}
   const result={pixels,size,period:3};rasterCache.set(size,result);return result;
@@ -40,14 +40,14 @@ const departureCache=new Map();
  */
 export function cylinderTileFinish(row,column,{columns=84,departureCount=64}={}){
  const key=columns+':'+departureCount;if(!departureCache.has(key))departureCache.set(key,new Set(Array.from({length:departureCount},(_,i)=>{const p=cylinderDepartureCell(i,{columns,count:departureCount});return p.row+':'+p.column;})));const departure=departureCache.get(key).has(row+':'+column);
- const level=Math.max(0,Math.min(1,(row-27)/7)),density=[.94,.85,.72,.66,.25,.10,0][row-28]??(row<28?1:0),scale=[.96,.90,.83,.78,.60,.44,.30][row-28]??.986;
- const n=((Math.imul(column+17,73856093)^Math.imul(row+41,19349663))>>>0)/4294967296,kept=departure||row<28||row<35&&n<density;
- return{departure,kept,intermediate:kept&&!departure&&row>=28&&row<35,scale:departure||row<28?.986:kept?scale:0,radius:departure||row<28?20.94:20.94-.20*smooth(level),progress:smooth(level)};
+ const theta=column/columns*TAU,boundary=32.1+1.65*Math.sin(theta*3+.6)+.45*Math.sin(theta*6),level=smooth((row-27)/7);
+ const kept=departure||row<28||row<35&&row<=boundary;
+ return{departure,kept,intermediate:kept&&!departure&&row>=28&&row<35,scale:kept?.986:0,radius:20.94,progress:level};
 }
 // Intermediate cells belong to the two thin wing batches in both LODs. Their
 // flat texture glyph is suppressed so a bird never has a second face behind it.
-export function createBirdTaperPixels(layout){const width=layout.columns>128?256:128,height=64,pixels=new Uint8Array(width*height*4);for(const t of layout.tiles){const i=((t.row+1)*width+t.column)*4;pixels[i]=t.kept&&!t.intermediate?255:0;pixels[i+1]=Math.round(t.scale/.986*255);pixels[i+2]=t.departure?255:t.intermediate?128:0;pixels[i+3]=255;}return{pixels,width,height,firstRow:-1};}
-export function cylinderIntermediatePose(tile,time=0,{reduced=false}={}){const t=reduced?0:Number.isFinite(time)?time:0,phase=tile.theta*3+tile.row*.47,p=cylinderTilePoint(tile,[.56,.68]),lift=.018+.055*tile.progress,r=tile.radius-lift;return{x:p[0]*r/tile.radius,y:p[1],z:p[2]*r/tile.radius,theta:Math.atan2(p[2],p[0]),scaleX:tile.width*tile.scale,scaleY:tile.height*tile.scale,fold:(.12+.47*tile.progress)*(.88+.12*Math.sin((t%(TAU/1.15))*1.15+phase)),lift};}
+export function createBirdTaperPixels(layout){const width=layout.columns>128?256:128,height=64,pixels=new Uint8Array(width*height*4);for(const t of layout.tiles){const i=((t.row+1)*width+t.column)*4;pixels[i]=t.kept&&!t.intermediate&&!t.departure?255:0;pixels[i+1]=Math.round(t.scale/.986*255);pixels[i+2]=t.departure?255:t.intermediate?128:0;pixels[i+3]=255;}return{pixels,width,height,firstRow:-1};}
+export function cylinderIntermediatePose(tile,time=0,{reduced=false}={}){const t=reduced?0:Number.isFinite(time)?time:0,p=cylinderTilePoint(tile,[.56,.68]),level=tile.progress,breath=reduced?0:Math.sin(t*.55+tile.theta*3)*.025*level;return{x:p[0],y:p[1],z:p[2],theta:Math.atan2(p[2],p[0]),scaleX:tile.width*tile.scale,scaleY:tile.height*tile.scale,fold:.08+.70*level+breath,inflate:.05+.32*level,lift:0};}
 
 /** Physical upper-world coordinates. Pure metadata, shared with the checks. */
 export function createCylinderMetamorphosisLayout({radius=20.94,columns=84,rows=39,topY=-28.14,rowHeight=1.86,birdCount=64,departureCount=64}={}) {
@@ -139,13 +139,9 @@ export function buildCylinderMetamorphosis(T,options={}) {
     // birds at walking distance. These are geometry, not a generated texture.
     const allowed=p=>p[1]>layout.wallBottom&&p[1]<layout.wallTop&&!cylinderWallOpening(layout,Math.atan2(p[2],p[0]),p[1]);
     const eye=[ink([1.025,.52]),ink([1.057,.54]),ink([1.026,.56])];if(eye.every(allowed))tri(dark,...eye);
-    for(const[a,b,w]of[[[.407,.87],[.40,1.34],.009],[[.18,.79],[.72,.63],.008]]) {
-      const dx=b[0]-a[0],dy=b[1]-a[1],length=Math.hypot(dx,dy),n=[-dy/length*w,dx/length*w];
-      const p=ink([a[0]+n[0],a[1]+n[1]]),q=ink([a[0]-n[0],a[1]-n[1]]),r=ink([b[0]-n[0],b[1]-n[1]]),s=ink([b[0]+n[0],b[1]+n[1]]);
-      if([p,q,r,s].every(allowed)){tri(dark,p,q,r);tri(dark,p,r,s);}
-    }
+
   }
-  layout.tiles.filter(tile=>tile.kept&&!tile.intermediate).forEach(panel);
+  layout.tiles.filter(tile=>tile.kept&&!tile.intermediate&&!tile.departure).forEach(panel);
   // Warm backing replaces visible grey retaining stone in every grout line and
   // behind the full-height east field. Only genuine portals interrupt it.
   const us=[...new Set([0,layout.columns,...Array.from({length:layout.columns*2+1},(_,i)=>i/2),...holes.flatMap(h=>[h[0],h[1]]).filter(u=>u>0&&u<layout.columns)])].sort((a,b)=>a-b);
@@ -190,7 +186,7 @@ export function buildCylinderMetamorphosis(T,options={}) {
   #endif`);};proxyMaterial.customProgramCacheKey=()=> 'city-bird-taper-proxy-local-relief-v2';
   const proxy=new T.Mesh(proxyGeometry,proxyMaterial);proxy.name='Warm complete cylinder · bird field tapers into the flight';group.add(proxy);
   let detail='relief',focusY=layout.topY,activeBand=null;
-  function setDetail(next,focus=focusY){if(next!=='proxy'&&next!=='relief')throw new RangeError('Use proxy or relief cylinder detail');detail=next;if(Number.isFinite(focus))focusY=focus;activeBand=detail==='relief'?reliefBands[bandAt(focusY)]:null;wallMeshes.forEach(mesh=>mesh.visible=!!activeBand&&mesh.userData.cylinderReliefBand===activeBand.id);activeHeight.value.set(activeBand?.bottom??1,activeBand?.top??0);proxy.visible=true;group.userData.cylinderDetail=detail;group.userData.cylinderReliefBand=activeBand?.id??null;}
+  function setDetail(next,focus=focusY){if(next!=='proxy'&&next!=='relief')throw new RangeError('Use proxy or relief cylinder detail');detail=options.paintedField?'proxy':next;if(Number.isFinite(focus))focusY=focus;activeBand=detail==='relief'?reliefBands[bandAt(focusY)]:null;wallMeshes.forEach(mesh=>mesh.visible=!!activeBand&&mesh.userData.cylinderReliefBand===activeBand.id);activeHeight.value.set(activeBand?.bottom??1,activeBand?.top??0);proxy.visible=true;group.userData.cylinderDetail=detail;group.userData.cylinderReliefBand=activeBand?.id??null;}
   setDetail(detail);
 
   function wingGeometry(above) {
@@ -210,10 +206,14 @@ export function buildCylinderMetamorphosis(T,options={}) {
     for(const sign of[-1,1])append(new T.SphereGeometry(.020,5,4).translate(.535,.007,sign*.092),.10);
     return geometry(positions,indices,colours);
   }
-  // One pair of shared paper-thin polygons is articulated over every remaining
-  // transition cell. There is deliberately no rounded body in this middle state.
+  // One continuous curved skin keeps the head pinned while the actual wings
+  // lift. It shares its topology and inflation with the departing living bird.
   const intermediateTiles=layout.tiles.filter(t=>t.intermediate),intermediateMeshes=[];
-  if(intermediateTiles.length)for(const[above,name]of[[true,'Upper'],[false,'Lower']]){const mesh=new T.InstancedMesh(wingGeometry(above),flightMaterial,intermediateTiles.length);mesh.name=name+' paper-thin wall wings · relief becoming flight';mesh.userData={cylinderTransitionWing:true};mesh.frustumCulled=false;mesh.instanceMatrix.setUsage(T.DynamicDrawUsage);intermediateTiles.forEach((tile,i)=>mesh.setColorAt(i,new T.Color(palette[tile.colour])));mesh.instanceColor.needsUpdate=true;group.add(mesh);meshes.push(mesh);intermediateMeshes.push(mesh);}
+  if(intermediateTiles.length){const g=own(createBirdMorphGeometry(T,BIRD_TILE_OUTLINE,{subdivision:0})),m=own(createBirdMorphMaterial(T)),mesh=new T.InstancedMesh(g,m,intermediateTiles.length);
+    mesh.name='Continuous lifted bird relief · pinned heads and curved wings';mesh.userData={cylinderTransitionWing:true};mesh.frustumCulled=false;mesh.instanceMatrix.setUsage(T.DynamicDrawUsage);
+    for(const[name,size]of[['birdFold',1],['birdInflate',1],['birdOpacity',1],['birdCurve',2]]){const a=new T.InstancedBufferAttribute(new Float32Array(intermediateTiles.length*size),size);a.setUsage(T.DynamicDrawUsage);g.setAttribute(name,a);}
+    intermediateTiles.forEach((tile,i)=>{mesh.setColorAt(i,new T.Color(palette[tile.colour]));g.attributes.birdOpacity.setX(i,1);});mesh.instanceColor.needsUpdate=true;group.add(mesh);meshes.push(mesh);intermediateMeshes.push(mesh);
+  }
   const count=layout.birds.length,flock=[];
   if(count)for(const[g,name]of[[bodyGeometry(),'Rounded bodies, beaks and eyes'],[wingGeometry(true),'Upper hinged wings from the same tile'],[wingGeometry(false),'Lower hinged wings from the same tile']]) {
     const mesh=new T.InstancedMesh(g,flightMaterial,count);mesh.name='Flying metamorphosis birds · '+name;mesh.frustumCulled=false;
@@ -223,7 +223,8 @@ export function buildCylinderMetamorphosis(T,options={}) {
   let disposed=false;
   function update(time,{reduced=options.reduced??false,detail:nextDetail,focusY:nextFocus}={}) {
     if(disposed)return;if(nextDetail||Number.isFinite(nextFocus))setDetail(nextDetail??detail,nextFocus);
-    intermediateTiles.forEach((tile,i)=>{const p=cylinderIntermediatePose(tile,time,{reduced});base.position.set(p.x,p.y,p.z);forward.set(-Math.sin(p.theta),0,Math.cos(p.theta));normal.crossVectors(forward,vertical);matrix.makeBasis(forward,vertical,normal);base.quaternion.setFromRotationMatrix(matrix);base.scale.set(p.scaleX,p.scaleY,p.scaleY);base.updateMatrix();for(let j=0;j<2;j++){rotation.setFromAxisAngle(axis,j===0?p.fold:-p.fold);hinge.compose(origin,rotation,unit);matrix.multiplyMatrices(base.matrix,hinge);intermediateMeshes[j].setMatrixAt(i,matrix);}});intermediateMeshes.forEach(mesh=>mesh.instanceMatrix.needsUpdate=true);
+    intermediateTiles.forEach((tile,i)=>{const p=cylinderIntermediatePose(tile,time,{reduced});base.position.set(p.x,p.y,p.z);forward.set(-Math.sin(p.theta),0,Math.cos(p.theta));normal.crossVectors(forward,vertical);matrix.makeBasis(forward,vertical,normal);base.quaternion.setFromRotationMatrix(matrix);base.scale.set(p.scaleX,p.scaleY,p.scaleY);base.updateMatrix();const mesh=intermediateMeshes[0],a=mesh.geometry.attributes;mesh.setMatrixAt(i,base.matrix);a.birdFold.setX(i,p.fold);a.birdInflate.setX(i,p.inflate);a.birdCurve.setXY(i,p.scaleX/tile.radius,p.scaleX/p.scaleY);});
+    intermediateMeshes.forEach(mesh=>{mesh.instanceMatrix.needsUpdate=true;for(const a of Object.values(mesh.geometry.attributes))if(a.isInstancedBufferAttribute)a.needsUpdate=true;});
     if(!count)return;
     layout.birds.forEach((bird,i)=>{
       const p=cylinderBirdPose(bird,time,{reduced});base.position.set(p.x,p.y,p.z);base.rotation.set(0,p.yaw,p.bank);base.scale.setScalar(p.scale);base.updateMatrix();flock[0].setMatrixAt(i,base.matrix);

@@ -1,10 +1,10 @@
-import {WORLD_CYLINDER as W,isLowerCoordinate,lowerLocal,lowerPhysical,lowerRadius,lowerMatrix,canWalkLower,tunnelContains,GALLERY_TUNNEL} from './world-cylinder-model.js?v=city-night-20261117';
-import {buildWorldCylinder,mountLowerWorld} from './world-cylinder-scene.js?v=city-night-20261117';
-import {UPPER,LOWER,pointAt,headingAt,heightAt,surfaceAt as gallerySurface,walkGallery} from './two-face-gallery-model.js?v=city-night-20261117';
-import {buildTwoFaceGallery} from './two-face-gallery-scene.js?v=city-night-20261117';
-import {LOWER_INLET} from './lower-landscape-model.js?v=city-night-20261117';
-import {buildMathFaculty} from './math-faculty-scene.js?v=city-night-20261117';
-import {createWorldFaceSectionRenderer} from './world-face-section-renderer.js?v=city-night-20261117';
+import {WORLD_CYLINDER as W,isLowerCoordinate,lowerLocal,lowerPhysical,lowerRadius,lowerMatrix,canWalkLower,tunnelContains,GALLERY_TUNNEL} from './world-cylinder-model.js?v=bird-peel-20261117b';
+import {buildWorldCylinder,mountLowerWorld} from './world-cylinder-scene.js?v=bird-peel-20261117b';
+import {UPPER,LOWER,pointAt,headingAt,heightAt,surfaceAt as gallerySurface,walkGallery} from './two-face-gallery-model.js?v=bird-peel-20261117b';
+import {buildTwoFaceGallery} from './two-face-gallery-scene.js?v=bird-peel-20261117b';
+import {LOWER_INLET} from './lower-landscape-model.js?v=bird-peel-20261117b';
+import {buildMathFaculty} from './math-faculty-scene.js?v=bird-peel-20261117b';
+import {createWorldFaceSectionRenderer} from './world-face-section-renderer.js?v=bird-peel-20261117b';
 export function installWorldCylinder(M,T){
  const built=buildWorldCylinder(T),upper=buildTwoFaceGallery(T,{side:'upper'}),lower=buildTwoFaceGallery(T,{side:'lower'}),faculty=buildMathFaculty(T);M.scene.add(built.group);built.group.add(upper.group);lower.group.position.set(-2160,0,-65);built.lowerFrame.add(lower.group);faculty.group.position.set(-2160,0,-65);built.lowerFrame.add(faculty.group);M.city.targets.push(...faculty.targets);
  const nativeShell=faculty.nativeShellNodes(window.CITY_EXTRAS?.mathModels),shellVisibility=new Map(nativeShell.map(n=>[n,n.visible]));for(const n of nativeShell)n.visible=false;

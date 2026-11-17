@@ -1,5 +1,5 @@
-import {HOUSE as H,HOUSE_LEVELS as LEVELS,houseSurface,houseRoomAt,houseInteractionAt,houseBlocked,walkHouse,inHex} from './transformation-house-model.js?v=city-night-20261117';
-import {buildTransformationHouse} from './transformation-house-scene.js?v=city-night-20261117';
+import {HOUSE as H,HOUSE_LEVELS as LEVELS,houseSurface,houseRoomAt,houseInteractionAt,houseBlocked,walkHouse,inHex} from './transformation-house-model.js?v=bird-peel-20261117b';
+import {buildTransformationHouse} from './transformation-house-scene.js?v=bird-peel-20261117b';
 export function installTransformationHouse(M,T){
  const built=buildTransformationHouse(T);M.scene.add(built.group);M.city.targets.push(...built.targets);const old={arrive:M.arrive,update:M.city.update,can:M.city.canStand,region:M.city.region,start:M.startExtra,target:M.city.targetInfo,show:M.showExtra};let active=false,shelfOpen=false,ratio=1.5,lastLevel=null,disposed=false,viewY=null;
  const el=(tag,text)=>{const n=document.createElement(tag);if(text)n.textContent=text;return n;},button=(text,fn)=>{const n=el('button',text);n.type='button';n.onclick=fn;return n;};const panel=el('details');panel.id='transformation-house-guide';panel.lang='en';const heading=el('summary'),headingText=el('span'),hint=el('p'),look=button('Look toward the stair',()=>{M.clearMovement();M.pointToward?.({x:133.2,z:0});M.player.pitch=-.2;}),examine=button('Investigate this room · E / A',()=>openRoom());heading.append(headingText);panel.append(heading,hint,look,examine);panel.hidden=true;document.body.append(panel);

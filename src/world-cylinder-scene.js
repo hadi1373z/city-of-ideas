@@ -1,11 +1,11 @@
-import {ESCHER_DEPTH} from './escher-depth-model.js?v=city-night-20261117';
-import {createOceanMaterial,updateOceanMaterial} from './ocean-surface.js?v=city-night-20261117';
-import {buildLowerLandscape} from './lower-landscape-scene.js?v=city-night-20261117';
-import {buildCylinderMetamorphosis} from './cylinder-metamorphosis-scene.js?v=city-night-20261117';
-import {WORLD_CYLINDER as W,lowerMatrix,GALLERY_TUNNEL} from './world-cylinder-model.js?v=city-night-20261117';
+import {ESCHER_DEPTH} from './escher-depth-model.js?v=bird-peel-20261117b';
+import {createOceanMaterial,updateOceanMaterial} from './ocean-surface.js?v=bird-peel-20261117b';
+import {buildLowerLandscape} from './lower-landscape-scene.js?v=bird-peel-20261117b';
+import {buildCylinderMetamorphosis} from './cylinder-metamorphosis-scene.js?v=bird-peel-20261117b';
+import {WORLD_CYLINDER as W,lowerMatrix,GALLERY_TUNNEL} from './world-cylinder-model.js?v=bird-peel-20261117b';
 export function buildWorldCylinder(T){
  const group=new T.Group();group.name='One cylindrical world · two inhabited faces';group.userData.worldCylinder=true;
- const metamorphosis=buildCylinderMetamorphosis(T,{birdCount:0});group.add(metamorphosis.group);
+ const metamorphosis=buildCylinderMetamorphosis(T,{birdCount:0,paintedField:true});group.add(metamorphosis.group);
  const lowerFrame=new T.Group();lowerFrame.name='Other face · unchanged source-coordinate frame';lowerFrame.matrixAutoUpdate=false;lowerFrame.matrix.copy(lowerMatrix(T));group.add(lowerFrame);
  const owned=new Set(),own=o=>(owned.add(o),o),mat=(c,o={})=>own(new T.MeshLambertMaterial({color:c,...o}));
  const stone=mat(0xb4a58c,{side:T.DoubleSide}),edge=mat(0x86795e),grass=mat(0x586f59),sand=mat(0xc2b18c),brass=mat(0xbba56d),warm=own(new T.MeshBasicMaterial({color:0xe1c28d}));

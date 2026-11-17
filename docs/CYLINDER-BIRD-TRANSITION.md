@@ -1,63 +1,52 @@
-# Cylinder birds: relief, paper wings and flight
+# A continuous wall-to-flight transformation
 
-The cylinder keeps its complete warm stone backing from Babel to the lower
-building. Only the decorative bird field becomes less dense before the lower
-rim. The real Escher entrance, middle landing and lower entrance remain open.
-The pattern is original geometric work; it is not a reproduction of an Escher
-print.
+The painted bird field, curved relief and living flock use the same original
+opposite-edge tile. This is original geometry, not a copied Escher print.
+The complete warm cylinder and its real doors remain unchanged.
 
-Open `?arrival=bird-transition` to inspect the lower transition directly. It
-places the visitor on an existing lower spiral tread at roughly physical
-Y −86m, facing the peeling wall with automatic travel disabled. It adds no
-geometry and does not change normal walking. The destination is exposed as
-`worldCylinder.visitBirdTransition()` for the same explicit arrival action.
+The dense field is a single continuous painted surface. The long black feather
+strokes are removed; only small eyes remain. Production uses no horizontal
+relief LOD bands, avoiding the visible shading stripes between bands.
 
-The visual sequence has three connected stages:
+A smooth threefold wave opens the lower field. Motifs keep their original size
+instead of randomly shrinking into isolated stickers. One instanced curved skin
+lifts their wings progressively. The head and beak remain pinned; the whole head
+is never treated as a hinged wing.
 
-1. The upper field is an edge-matched, fully tiled relief.
-2. Retained non-departure motifs in rows 28–34 become paper-thin paired wings.
-   Their fold increases towards the flight sources, with a gentle motion that
-   keeps every vertex in the wall band. These 279 motifs are architectural
-   details, rather than additional freely travelling birds. Thick flat relief
-   and distant flat glyphs are omitted at exactly these cells, so the wing
-   silhouettes never overlap a duplicate bird face.
-3. The 64 real departure cells in rows 32–34 retain their exact master tile,
-   position, scale and colour. The separate fixed flock peels from these cells
-   in a clockwise wave, circles inside the shaft, rises in a helical ribbon,
-   and folds into matching tiles on the observatory deck. Its floor pattern
-   remains in place while the finite pool repeats its journey.
+Exactly 64 source cells belong to the live flock. These cells are omitted from
+both the static relief and the painted proxy, so a moving bird never sits over
+an opaque duplicate. The living skin itself supplies the flat wall pose,
+slowly peels away, gains thickness and begins its clockwise wall orbit. It
+retains the source's width and height through phase .14 and resizes gradually
+only after leaving the wall. Head, eye, beak, wings and body stay on one surface;
+there is no separate rounded head that can detach from the printed silhouette.
 
-Rows 35–37 carry plain warm stone before the rim. They do not expose a grey gap
-or continue the decorative field to the edge. The retained-cell mask and
-height taper are shared with the distant proxy; paper wings remain visible in
-both levels of detail. Reduced motion freezes the wall-wing pose and retains
-the completed floor without the moving free flock.
+The subsequent safe gate, two-turn cylindrical ascent, west-side bridge
+clearance and observatory landings remain. Inflation and bending reverse as
+all 64 skins settle exactly into their original floor outlines. A fixed pool
+repeats the journey, with an opaque depth-writing ordered fade only at its
+concealed reset. Reduced motion retains static architecture and the completed
+floor without free flight.
 
-`cylinder-metamorphosis-scene.js` owns the original tile and wall transition.
-Its production configuration disables the old independent hover flock. The
-close wall draws just one 7.44m relief band around the visitor's physical height,
-using at most four merged batches. One faithful 2,060-triangle proxy covers all
-other heights, excluding only the exact active band. Both modes retain the same
-two instanced wing batches. This gives at most seven walking-view wall draws
-and three distant-view wall draws. The complete wall remains allocated in ten
-separately culled bands, while the actual submitted wall stays below 80,000
-triangles at every height, including the proxy and thin wings. The full shaft
-is not submitted and then discarded by a shader.
-During a connected gallery route below physical feet Y −31.5m, Babel's complete
-root is hidden behind its opaque floor. It is restored at the upper overlook,
-outside the route, in cutaway and during teardown. Repeated photo preparation
-preserves the original visibility record.
-The continuous flock and completed floor are separately owned by
-`bird-flight-model.js`, `bird-flight-scene.js` and `bird-flight.js` (seven draws).
-All resources dispose through their existing owners.
+`bird-morph-geometry.js` owns the shared closed skin, smooth wing envelope,
+curved wall mapping, geometric inflation and matching CPU deformation used for
+checks. Its normals follow the actual deformed surface. No long quill lines
+are added in the shared material.
 
-Checks in `tests/cylinder-metamorphosis.mjs` inspect genuine flat wing geometry,
-graded folds, motion, static reduced-motion poses, source-cell preservation,
-proxy suppression, exact horizontal relief slices, per-height submitted geometry
-budgets, real portal cuts, actual animated vertex clearance and
-cleanup. `tests/bird-flight.mjs` covers departure/arrival correspondence,
-continuous headings, circumferential coverage and more than 2,500 intersections
-against actual stairs, deck, bridge and roof geometry. The integrated draw and
-instance budget is checked in `tests/lower-face-visuals.mjs`.
+The production wall uses two draws: one 2,060-triangle faithful painted cylinder
+and one curved-relief instance batch, together below 60,000 submitted triangles.
+The former sliced relief remains available for isolated geometry diagnostics,
+not the live finish. The free flock plus four floor batches uses five draws.
+All owned geometry, materials, textures and instances dispose normally.
 
-The direct `?arrival=bird-transition` destination stands at the centre of an existing lower stair tread with automatic walking off. Its oblique view shows the partly folded wings against their stone backing; ordinary manual walking continues from that same real tread.
+During a connected gallery route below physical feet Y -31.5m, Babel is hidden
+behind its opaque floor and restored on ascent, exit, cutaway and teardown.
+The direct `?arrival=bird-transition` destination stands on the centre of a real
+lower tread, with an oblique wall view and automatic walking off. Ordinary
+manual walking continues from that exact tread.
+
+Checks preserve tile adjacency, complete backing, aperture clearance, source
+identity, the absence of duplicate proxy glyphs and black strokes, pinned heads,
+full-size peeling, actual deformed wing/rim vertices, all 64 floor matches,
+architectural path intersections, reduced motion and cleanup. Browser checks
+remain necessary for shader compilation and visual quality.

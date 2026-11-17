@@ -35,7 +35,7 @@ function mesh(geometry,mat,x=0,y=0,z=0,parent=scene){const m=new THREE.Mesh(geom
 function box(w,h,d,mat,x,y,z,parent){return mesh(new THREE.BoxGeometry(w,h,d),mat,x,y,z,parent)}
 function cylinder(rt,rb,h,mat,x=0,y=0,z=0,parent=scene){return mesh(new THREE.CylinderGeometry(rt,rb,h,40),mat,x,y,z,parent)}
 function torus(radius,tube,mat,y,parent=scene){const m=mesh(new THREE.TorusGeometry(radius,tube,8,144),mat,0,y,0,parent);m.rotation.x=Math.PI/2;return m}
-function annulus(y,mat,ri=inner,ro=outer,thick=.35,parent=scene){const shape=new THREE.Shape();shape.absarc(0,0,ro,0,Math.PI*2,false);const hole=new THREE.Path();hole.absarc(0,0,ri,0,Math.PI*2,true);shape.holes.push(hole);const m=mesh(new THREE.ExtrudeGeometry(shape,{depth:thick,bevelEnabled:false,curveSegments:112}),mat,0,y,0,parent);m.rotation.x=-Math.PI/2;m.userData.cityDestination='gallery';mainBuildingTargets.push(m);return m}
+function annulus(y,mat,ri=inner,ro=outer,thick=.35,parent=scene,voids=[]){const shape=new THREE.Shape();shape.absarc(0,0,ro,0,Math.PI*2,false);const hole=new THREE.Path();hole.absarc(0,0,ri,0,Math.PI*2,true);shape.holes.push(hole);for(const p of voids){const cut=new THREE.Path();cut.absarc(-p.z,-p.x,p.radius,0,Math.PI*2,true);shape.holes.push(cut);}const m=mesh(new THREE.ExtrudeGeometry(shape,{depth:thick,bevelEnabled:false,curveSegments:112}),mat,0,y,0,parent);m.rotation.x=-Math.PI/2;m.userData.cityDestination='gallery';mainBuildingTargets.push(m);return m}
 function galleryRing(y,mat,f,thick=.35,ri=inner){const shape=new THREE.Shape();shape.absarc(0,0,outer,0,Math.PI*2,false);const middle=new THREE.Path();middle.absarc(0,0,ri,0,Math.PI*2,true);shape.holes.push(middle);const hole=new THREE.Path(),b=f===0?window.CITY_BABEL_LAYOUT.opening:f===4?{...gallerySpiral.opening,minZ:gallerySpiral.roofOpeningStart}:gallerySpiral.opening;hole.moveTo(-b.maxZ,-b.maxX);hole.lineTo(-b.maxZ,-b.minX);hole.lineTo(-b.minZ,-b.minX);hole.lineTo(-b.minZ,-b.maxX);hole.closePath();shape.holes.push(hole);const m=mesh(new THREE.ExtrudeGeometry(shape,{depth:thick,bevelEnabled:false,curveSegments:112}),mat,0,y,0);m.rotation.x=-Math.PI/2;m.userData.cityDestination='gallery';mainBuildingTargets.push(m);return m;}
 function galleryCeilingArc(y){/* Ceiling rings stop at the broad rectangular stairwell. */}
 function startGallerySpiral(){if(visitMode==='roof'){setVisitMode('gallery');currentFloor=4;}else if(visitMode!=='gallery')enter();touring=false;closeExhibit();gallerySpiralTheta=currentFloor===4?gallerySpiral.max:gallerySpiral.starts[currentFloor];gallerySpiralDirection=currentFloor===4?-1:1;const p=gallerySpiral.pointAt(gallerySpiralTheta);Object.assign(player,{x:p.x,z:p.z,y:p.y+eye,yaw:gallerySpiral.headingAt(gallerySpiralTheta,gallerySpiralDirection),pitch:-.25});updateFloorUI();}
@@ -65,7 +65,9 @@ function sculpture(shape,color){const group=new THREE.Group(),m=new THREE.MeshSt
  case'threshold':for(let i=0;i<3;i++){const z=-i*.58,h=2.3-i*.3,w=1.8-i*.24;block(.10,h,.10,-w/2,h/2,z);block(.10,h,.10,w/2,h/2,z);block(w,.10,.10,0,h,z)}add(new THREE.CircleGeometry(.52,48),0,1.1,-1.28,light);break;
  }return group}
 function buildArchitecture(){
- const galleryPlinth=annulus(-.95,materials.dark,58,153,.7);galleryPlinth.name='Gallery plinth with a void above the Babel vault';mainBuildingTargets.pop();galleryPlinth.userData={};
+ // This plinth extends beneath the neighbouring house. Its shaft must be real
+ // here too; local shape coordinates account for the gallery entrance rotation.
+ const galleryPlinth=annulus(-.95,materials.dark,58,153,.7,scene,globalThis.window?.CITY_CONFIG?.houseWell?[globalThis.window.CITY_CONFIG.houseWell]:[]);galleryPlinth.name='Gallery plinth with a void above the Babel vault';mainBuildingTargets.pop();galleryPlinth.userData={};
  // The surrounding city now consists of genuine enterable source destinations.
  cylinder(inner-.9,inner-.9,.18,materials.water,0,.02,0);
  torus(inner-.8,.09,materials.metal,.12);
