@@ -41,8 +41,9 @@ not claims that Jung interpreted these particular narratives.
 The reader has Story, Concept, Interpretation and Sources & image sections. Stage
 controls update real scene objects manually; there is no automatic animation or
 new scene light. There are 91 mesh draws in the standalone quarter, with repeated
-stone, joinery and gate components instanced. New writing distinguishes a useful
-social persona from lying, includes positive unrealised capacities in shadow,
+stone, joinery and gate components instanced. Text-only signs use 1024 × 256
+canvases; genuine photographs keep their own dimensions. New writing distinguishes
+a useful social persona from lying, includes positive unrealised capacities in shadow,
 and preserves the costly conditions of Inana’s return. It treats Jungian theory
 as a historical interpretive framework, culturally specific myths as more than
 psychological examples, and archetypes as no fixed universal/personality list.
