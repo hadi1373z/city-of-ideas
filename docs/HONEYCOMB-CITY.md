@@ -152,3 +152,14 @@ block graph. Source route records retain their widths in actual composed geometr
 `tests/hex-coastal-walk.mjs` checks real paving absence on the retired strip,
 full-width street/dock surfaces, the existing promenade surface, and the exact
 shared map-guide vertices. No source boat, house or saved fold state moves.
+
+## Makers courtyard placement repair
+
+The three source houses now share one rigid placement at(239.0230114,-170),
+inside hex(2,-1). Library, Workshop and Dialogue House keep source-local rooms,
+furniture, 22 activities and cargo anchors. makers-site.js supplies actual roof
+footprints, door walks and a four-metre court approach to the exact western
+hex vertex. The Proof Atelier, study houses and their saved work do not move.
+The old boundary-straddling position is removed from the source transform,
+map, wall solver and all tree exclusions. tests/makers-block.mjs measures real
+source roof corners and door clearance rather than relying on map icons.

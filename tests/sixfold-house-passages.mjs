@@ -21,11 +21,14 @@ for(const h of SIXFOLD_HOUSES){const p=houseToWorld(h,{x:100,z:0}),d=new T.Vecto
 for(const d of[[.5,0,-Math.sqrt(3)/2],[-.5,0,Math.sqrt(3)/2],[0,0,1],[0,0,-1]])assert.equal(ray([SIXFOLD_CROSSING.x,-38.2,SIXFOLD_CROSSING.z],d,3.5).length,0,'The Escher crossing is physically open along every branch');
 assert.equal(ray([133,-38.2,115],[1,0,0],4).length,0,'The museum doorway remains open');
 assert.equal(ray([72,-38.2,0],[1,0,0],8).length,0,'The legacy gallery handoff remains open');
+// Near-plane clipping at a wall/jamb must still meet solid masonry behind it.
+for(const z of[-1.985,1.985]){const d=[0,0,Math.sign(z)],caster=new T.Raycaster(new T.Vector3(80,-38.2,z),new T.Vector3(...d),.08,.5);assert(caster.intersectObject(built.group,true).length,'Masonry remains visible behind the close camera clipping plane');}
 const plan=sixfoldPassagePlan();assert.equal(plan.segments.length,16);assert.equal(NETWORK_PASSAGES.length,13);assert.equal(built.counts.draws,3);
 // Downward normals and upward normals belong to the same partition. Every
 // sampled supported point has exactly one shell floor, without coplanar layers.
 for(const s of NETWORK_PASSAGES)for(let t=.05;t<.96;t+=.1){const x=s.a[0]+(s.b[0]-s.a[0])*t,z=s.a[1]+(s.b[1]-s.a[1])*t;const hits=new T.Raycaster(new T.Vector3(x,-38.2,z),new T.Vector3(0,-1,0),0,2).intersectObject(built.walking);const points=new Set(hits.map(h=>h.point.toArray().map(n=>n.toFixed(5)).join(',')));assert(points.size<=1,'The corridor union has no overlapping height layers');}
 assert.equal(houses.instances.length,6);for(const h of houses.instances){assert.equal(h.tiling,null,'Distant houses do not build six expensive interiors at startup');assert(h.exterior.children.length>10);assert.equal(h.detail.visible,false);}
+houses.update(0,{},{x:80,y:-38.2,z:0},'city',null);assert(houses.instances.every(h=>!h.exterior.visible),'Distant surface-only house shells cannot float in an underground view');
 houses.update(0,{},null,'overview',null,{angle:0});assert.deepEqual(houses.instances.filter(h=>h.detail.visible).map(h=>h.id),['east','west'],'A section through the east-west axis must reveal both complete basement interiors');assert(houses.instances.filter(h=>h.detail.visible).every(h=>h.tiling?.floors.length===8),'The cutaway renders the full eight-floor sources rather than exterior-only shells');
 const resources=new Map();for(const root of[built.group,houses.group])root.traverse(o=>{for(const r of[o.geometry,...(Array.isArray(o.material)?o.material:o.material?[o.material]:[])])if(r&&!resources.has(r)){resources.set(r,0);r.addEventListener('dispose',()=>resources.set(r,resources.get(r)+1));}});
 houses.dispose();built.dispose();museum.dispose();assert([...resources.values()].every(n=>n===1),'Shared prototypes and corridor resources are released exactly once');

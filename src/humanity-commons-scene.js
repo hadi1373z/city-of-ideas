@@ -1,4 +1,4 @@
-import {HUMANITY_COMMONS as C,CARE_NEEDS} from './humanity-commons-model.js?v=glass-continuous-20261118';
+import {HUMANITY_COMMONS as C,CARE_NEEDS} from './humanity-commons-model.js?v=makers-passages-20261118';
 
 // Original garden architecture and abstract figures; no borrowed character,
 // sculpture mesh, image, recording, dynamic light or reflection pass.

@@ -23,7 +23,7 @@
  ])});
 
 // Roof-aware street-tree exclusions exist before asynchronous district mounting.
- g.CITY_CORE_TREE_EXCLUSIONS=Object.freeze([{id:'gallery',x:0,z:0,shape:'circle',radius:58},...(sixfold?ring.map(h=>({...h,shape:'circle',radius:25})):[{id:'transformations',x:125,z:0,shape:'circle',radius:25},{id:'aperiodic',x:-108.25,z:-62.5,shape:'circle',radius:16},{id:'inflation',x:0,z:-125,shape:'circle',radius:16},{id:'symmetry',x:108.25,z:-62.5,shape:'circle',radius:16}]),{id:'makers',x:225,z:-50,shape:'circle',radius:29},{id:'socrates',x:-96,z:100,shape:'circle',radius:30},{id:'archetypes-reserved-ground',x:-318.6973486,z:276,shape:'circle',radius:55}]);
+ g.CITY_CORE_TREE_EXCLUSIONS=Object.freeze([{id:'gallery',x:0,z:0,shape:'circle',radius:58},...(sixfold?ring.map(h=>({...h,shape:'circle',radius:25})):[{id:'transformations',x:125,z:0,shape:'circle',radius:25},{id:'aperiodic',x:-108.25,z:-62.5,shape:'circle',radius:16},{id:'inflation',x:0,z:-125,shape:'circle',radius:16},{id:'symmetry',x:108.25,z:-62.5,shape:'circle',radius:16}]),{id:'makers',...(g.CITY_CONFIG?.makersSite??{x:Math.sqrt(3)*138,z:-170}),shape:'circle',radius:29},{id:'socrates',x:-96,z:100,shape:'circle',radius:30},{id:'archetypes-reserved-ground',x:-318.6973486,z:276,shape:'circle',radius:55}]);
  g.cityStreetTreeClear=(x,z,clearance=7)=>g.CITY_CORE_TREE_EXCLUSIONS.every(h=>Math.hypot(x-h.x,z-h.z)>=h.radius+clearance)&&(!g.CITY_PUBLIC_TREE_CLEAR||g.CITY_PUBLIC_TREE_CLEAR(x,z,clearance));
 // Deterministic branching trees: small individual leaves, open crowns, no spherical canopy or display plinth.
 g.buildNaturalCityTrees=function(T,parent,positions){

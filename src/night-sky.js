@@ -1,6 +1,6 @@
-import {CONSTELLATION_TOUR,constellationCandidates,constellationDirection,constellationName,nextConstellation,tickConstellationTour} from './constellation-tour-model.js?v=glass-continuous-20261118';
+import {CONSTELLATION_TOUR,constellationCandidates,constellationDirection,constellationName,nextConstellation,tickConstellationTour} from './constellation-tour-model.js?v=makers-passages-20261118';
 import {NIGHT_SKY_DEFAULTS,CONSTELLATION_GUIDES,equatorialToHorizontal,SKY_CHART_LIMITS} from './night-sky-model.js?v=city-night-20261117';
-import {buildNightSky} from './night-sky-scene.js?v=glass-continuous-20261118';
+import {buildNightSky} from './night-sky-scene.js?v=makers-passages-20261118';
 import {isLowerCoordinate} from './world-cylinder-model.js?v=city-night-20261117';
 
 export function installNightSky(M,T,{catalogue=null,fetcher=globalThis.fetch,events=globalThis}={}){

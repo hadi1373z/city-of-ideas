@@ -1,4 +1,4 @@
-import {installHousePatternGuides} from './house-pattern-guides.js?v=glass-continuous-20261118';
+import {installHousePatternGuides} from './house-pattern-guides.js?v=makers-passages-20261118';
 import {PAVILIONS,penroseTriangles,cropHex} from './mathematical-pavilions-model.js';
 
 // The original three public pavilion investigations move into real study rooms

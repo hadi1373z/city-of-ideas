@@ -1,4 +1,4 @@
-import {createPenroseRhombPatch} from './house-tiling-model.js?v=glass-continuous-20261118';
+import {createPenroseRhombPatch} from './house-tiling-model.js?v=makers-passages-20261118';
 import {WORLD_CYLINDER as W} from './world-cylinder-model.js';
 
 export const READING_FLOOR_PENROSE=Object.freeze({innerRadius:19,outerRadius:58,floorY:.13,tileInner:24.2,tileOuter:52,extent:60,textureSize:2048,depth:7,seedRadius:90,joint:.045,palette:Object.freeze({thin:'#d8d0b5',thick:'#78978e',joint:'#ac9763',stone:'#bcb39c'})});

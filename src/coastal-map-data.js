@@ -1,6 +1,7 @@
-import {IDEAS_PARK_SITE} from './city-hex-layout.js?v=glass-continuous-20261118';
-import {SEMINAR_HOUSES} from './seminar-houses-data.js?v=glass-continuous-20261118';
-import {SHORE,HEX_COAST_WALK,COAST_PROMENADE_WALK} from './island-layout.js?v=glass-continuous-20261118';
+import {MAKERS_SITE,MAKERS_ACCESS,MAKERS_ROOFS} from './makers-site.js?v=makers-block-20261118';
+import {IDEAS_PARK_SITE} from './city-hex-layout.js?v=makers-passages-20261118';
+import {SEMINAR_HOUSES} from './seminar-houses-data.js?v=makers-passages-20261118';
+import {SHORE,HEX_COAST_WALK,COAST_PROMENADE_WALK} from './island-layout.js?v=makers-passages-20261118';
 
 // The same world-to-SVG projection used by the original coastal plan.
 export const coastMapPoint = (x, z) => [460 + x * .7, 460 + z * .7];
@@ -20,8 +21,8 @@ export const COAST_MAIN_PATHS = [
  // The original park/pond entrance meets the northern shared hex edge.
  [[0,-92],[0,IDEAS_PARK_SITE.z+135]],
  // Makers and the existing Origami/Proof approaches meet a real block vertex.
- [[211.5,-50],[199,-50],[199,-92],[2*A,-92]],
- [[199,-50],[199,65],[203.5,65]]
+ MAKERS_ACCESS.points,
+ [[2*A,-92],[199,-92],[199,65],[203.5,65]]
 ];
 // The guide follows the source court approaches, real hex edges, existing
 // eastern coast gate and shoreline promenade. It creates no cross-cell road.
@@ -40,7 +41,7 @@ export const COAST_EXPLORER_COPY = {
     places: 'Five places to explore', information: 'About this place', visit: 'Visit this place',
     route: 'Walking route · Gallery → Origami → Coast', shown: 'Walking route shown.', hidden: 'Walking route hidden.',
     routeHelp: 'The dashed rust-coloured line follows existing paths. It starts at the gallery’s east approach; it is a map guide, not automatic movement.',
-    steps: ['From the gallery’s east approach, follow the central hex edge north to the shared vertex, then continue along the next hex edge toward Makers.', 'Follow the Makers’ lane south, then turn east past the north side of the House of Origami. The artists’ garden court is a separate destination in the western blocks.', 'Follow the honeycomb street edges to the eastern coast gate, then follow the shoreline promenade to the paper-boat lookout.'],
+    steps: ['From the gallery’s east approach, follow the central hex edge north to the shared vertex, then continue along the next hex edge to the east-side lane.', 'Follow the east-side lane south, then turn east past the north side of the House of Origami. The artists’ garden court is a separate destination in the western blocks.', 'Follow the honeycomb street edges to the eastern coast gate, then follow the shoreline promenade to the paper-boat lookout.'],
     more: 'More city destinations',
     landmarks: {
       gallery: {name: 'Zarathustra Gallery', area: 'The island centre', description: 'Explore the gallery and its philosophical artworks. Zarathustra stands at the exact centre of this circular island.'},

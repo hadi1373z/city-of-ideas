@@ -1,6 +1,6 @@
-import {buildTransformationHouse} from './transformation-house-scene.js?v=glass-continuous-20261118';
-import {buildHouseTiling} from './house-tiling-scene.js?v=glass-continuous-20261118';
-import {SIXFOLD_HOUSES} from './sixfold-house-network-model.js?v=glass-continuous-20261118';
+import {buildTransformationHouse} from './transformation-house-scene.js?v=makers-passages-20261118';
+import {buildHouseTiling} from './house-tiling-scene.js?v=makers-passages-20261118';
+import {SIXFOLD_HOUSES} from './sixfold-house-network-model.js?v=makers-passages-20261118';
 
 // One immutable structural prototype supplies all six houses. Only moving
 // shelves, pendulums, local lamp visibility and finish buffers are independent.
@@ -50,7 +50,7 @@ export function buildSixfoldTransformationHouses(T,{canvas=()=>document.createEl
  let disposed=false;
  return{group,walking:group,instances,targets,prototype,
   // The coordinator activates only the nearby house, including its lamps.
-  update(time,states={},player=null,mode='city',activeHouseId=null,section=null){if(disposed)return;for(const h of instances){const state=states[h.id]||{},near=mode==='city'&&player&&Math.abs(player.y)<45&&Math.hypot(player.x-h.x,player.z-h.z)<62,cut=section&&Math.abs(h.x*Math.sin(section.angle)+h.z*Math.cos(section.angle))<26,show=h.id===activeHouseId||near||cut;h.setDetail(show);h.update(time,state.shelfOpen,state.ratio);}},
+  update(time,states={},player=null,mode='city',activeHouseId=null,section=null){if(disposed)return;for(const h of instances){const state=states[h.id]||{},near=mode==='city'&&player&&Math.abs(player.y)<45&&Math.hypot(player.x-h.x,player.z-h.z)<62,cut=section&&Math.abs(h.x*Math.sin(section.angle)+h.z*Math.cos(section.angle))<26,show=h.id===activeHouseId||near||cut;h.setDetail(show);if(mode==='city'&&player?.y<-1&&!show)h.exterior.visible=false;h.update(time,state.shelfOpen,state.ratio);}},
   dispose(){if(disposed)return;disposed=true;for(const h of instances)h.dispose();for(const o of clonedInstances)o.dispose?.();prototype.dispose();for(const r of owned)r.dispose();group.clear();}
  };
 }

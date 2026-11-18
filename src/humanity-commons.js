@@ -1,5 +1,5 @@
-import {HUMANITY_COMMONS as C,CARE_RULES,CARE_QUESTION,allocateCare,nearHumanityCommons,commonsCanStand} from './humanity-commons-model.js?v=glass-continuous-20261118';
-import {buildHumanityCommons} from './humanity-commons-scene.js?v=glass-continuous-20261118';
+import {HUMANITY_COMMONS as C,CARE_RULES,CARE_QUESTION,allocateCare,nearHumanityCommons,commonsCanStand} from './humanity-commons-model.js?v=makers-passages-20261118';
+import {buildHumanityCommons} from './humanity-commons-scene.js?v=makers-passages-20261118';
 
 export function installHumanityCommons(M,T,{canvasFactory,events=globalThis,doc=document}={}){
  if(M.humanityCommons)return M.humanityCommons;const built=buildHumanityCommons(T,{canvasFactory});M.scene.add(built.group);M.city.targets.push(...built.targets);let disposed=false,hintDismissed=false,rule='equal',result=allocateCare(rule),feedback='';built.update(result.allocations);

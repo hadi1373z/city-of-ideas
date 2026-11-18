@@ -1,6 +1,6 @@
-import {ARCHETYPES_QUARTER,ARCHETYPE_HOUSES,archetypeHouse,archetypeEntry,archetypeInside,archetypeInteractionAllowed,createArchetypeState,setArchetypeStage} from './archetypes-quarter-model.js?v=glass-continuous-20261118';
-import {ARCHETYPE_CONTENT,ARCHETYPE_NOTICE,archetypeArtURL} from './archetypes-quarter-content.js?v=glass-continuous-20261118';
-import {buildArchetypesQuarter} from './archetypes-quarter-scene.js?v=glass-continuous-20261118';
+import {ARCHETYPES_QUARTER,ARCHETYPE_HOUSES,archetypeHouse,archetypeEntry,archetypeInside,archetypeInteractionAllowed,createArchetypeState,setArchetypeStage} from './archetypes-quarter-model.js?v=makers-passages-20261118';
+import {ARCHETYPE_CONTENT,ARCHETYPE_NOTICE,archetypeArtURL} from './archetypes-quarter-content.js?v=makers-passages-20261118';
+import {buildArchetypesQuarter} from './archetypes-quarter-scene.js?v=makers-passages-20261118';
 
 export function installArchetypesQuarter(M,T,options={}){
  const events=options.events||globalThis,built=buildArchetypesQuarter(T,options),state=createArchetypeState();M.scene.add(built.group);M.city.targets.push(...built.targets);M.city.buildingTargets.push(...built.houses.map(h=>h.group));

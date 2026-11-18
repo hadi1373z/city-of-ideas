@@ -285,3 +285,11 @@ The coastal map has a distinct Middle layer plan using real sixfold, Gallery and
 Escher footprints and honest depth labels. Keep it synchronized with those shared
 models. city-lawn-palette.js owns seaside/map grass colour and whole-cell selection;
 clone the source park material without introducing another coincident lawn skin.
+
+Makers courtyard now mounts as one rigid source district at(239.0230114,-170),
+inside hex(2,-1). makers-site.js owns its three roof footprints and real access
+paths. Keep source rooms/cargo anchors local and preserve the separate Proof
+Atelier at(215,-78). Map, planting and wall clipping use the shared site.
+The basement corridor walls have 0.28m outward masonry thickness to survive
+close-camera near clipping; keep joins open and hide distant surface-only house
+shells during underground walking. Never replace these walls with zero-depth planes.

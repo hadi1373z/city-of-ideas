@@ -133,3 +133,9 @@ checks per-house state/lamps, stale cross-house controls, registered collection
 obstacles, paused reading, the complete reverse circuit, all three legacy exit
 directions, wrapper cleanup and zero private-data access. Actual scene floor,
 roof, doorway and union-junction rays are checked by the physical scene suite.
+
+Boundary walls now extend 0.28m into the surrounding earth, with closed sides.
+The original inner wall line and all open union junctions stay unchanged. A
+regression reproduces an eye 15mm from a wall: the near plane clips the inner
+face but must still meet opaque outer masonry. Distant above-ground-only LOD
+shells are hidden while underground; nearby full house interiors remain visible.
