@@ -6,7 +6,7 @@ import {COAST_ROUTES,HOUSE_ORIGAMI} from './origami-house-math.js?v=sixfold-city
 import {CITY_ISLAND as I,islandRadius} from './island-layout.js?v=sixfold-city-20261118b';
 import {urbanRoutes,segmentDistance,streetTreeClear} from './city-urban-plan-model.js?v=sixfold-city-20261118b';
 import {buildCityUrbanPlan} from './city-urban-plan-scene.js?v=sixfold-city-20261118b';
-export function buildCityCoast(T,{cityPaths=[],heightAt=()=>0,naturalTrees=globalThis.window?.buildNaturalCityTrees}={}){
+export function buildCityCoast(T,{cityPaths=[],heightAt=()=>0,naturalTrees=globalThis.window?.buildNaturalCityTrees,parkGrass=null}={}){
  const group=new T.Group();group.name='Circular island and surrounding ocean';const owned=new Set(),own=r=>(owned.add(r),r),mat=c=>own(new T.MeshLambertMaterial({color:c})),sand=mat(0xcbbd96),wood=mat(0x846d50),pathMat=mat(0xc6bd9e),laneMat=mat(0x9b9e83);
  function box(w,h,d,x,y,z,m){const o=new T.Mesh(own(new T.BoxGeometry(w,h,d)),m);o.position.set(x,y,z);group.add(o);return o;}
  function polarBand(inner,outer,radial,angular,height,material,name,colours){
@@ -14,7 +14,7 @@ export function buildCityCoast(T,{cityPaths=[],heightAt=()=>0,naturalTrees=globa
   for(let j=0;j<angular;j++)for(let i=0;i<radial;i++){const a=j*(radial+1)+i,b=a+radial+1;indices.push(a,b,a+1,a+1,b,b+1);}
   const g=own(new T.BufferGeometry());g.setAttribute('position',new T.Float32BufferAttribute(pos,3));if(colours)g.setAttribute('color',new T.Float32BufferAttribute(cols,3));g.setIndex(indices);g.computeVertexNormals();const m=new T.Mesh(g,material);m.name=name;group.add(m);return m;
  }
- const grass=own(new T.MeshLambertMaterial({vertexColors:true})),base=new T.Color(0x84916d);
+ const grass=own(parkGrass?.clone?parkGrass.clone():new T.MeshStandardMaterial({color:0x9aaf86,roughness:1,metalness:0}));grass.color.setHex(0x9aaf86);grass.vertexColors=false;const base=new T.Color(0x84916d);
  const land=polarBand(58,I.lawnRadius,64,192,()=>.005,grass,'Continuous circular lawn centred on the gallery',(x,z)=>{const n=.035*Math.sin(x*.018+Math.sin(z*.011))+.018*Math.cos(z*.043-x*.021),c=base.clone().offsetHSL(0,0,n);return[c.r,c.g,c.b];});
  const wells=configuredHouseWells(globalThis.window?.CITY_CONFIG);if(wells.length){const original=land.geometry;land.geometry=own(cutHouseWell(T,original,wells));}
  const beach=polarBand(I.lawnRadius,I.radius,5,256,(_,u)=>.005-.05*u,sand,'Unbroken beach around the entire island');
@@ -29,7 +29,7 @@ export function buildCityCoast(T,{cityPaths=[],heightAt=()=>0,naturalTrees=globa
   const closed=Math.hypot(points[0][0]-points.at(-1)[0],points[0][1]-points.at(-1)[1])<1e-6;const {positions,indices}=roadBatches.get(material),v=[],ix=[];for(let i=0;i<points.length;i++){const a=points[i===0&&closed?points.length-2:Math.max(0,i-1)],p=points[i],b=points[i===points.length-1&&closed?1:Math.min(points.length-1,i+1)],before=new T.Vector2(p[0]-a[0],p[1]-a[1]).normalize(),after=new T.Vector2(b[0]-p[0],b[1]-p[1]).normalize();if(i===0&&!closed)before.copy(after);if(i===points.length-1&&!closed)after.copy(before);const normal=new T.Vector2(-after.y,after.x),miter=new T.Vector2(-before.y,before.x).add(normal).normalize(),distance=Math.min(width,width/2/Math.max(.5,miter.dot(normal)));v.push(p[0]+miter.x*distance,Math.max(.018,(heightAt(p[0],p[1])||0)+.003),p[1]+miter.y*distance,p[0]-miter.x*distance,Math.max(.018,(heightAt(p[0],p[1])||0)+.003),p[1]-miter.y*distance);if(i<points.length-1){const k=i*2;ix.push(k,k+2,k+1,k+1,k+2,k+3);}}const offset=positions.length/3;positions.push(...v);indices.push(...ix.map(i=>i+offset));}
  const paths=[...urbanRoutes(),...cityPaths].filter(p=>p.points.length>1&&p.points.every(([x,z])=>islandRadius(x,z)<I.radius));for(const p of paths)road(p.points,p.width||4,p.kind==='lane'?laneMat:pathMat);
  for(const[material,{positions,indices}]of roadBatches){const geometry=own(new T.BufferGeometry());geometry.setAttribute('position',new T.Float32BufferAttribute(positions,3));geometry.setIndex(indices);geometry.computeVertexNormals();const mesh=new T.Mesh(geometry,material);mesh.name=material===laneMat?'Quiet narrow honeycomb lanes · one paving batch':'Continuous campus and coast gateways · one paving batch';group.add(mesh);}
- const urban=buildCityUrbanPlan(T,{naturalTrees});group.add(urban.group);
+ const urban=buildCityUrbanPlan(T,{naturalTrees,parkGrass});group.add(urban.group);
  // A loose coastal woodland frames the city; the park and future western home lots stay clear.
  const trees=[];for(let n=0;n<150;n++){const a=n*2.399963,r=390+((n*41)%105),x=Math.cos(a)*r,z=Math.sin(a)*r;if(Math.hypot(x-IDEAS_PARK_SITE.x,z-IDEAS_PARK_SITE.z)<IDEAS_PARK_SITE.radius||x<0&&z>125||FOUNDATION_HOUSES.some(h=>Math.hypot(x-h.x,z-h.z)<30))continue;const clear=paths.every(p=>p.points.slice(1).every((b,i)=>{const a=p.points[i],dx=b[0]-a[0],dz=b[1]-a[1],u=Math.max(0,Math.min(1,((x-a[0])*dx+(z-a[1])*dz)/(dx*dx+dz*dz)));return Math.hypot(x-a[0]-dx*u,z-a[1]-dz*u)>(p.width||4)/2+3;}));if(clear&&streetTreeClear(x,z)&&!urban.walls.some(w=>segmentDistance(x,z,w.a,w.b)<1.2))trees.push({x,z});}if(naturalTrees)naturalTrees(T,group,trees);
  const shore=HOUSE_ORIGAMI.shore,dx=shore.x-256.5;
