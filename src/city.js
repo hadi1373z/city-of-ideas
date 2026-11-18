@@ -23,10 +23,12 @@ window.createGalleryCity=function(T,ctx){
  const islandShape=new T.Shape();islandShape.absarc(0,0,552,0,Math.PI*2,false);const galleryVoid=new T.Path();galleryVoid.absarc(0,0,58,0,Math.PI*2,true);islandShape.holes.push(galleryVoid);for(const p of window.CITY_CONFIG?.houseWells||(window.CITY_CONFIG?.houseWell?[window.CITY_CONFIG.houseWell]:[])){const h=new T.Path();h.absarc(p.x,-p.z,p.radius,0,Math.PI*2,true);islandShape.holes.push(h);}const islandBase=mesh(new T.ExtrudeGeometry(islandShape,{depth:.24,bevelEnabled:false,curveSegments:160}),new T.MeshLambertMaterial({color:0x7c8868}),0,-.34,0,city);islandBase.rotation.x=-Math.PI/2;islandBase.name='Circular island foundation centred on Zarathustra Gallery';
  // Retain only true source threshold approaches. The new block-edge city
  // owns the outward street network; retired diagonal lanes are not built.
+ if(window.CITY_CONFIG?.sixfoldHouses!==true){
  road([[-64,0],[-76,0],[-76,110],[-97.7,110],[-97.7,103.8]],5.2);
  road([[-97.7,110],[0,110]],5.2);
  road([[0,94],[0,110],[74,100],[74,76],[200,76],[203.5,65],[203.5,-50],[211.5,-50]],5.2);
  road([[-76,0],[-84,0],[-84,-32],[-138,-32],[-138,-150],[0,-185],[0,-195]],5.2);
+ }
  const landscape=createCityLandscape(T,{parent:city,tiles:ctx.siteTiles,outerRadius:A.outerRadius});
  plaque('گالری زرتشت',-65,9,4.6);plaque('کوهِ شدن · چهار دور',190,9,4.6);
  plaque('خانهٔ سقراط',-109,107.3,5);plaque('گالری اشیا · بازار روباز',OBJ.x,OBJ.z+50,14);

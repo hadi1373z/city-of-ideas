@@ -38,7 +38,7 @@ export function sixfoldPassagePlan(){
 export function buildSixfoldHousePassages(T){
  const plan=sixfoldPassagePlan(),group=new T.Group();group.name='Sixfold basement circuit and Escher junction · real joined corridors';const owned=new Set(),own=r=>(owned.add(r),r),stone=own(new T.MeshLambertMaterial({color:0xb4a58c,side:T.DoubleSide})),brass=own(new T.MeshLambertMaterial({color:0xbba56d})),warm=own(new T.MeshBasicMaterial({color:0xffd7a2}));
  const pos=[],norm=[],append=(a,b,c,n)=>{pos.push(...a,...b,...c);for(let k=0;k<3;k++)norm.push(...n);},poly=(points,y,up)=>{for(let i=1;i<points.length-1;i++){const a=points[0],b=points[i],c=points[i+1];append([a[0],y,a[1]],[(up?c:b)[0],y,(up?c:b)[1]],[(up?b:c)[0],y,(up?b:c)[1]],[0,up?1:-1,0]);}};
- for(const p of plan.floor){poly(p,-40,true);poly(p,-35.2,false);}
+ for(const p of plan.floor){poly(p,-40,true);poly(p,-40.24,false);poly(p,-35.2,false);poly(p,-34.875,true);}
  for(const{a,b}of plan.walls){const dx=b[0]-a[0],dz=b[1]-a[1],len=Math.hypot(dx,dz),n=[-dz/len,0,dx/len],u=[a[0],-40,a[1]],v=[b[0],-40,b[1]],w=[b[0],-35.2,b[1]],q=[a[0],-35.2,a[1]];append(u,v,w,n);append(u,w,q,n);}
  const geo=own(new T.BufferGeometry());geo.setAttribute('position',new T.Float32BufferAttribute(pos,3));geo.setAttribute('normal',new T.Float32BufferAttribute(norm,3));geo.computeBoundingSphere();const shell=new T.Mesh(geo,stone);shell.name='One corridor union · floors, roofs and genuinely open junctions';group.add(shell);
  // Repeated ceiling beacons use two tiny batches, not extra point lights.
