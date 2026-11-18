@@ -83,6 +83,11 @@ share the full current building/place footprint guard; the Jungian quarter's
 reserved ground stays clear as its rooms are built. Original park garden trees
 retain their own source planting and garden clearance; indoor plants are untouched.
 
+Covered arcades are architecture too: their complete6.2m roof bands participate
+in the same tree exclusion. Inner-courtyard planting is offset away from those
+eaves. The regression first reproduced a crown/arcade overlap, then verifies
+actual generated crown bounds against each transformed roof's oriented volume.
+
 The dashed underground routes are the existing physicalY−40 Babel/Transformations
 corridor and its Escher museum spur. A surface linked threshold is not described
 as a physical staircase. Personal homes occupy the night face without rewriting
@@ -95,7 +100,7 @@ result is committed in`honeycomb-city-layout.js`; run
 `node tools/render-honeycomb-layout.mjs`, `node tools/render-coastal-plan.mjs` and
 `node tools/render-artist-quarter-plan.cjs` after relevant placement changes.
 An independent consistency check regenerates the graph and compares its hash.
-A local measurement gave22ms module import and22ms layout of395 street trees;
+A local measurement gave58ms module import and77ms layout of398 street trees;
 these are development-machine timings, not a promise for every visitor.
 
 Two shared paving batches remain. Urban courts, walls, copings/feet, lawn field,
