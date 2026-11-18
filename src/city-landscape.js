@@ -1,10 +1,19 @@
 /* Polygonal campus streets shared by source landscape, city paving and maps. */
 (function(g){'use strict';
- const hex=(x,z,r)=>Array.from({length:7},(_,i)=>[x+r*Math.cos(i*Math.PI/3),z+r*Math.sin(i*Math.PI/3)]);
- const gallery=hex(0,0,76),house=hex(125,0,32),views=Array.from({length:6},(_,i)=>{const a=i*Math.PI/3;return{id:'civic-view-'+(i+1),name:'Campus hexagonal view '+(i+1),width:5.2,points:[gallery[i],i===0?[93,0]:[108*Math.cos(a),108*Math.sin(a)]]};});
- g.CITY_CAMPUS_PLAN=Object.freeze({roads:Object.freeze([
- {id:'sixfold-hexagon',name:'Gallery hexagonal precinct',width:6,points:gallery},
- {id:'transformations-precinct',name:'Transformations compact hexagonal precinct',width:4.5,points:house},...views,
+ const hex=(x,z,r,turn=0)=>Array.from({length:7},(_,i)=>[x+r*Math.cos(turn+i*Math.PI/3),z+r*Math.sin(turn+i*Math.PI/3)]),sixfold=g.CITY_CONFIG?.sixfoldHouses!==false,R=Math.sqrt(3)*92,A=R/2;
+ const ring=Array.from({length:6},(_,i)=>{const angle=i*Math.PI/3;return{id:['east','southeast','southwest','west','northwest','northeast'][i],x:R*Math.cos(angle),z:R*Math.sin(angle),angle};});
+ const gallery=hex(0,0,92,Math.PI/6),fronts=ring.map(h=>({id:'sixfold-front-'+h.id,name:'Tangential doorway · '+h.id,width:3.6,points:[26,92].map(r=>[h.x-r*Math.sin(h.angle),h.z+r*Math.cos(h.angle)])}));
+ const legacyGallery=hex(0,0,76),legacyHouse=hex(125,0,32);
+ g.CITY_CAMPUS_PLAN=Object.freeze({sixfold,roads:Object.freeze(sixfold?[
+ ...fronts,
+ {id:'gallery-west-threshold',name:'Gallery west graded threshold',width:7,points:[[-58,0],[-A,0]]},
+ {id:'gallery-east-threshold',name:'Gallery east graded threshold',width:7,points:[[58,0],[A,0]]},
+ {id:'gallery-lift-spine',name:'Graded lift return to the central hex',width:4,points:[[64.25,0],[62.5,0],[62.5,-46],[A,-46]]},
+ {id:'gallery-south-grade-spine',name:'Graded south doorway to the central hex',width:4.5,points:[[64.25,0],[62.5,0],[62.5,92-62.5/Math.sqrt(3)]]}
+ ]:[
+ {id:'sixfold-hexagon',name:'Gallery hexagonal precinct',width:6,points:legacyGallery},
+ {id:'transformations-precinct',name:'Transformations compact hexagonal precinct',width:4.5,points:legacyHouse},
+ ...Array.from({length:6},(_,i)=>{const a=i*Math.PI/3;return{id:'civic-view-'+(i+1),name:'Campus hexagonal view '+(i+1),width:5.2,points:[legacyGallery[i],i===0?[93,0]:[108*Math.cos(a),108*Math.sin(a)]]};}),
  {id:'gallery-west-threshold',name:'Gallery west graded threshold',width:7,points:[[-58,0],[-76,0]]},
  {id:'gallery-east-threshold',name:'Gallery east graded threshold',width:7,points:[[58,0],[76,0]]},
  {id:'gallery-lift-spine',name:'Straight return-lift garden',width:4,points:[[64.25,0],[62.5,0],[62.5,-46],[76,-46]]},
@@ -13,9 +22,8 @@
  {id:'transformation-south-door',name:'Transformations south doorway',width:3.2,points:[[125,19.918584287042087],[125,27.712812921102035]]}
  ])});
 
-// Available before any asynchronous district installation. These fixed real
-// shells must never receive a street tree, including its whole crown.
- g.CITY_CORE_TREE_EXCLUSIONS=Object.freeze([{id:'gallery',x:0,z:0,shape:'circle',radius:58},{id:'transformations',x:125,z:0,shape:'circle',radius:25},{id:'makers',x:225,z:-50,shape:'circle',radius:29},{id:'socrates',x:-96,z:100,shape:'circle',radius:30},{id:'aperiodic',x:-108.25,z:-62.5,shape:'circle',radius:16},{id:'inflation',x:0,z:-125,shape:'circle',radius:16},{id:'symmetry',x:108.25,z:-62.5,shape:'circle',radius:16},{id:'archetypes-reserved-ground',x:-318.6973486,z:276,shape:'circle',radius:55}]);
+// Roof-aware street-tree exclusions exist before asynchronous district mounting.
+ g.CITY_CORE_TREE_EXCLUSIONS=Object.freeze([{id:'gallery',x:0,z:0,shape:'circle',radius:58},...(sixfold?ring.map(h=>({...h,shape:'circle',radius:25})):[{id:'transformations',x:125,z:0,shape:'circle',radius:25},{id:'aperiodic',x:-108.25,z:-62.5,shape:'circle',radius:16},{id:'inflation',x:0,z:-125,shape:'circle',radius:16},{id:'symmetry',x:108.25,z:-62.5,shape:'circle',radius:16}]),{id:'makers',x:225,z:-50,shape:'circle',radius:29},{id:'socrates',x:-96,z:100,shape:'circle',radius:30},{id:'archetypes-reserved-ground',x:-318.6973486,z:276,shape:'circle',radius:55}]);
  g.cityStreetTreeClear=(x,z,clearance=7)=>g.CITY_CORE_TREE_EXCLUSIONS.every(h=>Math.hypot(x-h.x,z-h.z)>=h.radius+clearance)&&(!g.CITY_PUBLIC_TREE_CLEAR||g.CITY_PUBLIC_TREE_CLEAR(x,z,clearance));
 // Deterministic branching trees: small individual leaves, open crowns, no spherical canopy or display plinth.
 g.buildNaturalCityTrees=function(T,parent,positions){
@@ -52,7 +60,7 @@ g.createCityLandscape=function(T,{parent,tiles,outerRadius=58}){
  const cleanLamps=lampPositions.filter(p=>clearOfPaths(p,.45));
  // Dalí's residence occupies this lot; keep both trunks and foliage out of its rooms.
  const daliLot={minX:108,maxX:128,minZ:65,maxZ:83};
- const trees=treePositions.filter((p,i)=>g.cityStreetTreeClear(p.x,p.z)&&!(p.x>daliLot.minX&&p.x<daliLot.maxX&&p.z>daliLot.minZ&&p.z<daliLot.maxZ)&&!(Math.abs(p.z)<8&&(p.x< -58||p.x>183))&&clearOfPaths(p,2)&&Math.hypot(p.x,p.z)>outerRadius+4&&Math.hypot(p.x-125,p.z)>31&&treePositions.findIndex(q=>Math.hypot(q.x-p.x,q.z-p.z)<5)===i);
+ const trees=treePositions.filter((p,i)=>g.cityStreetTreeClear(p.x,p.z)&&!(p.x>daliLot.minX&&p.x<daliLot.maxX&&p.z>daliLot.minZ&&p.z<daliLot.maxZ)&&!(Math.abs(p.z)<8&&(p.x< -58||p.x>183))&&clearOfPaths(p,2)&&Math.hypot(p.x,p.z)>outerRadius+4&&treePositions.findIndex(q=>Math.hypot(q.x-p.x,q.z-p.z)<5)===i);
  function instances(geo,mat,list,transform,name){const m=new T.InstancedMesh(geo,mat,list.length),o=new T.Object3D();list.forEach((p,i)=>{o.position.set(0,0,0);o.scale.set(1,1,1);transform(o,p,i);o.updateMatrix();m.setMatrixAt(i,o.matrix);});m.name=name;m.userData.groundPaving=true;m.visible=g.CITY_CONFIG?.showGroundPaving!==false;group.add(m);}
  g.buildNaturalCityTrees(T,group,trees);
  instances(new T.CylinderGeometry(.1,.12,.85,10),metal,cleanLamps,(o,p)=>o.position.set(p.x,(groundHeight(p.x,p.z)??.13)+.425,p.z),'Aligned low path lights');

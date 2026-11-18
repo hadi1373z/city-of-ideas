@@ -1,8 +1,10 @@
 import {CITY_HEX as H,hexCentre} from './city-hex-layout.js?v=city-learning-20261118';
 
 const TAU=Math.PI*2,near=(a,b,e=1e-6)=>Math.hypot(a[0]-b[0],a[1]-b[1])<e;
-export const HONEYCOMB_RULES=Object.freeze({side:H.side,rings:H.rings,streetWidth:5.5,gateWidth:12,wallHeight:1.55,wallThickness:.45,coastRadius:536,protectedCore:173,parkRadius:181});
-export const CAMPUS_GATEWAYS=Object.freeze([{points:[[-170,0]]},{points:[[0,220]]},{points:[[256,138]]},{points:[[256.5,76]]},{points:[[64,-160]]},{points:[[-138,-150]]}]);
+export const HONEYCOMB_RULES=Object.freeze({side:H.side,rings:H.rings,streetWidth:5.5,gateWidth:12,wallHeight:1.55,wallThickness:.45,coastRadius:536,protectedCore:58,parkRadius:181});
+// The full central grid now reaches Gallery's two real graded doors directly.
+// Each sixfold house owns its one explicit tangential door-to-vertex spur.
+export const CAMPUS_GATEWAYS=Object.freeze([]);
 export function honeycombCells(){const cells=[];for(let q=-H.rings;q<=H.rings;q++)for(let r=-H.rings;r<=H.rings;r++){if(Math.max(Math.abs(q),Math.abs(r),Math.abs(q+r))>H.rings)continue;const p=hexCentre(q,r);cells.push({id:'hex-'+q+'-'+r,q,r,...p,vertices:Array.from({length:6},(_,i)=>[p.x+H.side*Math.cos(Math.PI/6+i*TAU/6),p.z+H.side*Math.sin(Math.PI/6+i*TAU/6)])});}return cells;}
 export function pointSegmentDistance(x,z,a,b){const dx=b[0]-a[0],dz=b[1]-a[1],u=Math.max(0,Math.min(1,((x-a[0])*dx+(z-a[1])*dz)/(dx*dx+dz*dz||1)));return Math.hypot(x-a[0]-dx*u,z-a[1]-dz*u);}
 const inside=(p,polygon,margin=0)=>{let sign=0;for(let i=0;i<polygon.length;i++){const a=polygon[i],b=polygon[(i+1)%polygon.length],c=(b[0]-a[0])*(p[1]-a[1])-(b[1]-a[1])*(p[0]-a[0]);if(Math.abs(c)<1e-9)continue;if(sign&&Math.sign(c)!==sign)return false;sign=Math.sign(c);}return margin<=0||polygon.every((a,i)=>pointSegmentDistance(...p,a,polygon[(i+1)%polygon.length])>=margin);};
