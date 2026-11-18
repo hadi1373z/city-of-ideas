@@ -1,7 +1,7 @@
 import {WORKBENCH_TEXT,faceRoomWork,showRoomDialog} from './room-workbench.js?v=city-night-20261117';
-import {SEMINAR_HOUSES} from './seminar-houses-data.js?v=sixfold-city-20261118b';
+import {SEMINAR_HOUSES} from './seminar-houses-data.js?v=sixfold-city-20261118c';
 import {SEMINAR_TEXT} from './seminar-houses-copy.js?v=city-night-20261117';
-import {buildSeminarHouses} from './seminar-houses-scene.js?v=sixfold-city-20261118b';
+import {buildSeminarHouses} from './seminar-houses-scene.js?v=sixfold-city-20261118c';
 import {oscillator,DISK_CASES,diskGeodesic,diskDistance,chordLength,chanceScore,SCORE_FREQUENCIES} from './seminar-house-models.js?v=city-night-20261117';
 export function installSeminarHouses(M,T){
  const built=buildSeminarHouses(T);M.scene.add(built.group);M.city.targets.push(...built.targets);M.city.buildingTargets.push(...built.houses.map(h=>h.group));

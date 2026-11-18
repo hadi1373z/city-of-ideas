@@ -1,14 +1,14 @@
-import {urbanRoutes,urbanBuildingFootprints} from './city-urban-plan-model.js?v=sixfold-city-20261118b';
-import {FOUNDATION_HOUSES,FOUNDATION_COPY,FOUNDATION_ROUTES} from './foundation-houses-data.js?v=sixfold-city-20261118b';
-import {CITY_ISLAND as ISLAND,onCityIsland,islandRadius} from './island-layout.js?v=sixfold-city-20261118b';
-import {buildOrigamiHouse} from './origami-house-scene.js?v=sixfold-city-20261118b';
-import {buildCityCoast} from './coastal-city-scene.js?v=sixfold-city-20261118b';
-import {foldHouseMemory,HOUSE_ORIGAMI as P,miura,vertexTests,CREASE_CASES,coastX,COAST_ROUTES} from './origami-house-math.js?v=sixfold-city-20261118b';
+import {urbanRoutes,urbanBuildingFootprints} from './city-urban-plan-model.js?v=sixfold-city-20261118c';
+import {FOUNDATION_HOUSES,FOUNDATION_COPY,FOUNDATION_ROUTES} from './foundation-houses-data.js?v=sixfold-city-20261118c';
+import {CITY_ISLAND as ISLAND,onCityIsland,islandRadius} from './island-layout.js?v=sixfold-city-20261118c';
+import {buildOrigamiHouse} from './origami-house-scene.js?v=sixfold-city-20261118c';
+import {buildCityCoast} from './coastal-city-scene.js?v=sixfold-city-20261118c';
+import {foldHouseMemory,HOUSE_ORIGAMI as P,miura,vertexTests,CREASE_CASES,coastX,COAST_ROUTES} from './origami-house-math.js?v=sixfold-city-20261118c';
 import {FOLD_COPY} from './origami-house-copy.js?v=city-night-20261117';
 import {ORIGAMI_LESSONS,paperDiagram} from './origami-lessons.js?v=city-night-20261117';
-import {mountCoastalMap} from './coastal-map.js?v=sixfold-city-20261118b';
-import {COAST_EXPLORER_COPY} from './coastal-map-data.js?v=sixfold-city-20261118b';
-import {SEMINAR_HOUSES} from './seminar-houses-data.js?v=sixfold-city-20261118b';
+import {mountCoastalMap} from './coastal-map.js?v=sixfold-city-20261118c';
+import {COAST_EXPLORER_COPY} from './coastal-map-data.js?v=sixfold-city-20261118c';
+import {SEMINAR_HOUSES} from './seminar-houses-data.js?v=sixfold-city-20261118c';
 export function installOrigamiHouse(M,T){
  const cityPaths=[],hiddenRoutes=[];M.scene.traverse(o=>{const r=o.userData;if(window.CITY_CONFIG?.sixfoldHouses!==true&&r?.groundRoute&&r.points?.every(([x,z])=>Math.hypot(x,z)<ISLAND.radius))cityPaths.push({points:r.points,width:r.width});if(o.name==='Mown lawn route · no raised paving'){hiddenRoutes.push([o,o.visible]);o.visible=false;}});/* Campus roads come from the shared polygonal authority; never resurface legacy landscape curves. */cityPaths.push(...(M.artistQuarter?.garden.paths||[]));
  let parkGrass=null;M.city.park?.group.traverse(o=>{for(const material of Array.isArray(o.material)?o.material:o.material?[o.material]:[])if(!parkGrass&&material.color?.getHex()===0x9aaf86)parkGrass=material;});

@@ -1,5 +1,5 @@
-import {CITY_ISLAND,coastX,SHORE,ISLAND_ROUTES} from './island-layout.js?v=sixfold-city-20261118b';
-export {coastX} from './island-layout.js?v=sixfold-city-20261118b';
+import {CITY_ISLAND,coastX,SHORE,ISLAND_ROUTES} from './island-layout.js?v=sixfold-city-20261118c';
+export {coastX} from './island-layout.js?v=sixfold-city-20261118c';
 export const HOUSE_ORIGAMI={x:229,z:76,width:18,depth:16,entry:{x:229,z:99,y:.13,yaw:0,pitch:.06},threshold:{x:229,z:87},insideEntry:{x:229,z:81.5,y:.13,yaw:0},shore:{...SHORE}};
 export const PAPER_COLOURS=['#e9dcb9','#92b9c5','#cc9584'];
 const hexVertexX=Math.sqrt(3)*138;

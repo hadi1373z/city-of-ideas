@@ -1,4 +1,4 @@
-import {HUMANITY_COMMONS as C,CARE_NEEDS} from './humanity-commons-model.js?v=sixfold-city-20261118b';
+import {HUMANITY_COMMONS as C,CARE_NEEDS} from './humanity-commons-model.js?v=sixfold-city-20261118c';
 
 // Original garden architecture and abstract figures; no borrowed character,
 // sculpture mesh, image, recording, dynamic light or reflection pass.

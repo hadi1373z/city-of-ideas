@@ -1,4 +1,4 @@
-import {SIXFOLD_TILINGS} from './sixfold-tiling-model.js?v=sixfold-city-20261118b';
+import {SIXFOLD_TILINGS} from './sixfold-tiling-model.js?v=sixfold-city-20261118c';
 
 export function tilingParentColourIndex(id){if(/^rhomb-\d+$/.test(id))return Number(id.slice(6));let h=2166136261;for(const c of id)h=Math.imul(h^c.charCodeAt(0),16777619);return h>>>0;}
 export function tilingPatternPalette(T,pattern,base){

@@ -1,5 +1,5 @@
-import {PHILOSOPHERS,pickLanguage} from './philosopher-data.js?v=sixfold-city-20261118b';
-import {createPhilosopherQuarter} from './philosopher-quarter.js?v=sixfold-city-20261118b';
+import {PHILOSOPHERS,pickLanguage} from './philosopher-data.js?v=sixfold-city-20261118c';
+import {createPhilosopherQuarter} from './philosopher-quarter.js?v=sixfold-city-20261118c';
 
 export function installPhilosopherQuarter(M,T){
  const lang=()=>window.CITY_I18N.lang,tx=(fa,en)=>CITY_I18N.tx(fa,en);

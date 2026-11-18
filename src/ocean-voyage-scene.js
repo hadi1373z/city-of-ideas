@@ -1,6 +1,6 @@
 import {buildPaperBoat} from './origami-boat.js?v=city-night-20261117';
-import {VOYAGE} from './ocean-voyage-model.js?v=sixfold-city-20261118b';
-import {SHORE} from './island-layout.js?v=sixfold-city-20261118b';
+import {VOYAGE} from './ocean-voyage-model.js?v=sixfold-city-20261118c';
+import {SHORE} from './island-layout.js?v=sixfold-city-20261118c';
 export function buildOceanBoat(T){
  const group=new T.Group();group.name='The paper sea · embarkable origami boat';
  const vessel=new T.Group();vessel.name='Large floating origami boat';group.add(vessel);

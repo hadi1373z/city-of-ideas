@@ -1,5 +1,5 @@
-import {HOUSE as H,HOUSE_LEVELS as LEVELS,stairY,houseRailLayout} from './transformation-house-model.js?v=sixfold-city-20261118b';
-import {buildHouseTiling} from './house-tiling-scene.js?v=sixfold-city-20261118b';
+import {HOUSE as H,HOUSE_LEVELS as LEVELS,stairY,houseRailLayout} from './transformation-house-model.js?v=sixfold-city-20261118c';
+import {buildHouseTiling} from './house-tiling-scene.js?v=sixfold-city-20261118c';
 export function buildTransformationHouse(T,{canvas=()=>document.createElement('canvas'),includeTiling=true}={}){
  const group=new T.Group();group.name='House of Transformations · inhabited rooms and deep stair';group.userData.transformationHouse=true;const owned=new Set(),own=o=>(owned.add(o),o),mat=(c,extra={})=>own(new T.MeshLambertMaterial({color:c,...extra}));const stone=mat(0xc9bea4),cream=mat(0xc6bba5),timber=mat(0x4a3e34),teal=mat(0x315b60),brass=mat(0xb89c60),clay=mat(0x9d6450),ink=mat(0x273d3d),pages=mat(0xdaccaa),glass=mat(0x8fa9a6,{transparent:true,opacity:.22}),glow=own(new T.MeshBasicMaterial({color:0xffdfad}));const books=[teal,clay,brass,ink],batches=new Map(),beams=new Map(),targets=[],walking=new T.Group();walking.name='Real house floors, stairs and corridor';group.add(walking);
  const mesh=(g,m,parent=group)=>{const o=new T.Mesh(own(g),m);parent.add(o);return o;};const box=(w,h,d,x,y,z,m=stone,yaw=0)=>{if(!batches.has(m))batches.set(m,[]);batches.get(m).push({w,h,d,x:x+125,y,z,yaw});};

@@ -1,7 +1,7 @@
-import {COAST_LANDMARKS, COAST_EXPLORER_COPY, coastMapPoint, coastWalkSvg, coastFaceLinksSvg} from './coastal-map-data.js?v=sixfold-city-20261118b';
+import {COAST_LANDMARKS, COAST_EXPLORER_COPY, coastMapPoint, coastWalkSvg, coastFaceLinksSvg} from './coastal-map-data.js?v=sixfold-city-20261118c';
 
-import {seminarPathsSvg} from './seminar-houses-data.js?v=sixfold-city-20261118b';
-import {coastVisitor,COAST_POSITION_COPY,coastPositionText,coastDistance} from './coastal-position.js?v=sixfold-city-20261118b';
+import {seminarPathsSvg} from './seminar-houses-data.js?v=sixfold-city-20261118c';
+import {coastVisitor,COAST_POSITION_COPY,coastPositionText,coastDistance} from './coastal-position.js?v=sixfold-city-20261118c';
 
 // Native buttons keep map selection available to touch, keyboard and controllers.
 // The SVG remains an ordinary image, with the same geometry in every language.
@@ -32,7 +32,7 @@ export function mountCoastalMap(container, {language = 'en', state, onVisit, vis
   // Physical east and west stay fixed when the surrounding interface is RTL.
   stage.dir = 'ltr';
   const image = el('img', '', 'coastal-plan');
-  image.src = new URL('./assets/city-coast-' + lang + '.svg?v=sixfold-city-20261118b', import.meta.url).href;
+  image.src = new URL('./assets/city-coast-' + lang + '.svg?v=sixfold-city-20261118c', import.meta.url).href;
   image.alt = c.title;
   image.width = image.height = 920;
   const overlay = el('img', '', 'coastal-walk-overlay');

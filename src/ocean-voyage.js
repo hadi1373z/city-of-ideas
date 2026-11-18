@@ -1,5 +1,5 @@
-import {createVoyage,VOYAGE,POEMS,VOYAGE_COPY,poemAt} from './ocean-voyage-model.js?v=sixfold-city-20261118b';
-import {buildOceanBoat} from './ocean-voyage-scene.js?v=sixfold-city-20261118b';
+import {createVoyage,VOYAGE,POEMS,VOYAGE_COPY,poemAt} from './ocean-voyage-model.js?v=sixfold-city-20261118c';
+import {buildOceanBoat} from './ocean-voyage-scene.js?v=sixfold-city-20261118c';
 export function installOceanVoyage(M,T){
  const voyage=createVoyage(),s=voyage.state,built=buildOceanBoat(T);M.scene.add(built.group);M.city.targets.push(built.vessel);
  const lang=()=>window.CITY_I18N.lang,w=()=>VOYAGE_COPY[lang()]||VOYAGE_COPY.en,el=(tag,text)=>{const n=document.createElement(tag);if(text)n.textContent=text;return n;},button=(text,fn)=>{const n=el('button',text);n.type='button';n.onclick=fn;return n;};

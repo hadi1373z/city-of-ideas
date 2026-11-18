@@ -1,6 +1,6 @@
-import {CONSTELLATION_TOUR,constellationCandidates,constellationDirection,constellationName,nextConstellation,tickConstellationTour} from './constellation-tour-model.js?v=sixfold-city-20261118b';
+import {CONSTELLATION_TOUR,constellationCandidates,constellationDirection,constellationName,nextConstellation,tickConstellationTour} from './constellation-tour-model.js?v=sixfold-city-20261118c';
 import {NIGHT_SKY_DEFAULTS,CONSTELLATION_GUIDES,equatorialToHorizontal,SKY_CHART_LIMITS} from './night-sky-model.js?v=city-night-20261117';
-import {buildNightSky} from './night-sky-scene.js?v=sixfold-city-20261118b';
+import {buildNightSky} from './night-sky-scene.js?v=sixfold-city-20261118c';
 import {isLowerCoordinate} from './world-cylinder-model.js?v=city-night-20261117';
 
 export function installNightSky(M,T,{catalogue=null,fetcher=globalThis.fetch,events=globalThis}={}){

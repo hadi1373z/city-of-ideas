@@ -1,7 +1,7 @@
 import { hexagon } from './mathematical-pavilions-model.js?v=city-night-20261117';
-import {HOUSE as HOUSE_JOIN,stairY,houseLandingLevel} from './transformation-house-model.js?v=sixfold-city-20261118b';
-import {createSixfoldTilingPatch,createPenroseRhombPatch} from './sixfold-tiling-model.js?v=sixfold-city-20261118b';
-export {createPenroseRhombPatch} from './sixfold-tiling-model.js?v=sixfold-city-20261118b';
+import {HOUSE as HOUSE_JOIN,stairY,houseLandingLevel} from './transformation-house-model.js?v=sixfold-city-20261118c';
+import {createSixfoldTilingPatch,createPenroseRhombPatch} from './sixfold-tiling-model.js?v=sixfold-city-20261118c';
+export {createPenroseRhombPatch} from './sixfold-tiling-model.js?v=sixfold-city-20261118c';
 
 // Geometry only: a finite substitution patch, not a test of infinite aperiodicity.
 // Coordinates are [x, z], with counterclockwise polygons as viewed on a plan.

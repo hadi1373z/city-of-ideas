@@ -1,4 +1,4 @@
-import {installHousePatternGuides} from './house-pattern-guides.js?v=sixfold-city-20261118b';
+import {installHousePatternGuides} from './house-pattern-guides.js?v=sixfold-city-20261118c';
 import {PAVILIONS,penroseTriangles,cropHex} from './mathematical-pavilions-model.js';
 
 // The original three public pavilion investigations move into real study rooms
