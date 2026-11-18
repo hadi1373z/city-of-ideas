@@ -1,4 +1,4 @@
-import {HOUSE as H,HOUSE_LEVELS,houseSurface,houseRoomAt,houseInteractionAt,houseBlocked,inHex} from './transformation-house-model.js';
+import {HOUSE as H,HOUSE_LEVELS,houseSurface,houseRoomAt,houseInteractionAt,houseBlocked,inHex} from './transformation-house-model.js?v=sixfold-city-20261118';
 
 const EPS=1e-8,ids=['east','southeast','southwest','west','northwest','northeast'],patterns=['penrose','hexagonal','triangular','square','octagon-square','trihexagonal'],names=['Penrose House','Hexagon House','Triangle House','Square House','Octagon House','Trihexagonal House'];
 export const SIXFOLD_HOUSE_NETWORK=Object.freeze({radius:159.3486742963367,loopRadius:106.3486742963367,y:-40,width:4,walkHalfWidth:1.72,floorThickness:.24,ceilingBottom:-35.2,wallTop:-35,sourceX:H.x,sourceZ:0,galleryExitX:71.1,galleryCaptureX:71.25,crossingSleeve:4.3,crossingExit:3.6,crossingCaptureOffset:1.2});

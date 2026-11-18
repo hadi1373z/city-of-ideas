@@ -1,6 +1,6 @@
-import {IDEAS_PARK_SITE} from './city-hex-layout.js?v=city-learning-20261118';
-import {SEMINAR_HOUSES} from './seminar-houses-data.js?v=city-learning-20261118';
-import {SHORE} from './island-layout.js?v=city-learning-20261118';
+import {IDEAS_PARK_SITE} from './city-hex-layout.js?v=sixfold-city-20261118';
+import {SEMINAR_HOUSES} from './seminar-houses-data.js?v=sixfold-city-20261118';
+import {SHORE} from './island-layout.js?v=sixfold-city-20261118';
 
 // The same world-to-SVG projection used by the original coastal plan.
 export const coastMapPoint = (x, z) => [460 + x * .7, 460 + z * .7];
