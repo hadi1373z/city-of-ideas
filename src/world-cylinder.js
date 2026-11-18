@@ -1,11 +1,11 @@
 import {WORLD_CYLINDER as W,isLowerCoordinate,lowerLocal,lowerPhysical,lowerRadius,lowerMatrix,canWalkLower,tunnelContains,GALLERY_TUNNEL} from './world-cylinder-model.js?v=bird-peel-20261117b';
-import {buildWorldCylinder,mountLowerWorld} from './world-cylinder-scene.js?v=sixfold-city-20261118c';
+import {buildWorldCylinder,mountLowerWorld} from './world-cylinder-scene.js?v=sixfold-city-20261118d';
 import {UPPER,LOWER,pointAt,headingAt,heightAt,surfaceAt as originalGallerySurface,walkGallery} from './two-face-gallery-model.js?v=bird-peel-20261117b';
 import {GRAVITY_STAIR as G,gravityStairFrame,gravityStairPose,walkGravityStair} from './gravity-stair-model.js?v=gravity-ant-20261117';
 import {buildGravityStair} from './gravity-stair-scene.js?v=gravity-ant-20261117';
 import {buildTwoFaceGallery} from './two-face-gallery-scene.js?v=gravity-ant-20261117';
 import {LOWER_INLET} from './lower-landscape-model.js?v=bird-peel-20261117b';
-import {buildMathFaculty} from './math-faculty-scene.js?v=sixfold-city-20261118c';
+import {buildMathFaculty} from './math-faculty-scene.js?v=sixfold-city-20261118d';
 import {createWorldFaceSectionRenderer} from './world-face-section-renderer.js?v=bird-peel-20261117b';
 export function installWorldCylinder(M,T){
  const gallerySurface=(...args)=>{const s=originalGallerySurface(...args);return s&&(s.layer==='mid'||s.layer==='spiral'&&s.theta>G.joinTheta+1e-8)?null:s;};

@@ -1,17 +1,18 @@
-import {urbanRoutes,urbanBuildingFootprints} from './city-urban-plan-model.js?v=sixfold-city-20261118c';
-import {FOUNDATION_HOUSES,FOUNDATION_COPY,FOUNDATION_ROUTES} from './foundation-houses-data.js?v=sixfold-city-20261118c';
-import {CITY_ISLAND as ISLAND,onCityIsland,islandRadius} from './island-layout.js?v=sixfold-city-20261118c';
-import {buildOrigamiHouse} from './origami-house-scene.js?v=sixfold-city-20261118c';
-import {buildCityCoast} from './coastal-city-scene.js?v=sixfold-city-20261118c';
-import {foldHouseMemory,HOUSE_ORIGAMI as P,miura,vertexTests,CREASE_CASES,coastX,COAST_ROUTES} from './origami-house-math.js?v=sixfold-city-20261118c';
+import {PARK_GRASS_HEX} from './city-lawn-palette.js?v=sixfold-city-20261118d';
+import {urbanRoutes,urbanBuildingFootprints} from './city-urban-plan-model.js?v=sixfold-city-20261118d';
+import {FOUNDATION_HOUSES,FOUNDATION_COPY,FOUNDATION_ROUTES} from './foundation-houses-data.js?v=sixfold-city-20261118d';
+import {CITY_ISLAND as ISLAND,onCityIsland,islandRadius} from './island-layout.js?v=sixfold-city-20261118d';
+import {buildOrigamiHouse} from './origami-house-scene.js?v=sixfold-city-20261118d';
+import {buildCityCoast} from './coastal-city-scene.js?v=sixfold-city-20261118d';
+import {foldHouseMemory,HOUSE_ORIGAMI as P,miura,vertexTests,CREASE_CASES,coastX,COAST_ROUTES} from './origami-house-math.js?v=sixfold-city-20261118d';
 import {FOLD_COPY} from './origami-house-copy.js?v=city-night-20261117';
 import {ORIGAMI_LESSONS,paperDiagram} from './origami-lessons.js?v=city-night-20261117';
-import {mountCoastalMap} from './coastal-map.js?v=sixfold-city-20261118c';
-import {COAST_EXPLORER_COPY} from './coastal-map-data.js?v=sixfold-city-20261118c';
-import {SEMINAR_HOUSES} from './seminar-houses-data.js?v=sixfold-city-20261118c';
+import {mountCoastalMap} from './coastal-map.js?v=sixfold-city-20261118d';
+import {COAST_EXPLORER_COPY} from './coastal-map-data.js?v=sixfold-city-20261118d';
+import {SEMINAR_HOUSES} from './seminar-houses-data.js?v=sixfold-city-20261118d';
 export function installOrigamiHouse(M,T){
  const cityPaths=[],hiddenRoutes=[];M.scene.traverse(o=>{const r=o.userData;if(window.CITY_CONFIG?.sixfoldHouses!==true&&r?.groundRoute&&r.points?.every(([x,z])=>Math.hypot(x,z)<ISLAND.radius))cityPaths.push({points:r.points,width:r.width});if(o.name==='Mown lawn route · no raised paving'){hiddenRoutes.push([o,o.visible]);o.visible=false;}});/* Campus roads come from the shared polygonal authority; never resurface legacy landscape curves. */cityPaths.push(...(M.artistQuarter?.garden.paths||[]));
- let parkGrass=null;M.city.park?.group.traverse(o=>{for(const material of Array.isArray(o.material)?o.material:o.material?[o.material]:[])if(!parkGrass&&material.color?.getHex()===0x9aaf86)parkGrass=material;});
+ let parkGrass=null;M.city.park?.group.traverse(o=>{for(const material of Array.isArray(o.material)?o.material:o.material?[o.material]:[])if(!parkGrass&&material.color?.getHex()===PARK_GRASS_HEX)parkGrass=material;});
  let storage;try{storage=localStorage;}catch{}const memory=foldHouseMemory(storage),house=buildOrigamiHouse(T),coast=buildCityCoast(T,{cityPaths,parkGrass,heightAt:(x,z)=>M.city.landscape?.groundHeight(x,z)}),boatLesson=ORIGAMI_LESSONS.find(l=>l.id==='boat');M.scene.add(house.group,house.released.group,coast.group);M.city.targets.push(...house.targets,coast.launch);M.city.buildingTargets.push(house.group);
  const lang=()=>window.CITY_I18N.lang,w=()=>FOLD_COPY[lang()]||FOLD_COPY.en,pick=a=>a[lang()==='fa'?0:lang()==='de'?2:1]||a[1],el=(tag,text)=>{const n=document.createElement(tag);if(text)n.textContent=text;if(tag==='summary')n.tabIndex=0;return n;},button=(text,fn)=>{const n=el('button',text);n.type='button';n.dataset.foldFocus=text;n.onclick=fn;return n;};
  function modal(id){const d=el('dialog');d.id=id;d.dataset.confirmFocused='true';const header=el('header'),title=el('h2'),close=button('×',()=>d.close()),body=el('div'),status=el('p');title.id=id+'-title';d.setAttribute('aria-labelledby',title.id);close.dataset.close='';body.className='fold-house-body';status.setAttribute('role','status');header.append(title,close);d.append(header,body,status);document.body.append(d);d.addEventListener('close',()=>M.clearMovement());return{d,title,close,body,status};}
@@ -49,7 +50,11 @@ export function installOrigamiHouse(M,T){
   map.d.lang=lang();map.d.dir=lang()==='fa'?'rtl':'ltr';map.body.replaceChildren();
   mountCoastalMap(map.body,{language:lang(),state:mapState,visitor:{x:M.player.x,z:M.player.z,yaw:M.player.yaw,belowGround:!!(M.babelLibrary?.active||M.escherDepth?.active||M.transformationHouse?.active&&M.player.y<0||M.worldCylinder?.route)},onVisit:id=>{
    map.d.close();
-   if(SEMINAR_HOUSES.some(h=>h.id===id))M.startExtra('seminar:'+id);
+   if(id==='middle-basements')M.transformationHouse?.visitBasements();
+   else if(id==='middle-babel')M.startExtra('babel');
+   else if(id==='middle-escher')M.startExtra('escher-depth');
+   else if(id==='middle-section')M.worldCylinder?.overview('section');
+   else if(SEMINAR_HOUSES.some(h=>h.id===id))M.startExtra('seminar:'+id);
    else if(id==='shore')visit('shore');
    else if(id==='park'&&M.pondWorldWindow){M.arrive(M.pondWorldWindow.pond.entry);M.player.pitch=-.25;}
    else M.quickStart(id==='artists'?'artists-quarter':id);

@@ -35,3 +35,9 @@ opaque neighbouring earth, off-plane rejection, resource reuse/disposal, the
 default diameter and restoration of global and newly loaded material clipping.
 The existing `world-cylinder.mjs` navigation/lifecycle suite and
 `world-face-section-renderer.mjs` lighting/depth/restoration suite also pass.
+
+The city map also provides Surface city / Middle layer controls. The underground
+plan uses the same house transforms, network passage endpoints, central Gallery
+tunnel and Escher room bounds as the physical scene. Depth labels distinguish
+Babel terraces from the -40m circuit and the -46m lower museum room. Its actions
+reuse the existing visits and world section; no new teleport or corridor is built.

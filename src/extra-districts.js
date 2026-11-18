@@ -1,6 +1,6 @@
-import {layoutArtistEditions} from './artist-edition-layout.js?v=sixfold-city-20261118c';
+import {layoutArtistEditions} from './artist-edition-layout.js?v=sixfold-city-20261118d';
 import './city-road-surface.js?v=city-night-20261117';
-import {nightHomeTransform,nightHomeAccess,nightHomeRoadSegments} from './night-home-layout.js?v=sixfold-city-20261118c';
+import {nightHomeTransform,nightHomeAccess,nightHomeRoadSegments} from './night-home-layout.js?v=sixfold-city-20261118d';
 /* Additive source-authentic geometry for the principal City of Ideas scene.
    Copy this module to src/extra-districts.js when its controller hooks are wired. */
 const copy=value=>JSON.parse(JSON.stringify(value));

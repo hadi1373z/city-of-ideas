@@ -1,6 +1,6 @@
-import {buildTransformationHouse} from './transformation-house-scene.js?v=sixfold-city-20261118c';
-import {buildHouseTiling} from './house-tiling-scene.js?v=sixfold-city-20261118c';
-import {SIXFOLD_HOUSES} from './sixfold-house-network-model.js?v=sixfold-city-20261118c';
+import {buildTransformationHouse} from './transformation-house-scene.js?v=sixfold-city-20261118d';
+import {buildHouseTiling} from './house-tiling-scene.js?v=sixfold-city-20261118d';
+import {SIXFOLD_HOUSES} from './sixfold-house-network-model.js?v=sixfold-city-20261118d';
 
 // One immutable structural prototype supplies all six houses. Only moving
 // shelves, pendulums, local lamp visibility and finish buffers are independent.

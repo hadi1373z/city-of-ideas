@@ -280,3 +280,8 @@ The latest park instruction is ONLY to shift it upward: keep its walls. The comp
 Saved artist editions use a presentation-only wrapper in the empty outer eastern cell(398.3716857,138), preserving all20 source slots, records, room/study actions and source indices. Keep its56m full-crown reserve and real approach; do not move private data or confuse this capacity with the separate128-home night neighbourhood. Existing fixed Kokoro voices/recordings, accounts, notes, original paper credits and the unmerged PR5 remain untouched.
 
 The latest coast request matches the park green on the existing lawn surfaces, using owned clones of the original park Standard material and two contiguous urban material groups; no thin coincident grass overlay. The four lower Mathematics facade levels now have160 genuine curved glass panes and fine edge joints, with the existing west opening preserved. The world section cuts actual six-house/basement/corridor/Escher cavities from its mineral face, starts on the east-west house axis and keeps surrounding earth opaque. Full source house interiors appear only where the chosen section plane intersects them; manual section rotation remains available without automatic drift. Read docs/WORLD-SECTION-VOIDS.md.
+
+The coastal map has a distinct Middle layer plan using real sixfold, Gallery and
+Escher footprints and honest depth labels. Keep it synchronized with those shared
+models. city-lawn-palette.js owns seaside/map grass colour and whole-cell selection;
+clone the source park material without introducing another coincident lawn skin.

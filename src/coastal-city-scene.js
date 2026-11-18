@@ -1,12 +1,12 @@
 import {createParkGrassMaterial} from './city-lawn-palette.js?v=sixfold-city-20261118d';
-import {IDEAS_PARK_SITE} from './city-hex-layout.js?v=sixfold-city-20261118c';
-import {cutHouseWell,configuredHouseWells} from './transformation-house-model.js?v=sixfold-city-20261118c';
-import {createOceanMaterial,updateOceanMaterial} from './ocean-surface.js?v=sixfold-city-20261118c';
-import {FOUNDATION_HOUSES,FOUNDATION_ROUTES} from './foundation-houses-data.js?v=sixfold-city-20261118c';
-import {COAST_ROUTES,HOUSE_ORIGAMI} from './origami-house-math.js?v=sixfold-city-20261118c';
-import {CITY_ISLAND as I,islandRadius} from './island-layout.js?v=sixfold-city-20261118c';
-import {urbanRoutes,segmentDistance,streetTreeClear} from './city-urban-plan-model.js?v=sixfold-city-20261118c';
-import {buildCityUrbanPlan} from './city-urban-plan-scene.js?v=sixfold-city-20261118c';
+import {IDEAS_PARK_SITE} from './city-hex-layout.js?v=sixfold-city-20261118d';
+import {cutHouseWell,configuredHouseWells} from './transformation-house-model.js?v=sixfold-city-20261118d';
+import {createOceanMaterial,updateOceanMaterial} from './ocean-surface.js?v=sixfold-city-20261118d';
+import {FOUNDATION_HOUSES,FOUNDATION_ROUTES} from './foundation-houses-data.js?v=sixfold-city-20261118d';
+import {COAST_ROUTES,HOUSE_ORIGAMI} from './origami-house-math.js?v=sixfold-city-20261118d';
+import {CITY_ISLAND as I,islandRadius} from './island-layout.js?v=sixfold-city-20261118d';
+import {urbanRoutes,segmentDistance,streetTreeClear} from './city-urban-plan-model.js?v=sixfold-city-20261118d';
+import {buildCityUrbanPlan} from './city-urban-plan-scene.js?v=sixfold-city-20261118d';
 export function buildCityCoast(T,{cityPaths=[],heightAt=()=>0,naturalTrees=globalThis.window?.buildNaturalCityTrees,parkGrass=null}={}){
  const group=new T.Group();group.name='Circular island and surrounding ocean';const owned=new Set(),own=r=>(owned.add(r),r),mat=c=>own(new T.MeshLambertMaterial({color:c})),sand=mat(0xcbbd96),wood=mat(0x846d50),pathMat=mat(0xc6bd9e),laneMat=mat(0x9b9e83);
  function box(w,h,d,x,y,z,m){const o=new T.Mesh(own(new T.BoxGeometry(w,h,d)),m);o.position.set(x,y,z);group.add(o);return o;}

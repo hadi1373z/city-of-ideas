@@ -1,4 +1,4 @@
-import {CITY_ISLAND as I} from './island-layout.js?v=sixfold-city-20261118c';
+import {CITY_ISLAND as I} from './island-layout.js?v=sixfold-city-20261118d';
 // Both physical faces share the upper city's ocean palette, foam and fog.
 export function createOceanMaterial(T){
  const uniforms={time:{value:0},fogColor:{value:new T.Color(0xc2d6df)},fogDensity:{value:.0007},islandRadius:{value:I.radius}};

@@ -1,4 +1,4 @@
-import {QUARTER_ARTISTS} from './artist-quarter-data.js?v=sixfold-city-20261118c';
+import {QUARTER_ARTISTS} from './artist-quarter-data.js?v=sixfold-city-20261118d';
 const PLAN=globalThis.ARTIST_QUARTER_PLAN;
 
 export function buildArtistStudios(T,{loadTexture=url=>new T.TextureLoader().load(url),canvas=()=>document.createElement('canvas')}={}){

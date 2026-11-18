@@ -1,4 +1,4 @@
-import {CITY_ISLAND,SHORE} from './island-layout.js?v=sixfold-city-20261118c';
+import {CITY_ISLAND,SHORE} from './island-layout.js?v=sixfold-city-20261118d';
 export const VOYAGE={dock:{x:SHORE.x+37,z:SHORE.z,yaw:-Math.PI/2+.5},shore:{...SHORE,pitch:-.04},minRadius:CITY_ISLAND.radius+18,maxRadius:1550};
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 export function createVoyage(){

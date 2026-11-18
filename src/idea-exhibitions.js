@@ -2,7 +2,7 @@
  * Existing artworks stay in their source galleries; de Chirico gets an original,
  * walkable interpretation, not an unlicensed reproduction.
  */
-import {QUARTER_ARTISTS} from './artist-quarter-data.js?v=sixfold-city-20261118c';
+import {QUARTER_ARTISTS} from './artist-quarter-data.js?v=sixfold-city-20261118d';
 import {DE_CHIRICO_COPY,DE_CHIRICO_SOURCE,buildDeChiricoExhibit} from './de-chirico-exhibit.js?v=city-night-20261117';
 
 const byArtist=id=>QUARTER_ARTISTS.find(a=>a.id===id);
