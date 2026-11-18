@@ -38,19 +38,19 @@ export function buildSixfoldTransformationHouses(T,{canvas=()=>document.createEl
   for(const root of[detail,distant])root.traverse(o=>{if(o.geometry?.type==='ConeGeometry'&&o.geometry.parameters.radius===25)o.material=roofMaterial;});
   const lamps=nodes[lampIndex],secret=nodes[secretIndex],pendulums=pendulumIndices.map(i=>nodes[i]);lamps.visible=false;
   const localTargets=prototype.targets.map(t=>nodes[sourceIndex(t)]);for(const t of localTargets){t.userData.houseInstance=h.id;targets.push(t);}
-  let tiling=null;
+  let tiling=null,instanceDisposed=false;
   const instance={...h,group:wrapper,detail,exterior:distant,lamps,secret,targets:localTargets,source:{secret,pendulums,walking:nodes[walkingIndex]},
-   ensureInterior(){if(!tiling){tiling=buildHouseTiling(T,{pattern:h.pattern,compact:true});detail.add(tiling.group);}return tiling;},
+   ensureInterior(){if(disposed||instanceDisposed)return null;if(!tiling){tiling=buildHouseTiling(T,{pattern:h.pattern,compact:true});detail.add(tiling.group);}return tiling;},
    get tiling(){return tiling;},
-   update(time,shelfOpen=false,ratio=1.5){secret.position.x=125+(shelfOpen?3:0);pendulums.forEach((p,i)=>p.rotation.z=.3*Math.sin(time*(i?ratio:1)));},
-   setDetail(show){if(show)this.ensureInterior();detail.visible=!!show;distant.visible=!show;},
-   dispose(){tiling?.dispose();wrapper.removeFromParent();}
+   update(time,shelfOpen=false,ratio=1.5){if(disposed||instanceDisposed)return;secret.position.x=125+(shelfOpen?3:0);pendulums.forEach((p,i)=>p.rotation.z=.3*Math.sin(time*(i?ratio:1)));},
+   setDetail(show){if(disposed||instanceDisposed)return;if(show)this.ensureInterior();detail.visible=!!show;distant.visible=!show;},
+   dispose(){if(instanceDisposed)return;instanceDisposed=true;tiling?.dispose();wrapper.removeFromParent();}
   };instances.push(instance);detail.visible=false;
  }
  let disposed=false;
  return{group,walking:group,instances,targets,prototype,
   // The coordinator activates only the nearby house, including its lamps.
-  update(time,states={},player=null,mode='city',activeHouseId=null){for(const h of instances){const state=states[h.id]||{},near=mode==='city'&&player&&Math.abs(player.y)<45&&Math.hypot(player.x-h.x,player.z-h.z)<62,show=h.id===activeHouseId||near;h.setDetail(show);h.update(time,state.shelfOpen,state.ratio);}},
+  update(time,states={},player=null,mode='city',activeHouseId=null){if(disposed)return;for(const h of instances){const state=states[h.id]||{},near=mode==='city'&&player&&Math.abs(player.y)<45&&Math.hypot(player.x-h.x,player.z-h.z)<62,show=h.id===activeHouseId||near;h.setDetail(show);h.update(time,state.shelfOpen,state.ratio);}},
   dispose(){if(disposed)return;disposed=true;for(const h of instances)h.dispose();for(const o of clonedInstances)o.dispose?.();prototype.dispose();for(const r of owned)r.dispose();group.clear();}
  };
 }
