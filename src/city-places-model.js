@@ -9,6 +9,12 @@ export const CITY_PLACES=Object.freeze([
  {id:'symmetry-garden',name:'Symmetry Garden',x:-H,z:414,kind:'symmetry',colour:0x839d73,question:'Which transformations preserve this whole rosette?',explanation:'Cₙ contains n rotations. Dₙ adds n reflections, giving 2n operations. The one-handed arrow petals deliberately distinguish the rotation-only arrangement from a reflected pair. Count transformations of the whole arrangement, not just the number of petals.',source:['MIT OpenCourseWare · symmetry groups lecture','https://ocw.mit.edu/courses/res-18-011-algebra-i-student-notes-fall-2021/mit18_701f21_lec14.pdf']}
 ].map(p=>Object.freeze({...p,radius:17,entry:Object.freeze({x:p.x,y:.13,z:p.z+18,yaw:0,pitch:-.08})})));
 export const PLACE_PATHS=Object.freeze(CITY_PLACES.map(p=>Object.freeze([[p.x,p.z+18],[p.x,p.z+92]].map(a=>Object.freeze(a)))));
+// The first footprint encloses every canopy, column, seat, plaque and experiment.
+// The second is only the level doorstep joining the independently paved spur.
+export const CITY_PLACE_FOOTPRINTS=Object.freeze(CITY_PLACES.flatMap(p=>[
+ Object.freeze({id:'place:'+p.id,x:p.x,z:p.z,shape:'circle',radius:17,front:Object.freeze([p.x,p.z+17])}),
+ Object.freeze({id:'place-step:'+p.id,x:p.x,z:p.z+16,shape:'polygon',points:Object.freeze([[p.x-1.7,p.z+14],[p.x+1.7,p.z+14],[p.x+1.7,p.z+18],[p.x-1.7,p.z+18]].map(a=>Object.freeze(a)))})
+]));
 export const GRAPH_EDGES=Object.freeze([[0,1],[1,2],[2,3],[3,0],[0,2],[1,3]].map(e=>Object.freeze(e)));
 export const GRAPH_NODES=Object.freeze([[-4,0],[-1,-4],[4,-2],[4,3]].map(p=>Object.freeze(p)));
 export function graphAnalysis(mask=15){
