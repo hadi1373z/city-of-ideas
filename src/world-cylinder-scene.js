@@ -1,3 +1,4 @@
+import {buildSixfoldHousePassages} from './sixfold-house-passages-scene.js';
 import {ESCHER_DEPTH} from './escher-depth-model.js?v=bird-peel-20261117b';
 import {createOceanMaterial,updateOceanMaterial} from './ocean-surface.js?v=city-learning-20261118';
 import {buildLowerLandscape} from './lower-landscape-scene.js?v=bird-peel-20261117b';
@@ -47,20 +48,7 @@ export function buildWorldCylinder(T){
  const ocean=mesh(new T.CylinderGeometry(650,650,96,192,1,true),own(new T.MeshLambertMaterial({color:0x467d91,transparent:true,opacity:.20,depthWrite:false,side:T.DoubleSide})));ocean.position.y=-48;ocean.name='Ocean surrounding the outside of the cylinder';
  const lowerGuide=band(534,538,.018,mat(0xa6ae91),lowerGround);lowerGuide.name='Lower-face shore promenade';
  const tunnel=new T.Group();tunnel.name='Gallery to Escher · continuous tunnel';group.add(tunnel);const boxes=new Map(),add=(m,w,h,d,x,y,z)=>{if(!boxes.has(m))boxes.set(m,[]);boxes.get(m).push({w,h,d,x,y,z});};
- const tunnelRects=[];
- for(let i=1;i<GALLERY_TUNNEL.points.length;i++){
-  const a=GALLERY_TUNNEL.points[i-1],b=GALLERY_TUNNEL.points[i],dx=b[0]-a[0],dz=b[1]-a[1],length=Math.hypot(dx,dz),vertical=Math.abs(dz)>0,cx=(a[0]+b[0])/2,cz=(a[1]+b[1])/2;
-  tunnelRects.push({minX:Math.max(GALLERY_TUNNEL.points[0][0],cx-(vertical?2:length/2+2)),maxX:Math.min(ESCHER_DEPTH.rooms[0].minX,cx+(vertical?2:length/2+2)),minZ:cz-(vertical?length/2+2:2),maxZ:cz+(vertical?length/2+2:2)});
-  // Stop side walls short of each corner, leaving the actual turning space open.
-  for(const sign of[-1,1])add(stone,vertical?.2:Math.max(0,length-4),5,vertical?Math.max(0,length-4):.2,cx+(vertical?sign*2:0),-37.5,cz+(vertical?0:sign*2));
-  for(let t=6;t<length-3;t+=11){const x=a[0]+dx*t/length,z=a[1]+dz*t/length;for(const sign of[-1,1]){
-   add(brass,vertical?.14:3.8,.1,vertical?3.8:.14,x,-35.22,z);
-   add(warm,.18,.16,.18,x+(vertical?sign*1.84:0),-36.8,z+(vertical?0:sign*1.84));
-  }}
- }
- // A partition of the route union gives each floor/ceiling point one owner.
- const xs=[...new Set(tunnelRects.flatMap(r=>[r.minX,r.maxX]))].sort((a,b)=>a-b),zs=[...new Set(tunnelRects.flatMap(r=>[r.minZ,r.maxZ]))].sort((a,b)=>a-b);
- for(let i=1;i<xs.length;i++)for(let j=1;j<zs.length;j++){const x=(xs[i-1]+xs[i])/2,z=(zs[j-1]+zs[j])/2;if(!tunnelRects.some(r=>x>r.minX&&x<r.maxX&&z>r.minZ&&z<r.maxZ))continue;add(stone,xs[i]-xs[i-1],.18,zs[j]-zs[j-1],x,-40.09,z);add(stone,xs[i]-xs[i-1],.25,zs[j]-zs[j-1],x,-35,z);}
+ const passages=buildSixfoldHousePassages(T);tunnel.add(passages.group);
  const unit=own(new T.BoxGeometry(1,1,1)),o=new T.Object3D();
  // A restrained garden campus surrounds the preserved buildings. All new
  // coordinates below are local to the lower circular face: logical X+2160,Z+65.
@@ -105,7 +93,7 @@ export function buildWorldCylinder(T){
  // These are physical lower-face lights, independent of the visitor's clock.
  const lamps=new T.Group();lamps.name='Lower face · permanent moonlight and campus lanterns';group.add(lamps);const hemi=new T.HemisphereLight(0xa4bce2,0x202b35,.50);hemi.position.set(0,-200,0);lamps.add(hemi);const moon=new T.DirectionalLight(0xb2caff,.56);moon.position.set(170,-600,-250);moon.target.position.set(0,-96,0);lamps.add(moon,moon.target);
  for(const[x,y,z]of[[-196,6,0],[-113,5,20]]){const light=new T.PointLight(0xffd29a,90,110,1.35);light.position.set(x,-96-y,-z);light.name='Warm lower-campus pool';lamps.add(light);}for(const light of lamps.children)if(light.isLight)light.userData.babelOwned=true;lamps.visible=false;
- return{group,sea,metamorphosis,updateOcean(time,options={}){updateOceanMaterial(water,time,options);metamorphosis.update(time,options);},lowerFrame,lowerGround,lowerPatio,lowerObstacles,lowerPaths,lowerLandscape,sectionCut,lamps,shell,land,tunnel,owned,dispose(){metamorphosis.dispose();lowerLandscape.dispose();group.removeFromParent();group.traverse(o=>{if(o.isInstancedMesh&&owned.has(o.geometry))o.dispose?.();});for(const r of owned)r.dispose();group.clear();}};
+ return{group,sea,metamorphosis,updateOcean(time,options={}){updateOceanMaterial(water,time,options);metamorphosis.update(time,options);},lowerFrame,lowerGround,lowerPatio,lowerObstacles,lowerPaths,lowerLandscape,sectionCut,lamps,shell,land,tunnel,passages,owned,dispose(){passages.dispose();metamorphosis.dispose();lowerLandscape.dispose();group.removeFromParent();group.traverse(o=>{if(o.isInstancedMesh&&owned.has(o.geometry))o.dispose?.();});for(const r of owned)r.dispose();group.clear();}};
 }
 // Move only wholly remote subtrees. Shared source geometry/materials and all local
 // positions survive: source animation and private tool coordinates keep working.
