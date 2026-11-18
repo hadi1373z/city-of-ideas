@@ -40,7 +40,7 @@ export function installPenroseReadingFloor(M,T,{canvasFactory=()=>document.creat
  };
  material.customProgramCacheKey=()=> 'penrose-reading-floor-v1';
  let disposed=false;floor.material=material;floor.userData.penroseReadingFloor=true;
- function visit(){if(disposed)return false;M.paperGallery?.visit?.('foundations');M.clearMovement();M.setCityMode();M.arrive({x:W.lowerOrigin.x+29,z:W.lowerOrigin.z,y:c.floorY,yaw:-Math.PI/2,pitch:-.35});return true;}
+ function visit(){if(disposed)return false;M.paperGallery?.visit?.('foundations');M.clearMovement();M.setCityMode();M.arrive({x:W.lowerOrigin.x+29,z:W.lowerOrigin.z,y:c.floorY,yaw:-Math.PI/2,pitch:-.35});M.player.pitch=-.35;return true;}
  const api={floor,material,texture,canvas,model,visit,dispose(){if(disposed)return;disposed=true;if(floor.material===material)floor.material=originalMaterial;if(floor.userData.penroseReadingFloor===true){if(hadFlag)floor.userData.penroseReadingFloor=originalFlag;else delete floor.userData.penroseReadingFloor;}texture.dispose();material.dispose();events.removeEventListener?.('pagehide',api.dispose);if(M.penroseReadingFloor===api)delete M.penroseReadingFloor;}};
  M.penroseReadingFloor=api;events.addEventListener?.('pagehide',api.dispose,{once:true});return api;
 }

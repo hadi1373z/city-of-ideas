@@ -1,6 +1,8 @@
-# The Mathematics floor as a quiet information display
+# Optional information-floor experiment
 
-The lower Mathematics **ground-floor annulus** now carries seven rotating,
+This experiment is saved in code but is not installed in the live city. The user ultimately chose a Penrose-tiled floor.
+
+When enabled, the lower Mathematics **ground-floor annulus** carries seven rotating,
 original English mathematics and computing cards. This replaces the proposed
 mirror direction. It is an opaque floor display, without reflections, glass,
 another floor mesh or a new light.

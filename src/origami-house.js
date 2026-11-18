@@ -56,6 +56,9 @@ export function installOrigamiHouse(M,T){
   for(const[label,action]of[[M.babelLibrary?.copy().visit||'Library of Babel',()=>{map.d.close();M.startExtra('babel');}],[w().open,()=>visit('entry')],[M.oceanSailing?.copy().visit||w().shore,()=>{map.d.close();M.startExtra('ocean');}],[w().study,()=>{map.d.close();M.studyHouses?.open();}],[w().makers,()=>{map.d.close();M.startExtra('makers');}],['Mathematics Faculty · lower face',()=>{map.d.close();M.worldCylinder?.visitLower();}],['Mathematics · working entrance',()=>{map.d.close();M.startExtra('mathematics');}],['Historic papers · reading ring',()=>{map.d.close();M.startExtra('paper-monitors');}],['Ocean walk · lower face',()=>{map.d.close();M.startExtra('lower-shore');}]])more.append(button(label,action));
   const future=el('details');future.append(el('summary',(FOUNDATION_COPY[lang()]||FOUNDATION_COPY.en).map));
   for(const h of FOUNDATION_HOUSES)future.append(button(h.names[lang()]||h.names.en,()=>{map.d.close();M.startExtra('house:'+h.id);}));
+  for(const place of M.cityPlaces?.places||[])more.append(button(place.name,()=>{map.d.close();M.cityPlaces.visit(place.id);}));
+  if(M.humanityCommons)more.append(button('Commons of Care',()=>{map.d.close();M.humanityCommons.visit();}));
+  if(M.archetypesQuarter)more.append(button('Houses of Archetypes',()=>{map.d.close();M.archetypesQuarter.visit();}));
   more.append(future);map.body.append(more,button(w().city3d,()=>{document.body.dataset.coastalOverview='clear';map.d.close();}));
   // The city map does not save visitor data; omit the folding lesson's storage status.
   map.status.hidden=true;if(!wasOpen)map.d.showModal();
