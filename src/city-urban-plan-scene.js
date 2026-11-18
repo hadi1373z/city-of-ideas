@@ -1,3 +1,4 @@
+import {createParkGrassMaterial,COURT_GRASS_HEX,isCoastalLawnCell,courtGrassIndex} from './city-lawn-palette.js?v=sixfold-city-20261118d';
 import {URBAN_COURTS,HONEYCOMB_CITY,urbanPlanting,urbanRoutes,segmentDistance,urbanLawnCells} from './city-urban-plan-model.js?v=sixfold-city-20261118c';
 import {INHABITED_BLOCKS} from './city-hex-layout.js?v=sixfold-city-20261118c';
 export function buildCityUrbanPlan(T,{naturalTrees=globalThis.window?.buildNaturalCityTrees,parkGrass=null}={}){
@@ -8,12 +9,12 @@ export function buildCityUrbanPlan(T,{naturalTrees=globalThis.window?.buildNatur
  // Quiet lawn tones make the real regular courts legible at island scale.
  // Only whole cells that clear both protected circles receive this thin
  // surface. The Gallery/Babel and park/pond keep their original floor holes.
- const lawnCells=urbanLawnCells(),lawnPositions=[],lawnColours=[],lawnIndices=[[],[]],coastalCellIds=[],lawnPalette=[0x72865f,0x899871,0x7b8f66].map(c=>new T.Color(c));
- for(const c of lawnCells){const colour=lawnPalette[((c.q-c.r)%3+3)%3],coastal=c.vertices.some(p=>Math.hypot(...p)>=390);if(coastal)coastalCellIds.push(c.id);for(let i=0;i<6;i++){const a=c.vertices[i],b=c.vertices[(i+1)%6],offset=lawnPositions.length/3;lawnPositions.push(c.x,.012,c.z,b[0],.012,b[1],a[0],.012,a[1]);lawnIndices[coastal?1:0].push(offset,offset+1,offset+2);for(let k=0;k<3;k++)lawnColours.push(colour.r,colour.g,colour.b);}}
+ const lawnCells=urbanLawnCells(),lawnPositions=[],lawnColours=[],lawnIndices=[[],[]],coastalCellIds=[],lawnPalette=COURT_GRASS_HEX.map(c=>new T.Color(c));
+ for(const c of lawnCells){const colour=lawnPalette[courtGrassIndex(c)],coastal=isCoastalLawnCell(c);if(coastal)coastalCellIds.push(c.id);for(let i=0;i<6;i++){const a=c.vertices[i],b=c.vertices[(i+1)%6],offset=lawnPositions.length/3;lawnPositions.push(c.x,.012,c.z,b[0],.012,b[1],a[0],.012,a[1]);lawnIndices[coastal?1:0].push(offset,offset+1,offset+2);for(let k=0;k<3;k++)lawnColours.push(colour.r,colour.g,colour.b);}}
  // Reuse the existing surface and exactly two material groups. Coast-facing
  // cells match the park's actual grass; inner courts retain their old palette.
  // No extra coplanar skin or per-triangle draw calls are introduced.
- const coastalGrass=own(parkGrass?.clone?parkGrass.clone():new T.MeshStandardMaterial({color:0x9aaf86,roughness:1,metalness:0}));coastalGrass.color.setHex(0x9aaf86);coastalGrass.vertexColors=false;
+ const coastalGrass=own(createParkGrassMaterial(T,parkGrass));
  const lawnGeometry=own(new T.BufferGeometry());lawnGeometry.setAttribute('position',new T.Float32BufferAttribute(lawnPositions,3));lawnGeometry.setAttribute('color',new T.Float32BufferAttribute(lawnColours,3));lawnGeometry.setIndex(lawnIndices.flat());let first=0;for(const [i,indices]of lawnIndices.entries()){if(indices.length)lawnGeometry.addGroup(first,indices.length,i);first+=indices.length;}lawnGeometry.computeVertexNormals();const lawn=new T.Mesh(lawnGeometry,[own(new T.MeshLambertMaterial({vertexColors:true})),coastalGrass]);lawn.name='Regular outer honeycomb lawn courts · one protected surface batch';lawn.userData.coastalCellIds=coastalCellIds;group.add(lawn);
  const hexes=URBAN_COURTS.filter(c=>c.shape==='hex');
  for(const [radiusDelta,material,y,height]of[[0,mats.edge,.026,.032],[-.23,mats.paving,.045,.018]]){const geometry=own(new T.CylinderGeometry(1,1,1,6)),mesh=new T.InstancedMesh(geometry,material,hexes.length);mesh.name=radiusDelta===0?'Shared hexagonal civic and neighbourhood court borders':'Open hexagonal civic and neighbourhood courts';hexes.forEach((c,i)=>{stamp.position.set(c.x,y,c.z);stamp.rotation.set(0,Math.PI/2-c.turn,0);stamp.scale.set(c.radius+radiusDelta,height,c.radius+radiusDelta);stamp.updateMatrix();mesh.setMatrixAt(i,stamp.matrix);});mesh.instanceMatrix.needsUpdate=true;mesh.computeBoundingSphere();group.add(mesh);}

@@ -1,3 +1,4 @@
+import {createParkGrassMaterial} from './city-lawn-palette.js?v=sixfold-city-20261118d';
 import {IDEAS_PARK_SITE} from './city-hex-layout.js?v=sixfold-city-20261118c';
 import {cutHouseWell,configuredHouseWells} from './transformation-house-model.js?v=sixfold-city-20261118c';
 import {createOceanMaterial,updateOceanMaterial} from './ocean-surface.js?v=sixfold-city-20261118c';
@@ -14,8 +15,8 @@ export function buildCityCoast(T,{cityPaths=[],heightAt=()=>0,naturalTrees=globa
   for(let j=0;j<angular;j++)for(let i=0;i<radial;i++){const a=j*(radial+1)+i,b=a+radial+1;indices.push(a,b,a+1,a+1,b,b+1);}
   const g=own(new T.BufferGeometry());g.setAttribute('position',new T.Float32BufferAttribute(pos,3));if(colours)g.setAttribute('color',new T.Float32BufferAttribute(cols,3));g.setIndex(indices);g.computeVertexNormals();const m=new T.Mesh(g,material);m.name=name;group.add(m);return m;
  }
- const grass=own(parkGrass?.clone?parkGrass.clone():new T.MeshStandardMaterial({color:0x9aaf86,roughness:1,metalness:0}));grass.color.setHex(0x9aaf86);grass.vertexColors=false;const base=new T.Color(0x84916d);
- const land=polarBand(58,I.lawnRadius,64,192,()=>.005,grass,'Continuous circular lawn centred on the gallery',(x,z)=>{const n=.035*Math.sin(x*.018+Math.sin(z*.011))+.018*Math.cos(z*.043-x*.021),c=base.clone().offsetHSL(0,0,n);return[c.r,c.g,c.b];});
+ const grass=own(createParkGrassMaterial(T,parkGrass));
+ const land=polarBand(58,I.lawnRadius,64,192,()=>.005,grass,'Continuous park-green circular lawn centred on the gallery');
  const wells=configuredHouseWells(globalThis.window?.CITY_CONFIG);if(wells.length){const original=land.geometry;land.geometry=own(cutHouseWell(T,original,wells));}
  const beach=polarBand(I.lawnRadius,I.radius,5,256,(_,u)=>.005-.05*u,sand,'Unbroken beach around the entire island');
  const water=own(createOceanMaterial(T)),uniforms=water.uniforms;
