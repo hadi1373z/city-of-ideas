@@ -1,5 +1,5 @@
-import {CITY_ISLAND} from './island-layout.js?v=honeycomb-facts-20261118';
-import {coastMapPoint} from './coastal-map-data.js?v=honeycomb-facts-20261118';
+import {CITY_ISLAND} from './island-layout.js?v=city-learning-20261118';
+import {coastMapPoint} from './coastal-map-data.js?v=city-learning-20261118';
 
 // A fresh, in-memory plan-view snapshot whenever the overview is opened.
 // Never clamp a remote world or sailing location onto the island edge.

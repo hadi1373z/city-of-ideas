@@ -1,4 +1,4 @@
-import {CITY_PLACES,GRAPH_EDGES,GRAPH_NODES,graphAnalysis,birthdayProbability,beatSample,gridRoute,reflection,rosette,initialPlaceState} from './city-places-model.js';
+import {CITY_PLACES,GRAPH_EDGES,GRAPH_NODES,graphAnalysis,birthdayProbability,beatSample,gridRoute,reflection,rosette,initialPlaceState} from './city-places-model.js?v=city-learning-20261118';
 
 // Original, owned procedural architecture. One vertex-colour batch per static
 // pavilion and one per manual experiment; no external mesh, texture or lights.

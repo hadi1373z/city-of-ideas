@@ -1,5 +1,5 @@
-import {ARCHETYPES_QUARTER,ARCHETYPE_HOUSES,archetypeCanStand,archetypeInside,archetypeEntry,archetypeLocal} from './archetypes-quarter-model.js';
-import {ARCHETYPE_CONTENT,archetypeArtURL} from './archetypes-quarter-content.js';
+import {ARCHETYPES_QUARTER,ARCHETYPE_HOUSES,archetypeCanStand,archetypeInside,archetypeEntry,archetypeLocal} from './archetypes-quarter-model.js?v=city-learning-20261118';
+import {ARCHETYPE_CONTENT,archetypeArtURL} from './archetypes-quarter-content.js?v=city-learning-20261118';
 
 export function buildArchetypesQuarter(T,{canvas=()=>document.createElement('canvas'),loader=new T.TextureLoader()}={}){
  const group=new T.Group();group.name='Archetypes quarter · four original houses and cultural artifacts';

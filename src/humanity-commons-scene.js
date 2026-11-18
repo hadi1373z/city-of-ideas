@@ -1,4 +1,4 @@
-import {HUMANITY_COMMONS as C,CARE_NEEDS} from './humanity-commons-model.js';
+import {HUMANITY_COMMONS as C,CARE_NEEDS} from './humanity-commons-model.js?v=city-learning-20261118';
 
 // Original garden architecture and abstract figures; no borrowed character,
 // sculpture mesh, image, recording, dynamic light or reflection pass.

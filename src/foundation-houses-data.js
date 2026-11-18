@@ -1,4 +1,4 @@
-import {HEX_DISTRICTS} from './city-hex-layout.js?v=honeycomb-facts-20261118';
+import {HEX_DISTRICTS} from './city-hex-layout.js?v=city-learning-20261118';
 // First architectural studies, not reconstructions of the writers' actual homes.
 const house=(id,x,z,names,style,wall,roof,feature,next)=>({id,x,z,names,style,wall,roof,feature,next,width:18,depth:16,turn:x<0?Math.PI/2:-Math.PI/2});
 export const FOUNDATION_HOUSES=[

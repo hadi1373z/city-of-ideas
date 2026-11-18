@@ -1,4 +1,4 @@
-import {CITY_HEX as H,hexCentre} from './city-hex-layout.js?v=honeycomb-facts-20261118';
+import {CITY_HEX as H,hexCentre} from './city-hex-layout.js?v=city-learning-20261118';
 
 const TAU=Math.PI*2,near=(a,b,e=1e-6)=>Math.hypot(a[0]-b[0],a[1]-b[1])<e;
 export const HONEYCOMB_RULES=Object.freeze({side:H.side,rings:H.rings,streetWidth:5.5,gateWidth:12,wallHeight:1.55,wallThickness:.45,coastRadius:536,protectedCore:173,parkRadius:181});

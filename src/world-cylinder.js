@@ -1,5 +1,5 @@
 import {WORLD_CYLINDER as W,isLowerCoordinate,lowerLocal,lowerPhysical,lowerRadius,lowerMatrix,canWalkLower,tunnelContains,GALLERY_TUNNEL} from './world-cylinder-model.js?v=bird-peel-20261117b';
-import {buildWorldCylinder,mountLowerWorld} from './world-cylinder-scene.js?v=honeycomb-facts-20261118';
+import {buildWorldCylinder,mountLowerWorld} from './world-cylinder-scene.js?v=city-learning-20261118';
 import {UPPER,LOWER,pointAt,headingAt,heightAt,surfaceAt as originalGallerySurface,walkGallery} from './two-face-gallery-model.js?v=bird-peel-20261117b';
 import {GRAVITY_STAIR as G,gravityStairFrame,gravityStairPose,walkGravityStair} from './gravity-stair-model.js?v=gravity-ant-20261117';
 import {buildGravityStair} from './gravity-stair-scene.js?v=gravity-ant-20261117';
