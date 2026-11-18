@@ -58,7 +58,8 @@ export function installOrigamiHouse(M,T){
   for(const h of FOUNDATION_HOUSES)future.append(button(h.names[lang()]||h.names.en,()=>{map.d.close();M.startExtra('house:'+h.id);}));
   for(const place of M.cityPlaces?.places||[])more.append(button(place.name,()=>{map.d.close();M.cityPlaces.visit(place.id);}));
   if(M.humanityCommons)more.append(button('Commons of Care',()=>{map.d.close();M.humanityCommons.visit();}));
-  if(M.archetypesQuarter)more.append(button('Houses of Archetypes',()=>{map.d.close();M.archetypesQuarter.visit();}));
+  if(M.archetypesQuarter)more.append(button('Houses of Archetypes',()=>{map.d.close();M.archetypesQuarter.visitCourt();}));
+  for(const {data:house} of M.archetypesQuarter?.built?.houses||[])more.append(button(house.name,()=>{map.d.close();M.archetypesQuarter.visit(house.id);}));
   more.append(future);map.body.append(more,button(w().city3d,()=>{document.body.dataset.coastalOverview='clear';map.d.close();}));
   // The city map does not save visitor data; omit the folding lesson's storage status.
   map.status.hidden=true;if(!wasOpen)map.d.showModal();
