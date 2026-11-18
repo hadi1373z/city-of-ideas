@@ -14,6 +14,7 @@ export function archetypeInside(h,x,z){const p=archetypeLocal(h,x,z);return Math
 export const ARCHETYPE_FOOTPRINTS=Object.freeze(ARCHETYPE_HOUSES.map(h=>Object.freeze({id:h.id,x:h.x,z:h.z,width:19.2,depth:22,turn:h.turn,polygon:[[-9.6,-9.6],[9.6,-9.6],[9.6,12.4],[-9.6,12.4]].map(([x,z])=>{const p=archetypeWorld(h,x,z);return[p.x,p.z];})})));
 // Court spokes are level paths, with a clear two metre central axis in each house.
 export const ARCHETYPE_PATHS=Object.freeze(ARCHETYPE_HOUSES.map(h=>Object.freeze({id:'archetype-'+h.id,width:3.4,points:[[ARCHETYPES_QUARTER.x,ARCHETYPES_QUARTER.z],...[[0,13],[0,9],[0,5.8]].map(([x,z])=>{const p=archetypeWorld(h,x,z);return[p.x,p.z];})]})));
+export const ARCHETYPE_CONNECTOR=Object.freeze({id:'archetypes-quarter-spur',width:3.4,points:[[0,0],[22,22],[22,58],[0,92]].map(([x,z])=>[ARCHETYPES_QUARTER.x+x,ARCHETYPES_QUARTER.z+z])});
 export function archetypeObstacles(){return[
  {id:'back-wall',x:0,z:-9,w:18,d:.28,minY:0,maxY:4.8},
  ...[-9,9].map(x=>({id:'side-wall',x,z:0,w:.28,d:18,minY:0,maxY:4.8})),
