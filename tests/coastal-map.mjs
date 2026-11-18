@@ -64,7 +64,7 @@ for (let i = 1; i < COAST_WALK.length; i++) {
   const count = Math.ceil(Math.hypot(b[0]-a[0], b[1]-a[1]));
   for (let j = 0; j <= count; j++) {
     const p = [a[0]+(b[0]-a[0])*j/count, a[1]+(b[1]-a[1])*j/count];
-    assert(segments.some(([s,e]) => distance(p,s,e) < .11), 'Overlay must follow an existing path: ' + p);
+    assert(segments.some(([s,e]) => distance(p,s,e) < .11)||Math.abs(Math.hypot(p[0]-460,p[1]-460)-536*.7)<.11, 'Overlay must follow an existing path: ' + p);
   }
 }
 assert(coastWalkSvg().includes('stroke-dasharray'), 'Route is identifiable without colour alone');

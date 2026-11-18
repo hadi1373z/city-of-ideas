@@ -5,8 +5,9 @@ export const onCityIsland=(x,z)=>Number.isFinite(x)&&Number.isFinite(z)&&islandR
 export const coastX=z=>Math.sqrt(Math.max(0,CITY_ISLAND.radius**2-z**2));
 export const SHORE={x:coastX(76)-9,z:76,y:.13,yaw:-Math.PI/2};
 export const ringPoint=(angle,r=CITY_ISLAND.promenadeRadius)=>[Math.cos(angle)*r,Math.sin(angle)*r];
-export const ISLAND_ROUTES=[
- // The real paper-boat launch retains its source approach. Six deliberate
- // honeycomb gates replace the former unrelated north/west/south spokes.
- {id:'east',width:6,points:[[256.5,76],[350,76],ringPoint(Math.asin(76/CITY_ISLAND.promenadeRadius)),[SHORE.x,76]]}
-];
+// The lookout keeps its source coordinates. Only this short dock approach
+// crosses the beach; the journey through the city uses existing hex street edges.
+const shoreAngle=Math.asin(SHORE.z/CITY_ISLAND.promenadeRadius),A=Math.sqrt(3)*46;
+export const HEX_COAST_WALK=Object.freeze([[3*A,46],[4*A,92],[5*A,46],[6*A,92],[7*A,46],[7*A,-46],[CITY_ISLAND.promenadeRadius,0]]);
+export const COAST_PROMENADE_WALK=Object.freeze(Array.from({length:13},(_,i)=>ringPoint(shoreAngle*i/12)));
+export const ISLAND_ROUTES=[{id:'paper-boat-dock',width:6,kind:'shore-approach',points:[ringPoint(shoreAngle),[SHORE.x,SHORE.z]]}];

@@ -15,7 +15,7 @@ its pond, people, seeds and tools. Its actual158m envelope replaces the old
 oversized181m road exclusion, revealing the six northern hex edges. The park
 still fits inside the shoreline promenade. The Gallery's two real graded doors
 and return lift join the same regular grid. No diagonal campus joins are needed.
-The live graph has131 shared block edges,95 junctions and189 gated wall
+The live graph has131 shared block edges,95 junctions and180 gated wall
 segments. Six clear coastal approaches continue to the ocean promenade.
 
 ## Six inhabited collections
@@ -140,3 +140,15 @@ Coastal/artist map generation, Origami, foundation, philosopher and seminar suit
 cover their source-specific entry and geometry contracts. The pond suite measures
 actual batched park area/corners while retaining original fountain ownership.
 The full city release suite and integrated browser inspection remain required.
+
+## Ocean approach follows the new city
+
+The retired z76 cross-cell road and long east-side source lane are removed.
+Origami retains its real courtyard/door/shore locations; a short court approach
+meets the(239.023,46) grid vertex. The guided journey follows existing hex street
+edges to the eastern coastal gate, then the existing shoreline promenade. Only
+the final short six-metre-wide beach/dock approach is new paving outside the
+block graph. Source route records retain their widths in actual composed geometry.
+`tests/hex-coastal-walk.mjs` checks real paving absence on the retired strip,
+full-width street/dock surfaces, the existing promenade surface, and the exact
+shared map-guide vertices. No source boat, house or saved fold state moves.

@@ -1,6 +1,6 @@
 import {IDEAS_PARK_SITE} from './city-hex-layout.js?v=sixfold-city-20261118';
 import {SEMINAR_HOUSES} from './seminar-houses-data.js?v=sixfold-city-20261118';
-import {SHORE} from './island-layout.js?v=sixfold-city-20261118';
+import {SHORE,HEX_COAST_WALK,COAST_PROMENADE_WALK} from './island-layout.js?v=sixfold-city-20261118';
 
 // The same world-to-SVG projection used by the original coastal plan.
 export const coastMapPoint = (x, z) => [460 + x * .7, 460 + z * .7];
@@ -23,9 +23,10 @@ export const COAST_MAIN_PATHS = [
  [[211.5,-50],[199,-50],[199,-92],[2*A,-92]],
  [[199,-50],[199,65],[203.5,65]]
 ];
-// One guided walk on existing paths only. Visit the artists' garden court,
-// retrace the short approach, then continue along the existing eastern lane.
-export const COAST_WALK = [[64,0],[A,0],[A,-46],[2*A,-92],[199,-92],[199,65],[203.5,65],[215,65],[249,65],[256.5,76],[350,76],[Math.sqrt(536**2-76**2),76],[SHORE.x,76]];
+// The guide follows the source court approaches, real hex edges, existing
+// eastern coast gate and shoreline promenade. It creates no cross-cell road.
+export const COAST_WALK = [[64,0],[A,0],[A,-46],[2*A,-92],[199,-92],[199,65],[203.5,65],[215,65],[249,65],...HEX_COAST_WALK,...COAST_PROMENADE_WALK.slice(1),[SHORE.x,SHORE.z]];
+
 
 export function coastWalkSvg() {
   const points = COAST_WALK.map(p => coastMapPoint(...p).map(n => n.toFixed(1)).join(',')).join(' ');
@@ -39,7 +40,7 @@ export const COAST_EXPLORER_COPY = {
     places: 'Five places to explore', information: 'About this place', visit: 'Visit this place',
     route: 'Walking route · Gallery → Origami → Coast', shown: 'Walking route shown.', hidden: 'Walking route hidden.',
     routeHelp: 'The dashed rust-coloured line follows existing paths. It starts at the gallery’s east approach; it is a map guide, not automatic movement.',
-    steps: ['From the gallery’s east approach, follow the central hex edge north to the shared vertex, then continue along the next hex edge toward Makers.', 'Follow the Makers’ lane south, then turn east past the north side of the House of Origami. The artists’ garden court is a separate destination in the western blocks.', 'Continue east across the shoreline promenade to the paper-boat lookout.'],
+    steps: ['From the gallery’s east approach, follow the central hex edge north to the shared vertex, then continue along the next hex edge toward Makers.', 'Follow the Makers’ lane south, then turn east past the north side of the House of Origami. The artists’ garden court is a separate destination in the western blocks.', 'Follow the honeycomb street edges to the eastern coast gate, then follow the shoreline promenade to the paper-boat lookout.'],
     more: 'More city destinations',
     landmarks: {
       gallery: {name: 'Zarathustra Gallery', area: 'The island centre', description: 'Explore the gallery and its philosophical artworks. Zarathustra stands at the exact centre of this circular island.'},
@@ -55,7 +56,7 @@ export const COAST_EXPLORER_COPY = {
     places: 'Fünf Orte zum Erkunden', information: 'Über diesen Ort', visit: 'Diesen Ort besuchen',
     route: 'Spazierweg · Galerie → Origami → Küste', shown: 'Spazierweg eingeblendet.', hidden: 'Spazierweg ausgeblendet.',
     routeHelp: 'Die rostrote gestrichelte Linie folgt bestehenden Wegen. Sie beginnt am östlichen Zugang der Galerie und dient zur Orientierung; sie bewegt dich nicht automatisch.',
-    steps: ['Gehe vom östlichen Zugang der Galerie entlang der nördlichen Hexagonkante zum gemeinsamen Eckpunkt und weiter in Richtung der Werkstätten.', 'Folge der Werkstattgasse nach Süden und gehe dann nach Osten an der Nordseite des Hauses des Origami vorbei. Der Gartenhof der Künstler liegt separat in den westlichen Stadtblöcken.', 'Gehe weiter nach Osten über die Uferpromenade zur Papierboot-Aussicht.'],
+    steps: ['Gehe vom östlichen Zugang der Galerie entlang der nördlichen Hexagonkante zum gemeinsamen Eckpunkt und weiter in Richtung der Werkstätten.', 'Folge der Werkstattgasse nach Süden und gehe dann nach Osten an der Nordseite des Hauses des Origami vorbei. Der Gartenhof der Künstler liegt separat in den westlichen Stadtblöcken.', 'Folge den Wabenstraßen zum östlichen Küstentor und dann der Uferpromenade zur Papierboot-Aussicht.'],
     more: 'Weitere Ziele in der Stadt',
     landmarks: {
       gallery: {name: 'Zarathustra-Galerie', area: 'Die Inselmitte', description: 'Erkunde die Galerie und ihre philosophischen Kunstwerke. Zarathustra steht genau im Mittelpunkt dieser kreisrunden Insel.'},
@@ -71,7 +72,7 @@ export const COAST_EXPLORER_COPY = {
     places: 'پنج مکان برای گردش', information: 'دربارهٔ این مکان', visit: 'رفتن به این مکان',
     route: 'مسیر پیاده‌روی · گالری ← اوریگامی ← ساحل', shown: 'مسیر پیاده‌روی نمایش داده شد.', hidden: 'مسیر پیاده‌روی پنهان شد.',
     routeHelp: 'خط‌چین آجری‌رنگ مسیرهای موجود را دنبال می‌کند. آغاز آن ورودی شرقی گالری است؛ این راهنمای نقشه است و شما را خودکار جابه‌جا نمی‌کند.',
-    steps: ['از ورودی شرقی گالری لبهٔ شش‌ضلعی را به شمال تا رأس مشترک دنبال کنید و در امتداد لبهٔ بعدی به سوی کارگاه‌ها بروید.', 'گذرگاه کارگاه‌ها را به جنوب بروید و سپس به شرق، از کنار بخش شمالی خانهٔ اوریگامی بگذرید. حیاط باغ هنرمندان مقصدی جداگانه در بلوک‌های غربی شهر است.', 'به شرق ادامه دهید و از پیاده‌راه ساحلی بگذرید تا به سکوی تماشای قایق کاغذی برسید.'],
+    steps: ['از ورودی شرقی گالری لبهٔ شش‌ضلعی را به شمال تا رأس مشترک دنبال کنید و در امتداد لبهٔ بعدی به سوی کارگاه‌ها بروید.', 'گذرگاه کارگاه‌ها را به جنوب بروید و سپس به شرق، از کنار بخش شمالی خانهٔ اوریگامی بگذرید. حیاط باغ هنرمندان مقصدی جداگانه در بلوک‌های غربی شهر است.', 'لبه‌های خیابان‌های شش‌ضلعی را تا دروازهٔ شرقی ساحل دنبال کنید و سپس از پیاده‌راه ساحلی به سکوی قایق کاغذی بروید.'],
     more: 'مقصدهای دیگر شهر',
     landmarks: {
       gallery: {name: 'گالری زرتشت', area: 'مرکز جزیره', description: 'گالری و آثار فلسفی آن را ببینید. زرتشت درست در مرکز این جزیرهٔ دایره‌ای قرار دارد.'},
