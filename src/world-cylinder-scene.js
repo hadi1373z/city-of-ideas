@@ -1,4 +1,5 @@
 import {buildSixfoldHousePassages} from './sixfold-house-passages-scene.js?v=sixfold-city-20261118b';
+import {buildSectionEarth} from './world-section-earth.js';
 import {ESCHER_DEPTH} from './escher-depth-model.js?v=bird-peel-20261117b';
 import {createOceanMaterial,updateOceanMaterial} from './ocean-surface.js?v=sixfold-city-20261118b';
 import {buildLowerLandscape} from './lower-landscape-scene.js?v=bird-peel-20261117b';
@@ -33,15 +34,9 @@ export function buildWorldCylinder(T){
  const strataGeo=own(new T.CylinderGeometry(570.18,570.18,1,192,1,true)),strataMats=[mat(0xa29075),mat(0x887c68),mat(0xb2a084)],strataRows=[[],[],[]];
  for(const [top,bottom,tone]of[[0,-8,0],[-8,-22,1],[-22,-31,2],[-31,-44,0],[-44,-52,1],[-52,-65,2],[-65,-79,0],[-79,-88,1],[-88,-96,2]])strataRows[tone].push({y:(top+bottom)/2,h:top-bottom});
  const strataStamp=new T.Object3D();strataRows.forEach((rows,i)=>{const batch=new T.InstancedMesh(strataGeo,strataMats[i],rows.length);rows.forEach((p,j)=>{strataStamp.position.set(0,p.y,0);strataStamp.scale.set(1,p.h,1);strataStamp.updateMatrix();batch.setMatrixAt(j,strataStamp.matrix);});batch.instanceMatrix.needsUpdate=true;batch.computeBoundingSphere();strata.add(batch);});
- // A camera-facing diameter section is a presentation aid, switched on only by
- // the section controller. Its central 116m gap keeps the real library/gallery
- // shaft visible; normal walking geometry and collision remain unchanged.
- const sectionCut=new T.Group();sectionCut.name='Section cut · visible 96-metre mineral thickness';sectionCut.userData.sectionOnly=true;sectionCut.visible=false;group.add(sectionCut);
- const cutGeo=own(new T.BoxGeometry(1,1,1)),cutMaterials=[mat(0xb2a185,{side:T.DoubleSide}),mat(0x9c8b73,{side:T.DoubleSide}),mat(0xbeaf90,{side:T.DoubleSide})],cutSeam=mat(0x766954,{side:T.DoubleSide}),cutRows=[[],[],[]],seams=[];
- for(const[top,bottom,tone]of[[0,-8,0],[-8,-22,1],[-22,-31,2],[-31,-44,0],[-44,-52,1],[-52,-65,2],[-65,-79,0],[-79,-88,1],[-88,-96,2]])for(const sign of[-1,1])cutRows[tone].push({x:sign*314,y:(top+bottom)/2,w:512,h:top-bottom,d:.34});
- for(const y of[-.08,-8,-22,-31,-44,-52,-65,-79,-88,-95.92])for(const sign of[-1,1])seams.push({x:sign*314,y,w:512,h:.12,d:.43});
- for(const x of[-569.92,-58.08,58.08,569.92])seams.push({x,y:-48,w:.16,h:96,d:.43});
- [...cutRows.map((rows,i)=>({rows,material:cutMaterials[i]})),{rows:seams,material:cutSeam}].forEach(({rows,material})=>{const batch=new T.InstancedMesh(cutGeo,material,rows.length);batch.name='Batched section mineral panels / seams';rows.forEach((p,i)=>{strataStamp.position.set(p.x,p.y,0);strataStamp.scale.set(p.w,p.h,p.d);strataStamp.updateMatrix();batch.setMatrixAt(i,strataStamp.matrix);});batch.instanceMatrix.needsUpdate=true;batch.computeBoundingSphere();sectionCut.add(batch);});
+ // The diameter face retains earth everywhere except the real spatial section
+ // of a house, basin, corridor or museum room. Its voids follow camera rotation.
+ const sectionEarth=buildSectionEarth(T),sectionCut=sectionEarth.group;group.add(sectionCut);
  const lowerGround=new T.Group();lowerGround.position.set(-2160,0,-65);lowerFrame.add(lowerGround);
  const land=band(58,552,.005,grass,lowerGround);land.name='Lower circular face · real central gallery aperture';band(552,570,.005,sand,lowerGround);const sea=mesh(new T.RingGeometry(570,3600,256,100).rotateX(-Math.PI/2),water,lowerGround);sea.position.y=-.015;sea.frustumCulled=false;sea.name='Ocean surrounding all 360 degrees of the lower face';
  // A structural ocean volume wraps the circumference, between the water faces.
@@ -93,7 +88,7 @@ export function buildWorldCylinder(T){
  // These are physical lower-face lights, independent of the visitor's clock.
  const lamps=new T.Group();lamps.name='Lower face · permanent moonlight and campus lanterns';group.add(lamps);const hemi=new T.HemisphereLight(0xa4bce2,0x202b35,.50);hemi.position.set(0,-200,0);lamps.add(hemi);const moon=new T.DirectionalLight(0xb2caff,.56);moon.position.set(170,-600,-250);moon.target.position.set(0,-96,0);lamps.add(moon,moon.target);
  for(const[x,y,z]of[[-196,6,0],[-113,5,20]]){const light=new T.PointLight(0xffd29a,90,110,1.35);light.position.set(x,-96-y,-z);light.name='Warm lower-campus pool';lamps.add(light);}for(const light of lamps.children)if(light.isLight)light.userData.babelOwned=true;lamps.visible=false;
- return{group,sea,metamorphosis,updateOcean(time,options={}){updateOceanMaterial(water,time,options);metamorphosis.update(time,options);},lowerFrame,lowerGround,lowerPatio,lowerObstacles,lowerPaths,lowerLandscape,sectionCut,lamps,shell,land,tunnel,passages,owned,dispose(){passages.dispose();metamorphosis.dispose();lowerLandscape.dispose();group.removeFromParent();group.traverse(o=>{if(o.isInstancedMesh&&owned.has(o.geometry))o.dispose?.();});for(const r of owned)r.dispose();group.clear();}};
+ return{group,sea,metamorphosis,updateOcean(time,options={}){updateOceanMaterial(water,time,options);metamorphosis.update(time,options);},lowerFrame,lowerGround,lowerPatio,lowerObstacles,lowerPaths,lowerLandscape,sectionCut,sectionEarth,updateSectionCut:angle=>sectionEarth.update(angle),lamps,shell,land,tunnel,passages,owned,dispose(){sectionEarth.dispose();passages.dispose();metamorphosis.dispose();lowerLandscape.dispose();group.removeFromParent();group.traverse(o=>{if(o.isInstancedMesh&&owned.has(o.geometry))o.dispose?.();});for(const r of owned)r.dispose();group.clear();}};
 }
 // Move only wholly remote subtrees. Shared source geometry/materials and all local
 // positions survive: source animation and private tool coordinates keep working.
