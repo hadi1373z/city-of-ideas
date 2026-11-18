@@ -2,9 +2,9 @@
 
 This feature uses the existing **Central Question Fountain** at the heart of Ideas Park. Its raised center is replaced by the live view of the other face. The existing pool, pale outer rim, lower water and paper boats remain in their original positions. The feature adds no floor and changes no walking bounds.
 
-The source geometry in `park.js` places the lower water cylinder at local Y 1.26, height 0.18, radius 11.1. `city.js` places that park at `(0,.015,-330)` with scale 0.65. Therefore its actual water top is Y **0.8925**, centered at **X 0, Z −330**, with radius **7.215**. The upper bowl's outer radius is 3.237 in world units. The existing floating paper boats remain on their original radius **4.29**, with their original animation.
+The source geometry in `park.js` places the lower water cylinder at local Y 1.26, height 0.18, radius 11.1. `city.js` places that park at `(0,.015,-375)` with scale 0.65. Therefore its actual water top is Y **0.8925**, centered at **X 0, Z −375**, with radius **7.215**. The upper bowl's outer radius is 3.237 in world units. The existing floating paper boats remain on their original radius **4.29**, with their original animation.
 
-`pond-world-window-model.js` exports `POND_SOURCE`, `POND_WORLD_WINDOW`, `pondDescriptor`, `pondToLower`, `lowerToPond`, `withinPondWindow` and `besidePond`. The default descriptor includes a safe ground entry at `{x:0,z:-320.9,y:.13,yaw:0}` and an interaction radius of 14.95. The descriptor's center is suitable for the host's map marker. The helper derives its geometry from the actual park transform supplied by `M.city.PARK`.
+`pond-world-window-model.js` exports `POND_SOURCE`, `POND_WORLD_WINDOW`, `pondDescriptor`, `pondToLower`, `lowerToPond`, `withinPondWindow` and `besidePond`. The default descriptor includes a safe ground entry at `{x:0,z:-365.9,y:.13,yaw:0}` and an interaction radius of 14.95. The descriptor's center is suitable for the host's map marker. The helper derives its geometry from the actual park transform supplied by `M.city.PARK`.
 
 ## Rendering the actual other face
 
@@ -43,3 +43,5 @@ The pond-side English context has two actions: **Look through the pond** and **T
 The host owns map integration and should mark both this pond and the through-gallery. `POND_WORLD_WINDOW` is re-exported by `pond-world-window.js`, while `M.pondWorldWindow.pond` reflects the installed park and lower-world positions.
 
 Run `node tests/pond-world-window.mjs`. It builds the actual source park, verifies that the four raised center objects and particles are gone from its real rendered batches, rays the preserved pale rim and lower water, restores every borrowed geometry and layer mask, and verifies no borrowed resource was disposed. It also checks source fountain dimensions, boat bounds, physical forward/inverse mapping, camera orientation, full center-disk geometry, contextual travel action, live lower-root visibility, recursion guard, throttling, complete state restoration after success and failure, and owned resource cleanup. The test renderer inspects the same scene and lower-frame object identities; a browser render remains the host integration check.
+
+The sixfold city moves the complete original park presentation45m north to keep all seven central cells legible. Park-local people, tools, seeds, pond and boats are unchanged. The five grass courts compensate locally so their corners remain on the city lattice; source transforms, the map, pond camera and crossings use the configured park site.
