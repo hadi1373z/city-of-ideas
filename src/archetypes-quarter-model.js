@@ -11,7 +11,7 @@ export function archetypeLocal(h,x,z){const dx=x-h.x,dz=z-h.z;return{x:dx*Math.c
 export const archetypeHouse=id=>ARCHETYPE_HOUSES.find(h=>h.id===id);
 export function archetypeEntry(h,inside=false){return{...archetypeWorld(h,0,inside?5.8:13),y:.13,yaw:h.turn,pitch:inside?-.04:0};}
 export function archetypeInside(h,x,z){const p=archetypeLocal(h,x,z);return Math.abs(p.x)<8.7&&Math.abs(p.z)<8.7;}
-export const ARCHETYPE_FOOTPRINTS=Object.freeze(ARCHETYPE_HOUSES.map(h=>Object.freeze({id:h.id,x:h.x,z:h.z,width:19.2,depth:22,turn:h.turn,polygon:[[-9.6,-9.6],[9.6,-9.6],[9.6,12.4],[-9.6,12.4]].map(([x,z])=>{const p=archetypeWorld(h,x,z);return[p.x,p.z];})})));
+export const ARCHETYPE_FOOTPRINTS=Object.freeze(ARCHETYPE_HOUSES.map(h=>Object.freeze({id:h.id,x:h.x,z:h.z,width:19.2,depth:22.1,turn:h.turn,polygon:[[-9.6,-9.6],[9.6,-9.6],[9.6,12.5],[-9.6,12.5]].map(([x,z])=>{const p=archetypeWorld(h,x,z);return[p.x,p.z];})})));
 // Court spokes are level paths, with a clear two metre central axis in each house.
 export const ARCHETYPE_PATHS=Object.freeze(ARCHETYPE_HOUSES.map(h=>Object.freeze({id:'archetype-'+h.id,width:3.4,points:[[ARCHETYPES_QUARTER.x,ARCHETYPES_QUARTER.z],...[[0,13],[0,9],[0,5.8]].map(([x,z])=>{const p=archetypeWorld(h,x,z);return[p.x,p.z];})]})));
 export const ARCHETYPE_CONNECTOR=Object.freeze({id:'archetypes-quarter-spur',width:3.4,points:[[0,0],[22,22],[22,58],[0,92]].map(([x,z])=>[ARCHETYPES_QUARTER.x+x,ARCHETYPES_QUARTER.z+z])});
@@ -19,7 +19,10 @@ export function archetypeObstacles(){return[
  {id:'back-wall',x:0,z:-9,w:18,d:.28,minY:0,maxY:4.8},
  ...[-9,9].map(x=>({id:'side-wall',x,z:0,w:.28,d:18,minY:0,maxY:4.8})),
  ...[-5.3,5.3].map(x=>({id:'front-wall',x,z:9,w:7.4,d:.28,minY:0,maxY:4.8})),
+ ...[-1.6,1.6].map(x=>({id:'door-jamb',x,z:9,w:.12,d:.38,minY:0,maxY:3.5})),
+ {id:'door-lintel',x:0,z:9,w:3.2,d:.28,minY:3.5,maxY:4.8},
  ...[-6.9,6.9].map(x=>({id:'porch-column',x,z:11.1,w:.34,d:.34,minY:0,maxY:4.8})),
+ ...[-6.9,6.9].map(x=>({id:'porch-column-base',x,z:11.1,w:.62,d:.62,minY:0,maxY:.16})),
  {id:'study-object',x:3.9,z:-2.5,w:3.4,d:3.4,minY:0,maxY:3.5},
  {id:'reading-bench',x:-5.4,z:-2,w:1.1,d:4.2,minY:0,maxY:1.05}
  ];}
