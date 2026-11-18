@@ -1,6 +1,8 @@
+import {installTransferredPavilions} from './transformation-house-collections.js';
 import {PAVILIONS,penroseTriangles,cropHex,hexagon,roofHeight,pavilionTurn,pavilionWorld,pavilionLocal,pavilionCanStand} from './mathematical-pavilions-model.js';
 import {showRoomDialog} from './room-workbench.js?v=touch1';
 export function installMathematicalPavilions(M,T){
+ if(M.transformationHouse?.built?.instances)return installTransferredPavilions(M,T);
  const root=new T.Group();root.name='Hexagonal mathematical pavilions around Zarathustra Gallery';M.scene.add(root);const owned=new Set(),houses=[],targets=[],own=o=>(owned.add(o),o),material=(color,other={})=>own(new T.MeshLambertMaterial({color,...other})),stone=material(0xd5cbb4),ink=material(0x274548),brass=material(0xaf925e),paper=material(0xe5d9bb),glass=material(0x90b2ad,{transparent:true,opacity:.2,side:T.DoubleSide});
  function mesh(g,m,parent){const n=new T.Mesh(own(g),m);parent.add(n);return n;}
  function beam(a,b,r,m,parent){const d=new T.Vector3().subVectors(b,a),n=mesh(new T.CylinderGeometry(r,r,d.length(),7),m,parent);n.position.copy(a).add(b).multiplyScalar(.5);n.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),d.normalize());return n;}

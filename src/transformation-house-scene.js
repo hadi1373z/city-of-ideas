@@ -12,7 +12,7 @@ export function buildTransformationHouse(T,{canvas=()=>document.createElement('c
   if(windows)for(const u of[5.5,len-5.5])openings.push({a:u-1.7,b:u+1.7,lo:1.35,hi:4.55,door:false});
   const xs=[...new Set([0,len,...openings.flatMap(o=>[o.a,o.b])])].sort((a,b)=>a-b),ys=[...new Set([0,8,...openings.flatMap(o=>[o.lo,o.hi])])].sort((a,b)=>a-b);
   for(let i=1;i<xs.length;i++)for(let j=1;j<ys.length;j++){const u=(xs[i-1]+xs[i])/2,v=(ys[j-1]+ys[j])/2;if(!openings.some(o=>u>o.a&&u<o.b&&v>o.lo&&v<o.hi))rect(xs[i-1],xs[i],ys[j-1],ys[j],.7,y>=0?cream:stone);}
-  for(const o of openings){for(const u of[o.a,o.b])rect(u-.12,u+.12,o.lo,o.hi,.96,timber,.02);rect(o.a-.22,o.b+.22,o.hi,o.hi+.24,1.02,timber,.02);if(!o.door){rect(o.a,o.b,o.lo,o.hi,.06,glass,0);rect(o.a-.3,o.b+.3,o.lo-.18,o.lo,1.2,stone,.08);rect((o.a+o.b)/2-.045,(o.a+o.b)/2+.045,o.lo,o.hi,.13,brass,.05);rect(o.a,o.b,o.lo+1.55,o.lo+1.63,.13,brass,.05);}}
+  for(const o of openings){for(const u of[o.a,o.b])if(!(o.door&&(u<.001||u>len-.001)))rect(u-.12,u+.12,o.lo,o.hi,.96,timber,.02);rect(o.a-.22,o.b+.22,o.hi,o.hi+.24,1.02,timber,.02);if(!o.door){rect(o.a,o.b,o.lo,o.hi,.06,glass,0);rect(o.a-.3,o.b+.3,o.lo-.18,o.lo,1.2,stone,.08);rect((o.a+o.b)/2-.045,(o.a+o.b)/2+.045,o.lo,o.hi,.13,brass,.05);rect(o.a,o.b,o.lo+1.55,o.lo+1.63,.13,brass,.05);}}
   // Continuous timber skirting stops at the genuine door apertures.
   const doors=openings.filter(o=>o.door);for(let i=1;i<xs.length;i++){const u=(xs[i-1]+xs[i])/2;if(!doors.some(o=>u>o.a&&u<o.b))rect(xs[i-1],xs[i],.08,.58,.82,teal,.02);}
  }

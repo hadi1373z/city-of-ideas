@@ -57,6 +57,9 @@ export function installOrigamiHouse(M,T){
   const future=el('details');future.append(el('summary',(FOUNDATION_COPY[lang()]||FOUNDATION_COPY.en).map));
   for(const h of FOUNDATION_HOUSES)future.append(button(h.names[lang()]||h.names.en,()=>{map.d.close();M.startExtra('house:'+h.id);}));
   for(const place of M.cityPlaces?.places||[])more.append(button(place.name,()=>{map.d.close();M.cityPlaces.visit(place.id);}));
+  if(M.transformationHouse?.visitBasements)more.append(button('Six houses · underground circuit',()=>{map.d.close();M.transformationHouse.visitBasements();}));
+  for(const house of M.transformationHouse?.built?.instances||[])more.append(button(house.name,()=>{map.d.close();M.transformationHouse.visit(house.id);}));
+  for(const collection of M.mathPavilions?.houses||[])more.append(button(collection.data.name,()=>{map.d.close();M.startExtra('math-pavilion:'+collection.data.id);}));
   if(M.humanityCommons)more.append(button('Commons of Care',()=>{map.d.close();M.humanityCommons.visit();}));
   if(M.archetypesQuarter)more.append(button('Houses of Archetypes',()=>{map.d.close();M.archetypesQuarter.visitCourt();}));
   for(const {data:house} of M.archetypesQuarter?.built?.houses||[])more.append(button(house.name,()=>{map.d.close();M.archetypesQuarter.visit(house.id);}));

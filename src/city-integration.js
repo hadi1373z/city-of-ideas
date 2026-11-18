@@ -134,9 +134,9 @@ try{
  installOceanVoyage(M,T);
  installBabelLibrary(M,T);
  installSeminarHouses(M,T);
- installMathematicalPavilions(M,T);
  installEscherDepth(M,T);
  installTransformationHouse(M,T);
+ installMathematicalPavilions(M,T);
  installWorldCylinder(M,T);
  installPaperGallery(M,T);
  installNightObservatory(M,T);
@@ -150,7 +150,7 @@ try{
  installArchetypesQuarter(M,T);
  installPondWorldWindow(M,T);
  installConnectedJourney(M,T);
- const arrivalQuery=new URLSearchParams(location.search||''),faceArrival=arrivalQuery.get('arrival');if(['penrose-floor','floor-facts','mirror-floor'].includes(faceArrival))M.penroseReadingFloor.visit();else if(faceArrival==='archetypes-quarter')M.archetypesQuarter.visitCourt();else if(faceArrival?.startsWith('archetype:'))M.archetypesQuarter.visit(faceArrival.slice(10));else if(faceArrival?.startsWith('place:'))M.cityPlaces.visit(faceArrival.slice(6));else if(faceArrival==='human-care')M.humanityCommons.visit();else if(faceArrival==='city-plan')M.worldCylinder.overview('upper');else if(faceArrival==='honeycomb')M.startExtra('philosophers');else if(faceArrival==='gravity-turn')M.worldCylinder.visitGravityTurn();else if(faceArrival==='mobius-ant')M.mathematicalSculptures.visit('mobius');else if(faceArrival==='ceiling-mosaic'){M.paperGallery.visit('foundations');M.player.x-=8;M.player.yaw=Math.PI/2;M.player.pitch=Math.atan2(M.birdFlight.built.layout.ceilingY-M.player.y,18);}else if(faceArrival==='transformations')M.startExtra('transformations');else if(faceArrival?.startsWith('math-pavilion:'))M.startExtra(faceArrival);else if(faceArrival==='pond-crossing'){M.arrive(M.pondWorldWindow.pond.entry);M.player.pitch=-.33;}else if(faceArrival==='escher-depth')M.escherDepth.enter('gallery');else if(faceArrival==='math-entrance')M.startExtra('mathematics');else if(faceArrival==='observatory')M.nightObservatory.visit('deck');else if(faceArrival?.startsWith('paper-gallery:'))M.startExtra(faceArrival);else if(faceArrival==='paper-monitors')M.startExtra('paper-monitors');
+ const arrivalQuery=new URLSearchParams(location.search||''),faceArrival=arrivalQuery.get('arrival');if(['penrose-floor','floor-facts','mirror-floor'].includes(faceArrival))M.penroseReadingFloor.visit();else if(faceArrival==='archetypes-quarter')M.archetypesQuarter.visitCourt();else if(faceArrival?.startsWith('archetype:'))M.archetypesQuarter.visit(faceArrival.slice(10));else if(faceArrival?.startsWith('place:'))M.cityPlaces.visit(faceArrival.slice(6));else if(faceArrival==='human-care')M.humanityCommons.visit();else if(faceArrival==='city-plan')M.worldCylinder.overview('upper');else if(faceArrival==='honeycomb')M.startExtra('philosophers');else if(faceArrival==='gravity-turn')M.worldCylinder.visitGravityTurn();else if(faceArrival==='mobius-ant')M.mathematicalSculptures.visit('mobius');else if(faceArrival==='ceiling-mosaic'){M.paperGallery.visit('foundations');M.player.x-=8;M.player.yaw=Math.PI/2;M.player.pitch=Math.atan2(M.birdFlight.built.layout.ceilingY-M.player.y,18);}else if(faceArrival==='transformations'||faceArrival?.startsWith('transformations:'))M.startExtra(faceArrival);else if(faceArrival==='transformation-basements')M.transformationHouse.visitBasements();else if(faceArrival?.startsWith('math-pavilion:'))M.startExtra(faceArrival);else if(faceArrival==='pond-crossing'){M.arrive(M.pondWorldWindow.pond.entry);M.player.pitch=-.33;}else if(faceArrival==='escher-depth')M.escherDepth.enter('gallery');else if(faceArrival==='math-entrance')M.startExtra('mathematics');else if(faceArrival==='observatory')M.nightObservatory.visit('deck');else if(faceArrival?.startsWith('paper-gallery:'))M.startExtra(faceArrival);else if(faceArrival==='paper-monitors')M.startExtra('paper-monitors');
  M.status('ready');
  installCinematicIntro(M,T,socrates);
  // The bare city address opens at the approved volcanic reservoir in Babel.
