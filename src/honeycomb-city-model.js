@@ -1,7 +1,7 @@
-import {CITY_HEX as H,hexCentre} from './city-hex-layout.js?v=city-learning-20261118';
+import {CITY_HEX as H,hexCentre,IDEAS_PARK_SITE} from './city-hex-layout.js?v=city-learning-20261118';
 
 const TAU=Math.PI*2,near=(a,b,e=1e-6)=>Math.hypot(a[0]-b[0],a[1]-b[1])<e;
-export const HONEYCOMB_RULES=Object.freeze({side:H.side,rings:H.rings,streetWidth:5.5,gateWidth:12,wallHeight:1.55,wallThickness:.45,coastRadius:536,protectedCore:58,parkRadius:181});
+export const HONEYCOMB_RULES=Object.freeze({side:H.side,rings:H.rings,streetWidth:5.5,gateWidth:12,wallHeight:1.55,wallThickness:.45,coastRadius:536,protectedCore:58,parkRadius:IDEAS_PARK_SITE.radius});
 // The full central grid now reaches Gallery's two real graded doors directly.
 // Each sixfold house owns its one explicit tangential door-to-vertex spur.
 export const CAMPUS_GATEWAYS=Object.freeze([]);
@@ -10,11 +10,11 @@ export function pointSegmentDistance(x,z,a,b){const dx=b[0]-a[0],dz=b[1]-a[1],u=
 const inside=(p,polygon,margin=0)=>{let sign=0;for(let i=0;i<polygon.length;i++){const a=polygon[i],b=polygon[(i+1)%polygon.length],c=(b[0]-a[0])*(p[1]-a[1])-(b[1]-a[1])*(p[0]-a[0]);if(Math.abs(c)<1e-9)continue;if(sign&&Math.sign(c)!==sign)return false;sign=Math.sign(c);}return margin<=0||polygon.every((a,i)=>pointSegmentDistance(...p,a,polygon[(i+1)%polygon.length])>=margin);};
 export function footprintBlocked(x,z,footprints,margin=0){return footprints.some(h=>h.shape==='circle'?Math.hypot(x-h.x,z-h.z)<h.radius+margin:inside([x,z],h.points)||h.points.some((a,i)=>pointSegmentDistance(x,z,a,h.points[(i+1)%h.points.length])<margin));}
 export function makeHoneycombCity({footprints=[],retainedRoutes=[]}={}){
- const C=HONEYCOMB_RULES,cells=honeycombCells(),blocked=(x,z,margin=3.4)=>Math.hypot(x,z)<C.protectedCore||Math.hypot(x,z+330)<C.parkRadius||footprintBlocked(x,z,footprints,margin);
+ const C=HONEYCOMB_RULES,cells=honeycombCells(),blocked=(x,z,margin=3.4)=>Math.hypot(x,z)<C.protectedCore||Math.hypot(x-IDEAS_PARK_SITE.x,z-IDEAS_PARK_SITE.z)<C.parkRadius||footprintBlocked(x,z,footprints,margin);
  const clear=(a,b,margin=3.4,source=false)=>{const n=Math.max(1,Math.ceil(Math.hypot(a[0]-b[0],a[1]-b[1])/.8));for(let i=0;i<=n;i++){const x=a[0]+(b[0]-a[0])*i/n,z=a[1]+(b[1]-a[1])*i/n;if(source?(Math.hypot(x,z)<70||footprintBlocked(x,z,footprints,margin)):blocked(x,z,margin))return false;}return true;};
- const key=p=>p.map(n=>n.toFixed(4)).join(','),segments=new Map();for(const c of cells)for(let i=0;i<6;i++){const a=c.vertices[i],b=c.vertices[(i+1)%6],id=[key(a),key(b)].sort().join('|');if(!segments.has(id)&&clear(a,b))segments.set(id,{a,b});}
+ const key=p=>p.map(n=>n.toFixed(4)).join(','),segments=new Map();for(const c of cells)for(let i=0;i<6;i++){const a=c.vertices[i],b=c.vertices[(i+1)%6],id=[key(a),key(b)].sort().join('|');if(segments.has(id))continue;const width=clear(a,b)?C.streetWidth:clear(a,b,2.4)?4.3:null;if(width)segments.set(id,{a,b,width});}
  const nodeMap=new Map(),node=p=>{const id='junction-'+key(p);if(!nodeMap.has(id))nodeMap.set(id,{id,x:p[0],z:p[1],walk:p});return id;},edges=[],roads=[];
- for(const{a,b}of segments.values()){const e={id:'block-street-'+edges.length,a:node(a),b:node(b),points:[a,b],width:C.streetWidth};edges.push(e);roads.push({...e,kind:'block-street'});}
+ for(const{a,b,width}of segments.values()){const e={id:'block-street-'+edges.length,a:node(a),b:node(b),points:[a,b],width};edges.push(e);roads.push({...e,kind:'block-street'});}
  const nodes=[...nodeMap.values()],coastLinks=[];for(let sector=0;sector<6;sector++){const angle=sector*TAU/6,p=[C.coastRadius*Math.cos(angle),C.coastRadius*Math.sin(angle)],c=nodes.filter(c=>clear(c.walk,p)).sort((a,b)=>Math.hypot(a.x-p[0],a.z-p[1])-Math.hypot(b.x-p[0],b.z-p[1]))[0];if(!c)throw Error('Missing coastal gateway '+sector);const road={id:'honeycomb-coast-'+sector,points:[c.walk,p],width:5.5,kind:'gateway'};coastLinks.push(road);roads.push(road);}
  // Six source-owned campus approaches meet actual street junctions, with a
  // source-clear dogleg only when a retained building requires it.

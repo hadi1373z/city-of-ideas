@@ -1,3 +1,4 @@
+import {IDEAS_PARK_SITE} from './city-hex-layout.js?v=city-learning-20261118';
 import {cutHouseWell,configuredHouseWells} from './transformation-house-model.js?v=city-night-20261117';
 import {createOceanMaterial,updateOceanMaterial} from './ocean-surface.js?v=city-learning-20261118';
 import {FOUNDATION_HOUSES,FOUNDATION_ROUTES} from './foundation-houses-data.js?v=city-learning-20261118';
@@ -30,7 +31,7 @@ export function buildCityCoast(T,{cityPaths=[],heightAt=()=>0,naturalTrees=globa
  for(const[material,{positions,indices}]of roadBatches){const geometry=own(new T.BufferGeometry());geometry.setAttribute('position',new T.Float32BufferAttribute(positions,3));geometry.setIndex(indices);geometry.computeVertexNormals();const mesh=new T.Mesh(geometry,material);mesh.name=material===laneMat?'Quiet narrow honeycomb lanes · one paving batch':'Continuous campus and coast gateways · one paving batch';group.add(mesh);}
  const urban=buildCityUrbanPlan(T,{naturalTrees});group.add(urban.group);
  // A loose coastal woodland frames the city; the park and future western home lots stay clear.
- const trees=[];for(let n=0;n<150;n++){const a=n*2.399963,r=390+((n*41)%105),x=Math.cos(a)*r,z=Math.sin(a)*r;if(Math.hypot(x,z+330)<179||x<0&&z>125||FOUNDATION_HOUSES.some(h=>Math.hypot(x-h.x,z-h.z)<30))continue;const clear=paths.every(p=>p.points.slice(1).every((b,i)=>{const a=p.points[i],dx=b[0]-a[0],dz=b[1]-a[1],u=Math.max(0,Math.min(1,((x-a[0])*dx+(z-a[1])*dz)/(dx*dx+dz*dz)));return Math.hypot(x-a[0]-dx*u,z-a[1]-dz*u)>(p.width||4)/2+3;}));if(clear&&streetTreeClear(x,z)&&!urban.walls.some(w=>segmentDistance(x,z,w.a,w.b)<1.2))trees.push({x,z});}if(naturalTrees)naturalTrees(T,group,trees);
+ const trees=[];for(let n=0;n<150;n++){const a=n*2.399963,r=390+((n*41)%105),x=Math.cos(a)*r,z=Math.sin(a)*r;if(Math.hypot(x-IDEAS_PARK_SITE.x,z-IDEAS_PARK_SITE.z)<IDEAS_PARK_SITE.radius||x<0&&z>125||FOUNDATION_HOUSES.some(h=>Math.hypot(x-h.x,z-h.z)<30))continue;const clear=paths.every(p=>p.points.slice(1).every((b,i)=>{const a=p.points[i],dx=b[0]-a[0],dz=b[1]-a[1],u=Math.max(0,Math.min(1,((x-a[0])*dx+(z-a[1])*dz)/(dx*dx+dz*dz)));return Math.hypot(x-a[0]-dx*u,z-a[1]-dz*u)>(p.width||4)/2+3;}));if(clear&&streetTreeClear(x,z)&&!urban.walls.some(w=>segmentDistance(x,z,w.a,w.b)<1.2))trees.push({x,z});}if(naturalTrees)naturalTrees(T,group,trees);
  const shore=HOUSE_ORIGAMI.shore,dx=shore.x-256.5;
  for(let i=0;i<12;i++)box(4,.09,.48,257+dx,.085,73.1+i*.5,wood);
  for(const z of[73,76,79])box(.12,.85,.12,259.05+dx,.5,z,wood);box(.12,.10,6.2,259.05+dx,.88,76,wood);

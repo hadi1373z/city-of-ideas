@@ -2,11 +2,21 @@
 
 The approved regular honeycomb now changes the actual city streets and the
 placement of working buildings. It is not a decorative graph over the old city.
-Thirty-seven exact92m hexagons fit inside the570m circular island.106 retained
-shared block EDGES form the new5.5m street network, with83 real junctions,
-alternate loops, six clear campus gateways and six symmetric coastal approaches.
-The previous centre-to-centre triangular web, outer irregular circuit and retired
-legacy source road calls are removed. The source-defined door approaches remain.
+Thirty-seven exact92m hexagons fit inside the570m circular island. The central
+Gallery cell and all six immediately adjacent cells now retain every actual
+regular block edge. Six complete Transformations houses occupy those six cells,
+each with its own tiling and a tangential doorway-to-vertex approach. The former
+76m misaligned inner ring,125m source precinct and central box/zigzag streets are
+retired from live paving and maps. At the preserved Proof Atelier corner one
+street narrows to4.3m; all other standard block streets remain5.5m wide.
+
+The existing park moves as one source-local presentation to(0,−375), preserving
+its pond, people, seeds and tools. Its actual158m envelope replaces the old
+oversized181m road exclusion, revealing the six northern hex edges. The park
+still fits inside the shoreline promenade. The Gallery's two real graded doors
+and return lift join the same regular grid. No diagonal campus joins are needed.
+The live graph has131 shared block edges,95 junctions and189 gated wall
+segments. Six clear coastal approaches continue to the ocean promenade.
 
 ## Six inhabited collections
 
@@ -35,10 +45,10 @@ loop. Supports avoid all street/door routes; central passages remain open.
 The arcades frame occupied collections and provide covered walking space; they
 are not empty teaching-room shells. Low walls sit inside the other street blocks,
 with source-clipped gate gaps, a warm coping and a flush2.4m-wide stone foot.
-Alternating lawn tones make23 wholly clear outer cells legible at overview scale.
+Alternating lawn tones make wholly clear outer cells legible at overview scale.
 No lawn surface crosses the protected Gallery/Babel/Transformation or pond areas.
 
-The original Gallery/Babel/observatory axis, House of Transformations, substantial
+The original Gallery/Babel/observatory axis, six transformed houses, substantial
 Proof Atelier and saved workbenches, Escher's real museum/tunnel anchor and Origami
 house remain fixed. Their true source approaches meet the new street network.
 Five connected hexagonal park lawns retain the original pond, nine garden
@@ -77,10 +87,12 @@ included in paving, gate clipping, map outlines and tree planning.
 
 All upper street-tree owners use a shared seven-metre roof/porch clearance. The
 natural-tree factory independently protects the fixed Gallery, Transformations,
-Socrates, Makers and three Penrose pavilions even before other scenes load. The
+Socrates, Makers and all six complete house roofs even before other scenes load. The
 old paired-promenade tree ring is removed. Urban, coastal and artist street trees
 share the full current building/place footprint guard; the Jungian quarter's
-reserved ground stays clear as its rooms are built. Original park garden trees
+reserved ground stays clear as its rooms are built. The three standalone Penrose pavilion shells retire after their lessons move
+into the western, northwestern and northeastern house rooms. Their legacy source
+builders and study IDs remain available. Original park garden trees
 retain their own source planting and garden clearance; indoor plants are untouched.
 
 Covered arcades are architecture too: their complete6.2m roof bands participate
@@ -88,10 +100,21 @@ in the same tree exclusion. Inner-courtyard planting is offset away from those
 eaves. The regression first reproduced a crown/arcade overlap, then verifies
 actual generated crown bounds against each transformed roof's oriented volume.
 
-The dashed underground routes are the existing physicalY−40 Babel/Transformations
-corridor and its Escher museum spur. A surface linked threshold is not described
-as a physical staircase. Personal homes occupy the night face without rewriting
-source designs, documents or contents; seeNIGHT-HOME-NEIGHBOURHOOD.md.
+The dashed underground routes show the physicalY−40 six-house loop, six real
+radial spurs, the Gallery branch and retained Escher museum spur. Surface arrivals
+are not described as physical passages. All six10.3m live wells are cut from the
+actual coast, foundation and153m Gallery plinth surfaces; the retired125m shaft
+closes. Boundary-intersecting plinth holes use real circular notches rather than
+invalid holes outside a shape. The legacy standalone house keeps its125m source
+geometry and single-well tests.
+
+Approved saved artist editions move through a presentation wrapper into the
+empty eastern cell at(398.372,138). Their twenty original source slots, records,
+artworks and studies remain unchanged. Actual roof/feature bounds fit the56m
+whole-crown reserve, and a shared real3.4m approach joins the cell's northern
+vertex. The wrapper translates collision/entry/action metadata while retaining
+the source factory's original spatial index. Personal homes remain on the night
+face without rewriting designs, documents or contents; seeNIGHT-HOME-NEIGHBOURHOOD.md.
 
 ## Startup, rendering and checks
 
@@ -100,7 +123,7 @@ result is committed in`honeycomb-city-layout.js`; run
 `node tools/render-honeycomb-layout.mjs`, `node tools/render-coastal-plan.mjs` and
 `node tools/render-artist-quarter-plan.cjs` after relevant placement changes.
 An independent consistency check regenerates the graph and compares its hash.
-A local measurement gave58ms module import and77ms layout of398 street trees;
+A local measurement gave66ms module import and74ms layout of330 street trees;
 these are development-machine timings, not a promise for every visitor.
 
 Two shared paving batches remain. Urban courts, walls, copings/feet, lawn field,

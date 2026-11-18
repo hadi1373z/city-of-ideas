@@ -1,6 +1,6 @@
 import {FOUNDATION_HOUSES,FOUNDATION_ROUTES} from './foundation-houses-data.js?v=city-learning-20261118';
 import {CITY_ISLAND as I} from './island-layout.js?v=city-learning-20261118';
-import {PARK_HEX_CELLS,CITY_HEX} from './city-hex-layout.js?v=city-learning-20261118';
+import {PARK_HEX_CELLS,CITY_HEX,IDEAS_PARK_SITE} from './city-hex-layout.js?v=city-learning-20261118';
 import {coastX,HOUSE_ORIGAMI,COAST_ROUTES} from './origami-house-math.js?v=city-learning-20261118';
 import {SEMINAR_HOUSES,SEMINAR_PATHS} from './seminar-houses-data.js?v=city-learning-20261118';
 import {STUDY_PATHS} from './study-houses-data.js?v=city-night-20261117';
@@ -17,7 +17,7 @@ export function coastalPlanSvg(plan,lang='en'){
  for(const cell of urbanLawnCells())parts.push('<polygon data-neighbourhood-lawn="'+cell.id+'" points="'+points(cell.vertices)+'" fill="'+['#72865f','#899871','#7b8f66'][((cell.q-cell.r)%3+3)%3]+'"/>');
  parts.push(text(0,-610,c.ocean,21,'#f3f2df'));
  for(const cell of PARK_HEX_CELLS)parts.push('<polygon data-garden-cell="'+cell.q+','+cell.r+'" points="'+points(Array.from({length:6},(_,i)=>[cell.x+CITY_HEX.side*Math.cos(Math.PI/6+i*Math.PI/3),cell.z+CITY_HEX.side*Math.sin(Math.PI/6+i*Math.PI/3)]))+'" fill="#aabf94"/>');
- parts.push(text(0,-325,c.park,21));
+ parts.push(text(IDEAS_PARK_SITE.x,IDEAS_PARK_SITE.z+5,c.park,21));
  for(const[rIndex,r]of urbanRoutes(plan).entries()){const id=r.id||'source-'+rIndex,core=id==='sixfold-hexagon'||id.startsWith('civic-view-')||id==='gallery-promenade';parts.push(path(r.points,core?'#8b7856':r.kind==='lane'?'#a5ad94':'#b2a585',r.width*s+(core?1:0),'data-street="'+id+'"'));if(core)parts.push(path(r.points,'#e0d4b3',Math.max(.7,r.width*s-1.4)));}
  for(const arcade of ARCADE_STREETS)parts.push(path(arcade.points,'#795d45',6.2*s,'data-inhabited-arcade="'+arcade.id+'"'));
  for(const wall of HONEYCOMB_CITY.walls)parts.push(path([wall.a,wall.b],'#967744',1.4,'data-honeycomb-wall="true"'));
@@ -25,7 +25,7 @@ export function coastalPlanSvg(plan,lang='en'){
  for(const court of URBAN_COURTS)parts.push('<polygon data-civic-court="'+court.id+'" points="'+points(urbanCourtOutline(court))+'" fill="'+(court.shape==='hex'?'#eee0bb':'#dcd0af')+'" stroke="#a48f65" stroke-width=".7"/>');
  parts.push('<circle data-gallery-centre="true" cx="460" cy="460" r="'+58*s+'" fill="#d5b366" stroke="#866734" stroke-width="2"/>','<circle cx="460" cy="460" r="'+28*s+'" fill="#efe0ab"/>',text(0,9,lang==='fa'?'ز':'Z',28),text(0,-176,c.gallery,20));
  const colours={letters:'#a77f58',philosopher:'#71816b',study:'#64817a',seminar:'#8b7eaa',artist:'#a56b55',pattern:'#497f86',making:'#b28c55',place:'#7c8d77','place-step':'#c6bd9e',humanities:'#ae9274'};
- for(const h of urbanBuildingFootprints(plan)){if(h.category==='gallery')continue;const extra='data-building-footprint="'+h.id+'" data-centre="'+h.x+','+h.z+'"'+(h.category==='letters'?' data-house="'+h.id+'"':'')+(h.id.startsWith('transformations')?' data-transformation-house="true"':''),shape=h.shape==='circle'?'<circle '+extra+' cx="'+px(h.x)+'" cy="'+pz(h.z)+'" r="'+h.radius*s+'"':'<polygon '+extra+' points="'+points(h.points)+'"';parts.push(shape+' fill="'+(colours[h.category]||'#d5b366')+'" stroke="#f7efd5" stroke-width=".8"><title>'+escape(h.label)+'</title></'+(h.shape==='circle'?'circle':'polygon')+'>');if(h.front)parts.push(path([[h.x,h.z],h.front],'#ead7a8',.7));if(h.id.startsWith('transformations-'))parts.push(text(h.x,h.z-34,h.label,10));if(h.category==='place')parts.push(text(h.x,h.z-23,h.label,11));}
+ for(const h of urbanBuildingFootprints(plan)){if(h.category==='gallery'||h.category==='reserve')continue;const extra='data-building-footprint="'+h.id+'" data-centre="'+h.x+','+h.z+'"'+(h.category==='letters'?' data-house="'+h.id+'"':'')+(h.id.startsWith('transformations')?' data-transformation-house="true"':''),shape=h.shape==='circle'?'<circle '+extra+' cx="'+px(h.x)+'" cy="'+pz(h.z)+'" r="'+h.radius*s+'"':'<polygon '+extra+' points="'+points(h.points)+'"';parts.push(shape+' fill="'+(colours[h.category]||'#d5b366')+'" stroke="#f7efd5" stroke-width=".8"><title>'+escape(h.label)+'</title></'+(h.shape==='circle'?'circle':'polygon')+'>');if(h.front)parts.push(path([[h.x,h.z],h.front],'#ead7a8',.7));if(h.id.startsWith('transformations-'))parts.push(text(h.x,h.z-34,h.label,10));if(h.category==='place')parts.push(text(h.x,h.z-23,h.label,11));}
  parts.push(text(-318.6973485926734,83,c.philosophers,14),dot(-96,100,7),text(-132,130,c.socrates,13));
  parts.push(text(-398.3716857408417,185,'Garden galleries',13),text(398.3716857408417,-184,'Form galleries',13),text(159.3486742963367,326,'Working studios',13),text(-159.3486742963367,387,'Stories and language',13),text(239.023011444505,204,'Advanced seminars',13),text(255,-181,c.study,13));
  for(const[x,z]of[[216,-58],[234,-58],[225,-41]])parts.push(dot(x,z,3));parts.push(text(254,-31,c.makers,11));

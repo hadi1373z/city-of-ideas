@@ -25,7 +25,7 @@ for (const lang of ['en', 'de', 'fa']) {
   assert(svg.includes('data-transformation-house="true"'));assert(!svg.includes('Mountain of Becoming'),'Version 2 map must show the retained house, not the removed mountain');
   const project=points=>points.map(p=>coastMapPoint(...p).map(n=>n.toFixed(1)).join(',')).join(' ');
   for(const h of FOUNDATION_HOUSES){const footprint=[[-9,-8],[9,-8],[9,8],[-9,8]].map(([x,z])=>{const p=houseWorld(h,x,z);return[p.x,p.z];});assert(svg.includes('data-house="'+h.id+'" points="'+project(footprint)+'"'),'Each inward-facing public home must show its actual rotated 18 × 16 m floor');}
-  for(const h of urbanBuildingFootprints(plan).filter(h=>h.category!=='gallery')){assert.equal([...svg.matchAll(new RegExp('data-building-footprint="'+h.id+'"','g'))].length,1,'Every existing public floor has one map outline');assert(svg.includes('data-centre="'+h.x+','+h.z+'"'));if(h.points)assert(svg.includes('points="'+project(h.points)+'"'));}
+  for(const h of urbanBuildingFootprints(plan).filter(h=>h.category!=='gallery'&&h.category!=='reserve')){assert.equal([...svg.matchAll(new RegExp('data-building-footprint="'+h.id+'"','g'))].length,1,'Every existing public floor has one map outline');assert(svg.includes('data-centre="'+h.x+','+h.z+'"'));if(h.points)assert(svg.includes('points="'+project(h.points)+'"'));}
   assert.equal((svg.match(/data-garden-cell=/g)||[]).length,5);for(const c of PARK_HEX_CELLS)assert(svg.includes('data-garden-cell="'+c.q+','+c.r+'" points="'+project(Array.from({length:6},(_,i)=>[c.x+CITY_HEX.side*Math.cos(Math.PI/6+i*Math.PI/3),c.z+CITY_HEX.side*Math.sin(Math.PI/6+i*Math.PI/3)]))+'"'),'The map must show the actual connected park lawns');
   for(const c of URBAN_COURTS)assert(svg.includes('data-civic-court="'+c.id+'"'));
   for(const c of CIVIC_PAIRED_COURTS)assert(svg.includes('data-civic-court="'+c.id+'" points="'+project(urbanCourtOutline(c))+'"'));
@@ -45,7 +45,7 @@ for (const lang of ['en', 'de', 'fa']) {
 }
 const generated=['en','de','fa'].map(lang=>geometry(coastalPlanSvg(plan,lang)));assert.deepEqual(generated[0],generated[1],'Translated copy cannot alter island coordinates or mirror the map');assert.deepEqual(generated[0],generated[2]);
 assert.deepEqual(COAST_LANDMARKS.map(p => coastMapPoint(...p.point)), [
-  [460,460], [460,229.00000000000003], [392.8,530], coastMapPoint(plan.arrival.x,plan.arrival.z), [849.1374286786722,513.2], ...SEMINAR_HOUSES.map(h=>coastMapPoint(h.x,h.z))
+  [460,460], [460,197.5], [392.8,530], coastMapPoint(plan.arrival.x,plan.arrival.z), [849.1374286786722,513.2], ...SEMINAR_HOUSES.map(h=>coastMapPoint(h.x,h.z))
 ]);
 assert.deepEqual(COAST_LANDMARKS.find(p => p.id === 'artists').point, Array.from([plan.arrival.x, plan.arrival.z]));
 

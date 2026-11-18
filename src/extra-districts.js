@@ -1,3 +1,4 @@
+import {layoutArtistEditions} from './artist-edition-layout.js?v=city-learning-20261118';
 import './city-road-surface.js?v=city-night-20261117';
 import {nightHomeTransform,nightHomeAccess,nightHomeRoadSegments} from './night-home-layout.js?v=city-learning-20261118';
 /* Additive source-authentic geometry for the principal City of Ideas scene.
@@ -72,8 +73,7 @@ export async function createExtraDistricts(THREE,options={}){
  const roadMaterial=new THREE.MeshLambertMaterial({color:0xd2c6af}),groundMaterial=new THREE.MeshLambertMaterial({color:0x556563}),roadGeometries=new Set();
  function road(points,width=6,parent=roads){const mesh=globalThis.createCityRoad(THREE,points,width,roadMaterial,parent);if(mesh)roadGeometries.add(mesh.geometry);}
  road(city.GRAVEYARD?[[transforms.mathematics.x+50,-65],[transforms.mathematics.x+50,65],[transforms.mathematics.x,65],[transforms.mathematics.x,transforms.mathematics.z+9.6]]:[[-97.7,110],[-125,110],[-125,140],[-215,140],[-215,104.6]],7);
- road([[74,110],[74,76],[200,76],[203.5,65],[203.5,-50],[211.5,-50]],6);
- road([[74,110],[74,96],[88,96]],3);
+ if(globalThis.window?.CITY_CONFIG?.sixfoldHouses!==true){road([[74,110],[74,76],[200,76],[203.5,65],[203.5,-50],[211.5,-50]],6);road([[74,110],[74,96],[88,96]],3);}
  const assetUrl=value=>{
   if(/^(?:data:|blob:)/i.test(value))return value;
   if(options.assetUrl)return options.assetUrl(value,sourceBase.href);
@@ -185,7 +185,7 @@ export async function createExtraDistricts(THREE,options={}){
    if(disposed)throw Error('The appended city layer has been disposed.');
    let nextEditions;const nextCargo=[];
    try{
-    nextEditions=F.buildArtistCityEditions(AssetThree,editionCatalog,daliArt,list);disableLights(nextEditions.group);
+    nextEditions=layoutArtistEditions(F.buildArtistCityEditions(AssetThree,editionCatalog,daliArt,list),transforms.artists,{enabled:globalThis.window?.CITY_CONFIG?.sixfoldHouses===true});disableLights(nextEditions.group);
     for(const house of nextEditions.houses)house.group.userData.cityDestination='artist-edition:'+house.editionId;
     const definitions=[{cityId:'makers',floor:0,anchors:makers.anchors,transform:transforms.makers},{cityId:'mathematics',floor:activeMathFloor,anchors:mathModels[activeMathFloor].anchors,transform:transforms.mathematics},{cityId:'artists',floor:0,anchors:artStation.anchors,transform:artStation.transform||transforms.artists}];
     for(const definition of definitions){const built=F.buildCityCargo(THREE,next,definition.cityId,definition.anchors);if(definition.cityId==='mathematics')built.group.position.y=mathModels[definition.floor].height;nextCargo.push({...built,...definition});}
