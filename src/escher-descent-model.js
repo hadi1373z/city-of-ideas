@@ -2,6 +2,7 @@
 export const DESCENT=Object.freeze({top:.13,bottom:-40,flights:8,steps:40,north:92,south:104,lanes:[228,225],width:1.8,
  shaft:{minX:223.8,maxX:229.2,minZ:90.6,maxZ:106.6},cut:{minX:226.8,maxX:229.2,minZ:96.4,maxZ:105.4},
  entry:{x:228,z:105.5,y:.13},exit:{x:225,z:106.6,y:-40}});
+export const STAIR_PORTAL=Object.freeze({x:225,z:106.8,floor:-40,halfWidth:1.5,opening:1.05,height:4,depth:.5,spring:2.55,radius:1.1});
 export const flightY=i=>DESCENT.top+(DESCENT.bottom-DESCENT.top)*i/DESCENT.flights;
 export function descentParts(){const out=[];for(let i=0;i<8;i++){
  const north=i%2===0,x=DESCENT.lanes[i%2],start=north?104:92,end=north?92:104;

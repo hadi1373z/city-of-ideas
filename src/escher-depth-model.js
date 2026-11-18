@@ -1,4 +1,4 @@
-import {DESCENT} from './escher-descent-model.js?v=escher-metal-20261118';
+import {DESCENT,STAIR_PORTAL} from './escher-descent-model.js?v=quiet-entrance-20261118';
 // Original museum geometry. Coordinates are in the ordinary +Y-up city world.
 const rect=(id,minX,maxX,minZ,maxZ,y=-40)=>Object.freeze({id,minX,maxX,minZ,maxZ,y});
 export const ESCHER_DEPTH=Object.freeze({
@@ -36,6 +36,7 @@ export const ESCHER_DEPTH_WALLS=Object.freeze([
  wz(156,160,181,-46),wz(156,188,232,-46),wx(160,156,184,-46),wx(232,156,184,-46),wz(184,160,232,-46)
 ]);
 export const ESCHER_DEPTH_OBSTACLES=Object.freeze([
+ ...[-1,1].map(side=>{const p=STAIR_PORTAL;return rect('Escher stair jamb',p.x+(side<0?-p.halfWidth:p.opening),p.x+(side<0?-p.opening:p.halfWidth),p.z,p.z+p.depth);}),
  rect('triangle case',206,220,103,115),rect('tile console',208,218,77,81),
  rect('loop table',190,204,166,180,-46),rect('reading desk',248,255,106,110)
 ]);

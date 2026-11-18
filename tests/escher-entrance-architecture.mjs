@@ -4,6 +4,7 @@ import {buildEscherHouse} from '../src/escher-house.js';
 import {buildPerspectiveStairs,measurePerspective} from '../src/escher-perspective.js';
 const ctx=new Proxy({},{get:(o,k)=>o[k]||(()=>{})}),canvas=()=>({getContext:()=>ctx});
 const house=buildEscherHouse(T,{x:228,z:115,canvas,loadTexture:()=>new T.Texture()});
+assert.equal(house.targets.length,3,'The large entrance name sign is removed; the three visible original prints remain interactive');
 house.group.updateWorldMatrix(true,true);
 const ray=new T.Raycaster(),v=(x,y,z)=>new T.Vector3(x,y,z),a=house.architecture;
 // Real rays check the complete walking floor and the formerly open sky slots.

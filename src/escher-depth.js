@@ -1,7 +1,7 @@
-import {installEscherDescent} from './escher-descent.js?v=escher-metal-20261118';
+import {installEscherDescent} from './escher-descent.js?v=quiet-entrance-20261118';
 import {PRINT_STUDIES,dependencyOrder} from './escher-print-studies.js?v=1';
-import {ESCHER_DEPTH as D,DEPTH_VIEW,DEPTH_FOCUS,depthFloorAt,depthRoomAt,walkDepth,atGalleryHandoff,perspectiveAligned,tileMismatch,loopResult} from './escher-depth-model.js?v=escher-metal-20261118';
-import {buildEscherDepth} from './escher-depth-scene.js?v=escher-metal-20261118';
+import {ESCHER_DEPTH as D,DEPTH_VIEW,DEPTH_FOCUS,depthFloorAt,depthRoomAt,walkDepth,atGalleryHandoff,perspectiveAligned,tileMismatch,loopResult} from './escher-depth-model.js?v=quiet-entrance-20261118';
+import {buildEscherDepth} from './escher-depth-scene.js?v=quiet-entrance-20261118';
 
 const ROOM_NAMES={vestibule:'Gallery passage',hall:'Hall of connected views',perspective:'Perspective chamber',tessellation:'Tessellation chamber',reading:'Room of three doors',stair:'Stair to the loop chamber',loop:'Closed-loop chamber'};
 export function installEscherDepth(M,T,{onGalleryExit=null}={}){

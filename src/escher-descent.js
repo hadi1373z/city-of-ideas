@@ -1,4 +1,4 @@
-import {DESCENT as D,DESCENT_PARTS as PARTS,descentSurface,walkDescent,outsideRectangle} from './escher-descent-model.js?v=escher-metal-20261118';
+import {DESCENT as D,STAIR_PORTAL as P,DESCENT_PARTS as PARTS,descentSurface,walkDescent,outsideRectangle} from './escher-descent-model.js?v=quiet-entrance-20261118';
 export function buildEscherDescent(T){
  const group=new T.Group();group.name='Escher · continuous eight-flight descent';const owned=[],batches=new Map(),unit=new T.BoxGeometry(1,1,1);owned.push(unit);
  const mat=c=>{const m=new T.MeshLambertMaterial({color:c,side:T.DoubleSide});owned.push(m);return m;},stone=mat(0xc6c5af),slate=mat(0x99aaa3),light=mat(0xe6ddbe),brass=mat(0xa9986c);
@@ -19,9 +19,19 @@ export function buildEscherDescent(T){
  for(const x of[s.minX-.14,s.maxX+.14])box(.28,39.6,s.maxZ-s.minZ,x,-20.2,(s.minZ+s.maxZ)/2,slate);
  box(s.maxX-s.minX,.28,s.maxZ-s.minZ,(s.minX+s.maxX)/2,-40.3,(s.minZ+s.maxZ)/2,slate);
  box(s.maxX-s.minX,39.6,.28,(s.minX+s.maxX)/2,-20.2,s.minZ-.14,slate);
- // The museum doorway occupies the bottom 2.8m of the south enclosure.
- box(s.maxX-s.minX,36.8,.28,(s.minX+s.maxX)/2,-18.8,s.maxZ+.14,slate);
- for(const r of outsideRectangle({minX:s.minX,maxX:s.maxX,minZ:s.maxZ,maxZ:s.maxZ+.28},{minX:223.95,maxX:226.05,minZ:s.maxZ-1,maxZ:s.maxZ+1}))box(r.maxX-r.minX,2.8,.28,(r.minX+r.maxX)/2,-38.6,s.maxZ+.14,slate);
+ // A real arched reveal replaces the plain rectangular museum-side mouth.
+ const doorwayHeight=3.7,wallTop=-.4,lintel=P.floor+doorwayHeight;
+ box(s.maxX-s.minX,wallTop-lintel,.28,(s.minX+s.maxX)/2,(wallTop+lintel)/2,s.maxZ+.14,slate);
+ for(const r of outsideRectangle({minX:s.minX,maxX:s.maxX,minZ:s.maxZ,maxZ:s.maxZ+.28},{minX:P.x-P.opening,maxX:P.x+P.opening,minZ:s.maxZ-1,maxZ:s.maxZ+1}))box(r.maxX-r.minX,doorwayHeight,.28,(r.minX+r.maxX)/2,P.floor+doorwayHeight/2,s.maxZ+.14,slate);
+ const archShape=new T.Shape();archShape.moveTo(-P.halfWidth,0);archShape.lineTo(-P.halfWidth,P.height);archShape.lineTo(P.halfWidth,P.height);archShape.lineTo(P.halfWidth,0);archShape.lineTo(P.radius,0);archShape.lineTo(P.radius,P.spring);
+ for(let i=1;i<=48;i++){const a=i*Math.PI/48;archShape.lineTo(P.radius*Math.cos(a),P.spring+P.radius*Math.sin(a));}archShape.lineTo(-P.radius,0);archShape.closePath();
+ const archGeometry=new T.ExtrudeGeometry(archShape,{depth:P.depth,bevelEnabled:true,bevelThickness:.035,bevelSize:.035,bevelSegments:1,curveSegments:48}),arch=new T.Mesh(archGeometry,light);arch.position.set(P.x,P.floor,P.z);arch.name='Escher house · sculpted arched stair entrance';group.add(arch);owned.push(archGeometry);
+ box(3.2,.12,.68,P.x,P.floor+P.height+.06,P.z+.24,light);
+ const innerRim=[];for(let i=0;i<=8;i++)innerRim.push(new T.Vector3(P.x-P.radius,P.floor+.06+(P.spring-.06)*i/8,P.z+P.depth+.045));for(let i=1;i<=48;i++){const a=Math.PI-i*Math.PI/48;innerRim.push(new T.Vector3(P.x+P.radius*Math.cos(a),P.floor+P.spring+P.radius*Math.sin(a),P.z+P.depth+.045));}for(let i=1;i<=8;i++)innerRim.push(new T.Vector3(P.x+P.radius,P.floor+P.spring-(P.spring-.06)*i/8,P.z+P.depth+.045));
+ const rimGeometry=new T.TubeGeometry(new T.CatmullRomCurve3(innerRim),96,.024,5,false);owned.push(rimGeometry);const rim=new T.Mesh(rimGeometry,brass);rim.name='Continuous bronze arch reveal';group.add(rim);
+ // A shallow fan-shaped approach meets the real floor without a raised step.
+ const apronShape=new T.Shape();apronShape.moveTo(-1.05,0);apronShape.lineTo(1.05,0);apronShape.lineTo(1.8,2.6);apronShape.quadraticCurveTo(0,3.25,-1.8,2.6);apronShape.closePath();const apronGeometry=new T.ShapeGeometry(apronShape,24);apronGeometry.rotateX(-Math.PI/2);const apron=new T.Mesh(apronGeometry,stone);apron.position.set(P.x,P.floor+.012,P.z+P.depth+.05);apron.rotation.y=Math.PI;apron.name='Escher stair · fan-shaped museum approach';group.add(apron);owned.push(apronGeometry);
+ for(const side of[-1,1]){box(.035,.018,2.5,P.x+side*.66,P.floor+.023,P.z+1.85,brass);const glowGeometry=new T.BoxGeometry(.055,1.35,.018),glowMaterial=new T.MeshBasicMaterial({color:0xffe6b0}),glow=new T.Mesh(glowGeometry,glowMaterial);glow.position.set(P.x+side*1.3,P.floor+1.55,P.z+P.depth+.045);group.add(glow);owned.push(glowGeometry,glowMaterial);}
  // Ground ceiling is genuinely notched above the shallow first flight.
  for(const r of outsideRectangle(s,D.cut))box(r.maxX-r.minX,.24,r.maxZ-r.minZ,(r.minX+r.maxX)/2,-.52,(r.minZ+r.maxZ)/2,slate);
  // A sloping covered mouth follows the first flight down through the lawn.

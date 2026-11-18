@@ -1,6 +1,6 @@
 /* Close only in-world notices, never experiments, readers or saved content. */
 (()=>{
- const ids=['paper-gallery-guide','transformation-house-guide','babel-library-context','world-cylinder-context','pond-world-window-context','escher-depth-context','artist-quarter-context','house-foundations-context','origami-house-context','study-house-context','learning-lab-tracker','city-discoveries-tracker','escher-perspective','connected-journey','question-walk-tracker','house-investigation-context','proof-atelier-context','seminar-context'];
+ const ids=['paper-gallery-guide','transformation-house-guide','babel-library-context','world-cylinder-context','pond-world-window-context','escher-depth-context','artist-quarter-context','house-foundations-context','origami-house-context','study-house-context','learning-lab-tracker','escher-perspective','connected-journey','question-walk-tracker','house-investigation-context','proof-atelier-context','seminar-context'];
  const selector=ids.map(id=>'#'+id).join(','),buttons=new WeakMap();
  const label=()=>({en:'Dismiss notification',de:'Hinweis schließen',fa:'بستن اعلان'}[window.CITY_I18N?.lang]||'Dismiss notification');
  function enhance(panel){

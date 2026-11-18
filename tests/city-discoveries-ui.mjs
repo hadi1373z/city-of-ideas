@@ -39,7 +39,7 @@ try{
  M.city.update(player,1,'city');assert(!M.city.targets.includes(api.boats.group),'Unreleased boats must not steal interactions invisibly');assert(!M.city.targets.includes(api.clue.group),'A sealed clue is not an interaction target');
  assert.equal(document.querySelector('#city-discoveries-welcome').parent,welcome,'Welcome entry must stay outside the collapsed places menu');
  api.open();assert(dialog.open);click(t.begin);assert(api.trial.state.active);
- dialog.close();M.showExtra({kind:'sixth-guest-clue'});assert(!dialog.open,'Cannot read a hidden clue from another place');
+ dialog.close();const savedTrial=api.trial.state;for(let i=0;i<20;i++)M.city.update(player,2+i,'city');assert.equal(document.querySelector('#city-discoveries-tracker'),null,'An active saved investigation must never create a floating continue notification');document.querySelector('#city-discoveries-open').onclick();click(t.resume);assert.deepEqual(api.trial.state,savedTrial,'Discoveries retains the same resumable investigation');dialog.close();M.showExtra({kind:'sixth-guest-clue'});assert(!dialog.open,'Cannot read a hidden clue from another place');
  Object.assign(player,{x:150,z:98});M.showExtra({kind:'sixth-guest-clue'});assert(!dialog.open,'Closed passage must keep its clue inaccessible');
  escher.passageOpen=true;M.showExtra({kind:'sixth-guest-clue'});click(t.readClue);assert(api.trial.state.clue);assert(memory.has('sixth-guest-sketch'));
  click(t.visitRamsey);assert.equal(destination,'graveyard-door');assert(player.x>-1000,'A guide must lead to the world door, not bypass it');

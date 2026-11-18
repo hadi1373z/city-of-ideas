@@ -2,7 +2,7 @@ import {COAST_LANDMARKS, COAST_EXPLORER_COPY, coastMapPoint, coastWalkSvg, coast
 
 import {seminarPathsSvg} from './seminar-houses-data.js?v=makers-passages-20261118';
 import {coastVisitor,COAST_POSITION_COPY,coastPositionText,coastDistance} from './coastal-position.js?v=makers-passages-20261118';
-import {mountMiddleLayerMap} from './middle-layer-map.js?v=escher-metal-20261118';
+import {mountMiddleLayerMap} from './middle-layer-map.js?v=quiet-entrance-20261118';
 
 // Native buttons keep map selection available to touch, keyboard and controllers.
 // The SVG remains an ordinary image, with the same geometry in every language.

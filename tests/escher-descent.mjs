@@ -2,6 +2,8 @@ import assert from 'node:assert/strict';import * as T from '../src/city-source-a
 import {DESCENT as D,DESCENT_PARTS as PARTS,descentSurface,walkDescent,cutDescentGround} from '../src/escher-descent-model.js';import {buildEscherDescent} from '../src/escher-descent.js';
 import {buildCityCoast} from '../src/coastal-city-scene.js';
 const built=buildEscherDescent(T);built.group.updateWorldMatrix(true,true);const ray=(x,y,z,d)=>new T.Raycaster(new T.Vector3(x,y,z),new T.Vector3(...d),0,50).intersectObject(built.group,true);
+for(const x of[224.45,225,225.55])for(const y of[-38.2,-37.9])assert.equal(new T.Raycaster(new T.Vector3(x,y,108.5),new T.Vector3(0,0,-1),0,1.8).intersectObject(built.group,true).length,0,'The new arched reveal leaves the actual doorway body-clear');
+assert(new T.Raycaster(new T.Vector3(225,-36.1,108.5),new T.Vector3(0,0,-1),0,1.8).intersectObject(built.group,true).length,'The entrance has a solid connected arch header');
 for(const p of PARTS.filter(p=>p.kind==='flight'))for(let i=0;i<40;i++)for(const offset of[-.55,0,.55]){
  const z=p.start+(p.end-p.start)*(i+.5)/40,y=p.top+(p.bottom-p.top)*(i+1)/40,x=p.x+offset,down=ray(x,y+1.8,z,[0,-1,0]),up=ray(x,y+1.8,z,[0,1,0]);assert(down.length);assert(Math.abs(down[0].point.y-y)<1e-4,'Every full-width tread is physical');assert(up.length&&up[0].point.y>=y+2.1,'Each tread has real headroom');assert(descentSurface(x,z,y));
 }
