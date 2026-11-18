@@ -1,7 +1,7 @@
 export const HOUSE={x:125,z:0,radius:23,well:10.3,stairInner:6.6,stairOuter:9.8,stairRadius:8.2,steps:448,turns:7,top:16,bottom:-40,doorZ:23*Math.sqrt(3)/2,stepAngle:Math.PI/32,landingHalfAngle:Math.PI/16,landingHalfWidth:1.75,landingRailZ:1.60,landingWalkHalfWidth:1.28,bridgeInner:9.76};
 export const HOUSE_LEVELS=[
  {y:16,name:'The Light-Well Observatory',hint:'The tiled crown gathers the patterns of the house above one open well. Follow the flat landing to look down through the rooms you passed.'},
- {y:8,name:'The Study of Symmetry',hint:'An inhabited study: books, a writing table and a ceiling that refuses to fit a repeating grid.'},
+ {y:8,name:'The Study of Symmetry',hint:'An inhabited study: books, a writing table and a continuous tiled ceiling. Compare the pattern of this room with the fields in the other five houses.'},
  {y:0,name:'The House of Transformations',hint:'The stair turns both ways. Up leads to the observatory; down leads through five underground rooms and toward the other face.'},
  {y:-8,name:'The Shadow Room',hint:'A brass circle on the floor marks one place to look. A convincing alignment breaks when you step sideways.'},
  {y:-16,name:'The Library with a Shallow Shelf',hint:'One bookcase has a brass handle. Perhaps it is concealing something more than books.'},
