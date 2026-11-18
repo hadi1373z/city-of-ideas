@@ -1,5 +1,5 @@
 import {gallerySide,heightAt,pointAt,TWO_FACE_GALLERY_CONTRACT} from './two-face-gallery-model.js?v=city-night-20261117';
-import {paperMonitorSlots} from './paper-monitors-model.js?v=city-night-20261117';
+import {paperMonitorSlots} from './paper-monitors-model.js?v=paper-detours-20261118';
 
 /** Builds only local +Y-up geometry. The caller owns the inverted lower frame. */
 export function buildTwoFaceGallery(T,{side='upper',lights=true,endTheta=null}={}){

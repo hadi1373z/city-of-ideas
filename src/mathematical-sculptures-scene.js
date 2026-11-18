@@ -1,4 +1,4 @@
-import {SCULPTURE_COURTS,tesseractGraph,enneperPatch,enneperPoint,mengerCells,likelihoodPatch,mobiusRibbon,mobiusAntPose,mobiusFootPoint,MOBIUS,MOBIUS_DISPLAY,mobiusSupportPoints,mobiusDisplayPoint,mobiusDisplayVector} from './mathematical-sculptures-model.js?v=gravity-ant-20261117';
+import {SCULPTURE_COURTS,tesseractGraph,enneperPatch,enneperPoint,mengerCells,likelihoodPatch,mobiusRibbon,mobiusAntPose,mobiusFootPoint,MOBIUS,MOBIUS_DISPLAY,mobiusSupportPoints,mobiusDisplayPoint,mobiusDisplayVector} from './mathematical-sculptures-model.js?v=paper-detours-20261118';
 
 export function buildMathematicalSculptures(T,{canvas=()=>document.createElement('canvas')}={}){
  const group=new T.Group();group.name='Five original mathematical sculpture courts';const owned=new Set(),own=x=>(owned.add(x),x),targets=[],records=new Map(),stamp=new T.Object3D();

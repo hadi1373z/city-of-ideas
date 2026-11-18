@@ -1,6 +1,6 @@
 import {MATH_FLOORS} from './city-source-assets/home-tools/math-city-data.js?v=city-night-20261117';
 import {MATH_FACULTY as F,facultyLibraryBays,facultyColliders,facultyCanStand,nativeMathShellNodes} from './math-faculty-model.js?v=makers-passages-20261118';
-import {PAPER_GALLERY_FLOORS} from './paper-gallery-model.js?v=city-night-20261117';
+import {PAPER_GALLERY_FLOORS} from './paper-gallery-model.js?v=paper-detours-20261118';
 export function buildMathFaculty(T,{canvas=()=>document.createElement('canvas')}={}){
  const group=new T.Group();group.name='Faculty of Mathematics · central rotunda and working west wing';group.userData.mathFaculty=true;
  const owned=new Set(),own=o=>(owned.add(o),o),mat=(color,more={})=>own(new T.MeshLambertMaterial({color,...more})),targets=[],batches=new Map();

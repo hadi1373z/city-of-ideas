@@ -1,6 +1,6 @@
 # Faculty first-page collection
 
-The 27 lower-gallery panels display a curated selection of mathematical and
+The 35 lower-gallery panels display a curated selection of mathematical and
 computational landmarks across four physical floors (6 / 8 / 6 / 7). The
 selection is not a claim to identify the greatest papers. It mixes original
 articles, historical editions and short monographs, and modern
@@ -53,3 +53,36 @@ in this set: the available scans did not offer as clear an archive-specific
 reuse statement as the selected ETH public-domain replacements. Public access
 to a modern paper, arXiv record, course PDF or modern translation is never by
 itself treated as reuse permission.
+
+## Eight modern mathematical detours - 18 November 2026
+
+The previous 27 records and full-page files remain unchanged. Eight additional
+publisher first pages expand the four physical floors to 8 / 10 / 8 / 9 pages.
+These are deliberate modern connections, not a claim to rank all historical
+mathematics and computer science.
+
+| Floor | New papers | Why this pair |
+| --- | --- | --- |
+| Foundations and logic | Bousquet & Elisseeff (2002), Stability and Generalization; Shalev-Shwartz et al. (2010), Learnability, Stability and Uniform Convergence | A sensitivity condition can support a theorem; a familiar proof route can also fail in a broader setting. |
+| Geometry, analysis and symmetry | Bubenik (2015), Persistence Landscapes; Chazal et al. (2015), Persistence Diagram Estimation | Move from a picture of holes to functional summaries and statistical estimation of shape. |
+| Machines and symbolic computation | Kalai & Vempala (2002), Universal Portfolios; Bach (2017), Kernel Quadrature and Random Features | Non-uniform sampling makes enormous mathematical objects computable; integration and kernel approximation share an operator viewpoint. |
+| Probability and learning | Shafer & Vovk (2008), Conformal Prediction; Peters et al. (2014), Additive Noise Models | Contrast a predictive coverage statement with a causal identifiability statement and their different assumptions. |
+
+Each has an original short hook, a description, prerequisites, an assumption
+boundary and a question. New physical captions display the hook, while the
+gated reader shows the full source, original page and qualifications. Floor
+reading guides show short descriptions without expanding every entry.
+
+Publisher records and PDFs are linked in historic-papers-surprises-data.js.
+JMLR author-info.html#publication grants CC BY while retaining author copyright.
+Bach explicitly prints CC BY 4.0 on the first page; other entries do not invent
+a licence version. All eight first pages were visually checked for title,
+authors, printed page and intact attribution. Their full PDF hashes and exact
+WebP hashes are recorded in assets/papers/surprises-provenance.json.
+Full facsimiles are 1600px high; separate 800px room images keep all35 page
+textures to 19,744,188 decoded pixels. Existing original images are unchanged.
+
+The assertions in paper-detours.mjs check category membership, unique physical
+slots, paired questions, concise commentary, source hashes and original-page
+credit. The existing gallery runtime walks to all35 displays in both directions,
+including the real west exit, under physical sculpture and frame collisions.

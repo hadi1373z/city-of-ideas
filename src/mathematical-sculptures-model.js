@@ -1,4 +1,5 @@
-import {PAPER_GALLERY_FLOORS} from './paper-gallery-model.js?v=city-night-20261117';
+import {SURPRISE_PAPERS} from './historic-papers-surprises-data.js?v=paper-detours-20261118';
+import {PAPER_GALLERY_FLOORS} from './paper-gallery-model.js?v=paper-detours-20261118';
 
 export const SCULPTURE_COURTS=Object.freeze([...PAPER_GALLERY_FLOORS.map((f,index)=>Object.freeze({id:['boolean','enneper','menger','likelihood'][index],floor:index,y:f.y,x:38*Math.cos(f.angle+.55),z:38*Math.sin(f.angle+.55),angle:f.angle+.55,radius:3.4,near:6,title:['Sixteen possibilities','A saddle without a preferred bend','A rule with four hundred survivors','The shape of evidence'][index]})),Object.freeze({id:'mobius',floor:1,y:PAPER_GALLERY_FLOORS[1].y,x:38*Math.cos(PAPER_GALLERY_FLOORS[1].angle-.55),z:38*Math.sin(PAPER_GALLERY_FLOORS[1].angle-.55),angle:PAPER_GALLERY_FLOORS[1].angle-.55,radius:3.4,near:6,title:'One surface, two laps'})]);
 export function sculptureCanStand(x,z,feet,{radius=.25}={}){return !SCULPTURE_COURTS.some(c=>Math.abs(feet-c.y)<.32&&Math.hypot(x-c.x,z-c.z)<c.radius+radius);}
@@ -39,6 +40,7 @@ export function mobiusRibbon({segments=128,widthSegments=16}={}){
 }
 
 export const PAPER_CURATION=Object.freeze({
+ ...Object.fromEntries(SURPRISE_PAPERS.map(p=>[p.id,{role:'Modern detour · '+p.chamber,prerequisite:p.prerequisite,why:p.why,question:p.question}])),
  boole:{role:'Core · symbolic structure',prerequisite:'Sets, intersection, union and binary variables.',why:'Read the algebra of classes as a proposal about what a symbol can mean. The title-page facsimile identifies the historical work; use its original-work link for the argument.',question:'Which laws survive when multiplication means intersection, and why does x² = x change the algebra?'},
  dedekind:{role:'Bridge · definitions that complete a system',prerequisite:'Ordered rational numbers and least upper bounds.',why:'Compare an algebra of finite choices with a definition that supplies missing real numbers. This is a monograph, represented by its genuine title page.',question:'How can a cut specify a number without assuming that a point on a drawn line already exists?'},
  euler:{role:'Entry · discard geometry, retain structure',prerequisite:'Finite graphs, vertices, edges and degree.',why:'The bridge problem gives a concrete reason to replace a picture with an invariant. Start here before comparing intrinsic and extrinsic geometry.',question:'Exactly which features of the original walk must a graph preserve, and which can it forget?'},

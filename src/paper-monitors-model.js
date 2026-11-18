@@ -1,5 +1,5 @@
 import {WORLD_CYLINDER as W} from './world-cylinder-model.js?v=city-night-20261117';
-import {paperGallerySlots} from './paper-gallery-model.js?v=city-night-20261117';
+import {paperGallerySlots} from './paper-gallery-model.js?v=paper-detours-20261118';
 export const PAPER_MONITORS=Object.freeze({radius:48,width:2.8,height:3.1,centreY:2.28,floorY:.13,near:4.2,feetTolerance:.30,zoom:[100,150,200]});
 export function paperMonitorSlots(){return paperGallerySlots();}
 export function validateMonitorPapers(papers,count=paperMonitorSlots().length){

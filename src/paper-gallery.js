@@ -1,5 +1,5 @@
-import {PAPER_GALLERY_FLOORS as FLOORS,paperGallerySlots,paperGallerySurface,paperGalleryGroundHandoff,walkPaperGallery} from './paper-gallery-model.js?v=city-night-20261117';
-import {buildPaperGallery} from './paper-gallery-scene.js?v=city-night-20261117';
+import {PAPER_GALLERY_FLOORS as FLOORS,paperGallerySlots,paperGallerySurface,paperGalleryGroundHandoff,walkPaperGallery} from './paper-gallery-model.js?v=paper-detours-20261118';
+import {buildPaperGallery} from './paper-gallery-scene.js?v=paper-detours-20261118';
 import {WORLD_CYLINDER as W,isLowerCoordinate,lowerLocal} from './world-cylinder-model.js?v=city-night-20261117';
 
 export function installPaperGallery(M,T){

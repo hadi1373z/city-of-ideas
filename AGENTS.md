@@ -293,3 +293,11 @@ Atelier at(215,-78). Map, planting and wall clipping use the shared site.
 The basement corridor walls have 0.28m outward masonry thickness to survive
 close-camera near clipping; keep joins open and hide distant surface-only house
 shells during underground walking. Never replace these walls with zero-depth planes.
+
+The paper gallery now contains35 distinct genuine first pages across8/10/8/9
+collections. Eight modern mathematical detours in historic-papers-surprises-data.js
+add brief hooks, assumptions and questions; preserve all previous27 records and
+full images unchanged. New 800px display derivatives have their own provenance.
+Keep explicit CC BY4.0 only where printed (Bach2017); other JMLR entries use the
+publisher policy without inventing a version. Preserve category/proximity gates,
+room caption hooks and the saved original scans. Read docs/PAPER-COLLECTION.md.

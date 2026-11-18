@@ -1,13 +1,13 @@
 // Lower-local +Y-up coordinates. The existing lower frame supplies the half-turn.
-import {HISTORIC_PAPERS} from './historic-papers-data.js?v=city-night-20261117';
+import {HISTORIC_PAPERS} from './historic-papers-data.js?v=paper-detours-20261118';
 const TAU=2*Math.PI;
 export const PAPER_GALLERY=Object.freeze({baseY:.13,innerRadius:19,outerRadius:58,monitorRadius:48,monitorSpacing:.18,stairInner:14.4,stairOuter:17.6,stairRadius:16,steps:96,endTheta:TAU,rise:12,feetTolerance:.29,navInset:.055});
-const readingOrder={foundations:['boole','frege-begriffsschrift','peano-arithmetic','dedekind','bolzano-continuity','hilbert-problems'],geometry:['euclid-elements','euler','euler-polyhedra','gauss-curvature','riemann','klein-erlangen','fourier','noether'],computation:['babbage','lovelace','liblinear','adagrad','sdca','kernel-ica'],learning:['bayes','lda','kernel-two-sample','feature-selection','random-forest-consistency','scikit-learn','dropout']};
+const readingOrder={foundations:['boole','frege-begriffsschrift','peano-arithmetic','dedekind','bolzano-continuity','hilbert-problems','stability-generalization','learnability-stability'],geometry:['euclid-elements','euler','euler-polyhedra','gauss-curvature','riemann','klein-erlangen','fourier','noether','persistence-landscapes','persistence-estimation'],computation:['babbage','lovelace','liblinear','adagrad','sdca','kernel-ica','universal-portfolios','kernel-quadrature'],learning:['bayes','lda','kernel-two-sample','feature-selection','random-forest-consistency','scikit-learn','dropout','conformal-prediction','causal-additive-noise']};
 export const PAPER_GALLERY_FLOORS=Object.freeze([
  {id:'foundations',name:'Foundations and logic',question:'What makes a definition support a proof?',paperIds:['boole','dedekind'],color:0x6e8d86},
- {id:'geometry',name:'Geometry, analysis and symmetry',question:'Which structure survives a change of representation?',paperIds:['euler','riemann','fourier','noether'],color:0x788ca2},
+ {id:'geometry',name:'Geometry, analysis and symmetry',question:'Which structure survives a change of representation?',paperIds:['euler','riemann','fourier','noether','persistence-landscapes','persistence-estimation'],color:0x788ca2},
  {id:'computation',name:'Machines and symbolic computation',question:'When does a calculation become a general method?',paperIds:['babbage','lovelace'],color:0xa78462},
- {id:'learning',name:'Probability and learning',question:'Which assumptions make an inference trustworthy?',paperIds:['bayes','scikit-learn','dropout'],color:0x91829c}
+ {id:'learning',name:'Probability and learning',question:'Which assumptions make an inference trustworthy?',paperIds:['bayes','scikit-learn','dropout','conformal-prediction','causal-additive-noise'],color:0x91829c}
 ].map((f,index)=>{const ids=[...f.paperIds,...HISTORIC_PAPERS.filter(p=>p.floorId===f.id&&!f.paperIds.includes(p.id)).map(p=>p.id)],rank=id=>{const i=readingOrder[f.id].indexOf(id);return i<0?Infinity:i;};return Object.freeze({...f,index,y:.13+4*index,theta:index*TAU/3,angle:-index*TAU/3,paperIds:Object.freeze(ids.sort((a,b)=>rank(a)-rank(b)))});}));
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 export const paperStairY=theta=>.13+Math.floor(clamp(theta,0,TAU)/TAU*96+1e-8)*.125;

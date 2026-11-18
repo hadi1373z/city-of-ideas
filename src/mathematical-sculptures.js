@@ -1,7 +1,7 @@
-import {SCULPTURE_COURTS,SCULPTURE_LESSONS,PAPER_CURATION,CURATED_FLOOR_PATHS,nearSculpture,sculptureCanStand,subsetName,likelihoodInformation,MOBIUS} from './mathematical-sculptures-model.js?v=gravity-ant-20261117';
-import {buildMathematicalSculptures} from './mathematical-sculptures-scene.js?v=gravity-ant-20261117';
-import {PAPER_GALLERY_FLOORS} from './paper-gallery-model.js?v=city-night-20261117';
-import {HISTORIC_PAPERS} from './historic-papers-data.js?v=city-night-20261117';
+import {SCULPTURE_COURTS,SCULPTURE_LESSONS,PAPER_CURATION,CURATED_FLOOR_PATHS,nearSculpture,sculptureCanStand,subsetName,likelihoodInformation,MOBIUS} from './mathematical-sculptures-model.js?v=paper-detours-20261118';
+import {buildMathematicalSculptures} from './mathematical-sculptures-scene.js?v=paper-detours-20261118';
+import {PAPER_GALLERY_FLOORS} from './paper-gallery-model.js?v=paper-detours-20261118';
+import {HISTORIC_PAPERS} from './historic-papers-data.js?v=paper-detours-20261118';
 import {WORLD_CYLINDER as W,isLowerCoordinate,lowerLocal} from './world-cylinder-model.js?v=city-night-20261117';
 
 export function installMathematicalSculptures(M,T){
@@ -13,7 +13,7 @@ export function installMathematicalSculptures(M,T){
  const near=()=>{if(M.mode!=='city'||!isLowerCoordinate(M.player))return null;const q=lowerLocal(M.player);return nearSculpture(q.x,q.z,M.player.y-M.eye);};
  function floorAt(){if(M.mode!=='city'||!isLowerCoordinate(M.player))return null;const q=lowerLocal(M.player);if(Math.hypot(q.x,q.z)<19||Math.hypot(q.x,q.z)>58)return null;return PAPER_GALLERY_FLOORS.find(f=>Math.abs(M.player.y-M.eye-f.y)<.3)?.index??null;}
  function facePaper(id){const p=paperById.get(id),slot=M.paperMonitors?.slots.find(s=>s.paperId===id);if(!p||!slot||floorAt()!==slot.floor)return false;M.clearMovement();M.pointToward?.({x:W.lowerOrigin.x+slot.x,z:W.lowerOrigin.z+slot.z});M.player.pitch=.08;dialog.close();return true;}
- function appendPath(parent,floor){const list=el('ol');for(const id of CURATED_FLOOR_PATHS[floor]){const p=paperById.get(id),c=PAPER_CURATION[id],row=el('li'),detail=el('details');detail.append(el('summary',p.author+' · '+p.year+' · '+c.role),el('p','Preparation: '+c.prerequisite),el('p',c.why),el('p','Read with this question: '+c.question),button('Face this original first page',()=>facePaper(id)));row.append(detail);list.append(row);}parent.append(list);}
+ function appendPath(parent,floor){const list=el('ol');for(const id of CURATED_FLOOR_PATHS[floor]){const p=paperById.get(id),c=PAPER_CURATION[id],row=el('li'),detail=el('details');detail.append(el('summary',p.title+' · '+p.year+' · '+c.role),el('p','Preparation: '+c.prerequisite),el('p',c.why),el('p','Read with this question: '+c.question),button('Face this original first page',()=>facePaper(id)));row.append(el('p',p.hook||c.why),detail);list.append(row);}parent.append(list);}
  function renderReading(){const floor=floorAt();reading.hidden=floor===null;if(floor===lastFloor)return;lastFloor=floor;reading.replaceChildren();if(floor===null)return;reading.append(el('h3','A deliberate reading path'),el('p','A selective core → bridge → extension trail, rather than a ranking of the greatest papers. Each monitor retains its genuine first page and original-work links.'));appendPath(reading,floor);}
  function act(id,next){if(near()?.id!==id)return false;Object.assign(state[id],next);built.update(id,state[id]);dialog.close();return true;}
  function render(){const lesson=SCULPTURE_LESSONS[selected.id];dialog.replaceChildren();const header=el('header');header.append(el('h2',lesson.title),button('Return to the sculpture',()=>dialog.close()));dialog.append(header,el('p',lesson.equation));const text=el('div');text.className='sculpture-explanation';for(const paragraph of lesson.explanation.split('\n\n'))text.append(el('p',paragraph));dialog.append(text);const controls=el('div');controls.className='sculpture-actions';

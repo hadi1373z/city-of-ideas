@@ -2,6 +2,7 @@
 // first pages from the credited historical editions or publisher PDFs.
 import {MODERN_PAPERS} from './historic-papers-modern-data.js?v=city-night-20261117';
 import {CLASSICAL_PAPERS} from './historic-papers-classical-data.js?v=city-night-20261117';
+import {SURPRISE_PAPERS} from './historic-papers-surprises-data.js?v=paper-detours-20261118';
 const pdm = 'https://creativecommons.org/publicdomain/mark/1.0/';
 const image = id => `./assets/papers/${id}.webp`;
 const paper = data => Object.freeze({ imageUrl: image(data.id), displayImageUrl: `./assets/papers/${data.id}.display.webp`, ...data });
@@ -135,5 +136,6 @@ export const HISTORIC_PAPERS = Object.freeze([
     scanNote: 'Actual publisher first page, including abstract and original copyright attribution.'
   }),
   ...CLASSICAL_PAPERS.map(paper),
-  ...MODERN_PAPERS.map(paper)
+  ...MODERN_PAPERS.map(paper),
+  ...SURPRISE_PAPERS.map(paper)
 ]);

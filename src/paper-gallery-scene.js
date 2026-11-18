@@ -1,4 +1,4 @@
-import {PAPER_GALLERY as C,PAPER_GALLERY_FLOORS as FLOORS,paperStairY} from './paper-gallery-model.js?v=city-night-20261117';
+import {PAPER_GALLERY as C,PAPER_GALLERY_FLOORS as FLOORS,paperStairY} from './paper-gallery-model.js?v=paper-detours-20261118';
 
 export function buildPaperGallery(T,{canvas=()=>document.createElement('canvas')}={}){
  const group=new T.Group(),walking=new T.Group(),lamps=new T.Group(),owned=new Set(),own=x=>(owned.add(x),x);group.name='Four connected collections · original mathematics and computing papers';walking.name='Three mezzanines and the upward continuation of the central stair';group.add(walking,lamps);
