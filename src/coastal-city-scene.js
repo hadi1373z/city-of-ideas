@@ -1,4 +1,4 @@
-import {cutHouseWell} from './transformation-house-model.js?v=city-night-20261117';
+import {cutHouseWell,configuredHouseWells} from './transformation-house-model.js?v=city-night-20261117';
 import {createOceanMaterial,updateOceanMaterial} from './ocean-surface.js?v=city-learning-20261118';
 import {FOUNDATION_HOUSES,FOUNDATION_ROUTES} from './foundation-houses-data.js?v=city-learning-20261118';
 import {COAST_ROUTES,HOUSE_ORIGAMI} from './origami-house-math.js?v=city-learning-20261118';
@@ -15,7 +15,7 @@ export function buildCityCoast(T,{cityPaths=[],heightAt=()=>0,naturalTrees=globa
  }
  const grass=own(new T.MeshLambertMaterial({vertexColors:true})),base=new T.Color(0x84916d);
  const land=polarBand(58,I.lawnRadius,64,192,()=>.005,grass,'Continuous circular lawn centred on the gallery',(x,z)=>{const n=.035*Math.sin(x*.018+Math.sin(z*.011))+.018*Math.cos(z*.043-x*.021),c=base.clone().offsetHSL(0,0,n);return[c.r,c.g,c.b];});
- if(globalThis.window?.CITY_CONFIG?.houseWell){const original=land.geometry;land.geometry=own(cutHouseWell(T,original));}
+ const wells=configuredHouseWells(globalThis.window?.CITY_CONFIG);if(wells.length){const original=land.geometry;land.geometry=own(cutHouseWell(T,original,wells));}
  const beach=polarBand(I.lawnRadius,I.radius,5,256,(_,u)=>.005-.05*u,sand,'Unbroken beach around the entire island');
  const water=own(createOceanMaterial(T)),uniforms=water.uniforms;
  const sea=polarBand(I.radius,3600,100,256,()=>-.015,water,'Ocean surrounding all 360 degrees of the island');sea.frustumCulled=false;
