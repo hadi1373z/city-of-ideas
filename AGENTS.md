@@ -301,3 +301,7 @@ full images unchanged. New 800px display derivatives have their own provenance.
 Keep explicit CC BY4.0 only where printed (Bach2017); other JMLR entries use the
 publisher policy without inventing a version. Preserve category/proximity gates,
 room caption hooks and the saved original scans. Read docs/PAPER-COLLECTION.md.
+
+## City guestbook
+
+The public visitor-comment service lives separately in workspace services/city-guestbook, Sites project appgprj_6afe0785a2d08191949699269510429c. Preserve its own D1 table and owner-only inbox; never connect it to the private House database. The city opens its form through city-guestbook.js. See docs/CITY-GUESTBOOK.md. No raw network addresses or public comment listing; secrets stay in runtime configuration.
