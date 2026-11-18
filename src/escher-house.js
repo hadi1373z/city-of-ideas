@@ -1,3 +1,4 @@
+import {buildEscherEntranceArchitecture} from './escher-entrance-architecture.js?v=entrance-20261118';
 import {PRINT_STUDIES} from './escher-print-studies.js?v=1';
 import {installPerspectiveActivity} from './escher-perspective.js?v=house-link1';
 export const ESCHER_WORKS=[
@@ -7,18 +8,15 @@ export const ESCHER_WORKS=[
  {id:'waterfall',title:'Waterfall',year:1961,file:'waterfall.webp',ratio:500/604,imageSource:'https://mcescher.com/wp-content/uploads/2019/05/LW-439.webp',question:{en:'Follow the water from the wheel. Which nearby edges invite you to misread their distance?',de:'Folge dem Wasser vom Rad aus. Welche benachbarten Kanten täuschen dich über ihre Entfernung?',fa:'آب را از چرخ دنبال کن. کدام لبه‌های کنار هم باعث می‌شوند فاصله‌شان را اشتباه ببینی؟'}}
 ];
 const pick=(v,lang)=>v[lang]||v.en;
-const houseName={en:'Escher · House & Museum',de:'M. C. Escher · Haus der Perspektive',fa:'ام. سی. اشر · خانهٔ پرسپکتیو'};
+const houseName={en:'Escher · House & Underground Museum',de:'M. C. Escher · Haus der Perspektive',fa:'ام. سی. اشر · خانهٔ پرسپکتیو'};
 export function buildEscherHouse(T,{x=151.75,z=108,loadTexture=url=>new T.TextureLoader().load(url),canvas=()=>document.createElement('canvas')}={}){
  const group=new T.Group();group.name='Escher house · museum entrance pavilion';group.position.set(x,.13,z);group.userData.cityDestination='artist:escher';const targets=[],colliders=[],owned=[],labels=[],paintings=[];
- const stone=new T.MeshLambertMaterial({color:0xc1c1af}),dark=new T.MeshLambertMaterial({color:0x39433f}),paper=new T.MeshLambertMaterial({color:0xe8e4d6});owned.push(stone,dark,paper);
+ const stone=new T.MeshLambertMaterial({color:0xc1c1af}),dark=new T.MeshLambertMaterial({color:0x39433f});owned.push(stone,dark);
  function box(w,h,d,px,y,pz,mat=stone){const geo=new T.BoxGeometry(w,h,d),mesh=new T.Mesh(geo,mat);mesh.position.set(px,y,pz);group.add(mesh);owned.push(geo);return mesh;}
- box(8,.16,14,0,-.07,0);for(const side of[-1,1]){box(.22,4.7,14,side*4,2.35,0);colliders.push({minX:x+side*4-.25,maxX:x+side*4+.25,minZ:z-7,maxZ:z+7});box(2.5,4.7,.22,side*2.75,2.35,7);colliders.push({minX:x+side*2.75-1.3,maxX:x+side*2.75+1.3,minZ:z+6.75,maxZ:z+7.25});}for(const side of[-1,1]){box(2.6,4.7,.22,side*2.7,2.35,-7);colliders.push({minX:x+side*2.7-1.3,maxX:x+side*2.7+1.3,minZ:z-7.25,maxZ:z-6.75});}box(2.8,1.1,.22,0,4.15,-7);box(8,.28,.3,0,4.7,7,dark);box(8,.16,2.8,0,4.82,-5.65,dark);
- // An open entrance pavilion frames the original viewpoint rather than filling it.
+ box(8,.16,14,0,-.07,0);for(const side of[-1,1]){box(.22,4.7,14,side*4,2.35,0);colliders.push({minX:x+side*4-.25,maxX:x+side*4+.25,minZ:z-7,maxZ:z+7});box(2.5,4.7,.22,side*2.75,2.35,7);colliders.push({minX:x+side*2.75-1.3,maxX:x+side*2.75+1.3,minZ:z+6.75,maxZ:z+7.25});}for(const side of[-1,1]){box(2.6,4.7,.22,side*2.7,2.35,-7);colliders.push({minX:x+side*2.7-1.3,maxX:x+side*2.7+1.3,minZ:z-7.25,maxZ:z-6.75});}box(2.8,1.1,.22,0,4.15,-7);box(8,.28,.3,0,4.7,7,dark);
+ // A sealed mathematical vault replaces the version-one open beam roof.
  const brass=new T.MeshLambertMaterial({color:0xb79a60});owned.push(brass);
- for(const side of[-1,1]){box(.12,4.9,14,side*4.14,2.45,0,dark);box(.18,.18,14,side*3.75,4.78,0,brass);}
- for(const pz of[-4,0,4])box(8.5,.18,.26,0,4.94,pz,dark);
- box(8.7,.14,2.2,0,4.98,7.3,dark);box(8.7,.05,.12,0,4.88,8.35,brass);
- for(let row=0;row<7;row++)for(let col=0;col<4;col++)if((row+col)%2===0)box(1.9,.008,1.9,-2.85+col*1.9,.016,-5.7+row*1.9,paper);
+ const architecture=buildEscherEntranceArchitecture(T);group.add(architecture.group);
  // A small hidden reading alcove fits beyond the eastern edge of the older artist lots.
  box(3.2,.16,6,0,-.07,-10);box(3.5,.16,6.2,0,4.82,-10,dark);
  for(const side of[-1,1]){box(.18,4.7,6,side*1.6,2.35,-10);colliders.push({minX:x+side*1.6-.2,maxX:x+side*1.6+.2,minZ:z-13,maxZ:z-7});}box(3.4,4.7,.22,0,2.35,-13);colliders.push({minX:x-1.8,maxX:x+1.8,minZ:z-13.2,maxZ:z-12.8});
@@ -27,13 +25,13 @@ export function buildEscherHouse(T,{x=151.75,z=108,loadTexture=url=>new T.Textur
  // Two fine inlays carry the house's axis into the revealed museum threshold.
  for(const side of[-1,1])box(.045,.012,5.5,side*1.18,.025,-9.9,brass);
  const routeCanvas=canvas();routeCanvas.width=1024;routeCanvas.height=512;const rc=routeCanvas.getContext('2d');rc.fillStyle='#e8e4d6';rc.fillRect(0,0,1024,512);rc.fillStyle='#27372f';rc.textAlign='center';rc.font='bold 52px Georgia';rc.fillText('THE HOUSE CONTINUES BELOW',512,100,940);rc.font='32px Georgia';for(const [i,line]of['Perspective · separated depths','Pattern · edges that agree','Closed loops · local and global','Cross the framed threshold to the museum'].entries())rc.fillText(line,512,200+i*72,940);
- const routeTexture=new T.CanvasTexture(routeCanvas),routeMat=new T.MeshBasicMaterial({map:routeTexture,toneMapped:false}),routeGeo=new T.PlaneGeometry(3.6,1.8),routePanel=new T.Mesh(routeGeo,routeMat);routeTexture.colorSpace=T.SRGBColorSpace;routePanel.position.set(1.49,2.35,-10);routePanel.rotation.y=-Math.PI/2;group.add(routePanel);owned.push(routeTexture,routeMat,routeGeo);
+ const routeTexture=new T.CanvasTexture(routeCanvas),routeMat=new T.MeshBasicMaterial({map:routeTexture,toneMapped:false}),routeGeo=new T.PlaneGeometry(3.6,1.8),routePanel=new T.Mesh(routeGeo,routeMat);routeTexture.colorSpace=T.SRGBColorSpace;routePanel.position.set(3.86,2.35,-3.7);routePanel.name='Escher · visible museum route';routePanel.rotation.y=-Math.PI/2;group.add(routePanel);owned.push(routeTexture,routeMat,routeGeo);
  function setPassage(open,progress=1){passageOpen=!!open;passageProgress=progress;for(const {side,shutter}of shutters){shutter.position.x=side*(.7+Math.max(0,Math.min(1,progress))*1.5);shutter.visible=progress<1;}const i=targets.indexOf(revealedPainting);if(passageOpen&&i<0)targets.push(revealedPainting);else if(!passageOpen&&i>=0)targets.splice(i,1);}
  for(let i=0;i<3;i++){const work=ESCHER_WORKS[i],side=i<2?-1:1,pz=i%2?-3.5:2.5,w=2.8*work.ratio,h=2.8,frame=new T.Group();frame.position.set(side*3.85,2.45,pz);frame.rotation.y=side<0?Math.PI/2:-Math.PI/2;group.add(frame);const backing=new T.Mesh(new T.BoxGeometry(w+.24,h+.24,.10),dark);frame.add(backing);owned.push(backing.geometry);const texture=loadTexture(new URL('./assets/escher/'+work.file,import.meta.url).href);texture.colorSpace=T.SRGBColorSpace;texture.anisotropy=4;const mat=new T.MeshBasicMaterial({map:texture,toneMapped:false}),geo=new T.PlaneGeometry(w,h),picture=new T.Mesh(geo,mat);picture.position.z=.065;picture.userData={escherWork:work.id};frame.add(picture);targets.push(picture);owned.push(texture,mat,geo);paintings.push(picture);}
  paintings.push(revealedPainting);
  const c=canvas();c.width=1024;c.height=192;const texture=new T.CanvasTexture(c);texture.colorSpace=T.SRGBColorSpace;const mat=new T.MeshBasicMaterial({map:texture,toneMapped:false}),geo=new T.PlaneGeometry(7.4,1.15),sign=new T.Mesh(geo,mat);sign.position.set(0,3.95,7.15);group.add(sign);owned.push(texture,mat,geo);sign.userData={escherWork:'relativity'};targets.push(sign);labels.push({c,texture});
  function setLanguage(lang){for(const {c,texture}of labels){const ctx=c.getContext('2d');ctx.fillStyle='#d9d7c9';ctx.fillRect(0,0,1024,192);ctx.fillStyle='#27372f';ctx.font='bold 42px Georgia';ctx.textAlign='center';ctx.direction=lang==='fa'?'rtl':'ltr';ctx.fillText(pick(houseName,lang),512,104,960);texture.needsUpdate=true;}}
- setLanguage('en');return{group,targets,colliders,paintings,entry:{x,z:z+8.4,y:.13,yaw:0},inside:(px,pz)=>Math.abs(px-x)<3.8&&Math.abs(pz-z)<6.9||Math.abs(px-x)<1.5&&pz>z-12.8&&pz<z-6.9,setPassage,get passageOpen(){return passageOpen;},revealedPainting,gateBlocks:(px,pz)=>(!passageOpen||passageProgress<.95)&&Math.abs(px-x)<1.65&&Math.abs(pz-z+7)<.35,setLanguage,dispose(){group.removeFromParent();for(const r of owned)r.dispose();group.clear();}};
+ setLanguage('en');return{group,architecture,routePanel,targets,colliders,paintings,entry:{x,z:z+8.4,y:.13,yaw:0},inside:(px,pz)=>Math.abs(px-x)<3.8&&Math.abs(pz-z)<6.9||Math.abs(px-x)<1.5&&pz>z-12.8&&pz<z-6.9,setPassage,get passageOpen(){return passageOpen;},revealedPainting,gateBlocks:(px,pz)=>(!passageOpen||passageProgress<.95)&&Math.abs(px-x)<1.65&&Math.abs(pz-z+7)<.35,setLanguage,dispose(){architecture.dispose();group.removeFromParent();for(const r of owned)r.dispose();group.clear();}};
 }
 export function installEscherHouse(M,T){
  const model=buildEscherHouse(T,window.ARTIST_QUARTER_PLAN?.escher||{});M.scene.add(model.group);M.city.targets.push(...model.targets);M.city.buildingTargets.push(model.group);const oldRegion=M.city.region,oldCan=M.city.canStand,oldStart=M.startExtra,oldTarget=M.city.targetInfo,oldShow=M.showExtra,lang=()=>CITY_I18N.lang;
