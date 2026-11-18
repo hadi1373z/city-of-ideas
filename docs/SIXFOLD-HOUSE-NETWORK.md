@@ -104,7 +104,9 @@ east house. New helpers include:
 - `currentHouseId`, `roomAtPlayer()`, `sourcePlayer(id)` and `nearInteraction()`
   for physical content gates, and `stateFor(id)` for temporary public state.
 - `registerRoomReader(id, fn)` to add source-bound teaching content inside the
-  shared reader. The callback receives `{house,room,source,dialog,el,button,api}`.
+  shared reader. Multiple subscriptions run in registration order; each returns
+  its own release function. The callback receives
+  `{house,room,source,dialog,el,button,api}`.
 - `registerRoomObstacle(id,{x,z,y,radius})`, or `{x,z,y,w,d}`, for real furniture
   added by a collection. Coordinates are source-local (including source X125).
   It returns a release function for scoped cleanup. For example, the migrated
