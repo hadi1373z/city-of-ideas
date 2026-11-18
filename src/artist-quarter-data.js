@@ -1,4 +1,4 @@
-import './artist-quarter-layout.js?v=sixfold-city-20261118d';
+import './artist-quarter-layout.js?v=glass-continuous-20261118';
 const PLAN=globalThis.ARTIST_QUARTER_PLAN;
 // Fictional studios, with public-domain paintings from the Met's Open Access collection.
 export const QUARTER_ARTISTS=[

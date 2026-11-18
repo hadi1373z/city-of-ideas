@@ -1,4 +1,4 @@
-import {HEX_DISTRICTS} from './city-hex-layout.js?v=sixfold-city-20261118d';
+import {HEX_DISTRICTS} from './city-hex-layout.js?v=glass-continuous-20261118';
 const court=HEX_DISTRICTS.philosophers;
 // Original bilingual study guides. Architecture is an imaginative interpretation.
 export const PHILOSOPHERS = [

@@ -1,5 +1,5 @@
-import {SIXFOLD_HOUSES,houseToWorld} from './sixfold-house-network-model.js?v=sixfold-city-20261118d';
-import {sixfoldPassagePlan} from './sixfold-house-passages-scene.js?v=sixfold-city-20261118d';
+import {SIXFOLD_HOUSES,houseToWorld} from './sixfold-house-network-model.js?v=glass-continuous-20261118';
+import {sixfoldPassagePlan} from './sixfold-house-passages-scene.js?v=glass-continuous-20261118';
 import {ESCHER_DEPTH as D} from './escher-depth-model.js';
 
 const EPS=1e-7,STRATA=[[0,-8,0],[-8,-22,1],[-22,-31,2],[-31,-44,0],[-44,-52,1],[-52,-65,2],[-65,-79,0],[-79,-88,1],[-88,-96,2]],cross=(a,b)=>a[0]*b[1]-a[1]*b[0];

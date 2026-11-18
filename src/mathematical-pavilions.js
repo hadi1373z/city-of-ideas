@@ -1,4 +1,4 @@
-import {installTransferredPavilions} from './transformation-house-collections.js?v=sixfold-city-20261118d';
+import {installTransferredPavilions} from './transformation-house-collections.js?v=glass-continuous-20261118';
 import {PAVILIONS,penroseTriangles,cropHex,hexagon,roofHeight,pavilionTurn,pavilionWorld,pavilionLocal,pavilionCanStand} from './mathematical-pavilions-model.js';
 import {showRoomDialog} from './room-workbench.js?v=touch1';
 export function installMathematicalPavilions(M,T){

@@ -1,6 +1,6 @@
-import {IDEAS_PARK_SITE} from './city-hex-layout.js?v=sixfold-city-20261118d';
-import {SEMINAR_HOUSES} from './seminar-houses-data.js?v=sixfold-city-20261118d';
-import {SHORE,HEX_COAST_WALK,COAST_PROMENADE_WALK} from './island-layout.js?v=sixfold-city-20261118d';
+import {IDEAS_PARK_SITE} from './city-hex-layout.js?v=glass-continuous-20261118';
+import {SEMINAR_HOUSES} from './seminar-houses-data.js?v=glass-continuous-20261118';
+import {SHORE,HEX_COAST_WALK,COAST_PROMENADE_WALK} from './island-layout.js?v=glass-continuous-20261118';
 
 // The same world-to-SVG projection used by the original coastal plan.
 export const coastMapPoint = (x, z) => [460 + x * .7, 460 + z * .7];

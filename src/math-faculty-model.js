@@ -8,7 +8,7 @@ export function facultyLibraryBays(){return Array.from({length:8},(_,floor)=>{co
 export function facultyColliders(){
  const out=[];for(const sign of[-1,1])out.push({kind:'open entrance door',shape:'obb',x:-80+sign*1.99,z:9.48,angle:0,halfTangent:.86,halfRadius:.065,minY:.13,maxY:2.69});for(const b of facultyLibraryBays())out.push({kind:'library bay',shape:'obb',x:b.x,z:b.z,angle:b.angle,halfTangent:b.width/2,halfRadius:b.depth/2,minY:.13,maxY:3.73});
  // The ring retains a genuinely open western doorway, matching the gallery.
- out.push({kind:'rotunda wall',shape:'ring',inner:59.8,outer:60.7,gapZ:4.5,minY:.13,maxY:16.4});
+ out.push({kind:'rotunda wall',shape:'ring',inner:59.8,outer:60.7,gapZ:4.5,gapTop:4.13,minY:.13,maxY:16.4});
  for(const x of[-83.8,-76.2])for(const z of[14,20])out.push({kind:'wing portico post',shape:'circle',x,z,radius:.36,minY:.13,maxY:3.9});
  for(const x of[-67.7,-60.3])for(const z of[11,22])out.push({kind:'connector post',shape:'circle',x,z,radius:.32,minY:.13,maxY:4.2});
  return out;
@@ -16,7 +16,7 @@ export function facultyColliders(){
 export function facultyCanStand(x,z,feetY=.13,{radius=.28,colliders=facultyColliders()}={}){
  if(![x,z,feetY,radius].every(Number.isFinite))return false;
  return !colliders.some(b=>{if(feetY+1.8<b.minY||feetY>b.maxY+.1)return false;
-  if(b.shape==='ring'){const r=Math.hypot(x,z);return r>b.inner-radius&&r<b.outer+radius&&!(x<0&&Math.abs(z)<b.gapZ-radius);}
+  if(b.shape==='ring'){const r=Math.hypot(x,z);return r>b.inner-radius&&r<b.outer+radius&&!(x<0&&feetY<b.gapTop-.1&&Math.abs(z)<b.gapZ-radius);}
   if(b.shape==='circle')return Math.hypot(x-b.x,z-b.z)<b.radius+radius;
   const dx=x-b.x,dz=z-b.z,t=-Math.sin(b.angle)*dx+Math.cos(b.angle)*dz,r=Math.cos(b.angle)*dx+Math.sin(b.angle)*dz;return Math.abs(t)<b.halfTangent+radius&&Math.abs(r)<b.halfRadius+radius;
  });

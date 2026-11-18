@@ -1,6 +1,6 @@
-import {createParkGrassMaterial,COURT_GRASS_HEX,isCoastalLawnCell,courtGrassIndex} from './city-lawn-palette.js?v=sixfold-city-20261118d';
-import {URBAN_COURTS,HONEYCOMB_CITY,urbanPlanting,urbanRoutes,segmentDistance,urbanLawnCells} from './city-urban-plan-model.js?v=sixfold-city-20261118d';
-import {INHABITED_BLOCKS} from './city-hex-layout.js?v=sixfold-city-20261118d';
+import {createParkGrassMaterial,COURT_GRASS_HEX,isCoastalLawnCell,courtGrassIndex} from './city-lawn-palette.js?v=glass-continuous-20261118';
+import {URBAN_COURTS,HONEYCOMB_CITY,urbanPlanting,urbanRoutes,segmentDistance,urbanLawnCells} from './city-urban-plan-model.js?v=glass-continuous-20261118';
+import {INHABITED_BLOCKS} from './city-hex-layout.js?v=glass-continuous-20261118';
 export function buildCityUrbanPlan(T,{naturalTrees=globalThis.window?.buildNaturalCityTrees,parkGrass=null}={}){
  const group=new T.Group();group.name='Honeycomb city · gated mathematical courts and connected learning houses';const owned=new Set(),own=x=>(owned.add(x),x),box=own(new T.BoxGeometry(1,1,1)),stamp=new T.Object3D(),batches=new Map(),colliders=[],treePositions=urbanPlanting().filter(p=>HONEYCOMB_CITY.walls.every(w=>segmentDistance(p.x,p.z,w.a,w.b)>1.7)),routes=urbanRoutes();
  const mats={paving:own(new T.MeshLambertMaterial({color:0xc5baa1})),edge:own(new T.MeshLambertMaterial({color:0xaaa58d})),wood:own(new T.MeshLambertMaterial({color:0x795d45})),leaf:own(new T.MeshLambertMaterial({color:0x667d5d}))};

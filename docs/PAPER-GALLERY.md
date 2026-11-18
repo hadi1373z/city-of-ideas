@@ -60,3 +60,8 @@ and Dropout are identified as modern extensions. The new sculpture controls
 change the physical objects without touching notes or the original facsimiles.
 See [MATHEMATICAL-SCULPTURES.md](MATHEMATICAL-SCULPTURES.md) for the equations,
 artist inspiration, primary references, collision bounds and interpretation.
+
+Facade correction: glass extends continuously from each floor to the next,
+ending at the real 16.4m eaves. The west opening exists only below the 4.13m
+first mezzanine; upper floors have a complete glazed circumference and matching
+wall collision. Keep this distinction instead of a full-height unglazed slit.

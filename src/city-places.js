@@ -1,5 +1,5 @@
-import {CITY_PLACES,GRAPH_EDGES,graphAnalysis,birthdayProbability,gridRoute,reflection,rosette,nearCityPlace} from './city-places-model.js?v=sixfold-city-20261118d';
-import {buildCityPlaces} from './city-places-scene.js?v=sixfold-city-20261118d';
+import {CITY_PLACES,GRAPH_EDGES,graphAnalysis,birthdayProbability,gridRoute,reflection,rosette,nearCityPlace} from './city-places-model.js?v=glass-continuous-20261118';
+import {buildCityPlaces} from './city-places-scene.js?v=glass-continuous-20261118';
 
 // One shared, proximity-gated reader. Every state change is manual; the only
 // persistence call is the visitor's explicit “Carry this question” action.

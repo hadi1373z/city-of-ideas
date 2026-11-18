@@ -1,5 +1,5 @@
 import {MATH_FLOORS} from './city-source-assets/home-tools/math-city-data.js?v=city-night-20261117';
-import {MATH_FACULTY as F,facultyLibraryBays,facultyColliders,facultyCanStand,nativeMathShellNodes} from './math-faculty-model.js?v=city-night-20261117';
+import {MATH_FACULTY as F,facultyLibraryBays,facultyColliders,facultyCanStand,nativeMathShellNodes} from './math-faculty-model.js?v=glass-continuous-20261118';
 import {PAPER_GALLERY_FLOORS} from './paper-gallery-model.js?v=city-night-20261117';
 export function buildMathFaculty(T,{canvas=()=>document.createElement('canvas')}={}){
  const group=new T.Group();group.name='Faculty of Mathematics · central rotunda and working west wing';group.userData.mathFaculty=true;
@@ -24,10 +24,13 @@ export function buildMathFaculty(T,{canvas=()=>document.createElement('canvas')}
  const facadeRadius=60.25,westHalfAngle=Math.asin(4.5/facadeRadius),paneVertices=[],paneNormals=[],paneEdges=[],facadePanes=[];
  const point=(a,y,r=facadeRadius)=>[r*Math.cos(a),y,r*Math.sin(a)],vertex=(a,y)=>{paneVertices.push(...point(a,y));paneNormals.push(Math.cos(a),0,Math.sin(a));};
  for(const floor of PAPER_GALLERY_FLOORS)for(let i=0;i<count;i++){
-  const begin=i*da,end=(i+1)*da,spans=[];if(begin<Math.PI-westHalfAngle)spans.push([begin,Math.min(end,Math.PI-westHalfAngle)]);if(end>Math.PI+westHalfAngle)spans.push([Math.max(begin,Math.PI+westHalfAngle),end]);
-  for(const[a,b]of spans){if(b-a<1e-8)continue;const lo=floor.y+.455,hi=floor.y+3.585;facadePanes.push({floor:floor.index,a,b,lo,hi,radius:facadeRadius});for(let j=0;j<6;j++){const u=a+(b-a)*j/6,v=a+(b-a)*(j+1)/6;for(const[t,y]of[[u,lo],[u,hi],[v,hi],[u,lo],[v,hi],[v,lo]])vertex(t,y);for(const y of[lo,hi])paneEdges.push(...point(u,y,facadeRadius+.012),...point(v,y,facadeRadius+.012));}for(const t of[a,b])paneEdges.push(...point(t,lo,facadeRadius+.012),...point(t,hi,facadeRadius+.012));}
+  const begin=i*da,end=(i+1)*da,spans=[];
+  // The west entrance is only a ground-floor doorway, never a full-height slit.
+  if(floor.index>0)spans.push([begin,end]);
+  else{if(begin<Math.PI-westHalfAngle)spans.push([begin,Math.min(end,Math.PI-westHalfAngle)]);if(end>Math.PI+westHalfAngle)spans.push([Math.max(begin,Math.PI+westHalfAngle),end]);}
+  for(const[a,b]of spans){if(b-a<1e-8)continue;const lo=floor.y,hi=PAPER_GALLERY_FLOORS[floor.index+1]?.y??F.roofOuterY;facadePanes.push({floor:floor.index,a,b,lo,hi,radius:facadeRadius});for(let j=0;j<6;j++){const u=a+(b-a)*j/6,v=a+(b-a)*(j+1)/6;for(const[t,y]of[[u,lo],[u,hi],[v,hi],[u,lo],[v,hi],[v,lo]])vertex(t,y);for(const y of[lo,hi])paneEdges.push(...point(u,y,facadeRadius+.012),...point(v,y,facadeRadius+.012));}for(const t of[a,b])paneEdges.push(...point(t,lo,facadeRadius+.012),...point(t,hi,facadeRadius+.012));}
  }
- const facadeMaterial=own(new T.MeshPhongMaterial({color:0xb1d1d4,specular:0xe1f3f5,shininess:100,transparent:true,opacity:.30,depthWrite:false,side:T.DoubleSide,forceSinglePass:true})),facadeGeometry=new T.BufferGeometry();facadeGeometry.setAttribute('position',new T.Float32BufferAttribute(paneVertices,3));facadeGeometry.setAttribute('normal',new T.Float32BufferAttribute(paneNormals,3));facadeGeometry.computeBoundingSphere();const facadeGlazing=add(facadeGeometry,facadeMaterial,'Four-storey curved glass facade · open west doorway');facadeGlazing.userData.facultyFacadeGlazing=true;
+ const facadeMaterial=own(new T.MeshPhongMaterial({color:0xb1d1d4,specular:0xe1f3f5,shininess:100,transparent:true,opacity:.38,depthWrite:false,side:T.DoubleSide,forceSinglePass:true})),facadeGeometry=new T.BufferGeometry();facadeGeometry.setAttribute('position',new T.Float32BufferAttribute(paneVertices,3));facadeGeometry.setAttribute('normal',new T.Float32BufferAttribute(paneNormals,3));facadeGeometry.computeBoundingSphere();const facadeGlazing=add(facadeGeometry,facadeMaterial,'Four-storey curved glass facade · open west doorway');facadeGlazing.userData.facultyFacadeGlazing=true;
  const edgeGeometry=own(new T.BufferGeometry());edgeGeometry.setAttribute('position',new T.Float32BufferAttribute(paneEdges,3));edgeGeometry.computeBoundingSphere();const facadeJoinery=new T.LineSegments(edgeGeometry,own(new T.LineBasicMaterial({color:0xc2e2e5,transparent:true,opacity:.62,depthWrite:false})));facadeJoinery.name='Fine curved glass pane edges and vertical joints';group.add(facadeJoinery);
  // Twenty shallow arches articulate the circular facade between the existing
  // columns. They add framing rather than a second thick ring of columns.

@@ -1,20 +1,20 @@
-import {ARTIST_EDITIONS_DISTRICT,ARTIST_EDITIONS_PATH} from './artist-edition-layout.js?v=sixfold-city-20261118d';
-import {SIXFOLD_HOUSES,NETWORK_PASSAGES,sixfoldHouseEntry} from './sixfold-house-network-model.js?v=sixfold-city-20261118d';
-import {ARCHETYPES_QUARTER,ARCHETYPE_HOUSES,ARCHETYPE_FOOTPRINTS,ARCHETYPE_PATHS,ARCHETYPE_CONNECTOR} from './archetypes-quarter-model.js?v=sixfold-city-20261118d';
-import {footprintBlocked} from './honeycomb-city-model.js?v=sixfold-city-20261118d';
-import {CITY_PLACES,PLACE_PATHS,CITY_PLACE_FOOTPRINTS} from './city-places-model.js?v=sixfold-city-20261118d';
-import {HUMANITY_COMMONS,COMMONS_PATH} from './humanity-commons-model.js?v=sixfold-city-20261118d';
-import './city-landscape.js?v=sixfold-city-20261118d';
-import './artist-quarter-layout.js?v=sixfold-city-20261118d';
-import {BUILT_HONEYCOMB_LAYOUT} from './honeycomb-city-layout.js?v=sixfold-city-20261118d';
-import {HEX_DISTRICTS,INHABITED_BLOCKS,IDEAS_PARK_SITE} from './city-hex-layout.js?v=sixfold-city-20261118d';
-import {FOUNDATION_HOUSES,FOUNDATION_ROUTES,houseEntry} from './foundation-houses-data.js?v=sixfold-city-20261118d';
-import {SEMINAR_HOUSES,SEMINAR_PATHS,seminarEntry} from './seminar-houses-data.js?v=sixfold-city-20261118d';
+import {ARTIST_EDITIONS_DISTRICT,ARTIST_EDITIONS_PATH} from './artist-edition-layout.js?v=glass-continuous-20261118';
+import {SIXFOLD_HOUSES,NETWORK_PASSAGES,sixfoldHouseEntry} from './sixfold-house-network-model.js?v=glass-continuous-20261118';
+import {ARCHETYPES_QUARTER,ARCHETYPE_HOUSES,ARCHETYPE_FOOTPRINTS,ARCHETYPE_PATHS,ARCHETYPE_CONNECTOR} from './archetypes-quarter-model.js?v=glass-continuous-20261118';
+import {footprintBlocked} from './honeycomb-city-model.js?v=glass-continuous-20261118';
+import {CITY_PLACES,PLACE_PATHS,CITY_PLACE_FOOTPRINTS} from './city-places-model.js?v=glass-continuous-20261118';
+import {HUMANITY_COMMONS,COMMONS_PATH} from './humanity-commons-model.js?v=glass-continuous-20261118';
+import './city-landscape.js?v=glass-continuous-20261118';
+import './artist-quarter-layout.js?v=glass-continuous-20261118';
+import {BUILT_HONEYCOMB_LAYOUT} from './honeycomb-city-layout.js?v=glass-continuous-20261118';
+import {HEX_DISTRICTS,INHABITED_BLOCKS,IDEAS_PARK_SITE} from './city-hex-layout.js?v=glass-continuous-20261118';
+import {FOUNDATION_HOUSES,FOUNDATION_ROUTES,houseEntry} from './foundation-houses-data.js?v=glass-continuous-20261118';
+import {SEMINAR_HOUSES,SEMINAR_PATHS,seminarEntry} from './seminar-houses-data.js?v=glass-continuous-20261118';
 import {STUDY_HOUSES,STUDY_PATHS} from './study-houses-data.js?v=city-night-20261117';
 import {PAVILIONS,pavilionTurn} from './mathematical-pavilions-model.js?v=city-night-20261117';
-import {PHILOSOPHERS,quarterPaths} from './philosopher-data.js?v=sixfold-city-20261118d';
-import {COAST_PATHS,HOUSE_ORIGAMI} from './origami-house-math.js?v=sixfold-city-20261118d';
-import {COAST_MAIN_PATHS} from './coastal-map-data.js?v=sixfold-city-20261118d';
+import {PHILOSOPHERS,quarterPaths} from './philosopher-data.js?v=glass-continuous-20261118';
+import {COAST_PATHS,HOUSE_ORIGAMI} from './origami-house-math.js?v=glass-continuous-20261118';
+import {COAST_MAIN_PATHS} from './coastal-map-data.js?v=glass-continuous-20261118';
 
 // A regular city fabric joins the original inhabited districts. Private homes
 // retain source-local designs and now occupy the lower face.

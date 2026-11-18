@@ -1,6 +1,6 @@
-import {SIXFOLD_HOUSES,NETWORK_PASSAGES,houseToWorld} from './sixfold-house-network-model.js?v=sixfold-city-20261118d';
-import {GALLERY_TUNNEL} from './world-cylinder-model.js?v=sixfold-city-20261118d';
-import {ESCHER_DEPTH} from './escher-depth-model.js?v=sixfold-city-20261118d';
+import {SIXFOLD_HOUSES,NETWORK_PASSAGES,houseToWorld} from './sixfold-house-network-model.js?v=glass-continuous-20261118';
+import {GALLERY_TUNNEL} from './world-cylinder-model.js?v=glass-continuous-20261118';
+import {ESCHER_DEPTH} from './escher-depth-model.js?v=glass-continuous-20261118';
 
 // A plan of the existing rooms, not a projection through solid earth. All
 // footprints retain their actual x/z positions; the labels disclose depth.

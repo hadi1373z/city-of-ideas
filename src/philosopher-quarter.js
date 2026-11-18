@@ -1,4 +1,4 @@
-import {PHILOSOPHERS,quarterPaths,pickLanguage} from './philosopher-data.js?v=sixfold-city-20261118d';
+import {PHILOSOPHERS,quarterPaths,pickLanguage} from './philosopher-data.js?v=glass-continuous-20261118';
 
 // A single, additive ground-level district. No renderer, account or private archive.
 export function createPhilosopherQuarter(T,{language=()=> 'en',canvas=()=>document.createElement('canvas')}={}){

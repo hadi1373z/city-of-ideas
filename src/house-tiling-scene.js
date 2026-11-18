@@ -1,7 +1,7 @@
-import {createHouseTiling,createHouseWallTiling,houseWallPoint,createHouseStairTiling,createHouseLandingTiling,withoutHouseLanding} from './house-tiling-model.js?v=sixfold-city-20261118d';
-import {HOUSE_LEVELS} from './transformation-house-model.js?v=sixfold-city-20261118d';
-import {SIXFOLD_TILINGS} from './sixfold-tiling-model.js?v=sixfold-city-20261118d';
-import {tilingParentColourIndex,tilingPatternPalette,compactTilingMeshes} from './sixfold-tiling-scene.js?v=sixfold-city-20261118d';
+import {createHouseTiling,createHouseWallTiling,houseWallPoint,createHouseStairTiling,createHouseLandingTiling,withoutHouseLanding} from './house-tiling-model.js?v=glass-continuous-20261118';
+import {HOUSE_LEVELS} from './transformation-house-model.js?v=glass-continuous-20261118';
+import {SIXFOLD_TILINGS} from './sixfold-tiling-model.js?v=glass-continuous-20261118';
+import {tilingParentColourIndex,tilingPatternPalette,compactTilingMeshes} from './sixfold-tiling-scene.js?v=glass-continuous-20261118';
 
 // A finite Robinson substitution patch, paired into genuine thick/thin rhombs.
 // Tile faces share one finish per storey; clipped fragments never get fake seams.

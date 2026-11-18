@@ -1,4 +1,4 @@
-import {SEMINAR_HOUSES,SEMINAR_PATHS,seminarWorld,seminarEntry} from './seminar-houses-data.js?v=sixfold-city-20261118d';
+import {SEMINAR_HOUSES,SEMINAR_PATHS,seminarWorld,seminarEntry} from './seminar-houses-data.js?v=glass-continuous-20261118';
 import {oscillator,DISK_CASES,diskGeodesic,chanceScore} from './seminar-house-models.js?v=city-night-20261117';
 export function buildSeminarHouses(T,{canvas=()=>document.createElement('canvas')}={}){
  const root=new T.Group();root.name='Southern garden · form and listening';const owned=new Set(),own=r=>(owned.add(r),r),mat=(colour,extra={})=>own(new T.MeshLambertMaterial({color:colour,...extra}));
