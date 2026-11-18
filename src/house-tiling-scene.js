@@ -1,5 +1,7 @@
 import {createHouseTiling,createHouseWallTiling,houseWallPoint,createHouseStairTiling,createHouseLandingTiling,withoutHouseLanding} from './house-tiling-model.js?v=city-night-20261117';
 import {HOUSE_LEVELS} from './transformation-house-model.js?v=city-night-20261117';
+import {SIXFOLD_TILINGS} from './sixfold-tiling-model.js';
+import {tilingParentColourIndex,tilingPatternPalette,compactTilingMeshes} from './sixfold-tiling-scene.js';
 
 // A finite Robinson substitution patch, paired into genuine thick/thin rhombs.
 // Tile faces share one finish per storey; clipped fragments never get fake seams.
@@ -14,9 +16,10 @@ const PALETTES = [
  {floor:[0x526266,0xbd9d70],ceiling:[0xc4b99f,0x87938e],border:0x344b4e}
 ];
 
-export function buildHouseTiling(T){
- const patch=createHouseTiling({outerRadius:22.4,wellRadius:10.7,grout:.035});
- const group=new T.Group();group.name='Penrose stonework · continuous floors, walls and shallow vaulted ceilings';
+export function buildHouseTiling(T,{pattern='penrose',compact=false}={}){
+ const info=SIXFOLD_TILINGS.find(p=>p.id===pattern);if(!info)throw new RangeError('Unknown mathematical tiling');const palettes=PALETTES.map(p=>tilingPatternPalette(T,pattern,p));
+ const patch=createHouseTiling({outerRadius:22.4,wellRadius:10.7,grout:.035,pattern});
+ const group=new T.Group();group.name=(pattern==='penrose'?'Penrose':info.name)+' stonework · continuous floors, walls and shallow vaulted ceilings';
  const owned=new Set(),floors=[],ceilings=[],borders=[],walls=[],own=o=>(owned.add(o),o);
  const tileMaterial=own(new T.MeshLambertMaterial({vertexColors:true}));
  const borderMaterial=own(new T.MeshLambertMaterial({vertexColors:true}));
@@ -31,7 +34,7 @@ export function buildHouseTiling(T){
   for(let j=1;j<p.length-1;j++)triangle(out,colors,p[0],p[up?j+1:j],p[up?j:j+1],color);
  }
  for(const [index,level] of HOUSE_LEVELS.entries()){
-  const palette=PALETTES[index],floorY=level.y+.022;
+  const palette=palettes[index],floorY=level.y+.022;
   const ceilingY=(x,z)=>{const r=Math.hypot(x,z),gauge=Math.max(Math.abs(z)*2/Math.sqrt(3),Math.abs(x)+Math.abs(z)/Math.sqrt(3)),edge=22.4*r/gauge,u=Math.max(0,Math.min(1,(r-10.7)/(edge-10.7)));return level.y+7.3+.35*Math.sin(Math.PI*u);};
   for(const [isFloor,colorsHex,y] of [[true,palette.floor,()=>floorY],[false,palette.ceiling,ceilingY]]){
    const positions=[],colors=[];
@@ -39,8 +42,8 @@ export function buildHouseTiling(T){
     const shade=1+Math.sin(i*17.31)*.025,color=new T.Color(colorsHex[cell.kind]).multiplyScalar(shade);
     for(const piece of cell.insetPolygons)polygon(positions,colors,piece,y,color,isFloor);
    }
-   const mesh=finish(positions,colors,level.name+(isFloor?' · matched Penrose rhomb floor':' · tiled shallow vault'));
-   mesh.userData.houseTiling={level:level.y,upward:isFloor,thin:patch.counts.thin,thick:patch.counts.thick};
+   const mesh=finish(positions,colors,level.name+(isFloor?(pattern==='penrose'?' · matched Penrose rhomb floor':' · matched '+info.name+' floor'):' · tiled shallow vault'));
+   mesh.userData.houseTiling={pattern,level:level.y,upward:isFloor,thin:patch.counts.thin,thick:patch.counts.thick};
    (isFloor?floors:ceilings).push(mesh);
   }
   // Quiet perimeter bands frame the intricate field and keep the well legible.
@@ -57,20 +60,20 @@ export function buildHouseTiling(T){
  // One rhomb field is unfolded over the entire six-sided perimeter and the
  // full height of the house, then folded at its corners. Storeys share the
  // same parent tile ids and cuts rather than restarting a pattern per wall.
- const wallPatch=createHouseWallTiling({levels:HOUSE_LEVELS.map(l=>l.y)}),wallPositions=[],wallColors=[],wallNormals=[];
+ const wallPatch=createHouseWallTiling({levels:HOUSE_LEVELS.map(l=>l.y),pattern}),wallPositions=[],wallColors=[],wallNormals=[];
  const calmStone=new T.Color(0xe1d5ba);
  for(const panel of wallPatch.panels){
-  const index=HOUSE_LEVELS.findIndex(l=>l.y===panel.level),palette=PALETTES[index];
+  const index=HOUSE_LEVELS.findIndex(l=>l.y===panel.level),palette=palettes[index];
   for(const cell of panel.cells){
-   const shade=1+Math.sin(Number(cell.id.slice(6))*17.31)*.018;
+   const shade=1+Math.sin(tilingParentColourIndex(cell.id)*17.31)*.018;
    const color=new T.Color(palette.floor[cell.kind]).lerp(calmStone,.67).multiplyScalar(shade);
    for(const piece of cell.insetPolygons){const p=piece.map(q=>houseWallPoint(panel,q));for(let j=1;j<p.length-1;j++){triangle(wallPositions,wallColors,p[0],p[j],p[j+1],color);for(let k=0;k<3;k++)wallNormals.push(panel.inward[0],0,panel.inward[1]);}}
   }
  }
- const tiledWalls=finish(wallPositions,wallColors,'All 48 interior walls · one folded Penrose field');
+ const tiledWalls=finish(wallPositions,wallColors,'All 48 interior walls · one folded '+(pattern==='penrose'?'Penrose':info.name)+' field');
  // Analytic planar normals avoid float32 sliver noise at clipped window corners.
  tiledWalls.geometry.setAttribute('normal',new T.Float32BufferAttribute(wallNormals,3));
- tiledWalls.userData.houseWallTiling={panels:48,pairedRhombs:true,offset:wallPatch.offset,unfolded:true};walls.push(tiledWalls);
+ tiledWalls.userData.houseWallTiling={pattern,panels:48,pairedRhombs:pattern==='penrose',offset:wallPatch.offset,unfolded:true};walls.push(tiledWalls);
  // A slender vertical corner joint makes the folding deliberate and provides
  // an honest architectural closing seam for the finite aperiodic patch.
  const jointPositions=[],jointColors=[],joint=new T.Color(0x8f886d),warmJoint=new T.Color(0xc4ad74);
@@ -85,7 +88,7 @@ export function buildHouseTiling(T){
   triangle(jointPositions,jointColors,p[0],p[1],p[2],color);triangle(jointPositions,jointColors,p[0],p[2],p[3],color);
  }
  const wallJoint=finish(jointPositions,jointColors,'Continuous folded corner joints · quiet closing seam',borderMaterial);
- const stairPatch=createHouseStairTiling(),stairPositions=[],stairColors=[];
+ const stairPatch=createHouseStairTiling({pattern}),stairPositions=[],stairColors=[];
  const stairColours=[new T.Color(0x6e8586),new T.Color(0xccbb94)],nosing=new T.Color(0xd8ccb2),riserGold=new T.Color(0xb29a67),riserSage=new T.Color(0x788a83);
  for(const tread of stairPatch.treads){
   if(!tread.landing)for(const cell of tread.cells)polygon(stairPositions,stairColors,cell.piece,()=>tread.y+tread.capOffset,stairColours[cell.kind],true);
@@ -99,12 +102,15 @@ export function buildHouseTiling(T){
    triangle(stairPositions,stairColors,v[0],v[1],v[2],color);triangle(stairPositions,stairColors,v[0],v[2],v[3],color);
   }
  }
- const stairInlays=finish(stairPositions,stairColors,'448 rhomb-inlaid treads · ivory nosings and ceramic risers');
- stairInlays.userData.houseStairTiling={treads:448,capOffset:.022,sharedLandingProfile:true};
- const landingPatch=createHouseLandingTiling(patch.well),landingPositions=[],landingColors=[],patchIndices=new Map(patch.cells.map((c,i)=>[c.id,i])),matchedShade=id=>1+Math.sin((patchIndices.get(id)??Number(id.slice(6)))*17.31)*.025;
- for(const[index,level]of HOUSE_LEVELS.entries())for(const cell of landingPatch.cells){const color=new T.Color(PALETTES[index].floor[cell.kind]).multiplyScalar(matchedShade(cell.id));for(const piece of cell.polygons)polygon(landingPositions,landingColors,piece,()=>level.y+.022,color,true);}
- const landingFinish=finish(landingPositions,landingColors,'Eight continuous rhomb landings · stair to room with no threshold stripe');
- const crownPositions=[],crownColors=[];for(const cell of landingPatch.crown){const color=new T.Color(PALETTES[0].ceiling[cell.kind]).multiplyScalar(matchedShade(cell.id));polygon(crownPositions,crownColors,cell.polygon,(x,z)=>23.3+.65*Math.max(0,1-(x*x+z*z)/(10.7*10.7)),color,false);}
+ const stairInlays=finish(stairPositions,stairColors,pattern==='penrose'?'448 rhomb-inlaid treads · ivory nosings and ceramic risers':'448 '+info.name+' inlaid treads · ivory nosings and ceramic risers');
+ stairInlays.userData.houseStairTiling={pattern,treads:448,capOffset:.022,sharedLandingProfile:true};
+ const landingPatch=createHouseLandingTiling(patch.well,{pattern}),landingPositions=[],landingColors=[],patchIndices=new Map(patch.cells.map((c,i)=>[c.id,i])),matchedShade=id=>1+Math.sin((patchIndices.get(id)??tilingParentColourIndex(id))*17.31)*.025;
+ for(const[index,level]of HOUSE_LEVELS.entries())for(const cell of landingPatch.cells){const color=new T.Color(palettes[index].floor[cell.kind]).multiplyScalar(matchedShade(cell.id));for(const piece of cell.polygons)polygon(landingPositions,landingColors,piece,()=>level.y+.022,color,true);}
+ const landingFinish=finish(landingPositions,landingColors,'Eight continuous '+(pattern==='penrose'?'rhomb':info.name)+' landings · stair to room with no threshold stripe');
+ const crownPositions=[],crownColors=[];for(const cell of landingPatch.crown){const color=new T.Color(palettes[0].ceiling[cell.kind]).multiplyScalar(matchedShade(cell.id));polygon(crownPositions,crownColors,cell.polygon,(x,z)=>23.3+.65*Math.max(0,1-(x*x+z*z)/(10.7*10.7)),color,false);}
  const crown=finish(crownPositions,crownColors,'Complete tiled crown · the house ceiling above the light well');crown.userData.houseCrown=true;
- return{group,floors,ceilings,borders,walls,wallJoints:[wallJoint],stairs:[stairInlays],landings:[landingFinish],crowns:[crown],patch,wallPatch,stairPatch,landingPatch,dispose(){group.removeFromParent();for(const resource of owned)resource.dispose();}};
+ const wallJoints=[wallJoint],stairs=[stairInlays],landings=[landingFinish],crowns=[crown];let packing=null;
+ if(compact){packing=compactTilingMeshes(T,group,{own,release:g=>{owned.delete(g);g.dispose();}});for(const list of[floors,ceilings,borders,walls,wallJoints,stairs,landings,crowns])for(let i=0;i<list.length;i++)list[i]=packing.records.get(list[i]);}
+ const geometryBytes=packing?.geometryBytes??[...owned].filter(o=>o.isBufferGeometry).reduce((sum,g)=>sum+Object.values(g.attributes).reduce((n,a)=>n+a.array.byteLength,0)+(g.index?.array.byteLength??0),0);let disposed=false;
+ return{pattern,compact,group,floors,ceilings,borders,walls,wallJoints,stairs,landings,crowns,batches:packing?.batches??null,surfaceRecords:packing?[...packing.records.values()]:null,geometryBytes,patch,wallPatch,stairPatch,landingPatch,dispose(){if(disposed)return;disposed=true;group.removeFromParent();for(const resource of owned)resource.dispose();owned.clear();}};
 }

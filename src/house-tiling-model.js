@@ -1,5 +1,7 @@
-import { penroseTriangles, hexagon, PHI } from './mathematical-pavilions-model.js?v=city-night-20261117';
+import { hexagon } from './mathematical-pavilions-model.js?v=city-night-20261117';
 import {HOUSE as HOUSE_JOIN,stairY,houseLandingLevel} from './transformation-house-model.js?v=city-night-20261117';
+import {createSixfoldTilingPatch,createPenroseRhombPatch} from './sixfold-tiling-model.js';
+export {createPenroseRhombPatch} from './sixfold-tiling-model.js';
 
 // Geometry only: a finite substitution patch, not a test of infinite aperiodicity.
 // Coordinates are [x, z], with counterclockwise polygons as viewed on a plan.
@@ -94,27 +96,6 @@ function visibleEdge(a, b, outer, well) {
   return intervals.filter(([lo, hi]) => hi - lo > EPS).map(([lo, hi]) => [mix(a, b, lo), mix(a, b, hi)]);
 }
 
-// The existing pavilion generator intentionally caps its display at depth five.
-// A wall unfolded to a 135 m strip needs a larger, finer original patch, so use
-// the same Robinson subdivision for the remaining levels before pairing bases.
-export function createPenroseRhombPatch({depth=5,radius=30}={}) {
-  if(!Number.isInteger(depth)||depth<0||depth>8||!Number.isFinite(radius)||radius<=0)throw new RangeError('Finite radius and depth 0..8 required');
-  let triangles=penroseTriangles(Math.min(depth,5),radius);
-  for(let n=5;n<depth;n++){
-    const next=[];
-    for(const[kind,a,b,c]of triangles)if(kind===0){const p=mix(a,b,1/PHI);next.push([0,c,p,b],[1,p,c,a]);}
-    else{const q=mix(b,a,1/PHI),r=mix(b,c,1/PHI);next.push([1,r,c,a],[1,q,r,b],[0,r,q,a]);}
-    triangles=next;
-  }
-  const groups=new Map(),key=p=>p.map(v=>Math.round(v*1e8)).join(',');
-  triangles.forEach((t,i)=>{const k=`${t[0]}:${[key(t[2]),key(t[3])].sort().join(';')}`,g=groups.get(k)||[];g.push(i);groups.set(k,g);});
-  return [...groups.values()].map(ids=>{
-    if(ids.length>2)throw new Error('Unexpected Robinson base multiplicity');
-    const[kind,a,b,c]=triangles[ids[0]],paired=ids.length===2,rhomb=tidy(paired?[a,b,triangles[ids[1]][1],c]:[a,b,c]);
-    return{id:`rhomb-${ids[0]}`,kind,paired,triangleIds:ids,rhomb,edges:rhomb.map((p,i)=>[p,rhomb[(i+1)%rhomb.length]])};
-  });
-}
-
 const rectangle=(a,b,lo,hi)=>[[a,lo],[b,lo],[b,hi],[a,hi]];
 
 /** A continuous Penrose field folded around all six interior walls.
@@ -123,10 +104,10 @@ const rectangle=(a,b,lo,hi)=>[[a,lo],[b,lo],[b,hi],[a,hi]];
  * patch cannot close after one arbitrary perimeter translation; the sixth
  * corner is deliberately framed by architectural trim rather than faked.
  */
-export function createHouseWallTiling({levels=[0,8,16,-8,-16,-24,-32,-40],radius=23,offset=.365,height=8,grout=.035}={}) {
+export function createHouseWallTiling({levels=[0,8,16,-8,-16,-24,-32,-40],radius=23,offset=.365,height=8,grout=.035,pattern='penrose'}={}) {
   if(!levels.length||!levels.every(Number.isFinite)||!Number.isFinite(radius)||radius<=0||!Number.isFinite(offset)||offset<.35||offset>.5||height!==8||!Number.isFinite(grout)||grout<0)throw new RangeError('Invalid house wall dimensions');
   const hex=hexagon(radius),cornerInset=offset/Math.sqrt(3),length=radius-2*cornerInset,perimeter=6*length;
-  const patch=createPenroseRhombPatch({depth:8,radius:90});
+  const patch=pattern==='penrose'?createPenroseRhombPatch({depth:8,radius:90}):createSixfoldTilingPatch(pattern,{edge:1.8,bounds:[-3*length,Math.min(...levels)+8,3*length,Math.max(...levels)+16]}).cells;
   const prepared=patch.map(cell=>({...cell,inset:insetPolygon(cell.rhomb,grout/2),box:[Math.min(...cell.rhomb.map(p=>p[0])),Math.max(...cell.rhomb.map(p=>p[0])),Math.min(...cell.rhomb.map(p=>p[1])),Math.max(...cell.rhomb.map(p=>p[1]))]}));
   const panels=[];
   for(const level of levels)for(let wall=0;wall<6;wall++){
@@ -151,7 +132,7 @@ export function createHouseWallTiling({levels=[0,8,16,-8,-16,-24,-32,-40],radius
     const openingArea=apertures.reduce((sum,o)=>sum+tilingArea(clipTilingPolygon(o.polygon,boundary)),0);
     panels.push({id:`wall-${level}-${wall}`,level,wall,a,b,length,radius,offset,cornerInset,s0,s1,v0,v1,tangent:[dx,dz],inward:[-dz,dx],apertures,cells,area,expectedArea:length*height-openingArea});
   }
-  return{panels,perimeter,length,offset,grout,area:panels.reduce((sum,p)=>sum+p.area,0),expectedArea:panels.reduce((sum,p)=>sum+p.expectedArea,0),credit:'Finite Robinson substitution, paired into true Penrose rhombs; one unfolded perimeter-height field with a deliberate closing corner seam.'};
+  return{pattern,panels,perimeter,length,offset,grout,area:panels.reduce((sum,p)=>sum+p.area,0),expectedArea:panels.reduce((sum,p)=>sum+p.expectedArea,0),credit:pattern==='penrose'?'Finite Robinson substitution, paired into true Penrose rhombs; one unfolded perimeter-height field with a deliberate closing corner seam.':'Exact '+pattern+' parent polygons in one unfolded perimeter-height field, with an honest framed closing seam.'};
 }
 
 export function houseWallPoint(panel,[s,v]) {
@@ -160,9 +141,10 @@ export function houseWallPoint(panel,[s,v]) {
 }
 
 /** Fine rhomb inlays fit wholly within the448 shared-profile tread caps. */
-export function createHouseStairTiling({grout=.025}={}) {
+export function createHouseStairTiling({grout=.025,pattern='penrose'}={}) {
   if(!Number.isFinite(grout)||grout<0||grout>.08)throw new RangeError('Invalid stair grout');
-  const parents=createPenroseRhombPatch({depth:7,radius:20}).filter(c=>c.paired).map(c=>({...c,inset:insetPolygon(c.rhomb,grout/2)}));
+  const raw=pattern==='penrose'?createPenroseRhombPatch({depth:7,radius:20}):createSixfoldTilingPatch(pattern,{edge:.64,bounds:[-10,-10,10,10]}).cells;
+  const parents=raw.filter(c=>c.paired).map(c=>({...c,inset:insetPolygon(c.rhomb,grout/2)}));
   const step=Math.PI/32,templates=[],polar=(r,a)=>[r*Math.cos(a),r*Math.sin(a)];
   for(let i=0;i<64;i++){
     const a=i*step+.0045,b=(i+1)*step-.0045,cap=[polar(6.78,a),polar(9.62,a),polar(9.62,b),polar(6.78,b)],cells=[];
@@ -173,19 +155,20 @@ export function createHouseStairTiling({grout=.025}={}) {
     const edge=(i+1)*step,a=edge-.004,b=edge-.001;
     const theta=i*step;return{i,y:stairY(theta),nextY:stairY(edge),landing:houseLandingLevel(theta+step/2)!==null,capOffset:.022,...templates[i%64],nosing:[polar(6.68,a),polar(9.73,a),polar(9.73,b),polar(6.68,b)],riserAngle:edge+.001};
   });
-  return{treads,grout,templateCount:64,innerRadius:6.78,outerRadius:9.62};
+  return{pattern,treads,grout,templateCount:64,innerRadius:6.78,outerRadius:9.62};
 }
 
 export function withoutHouseLanding(polygon){return subtractWell(polygon,rectangle(0,40,-HOUSE_JOIN.landingHalfWidth,HOUSE_JOIN.landingHalfWidth));}
 
 /** The same large rhombs flow across the flat cap sectors and room threshold. */
-export function createHouseLandingTiling(wellBoundary,{grout=.035}={}){
- const parents=createPenroseRhombPatch().filter(c=>c.paired).map(c=>({...c,inset:insetPolygon(c.rhomb,grout/2)})),domains=[],p=(r,a)=>[r*Math.cos(a),r*Math.sin(a)],ri=HOUSE_JOIN.bridgeInner,half=HOUSE_JOIN.landingHalfAngle;
+export function createHouseLandingTiling(wellBoundary,{grout=.035,pattern='penrose'}={}){
+ const raw=pattern==='penrose'?createPenroseRhombPatch():createSixfoldTilingPatch(pattern,{edge:2.5,bounds:[-25,-25,25,25]}).cells;
+ const parents=raw.filter(c=>c.paired).map(c=>({...c,inset:insetPolygon(c.rhomb,grout/2)})),domains=[],p=(r,a)=>[r*Math.cos(a),r*Math.sin(a)],ri=HOUSE_JOIN.bridgeInner,half=HOUSE_JOIN.landingHalfAngle;
  for(let j=0;j<24;j++){const a=-half+j/24*2*half,b=-half+(j+1)/24*2*half;domains.push([p(HOUSE_JOIN.stairInner,a),p(ri,a),p(ri,b),p(HOUSE_JOIN.stairInner,b)]);}
  const outer=clipTilingPolygon(wellBoundary,rectangle(0,40,-HOUSE_JOIN.landingHalfWidth,HOUSE_JOIN.landingHalfWidth)),inner=Array.from({length:384},(_,i)=>p(ri,i*Math.PI/192));domains.push(...subtractWell(outer,inner));
  const cells=[];for(const cell of parents){const polygons=domains.map(d=>clipTilingPolygon(cell.inset,d)).filter(p=>p.length);if(polygons.length)cells.push({id:cell.id,kind:cell.kind,polygons});}
  const crown=parents.map(cell=>({...cell,polygon:clipTilingPolygon(cell.inset,wellBoundary)})).filter(c=>c.polygon.length);
- return{cells,crown,domains,grout};
+ return{pattern,cells,crown,domains,grout};
 }
 
 /**
@@ -197,7 +180,7 @@ export function createHouseLandingTiling(wellBoundary,{grout=.035}={}){
  */
 export function createHouseTiling({
   depth = 5, radius = 30, outerRadius = 22.7,
-  wellRadius = 10.32, wellSides = 96, grout = 0.035
+  wellRadius = 10.32, wellSides = 96, grout = 0.035,pattern='penrose'
 } = {}) {
   for (const [name, value] of Object.entries({ radius, outerRadius, wellRadius, grout })) {
     if (!Number.isFinite(value) || value < 0 || (name !== 'grout' && value === 0)) throw new RangeError(`${name} must be finite and positive`);
@@ -205,7 +188,7 @@ export function createHouseTiling({
   if (!Number.isInteger(depth) || depth < 0 || depth > 5) throw new RangeError('depth must be an integer from 0 to 5');
   if (!Number.isInteger(wellSides) || wellSides < 12 || wellSides > 1024) throw new RangeError('wellSides must be an integer from 12 to 1024');
   if (wellRadius / Math.cos(Math.PI / wellSides) >= outerRadius * Math.cos(Math.PI / 6)) throw new RangeError('well must fit completely inside the hexagon');
-  if (radius * Math.cos(Math.PI / 10) < outerRadius) throw new RangeError('seed decagon must contain the outer hexagon');
+  if (pattern==='penrose'&&radius * Math.cos(Math.PI / 10) < outerRadius) throw new RangeError('seed decagon must contain the outer hexagon');
 
   const outer = hexagon(outerRadius);
   const wellVertexRadius = wellRadius / Math.cos(Math.PI / wellSides);
@@ -213,38 +196,26 @@ export function createHouseTiling({
     const angle = (i + .5) * Math.PI * 2 / wellSides;
     return [wellVertexRadius * Math.cos(angle), wellVertexRadius * Math.sin(angle)];
   });
-  const triangles = penroseTriangles(depth, radius), groups = new Map();
-  // Hash only for topology lookup. Returned coordinates remain full precision.
-  const pointKey = p => p.map(v => Math.round(v * 1e8)).join(',');
-  triangles.forEach((triangle, index) => {
-    const key = `${triangle[0]}:${[pointKey(triangle[2]), pointKey(triangle[3])].sort().join(';')}`;
-    const group = groups.get(key) || [];
-    group.push(index);
-    groups.set(key, group);
-  });
+  const parents=pattern==='penrose'?createPenroseRhombPatch({depth,radius}):createSixfoldTilingPatch(pattern,{edge:2.5,bounds:[-outerRadius,-outerRadius,outerRadius,outerRadius]}).cells;
 
   const cells = [];
   const crop = polygon => subtractWell(clipTilingPolygon(polygon, outer), well);
-  for (const indices of groups.values()) {
-    const [kind, a, b, c] = triangles[indices[0]];
-    if (indices.length > 2) throw new Error('Unexpected Robinson base multiplicity');
-    const paired = indices.length === 2;
-    const rhomb = tidy(paired ? [a, b, triangles[indices[1]][1], c] : [a, b, c]);
+  for (const parent of parents) {
+    const {id,kind,paired,rhomb,edges,triangleIds}=parent;
     const polygons = crop(rhomb);
     if (!polygons.length) continue;
     // At default depth/radius only paired rhombs reach the hexagon. A very
     // coarse user-selected seed may expose boundary half-rhombs honestly.
-    const edges = rhomb.map((p, i) => [p, rhomb[(i + 1) % rhomb.length]]);
     const insetPolygons = grout === 0 ? polygons : crop(insetPolygon(rhomb, grout / 2));
     cells.push({
-      id: `rhomb-${indices[0]}`, kind, paired, triangleIds: indices,
+      id,kind,paired,triangleIds,
       rhomb, edges, polygons, insetPolygons,
       visibleEdges: edges.flatMap(([p, q]) => visibleEdge(p, q, outer, well))
     });
   }
   const sumArea = key => cells.reduce((sum, cell) => sum + cell[key].reduce((n, polygon) => n + tilingArea(polygon), 0), 0);
   return {
-    cells, outer, well, depth, radius, outerRadius, wellRadius, wellSides, grout,
+    pattern,cells, outer, well, depth, radius, outerRadius, wellRadius, wellSides, grout,
     area: sumArea('polygons'), insetArea: sumArea('insetPolygons'),
     expectedArea: tilingArea(outer) - tilingArea(well),
     counts: { thin: cells.filter(c => c.kind === 0).length, thick: cells.filter(c => c.kind === 1).length, boundaryHalves: cells.filter(c => !c.paired).length }
