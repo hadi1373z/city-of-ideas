@@ -1,6 +1,6 @@
-import {buildSixfoldHousePassages} from './sixfold-house-passages-scene.js?v=sixfold-city-20261118';
+import {buildSixfoldHousePassages} from './sixfold-house-passages-scene.js?v=sixfold-city-20261118b';
 import {ESCHER_DEPTH} from './escher-depth-model.js?v=bird-peel-20261117b';
-import {createOceanMaterial,updateOceanMaterial} from './ocean-surface.js?v=sixfold-city-20261118';
+import {createOceanMaterial,updateOceanMaterial} from './ocean-surface.js?v=sixfold-city-20261118b';
 import {buildLowerLandscape} from './lower-landscape-scene.js?v=bird-peel-20261117b';
 import {buildCylinderMetamorphosis} from './cylinder-metamorphosis-scene.js?v=bird-peel-20261117b';
 import {WORLD_CYLINDER as W,lowerMatrix,GALLERY_TUNNEL} from './world-cylinder-model.js?v=bird-peel-20261117b';

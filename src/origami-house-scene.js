@@ -1,4 +1,4 @@
-import {HOUSE_ORIGAMI as P,PAPER_COLOURS,miura,CREASE_CASES,releasedBoatPose} from './origami-house-math.js?v=sixfold-city-20261118';
+import {HOUSE_ORIGAMI as P,PAPER_COLOURS,miura,CREASE_CASES,releasedBoatPose} from './origami-house-math.js?v=sixfold-city-20261118b';
 import {buildPaperBoat} from './origami-boat.js?v=city-night-20261117';
 import {buildPaperCrane} from './origami-creatures.js?v=city-night-20261117';
 export function buildOrigamiHouse(T,{canvas=()=>document.createElement('canvas')}={}){

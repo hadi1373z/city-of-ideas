@@ -1,4 +1,4 @@
-import {CITY_PLACES,GRAPH_EDGES,GRAPH_NODES,graphAnalysis,birthdayProbability,beatSample,gridRoute,reflection,rosette,initialPlaceState} from './city-places-model.js?v=sixfold-city-20261118';
+import {CITY_PLACES,GRAPH_EDGES,GRAPH_NODES,graphAnalysis,birthdayProbability,beatSample,gridRoute,reflection,rosette,initialPlaceState} from './city-places-model.js?v=sixfold-city-20261118b';
 
 // Original, owned procedural architecture. One vertex-colour batch per static
 // pavilion and one per manual experiment; no external mesh, texture or lights.

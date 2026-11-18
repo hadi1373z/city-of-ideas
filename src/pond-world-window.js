@@ -1,7 +1,7 @@
-import {POND_WORLD_WINDOW,pondDescriptor,pondToLower,besidePond} from './pond-world-window-model.js?v=sixfold-city-20261118';
+import {POND_WORLD_WINDOW,pondDescriptor,pondToLower,besidePond} from './pond-world-window-model.js?v=sixfold-city-20261118b';
 import {lowerPhysical} from './world-cylinder-model.js?v=city-night-20261117';
 import {replaceFountainCenter} from './pond-world-window-center.js?v=city-night-20261117';
-export {POND_WORLD_WINDOW,pondDescriptor} from './pond-world-window-model.js?v=sixfold-city-20261118';
+export {POND_WORLD_WINDOW,pondDescriptor} from './pond-world-window-model.js?v=sixfold-city-20261118b';
 
 /** A projective water portal into the real, live lower-frame scene. */
 export function installPondWorldWindow(M,T,{resolution=384,interval=100,now=()=>performance.now(),document:doc=globalThis.document,events=globalThis}={}){

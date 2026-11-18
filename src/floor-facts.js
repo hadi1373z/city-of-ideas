@@ -1,4 +1,4 @@
-import {FLOOR_FACTS,FLOOR_FACTS_LAYOUT as C,BRIDGE_EDGES,GLIDER,lifeStep,floorCardAt,tickFloorFacts} from './floor-facts-model.js?v=sixfold-city-20261118';
+import {FLOOR_FACTS,FLOOR_FACTS_LAYOUT as C,BRIDGE_EDGES,GLIDER,lifeStep,floorCardAt,tickFloorFacts} from './floor-facts-model.js?v=sixfold-city-20261118b';
 import {WORLD_CYLINDER as W,isLowerCoordinate,lowerLocal} from './world-cylinder-model.js';
 
 // One opaque display material on the real borrowed floor. No reflection pass,

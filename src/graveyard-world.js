@@ -1,4 +1,4 @@
-import {onCityIsland} from './island-layout.js?v=sixfold-city-20261118';
+import {onCityIsland} from './island-layout.js?v=sixfold-city-20261118b';
 export const CITY_EDGE_DOOR={x:-255,z:-75};
 export const inWorld=(bounds,x,z)=>x>=bounds.minX&&x<=bounds.maxX&&z>=bounds.minZ&&z<=bounds.maxZ;
 export function buildWorldDoor(T,{x,z,yaw=0,returning=false}){
