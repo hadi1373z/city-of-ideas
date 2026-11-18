@@ -1,0 +1,25 @@
+import {SIXFOLD_HOUSES,NETWORK_PASSAGES,houseToWorld} from './sixfold-house-network-model.js?v=sixfold-city-20261118c';
+import {GALLERY_TUNNEL} from './world-cylinder-model.js?v=sixfold-city-20261118c';
+import {ESCHER_DEPTH} from './escher-depth-model.js?v=sixfold-city-20261118c';
+
+// A plan of the existing rooms, not a projection through solid earth. All
+// footprints retain their actual x/z positions; the labels disclose depth.
+export const middleMapPoint=(x,z)=>[410+x*1.5,355+z*1.5];
+const points=a=>a.map(p=>middleMapPoint(...p).map(n=>n.toFixed(2)).join(',')).join(' ');
+const text=(x,y,s,extra='')=>`<text x="${x}" y="${y}" ${extra}>${s}</text>`;
+export function middleLayerMapSvg(){
+ const paths=NETWORK_PASSAGES.map(p=>`<polyline data-passage="${p.id}" points="${points([p.a,p.b])}"/>`).join('');
+ const houses=SIXFOLD_HOUSES.map(h=>{const outline=Array.from({length:6},(_,i)=>{const p=houseToWorld(h,{x:125+23.45*Math.cos(i*Math.PI/3),z:23.45*Math.sin(i*Math.PI/3)});return[p.x,p.z];}),[x,y]=middleMapPoint(h.x,h.z),labelY=y+(h.z<0?-51:58);return `<g data-house="${h.id}"><polygon points="${points(outline)}" fill="#e9ddba" stroke="#a97c41" stroke-width="2"/><circle cx="${x}" cy="${y}" r="15.45" fill="#c7cfae" stroke="#6e825e"/>${text(x,labelY,h.name,'text-anchor="middle" font-weight="600"')}${text(x,labelY+20,'Basement −40 m','text-anchor="middle" class="depth"')}</g>`;}).join('');
+ const museum=ESCHER_DEPTH.rooms.map(r=>{const[x,y]=middleMapPoint(r.minX,r.minZ);return `<rect data-museum-room="${r.id}" x="${x}" y="${y}" width="${(r.maxX-r.minX)*1.5}" height="${(r.maxZ-r.minZ)*1.5}" fill="${r.y===-46?'#ab8766':'#d8c6a2'}" stroke="#76654c" stroke-width="1.5"/>`;}).join('');
+ const s=ESCHER_DEPTH.stair,[sx,sy]=middleMapPoint(s.minX,s.minZ);
+ return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 760" role="img" aria-labelledby="middle-title middle-desc"><title id="middle-title">Middle layer · the connected underground</title><desc id="middle-desc">Six house basements join a hexagonal circuit at forty metres below the upper city. The circuit meets the central gallery passage and Escher museum. Babel is above the central spiral. Depths are labelled separately.</desc><style>text{font:18px Georgia,serif;fill:#29483c}.depth{font:14px Arial,sans-serif;fill:#5d6652}</style><rect width="920" height="760" rx="18" fill="#eee9d4"/><rect x="16" y="16" width="888" height="728" rx="10" fill="none" stroke="#c7c4a6"/>${text(38,52,'MIDDLE LAYER','font-size="23" letter-spacing="2"')}${text(38,78,'A plan of the real rooms and connecting passages','class="depth"')}<g fill="none" stroke="#8c6940" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">${paths}<polyline data-gallery-tunnel="true" points="${points(GALLERY_TUNNEL.points)}"/></g>${houses}<g data-escher-museum="true">${museum}<rect data-museum-stair="true" x="${sx}" y="${sy}" width="${(s.maxX-s.minX)*1.5}" height="${(s.maxZ-s.minZ)*1.5}" fill="#e9dba9" stroke="#76654c"/>${text(758,672,'Escher museum','text-anchor="middle" font-weight="600"')}${text(758,694,'−40 m · lower room −46 m','text-anchor="middle" class="depth"')}</g><g data-babel="true"><circle cx="410" cy="355" r="87" fill="#dee2c7" fill-opacity=".88" stroke="#6e825e" stroke-width="2"/>${text(410,325,'Library of Babel','text-anchor="middle" font-weight="600"')}${text(410,346,'Five terraces · −8 to −24 m','text-anchor="middle" class="depth"')}<circle cx="410" cy="380" r="18" fill="none" stroke="#597966" stroke-width="3" stroke-dasharray="3 4"/>${text(410,420,'Spiral to the night face','text-anchor="middle" class="depth"')}</g><g fill="none" stroke="#29483c" stroke-width="2"><path d="M842 108V58m-7 10 7-10 7 10"/><path d="M45 686h150m-150-5v10m150-10v10"/></g>${text(842,45,'N','text-anchor="middle"')}${text(120,712,'100 m','text-anchor="middle" class="depth"')}${text(40,738,'Pale areas: rooms · brown lines: walkable passages · blank areas: solid ground','class="depth"')}</svg>`;
+}
+
+export function mountMiddleLayerMap(container,{onVisit}){
+ const el=(tag,value)=>{const n=document.createElement(tag);if(value)n.textContent=value;return n;},root=el('section');root.className='middle-layer-map';root.lang='en';root.dir='ltr';
+ const figure=el('figure'),image=el('img');image.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(middleLayerMapSvg());image.alt='Middle-layer plan: six house basements around Babel, the underground circuit, central passage and Escher museum.';image.width=920;image.height=760;
+ figure.append(image,el('figcaption','The rooms share a map position but sit at the labelled depths. Babel lies above the −40 m circuit; the central stair continues through the cylinder to the night face.'));
+ const nav=el('nav');nav.setAttribute('aria-label','Explore the middle layer');
+ for(const[id,label]of[['middle-basements','Walk the six-house circuit'],['middle-babel','Enter Babel'],['middle-escher','Enter Escher museum'],['middle-section','See the world section']]){const b=el('button',label);b.type='button';b.dataset.coastFocus=id;b.onclick=()=>onVisit(id);nav.append(b);}
+ root.append(figure,nav);container.append(root);return root;
+}

@@ -2,6 +2,7 @@ import {COAST_LANDMARKS, COAST_EXPLORER_COPY, coastMapPoint, coastWalkSvg, coast
 
 import {seminarPathsSvg} from './seminar-houses-data.js?v=sixfold-city-20261118c';
 import {coastVisitor,COAST_POSITION_COPY,coastPositionText,coastDistance} from './coastal-position.js?v=sixfold-city-20261118c';
+import {mountMiddleLayerMap} from './middle-layer-map.js?v=sixfold-city-20261118c';
 
 // Native buttons keep map selection available to touch, keyboard and controllers.
 // The SVG remains an ordinary image, with the same geometry in every language.
@@ -111,7 +112,12 @@ export function mountCoastalMap(container, {language = 'en', state, onVisit, vis
   for (const step of c.steps) steps.append(el('li', step));
   guide.append(help, steps);
   route.append(toggle, status, guide);
-  root.append(intro, layout, route);
+  const layers=el('nav','','coastal-map-layers');layers.setAttribute('aria-label','Map layer');
+  const middle=mountMiddleLayerMap(el('div'),{onVisit});
+  const layerButtons=[];
+  for(const[id,label]of[['surface','Surface city'],['middle','Middle layer · underground']]){const b=button(label,()=>{state.layer=id;updateLayer();});b.dataset.coastFocus='layer-'+id;layerButtons.push([id,b]);layers.append(b);}
+  function updateLayer(){const below=state.layer==='middle';layout.hidden=route.hidden=below;middle.hidden=!below;intro.textContent=below?'Explore the real rooms inside the island: six linked house basements, Babel and the Escher museum. The plan keeps north and east in the same directions as the surface map.':c.intro;for(const[id,b]of layerButtons)b.setAttribute('aria-pressed',String(id===(below?'middle':'surface')));}
+  root.append(layers,intro,layout,route,middle);
   container.append(root);
 
   function select(id) {
@@ -132,5 +138,6 @@ export function mountCoastalMap(container, {language = 'en', state, onVisit, vis
   }
   select(state.selected);
   updateRoute();
+  updateLayer();
   return {root, state};
 }
