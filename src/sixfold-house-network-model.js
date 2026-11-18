@@ -1,6 +1,6 @@
 import {HOUSE as H,HOUSE_LEVELS,houseSurface,houseRoomAt,houseInteractionAt,houseBlocked,inHex} from './transformation-house-model.js';
 
-const TAU=Math.PI*2,EPS=1e-8,ids=['east','southeast','southwest','west','northwest','northeast'],patterns=['penrose','hexagons','triangles','squares','octagons','trihexagonal'],names=['Penrose House','Hexagon House','Triangle House','Square House','Octagon House','Trihexagonal House'];
+const EPS=1e-8,ids=['east','southeast','southwest','west','northwest','northeast'],patterns=['penrose','hexagonal','triangular','square','octagon-square','trihexagonal'],names=['Penrose House','Hexagon House','Triangle House','Square House','Octagon House','Trihexagonal House'];
 export const SIXFOLD_HOUSE_NETWORK=Object.freeze({radius:159.3486742963367,loopRadius:106.3486742963367,y:-40,width:4,walkHalfWidth:1.72,floorThickness:.24,ceilingBottom:-35.2,wallTop:-35,sourceX:H.x,sourceZ:0,galleryExitX:71.1,galleryCaptureX:71.25,crossingSleeve:4.3,crossingExit:3.6,crossingCaptureOffset:1.2});
 export const SIXFOLD_HOUSES=Object.freeze(ids.map((id,index)=>{const angle=index*Math.PI/3;return Object.freeze({id,index,angle,turn:-angle,x:SIXFOLD_HOUSE_NETWORK.radius*Math.cos(angle),z:SIXFOLD_HOUSE_NETWORK.radius*Math.sin(angle),radius:H.radius,well:H.well,pattern:patterns[index],name:names[index]});}));
 export const SIXFOLD_INSTANCES=SIXFOLD_HOUSES;
