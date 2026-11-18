@@ -1,11 +1,12 @@
+import {installEscherDescent} from './escher-descent.js?v=escher-metal-20261118';
 import {PRINT_STUDIES,dependencyOrder} from './escher-print-studies.js?v=1';
-import {ESCHER_DEPTH as D,DEPTH_VIEW,DEPTH_FOCUS,depthFloorAt,depthRoomAt,walkDepth,atGalleryHandoff,perspectiveAligned,tileMismatch,loopResult} from './escher-depth-model.js?v=print-studies1';
-import {buildEscherDepth} from './escher-depth-scene.js?v=house-link1';
+import {ESCHER_DEPTH as D,DEPTH_VIEW,DEPTH_FOCUS,depthFloorAt,depthRoomAt,walkDepth,atGalleryHandoff,perspectiveAligned,tileMismatch,loopResult} from './escher-depth-model.js?v=escher-metal-20261118';
+import {buildEscherDepth} from './escher-depth-scene.js?v=escher-metal-20261118';
 
 const ROOM_NAMES={vestibule:'Gallery passage',hall:'Hall of connected views',perspective:'Perspective chamber',tessellation:'Tessellation chamber',reading:'Room of three doors',stair:'Stair to the loop chamber',loop:'Closed-loop chamber'};
 export function installEscherDepth(M,T,{onGalleryExit=null}={}){
  const built=buildEscherDepth(T);M.scene.add(built.group);M.city.targets.push(...built.targets);
- let active=false,disposed=false,lastDoor='park',lighting=null,lastTime=0,cooldown=0,hold=0,solvedPerspective=false,selectedMark=-1;
+ let descent=null;let active=false,disposed=false,lastDoor='park',lighting=null,lastTime=0,cooldown=0,hold=0,solvedPerspective=false,selectedMark=-1;
  let selectedPrint=null;const dependency={a:true,b:true};
  const tess={motif:0,pairX:false,pairZ:false},directions=[1,1,1,1];let galleryExit=onGalleryExit;
  const old={arrive:M.arrive,update:M.city.update,region:M.city.region,target:M.city.targetInfo,show:M.showExtra};
@@ -26,7 +27,7 @@ export function installEscherDepth(M,T,{onGalleryExit=null}={}){
   return D.portals.filter(p=>Math.abs(M.player.y-M.eye-(M.cityGroundHeight?.(p.x,p.z)??p.y))<1.1&&distance(p)<3.4).sort((a,b)=>distance(a)-distance(b))[0]??null;
  }
  function nearestExhibit(){return active?D.exhibits.filter(p=>Math.abs(M.player.y-M.eye-p.y)<.4&&distance(p)<4.1).sort((a,b)=>distance(a)-distance(b))[0]??null:null;}
- function nearestDoor(){return active?D.portals.find(p=>distance(p.landing)<3.2&&Math.abs(M.player.y-M.eye-p.landing.y)<.4)??null:null;}
+ function nearestDoor(){return active?D.portals.find(p=>p.id!=='escher'&&distance(p.landing)<3.2&&Math.abs(M.player.y-M.eye-p.landing.y)<.4)??null:null;}
  function restoreLight(){
   if(!lighting)return;
   if(lighting.background&&M.scene.background?.copy)M.scene.background.copy(lighting.background);
@@ -36,9 +37,9 @@ export function installEscherDepth(M,T,{onGalleryExit=null}={}){
   if(!lighting)lighting={background:M.scene.background?.clone?.(),fog:M.scene.fog?.color.clone(),density:M.scene.fog?.density};
   M.scene.background?.set?.(0x303b3b);if(M.scene.fog){M.scene.fog.color.set(0x303b3b);M.scene.fog.density=.0014;}built.lamps.visible=true;
  }
- function stop(){active=false;hold=0;dialog.close();restoreLight();delete document.body.dataset.escherDepth;panel.hidden=true;portalButton.hidden=true;}
+ function stop(){descent?.stop();active=false;hold=0;dialog.close();restoreLight();delete document.body.dataset.escherDepth;panel.hidden=true;portalButton.hidden=true;}
  function enter(id='gallery'){
-  if(disposed||blocked())return false;const p=D.portals.find(p=>p.id===id);if(id!=='gallery'&&(!p||!gateOpen(p)))return false;
+  if(disposed||blocked())return false;if(id==='escher')return gateOpen(D.portals[0])&&descent?.approach();const p=D.portals.find(p=>p.id===id);if(id!=='gallery'&&(!p||!gateOpen(p)))return false;
   M.cancelActivity?.();if(active)stop();const landing=p?.landing??{x:136.4,z:115,y:-40,yaw:-Math.PI/2};
   M.arrive({...landing});M.setCityMode();M.clearMovement();M.player.pitch=0;active=true;if(p)lastDoor=p.id;hold=0;document.body.dataset.escherDepth='true';portalButton.hidden=true;setLight();renderPanel();return true;
  }
@@ -49,7 +50,7 @@ export function installEscherDepth(M,T,{onGalleryExit=null}={}){
   if(!active||!atGalleryHandoff(M.player))return false;const p={x:134.9,z:M.player.z,y:-40,yaw:M.player.yaw,pitch:M.player.pitch};
   stop();M.clearMovement();if(typeof galleryExit==='function')galleryExit(p);else{M.arrive({x:136.4,z:115,y:-40,yaw:-Math.PI/2});active=true;document.body.dataset.escherDepth='true';setLight();M.status?.('The gallery connector is not installed. The museum remains open.');}return true;
  }
- M.arrive=function(p){if(active)stop();return old.arrive.call(M,p);};
+ M.arrive=function(p){if(active||descent?.active)stop();return old.arrive.call(M,p);};
  function renderPanel(){
   const paused=blocked();panel.hidden=!active||paused;if(!active)return;
   location.textContent=ROOM_NAMES[depthRoomAt(M.player.x,M.player.z)]||'Underground museum';const e=nearestExhibit(),door=nearestDoor();examine.hidden=!e;exit.hidden=!door;examine.textContent=e?'Explore: '+e.name:'Explore this experiment';exit.textContent=door?'Return to '+door.name:'Return through this door';
@@ -57,13 +58,13 @@ export function installEscherDepth(M,T,{onGalleryExit=null}={}){
   progress.textContent=selectedPrint?PRINT_STUDIES[selectedPrint].title+' → '+PRINT_STUDIES[selectedPrint].question+' '+(e?.id===PRINT_STUDIES[selectedPrint].experiment?'You reached the experiment. Choose Explore to test it.':PRINT_STUDIES[selectedPrint].route):depthRoomAt(M.player.x,M.player.z)==='perspective'?(solvedPerspective?'The triangle joined from one view. Move sideways to expose its separated depths.':hold>0?'The ends meet. Hold this view…':'Compare the three brass floor marks. Face the rods and find a view where all three corners join.'):'Gallery connection: west through the hall. Surface doors: brass floor markers in the hall and the room of three doors.';
  }
  function checkPortals(time=0){
-  if(disposed)return false;if(Number.isFinite(time))lastTime=time;
+  if(disposed)return false;if(descent?.active){portalButton.hidden=true;panel.hidden=true;return false;}if(Number.isFinite(time))lastTime=time;
   if(active){portalButton.hidden=true;if(!valid()){stop();return false;}renderPanel();return handoff();}
-  const p=nearestSurfaceDoor(),paused=blocked();portalButton.hidden=!p||paused;portalButton.disabled=!!p&&!gateOpen(p);portalButton.textContent=p&&!gateOpen(p)?'Align the house stair to reveal the museum entrance':p?.id==='escher'?'Continue from Escher House into the museum · E / A':p?'Enter Escher · Depth & Pattern — '+p.name:'Enter the underground museum';
-  if(p&&!paused&&gateOpen(p)&&time>=cooldown&&distance(p)<.68)return enter(p.id);return false;
+  const p=nearestSurfaceDoor(),paused=blocked();portalButton.hidden=!p||paused;portalButton.disabled=!!p&&!gateOpen(p);portalButton.textContent=p&&!gateOpen(p)?'Align the house stair to reveal the museum entrance':p?.id==='escher'?'Follow the real stair down to the museum':p?'Enter Escher · Depth & Pattern — '+p.name:'Enter the underground museum';
+  if(p&&!paused&&gateOpen(p)&&time>=cooldown&&distance(p)<.68&&p.id!=='escher')return enter(p.id);return false;
  }
  function step(dt,{forward=0,strafe=0,turn=0,boost=false}={}){
-  if(!active)return false;if(!valid()){stop();return false;}if(blocked())return true;
+  if(descent?.step(dt,{forward,strafe,turn,boost}))return true;if(!active)return false;if(!valid()){stop();return false;}if(blocked())return true;
   dt=Number.isFinite(dt)?Math.max(0,Math.min(.1,dt)):0;
   forward=Number.isFinite(forward)?Math.max(-1,Math.min(1,forward)):0;strafe=Number.isFinite(strafe)?Math.max(-1,Math.min(1,strafe)):0;turn=Number.isFinite(turn)?Math.max(-1,Math.min(1,turn)):0;
   M.player.yaw+=turn*dt*1.65;const n=Math.max(1,Math.hypot(forward,strafe)),speed=(boost?7.2:4.6)*dt;
@@ -72,9 +73,9 @@ export function installEscherDepth(M,T,{onGalleryExit=null}={}){
   renderPanel();handoff();return true;
  }
  function interact(){
-  if(blocked())return active;
+  if(descent?.active)return true;if(blocked())return active;
   if(active){if(nearestExhibit()){openExhibit();return true;}const p=nearestDoor();if(p){leave(p.id);return true;}return true;}
-  const p=nearestSurfaceDoor();if(!p)return false;if(!gateOpen(p)){M.status?.('Align the perspective stair upstairs to open Escher’s rear alcove.');return true;}return enter(p.id);
+  const p=nearestSurfaceDoor();if(!p)return false;if(!gateOpen(p)){M.status?.('Align the perspective stair upstairs to open Escher’s rear alcove.');return true;}if(p.id==='escher'){M.pointToward?.({x:228,z:92});return true;}return enter(p.id);
  }
  function faceTriangle(){M.clearMovement();M.pointToward?.(DEPTH_FOCUS);M.player.yaw=Math.atan2(-(DEPTH_FOCUS.x-M.player.x),-(DEPTH_FOCUS.z-M.player.z));M.player.pitch=Math.atan2(DEPTH_FOCUS.y-M.player.y,Math.hypot(DEPTH_FOCUS.x-M.player.x,DEPTH_FOCUS.z-M.player.z));}
  function moveMark(){
@@ -108,11 +109,13 @@ export function installEscherDepth(M,T,{onGalleryExit=null}={}){
  function openExhibit(id=nearestExhibit()?.id){
   const near=nearestExhibit();if(!active||!near||near.id!==id||blocked())return false;M.clearMovement();renderExhibit(id);dialog.showModal();close.focus();return true;
  }
- M.city.region=(x,z)=>active&&depthRoomAt(x,z)?{id:'escher-depth',title:'Escher · '+(ROOM_NAMES[depthRoomAt(x,z)]||'Depth & Pattern'),inside:true}:old.region(x,z);
+ M.city.region=(x,z)=>descent?.active?{id:'escher-stair',title:'Escher · stair to the museum',inside:true}:active&&depthRoomAt(x,z)?{id:'escher-depth',title:'Escher · '+(ROOM_NAMES[depthRoomAt(x,z)]||'Depth & Pattern'),inside:true}:old.region(x,z);
  M.city.targetInfo=d=>d?.escherDepthDoor?{kind:'escher-depth-door',data:d,title:'Enter Escher · Depth & Pattern'}:d?.escherDepthExhibit?{kind:'escher-depth-exhibit',data:d,title:'Explore the experiment'}:old.target(d);
  M.showExtra=info=>info?.kind==='escher-depth-door'?(nearestSurfaceDoor()?.id===info.data.escherDepthDoor&&interact(),true):info?.kind==='escher-depth-exhibit'?(openExhibit(info.data.escherDepthExhibit),true):old.show?.(info);
  M.city.update=(...args)=>{old.update(...args);if(disposed)return;checkPortals(args[1]);if(active)setLight();};
  function followPrint(id){if(!PRINT_STUDIES[id])return false;selectedPrint=id;M.status?.(PRINT_STUDIES[id].title+': '+(globalThis.window?.CITY_ESCHER?.passageOpen?'Follow the rear alcove into the museum.':'First align the house stair, then follow the rear alcove into the museum.'));if(active)renderPanel();return true;}
- const api={followPrint,get selectedPrint(){return selectedPrint;},built,step,checkPortals,interact,enter,leave,stop,openExhibit,moveMark,faceTriangle,setGalleryExit(fn){galleryExit=fn;},get active(){return active;},get progress(){return{perspective:solvedPerspective,tessellation:tileMismatch(tess).solved,loop:loopResult(directions).closed};},galleryBoundary:D.gallery};M.escherDepth=api;
- addEventListener('pagehide',()=>{disposed=true;stop();if(M.arrive!==old.arrive)M.arrive=old.arrive;M.city.update=old.update;M.city.region=old.region;M.city.targetInfo=old.target;M.showExtra=old.show;for(const t of built.targets){const i=M.city.targets.indexOf(t);if(i>=0)M.city.targets.splice(i,1);}built.dispose();for(const n of[panel,portalButton,dialog])n.remove();},{once:true});return api;
+ descent=installEscherDescent(M,T,{gateOpen:()=>gateOpen(D.portals[0]),onBegin:fromBelow=>{stop();if(fromBelow)globalThis.window?.CITY_ESCHER?.setPassage?.(true,1);setLight();},onStop:restoreLight,onMuseum:()=>{active=true;document.body.dataset.escherDepth='true';setLight();renderPanel();}});
+ built.group.add(descent.built.group);
+ const api={descent,followPrint,get selectedPrint(){return selectedPrint;},built,step,checkPortals,interact,enter,leave,stop,openExhibit,moveMark,faceTriangle,setGalleryExit(fn){galleryExit=fn;},get active(){return active||!!descent?.active;},get progress(){return{perspective:solvedPerspective,tessellation:tileMismatch(tess).solved,loop:loopResult(directions).closed};},galleryBoundary:D.gallery};M.escherDepth=api;
+ addEventListener('pagehide',()=>{disposed=true;stop();descent.dispose();if(M.arrive!==old.arrive)M.arrive=old.arrive;M.city.update=old.update;M.city.region=old.region;M.city.targetInfo=old.target;M.showExtra=old.show;for(const t of built.targets){const i=M.city.targets.indexOf(t);if(i>=0)M.city.targets.splice(i,1);}built.dispose();for(const n of[panel,portalButton,dialog])n.remove();},{once:true});return api;
 }

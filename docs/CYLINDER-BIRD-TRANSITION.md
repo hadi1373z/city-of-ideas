@@ -2,7 +2,7 @@
 
 The painted bird field, curved relief and living flock use the same original
 opposite-edge tile. This is original geometry, not a copied Escher print.
-The complete warm cylinder and its real doors remain unchanged.
+The complete cylinder and its real doors remain. Its exposed lining is now brushed-silver aluminium, with a restrained specular response and subtle directional grain. The original ivory, ochre and slate birds retain their colours, shape, animated ownership and landing positions.
 
 The dense field is a single continuous painted surface. The long black feather
 strokes are removed; only small eyes remain. Production uses no horizontal

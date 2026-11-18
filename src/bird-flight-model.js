@@ -1,5 +1,5 @@
 import {NIGHT_OBSERVATORY as O} from './night-observatory-model.js?v=ceiling-20261117';
-import {BIRD_TILE_OUTLINE,createCylinderMetamorphosisLayout,cylinderTilePoint,cylinderDepartureCell} from './cylinder-metamorphosis-scene.js?v=ceiling-20261117';
+import {BIRD_TILE_OUTLINE,createCylinderMetamorphosisLayout,cylinderTilePoint,cylinderDepartureCell} from './cylinder-metamorphosis-scene.js?v=escher-metal-20261118';
 const TAU=2*Math.PI,clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)),smooth=x=>{x=clamp(x);return x*x*x*(10+x*(-15+6*x));},mix=(a,b,t)=>a+(b-a)*t;
 export const BIRD_FLIGHT=Object.freeze({coordinateSpace:'lower-local +Y up; physical wrapper (0,-96,0), rotation X=PI',count:64,duration:96,ceilingY:O.deckY-O.deckThickness-.015,deckY:O.deckY,ceilingRadius:O.deckRadius-.04,tileSize:.9,tileScale:.986,gateY:-8,coreRadius:11,cruiseY:19.9,approachY:20.6,telescope:{x:0,z:-2.5,radius:1.8},seat:{x:-4.8,z:3.5,radius:1.7}});
 export function birdCeilingPoint(tile,p){const s=tile.size*tile.scale;return{x:tile.x+(p[0]-.5)*s,y:BIRD_FLIGHT.ceilingY,z:tile.z+(p[1]-.5)*s};}

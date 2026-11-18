@@ -1,3 +1,4 @@
+import {DESCENT} from './escher-descent-model.js?v=escher-metal-20261118';
 // Original museum geometry. Coordinates are in the ordinary +Y-up city world.
 const rect=(id,minX,maxX,minZ,maxZ,y=-40)=>Object.freeze({id,minX,maxX,minZ,maxZ,y});
 export const ESCHER_DEPTH=Object.freeze({
@@ -10,7 +11,7 @@ export const ESCHER_DEPTH=Object.freeze({
  ]),
  stair:Object.freeze({minX:181,maxX:188,minZ:132,maxZ:156,top:-40,bottom:-46,steps:48}),
  portals:Object.freeze([
-  Object.freeze({id:'escher',name:'Escher House · entrance pavilion',x:228,z:104,y:.13,gated:true,landing:{x:240,z:115,y:-40,yaw:-Math.PI/2}}),
+  Object.freeze({id:'escher',name:'Escher House · walkable stair',x:228,z:104,y:.13,gated:true,landing:{x:225,z:107,y:-40,yaw:Math.PI}}),
   Object.freeze({id:'park',name:'Park approach',x:-84,z:-110,y:.13,landing:{x:174,z:114,y:-40,yaw:-Math.PI/2}}),
   Object.freeze({id:'study',name:'Study-house lane',x:256,z:-112,y:.13,landing:{x:260,z:121,y:-40,yaw:Math.PI/2}})
  ]),
@@ -28,7 +29,7 @@ const wz=(z,x0,x1,y=-40,height=11)=>({...rect('wall',x0,x1,z-.18,z+.18,y),height
 export const ESCHER_DEPTH_WALLS=Object.freeze([
  wx(135,105,112),wx(135,118,125),wz(105,135,160),wz(125,135,160),
  wx(160,98,112),wx(160,118,132),wz(98,160,194),wz(132,160,181),wz(132,188,232),
- wx(194,98,112),wx(194,118,132),wz(98,194,210),wz(98,216,232),
+ wx(194,98,112),wx(194,118,132),wz(98,194,210),wz(98,216,223.8),wz(98,229.2,232),
  wx(232,98,112),wx(232,118,132),wz(98,232,270),wz(132,232,270),wx(270,98,132),
  wx(194,66,98),wz(66,194,232),wx(232,66,98),
  wx(181,132,156,-46,17),wx(188,132,156,-46,17),
@@ -49,6 +50,7 @@ export function depthRoomAt(x,z){
  return inRect(ESCHER_DEPTH.stair,x,z)?'stair':ESCHER_DEPTH.rooms.find(r=>inRect(r,x,z))?.id??null;
 }
 export function canWalkDepth(x,z,{radius=ESCHER_DEPTH.radius,fromY=null}={}){
+ const shaft=DESCENT.shaft;if(inRect(shaft,x,z)&&!(Math.abs(x-225)<.7&&z>=104))return false;
  const y=depthFloorAt(x,z);if(y===null||Number.isFinite(fromY)&&Math.abs(y-fromY)>.3)return false;
  return ![...ESCHER_DEPTH_WALLS,...ESCHER_DEPTH_OBSTACLES].some(b=>inRect(b,x,z,radius)&&Math.abs(y-b.y)<18);
 }

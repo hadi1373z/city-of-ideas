@@ -4,7 +4,7 @@
 `src/escher-depth.js` add one connected museum within the island. All coordinates
 are ordinary city coordinates with +Y up. The upper Escher house remains at
 `(228, 115)`, including its original viewpoint stair, shutters, reproductions,
-links, and artwork credits. This module does not change the house or its save.
+links, and artwork credits. The saved alignment state and credited prints remain unchanged.
 
 ## Physical plan
 
@@ -29,17 +29,15 @@ in both directions. Walls, roof slabs, exhibit cases, floor bounds and treads
 are real geometry; navigation uses the same coordinates. The floor has no
 invisible route into the surrounding solid island.
 
-Three surface thresholds lead to this same geometry, rather than loading a page
-or creating a second copy:
+Two linked surface doors and one physical house stair lead to the same museum:
 
 | Door ID | Surface door | Interior landing |
 | --- | --- | --- |
-| `escher` | Escher rear alcove `(228,104,.13)` | `(240,115,−40)` |
+| `escher` | Rear alcove `(228,104,.13)` | Eight real flights to `(225,107,−40)` |
 | `park` | Park approach `(−84,−110,.13)` | Hall `(174,114,−40)` |
 | `study` | Study-house lane `(256,−112,.13)` | `(260,121,−40)` |
 
-The doors are linked thresholds between surface and interior. They do not claim
-to contain an unmodelled forty-metre staircase. The original Escher threshold
+The Park and Study doors retain their linked thresholds. The Escher-house doorway no longer jumps between levels: it opens onto a real 40.13m descent. The original Escher threshold
 requires `window.CITY_ESCHER.passageOpen`. The other two doors do not bypass or
 change the original house puzzle. Surface activation requires city mode and a
 valid surface height. Returning through a door places the visitor safely south
@@ -135,10 +133,16 @@ gates, mode/height guards, modal pauses, return handoff, lighting and owned clea
 
 ## House as museum entrance pavilion
 
-The surface house keeps its footprint, four credited prints, alignment puzzle and saved passage. A continuous shallow barrel vault replaces the old open beams; its sealed end cheeks meet the door lintels. An original periodic three-colour lozenge field covers the floor and curves over the ceiling, creating a cube/perspective ambiguity without claiming Penrose aperiodicity. The museum route panel is now on the unoccupied right wall before the shutters, so the underground destination is visible on arrival. Brass alcove inlays preserve the entrance axis. The Escher threshold has an open frame rather than an opaque slab hiding the rear print; proximity and E/A still activate the existing shared underground interior after solving the house puzzle. Returning uses the same alcove with the existing cooldown. This is a linked threshold, not a modelled forty-metre stair. The surface puzzle panel is now height-gated so it cannot appear over the museum below.
+The surface house keeps its footprint, four credited prints, alignment puzzle and saved passage. A continuous shallow barrel vault replaces the old open beams; its sealed end cheeks meet the door lintels. An original periodic three-colour lozenge field covers the floor and curves over the ceiling, creating a cube/perspective ambiguity without claiming Penrose aperiodicity. The museum route panel is on the right wall before the shutters, so the underground destination is visible on arrival. Brass alcove inlays preserve the entrance axis. Waterfall is preserved on the alcove’s west wall. Behind it, eight connected switchbacks with 320 real treads descend to the existing museum. No automatic portal activation remains at this house; walking owns progress in both directions. The surface puzzle panel is now height-gated so it cannot appear over the museum below.
 
 ## Print-to-experiment journeys
 
 Each upper-house print now offers a specific study prompt. Following a print selects an in-memory question and points toward the existing rear threshold; it neither transports the visitor nor bypasses the alignment puzzle. Museum guidance names the physical route. Ascending and Descending leads to the signed-flight model with a four-up reset; Waterfall and Relativity lead to the separated-depth projection experiment (which does not model different gravity fields); Drawing Hands leads to a two-task dependency experiment at the reading desk. These are original finite models, with their limits stated. No new achievements or automatic private-note writes are introduced.
 
 Direct surface arrival: `?arrival=escher-house`. Roof/floor support, grazing edge closure, both doorways and the original projection are checked in `tests/escher-entrance-architecture.mjs`.
+
+## Physical house descent · 18 November 2026
+
+`escher-descent-model.js` shares eight 12m flights, seven turning landings, the top alcove opening and the exact bottom museum doorway. `escher-descent.js` builds supported pale treads, slate enclosing walls and repeated low arcades inspired by Escher’s spatial layering; it is original ordinary Euclidean architecture. The first flight cuts the actual lawn, island foundation and alcove floor. The shaft cuts both intersected museum ceilings and the room divider. Thick walls enclose the entire journey. The mineral section and middle-layer map include this actual shaft.
+
+The controller retains visitor position at both seams, chooses a floor only near the previous height, pauses for modals and releases movement in the outgoing direction. Walking away from the bottom landing cannot recapture it. Returning from below opens the physical surface shutter without recording a solved puzzle or changing private progress. Park and Study doors remain unchanged. `tests/escher-descent.mjs` checks every tread at three widths, headroom, both directions and actual ground removal; the runtime fixture drives the real controller all the way down and up without a jump.

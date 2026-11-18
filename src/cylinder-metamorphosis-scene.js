@@ -9,6 +9,7 @@ const top = bottom.toReversed().map(([x,y]) => [x,y+1]);
 const left = right.toReversed().map(([x,y]) => [x-1,y]);
 export const BIRD_TILE_EDGES = Object.freeze({bottom, right, top, left});
 export const BIRD_TILE_OUTLINE = Object.freeze([...bottom.slice(0,-1),...right.slice(0,-1),...top.slice(0,-1),...left.slice(0,-1)].map(p => Object.freeze(p)));
+export const CYLINDER_ALUMINIUM=0xbdc8d0;
 const palette = [0xe0d7bd, 0xb88b58, 0x56727b];
 const rasterCache=new Map();
 /** A small original repeating image of the very same geometric birds. Scanline
@@ -77,7 +78,7 @@ export function createCylinderMetamorphosisLayout({radius=20.94,columns=84,rows=
     {id:'lower-entry',angle0:-.15,angle1:.15,bottom:-96.3,top:-92.4},
     ...[-1,1].map(sign=>({id:'middle-platform-corner-'+sign,angle0:sign<0?-.17:.12,angle1:sign<0?-.12:.17,bottom:-48.25,top:-46.75}))
   ];
-  return{radius,columns,rows,width,rowHeight,topY,tiles,birds,apertures,wallTop:-24,wallBottom:-96.18,departureCount,coverage:{fullThroughRow:27,taperFirstRow:28,taperLastRow:34,plainFromRow:35,backing:'complete warm honey stone'},
+  return{radius,columns,rows,width,rowHeight,topY,tiles,birds,apertures,wallTop:-24,wallBottom:-96.18,departureCount,coverage:{fullThroughRow:27,taperFirstRow:28,taperLastRow:34,plainFromRow:35,backing:'complete brushed aluminium'},
     credit:'Original bird polygons and low-poly sculpture for City of Ideas; translational opposite-edge construction, not copied artwork.',
     bounds:{minRadius:18.8,maxRadius:21.03,top:-26.6,bottom:-93.5},
     routeClearance:{stairOuterRadius:17.66,archOuterRadius:18.12}};
@@ -118,7 +119,7 @@ export function buildCylinderMetamorphosis(T,options={}) {
   group.name='Metamorphosis · interlocking wall birds become a living flock';
   group.userData.cylinderMetamorphosis=true;group.userData.credit=layout.credit;
   const material=colour=>own(new T.MeshLambertMaterial({color:colour,emissive:colour,emissiveIntensity:.065,side:T.DoubleSide}));
-  const stoneMaterials=palette.map(material),inkMaterial=material(0x283e43),flightMaterial=own(new T.MeshLambertMaterial({color:0xffffff,vertexColors:true,side:T.DoubleSide,emissive:0x746b55,emissiveIntensity:.06}));
+  const stoneMaterials=palette.map(material),aluminiumRelief=own(new T.MeshPhongMaterial({color:0xffffff,vertexColors:true,specular:0xa4b2bd,shininess:48,side:T.DoubleSide})),inkMaterial=material(0x283e43),flightMaterial=own(new T.MeshLambertMaterial({color:0xffffff,vertexColors:true,side:T.DoubleSide,emissive:0x746b55,emissiveIntensity:.06}));
   const outline=BIRD_TILE_OUTLINE.map(p=>new T.Vector2(...p)),faces=T.ShapeUtils.triangulateShape(outline,[]),batches=Array.from({length:4},()=>({positions:[],indices:[]}));
   const tri=(batch,a,b,c)=>{const i=batch.positions.length/3;batch.positions.push(...a,...b,...c);batch.indices.push(i,i+1,i+2);};
   const holes=apertureBoxes(layout);
@@ -142,7 +143,7 @@ export function buildCylinderMetamorphosis(T,options={}) {
 
   }
   layout.tiles.filter(tile=>tile.kept&&!tile.intermediate&&!tile.departure).forEach(panel);
-  // Warm backing replaces visible grey retaining stone in every grout line and
+  // Brushed aluminium backs the complete field and every open departure row;
   // behind the full-height east field. Only genuine portals interrupt it.
   const us=[...new Set([0,layout.columns,...Array.from({length:layout.columns*2+1},(_,i)=>i/2),...holes.flatMap(h=>[h[0],h[1]]).filter(u=>u>0&&u<layout.columns)])].sort((a,b)=>a-b);
   const ys=[...new Set([layout.wallBottom,layout.wallTop,...layout.apertures.flatMap(a=>[a.bottom,a.top]).filter(y=>y>layout.wallBottom&&y<layout.wallTop)])].sort((a,b)=>a-b);
@@ -159,7 +160,7 @@ export function buildCylinderMetamorphosis(T,options={}) {
   const bandAt=y=>Math.max(0,Math.min(reliefBands.length-1,Math.floor((layout.wallTop-y)/bandHeight)));
   function clipHeight(poly,height,above){const out=[],sign=above?1:-1;for(let i=0;i<poly.length;i++){const a=poly[i],b=poly[(i+1)%poly.length],u=(a[1]-height)*sign,v=(b[1]-height)*sign;if(u>=0)out.push(a);if((u<0)!==(v<0)){const t=u/(u-v);out.push(a.map((value,k)=>value+(b[k]-value)*t));}}return out;}
   batches.forEach((batch,colour)=>{for(let i=0;i<batch.indices.length;i+=3){const points=batch.indices.slice(i,i+3).map(id=>batch.positions.slice(id*3,id*3+3)),first=bandAt(Math.max(...points.map(p=>p[1]))),last=bandAt(Math.min(...points.map(p=>p[1])));for(let id=first;id<=last;id++){const band=reliefBands[id],poly=first===last?points:clipHeight(clipHeight(points,band.bottom,true),band.top,false);for(let j=1;j+1<poly.length;j++)tri(band.batches[colour],poly[0],poly[j],poly[j+1]);}}});
-  for(const band of reliefBands){band.batches.forEach((batch,i)=>{if(!batch.positions.length)return;const mesh=new T.Mesh(geometry(batch.positions,batch.indices),i===3?inkMaterial:stoneMaterials[i]);mesh.name='Local bird relief band '+band.id+' · '+(i===3?'feather and eye inlays':['ivory','ochre','slate'][i]);mesh.userData.cylinderReliefBand=band.id;group.add(mesh);meshes.push(mesh);wallMeshes.push(mesh);band.meshes.push(mesh);band.triangles+=batch.indices.length/3;});delete band.batches;}
+  for(const band of reliefBands){band.batches.forEach((batch,i)=>{if(!batch.positions.length)return;const g=geometry(batch.positions,batch.indices);if(i===1){const colours=[];for(let k=0;k<batch.positions.length;k+=3){const c=new T.Color(Math.hypot(batch.positions[k],batch.positions[k+2])>21?CYLINDER_ALUMINIUM:palette[1]);colours.push(c.r,c.g,c.b);}g.setAttribute('color',new T.Float32BufferAttribute(colours,3));}const mesh=new T.Mesh(g,i===3?inkMaterial:i===1?aluminiumRelief:stoneMaterials[i]);mesh.name='Local bird relief band '+band.id+' · '+(i===3?'feather and eye inlays':['ivory','ochre','slate'][i]);mesh.userData.cylinderReliefBand=band.id;group.add(mesh);meshes.push(mesh);wallMeshes.push(mesh);band.meshes.push(mesh);band.triangles+=batch.indices.length/3;});delete band.batches;}
   batches.forEach(batch=>{batch.positions.length=0;batch.indices.length=0;});
   // The distant proxy preserves the complete cylinder and the exact same real
   // portal cuts. Only its shallow extrusion is replaced by an original texture.
@@ -168,11 +169,11 @@ export function buildCylinderMetamorphosis(T,options={}) {
   for(let i=1;i<us.length;i++)for(let j=1;j<ys.length;j++){const angle=(us[i-1]+us[i])/2*TAU/layout.columns,y=(ys[j-1]+ys[j])/2;if(cylinderWallOpening(layout,angle,y))continue;const p=[[us[i-1],ys[j-1]],[us[i],ys[j-1]],[us[i],ys[j]],[us[i-1],ys[j]]],k=proxyPositions.length/3;for(const q of p){proxyPositions.push(...wallPoint(layout,q,layout.radius));proxyUvs.push(q[0]/3,(q[1]-layout.topY)/(layout.rowHeight*3));}proxyIndices.push(k,k+1,k+2,k,k+2,k+3);}
   const proxyGeometry=geometry(proxyPositions,proxyIndices);proxyGeometry.setAttribute('uv',new T.Float32BufferAttribute(proxyUvs,2));
   const taper=createBirdTaperPixels(layout),taperTexture=own(new T.DataTexture(taper.pixels,taper.width,taper.height,T.RGBAFormat));taperTexture.magFilter=taperTexture.minFilter=T.NearestFilter;taperTexture.generateMipmaps=false;taperTexture.needsUpdate=true;
-  const proxyMaterial=own(new T.MeshLambertMaterial({color:0xffffff,map:texture,side:T.DoubleSide,emissive:0x8e805e,emissiveIntensity:.04}));
+  const proxyMaterial=own(new T.MeshPhongMaterial({color:0xffffff,map:texture,side:T.DoubleSide,specular:0x9aaab7,shininess:48}));
   proxyMaterial.userData.birdTaper={...taper,texture:taperTexture};
   const activeHeight={value:new T.Vector2(1,0)};
   proxyMaterial.userData.activeReliefHeight=activeHeight;
-  proxyMaterial.onBeforeCompile=shader=>{shader.uniforms.birdTaper={value:taperTexture};shader.uniforms.birdStone={value:new T.Color(palette[1])};shader.uniforms.birdColumns={value:layout.columns};shader.uniforms.birdTaperSize={value:new T.Vector2(taper.width,taper.height)};shader.uniforms.birdActiveHeight=activeHeight;shader.uniforms.birdTopY={value:layout.topY};shader.uniforms.birdRowHeight={value:layout.rowHeight};shader.fragmentShader='uniform sampler2D birdTaper;uniform vec3 birdStone;uniform float birdColumns;uniform vec2 birdTaperSize;uniform vec2 birdActiveHeight;uniform float birdTopY;uniform float birdRowHeight;\n'+shader.fragmentShader.replace('#include <map_fragment>',`#ifdef USE_MAP
+  proxyMaterial.onBeforeCompile=shader=>{shader.uniforms.birdTaper={value:taperTexture};shader.uniforms.birdStone={value:new T.Color(CYLINDER_ALUMINIUM)};shader.uniforms.birdColumns={value:layout.columns};shader.uniforms.birdTaperSize={value:new T.Vector2(taper.width,taper.height)};shader.uniforms.birdActiveHeight=activeHeight;shader.uniforms.birdTopY={value:layout.topY};shader.uniforms.birdRowHeight={value:layout.rowHeight};shader.fragmentShader='uniform sampler2D birdTaper;uniform vec3 birdStone;uniform float birdColumns;uniform vec2 birdTaperSize;uniform vec2 birdActiveHeight;uniform float birdTopY;uniform float birdRowHeight;\n'+shader.fragmentShader.replace('#include <map_fragment>',`#ifdef USE_MAP
     float birdPhysicalY=birdTopY+vMapUv.y*3.0*birdRowHeight;
     if(birdPhysicalY>=birdActiveHeight.x&&birdPhysicalY<birdActiveHeight.y)discard;
     vec2 birdGrid=vMapUv*3.0;vec2 birdCell=floor(birdGrid);float birdRow=-birdCell.y;
@@ -183,8 +184,10 @@ export function buildCylinderMetamorphosis(T,options={}) {
     if(birdRow<28.0){birdCoverage=1.0;birdUv=vMapUv;}
     vec4 birdSample=texture2D(map,birdUv);
     diffuseColor.rgb*=mix(birdStone,birdSample.rgb,birdCoverage);
-  #endif`);};proxyMaterial.customProgramCacheKey=()=> 'city-bird-taper-proxy-local-relief-v2';
-  const proxy=new T.Mesh(proxyGeometry,proxyMaterial);proxy.name='Warm complete cylinder · bird field tapers into the flight';group.add(proxy);
+    float brush=.012*sin(birdPhysicalY*115.0+sin(vMapUv.x*64.0)*.6);
+    diffuseColor.rgb*=1.0+brush*(1.0-birdCoverage);
+  #endif`);};proxyMaterial.customProgramCacheKey=()=> 'city-bird-taper-brushed-aluminium-v3';
+  const proxy=new T.Mesh(proxyGeometry,proxyMaterial);proxy.name='Brushed aluminium cylinder · bird field tapers into flight';group.add(proxy);
   let detail='relief',focusY=layout.topY,activeBand=null;
   function setDetail(next,focus=focusY){if(next!=='proxy'&&next!=='relief')throw new RangeError('Use proxy or relief cylinder detail');detail=options.paintedField?'proxy':next;if(Number.isFinite(focus))focusY=focus;activeBand=detail==='relief'?reliefBands[bandAt(focusY)]:null;wallMeshes.forEach(mesh=>mesh.visible=!!activeBand&&mesh.userData.cylinderReliefBand===activeBand.id);activeHeight.value.set(activeBand?.bottom??1,activeBand?.top??0);proxy.visible=true;group.userData.cylinderDetail=detail;group.userData.cylinderReliefBand=activeBand?.id??null;}
   setDetail(detail);

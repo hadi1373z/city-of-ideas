@@ -1,9 +1,9 @@
 import {buildSixfoldHousePassages} from './sixfold-house-passages-scene.js?v=makers-passages-20261118';
-import {buildSectionEarth} from './world-section-earth.js?v=makers-passages-20261118';
-import {ESCHER_DEPTH} from './escher-depth-model.js?v=bird-peel-20261117b';
+import {buildSectionEarth} from './world-section-earth.js?v=escher-metal-20261118';
+import {ESCHER_DEPTH} from './escher-depth-model.js?v=escher-metal-20261118';
 import {createOceanMaterial,updateOceanMaterial} from './ocean-surface.js?v=makers-passages-20261118';
 import {buildLowerLandscape} from './lower-landscape-scene.js?v=bird-peel-20261117b';
-import {buildCylinderMetamorphosis} from './cylinder-metamorphosis-scene.js?v=bird-peel-20261117b';
+import {buildCylinderMetamorphosis} from './cylinder-metamorphosis-scene.js?v=escher-metal-20261118';
 import {WORLD_CYLINDER as W,lowerMatrix,GALLERY_TUNNEL} from './world-cylinder-model.js?v=bird-peel-20261117b';
 export function buildWorldCylinder(T){
  const group=new T.Group();group.name='One cylindrical world · two inhabited faces';group.userData.worldCylinder=true;

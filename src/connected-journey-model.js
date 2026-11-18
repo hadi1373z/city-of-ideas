@@ -1,6 +1,6 @@
 import {BABEL,babelDesk,surfaceAt as babelSurface,walkLibrary} from './babel-library-model.js?v=city-night-20261117';
 import {UPPER,LOWER,pointAt} from './two-face-gallery-model.js?v=city-night-20261117';
-import {ESCHER_DEPTH as D,depthRoomAt,depthFloorAt,canWalkDepth} from './escher-depth-model.js?v=city-night-20261117';
+import {ESCHER_DEPTH as D,depthRoomAt,depthFloorAt,canWalkDepth} from './escher-depth-model.js?v=escher-metal-20261118';
 import {lowerLocal,lowerPhysical,GALLERY_TUNNEL,tunnelContains} from './world-cylinder-model.js?v=city-night-20261117';
 import {MATH_FACULTY as F,facultyCanStand,facultyColliders} from './math-faculty-model.js?v=makers-passages-20261118';
 
@@ -46,7 +46,7 @@ function babelRoute(c){
 }
 const museumNodes=[
  [136.4,115],[154,115],[166,115],[174,115],[198,115],[200,124],[213,124],[225,124],[230,115],[240,115],[260,115],
- [213,94],[213,100],[224,100],[202,90],[202,73],[213,73],
+ [213,94],[213,100],[221.8,100],[202,90],[202,73],[213,73],
  [184.5,130],[184.5,138],[184.5,150],[184.5,158],[184.5,162],[197,163]
 ].map(([x,z])=>({x,z,y:depthFloorAt(x,z)}));
 function clearMuseum(a,b){let y=a.y;for(const p of line(a,b,.18)){const h=depthFloorAt(p.x,p.z);if(!canWalkDepth(p.x,p.z,{fromY:y}))return false;y=h;}return true;}

@@ -1,4 +1,5 @@
-import {ESCHER_DEPTH as D,ESCHER_DEPTH_WALLS as WALLS,DEPTH_TRIANGLE,tilePolygon,loopResult} from './escher-depth-model.js?v=house-link1';
+import {DESCENT,outsideRectangle} from './escher-descent-model.js?v=escher-metal-20261118';
+import {ESCHER_DEPTH as D,ESCHER_DEPTH_WALLS as WALLS,DEPTH_TRIANGLE,tilePolygon,loopResult} from './escher-depth-model.js?v=escher-metal-20261118';
 
 export function buildEscherDepth(T,{canvas=()=>document.createElement('canvas'),loadTexture=typeof globalThis.document?.createElementNS==='function'?url=>new T.TextureLoader().load(url):null}={}){
  const group=new T.Group();group.name='Escher · connected underground museum';group.userData.escherDepth=true;
@@ -11,7 +12,7 @@ export function buildEscherDepth(T,{canvas=()=>document.createElement('canvas'),
   const c=canvas();c.width=1536;c.height=256;const ctx=c.getContext('2d');ctx.fillStyle='#e6e0c8';ctx.fillRect(0,0,c.width,c.height);ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle='#273f41';ctx.font='bold 72px Georgia';ctx.fillText(text,768,134,1460);
   const texture=own(new T.CanvasTexture(c));texture.colorSpace=T.SRGBColorSpace;const mesh=new T.Mesh(own(new T.PlaneGeometry(width,height)),own(new T.MeshBasicMaterial({map:texture,side:T.DoubleSide,toneMapped:false})));mesh.position.set(x,y,z);mesh.rotation.y=yaw;parent.add(mesh);return mesh;
  }
- for(const r of D.rooms){box(r.maxX-r.minX,.4,r.maxZ-r.minZ,(r.minX+r.maxX)/2,r.y-.2,(r.minZ+r.maxZ)/2,floor);const top=r.id==='loop'?D.lowerCeiling:D.ceiling;box(r.maxX-r.minX,.45,r.maxZ-r.minZ,(r.minX+r.maxX)/2,top+.225,(r.minZ+r.maxZ)/2,roof);}
+ for(const r of D.rooms){box(r.maxX-r.minX,.4,r.maxZ-r.minZ,(r.minX+r.maxX)/2,r.y-.2,(r.minZ+r.maxZ)/2,floor);const top=r.id==='loop'?D.lowerCeiling:D.ceiling;for(const q of outsideRectangle(r,DESCENT.shaft))box(q.maxX-q.minX,.45,q.maxZ-q.minZ,(q.minX+q.maxX)/2,top+.225,(q.minZ+q.maxZ)/2,roof);}
  for(const b of WALLS){box(b.maxX-b.minX,b.height,b.maxZ-b.minZ,(b.minX+b.maxX)/2,b.y+b.height/2,(b.minZ+b.maxZ)/2);box(b.maxX-b.minX+.02,.16,b.maxZ-b.minZ+.02,(b.minX+b.maxX)/2,b.y+.12,(b.minZ+b.maxZ)/2,ink);}
  // The quiet masonry is articulated by thin cornices and ribs, rather than
  // free-standing props in the visitor's route. All relief stays in wall space.
@@ -26,9 +27,9 @@ export function buildEscherDepth(T,{canvas=()=>document.createElement('canvas'),
  // A broad, genuinely open six-metre doorway receives the central gallery tunnel.
  label('CENTRAL GALLERY',135.51,-32.75,115,5,.5,interior,Math.PI/2);
  label('ESCHER · DEPTH & PATTERN',177,-31.25,98.25,11,.75);
- const triangleSign=label('ONE TRIANGLE, SEVERAL DEPTHS',213,-32.3,98.25,24,1.15);triangleSign.userData.escherDepthExhibit='perspective';targets.push(triangleSign);
+ const triangleSign=label('ONE TRIANGLE, SEVERAL DEPTHS',213,-32.3,98.25,18,1.15);triangleSign.userData.escherDepthExhibit='perspective';targets.push(triangleSign);
  const tileSign=label('EDGES THAT AGREE',213,-30.1,66.25,18,1.1);tileSign.userData.escherDepthExhibit='tessellation';targets.push(tileSign);
- label('ONE MUSEUM · THREE SURFACE DOORS',251,-34.5,98.25,24,1.1);
+ label('ONE MUSEUM · TWO DOORS & A STAIR',251,-34.5,98.25,24,1.1);
  const loopSign=label('CAN EVERY FLIGHT RISE?',196,-37.5,156.25,22,1.1);loopSign.userData.escherDepthExhibit='loop';targets.push(loopSign);
  label('Original geometric experiments · English',177,-38.65,98.25,7.5,.32);
  // Reuse the credited prints already supplied with the surface Escher house.
@@ -44,7 +45,7 @@ export function buildEscherDepth(T,{canvas=()=>document.createElement('canvas'),
  DEPTH_TRIANGLE.forEach(([a,b],i)=>{const av=new T.Vector3(a.x,a.y,a.z),bv=new T.Vector3(b.x,b.y,b.z),delta=bv.clone().sub(av);obj.position.copy(av.clone().add(bv).multiplyScalar(.5));obj.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),delta.clone().normalize());obj.scale.set(1,delta.length(),1);obj.updateMatrix();rods.setMatrixAt(i,obj.matrix);});rods.instanceMatrix.needsUpdate=true;interior.add(rods);
  for(const x of[209.5,213,216.5]){box(.9,.025,.9,x,-39.98,124,brass);box(.55,.03,.55,x,-39.96,124,ink);}
  label('Compare the three brass floor marks',213,-39.05,130.7,18,.6,interior,Math.PI);
- const landingMarkers={park:[170,114],study:[260,121],escher:[240,115]};
+ const landingMarkers={park:[170,114],study:[260,121],escher:[225,107.5]};
  for(const p of D.portals){
   const w=p.id==='escher'?2.4:3.3,h=p.id==='escher'?3.5:4.4;
   for(const sign of[-1,1])box(.22,h,.38,p.x+sign*w/2,p.y+h/2,p.z,stone,surface);
@@ -52,7 +53,7 @@ export function buildEscherDepth(T,{canvas=()=>document.createElement('canvas'),
   const door=new T.Mesh(own(new T.PlaneGeometry(w-.28,h-.1)),ink);door.position.set(p.x,p.y+h/2,p.z+.055);if(p.id==='escher')door.visible=false;door.userData.escherDepthDoor=p.id;surface.add(door);targets.push(door);
   label('ESCHER · BELOW',p.x,p.y+h+.45,p.z+.23,w+1,.5,surface);
   const [x,z]=landingMarkers[p.id];box(3,.025,2,x,-39.98,z,brass);box(2.7,.03,1.7,x,-39.96,z,ink);
-  label(p.name+' ↑',x,-37.2,z-.9,7,.65);
+  label(p.id==='escher'?'Walk the eight-flight stair upstairs':p.name+' ↑',x,-37.2,z-.9,7,.65);
  }
  // Illumination is switched on only while visiting; it never owns surface lights.
  const ambient=new T.AmbientLight(0xdce7df,.65);ambient.userData.escherDepthOwned=true;lamps.add(ambient);

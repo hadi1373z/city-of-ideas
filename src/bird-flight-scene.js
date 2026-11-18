@@ -1,6 +1,6 @@
 import {createBirdMorphGeometry,createBirdMorphMaterial,birdMorphPoint} from './bird-morph-geometry.js?v=ceiling-20261117';
-import {BIRD_TILE_OUTLINE} from './cylinder-metamorphosis-scene.js?v=ceiling-20261117';
-import {BIRD_FLIGHT,createBirdFlightLayout,birdCeilingPoint,birdFlightPose} from './bird-flight-model.js?v=ceiling-20261117';
+import {BIRD_TILE_OUTLINE} from './cylinder-metamorphosis-scene.js?v=escher-metal-20261118';
+import {BIRD_FLIGHT,createBirdFlightLayout,birdCeilingPoint,birdFlightPose} from './bird-flight-model.js?v=escher-metal-20261118';
 const PALETTE=[0xe0d7bd,0xb88b58,0x56727b];
 function clip(poly,axis,value,positive=true){const out=[],sign=positive?1:-1;for(let i=0;i<poly.length;i++){const p=poly[i],q=poly[(i+1)%poly.length],a=(p[axis]-value)*sign,b=(q[axis]-value)*sign;if(a>=0)out.push(p);if((a<0)!==(b<0)){const t=a/(a-b);out.push([p[0]+(q[0]-p[0])*t,p[1]+(q[1]-p[1])*t]);}}return out;}
 function wingPolygon(above){return clip(BIRD_TILE_OUTLINE,1,.68,above);}

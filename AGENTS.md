@@ -305,3 +305,9 @@ room caption hooks and the saved original scans. Read docs/PAPER-COLLECTION.md.
 ## City guestbook
 
 The public visitor-comment service lives separately in workspace services/city-guestbook, Sites project appgprj_6afe0785a2d08191949699269510429c. Preserve its own D1 table and owner-only inbox; never connect it to the private House database. The city opens its form through city-guestbook.js. See docs/CITY-GUESTBOOK.md. No raw network addresses or public comment listing; secrets stay in runtime configuration.
+
+## Physical Escher house stair and aluminium cylinder
+
+The rear Escher alcove now leads to eight actual switchback flights (320 treads) from .13m to the existing museum at −40m. Preserve escher-descent-model.js as the shared authority for the real lawn/civic grass/paving/foundation opening, house floor, shaft, museum ceiling/divider cuts, section and map. Park and Study remain linked doors; the Escher surface threshold must not teleport underground. Root ground substeps capture the narrow stair mouth even after a slow frame; the stair group belongs to the museum root so underground culling keeps it visible. Keep .3m wall clearance, double-sided enclosing masonry, reversible floor ownership and modal pause. Returning from below may open the physical shutter without marking the perspective puzzle solved or writing progress.
+
+The cylinder lining is now brushed-silver aluminium with Phong specular response and subtle grain. Keep the original ivory/ochre/slate birds and all 64 departure/ceiling bindings unchanged. Both the painted field and optional relief use the same exposed silver finish. See docs/CYLINDER-BIRD-TRANSITION.md.
