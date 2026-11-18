@@ -89,6 +89,6 @@ export function buildQuarterGarden(T,art,{naturalTrees=globalThis.window?.buildN
  for(const [x,z]of plan.seats){
   box(2.6,.12,.65,x,.52,z,wood);box(2.6,.5,.1,x,.84,z+.3,wood);for(const dx of[-1.05,1.05])box(.1,.46,.46,x+dx,.23,z,wood);colliders.push({minX:x-1.35,maxX:x+1.35,minZ:z-.4,maxZ:z+.4,label:'Garden seat'});
  }
- if(naturalTrees)naturalTrees(T,group,plan.trees.map(([x,z])=>({x,z})));
- return{group,paths,colliders,dispose(){group.removeFromParent();const all=new Set(owned);group.traverse(o=>{if(o.geometry)all.add(o.geometry);for(const m of Array.isArray(o.material)?o.material:o.material?[o.material]:[])all.add(m);if(o.isInstancedMesh)o.dispose?.();});for(const r of all)r.dispose();group.clear();}};
+ const streetTrees=plan.trees.map(([x,z])=>({x,z})).filter(p=>!globalThis.cityStreetTreeClear||globalThis.cityStreetTreeClear(p.x,p.z));if(naturalTrees)naturalTrees(T,group,streetTrees);
+ return{group,paths,colliders,treePositions:streetTrees,dispose(){group.removeFromParent();const all=new Set(owned);group.traverse(o=>{if(o.geometry)all.add(o.geometry);for(const m of Array.isArray(o.material)?o.material:o.material?[o.material]:[])all.add(m);if(o.isInstancedMesh)o.dispose?.();});for(const r of all)r.dispose();group.clear();}};
 }

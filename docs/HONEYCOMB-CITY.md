@@ -61,6 +61,28 @@ artist doorway spurs. Hiding retired source paving therefore cannot hide the new
 door paths. The scene suite raycasts the two real visible road meshes along every
 composed route, rather than accepting route metadata as proof of rendered paving.
 
+The central campus now uses the same polygonal authority in the original source
+landscape and shared paving: a76m Gallery hexagon, a compact32m hexagon around
+Transformations and straight graded door/lift spines. Both old64m circular
+promenades and the sweeping entrance curve are retired at their source factory.
+Origami installation never resurfaces old landscape path rows. Existing doorway
+height functions remain exact; shared geometry includes their grade breakpoints
+and properly joined closed corners. Only Transformations' real south door gets
+a doorway approach; its north wall remains a window.
+
+Six outer learning-place spurs, Commons of Care and the Jungian quarter's actual
+door lanes and southeast connector now enter the shared route/footprint authority.
+Their owners supply exact canopy, roof, porch and doorstep footprints. They are
+included in paving, gate clipping, map outlines and tree planning.
+
+All upper street-tree owners use a shared seven-metre roof/porch clearance. The
+natural-tree factory independently protects the fixed Gallery, Transformations,
+Socrates, Makers and three Penrose pavilions even before other scenes load. The
+old paired-promenade tree ring is removed. Urban, coastal and artist street trees
+share the full current building/place footprint guard; the Jungian quarter's
+reserved ground stays clear as its rooms are built. Original park garden trees
+retain their own source planting and garden clearance; indoor plants are untouched.
+
 The dashed underground routes are the existing physicalY−40 Babel/Transformations
 corridor and its Escher museum spur. A surface linked threshold is not described
 as a physical staircase. Personal homes occupy the night face without rewriting
