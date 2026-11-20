@@ -1,77 +1,71 @@
-import {DESCENT,STAIR_PORTAL} from './escher-descent-model.js?v=quiet-entrance-20261118';
-// Original museum geometry. Coordinates are in the ordinary +Y-up city world.
-const rect=(id,minX,maxX,minZ,maxZ,y=-40)=>Object.freeze({id,minX,maxX,minZ,maxZ,y});
-export const ESCHER_DEPTH=Object.freeze({
- floor:-40,ceiling:-29,lowerFloor:-46,lowerCeiling:-35,radius:.28,
- gallery:Object.freeze({x:135,z:115,y:-40,width:6}),
- rooms:Object.freeze([
-  rect('vestibule',134.4,160,105,125),rect('hall',160,194,98,132),
-  rect('perspective',194,232,98,132),rect('tessellation',194,232,66,98),
-  rect('reading',232,270,98,132),rect('loop',160,232,156,184,-46)
- ]),
- stair:Object.freeze({minX:181,maxX:188,minZ:132,maxZ:156,top:-40,bottom:-46,steps:48}),
+import {DESCENT,STAIR_PORTAL} from './escher-descent-model.js?v=cloister-20261120';
+import {CLOISTER_ROOMS,CLOISTER_STAIRS,CLOISTER_GALLERIES,insidePolygon,hexagon,rectangle,ringPolygons,outsidePolygonRectangle} from './escher-cloister-layout.js?v=cloister-20261120';
+export {insidePolygon,hexagon,ringPolygons,outsidePolygonRectangle};
+export const ESCHER_DEPTH=Object.freeze({floor:-40,ceiling:-23.6,lowerFloor:-46,lowerCeiling:-39.5,radius:.28,
+ gallery:Object.freeze({x:135,z:115,y:-40,width:6}),rooms:CLOISTER_ROOMS,galleries:CLOISTER_GALLERIES,stairs:CLOISTER_STAIRS,stair:CLOISTER_STAIRS[0],
  portals:Object.freeze([
-  Object.freeze({id:'escher',name:'Escher House · walkable stair',x:228,z:104,y:.13,gated:true,landing:{x:225,z:107,y:-40,yaw:Math.PI}}),
-  Object.freeze({id:'park',name:'Park approach',x:-84,z:-110,y:.13,landing:{x:174,z:114,y:-40,yaw:-Math.PI/2}}),
-  Object.freeze({id:'study',name:'Study-house lane',x:256,z:-112,y:.13,landing:{x:260,z:121,y:-40,yaw:Math.PI/2}})
- ]),
+ {id:'escher',name:'Escher House · walkable stair',x:228,z:104,y:.13,gated:true,landing:{x:225,z:107,y:-40,yaw:Math.PI}},
+ {id:'park',name:'Park approach',x:-84,z:-110,y:.13,landing:{x:174,z:114,y:-40,yaw:-Math.PI/2}},
+ {id:'study',name:'Study-house lane',x:256,z:-112,y:.13,landing:{x:221,z:155,y:-40,yaw:Math.PI/2}}]),
  exhibits:Object.freeze([
-  Object.freeze({id:'perspective',name:'One triangle, several depths',x:213,z:124,y:-40}),
-  Object.freeze({id:'tessellation',name:'Edges that agree',x:213,z:73,y:-40}),
-  Object.freeze({id:'loop',name:'Can every flight rise?',x:197,z:163,y:-46}),
-  Object.freeze({id:'reading',name:'Which hand comes first?',x:251,z:116,y:-40})
- ])
-});
-
-// Walls are independent of the city surface colliders. Doorways are actual gaps.
-const wx=(x,z0,z1,y=-40,height=11)=>({...rect('wall',x-.18,x+.18,z0,z1,y),height});
-const wz=(z,x0,x1,y=-40,height=11)=>({...rect('wall',x0,x1,z-.18,z+.18,y),height});
-export const ESCHER_DEPTH_WALLS=Object.freeze([
- wx(135,105,112),wx(135,118,125),wz(105,135,160),wz(125,135,160),
- wx(160,98,112),wx(160,118,132),wz(98,160,194),wz(132,160,181),wz(132,188,232),
- wx(194,98,112),wx(194,118,132),wz(98,194,210),wz(98,216,223.8),wz(98,229.2,232),
- wx(232,98,112),wx(232,118,132),wz(98,232,270),wz(132,232,270),wx(270,98,132),
- wx(194,66,98),wz(66,194,232),wx(232,66,98),
- wx(181,132,156,-46,17),wx(188,132,156,-46,17),
- wz(156,160,181,-46),wz(156,188,232,-46),wx(160,156,184,-46),wx(232,156,184,-46),wz(184,160,232,-46)
-]);
+ {id:'perspective',name:'One triangle, several depths',x:157.63,z:125,y:-40},
+ {id:'tessellation',name:'Edges that agree',x:216.69,z:87,y:-40},
+ {id:'loop',name:'Can every flight rise?',x:182,z:172,y:-46},
+ {id:'reading',name:'Which hand comes first?',x:220,z:151,y:-40}])});
+const rect=(id,minX,maxX,minZ,maxZ,y=-40)=>({id,minX,maxX,minZ,maxZ,y});
+const inRect=(r,x,z,pad=0)=>x>=r.minX-pad&&x<=r.maxX+pad&&z>=r.minZ-pad&&z<=r.maxZ+pad;
+const inFloor=(r,x,z)=>insidePolygon(r.polygon,x,z)&&(!r.inner||!insidePolygon(hexagon(...r.centre,r.inner),x,z));
+const shaftBlocked=(x,z)=>inRect(DESCENT.shaft,x,z)&&!(Math.abs(x-225)<=.9&&z>=104);
 export const ESCHER_DEPTH_OBSTACLES=Object.freeze([
  ...[-1,1].map(side=>{const p=STAIR_PORTAL;return rect('Escher stair jamb',p.x+(side<0?-p.halfWidth:p.opening),p.x+(side<0?-p.opening:p.halfWidth),p.z,p.z+p.depth);}),
- rect('triangle case',206,220,103,115),rect('tile console',208,218,77,81),
- rect('loop table',190,204,166,180,-46),rect('reading desk',248,255,106,110)
-]);
-const inRect=(r,x,z,pad=0)=>x>=r.minX-pad&&x<=r.maxX+pad&&z>=r.minZ-pad&&z<=r.maxZ+pad;
-export function depthFloorAt(x,z){
- if(!Number.isFinite(x)||!Number.isFinite(z))return null;
- const s=ESCHER_DEPTH.stair;
- if(inRect(s,x,z)){const t=Math.max(0,Math.min(s.steps,Math.ceil((z-s.minZ)/(s.maxZ-s.minZ)*s.steps-1e-9)));return s.top+(s.bottom-s.top)*t/s.steps;}
- return ESCHER_DEPTH.rooms.find(r=>inRect(r,x,z))?.y??null;
+ rect('triangle case',150.63,164.63,104,116),rect('tile console',214.69,218.69,81,83),
+ rect('loop table',180.7,185.3,163.7,168.3,-46),rect('reading desk',218,222,143,145),
+ rect('tessellation screen',208.6,224.8,69.7,70.05),
+ rect('court sculpture',195,199,113,117),rect('Möbius plinth',221.5,226.5,152.5,157.5),rect('trefoil plinth',209,213,150,154),
+ ...CLOISTER_GALLERIES.filter(r=>r.inner).flatMap(r=>{const p=hexagon(...r.centre,r.inner);return p.flatMap((a,i)=>{const b=p[(i+1)%6];return[0,1/3,2/3].flatMap(t=>[-40,-34].map(y=>{const x=a[0]+(b[0]-a[0])*t,z=a[1]+(b[1]-a[1])*t;return rect('arcade pier',x-.19,x+.19,z-.19,z+.19,y);}));});})]);
+function stairHeight(s,z){const t=Math.max(0,Math.min(s.steps,Math.ceil((z-s.minZ)/(s.maxZ-s.minZ)*s.steps-1e-9)));return s.top+(s.bottom-s.top)*t/s.steps;}
+function floorCandidates(x,z){
+ if(!Number.isFinite(x)||!Number.isFinite(z)||shaftBlocked(x,z))return[];
+ const stairs=CLOISTER_STAIRS.filter(s=>inRect(s,x,z));
+ const out=stairs.map(s=>({y:stairHeight(s,z),id:s.id}));
+ for(const r of [...CLOISTER_ROOMS,...CLOISTER_GALLERIES]){
+  if(!inFloor(r,x,z))continue;
+  // Floor openings exactly match the physical stair cuts. Do not snap between storeys.
+  if(stairs.some(s=>r.y===s.top))continue;
+  if(stairs.some(s=>r.y===s.bottom&&stairHeight(s,z)-r.y<2.25))continue;
+  out.push({y:r.y,id:r.id});
+ }return out;
 }
-export function depthRoomAt(x,z){
- return inRect(ESCHER_DEPTH.stair,x,z)?'stair':ESCHER_DEPTH.rooms.find(r=>inRect(r,x,z))?.id??null;
-}
+export function depthFloorAt(x,z,fromY=null){const candidates=floorCandidates(x,z);if(!candidates.length)return null;if(Number.isFinite(fromY))candidates.sort((a,b)=>Math.abs(a.y-fromY)-Math.abs(b.y-fromY));return candidates[0].y;}
+export function depthRoomAt(x,z,fromY=null){const candidates=floorCandidates(x,z);if(Number.isFinite(fromY))candidates.sort((a,b)=>Math.abs(a.y-fromY)-Math.abs(b.y-fromY));return candidates[0]?.id??null;}
+function supportAt(x,z,y){return floorCandidates(x,z).some(q=>Math.abs(q.y-y)<.32);}
 export function canWalkDepth(x,z,{radius=ESCHER_DEPTH.radius,fromY=null}={}){
- const shaft=DESCENT.shaft;if(inRect(shaft,x,z)&&!(Math.abs(x-225)<.7&&z>=104))return false;
- const y=depthFloorAt(x,z);if(y===null||Number.isFinite(fromY)&&Math.abs(y-fromY)>.3)return false;
- return ![...ESCHER_DEPTH_WALLS,...ESCHER_DEPTH_OBSTACLES].some(b=>inRect(b,x,z,radius)&&Math.abs(y-b.y)<18);
+ const y=depthFloorAt(x,z,fromY);if(y===null||Number.isFinite(fromY)&&Math.abs(y-fromY)>.3)return false;
+ // Balustrades forbid stepping off the sides of a flight before its landing,
+ // even where the last tread is within a normal step of the adjoining floor.
+ for(const s of CLOISTER_STAIRS)if(z>s.minZ+.4&&z<s.maxZ-.4&&Math.abs(y-stairHeight(s,z))<.31&&x>s.minX-radius&&x<s.maxX+radius&&(x<s.minX+radius+.10||x>s.maxX-radius-.10))return false;
+ // Erode the union of real polygon floors, rather than each room separately:
+ // overlapping corridors retain their full door width and concave corners stay safe.
+ for(let i=0;i<12;i++){const a=i*Math.PI/6;if(!supportAt(x+Math.cos(a)*(radius+.10),z+Math.sin(a)*(radius+.10),y))return false;}
+ return !ESCHER_DEPTH_OBSTACLES.some(b=>Math.abs(y-b.y)<.4&&inRect(b,x,z,radius));
 }
 export function walkDepth(player,dx,dz,eye=1.8){
  if(![player.x,player.z,player.y,dx,dz,eye].every(Number.isFinite))return false;
- const n=Math.max(1,Math.ceil(Math.hypot(dx,dz)/.1));
- for(let i=0;i<n;i++){
-  let y=player.y-eye;
-  if(canWalkDepth(player.x+dx/n,player.z,{fromY:y})){player.x+=dx/n;player.y=depthFloorAt(player.x,player.z)+eye;}
-  y=player.y-eye;
-  if(canWalkDepth(player.x,player.z+dz/n,{fromY:y})){player.z+=dz/n;player.y=depthFloorAt(player.x,player.z)+eye;}
- }
- return true;
+ const n=Math.max(1,Math.ceil(Math.hypot(dx,dz)/.1));for(let i=0;i<n;i++)for(const axis of['x','z']){const delta=(axis==='x'?dx:dz)/n,y=player.y-eye,x=player.x+(axis==='x'?delta:0),z=player.z+(axis==='z'?delta:0);if(canWalkDepth(x,z,{fromY:y})){player[axis]+=delta;player.y=depthFloorAt(player.x,player.z,y)+eye;}}return true;
 }
 export const atGalleryHandoff=p=>p.x<=135.15&&p.x>=134.4&&Math.abs(p.z-115)<2.5;
-
+// Solid perimeter runs are shared with the renderer. Door intervals are removed
+// wherever another real room/corridor continues through this boundary.
+const walls=[];for(const r of CLOISTER_ROOMS){if(r.shaftLanding)continue;for(let i=0;i<r.polygon.length;i++){
+ const a=r.polygon[i],b=r.polygon[(i+1)%r.polygon.length],dx=b[0]-a[0],dz=b[1]-a[1],len=Math.hypot(dx,dz),n=Math.ceil(len/.25);let run=null;
+ const solid=t=>{const x=a[0]+dx*t,z=a[1]+dz*t;if(r.id==='vestibule'&&Math.abs(x-134.4)<.01&&Math.abs(z-115)<3)return false;if((r.id==='hall'||r.id==='loop')&&inRect(CLOISTER_STAIRS[0],x,z,.25))return false;const ox=x+dz/len*.24,oz=z-dx/len*.24;return !CLOISTER_ROOMS.some(q=>q!==r&&Math.abs(q.y-r.y)<.1&&insidePolygon(q.polygon,ox,oz));};
+ for(let j=0;j<=n;j++){const yes=j<n&&solid((j+.5)/n);if(yes&&run===null)run=j/n;if(!yes&&run!==null){const end=j/n,x0=a[0]+dx*run,z0=a[1]+dz*run,x1=a[0]+dx*end,z1=a[1]+dz*end;walls.push(Object.freeze({id:'wall',a:[x0,z0],b:[x1,z1],minX:Math.min(x0,x1)-.18,maxX:Math.max(x0,x1)+.18,minZ:Math.min(z0,z1)-.18,maxZ:Math.max(z0,z1)+.18,y:r.y,height:(r.spring??r.ceiling)-r.y,room:r.id}));run=null;}}
+ }}
+export const ESCHER_DEPTH_WALLS=Object.freeze(walls);
 // Triangle sides occupy different distances along rays from a single eye point.
-export const DEPTH_VIEW=Object.freeze({x:213,y:-38.2,z:124});
-export const DEPTH_FOCUS=Object.freeze({x:213,y:-34.2,z:104});
-const triangle=[{x:209,y:-37,z:104},{x:217,y:-37,z:104},{x:213,y:-30.5,z:104}];
+export const DEPTH_VIEW=Object.freeze({x:157.63,y:-38.2,z:125});
+export const DEPTH_FOCUS=Object.freeze({x:157.63,y:-34.2,z:105});
+const triangle=[{x:153.63,y:-37,z:105},{x:161.63,y:-37,z:105},{x:157.63,y:-30.5,z:105}];
 const ray=(p,k)=>({x:DEPTH_VIEW.x+(p.x-DEPTH_VIEW.x)*k,y:DEPTH_VIEW.y+(p.y-DEPTH_VIEW.y)*k,z:DEPTH_VIEW.z+(p.z-DEPTH_VIEW.z)*k});
 export const DEPTH_TRIANGLE=Object.freeze([.60,1,.78].map((k,i)=>Object.freeze([ray(triangle[i],k),ray(triangle[(i+1)%3],k)])));
 export function perspectiveClosure(eye){

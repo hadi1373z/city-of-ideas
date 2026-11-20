@@ -1,6 +1,6 @@
-import {outsideRectangle} from './escher-descent-model.js?v=quiet-entrance-20261118';
+import {outsideRectangle} from './escher-descent-model.js?v=cloister-20261120';
 import {buildEscherEntranceArchitecture} from './escher-entrance-architecture.js?v=entrance-20261118';
-import {PRINT_STUDIES} from './escher-print-studies.js?v=1';
+import {PRINT_STUDIES} from './escher-print-studies.js?v=cloister-20261120';
 import {installPerspectiveActivity} from './escher-perspective.js?v=house-link1';
 export const ESCHER_WORKS=[
  {id:'relativity',title:'Relativity',year:1953,file:'relativity.jpg',ratio:500/479,imageSource:'https://mcescher.com/wp-content/uploads/2019/04/LW-389.jpg',question:{en:'Choose one person. Which direction is down for them? Now follow someone on another staircase.',de:'Wähle eine Person. Wo ist für sie unten? Folge dann jemandem auf einer anderen Treppe.',fa:'یک نفر را انتخاب کن. پایین برای او کدام سوست؟ سپس کسی را روی پلکانی دیگر دنبال کن.'}},

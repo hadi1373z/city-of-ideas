@@ -3,6 +3,8 @@ export const DESCENT=Object.freeze({top:.13,bottom:-40,flights:8,steps:40,north:
  shaft:{minX:223.8,maxX:229.2,minZ:90.6,maxZ:106.6},cut:{minX:226.8,maxX:229.2,minZ:96.4,maxZ:105.4},
  entry:{x:228,z:105.5,y:.13},exit:{x:225,z:106.6,y:-40}});
 export const STAIR_PORTAL=Object.freeze({x:225,z:106.8,floor:-40,halfWidth:1.5,opening:1.05,height:4,depth:.5,spring:2.55,radius:1.1});
+export const DESCENT_ANNEX=Object.freeze({polygon:Object.freeze([[226.5,104],[226.5,98],[227.2,96.1],[228.8,96.1],[229.5,98],[229.5,104]].map(Object.freeze)),bottom:-.4,eave:3.5,apex:4.55,centre:[228,100.3]});
+export function annexContains(x,z,padding=.28){const p=DESCENT_ANNEX.polygon;return p.every((a,i)=>{const b=p[(i+1)%p.length],dx=b[0]-a[0],dz=b[1]-a[1];return dx*(z-a[1])-dz*(x-a[0])>=-padding*Math.hypot(dx,dz);});}
 export const flightY=i=>DESCENT.top+(DESCENT.bottom-DESCENT.top)*i/DESCENT.flights;
 export function descentParts(){const out=[];for(let i=0;i<8;i++){
  const north=i%2===0,x=DESCENT.lanes[i%2],start=north?104:92,end=north?92:104;

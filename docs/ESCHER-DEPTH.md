@@ -13,29 +13,45 @@ wall at `(135, 115, -40)`. There is no wall or portal plane across this opening.
 The navigable floor extends to `x=134.4` for an overlap with the tunnel. The
 entrance placement for `enter('gallery')` is `(136.4, 115, -40)` and faces east.
 
-| Room | X bounds | Z bounds | Floor | Ceiling |
-| --- | --- | --- | --- | --- |
-| Gallery vestibule | 134.4–160 | 105–125 | −40 | −29 |
-| Hall of connected views | 160–194 | 98–132 | −40 | −29 |
-| Perspective chamber | 194–232 | 98–132 | −40 | −29 |
-| Tessellation chamber | 194–232 | 66–98 | −40 | −29 |
-| Room of three doors | 232–270 | 98–132 | −40 | −29 |
-| Stair | 181–188 | 132–156 | −40 to −46 | −29 |
-| Closed-loop chamber | 160–232 | 156–184 | −46 | −35 |
+The approved cutaway reference is retained at
+`design/escher/hexagonal-cloister-approved.png` as design evidence, outside the
+published source assets. The built interpretation follows its hexagonal massing,
+two-level stone arcades, vaulted ribs, teal recessed bays, geometric court floor
+and tall brass focal sculpture. It uses ordinary, walkable Euclidean geometry;
+it is not an Escher work or an exact historical architectural reconstruction.
 
-Six-metre shared doorways connect the main rooms. A seven-metre-wide stair with
-48 real treads connects the main hall to the lower chamber, and can be walked
-in both directions. Walls, roof slabs, exhibit cases, floor bounds and treads
-are real geometry; navigation uses the same coordinates. The floor has no
-invisible route into the surrounding solid island.
+| Space | Plan | Floor / upper gallery | Vault apex |
+| --- | --- | --- | --- |
+| Gallery vestibule | x134.4–143, z112–118, enclosed corridor | −40 | −33.5 |
+| Central court | hexagon centred 197,115, radius 24m | −40 / −34 | −23.6 |
+| Perspective wing | hexagon centred 157.63,115, radius 18m | −40 / −34 | −26.8 |
+| Tessellation wing | hexagon centred 216.69,80.9, radius18m | −40 / −34 | −26.8 |
+| Topology & relations wing | hexagon centred216.69,149.1, radius18m | −40 / −34 | −26.8 |
+| Lower cloister | hexagon centred197,166, outer radius 22m, inner radius 12m | −46 | −39.5 |
+
+The west court stair has 48 real treads from −40 to −34. Its opening is cut from
+the upper gallery, while routes under it exclude insufficient headroom. Three
+upper corridors join the wing balconies to the court gallery. The south stair
+has48 real treads from−40 to −46, with actual openings in both court and lower
+cloister walls. Its solid side walls and balustrades prohibit side exits before
+the landing. The lower well has opaque inner walls and a closed basin at −50.
+
+`escher-cloister-layout.js` supplies shared convex room polygons, ring sectors,
+stair bounds and ceilings. The floor navigator selects by previous feet height;
+rooms stacked at the same x/z cannot snap visitors between storeys. Floor meshes
+and roofs are clipped around the shaft and physical stairs. Perimeter openings,
+cases, sculpture plinths and arcade piers are represented in real navigation.
+The ivory/sage/ochre court rosette is clipped around stairs and central plinth.
+The middle-layer map and mineral section use those same polygons, not bounding
+rectangles that invent space around the hexagonal rooms.
 
 Two linked surface doors and one physical house stair lead to the same museum:
 
 | Door ID | Surface door | Interior landing |
 | --- | --- | --- |
 | `escher` | Rear alcove `(228,104,.13)` | Eight real flights to `(225,107,−40)` |
-| `park` | Park approach `(−84,−110,.13)` | Hall `(174,114,−40)` |
-| `study` | Study-house lane `(256,−112,.13)` | `(260,121,−40)` |
+| `park` | Park approach `(−84,−110,.13)` | West passage `(174,114,−40)` |
+| `study` | Study-house lane `(256,−112,.13)` | `(221,155,−40)` |
 
 The Park and Study doors retain their linked thresholds. The Escher-house doorway no longer jumps between levels: it opens onto a real 40.13m descent. The original Escher threshold
 requires `window.CITY_ESCHER.passageOpen`. The other two doors do not bypass or
@@ -81,6 +97,10 @@ Runtime API:
 - `interact()`: call before ordinary interaction. Opens a nearby exhibit, enters
   a surface threshold, or leaves at a nearby interior door marker.
 - `enter('gallery'|'escher'|'park'|'study')`, `leave(id?)`, `active` getter.
+- `travel('court'|'upper')`: explicit optional convenience travel within an active
+  museum visit. The visible buttons say Travel; neither changes investigation
+  progress nor presents a jump as walking. Both destinations also have real
+  reversible walking routes.
 - `stop()`: relinquish museum control without moving the player, for connected
   navigation and external travel.
 - `setGalleryExit(fn)`, `galleryBoundary`, `progress` getter, `built` scene.
@@ -145,8 +165,32 @@ Direct surface arrival: `?arrival=escher-house`. Roof/floor support, grazing edg
 
 `escher-descent-model.js` shares eight 12m flights, seven turning landings, the top alcove opening and the exact bottom museum doorway. `escher-descent.js` builds supported pale treads, slate enclosing walls and repeated low arcades inspired by Escher’s spatial layering; it is original ordinary Euclidean architecture. The first flight cuts the actual lawn, island foundation and alcove floor. The shaft cuts both intersected museum ceilings and the room divider. Thick walls enclose the entire journey. The mineral section and middle-layer map include this actual shaft.
 
-The controller retains visitor position at both seams, chooses a floor only near the previous height, pauses for modals and releases movement in the outgoing direction. Walking away from the bottom landing cannot recapture it. Returning from below opens the physical surface shutter without recording a solved puzzle or changing private progress. Park and Study doors remain unchanged. `tests/escher-descent.mjs` checks every tread at three widths, headroom, both directions and actual ground removal; the runtime fixture drives the real controller all the way down and up without a jump.
+The controller retains visitor position at both seams, chooses a floor only near the previous height, pauses for modals and releases movement in the outgoing direction. Walking away from the bottom landing cannot recapture it. Returning from below opens the physical surface shutter without recording a solved puzzle or changing private progress. Park and Study surface doors remain at their original coordinates; Study now lands in the southeast wing. `tests/escher-descent.mjs` checks every tread at three widths, headroom, both directions and actual ground removal; the runtime fixture drives the real controller all the way down and up without a jump.
 
 ## Quiet stair entrance
 
 The museum-side return stair has a bevelled stone arch, continuous bronze reveal, warm recessed edge strips and a shallow fan-shaped floor approach. STAIR_PORTAL in escher-descent-model.js shares the actual clear opening and jamb collision bounds. The existing eight flights, tread heights and handoffs remain. The old floating stair caption, black rectangular floor marker and large surface-house name sign are removed; all four credited prints remain.
+
+## Surface stair pavilion · 20 November 2026
+
+The exposed sloping cover formerly looked like a ramp into reversed signage.
+It is replaced with a genuine six-sided stair pavilion, with a six-facet hipped
+cap and chamfered rear. Its solid rear and side walls conceal the shallow lawn
+cut. The shared DESCENT_ANNEX polygon drives the actual masonry, roof and
+body-expanded surface collision.
+The pavilion is deliberately long and narrow to fit the established shaft; it
+is not the broad regular surface hexagon drawn in the reference. Achieving those
+exact proportions would require moving the original house, lanes and proven
+ground cuts. The underground hexagonal court/wing arrangement is built, while
+the original rectangular credited-print gallery remains the approach.
+
+The real front capture interval, first-flight headroom, eight switchbacks and
+bottom arch remain. Signs are front-facing, so the back of an entrance caption
+cannot become a misleading reversed doorway.
+
+The route guide's museum graph now follows the new ground aisles, upper rings
+and lower annulus. Each candidate edge is checked in both directions against the
+height-aware navigator; the guide never reuses the retired rectangular floor plan.
+`tests/sixfold-world-integration.mjs` holds forward through the actual tunnel,
+perspective aisle and return seam. `tests/connected-journey.mjs` includes upper
+and lower floor routes as well as the unchanged city learning journey.

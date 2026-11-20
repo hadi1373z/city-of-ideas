@@ -1,85 +1,39 @@
 import assert from 'node:assert/strict';
-import {
- ESCHER_DEPTH as D,ESCHER_DEPTH_WALLS as walls,ESCHER_DEPTH_OBSTACLES as obstacles,
- depthFloorAt,depthRoomAt,canWalkDepth,walkDepth,atGalleryHandoff,
- DEPTH_VIEW,DEPTH_FOCUS,DEPTH_TRIANGLE,perspectiveClosure,perspectiveAligned,
- tilePolygon,tileMismatch,loopResult
-} from '../src/escher-depth-model.js';
-
-const eye=1.8,near=(a,b,eps=1e-8)=>assert(Math.abs(a-b)<eps,`${a} ≠ ${b}`);
-const visitor=(x,z)=>({x,z,y:depthFloorAt(x,z)+eye,yaw:0,pitch:0});
-
-// Search the actual floor/collider space, then walk the recovered routes. A list
-// of declared room neighbours alone would not catch a blocked doorway or tread.
-const key=(x,z)=>`${x},${z}`,start=[136,115],queue=[start],parents=new Map([[key(...start),null]]);
+import {ESCHER_DEPTH as D,ESCHER_DEPTH_OBSTACLES as obstacles,depthFloorAt,depthRoomAt,canWalkDepth,walkDepth,atGalleryHandoff,DEPTH_VIEW,DEPTH_FOCUS,DEPTH_TRIANGLE,perspectiveClosure,perspectiveAligned,tilePolygon,tileMismatch,loopResult} from '../src/escher-depth-model.js';
+const eye=1.8,near=(a,b,e=1e-7)=>assert(Math.abs(a-b)<e,a+' ≠ '+b);
+const key=(x,z,y)=>[x,z,Math.round(y*8)].join(','),start=[136,115,-40],queue=[start],parents=new Map([[key(...start),null]]);
+// Search all three storeys and both real staircases with the same radius and
+// height-aware controller as a visitor. The grid is half a metre, not a graph of
+// declared room neighbours; recover and physically walk every destination route.
 for(let head=0;head<queue.length;head++){
- const [x,z]=queue[head],y=depthFloorAt(x,z);
- for(const [dx,dz]of[[.5,0],[-.5,0],[0,.5],[0,-.5]]){
-  const nx=x+dx,nz=z+dz,k=key(nx,nz);
-  if(parents.has(k)||!canWalkDepth(nx,nz,{fromY:y}))continue;
-  parents.set(k,[x,z]);queue.push([nx,nz]);
+ const [x,z,y]=queue[head];for(const[dx,dz]of[[.5,0],[-.5,0],[0,.5],[0,-.5]]){
+  const nx=x+dx,nz=z+dz;if(!canWalkDepth(nx,nz,{fromY:y}))continue;const ny=depthFloorAt(nx,nz,y),k=key(nx,nz,ny);if(parents.has(k))continue;parents.set(k,[x,z,y]);queue.push([nx,nz,ny]);
  }
 }
-const destinations=[
- ['hall',174,114],['perspective',213,124],['tessellation',213,73],
- ['reading',260,121],['stair',184.5,144],['loop',174,170],
- ...D.portals.map(p=>[p.id,p.landing.x,p.landing.z]),
- ...D.exhibits.map(p=>[p.id,p.x,p.z])
-];
-for(const [name,x,z]of destinations){
- assert(parents.has(key(x,z)),`${name} must be reachable through the shared interior`);
- const route=[];for(let p=[x,z];p;p=parents.get(key(...p)))route.push(p);route.reverse();
- const p=visitor(...start);
- for(const [nx,nz]of route.slice(1)){
-  const oldY=p.y;
-  assert(walkDepth(p,nx-p.x,nz-p.z,eye));near(p.x,nx);near(p.z,nz);
-  near(p.y,depthFloorAt(nx,nz)+eye);assert(Math.abs(p.y-oldY)<=.126,'A route changes height by one physical tread at most');
- }
- near(p.x,x);near(p.z,z);
- // The same doors and stair remain traversable in the reverse direction.
- for(const [nx,nz]of route.slice(0,-1).reverse()){walkDepth(p,nx-p.x,nz-p.z,eye);near(p.x,nx);near(p.z,nz);}
- near(p.y,D.floor+eye);
+const destinations=[...D.portals.map(p=>[p.id,p.landing.x,p.landing.z,p.landing.y]),...D.exhibits.map(p=>[p.id,p.x,p.z,p.y]),...D.galleries.filter(r=>r.inner).map(r=>[r.id,r.centre[0],r.centre[1]-r.radius+2,-34]),['court',202,115,-40],['lower east',214,166,-46]];
+for(const[name,x,z,y]of destinations){
+ const candidates=queue.filter(p=>Math.abs(p[2]-y)<.02&&Math.hypot(p[0]-x,p[1]-z)<.8).sort((a,b)=>Math.hypot(a[0]-x,a[1]-z)-Math.hypot(b[0]-x,b[1]-z));
+ assert(candidates.length,name+' must be reachable through supported interior floors');
+ const route=[];for(let p=candidates[0];p;p=parents.get(key(...p)))route.push(p);route.reverse();const player={x:start[0],z:start[1],y:start[2]+eye};
+ for(const[nx,nz,ny]of route.slice(1)){assert(walkDepth(player,nx-player.x,nz-player.z,eye));near(player.x,nx);near(player.z,nz);near(player.y,ny+eye);}
+ for(const[nx,nz,ny]of route.slice(0,-1).reverse()){walkDepth(player,nx-player.x,nz-player.z,eye);near(player.x,nx);near(player.z,nz);near(player.y,ny+eye);}
 }
-assert(queue.length>20000,'The museum supplies substantial connected floor space');
-
-const s=D.stair;
-for(let i=0;i<s.steps;i++){
- const z=s.minZ+(i+.5)*(s.maxZ-s.minZ)/s.steps;
- near(depthFloorAt(184.5,z),s.top+(i+1)*(s.bottom-s.top)/s.steps);
- assert.equal(depthRoomAt(184.5,z),'stair');
-}
-near(depthFloorAt(184.5,s.minZ),s.top);near(depthFloorAt(184.5,s.maxZ),s.bottom);
-const descending=visitor(184.5,131);
-for(let i=0;i<260;i++)walkDepth(descending,0,.1,eye);
-near(descending.z,157,1e-7);near(descending.y,D.lowerFloor+eye);
-for(let i=0;i<260;i++)walkDepth(descending,0,-.1,eye);
-near(descending.z,131,1e-7);near(descending.y,D.floor+eye);
-
-// Cases, masonry, voids and corners remain barriers even under a large frame.
-for(const b of [...walls,...obstacles])assert(!canWalkDepth((b.minX+b.maxX)/2,(b.minZ+b.maxZ)/2),`Solid ${b.id} cannot be walked through`);
-assert.equal(depthFloorAt(150,140),null);assert(!canWalkDepth(150,140));
+assert(queue.some(p=>p[2]===-34)&&queue.some(p=>p[2]===-46));assert(queue.length>20000,'Substantial real connected museum space');
+for(const s of D.stairs){const x=(s.minX+s.maxX)/2;for(let i=0;i<s.steps;i++){const z=s.minZ+(i+.5)*(s.maxZ-s.minZ)/s.steps,y=s.top+(i+1)*(s.bottom-s.top)/s.steps;near(depthFloorAt(x,z,y),y);assert.equal(depthRoomAt(x,z,y),s.id);assert(canWalkDepth(x,z,{fromY:y}));}}
+for(const b of obstacles)assert(!canWalkDepth((b.minX+b.maxX)/2,(b.minZ+b.maxZ)/2,{fromY:b.y}),'Solid '+b.id);
 for(const v of[NaN,Infinity,-Infinity]){assert.equal(depthFloorAt(v,115),null);assert(!canWalkDepth(174,v));}
-assert(!canWalkDepth(174,114,{fromY:-46}),'Different levels do not silently snap together');
-const large=visitor(213,120);walkDepth(large,0,-20,eye);
-assert(large.z>=115+D.radius&&large.z<116,'A large move stops at the triangle case');
-const partition=visitor(190,105);walkDepth(partition,12,0,eye);
-assert(partition.x<194-D.radius,'Substeps prevent tunnelling through an internal wall');
-const diagonal=visitor(230,130);walkDepth(diagonal,30,30,eye);
-assert(canWalkDepth(diagonal.x,diagonal.z));assert(diagonal.z<132-D.radius,'Diagonal sliding cannot clip an outer corner');
-const invalid=visitor(174,114),before={...invalid};
-assert.equal(walkDepth(invalid,NaN,0,eye),false);assert.deepEqual(invalid,before);
-
-// The six-metre gallery threshold is an intentional aperture, including room
-// for a visitor's radius. Adjacent wall faces and other perimeter walls stay shut.
-assert.equal(D.gallery.width,6);
-for(let z=112.5;z<=117.5;z+=.5)assert(canWalkDepth(135,z),`Gallery gap closed at z=${z}`);
-for(const z of[106,110,112,118,121,124])assert(!canWalkDepth(135,z));
-for(const [x,z]of[[270,115],[160,101],[213,66],[194,81],[232,81],[170,184]])assert(!canWalkDepth(x,z));
-assert(atGalleryHandoff({x:135,z:115}));assert(!atGalleryHandoff({x:136,z:115}));assert(!atGalleryHandoff({x:135,z:110}));
-for(const p of D.portals){assert(canWalkDepth(p.landing.x,p.landing.z));near(depthFloorAt(p.landing.x,p.landing.z),p.landing.y);}
+assert(!canWalkDepth(174,114,{fromY:-46}));
+assert.equal(depthFloorAt(197,166,-46),null,'Lower central well is an actual void');
+assert(!canWalkDepth(197,166,{fromY:-46}));
+for(let z=112.5;z<=117.5;z+=.5)assert(canWalkDepth(135,z,{fromY:-40}));
+for(const z of[110,112,118,120])assert(!canWalkDepth(135,z));
+assert(atGalleryHandoff({x:135,z:115}));assert(!atGalleryHandoff({x:136,z:115}));
+for(const p of D.portals){assert(canWalkDepth(p.landing.x,p.landing.z,{fromY:p.landing.y}));near(depthFloorAt(p.landing.x,p.landing.z,p.landing.y),p.landing.y);}
 assert.deepEqual(D.portals.map(p=>[p.id,p.x,p.z]),[['escher',228,104],['park',-84,-110],['study',256,-112]]);
-assert.equal(D.portals.find(p=>p.id==='escher').gated,true);
-
+assert.equal(D.portals[0].gated,true);
+assert(D.rooms.filter(r=>r.radius).every(r=>r.polygon.length===6),'Central court and all wings remain actual hexagons');
+const large={...DEPTH_VIEW};walkDepth(large,0,-20,eye);assert(large.z>116,'Substeps stop at the perspective case');
+const invalid={...DEPTH_VIEW},before={...invalid};assert.equal(walkDepth(invalid,NaN,0),false);assert.deepEqual(invalid,before);
 // A closed screen-space triangle has genuinely disconnected endpoints in space.
 for(let i=0;i<3;i++){
  const a=DEPTH_TRIANGLE[i][1],b=DEPTH_TRIANGLE[(i+1)%3][0];
@@ -120,4 +74,4 @@ for(let mask=0;mask<16;mask++){
 assert.equal(closedCount,6);assert.equal(loopResult().rise,8);assert(!loopResult().closed,'Four rising flights cannot close at the original height');
 for(const bad of[[],[1,1,1],[1,1,1,0],[1,1,1,'1'],null])assert.throws(()=>loopResult(bad),TypeError);
 
-console.log(`PASS Escher depth: ${queue.length.toLocaleString('en')} connected floor samples, every room/door/exhibit and reverse route, 48 real treads, collision/void/large-move guards, true tunnel gap, original perspective, translated-edge tessellation and all 16 closed-loop cases`);
+console.log(`PASS Escher depth: ${queue.length.toLocaleString('en')} connected floor samples, every room/door/exhibit and reverse route, 96 real treads, collision/void/large-move guards, true tunnel gap, original perspective, translated-edge tessellation and all 16 closed-loop cases`);

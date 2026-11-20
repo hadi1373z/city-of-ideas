@@ -10,12 +10,12 @@ import './artist-quarter-layout.js?v=makers-passages-20261118';
 import {BUILT_HONEYCOMB_LAYOUT} from './honeycomb-city-layout.js?v=makers-passages-20261118';
 import {HEX_DISTRICTS,INHABITED_BLOCKS,IDEAS_PARK_SITE} from './city-hex-layout.js?v=makers-passages-20261118';
 import {FOUNDATION_HOUSES,FOUNDATION_ROUTES,houseEntry} from './foundation-houses-data.js?v=makers-passages-20261118';
-import {SEMINAR_HOUSES,SEMINAR_PATHS,seminarEntry} from './seminar-houses-data.js?v=makers-passages-20261118';
+import {SEMINAR_HOUSES,SEMINAR_PATHS,seminarEntry} from './seminar-houses-data.js?v=cloister-20261120';
 import {STUDY_HOUSES,STUDY_PATHS} from './study-houses-data.js?v=city-night-20261117';
 import {PAVILIONS,pavilionTurn} from './mathematical-pavilions-model.js?v=city-night-20261117';
 import {PHILOSOPHERS,quarterPaths} from './philosopher-data.js?v=makers-passages-20261118';
 import {COAST_PATHS,HOUSE_ORIGAMI} from './origami-house-math.js?v=makers-passages-20261118';
-import {COAST_MAIN_PATHS} from './coastal-map-data.js?v=makers-passages-20261118';
+import {COAST_MAIN_PATHS} from './coastal-map-data.js?v=cloister-20261120';
 
 // A regular city fabric joins the original inhabited districts. Private homes
 // retain source-local designs and now occupy the lower face.

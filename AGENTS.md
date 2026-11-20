@@ -322,3 +322,29 @@ The learning edition means MATHEMATICS learning. It starts at the existing Proof
 ## Rebuilt Mathematics edition · 20 November 2026
 
 The latest user direction replaces the Mathematics prototype with a real smaller mathematical city. Keep this isolated in editions/mathematics and its two published routes. The main city and other editions must remain unchanged. Read docs/MATHEMATICS-CITY.md. Six mathematical houses and their shared gardens surround the complete original Proof Atelier; the park is woven between houses, not copied as a separate district. Reuse the pinned public Atelier and paper sources, existing progress, distinct resume/next-unfinished navigation and credits. Campus notes have their own explicit-save key. Keep actual map footprints, roads, front doors, collision domain and full-crown planting synchronized. Preserve the nonmodal-workbench movement return value so phone arrows close its panel and keep moving.
+
+## Explicit main-city house requests · 20 November 2026
+
+The user separately authorized improvements to the existing main-city Origami
+house, Cage listening house and the pictured Escher hexagonal cloister. These
+are main-city work; keep all edition baselines unchanged. Origami's roof strips
+must remain real glazed openings, its floor a flat crease pattern, and its live
+controls must preserve private drafts and the movement return convention. Read
+docs/ORIGAMI-HOUSE.md. Cage compares the same event inventory under different
+rest arrangements and invites untimed environmental listening without recording;
+read docs/CAGE-LISTENING-HOUSE.md. Preserve the established cast and recordings.
+
+At the user's request, Mirzakhani's Curved Space building is absent from the live
+main city. SEMINAR_HOUSE_ARCHIVE retains its model/lesson definition and existing
+personal storage; do not recreate its building, path, map landmark or collider
+through the live SEMINAR_HOUSES list.
+
+Escher now follows the approved reference at
+design/escher/hexagonal-cloister-approved.png. Read docs/ESCHER-DEPTH.md.
+escher-cloister-layout.js is the shared polygon authority for the vaulted court
+at−40m, upper arcades at−34m, three hexagonal wings, lower cloister at−46m and
+both real connecting stairs. Keep all floor cuts, collision piers/plinths,
+height-aware routes, middle map and mineral section synchronized. The preserved
+320-tread surface descent has a narrow six-sided entrance annex; its proportions
+are constrained by the established shaft. Travel buttons are explicit convenient
+travel, independent of the uninterrupted walk. The lower well closes at−50m.

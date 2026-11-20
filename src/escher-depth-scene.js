@@ -1,76 +1,102 @@
-import {DESCENT,outsideRectangle} from './escher-descent-model.js?v=quiet-entrance-20261118';
-import {ESCHER_DEPTH as D,ESCHER_DEPTH_WALLS as WALLS,DEPTH_TRIANGLE,tilePolygon,loopResult} from './escher-depth-model.js?v=quiet-entrance-20261118';
+import {DESCENT} from './escher-descent-model.js?v=cloister-20261120';
+import {ESCHER_DEPTH as D,ESCHER_DEPTH_WALLS as WALLS,ESCHER_DEPTH_OBSTACLES as CASES,DEPTH_TRIANGLE,DEPTH_VIEW,tilePolygon,loopResult,hexagon,ringPolygons,outsidePolygonRectangle} from './escher-depth-model.js?v=cloister-20261120';
 
 export function buildEscherDepth(T,{canvas=()=>document.createElement('canvas'),loadTexture=typeof globalThis.document?.createElementNS==='function'?url=>new T.TextureLoader().load(url):null}={}){
- const group=new T.Group();group.name='Escher · connected underground museum';group.userData.escherDepth=true;
+ const group=new T.Group();group.name='Escher · hexagonal cloister';group.userData.escherDepth=true;
  const interior=new T.Group(),surface=new T.Group(),lamps=new T.Group();interior.name='Escher underground rooms';surface.name='Three doors to one interior';group.add(interior,surface);interior.add(lamps);lamps.visible=false;
- const owned=new Set(),targets=[],own=o=>(owned.add(o),o),mat=(color,extra={})=>own(new T.MeshLambertMaterial({color,...extra}));
- const floor=mat(0x8e968b),stone=mat(0xa4afa3),roof=mat(0x596b63),ink=mat(0x263b3d),timber=mat(0x3c5149),sage=mat(0x71867c),brass=mat(0xaa9868),paper=mat(0xe3dfc7),tileInk=mat(0x304d50),red=mat(0xb45f4d),glow=own(new T.MeshBasicMaterial({color:0xffe2b9}));
- const unit=own(new T.BoxGeometry(1,1,1)),batches=new Map();
+ const owned=new Set(),targets=[],own=o=>(owned.add(o),o),mat=(color,extra={})=>own(new T.MeshLambertMaterial({color,side:T.DoubleSide,...extra}));
+ const floor=mat(0xd2cbb3),stone=mat(0xd0c4aa),roof=mat(0xafa187),ink=mat(0x263b3d),timber=mat(0x3c5149),sage=mat(0x71867c),brass=mat(0xb39a58),paper=mat(0xe3dfc7),tileInk=mat(0x304d50),ochre=mat(0xb7a378),red=mat(0xb45f4d),glow=own(new T.MeshBasicMaterial({color:0xffe2b9}));
+ const unit=own(new T.BoxGeometry(1,1,1)),batches=new Map(),surfaces=new Map(),obj=new T.Object3D();
  function box(w,h,d,x,y,z,m=stone,parent=interior,yaw=0){let byParent=batches.get(parent);if(!byParent)batches.set(parent,byParent=new Map());if(!byParent.has(m))byParent.set(m,[]);byParent.get(m).push({w,h,d,x,y,z,yaw});}
+ function face(poly,m){if(poly.length<3)return;let points=surfaces.get(m);if(!points)surfaces.set(m,points=[]);for(let i=1;i<poly.length-1;i++)for(const p of[poly[0],poly[i],poly[i+1]])points.push(p[0],p[2],p[1]);}
+ function slab(poly,y,thickness=.35,m=floor){face(poly.map(p=>[...p,y]),m);face([...poly].reverse().map(p=>[...p,y-thickness]),m);for(let i=0;i<poly.length;i++){const a=poly[i],b=poly[(i+1)%poly.length];face([[...a,y],[...b,y],[...b,y-thickness],[...a,y-thickness]],m);}}
+ function cutPieces(poly,cuts){let ps=[poly];for(const cut of cuts)ps=ps.flatMap(p=>outsidePolygonRectangle(p,cut));return ps;}
  function label(text,x,y,z,width=7,height=.9,parent=interior,yaw=0){
   const c=canvas();c.width=1536;c.height=256;const ctx=c.getContext('2d');ctx.fillStyle='#e6e0c8';ctx.fillRect(0,0,c.width,c.height);ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle='#273f41';ctx.font='bold 72px Georgia';ctx.fillText(text,768,134,1460);
-  const texture=own(new T.CanvasTexture(c));texture.colorSpace=T.SRGBColorSpace;const mesh=new T.Mesh(own(new T.PlaneGeometry(width,height)),own(new T.MeshBasicMaterial({map:texture,side:T.DoubleSide,toneMapped:false})));mesh.position.set(x,y,z);mesh.rotation.y=yaw;parent.add(mesh);return mesh;
+  const texture=own(new T.CanvasTexture(c));texture.colorSpace=T.SRGBColorSpace;const mesh=new T.Mesh(own(new T.PlaneGeometry(width,height)),own(new T.MeshBasicMaterial({map:texture,side:T.FrontSide,toneMapped:false})));mesh.position.set(x,y,z);mesh.rotation.y=yaw;parent.add(mesh);return mesh;
  }
- for(const r of D.rooms){box(r.maxX-r.minX,.4,r.maxZ-r.minZ,(r.minX+r.maxX)/2,r.y-.2,(r.minZ+r.maxZ)/2,floor);const top=r.id==='loop'?D.lowerCeiling:D.ceiling;for(const q of outsideRectangle(r,DESCENT.shaft))box(q.maxX-q.minX,.45,q.maxZ-q.minZ,(q.minX+q.maxX)/2,top+.225,(q.minZ+q.maxZ)/2,roof);}
- for(const b of WALLS){box(b.maxX-b.minX,b.height,b.maxZ-b.minZ,(b.minX+b.maxX)/2,b.y+b.height/2,(b.minZ+b.maxZ)/2);box(b.maxX-b.minX+.02,.16,b.maxZ-b.minZ+.02,(b.minX+b.maxX)/2,b.y+.12,(b.minZ+b.maxZ)/2,ink);}
- // The quiet masonry is articulated by thin cornices and ribs, rather than
- // free-standing props in the visitor's route. All relief stays in wall space.
- for(const b of WALLS){const x=(b.minX+b.maxX)/2,z=(b.minZ+b.maxZ)/2,top=b.y+b.height;box(b.maxX-b.minX+.12,.16,b.maxZ-b.minZ+.12,x,top-.22,z,timber);box(b.maxX-b.minX+.09,.055,b.maxZ-b.minZ+.09,x,b.y+1.05,z,sage);}
- for(const r of D.rooms){const top=r.id==='loop'?D.lowerCeiling:D.ceiling,spacing=r.id==='vestibule'?6.4:8.5;for(let x=r.minX+3;x<r.maxX-1;x+=spacing){box(.14,.16,r.maxZ-r.minZ-.5,x,top-.08,(r.minZ+r.maxZ)/2,timber);for(const z of[r.minZ+.55,r.maxZ-.55])box(.4,.32,.5,x,top-.16,z,sage);}for(const z of[r.minZ+1.0,r.maxZ-1.0])box(r.maxX-r.minX-.7,.08,.085,(r.minX+r.maxX)/2,top-.04,z,brass);}
- // Recessed double frames mark real six-metre apertures. Their jambs remain
- // entirely inside the existing solid wall strips; their lintels have 6m+ clearance.
- function portalFrame(x,z,y,alongX=true,width=6){for(let layer=0;layer<2;layer++){const material=layer?timber:sage,depth=layer?.16:.28,spread=width/2+.37+layer*.18,height=6.35+layer*.35,offset=layer?.16:0;for(const sign of[-1,1])box(alongX?depth:.28,height,alongX?.28:depth,x+(alongX?offset:sign*spread),y+height/2,z+(alongX?sign*spread:offset),material);box(alongX?depth:width+1.25,.22,alongX?width+1.25:depth,x+(alongX?offset:0),y+height,z+(alongX?0:offset),material);}box(alongX?.08:width+.75,.055,alongX?width+.75:.08,x+(alongX?.27:0),y+6.08,z+(alongX?0:.27),brass);}
- for(const x of[135.24,160.24,194.24,232.24])portalFrame(x,115,-40,true);portalFrame(213,98.24,-40,false);portalFrame(184.5,132.24,-40,false,7);portalFrame(184.5,156.24,-46,false,7);
- const s=D.stair;for(let i=0;i<s.steps;i++){const z=s.minZ+(i+.5)*(s.maxZ-s.minZ)/s.steps,y=s.top+(i+1)*(s.bottom-s.top)/s.steps;box(s.maxX-s.minX,.18,(s.maxZ-s.minZ)/s.steps+.012,(s.minX+s.maxX)/2,y-.09,z,stone);for(const x of[s.minX+.22,s.maxX-.22]){box(.06,1.1,.06,x,y+.55,z,brass);box(.12,.08,.50,x,y+1.08,z,brass);}}
- box(7,.45,24,184.5,-28.775,144,roof);
- // A broad, genuinely open six-metre doorway receives the central gallery tunnel.
- label('CENTRAL GALLERY',135.51,-32.75,115,5,.5,interior,Math.PI/2);
- label('ESCHER · DEPTH & PATTERN',177,-31.25,98.25,11,.75);
- const triangleSign=label('ONE TRIANGLE, SEVERAL DEPTHS',213,-32.3,98.25,18,1.15);triangleSign.userData.escherDepthExhibit='perspective';targets.push(triangleSign);
- const tileSign=label('EDGES THAT AGREE',213,-30.1,66.25,18,1.1);tileSign.userData.escherDepthExhibit='tessellation';targets.push(tileSign);
- label('ONE MUSEUM · TWO DOORS & A STAIR',251,-34.5,98.25,24,1.1);
- const loopSign=label('CAN EVERY FLIGHT RISE?',196,-37.5,156.25,22,1.1);loopSign.userData.escherDepthExhibit='loop';targets.push(loopSign);
- label('Original geometric experiments · English',177,-38.65,98.25,7.5,.32);
- // Reuse the credited prints already supplied with the surface Escher house.
- // No empty frames are generated in environments without an image loader.
- if(loadTexture){const prints=[{file:'relativity.jpg',title:'Relativity',year:1953,ratio:500/479,x:143,z:105.27,yaw:0},{file:'drawing-hands.jpg',title:'Drawing Hands',year:1948,ratio:500/448,x:153,z:105.27,yaw:0},{file:'ascending-descending.jpg',title:'Ascending and Descending',year:1960,ratio:500/595,x:147.7,z:124.73,yaw:Math.PI}];for(const print of prints){const h=4.4,w=h*print.ratio,y=-35.85,sign=print.yaw? -1:1;box(w+.36,h+.36,.10,print.x,y,print.z-sign*.09,timber);box(w+.12,h+.12,.035,print.x,y,print.z-sign*.025,paper);const texture=own(loadTexture(new URL('./assets/escher/'+print.file,import.meta.url).href));texture.colorSpace=T.SRGBColorSpace;texture.anisotropy=2;const picture=new T.Mesh(own(new T.PlaneGeometry(w,h)),own(new T.MeshBasicMaterial({map:texture,toneMapped:false})));picture.position.set(print.x,y,print.z+sign*.005);picture.rotation.y=print.yaw;picture.name='M. C. Escher · '+print.title;picture.userData={escherPrint:print.title,source:'https://mcescher.com/gallery/most-popular/',credit:'© The M. C. Escher Company B.V. All rights reserved.'};interior.add(picture);label('M. C. Escher · '+print.title+' · '+print.year,print.x,y-h/2-.30,print.z+sign*.01,w+.3,.21,interior,print.yaw);label('© The M. C. Escher Company B.V. · mcescher.com',print.x,y-h/2-.55,print.z+sign*.01,w+.3,.15,interior,print.yaw);}}
- // Cases and consoles are included in the pure collision plan.
- for(const [x0,x1,z0,z1,y]of[[206,220,103,115,-40],[208,218,77,81,-40],[190,204,166,180,-46],[248,255,106,110,-40]]){
-  box(x1-x0,.42,z1-z0,(x0+x1)/2,y+.21,(z0+z1)/2,ink);
-  for(const x of[x0+.12,x1-.12])for(const z of[z0+.12,z1-.12])box(.08,1,.08,x,y+.9,z,brass);
+ // Every floor, balcony and stair opening is cut from the shared navigation plan.
+ for(const r of [...D.rooms,...D.galleries]){
+  const ps=r.inner?ringPolygons(r):[r.polygon],cuts=[...(!r.shaftLanding?[DESCENT.shaft]:[]),...D.stairs.filter(s=>s.top===r.y)];
+  for(const p of ps)for(const q of cutPieces(p,cuts))slab(q,r.y);
+  if(r.corridor&&r.y===D.floor){for(const q of cutPieces(r.polygon,[DESCENT.shaft]))slab(q,r.ceiling,.28,roof);}
  }
- // The separated rods are real 3D segments, not an impossible solid staircase.
- const rodGeo=own(new T.CylinderGeometry(.105,.105,1,8)),rods=new T.InstancedMesh(rodGeo,brass,3),obj=new T.Object3D();
- DEPTH_TRIANGLE.forEach(([a,b],i)=>{const av=new T.Vector3(a.x,a.y,a.z),bv=new T.Vector3(b.x,b.y,b.z),delta=bv.clone().sub(av);obj.position.copy(av.clone().add(bv).multiplyScalar(.5));obj.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),delta.clone().normalize());obj.scale.set(1,delta.length(),1);obj.updateMatrix();rods.setMatrixAt(i,obj.matrix);});rods.instanceMatrix.needsUpdate=true;interior.add(rods);
- for(const x of[209.5,213,216.5]){box(.9,.025,.9,x,-39.98,124,brass);box(.55,.03,.55,x,-39.96,124,ink);}
- label('Compare the three brass floor marks',213,-39.05,130.7,18,.6,interior,Math.PI);
- const landingMarkers={park:[170,114],study:[260,121],escher:[225,107.5]};
- for(const p of D.portals){
-  const w=p.id==='escher'?2.4:3.3,h=p.id==='escher'?3.5:4.4;
-  for(const sign of[-1,1])box(.22,h,.38,p.x+sign*w/2,p.y+h/2,p.z,stone,surface);
-  box(w+.2,.25,.38,p.x,p.y+h,p.z,stone,surface);if(p.id!=='escher')box(w-.28,h-.1,.08,p.x,p.y+h/2,p.z,ink,surface);
-  const door=new T.Mesh(own(new T.PlaneGeometry(w-.28,h-.1)),ink);door.position.set(p.x,p.y+h/2,p.z+.055);if(p.id==='escher')door.visible=false;door.userData.escherDepthDoor=p.id;surface.add(door);targets.push(door);
-  label('ESCHER · BELOW',p.x,p.y+h+.45,p.z+.23,w+1,.5,surface);
-  if(p.id==='escher')continue;const [x,z]=landingMarkers[p.id];box(3,.025,2,x,-39.98,z,brass);box(2.7,.03,1.7,x,-39.96,z,ink);
-  label(p.id==='escher'?'Walk the eight-flight stair upstairs':p.name+' ↑',x,-37.2,z-.9,7,.65);
+ // Deep opaque basin closes the lower cloister well; no sky is visible below it.
+ const lower=D.rooms.find(r=>r.id==='loop'),well=hexagon(...lower.centre,lower.inner);slab(well,-50,.4,ink);
+ for(let i=0;i<6;i++){const a=well[i],b=well[(i+1)%6];face([[...a,-46],[...b,-46],[...b,-50],[...a,-50]],stone);}
+ for(const b of WALLS){const [a,c]=[b.a,b.b],dx=c[0]-a[0],dz=c[1]-a[1],len=Math.hypot(dx,dz),yaw=-Math.atan2(dz,dx),x=(a[0]+c[0])/2,z=(a[1]+c[1])/2;
+  box(len,b.height,.38,x,b.y+b.height/2,z,stone,interior,yaw);box(len,.18,.48,x,b.y+.12,z,timber,interior,yaw);box(len,.22,.56,x,b.y+b.height-.12,z,sage,interior,yaw);
+  if(len>3){const bays=Math.max(1,Math.round(len/5));for(let i=0;i<bays;i++){const t=(i+.5)/bays-.5,bx=x+dx*t-dz/len*.23,bz=z+dz*t+dx/len*.23,w=len/bays-.7;for(const h of b.height>9?[3,8]:[3]){box(w,2.7,.09,bx,b.y+h,bz,ink,interior,yaw);box(w+.12,.09,.12,bx,b.y+h-1.4,bz,brass,interior,yaw);for(const sign of[-1,1])box(.09,2.95,.12,bx+dx/len*sign*(w/2+.08),b.y+h,bz+dz/len*sign*(w/2+.08),sage,interior,yaw);}}}
  }
- // Illumination is switched on only while visiting; it never owns surface lights.
- const ambient=new T.AmbientLight(0xdce7df,.65);ambient.userData.escherDepthOwned=true;lamps.add(ambient);
- for(const x of[141,153]){for(const z of[105.43,124.57]){box(.15,.9,.11,x,-35.6,z,timber);box(.08,.5,.12,x,-35.55,z+(z<115?.07:-.07),glow);}const light=new T.PointLight(0xffd0a2,30,23,1.7);light.position.set(x,-34.7,115);light.userData.escherDepthOwned=true;lamps.add(light);}
- for(const [x,y,z]of[[176,-32,115],[213,-32,115],[213,-32,82],[250,-32,115],[184,-34,144],[196,-38,171]]){
-  box(2.4,.12,.8,x,y,z,glow);const light=new T.PointLight(0xffdfb7,40,35,1.7);light.position.set(x,y-.2,z);light.userData.escherDepthOwned=true;lamps.add(light);
+ // Six curved roof sectors form an opaque vault, with bronze radial ribs.
+ const rodsByMat=new Map();function rod(a,b,r=.04,m=brass){let list=rodsByMat.get(m);if(!list)rodsByMat.set(m,list=[]);list.push({a,b,r});}
+ for(const r of D.rooms.filter(r=>r.radius)){
+  const [cx,cz]=r.centre,rise=r.ceiling-r.spring,levels=12,segments=8;
+  const point=(edge,t,f)=>{const a=r.polygon[edge],b=r.polygon[(edge+1)%6];return[cx+((a[0]+(b[0]-a[0])*t)-cx)*f,cz+((a[1]+(b[1]-a[1])*t)-cz)*f,r.spring+rise*(1-f*f)];};
+  for(let edge=0;edge<6;edge++)for(let j=0;j<levels;j++)for(let k=0;k<segments;k++){
+   const a=point(edge,k/segments,j/levels),b=point(edge,(k+1)/segments,j/levels),c=point(edge,(k+1)/segments,(j+1)/levels),d=point(edge,k/segments,(j+1)/levels);
+   for(const tri of[[a,b,c],[a,c,d]])for(const q of cutPieces(tri,[DESCENT.shaft]))face(q,roof);
+  }
+  for(let edge=0;edge<6;edge++)for(const t of[0,.5]){let previous=point(edge,t,0);for(let j=1;j<=levels;j++){const next=point(edge,t,j/levels);if(!([previous,next].some(p=>p[0]>DESCENT.shaft.minX-.1&&p[0]<DESCENT.shaft.maxX+.1&&p[1]>DESCENT.shaft.minZ-.1&&p[1]<DESCENT.shaft.maxZ+.1)))rod([previous[0],previous[2]-.05,previous[1]],[next[0],next[2]-.05,next[1]],.055);previous=next;}}
  }
- obj.quaternion.identity();obj.scale.set(1,1,1);for(const [parent,materials]of batches)for(const[m,items]of materials){const mesh=new T.InstancedMesh(unit,m,items.length);mesh.name='Batched Escher masonry / joinery';items.forEach((b,i)=>{obj.position.set(b.x,b.y,b.z);obj.rotation.set(0,b.yaw,0);obj.scale.set(b.w,b.h,b.d);obj.updateMatrix();mesh.setMatrixAt(i,obj.matrix);});mesh.instanceMatrix.needsUpdate=true;mesh.computeBoundingSphere?.();parent.add(mesh);}
+ // Repeated arched bays, real upper galleries and slender balustrades make the
+ // two storeys legible. All piers are repeated instances of one owned arch mesh.
+ const archShape=new T.Shape();archShape.moveTo(-.5,0);archShape.lineTo(-.5,5.6);archShape.lineTo(.5,5.6);archShape.lineTo(.5,0);archShape.lineTo(.44,0);archShape.lineTo(.44,2.65);for(let i=0;i<=32;i++){const a=i*Math.PI/32;archShape.lineTo(.44*Math.cos(a),2.65+2.4*Math.sin(a));}archShape.lineTo(-.44,0);archShape.closePath();
+ const archGeo=own(new T.ExtrudeGeometry(archShape,{depth:.32,bevelEnabled:false,curveSegments:24})),arches=[];
+ function railRing(r,y,cut=null){const poly=hexagon(...r.centre,r.inner??r.radius-1);for(let edge=0;edge<6;edge++){const a=poly[edge],b=poly[(edge+1)%6],len=Math.hypot(b[0]-a[0],b[1]-a[1]),steps=Math.ceil(len/1.6);for(let j=0;j<steps;j++){const t=j/steps,u=(j+1)/steps,x=a[0]+(b[0]-a[0])*t,z=a[1]+(b[1]-a[1])*t,xx=a[0]+(b[0]-a[0])*u,zz=a[1]+(b[1]-a[1])*u;if(cut&&(x>cut.minX-.25&&x<cut.maxX+.25&&z>cut.minZ-.25&&z<cut.maxZ+.25||xx>cut.minX-.25&&xx<cut.maxX+.25&&zz>cut.minZ-.25&&zz<cut.maxZ+.25))continue;rod([x,y+1.1,z],[xx,y+1.1,zz],.055);rod([x,y+.5,z],[xx,y+.5,zz],.025);rod([x,y,z],[x,y+1.1,z],.035);}}}
+ for(const r of D.galleries.filter(r=>r.inner)){const poly=hexagon(...r.centre,r.inner);for(let edge=0;edge<6;edge++){const a=poly[edge],b=poly[(edge+1)%6],dx=b[0]-a[0],dz=b[1]-a[1],len=Math.hypot(dx,dz);for(let j=0;j<3;j++){const t=(j+.5)/3,x=a[0]+dx*t,z=a[1]+dz*t;for(const y of[-40,-34])arches.push({x,y,z,w:len/3,yaw:-Math.atan2(dz,dx),sy:y===-34?.95:1});}}
+  railRing(r,-34,r.room==='hall'?D.stairs[1]:null);
+ }
+ railRing({...lower,inner:12},-46);
+ // Main floor inlays follow sixfold geometry without covering the stair voids.
+ // A finite sixfold rosette is laid in stone, rather than a reflective floor or
+ // an unbounded texture. Clip every facet around the central plinth and stairs.
+ for(let band=0;band<4;band++){const inner=hexagon(197,115,band*4),outer=hexagon(197,115,(band+1)*4);for(let side=0;side<6;side++){const next=(side+1)%6,a=inner[side],b=outer[side],c=outer[next],d=inner[next];for(const[poly,m]of[[[a,b,c],(band+side)%2?sage:paper],[[a,c,d],(band+side)%2?paper:ochre]])for(const q of cutPieces(poly,[{minX:194.9,maxX:199.1,minZ:112.9,maxZ:117.1},...D.stairs]))face(q.map(p=>[...p,-39.992]),m);}}
+ for(const r of D.rooms.filter(r=>r.radius)){for(const rad of[r.radius-.8,r.radius-2]){const poly=hexagon(...r.centre,rad);for(let i=0;i<6;i++){const a=poly[i],b=poly[(i+1)%6],steps=16;for(let j=0;j<steps;j++){const t=j/steps,u=(j+1)/steps,p=[a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t],q=[a[0]+(b[0]-a[0])*u,a[1]+(b[1]-a[1])*u];if(D.stairs.some(s=>p[0]>s.minX-.2&&p[0]<s.maxX+.2&&p[1]>s.minZ-.2&&p[1]<s.maxZ+.2))continue;rod([p[0],r.y+.014,p[1]],[q[0],r.y+.014,q[1]],.025);}}}}
+ for(const s of D.stairs){const run=(s.maxZ-s.minZ)/s.steps,cx=(s.minX+s.maxX)/2;for(let i=0;i<s.steps;i++){const z=s.minZ+(i+.5)*run,y=s.top+(i+1)*(s.bottom-s.top)/s.steps;box(s.maxX-s.minX,.18,run+.012,cx,y-.09,z,floor);if(i%3===0)for(const x of[s.minX+.1,s.maxX-.1])rod([x,y,z],[x,y+1.08,z],.035);}
+  for(const x of[s.minX+.1,s.maxX-.1]){rod([x,s.top+1.08,s.minZ],[x,s.bottom+1.08,s.maxZ],.055);rod([x,s.top+.5,s.minZ],[x,s.bottom+.5,s.maxZ],.025);}
+  // Enclosed tall stairwell roof stays above both landings.
+  box(s.maxX-s.minX+.5,.3,s.maxZ-s.minZ,cx,s.ceiling+.15,(s.minZ+s.maxZ)/2,roof);
+  if(s.id==='stair')for(const x of[s.minX-.14,s.maxX+.14])box(.28,17,s.maxZ-s.minZ,x,-37.5,(s.minZ+s.maxZ)/2,stone);
+ }
+ // Gold vertical focal sculpture: nested open octahedra around a slender spine.
+ box(4,.35,4,197,-39.825,115,ink);rod([197,-39.65,115],[197,-29.2,115],.055);
+ for(let i=0;i<12;i++){const a=i*Math.PI/6,x=197+1.35*Math.cos(a),z=115+1.35*Math.sin(a);rod([x,-39.6,z],[x,-28.8,z],.035);}
+ for(let j=0;j<=6;j++)for(let i=0;i<12;i++){const a=i*Math.PI/6,b=(i+1)*Math.PI/6,y=-39.4+j*1.65;rod([197+1.4*Math.cos(a),y,115+1.4*Math.sin(a)],[197+1.4*Math.cos(b),y,115+1.4*Math.sin(b)],.04);}
+ for(let j=0;j<4;j++){const y=-38.4+j*2.25,r=1.8-j*.25,vs=[[197+r,y,115],[197,y,115+r],[197-r,y,115],[197,y,115-r]],top=[197,y+1.6,115],bottom=[197,y-1.1,115];for(let i=0;i<4;i++){rod(vs[i],vs[(i+1)%4],.04);rod(vs[i],top,.04);rod(vs[i],bottom,.04);}}
+ // Credited original prints are retained, framed on actual vertical wing walls.
+ if(loadTexture){const prints=[{file:'relativity.jpg',title:'Relativity',year:1953,ratio:500/479,x:142.25,z:120,yaw:Math.PI/2},{file:'drawing-hands.jpg',title:'Drawing Hands',year:1948,ratio:500/448,x:231.97,z:149.1,yaw:-Math.PI/2},{file:'ascending-descending.jpg',title:'Ascending and Descending',year:1960,ratio:500/595,x:179.03,z:166,yaw:Math.PI/2}];for(const p of prints){const h=3.4,w=h*p.ratio,y=p.title==='Ascending and Descending'?-43.35:-37.1,dx=Math.sin(p.yaw),dz=Math.cos(p.yaw);box(w+.3,h+.3,.12,p.x-dx*.09,y,p.z-dz*.09,timber,interior,p.yaw);const texture=own(loadTexture(new URL('./assets/escher/'+p.file,import.meta.url).href));texture.colorSpace=T.SRGBColorSpace;texture.anisotropy=2;const picture=new T.Mesh(own(new T.PlaneGeometry(w,h)),own(new T.MeshBasicMaterial({map:texture,toneMapped:false})));picture.position.set(p.x,y,p.z);picture.rotation.y=p.yaw;picture.name='M. C. Escher · '+p.title;picture.userData={escherPrint:p.title,source:'https://mcescher.com/gallery/most-popular/',credit:'© The M. C. Escher Company B.V. All rights reserved.'};interior.add(picture);label('M. C. Escher · '+p.title+' · '+p.year,p.x+dx*.01,y-h/2-.25,p.z+dz*.01,w+.3,.20,interior,p.yaw);label('© The M. C. Escher Company B.V. · mcescher.com',p.x+dx*.01,y-h/2-.47,p.z+dz*.01,w+.3,.13,interior,p.yaw);}}
+ for(const b of CASES.filter(b=>['triangle case','tile console','loop table','reading desk'].includes(b.id))){box(b.maxX-b.minX,.42,b.maxZ-b.minZ,(b.minX+b.maxX)/2,b.y+.21,(b.minZ+b.maxZ)/2,ink);}
+ box(16.2,8.4,.3,216.69,-35.8,69.87,ink);
+ for(const[a,b]of DEPTH_TRIANGLE)rod([a.x,a.y,a.z],[b.x,b.y,b.z],.105);
+ for(const dx of[-3.5,0,3.5]){box(.9,.025,.9,DEPTH_VIEW.x+dx,-39.98,DEPTH_VIEW.z,brass);box(.55,.03,.55,DEPTH_VIEW.x+dx,-39.96,DEPTH_VIEW.z,ink);}
+ // Original topology sculptures are parametric meshes, not claimed Escher works.
+ const mobiusPositions=[],mobiusIndices=[],cx=224,cz=155;for(let i=0;i<=96;i++){const u=i/96*Math.PI*2;for(const v of[-.65,.65])mobiusPositions.push(cx+(2.2+v*Math.cos(u/2))*Math.cos(u),-37.8+v*Math.sin(u/2),cz+(2.2+v*Math.cos(u/2))*Math.sin(u));if(i<96){const n=i*2;mobiusIndices.push(n,n+1,n+2,n+1,n+3,n+2);}}
+ const mg=own(new T.BufferGeometry());mg.setAttribute('position',new T.Float32BufferAttribute(mobiusPositions,3));mg.setIndex(mobiusIndices);mg.computeVertexNormals();const mm=new T.Mesh(mg,brass);mm.name='Original Möbius band · topology wing';interior.add(mm);box(5,.35,5,cx,-39.825,cz,ink);
+ const knot=new T.Mesh(own(new T.TorusKnotGeometry(1.4,.14,128,8,2,3)),sage);knot.position.set(211,-37.7,152);knot.name='Original trefoil · topology wing';interior.add(knot);box(4,.35,4,211,-39.825,152,ink);
+ label('CENTRAL GALLERY',138,-35.3,112.22,5,.6);
+ label('PERSPECTIVE',157.63,-33.1,99.8,10,.7);
+ label('TESSELLATION',216.69,-33.1,65.8,11,.7);
+ label('TOPOLOGY · RELATIONS',216.69,-33.1,136.6,12,.7);
+ label('LOWER CLOISTER · CAN EVERY FLIGHT RISE?',197,-41.4,184.2,16,.8,interior,Math.PI);
+ for(const p of D.exhibits){const sign=label(p.name.toUpperCase(),p.x,p.y+2.8,p.z-2.2,p.id==='perspective'?11:9,.55);sign.userData.escherDepthExhibit=p.id;targets.push(sign);}
+ for(const p of D.portals){const w=p.id==='escher'?2.4:3.3,h=p.id==='escher'?3.5:4.4;for(const sign of[-1,1])box(.22,h,.38,p.x+sign*w/2,p.y+h/2,p.z,stone,surface);box(w+.2,.25,.38,p.x,p.y+h,p.z,stone,surface);if(p.id!=='escher')box(w-.28,h-.1,.08,p.x,p.y+h/2,p.z,ink,surface);const door=new T.Mesh(own(new T.PlaneGeometry(w-.28,h-.1)),ink);door.position.set(p.x,p.y+h/2,p.z+.055);if(p.id==='escher')door.visible=false;door.userData.escherDepthDoor=p.id;surface.add(door);targets.push(door);label('ESCHER · BELOW',p.x,p.y+h+.45,p.z+.23,w+1,.5,surface);if(p.id!=='escher'){const q=p.landing;box(2.4,.025,1.7,q.x,-39.98,q.z,brass);label(p.name+' ↑',q.x,-37.2,q.z-.9,6,.55);}}
+ const ambient=new T.AmbientLight(0xdce7df,.85);ambient.userData.escherDepthOwned=true;lamps.add(ambient);
+ for(const r of D.rooms.filter(r=>r.radius)){const[x,z]=r.centre,y=r.y+7;const light=new T.PointLight(0xffe2b5,r.id==='hall'?100:65,r.radius*2.6,1.4);light.position.set(x,y,z);light.userData.escherDepthOwned=true;lamps.add(light);for(const a of[0,2,4]){const p=r.polygon[a],lx=x+(p[0]-x)*.7,lz=z+(p[1]-z)*.7;box(.5,.5,.5,lx,r.y+4.5,lz,glow);}}
+ // Flush polygon faces are merged by material; masonry and rails are instanced.
+ for(const[m,points]of surfaces){const g=own(new T.BufferGeometry());g.setAttribute('position',new T.Float32BufferAttribute(points,3));g.computeVertexNormals();const mesh=new T.Mesh(g,m);mesh.name='Cloister · continuous polygon floors / vault';interior.add(mesh);}
+ const ag=new T.InstancedMesh(archGeo,stone,arches.length);arches.forEach((p,i)=>{obj.position.set(p.x,p.y,p.z);obj.rotation.set(0,p.yaw,0);obj.scale.set(p.w,p.sy,1);obj.updateMatrix();ag.setMatrixAt(i,obj.matrix);});ag.instanceMatrix.needsUpdate=true;ag.computeBoundingSphere();ag.name='Two-storey hexagonal vaulted arcades';interior.add(ag);
+ const cylinder=own(new T.CylinderGeometry(1,1,1,6));for(const[m,rs]of rodsByMat){const mesh=new T.InstancedMesh(cylinder,m,rs.length);rs.forEach((p,i)=>{const a=new T.Vector3(...p.a),b=new T.Vector3(...p.b),d=b.clone().sub(a);obj.position.copy(a.add(b).multiplyScalar(.5));obj.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),d.clone().normalize());obj.scale.set(p.r,d.length(),p.r);obj.updateMatrix();mesh.setMatrixAt(i,obj.matrix);});mesh.instanceMatrix.needsUpdate=true;mesh.computeBoundingSphere();mesh.name='Cloister · bronze ribs and balustrades';interior.add(mesh);}
+ obj.quaternion.identity();obj.scale.set(1,1,1);for(const[parent,materials]of batches)for(const[m,items]of materials){const mesh=new T.InstancedMesh(unit,m,items.length);items.forEach((b,i)=>{obj.position.set(b.x,b.y,b.z);obj.rotation.set(0,b.yaw,0);obj.scale.set(b.w,b.h,b.d);obj.updateMatrix();mesh.setMatrixAt(i,obj.matrix);});mesh.instanceMatrix.needsUpdate=true;mesh.computeBoundingSphere();mesh.name='Batched Escher masonry / joinery';parent.add(mesh);}
  const tess=new T.Group(),loop=new T.Group();tess.name='Live edge-pairing mosaic';loop.name='Live closed-loop stair model';interior.add(tess,loop);let tileGeo=null,loopGeo=null;
  function discard(g){for(const m of [...g.children]){m.dispose?.();g.remove(m);}}
  function setTessellation(state){discard(tess);if(tileGeo){tileGeo.dispose();owned.delete(tileGeo);}const points=tilePolygon(state),shape=new T.Shape();shape.moveTo(...points[0]);for(const p of points.slice(1))shape.lineTo(...p);shape.closePath();tileGeo=own(new T.ShapeGeometry(shape));
-  for(let parity=0;parity<2;parity++){const cells=[];for(let row=0;row<4;row++)for(let col=0;col<8;col++)if((row+col)%2===parity)cells.push([col,row]);const mesh=new T.InstancedMesh(tileGeo,parity?tileInk:paper,cells.length);obj.rotation.set(0,0,0);obj.scale.set(1,1,1);cells.forEach(([col,row],i)=>{obj.position.set(205+col*2,-39+row*2,66.28+parity*.003);obj.updateMatrix();mesh.setMatrixAt(i,obj.matrix);});mesh.instanceMatrix.needsUpdate=true;tess.add(mesh);}
+  for(let parity=0;parity<2;parity++){const cells=[];for(let row=0;row<4;row++)for(let col=0;col<8;col++)if((row+col)%2===parity)cells.push([col,row]);const mesh=new T.InstancedMesh(tileGeo,parity?tileInk:paper,cells.length);obj.rotation.set(0,0,0);obj.scale.set(1,1,1);cells.forEach(([col,row],i)=>{obj.position.set(208.69+col*2,-39+row*2,70.1+parity*.003);obj.updateMatrix();mesh.setMatrixAt(i,obj.matrix);});mesh.instanceMatrix.needsUpdate=true;tess.add(mesh);}
  }
- function setLoop(directions){discard(loop);if(loopGeo){loopGeo.dispose();owned.delete(loopGeo);}loopGeo=own(new T.BoxGeometry(1,1,1));const result=loopResult(directions),min=Math.min(...result.heights),items=[];const corners=[[192,168],[202,168],[202,178],[192,178],[192,168]];
-  for(let j=0;j<4;j++)for(let k=0;k<10;k++){const t=(k+.5)/10,[ax,az]=corners[j],[bx,bz]=corners[j+1],y=-44.8+(result.heights[j]-min+directions[j]*2*(k+1)/10)*.4;items.push({x:ax+(bx-ax)*t,z:az+(bz-az)*t,y,yaw:j*Math.PI/2});}
-  const mesh=new T.InstancedMesh(loopGeo,brass,items.length);items.forEach((p,i)=>{obj.position.set(p.x,p.y-.07,p.z);obj.rotation.set(0,p.yaw,0);obj.scale.set(1.03,.14,1.1);obj.updateMatrix();mesh.setMatrixAt(i,obj.matrix);});mesh.instanceMatrix.needsUpdate=true;loop.add(mesh);
-  if(result.rise){const seam=new T.Mesh(loopGeo,red);seam.position.set(192,-44.8+((result.heights[0]+result.heights[4])/2-min)*.4,168);seam.scale.set(.16,Math.abs(result.rise)*.4,.16);loop.add(seam);}
+ function setLoop(directions){discard(loop);if(loopGeo){loopGeo.dispose();owned.delete(loopGeo);}loopGeo=own(new T.BoxGeometry(1,1,1));const result=loopResult(directions),min=Math.min(...result.heights),items=[];const corners=[[181.4,164.4],[184.6,164.4],[184.6,167.6],[181.4,167.6],[181.4,164.4]];
+  for(let j=0;j<4;j++)for(let k=0;k<10;k++){const t=(k+.5)/10,[ax,az]=corners[j],[bx,bz]=corners[j+1],y=-44.9+(result.heights[j]-min+directions[j]*2*(k+1)/10)*.25;items.push({x:ax+(bx-ax)*t,z:az+(bz-az)*t,y,yaw:j*Math.PI/2});}
+  const mesh=new T.InstancedMesh(loopGeo,brass,items.length);items.forEach((p,i)=>{obj.position.set(p.x,p.y-.07,p.z);obj.rotation.set(0,p.yaw,0);obj.scale.set(.34,.10,.65);obj.updateMatrix();mesh.setMatrixAt(i,obj.matrix);});mesh.instanceMatrix.needsUpdate=true;loop.add(mesh);
+  if(result.rise){const seam=new T.Mesh(loopGeo,red);seam.position.set(181.4,-44.9+((result.heights[0]+result.heights[4])/2-min)*.25,164.4);seam.scale.set(.16,Math.abs(result.rise)*.25,.16);loop.add(seam);}
  }
  setTessellation({});setLoop([1,1,1,1]);
  return{group,interior,surface,lamps,targets,setTessellation,setLoop,dispose(){group.removeFromParent();group.traverse(o=>{if(o.isInstancedMesh)o.dispose?.();});for(const r of owned)r.dispose();group.clear();}};

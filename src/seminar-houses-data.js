@@ -1,9 +1,11 @@
 import {HEX_DISTRICTS} from './city-hex-layout.js?v=makers-passages-20261118';
-export const SEMINAR_HOUSES=[
+export const SEMINAR_HOUSE_ARCHIVE=[
  {id:'noether',x:HEX_DISTRICTS.symmetry.x-45,z:168,names:{en:'Emmy Noether · House of Symmetry',de:'Emmy Noether · Haus der Symmetrie',fa:'امی نوتر؛ خانهٔ تقارن',cs:'Emmy Noether · Dům symetrie'},colour:0xa58245,style:'oculus',sources:[['Emmy Noether · Invariant Variation Problems (1918), M. A. Tavel translation','https://arxiv.org/abs/physics/0503066']]},
  {id:'mirzakhani',x:HEX_DISTRICTS.curvedSpace.x,z:168,names:{en:'Maryam Mirzakhani · House of Curved Space',de:'Maryam Mirzakhani · Haus des gekrümmten Raums',fa:'مریم میرزاخانی؛ خانهٔ فضای خمیده',cs:'Maryam Mirzakhani · Dům zakřiveného prostoru'},colour:0x48848c,style:'ribbon',sources:[['Maryam Mirzakhani · Growth of the number of simple closed geodesics (2008)','https://annals.math.princeton.edu/wp-content/uploads/annals-v168-n1-p03.pdf'],['Maryam Mirzakhani · Simple geodesics and Weil–Petersson volumes','https://www.math.stonybrook.edu/~mlyubich/Archive/Geometry/Teichmuller%20Space/Mirz3.pdf']]},
  {id:'cage',x:HEX_DISTRICTS.listening.x+45,z:168,names:{en:'John Cage · House of Listening',de:'John Cage · Haus des Zuhörens',fa:'جان کیج؛ خانهٔ شنیدن',cs:'John Cage · Dům naslouchání'},colour:0x8b684b,style:'fins',sources:[["MoMA · John Cage, 4′33″ (In Proportional Notation)",'https://www.moma.org/collection/works/163616']]}
 ];
+// The Curved Space house is retired from the main city; retain its lesson data and saved IDs.
+export const SEMINAR_HOUSES=SEMINAR_HOUSE_ARCHIVE.map((h,i)=>({...h,mapNumber:6+i})).filter(h=>h.id!=='mirzakhani');
 export const seminarWorld=(h,x,z)=>({x:h.x-x,z:h.z-z});
 export const seminarEntry=h=>({...seminarWorld(h,0,20),y:.13,yaw:Math.PI});
 export const SEMINAR_PATHS=[[[194.023011444505,138],[318.6973485926734,138]],...SEMINAR_HOUSES.map(h=>[[h.x,138],[h.x,h.z-12]])];

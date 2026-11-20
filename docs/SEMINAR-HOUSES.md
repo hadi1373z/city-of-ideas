@@ -1,3 +1,9 @@
+> Current main-city revision: only Noether (map6) and Cage (map8) are live.
+> Mirzakhani was removed at the user's request; its definition remains archived
+> in SEMINAR_HOUSE_ARCHIVE and the historical design notes below.
+> Cage's new listening comparison is documented in CAGE-LISTENING-HOUSE.md.
+> The following original-release account includes the archived third house.
+
 # Houses of form and listening
 
 Open `?arrival=seminar-houses` for the directory, or visit map markers 6–8.

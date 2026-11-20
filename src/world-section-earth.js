@@ -1,7 +1,7 @@
-import {DESCENT} from './escher-descent-model.js?v=quiet-entrance-20261118';
+import {DESCENT} from './escher-descent-model.js?v=cloister-20261120';
 import {SIXFOLD_HOUSES,houseToWorld} from './sixfold-house-network-model.js?v=makers-passages-20261118';
 import {sixfoldPassagePlan} from './sixfold-house-passages-scene.js?v=makers-passages-20261118';
-import {ESCHER_DEPTH as D} from './escher-depth-model.js?v=quiet-entrance-20261118';
+import {ESCHER_DEPTH as D,hexagon} from './escher-depth-model.js?v=cloister-20261120';
 
 const EPS=1e-7,STRATA=[[0,-8,0],[-8,-22,1],[-22,-31,2],[-31,-44,0],[-44,-52,1],[-52,-65,2],[-65,-79,0],[-79,-88,1],[-88,-96,2]],cross=(a,b)=>a[0]*b[1]-a[1]*b[0];
 const rectangle=(minX,maxX,minZ,maxZ)=>[[minX,minZ],[maxX,minZ],[maxX,maxZ],[minX,maxZ]];
@@ -13,8 +13,9 @@ export function sectionRoomPrisms(){const passages=sixfoldPassagePlan();return[
  ...SIXFOLD_HOUSES.map(h=>prism('house-'+h.id,Array.from({length:6},(_,i)=>{const p=houseToWorld(h,{x:125+23.45*Math.cos(i*Math.PI/3),z:23.45*Math.sin(i*Math.PI/3)});return[p.x,p.z];}),-40.24,.13)),
  ...passages.rectangles.map(p=>prism('passage-'+p.id,p.polygon,-40.24,-34.875)),
  prism('escher-descent',rectangle(DESCENT.shaft.minX,DESCENT.shaft.maxX,DESCENT.shaft.minZ,DESCENT.shaft.maxZ),-40.4,.13),
- ...D.rooms.map(r=>prism('museum-'+r.id,rectangle(r.minX-.24,r.maxX+.24,r.minZ-.24,r.maxZ+.24),r.y-.4,(r.id==='loop'?D.lowerCeiling:D.ceiling)+.45)),
- prism('museum-stairwell',rectangle(D.stair.minX-.24,D.stair.maxX+.24,D.stair.minZ-.24,D.stair.maxZ+.24),D.stair.bottom-.4,D.ceiling+.45)
+ ...D.rooms.map(r=>prism('museum-'+r.id,r.polygon,r.y-.4,r.ceiling+.45)),
+ ...D.stairs.map(s=>prism('museum-'+s.id+'-well',rectangle(s.minX-.24,s.maxX+.24,s.minZ-.24,s.maxZ+.24),s.bottom-.4,s.ceiling+.45)),
+ prism('museum-lower-basin',hexagon(197,166,12),-50,-46)
  ];}
 const PRISMS=sectionRoomPrisms();
 export function sectionVoidRectangles(angle=0){const out=[];for(const p of PRISMS){const interval=sectionFootprintInterval(p.polygon,angle);if(interval)out.push({id:p.id,minX:interval[0],maxX:interval[1],minY:p.bottom,maxY:p.top});}

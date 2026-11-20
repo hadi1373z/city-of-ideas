@@ -1,6 +1,6 @@
 import {MAKERS_SITE,MAKERS_ACCESS,MAKERS_ROOFS} from './makers-site.js?v=makers-block-20261118';
 import {IDEAS_PARK_SITE} from './city-hex-layout.js?v=makers-passages-20261118';
-import {SEMINAR_HOUSES} from './seminar-houses-data.js?v=makers-passages-20261118';
+import {SEMINAR_HOUSES} from './seminar-houses-data.js?v=cloister-20261120';
 import {SHORE,HEX_COAST_WALK,COAST_PROMENADE_WALK} from './island-layout.js?v=makers-passages-20261118';
 
 // The same world-to-SVG projection used by the original coastal plan.
@@ -85,13 +85,13 @@ export const COAST_EXPLORER_COPY = {
   }
 };
 
-for(const [i,h]of SEMINAR_HOUSES.entries())COAST_LANDMARKS.push({id:h.id,number:6+i,point:[h.x,h.z],seminarHouse:true});
+for(const [i,h]of SEMINAR_HOUSES.entries())COAST_LANDMARKS.push({id:h.id,number:h.mapNumber,point:[h.x,h.z],seminarHouse:true});
 const seminarMapCopy={
- en:{places:'Eight places to explore',area:'The southeastern seminar court',descriptions:['Enter a stone rotunda and test how breaking rotational symmetry changes an exact oscillator model. Read the assumptions behind its conserved quantities.','Explore a turquoise ribbon-roof house, compare paths in the Poincaré disk and follow the question toward Mirzakhani’s research on closed geodesics.','Enter a timber listening house, change an original seeded score and question the roles of chance, constraints and authorship. Sound is optional.']},
- de:{places:'Acht Orte zum Erkunden',area:'Der südöstliche Seminarhof',descriptions:['Betritt die Steinrotunde und prüfe an exakten Oszillatoren, was beim Brechen der Rotationssymmetrie erhalten bleibt. Lies die Voraussetzungen des Arguments.','Erkunde das Haus unter dem türkisen Banddach, vergleiche Wege in der Poincaré-Scheibe und folge der Frage zu Mirzakhanis Forschung über geschlossene Geodäten.','Betritt das hölzerne Haus des Zuhörens, verändere eine eigenständige gesetzte Partitur und befrage Zufall, Regeln und Autorschaft. Klang ist freiwillig.']},
- fa:{places:'هشت مکان برای گردش',area:'حیاط سمینار در جنوب‌شرق',descriptions:['وارد روتوندای سنگی شو و در مدل دقیق نوسانگر بررسی کن شکست تقارن دورانی چه چیزی را تغییر می‌دهد. فرض‌های کمیت پایسته را بخوان.','زیر سقف نواری فیروزه‌ای، مسیرهای دیسک پوانکاره را مقایسه کن و پرسش را تا پژوهش میرزاخانی دربارهٔ ژئودزیک‌های بسته دنبال کن.','وارد خانهٔ چوبی شنیدن شو؛ پارتیتور تازهٔ بذردار را تغییر بده و نقش تصادف، قید و مؤلف را بسنج. پخش صدا اختیاری است.']}
+ en:{places:'Seven places to explore',area:'The southeastern seminar court',descriptions:['Enter a stone rotunda and test how breaking rotational symmetry changes an exact oscillator model. Read the assumptions behind its conserved quantities.','Explore a turquoise ribbon-roof house, compare paths in the Poincaré disk and follow the question toward Mirzakhani’s research on closed geodesics.','Enter a timber listening house, change an original seeded score and question the roles of chance, constraints and authorship. Sound is optional.']},
+ de:{places:'Sieben Orte zum Erkunden',area:'Der südöstliche Seminarhof',descriptions:['Betritt die Steinrotunde und prüfe an exakten Oszillatoren, was beim Brechen der Rotationssymmetrie erhalten bleibt. Lies die Voraussetzungen des Arguments.','Erkunde das Haus unter dem türkisen Banddach, vergleiche Wege in der Poincaré-Scheibe und folge der Frage zu Mirzakhanis Forschung über geschlossene Geodäten.','Betritt das hölzerne Haus des Zuhörens, verändere eine eigenständige gesetzte Partitur und befrage Zufall, Regeln und Autorschaft. Klang ist freiwillig.']},
+ fa:{places:'هفت مکان برای گردش',area:'حیاط سمینار در جنوب‌شرق',descriptions:['وارد روتوندای سنگی شو و در مدل دقیق نوسانگر بررسی کن شکست تقارن دورانی چه چیزی را تغییر می‌دهد. فرض‌های کمیت پایسته را بخوان.','زیر سقف نواری فیروزه‌ای، مسیرهای دیسک پوانکاره را مقایسه کن و پرسش را تا پژوهش میرزاخانی دربارهٔ ژئودزیک‌های بسته دنبال کن.','وارد خانهٔ چوبی شنیدن شو؛ پارتیتور تازهٔ بذردار را تغییر بده و نقش تصادف، قید و مؤلف را بسنج. پخش صدا اختیاری است.']}
 };
-for(const lang of ['en','de','fa']){const c=COAST_EXPLORER_COPY[lang],extra=seminarMapCopy[lang];c.places=extra.places;SEMINAR_HOUSES.forEach((h,i)=>c.landmarks[h.id]={name:h.names[lang],area:extra.area,description:extra.descriptions[i]});}
+for(const lang of ['en','de','fa']){const c=COAST_EXPLORER_COPY[lang],extra=seminarMapCopy[lang];c.places=extra.places;SEMINAR_HOUSES.forEach((h,i)=>c.landmarks[h.id]={name:h.names[lang],area:extra.area,description:extra.descriptions[{noether:0,mirzakhani:1,cage:2}[h.id]]});}
 
 // Both vertical world connections use existing landmark coordinates.
 export function coastFaceLinksSvg(){const[x,y]=coastMapPoint(IDEAS_PARK_SITE.x,IDEAS_PARK_SITE.z);return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 920"><g fill="none" stroke="#8c6f40" stroke-width="2"><circle cx="460" cy="460" r="18"/><path d="M455 450v19m-5 -6l5 6 5 -6M465 470v-19m-5 6l5 -6 5 6"/></g><g fill="none" stroke="#3b7081" stroke-width="2"><ellipse cx="'+x+'" cy="'+y+'" rx="19" ry="12"/><path d="M'+x+' '+(y-10)+'v21m-5 -6l5 6 5 -6"/></g><g font-family="Tahoma,Arial,sans-serif" text-anchor="middle" font-size="15" paint-order="stroke" stroke="#f0eddb" stroke-width="4"><text x="460" y="519" fill="#7a5c2d">Through-gallery · both faces</text><text x="'+x+'" y="'+(y+51)+'" fill="#326577">Pond · other-face crossing</text></g></svg>';}

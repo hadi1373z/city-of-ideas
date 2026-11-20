@@ -1,9 +1,9 @@
-import {DESCENT as D,STAIR_PORTAL as P,DESCENT_PARTS as PARTS,descentSurface,walkDescent,outsideRectangle} from './escher-descent-model.js?v=quiet-entrance-20261118';
+import {DESCENT as D,DESCENT_ANNEX as A,annexContains,STAIR_PORTAL as P,DESCENT_PARTS as PARTS,descentSurface,walkDescent,outsideRectangle} from './escher-descent-model.js?v=cloister-20261120';
 export function buildEscherDescent(T){
  const group=new T.Group();group.name='Escher · continuous eight-flight descent';const owned=[],batches=new Map(),unit=new T.BoxGeometry(1,1,1);owned.push(unit);
  const mat=c=>{const m=new T.MeshLambertMaterial({color:c,side:T.DoubleSide});owned.push(m);return m;},stone=mat(0xc6c5af),slate=mat(0x99aaa3),light=mat(0xe6ddbe),brass=mat(0xa9986c);
  const fill=new T.AmbientLight(0xd6e2dc,.6);fill.visible=false;group.add(fill);
- function box(w,h,d,x,y,z,m=stone){if(!batches.has(m))batches.set(m,[]);batches.get(m).push({w,h,d,x,y,z});}
+ function box(w,h,d,x,y,z,m=stone,yaw=0){if(!batches.has(m))batches.set(m,[]);batches.get(m).push({w,h,d,x,y,z,yaw});}
  function rail(a,b){const delta=new T.Vector3().subVectors(b,a),g=new T.CylinderGeometry(.045,.045,delta.length(),6),mesh=new T.Mesh(g,brass);mesh.position.copy(a).add(b).multiplyScalar(.5);mesh.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),delta.normalize());group.add(mesh);owned.push(g);}
  for(const p of PARTS){if(p.kind==='flight'){
   for(let i=0;i<40;i++){const z=p.start+(p.end-p.start)*(i+.5)/40,y=p.top+(p.bottom-p.top)*(i+1)/40;box(1.8,.18,.304,p.x,y-.09,z,i%8===0?light:stone);box(1.8,.018,.035,p.x,y+.009,z+(p.end>p.start?-.11:.11),slate);
@@ -34,19 +34,30 @@ export function buildEscherDescent(T){
  for(const side of[-1,1]){box(.035,.018,2.5,P.x+side*.66,P.floor+.023,P.z+1.85,brass);const glowGeometry=new T.BoxGeometry(.055,1.35,.018),glowMaterial=new T.MeshBasicMaterial({color:0xffe6b0}),glow=new T.Mesh(glowGeometry,glowMaterial);glow.position.set(P.x+side*1.3,P.floor+1.55,P.z+P.depth+.045);group.add(glow);owned.push(glowGeometry,glowMaterial);}
  // Ground ceiling is genuinely notched above the shallow first flight.
  for(const r of outsideRectangle(s,D.cut))box(r.maxX-r.minX,.24,r.maxZ-r.minZ,(r.minX+r.maxX)/2,-.52,(r.minZ+r.maxZ)/2,slate);
- // A sloping covered mouth follows the first flight down through the lawn.
- const roof0=.13-(104-96.4)/12*(40.13/8)+3.15,roof1=3.28,roofRun=7.6,roofRise=roof1-roof0,roofGeometry=new T.BoxGeometry(2.4,.18,Math.hypot(roofRun,roofRise)),roof=new T.Mesh(roofGeometry,light);roof.position.set(228,(roof0+roof1)/2,100.2);roof.rotation.x=-Math.atan2(roofRise,roofRun);group.add(roof);owned.push(roofGeometry);
- const sideGeometry=new T.BufferGeometry(),sidePositions=[];for(const x of[-.09,.09])sidePositions.push(x,-.4,96.4,x,-.4,104,x,roof1,104,x,roof0,96.4);sideGeometry.setAttribute('position',new T.Float32BufferAttribute(sidePositions,3));sideGeometry.setIndex([0,2,1,0,3,2,4,5,6,4,6,7,0,1,5,0,5,4,1,2,6,1,6,5,2,3,7,2,7,6,3,0,4,3,4,7]);sideGeometry.computeVertexNormals();owned.push(sideGeometry);for(const x of[226.8,229.2]){const side=new T.Mesh(sideGeometry,slate);side.position.x=x;group.add(side);}
+ // This actual six-sided stair pavilion keeps the proven shaft footprint.
+ // Its front edge is the real first-flight opening, not a decorative doorway.
+ const capPositions=[],capFace=(a,b,c)=>{for(const p of[a,b,c])capPositions.push(...p);};
+ for(let i=0;i<6;i++){const p=A.polygon[i],q=A.polygon[(i+1)%6],dx=q[0]-p[0],dz=q[1]-p[1],len=Math.hypot(dx,dz),x=(p[0]+q[0])/2,z=(p[1]+q[1])/2,yaw=-Math.atan2(dz,dx);
+  if(i!==5)box(len,A.eave-A.bottom,.24,x,(A.eave+A.bottom)/2,z,slate,yaw);
+  box(len+.05,.18,.32,x,A.eave+.04,z,light,yaw);
+  capFace([p[0],A.eave+.13,p[1]],[q[0],A.eave+.13,q[1]],[A.centre[0],A.apex,A.centre[1]]);
+  capFace([q[0],A.eave-.10,q[1]],[p[0],A.eave-.10,p[1]],[A.centre[0],A.apex-.23,A.centre[1]]);
+  rail(new T.Vector3(p[0],A.eave+.16,p[1]),new T.Vector3(A.centre[0],A.apex+.02,A.centre[1]));
+ }
+ const capGeometry=new T.BufferGeometry();capGeometry.setAttribute('position',new T.Float32BufferAttribute(capPositions,3));capGeometry.computeVertexNormals();owned.push(capGeometry);const cap=new T.Mesh(capGeometry,light);cap.name='Escher · six-facet capped stair pavilion';group.add(cap);
  // Repeated short arcades reveal the depth without copying an impossible print.
  for(const p of PARTS.filter(p=>p.kind==='landing'&&p.id.startsWith('landing-'))){const z=(p.minZ+p.maxZ)/2;
   for(const x of[224.05,228.95])box(.14,2.5,.14,x,p.y+1.25,z,light);
   const points=Array.from({length:25},(_,i)=>{const t=i/24*Math.PI;return new T.Vector3(226.5-2.45*Math.cos(t),p.y+2.5+.7*Math.sin(t),z);});const g=new T.TubeGeometry(new T.CatmullRomCurve3(points),32,.08,6,false);group.add(new T.Mesh(g,light));owned.push(g);
  }
- const stamp=new T.Object3D();for(const[m,items]of batches){const mesh=new T.InstancedMesh(unit,m,items.length);items.forEach((p,i)=>{stamp.position.set(p.x,p.y,p.z);stamp.scale.set(p.w,p.h,p.d);stamp.updateMatrix();mesh.setMatrixAt(i,stamp.matrix);});mesh.instanceMatrix.needsUpdate=true;mesh.computeBoundingSphere();group.add(mesh);}
+ const stamp=new T.Object3D();for(const[m,items]of batches){const mesh=new T.InstancedMesh(unit,m,items.length);items.forEach((p,i)=>{stamp.position.set(p.x,p.y,p.z);stamp.rotation.set(0,p.yaw??0,0);stamp.scale.set(p.w,p.h,p.d);stamp.updateMatrix();mesh.setMatrixAt(i,stamp.matrix);});mesh.instanceMatrix.needsUpdate=true;mesh.computeBoundingSphere();group.add(mesh);}
  return{group,fill,dispose(){group.removeFromParent();group.traverse(o=>{if(o.isInstancedMesh)o.dispose();});owned.forEach(o=>o.dispose());group.clear();}};
 }
 export function installEscherDescent(M,T,{gateOpen,onBegin,onMuseum,onStop}={}){
  const built=buildEscherDescent(T);M.scene.add(built.group);let active=false,disposed=false,lastLevel=-1;
+ const previousStand=M.city?.canStand;
+ const annexStand=function(x,z,...args){if(annexContains(x,z))return false;return previousStand?.call(this,x,z,...args)??true;};
+ if(previousStand)M.city.canStand=annexStand;
  const blocked=()=>document.hidden||!!document.querySelector('dialog[open],#reader-panel:not([hidden]),#exhibit-panel:not([hidden]),#map-panel:not([hidden])');
  const top=()=>Math.abs(M.player.y-M.eye-D.top)<.25&&Math.abs(M.player.x-228)<.66&&M.player.z>103.75&&M.player.z<105.85;
  const bottom=()=>Math.abs(M.player.y-M.eye-D.bottom)<.25&&Math.abs(M.player.x-225)<.66&&M.player.z>106.1&&M.player.z<106.95;
@@ -62,5 +73,5 @@ export function installEscherDescent(M,T,{gateOpen,onBegin,onMuseum,onStop}={}){
   if(Math.abs(floor-D.top)<.02&&M.player.z>105.85){stop();return true;}
   return true;
  }
- return{built,step,stop,captureSurfaceAt(x,z){if(active||disposed||blocked()||M.mode!=='city'||!gateOpen?.()||Math.abs(M.player.y-M.eye-D.top)>.25||Math.abs(x-228)>=.66||z<=103.75||z>=105.85||z>=M.player.z)return false;M.player.x=x;M.player.z=z;step(0);return active;},get active(){return active;},approach(){if(blocked())return false;M.arrive({...D.entry,yaw:0});return true;},dispose(){disposed=true;stop();built.dispose();}};
+ return{built,step,stop,captureSurfaceAt(x,z){if(active||disposed||blocked()||M.mode!=='city'||!gateOpen?.()||Math.abs(M.player.y-M.eye-D.top)>.25||Math.abs(x-228)>=.66||z<=103.75||z>=105.85||z>=M.player.z)return false;M.player.x=x;M.player.z=z;step(0);return active;},get active(){return active;},approach(){if(blocked())return false;M.arrive({...D.entry,yaw:0});return true;},dispose(){disposed=true;stop();if(M.city?.canStand===annexStand)M.city.canStand=previousStand;built.dispose();}};
 }

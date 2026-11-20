@@ -11,7 +11,9 @@ assert.equal((svg.match(/data-house=/g)||[]).length,6);
 for(const h of SIXFOLD_HOUSES){const polygon=Array.from({length:6},(_,i)=>{const p=houseToWorld(h,{x:125+23.45*Math.cos(i*Math.PI/3),z:23.45*Math.sin(i*Math.PI/3)});return[p.x,p.z];});assert(svg.includes(`data-house="${h.id}"`));assert(svg.includes(`points="${pointList(polygon)}"`));}
 for(const p of NETWORK_PASSAGES)assert(svg.includes(`data-passage="${p.id}" points="${pointList([p.a,p.b])}"`));
 assert(svg.includes(`data-gallery-tunnel="true" points="${pointList(GALLERY_TUNNEL.points)}"`));
-for(const r of ESCHER_DEPTH.rooms)assert(svg.includes(`data-museum-room="${r.id}"`));
+for(const r of ESCHER_DEPTH.rooms)assert(svg.includes(`data-museum-room="${r.id}" points="${pointList(r.polygon)}"`));
+for(const s of ESCHER_DEPTH.stairs)assert(svg.includes(`data-museum-stair="${s.id}"`));
+assert(svg.includes("gallery −34 m")&&svg.includes('data-museum-well="loop"'));
 assert(svg.includes('−8 to −24 m')&&svg.includes('−46 m')&&svg.includes('Basement −40 m'),'Different physical depths must not be presented as one floor');
 class Node{constructor(tag){assert(/^[a-z][a-z-]*$/.test(tag));this.children=[];this.dataset={};this.attributes={};this.tagName=tag;}append(...children){this.children.push(...children);}setAttribute(k,v){this.attributes[k]=v;}}
 const old=globalThis.document;globalThis.document={createElement:t=>new Node(t)};

@@ -1,6 +1,6 @@
 import {BABEL,babelDesk,surfaceAt as babelSurface,walkLibrary} from './babel-library-model.js?v=city-night-20261117';
 import {UPPER,LOWER,pointAt} from './two-face-gallery-model.js?v=city-night-20261117';
-import {ESCHER_DEPTH as D,depthRoomAt,depthFloorAt,canWalkDepth} from './escher-depth-model.js?v=quiet-entrance-20261118';
+import {ESCHER_DEPTH as D,depthRoomAt,depthFloorAt,canWalkDepth} from './escher-depth-model.js?v=cloister-20261120';
 import {lowerLocal,lowerPhysical,GALLERY_TUNNEL,tunnelContains} from './world-cylinder-model.js?v=city-night-20261117';
 import {MATH_FACULTY as F,facultyCanStand,facultyColliders} from './math-faculty-model.js?v=makers-passages-20261118';
 
@@ -9,7 +9,7 @@ const nearFloor=(p,y,eye)=>Math.abs(p.y-eye-y)<.5;
 export const JOURNEY_QUESTIONS=Object.freeze({
  babel:{title:'A catalogue and a reason',question:'The catalogue contains every six-symbol page over four symbols. What would make one of its 4,096 pages a justified claim?',route:'Visit a reading desk, try a prefix, then follow the fifth terrace east to the open bookshelf doorway.'},
  passage:{title:'One question, connected rooms',question:'A complete list gives you possibilities. Escher’s chamber asks what a convincing view can establish about the world.',route:'At the upper spiral’s second full turn, take the level passage east. It turns north, then east into Escher’s museum.'},
- perspective:{title:'What does one image establish?',question:'Projection discards depth. Align the separated rods, then step sideways: which properties survive the change of viewpoint?',route:'Follow the main hall east through the real doorway. The three brass viewing marks are beyond the triangle case.'},
+ perspective:{title:'What does one image establish?',question:'Projection discards depth. Align the separated rods, then step sideways: which properties survive the change of viewpoint?',route:'Cross the vaulted court into the west Perspective wing. Take the aisle around the case to its three brass viewing marks.'},
  loop:{title:'Test a global constraint',question:'For a closed spatial route, signed height changes must sum to zero. Can every flight rise and still return to the same landing?',route:'Return to the main hall and take its south stair. The lower room contains the four-flight closure experiment.'},
  shore:{title:'Reflection or rotation?',question:'As you pass to the other face, does your compass frame undergo a reflection or a rotation?',route:'Imagine carrying three arrows through the gallery: east, north and up. Predict which directions reverse before revealing the answer.'},
  working:{title:'Leave the Mathematics library',question:'To leave: return to the central hall, then go through the open front doors.',route:'From a side room, use the opening halfway along its inner wall. Turn into the hall and follow it toward the front doorway. Outside, the covered walk returns to the circular Faculty.'},
@@ -20,7 +20,7 @@ export function connectedContext({player,eye=1.8,mode,babelActive=false,escherAc
  if(mode!=='city'||![player?.x,player?.y,player?.z,eye].every(Number.isFinite))return null;
  const common={player,eye,feet:player.y-eye,progress,catalogueOpened};
  if(babelActive&&babelSurface(player.x,player.z,player.y-eye)!==null){const level=BABEL.levels.reduce((a,b)=>Math.abs(a.y-common.feet)<Math.abs(b.y-common.feet)?a:b);return{...common,place:'babel',level};}
- if(escherActive&&depthFloorAt(player.x,player.z)!==null&&nearFloor(player,depthFloorAt(player.x,player.z),eye))return{...common,place:!progress.perspective?'perspective':!progress.loop?'loop':'passage',museum:true,room:depthRoomAt(player.x,player.z)};
+ if(escherActive&&depthFloorAt(player.x,player.z,common.feet)!==null&&nearFloor(player,depthFloorAt(player.x,player.z),eye))return{...common,place:!progress.perspective?'perspective':!progress.loop?'loop':'passage',museum:true,room:depthRoomAt(player.x,player.z,common.feet)};
  if(player.x<-1000&&shore&&nearFloor(player,.13,eye)){const q=lowerLocal(player);if(Math.hypot(q.x-shore.x,q.z-shore.z)<(shore.radius??8))return{...common,place:'shore',lower:true};}
  if(worldRoute?.side==='lower'&&['floor','walkout'].includes(worldRoute.layer))return{...common,place:'faculty',lower:true,region};
  if(worldRoute)return{...common,place:progress.perspective&&progress.loop?'faculty':'passage',worldRoute};
@@ -44,19 +44,26 @@ function babelRoute(c){
  const walker={x:p.x,z:p.z,y:p.y},out=[];for(const q of points){walkLibrary(walker,q.x-walker.x,q.z-walker.z,c.eye);if(distance(walker,q)>.09)break;out.push({x:walker.x,z:walker.z,y:walker.y-c.eye});}
  return out;
 }
+// Architectural aisle landmarks, not retired rectangular room coordinates.
+// Edges are accepted only after sampling the actual height-aware navigator.
 const museumNodes=[
- [136.4,115],[154,115],[166,115],[174,115],[198,115],[200,124],[213,124],[225,124],[230,115],[240,115],[260,115],
- [213,94],[213,100],[221.8,100],[202,90],[202,73],[213,73],
- [184.5,130],[184.5,138],[184.5,150],[184.5,158],[184.5,162],[197,163]
-].map(([x,z])=>({x,z,y:depthFloorAt(x,z)}));
-function clearMuseum(a,b){let y=a.y;for(const p of line(a,b,.18)){const h=depthFloorAt(p.x,p.z);if(!canWalkDepth(p.x,p.z,{fromY:y}))return false;y=h;}return true;}
-// These edges are the museum's actual door and stair sequence, not an all-pairs
-// visibility graph built during startup. Each is still checked against real solids.
-const museumEdges=museumNodes.map(()=>[]);for(const[a,b]of[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,10],[7,13],[13,12],[12,11],[11,14],[14,15],[15,16],[3,17],[17,18],[18,19],[19,20],[20,21],[21,22]])if(clearMuseum(museumNodes[a],museumNodes[b])){const d=distance(museumNodes[a],museumNodes[b]);museumEdges[a].push({j:b,d});museumEdges[b].push({j:a,d});}
+ [136.4,115,-40],[145,115,-40],[145,120,-40],[157.63,122,-40],[157.63,125,-40],[170,120,-40],[170,115,-40],[177,115,-40],[186,115,-40],[191,123,-40],[202,123,-40],[207,124,-40],[214,115,-40],[221,110,-40],[225,107,-40],
+ [204,106,-40],[204,100,-40],[208,96,-40],[210,93,-40],[212,89,-40],[216,89,-40],[216.69,87,-40],[220,91,-40],
+ [204,124,-40],[204,130,-40],[208,134,-40],[210,137,-40],[212,140,-40],[216,140,-40],[216,148,-40],[214,136,-40],[220,140,-40],[220,151,-40],[221,155,-40],
+ [195,131,-40],[195,132,-40],[195,150,-46],[195,151,-46],[186,151,-46],[181,158,-46],[181,174,-46],[190,183,-46],[204,183,-46],[213,174,-46],[213,158,-46],[204,151,-46],[182,172,-46],
+ [179.7,126,-40],[179.7,125,-40],[179.7,103,-34],[179.7,102,-34],
+ [185,99,-34],[197,94,-34],[207,100,-34],[214,111,-34],[214,122,-34],[205,132,-34],[190,132,-34],[183,129,-34],[177,124,-34],[177,105,-34],
+ ...D.galleries.filter(r=>r.inner&&r.room!=='hall').flatMap(r=>Array.from({length:6},(_,i)=>[r.centre[0]+15*Math.cos(Math.PI/6+i*Math.PI/3),r.centre[1]+15*Math.sin(Math.PI/6+i*Math.PI/3),-34]))
+].map(([x,z,y])=>({x,z,y})).filter(p=>canWalkDepth(p.x,p.z,{fromY:p.y}));
+function clearMuseum(a,b){let y=a.y;for(const p of line(a,b,.16)){if(!canWalkDepth(p.x,p.z,{fromY:y}))return false;y=depthFloorAt(p.x,p.z,y);}return Math.abs(y-b.y)<.15;}
+let museumEdges=null;
+function museumGraph(){if(museumEdges)return museumEdges;const edges=museumNodes.map(()=>[]);for(let a=0;a<museumNodes.length;a++)for(let b=a+1;b<museumNodes.length;b++){const p=museumNodes[a],q=museumNodes[b],d=distance(p,q);if(d>27||Math.abs(p.y-q.y)>.2&&!(Math.abs(p.x-q.x)<.02&&Math.abs(p.y-q.y)<=6))continue;if(clearMuseum(p,q)&&clearMuseum(q,p)){edges[a].push({j:b,d});edges[b].push({j:a,d});}}return museumEdges=edges;}
 export function museumRoute(player,goal='perspective',eye=1.8){
- const start={x:player.x,z:player.z,y:player.y-eye},target=goal==='perspective'?6:goal==='loop'?22:0,nodes=[...museumNodes,start],edges=[...museumEdges,nodes.slice(0,-1).flatMap((q,j)=>clearMuseum(start,q)?[{j,d:distance(start,q)}]:[])],cost=nodes.map(()=>Infinity),prev=[],queue=new Set(nodes.map((_,i)=>i));cost[nodes.length-1]=0;
+ const start={x:player.x,z:player.z,y:player.y-eye},end=goal==='perspective'?D.exhibits.find(p=>p.id==='perspective'):goal==='loop'?D.exhibits.find(p=>p.id==='loop'):{x:136.4,z:115,y:-40};
+ if(!canWalkDepth(start.x,start.z,{fromY:start.y}))return[];
+ const base=museumGraph(),nodes=[...museumNodes,start],target=nodes.findIndex(p=>distance(p,end)<.01&&Math.abs(p.y-end.y)<.01),edges=[...base,museumNodes.flatMap((q,j)=>distance(start,q)<=30&&clearMuseum(start,q)?[{j,d:distance(start,q)}]:[])],cost=nodes.map(()=>Infinity),prev=[],queue=new Set(nodes.map((_,i)=>i));if(target<0)return[];cost[nodes.length-1]=0;
  while(queue.size){let i=-1;for(const j of queue)if(i<0||cost[j]<cost[i])i=j;if(!Number.isFinite(cost[i]))break;queue.delete(i);if(i===target)break;for(const e of edges[i])if(cost[i]+e.d<cost[e.j]){cost[e.j]=cost[i]+e.d;prev[e.j]=i;}}
- if(!Number.isFinite(cost[target]))return[];const path=[];for(let i=target;i!==undefined;i=prev[i])path.push(nodes[i]);return through(path.reverse()).map(p=>({...p,y:depthFloorAt(p.x,p.z)}));
+ if(!Number.isFinite(cost[target]))return[];const path=[];for(let i=target;i!==undefined;i=prev[i])path.push(nodes[i]);let y=start.y;return through(path.reverse(),.5).map(p=>{y=depthFloorAt(p.x,p.z,y);return{...p,y};});
 }
 function tunnelRoute(p,reverse=false){const knots=GALLERY_TUNNEL.points.map(([x,z])=>({x,z,y:-40}));let best=null;for(let i=1;i<knots.length;i++){const a=knots[i-1],b=knots[i],dx=b.x-a.x,dz=b.z-a.z,t=Math.max(0,Math.min(1,((p.x-a.x)*dx+(p.z-a.z)*dz)/(dx*dx+dz*dz))),q={x:a.x+dx*t,z:a.z+dz*t,y:-40},d=distance(p,q);if(!best||d<best.d)best={i,q,d};}return through([{x:p.x,z:p.z,y:-40},best.q,...(reverse?knots.slice(0,best.i).reverse():knots.slice(best.i))]);}
 function spiralRoute(c){

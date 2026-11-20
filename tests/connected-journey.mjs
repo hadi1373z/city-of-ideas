@@ -19,10 +19,10 @@ for(const l of BABEL.levels)for(const opened of[false,true]){
 }
 assert.equal(make({x:0,z:0,y:1.93},{babelActive:true}),null,'A stale library flag cannot place a route on the surface');
 assert.equal(make({x:0,z:0,y:1.8},{escherActive:true}),null,'A stale museum flag cannot claim a surface floor');
-for(const p of[{x:136.4,z:115,y:-38.2},{x:174,z:114,y:-38.2},{x:213,z:124,y:-38.2},{x:240,z:115,y:-38.2},{x:260,z:121,y:-38.2},{x:213,z:73,y:-38.2},{x:184.5,z:143,y:depthFloorAt(184.5,143)+1.8},{x:197,z:163,y:-44.2}])for(const goal of['perspective','loop','passage']){
+for(const p of[{x:136.4,z:115,y:-38.2},{x:174,z:114,y:-38.2},{x:157.63,z:125,y:-38.2},{x:221,z:155,y:-38.2},{x:216.69,z:87,y:-38.2},{x:195,z:143,y:depthFloorAt(195,143,-44)+1.8},{x:182,z:172,y:-44.2},{x:207,z:100,y:-32.2}])for(const goal of['perspective','loop','passage']){
  const path=museumRoute(p,goal);assert(path.length>0,`A real museum route from ${p.x},${p.z} to ${goal}`);
- for(const q of path){assert(canWalkDepth(q.x,q.z),'Museum breadcrumbs must respect cases, walls, doorways and stair');near(q.y,depthFloorAt(q.x,q.z));samples++;}
- const end=path.at(-1),target=goal==='perspective'?{x:213,z:124}:goal==='loop'?{x:197,z:163}:{x:136.4,z:115};assert(distance(end,target)<.01);
+ for(const q of path){assert(canWalkDepth(q.x,q.z,{fromY:q.y}),'Museum breadcrumbs must respect cases, walls, doorways and stair');near(q.y,depthFloorAt(q.x,q.z,q.y));samples++;}
+ const end=path.at(-1),target=goal==='perspective'?{x:157.63,z:125}:goal==='loop'?{x:182,z:172}:{x:136.4,z:115};assert(distance(end,target)<.01);
 }
 for(const side of['upper','lower'])for(const done of[false,true]){
  const theta=4.2,q=pointAt(theta,side),p=side==='upper'?{...q,y:q.y+1.8}:{x:q.x-2160,z:q.z-65,y:q.y+1.8},c=make(p,{worldRoute:{side,theta,layer:'spiral'},progress:{perspective:done,loop:done}}),path=connectedRoute(c);assert(path.length>20);

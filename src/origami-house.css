@@ -72,4 +72,14 @@
 @media(max-width:520px){.coastal-map-layers button,.middle-layer-map nav button{flex:1 1 100%}}
 
 .coastal-house-anchor{position:absolute;z-index:1;width:5px;height:5px;transform:translate(-50%,-50%);border:1px solid #fff9e8;border-radius:50%;background:#294f45;pointer-events:none}
+/* A nearby folding station keeps its real sheet visible beside the controls. */
+#origami-house[data-workbench=true]{position:fixed;inset:94px 16px auto auto;margin:0;width:370px;max-height:calc(100dvh - 118px);box-shadow:0 12px 45px #173a3540}
+#origami-house[data-workbench=true] header{padding:10px 14px}#origami-house[data-workbench=true] h2{font-size:23px}#origami-house[data-workbench=true] .fold-house-body{padding:10px 14px}#origami-house[data-workbench=true] p{font-size:14px;line-height:1.6}#origami-house[data-workbench=true] h3{font-size:20px}#origami-house[data-workbench=true] nav{gap:4px}#origami-house[data-workbench=true] button{font-size:13px;padding:8px 10px}#origami-house[data-workbench=true] td,#origami-house[data-workbench=true] th{padding:6px;font-size:13px}
+@media(max-width:800px){#origami-house[data-workbench=true]{inset:auto 10px 190px 10px;width:auto;max-height:43dvh}}
+#origami-house[data-workbench=true] .fold-house-body{max-height:calc(100dvh - 250px)}
+@media(max-width:800px){#origami-house[data-workbench=true] .fold-house-body{max-height:calc(43dvh - 95px)}}
 @media(max-width:480px){#coastal-city-map .coastal-landmark[data-landmark=noether]{transform:translate(calc(-50% - 17px),-50%)}#coastal-city-map .coastal-landmark[data-landmark=cage]{transform:translate(calc(-50% + 17px),-50%)}#coastal-city-map .coastal-landmark[data-landmark=mirzakhani]{transform:translate(-50%,calc(-50% + 20px))}#coastal-city-map .coastal-landmark[data-landmark=noether]::after,#coastal-city-map .coastal-landmark[data-landmark=cage]::after{content:"";position:absolute;top:12px;width:5px;height:1px;background:#294f45}#coastal-city-map .coastal-landmark[data-landmark=noether]::after{left:100%}#coastal-city-map .coastal-landmark[data-landmark=cage]::after{right:100%}#coastal-city-map .coastal-landmark[data-landmark=mirzakhani]::after{content:"";position:absolute;bottom:100%;left:12px;width:1px;height:8px;background:#294f45}}
+
+#origami-house[data-workbench=true][open]{display:flex;flex-direction:column;overflow:hidden;max-height:calc(100dvh - 210px)}
+#origami-house[data-workbench=true] header{flex:0 0 auto}#origami-house[data-workbench=true] .fold-house-body{flex:1 1 auto;min-height:0;max-height:none;overflow:auto}#origami-house[data-workbench=true]>p[role=status]{flex:0 0 auto;margin:4px 14px 8px;font-size:11px}
+@media(max-width:800px){#origami-house[data-workbench=true][open]{max-height:43dvh}}

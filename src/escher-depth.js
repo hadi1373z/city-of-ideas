@@ -1,9 +1,9 @@
-import {installEscherDescent} from './escher-descent.js?v=quiet-entrance-20261118';
-import {PRINT_STUDIES,dependencyOrder} from './escher-print-studies.js?v=1';
-import {ESCHER_DEPTH as D,DEPTH_VIEW,DEPTH_FOCUS,depthFloorAt,depthRoomAt,walkDepth,atGalleryHandoff,perspectiveAligned,tileMismatch,loopResult} from './escher-depth-model.js?v=quiet-entrance-20261118';
-import {buildEscherDepth} from './escher-depth-scene.js?v=quiet-entrance-20261118';
+import {installEscherDescent} from './escher-descent.js?v=cloister-20261120';
+import {PRINT_STUDIES,dependencyOrder} from './escher-print-studies.js?v=cloister-20261120';
+import {ESCHER_DEPTH as D,DEPTH_VIEW,DEPTH_FOCUS,depthFloorAt,depthRoomAt,walkDepth,atGalleryHandoff,perspectiveAligned,tileMismatch,loopResult} from './escher-depth-model.js?v=cloister-20261120';
+import {buildEscherDepth} from './escher-depth-scene.js?v=cloister-20261120';
 
-const ROOM_NAMES={vestibule:'Gallery passage',hall:'Hall of connected views',perspective:'Perspective chamber',tessellation:'Tessellation chamber',reading:'Room of three doors',stair:'Stair to the loop chamber',loop:'Closed-loop chamber'};
+const ROOM_NAMES={vestibule:'Gallery passage',hall:'Hexagonal vaulted court','hall-gallery':'Upper court gallery','perspective-gallery':'Perspective balcony','tessellation-gallery':'Tessellation balcony','reading-gallery':'Topology balcony','gallery-stair':'Stair to the upper gallery',perspective:'Perspective chamber',tessellation:'Tessellation chamber',reading:'Topology & relations wing',stair:'Stair to the loop chamber',loop:'Lower hexagonal cloister'};
 export function installEscherDepth(M,T,{onGalleryExit=null}={}){
  const built=buildEscherDepth(T);M.scene.add(built.group);M.city.targets.push(...built.targets);
  let descent=null;let active=false,disposed=false,lastDoor='park',lighting=null,lastTime=0,cooldown=0,hold=0,solvedPerspective=false,selectedMark=-1;
@@ -15,12 +15,13 @@ export function installEscherDepth(M,T,{onGalleryExit=null}={}){
  const panel=el('aside');panel.id='escher-depth-context';panel.hidden=true;panel.dir='ltr';panel.lang='en';
  const heading=el('strong','Escher · Depth & Pattern'),location=el('span'),help=el('p'),progress=el('p'),actions=el('div');progress.setAttribute('role','status');
  const examine=button('Explore this experiment',()=>openExhibit()),exit=button('Return through this door',()=>{const p=nearestDoor();if(p)leave(p.id);}),route=button('Locate the gallery passage',()=>{M.clearMovement();M.pointToward?.(D.gallery);M.status?.('Gallery passage: return to the west end of the vestibule at (135, 115).');});
- actions.append(examine,exit,route);panel.append(heading,location,help,progress,actions);document.body.append(panel);
+ const court=button('Travel to the central court',()=>travel('court')),upper=button('Travel to the upper gallery',()=>travel('upper'));
+ actions.append(examine,exit,route,court,upper);panel.append(heading,location,help,progress,actions);document.body.append(panel);
  const portalButton=button('Enter the underground museum',()=>{const p=nearestSurfaceDoor();if(p)enter(p.id);});portalButton.id='escher-depth-enter';portalButton.hidden=true;portalButton.lang='en';document.body.append(portalButton);
  const dialog=el('dialog');dialog.id='escher-depth-experiment';dialog.dir='ltr';dialog.lang='en';dialog.dataset.confirmFocused='true';const head=el('header'),title=el('h2'),close=button('Close',()=>dialog.close()),body=el('div');title.id='escher-depth-experiment-title';dialog.setAttribute('aria-labelledby',title.id);head.append(title,close);dialog.append(head,body);document.body.append(dialog);dialog.addEventListener('close',()=>M.clearMovement());
  const blocked=()=>document.hidden||!!document.querySelector('dialog[open],#reader-panel:not([hidden]),#exhibit-panel:not([hidden]),#map-panel:not([hidden])');
  const gateOpen=p=>!p.gated||!!globalThis.window?.CITY_ESCHER?.passageOpen;
- const valid=()=>M.mode==='city'&&depthFloorAt(M.player.x,M.player.z)!==null&&Math.abs(M.player.y-M.eye-depthFloorAt(M.player.x,M.player.z))<.45;
+ const valid=()=>M.mode==='city'&&depthFloorAt(M.player.x,M.player.z,M.player.y-M.eye)!==null&&Math.abs(M.player.y-M.eye-depthFloorAt(M.player.x,M.player.z,M.player.y-M.eye))<.45;
  const distance=p=>Math.hypot(M.player.x-p.x,M.player.z-p.z);
  function nearestSurfaceDoor(){
   if(active||M.mode!=='city')return null;
@@ -46,6 +47,13 @@ export function installEscherDepth(M,T,{onGalleryExit=null}={}){
  function leave(id=lastDoor){
   if(!active)return false;const p=D.portals.find(p=>p.id===id)??D.portals[1];stop();cooldown=lastTime+1.5;M.clearMovement();M.arrive({x:p.x,z:p.z+2.35,y:M.cityGroundHeight?.(p.x,p.z+2.35)??p.y,yaw:Math.PI});return true;
  }
+ // An explicit convenience journey, distinct from the continuous stair walk.
+ function travel(destination){
+  if(!active||blocked())return false;const p=destination==='upper'?{x:207,z:100,y:-34}:{x:207,z:124,y:-40};
+  M.clearMovement();Object.assign(M.player,{...p,y:p.y+M.eye,pitch:0});M.camera?.position?.set?.(M.player.x,M.player.y,M.player.z);
+  const target={x:197,y:-35,z:115};M.player.yaw=Math.atan2(-(target.x-p.x),-(target.z-p.z));M.player.pitch=Math.atan2(target.y-M.player.y,Math.hypot(target.x-p.x,target.z-p.z));
+  M.status?.(destination==='upper'?'Travelled to the upper gallery. The west stair also connects it to the court.':'Travelled to the hexagonal court. Three wings and the south lower-cloister stair surround it.');renderPanel();return true;
+ }
  function handoff(){
   if(!active||!atGalleryHandoff(M.player))return false;const p={x:134.9,z:M.player.z,y:-40,yaw:M.player.yaw,pitch:M.player.pitch};
   stop();M.clearMovement();if(typeof galleryExit==='function')galleryExit(p);else{M.arrive({x:136.4,z:115,y:-40,yaw:-Math.PI/2});active=true;document.body.dataset.escherDepth='true';setLight();M.status?.('The gallery connector is not installed. The museum remains open.');}return true;
@@ -53,9 +61,9 @@ export function installEscherDepth(M,T,{onGalleryExit=null}={}){
  M.arrive=function(p){if(active||descent?.active)stop();return old.arrive.call(M,p);};
  function renderPanel(){
   const paused=blocked();panel.hidden=!active||paused;if(!active)return;
-  location.textContent=ROOM_NAMES[depthRoomAt(M.player.x,M.player.z)]||'Underground museum';const e=nearestExhibit(),door=nearestDoor();examine.hidden=!e;exit.hidden=!door;examine.textContent=e?'Explore: '+e.name:'Explore this experiment';exit.textContent=door?'Return to '+door.name:'Return through this door';
-  help.textContent='Walk with the usual keyboard or controller controls. The rooms share one continuous floor; the south stair reaches a lower chamber.';
-  progress.textContent=selectedPrint?PRINT_STUDIES[selectedPrint].title+' → '+PRINT_STUDIES[selectedPrint].question+' '+(e?.id===PRINT_STUDIES[selectedPrint].experiment?'You reached the experiment. Choose Explore to test it.':PRINT_STUDIES[selectedPrint].route):depthRoomAt(M.player.x,M.player.z)==='perspective'?(solvedPerspective?'The triangle joined from one view. Move sideways to expose its separated depths.':hold>0?'The ends meet. Hold this view…':'Compare the three brass floor marks. Face the rods and find a view where all three corners join.'):'Gallery connection: west through the hall. Surface doors: brass floor markers in the hall and the room of three doors.';
+  location.textContent=ROOM_NAMES[depthRoomAt(M.player.x,M.player.z,M.player.y-M.eye)]||'Underground museum';const e=nearestExhibit(),door=nearestDoor();examine.hidden=!e;exit.hidden=!door;examine.textContent=e?'Explore: '+e.name:'Explore this experiment';exit.textContent=door?'Return to '+door.name:'Return through this door';
+  help.textContent='Walk with the usual keyboard or controller controls. Three hexagonal wings meet the vaulted court. Follow the west stair to the upper galleries or the south stair to the lower cloister.';
+  progress.textContent=selectedPrint?PRINT_STUDIES[selectedPrint].title+' → '+PRINT_STUDIES[selectedPrint].question+' '+(e?.id===PRINT_STUDIES[selectedPrint].experiment?'You reached the experiment. Choose Explore to test it.':PRINT_STUDIES[selectedPrint].route):depthRoomAt(M.player.x,M.player.z,M.player.y-M.eye)==='perspective'?(solvedPerspective?'The triangle joined from one view. Move sideways to expose its separated depths.':hold>0?'The ends meet. Hold this view…':'Compare the three brass floor marks. Face the rods and find a view where all three corners join.'):'Gallery connection: west through the hall. Surface doors: brass floor markers in the west passage and the topology wing.';
  }
  function checkPortals(time=0){
   if(disposed)return false;if(descent?.active){portalButton.hidden=true;panel.hidden=true;return false;}if(Number.isFinite(time))lastTime=time;
@@ -77,9 +85,9 @@ export function installEscherDepth(M,T,{onGalleryExit=null}={}){
   if(active){if(nearestExhibit()){openExhibit();return true;}const p=nearestDoor();if(p){leave(p.id);return true;}return true;}
   const p=nearestSurfaceDoor();if(!p)return false;if(!gateOpen(p)){M.status?.('Align the perspective stair upstairs to open Escher’s rear alcove.');return true;}if(p.id==='escher'){M.pointToward?.({x:228,z:92});return true;}return enter(p.id);
  }
- function faceTriangle(){M.clearMovement();M.pointToward?.(DEPTH_FOCUS);M.player.yaw=Math.atan2(-(DEPTH_FOCUS.x-M.player.x),-(DEPTH_FOCUS.z-M.player.z));M.player.pitch=Math.atan2(DEPTH_FOCUS.y-M.player.y,Math.hypot(DEPTH_FOCUS.x-M.player.x,DEPTH_FOCUS.z-M.player.z));}
+ function faceTriangle(){M.clearMovement();M.camera?.position?.set?.(M.player.x,M.player.y,M.player.z);M.pointToward?.(DEPTH_FOCUS);M.player.yaw=Math.atan2(-(DEPTH_FOCUS.x-M.player.x),-(DEPTH_FOCUS.z-M.player.z));M.player.pitch=Math.atan2(DEPTH_FOCUS.y-M.player.y,Math.hypot(DEPTH_FOCUS.x-M.player.x,DEPTH_FOCUS.z-M.player.z));}
  function moveMark(){
-  if(!active||depthRoomAt(M.player.x,M.player.z)!=='perspective')return false;selectedMark=(selectedMark+1)%3;
+  if(!active||depthRoomAt(M.player.x,M.player.z,M.player.y-M.eye)!=='perspective')return false;selectedMark=(selectedMark+1)%3;
   M.clearMovement();Object.assign(M.player,{x:DEPTH_VIEW.x+[-3.5,0,3.5][selectedMark],z:DEPTH_VIEW.z,y:D.floor+M.eye});faceTriangle();dialog.close();return true;
  }
  function renderExhibit(id){
@@ -109,13 +117,13 @@ export function installEscherDepth(M,T,{onGalleryExit=null}={}){
  function openExhibit(id=nearestExhibit()?.id){
   const near=nearestExhibit();if(!active||!near||near.id!==id||blocked())return false;M.clearMovement();renderExhibit(id);dialog.showModal();close.focus();return true;
  }
- M.city.region=(x,z)=>descent?.active?{id:'escher-stair',title:'Escher · stair to the museum',inside:true}:active&&depthRoomAt(x,z)?{id:'escher-depth',title:'Escher · '+(ROOM_NAMES[depthRoomAt(x,z)]||'Depth & Pattern'),inside:true}:old.region(x,z);
+ M.city.region=(x,z)=>descent?.active?{id:'escher-stair',title:'Escher · stair to the museum',inside:true}:active&&depthRoomAt(x,z,M.player.y-M.eye)?{id:'escher-depth',title:'Escher · '+(ROOM_NAMES[depthRoomAt(x,z,M.player.y-M.eye)]||'Depth & Pattern'),inside:true}:old.region(x,z);
  M.city.targetInfo=d=>d?.escherDepthDoor?{kind:'escher-depth-door',data:d,title:'Enter Escher · Depth & Pattern'}:d?.escherDepthExhibit?{kind:'escher-depth-exhibit',data:d,title:'Explore the experiment'}:old.target(d);
  M.showExtra=info=>info?.kind==='escher-depth-door'?(nearestSurfaceDoor()?.id===info.data.escherDepthDoor&&interact(),true):info?.kind==='escher-depth-exhibit'?(openExhibit(info.data.escherDepthExhibit),true):old.show?.(info);
  M.city.update=(...args)=>{old.update(...args);if(disposed)return;checkPortals(args[1]);if(active)setLight();};
  function followPrint(id){if(!PRINT_STUDIES[id])return false;selectedPrint=id;M.status?.(PRINT_STUDIES[id].title+': '+(globalThis.window?.CITY_ESCHER?.passageOpen?'Follow the rear alcove into the museum.':'First align the house stair, then follow the rear alcove into the museum.'));if(active)renderPanel();return true;}
  descent=installEscherDescent(M,T,{gateOpen:()=>gateOpen(D.portals[0]),onBegin:fromBelow=>{stop();if(fromBelow)globalThis.window?.CITY_ESCHER?.setPassage?.(true,1);setLight();},onStop:restoreLight,onMuseum:()=>{active=true;document.body.dataset.escherDepth='true';setLight();renderPanel();}});
  built.group.add(descent.built.group);
- const api={descent,followPrint,get selectedPrint(){return selectedPrint;},built,step,checkPortals,interact,enter,leave,stop,openExhibit,moveMark,faceTriangle,setGalleryExit(fn){galleryExit=fn;},get active(){return active||!!descent?.active;},get progress(){return{perspective:solvedPerspective,tessellation:tileMismatch(tess).solved,loop:loopResult(directions).closed};},galleryBoundary:D.gallery};M.escherDepth=api;
+ const api={descent,travel,followPrint,get selectedPrint(){return selectedPrint;},built,step,checkPortals,interact,enter,leave,stop,openExhibit,moveMark,faceTriangle,setGalleryExit(fn){galleryExit=fn;},get active(){return active||!!descent?.active;},get progress(){return{perspective:solvedPerspective,tessellation:tileMismatch(tess).solved,loop:loopResult(directions).closed};},galleryBoundary:D.gallery};M.escherDepth=api;
  addEventListener('pagehide',()=>{disposed=true;stop();descent.dispose();if(M.arrive!==old.arrive)M.arrive=old.arrive;M.city.update=old.update;M.city.region=old.region;M.city.targetInfo=old.target;M.showExtra=old.show;for(const t of built.targets){const i=M.city.targets.indexOf(t);if(i>=0)M.city.targets.splice(i,1);}built.dispose();for(const n of[panel,portalButton,dialog])n.remove();},{once:true});return api;
 }

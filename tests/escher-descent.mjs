@@ -1,7 +1,11 @@
 import assert from 'node:assert/strict';import * as T from '../src/city-source-assets/home-tools/vendor/three.module.js';
-import {DESCENT as D,DESCENT_PARTS as PARTS,descentSurface,walkDescent,cutDescentGround} from '../src/escher-descent-model.js';import {buildEscherDescent} from '../src/escher-descent.js';
+import {DESCENT as D,DESCENT_ANNEX as A,annexContains,DESCENT_PARTS as PARTS,descentSurface,walkDescent,cutDescentGround} from '../src/escher-descent-model.js';import {buildEscherDescent} from '../src/escher-descent.js';
 import {buildCityCoast} from '../src/coastal-city-scene.js';
 const built=buildEscherDescent(T);built.group.updateWorldMatrix(true,true);const ray=(x,y,z,d)=>new T.Raycaster(new T.Vector3(x,y,z),new T.Vector3(...d),0,50).intersectObject(built.group,true);
+assert.equal(A.polygon.length,6);assert(built.group.getObjectByName('Escher · six-facet capped stair pavilion'));
+for(const x of[227.5,228,228.5])for(const z of[97.2,100,103.5]){const roof=ray(x,1.93,z,[0,1,0]);assert(roof.length&&roof[0].point.y>=3.3,'Six-facet cap actually encloses the pavilion');}
+for(let i=0;i<5;i++){const a=A.polygon[i],b=A.polygon[(i+1)%6],dx=b[0]-a[0],dz=b[1]-a[1],d=Math.hypot(dx,dz),x=(a[0]+b[0])/2,z=(a[1]+b[1])/2;assert(ray(x+dz/d*.6,1.93,z-dx/d*.6,[-dz/d,0,dx/d]).length,'Every closed pavilion edge has real masonry');assert(annexContains(x,z,0),'Surface blocker shares each wall edge');}
+assert.equal(new T.Raycaster(new T.Vector3(228,1.93,105),new T.Vector3(0,0,-1),0,1.4).intersectObject(built.group,true).length,0,'Pavilion front remains the genuine stair mouth');assert(!annexContains(226.5,96.2,0),'Chamfered corners have no phantom rectangular blocker');
 for(const x of[224.45,225,225.55])for(const y of[-38.2,-37.9])assert.equal(new T.Raycaster(new T.Vector3(x,y,108.5),new T.Vector3(0,0,-1),0,1.8).intersectObject(built.group,true).length,0,'The new arched reveal leaves the actual doorway body-clear');
 assert(new T.Raycaster(new T.Vector3(225,-36.1,108.5),new T.Vector3(0,0,-1),0,1.8).intersectObject(built.group,true).length,'The entrance has a solid connected arch header');
 for(const p of PARTS.filter(p=>p.kind==='flight'))for(let i=0;i<40;i++)for(const offset of[-.55,0,.55]){
