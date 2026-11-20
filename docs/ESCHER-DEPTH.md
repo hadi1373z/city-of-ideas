@@ -226,3 +226,21 @@ It also checks the high view above the lower doorway. These complement vertical
 floor/headroom rays: an unobstructed downward ray alone cannot rule out a wall
 across an entrance or a disconnected handrail. Closed shaft walls beyond a
 switchback remain intentional; the continuous guard now makes its turn legible.
+
+## Pavilion and combined-scene repair · 20 November 2026
+
+The surface gallery, rear alcove and narrow stair annex share pale masonry,
+stone base courses, bronze cornices and opaque recessed arch reliefs. The original
+roof, credited prints, puzzle and stair footprint stay intact. Stair landing
+recesses attach to the enclosing walls; the former cross-flight arches are gone.
+Warm strips are owned unlit materials, without additional point lights.
+
+All museum box solids and mouldings subtract the complete surface stair shaft
+in plan before batching. Testing the isolated stair was insufficient: the old
+wing wall crossed flights six and seven. The stair body sweeps now run against
+both museum and stair geometry together. Artwork reserves remove decorative
+bays behind/over the genuine prints, with27 first-surface visibility rays.
+
+The west vestibule retains its6m width but narrows at the actual4m-wide,4.8m-high
+Gallery tunnel mouth. Jamb collision and handoff width match that doorway; the
+side strips and header close the former views into empty earth.

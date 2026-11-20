@@ -23,7 +23,7 @@ assert.equal(ray([133,-38.2,115],[1,0,0],4).length,0,'The museum doorway remains
 assert.equal(ray([72,-38.2,0],[1,0,0],8).length,0,'The legacy gallery handoff remains open');
 // Near-plane clipping at a wall/jamb must still meet solid masonry behind it.
 for(const z of[-1.985,1.985]){const d=[0,0,Math.sign(z)],caster=new T.Raycaster(new T.Vector3(80,-38.2,z),new T.Vector3(...d),.08,.5);assert(caster.intersectObject(built.group,true).length,'Masonry remains visible behind the close camera clipping plane');}
-const plan=sixfoldPassagePlan();assert.equal(plan.segments.length,16);assert.equal(NETWORK_PASSAGES.length,13);assert.equal(built.counts.draws,3);
+const plan=sixfoldPassagePlan();assert.equal(plan.segments.length,17);assert.equal(NETWORK_PASSAGES.length,14);assert.equal(built.counts.draws,3);
 // Downward normals and upward normals belong to the same partition. Every
 // sampled supported point has exactly one shell floor, without coplanar layers.
 for(const s of NETWORK_PASSAGES)for(let t=.05;t<.96;t+=.1){const x=s.a[0]+(s.b[0]-s.a[0])*t,z=s.a[1]+(s.b[1]-s.a[1])*t;const hits=new T.Raycaster(new T.Vector3(x,-38.2,z),new T.Vector3(0,-1,0),0,2).intersectObject(built.walking);const points=new Set(hits.map(h=>h.point.toArray().map(n=>n.toFixed(5)).join(',')));assert(points.size<=1,'The corridor union has no overlapping height layers');}

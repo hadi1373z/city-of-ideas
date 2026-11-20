@@ -3,7 +3,7 @@ import * as T from '../src/city-source-assets/home-tools/vendor/three.module.js'
 import {buildEscherDepth} from '../src/escher-depth-scene.js';
 import {buildEscherDescent} from '../src/escher-descent.js';
 import {ESCHER_DEPTH as D,canWalkDepth,roomCeilingAt,insidePolygon} from '../src/escher-depth-model.js';
-const canvas=()=>({getContext:()=>new Proxy({},{get:()=>()=>{}})}),m=buildEscherDepth(T,{canvas,loadTexture:null}),s=buildEscherDescent(T),root=new T.Group();root.add(m.interior,s.group);root.updateMatrixWorld(true);
+const canvas=()=>({getContext:()=>new Proxy({},{get:()=>()=>{}})}),m=buildEscherDepth(T,{canvas,loadTexture:()=>new T.Texture()}),s=buildEscherDescent(T),root=new T.Group();root.add(m.interior,s.group);root.updateMatrixWorld(true);
 const probes=[],ray=new T.Raycaster();for(const r of [...D.rooms,...D.galleries].filter(r=>r.radius||r.corridor))for(let x=Math.ceil(r.minX);x<r.maxX;x+=5)for(let z=Math.ceil(r.minZ);z<r.maxZ;z+=5){if(canWalkDepth(x,z,{fromY:r.y}))probes.push({x,z,y:r.y+1.8,room:r.id});}
 const directions=Array.from({length:24},(_,i)=>{const a=i*Math.PI/12;return[Math.cos(a),0,Math.sin(a)];}).concat([[0,1,0],[.5,.707,.5],[-.5,.707,.5],[.5,.707,-.5],[-.5,.707,-.5]]);
 let tested=0,tunnelRays=0;
@@ -18,4 +18,10 @@ assert(probes.some(p=>p.room==='tessellation-gallery'));assert(probes.some(p=>p.
 const arcades=root.getObjectByName('Two-storey hexagonal vaulted arcades'),matrix=new T.Matrix4(),point=new T.Vector3(),origin=new T.Vector3();let capVertices=0;
 for(let i=0;i<arcades.count;i++){arcades.getMatrixAt(i,matrix);origin.setFromMatrixPosition(matrix);if(Math.abs(origin.y+34)>.01)continue;const room=D.rooms.filter(r=>r.gallery).sort((a,b)=>Math.hypot(origin.x-a.centre[0],origin.z-a.centre[1])-Math.hypot(origin.x-b.centre[0],origin.z-b.centre[1]))[0];const attr=arcades.geometry.attributes.position;for(let j=0;j<attr.count;j++){point.fromBufferAttribute(attr,j).applyMatrix4(matrix);if(!insidePolygon(room.polygon,point.x,point.z))continue;assert(point.y<=roomCeilingAt(room,point.x,point.z)+.015,'Upper arcade cap cannot protrude through '+room.id+' vault');capVertices++;}}
 assert(capVertices>1000);
+// A genuine print must be the first visible surface, never behind a blind bay.
+let artworkRays=0;
+m.interior.traverse(o=>{if(!o.userData.escherPrint)return;const n=new T.Vector3(0,0,1).applyQuaternion(o.quaternion),horizontal=new T.Vector3(1,0,0).applyQuaternion(o.quaternion);for(const x of[-.7,0,.7])for(const y of[-1,0,1]){const p=o.position.clone().addScaledVector(horizontal,x).add(new T.Vector3(0,y,0));ray.set(p.clone().addScaledVector(n,2),n.clone().negate());ray.far=2.1;assert.equal(ray.intersectObject(root,true)[0]?.object,o,'No blackboard/moulding may cover '+o.userData.escherPrint);artworkRays++;}});
+assert.equal(artworkRays,27);
+// The vestibule opens only to the actual 4m by4.8m tunnel, with closed jambs.
+for(const z of[112.4,112.8,117.2,117.6]){ray.set(new T.Vector3(136,-38.2,z),new T.Vector3(-1,0,0));ray.far=2;assert(ray.intersectObject(root,true).length,'Tunnel side reveal must close the wider vestibule');}
 m.dispose();s.dispose();console.log('PASS cloister shell: '+tested+' actual horizontal/diagonal/upward rays across all three levels; only the real west tunnel mouth stays open, no balcony/short-corridor voids.');

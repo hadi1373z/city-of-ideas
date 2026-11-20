@@ -1,6 +1,6 @@
 import {HOUSE_LEVELS as LEVELS} from './transformation-house-model.js?v=makers-passages-20261118';
-import {buildSixfoldTransformationHouses} from './sixfold-house-scene.js?v=makers-passages-20261118';
-import {SIXFOLD_HOUSES,sixfoldHouse,houseToWorld,houseToSource,sixfoldHouseEntry,createSixfoldHouseStates,networkSurface,networkRoomAt,networkInteractionAt,networkShellBlocks,networkCanCapture,networkOutdoorHandoff,networkGalleryHandoff,networkGalleryCapture,walkSixfoldNetwork} from './sixfold-house-network-model.js?v=makers-passages-20261118';
+import {buildSixfoldTransformationHouses} from './sixfold-house-scene.js?v=escher-finish-20261120';
+import {SIXFOLD_HOUSES,sixfoldHouse,houseToWorld,houseToSource,sixfoldHouseEntry,createSixfoldHouseStates,networkSurface,networkRoomAt,networkInteractionAt,networkShellBlocks,networkCanCapture,networkOutdoorHandoff,networkGalleryHandoff,networkGalleryCapture,walkSixfoldNetwork} from './sixfold-house-network-model.js?v=escher-finish-20261120';
 
 // One controller owns all six houses and their real basement circuit. Rendering,
 // camera easing and the legacy gallery join therefore retain one stable API.

@@ -364,3 +364,12 @@ guide fold/unfold, behind-fold clearance, reversible scrubbing/rotation, manual
 reduced-motion mode and visit-local controls. The original lessonStates remain
 the completed-diagram authority; no automatic achievement or notebook write.
 See docs/ORIGAMI-HOUSE.md and tests/origami-fold-workbench.mjs.
+
+The Escher detail repair clips museum masonry AND blind panels out of the entire
+surface-descent shaft; verify both scene roots together. Reserve all three real
+print frames from decorative bays. The west vestibule aperture matches the
+actual4m by4.8m tunnel, including navigation jambs. escher-stone-details.js owns
+the shallow exterior and wall-mounted stair reliefs; do not restore intrusive
+cross-flight arches. The southeast basement connector at(70,115)–(68.8,120)
+is a supported two-way route with hysteretic controller handoff; keep maps,
+cavities and held-input integration synchronized with its shared passage model.

@@ -1,5 +1,5 @@
 import {WORLD_CYLINDER as W,isLowerCoordinate,lowerLocal,lowerPhysical,lowerRadius,lowerMatrix,canWalkLower,tunnelContains,GALLERY_TUNNEL} from './world-cylinder-model.js?v=bird-peel-20261117b';
-import {buildWorldCylinder,mountLowerWorld} from './world-cylinder-scene.js?v=cloister-details-20261120';
+import {buildWorldCylinder,mountLowerWorld} from './world-cylinder-scene.js?v=escher-finish-20261120';
 import {UPPER,LOWER,pointAt,headingAt,heightAt,surfaceAt as originalGallerySurface,walkGallery} from './two-face-gallery-model.js?v=bird-peel-20261117b';
 import {GRAVITY_STAIR as G,gravityStairFrame,gravityStairPose,walkGravityStair} from './gravity-stair-model.js?v=gravity-ant-20261117';
 import {buildGravityStair} from './gravity-stair-scene.js?v=gravity-ant-20261117';
@@ -104,7 +104,7 @@ export function installWorldCylinder(M,T){
   const d=movement(dt,input),local={...p,galleryTheta:route.theta,galleryLayer:route.layer};
   if(route.layer==='spiral'&&route.theta>=G.joinTheta-G.entryLead&&p.x*d.dz-p.z*d.dx>1e-7){beginTurn(side);return driveTurn(dt,{...input,turn:0});}
   if(side==='upper'&&Math.abs(p.y-M.eye+40)<.3&&tunnelContains(p.x,p.z)&&p.x>20){
-   const steps=Math.max(1,Math.ceil(Math.hypot(d.dx,d.dz)/.1));for(let i=0;i<steps;i++){const x=local.x+d.dx/steps,z=local.z+d.dz/steps;if(tunnelContains(x,z)||gallerySurface(x,z,-40,{side:'upper',lastTheta:UPPER.spur.theta,layer:'spur'})){local.x=x;local.z=z;}}
+   const steps=Math.max(1,Math.ceil(Math.hypot(d.dx,d.dz)/.1));for(let i=0;i<steps;i++){const x=local.x+d.dx/steps,z=local.z+d.dz/steps;if(M.transformationHouse?.shouldEnterFromGallery?.({x,z,y:-40})||tunnelContains(x,z)||gallerySurface(x,z,-40,{side:'upper',lastTheta:UPPER.spur.theta,layer:'spur'})){local.x=x;local.z=z;}}
    local.y=-40+M.eye;local.galleryTheta=UPPER.spur.theta;local.galleryLayer='spur';
    if((M.transformationHouse?.shouldEnterFromGallery?.({x:local.x,z:local.z,y:-40})??(local.x>71.25&&local.x<73&&Math.abs(local.z)<1.7))&&M.transformationHouse){const point={x:local.x,z:local.z,y:-40,yaw:M.player.yaw,pitch:M.player.pitch};route=null;delete document.body.dataset.galleryPassage;M.transformationHouse.enterFromPassage(point);return true;}if(local.x>134&&Math.abs(local.z-115)<1.7){route=null;delete document.body.dataset.galleryPassage;M.escherDepth?.enter('gallery');return true;}
   }else walkGallery(local,d.dx,d.dz,{side,eye:M.eye,lastTheta:route.theta,layer:route.layer,canStand:(x,z,y)=>{const active=gallerySurface(x,z,y,{side,lastTheta:route.theta,layer:route.layer});if(!active)return false;if(side!=='lower')return true;if(!faculty.canStand(x,z,y)||M.paperMonitors?.canStand(x,z,y)===false||M.mathematicalSculptures?.canStand(x,z,y)===false)return false;return !lowerOutdoorHandoff(active,x,z)||canLower(x+W.lowerOrigin.x,z+W.lowerOrigin.z);}});

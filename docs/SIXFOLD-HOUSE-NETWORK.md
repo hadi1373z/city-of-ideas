@@ -139,3 +139,14 @@ The original inner wall line and all open union junctions stay unchanged. A
 regression reproduces an eye 15mm from a wall: the near plane clips the inner
 face but must still meet opaque outer masonry. Distant above-ground-only LOD
 shells are hidden while underground; nearby full house interiors remain visible.
+
+## Southeast Escher-side basement connector · 20 November 2026
+
+A real4m passage from(70,115) to(68.8,120) joins the legacy corridor bend to the
+southeast house's existing basement door. The corridor union, middle map and
+earth cavity use this shared segment. Gallery movement accepts a supported
+network capture candidate before its old tunnel-only rejection. Network entry
+is beyond Z116.2; release is below Z115.9 within the actual legacy overlap,
+with the same exclusion on recapture. Held-input integration walks into the
+house to(74,125), reverses and continues down the corridor, checking real floor,
+roof and wall clearance every frame of that reported route.

@@ -1,6 +1,6 @@
 import {buildTransformationHouse} from './transformation-house-scene.js?v=makers-passages-20261118';
 import {buildHouseTiling} from './house-tiling-scene.js?v=makers-passages-20261118';
-import {SIXFOLD_HOUSES} from './sixfold-house-network-model.js?v=makers-passages-20261118';
+import {SIXFOLD_HOUSES} from './sixfold-house-network-model.js?v=escher-finish-20261120';
 
 // One immutable structural prototype supplies all six houses. Only moving
 // shelves, pendulums, local lamp visibility and finish buffers are independent.

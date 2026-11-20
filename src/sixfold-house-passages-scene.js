@@ -1,4 +1,4 @@
-import {NETWORK_PASSAGES,SIXFOLD_HOUSES,houseToWorld} from './sixfold-house-network-model.js?v=makers-passages-20261118';
+import {NETWORK_PASSAGES,SIXFOLD_HOUSES,houseToWorld} from './sixfold-house-network-model.js?v=escher-finish-20261120';
 import {GALLERY_TUNNEL} from './world-cylinder-model.js';
 
 const EPS=1e-8,cross=(a,b,p)=>(b[0]-a[0])*(p[1]-a[1])-(b[1]-a[1])*(p[0]-a[0]);

@@ -10,6 +10,7 @@ const surface=buildEscherDescent(T),museum=buildEscherDepth(T,{canvas});
 surface.group.updateMatrixWorld(true);museum.group.updateMatrixWorld(true);
 const v=p=>p.isVector3?p:new T.Vector3(...p),segment=(a,b,p)=>new T.Line3(v(a),v(b)).closestPointToPoint(v(p),true,new T.Vector3()).distanceTo(v(p));
 const ray=(root,a,b)=>{a=v(a);b=v(b);const d=b.clone().sub(a),length=d.length();return new T.Raycaster(a,d.normalize(),.001,length-.001).intersectObject(root,true);};
+const combined=new T.Group();combined.add(surface.group,museum.interior);combined.updateMatrixWorld(true);
 let guards=0,bodyProbes=0;
 function checkGuards(root,paths,posts,railRoot){
  const pieces=paths.flatMap(path=>path.slice(1).map((b,i)=>[path[i],b]));
@@ -22,7 +23,7 @@ function checkGuards(root,paths,posts,railRoot){
  for(const[a,b]of pieces){const p=v(a).clone().add(v(b)).multiplyScalar(.5);assert(ray(railRoot,p.clone().add(new T.Vector3(0,.13,0)),p.clone().add(new T.Vector3(0,-.08,0))).length,'No missing physical guard segment at its midpoint');}
 }
 checkGuards(surface.group,surface.group.userData.stairGuardPaths,[...surface.group.userData.stairGuardPosts.values()],surface.group.getObjectByName('Continuous supported eight-flight handrails'));
-for(const g of museum.group.userData.museumStairGuards)checkGuards(museum.interior,g.paths,g.posts,museum.group.getObjectByName('Cloister · bronze ribs and balustrades'));
+for(const g of museum.group.userData.museumStairGuards)checkGuards(museum.interior,g.paths,g.posts,combined.getObjectByName('Cloister · bronze ribs and balustrades'));
 
 // Sweep actual shoulder/torso sight lines through every tread and both landing
 // approaches. Vertical floor rays alone miss a wall across a flight or turn.
@@ -31,7 +32,7 @@ function clearBody(root,a,b,width=.30){const d=v(b).clone().sub(v(a)),side=new T
 }}
 for(const f of DESCENT_PARTS.filter(p=>p.kind==='flight'))for(let i=0;i<40;i++){
  const za=f.start+(f.end-f.start)*(i+.25)/40,zb=f.start+(f.end-f.start)*(i+.75)/40,y=f.top+(f.bottom-f.top)*(i+1)/40;
- clearBody(surface.group,[f.x,y,za],[f.x,y,zb]);clearBody(surface.group,[f.x,y,zb],[f.x,y,za]);
+ clearBody(combined,[f.x,y,za],[f.x,y,zb]);clearBody(surface.group,[f.x,y,zb],[f.x,y,za]);
 }
 for(const p of DESCENT_PARTS.filter(p=>p.id.startsWith('landing-'))){const z=p.minZ<92?91.3:104.7;clearBody(surface.group,[225,p.y,z],[228,p.y,z]);clearBody(surface.group,[228,p.y,z],[225,p.y,z]);
  for(const x of[225,228]){const near=p.minZ<92?92:104;clearBody(surface.group,[x,p.y,near],[x,p.y,z]);clearBody(surface.group,[x,p.y,z],[x,p.y,near]);}

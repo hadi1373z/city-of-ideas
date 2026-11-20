@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {HOUSE as H,HOUSE_LEVELS,stairPoint} from '../src/transformation-house-model.js';
 import {SIXFOLD_HOUSES,SIXFOLD_NETWORK,SIXFOLD_LOOP_VERTICES,SIXFOLD_CROSSING,NETWORK_PASSAGES,houseToWorld,houseToSource,sixfoldHouseEntry,sixfoldWellHoles,createSixfoldHouseStates,networkSurface,networkRoomAt,networkInteractionAt,networkBlocked,networkShellBlocks,networkCanCapture,networkOutdoorHandoff,networkGalleryCapture,networkGalleryHandoff,networkCrossingAt,walkSixfoldNetwork} from '../src/sixfold-house-network-model.js';
 
-const close=(a,b,eps=1e-7)=>assert(Math.abs(a-b)<eps,`${a} ≠ ${b}`),eye=1.8,states=createSixfoldHouseStates();assert.equal(SIXFOLD_HOUSES.length,6);assert.equal(new Set(SIXFOLD_HOUSES.map(h=>h.id)).size,6);assert.equal(new Set(SIXFOLD_HOUSES.map(h=>h.pattern)).size,6);assert.equal(NETWORK_PASSAGES.length,13);
+const close=(a,b,eps=1e-7)=>assert(Math.abs(a-b)<eps,`${a} ≠ ${b}`),eye=1.8,states=createSixfoldHouseStates();assert.equal(SIXFOLD_HOUSES.length,6);assert.equal(new Set(SIXFOLD_HOUSES.map(h=>h.id)).size,6);assert.equal(new Set(SIXFOLD_HOUSES.map(h=>h.pattern)).size,6);assert.equal(NETWORK_PASSAGES.length,14);
 for(const h of SIXFOLD_HOUSES){
  close(Math.hypot(h.x,h.z),159.3486742963367);close(h.turn,-h.index*Math.PI/3);const next=SIXFOLD_HOUSES[(h.index+1)%6];close(Math.hypot(next.x-h.x,next.z-h.z),SIXFOLD_NETWORK.radius);
  for(const p of[{x:125,z:0,y:-40,yaw:.33},{x:133.2,z:1.3,y:16,yaw:-2},{x:125.9,z:12.3,y:-16,yaw:Math.PI}]){const q=houseToSource(h,houseToWorld(h,p));for(const k of['x','y','z','yaw'])close(q[k],p[k]);}

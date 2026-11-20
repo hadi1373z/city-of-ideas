@@ -2,7 +2,7 @@ import {DESCENT,STAIR_PORTAL} from './escher-descent-model.js?v=cloister-2026112
 import {CLOISTER_ROOMS,CLOISTER_STAIRS,CLOISTER_GALLERIES,insidePolygon,hexagon,rectangle,ringPolygons,outsidePolygonRectangle} from './escher-cloister-layout.js?v=cloister-20261120';
 export {insidePolygon,hexagon,ringPolygons,outsidePolygonRectangle};
 export const ESCHER_DEPTH=Object.freeze({floor:-40,ceiling:-23.6,lowerFloor:-46,lowerCeiling:-39.5,radius:.28,
- gallery:Object.freeze({x:135,z:115,y:-40,width:6}),rooms:CLOISTER_ROOMS,galleries:CLOISTER_GALLERIES,stairs:CLOISTER_STAIRS,stair:CLOISTER_STAIRS[0],
+ gallery:Object.freeze({x:135,z:115,y:-40,width:4}),rooms:CLOISTER_ROOMS,galleries:CLOISTER_GALLERIES,stairs:CLOISTER_STAIRS,stair:CLOISTER_STAIRS[0],
  portals:Object.freeze([
  {id:'escher',name:'Escher House · walkable stair',x:228,z:104,y:.13,gated:true,landing:{x:225,z:107,y:-40,yaw:Math.PI}},
  {id:'park',name:'Park approach',x:-84,z:-110,y:.13,landing:{x:174,z:114,y:-40,yaw:-Math.PI/2}},
@@ -17,6 +17,7 @@ const inRect=(r,x,z,pad=0)=>x>=r.minX-pad&&x<=r.maxX+pad&&z>=r.minZ-pad&&z<=r.ma
 const inFloor=(r,x,z)=>insidePolygon(r.polygon,x,z)&&(!r.inner||!insidePolygon(hexagon(...r.centre,r.inner),x,z));
 const shaftBlocked=(x,z)=>inRect(DESCENT.shaft,x,z)&&!(Math.abs(x-225)<=.9&&z>=104);
 export const ESCHER_DEPTH_OBSTACLES=Object.freeze([
+ rect('west tunnel jamb',134.1,134.65,112,113),rect('west tunnel jamb',134.1,134.65,117,118),
  ...[-1,1].map(side=>{const p=STAIR_PORTAL;return rect('Escher stair jamb',p.x+(side<0?-p.halfWidth:p.opening),p.x+(side<0?-p.opening:p.halfWidth),p.z,p.z+p.depth);}),
  rect('triangle case',150.63,164.63,104,116),rect('tile console',214.69,218.69,81,83),
  rect('loop table',180.7,185.3,163.7,168.3,-46),rect('reading desk',218,222,143,145),
@@ -53,7 +54,7 @@ export function walkDepth(player,dx,dz,eye=1.8){
  if(![player.x,player.z,player.y,dx,dz,eye].every(Number.isFinite))return false;
  const n=Math.max(1,Math.ceil(Math.hypot(dx,dz)/.1));for(let i=0;i<n;i++)for(const axis of['x','z']){const delta=(axis==='x'?dx:dz)/n,y=player.y-eye,x=player.x+(axis==='x'?delta:0),z=player.z+(axis==='z'?delta:0);if(canWalkDepth(x,z,{fromY:y})){player[axis]+=delta;player.y=depthFloorAt(player.x,player.z,y)+eye;}}return true;
 }
-export const atGalleryHandoff=p=>p.x<=135.15&&p.x>=134.4&&Math.abs(p.z-115)<2.5;
+export const atGalleryHandoff=p=>p.x<=135.15&&p.x>=134.4&&Math.abs(p.z-115)<1.7;
 // Subtract openings as vertical intervals. A short corridor does not remove
 // the wall above its roof, and ground-floor mouths never become balcony exits.
 export function roomCeilingAt(r,x,z){
@@ -68,7 +69,7 @@ for(const r of CLOISTER_ROOMS){if(r.shaftLanding)continue;for(let i=0;i<r.polygo
  for(let j=0;j<n;j++){
   const t=(j+.5)/n,x=a[0]+dx*t,z=a[1]+dz*t,ox=x+dz/len*.24,oz=z-dx/len*.24,holes=[];
   for(const q of CLOISTER_ROOMS)if(q!==r&&Math.abs(q.y-r.y)<.1&&insidePolygon(q.polygon,ox,oz))holes.push([q.y-.02,roomCeilingAt(q,ox,oz)-.02]);
-  if(r.id==='vestibule'&&Math.abs(x-134.4)<.01&&Math.abs(z-115)<3)holes.push([-40.3,-34.7]);
+  if(r.id==='vestibule'&&Math.abs(x-134.4)<.01&&Math.abs(z-115)<2)holes.push([-40.3,-35.2]);
   if((r.id==='hall'||r.id==='loop')&&inRect(CLOISTER_STAIRS[0],x,z,.25))holes.push([CLOISTER_STAIRS[0].bottom-.2,CLOISTER_STAIRS[0].ceiling]);
   let bands=[[r.y,top]];for(const[lo,hi]of holes)bands=bands.flatMap(([y0,y1])=>hi<=y0||lo>=y1?[[y0,y1]]:[[y0,Math.min(y1,lo)],[Math.max(y0,hi),y1]].filter(([a,b])=>b-a>.015));
   for(const[y0,y1]of bands){const previous=rows.find(v=>v.end===j&&Math.abs(v.y0-y0)<.025&&Math.abs(v.y1-y1)<.025);if(previous)previous.end=j+1;else rows.push({start:j,end:j+1,y0,y1});}

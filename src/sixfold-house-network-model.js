@@ -17,6 +17,7 @@ export const SIXFOLD_CORRIDORS=Object.freeze([
  ...SIXFOLD_LOOP_VERTICES.map((a,i)=>segment('loop-'+i,a,SIXFOLD_LOOP_VERTICES[(i+1)%6],'loop')),
  ...SIXFOLD_HOUSES.map((h,i)=>{const b=houseToWorld(h,{x:104,z:0});return segment('spur-'+h.id,SIXFOLD_LOOP_VERTICES[i],[b.x,b.z],'house-spur',h.id);}),
  segment('gallery-east',[70.75,0],SIXFOLD_LOOP_VERTICES[0],'gallery-branch'),
+ segment('escher-house-link',[70,115],[68.8,120],'house-link'),
  segment('legacy-crossing-sleeve',[70,SIXFOLD_CROSSING.z-4.3],[70,SIXFOLD_CROSSING.z+4.3],'legacy-junction')
 ]);
 // Physical shell segments. Existing source-house wall apertures meet the spur
@@ -28,8 +29,8 @@ export function networkCrossingAt(x,z,feet=-40){if(Math.abs(feet+40)>.3)return n
 export const crossingAt=networkCrossingAt;
 // This exact release predicate also excludes inactive capture. Otherwise the
 // next frame can recapture the visitor on a finite sleeve and prevent an exit.
-export function networkGalleryHandoff(x,z,feet=-40){if(Math.abs(feet+40)>.3)return null;if(x<71.1&&x>=69&&Math.abs(z)<1.72)return'east';if(Math.abs(x-70)<1.72&&Math.abs(z-SIXFOLD_CROSSING.z)>3.6&&Math.abs(z-SIXFOLD_CROSSING.z)<=6.05)return z<SIXFOLD_CROSSING.z?'crossing-south':'crossing-north';return null;}
-export function networkGalleryCapture(x,z,feet=-40){if(Math.abs(feet+40)>.3||networkGalleryHandoff(x,z,feet))return false;if(x>71.25&&x<73.1&&Math.abs(z)<1.7)return true;return !!networkCrossingAt(x,z,feet)&&Math.abs(x-70)>1.2&&!!networkCorridorAt(x,z,feet);}
+export function networkGalleryHandoff(x,z,feet=-40){if(Math.abs(feet+40)>.3)return null;if(z<115.9&&z>113.5&&Math.abs(x-70)<1.72)return'escher-house-link';if(x<71.1&&x>=69&&Math.abs(z)<1.72)return'east';if(Math.abs(x-70)<1.72&&Math.abs(z-SIXFOLD_CROSSING.z)>3.6&&Math.abs(z-SIXFOLD_CROSSING.z)<=6.05)return z<SIXFOLD_CROSSING.z?'crossing-south':'crossing-north';return null;}
+export function networkGalleryCapture(x,z,feet=-40){if(Math.abs(feet+40)>.3||networkGalleryHandoff(x,z,feet))return false;if(z>116.2&&z<121&&Math.abs(x-70)<3.5&&networkCorridorAt(x,z,feet)?.id==='escher-house-link')return true;if(x>71.25&&x<73.1&&Math.abs(z)<1.7)return true;return !!networkCrossingAt(x,z,feet)&&Math.abs(x-70)>1.2&&!!networkCorridorAt(x,z,feet);}
 export function networkOutdoorHandoff(h,p,eye=1.8){const q=houseToSource(h,p);return !!q&&Math.abs(q.y-eye)<.3&&q.z>23.25&&Math.abs(q.x-125)<2.5;}
 export function networkHouseAt(x,z,feet,{lastHouseId=null,lastTheta=null}={}){for(const h of SIXFOLD_HOUSES){if(Math.hypot(x-h.x,z-h.z)>27)continue;const q=houseToSource(h,{x,z}),s=houseSurface(q.x,q.z,feet,lastHouseId===h.id?lastTheta:null);if(s&&s.kind!=='passage')return{house:h,source:q,surface:s};}return null;}
 export function networkSurface(x,z,feet,options={}){if(![x,z,feet].every(Number.isFinite))return null;const found=networkHouseAt(x,z,feet,options);if(found)return{...found.surface,houseId:found.house.id,sourceKind:found.surface.kind,source:found.source};const corridor=networkCorridorAt(x,z,feet);return corridor?{y:-40,theta:null,kind:'network',houseId:null,corridorId:corridor.id,corridor}:null;}
