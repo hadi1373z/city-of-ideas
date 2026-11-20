@@ -1,4 +1,4 @@
-import {QUARTER_ARTISTS} from './artist-quarter-data.js?v=makers-passages-20261118';
+import {QUARTER_ARTISTS} from './artist-quarter-data.js?v=academy-escher-20261120';
 const PLAN=globalThis.ARTIST_QUARTER_PLAN;
 
 export function buildArtistStudios(T,{loadTexture=url=>new T.TextureLoader().load(url),canvas=()=>document.createElement('canvas')}={}){

@@ -1,3 +1,4 @@
+import {academySite,ACADEMY_PATHS} from './academy-layout.js?v=academy-escher-20261120';
 import {HEX_DISTRICTS} from './city-hex-layout.js?v=makers-passages-20261118';
 const court=HEX_DISTRICTS.philosophers;
 // Original bilingual study guides. Architecture is an imaginative interpretation.
@@ -32,6 +33,6 @@ export const PHILOSOPHERS = [
   object:['طاقِ امکان','Arch of possibility'],idea:['می‌توان ویژگی‌های یک خانه را شرح داد بی‌آنکه چنین خانه‌ای ساخته شده باشد. این تفاوت چه کمکی به اندیشیدن دربارهٔ چیستی و وجود می‌کند؟','A house can be described without such a house having been built. How can this difference help us think about essence and existence?'],
   reading:['درآمدی بر فلسفهٔ ابن‌سینا: تمایزِ ماهیت و وجود و آزمایشِ فکریِ انسانِ معلّق را دنبال کنید.','Introduction to Ibn Sina’s philosophy: explore essence and existence and the floating-person thought experiment.'],
   prompt:['چیزی را تصور کنید که ممکن است وجود داشته باشد، اما اکنون وجود ندارد. توصیفِ آن چه چیزی را ثابت می‌کند و چه چیزی را نه؟','Imagine something possible that does not exist around you. What does describing it establish, and what does it leave unproved?'],source:'https://plato.stanford.edu/entries/ibn-sina/',sourceName:'Stanford Encyclopedia of Philosophy · Ibn Sina'}
-];
-export const quarterPaths = [[[court.x-79.67433714816835,46],[court.x-58,46],[court.x-58,0],[court.x,0],[court.x,-12]],[[court.x-36,-12],[court.x+36,-12]],[[court.x-58,0],[court.x-58,52],[court.x+36,52]],...PHILOSOPHERS.map(h=>[[h.x,h.z+13],[h.x,h.z<0?-12:52]])];
+].map(h=>({...h,...academySite(h.id)}));
+export const quarterPaths = ACADEMY_PATHS;
 export const pickLanguage = (pair,lang='en') => lang==='de'?(globalThis.CITY_PUBLIC_DE?.[pair[1]]||pair[1]):pair[lang==='fa'?0:1];

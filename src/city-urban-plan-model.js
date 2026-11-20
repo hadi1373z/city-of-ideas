@@ -1,3 +1,5 @@
+import {ACADEMY,ACADEMY_GATE_FOOTPRINT,ACADEMY_STOA_FOOTPRINTS,academyHousePolygon,philosopherWorld,philosopherEntry} from './academy-layout.js?v=academy-escher-20261120';
+import {pavilionFootprint,pavilionEntry} from './escher-pavilion-model.js?v=academy-escher-20261120';
 import {origamiHouseOutline} from './origami-house-entry-model.js?v=cloister-details-20261120';
 import {MAKERS_SITE,MAKERS_ACCESS,MAKERS_ROOFS,MAKERS_DOOR_PATHS} from './makers-site.js?v=makers-block-20261118';
 import {ARTIST_EDITIONS_DISTRICT,ARTIST_EDITIONS_PATH} from './artist-edition-layout.js?v=makers-passages-20261118';
@@ -7,14 +9,14 @@ import {footprintBlocked} from './honeycomb-city-model.js?v=makers-passages-2026
 import {CITY_PLACES,PLACE_PATHS,CITY_PLACE_FOOTPRINTS} from './city-places-model.js?v=makers-passages-20261118';
 import {HUMANITY_COMMONS,COMMONS_PATH} from './humanity-commons-model.js?v=makers-passages-20261118';
 import './city-landscape.js?v=makers-passages-20261118';
-import './artist-quarter-layout.js?v=makers-passages-20261118';
+import './artist-quarter-layout.js?v=academy-escher-20261120';
 import {BUILT_HONEYCOMB_LAYOUT} from './honeycomb-city-layout.js?v=makers-passages-20261118';
 import {HEX_DISTRICTS,INHABITED_BLOCKS,IDEAS_PARK_SITE} from './city-hex-layout.js?v=makers-passages-20261118';
 import {FOUNDATION_HOUSES,FOUNDATION_ROUTES,houseEntry} from './foundation-houses-data.js?v=makers-passages-20261118';
 import {SEMINAR_HOUSES,SEMINAR_PATHS,seminarEntry} from './seminar-houses-data.js?v=cloister-20261120';
 import {STUDY_HOUSES,STUDY_PATHS} from './study-houses-data.js?v=city-night-20261117';
 import {PAVILIONS,pavilionTurn} from './mathematical-pavilions-model.js?v=city-night-20261117';
-import {PHILOSOPHERS,quarterPaths} from './philosopher-data.js?v=makers-passages-20261118';
+import {PHILOSOPHERS,quarterPaths} from './philosopher-data.js?v=academy-escher-20261120';
 import {COAST_PATHS,HOUSE_ORIGAMI} from './origami-house-math.js?v=cloister-details-20261120';
 import {COAST_MAIN_PATHS} from './coastal-map-data.js?v=cloister-20261120';
 
@@ -44,7 +46,7 @@ export function urbanBuildingFootprints(plan=globalThis.ARTIST_QUARTER_PLAN){ret
  ...(SIXFOLD_CITY?[{...ARTIST_EDITIONS_DISTRICT,shape:'circle',category:'reserve',label:'Preserved artist editions · reserved capacity'}]:[]),
  ...ARCHETYPE_FOOTPRINTS.map(p=>({...p,id:'archetype-'+p.id,shape:'polygon',points:p.polygon,category:'humanities',label:ARCHETYPE_HOUSES.find(h=>h.id===p.id).name})),...CITY_PLACE_FOOTPRINTS.filter(p=>p.shape==='polygon').map(p=>({...p,category:'place-step',label:'Level entry'})),...CITY_PLACES.map(p=>({...p,shape:'circle',category:'place',label:p.name})),{...HUMANITY_COMMONS,shape:'circle',category:'place',label:HUMANITY_COMMONS.name},
  ...FOUNDATION_HOUSES.map(h=>rect(h.id,h.x,h.z,h.width,h.depth,h.turn,{category:'letters',label:h.names.en})),
- ...PHILOSOPHERS.map(h=>rect(h.id,h.x,h.z,20,22,0,{category:'philosopher',label:h.name[1]})),
+ ACADEMY_GATE_FOOTPRINT,...ACADEMY_STOA_FOOTPRINTS,...PHILOSOPHERS.map(h=>({id:h.id,x:h.x,z:h.z,shape:'polygon',points:academyHousePolygon(h),front:[philosopherEntry(h).x,philosopherEntry(h).z],category:'philosopher',label:h.name[1]})),...PHILOSOPHERS.map(h=>({id:'academy-porch-'+h.id,x:h.x,z:h.z,shape:'polygon',points:[[-2.55,11.8],[2.55,11.8],[2.55,15.3],[-2.55,15.3]].map(([x,z])=>{const p=philosopherWorld(h,x,z);return[p.x,p.z];}),category:'academy',label:h.name[1]+' · porch'})),
  ...STUDY_HOUSES.map(h=>rect(h.id,h.x,h.z,16,12,h.turn,{category:'study',label:h.names.en})),
  ...MAKERS_ROOFS.map(h=>rect(h.id,h.x,h.z,h.width,h.depth,0,{category:'making',label:h.id.replace('makers-','Makers · '),front:h.front})),
  rect('proof-atelier',215,-78,18,20,0,{category:'study',label:'Proof Atelier · six workshops'}),
@@ -54,19 +56,19 @@ export function urbanBuildingFootprints(plan=globalThis.ARTIST_QUARTER_PLAN){ret
  {id:'gallery-core',x:0,z:0,shape:'circle',radius:58,category:'gallery',label:'Zarathustra Gallery'},
  ...Object.entries(plan?.galleries||{}).map(([id,[x,z]])=>rect(id,x,z,9.45,8.1,0,{category:'artist',label:id.replaceAll('-',' '),front:[x,z+Math.sign((plan.fronts?.[id]?.[1]??z+1)-z)*4.05]})),
  ...Object.entries(plan?.studios||{}).map(([id,h])=>rect(id,h.x,h.z,14,12,h.turn,{category:'artist',label:id})),
- ...(plan?[rect('dali',plan.dali.x,plan.dali.z,16.2,13.5,0,{category:'artist',label:'Dalí’s dream residence'}),{id:'escher',x:plan.escher.x,z:plan.escher.z,shape:'polygon',points:[[-4,7],[4,7],[4,-7],[1.6,-7],[1.6,-13],[-1.6,-13],[-1.6,-7],[-4,-7]].map(([x,z])=>[x+plan.escher.x,z+plan.escher.z]),front:[plan.escher.x,plan.escher.z+7],category:'artist',label:'Escher · perspective house'}]:[]),
+ ...(plan?[rect('dali',plan.dali.x,plan.dali.z,16.2,13.5,0,{category:'artist',label:'Dalí’s dream residence'}),pavilionFootprint(plan.escher.x,plan.escher.z-1)]:[]),
  {...rect('origami',HOUSE_ORIGAMI.x,HOUSE_ORIGAMI.z,HOUSE_ORIGAMI.width,HOUSE_ORIGAMI.depth,0,{category:'making',label:'House of Origami'}),points:origamiHouseOutline(HOUSE_ORIGAMI.x,HOUSE_ORIGAMI.z)}
  ];}
 export function segmentDistance(x,z,a,b){const dx=b[0]-a[0],dz=b[1]-a[1],u=Math.max(0,Math.min(1,((x-a[0])*dx+(z-a[1])*dz)/(dx*dx+dz*dz||1)));return Math.hypot(x-a[0]-dx*u,z-a[1]-dz*u);}
-export function artistDoorRoutes(plan=globalThis.ARTIST_QUARTER_PLAN){if(!plan)return[];return[...Object.entries(plan.galleries).map(([id,[x,z]])=>({id:'artist-door-'+id,width:2.5,points:[[x,z+Math.sign(plan.fronts[id][1]-z)*4.995],plan.fronts[id]]})),...Object.entries(plan.studios).map(([id,h])=>({id:'artist-door-'+id,width:3,points:[[h.x,h.z+(h.turn?-6:6)],plan.fronts[id]]})),{id:'artist-door-dali',width:3,points:[[plan.dali.x,plan.dali.z+7.83],plan.fronts.dali]},{id:'artist-door-escher',width:3,points:[[plan.escher.x,plan.escher.z+8.4],plan.fronts.escher]}];}
-export function urbanRoutes(plan=globalThis.ARTIST_QUARTER_PLAN){return [...URBAN_STREETS,...FOUNDATION_ROUTES,...COAST_PATHS,...SEMINAR_PATHS.map(points=>({points,width:4.4})),...STUDY_PATHS.map(points=>({points,width:3.5})),...quarterPaths.map(points=>({points,width:4.6})),...PHILOSOPHERS.map(h=>({id:'philosopher-threshold-'+h.id,width:3,points:[[h.x,h.z+10.8],[h.x,h.z+13]]})),...(plan?.routes||[]).map(points=>({points,width:4})),...artistDoorRoutes(plan)];}
+export function artistDoorRoutes(plan=globalThis.ARTIST_QUARTER_PLAN){if(!plan)return[];return[...Object.entries(plan.galleries).map(([id,[x,z]])=>({id:'artist-door-'+id,width:2.5,points:[[x,z+Math.sign(plan.fronts[id][1]-z)*4.995],plan.fronts[id]]})),...Object.entries(plan.studios).map(([id,h])=>({id:'artist-door-'+id,width:3,points:[[h.x,h.z+(h.turn?-6:6)],plan.fronts[id]]})),{id:'artist-door-dali',width:3,points:[[plan.dali.x,plan.dali.z+7.83],plan.fronts.dali]},{id:'artist-door-escher',width:3,points:[[plan.escher.x,plan.escher.z-1+27.5*Math.sqrt(3)/2],plan.fronts.escher]}];}
+export function urbanRoutes(plan=globalThis.ARTIST_QUARTER_PLAN){return [...URBAN_STREETS,...FOUNDATION_ROUTES,...COAST_PATHS,...SEMINAR_PATHS.map(points=>({points,width:4.4})),...STUDY_PATHS.map(points=>({points,width:3.5})),...quarterPaths.map(points=>({points,width:4.6})),...PHILOSOPHERS.map(h=>({id:'philosopher-threshold-'+h.id,width:3,points:[philosopherWorld(h,0,11.8),philosopherEntry(h)].map(p=>[p.x,p.z])})),...(plan?.routes||[]).map(points=>({points,width:4})),...artistDoorRoutes(plan)];}
 export function inPrivateHomeReserve(x,z,margin=0){const r=PRIVATE_HOME_RESERVE;if(r.face!=='upper')return false;return x>r.minX-margin&&x<r.maxX+margin&&z>r.minZ-margin&&z<r.maxZ+margin;}
 export function urbanLots(plan=globalThis.ARTIST_QUARTER_PLAN){return[...CITY_PLACES,HUMANITY_COMMONS,ARCHETYPES_QUARTER,...(SIXFOLD_CITY?[ARTIST_EDITIONS_DISTRICT]:[]),
  ...FOUNDATION_HOUSES.map(h=>({x:h.x,z:h.z,radius:16,id:h.id})),...STUDY_HOUSES.map(h=>({x:h.x,z:h.z,radius:15,id:h.id})),...SEMINAR_HOUSES.map(h=>({x:h.x,z:h.z,radius:18,id:h.id})),...LIVE_PAVILIONS.map(h=>({...h,radius:22})),...PHILOSOPHERS.map(h=>({...h,radius:16})),
  {id:'gallery',x:0,z:0,radius:58},...(SIXFOLD_CITY?SIXFOLD_HOUSES.map(h=>({...h,radius:32})):[{id:'transformations',x:125,z:0,radius:34}]),{id:'park',...IDEAS_PARK_SITE},{id:'makers',...MAKERS_SITE,radius:27},{id:'socrates',x:-96,z:100,radius:28},
- ...Object.entries(plan?.galleries||{}).map(([id,[x,z]])=>({id,x,z,radius:9})),...Object.entries(plan?.studios||{}).map(([id,h])=>({id,...h,radius:12})),...(plan?[{...plan.escher,radius:17,id:'escher'},{...plan.dali,radius:18,id:'dali'}]:[])
+ ...Object.entries(plan?.galleries||{}).map(([id,[x,z]])=>({id,x,z,radius:9})),...Object.entries(plan?.studios||{}).map(([id,h])=>({id,...h,radius:12})),...(plan?[{x:plan.escher.x,z:plan.escher.z-1,radius:33,id:'escher'},{...plan.dali,radius:18,id:'dali'}]:[])
  ];}
-export function urbanEntries(){return[...MAKERS_ROOFS.map(h=>({id:h.id,x:h.front[0],z:h.front[1]})),...(SIXFOLD_CITY?SIXFOLD_HOUSES.map(h=>({id:'transformations-'+h.id,...sixfoldHouseEntry(h)})):[]),{id:'commons',...HUMANITY_COMMONS.entry},...FOUNDATION_HOUSES.map(h=>({id:h.id,...houseEntry(h)})),...SEMINAR_HOUSES.map(h=>({id:h.id,...seminarEntry(h)})),...STUDY_HOUSES.map(h=>({id:h.id,x:h.x,z:h.z+(h.turn?-10.7:10.7)})),...PHILOSOPHERS.map(h=>({id:h.id,x:h.x,z:h.z+13})),...Object.entries(globalThis.ARTIST_QUARTER_PLAN?.fronts||{}).map(([id,[x,z]])=>({id,x,z})),{id:'origami',...HOUSE_ORIGAMI.entry}];}
+export function urbanEntries(){return[...MAKERS_ROOFS.map(h=>({id:h.id,x:h.front[0],z:h.front[1]})),...(SIXFOLD_CITY?SIXFOLD_HOUSES.map(h=>({id:'transformations-'+h.id,...sixfoldHouseEntry(h)})):[]),{id:'commons',...HUMANITY_COMMONS.entry},...FOUNDATION_HOUSES.map(h=>({id:h.id,...houseEntry(h)})),...SEMINAR_HOUSES.map(h=>({id:h.id,...seminarEntry(h)})),...STUDY_HOUSES.map(h=>({id:h.id,x:h.x,z:h.z+(h.turn?-10.7:10.7)})),...PHILOSOPHERS.map(h=>({id:h.id,...philosopherEntry(h)})),...Object.entries(globalThis.ARTIST_QUARTER_PLAN?.fronts||{}).map(([id,[x,z]])=>({id,x,z})),{id:'origami',...HOUSE_ORIGAMI.entry}];}
 export function urbanPlanting(plan=globalThis.ARTIST_QUARTER_PLAN){const routes=urbanRoutes(plan),lots=urbanLots(plan),points=[];for(const route of [...URBAN_STREETS,...FOUNDATION_ROUTES.filter(r=>r.width>=5)])for(let i=1;i<route.points.length;i++){const a=route.points[i-1],b=route.points[i],dx=b[0]-a[0],dz=b[1]-a[1],length=Math.hypot(dx,dz);for(let d=12;d<length-7;d+=23)for(const side of[-1,1]){const offset=route.id?.startsWith('arcade-')?route.width/2+12:route.width/2+4.5,x=a[0]+dx*d/length-dz/length*offset*side,z=a[1]+dz*d/length+dx/length*offset*side;if(!streetTreeClear(x,z)||inPrivateHomeReserve(x,z,3)||HONEYCOMB_CITY.walls.some(w=>segmentDistance(x,z,w.a,w.b)<1.5)||lots.some(h=>Math.hypot(x-h.x,z-h.z)<h.radius+3)||routes.some(r=>r.points.slice(1).some((q,j)=>segmentDistance(x,z,r.points[j],q)<r.width/2+3))||points.some(p=>Math.hypot(x-p.x,z-p.z)<9))continue;points.push({x,z});}}return points;}
 
 // The new physical honeycomb uses the same source footprints as the map.
@@ -80,7 +82,7 @@ export const CITY_UNDERGROUND_LINKS=Object.freeze([...(SIXFOLD_CITY?NETWORK_PASS
 export function urbanLawnCells(){const h=HONEYCOMB_CITY;return h.cells.filter(c=>[[0,0,h.rules.protectedCore],[IDEAS_PARK_SITE.x,IDEAS_PARK_SITE.z,h.rules.parkRadius]].every(([x,z,r])=>Math.hypot(c.x-x,c.z-z)>r&&c.vertices.every((a,i)=>segmentDistance(x,z,a,c.vertices[(i+1)%6])>r))&&(!SIXFOLD_CITY||SIXFOLD_HOUSES.every(h=>Math.hypot(c.x-h.x,c.z-h.z)>h.well+92)));}
 
 // Every street-tree owner uses the same current roof/porch clearance.
-const STREET_TREE_FOOTPRINTS=urbanBuildingFootprints().map(h=>({...h,minX:h.shape==='circle'?h.x-h.radius:Math.min(...h.points.map(p=>p[0])),maxX:h.shape==='circle'?h.x+h.radius:Math.max(...h.points.map(p=>p[0])),minZ:h.shape==='circle'?h.z-h.radius:Math.min(...h.points.map(p=>p[1])),maxZ:h.shape==='circle'?h.z+h.radius:Math.max(...h.points.map(p=>p[1]))}));
+const STREET_TREE_FOOTPRINTS=[...urbanBuildingFootprints(),{id:"academy-paved-court",shape:"circle",x:ACADEMY.x,z:0,radius:31}].map(h=>({...h,minX:h.shape==='circle'?h.x-h.radius:Math.min(...h.points.map(p=>p[0])),maxX:h.shape==='circle'?h.x+h.radius:Math.max(...h.points.map(p=>p[0])),minZ:h.shape==='circle'?h.z-h.radius:Math.min(...h.points.map(p=>p[1])),maxZ:h.shape==='circle'?h.z+h.radius:Math.max(...h.points.map(p=>p[1]))}));
 const ARCADE_ROOF_SEGMENTS=ARCADE_STREETS.flatMap(r=>r.points.slice(1).map((b,i)=>({a:r.points[i],b,minX:Math.min(r.points[i][0],b[0]),maxX:Math.max(r.points[i][0],b[0]),minZ:Math.min(r.points[i][1],b[1]),maxZ:Math.max(r.points[i][1],b[1])})));
 export function streetTreeClear(x,z,clearance=7){for(const r of ARCADE_ROOF_SEGMENTS){const buffer=3.3+clearance;if(x<r.minX-buffer||x>r.maxX+buffer||z<r.minZ-buffer||z>r.maxZ+buffer)continue;if(segmentDistance(x,z,r.a,r.b)<buffer)return false;}for(const h of STREET_TREE_FOOTPRINTS){if(x<h.minX-clearance||x>h.maxX+clearance||z<h.minZ-clearance||z>h.maxZ+clearance)continue;if(footprintBlocked(x,z,[h],clearance))return false;}return !(globalThis.CITY_CORE_TREE_EXCLUSIONS||[]).some(h=>Math.hypot(x-h.x,z-h.z)<h.radius+clearance);}
 globalThis.CITY_PUBLIC_TREE_CLEAR=streetTreeClear;

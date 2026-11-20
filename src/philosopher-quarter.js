@@ -1,134 +1,70 @@
-import {PHILOSOPHERS,quarterPaths,pickLanguage} from './philosopher-data.js?v=makers-passages-20261118';
+import {PHILOSOPHERS,pickLanguage,quarterPaths} from './philosopher-data.js?v=academy-escher-20261120';
+import {ACADEMY,academyPolygon,academyHousePolygon,academyEntry,philosopherWorld,philosopherLocal,philosopherEntry} from './academy-layout.js?v=academy-escher-20261120';
 
-// A single, additive ground-level district. No renderer, account or private archive.
+// One original academy: six real courtyard houses and one common, shaded court.
 export function createPhilosopherQuarter(T,{language=()=> 'en',canvas=()=>document.createElement('canvas')}={}){
- const group=new T.Group();group.name='Philosophers’ quarter · six imagined homes';
- const colliders=[],targets=[],homes=[],labels=[],geometries=new Map(),materials=new Map(),textures=[];let disposed=false;
- const material=color=>{if(!materials.has(color))materials.set(color,new T.MeshLambertMaterial({color}));return materials.get(color);};
- const geometry=(key,create)=>{if(!geometries.has(key))geometries.set(key,create());return geometries.get(key);};
- const box=(parent,w,h,d,x,y,z,color)=>{const mesh=new T.Mesh(geometry(`b:${w}:${h}:${d}`,()=>new T.BoxGeometry(w,h,d)),material(color));mesh.position.set(x,y,z);parent.add(mesh);return mesh;};
- const cylinder=(parent,r,h,x,y,z,color,top=r)=>{const mesh=new T.Mesh(geometry(`c:${r}:${h}:${top}`,()=>new T.CylinderGeometry(top,r,h,12)),material(color));mesh.position.set(x,y,z);parent.add(mesh);return mesh;};
- const ring=(parent,r,x,y,z,color,rotation=0)=>{const mesh=new T.Mesh(geometry(`r:${r}`,()=>new T.TorusGeometry(r,.055,6,40)),material(color));mesh.position.set(x,y,z);mesh.rotation.x=rotation;parent.add(mesh);return mesh;};
- const block=(home,x,z,w,d)=>colliders.push({minX:home.x+x-w/2,maxX:home.x+x+w/2,minZ:home.z+z-d/2,maxZ:home.z+z+d/2});
- const label=(parent,text,x,y,z,width=8)=>{const c=canvas();c.width=1024;c.height=192;const texture=new T.CanvasTexture(c);textures.push(texture);const mat=new T.MeshBasicMaterial({map:texture,side:T.DoubleSide,transparent:true});const mesh=new T.Mesh(geometry('label',()=>new T.PlaneGeometry(1,1)),mat);mesh.position.set(x,y,z);mesh.scale.set(width,width*192/1024,1);parent.add(mesh);labels.push({c,texture,text,mat});return mesh;};
- const action=(mesh,home,section)=>{mesh.userData={philosopherId:home.id,philosopherSection:section};targets.push(mesh);return mesh;};
- // Roofs and street fronts are merged by colour. The original room, books and
- // collision contract below stay in place; these are original imagined houses.
- function architecture(root,home,wall,wood){
-  const batches=new Map(),positions=color=>{if(!batches.has(color))batches.set(color,[]);return batches.get(color);},v=p=>new T.Vector3(...p);
-  const triangle=(a,b,c,color)=>{if(v(b).sub(v(a)).cross(v(c).sub(v(a))).lengthSq()>1e-12)positions(color).push(...a,...b,...c);};
-  const quad=(a,b,c,d,color)=>{triangle(a,b,c,color);triangle(a,c,d,color);};
-  const append=(g,m,color)=>{const p=g.attributes.position,index=g.index,out=positions(color);for(let i=0;i<(index?.count??p.count);i++){const q=new T.Vector3().fromBufferAttribute(p,index?index.getX(i):i).applyMatrix4(m);out.push(q.x,q.y,q.z);}};
-  const cube=geometry('architecture-unit-box',()=>new T.BoxGeometry(1,1,1)),column=geometry('architecture-unit-column',()=>new T.CylinderGeometry(1,1,1,12));
-  const block=(w,h,d,x,y,z,color,yaw=0)=>append(cube,new T.Matrix4().compose(new T.Vector3(x,y,z),new T.Quaternion().setFromAxisAngle(new T.Vector3(0,1,0),yaw),new T.Vector3(w,h,d)),color);
-  const beam=(a,b,r,color)=>{const start=v(a),end=v(b),delta=end.clone().sub(start);append(column,new T.Matrix4().compose(start.add(end).multiplyScalar(.5),new T.Quaternion().setFromUnitVectors(new T.Vector3(0,1,0),delta.clone().normalize()),new T.Vector3(r,delta.length(),r)),color);};
-  // A closed thin skin gives both the exterior roof and its visible soffit.
-  function panel(a,b,c,d,color){let p=[a,b,c,d];if(v(b).sub(v(a)).cross(v(c).sub(v(a))).y<0)p=p.reverse();quad(...p,color);const below=p.map(q=>[q[0],q[1]-.16,q[2]]);quad(...below.slice().reverse(),color);for(let i=0;i<4;i++){const n=(i+1)%4;quad(p[i],below[i],below[n],p[n],color);}}
-  const roof=home.style==='academy'?0x667f88:home.style==='lyceum'?0x9a7155:home.style==='garden'?0x687d58:home.style==='observatory'?0x65768d:home.style==='courtyard'?0x526c62:0x4c8683,trim=0xe6d7b4,glass=0x54777b;
-  function gable(cx,cz,width,depth,eave,rise,color=roof){const x0=cx-width/2,x1=cx+width/2,z0=cz-depth/2,z1=cz+depth/2;panel([x0,eave,z0],[cx,eave+rise,z0],[cx,eave+rise,z1],[x0,eave,z1],color);panel([cx,eave+rise,z0],[x1,eave,z0],[x1,eave,z1],[cx,eave+rise,z1],color);triangle([x1,eave,z0],[x0,eave,z0],[cx,eave+rise,z0],wall);triangle([x0,eave,z1],[x1,eave,z1],[cx,eave+rise,z1],wall);}
-  function hip(cx,cz,width,depth,eave,rise){const x0=cx-width/2,x1=cx+width/2,z0=cz-depth/2,z1=cz+depth/2,k=Math.min(width,depth)*.27,a=[x0+k,eave+rise,cz],b=[x1-k,eave+rise,cz];panel([x0,eave,z0],[x1,eave,z0],b,a,roof);panel([x1,eave,z1],[x0,eave,z1],a,b,roof);panel([x0,eave,z1],[x0,eave,z0],a,a,roof);panel([x1,eave,z0],[x1,eave,z1],b,b,roof);}
-  // Recessed blue-green windows, deep reveals and a sheltered public doorstep.
-  for(const x of[-6,6]){block(3.2,1.7,.10,x,2.18,11.23,glass);for(const dx of[-1.72,1.72])block(.18,1.98,.22,x+dx,2.18,11.31,trim);for(const y of[1.24,3.12])block(3.6,.18,.3,x,y,11.36,trim);block(.10,1.7,.18,x,2.18,11.37,wood);}
-  block(12.8,.12,3.2,0,.07,12.55,0xb8ae94);
-  for(const x of[-6.8,6.8]){beam([x,.13,12.8],[x,4.06,12.8],.22,wall);block(.72,.18,.72,x,.22,12.8,trim);block(.66,.2,.66,x,3.97,12.8,trim);colliders.push({minX:home.x+x-.28,maxX:home.x+x+.28,minZ:home.z+12.52,maxZ:home.z+13.08});}
-  block(15.2,.28,.65,0,4.08,12.8,home.color);
-  // A nameplate belongs to the porch, below the roof rather than floating over
-  // a missing roof. The original reading/idea target transforms are untouched.
-  if(home.style==='academy'){
-   gable(-6.6,0,9,24,4.02,1.75);gable(6.6,0,9,24,4.02,1.75);gable(0,12.25,22.6,3.7,4.22,2.25);
-   for(const x of[-3.8,3.8]){beam([x,.13,12.8],[x,4.1,12.8],.20,wall);colliders.push({minX:home.x+x-.25,maxX:home.x+x+.25,minZ:home.z+12.55,maxZ:home.z+13.05});}
-  }else if(home.style==='lyceum'){
-   // Two barrel shells leave a real longitudinal clerestory open to the sky.
-   const y=x=>4.02+2.65*Math.sqrt(Math.max(0,1-(x/11.2)**2));for(const sign of[-1,1])for(let i=0;i<7;i++){const a=sign*(2.15+i*9.05/7),b=sign*(2.15+(i+1)*9.05/7);panel([a,y(a),-12],[b,y(b),-12],[b,y(b),12],[a,y(a),12],roof);}
-   for(const x of[-2.15,2.15]){block(.16,.4,24,x,6.48,0,trim);for(const z of[-10,-5,0,5,10])beam([x,6.25,z],[x,6.95,z],.065,wood);}gable(0,12.35,15.4,3.7,4.23,.75);
-  }else if(home.style==='garden'){
-   // Low garden wings and an open vine pergola enclose a planted daylight court.
-   for(const sign of[-1,1])panel([sign*3.1,4.85,-12],[sign*11.2,4.02,-12],[sign*11.2,4.02,12],[sign*3.1,4.85,12],roof);
-   panel([-11.2,4.02,-12],[11.2,4.02,-12],[11.2,4.85,-8.3],[-11.2,4.85,-8.3],roof);
-   for(const x of[-5.5,-3.7,-1.85,0,1.85,3.7,5.5])block(.16,.20,7,x,4.35,10.7,wood);for(const z of[7.4,10.7,14])block(14.5,.18,.18,0,4.25,z,wood);
-  }else if(home.style==='observatory'){
-   // A true curved shell with an open observing slit, not decorative wire rings.
-   const radius=9.4,base=4.04;for(let i=0;i<32;i++){const a=i*Math.PI/16,b=(i+1)*Math.PI/16;if(i===7||i===8)continue;for(let j=0;j<8;j++){const p=.26+(Math.PI/2-.26)*j/8,q=.26+(Math.PI/2-.26)*(j+1)/8,at=(t,u)=>[radius*Math.sin(t)*Math.cos(u),base+5*Math.cos(t),radius*Math.sin(t)*Math.sin(u)];panel(at(p,a),at(q,a),at(q,b),at(p,b),roof);}}
-   for(let i=0;i<32;i++){const a=i*Math.PI/16,b=(i+1)*Math.PI/16,edge=t=>Math.min(11.2/Math.max(.0001,Math.abs(Math.cos(t))),12/Math.max(.0001,Math.abs(Math.sin(t)))),at=(r,t)=>[r*Math.cos(t),base,r*Math.sin(t)];panel(at(radius,a),at(edge(a),a),at(edge(b),b),at(radius,b),roof);}gable(0,12.3,15.4,3.8,4.22,.7);
-  }else if(home.style==='courtyard'){
-   // Four tiled pavilion roofs leave a generous rectangular courtyard open.
-   hip(0,-9.4,22.6,5.2,4.22,1.45);hip(0,10.9,22.6,6.2,4.22,1.45);
-   for(const x of[-8.3,8.3])gable(x,.1,6,15.5,4.22,1.05);for(const x of[-10.9,10.9])for(const z of[-11.6,13.8])block(.3,.22,.7,x,4.43,z,roof);
-  }else{
-   // An octagonal lantern over a folded hip roof distinguishes the library.
-   const at=(r,y,a)=>[r*Math.cos(a),y,r*Math.sin(a)];for(let i=0;i<8;i++){const a=i*Math.PI/4,b=(i+1)*Math.PI/4,edge=t=>Math.min(11.2/Math.max(.0001,Math.abs(Math.cos(t))),12/Math.max(.0001,Math.abs(Math.sin(t))));panel(at(6.4,5.25,a),at(edge(a),4.02,a),at(edge(b),4.02,b),at(6.4,5.25,b),roof);panel(at(1.85,8.05,a),at(6.4,5.25,a),at(6.4,5.25,b),at(1.85,8.05,b),roof);beam(at(6.4,5.34,a),at(1.85,8.14,a),.045,trim);}
-   // Tall iwan arch frames the existing three-metre doorway without crossing it.
-   for(const x of[-2.7,2.7]){beam([x,.13,13.75],[x,3.15,13.75],.14,trim);colliders.push({minX:home.x+x-.16,maxX:home.x+x+.16,minZ:home.z+13.59,maxZ:home.z+13.91});}
-   for(let i=0;i<16;i++){const a=i*Math.PI/16,b=(i+1)*Math.PI/16;beam([2.7*Math.cos(a),3.15+2.7*Math.sin(a),13.75],[2.7*Math.cos(b),3.15+2.7*Math.sin(b),13.75],.14,trim);}
-  }
-  // Vertex colours keep the complete new architecture to one draw per home.
-  const packed=[],colours=[];for(const[color,p]of batches){packed.push(...p);const c=new T.Color(color);for(let i=0;i<p.length;i+=3)colours.push(c.r,c.g,c.b);}
-  const g=geometry('architecture:'+home.id,()=>{const mesh=new T.BufferGeometry();mesh.setAttribute('position',new T.Float32BufferAttribute(packed,3));mesh.setAttribute('color',new T.Float32BufferAttribute(colours,3));mesh.computeVertexNormals();return mesh;});
-  if(!materials.has('architecture'))materials.set('architecture',new T.MeshLambertMaterial({vertexColors:true}));const mesh=new T.Mesh(g,materials.get('architecture'));mesh.name=home.id+' · merged roof and street-front architecture';mesh.userData.philosopherArchitecture=true;root.add(mesh);
-  root.userData.architecture={style:home.style,drawMeshes:1,roof:true,openSky:true};
+ const group=new T.Group();group.name='Academy of Questions · six inward-facing courtyard houses';const homes=[],targets=[],colliders=[],labels=[],owned=new Set();let disposed=false;
+ const own=o=>(owned.add(o),o),white=0xd8cbb0,light=0xe8dfc9,terracotta=0xae7452,tile=0xbc8764,wood=0x70563d,ink=0x38534b;
+ const material=own(new T.MeshLambertMaterial({vertexColors:true,side:T.DoubleSide})),unit=own(new T.BoxGeometry(1,1,1)),cylinder=own(new T.CylinderGeometry(1,1,1,12)),stamp=new T.Object3D();
+ function builder(parent,name){const points=[],colours=[];const add=(a,b,c,color)=>{if(new T.Vector3().subVectors(new T.Vector3(...b),new T.Vector3(...a)).cross(new T.Vector3().subVectors(new T.Vector3(...c),new T.Vector3(...a))).lengthSq()<1e-12)return;const col=new T.Color(color);for(const p of[a,b,c]){points.push(...p);colours.push(col.r,col.g,col.b);}},face=(p,c)=>{for(let i=1;i<p.length-1;i++)add(p[0],p[i],p[i+1],c);};
+  function append(g,color){const p=g.attributes.position,index=g.index,col=new T.Color(color);for(let i=0;i<(index?.count??p.count);i++){const q=new T.Vector3().fromBufferAttribute(p,index?index.getX(i):i).applyMatrix4(stamp.matrix);points.push(q.x,q.y,q.z);colours.push(col.r,col.g,col.b);}}
+  function box(w,h,d,x,y,z,c=white,yaw=0){stamp.position.set(x,y,z);stamp.rotation.set(0,yaw,0);stamp.scale.set(w,h,d);stamp.updateMatrix();append(unit,c);}
+  function post(x,z,r=.24,h=3.65,y=.13,c=white){stamp.position.set(x,y+h/2,z);stamp.rotation.set(0,0,0);stamp.scale.set(r,h,r);stamp.updateMatrix();append(cylinder,c);box(r*3,.18,r*3,x,y+.09,z,light);box(r*2.8,.22,r*2.8,x,y+h-.05,z,light);}
+  function rod(a,b,r=.045,c=wood){const aa=new T.Vector3(...a),bb=new T.Vector3(...b),d=bb.clone().sub(aa);stamp.position.copy(aa).add(bb).multiplyScalar(.5);stamp.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),d.clone().normalize());stamp.scale.set(r,d.length(),r);stamp.updateMatrix();append(cylinder,c);}
+  function roof(poly0,poly1,y0,y1,c=terracotta){for(let i=0;i<6;i++){const j=(i+1)%6,p=[[poly0[i][0],y0,poly0[i][1]],[poly0[j][0],y0,poly0[j][1]],[poly1[j][0],y1,poly1[j][1]],[poly1[i][0],y1,poly1[i][1]]];face(p,c);face([...p].reverse().map(v=>[v[0],v[1]-.14,v[2]]),light);for(let k=0;k<4;k++)face([p[k],p[(k+1)%4],[p[(k+1)%4][0],p[(k+1)%4][1]-.14,p[(k+1)%4][2]],[p[k][0],p[k][1]-.14,p[k][2]]],c);}}
+  function finish(){const g=own(new T.BufferGeometry());g.setAttribute('position',new T.Float32BufferAttribute(points,3));g.setAttribute('color',new T.Float32BufferAttribute(colours,3));g.computeVertexNormals();const mesh=new T.Mesh(g,material);mesh.name=name;mesh.userData.philosopherArchitecture=true;parent.add(mesh);return mesh;}
+  return{face,box,post,rod,roof,finish};
  }
- const pathMaterial=0xc5b797;
- for(const points of quarterPaths)for(let i=1;i<points.length;i++){const [a,b]=[points[i-1],points[i]],dx=b[0]-a[0],dz=b[1]-a[1];const mesh=box(group,4.6,.1,Math.hypot(dx,dz)+1,(a[0]+b[0])/2,.075,(a[1]+b[1])/2,pathMaterial);mesh.rotation.y=Math.atan2(dx,dz);mesh.visible=globalThis.CITY_CONFIG?.showGroundPaving!==false;}
- for(const home of PHILOSOPHERS){
-  const root=new T.Group();root.name=home.id+' · '+home.home[1];root.position.set(home.x,0,home.z);root.userData.cityDestination='philosopher:'+home.id;group.add(root);
-  const wall=home.style==='library'?0xc3b18b:home.style==='courtyard'?0xd8c9ad:0xded8c5,wood=0x71573e,ink=0x344248;
-  box(root,24,.14,26,0,-.01,0,0x64776a);box(root,20,.12,22,0,.07,0,0xb8ae94);
-  // The original walls and three-metre doorway retain their collision contract.
-  for(const x of [-10,10]){box(root,.35,3.6,22,x,1.93,0,wall);block(home,x,0,.35,22);}
-  box(root,20,3.6,.35,0,1.93,-11,wall);block(home,0,-11,20,.35);
-  for(const x of [-5.75,5.75]){box(root,8.5,3.6,.35,x,1.93,11,wall);block(home,x,11,8.5,.35);}
-  box(root,3,1,.35,0,3.23,11,home.color);
-  for(const x of [-10,10])box(root,.55,.25,22.7,x,3.86,0,home.color);
-  for(const z of [-11,11])box(root,20.6,.25,.65,0,3.86,z,home.color);
-  action(label(root,()=>pickLanguage(home.name,language()),0,3.65,14.22,8),home,'intro');
-  label(root,()=>pickLanguage(home.home,language()),0,3.15,11.23,7.4);
-  box(root,3,.08,5,0,.09,14,pathMaterial).visible=globalThis.CITY_CONFIG?.showGroundPaving!==false;
-  // Library desk with a real interactive book, plus an unobstructed centre aisle.
-  box(root,4,.18,1.8,4,1.2,-6,wood);block(home,4,-6,4,1.8);
-  for(const x of [2.4,5.6])box(root,.15,1.1,1.4,x,.63,-6,wood);
-  const book=action(box(root,1.15,.14,.85,3.4,1.36,-5.9,home.color),home,'reading');
-  box(root,1.05,.08,.76,3.4,1.4,-5.9,0xf2e6ca);book.userData.label=home.reading[1];
-  label(root,()=>language()==='fa'?'خواندن و اندیشیدن':'READ & REFLECT',4,2.35,-6.8,4.2);
-  for(let shelf=0;shelf<3;shelf++){
-   box(root,4,.13,.6,-5,1+shelf*.65,-10.45,wood);
-   for(let i=0;i<8;i++)box(root,.25,.4+(i%3)*.06,.38,-6.5+i*.43,1.27+shelf*.65,-10.4,[home.color,0x9d6c53,0x8d9d86][i%3]);
-  }block(home,-5,-10.45,4,.8);
-  for(const x of [4,7]){box(root,1.3,.15,1.2,x,.65,2,wood);box(root,1.3,.9,.15,x,1.14,2.5,home.color);block(home,x,2,1.3,1.35);for(const dx of [-.45,.45])box(root,.12,.55,.8,x+dx,.34,2,wood);}
-  action(label(root,()=>pickLanguage(home.object,language()),-5,2.8,-3.8,6),home,'idea');
-  const pedestal=action(cylinder(root,1.3,.7,-5,.48,-2,0x8c8776),home,'idea');block(home,-5,-2,2.6,2.6);
-  const disc=()=>{const n=cylinder(root,1.25,.1,-5,1.6,-2,home.color);action(n,home,'idea');return n;};
-  if(home.style==='academy'){
-   for(const x of [-8,8])for(const z of [-7,7]){cylinder(root,.27,3.4,x,1.83,z,wall);cylinder(root,.44,.18,x,3.55,z,wall);block(home,x,z,.7,.7);}
-   action(ring(root,1,-5,1.9,-2,0xd3ad60),home,'idea');box(root,2.5,.025,1.2,-5,.15,-.8,0x777c71);
-  }else if(home.style==='lyceum'){
-   for(const z of [-8,-4,0,4,8]){cylinder(root,.23,3.35,-8.3,1.8,z,wall);block(home,-8.3,z,.6,.6);}box(root,1.3,.15,19,-8.3,3.5,0,home.color);
-   cylinder(root,.075,1.6,-5,1.6,-2,0xb99b60);box(root,2.1,.08,.12,-5,2.35,-2,0xb99b60);for(const x of [-5.85,-4.15]){cylinder(root,.025,.55,x,2.05,-2,0xb99b60);cylinder(root,.32,.07,x,1.75,-2,0xb99b60);}
-  }else if(home.style==='garden'){
-   for(const x of [-7.5,7.5])for(const z of [-6,6]){cylinder(root,.17,3.4,x,1.83,z,wood);block(home,x,z,.5,.5);}for(const z of [-6,-3,0,3,6])box(root,16,.14,.15,0,3.6,z,wood);
-   for(const x of [-7,7]){box(root,2,.5,3,x,.38,7,0x947b57);block(home,x,7,2,3);for(const dz of [-.8,0,.8])cylinder(root,.65,1.1,x,1.1,7+dz,0x7b975e,.25);}
-   disc();cylinder(root,.3,.12,-5.4,1.72,-2,0xcaa468);cylinder(root,.2,.5,-4.5,1.9,-2,0xbed4ce);
-  }else if(home.style==='observatory'){
-   // The architectural dome replaces the old roof rings, whose lower halves
-   // dipped into the central aisle. The interactive armillary below is intact.
-   for(const x of [-8,8]){cylinder(root,.18,4.4,x,2.3,-8,wall);block(home,x,-8,.6,.6);}
-   for(const angle of [0,.8,-.8]){const r=action(ring(root,1,-5,1.95,-2,0xc6ac72),home,'idea');r.rotation.y=angle;r.rotation.x=angle*.8;}cylinder(root,.12,.8,-5,1.2,-2,ink);
-  }else if(home.style==='courtyard'){
-   for(const z of [-10,10])for(const y of [3.85,4.25]){box(root,22,.14,2.2,0,y,z,0x665b50);for(const x of [-10.7,10.7])box(root,.2,.4,2.3,x,y+.13,z,wood);}
-   for(const x of [-7.5,7.5]){cylinder(root,.17,3.6,x,1.93,7.5,0x985d48);block(home,x,7.5,.5,.5);}
-   for(const x of [-5.65,-4.35]){box(root,.75,.1,.8,x,1.15,-2,wood);box(root,.75,.8,.1,x,1.6,-2.35,home.color);}
-  }else{
-   for(const x of [-8,8]){cylinder(root,.22,3.5,x,1.88,7.5,wall);block(home,x,7.5,.6,.6);}const arch=ring(root,8,0,3.8,7.5,home.color);arch.scale.y=.27;
-   const archIdea=action(ring(root,1,-5,1.7,-2,0xd6b66b),home,'idea');archIdea.scale.y=1.25;box(root,1.7,.08,1.2,-5,1,-2,home.color);
+ function label(parent,text,x,y,z,width=5,yaw=0,home=null,section='intro',height=.8){const c=canvas();c.width=1024;c.height=192;const tx=own(new T.CanvasTexture(c));tx.colorSpace=T.SRGBColorSpace;const mat=own(new T.MeshBasicMaterial({map:tx,side:T.DoubleSide})),g=own(new T.PlaneGeometry(width,height)),mesh=new T.Mesh(g,mat);mesh.position.set(x,y,z);mesh.rotation.y=yaw;parent.add(mesh);labels.push({c,tx,text});if(home){mesh.userData={philosopherId:home.id,philosopherSection:section};targets.push(mesh);}return mesh;}
+ const hex=r=>Array.from({length:6},(_,i)=>[r*Math.cos(i*Math.PI/3),r*Math.sin(i*Math.PI/3)]);
+ function localBlock(h,x,z,w,d){colliders.push({homeId:h.id,x,z,w,d});}
+ for(const h of PHILOSOPHERS){const root=new T.Group();root.name=h.id+' · courtyard house';root.position.set(h.x,0,h.z);root.rotation.y=h.turn;root.userData.cityDestination='philosopher:'+h.id;group.add(root);const b=builder(root,h.id+' · Greek courtyard structure'),poly=hex(14),wallTop=3.75;
+  b.face([...hex(14.2)].reverse().map(([x,z])=>[x,.13,z]),light);b.face(hex(14.2).map(([x,z])=>[x,-.05,z]),white);
+  function wall(a,c){const dx=c[0]-a[0],dz=c[1]-a[1],len=Math.hypot(dx,dz);b.box(len,3.6,.28,(a[0]+c[0])/2,1.93,(a[1]+c[1])/2,white,-Math.atan2(dz,dx));colliders.push({homeId:h.id,a,b:c});}
+  for(let i=0;i<6;i++){const a=poly[i],c=poly[(i+1)%6],dx=c[0]-a[0],dz=c[1]-a[1],len=Math.hypot(dx,dz),yaw=-Math.atan2(dz,dx);if(i===1){wall(a,[1.65,a[1]]);wall([-1.65,a[1]],c);b.box(3.3,.48,.32,0,3.51,a[1],white);}else wall(a,c);
+   for(const[y,hh,depth,color]of[[.28,.28,.45,0xb7ab90],[3.64,.16,.45,h.color],[3.84,.16,.57,light]]){if(i===1){for(const side of[-1,1])b.box((len-3.5)/2,hh,depth,side*(len+3.5)/4,y,a[1],color);}else b.box(len+.1,hh,depth,(a[0]+c[0])/2,y,(a[1]+c[1])/2,color,yaw);}
+   // The meander is original, shallow masonry relief, with no copied artwork.
+   for(let k=1;k<len-1;k+=1.25){const px=a[0]+dx*k/len,pz=a[1]+dz*k/len,nx=dz/len,nz=-dx/len;if(i===1&&Math.abs(px)<2.4)continue;b.box(.6,.07,.045,px+nx*.17,3.23,pz+nz*.17,h.color,yaw);}
   }
-  architecture(root,home,wall,wood);
-  const bounds={minX:home.x-10,maxX:home.x+10,minZ:home.z-11,maxZ:home.z+11};
-  homes.push({...home,group:root,bounds,entry:{x:home.x,y:.13,z:home.z+13,yaw:0},study:{x:home.x,y:.13,z:home.z-4,yaw:0}});
+  b.roof(hex(14.5),hex(10.2),4.04,5.35);b.roof(hex(10.2),hex(6.45),5.35,3.95);
+  for(let radius=6.8;radius<14.45;radius+=.55){const yy=radius<10.2?3.95+(radius-6.45)/3.75*1.4:5.35-(radius-10.2)/4.3*1.31,p=hex(radius);for(let i=0;i<6;i++)b.rod([p[i][0],yy+.025,p[i][1]],[p[(i+1)%6][0],yy+.025,p[(i+1)%6][1]],.027,tile);}
+  for(let i=0;i<6;i++){const a=i*Math.PI/3,x=7.25*Math.cos(a),z=7.25*Math.sin(a);b.post(x,z,.24,3.72);localBlock(h,x,z,.85,.85);const n=(i+1)*Math.PI/3;b.rod([x,3.8,z],[7.25*Math.cos(n),3.8,7.25*Math.sin(n)],.13,wood);}
+  // A front porch links the real three-metre doorway to the common stoa.
+  b.box(4.4,.14,3.3,0,.06,13.6,0xc8bda3);for(const x of[-2.05,2.05]){b.post(x,14.3,.22,3.58);localBlock(h,x,14.3,.8,.8);}b.box(4.65,.25,.5,0,3.84,14.3,light);
+  b.face([[-2.5,4.02,12],[0,4.9,12],[0,4.9,15.0],[-2.5,4.02,15.0]],terracotta);b.face([[0,4.9,12],[2.5,4.02,12],[2.5,4.02,15],[0,4.9,15]],terracotta);b.face([[-2.5,4.02,15],[2.5,4.02,15],[0,4.9,15]],light);
+  label(root,()=>pickLanguage(h.name,language()),0,3.42,14.57,4.1,0,h,'intro',.5);
+  label(root,()=>pickLanguage(h.home,language()),0,2.95,12.34,4.1,0,null,'intro',.42);
+  // Keep source learning and note IDs; the reading desk clears the peristyle.
+  b.box(4,.18,1.8,4.5,1.2,-8.5,wood);for(const x of[2.9,6.1])b.box(.15,1.1,1.4,x,.63,-8.5,wood);localBlock(h,4.5,-8.5,4,1.8);
+  const book=new T.Mesh(own(new T.BoxGeometry(1.15,.14,.85)),own(new T.MeshLambertMaterial({color:h.color})));book.position.set(3.9,1.36,-8.4);book.userData={philosopherId:h.id,philosopherSection:'reading',label:h.reading[1]};root.add(book);targets.push(book);b.box(1.05,.06,.76,3.9,1.45,-8.4,light);label(root,()=>pickLanguage(h.name,language())+' · '+(language()==='fa'?'خواندن و اندیشیدن':language()==='de'?'LESEN & NACHDENKEN':'READ & REFLECT'),4.5,2.2,-9.6,5,0,h,'reading',.6);
+  for(let shelf=0;shelf<3;shelf++){b.box(4,.13,.6,-5,1+shelf*.65,-10.45,wood);for(let j=0;j<8;j++)b.box(.25,.4+(j%3)*.06,.38,-6.5+j*.43,1.27+shelf*.65,-10.4,[h.color,terracotta,ink][j%3]);}localBlock(h,-5,-10.45,4,.8);
+  b.box(2.7,.55,2.4,-5,.405,-2,0xc1b69b);localBlock(h,-5,-2,2.7,2.4);
+  const idea=new T.Group();idea.position.set(-5,1.1,-2);idea.userData={philosopherId:h.id,philosopherSection:'idea'};root.add(idea);targets.push(idea);const ideaMat=own(new T.MeshLambertMaterial({color:0xb89e62}));
+  if(h.id==='aristotle'){const q=builder(idea,'Aristotle · balance of choice');q.post(0,0,.06,1,0,0xb89e62);q.box(2,.07,.1,0,1,0,0xb89e62);for(const x of[-.8,.8]){q.rod([x,1,0],[x,.5,0],.02,0xb89e62);q.box(.5,.06,.5,x,.5,0,0xb89e62);}q.finish();}
+  else{const ring=own(new T.TorusGeometry(h.id==='epicurus'?.65:.9,.055,6,48)),a=new T.Mesh(ring,ideaMat);a.position.y=.8;idea.add(a);if(h.id==='hypatia'){for(const turn of[.8,-.8]){const c=a.clone();c.rotation.set(turn*.6,turn,0);idea.add(c);}}if(h.id==='confucius'){const q=builder(idea,'Confucius · two seats');q.box(.6,.1,.6,-.6,.3,0,wood);q.box(.6,.1,.6,.6,.3,0,wood);q.box(.6,.65,.1,-.6,.65,-.3,h.color);q.box(.6,.65,.1,.6,.65,-.3,h.color);q.finish();}}
+  label(root,()=>pickLanguage(h.object,language()),-5,2.5,-3,4.3,0,h,'idea',.6);
+  // Two quiet seats occupy a roofed side, outside the central approach.
+  for(const zz of[2.3,6.3]){b.box(2.6,.48,1,9,.37,zz,white);b.box(2.6,.08,1,9,.65,zz,h.color);localBlock(h,9,zz,2.6,1);}
+  b.finish();root.userData.architecture={style:'hexagonal-courtyard',roof:true,openSky:true,drawMeshes:1};const study={...philosopherWorld(h,0,-4),y:.13,yaw:h.turn};homes.push({...h,group:root,entry:philosopherEntry(h),study,polygon:academyHousePolygon(h),bounds:{minX:h.x-15,maxX:h.x+15,minZ:h.z-15,maxZ:h.z+15}});
  }
- function refreshLanguage(){for(const item of labels){const ctx=item.c.getContext('2d');ctx.clearRect(0,0,1024,192);ctx.fillStyle='#233b39';ctx.fillRect(0,0,1024,192);ctx.strokeStyle='#bda779';ctx.lineWidth=4;ctx.strokeRect(6,6,1012,180);ctx.fillStyle='#f2e6cc';ctx.font='52px Tahoma, sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.direction=language()==='fa'?'rtl':'ltr';ctx.fillText(item.text(),512,96,970);item.texture.needsUpdate=true;}}
- function canStand(x,z){return Number.isFinite(x)&&Number.isFinite(z)&&!colliders.some(b=>x>b.minX-.24&&x<b.maxX+.24&&z>b.minZ-.24&&z<b.maxZ+.24);}
- function region(x,z){const home=homes.find(h=>x>h.bounds.minX&&x<h.bounds.maxX&&z>h.bounds.minZ&&z<h.bounds.maxZ);if(home)return{id:'philosophers',philosopherId:home.id,title:pickLanguage(home.name,language())+' · '+pickLanguage(home.home,language()),inside:true};if(x>Math.min(...homes.map(h=>h.x))-20&&x<Math.max(...homes.map(h=>h.x))+20&&z>Math.min(...homes.map(h=>h.z))-20&&z<Math.max(...homes.map(h=>h.z))+20)return{id:'philosophers',title:language()==='fa'?'محلهٔ فیلسوفان':'Philosophers’ quarter',inside:false};return null;}
- function entryFor(destination){if(destination==='philosophers')return{x:PHILOSOPHERS[1].x,y:.13,z:0,yaw:0};return homes.find(h=>'philosopher:'+h.id===destination)?.entry||null;}
- function dispose(){if(disposed)return;disposed=true;group.removeFromParent();for(const g of geometries.values())g.dispose();for(const m of materials.values())m.dispose();for(const item of labels)item.mat.dispose();textures.forEach(t=>t.dispose());}
- function drawMap(ctx,{s,cx,cz}){ctx.strokeStyle='#b4cba5';ctx.lineWidth=1;for(const path of quarterPaths){ctx.beginPath();path.forEach((p,i)=>ctx[i?'lineTo':'moveTo'](cx+p[0]*s,cz+p[1]*s));ctx.stroke();}ctx.fillStyle='#b4cba5';for(const h of homes)ctx.fillRect(cx+(h.x-10)*s,cz+(h.z-11)*s,20*s,22*s);ctx.font='10px Tahoma';ctx.textAlign='center';ctx.fillText(language()==='fa'?'فیلسوفان':'Philosophers',cx+PHILOSOPHERS[1].x*s,cz+80*s);}
+ const common=builder(group,'Academy · common court and six shaded stoas'),outer=academyPolygon(30.6),inner=academyPolygon(23),peak=academyPolygon(26.8);
+ common.face([...academyPolygon(30.8)].reverse().map(([x,z])=>[x,.125,z]),0xcac2aa);
+ // Quiet geometric paving and six real paths, rather than the retired row roads.
+ for(let ring=1;ring<=5;ring++){const p=academyPolygon(ring*4.4);for(let i=0;i<6;i++)common.rod([p[i][0],.136,p[i][1]],[p[(i+1)%6][0],.136,p[(i+1)%6][1]],.015,0xb49d6a);}
+ common.roof(outer,peak,4.3,5.2);common.roof(peak,inner,5.2,4.3);
+ const seen=new Set();for(const p of[outer,inner])for(let edge=0;edge<6;edge++){const a=p[edge],b=p[(edge+1)%6];for(const t of[0,.2,.4,.6,.8]){const x=a[0]+(b[0]-a[0])*t,z=a[1]+(b[1]-a[1])*t,key=x.toFixed(3)+','+z.toFixed(3);if(seen.has(key))continue;seen.add(key);const ux=-.5,uz=Math.sqrt(3)/2,along=(x-ACADEMY.x)*ux+z*uz,across=(x-ACADEMY.x)*uz-z*ux;if(along>16&&Math.abs(across)<2.6)continue;common.post(x,z,.22,3.95);colliders.push({x,z,r:.48});}common.rod([a[0],4.12,a[1]],[b[0],4.12,b[1]],.16,wood);}
+ for(let i=0;i<6;i++){const a=Math.PI/12+i*Math.PI/3,x=ACADEMY.x+17.4*Math.cos(a),z=17.4*Math.sin(a),yaw=Math.PI/2-a;common.box(4,.46,1,x,.36,z,white,yaw);common.box(4,.1,1,x,.64,z,0x7a8d77,yaw);colliders.push({x,z,w:4.5,d:1.5,turn:yaw});}
+ // The main gateway lies between houses, with a clear path under its entablature.
+ const entry=academyEntry(),gateX=ACADEMY.x-32,gateZ=64*Math.sqrt(3)/2,yaw=-Math.PI/6;
+ for(const x of[-3.2,3.2]){const px=gateX+x*Math.cos(yaw),pz=gateZ-x*Math.sin(yaw);common.post(px,pz,.32,4.25);colliders.push({x:px,z:pz,r:.62});}common.box(7.6,.42,.8,gateX,4.43,gateZ,light,yaw);
+ const gatePoint=(u,v,y)=>[gateX+u*Math.cos(yaw)+v*Math.sin(yaw),y,gateZ-u*Math.sin(yaw)+v*Math.cos(yaw)];common.face([gatePoint(-4,-1.5,4.65),gatePoint(0,-1.5,5.85),gatePoint(0,1.5,5.85),gatePoint(-4,1.5,4.65)],terracotta);common.face([gatePoint(0,-1.5,5.85),gatePoint(4,-1.5,4.65),gatePoint(4,1.5,4.65),gatePoint(0,1.5,5.85)],terracotta);for(const v of[-1.5,1.5])common.face([gatePoint(-4,v,4.65),gatePoint(4,v,4.65),gatePoint(0,v,5.85)],light);
+ const gateLabel=gatePoint(0,.47,4.43);label(group,()=>language()==='fa'?'آکادمیِ پرسش‌ها':language()==='de'?'AKADEMIE DER FRAGEN':'ACADEMY OF QUESTIONS',gateLabel[0],gateLabel[1],gateLabel[2],6.5,yaw,null,'intro',.45);common.finish();
+ function canStand(x,z){if(!Number.isFinite(x)||!Number.isFinite(z))return false;return!colliders.some(c=>{let p;if(c.homeId){const h=PHILOSOPHERS.find(h=>h.id===c.homeId);p=philosopherLocal(h,x,z);}else{const dx=x-c.x,dz=z-c.z;p={x:dx*Math.cos(c.turn||0)-dz*Math.sin(c.turn||0),z:dx*Math.sin(c.turn||0)+dz*Math.cos(c.turn||0)};}if(c.a){const dx=c.b[0]-c.a[0],dz=c.b[1]-c.a[1],t=Math.max(0,Math.min(1,((p.x-c.a[0])*dx+(p.z-c.a[1])*dz)/(dx*dx+dz*dz)));return Math.hypot(p.x-c.a[0]-dx*t,p.z-c.a[1]-dz*t)<.38;}if(c.r)return Math.hypot(p.x,p.z)<c.r;return Math.abs(p.x-(c.homeId?c.x:0))<c.w/2+.24&&Math.abs(p.z-(c.homeId?c.z:0))<c.d/2+.24;});}
+ function inside(h,x,z){const p=philosopherLocal(h,x,z);return hex(14).every((a,i)=>{const b=hex(14)[(i+1)%6];return(b[0]-a[0])*(p.z-a[1])-(b[1]-a[1])*(p.x-a[0])>=0;});}
+ function region(x,z){const h=homes.find(h=>inside(h,x,z));if(h)return{id:'philosophers',philosopherId:h.id,title:pickLanguage(h.name,language())+' · '+pickLanguage(h.home,language()),inside:true};if(Math.hypot(x-ACADEMY.x,z)<70)return{id:'philosophers',title:language()==='fa'?'آکادمی پرسش‌ها':'Academy of Questions',inside:false};return null;}
+ function entryFor(id){return id==='philosophers'?academyEntry():homes.find(h=>'philosopher:'+h.id===id)?.entry||null;}
+ function refreshLanguage(){for(const l of labels){const c=l.c.getContext('2d');c.fillStyle='#f1e7d0';c.fillRect(0,0,1024,192);c.fillStyle='#29483f';c.textAlign='center';c.textBaseline='middle';c.font='46px Tahoma';c.direction=language()==='fa'?'rtl':'ltr';c.fillText(l.text(),512,98,980);l.tx.needsUpdate=true;}}
+ function drawMap(ctx,{s,cx,cz}){ctx.fillStyle='#dbcda8';for(const h of homes){ctx.beginPath();h.polygon.forEach(([x,z],i)=>ctx[i?'lineTo':'moveTo'](cx+x*s,cz+z*s));ctx.closePath();ctx.fill();}}
+ function dispose(){if(disposed)return;disposed=true;group.removeFromParent();for(const r of owned)r.dispose();group.clear();}
  refreshLanguage();return{group,homes,targets,colliders,canStand,region,entryFor,refreshLanguage,drawMap,dispose};
 }

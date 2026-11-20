@@ -3,12 +3,12 @@
  const garden={x:-398.3716857408417,z:138},form={x:398.3716857408417,z:-138},studio={x:159.3486742963367,z:276};
  const galleries={monet:[garden.x-18,114],'van-gogh':[garden.x+18,114],'hilma-af-klint':[garden.x-18,162],morris:[garden.x+18,162],kandinsky:[form.x-30,-162],hokusai:[form.x,-162],rodin:[form.x+30,-162],mondrian:[form.x-30,-114],lange:[form.x,-114],klee:[form.x+30,-114]};
  const fronts=Object.fromEntries(Object.entries(galleries).map(([id,[x,z]])=>[id,[x,id==='monet'||id==='van-gogh'||id==='hilma-af-klint'||id==='morris'?138:-138]]));
- Object.assign(fronts,{escher:[228,126],dali:[studio.x,276],cezanne:[studio.x-30,276],morisot:[studio.x+30,276],seurat:[studio.x,276]});
+ Object.assign(fronts,{escher:[228,140.41569860407205],dali:[studio.x,276],cezanne:[studio.x-30,276],morisot:[studio.x+30,276],seurat:[studio.x,276]});
  const plan={version:4,galleries,fronts,escher:{x:228,z:115},dali:{x:studio.x,z:246},studios:{cezanne:{x:studio.x-30,z:246,turn:0},morisot:{x:studio.x+30,z:246,turn:0},seurat:{x:studio.x,z:310,turn:Math.PI}},bounds:{minX:-480,maxX:480,minZ:-200,maxZ:330},arrival:{x:garden.x,z:138,y:.13,yaw:0},
  courts:[{id:'garden',title:{en:'The garden court',de:'Der Gartenhof',fa:'حیاط باغ'},artists:['monet','van-gogh','hilma-af-klint','morris'],arrival:{x:garden.x,z:138,y:.13,yaw:0}},
  {id:'form',title:{en:'The form court',de:'Der Formhof',fa:'حیاط فرم'},artists:['kandinsky','hokusai','rodin','mondrian','lange','klee','escher'],arrival:{x:form.x,z:-138,y:.13,yaw:0}},
  {id:'studio',title:{en:'The studio court',de:'Der Atelierhof',fa:'حیاط آتلیه‌ها'},artists:['cezanne','morisot','seurat','dali'],arrival:{x:studio.x,z:276,y:.13,yaw:0}}],
- routes:[[[garden.x-79.67433714816835,138],[garden.x+45,138]],[[form.x-45,-138],[form.x+79.67433714816835,-138]],[[studio.x-79.67433714816835,276],[studio.x+45,276]],[[228,126],[239.023011444505,138],[318.6973485926734,138]]],
+ routes:[[[garden.x-79.67433714816835,138],[garden.x+45,138]],[[form.x-45,-138],[form.x+79.67433714816835,-138]],[[studio.x-79.67433714816835,276],[studio.x+45,276]],[[228,140.41569860407205],[239.023011444505,138],[318.6973485926734,138]]],
  plants:[[garden.x,124],[garden.x,152],[form.x-15,-151],[form.x+15,-125],[studio.x-15,262],[studio.x+15,290]],
  seats:[[garden.x,122],[garden.x,154],[form.x-15,-153],[form.x+15,-123],[studio.x-15,260],[studio.x+15,292]],
  trees:[[garden.x-48,114],[garden.x+48,162],[form.x-55,-162],[form.x+55,-114],[studio.x-55,246],[studio.x+55,310]]};

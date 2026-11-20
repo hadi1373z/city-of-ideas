@@ -244,3 +244,11 @@ bays behind/over the genuine prints, with27 first-surface visibility rays.
 The west vestibule retains its6m width but narrows at the actual4m-wide,4.8m-high
 Gallery tunnel mouth. Jamb collision and handoff width match that doorway; the
 side strips and header close the former views into empty earth.
+
+## Approved surface pavilion · 20 November 2026
+
+The user's approved reference is `design/escher/hexagonal-pavilion-approved-20261120.png`. The main-city house is now one regular hexagon (27.5m radius, centre228,114), not three rectangular boxes. `escher-pavilion-model.js` supplies its physical outline, front threshold and planting reserve; `escher-pavilion-scene.js` owns the pale masonry, arched entrance/recesses, original bird frieze, continuous clipped lozenge floor, roof facets, six-column arcade and actual transparent glass lantern. The scaled design deliberately fits the original eight-flight shaft without moving its real mouth or underground destination. The earlier narrow annex is enclosed inside the rear of the larger pavilion.
+
+The original perspective experiment retains its world origin228,115, all viewing markers and exact alignment; never derive its origin from the enlarged building's new front door. The three genuine print frames move onto clear inner wall faces; the gated Waterfall alcove, source attribution and original interaction IDs remain. The entrance and source gallery routes/map share the new threshold. No image from the reference board is used as a scene texture. Tests check floor support, roof/glass closure, the real stair opening, print visibility, full-body entry lanes and preserved puzzle alignment.
+
+The pavilion court also contains an original anamorphic frame sculpture on a low off-axis plinth. Its twelve edges occupy three real depths; their projections meet at exactly eight shared corners only from the brass stud. It leaves the original gate puzzle and its comparison marks unchanged. The masonry recesses are intentionally opaque arched panels, while only the central lantern is actual glass.

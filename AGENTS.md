@@ -373,3 +373,7 @@ the shallow exterior and wall-mounted stair reliefs; do not restore intrusive
 cross-flight arches. The southeast basement connector at(70,115)–(68.8,120)
 is a supported two-way route with hysteretic controller handoff; keep maps,
 cavities and held-input integration synchronized with its shared passage model.
+
+The user approved one larger hexagonal House of Perspectives surface pavilion on20 November2026. Read the surface section of docs/ESCHER-DEPTH.md. Keep its actual glazed lantern, single unified silhouette and shared footprint/entry authority. Preserve the perspective experiment's fixed228,115 origin independently of the new front threshold; its rear passage and original shaft stay connected. The old exterior-detail helper is dormant; its shaft relief remains live.
+
+The philosophy quarter now follows the approved six-house Academy sketch. Read docs/ACADEMY-OF-QUESTIONS.md. academy-layout.js owns six equal inward-facing courtyard sites, local/world transforms, Greek gateway, shaded hexagonal square, actual porches and routes. Keep one Plato house, original reading/source/reflection IDs, all six supported open-sky courts and full-width route clearance. Do not restore the former modern rows or unrotated book/study coordinates. Main-city changes do not alter isolated edition baselines.

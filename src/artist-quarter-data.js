@@ -1,4 +1,4 @@
-import './artist-quarter-layout.js?v=makers-passages-20261118';
+import './artist-quarter-layout.js?v=academy-escher-20261120';
 const PLAN=globalThis.ARTIST_QUARTER_PLAN;
 // Fictional studios, with public-domain paintings from the Met's Open Access collection.
 export const QUARTER_ARTISTS=[
