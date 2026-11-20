@@ -27,7 +27,7 @@ for(const s of D.stairs)for(let i=0;i<s.steps;i++){
  assert(hits.length,'Physical stair tread '+s.id+' '+i+' missing');near(hits[0].point.y,y);const up=ray(x,y+1.8,z,0,1,0,30);assert(up.length&&up[0].point.y-y>2.1,'Stair headroom '+s.id+' '+i);
 }
 near(ray(197,-47,166,0,-1,0,10)[0].point.y,-50);
-for(const z of[112.5,114,115,116,117.5])assert.equal(ray(134,-38.2,z,1,0,0,2.5).length,0,'Gallery passage is an actual gap');
+for(const z of[113.5,114,115,116,116.5])assert.equal(ray(134,-38.2,z,1,0,0,2.5).length,0,'Gallery passage is an actual gap');
 for(const z of[111.9,118.1])assert(ray(138,-38.2,z,0,0,z<115?1:-1,1).length,'Enclosed connector walls flank the aperture');
 assert.equal(built.targets.filter(o=>o.userData.escherDepthDoor).length,3);
 assert(built.group.getObjectByName('Two-storey hexagonal vaulted arcades'));

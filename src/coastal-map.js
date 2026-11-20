@@ -33,7 +33,7 @@ export function mountCoastalMap(container, {language = 'en', state, onVisit, vis
   // Physical east and west stay fixed when the surrounding interface is RTL.
   stage.dir = 'ltr';
   const image = el('img', '', 'coastal-plan');
-  image.src = new URL('./assets/city-coast-' + lang + '.svg?v=cloister-details-20261120', import.meta.url).href;
+  image.src = new URL('./assets/city-coast-' + lang + '.svg?v=escher-finish-20261120', import.meta.url).href;
   image.alt = c.title;
   image.width = image.height = 920;
   const overlay = el('img', '', 'coastal-walk-overlay');
