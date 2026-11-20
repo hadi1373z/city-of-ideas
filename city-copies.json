@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "copies": [
+    {"slug":"city-of-questions","name":"City of Questions","baseline":"944f69d4be1f7af55a64ba0feacc44d9e9f86955","description":"A starting copy for questioning, evidence and discovery."},
+    {"slug":"city-of-connections","name":"City of Connections","baseline":"944f69d4be1f7af55a64ba0feacc44d9e9f86955","description":"A starting copy for relationships between ideas."},
+    {"slug":"city-of-human-life","name":"City of Human Life","baseline":"944f69d4be1f7af55a64ba0feacc44d9e9f86955","description":"A starting copy for making, remembering and living together."},
+    {"slug":"city-of-transformations","name":"City of Transformations","baseline":"944f69d4be1f7af55a64ba0feacc44d9e9f86955","description":"A starting copy for patterns, form and change."}
+  ]
+}
