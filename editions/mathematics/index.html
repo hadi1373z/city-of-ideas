@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="math-baseline" content="__BASELINE__">
+<title>City of Mathematics · A place to think</title>
+<meta name="description" content="Walk a new mathematical city. Experiment with symmetry, probability, infinity, topology and algorithms, then build a proof in six connected workshops.">
+<link rel="stylesheet" href="../_city-baselines/__BASELINE__/proof-atelier.css">
+<link rel="stylesheet" href="math-city.css">
+<script defer src="../_city-baselines/__BASELINE__/assets/three.min.js"></script>
+<script type="module" src="math-city.js"></script>
+</head><body>
+<canvas id="city" aria-label="Walkable three-dimensional City of Mathematics"></canvas>
+<header class="mast"><a href="./" class="brand"><span class="mark">∴</span><span>City of Mathematics<small>A place to think</small></span></a><nav aria-label="City tools"><button id="map-button">City map</button><button id="journal-button">My arguments</button><button id="help-button" aria-label="Controls and help">?</button></nav></header>
+<section id="arrival" class="arrival"><p class="eyebrow">A new mathematical city</p><h1>Wonder.<br>Try. Prove.</h1><p>Six houses around a court of proofs. Walk between ideas, change an experiment and carry a question into the next room.</p><button id="enter" class="primary">Enter the city</button><button id="browse">Explore the map</button><p class="fine">A smaller city with new streets and buildings. Your existing Proof Atelier work is still here.</p></section>
+<div id="loading" role="status">Building the mathematical city…</div>
+<aside id="place" hidden><span id="place-name"></span><button id="interact">Explore this house</button></aside>
+<footer id="walk-hint" hidden>WASD / arrows · drag to look · E to explore · M for map</footer>
+<div id="touch" hidden aria-label="Walking controls"><button data-move="forward" aria-label="Walk forward">↑</button><button data-move="left" aria-label="Walk left">←</button><button data-move="back" aria-label="Walk backward">↓</button><button data-move="right" aria-label="Walk right">→</button></div>
+<button id="overview" hidden>View the city</button>
+<dialog id="map" aria-labelledby="map-title"><header><div><p class="eyebrow">One court · six houses</p><h2 id="map-title">A city of connected ideas</h2></div><button data-close aria-label="Close city map">×</button></header><div id="map-drawing"></div><p>Travel to a real doorstep, or follow the streets there on foot. Six shared gardens connect neighbouring houses to the outer promenade. Each experiment leads to a question; a visit alone earns no completion.</p><div id="destinations" class="destinations"></div></dialog>
+<dialog id="lab" aria-labelledby="lab-title"><header><div><p id="lab-topic" class="eyebrow"></p><h2 id="lab-title"></h2></div><button data-close aria-label="Close experiment">×</button></header><main id="lab-body"></main></dialog>
+<dialog id="journal" aria-labelledby="journal-title"><header><h2 id="journal-title">My mathematical arguments</h2><button data-close aria-label="Close arguments">×</button></header><p>Your campus notes are private to this browser. Only “Keep my argument” saves your writing. Proof Atelier arguments keep their established save and resume settings.</p><div id="journal-body"></div><button id="export">Download my campus notebook</button><p id="storage-status" role="status"></p></dialog>
+<dialog id="help" aria-labelledby="help-title"><header><h2 id="help-title">Take your time</h2><button data-close aria-label="Close help">×</button></header><p>Walk with W A S D or the arrow keys. Drag the view to look around. On a phone, hold the walking arrows and drag elsewhere to look. E opens a nearby house or workbench. Escape closes a panel.</p><p>The map offers direct travel to real doorsteps. Every building has a level entrance. Experiments pause walking while you read. No notifications cover the walking arrows.</p><p>Begin with any house. For a longer investigation, enter the central Proof Atelier: six workshops connect invariants, Hall’s theorem, exchanges, covers, prices and a final graph certificate.</p><p>Campus teaching text and architecture are original. The original Proof Atelier and all paper scans retain their credits. The renderer uses the existing Three.js library under its MIT licence.</p><p><a href="../_city-baselines/__BASELINE__/ramsey-film/vendor/THREE-LICENSE.txt">Three.js licence</a> · <a href="../editions/">Other city editions</a></p></dialog>
+<noscript>This city needs JavaScript. The original city remains available at <a href="../">City of Ideas</a>.</noscript>
+</body></html>

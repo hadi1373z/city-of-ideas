@@ -32,3 +32,8 @@ language changes and preservation of the main entry. Browser checks are separate
 `edition_math_learning/` starts at the Proof Atelier and offers an optional Math journey through its six workshops/twelve deeper problems, the Library–Workshop–Dialogue counterexample investigation and the original paper gallery. `edition_discovery/` starts at Escher’s surface house and connects perspective, the Sixth Guest and Ramsey’s graph experiment. `edition_making/` starts at Origami and connects folding, the Makers courtyard and Cage’s constrained score.
 
 These are curated playable prototypes using existing activities, not newly constructed city architectures. A head initializer sets a default arrival only when no explicit arrival was supplied. A ready-gated client adds one optional journey button and a closeable dialog; all actions delegate to original public APIs. It does not mark progress for visits, begin challenges automatically or write notes. The original src tree is unchanged and never loads this client. Existing tools retain their own explicit progress and notebook behavior.
+
+
+## Rebuilt Mathematics city
+
+The Mathematics edition now has its own compact campus, six mathematical houses, connected shared gardens, new streets and the full existing Proof Atelier. It is no longer the old city with an optional guide. Its new campus notebook is separate; the original Atelier progress remains shared deliberately. The other editions keep their previous implementations. See [MATHEMATICS-CITY.md](MATHEMATICS-CITY.md).

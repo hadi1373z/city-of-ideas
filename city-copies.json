@@ -5,7 +5,7 @@
     {"slug":"city-of-connections","path":"edition_connections","name":"City of Connections","baseline":"944f69d4be1f7af55a64ba0feacc44d9e9f86955","description":"A starting copy for relationships between ideas."},
     {"slug":"city-of-human-life","path":"edition_human_life","name":"City of Human Life","baseline":"944f69d4be1f7af55a64ba0feacc44d9e9f86955","description":"A starting copy for making, remembering and living together."},
     {"slug":"city-of-transformations","path":"edition_transformations","name":"City of Transformations","baseline":"944f69d4be1f7af55a64ba0feacc44d9e9f86955","description":"A starting copy for patterns, form and change."},
-    {"slug":"city-of-mathematics","path":"edition_math_learning","experience":"math","name":"City of Mathematics","baseline":"944f69d4be1f7af55a64ba0feacc44d9e9f86955","description":"Learn mathematics by predicting, experimenting and proving."},
+    {"slug":"city-of-mathematics","path":"edition_math_learning","experience":"math","name":"City of Mathematics","baseline":"944f69d4be1f7af55a64ba0feacc44d9e9f86955","description":"A new six-house mathematical campus: connected gardens, working experiments, original papers and the full Proof Atelier."},
     {"slug":"city-of-discovery","path":"edition_discovery","experience":"discovery","name":"City of Discovery","baseline":"944f69d4be1f7af55a64ba0feacc44d9e9f86955","description":"Follow clues through perspective, patterns and mathematical surprises."},
     {"slug":"city-of-making","path":"edition_making","experience":"making","name":"City of Making","baseline":"944f69d4be1f7af55a64ba0feacc44d9e9f86955","description":"Explore mathematical ideas by folding, constructing and composing."}
   ]

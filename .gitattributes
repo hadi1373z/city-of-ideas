@@ -1,6 +1,7 @@
 * text=auto
 # Imported browser sources are verified byte-for-byte across Windows and CI.
 src/** -text
+editions/** -text
 tests/** -text
 *.glb binary
 *.webp binary
