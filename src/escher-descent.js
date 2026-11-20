@@ -4,15 +4,24 @@ export function buildEscherDescent(T){
  const mat=c=>{const m=new T.MeshLambertMaterial({color:c,side:T.DoubleSide});owned.push(m);return m;},stone=mat(0xc6c5af),slate=mat(0x99aaa3),light=mat(0xe6ddbe),brass=mat(0xa9986c);
  const fill=new T.AmbientLight(0xd6e2dc,.6);fill.visible=false;group.add(fill);
  function box(w,h,d,x,y,z,m=stone,yaw=0){if(!batches.has(m))batches.set(m,[]);batches.get(m).push({w,h,d,x,y,z,yaw});}
- function rail(a,b){const delta=new T.Vector3().subVectors(b,a),g=new T.CylinderGeometry(.045,.045,delta.length(),6),mesh=new T.Mesh(g,brass);mesh.position.copy(a).add(b).multiplyScalar(.5);mesh.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),delta.normalize());group.add(mesh);owned.push(g);}
+ const railPieces=[],guardPaths=[],guardPosts=new Map();group.userData.stairGuardPaths=guardPaths;group.userData.stairGuardPosts=guardPosts;
+ function rail(a,b){railPieces.push({a:a.clone(),b:b.clone()});}
+ function guard(points){const path=points.map(p=>new T.Vector3(...p));guardPaths.push(path);for(let i=1;i<path.length;i++)rail(path[i-1],path[i]);}
+ function guardPost(x,z,base,top){const key=[x,z,base].join(',');if(guardPosts.has(key))return;guardPosts.set(key,{x,z,base,top});box(.055,top-base,.055,x,(base+top)/2,z,brass);}
  for(const p of PARTS){if(p.kind==='flight'){
   for(let i=0;i<40;i++){const z=p.start+(p.end-p.start)*(i+.5)/40,y=p.top+(p.bottom-p.top)*(i+1)/40;box(1.8,.18,.304,p.x,y-.09,z,i%8===0?light:stone);box(1.8,.018,.035,p.x,y+.009,z+(p.end>p.start?-.11:.11),slate);
-   if(i%4===0)for(const x of[p.x-.88,p.x+.88])box(.055,1.05,.055,x,y+.525,z,brass);
+   if(i%4===0)for(const x of[p.x-.88,p.x+.88])guardPost(x,z,y,p.top+(p.bottom-p.top)*(i+.5)/40+1.08);
   }
-  for(const x of[p.x-.88,p.x+.88])rail(new T.Vector3(x,p.top+1.08,p.start),new T.Vector3(x,p.bottom+1.08,p.end));
+  for(const x of[p.x-.88,p.x+.88]){guard([[x,p.top+1.08,p.start],[x,p.bottom+1.08,p.end]]);guardPost(x,p.start,p.top,p.top+1.08);guardPost(x,p.end,p.bottom,p.bottom+1.08);}
  }else{box(p.maxX-p.minX,.25,p.maxZ-p.minZ,(p.minX+p.maxX)/2,p.y-.125,(p.minZ+p.maxZ)/2,light);
-  const north=p.id.startsWith('landing-')&&p.minZ<92,z=north?p.minZ:p.maxZ;
-  if(p.id.startsWith('landing-')){rail(new T.Vector3(p.minX,p.y+1.08,z),new T.Vector3(p.maxX,p.y+1.08,z));for(const x of[p.minX,p.maxX])box(.06,1.08,.06,x,p.y+.54,z,brass);}
+  if(p.id.startsWith('landing-')){const north=p.minZ<92,near=north?92:104,far=north?p.minZ+.16:p.maxZ-.16,left=224.12,right=228.88,y=p.y+1.08;
+   // Both flight guards become one continuous switchback: an outer U hugs
+   // the supported landing, while the short inner bridge encloses the lane gap.
+   guard([[left,y,near],[left,y,far],[right,y,far],[right,y,near]]);guard([[225.88,y,near],[227.12,y,near]]);
+   for(const x of[left,226.5,right])guardPost(x,far,p.y,y);
+  }else{const x=p.id==='entry'?228:225,near=104,far=p.id==='entry'?105.8:106.65,y=p.y+1.08;
+   for(const side of[-1,1]){const xx=x+side*.88;guard([[xx,y,near],[xx,y,far],[xx,y-.18,far]]);guardPost(xx,far,p.y,y);}
+  }
  }}
  const s=D.shaft;
  // Solid 28cm masonry survives the close camera, enclosing every flight.
@@ -50,7 +59,10 @@ export function buildEscherDescent(T){
   for(const x of[224.05,228.95])box(.14,2.5,.14,x,p.y+1.25,z,light);
   const points=Array.from({length:25},(_,i)=>{const t=i/24*Math.PI;return new T.Vector3(226.5-2.45*Math.cos(t),p.y+2.5+.7*Math.sin(t),z);});const g=new T.TubeGeometry(new T.CatmullRomCurve3(points),32,.08,6,false);group.add(new T.Mesh(g,light));owned.push(g);
  }
- const stamp=new T.Object3D();for(const[m,items]of batches){const mesh=new T.InstancedMesh(unit,m,items.length);items.forEach((p,i)=>{stamp.position.set(p.x,p.y,p.z);stamp.rotation.set(0,p.yaw??0,0);stamp.scale.set(p.w,p.h,p.d);stamp.updateMatrix();mesh.setMatrixAt(i,stamp.matrix);});mesh.instanceMatrix.needsUpdate=true;mesh.computeBoundingSphere();group.add(mesh);}
+ const stamp=new T.Object3D(),railGeometry=new T.CylinderGeometry(.045,.045,1,8),railBatch=new T.InstancedMesh(railGeometry,brass,railPieces.length);owned.push(railGeometry);
+ railPieces.forEach(({a,b},i)=>{const delta=b.clone().sub(a);stamp.position.copy(a.clone().add(b).multiplyScalar(.5));stamp.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),delta.clone().normalize());stamp.scale.set(1,delta.length(),1);stamp.updateMatrix();railBatch.setMatrixAt(i,stamp.matrix);});railBatch.instanceMatrix.needsUpdate=true;railBatch.computeBoundingSphere();railBatch.name='Continuous supported eight-flight handrails';group.add(railBatch);
+ const corners=new Map();for(const path of guardPaths)for(const p of path)corners.set(p.toArray().join(','),p);const jointGeometry=new T.SphereGeometry(.046,8,6),joints=new T.InstancedMesh(jointGeometry,brass,corners.size);owned.push(jointGeometry);let ji=0;stamp.quaternion.identity();stamp.scale.set(1,1,1);for(const p of corners.values()){stamp.position.copy(p);stamp.updateMatrix();joints.setMatrixAt(ji++,stamp.matrix);}joints.instanceMatrix.needsUpdate=true;joints.computeBoundingSphere();joints.name='Rounded connected stair-rail joints';group.add(joints);
+ for(const[m,items]of batches){const mesh=new T.InstancedMesh(unit,m,items.length);items.forEach((p,i)=>{stamp.position.set(p.x,p.y,p.z);stamp.rotation.set(0,p.yaw??0,0);stamp.scale.set(p.w,p.h,p.d);stamp.updateMatrix();mesh.setMatrixAt(i,stamp.matrix);});mesh.instanceMatrix.needsUpdate=true;mesh.computeBoundingSphere();group.add(mesh);}
  return{group,fill,dispose(){group.removeFromParent();group.traverse(o=>{if(o.isInstancedMesh)o.dispose();});owned.forEach(o=>o.dispose());group.clear();}};
 }
 export function installEscherDescent(M,T,{gateOpen,onBegin,onMuseum,onStop}={}){

@@ -348,3 +348,19 @@ height-aware routes, middle map and mineral section synchronized. The preserved
 320-tread surface descent has a narrow six-sided entrance annex; its proportions
 are constrained by the established shaft. Travel buttons are explicit convenient
 travel, independent of the uninterrupted walk. The lower well closes at−50m.
+
+The cloister detail pass subtracts vertical doorway intervals rather than full
+wall heights. Keep the low corridor headers, upper-wing arcade/vault clearance,
+continuous switchback rails and supported landing returns. Regression checks
+include tests/escher-shell.mjs and tests/escher-stair-details.mjs. Origami's
+supported Miura portico shares its outline with the urban plan; its arrival is
+at(229,92), outside the Escher annex. Gate all Origami context and operations by
+actual surface feet height so its prompt never appears in the museum below.
+
+Origami now also has a front construction desk with two exact dog/cat flat-fold
+lessons. Keep origami-fold-workbench.js and its UI controller separate from the
+old boat/crane milestone activities. Preserve rigid hinge motion, temporary
+guide fold/unfold, behind-fold clearance, reversible scrubbing/rotation, manual
+reduced-motion mode and visit-local controls. The original lessonStates remain
+the completed-diagram authority; no automatic achievement or notebook write.
+See docs/ORIGAMI-HOUSE.md and tests/origami-fold-workbench.mjs.

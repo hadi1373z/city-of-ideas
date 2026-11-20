@@ -8,6 +8,13 @@ links, and artwork credits. The saved alignment state and credited prints remain
 
 ## Physical plan
 
+The detail pass closes each boundary in three dimensions. Short connecting
+passages remove only their actual vertical doorway interval; masonry remains
+above their roofs. Ground-floor mouths cannot become empty balcony exits.
+Upper wing arcade caps fit below their own vaults. The shell check casts more
+than8000horizontal, diagonal and upward rays from real walkable positions on all
+three levels; only the actual west tunnel aperture is allowed to remain open.
+
 The gallery connector meets an actual six-metre opening in the west vestibule
 wall at `(135, 115, -40)`. There is no wall or portal plane across this opening.
 The navigable floor extends to `x=134.4` for an overlap with the tunnel. The
@@ -194,3 +201,28 @@ height-aware navigator; the guide never reuses the retired rectangular floor pla
 `tests/sixfold-world-integration.mjs` holds forward through the actual tunnel,
 perspective aisle and return seam. `tests/connected-journey.mjs` includes upper
 and lower floor routes as well as the unchanged city learning journey.
+
+## Stair rail and enclosure repair
+
+All 320 surface-descent treads and 96 museum treads retain their original
+positions and reversible controllers. Surface rail posts now reach the actual
+interpolated handrail height, instead of ending below its slope. Each of the
+seven turning landings joins both flights with a supported outer U-shaped guard
+and a short inner return over the gap between lanes. Top and bottom guards
+continue onto their real entry/exit landings and end against posts with turned
+returns. Rounded joints and rails use two owned instance batches.
+
+The museum stairs have matching measured post heights and flat landing returns.
+The lower stair's tall side enclosure now has headers over both actual doorways:
+2.65m clearance at the court and 4.65m at the lower cloister. The lower header
+overlaps the cloister vault and reaches the stair lid, closing the former
+upper-gallery sightline into the island exterior. The upper stair remains open
+within the already closed main court vault.
+
+`tests/escher-stair-details.mjs` checks 297 post-to-rail joins against their
+physical meshes, supported rail endings, and 5,400 bidirectional shoulder/torso
+rays across every tread, all surface turns and lateral museum-stair entrances.
+It also checks the high view above the lower doorway. These complement vertical
+floor/headroom rays: an unobstructed downward ray alone cannot rule out a wall
+across an entrance or a disconnected handrail. Closed shaft walls beyond a
+switchback remain intentional; the continuous guard now makes its turn legible.

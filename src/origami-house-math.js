@@ -1,9 +1,9 @@
 import {CITY_ISLAND,coastX,SHORE,ISLAND_ROUTES} from './island-layout.js?v=makers-passages-20261118';
 export {coastX} from './island-layout.js?v=makers-passages-20261118';
-export const HOUSE_ORIGAMI={x:229,z:76,width:18,depth:16,entry:{x:229,z:99,y:.13,yaw:0,pitch:.06},threshold:{x:229,z:87},insideEntry:{x:229,z:81.5,y:.13,yaw:0},shore:{...SHORE}};
+export const HOUSE_ORIGAMI={x:229,z:76,width:18,depth:16,entry:{x:229,z:92,y:.13,yaw:0,pitch:.06},threshold:{x:229,z:87},insideEntry:{x:229,z:81.5,y:.13,yaw:0},shore:{...SHORE}};
 export const PAPER_COLOURS=['#e9dcb9','#92b9c5','#cc9584'];
 const hexVertexX=Math.sqrt(3)*138;
-const LOCAL_ROUTES=[[[215,116],[215,90],[229,90],[229,84]],[[229,99],[229,84]],[[229,90],[249,90],[249,65]],[[203.5,65],[215,65],[249,65],[hexVertexX,46]]];
+const LOCAL_ROUTES=[[[215,116],[215,90],[229,90],[229,84]],[[229,92],[229,84]],[[229,90],[249,90],[249,65]],[[203.5,65],[215,65],[249,65],[hexVertexX,46]]];
 export const COAST_PATHS=[...LOCAL_ROUTES.map((points,i)=>({id:'origami-court-'+i,points,width:4,kind:'court-approach'})),...ISLAND_ROUTES];
 // Keep the established array API for the source folding/boat modules.
 export const COAST_ROUTES=COAST_PATHS.map(r=>r.points);

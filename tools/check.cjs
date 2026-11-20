@@ -1,7 +1,7 @@
 'use strict';
 const path=require('node:path'),{spawnSync}=require('node:child_process');
 const root=path.resolve(__dirname,'..');
-for(const file of ['tests/origami-house-architecture.mjs','tests/cage-listening.mjs']){
+for(const file of ['tests/origami-house-architecture.mjs','tests/origami-fold-workbench.mjs','tests/cage-listening.mjs','tests/escher-stair-details.mjs','tests/escher-shell.mjs']){
   const result=spawnSync(process.execPath,[file],{cwd:root,stdio:'inherit',windowsHide:true});
   if(result.error||result.status!==0){console.error('Release check failed: '+file);process.exit(result.status||1);}
 }

@@ -1,5 +1,5 @@
 import {DESCENT} from './escher-descent-model.js?v=cloister-20261120';
-import {ESCHER_DEPTH as D,ESCHER_DEPTH_WALLS as WALLS,ESCHER_DEPTH_OBSTACLES as CASES,DEPTH_TRIANGLE,DEPTH_VIEW,tilePolygon,loopResult,hexagon,ringPolygons,outsidePolygonRectangle} from './escher-depth-model.js?v=cloister-20261120';
+import {roomCeilingAt,ESCHER_DEPTH as D,ESCHER_DEPTH_WALLS as WALLS,ESCHER_DEPTH_OBSTACLES as CASES,DEPTH_TRIANGLE,DEPTH_VIEW,tilePolygon,loopResult,hexagon,ringPolygons,outsidePolygonRectangle} from './escher-depth-model.js?v=cloister-details-20261120';
 
 export function buildEscherDepth(T,{canvas=()=>document.createElement('canvas'),loadTexture=typeof globalThis.document?.createElementNS==='function'?url=>new T.TextureLoader().load(url):null}={}){
  const group=new T.Group();group.name='Escher · hexagonal cloister';group.userData.escherDepth=true;
@@ -26,7 +26,7 @@ export function buildEscherDepth(T,{canvas=()=>document.createElement('canvas'),
  for(let i=0;i<6;i++){const a=well[i],b=well[(i+1)%6];face([[...a,-46],[...b,-46],[...b,-50],[...a,-50]],stone);}
  for(const b of WALLS){const [a,c]=[b.a,b.b],dx=c[0]-a[0],dz=c[1]-a[1],len=Math.hypot(dx,dz),yaw=-Math.atan2(dz,dx),x=(a[0]+c[0])/2,z=(a[1]+c[1])/2;
   box(len,b.height,.38,x,b.y+b.height/2,z,stone,interior,yaw);box(len,.18,.48,x,b.y+.12,z,timber,interior,yaw);box(len,.22,.56,x,b.y+b.height-.12,z,sage,interior,yaw);
-  if(len>3){const bays=Math.max(1,Math.round(len/5));for(let i=0;i<bays;i++){const t=(i+.5)/bays-.5,bx=x+dx*t-dz/len*.23,bz=z+dz*t+dx/len*.23,w=len/bays-.7;for(const h of b.height>9?[3,8]:[3]){box(w,2.7,.09,bx,b.y+h,bz,ink,interior,yaw);box(w+.12,.09,.12,bx,b.y+h-1.4,bz,brass,interior,yaw);for(const sign of[-1,1])box(.09,2.95,.12,bx+dx/len*sign*(w/2+.08),b.y+h,bz+dz/len*sign*(w/2+.08),sage,interior,yaw);}}}
+  if(b.decorative&&len>3){const bays=Math.max(1,Math.round(len/5));for(let i=0;i<bays;i++){const t=(i+.5)/bays-.5,bx=x+dx*t-dz/len*.23,bz=z+dz*t+dx/len*.23,w=len/bays-.7;for(const h of b.height>9?[3,8]:[3]){box(w,2.7,.09,bx,b.y+h,bz,ink,interior,yaw);box(w+.12,.09,.12,bx,b.y+h-1.4,bz,brass,interior,yaw);for(const sign of[-1,1])box(.09,2.95,.12,bx+dx/len*sign*(w/2+.08),b.y+h,bz+dz/len*sign*(w/2+.08),sage,interior,yaw);}}}
  }
  // Six curved roof sectors form an opaque vault, with bronze radial ribs.
  const rodsByMat=new Map();function rod(a,b,r=.04,m=brass){let list=rodsByMat.get(m);if(!list)rodsByMat.set(m,list=[]);list.push({a,b,r});}
@@ -44,7 +44,7 @@ export function buildEscherDepth(T,{canvas=()=>document.createElement('canvas'),
  const archShape=new T.Shape();archShape.moveTo(-.5,0);archShape.lineTo(-.5,5.6);archShape.lineTo(.5,5.6);archShape.lineTo(.5,0);archShape.lineTo(.44,0);archShape.lineTo(.44,2.65);for(let i=0;i<=32;i++){const a=i*Math.PI/32;archShape.lineTo(.44*Math.cos(a),2.65+2.4*Math.sin(a));}archShape.lineTo(-.44,0);archShape.closePath();
  const archGeo=own(new T.ExtrudeGeometry(archShape,{depth:.32,bevelEnabled:false,curveSegments:24})),arches=[];
  function railRing(r,y,cut=null){const poly=hexagon(...r.centre,r.inner??r.radius-1);for(let edge=0;edge<6;edge++){const a=poly[edge],b=poly[(edge+1)%6],len=Math.hypot(b[0]-a[0],b[1]-a[1]),steps=Math.ceil(len/1.6);for(let j=0;j<steps;j++){const t=j/steps,u=(j+1)/steps,x=a[0]+(b[0]-a[0])*t,z=a[1]+(b[1]-a[1])*t,xx=a[0]+(b[0]-a[0])*u,zz=a[1]+(b[1]-a[1])*u;if(cut&&(x>cut.minX-.25&&x<cut.maxX+.25&&z>cut.minZ-.25&&z<cut.maxZ+.25||xx>cut.minX-.25&&xx<cut.maxX+.25&&zz>cut.minZ-.25&&zz<cut.maxZ+.25))continue;rod([x,y+1.1,z],[xx,y+1.1,zz],.055);rod([x,y+.5,z],[xx,y+.5,zz],.025);rod([x,y,z],[x,y+1.1,z],.035);}}}
- for(const r of D.galleries.filter(r=>r.inner)){const poly=hexagon(...r.centre,r.inner);for(let edge=0;edge<6;edge++){const a=poly[edge],b=poly[(edge+1)%6],dx=b[0]-a[0],dz=b[1]-a[1],len=Math.hypot(dx,dz);for(let j=0;j<3;j++){const t=(j+.5)/3,x=a[0]+dx*t,z=a[1]+dz*t;for(const y of[-40,-34])arches.push({x,y,z,w:len/3,yaw:-Math.atan2(dz,dx),sy:y===-34?.95:1});}}
+ for(const r of D.galleries.filter(r=>r.inner)){const poly=hexagon(...r.centre,r.inner);for(let edge=0;edge<6;edge++){const a=poly[edge],b=poly[(edge+1)%6],dx=b[0]-a[0],dz=b[1]-a[1],len=Math.hypot(dx,dz);for(let j=0;j<3;j++){const t=(j+.5)/3,x=a[0]+dx*t,z=a[1]+dz*t;for(const y of[-40,-34])arches.push({x,y,z,w:len/3,yaw:-Math.atan2(dz,dx),sy:y===-34?Math.min(.95,(roomCeilingAt(D.rooms.find(q=>q.id===r.room),x,z)-y-.08)/5.6):1});}}
   railRing(r,-34,r.room==='hall'?D.stairs[1]:null);
  }
  railRing({...lower,inner:12},-46);
@@ -53,11 +53,26 @@ export function buildEscherDepth(T,{canvas=()=>document.createElement('canvas'),
  // an unbounded texture. Clip every facet around the central plinth and stairs.
  for(let band=0;band<4;band++){const inner=hexagon(197,115,band*4),outer=hexagon(197,115,(band+1)*4);for(let side=0;side<6;side++){const next=(side+1)%6,a=inner[side],b=outer[side],c=outer[next],d=inner[next];for(const[poly,m]of[[[a,b,c],(band+side)%2?sage:paper],[[a,c,d],(band+side)%2?paper:ochre]])for(const q of cutPieces(poly,[{minX:194.9,maxX:199.1,minZ:112.9,maxZ:117.1},...D.stairs]))face(q.map(p=>[...p,-39.992]),m);}}
  for(const r of D.rooms.filter(r=>r.radius)){for(const rad of[r.radius-.8,r.radius-2]){const poly=hexagon(...r.centre,rad);for(let i=0;i<6;i++){const a=poly[i],b=poly[(i+1)%6],steps=16;for(let j=0;j<steps;j++){const t=j/steps,u=(j+1)/steps,p=[a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t],q=[a[0]+(b[0]-a[0])*u,a[1]+(b[1]-a[1])*u];if(D.stairs.some(s=>p[0]>s.minX-.2&&p[0]<s.maxX+.2&&p[1]>s.minZ-.2&&p[1]<s.maxZ+.2))continue;rod([p[0],r.y+.014,p[1]],[q[0],r.y+.014,q[1]],.025);}}}}
- for(const s of D.stairs){const run=(s.maxZ-s.minZ)/s.steps,cx=(s.minX+s.maxX)/2;for(let i=0;i<s.steps;i++){const z=s.minZ+(i+.5)*run,y=s.top+(i+1)*(s.bottom-s.top)/s.steps;box(s.maxX-s.minX,.18,run+.012,cx,y-.09,z,floor);if(i%3===0)for(const x of[s.minX+.1,s.maxX-.1])rod([x,y,z],[x,y+1.08,z],.035);}
-  for(const x of[s.minX+.1,s.maxX-.1]){rod([x,s.top+1.08,s.minZ],[x,s.bottom+1.08,s.maxZ],.055);rod([x,s.top+.5,s.minZ],[x,s.bottom+.5,s.maxZ],.025);}
+ group.userData.museumStairGuards=[];
+ for(const s of D.stairs){const run=(s.maxZ-s.minZ)/s.steps,cx=(s.minX+s.maxX)/2,guard={id:s.id,paths:[],posts:[]};group.userData.museumStairGuards.push(guard);
+  const guardRail=points=>{guard.paths.push(points);for(let i=1;i<points.length;i++)rod(points[i-1],points[i],.055);},post=(x,z,base,top)=>{guard.posts.push({x,z,base,top});rod([x,base,z],[x,top,z],.035);};
+  for(let i=0;i<s.steps;i++){const z=s.minZ+(i+.5)*run,y=s.top+(i+1)*(s.bottom-s.top)/s.steps;box(s.maxX-s.minX,.18,run+.012,cx,y-.09,z,floor);if(i%3===0)for(const x of[s.minX+.1,s.maxX-.1])post(x,z,y,s.top+(s.bottom-s.top)*(i+.5)/s.steps+1.1);}
+  for(const x of[s.minX+.1,s.maxX-.1]){
+   // Flat landing returns meet the sloping guard at exact shared endpoints.
+   // Posts touch its actual interpolated height, rather than stopping below it.
+   guardRail([[x,s.top+.92,s.minZ-.7],[x,s.top+1.1,s.minZ-.7],[x,s.top+1.1,s.minZ],[x,s.bottom+1.1,s.maxZ],[x,s.bottom+1.1,s.maxZ+.7],[x,s.bottom+.92,s.maxZ+.7]]);
+   rod([x,s.top+.5,s.minZ-.7],[x,s.top+.5,s.minZ],.025);rod([x,s.top+.5,s.minZ],[x,s.bottom+.5,s.maxZ],.025);rod([x,s.bottom+.5,s.maxZ],[x,s.bottom+.5,s.maxZ+.7],.025);
+   for(const[z,y]of[[s.minZ-.7,s.top],[s.minZ,s.top],[s.maxZ,s.bottom],[s.maxZ+.7,s.bottom]])post(x,z,y,y+1.1);
+  }
   // Enclosed tall stairwell roof stays above both landings.
   box(s.maxX-s.minX+.5,.3,s.maxZ-s.minZ,cx,s.ceiling+.15,(s.minZ+s.maxZ)/2,roof);
-  if(s.id==='stair')for(const x of[s.minX-.14,s.maxX+.14])box(.28,17,s.maxZ-s.minZ,x,-37.5,(s.minZ+s.maxZ)/2,stone);
+  if(s.id==='stair'){
+   for(const x of[s.minX-.14,s.maxX+.14])box(.28,17,s.maxZ-s.minZ,x,-37.5,(s.minZ+s.maxZ)/2,stone);
+   // The tall connecting enclosure must close ABOVE both real doorways as
+   // well as along its sides. Otherwise an upper-balcony view sees out over
+   // the lower cloister vault through the open end of the stair box.
+   for(const[z,bottom]of[[s.minZ,s.top+2.65],[s.maxZ,s.bottom+4.65]]){const top=s.ceiling+.30;box(s.maxX-s.minX+.56,top-bottom,.28,cx,(top+bottom)/2,z,stone);}
+  }
  }
  // Gold vertical focal sculpture: nested open octahedra around a slender spine.
  box(4,.35,4,197,-39.825,115,ink);rod([197,-39.65,115],[197,-29.2,115],.055);

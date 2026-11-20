@@ -54,13 +54,27 @@ export function walkDepth(player,dx,dz,eye=1.8){
  const n=Math.max(1,Math.ceil(Math.hypot(dx,dz)/.1));for(let i=0;i<n;i++)for(const axis of['x','z']){const delta=(axis==='x'?dx:dz)/n,y=player.y-eye,x=player.x+(axis==='x'?delta:0),z=player.z+(axis==='z'?delta:0);if(canWalkDepth(x,z,{fromY:y})){player[axis]+=delta;player.y=depthFloorAt(player.x,player.z,y)+eye;}}return true;
 }
 export const atGalleryHandoff=p=>p.x<=135.15&&p.x>=134.4&&Math.abs(p.z-115)<2.5;
-// Solid perimeter runs are shared with the renderer. Door intervals are removed
-// wherever another real room/corridor continues through this boundary.
-const walls=[];for(const r of CLOISTER_ROOMS){if(r.shaftLanding)continue;for(let i=0;i<r.polygon.length;i++){
- const a=r.polygon[i],b=r.polygon[(i+1)%r.polygon.length],dx=b[0]-a[0],dz=b[1]-a[1],len=Math.hypot(dx,dz),n=Math.ceil(len/.25);let run=null;
- const solid=t=>{const x=a[0]+dx*t,z=a[1]+dz*t;if(r.id==='vestibule'&&Math.abs(x-134.4)<.01&&Math.abs(z-115)<3)return false;if((r.id==='hall'||r.id==='loop')&&inRect(CLOISTER_STAIRS[0],x,z,.25))return false;const ox=x+dz/len*.24,oz=z-dx/len*.24;return !CLOISTER_ROOMS.some(q=>q!==r&&Math.abs(q.y-r.y)<.1&&insidePolygon(q.polygon,ox,oz));};
- for(let j=0;j<=n;j++){const yes=j<n&&solid((j+.5)/n);if(yes&&run===null)run=j/n;if(!yes&&run!==null){const end=j/n,x0=a[0]+dx*run,z0=a[1]+dz*run,x1=a[0]+dx*end,z1=a[1]+dz*end;walls.push(Object.freeze({id:'wall',a:[x0,z0],b:[x1,z1],minX:Math.min(x0,x1)-.18,maxX:Math.max(x0,x1)+.18,minZ:Math.min(z0,z1)-.18,maxZ:Math.max(z0,z1)+.18,y:r.y,height:(r.spring??r.ceiling)-r.y,room:r.id}));run=null;}}
- }}
+// Subtract openings as vertical intervals. A short corridor does not remove
+// the wall above its roof, and ground-floor mouths never become balcony exits.
+export function roomCeilingAt(r,x,z){
+ if(!r.radius)return r.ceiling;
+ const [cx,cz]=r.centre,apothem=r.radius*Math.cos(Math.PI/6);let f=0;
+ for(let i=0;i<6;i++){const a=r.polygon[i],b=r.polygon[(i+1)%6],dx=b[0]-a[0],dz=b[1]-a[1],len=Math.hypot(dx,dz);f=Math.max(f,((x-cx)*dz-(z-cz)*dx)/len/apothem);}
+ f=Math.max(0,Math.min(1,f));const step=f*12,j=Math.min(11,Math.floor(step)),t=step-j,height=k=>r.spring+(r.ceiling-r.spring)*(1-(k/12)**2);return height(j)*(1-t)+height(j+1)*t;
+}
+const walls=[];
+for(const r of CLOISTER_ROOMS){if(r.shaftLanding)continue;for(let i=0;i<r.polygon.length;i++){
+ const a=r.polygon[i],b=r.polygon[(i+1)%r.polygon.length],dx=b[0]-a[0],dz=b[1]-a[1],len=Math.hypot(dx,dz),n=Math.ceil(len/.24),top=r.spring??r.ceiling,rows=[];
+ for(let j=0;j<n;j++){
+  const t=(j+.5)/n,x=a[0]+dx*t,z=a[1]+dz*t,ox=x+dz/len*.24,oz=z-dx/len*.24,holes=[];
+  for(const q of CLOISTER_ROOMS)if(q!==r&&Math.abs(q.y-r.y)<.1&&insidePolygon(q.polygon,ox,oz))holes.push([q.y-.02,roomCeilingAt(q,ox,oz)-.02]);
+  if(r.id==='vestibule'&&Math.abs(x-134.4)<.01&&Math.abs(z-115)<3)holes.push([-40.3,-34.7]);
+  if((r.id==='hall'||r.id==='loop')&&inRect(CLOISTER_STAIRS[0],x,z,.25))holes.push([CLOISTER_STAIRS[0].bottom-.2,CLOISTER_STAIRS[0].ceiling]);
+  let bands=[[r.y,top]];for(const[lo,hi]of holes)bands=bands.flatMap(([y0,y1])=>hi<=y0||lo>=y1?[[y0,y1]]:[[y0,Math.min(y1,lo)],[Math.max(y0,hi),y1]].filter(([a,b])=>b-a>.015));
+  for(const[y0,y1]of bands){const previous=rows.find(v=>v.end===j&&Math.abs(v.y0-y0)<.025&&Math.abs(v.y1-y1)<.025);if(previous)previous.end=j+1;else rows.push({start:j,end:j+1,y0,y1});}
+ }
+ for(const v of rows){const x0=a[0]+dx*v.start/n,z0=a[1]+dz*v.start/n,x1=a[0]+dx*v.end/n,z1=a[1]+dz*v.end/n;walls.push(Object.freeze({id:'wall',a:[x0,z0],b:[x1,z1],minX:Math.min(x0,x1)-.18,maxX:Math.max(x0,x1)+.18,minZ:Math.min(z0,z1)-.18,maxZ:Math.max(z0,z1)+.18,y:v.y0,height:v.y1-v.y0,room:r.id,decorative:Math.abs(v.y0-r.y)<.01&&v.y1-v.y0>4.5}));}
+}}
 export const ESCHER_DEPTH_WALLS=Object.freeze(walls);
 // Triangle sides occupy different distances along rays from a single eye point.
 export const DEPTH_VIEW=Object.freeze({x:157.63,y:-38.2,z:125});

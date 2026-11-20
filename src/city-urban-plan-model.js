@@ -1,3 +1,4 @@
+import {origamiHouseOutline} from './origami-house-entry-model.js?v=cloister-details-20261120';
 import {MAKERS_SITE,MAKERS_ACCESS,MAKERS_ROOFS,MAKERS_DOOR_PATHS} from './makers-site.js?v=makers-block-20261118';
 import {ARTIST_EDITIONS_DISTRICT,ARTIST_EDITIONS_PATH} from './artist-edition-layout.js?v=makers-passages-20261118';
 import {SIXFOLD_HOUSES,NETWORK_PASSAGES,sixfoldHouseEntry} from './sixfold-house-network-model.js?v=makers-passages-20261118';
@@ -14,7 +15,7 @@ import {SEMINAR_HOUSES,SEMINAR_PATHS,seminarEntry} from './seminar-houses-data.j
 import {STUDY_HOUSES,STUDY_PATHS} from './study-houses-data.js?v=city-night-20261117';
 import {PAVILIONS,pavilionTurn} from './mathematical-pavilions-model.js?v=city-night-20261117';
 import {PHILOSOPHERS,quarterPaths} from './philosopher-data.js?v=makers-passages-20261118';
-import {COAST_PATHS,HOUSE_ORIGAMI} from './origami-house-math.js?v=makers-passages-20261118';
+import {COAST_PATHS,HOUSE_ORIGAMI} from './origami-house-math.js?v=cloister-details-20261120';
 import {COAST_MAIN_PATHS} from './coastal-map-data.js?v=cloister-20261120';
 
 // A regular city fabric joins the original inhabited districts. Private homes
@@ -54,7 +55,7 @@ export function urbanBuildingFootprints(plan=globalThis.ARTIST_QUARTER_PLAN){ret
  ...Object.entries(plan?.galleries||{}).map(([id,[x,z]])=>rect(id,x,z,9.45,8.1,0,{category:'artist',label:id.replaceAll('-',' '),front:[x,z+Math.sign((plan.fronts?.[id]?.[1]??z+1)-z)*4.05]})),
  ...Object.entries(plan?.studios||{}).map(([id,h])=>rect(id,h.x,h.z,14,12,h.turn,{category:'artist',label:id})),
  ...(plan?[rect('dali',plan.dali.x,plan.dali.z,16.2,13.5,0,{category:'artist',label:'Dalí’s dream residence'}),{id:'escher',x:plan.escher.x,z:plan.escher.z,shape:'polygon',points:[[-4,7],[4,7],[4,-7],[1.6,-7],[1.6,-13],[-1.6,-13],[-1.6,-7],[-4,-7]].map(([x,z])=>[x+plan.escher.x,z+plan.escher.z]),front:[plan.escher.x,plan.escher.z+7],category:'artist',label:'Escher · perspective house'}]:[]),
- rect('origami',HOUSE_ORIGAMI.x,HOUSE_ORIGAMI.z,HOUSE_ORIGAMI.width,HOUSE_ORIGAMI.depth,0,{category:'making',label:'House of Origami'})
+ {...rect('origami',HOUSE_ORIGAMI.x,HOUSE_ORIGAMI.z,HOUSE_ORIGAMI.width,HOUSE_ORIGAMI.depth,0,{category:'making',label:'House of Origami'}),points:origamiHouseOutline(HOUSE_ORIGAMI.x,HOUSE_ORIGAMI.z)}
  ];}
 export function segmentDistance(x,z,a,b){const dx=b[0]-a[0],dz=b[1]-a[1],u=Math.max(0,Math.min(1,((x-a[0])*dx+(z-a[1])*dz)/(dx*dx+dz*dz||1)));return Math.hypot(x-a[0]-dx*u,z-a[1]-dz*u);}
 export function artistDoorRoutes(plan=globalThis.ARTIST_QUARTER_PLAN){if(!plan)return[];return[...Object.entries(plan.galleries).map(([id,[x,z]])=>({id:'artist-door-'+id,width:2.5,points:[[x,z+Math.sign(plan.fronts[id][1]-z)*4.995],plan.fronts[id]]})),...Object.entries(plan.studios).map(([id,h])=>({id:'artist-door-'+id,width:3,points:[[h.x,h.z+(h.turn?-6:6)],plan.fronts[id]]})),{id:'artist-door-dali',width:3,points:[[plan.dali.x,plan.dali.z+7.83],plan.fronts.dali]},{id:'artist-door-escher',width:3,points:[[plan.escher.x,plan.escher.z+8.4],plan.fronts.escher]}];}

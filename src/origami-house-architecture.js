@@ -1,4 +1,5 @@
-import {miura} from './origami-house-math.js?v=origami-court-20261120';
+import {miura} from './origami-house-math.js?v=cloister-details-20261120';
+import {ORIGAMI_ENTRY,origamiEntrySheet,origamiEntryPosts} from './origami-house-entry-model.js?v=cloister-details-20261120';
 export const ORIGAMI_ROOF=Object.freeze({profile:[[-9.7,4.15],[-5,6],[0,4.5],[5,6],[9.7,4.15]],solid:[[-8.6,-4.4],[-3.55,1.9],[2.75,8.6]],lights:[[-4.4,-3.55],[1.9,2.75]]});
 // An original folded-plate roof: daylight bands are holes in the solid plates,
 // closed by supported glass panes, rather than glass drawn over an opaque roof.
@@ -18,5 +19,19 @@ export function buildOrigamiArchitecture(T){
  for(const[f,ids]of flat.faces.entries()){let p=ids.map(i=>flat.vertices[i]);for(const[axis,v,less]of[[0,-8.97,false],[0,8.97,true],[2,-7.97,false],[2,7.97,true]])p=clip(p,axis,v,less);for(let j=1;j<p.length-1;j++)for(const q of[p[0],p[j+1],p[j]])vertices[(f+Math.floor(f/24))%2].push(q[0],.006,q[2]);for(let j=0;j<p.length;j++)for(const q of[p[j],p[(j+1)%p.length]])edgePoints.push(q[0],.009,q[2]);}
  const floorGeo=own(new T.BufferGeometry());floorGeo.setAttribute('position',new T.Float32BufferAttribute(vertices.flat(),3));let offset=0;vertices.forEach((v,i)=>{floorGeo.addGroup(offset,v.length/3,i);offset+=v.length/3;});floorGeo.computeVertexNormals();const floor=new T.Mesh(floorGeo,[ivory,sage]);floor.name='Origami · complete flat Miura floor';group.add(floor);
  const edges=own(new T.BufferGeometry());edges.setAttribute('position',new T.Float32BufferAttribute(edgePoints,3));group.add(new T.LineSegments(edges,seam));
- return{group,opaque,panes,floor,dispose(){group.removeFromParent();for(const r of owned)r.dispose();group.clear();}};
+ // A closed, supported folded-paper portico projects over the real approach.
+ const entry=origamiEntrySheet(),entryPositions=[],entryColours=[],e=ORIGAMI_ENTRY;
+ const addFace=(points,tone)=>{for(let i=1;i<points.length-1;i++)for(const p of[points[0],points[i],points[i+1]]){entryPositions.push(p[0],p[1],p[2]);new T.Color(tone).toArray(entryColours,entryColours.length);}};
+ for(const [i,f]of entry.faces.entries()){
+  const top=f.map(k=>{const p=entry.vertices[k];return[p[0],e.y+p[1],e.z+p[2]];}),bottom=top.map(p=>[p[0],p[1]-e.thickness,p[2]]);
+  addFace(top,i%2?0xe8e4d3:0x9bbcb3);addFace([...bottom].reverse(),0xe8e4d3);
+  for(let j=0;j<4;j++)addFace([top[j],top[(j+1)%4],bottom[(j+1)%4],bottom[j]],0x426d63);
+ }
+ const entryGeo=own(new T.BufferGeometry());entryGeo.setAttribute('position',new T.Float32BufferAttribute(entryPositions,3));entryGeo.setAttribute('color',new T.Float32BufferAttribute(entryColours,3));entryGeo.computeVertexNormals();
+ const canopy=new T.Mesh(entryGeo,own(new T.MeshLambertMaterial({vertexColors:true,side:T.DoubleSide})));canopy.name='Origami · rigid Miura entrance canopy';group.add(canopy);
+ const posts=origamiEntryPosts(),postGeo=own(new T.BoxGeometry(.18,e.y,.18));for(const p of posts){const column=new T.Mesh(postGeo,frame);column.position.set(p.x,e.y/2,p.z);column.name='Origami · real entrance support';group.add(column);}
+ // Folded lines remain visible at the street and join the actual canopy vertices.
+ const edgePositions=[];for(const f of entry.faces)for(let i=0;i<4;i++)for(const k of[f[i],f[(i+1)%4]]){const p=entry.vertices[k];edgePositions.push(p[0],e.y+p[1]+.008,e.z+p[2]);}
+ const entryEdgeGeo=own(new T.BufferGeometry());entryEdgeGeo.setAttribute('position',new T.Float32BufferAttribute(edgePositions,3));group.add(new T.LineSegments(entryEdgeGeo,seam));
+ return{group,opaque,panes,floor,canopy,posts,dispose(){group.removeFromParent();for(const r of owned)r.dispose();group.clear();}};
 }

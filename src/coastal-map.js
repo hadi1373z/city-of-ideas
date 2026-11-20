@@ -2,7 +2,7 @@ import {COAST_LANDMARKS, COAST_EXPLORER_COPY, coastMapPoint, coastWalkSvg, coast
 
 import {seminarPathsSvg} from './seminar-houses-data.js?v=cloister-20261120';
 import {coastVisitor,COAST_POSITION_COPY,coastPositionText,coastDistance} from './coastal-position.js?v=cloister-20261120';
-import {mountMiddleLayerMap} from './middle-layer-map.js?v=cloister-20261120';
+import {mountMiddleLayerMap} from './middle-layer-map.js?v=cloister-details-20261120';
 
 // Native buttons keep map selection available to touch, keyboard and controllers.
 // The SVG remains an ordinary image, with the same geometry in every language.
@@ -33,7 +33,7 @@ export function mountCoastalMap(container, {language = 'en', state, onVisit, vis
   // Physical east and west stay fixed when the surrounding interface is RTL.
   stage.dir = 'ltr';
   const image = el('img', '', 'coastal-plan');
-  image.src = new URL('./assets/city-coast-' + lang + '.svg?v=cloister-20261120', import.meta.url).href;
+  image.src = new URL('./assets/city-coast-' + lang + '.svg?v=cloister-details-20261120', import.meta.url).href;
   image.alt = c.title;
   image.width = image.height = 920;
   const overlay = el('img', '', 'coastal-walk-overlay');

@@ -83,3 +83,5 @@
 #origami-house[data-workbench=true][open]{display:flex;flex-direction:column;overflow:hidden;max-height:calc(100dvh - 210px)}
 #origami-house[data-workbench=true] header{flex:0 0 auto}#origami-house[data-workbench=true] .fold-house-body{flex:1 1 auto;min-height:0;max-height:none;overflow:auto}#origami-house[data-workbench=true]>p[role=status]{flex:0 0 auto;margin:4px 14px 8px;font-size:11px}
 @media(max-width:800px){#origami-house[data-workbench=true][open]{max-height:43dvh}}
+
+.fold-construction-controls>small,.fold-construction-controls>a{display:block;margin:12px 0;line-height:1.5}.fold-construction-controls>details{margin:12px 0}.fold-construction-controls>nav{margin-bottom:12px}
