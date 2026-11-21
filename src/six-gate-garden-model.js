@@ -53,6 +53,16 @@ export const GARDEN_ARCADE_BAYS=Object.freeze(SIXFOLD_HOUSES.flatMap(h=>{
  });
 }));
 
+// The curved arcade ends at +/-0.07rad, while a rectangular loggia ends at
+// tangent +/-5.3m. These twelve fitted saddles close the resulting ~2m slots
+// without shifting either the old roof edges or the supported columns below.
+export const GARDEN_ROOF_JOINS=Object.freeze(GARDEN_GATES.flatMap(g=>[-1,1].map(side=>{
+ const arcade=frozen([G.roofInner,G.ringRadius,G.roofOuter].map(r=>gardenPolar(r,g.angle+side*G.gateHalfAngle))),
+  loggia=frozen([G.gateInner,G.ringRadius,G.gateOuter].map(u=>gardenWorld(g,u,side*(G.gateWidth+.8)/2))),
+  outline=[arcade[0],arcade[2],loggia[2],loggia[0]],area=outline.reduce((s,p,i)=>{const q=outline[(i+1)%outline.length];return s+p[0]*q[1]-q[0]*p[1];},0);
+ return Object.freeze({id:'garden-roof-join-'+g.id+'-'+(side<0?'before':'after'),gateId:g.id,side,arcade,loggia,points:frozen(area<0?outline.reverse():outline)});
+})));
+
 // The six rays begin at an open outer Gallery promenade, not at invented doors.
 // Two existing east/west thresholds reach it. House approaches turn around each
 // real hexagonal wall to reach its original tangential front doorway.
@@ -107,6 +117,7 @@ function furnitureFootprint(o){
 export const GARDEN_FOOTPRINTS=Object.freeze([
  ...GARDEN_ARCADE_BAYS.map(b=>Object.freeze({id:b.id,x:gardenPolar(G.ringRadius,(b.a+b.b)/2)[0],z:gardenPolar(G.ringRadius,(b.a+b.b)/2)[1],shape:'polygon',points:b.points,category:'garden-arcade',walkThrough:true,label:'Shaded garden promenade'})),
  ...GARDEN_GATES.map(g=>Object.freeze({id:'garden-loggia-'+g.id,x:g.point[0],z:g.point[1],shape:'polygon',points:g.roof,category:'garden-arcade',walkThrough:true,label:g.name+' · open loggia'})),
+ ...GARDEN_ROOF_JOINS.map(j=>Object.freeze({id:j.id,x:j.points.reduce((s,p)=>s+p[0],0)/j.points.length,z:j.points.reduce((s,p)=>s+p[1],0)/j.points.length,shape:'polygon',points:j.points,category:'garden-arcade',walkThrough:true,label:'Fitted arcade-to-loggia roof join'})),
  ...[...GARDEN_SEATS,...GARDEN_BEDS].map(furnitureFootprint)
 ]);
 

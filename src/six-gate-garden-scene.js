@@ -1,4 +1,4 @@
-import {SIX_GATE_GARDEN as G,GARDEN_GATES,GARDEN_ARCADE_BAYS,GARDEN_COLUMNS,GARDEN_ROUTES,GARDEN_SEATS,GARDEN_BEDS,GARDEN_COLLIDERS,gardenPolar,gardenWorld,gardenCanStand,gardenTreeBedPlan} from './six-gate-garden-model.js?v=night-garden-20261121';
+import {SIX_GATE_GARDEN as G,GARDEN_GATES,GARDEN_ARCADE_BAYS,GARDEN_ROOF_JOINS,GARDEN_COLUMNS,GARDEN_ROUTES,GARDEN_SEATS,GARDEN_BEDS,GARDEN_COLLIDERS,gardenPolar,gardenWorld,gardenCanStand,gardenTreeBedPlan} from './six-gate-garden-model.js?v=coastal-terraces-20261121';
 
 export function buildSixGateGarden(T,{paving=true,planting=true}={}){
  const group=new T.Group();group.name='Six Gate Garden · shaded loop, open loggias and real house approaches';
@@ -107,6 +107,26 @@ export function buildSixGateGarden(T,{paving=true,planting=true}={}){
   cylinder(peak[0],7.0,peak[1],.15,.18,0xae9258,'bronze');
  }
 
+ // Fitted slate saddles join the six unchanged hipped loggias to both ends
+ // of the arcade. Each follows its existing pitched profile, has a complete
+ // 16cm solid soffit/fascia, and stays entirely above ordinary walking space.
+ const roofJoinStarts=new Map([...batches].map(([name,values])=>[name,values.length/6]));
+ for(const j of GARDEN_ROOF_JOINS){
+  const ring=j.arcade.map((p,i)=>[p[0],i===1?G.roofRidge:G.roofEave,p[1]]),gate=j.loggia.map(p=>[p[0],G.roofEave,p[1]]),under=p=>[p[0],p[1]-.16,p[2]];
+  for(let i=0;i<2;i++){
+   const top=[ring[i],ring[i+1],gate[i+1],gate[i]];face(top,0x6f8883,'roof');
+   // Both skins MUST use the same diagonal: this fitted quad is not planar.
+   // Reversing all four corners would change its diagonal and let the upper
+   // slate pierce the soffit despite every vertex having16cm of thickness.
+   for(let k=1;k<top.length-1;k++)triangle(under(top[0]),under(top[k+1]),under(top[k]),0xd7cbb0,'stone');
+  }
+  const perimeter=[ring[0],ring[1],ring[2],gate[2],gate[1],gate[0]];
+  for(let i=0;i<perimeter.length;i++){const a=perimeter[i],b=perimeter[(i+1)%perimeter.length];face([a,b,under(b),under(a)],0xb8af94,'stone');}
+  for(const i of[0,2])beam(ring[i],gate[i],.045);beam(ring[1],gate[1],.035);
+ }
+ group.userData.roofJoinCount=GARDEN_ROOF_JOINS.length;
+ group.userData.roofJoinRanges=Object.fromEntries([...batches].map(([name,values])=>[name,{start:roofJoinStarts.get(name)||0,count:values.length/6-(roofJoinStarts.get(name)||0)}]).filter(([,range])=>range.count));
+
  for(const s of GARDEN_SEATS){const p=s.point;
   box(p[0],.63,p[1],s.depth,.20,s.width,0xa88b5a,s.angle);
   for(const v of[-1.35,1.35]){const q=[p[0]-Math.sin(s.angle)*v,p[1]+Math.cos(s.angle)*v];box(q[0],.35,q[1],.72,.44,.22,0xbcb399,s.angle);}
@@ -125,7 +145,7 @@ export function buildSixGateGarden(T,{paving=true,planting=true}={}){
 
  for(const[name,rows]of batches){
   const positions=[],colours=[];for(let i=0;i<rows.length;i+=6){positions.push(rows[i],rows[i+1],rows[i+2]);colours.push(rows[i+3],rows[i+4],rows[i+5]);}
-  const geometry=own(new T.BufferGeometry());geometry.setAttribute('position',new T.Float32BufferAttribute(positions,3));geometry.setAttribute('color',new T.Float32BufferAttribute(colours,3));geometry.computeVertexNormals();const mesh=new T.Mesh(geometry,materials[name]);mesh.name={stone:'Garden masonry · supported paving, real arches, columns and seats',roof:'Garden slate · shaded arcade and six open loggia roofs',bronze:'Garden bronze · fine supported roof seams',plant:'Garden planting · contained low native-colour beds'}[name];group.add(mesh);
+  const geometry=own(new T.BufferGeometry());geometry.setAttribute('position',new T.Float32BufferAttribute(positions,3));geometry.setAttribute('color',new T.Float32BufferAttribute(colours,3));geometry.computeVertexNormals();const mesh=new T.Mesh(geometry,materials[name]);mesh.name={stone:'Garden masonry · supported paving, real arches, columns and seats',roof:'Garden slate · shaded arcade and six open loggia roofs',bronze:'Garden bronze · fine supported roof seams',plant:'Garden planting · contained low native-colour beds'}[name];mesh.userData.gardenMaterialBatch=name;group.add(mesh);
  }
  let disposed=false;return{group,colliders:GARDEN_COLLIDERS,canStand:gardenCanStand,dispose(){if(disposed)return;disposed=true;group.removeFromParent();for(const resource of owned)resource.dispose();owned.clear();group.clear();}};
 }

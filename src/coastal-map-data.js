@@ -1,10 +1,11 @@
 import {LIGHT_HOUSE} from './house-of-light-model.js?v=live-light-niches-20261121';
+import {SEA_TERRACES,SEA_TERRACE_ENTRY} from './sea-terraces-model.js';
 import {SOCRATES_SITE} from './socrates-site-model.js?v=shore-niches-20261121';
 import {MAKERS_SITE,MAKERS_ACCESS,MAKERS_ROOFS} from './makers-site.js?v=makers-block-20261118';
 import {IDEAS_PARK_SITE,FORMER_IDEAS_PARK_SITE,PAPER_SEMINAR_COURT as COURT} from './city-hex-layout.js?v=night-garden-20261121';
 import {SEMINAR_HOUSES} from './seminar-houses-data.js?v=night-garden-20261121';
 import {SHORE,HEX_COAST_WALK,COAST_PROMENADE_WALK} from './island-layout.js?v=makers-passages-20261118';
-import {GARDEN_ROUTES} from './six-gate-garden-model.js?v=night-garden-20261121';
+import {GARDEN_ROUTES} from './six-gate-garden-model.js?v=coastal-terraces-20261121';
 
 // The same world-to-SVG projection used by the original coastal plan.
 export const coastMapPoint = (x, z) => [460 + x * .7, 460 + z * .7];
@@ -116,3 +117,7 @@ for(const lang of ['en','de','fa']){const c=COAST_EXPLORER_COPY[lang];Object.ass
 COAST_LANDMARKS.push({id:LIGHT_HOUSE.id,number:9,point:[LIGHT_HOUSE.x,LIGHT_HOUSE.z]});
 const lightMapCopy={en:{name:'House of Light',area:'The southeastern light-art hexagon',description:'Enter the glass pavilion, walk around its suspended spectrum, explore colour chambers and compare a live reflection in the framed mirror passage.'},de:{name:'Haus des Lichts',area:'Die südöstliche Wabe für Lichtkunst',description:'Betritt den Glaspavillon, umrunde das schwebende Spektrum, erkunde Farbräume und vergleiche die lebendige Spiegelung im gerahmten Spiegelgang.'},fa:{name:'خانهٔ نور',area:'شش‌ضلعی هنر نور در جنوب‌شرق',description:'وارد کوشک شیشه‌ای شو، طیف معلق را از چند زاویه ببین، اتاق‌های رنگ را تجربه کن و بازتاب زندهٔ گذرگاه آینه را با فضای واقعی مقایسه کن.'}};
 for(const lang of ['en','de','fa']){COAST_EXPLORER_COPY[lang].landmarks[LIGHT_HOUSE.id]=lightMapCopy[lang];COAST_EXPLORER_COPY[lang].places={en:'Eight places to explore',de:'Acht Orte zum Erkunden',fa:'هشت مکان برای گردش'}[lang];}
+
+COAST_LANDMARKS.push({id:SEA_TERRACES.id,number:10,point:[SEA_TERRACE_ENTRY.x,SEA_TERRACE_ENTRY.z]});
+const seaMapCopy={en:{name:'Sea Terraces',area:'Northeastern coastal hexagon',description:'Three low stone terraces, gentle central and side ramps, shaded pergolas and sea-view frames. Walk around the existing Listening Court to reach the terraces, or arrive from the continuous shore promenade.'},de:{name:'Meeresterrassen',area:'Nordöstliche Küstenwabe',description:'Drei niedrige Steinterrassen mit sanften mittleren und seitlichen Rampen, schattigen Pergolen und gerahmten Meerblicken. Der Weg führt um den erhaltenen Hof des Zuhörens oder von der durchgehenden Uferpromenade hierher.'},fa:{name:'ایوان تماشای دریا',area:'شش‌ضلعی ساحلی شمال‌شرق',description:'سه ایوان سنگی کم‌ارتفاع با شیب‌راه‌های ملایم، سایه‌بان‌های چوبی و قاب‌های تماشای افق. از کنار حیاط شنیدنِ موجود یا پیاده‌راه پیوستهٔ ساحل به ایوان‌ها برسید.'}};
+for(const lang of ['en','de','fa']){COAST_EXPLORER_COPY[lang].landmarks[SEA_TERRACES.id]=seaMapCopy[lang];COAST_EXPLORER_COPY[lang].places={en:'Nine places to explore',de:'Neun Orte zum Erkunden',fa:'نه مکان برای گردش'}[lang];}

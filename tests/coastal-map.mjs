@@ -1,3 +1,4 @@
+import {SEA_TERRACE_ENTRY} from '../src/sea-terraces-model.js';
 import {NIGHT_PARK} from '../src/night-park-model.js';
 import {LIGHT_HOUSE} from '../src/house-of-light-model.js';
 import {SOCRATES_SITE} from '../src/socrates-site-model.js';
@@ -53,7 +54,7 @@ for(const route of urbanPavedRoutes(plan).filter(r=>!r.id.startsWith('garden-'))
  for(const t of[.1,.5,.9])assert(!gardenPrecinctContains(a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t),'The map cannot keep an old crossing strip inside the garden');
 }
 assert.deepEqual(COAST_LANDMARKS.map(p => coastMapPoint(...p.point)), [
-  [460,460], coastMapPoint(NIGHT_PARK.localX,NIGHT_PARK.localZ), coastMapPoint(SOCRATES_SITE.x,SOCRATES_SITE.z), coastMapPoint(plan.arrival.x,plan.arrival.z), [849.1374286786722,513.2], ...SEMINAR_HOUSES.map(h=>coastMapPoint(h.x,h.z)),coastMapPoint(LIGHT_HOUSE.x,LIGHT_HOUSE.z)
+  [460,460], coastMapPoint(NIGHT_PARK.localX,NIGHT_PARK.localZ), coastMapPoint(SOCRATES_SITE.x,SOCRATES_SITE.z), coastMapPoint(plan.arrival.x,plan.arrival.z), [849.1374286786722,513.2], ...SEMINAR_HOUSES.map(h=>coastMapPoint(h.x,h.z)),coastMapPoint(LIGHT_HOUSE.x,LIGHT_HOUSE.z),coastMapPoint(SEA_TERRACE_ENTRY.x,SEA_TERRACE_ENTRY.z)
 ]);
 assert.deepEqual(COAST_LANDMARKS.find(p => p.id === 'artists').point, Array.from([plan.arrival.x, plan.arrival.z]));
 

@@ -27,6 +27,27 @@ Both sides of the covered promenade stay open. Walking feet stay atY.13m.
 Real paving slabs have thickness .165m, including narrow actual overlaps at
 rotated joins to avoid cracks after Float32 coordinate quantisation.
 
+The later close-up identified twelve unintended sky slots: the curved arcade
+ends at+/-0.07rad around each gate, while its rectangular loggia ends at
+tangent+/-5.3m. Their roughly2m separation is now covered by twelve fitted
+slate saddles, each with a continuous16cm stone soffit and closed fascia. Their
+two slopes meet the exact unchanged arcade eave/ridge/eave profile and existing
+loggia hip edge. The lowest face remains5.26m above ground; no column, arch,
+collider, path, Gallery roof or original roof endpoint is moved. Fine bronze
+seams use the existing batch. GARDEN_ROOF_JOINS owns their twelve polygons and
+the map/full-crown footprints, all still walkThrough:true.
+
+Each warped saddle quad uses identical triangle diagonals on top and underside.
+Reversing all four underside corners would choose a different diagonal, causing
+the upper slate to pierce the soffit despite matching endpoint thicknesses.
+tests/six-gate-garden-roof-joins.mjs checks4056 actual roof/soffit rays,240 exact
+abutment rays,1944 paired interior thickness probes and108 body-width route
+rays, plus the narrow roof envelope, unchanged shared route/column data and
+exactly-once disposal. Existing integration and forest tests also retain all455
+street trees,170 planted beds and their exact instance poses. Browser proof:
+design/visual-walk/garden-roof-joins-before.jpg and
+design/visual-walk/garden-roof-joins-after.jpg.
+
 The existing central block streets cross the arcade at the six30° sector
 bisectors. An evenly spaced column grid would put a pair directly in each
 street. gardenBayAngles starts with16 intervals per sector and omits each
@@ -73,7 +94,8 @@ Shared exports from the model:
 - SIX_GATE_GARDEN: dimensions and surface ID.
 - GARDEN_GATES / GARDEN_ENTRIES: six exact public gate positions and old doors.
 - GARDEN_ROUTES: both loops, six rays, curved house approaches/courts/street joins.
-- GARDEN_FOOTPRINTS:90 actual roof polygons, six loggia roof polygons and18
+- GARDEN_FOOTPRINTS:90 actual roof polygons, six loggia roof polygons,12 fitted
+  roof-join polygons and18
   seat/bed footprints. Roofs have walkThrough:true: reserve their volume for
   planting and maps without treating the entire arcade as a solid collider.
 - GARDEN_COLUMNS / GARDEN_COLLIDERS: actual bases and furniture.

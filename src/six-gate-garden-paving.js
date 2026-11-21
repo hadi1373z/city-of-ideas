@@ -1,6 +1,7 @@
 import {honeycombCells} from './honeycomb-city-model.js?v=night-garden-20261121';
 import {SIXFOLD_HOUSES} from './sixfold-house-network-model.js';
-import {SIX_GATE_GARDEN as G,GARDEN_GATES,GARDEN_ROUTES,gardenPolar,gardenWorld} from './six-gate-garden-model.js?v=night-garden-20261121';
+import {SIX_GATE_GARDEN as G,GARDEN_GATES,GARDEN_ROUTES,gardenPolar,gardenWorld} from './six-gate-garden-model.js?v=coastal-terraces-20261121';
+import {GALLERY_FORECOURT,galleryForecourtHeight} from './gallery-forecourt-model.js';
 
 const EPS=1e-8,TAU=Math.PI*2;
 export const GARDEN_STONE_BELT=Object.freeze({inner:58,outer:110.5});
@@ -33,19 +34,14 @@ const protectedPolygons=[protectedGallery,...protectedHouses,...GALLERY_SOURCE_P
 // stretching a flat skin over an old graded road or interpolating a whole tile
 // across a crease. East/west thresholds take priority over the side-return ramp.
 const grade=(points,height)=>({points,bounds:bounds(points),height});
-const galleryGrades=[
- grade(rectangle(56,64,-4,4),()=>.395),
- grade(rectangle(64,67,-4,4),x=>.13+.265*(67-x)/3),
- grade(rectangle(-64,-56,-4,4),()=>.395),
- grade(rectangle(-67,-64,-4,4),x=>.13+.265*(x+67)/3),
- grade(rectangle(58,67,-34,-20),(x,z)=>.13+.265*(z+34)/14),
- grade(rectangle(58,67,-20,7),()=>.395),
- grade(rectangle(58,67,7,25),(x,z)=>.395-.265*(z-7)/18)
-];
+const galleryGrades=GALLERY_FORECOURT.triangles.map(t=>{
+ const[a,b,c]=t.points,dx=b[0]-a[0],dz=b[1]-a[1],ex=c[0]-a[0],ez=c[1]-a[1],den=dx*ez-dz*ex;
+ const ax=((b[2]-a[2])*ez-(c[2]-a[2])*dz)/den,az=(dx*(c[2]-a[2])-ex*(b[2]-a[2]))/den;
+ return grade(ccw(t.points.map(p=>[p[0],p[1]])),(x,z)=>a[2]+ax*(x-a[0])+az*(z-a[1]));
+});
 export function gardenPavingHeight(x,z){
  if(!Number.isFinite(x)||!Number.isFinite(z)||Math.hypot(x,z)<GARDEN_STONE_BELT.inner-EPS)return null;
- const patch=galleryGrades.find(p=>x>=p.bounds[0]-EPS&&x<=p.bounds[1]+EPS&&z>=p.bounds[2]-EPS&&z<=p.bounds[3]+EPS);
- return patch?patch.height(x,z):G.floor;
+ return galleryForecourtHeight(x,z)??G.floor;
 }
 
 // Retirement mask for OLD visual roads, not the new stone field. Outer union
@@ -137,27 +133,10 @@ export function buildGardenPaving(T,{treeBeds=[]}={}){
   if(!domain.some(d=>intersects(bb,d.bounds)))continue;activeBeds.push(bed);
   const points=ccw(contour),v=points.map(p=>new T.Vector2(...p));for(const triangle of T.ShapeUtils.triangulateShape(v,[])){const p=triangle.map(i=>points[i]);holes.push({points:ccw(p),bounds:bounds(p)});}
  }
- const gradeEdges=galleryGrades.flatMap(g=>g.points.map((a,i)=>[a,g.points[(i+1)%g.points.length]]));let closedGradeEdges=0;
- const put=(poly,colour,buffer,height=()=>G.floor)=>{const c=new T.Color(colour),snap=p=>{const x=Math.fround(Math.round(p[0]*1e4)/1e4),z=Math.fround(Math.round(p[2]*1e4)/1e4);return[x,height(x,z),z];},points=poly.map(snap),emit=p=>buffer.push(p[0],p[1],p[2],c.r,c.g,c.b);for(let i=1;i<points.length-1;i++){const a=points[0],b=points[i],d=points[i+1],s=(b[0]-a[0])*(d[2]-a[2])-(b[2]-a[2])*(d[0]-a[0]);if(Math.abs(s)<1e-9)continue;for(const p of(s>0?[a,d,b]:[a,b,d]))emit(p);}
-  // The original doorway grades meet flat plaza ground with a vertical edge.
-  // Close that actual edge in the SAME clipped tile/joint buffers; an open
-  // top-only surface exposed a green ribbon when seen from the lower side.
-  for(let i=0;i<points.length;i++){
-   const a=points[i],b=points[(i+1)%points.length],dx=b[0]-a[0],dz=b[2]-a[2],len=Math.hypot(dx,dz);if(len<1e-5||Math.abs(dx)>.0002&&Math.abs(dz)>.0002)continue;
-   const x=(a[0]+b[0])/2,z=(a[2]+b[2])/2;
-   if(!gradeEdges.some(([p,q])=>Math.abs(p[0]-q[0])<EPS?Math.abs(x-p[0])<.0002&&z>=Math.min(p[1],q[1])-EPS&&z<=Math.max(p[1],q[1])+EPS:Math.abs(z-p[1])<.0002&&x>=Math.min(p[0],q[0])-EPS&&x<=Math.max(p[0],q[0])+EPS))continue;
-   for(const sign of[-1,1]){const nx=-dz/len*sign,nz=dx/len*sign,otherX=x+nx*.001,otherZ=z+nz*.001;
-    if(!gardenPavingContains(otherX,otherZ,{treeBeds:activeBeds}))continue;
-    const other=gardenPavingHeight(otherX,otherZ);if(other===null||height(x,z)-other<.001)continue;
-    const low=p=>[p[0],gardenPavingHeight(p[0]+nx*.001,p[2]+nz*.001)??G.floor,p[2]],aa=low(a),bb=low(b);
-    // Winding faces the lower side; both directions are independently closed.
-    const tri=sign>0?[a,aa,b,b,aa,bb]:[a,b,aa,b,bb,aa];for(const p of tri)emit(p);closedGradeEdges++;break;
-   }
-  }
- };
+ const put=(poly,colour,buffer,height=()=>G.floor)=>{const c=new T.Color(colour),snap=p=>{const x=Math.fround(Math.round(p[0]*1e4)/1e4),z=Math.fround(Math.round(p[2]*1e4)/1e4);return[x,Math.max(G.floor,Math.min(.395,height(x,z))),z];},points=poly.map(snap);for(let i=1;i<points.length-1;i++){const a=points[0],b=points[i],d=points[i+1],s=(b[0]-a[0])*(d[2]-a[2])-(b[2]-a[2])*(d[0]-a[0]);if(Math.abs(s)<1e-9)continue;for(const p of(s>0?[a,d,b]:[a,b,d]))buffer.push(p[0],p[1],p[2],c.r,c.g,c.b);}};
  function graded(poly,colour,buffer){
   let remaining=[poly];
-  for(const patch of galleryGrades){const next=[];for(const p of remaining){if(!intersects(polyBounds(p),patch.bounds)){next.push(p);continue;}const cut=carve(p,patch.points);next.push(...cut.outside);if(cut.inside.length)put(cut.inside,colour,buffer,patch.height);}remaining=next;if(!remaining.length)break;}
+  const local=galleryGrades.filter(p=>intersects(polyBounds(poly),p.bounds));for(const patch of local){const next=[];for(const p of remaining){if(!intersects(polyBounds(p),patch.bounds)){next.push(p);continue;}const cut=carve(p,patch.points);next.push(...cut.outside);if(cut.inside.length)put(cut.inside,colour,buffer,patch.height);}remaining=next;if(!remaining.length)break;}
   for(const p of remaining)put(p,colour,buffer);
  }
  function fill(tile,colour,buffer){const tileBounds=polyBounds(tile),local=domain.filter(p=>intersects(tileBounds,p.bounds));if(!local.length)return;let remaining=[tile],inside=[];
@@ -175,6 +154,6 @@ export function buildGardenPaving(T,{treeBeds=[]}={}){
   const pos=[],col=[];for(let j=0;j<buffer.length;j+=6){pos.push(buffer[j],buffer[j+1],buffer[j+2]);col.push(buffer[j+3],buffer[j+4],buffer[j+5]);}
   const geometry=own(new T.BufferGeometry());geometry.setAttribute('position',new T.Float32BufferAttribute(pos,3));geometry.setAttribute('color',new T.Float32BufferAttribute(col,3));geometry.computeVertexNormals();const material=own(new T.MeshLambertMaterial({vertexColors:true,side:T.FrontSide,polygonOffset:true,polygonOffsetFactor:i?-1:1,polygonOffsetUnits:i?-1:1})),mesh=new T.Mesh(geometry,material);mesh.name=i?'Warm geometric stone tiles · cream, honey, teal and brass inlay':'Continuous flat stone joint bed · no painted road strips';group.add(mesh);
  }
- group.userData.closedGradeEdges=closedGradeEdges;
+ group.userData.closedGradeEdges=0;group.userData.continuousForecourt=true;
  let disposed=false;return{group,treeBeds,activeBeds,contains:(x,z)=>gardenPavingContains(x,z,{treeBeds:activeBeds}),heightAt:(x,z)=>gardenPavingContains(x,z,{treeBeds:activeBeds})?gardenPavingHeight(x,z):null,triangles:group.children.reduce((n,o)=>n+o.geometry.attributes.position.count/3,0),dispose(){if(disposed)return;disposed=true;group.removeFromParent();for(const r of owned)r.dispose();owned.clear();group.clear();}};
 }

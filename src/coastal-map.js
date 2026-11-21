@@ -1,8 +1,8 @@
 import {mountNightParkMap} from './night-park-map.js?v=night-garden-20261121';
-import {COAST_LANDMARKS, COAST_EXPLORER_COPY, coastMapPoint, coastWalkSvg, coastFaceLinksSvg} from './coastal-map-data.js?v=night-garden-20261121';
+import {COAST_LANDMARKS, COAST_EXPLORER_COPY, coastMapPoint, coastWalkSvg, coastFaceLinksSvg} from './coastal-map-data.js?v=coastal-terraces-20261121';
 
 import {seminarPathsSvg} from './seminar-houses-data.js?v=night-garden-20261121';
-import {coastVisitor,COAST_POSITION_COPY,coastPositionText,coastDistance} from './coastal-position.js?v=night-garden-20261121';
+import {coastVisitor,COAST_POSITION_COPY,coastPositionText,coastDistance} from './coastal-position.js?v=coastal-terraces-20261121';
 import {mountMiddleLayerMap} from './middle-layer-map.js?v=night-garden-20261121';
 
 // Native buttons keep map selection available to touch, keyboard and controllers.

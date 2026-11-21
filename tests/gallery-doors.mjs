@@ -15,7 +15,7 @@ for(const p of transom.userData.placements){assert(Math.abs(p.position.x)<1e-8);
 
 // Walk a body-width corridor through each opening, not merely a zero-width ray.
 for(const door of doors){
- for(const x of[-.8,0,.8])for(const y of[.15,1,1.8,2.35]){
+ for(const x of[-1.24,-.8,0,.8,1.24])for(const y of[.15,1,1.8,2.35]){
   const from=door.localToWorld(new T.Vector3(x,y,2)),to=door.localToWorld(new T.Vector3(x,y,-2)),d=to.clone().sub(from);
   assert.equal(new T.Raycaster(from,d.normalize(),0,4).intersectObject(door,true).length,0,'Retracted leaves keep the full visitor corridor open');
  }
@@ -24,6 +24,12 @@ for(const door of doors){
  assert.equal(Math.abs(labels[0].rotation.y-labels[1].rotation.y),Math.PI,'Each side has correctly facing text');
  const header=door.getObjectByName('Sliding door header');
  assert(Math.abs(door.position.y+header.position.y+header.geometry.parameters.height/2-3.875)<1e-9,'Header meets transom without a floating gap');
+ assert.equal(header.material.color.getHex(),0xe9dfc8,'Warm ivory fascia replaces the former dark blocking sign bar');
+ assert.equal(door.getObjectByName('Facade entrance mullion').material.color.getHex(),0xa68d60,'Thin mullions retain the glass-cylinder language in warm bronze');
+ assert(!door.children.some(o=>o.isLight),'The edge glow does not introduce an unbounded PointLight');
+ assert.equal(door.children.filter(o=>o.name==='Concealed warm sidelight edge').length,4);
+ for(const trim of door.children.filter(o=>o.name==='Warm ivory entrance reveal')){assert(Math.abs(trim.position.x)>2.5);assert.equal(trim.geometry.parameters.depth,.16);assert(trim.position.y+trim.geometry.parameters.height/2<=3.08,'Flush reveals do not alter the facade transom');}
+ for(const label of labels){assert.equal(label.geometry.parameters.width,4.45);assert.equal(label.geometry.parameters.height,.32);const uv=label.geometry.attributes.uv;for(let i=0;i<uv.count;i++){assert(uv.getX(i)>=.18-1e-6&&uv.getX(i)<=.82+1e-6);assert(uv.getY(i)>=.17-1e-6&&uv.getY(i)<=.83+1e-6);}const face=label.rotation.y===0?1:-1,start=door.localToWorld(new T.Vector3(0,3.28,face*1)),target=label.getWorldPosition(new T.Vector3()),ray=new T.Raycaster(start,target.clone().sub(start).normalize(),0,2);assert.equal(ray.intersectObject(door,true)[0]?.object,label,'Actual front-facing name is unobscured from each side');}
  const leaves=door.children.filter(o=>o.name==='Retracted sliding glass door');
  assert(leaves.every(o=>o.rotation.y===0),'Leaves slide beside the opening instead of jutting into the route');
 }

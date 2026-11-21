@@ -29,7 +29,7 @@
 g.CITY_REMOVED_PLAZA_TREE=Object.freeze({x:69.5,z:-25});
 // The later screenshot identifies the other bare source tree beside the south
 // door at (69.75,25). Keep the earlier removal and every planted bed unchanged.
-g.CITY_REMOVED_PLAZA_TREES=Object.freeze([g.CITY_REMOVED_PLAZA_TREE,Object.freeze({x:69.75,z:25})]);
+g.CITY_REMOVED_PLAZA_TREES=Object.freeze([g.CITY_REMOVED_PLAZA_TREE,Object.freeze({x:69.75,z:25}),Object.freeze({x:72.5,z:-53})]);
 const removedPlazaTree=p=>g.CITY_REMOVED_PLAZA_TREES.some(q=>Math.abs(p.x-q.x)<1e-7&&Math.abs(p.z-q.z)<1e-7);
 // Deterministic branching trees: small individual leaves, open crowns, no spherical canopy or display plinth.
 g.buildNaturalCityTrees=function(T,parent,positions){
@@ -59,7 +59,7 @@ g.createCityLandscape=function(T,{parent,tiles,outerRadius=58}){
  const group=new T.Group();group.name='Polygonal central campus and real graded doorways';parent.add(group);
  const edgeMat=new T.MeshLambertMaterial({color:0xa9ac98}),bark=new T.MeshLambertMaterial({color:0x5f6959}),leaves=new T.MeshLambertMaterial({color:0x536e52}),beds=new T.MeshLambertMaterial({color:0x73836a}),metal=new T.MeshLambertMaterial({color:0x6c7967}),glow=new T.MeshStandardMaterial({color:0xe4d9b8,emissive:0xffd5a0,emissiveIntensity:.35,roughness:.8});
  const treePositions=[],lampPositions=[],paths=[];
- function groundHeight(x,z){if(Math.abs(z)<4&&x>=56&&x<=67)return .13+.265*Math.max(0,Math.min(1,(67-x)/3));if(Math.abs(z)<4&&x>=-67&&x<=-56)return .13+.265*Math.max(0,Math.min(1,(x+67)/3));if(Math.abs(z)<4&&x>=179&&x<=192)return .13+.29*Math.max(0,Math.min(1,(192-x)/9));if(Math.abs(x-62.5)>4.5||z< -47||z>27)return null;if(z< -20)return .13+.265*Math.max(0,Math.min(1,(z+34)/14));return .395-.265*Math.max(0,Math.min(1,(z-7)/18));}
+ function groundHeight(x,z){const forecourt=g.CITY_GALLERY_FORECOURT?.heightAt(x,z);if(Number.isFinite(forecourt))return forecourt;if(Math.abs(z)<4&&x>=179&&x<=192)return .13+.29*Math.max(0,Math.min(1,(192-x)/9));return null;}
  function surface(points,width,name){const p=[],ix=[],edge=[];for(let i=0;i<points.length;i++){const a=points[Math.max(0,i-1)],b=points[Math.min(points.length-1,i+1)],d=new T.Vector2(b.x-a.x,b.z-a.z).normalize(),nx=-d.y,nz=d.x;for(const side of[-1,1]){const x=points[i].x+nx*width/2*side,z=points[i].z+nz*width/2*side,y=groundHeight(x,z)??.13;p.push(x,y+.003,z);edge.push(x,y-.025,z);}if(i<points.length-1){const k=i*2;ix.push(k,k+1,k+2,k+1,k+3,k+2);}}function mesh(v,mat){const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(v,3));geo.setIndex(ix);geo.computeVertexNormals();const m=new T.Mesh(geo,mat);m.name=name;m.userData.groundPaving=true;m.visible=g.CITY_CONFIG?.showGroundPaving!==false;group.add(m);return m;}mesh(edge,edgeMat);mesh(p,tiles);paths.push({name,width,points});}
  // Straight segments are sampled only to preserve the existing doorway
  // grades; the plan has genuine polygon corners, never a resampled old arc.

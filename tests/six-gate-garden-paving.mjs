@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
+import {GALLERY_FORECOURT} from '../src/gallery-forecourt-model.js';
 import * as T from '../src/city-source-assets/home-tools/vendor/three.module.js';
 import {GARDEN_PAVING_CELLS,GARDEN_STONE_BELT,GALLERY_SOURCE_PORCHES,gardenPavingHeight,gardenPrecinctContains,clipGardenLegacyPolyline,subtractGardenPaving,gardenPavingContains,buildGardenPaving} from '../src/six-gate-garden-paving.js';
 import {SIX_GATE_GARDEN as G,GARDEN_ROUTES,GARDEN_GATES,gardenTreeBedPlan,gardenWorld,GARDEN_TREE_CANDIDATES} from '../src/six-gate-garden-model.js';
@@ -8,21 +9,10 @@ import {SIXFOLD_HOUSES,sixfoldWellHoles} from '../src/sixfold-house-network-mode
 assert.equal(GARDEN_PAVING_CELLS.length,7);assert.equal(GARDEN_STONE_BELT.inner,58);const untouched=JSON.stringify({houses:SIXFOLD_HOUSES,holes:sixfoldWellHoles(),trees:GARDEN_TREE_CANDIDATES});
 const field=buildGardenPaving(T);field.group.updateMatrixWorld(true);assert.equal(field.group.children.length,2);assert(field.triangles<200000);
 // Test-only broad-phase over exact output triangles, never proxy floor planes.
-function indexed(group){const cell=8,bins=new Map(),material=new T.MeshBasicMaterial({side:T.DoubleSide});group.updateMatrixWorld(true);group.traverse(o=>{if(!o.geometry)return;const p=o.geometry.attributes.position,normal=o.geometry.attributes.normal;for(let j=0;j<p.count;j++){assert(p.getY(j)>=G.floor-1e-6&&p.getY(j)<=.395+1e-6);assert(normal.getY(j)>.99||Math.abs(normal.getY(j))<1e-6,'Walking faces point upward; only closed grade risers are vertical');}for(let j=0;j<p.count;j+=3){const a=[0,1,2].map(k=>new T.Vector3().fromBufferAttribute(p,j+k).applyMatrix4(o.matrixWorld)),loX=Math.floor(Math.min(...a.map(v=>v.x))/cell),hiX=Math.floor(Math.max(...a.map(v=>v.x))/cell),loZ=Math.floor(Math.min(...a.map(v=>v.z))/cell),hiZ=Math.floor(Math.max(...a.map(v=>v.z))/cell);for(let x=loX;x<=hiX;x++)for(let z=loZ;z<=hiZ;z++){const key=x+','+z;if(!bins.has(key))bins.set(key,[]);bins.get(key).push(...a.flatMap(v=>v.toArray()));}}});const meshes=new Map();for(const[key,values]of bins){const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(values,3));g.computeBoundingSphere();const m=new T.Mesh(g,material);m.updateMatrixWorld();meshes.set(key,m);}return{hits(x,z){const m=meshes.get(Math.floor(x/cell)+','+Math.floor(z/cell));return m?new T.Raycaster(new T.Vector3(x,1,z),new T.Vector3(0,-1,0),0,2).intersectObject(m):[];},dispose(){for(const m of meshes.values())m.geometry.dispose();material.dispose();}};}
+function indexed(group){const cell=8,bins=new Map(),material=new T.MeshBasicMaterial({side:T.DoubleSide});group.updateMatrixWorld(true);group.traverse(o=>{if(!o.geometry)return;const p=o.geometry.attributes.position,normal=o.geometry.attributes.normal;for(let j=0;j<p.count;j++){assert(p.getY(j)>=G.floor-1e-6&&p.getY(j)<=.395+1e-6);assert(normal.getY(j)>.975,'All plaza and forecourt triangles point upward with gentle continuous slopes');}for(let j=0;j<p.count;j+=3){const a=[0,1,2].map(k=>new T.Vector3().fromBufferAttribute(p,j+k).applyMatrix4(o.matrixWorld)),loX=Math.floor(Math.min(...a.map(v=>v.x))/cell),hiX=Math.floor(Math.max(...a.map(v=>v.x))/cell),loZ=Math.floor(Math.min(...a.map(v=>v.z))/cell),hiZ=Math.floor(Math.max(...a.map(v=>v.z))/cell);for(let x=loX;x<=hiX;x++)for(let z=loZ;z<=hiZ;z++){const key=x+','+z;if(!bins.has(key))bins.set(key,[]);bins.get(key).push(...a.flatMap(v=>v.toArray()));}}});const meshes=new Map();for(const[key,values]of bins){const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(values,3));g.computeBoundingSphere();const m=new T.Mesh(g,material);m.updateMatrixWorld();meshes.set(key,m);}return{hits(x,z){const m=meshes.get(Math.floor(x/cell)+','+Math.floor(z/cell));return m?new T.Raycaster(new T.Vector3(x,1,z),new T.Vector3(0,-1,0),0,2).intersectObject(m):[];},dispose(){for(const m of meshes.values())m.geometry.dispose();material.dispose();}};}
 const grid=indexed(field.group);let samples=0;
-// A downward ray cannot detect the formerly open vertical lips at the two
-// door grades. Probe actual rendered triangles horizontally from the low side.
-assert(field.group.userData.closedGradeEdges>0);
-let seamProbes=0;
-for(const [x,z,nx,nz]of[[67,-15,1,0],[58,-15,-1,0],[-64,4,0,1],[-64,-4,0,-1],[65,-4,0,1]]){
- const low=sourceHeight(x+nx*.002,z+nz*.002),high=sourceHeight(x-nx*.002,z-nz*.002);
- assert(high>low+.02);
- for(const t of[.15,.5,.85]){
-  const y=low+(high-low)*t,ray=new T.Raycaster(new T.Vector3(x+nx*.2,y,z+nz*.2),new T.Vector3(-nx,0,-nz),0,.4);
-  assert(ray.intersectObject(field.group,true).length,'The stone grade edge must close the doorway lawn ribbon at '+[x,z,y]);seamProbes++;
- }
-}
-function sourceHeight(x,z){if(Math.abs(z)<4&&x>=56&&x<=67)return .13+.265*Math.max(0,Math.min(1,(67-x)/3));if(Math.abs(z)<4&&x>=-67&&x<=-56)return .13+.265*Math.max(0,Math.min(1,(x+67)/3));if(Math.abs(x-62.5)>4.5||z< -47||z>27)return .13;if(z< -20)return .13+.265*Math.max(0,Math.min(1,(z+34)/14));return .395-.265*Math.max(0,Math.min(1,(z-7)/18));}
+assert.equal(field.group.userData.closedGradeEdges,0,'The redesigned forecourt has no abrupt vertical grade lips');
+assert(field.group.userData.continuousForecourt);
 for(const route of GARDEN_ROUTES)for(let j=1;j<route.points.length;j++){
  const a=route.points[j-1],b=route.points[j],dx=b[0]-a[0],dz=b[1]-a[1],length=Math.hypot(dx,dz),n=Math.ceil(length/.35);
  for(let i=0;i<=n;i++)for(const side of[-1,0,1]){const offset=side*(route.width/2-.55),x=a[0]+dx*i/n-dz/length*offset,z=a[1]+dz*i/n+dx/length*offset;if(gardenPavingContains(x,z))assert(grid.hits(x,z).some(h=>Math.abs(h.point.y-gardenPavingHeight(x,z))<1e-5),'Every model-owned garden walking sample has a real stone surface '+route.id+' '+[x,z]);samples++;}
@@ -32,7 +22,7 @@ for(const h of[{x:0,z:0,radius:58},...sixfoldWellHoles()])for(let i=0;i<24;i++)f
 
 // Independently execute the unchanged source walking function and real source
 // porch/lift creation statements; dimensions are not test-only proxy slabs.
-const landscape=readFileSync(new URL('../src/city-landscape.js',import.meta.url),'utf8'),sourceGrade=new Function('return ('+landscape.match(/function groundHeight\(x,z\)\{[^\n]+/)[0]+');')();
+const landscape=readFileSync(new URL('../src/city-landscape.js',import.meta.url),'utf8'),sourceGrade=new Function('g','return ('+landscape.match(/function groundHeight\(x,z\)\{[^\n]+/)[0]+');')({CITY_GALLERY_FORECOURT:GALLERY_FORECOURT});
 for(let x=-68;x<=68;x+=.37)for(let z=-36;z<30;z+=.71)if(Math.hypot(x,z)>58.05&&Math.hypot(x,z)<71&&gardenPavingContains(x,z)){const expected=sourceGrade(x,z)??G.floor;assert(Math.abs(gardenPavingHeight(x,z)-expected)<1e-8);assert(grid.hits(x,z).some(h=>Math.abs(h.point.y-expected)<1e-4),'Actual source-grade tile support at '+[x,z]);}
 const gallerySource=readFileSync(new URL('../src/gallery.js',import.meta.url),'utf8'),porches=new T.Group(),porchMaterial=new T.MeshBasicMaterial(),box=(w,h,d,m,x,y,z)=>{const o=new T.Mesh(new T.BoxGeometry(w,h,d),porchMaterial);o.position.set(x,y,z);porches.add(o);return o;};
 const sidePorch=gallerySource.match(/box\(4\.3,\.18,6\.2,materials\.stone,-12,y\+\.37,outer\+\.65\);/)[0],lift=gallerySource.match(/box\(4\.2,\.10,3\.6,liftFrame,-12,\.345,liftRadius\)[^\n;]*;/)[0],doors=gallerySource.match(/box\(4\.3,\.18,6\.2,materials\.stone,0,\.37,side\*\(outer\+\.65\)\);/)[0];

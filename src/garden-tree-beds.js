@@ -1,7 +1,7 @@
-import {buildGardenTreeBeds} from './six-gate-garden-scene.js?v=night-garden-20261121';
+import {buildGardenTreeBeds} from './six-gate-garden-scene.js?v=coastal-terraces-20261121';
 import {SIXFOLD_HOUSES} from './sixfold-house-network-model.js';
-import {gardenCanStand} from './six-gate-garden-model.js?v=night-garden-20261121';
-import {urbanRoutes,urbanBuildingFootprints,segmentDistance} from './city-urban-plan-model.js?v=night-garden-20261121';
+import {gardenCanStand} from './six-gate-garden-model.js?v=coastal-terraces-20261121';
+import {urbanRoutes,urbanBuildingFootprints,segmentDistance} from './city-urban-plan-model.js?v=coastal-terraces-20261121';
 import {footprintBlocked} from './honeycomb-city-model.js?v=night-garden-20261121';
 
 const centres=[{x:0,z:0},...SIXFOLD_HOUSES];

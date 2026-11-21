@@ -516,13 +516,16 @@ existing collider and the outer ocean rejection. tests/night-park.mjs drives
 the actual classic city, district, Graveyard and cylinder chain through1190
 held-input steps; testing the cylinder with a permissive delegate is insufficient.
 
-The two Gallery doorway grades now have real stone vertical edge closures in
-the same garden tile/joint buffers. Preserve their original slopes and porch
-slabs; test horizontal low-side rays as well as downward support. The user's
-later bare-tree screenshot identifies the source campus tree at(69.75,25).
-Remove it in addition to the earlier(69.5,-25) omission, consuming both original
-RNG sequences. All455 accepted street trees,170 planted beds and retained leaf/
-wood poses remain exact; never remove a planted tree to satisfy this request.
+The Gallery forecourt now uses one continuous triangulated slope authority in
+gallery-forecourt-data.js, shared by classic native groundHeight and the clipped
+garden tiles. It supersedes the former rectangular grades/vertical stone risers.
+Load it before city-landscape.js; preserve exact porch/lift slabs, native .395m
+anchors and both planted entrance gardens. Read docs/GALLERY-FORECOURT.md.
+The three selected bare source campus trees at(69.5,-25),(69.75,25),(72.5,-53)
+are omitted while consuming all original RNG sequences. All455 accepted street
+trees,170 planted beds and retained leaf/wood poses remain exact. Do not clear
+a planted tree to satisfy a bare-tree removal. The bronze/ivory Gallery door
+finish preserves both original sliding entrances and their walking controls.
 
 Escher niche design direction,21 November: retain the first blue/cobalt,
 turquoise, ivory and restrained gold ornamental sketch with concealed warm
@@ -540,3 +543,16 @@ Escher's existing brass has scoped aged-bronze highlights; House of Light keeps
 the original cylindrical metal normals through batching. Preserve both fixed
 reflection captures and all paths. Do not describe this small material pass as
 an exact reconstruction of the architectural sketches or a night-world redesign.
+
+Sea Terraces now occupy the seaward band of outer cell hex(3,-3), centred on
+(239.023011444505,-414). This cell already contains the retained Listening Court;
+never describe it as empty or cover its experiment. The new low courts use the
+shared sea-terraces-model.js triangle heights and native movement hooks, two
+central ramps, lateral ground returns, a clockwise Listening Court approach and
+two links to the unchanged shore promenade. Only that cell's six perimeter walls
+are removed. Preserve all existing streets, trees, island/ocean bounds, source
+content, culling and voices. Read docs/SEA-TERRACES.md. The six coastal districts
+mean the six outer corner cells of the37-cell city, not the central six towers.
+Garden arcade/loggia roofs now have12 fitted solid saddles, with shared actual
+footprints and unchanged arches/headroom; keep their top/bottom triangulation
+paired. Tests cover actual roof rays, support, bodies and native walking.

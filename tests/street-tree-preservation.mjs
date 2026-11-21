@@ -18,7 +18,7 @@ for(const p of accepted){assert(streetTreeClear(p.x,p.z),'The full original crow
 // read as they stand; rebuilding them with a later callback would delete them.
 const scene=new T.Scene(),publicClear=globalThis.CITY_PUBLIC_TREE_CLEAR;let campus;
 try{delete globalThis.CITY_PUBLIC_TREE_CLEAR;campus=globalThis.createCityLandscape(T,{parent:scene,outerRadius:58});}finally{globalThis.CITY_PUBLIC_TREE_CLEAR=publicClear;}
-assert.equal(campus.trees.length,57);const urban=buildCityUrbanPlan(T,{naturalTrees:globalThis.buildNaturalCityTrees});scene.add(urban.group);const forest=urban.group.children.find(n=>n.userData.naturalTrees);assert(forest);assert.equal(forest.userData.naturalTrees.count,455);assert.deepEqual(forest.userData.naturalTrees.positions,accepted.map(({x,z})=>({x,z})),'Every original accepted tree is actually rendered, in the same order');
+assert.equal(campus.trees.length,56);const urban=buildCityUrbanPlan(T,{naturalTrees:globalThis.buildNaturalCityTrees});scene.add(urban.group);const forest=urban.group.children.find(n=>n.userData.naturalTrees);assert(forest);assert.equal(forest.userData.naturalTrees.count,455);assert.deepEqual(forest.userData.naturalTrees.positions,accepted.map(({x,z})=>({x,z})),'Every original accepted tree is actually rendered, in the same order');
 // These are the actual HEAD5913 renderer instance buffers, independently
 // recovered and compared with the original source builder before pinning.
 assert.equal(forest.children[0].count,17290);assert.equal(arrayHash(forest.children[0].instanceMatrix.array),'de1f6a2f394385b9b23b5bde2960727457a6c955c0232366c0c654ce1993e399','All original leaf poses survive');
