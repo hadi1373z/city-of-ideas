@@ -556,3 +556,18 @@ mean the six outer corner cells of the37-cell city, not the central six towers.
 Garden arcade/loggia roofs now have12 fitted solid saddles, with shared actual
 footprints and unchanged arches/headroom; keep their top/bottom triangulation
 paired. Tests cover actual roof rays, support, bodies and native walking.
+
+The six live upper pattern houses now enable the optional gardenFacade branch
+in transformation-house-scene.js; all default legacy geometry stays exact.
+sixfold-house-facade.js replaces ONLY their upper walls with three tall arched
+bays per facet, pale limestone reveals/cornices and recessed bronze/glass.
+The same flag MUST reach createHouseWallTiling through buildHouseTiling, or the
+old interior finish would fill the new apertures when near detail activates.
+Keep all448 treads, eight floor/landing buffers, source door clearance and five
+lower wall crops byte-exact. The existing patterned roofs remain independent.
+Read docs/SIXFOLD-GARDEN-FACADES.md and run its independent baseline/ray checks.
+The garden's65cm stone-course texture changes no paving positions, colours,
+tree holes or heights. It is separate from the still-uninstalled refined blue
+Escher alcove design. Do not report those alcoves as completed. The corrected
+house-grain browser review was blocked by the preview connection; no claim of
+exact sketch fidelity or public publication has been made.

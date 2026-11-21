@@ -1,4 +1,4 @@
-import {createHouseTiling,createHouseWallTiling,houseWallPoint,createHouseStairTiling,createHouseLandingTiling,withoutHouseLanding} from './house-tiling-model.js?v=makers-passages-20261118';
+import {createHouseTiling,createHouseWallTiling,houseWallPoint,createHouseStairTiling,createHouseLandingTiling,withoutHouseLanding} from './house-tiling-model.js?v=garden-house-stone-20261121';
 import {HOUSE_LEVELS} from './transformation-house-model.js?v=makers-passages-20261118';
 import {SIXFOLD_TILINGS} from './sixfold-tiling-model.js?v=makers-passages-20261118';
 import {tilingParentColourIndex,tilingPatternPalette,compactTilingMeshes} from './sixfold-tiling-scene.js?v=makers-passages-20261118';
@@ -16,7 +16,7 @@ const PALETTES = [
  {floor:[0x526266,0xbd9d70],ceiling:[0xc4b99f,0x87938e],border:0x344b4e}
 ];
 
-export function buildHouseTiling(T,{pattern='penrose',compact=false}={}){
+export function buildHouseTiling(T,{pattern='penrose',compact=false,gardenFacade=false}={}){
  const info=SIXFOLD_TILINGS.find(p=>p.id===pattern);if(!info)throw new RangeError('Unknown mathematical tiling');const palettes=PALETTES.map(p=>tilingPatternPalette(T,pattern,p));
  const patch=createHouseTiling({outerRadius:22.4,wellRadius:10.7,grout:.035,pattern});
  const group=new T.Group();group.name=(pattern==='penrose'?'Penrose':info.name)+' stonework · continuous floors, walls and shallow vaulted ceilings';
@@ -60,7 +60,7 @@ export function buildHouseTiling(T,{pattern='penrose',compact=false}={}){
  // One rhomb field is unfolded over the entire six-sided perimeter and the
  // full height of the house, then folded at its corners. Storeys share the
  // same parent tile ids and cuts rather than restarting a pattern per wall.
- const wallPatch=createHouseWallTiling({levels:HOUSE_LEVELS.map(l=>l.y),pattern}),wallPositions=[],wallColors=[],wallNormals=[];
+ const wallPatch=createHouseWallTiling({levels:HOUSE_LEVELS.map(l=>l.y),pattern,gardenFacade}),wallPositions=[],wallColors=[],wallNormals=[];
  const calmStone=new T.Color(0xe1d5ba);
  for(const panel of wallPatch.panels){
   const index=HOUSE_LEVELS.findIndex(l=>l.y===panel.level),palette=palettes[index];

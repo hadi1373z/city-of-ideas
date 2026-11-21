@@ -77,6 +77,32 @@ Straight path joins overlap3.5cm before final clipping. All protected openings
 are cut from the resulting actual triangle buffers, including concave organic
 bed outlines. There is no broad replacement plane across a shaft.
 
+## Smaller warm stone courses
+
+The later comparison with the approved sketch refines the daytime finish only.
+garden-stone-finish.js creates one original256px RGBA DataTexture: restrained
+near-white mineral grain and65cm staggered masonry courses across each existing
+2.6m stone module. These are material details on the same supported paving,
+not extra slabs or new collision edges. The existing cream/honey/teal vertex
+colours and major stone joints remain authoritative; the coarse joint bed keeps
+its original untextured material.
+
+Both existing buffers receive only UV attributes from the inverse45-degree
+world grid. The tile material owns the texture in the same cleanup set as its
+geometry and materials. The sRGB texture repeats in both directions, generates
+mipmaps and uses linear filtering with4x anisotropy to avoid harsh distant
+course lines. There is no DOM canvas, external image, animated shader, light,
+normal/displacement map or night-floor installation.
+
+tests/garden-stone-finish.mjs compares the actual position/colour/index buffers
+against independently recorded hashes from immediately before this finish
+pass, including two real organic tree-bed cuts and the current entrance grades.
+The original geometry is byte-identical. It also checks correct65cm UV scale,
+half-stone course staggering, deterministic seamless texture data, neutral
+bounded tones, mipmapping, the original two draws and exactly-once texture
+release when a paving instance is rebuilt. Existing height/route/shaft/bed
+tests remain the authority for all geometric support and openings.
+
 ## Verification and bounds
 
 The later close views exposed green ribbons at the sides of the two original

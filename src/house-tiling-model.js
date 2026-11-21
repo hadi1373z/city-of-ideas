@@ -1,6 +1,7 @@
 import { hexagon } from './mathematical-pavilions-model.js?v=city-night-20261117';
 import {HOUSE as HOUSE_JOIN,stairY,houseLandingLevel} from './transformation-house-model.js?v=makers-passages-20261118';
 import {createSixfoldTilingPatch,createPenroseRhombPatch} from './sixfold-tiling-model.js?v=makers-passages-20261118';
+import {sixfoldFacadeOpenings,facadeAperture} from './sixfold-house-facade.js?v=garden-house-stone-20261121';
 export {createPenroseRhombPatch} from './sixfold-tiling-model.js?v=makers-passages-20261118';
 
 // Geometry only: a finite substitution patch, not a test of infinite aperiodicity.
@@ -104,7 +105,7 @@ const rectangle=(a,b,lo,hi)=>[[a,lo],[b,lo],[b,hi],[a,hi]];
  * patch cannot close after one arbitrary perimeter translation; the sixth
  * corner is deliberately framed by architectural trim rather than faked.
  */
-export function createHouseWallTiling({levels=[0,8,16,-8,-16,-24,-32,-40],radius=23,offset=.365,height=8,grout=.035,pattern='penrose'}={}) {
+export function createHouseWallTiling({levels=[0,8,16,-8,-16,-24,-32,-40],radius=23,offset=.365,height=8,grout=.035,pattern='penrose',gardenFacade=false}={}) {
   if(!levels.length||!levels.every(Number.isFinite)||!Number.isFinite(radius)||radius<=0||!Number.isFinite(offset)||offset<.35||offset>.5||height!==8||!Number.isFinite(grout)||grout<0)throw new RangeError('Invalid house wall dimensions');
   const hex=hexagon(radius),cornerInset=offset/Math.sqrt(3),length=radius-2*cornerInset,perimeter=6*length;
   const patch=pattern==='penrose'?createPenroseRhombPatch({depth:8,radius:90}):createSixfoldTilingPatch(pattern,{edge:1.8,bounds:[-3*length,Math.min(...levels)+8,3*length,Math.max(...levels)+16]}).cells;
@@ -113,12 +114,12 @@ export function createHouseWallTiling({levels=[0,8,16,-8,-16,-24,-32,-40],radius
   for(const level of levels)for(let wall=0;wall<6;wall++){
     const a=hex[wall],b=hex[(wall+1)%6],dx=(b[0]-a[0])/radius,dz=(b[1]-a[1])/radius;
     const s0=(wall-3)*length,s1=s0+length,v0=level+8,v1=v0+height,boundary=rectangle(s0,s1,v0,v1),openings=[];
-    if(level===0&&wall===1)openings.push({u0:radius/2-2.8,u1:radius/2+2.8,lo:0,hi:4.6,kind:'door'});
+    if(level===0&&wall===1&&!gardenFacade)openings.push({u0:radius/2-2.8,u1:radius/2+2.8,lo:0,hi:4.6,kind:'door'});
     if(level===-40&&(wall===2||wall===3))openings.push(wall===2?{u0:radius-3.2,u1:radius,lo:0,hi:4.6,kind:'door'}:{u0:0,u1:3.2,lo:0,hi:4.6,kind:'door'});
-    if(level>=0)for(const u of[5.5,radius-5.5])openings.push({u0:u-1.7,u1:u+1.7,lo:1.35,hi:4.55,kind:'window'});
+    if(level>=0&&!gardenFacade)for(const u of[5.5,radius-5.5])openings.push({u0:u-1.7,u1:u+1.7,lo:1.35,hi:4.55,kind:'window'});
     // Keep the entire timber lintel, sill and jamb visible, with a small calm
     // stone reveal. Glass and the actual navigation aperture are never covered.
-    const apertures=openings.map(o=>({...o,u0:o.u0-.16,u1:o.u1+.16,lo:o.kind==='window'?o.lo-.21:o.lo,hi:o.hi+.29})).map(o=>({...o,polygon:rectangle(s0+o.u0-cornerInset,s0+o.u1-cornerInset,v0+o.lo,v0+o.hi)}));
+    const apertures=gardenFacade&&level>=0?sixfoldFacadeOpenings(level,wall).map(o=>({u0:o.centre-o.width/2-.18,u1:o.centre+o.width/2+.18,lo:o.sill-.18,hi:o.spring+o.rise+.18,kind:o.door?'door':'window',polygon:facadeAperture(o,{inset:-.18}).map(([u,y])=>[s0+u-cornerInset,v0+y])})):openings.map(o=>({...o,u0:o.u0-.16,u1:o.u1+.16,lo:o.kind==='window'?o.lo-.21:o.lo,hi:o.hi+.29})).map(o=>({...o,polygon:rectangle(s0+o.u0-cornerInset,s0+o.u1-cornerInset,v0+o.lo,v0+o.hi)}));
     const crop=polygon=>{
       let pieces=[clipTilingPolygon(polygon,boundary)].filter(p=>p.length);
       for(const opening of apertures)pieces=pieces.flatMap(p=>subtractWell(p,opening.polygon));

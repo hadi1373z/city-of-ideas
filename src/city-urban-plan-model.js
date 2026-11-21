@@ -2,7 +2,7 @@ import {ACCEPTED_STREET_TREE_SITES} from './accepted-street-trees.js';
 import {SEA_TERRACES,SEA_TERRACE_FOOTPRINTS,SEA_TERRACE_PATHS} from './sea-terraces-model.js';
 import {SEA_TERRACE_APPROACHES} from './sea-terraces-access.js';
 import {GARDEN_ROUTES,GARDEN_FOOTPRINTS,GARDEN_TREE_CANDIDATES,gardenTreeClear} from './six-gate-garden-model.js?v=coastal-terraces-20261121';
-import {clipGardenLegacyPolyline} from './six-gate-garden-paving.js?v=coastal-terraces-20261121';
+import {clipGardenLegacyPolyline} from './six-gate-garden-paving.js?v=garden-house-stone-20261121';
 import {LIGHT_HOUSE,LIGHT_FOOTPRINT,LIGHT_PATHS,LIGHT_ENTRY} from './house-of-light-model.js?v=live-light-niches-20261121';
 import {SOCRATES_SITE} from './socrates-site-model.js?v=shore-niches-20261121';
 import {ACADEMY,ACADEMY_GATE_FOOTPRINT,ACADEMY_STOA_FOOTPRINTS,academyHousePolygon,philosopherWorld,philosopherEntry} from './academy-layout.js?v=night-garden-20261121';

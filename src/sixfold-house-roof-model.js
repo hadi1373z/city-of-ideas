@@ -1,4 +1,4 @@
-import {createHouseTiling} from './house-tiling-model.js?v=makers-passages-20261118';
+import {createHouseTiling} from './house-tiling-model.js?v=garden-house-stone-20261121';
 
 // The approved garden sketch uses pale, nearly level, individually tiled roofs.
 // Dimensions remain in the unchanged source-house frame, centred at X125.

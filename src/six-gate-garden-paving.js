@@ -1,5 +1,6 @@
 import {honeycombCells} from './honeycomb-city-model.js?v=night-garden-20261121';
 import {SIXFOLD_HOUSES} from './sixfold-house-network-model.js';
+import {createGardenStoneTexture,GARDEN_STONE_FINISH} from './garden-stone-finish.js?v=garden-house-stone-20261121';
 import {SIX_GATE_GARDEN as G,GARDEN_GATES,GARDEN_ROUTES,gardenPolar,gardenWorld} from './six-gate-garden-model.js?v=coastal-terraces-20261121';
 import {GALLERY_FORECOURT,galleryForecourtHeight} from './gallery-forecourt-model.js';
 
@@ -150,9 +151,11 @@ export function buildGardenPaving(T,{treeBeds=[]}={}){
   const full=[at(x,z),at(x+size,z),at(x+size,z+size),at(x,z+size)],inset=.026,inner=[at(x+inset,z+inset),at(x+size-inset,z+inset),at(x+size-inset,z+size-inset),at(x+inset,z+size-inset)],a=Math.atan2(center[2],center[0]),sector=Math.floor((a+TAU+Math.PI/6)/(Math.PI/3))%6,r=Math.hypot(center[0],center[2]),accent=(r>96&&r<99||r>108.1)&&((i+j+sector)%4===0),colour=accent?(sector%2?0xa5a17a:0x6c8a82):stone[((i*13+j*7)%stone.length+stone.length)%stone.length];
   fill(full,0xb6ad94,buffers[0]);fill(inner,colour,buffers[1]);
  }
+ const stoneTexture=own(createGardenStoneTexture(T));
  for(const[i,buffer]of buffers.entries()){
   const pos=[],col=[];for(let j=0;j<buffer.length;j+=6){pos.push(buffer[j],buffer[j+1],buffer[j+2]);col.push(buffer[j+3],buffer[j+4],buffer[j+5]);}
-  const geometry=own(new T.BufferGeometry());geometry.setAttribute('position',new T.Float32BufferAttribute(pos,3));geometry.setAttribute('color',new T.Float32BufferAttribute(col,3));geometry.computeVertexNormals();const material=own(new T.MeshLambertMaterial({vertexColors:true,side:T.FrontSide,polygonOffset:true,polygonOffsetFactor:i?-1:1,polygonOffsetUnits:i?-1:1})),mesh=new T.Mesh(geometry,material);mesh.name=i?'Warm geometric stone tiles · cream, honey, teal and brass inlay':'Continuous flat stone joint bed · no painted road strips';group.add(mesh);
+  const uv=[];for(let j=0;j<pos.length;j+=3)uv.push((pos[j]+pos[j+2])*Math.SQRT1_2/GARDEN_STONE_FINISH.repeatMetres,(pos[j+2]-pos[j])*Math.SQRT1_2/GARDEN_STONE_FINISH.repeatMetres);
+  const geometry=own(new T.BufferGeometry());geometry.setAttribute('position',new T.Float32BufferAttribute(pos,3));geometry.setAttribute('color',new T.Float32BufferAttribute(col,3));geometry.setAttribute('uv',new T.Float32BufferAttribute(uv,2));geometry.computeVertexNormals();const material=own(new T.MeshLambertMaterial({vertexColors:true,map:i?stoneTexture:null,side:T.FrontSide,polygonOffset:true,polygonOffsetFactor:i?-1:1,polygonOffsetUnits:i?-1:1})),mesh=new T.Mesh(geometry,material);mesh.name=i?'Warm geometric stone tiles · cream, honey, teal and brass inlay':'Continuous flat stone joint bed · no painted road strips';group.add(mesh);
  }
  group.userData.closedGradeEdges=0;group.userData.continuousForecourt=true;
  let disposed=false;return{group,treeBeds,activeBeds,contains:(x,z)=>gardenPavingContains(x,z,{treeBeds:activeBeds}),heightAt:(x,z)=>gardenPavingContains(x,z,{treeBeds:activeBeds})?gardenPavingHeight(x,z):null,triangles:group.children.reduce((n,o)=>n+o.geometry.attributes.position.count/3,0),dispose(){if(disposed)return;disposed=true;group.removeFromParent();for(const r of owned)r.dispose();owned.clear();group.clear();}};

@@ -1,12 +1,12 @@
-import {installGardenTreeBeds} from './garden-tree-beds.js?v=coastal-terraces-20261121';
+import {installGardenTreeBeds} from './garden-tree-beds.js?v=garden-house-stone-20261121';
 import {createFoldWorkbenchControls} from './origami-fold-workbench-ui.js?v=cloister-details-20261120';
 import {faceRoomWork,showRoomDialog} from './room-workbench.js?v=origami-court-20261120';
 import {PARK_GRASS_HEX} from './city-lawn-palette.js?v=makers-passages-20261118';
-import {urbanRoutes,urbanPavedRoutes,urbanBuildingFootprints} from './city-urban-plan-model.js?v=coastal-terraces-20261121';
+import {urbanRoutes,urbanPavedRoutes,urbanBuildingFootprints} from './city-urban-plan-model.js?v=garden-house-stone-20261121';
 import {FOUNDATION_HOUSES,FOUNDATION_COPY,FOUNDATION_ROUTES} from './foundation-houses-data.js?v=night-garden-20261121';
 import {CITY_ISLAND as ISLAND,onCityIsland,islandRadius} from './island-layout.js?v=makers-passages-20261118';
 import {buildOrigamiHouse} from './origami-house-scene.js?v=night-garden-20261121';
-import {buildCityCoast} from './coastal-city-scene.js?v=coastal-terraces-20261121';
+import {buildCityCoast} from './coastal-city-scene.js?v=garden-house-stone-20261121';
 import {foldHouseMemory,HOUSE_ORIGAMI as P,miura,vertexTests,CREASE_CASES,coastX,COAST_ROUTES} from './origami-house-math.js?v=night-garden-20261121';
 import {FOLD_COPY} from './origami-house-copy.js?v=cloister-details-20261120';
 import {ORIGAMI_LESSONS,paperDiagram} from './origami-lessons.js?v=city-night-20261117';

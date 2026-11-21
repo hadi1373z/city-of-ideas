@@ -1,4 +1,4 @@
-import {createSixfoldHouseRoof,roofHexagon,SIXFOLD_GARDEN_ROOF as R} from './sixfold-house-roof-model.js?v=garden-pattern-roofs-20261121';
+import {createSixfoldHouseRoof,roofHexagon,SIXFOLD_GARDEN_ROOF as R} from './sixfold-house-roof-model.js?v=garden-house-stone-20261121';
 import {tilingParentColourIndex} from './sixfold-tiling-scene.js?v=makers-passages-20261118';
 
 /** One persistent roof per house, shared by its near/far presentation. Three

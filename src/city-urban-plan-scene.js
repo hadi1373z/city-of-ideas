@@ -1,9 +1,9 @@
-import {buildGardenPaving} from './six-gate-garden-paving.js?v=coastal-terraces-20261121';
+import {buildGardenPaving} from './six-gate-garden-paving.js?v=garden-house-stone-20261121';
 import {buildSixGateGarden} from './six-gate-garden-scene.js?v=coastal-terraces-20261121';
-import {SIXFOLD_CITY} from './city-urban-plan-model.js?v=coastal-terraces-20261121';
+import {SIXFOLD_CITY} from './city-urban-plan-model.js?v=garden-house-stone-20261121';
 import {cutDescentGround} from './escher-descent-model.js?v=wall-rails-20261121';
 import {createParkGrassMaterial,COURT_GRASS_HEX,isCoastalLawnCell,courtGrassIndex} from './city-lawn-palette.js?v=makers-passages-20261118';
-import {URBAN_COURTS,HONEYCOMB_CITY,urbanPlanting,urbanRoutes,segmentDistance,urbanLawnCells} from './city-urban-plan-model.js?v=coastal-terraces-20261121';
+import {URBAN_COURTS,HONEYCOMB_CITY,urbanPlanting,urbanRoutes,segmentDistance,urbanLawnCells} from './city-urban-plan-model.js?v=garden-house-stone-20261121';
 import {INHABITED_BLOCKS} from './city-hex-layout.js?v=night-garden-20261121';
 export function buildCityUrbanPlan(T,{naturalTrees=globalThis.window?.buildNaturalCityTrees,parkGrass=null}={}){
  const group=new T.Group();group.name='Honeycomb city · gated mathematical courts and connected learning houses';const owned=new Set(),own=x=>(owned.add(x),x),box=own(new T.BoxGeometry(1,1,1)),stamp=new T.Object3D(),batches=new Map(),colliders=[],treePositions=urbanPlanting().filter(p=>HONEYCOMB_CITY.walls.every(w=>segmentDistance(p.x,p.z,w.a,w.b)>1.7)),routes=urbanRoutes();
