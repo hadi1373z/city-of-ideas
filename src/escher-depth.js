@@ -1,8 +1,8 @@
 import {CLEBSCH} from './clebsch-cubic-model.js';
-import {installEscherDescent} from './escher-descent.js?v=live-light-niches-20261121';
+import {installEscherDescent} from './escher-descent.js?v=escher-blue-alcoves-final-20261121';
 import {PRINT_STUDIES,dependencyOrder} from './escher-print-studies.js?v=cloister-20261120';
-import {ESCHER_DEPTH as D,DEPTH_VIEW,DEPTH_FOCUS,depthFloorAt,depthRoomAt,walkDepth,atGalleryHandoff,perspectiveAligned,tileMismatch,loopResult} from './escher-depth-model.js?v=night-garden-20261121';
-import {buildEscherDepth} from './escher-depth-scene.js?v=visual-polish-20261121';
+import {ESCHER_DEPTH as D,DEPTH_VIEW,DEPTH_FOCUS,depthFloorAt,depthRoomAt,walkDepth,atGalleryHandoff,perspectiveAligned,tileMismatch,loopResult} from './escher-depth-model.js?v=escher-blue-alcoves-final-20261121';
+import {buildEscherDepth} from './escher-depth-scene.js?v=escher-blue-alcoves-final-20261121';
 
 const ROOM_NAMES={vestibule:'Gallery passage',hall:'Hexagonal vaulted court','hall-gallery':'Upper court gallery','perspective-gallery':'Perspective balcony','tessellation-gallery':'Tessellation balcony','reading-gallery':'Topology balcony','gallery-stair':'Stair to the upper gallery',perspective:'Perspective chamber',tessellation:'Tessellation chamber',reading:'Topology & relations wing',stair:'Stair to the loop chamber',loop:'Lower hexagonal cloister'};
 export function installEscherDepth(M,T,{onGalleryExit=null}={}){
@@ -41,6 +41,13 @@ export function installEscherDepth(M,T,{onGalleryExit=null}={}){
  }
  function stop(){descent?.stop();active=false;hold=0;dialog.close();restoreLight();delete document.body.dataset.escherDepth;panel.hidden=true;portalButton.hidden=true;}
  function enter(id='gallery'){
+  // Explicit visitor shortcut to the existing lower stair mouth. Activate the
+  // same reversible controller that ordinary visitors enter from the museum.
+  if(id==='alcoves'){
+   if(disposed||blocked())return false;M.cancelActivity?.();stop();
+   M.arrive({x:225,z:106.5,y:-40,yaw:0,pitch:.02});M.setCityMode();M.clearMovement();
+   return descent.step(0,{forward:1});
+  }
   if(disposed||blocked())return false;if(id==='escher')return gateOpen(D.portals[0])&&descent?.approach();const p=D.portals.find(p=>p.id===id);if(id!=='gallery'&&(!p||!gateOpen(p)))return false;
   M.cancelActivity?.();if(active)stop();const landing=p?.landing??{x:136.4,z:115,y:-40,yaw:-Math.PI/2};
   M.arrive({...landing});M.setCityMode();M.clearMovement();M.player.pitch=0;active=true;if(p)lastDoor=p.id;hold=0;document.body.dataset.escherDepth='true';portalButton.hidden=true;setLight();renderPanel();return true;

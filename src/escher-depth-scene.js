@@ -2,9 +2,10 @@ import {buildMobiusLattice} from './mobius-lattice-scene.js';
 import {CLEBSCH} from './clebsch-cubic-model.js';
 import {buildClebschCubic} from './clebsch-cubic-scene.js';
 import {DESCENT} from './escher-descent-model.js?v=wall-rails-20261121';
-import {roomCeilingAt,ESCHER_DEPTH as D,ESCHER_DEPTH_WALLS as WALLS,ESCHER_DEPTH_OBSTACLES as CASES,DEPTH_TRIANGLE,DEPTH_VIEW,tilePolygon,loopResult,hexagon,ringPolygons,outsidePolygonRectangle} from './escher-depth-model.js?v=night-garden-20261121';
+import {ESCHER_NICHE_FINISH_CUT} from './escher-niche-model.js?v=escher-blue-alcoves-final-20261121';
+import {roomCeilingAt,ESCHER_DEPTH as D,ESCHER_DEPTH_WALLS as WALLS,ESCHER_DEPTH_OBSTACLES as CASES,DEPTH_TRIANGLE,DEPTH_VIEW,tilePolygon,loopResult,hexagon,ringPolygons,outsidePolygonRectangle} from './escher-depth-model.js?v=escher-blue-alcoves-final-20261121';
 
-const shaftFinishCut={minX:DESCENT.shaft.minX-.22,maxX:DESCENT.shaft.maxX+.22,minZ:DESCENT.shaft.minZ-.22,maxZ:DESCENT.shaft.maxZ+.22};
+const shaftFinishCut=ESCHER_NICHE_FINISH_CUT;
 const WALL_PRINTS=[{file:'relativity.jpg',title:'Relativity',year:1953,ratio:500/479,x:142.25,z:120,yaw:Math.PI/2},{file:'drawing-hands.jpg',title:'Drawing Hands',year:1948,ratio:500/448,x:231.97,z:149.1,yaw:-Math.PI/2},{file:'ascending-descending.jpg',title:'Ascending and Descending',year:1960,ratio:500/595,x:179.03,z:166,yaw:Math.PI/2}];
 export function buildEscherDepth(T,{canvas=()=>document.createElement('canvas'),loadTexture=typeof globalThis.document?.createElementNS==='function'?url=>new T.TextureLoader().load(url):null}={}){
  const group=new T.Group();group.name='Escher · hexagonal cloister';group.userData.escherDepth=true;

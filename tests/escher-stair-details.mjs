@@ -5,6 +5,7 @@ import {buildEscherDescent} from '../src/escher-descent.js';
 import {ESCHER_DEPTH as D,depthFloorAt} from '../src/escher-depth-model.js';
 import {buildEscherDepth} from '../src/escher-depth-scene.js';
 import {ESCHER_NICHE_SILL} from '../src/escher-stone-details.js';
+import {nicheArchHeight} from '../src/escher-niche-model.js';
 
 const ctx=new Proxy({},{get:(o,k)=>o[k]??(()=>{})}),canvas=()=>({getContext:()=>ctx});
 const surface=buildEscherDescent(T),museum=buildEscherDepth(T,{canvas});
@@ -25,24 +26,25 @@ assert.equal(ornaments.children.length,2,'All31 decorated niches use two bounded
 assert(ornaments.userData.tileCount>600&&ornaments.userData.vaultCellCount>400);
 for(const mesh of ornaments.children){const p=mesh.geometry.attributes.position;for(let i=0;i<p.count;i++){
  const x=p.getX(i),y=p.getY(i),z=p.getZ(i);assert(Number.isFinite(x+y+z));
- assert(surface.group.userData.stairNiches.some(n=>{const dx=x-n.origin[0],dz=z-n.origin[2],u=dx*n.along[0]+dz*n.along[1],d=dx*n.out[0]+dz*n.out[1],v=y-n.origin[1],r=n.w/2;return d>=-n.depth-.001&&d<=-.044&&v>=.011&&Math.abs(u)<=r+.001&&(v<=n.spring||u*u+(v-n.spring)**2<=r*r+.002);}), 'Every tile and vault facet remains inside a carved arch and behind its wall face');
+ assert(surface.group.userData.stairNiches.some(n=>{const dx=x-n.origin[0],dz=z-n.origin[2],u=dx*n.along[0]+dz*n.along[1],d=dx*n.out[0]+dz*n.out[1],v=y-n.origin[1],r=n.w/2;return d>=-n.depth-.001&&d<=-.042&&v>=.011&&Math.abs(u)<=r+.001&&v<=nicheArchHeight(n,u)+.002;}), 'Every tile and vault facet remains inside a carved pointed arch and behind its wall face');
 }}
 for(const n of surface.group.userData.stairNiches){
  const y=n.origin[1]+1.3,start=new T.Vector3(n.origin[0]+n.out[0]*.4,y,n.origin[2]+n.out[1]*.4),direction=new T.Vector3(-n.out[0],0,-n.out[1]);
- const hits=new T.Raycaster(start,direction,0,1).intersectObject(combined,true).filter(h=>!h.object.userData.nicheOrnament);assert(hits.length,'Every alcove has a real opaque back');
+ const hits=new T.Raycaster(start,direction,0,1.1).intersectObject(combined,true).filter(h=>!h.object.userData.nicheOrnament);assert(hits.length,'Every alcove has a real opaque back');
  const depth=(hits[0].point.x-n.origin[0])*n.out[0]+(hits[0].point.z-n.origin[2])*n.out[1];
  assert(Math.abs(depth+n.depth)<.004,'The combined museum/shaft must expose the full recessed depth: '+n.id+' '+depth+' '+hits[0].object.name);
  if(n.id.startsWith('flight-0-'))assert(n.origin[1]+n.spring+n.w/2<-.4,'First-flight arches fit entirely below the surface shaft lid');
  for(const offset of[-.3,0,.3]){
-  const along=offset*n.w,r=n.w/2,top=n.origin[1]+n.spring+Math.sqrt(r*r-along*along)-.06;
+  const along=offset*n.w,top=n.origin[1]+nicheArchHeight(n,along)-.06;
   const a=new T.Vector3(n.origin[0]+n.along[0]*along+n.out[0]*.4,top,n.origin[2]+n.along[1]*along+n.out[1]*.4);
-  const h=new T.Raycaster(a,direction,0,1).intersectObject(combined,true).filter(h=>!h.object.userData.nicheOrnament);assert(h.length,'The alcove crown has a closed back');
+  const h=new T.Raycaster(a,direction,0,1.1).intersectObject(combined,true).filter(h=>!h.object.userData.nicheOrnament);assert(h.length,'The alcove crown has a closed back');
   const d=(h[0].point.x-n.origin[0])*n.out[0]+(h[0].point.z-n.origin[2])*n.out[1];
   assert(Math.abs(d+n.depth)<.004,'A real museum slab or shaft lid must not fill the arch crown: '+n.id);
  }
- const tileStart=new T.Vector3(n.origin[0]+n.out[0]*.4,n.origin[1]+.45,n.origin[2]+n.out[1]*.4),tileHits=new T.Raycaster(tileStart,direction,0,1).intersectObject(combined,true);
+ const tileStart=new T.Vector3(n.origin[0]+n.out[0]*.4,n.origin[1]+.45,n.origin[2]+n.out[1]*.4),tileHits=new T.Raycaster(tileStart,direction,0,1.1).intersectObject(combined,true);
  assert(tileHits[0]?.object.userData.nicheOrnament,'Tilework is the visible first surface in every formerly empty recess');
- let sculpted=false;for(const u of[-.12*n.w,0,.12*n.w]){const a=new T.Vector3(n.origin[0]+n.along[0]*u+n.out[0]*.4,n.origin[1]+n.spring+.1*n.w/2,n.origin[2]+n.along[1]*u+n.out[1]*.4),h=new T.Raycaster(a,direction,0,1).intersectObject(combined,true)[0];if(h?.object.name.includes('faceted')){const d=(h.point.x-n.origin[0])*n.out[0]+(h.point.z-n.origin[2])*n.out[1];if(d>-n.depth+.025&&d<-.04)sculpted=true;}}
+ const layout=ornaments.userData.nicheLayouts.find(l=>l.niche.id===n.id);
+ let sculpted=false;for(const c of layout.cells.filter(c=>c.row===2)){const u=c.u,a=new T.Vector3(n.origin[0]+n.along[0]*u+n.out[0]*.4,n.origin[1]+c.y+c.spring*.5,n.origin[2]+n.along[1]*u+n.out[1]*.4),h=new T.Raycaster(a,direction,0,1.1).intersectObject(combined,true)[0];if(h?.object.name.includes('faceted')){const d=(h.point.x-n.origin[0])*n.out[0]+(h.point.z-n.origin[2])*n.out[1];if(d>-n.depth+.025&&d<-.04)sculpted=true;}}
  assert(sculpted,'Every niche has visible three-dimensional vault cells rather than a flat printed substitute');
 }
 for(const p of DESCENT_PARTS.filter(p=>p.id.startsWith('landing-'))){

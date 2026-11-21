@@ -1,5 +1,6 @@
 import {CLEBSCH} from './clebsch-cubic-model.js';
 import {DESCENT,STAIR_PORTAL} from './escher-descent-model.js?v=wall-rails-20261121';
+import {ESCHER_NICHE_ENCLOSURE} from './escher-niche-model.js?v=escher-blue-alcoves-final-20261121';
 import {CLOISTER_ROOMS,CLOISTER_STAIRS,CLOISTER_GALLERIES,insidePolygon,hexagon,rectangle,ringPolygons,outsidePolygonRectangle} from './escher-cloister-layout.js?v=cloister-20261120';
 export {insidePolygon,hexagon,ringPolygons,outsidePolygonRectangle};
 export const ESCHER_MOBIUS_PLINTH=Object.freeze({x:218.5,z:155,width:5,depth:5});
@@ -18,7 +19,15 @@ export const ESCHER_DEPTH=Object.freeze({mobiusPlinth:ESCHER_MOBIUS_PLINTH,floor
 const rect=(id,minX,maxX,minZ,maxZ,y=-40)=>({id,minX,maxX,minZ,maxZ,y});
 const inRect=(r,x,z,pad=0)=>x>=r.minX-pad&&x<=r.maxX+pad&&z>=r.minZ-pad&&z<=r.maxZ+pad;
 const inFloor=(r,x,z)=>insidePolygon(r.polygon,x,z)&&(!r.inner||!insidePolygon(hexagon(...r.centre,r.inner),x,z));
-const shaftBlocked=(x,z)=>inRect(DESCENT.shaft,x,z)&&!(Math.abs(x-225)<=.9&&z>=104);
+const shaftBlocked=(x,z)=>{
+ // The original inner stair/landing ownership remains exact. Only the newly
+ // thicker OUTSIDE masonry reserve is added to museum walking exclusions.
+ if(inRect(DESCENT.shaft,x,z))return !(Math.abs(x-225)<=.9&&z>=104);
+ if(!inRect(ESCHER_NICHE_ENCLOSURE,x,z))return false;
+ // Preserve the real south doorway through the whole wall thickness; never
+ // make a blanket expanded rectangle across the unchanged225m exit aisle.
+ return !(Math.abs(x-STAIR_PORTAL.x)<=STAIR_PORTAL.opening&&z>=104);
+};
 export const ESCHER_DEPTH_OBSTACLES=Object.freeze([
  rect('west tunnel jamb',134.1,134.65,112,113),rect('west tunnel jamb',134.1,134.65,117,118),
  ...[-1,1].map(side=>{const p=STAIR_PORTAL;return rect('Escher stair jamb',p.x+(side<0?-p.halfWidth:p.opening),p.x+(side<0?-p.opening:p.halfWidth),p.z,p.z+p.depth);}),

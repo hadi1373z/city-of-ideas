@@ -377,3 +377,9 @@ actual wall, both locked and unlocked. The two sliding shutter halves overlap
 by2cm at the centre seam, avoiding an unintended pinhole. Existing entrance,
 descent and combined
 stair-detail checks pass; historical explicit builder placements remain intact.
+
+The blue recessed stair alcoves are now implemented, with .60m cavities,
+six courses and three equal wall facets. Their depth runs upper-forward to
+lower-deeper and from both sides towards the centre. The original320 treads,
+all landings, rails and niche positions stay fixed; the masonry reserve expands
+outward only. See `ESCHER-BLUE-ALCOVES.md` for geometry and independent checks.

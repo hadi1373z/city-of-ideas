@@ -1,5 +1,6 @@
-import {buildEscherShaftDetails,ESCHER_SHAFT_NICHES,nicheVoid} from './escher-stone-details.js?v=live-light-niches-20261121';
+import {buildEscherShaftDetails,ESCHER_SHAFT_NICHES,nicheVoid} from './escher-stone-details.js?v=escher-blue-alcoves-final-20261121';
 import {DESCENT as D,DESCENT_ANNEX as A,annexContains,STAIR_PORTAL as P,DESCENT_PARTS as PARTS,descentFloorBounds,descentSurface,walkDescent,outsideRectangle} from './escher-descent-model.js?v=wall-rails-20261121';
+import {ESCHER_NICHE_WALL as WALL} from './escher-niche-model.js?v=escher-blue-alcoves-final-20261121';
 export function buildEscherDescent(T){
  const group=new T.Group();group.name='Escher · continuous eight-flight descent';const owned=[],batches=new Map(),unit=new T.BoxGeometry(1,1,1);owned.push(unit);
  const mat=c=>{const m=new T.MeshLambertMaterial({color:c,side:T.DoubleSide});owned.push(m);return m;},stone=mat(0xd0c7ae),slate=mat(0x718980),light=mat(0xe2dac2),brass=mat(0x9c824e),facade=mat(0xd0c7ae);
@@ -27,14 +28,15 @@ export function buildEscherDescent(T){
   }
  }}
  const s=D.shaft;
- // Solid 28cm masonry survives the close camera, enclosing every flight.
- for(const x of[s.minX-.14,s.maxX+.14])box(.28,39.6,s.maxZ-s.minZ,x,-20.2,(s.minZ+s.maxZ)/2,slate);
+ // Additional bearing masonry is OUTSIDE the fixed stair faces, never an
+ // inward wall shift or a change to a tread, landing or walking width.
+ for(const x of[s.minX-WALL/2,s.maxX+WALL/2])box(WALL,39.6,s.maxZ-s.minZ,x,-20.2,(s.minZ+s.maxZ)/2,slate);
  box(s.maxX-s.minX,.28,s.maxZ-s.minZ,(s.minX+s.maxX)/2,-40.3,(s.minZ+s.maxZ)/2,slate);
- box(s.maxX-s.minX,39.6,.28,(s.minX+s.maxX)/2,-20.2,s.minZ-.14,slate);
+ box(s.maxX-s.minX,39.6,WALL,(s.minX+s.maxX)/2,-20.2,s.minZ-WALL/2,slate);
  // A real arched reveal replaces the plain rectangular museum-side mouth.
  const doorwayHeight=3.7,wallTop=-.4,lintel=P.floor+doorwayHeight;
- box(s.maxX-s.minX,wallTop-lintel,.28,(s.minX+s.maxX)/2,(wallTop+lintel)/2,s.maxZ+.14,slate);
- for(const r of outsideRectangle({minX:s.minX,maxX:s.maxX,minZ:s.maxZ,maxZ:s.maxZ+.28},{minX:P.x-P.opening,maxX:P.x+P.opening,minZ:s.maxZ-1,maxZ:s.maxZ+1}))box(r.maxX-r.minX,doorwayHeight,.28,(r.minX+r.maxX)/2,P.floor+doorwayHeight/2,s.maxZ+.14,slate);
+ box(s.maxX-s.minX,wallTop-lintel,WALL,(s.minX+s.maxX)/2,(wallTop+lintel)/2,s.maxZ+WALL/2,slate);
+ for(const r of outsideRectangle({minX:s.minX,maxX:s.maxX,minZ:s.maxZ,maxZ:s.maxZ+WALL},{minX:P.x-P.opening,maxX:P.x+P.opening,minZ:s.maxZ-1,maxZ:s.maxZ+1}))box(r.maxX-r.minX,doorwayHeight,WALL,(r.minX+r.maxX)/2,P.floor+doorwayHeight/2,s.maxZ+WALL/2,slate);
  const archShape=new T.Shape();archShape.moveTo(-P.halfWidth,0);archShape.lineTo(-P.halfWidth,P.height);archShape.lineTo(P.halfWidth,P.height);archShape.lineTo(P.halfWidth,0);archShape.lineTo(P.radius,0);archShape.lineTo(P.radius,P.spring);
  for(let i=1;i<=48;i++){const a=i*Math.PI/48;archShape.lineTo(P.radius*Math.cos(a),P.spring+P.radius*Math.sin(a));}archShape.lineTo(-P.radius,0);archShape.closePath();
  const archGeometry=new T.ExtrudeGeometry(archShape,{depth:P.depth,bevelEnabled:true,bevelThickness:.035,bevelSize:.035,bevelSegments:1,curveSegments:48}),arch=new T.Mesh(archGeometry,light);arch.position.set(P.x,P.floor,P.z);arch.name='Escher house · sculpted arched stair entrance';group.add(arch);owned.push(archGeometry);

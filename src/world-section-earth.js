@@ -1,7 +1,8 @@
 import {DESCENT} from './escher-descent-model.js?v=wall-rails-20261121';
+import {ESCHER_NICHE_ENCLOSURE} from './escher-niche-model.js?v=escher-blue-alcoves-final-20261121';
 import {SIXFOLD_HOUSES,houseToWorld} from './sixfold-house-network-model.js?v=escher-finish-20261120';
 import {sixfoldPassagePlan} from './sixfold-house-passages-scene.js?v=escher-finish-20261120';
-import {ESCHER_DEPTH as D,hexagon} from './escher-depth-model.js?v=night-garden-20261121';
+import {ESCHER_DEPTH as D,hexagon} from './escher-depth-model.js?v=escher-blue-alcoves-final-20261121';
 
 const EPS=1e-7,STRATA=[[0,-8,0],[-8,-22,1],[-22,-31,2],[-31,-44,0],[-44,-52,1],[-52,-65,2],[-65,-79,0],[-79,-88,1],[-88,-96,2]],cross=(a,b)=>a[0]*b[1]-a[1]*b[0];
 const rectangle=(minX,maxX,minZ,maxZ)=>[[minX,minZ],[maxX,minZ],[maxX,maxZ],[minX,maxZ]];
@@ -12,7 +13,7 @@ const prism=(id,polygon,bottom,top)=>({id,polygon,bottom,top});
 export function sectionRoomPrisms(){const passages=sixfoldPassagePlan();return[
  ...SIXFOLD_HOUSES.map(h=>prism('house-'+h.id,Array.from({length:6},(_,i)=>{const p=houseToWorld(h,{x:125+23.45*Math.cos(i*Math.PI/3),z:23.45*Math.sin(i*Math.PI/3)});return[p.x,p.z];}),-40.24,.13)),
  ...passages.rectangles.map(p=>prism('passage-'+p.id,p.polygon,-40.24,-34.875)),
- prism('escher-descent',rectangle(DESCENT.shaft.minX,DESCENT.shaft.maxX,DESCENT.shaft.minZ,DESCENT.shaft.maxZ),-40.4,.13),
+ prism('escher-descent',rectangle(ESCHER_NICHE_ENCLOSURE.minX,ESCHER_NICHE_ENCLOSURE.maxX,ESCHER_NICHE_ENCLOSURE.minZ,ESCHER_NICHE_ENCLOSURE.maxZ),-40.4,.13),
  ...D.rooms.map(r=>prism('museum-'+r.id,r.polygon,r.y-.4,r.ceiling+.45)),
  ...D.stairs.map(s=>prism('museum-'+s.id+'-well',rectangle(s.minX-.24,s.maxX+.24,s.minZ-.24,s.maxZ+.24),s.bottom-.4,s.ceiling+.45)),
  prism('museum-lower-basin',hexagon(197,166,12),-50,-46)

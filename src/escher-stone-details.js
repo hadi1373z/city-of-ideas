@@ -1,13 +1,9 @@
-import {buildEscherNicheOrnaments} from './escher-niche-ornaments.js?v=live-light-niches-20261121';
+import {buildEscherNicheOrnaments} from './escher-niche-ornaments.js?v=escher-blue-alcoves-final-20261121';
 import {DESCENT_PARTS,DESCENT_ANNEX} from './escher-descent-model.js?v=wall-rails-20261121';
+import {ESCHER_SHAFT_NICHES} from './escher-niche-model.js?v=escher-blue-alcoves-final-20261121';
+export {ESCHER_NICHE_SILL,ESCHER_SHAFT_NICHES,nicheVoid} from './escher-niche-model.js?v=escher-blue-alcoves-final-20261121';
 
-// Original masonry details; the stair arches are real shallow closed alcoves.
-export const ESCHER_NICHE_SILL=.93;
-export const ESCHER_SHAFT_NICHES=Object.freeze([
- ...DESCENT_PARTS.filter(p=>p.id.startsWith('landing-')).map(p=>({id:p.id,origin:[226.5,p.y+ESCHER_NICHE_SILL,p.minZ<92?90.62:106.58],along:[1,0],out:[0,p.minZ<92?1:-1],w:2.8,spring:1.25,depth:.18})),
- ...DESCENT_PARTS.filter(p=>p.kind==='flight').flatMap(p=>(p.i===0?[.72,.86,1]:[.2,.5,.8]).map(t=>{const side=p.x>226?1:-1;return{id:p.id+'-'+t,origin:[side>0?229.185:223.815,p.top+(p.bottom-p.top)*t+ESCHER_NICHE_SILL,p.start+(p.end-p.start)*t],along:[0,1],out:[-side,0],w:p.i===0?1.4:1.45,spring:1.05,depth:.18};}))
-]);
-export function nicheVoid(n){const corners=[-.5,.5].flatMap(s=>[-n.depth-.01,.045].map(d=>[n.origin[0]+n.along[0]*n.w*s+n.out[0]*d,n.origin[2]+n.along[1]*n.w*s+n.out[1]*d]));return{minX:Math.min(...corners.map(p=>p[0])),maxX:Math.max(...corners.map(p=>p[0])),minZ:Math.min(...corners.map(p=>p[1])),maxZ:Math.max(...corners.map(p=>p[1])),minY:n.origin[1],maxY:n.origin[1]+n.spring+n.w/2};}
+// Original masonry details; the stair arches are genuine closed recessed alcoves.
 function workshop(T,name){
  const group=new T.Group();group.name=name;const owned=[],positions=new Map();
  const material=(color,basic=false)=>{const m=basic?new T.MeshBasicMaterial({color}):new T.MeshLambertMaterial({color,side:T.DoubleSide});owned.push(m);return m;};
@@ -15,11 +11,11 @@ function workshop(T,name){
  function face(points,m){if(!positions.has(m))positions.set(m,[]);const p=positions.get(m);for(let i=1;i<points.length-1;i++)for(const v of[points[0],points[i],points[i+1]])p.push(...v);}
  function plate(poly,origin,along,out,depth,m){const map=(p,d)=>[origin[0]+along[0]*p[0]+out[0]*d,origin[1]+p[1],origin[2]+along[1]*p[0]+out[1]*d];face(poly.map(p=>map(p,depth)),m);face([...poly].reverse().map(p=>map(p,0)),m);for(let i=0;i<poly.length;i++)face([map(poly[i],0),map(poly[(i+1)%poly.length],0),map(poly[(i+1)%poly.length],depth),map(poly[i],depth)],m);}
  const rect=(w,h,y=0)=>[[-w/2,y],[w/2,y],[w/2,y+h],[-w/2,y+h]];
- function arch(origin,along,out,w,spring,depth=0){const r=w/2,outer=r+.12,poly=[[-r,0],[r,0],[r,spring]];for(let i=1;i<=32;i++){const a=i*Math.PI/32;poly.push([r*Math.cos(a),spring+r*Math.sin(a)]);}
-  if(depth){const at=(p,d)=>[origin[0]+along[0]*p[0]+out[0]*d,origin[1]+p[1],origin[2]+along[1]*p[0]+out[1]*d];face(poly.map(p=>at(p,-depth)),shadow);for(let i=0;i<poly.length;i++){const a=poly[i],b=poly[(i+1)%poly.length];face([at(a,0),at(b,0),at(b,-depth),at(a,-depth)],rim);}for(let i=0;i<32;i++){const a=i*Math.PI/32,b=(i+1)*Math.PI/32,p=[r*Math.cos(a),spring+r*Math.sin(a)],q=[r*Math.cos(b),spring+r*Math.sin(b)];face([at(p,0),at(q,0),at([q[0],spring+r],0),at([p[0],spring+r],0)],masonry);}}
+ function arch(origin,along,out,w,spring,depth=0,profile='round'){const r=w/2,outer=r+.12,crown=(rad,a)=>spring+rad*(profile==='pointed'?Math.pow(Math.max(0,1-Math.abs(Math.cos(a))),.65):Math.sin(a)),poly=[[-r,0],[r,0],[r,spring]];for(let i=1;i<=32;i++){const a=i*Math.PI/32;poly.push([r*Math.cos(a),crown(r,a)]);}
+  if(depth){const at=(p,d)=>[origin[0]+along[0]*p[0]+out[0]*d,origin[1]+p[1],origin[2]+along[1]*p[0]+out[1]*d];face(poly.map(p=>at(p,-depth)),shadow);for(let i=0;i<poly.length;i++){const a=poly[i],b=poly[(i+1)%poly.length];face([at(a,0),at(b,0),at(b,-depth),at(a,-depth)],rim);}for(let i=0;i<32;i++){const a=i*Math.PI/32,b=(i+1)*Math.PI/32,p=[r*Math.cos(a),crown(r,a)],q=[r*Math.cos(b),crown(r,b)];face([at(p,0),at(q,0),at([q[0],spring+r],0),at([p[0],spring+r],0)],masonry);}}
   else plate(poly,origin,along,out,.035,shadow);
   for(const sign of[-1,1])plate(rect(.12,spring),[origin[0]+along[0]*sign*(r+.06),origin[1],origin[2]+along[1]*sign*(r+.06)],along,out,.085,stone);
-  for(let i=0;i<32;i++){const a=i*Math.PI/32,b=(i+1)*Math.PI/32;plate([[r*Math.cos(a),spring+r*Math.sin(a)],[outer*Math.cos(a),spring+outer*Math.sin(a)],[outer*Math.cos(b),spring+outer*Math.sin(b)],[r*Math.cos(b),spring+r*Math.sin(b)]],origin,along,out,.085,stone);}
+  for(let i=0;i<32;i++){const a=i*Math.PI/32,b=(i+1)*Math.PI/32;plate([[r*Math.cos(a),crown(r,a)],[outer*Math.cos(a),crown(outer,a)],[outer*Math.cos(b),crown(outer,b)],[r*Math.cos(b),crown(r,b)]],origin,along,out,.085,stone);}
   plate(rect(w+.38,.10,-.1),origin,along,out,.10,stone);
  }
  function band(origin,along,out,w,h,depth,m=stone){plate(rect(w,h),origin,along,out,depth,m);}
@@ -56,6 +52,6 @@ export function buildEscherShaftDetails(T){
   for(const x of[224.15,228.85]){w.band([x,p.y+.55,z],along,out,.11,1.6,.025,w.rim);w.band([x,p.y+.65,z+(north?.03:-.03)],along,out,.035,1.35,.015,w.glow);}
  }
  // Curved reveals and a closed back sit inside the carved masonry, not over it.
- for(const n of ESCHER_SHAFT_NICHES)w.arch(n.origin,n.along,n.out,n.w,n.spring,n.depth);
+ for(const n of ESCHER_SHAFT_NICHES){w.arch(n.origin,n.along,n.out,n.w,n.spring,n.depth,n.profile);w.band([n.origin[0]-n.out[0]*.055,n.origin[1]+.027,n.origin[2]-n.out[1]*.055],n.along,n.out,n.w*.83,.014,.008,w.glow);}
  const built=w.finish(),ornaments=buildEscherNicheOrnaments(T,ESCHER_SHAFT_NICHES),dispose=built.dispose;built.group.add(ornaments.group);built.dispose=()=>{ornaments.dispose();dispose();};return built;
 }

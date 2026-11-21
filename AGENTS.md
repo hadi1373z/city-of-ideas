@@ -381,7 +381,7 @@ The philosophy quarter now follows the approved six-house Academy sketch. Read d
 
 Socrates’ original six-room public house now occupies eastern hex(3,0) beside the paper-boat landing. Read docs/SOCRATES-SHORE.md. socrates-site.js owns the rigid source placement(507,40), arrival and street approach; map, planting and urban footprints share it. Do not restore the old southwest house/marker or move its source-local contents/IDs.
 
-The31 Escher shaft arches are closed18cm-deep niches, shared by stone detail and masonry carving. Museum cuts extend22cm into the28cm shaft walls to preserve overlap without filling the recesses. All flight and landing floors now meet the enclosing walls; remove all wall-facing rails, including those in front of the flight alcoves, while retaining guards only beside open inter-flight drops and short landing returns. descentFloorBounds shares the solid support strips independently of the established navigation bands. Combined scene rays in tests/escher-stair-details.mjs verify the cavities, wall-side tread support, continuous landings and178 supported post joins.
+The31 Escher shaft arches now have .60m blue recessed cavities, shared by stone detail and masonry carving. Museum cuts extend .64m into .74m shaft walls expanded outward only, preserving overlap without filling recesses. All flight and landing floors meet the enclosing walls; retain guards only beside open inter-flight drops and short landing returns. descentFloorBounds shares solid support strips independently of established navigation bands. Combined scene rays in tests/escher-stair-details.mjs verify cavities, wall-side tread support, continuous landings and178 supported post joins. See docs/ESCHER-BLUE-ALCOVES.md.
 
 The daytime House of Light occupies hex(1,2). Read docs/HOUSE-OF-LIGHT.md. Preserve its real transparent shell, roof lantern,61 overhead rods, physical open routes and live mirror with oblique camera clipping. Keep map, planting and walking tied to house-of-light-model.js, controls physically gated and notebook writes explicit. Do not introduce a global clipping-plane mutation during nested mirror capture; it hides instanced transparent rods in the main pass.
 
@@ -532,9 +532,10 @@ turquoise, ivory and restrained gold ornamental sketch with concealed warm
 light. Cavities have roughly three sides of a hexagon, genuine vertical facets,
 upper courses forward and lower courses deeper, and symmetric sides-to-centre
 recession including the lower inner wall. The user explicitly CANCELLED the
-larger-central-facet requirement: use three equal sides. These refined drawings
-are proposals, not live niche replacements; preserve all320 stair treads,
-landings, positions and walking controls when implementing the eventual model.
+larger-central-facet requirement: use three equal sides. This design is now live
+in31 fixed apertures with .60m cavities and six courses. Preserve all320 stair
+treads, landings, original positions and walking controls; keep the outward-only
+.74m masonry reserve and museum finish cuts coherent. Run the blue-alcoves tests.
 
 The three-agent visual pass was limited to daytime public space and underground
 rooms after the user explicitly excluded night work. De Chirico uses restrained
@@ -567,7 +568,7 @@ Keep all448 treads, eight floor/landing buffers, source door clearance and five
 lower wall crops byte-exact. The existing patterned roofs remain independent.
 Read docs/SIXFOLD-GARDEN-FACADES.md and run its independent baseline/ray checks.
 The garden's65cm stone-course texture changes no paving positions, colours,
-tree holes or heights. It is separate from the still-uninstalled refined blue
-Escher alcove design. Do not report those alcoves as completed. The corrected
+tree holes or heights. It is separate from the now-installed blue Escher alcoves.
+The corrected
 house-grain browser review was blocked by the preview connection; no claim of
 exact sketch fidelity or public publication has been made.

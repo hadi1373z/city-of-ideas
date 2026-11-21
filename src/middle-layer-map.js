@@ -1,7 +1,7 @@
 import {DESCENT} from './escher-descent-model.js?v=wall-rails-20261121';
 import {SIXFOLD_HOUSES,NETWORK_PASSAGES,houseToWorld} from './sixfold-house-network-model.js?v=escher-finish-20261120';
 import {GALLERY_TUNNEL} from './world-cylinder-model.js?v=makers-passages-20261118';
-import {ESCHER_DEPTH} from './escher-depth-model.js?v=night-garden-20261121';
+import {ESCHER_DEPTH} from './escher-depth-model.js?v=escher-blue-alcoves-final-20261121';
 
 // A plan of the existing rooms, not a projection through solid earth. All
 // footprints retain their actual x/z positions; the labels disclose depth.
