@@ -26,11 +26,16 @@ Five original works invite a prediction and a physical comparison:
   than a painted image or a claim of an infinitely recursive mirror.
 
 These are original educational installations, not reproductions attributed to
-historical light artists. The luminous floor is an artistic projection, not a
-physical spectral simulation. Source references are the
+historical light artists. The former static rainbow fan is replaced with a real
+horizontal planar reflection of the61 hanging rods and suspension. Its selective
+512px transparent capture borrows their actual geometry, instance matrices,
+instance colours and current world transform. Manual hue/rotation and slow play
+therefore reach the floor together. The soft48%-strength circular reflection
+leaves the existing tiles visible; it does not simulate spectral caustics or
+reflect the entire city. Source references are the
 [Exploratorium light-mixing exhibit](https://annex.exploratorium.edu/exhibits/mix_n_match/)
 and [OpenStax plane mirrors](https://openstax.org/books/university-physics-volume-3/pages/2-1-images-formed-by-plane-mirrors).
-The one512px render target and oblique reflected-camera clipping follow the
+The passage and floor512px render targets and oblique reflected-camera clipping follow the
 standard construction documented by
 [Three.js Reflector](https://threejs.org/docs/pages/Reflector.html) and its
 [r160 reference implementation](https://github.com/mrdoob/three.js/blob/r160/examples/jsm/objects/Reflector.js).
@@ -49,3 +54,7 @@ state restoration. tests/house-of-light-ui.mjs checks physical eligibility,
 controls, reduced motion, hidden-page/underground isolation and cleanup. The
 urban-plan check also compares actual transformed pavilion and Commons geometry
 against every source/urban/coastal tree crown.
+
+tests/house-of-light-floor-reflection.mjs checks27 colour/rotation/viewpoint
+combinations, independently reflected viewing rays, horizontal clipping,
+shared source attributes, selective capture, playback, pause and cleanup.

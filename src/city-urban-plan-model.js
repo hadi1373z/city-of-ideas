@@ -1,4 +1,4 @@
-import {LIGHT_HOUSE,LIGHT_FOOTPRINT,LIGHT_PATHS,LIGHT_ENTRY} from './house-of-light-model.js?v=house-light-20261121';
+import {LIGHT_HOUSE,LIGHT_FOOTPRINT,LIGHT_PATHS,LIGHT_ENTRY} from './house-of-light-model.js?v=live-light-niches-20261121';
 import {SOCRATES_SITE} from './socrates-site-model.js?v=shore-niches-20261121';
 import {ACADEMY,ACADEMY_GATE_FOOTPRINT,ACADEMY_STOA_FOOTPRINTS,academyHousePolygon,philosopherWorld,philosopherEntry} from './academy-layout.js?v=academy-escher-20261120';
 import {pavilionFootprint,pavilionEntry} from './escher-pavilion-model.js?v=academy-escher-20261120';
@@ -20,7 +20,7 @@ import {STUDY_HOUSES,STUDY_PATHS} from './study-houses-data.js?v=city-night-2026
 import {PAVILIONS,pavilionTurn} from './mathematical-pavilions-model.js?v=city-night-20261117';
 import {PHILOSOPHERS,quarterPaths} from './philosopher-data.js?v=academy-escher-20261120';
 import {COAST_PATHS,HOUSE_ORIGAMI} from './origami-house-math.js?v=cloister-details-20261120';
-import {COAST_MAIN_PATHS} from './coastal-map-data.js?v=house-light-20261121';
+import {COAST_MAIN_PATHS} from './coastal-map-data.js?v=live-light-niches-20261121';
 
 // A regular city fabric joins the original inhabited districts. Private homes
 // retain source-local designs and now occupy the lower face.

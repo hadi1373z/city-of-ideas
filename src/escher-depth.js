@@ -1,4 +1,4 @@
-import {installEscherDescent} from './escher-descent.js?v=wall-rails-20261121';
+import {installEscherDescent} from './escher-descent.js?v=live-light-niches-20261121';
 import {PRINT_STUDIES,dependencyOrder} from './escher-print-studies.js?v=cloister-20261120';
 import {ESCHER_DEPTH as D,DEPTH_VIEW,DEPTH_FOCUS,depthFloorAt,depthRoomAt,walkDepth,atGalleryHandoff,perspectiveAligned,tileMismatch,loopResult} from './escher-depth-model.js?v=wall-rails-20261121';
 import {buildEscherDepth} from './escher-depth-scene.js?v=wall-rails-20261121';

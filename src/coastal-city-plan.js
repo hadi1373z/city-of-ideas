@@ -1,4 +1,4 @@
-import {LIGHT_HOUSE} from './house-of-light-model.js?v=house-light-20261121';
+import {LIGHT_HOUSE} from './house-of-light-model.js?v=live-light-niches-20261121';
 import {SOCRATES_SITE} from './socrates-site-model.js?v=shore-niches-20261121';
 import {MAKERS_SITE,MAKERS_ACCESS,MAKERS_ROOFS} from './makers-site.js?v=makers-block-20261118';
 import {PARK_GRASS_CSS,lawnMapColour} from './city-lawn-palette.js?v=makers-passages-20261118';
@@ -8,8 +8,8 @@ import {PARK_HEX_CELLS,CITY_HEX,IDEAS_PARK_SITE} from './city-hex-layout.js?v=ma
 import {coastX,HOUSE_ORIGAMI,COAST_ROUTES} from './origami-house-math.js?v=cloister-details-20261120';
 import {SEMINAR_HOUSES,SEMINAR_PATHS} from './seminar-houses-data.js?v=cloister-20261120';
 import {STUDY_PATHS} from './study-houses-data.js?v=city-night-20261117';
-import {COAST_MAIN_PATHS} from './coastal-map-data.js?v=house-light-20261121';
-import {URBAN_STREETS,ARCADE_STREETS,URBAN_COURTS,PRIVATE_HOME_RESERVE,HONEYCOMB_CITY,CITY_UNDERGROUND_LINKS,urbanCourtOutline,urbanBuildingFootprints,urbanLawnCells,urbanRoutes} from './city-urban-plan-model.js?v=house-light-20261121';
+import {COAST_MAIN_PATHS} from './coastal-map-data.js?v=live-light-niches-20261121';
+import {URBAN_STREETS,ARCADE_STREETS,URBAN_COURTS,PRIVATE_HOME_RESERVE,HONEYCOMB_CITY,CITY_UNDERGROUND_LINKS,urbanCourtOutline,urbanBuildingFootprints,urbanLawnCells,urbanRoutes} from './city-urban-plan-model.js?v=live-light-niches-20261121';
 export const COAST_MAP_COPY={en:{title:'An island around Zarathustra',gallery:'Zarathustra Gallery',ocean:'Surrounding ocean',park:'Ideas Park',artists:'Artists’ quarter',socrates:'Socrates',philosophers:'Philosophers’ quarter',makers:'Makers’ courtyard',study:'Advanced study houses',origami:'House of Origami',mountain:'Mountain of Becoming',shore:'Paper-boat lookout',note:'One circular island. The gallery at its centre. Ocean all around.'},de:{title:'Eine Insel um Zarathustra',gallery:'Zarathustra-Galerie',ocean:'Umliegender Ozean',park:'Ideenpark',artists:'Künstlerviertel',socrates:'Sokrates',philosophers:'Philosophenviertel',makers:'Hof der Schaffenden',study:'Vertiefte Lernhäuser',origami:'Haus des Origami',mountain:'Berg des Werdens',shore:'Papierboot-Aussicht',note:'Eine kreisrunde Insel. Die Galerie im Mittelpunkt. Rundum Ozean.'},fa:{title:'جزیره‌ای پیرامون زرتشت',gallery:'گالری زرتشت',ocean:'اقیانوس پیرامون جزیره',park:'پارک ایده‌ها',artists:'محلهٔ هنرمندان',socrates:'سقراط',philosophers:'محلهٔ فیلسوفان',makers:'حیاط سازندگان',study:'خانه‌های مطالعهٔ پیشرفته',origami:'خانهٔ اوریگامی',mountain:'کوه شدن',shore:'تماشای قایق کاغذی',note:'جزیره‌ای دایره‌ای؛ گالری در مرکز و اقیانوس در پیرامون.'}};
 const escape=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
 export function coastalPlanSvg(plan,lang='en'){

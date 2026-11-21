@@ -1,4 +1,4 @@
-import {buildEscherShaftDetails,ESCHER_SHAFT_NICHES,nicheVoid} from './escher-stone-details.js?v=wall-rails-20261121';
+import {buildEscherShaftDetails,ESCHER_SHAFT_NICHES,nicheVoid} from './escher-stone-details.js?v=live-light-niches-20261121';
 import {DESCENT as D,DESCENT_ANNEX as A,annexContains,STAIR_PORTAL as P,DESCENT_PARTS as PARTS,descentFloorBounds,descentSurface,walkDescent,outsideRectangle} from './escher-descent-model.js?v=wall-rails-20261121';
 export function buildEscherDescent(T){
  const group=new T.Group();group.name='Escher · continuous eight-flight descent';const owned=[],batches=new Map(),unit=new T.BoxGeometry(1,1,1);owned.push(unit);

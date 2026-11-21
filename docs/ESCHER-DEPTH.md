@@ -262,3 +262,14 @@ All seven turning landings extend to the enclosing side/end walls. The end-wall-
 
 
 The user clarified that wall-facing flight rails must be removed too. All eight flights and both end landings now have solid bearing strips to the shaft walls, while the established navigation bands remain unchanged. descentFloorBounds shares these actual support extents. The only shaft guards follow the open inter-flight drops and their short landing returns; none run in front of the wall alcoves. A regression checks every widened tread at the wall and rejects any outer-wall rail path.
+
+The31 niches now have93cm sill origins,55cm higher than before. The three on
+the first flight move to fractions .72/.86/1 and narrow to1.4m so their raised
+crowns fit below the actual ground ceiling. escher-niche-ornaments.js fills the
+backs with original cobalt/turquoise/ivory eight-point-star tilework and four
+rows of recessed faceted vault cells inspired by the user's reference. All
+ornament remains45–180mm behind the wall face. These are procedural geometric
+interpretations, not a photograph texture or a claim of a historical replica.
+Two geometry batches share one glazed material. Combined-scene tests retain
+opaque18cm backs, check visible tiles and genuinely three-dimensional cells in
+every niche, and prove all original stair/landing routes remain clear.

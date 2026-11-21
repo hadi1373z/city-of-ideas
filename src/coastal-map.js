@@ -1,7 +1,7 @@
-import {COAST_LANDMARKS, COAST_EXPLORER_COPY, coastMapPoint, coastWalkSvg, coastFaceLinksSvg} from './coastal-map-data.js?v=house-light-20261121';
+import {COAST_LANDMARKS, COAST_EXPLORER_COPY, coastMapPoint, coastWalkSvg, coastFaceLinksSvg} from './coastal-map-data.js?v=live-light-niches-20261121';
 
 import {seminarPathsSvg} from './seminar-houses-data.js?v=cloister-20261120';
-import {coastVisitor,COAST_POSITION_COPY,coastPositionText,coastDistance} from './coastal-position.js?v=house-light-20261121';
+import {coastVisitor,COAST_POSITION_COPY,coastPositionText,coastDistance} from './coastal-position.js?v=live-light-niches-20261121';
 import {mountMiddleLayerMap} from './middle-layer-map.js?v=wall-rails-20261121';
 
 // Native buttons keep map selection available to touch, keyboard and controllers.

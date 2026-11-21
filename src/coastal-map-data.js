@@ -1,4 +1,4 @@
-import {LIGHT_HOUSE} from './house-of-light-model.js?v=house-light-20261121';
+import {LIGHT_HOUSE} from './house-of-light-model.js?v=live-light-niches-20261121';
 import {SOCRATES_SITE} from './socrates-site-model.js?v=shore-niches-20261121';
 import {MAKERS_SITE,MAKERS_ACCESS,MAKERS_ROOFS} from './makers-site.js?v=makers-block-20261118';
 import {IDEAS_PARK_SITE} from './city-hex-layout.js?v=makers-passages-20261118';

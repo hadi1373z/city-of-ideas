@@ -1,9 +1,11 @@
+import {buildEscherNicheOrnaments} from './escher-niche-ornaments.js?v=live-light-niches-20261121';
 import {DESCENT_PARTS,DESCENT_ANNEX} from './escher-descent-model.js?v=wall-rails-20261121';
 
 // Original masonry details; the stair arches are real shallow closed alcoves.
+export const ESCHER_NICHE_SILL=.93;
 export const ESCHER_SHAFT_NICHES=Object.freeze([
- ...DESCENT_PARTS.filter(p=>p.id.startsWith('landing-')).map(p=>({id:p.id,origin:[226.5,p.y+.38,p.minZ<92?90.62:106.58],along:[1,0],out:[0,p.minZ<92?1:-1],w:2.8,spring:1.25,depth:.18})),
- ...DESCENT_PARTS.filter(p=>p.kind==='flight').flatMap(p=>(p.i===0?[.6,.75,.9]:[.2,.5,.8]).map(t=>{const side=p.x>226?1:-1;return{id:p.id+'-'+t,origin:[side>0?229.185:223.815,p.top+(p.bottom-p.top)*t+.38,p.start+(p.end-p.start)*t],along:[0,1],out:[-side,0],w:1.45,spring:1.05,depth:.18};}))
+ ...DESCENT_PARTS.filter(p=>p.id.startsWith('landing-')).map(p=>({id:p.id,origin:[226.5,p.y+ESCHER_NICHE_SILL,p.minZ<92?90.62:106.58],along:[1,0],out:[0,p.minZ<92?1:-1],w:2.8,spring:1.25,depth:.18})),
+ ...DESCENT_PARTS.filter(p=>p.kind==='flight').flatMap(p=>(p.i===0?[.72,.86,1]:[.2,.5,.8]).map(t=>{const side=p.x>226?1:-1;return{id:p.id+'-'+t,origin:[side>0?229.185:223.815,p.top+(p.bottom-p.top)*t+ESCHER_NICHE_SILL,p.start+(p.end-p.start)*t],along:[0,1],out:[-side,0],w:p.i===0?1.4:1.45,spring:1.05,depth:.18};}))
 ]);
 export function nicheVoid(n){const corners=[-.5,.5].flatMap(s=>[-n.depth-.01,.045].map(d=>[n.origin[0]+n.along[0]*n.w*s+n.out[0]*d,n.origin[2]+n.along[1]*n.w*s+n.out[1]*d]));return{minX:Math.min(...corners.map(p=>p[0])),maxX:Math.max(...corners.map(p=>p[0])),minZ:Math.min(...corners.map(p=>p[1])),maxZ:Math.max(...corners.map(p=>p[1])),minY:n.origin[1],maxY:n.origin[1]+n.spring+n.w/2};}
 function workshop(T,name){
@@ -55,5 +57,5 @@ export function buildEscherShaftDetails(T){
  }
  // Curved reveals and a closed back sit inside the carved masonry, not over it.
  for(const n of ESCHER_SHAFT_NICHES)w.arch(n.origin,n.along,n.out,n.w,n.spring,n.depth);
- return w.finish();
+ const built=w.finish(),ornaments=buildEscherNicheOrnaments(T,ESCHER_SHAFT_NICHES),dispose=built.dispose;built.group.add(ornaments.group);built.dispose=()=>{ornaments.dispose();dispose();};return built;
 }

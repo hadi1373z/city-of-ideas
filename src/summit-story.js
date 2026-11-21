@@ -1,6 +1,7 @@
 /* One optional summit event, using the existing child, roof and crater. */
 (function(g){'use strict';
-g.createSummitStory=function(T,{roof,mountain,figure,volcano,lava,figureLight,coreLight}){
+g.createSummitStory=function(T,{roof,mountain,figure,volcano,lava,figureLight,coreLight,enabled=g.CITY_CONFIG?.superhumanEnabled!==false}){
+ if(!enabled){figure.visible=false;if(figureLight){figureLight.visible=false;figureLight.intensity=0;}const off=()=>false;return{setMode:off,reachSummit:off,beginFromRoof:off,replay:off,finish:off,follow:off,update:off,updateCamera:off,dispose(){},get state(){return{enabled:false,mode:"explore",phase:"disabled",active:false,elapsed:0,following:false,waiting:false};}};}
  const child=mountain.infant,baseY=-2.16+(volcano.userData.figureRise||0),landingHeight=volcano.userData.landingHeight||12.35,coreIntensity=volcano.userData.coreIntensity||150,clamp=T.MathUtils.clamp,smooth=u=>u*u*(3-2*u);
  let mode='explore',phase='explore',elapsed=0,following=false,lastCamera=null;
  const active=()=>['arrival','crawl','poise','leap','flare','emerge'].includes(phase);
@@ -57,6 +58,7 @@ g.createSummitStory=function(T,{roof,mountain,figure,volcano,lava,figureLight,co
 };
 
 g.mountSummitStoryUI=function(story,{language,getPlayer,getVisitMode,isPaused=()=>false,readChapter=()=>{},reduced=false}){
+ if(story.state.enabled===false)return{update(){},dispose(){}};
  const words={
   en:{begin:'Begin the story ascent',legend:'Choose your experience',explore:'Free exploration',story:'Summit story',armed:'Reach the summit to begin the transformation.',arrival:'The child turns toward the light.',crawl:'Follow the child toward the gallery opening.',waiting:'Step aside to let the child pass.',poise:'At the edge, a moment of stillness.',leap:'The child leaps into the light.',flare:'A transformation begins.',emerge:'The Übermensch emerges.',complete:'The transformation is complete.',skip:'Skip animation',follow:'Follow the scene',free:'Return to my view',replay:'Replay transformation',aside:'Step away from the child’s starting place to replay.',note:'An imagined scene for this city, inspired by Zarathustra.'},
   de:{begin:'Den Aufstieg als Geschichte beginnen',legend:'Erlebnis wählen',explore:'Frei erkunden',story:'Gipfelgeschichte',armed:'Erreiche den Gipfel, um die Verwandlung zu beginnen.',arrival:'Das Kind wendet sich dem Licht zu.',crawl:'Folge dem Kind zur Öffnung im Galeriedach.',waiting:'Tritt zur Seite und lass das Kind vorbei.',poise:'Am Rand ein Moment der Stille.',leap:'Das Kind springt ins Licht.',flare:'Eine Verwandlung beginnt.',emerge:'Der Übermensch erhebt sich.',complete:'Die Verwandlung ist vollendet.',skip:'Animation überspringen',follow:'Der Szene folgen',free:'Zu meiner Ansicht zurückkehren',replay:'Verwandlung erneut ansehen',aside:'Verlasse den Startplatz des Kindes, um die Szene erneut anzusehen.',note:'Eine für diese Stadt erdachte Szene, inspiriert von Zarathustra.'},
