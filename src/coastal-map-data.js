@@ -1,3 +1,4 @@
+import {SOCRATES_SITE} from './socrates-site-model.js?v=shore-niches-20261121';
 import {MAKERS_SITE,MAKERS_ACCESS,MAKERS_ROOFS} from './makers-site.js?v=makers-block-20261118';
 import {IDEAS_PARK_SITE} from './city-hex-layout.js?v=makers-passages-20261118';
 import {SEMINAR_HOUSES} from './seminar-houses-data.js?v=cloister-20261120';
@@ -8,7 +9,7 @@ export const coastMapPoint = (x, z) => [460 + x * .7, 460 + z * .7];
 export const COAST_LANDMARKS = [
   {id: 'gallery', number: 1, point: [0, 0]},
   {id: 'park', number: 2, point: [IDEAS_PARK_SITE.x, IDEAS_PARK_SITE.z]},
-  {id: 'socrates', number: 3, point: [-96, 100]},
+  {id: 'socrates', number: 3, point: [SOCRATES_SITE.x, SOCRATES_SITE.z]},
   // The existing garden-court arrival, rather than a new district position.
   {id: 'artists', number: 4, point: [-398.3716857408417, 138]},
   {id: 'shore', number: 5, point: [SHORE.x, SHORE.z]}
@@ -16,8 +17,8 @@ export const COAST_LANDMARKS = [
 
 const A=Math.sqrt(3)*46;
 export const COAST_MAIN_PATHS = [
- // Socrates remains a small annex of the southwest learning cell.
- [[-97.7,103.8],[-97.7,111],[-119.5,111],[-2*A,92]],
+ // The original house now occupies the eastern boat-side hexagon.
+ ...SOCRATES_SITE.approaches,
  // The original park/pond entrance meets the northern shared hex edge.
  [[0,-92],[0,IDEAS_PARK_SITE.z+135]],
  // Makers and the existing Origami/Proof approaches meet a real block vertex.
@@ -46,7 +47,7 @@ export const COAST_EXPLORER_COPY = {
     landmarks: {
       gallery: {name: 'Zarathustra Gallery', area: 'The island centre', description: 'Explore the gallery and its philosophical artworks. Zarathustra stands at the exact centre of this circular island.'},
       park: {name: 'Ideas Park', area: 'The northern park', description: 'A green place for reflection, ideas and hands-on exploration. The park lies north of the central gallery.'},
-      socrates: {name: 'Socrates’ House', area: 'Southwest of the gallery', description: 'Visit Socrates’ house and its spaces for questions and conversation. Select Visit to approach the existing entrance.'},
+      socrates: {name: 'Socrates’ House', area: 'Eastern boat-side hexagon', description: 'Visit Socrates’ house and its spaces for questions and conversation. Select Visit to approach the existing entrance.'},
       artists: {name: 'Artists’ Quarter', area: 'The western garden block', description: 'Discover Monet, Van Gogh, Hilma af Klint and Morris around a shared garden court. The form galleries and working studios have their own marked blocks.'},
       shore: {name: 'Paper-Boat Lookout', area: 'The eastern shore', description: 'Look out over the ocean from the existing paper-boat landing. The coastal promenade connects this shore to the rest of the island.'}
     }
@@ -62,7 +63,7 @@ export const COAST_EXPLORER_COPY = {
     landmarks: {
       gallery: {name: 'Zarathustra-Galerie', area: 'Die Inselmitte', description: 'Erkunde die Galerie und ihre philosophischen Kunstwerke. Zarathustra steht genau im Mittelpunkt dieser kreisrunden Insel.'},
       park: {name: 'Ideenpark', area: 'Der nördliche Park', description: 'Ein grüner Ort zum Nachdenken, für Ideen und zum Ausprobieren. Der Park liegt nördlich der zentralen Galerie.'},
-      socrates: {name: 'Haus des Sokrates', area: 'Südwestlich der Galerie', description: 'Besuche das Haus des Sokrates mit seinen Räumen für Fragen und Gespräche. Mit „Diesen Ort besuchen“ erreichst du den bestehenden Eingang.'},
+      socrates: {name: 'Haus des Sokrates', area: 'Östlicher Wabenhof beim Boot', description: 'Besuche das Haus des Sokrates mit seinen Räumen für Fragen und Gespräche. Mit „Diesen Ort besuchen“ erreichst du den bestehenden Eingang.'},
       artists: {name: 'Künstlerviertel', area: 'Der westliche Gartenblock', description: 'Entdecke Monet, Van Gogh, Hilma af Klint und Morris am gemeinsamen Gartenhof. Die Formgalerien und Arbeitsateliers haben eigene markierte Stadtblöcke.'},
       shore: {name: 'Papierboot-Aussicht', area: 'Das östliche Ufer', description: 'Blicke von der bestehenden Papierboot-Anlegestelle auf den Ozean. Die Uferpromenade verbindet diesen Ort mit dem Rest der Insel.'}
     }
@@ -78,7 +79,7 @@ export const COAST_EXPLORER_COPY = {
     landmarks: {
       gallery: {name: 'گالری زرتشت', area: 'مرکز جزیره', description: 'گالری و آثار فلسفی آن را ببینید. زرتشت درست در مرکز این جزیرهٔ دایره‌ای قرار دارد.'},
       park: {name: 'پارک ایده‌ها', area: 'پارک شمالی', description: 'فضایی سبز برای اندیشیدن، ایده‌ها و تجربه کردن. پارک در شمال گالری مرکزی قرار دارد.'},
-      socrates: {name: 'خانهٔ سقراط', area: 'جنوب‌غرب گالری', description: 'به خانهٔ سقراط و فضاهای پرسش و گفت‌وگو سر بزنید. با انتخاب «رفتن به این مکان» به ورودی موجود خانه می‌رسید.'},
+      socrates: {name: 'خانهٔ سقراط', area: 'شش‌ضلعی شرقی کنار قایق', description: 'به خانهٔ سقراط و فضاهای پرسش و گفت‌وگو سر بزنید. با انتخاب «رفتن به این مکان» به ورودی موجود خانه می‌رسید.'},
       artists: {name: 'محلهٔ هنرمندان', area: 'بلوک باغ در غرب', description: 'مونه، ون‌گوگ، هیلما آف کلینت و موریس را پیرامون حیاط باغ مشترک کشف کنید. گالری‌های فرم و آتلیه‌های کار، بلوک‌های نشانه‌گذاری‌شدهٔ خود را دارند.'},
       shore: {name: 'سکوی تماشای قایق کاغذی', area: 'ساحل شرقی', description: 'از سکوی موجود قایق کاغذی به اقیانوس نگاه کنید. پیاده‌راه ساحلی اینجا را به دیگر بخش‌های جزیره پیوند می‌دهد.'}
     }

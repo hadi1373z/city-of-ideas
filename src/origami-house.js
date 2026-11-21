@@ -1,16 +1,16 @@
 import {createFoldWorkbenchControls} from './origami-fold-workbench-ui.js?v=cloister-details-20261120';
 import {faceRoomWork,showRoomDialog} from './room-workbench.js?v=origami-court-20261120';
 import {PARK_GRASS_HEX} from './city-lawn-palette.js?v=makers-passages-20261118';
-import {urbanRoutes,urbanBuildingFootprints} from './city-urban-plan-model.js?v=academy-escher-20261120';
+import {urbanRoutes,urbanBuildingFootprints} from './city-urban-plan-model.js?v=shore-niches-20261121';
 import {FOUNDATION_HOUSES,FOUNDATION_COPY,FOUNDATION_ROUTES} from './foundation-houses-data.js?v=makers-passages-20261118';
 import {CITY_ISLAND as ISLAND,onCityIsland,islandRadius} from './island-layout.js?v=makers-passages-20261118';
 import {buildOrigamiHouse} from './origami-house-scene.js?v=cloister-details-20261120';
-import {buildCityCoast} from './coastal-city-scene.js?v=academy-escher-20261120';
+import {buildCityCoast} from './coastal-city-scene.js?v=shore-niches-20261121';
 import {foldHouseMemory,HOUSE_ORIGAMI as P,miura,vertexTests,CREASE_CASES,coastX,COAST_ROUTES} from './origami-house-math.js?v=cloister-details-20261120';
 import {FOLD_COPY} from './origami-house-copy.js?v=cloister-details-20261120';
 import {ORIGAMI_LESSONS,paperDiagram} from './origami-lessons.js?v=city-night-20261117';
-import {mountCoastalMap} from './coastal-map.js?v=academy-escher-20261120';
-import {COAST_EXPLORER_COPY} from './coastal-map-data.js?v=cloister-20261120';
+import {mountCoastalMap} from './coastal-map.js?v=shore-niches-20261121';
+import {COAST_EXPLORER_COPY} from './coastal-map-data.js?v=shore-niches-20261121';
 import {SEMINAR_HOUSES} from './seminar-houses-data.js?v=cloister-20261120';
 export function installOrigamiHouse(M,T){
  const cityPaths=[],hiddenRoutes=[];M.scene.traverse(o=>{const r=o.userData;if(window.CITY_CONFIG?.sixfoldHouses!==true&&r?.groundRoute&&r.points?.every(([x,z])=>Math.hypot(x,z)<ISLAND.radius))cityPaths.push({points:r.points,width:r.width});if(o.name==='Mown lawn route · no raised paving'){hiddenRoutes.push([o,o.visible]);o.visible=false;}});/* Campus roads come from the shared polygonal authority; never resurface legacy landscape curves. */cityPaths.push(...(M.artistQuarter?.garden.paths||[]));

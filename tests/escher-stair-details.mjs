@@ -11,6 +11,27 @@ surface.group.updateMatrixWorld(true);museum.group.updateMatrixWorld(true);
 const v=p=>p.isVector3?p:new T.Vector3(...p),segment=(a,b,p)=>new T.Line3(v(a),v(b)).closestPointToPoint(v(p),true,new T.Vector3()).distanceTo(v(p));
 const ray=(root,a,b)=>{a=v(a);b=v(b);const d=b.clone().sub(a),length=d.length();return new T.Raycaster(a,d.normalize(),.001,length-.001).intersectObject(root,true);};
 const combined=new T.Group();combined.add(surface.group,museum.interior);combined.updateMatrixWorld(true);
+// These must be actual closed cavities, not a dark polygon laid on a wall.
+for(const n of surface.group.userData.stairNiches){
+ const y=n.origin[1]+1.3,start=new T.Vector3(n.origin[0]+n.out[0]*.4,y,n.origin[2]+n.out[1]*.4),direction=new T.Vector3(-n.out[0],0,-n.out[1]);
+ const hits=new T.Raycaster(start,direction,0,1).intersectObject(combined,true);assert(hits.length,'Every alcove has a real opaque back');
+ const depth=(hits[0].point.x-n.origin[0])*n.out[0]+(hits[0].point.z-n.origin[2])*n.out[1];
+ assert(Math.abs(depth+n.depth)<.004,'The combined museum/shaft must expose the full recessed depth: '+n.id+' '+depth+' '+hits[0].object.name);
+ if(n.id.startsWith('flight-0-'))assert(n.origin[1]+n.spring+n.w/2<-.4,'First-flight arches fit entirely below the surface shaft lid');
+ for(const offset of[-.3,0,.3]){
+  const along=offset*n.w,r=n.w/2,top=n.origin[1]+n.spring+Math.sqrt(r*r-along*along)-.06;
+  const a=new T.Vector3(n.origin[0]+n.along[0]*along+n.out[0]*.4,top,n.origin[2]+n.along[1]*along+n.out[1]*.4);
+  const h=new T.Raycaster(a,direction,0,1).intersectObject(combined,true);assert(h.length,'The alcove crown has a closed back');
+  const d=(h[0].point.x-n.origin[0])*n.out[0]+(h[0].point.z-n.origin[2])*n.out[1];
+  assert(Math.abs(d+n.depth)<.004,'A real museum slab or shaft lid must not fill the arch crown: '+n.id);
+ }
+}
+for(const p of DESCENT_PARTS.filter(p=>p.id.startsWith('landing-'))){
+ const north=p.minZ<92,z=north?p.minZ+.07:p.maxZ-.07;
+ for(const x of[224,226.5,229]){const hits=new T.Raycaster(new T.Vector3(x,p.y+.15,z),new T.Vector3(0,-1,0),0,.3).intersectObject(surface.group,true);assert(hits.some(h=>Math.abs(h.point.y-p.y)<.002),'Landing floor meets the wall without a side/end gap');}
+ const mid=new T.Vector3(226.5,p.y+1.08,north?p.minZ+.16:p.maxZ-.16),cross=new T.Raycaster(mid.clone().add(new T.Vector3(-1.2,0,0)),new T.Vector3(1,0,0),0,2.4).intersectObject(surface.group.getObjectByName('Continuous supported eight-flight handrails'));
+ assert.equal(cross.length,0,'No cross-fence blocks the wall-backed alcove');
+}
 let guards=0,bodyProbes=0;
 function checkGuards(root,paths,posts,railRoot){
  const pieces=paths.flatMap(path=>path.slice(1).map((b,i)=>[path[i],b]));

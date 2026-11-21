@@ -1,6 +1,7 @@
-import {DESCENT} from './escher-descent-model.js?v=cloister-20261120';
-import {roomCeilingAt,ESCHER_DEPTH as D,ESCHER_DEPTH_WALLS as WALLS,ESCHER_DEPTH_OBSTACLES as CASES,DEPTH_TRIANGLE,DEPTH_VIEW,tilePolygon,loopResult,hexagon,ringPolygons,outsidePolygonRectangle} from './escher-depth-model.js?v=escher-finish-20261120';
+import {DESCENT} from './escher-descent-model.js?v=shore-niches-20261121';
+import {roomCeilingAt,ESCHER_DEPTH as D,ESCHER_DEPTH_WALLS as WALLS,ESCHER_DEPTH_OBSTACLES as CASES,DEPTH_TRIANGLE,DEPTH_VIEW,tilePolygon,loopResult,hexagon,ringPolygons,outsidePolygonRectangle} from './escher-depth-model.js?v=shore-niches-20261121';
 
+const shaftFinishCut={minX:DESCENT.shaft.minX-.22,maxX:DESCENT.shaft.maxX+.22,minZ:DESCENT.shaft.minZ-.22,maxZ:DESCENT.shaft.maxZ+.22};
 const WALL_PRINTS=[{file:'relativity.jpg',title:'Relativity',year:1953,ratio:500/479,x:142.25,z:120,yaw:Math.PI/2},{file:'drawing-hands.jpg',title:'Drawing Hands',year:1948,ratio:500/448,x:231.97,z:149.1,yaw:-Math.PI/2},{file:'ascending-descending.jpg',title:'Ascending and Descending',year:1960,ratio:500/595,x:179.03,z:166,yaw:Math.PI/2}];
 export function buildEscherDepth(T,{canvas=()=>document.createElement('canvas'),loadTexture=typeof globalThis.document?.createElementNS==='function'?url=>new T.TextureLoader().load(url):null}={}){
  const group=new T.Group();group.name='Escher · hexagonal cloister';group.userData.escherDepth=true;
@@ -11,7 +12,7 @@ export function buildEscherDepth(T,{canvas=()=>document.createElement('canvas'),
  function box(w,h,d,x,y,z,m=stone,parent=interior,yaw=0){
   // Every museum solid, including its decorative panels and mouldings, must
   // leave the independently owned surface descent clear in the combined scene.
-  if(parent===interior){const c=Math.cos(yaw),s=Math.sin(yaw),p=[[-w/2,-d/2],[w/2,-d/2],[w/2,d/2],[-w/2,d/2]].map(([a,b])=>[x+a*c+b*s,z-a*s+b*c]),cut={minX:DESCENT.shaft.minX-.02,maxX:DESCENT.shaft.maxX+.02,minZ:DESCENT.shaft.minZ-.02,maxZ:DESCENT.shaft.maxZ+.02};
+  if(parent===interior){const c=Math.cos(yaw),s=Math.sin(yaw),p=[[-w/2,-d/2],[w/2,-d/2],[w/2,d/2],[-w/2,d/2]].map(([a,b])=>[x+a*c+b*s,z-a*s+b*c]),cut=shaftFinishCut;
    if(Math.min(...p.map(q=>q[0]))<cut.maxX&&Math.max(...p.map(q=>q[0]))>cut.minX&&Math.min(...p.map(q=>q[1]))<cut.maxZ&&Math.max(...p.map(q=>q[1]))>cut.minZ){for(const q of outsidePolygonRectangle(p,cut))slab(q,y+h/2,h,m);return;}}
   let byParent=batches.get(parent);if(!byParent)batches.set(parent,byParent=new Map());if(!byParent.has(m))byParent.set(m,[]);byParent.get(m).push({w,h,d,x,y,z,yaw});}
  function face(poly,m){if(poly.length<3)return;let points=surfaces.get(m);if(!points)surfaces.set(m,points=[]);for(let i=1;i<poly.length-1;i++)for(const p of[poly[0],poly[i],poly[i+1]])points.push(p[0],p[2],p[1]);}
@@ -23,9 +24,9 @@ export function buildEscherDepth(T,{canvas=()=>document.createElement('canvas'),
  }
  // Every floor, balcony and stair opening is cut from the shared navigation plan.
  for(const r of [...D.rooms,...D.galleries]){
-  const ps=r.inner?ringPolygons(r):[r.polygon],cuts=[...(!r.shaftLanding?[DESCENT.shaft]:[]),...D.stairs.filter(s=>s.top===r.y)];
+  const ps=r.inner?ringPolygons(r):[r.polygon],cuts=[...(!r.shaftLanding?[shaftFinishCut]:[]),...D.stairs.filter(s=>s.top===r.y)];
   for(const p of ps)for(const q of cutPieces(p,cuts))slab(q,r.y);
-  if(r.corridor&&r.y===D.floor){for(const q of cutPieces(r.polygon,[DESCENT.shaft]))slab(q,r.ceiling,.28,roof);}
+  if(r.corridor&&r.y===D.floor){for(const q of cutPieces(r.polygon,[shaftFinishCut]))slab(q,r.ceiling,.28,roof);}
  }
  // Deep opaque basin closes the lower cloister well; no sky is visible below it.
  const lower=D.rooms.find(r=>r.id==='loop'),well=hexagon(...lower.centre,lower.inner);slab(well,-50,.4,ink);
@@ -41,7 +42,7 @@ export function buildEscherDepth(T,{canvas=()=>document.createElement('canvas'),
   const point=(edge,t,f)=>{const a=r.polygon[edge],b=r.polygon[(edge+1)%6];return[cx+((a[0]+(b[0]-a[0])*t)-cx)*f,cz+((a[1]+(b[1]-a[1])*t)-cz)*f,r.spring+rise*(1-f*f)];};
   for(let edge=0;edge<6;edge++)for(let j=0;j<levels;j++)for(let k=0;k<segments;k++){
    const a=point(edge,k/segments,j/levels),b=point(edge,(k+1)/segments,j/levels),c=point(edge,(k+1)/segments,(j+1)/levels),d=point(edge,k/segments,(j+1)/levels);
-   for(const tri of[[a,b,c],[a,c,d]])for(const q of cutPieces(tri,[DESCENT.shaft]))face(q,roof);
+   for(const tri of[[a,b,c],[a,c,d]])for(const q of cutPieces(tri,[shaftFinishCut]))face(q,roof);
   }
   for(let edge=0;edge<6;edge++)for(const t of[0,.5]){let previous=point(edge,t,0);for(let j=1;j<=levels;j++){const next=point(edge,t,j/levels);if(!([previous,next].some(p=>p[0]>DESCENT.shaft.minX-.1&&p[0]<DESCENT.shaft.maxX+.1&&p[1]>DESCENT.shaft.minZ-.1&&p[1]<DESCENT.shaft.maxZ+.1)))rod([previous[0],previous[2]-.05,previous[1]],[next[0],next[2]-.05,next[1]],.055);previous=next;}}
  }

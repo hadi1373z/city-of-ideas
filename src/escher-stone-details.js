@@ -1,15 +1,21 @@
-import {DESCENT_PARTS,DESCENT_ANNEX} from './escher-descent-model.js';
+import {DESCENT_PARTS,DESCENT_ANNEX} from './escher-descent-model.js?v=shore-niches-20261121';
 
-// Original masonry details. Blind arches are deliberately opaque reliefs:
-// the credited prints on the other face of the wall keep their quiet backing.
+// Original masonry details; the stair arches are real shallow closed alcoves.
+export const ESCHER_SHAFT_NICHES=Object.freeze([
+ ...DESCENT_PARTS.filter(p=>p.id.startsWith('landing-')).map(p=>({id:p.id,origin:[226.5,p.y+.38,p.minZ<92?90.62:106.58],along:[1,0],out:[0,p.minZ<92?1:-1],w:2.8,spring:1.25,depth:.18})),
+ ...DESCENT_PARTS.filter(p=>p.kind==='flight').flatMap(p=>(p.i===0?[.6,.75,.9]:[.2,.5,.8]).map(t=>{const side=p.x>226?1:-1;return{id:p.id+'-'+t,origin:[side>0?229.185:223.815,p.top+(p.bottom-p.top)*t+.38,p.start+(p.end-p.start)*t],along:[0,1],out:[-side,0],w:1.45,spring:1.05,depth:.18};}))
+]);
+export function nicheVoid(n){const corners=[-.5,.5].flatMap(s=>[-n.depth-.01,.045].map(d=>[n.origin[0]+n.along[0]*n.w*s+n.out[0]*d,n.origin[2]+n.along[1]*n.w*s+n.out[1]*d]));return{minX:Math.min(...corners.map(p=>p[0])),maxX:Math.max(...corners.map(p=>p[0])),minZ:Math.min(...corners.map(p=>p[1])),maxZ:Math.max(...corners.map(p=>p[1])),minY:n.origin[1],maxY:n.origin[1]+n.spring+n.w/2};}
 function workshop(T,name){
  const group=new T.Group();group.name=name;const owned=[],positions=new Map();
  const material=(color,basic=false)=>{const m=basic?new T.MeshBasicMaterial({color}):new T.MeshLambertMaterial({color,side:T.DoubleSide});owned.push(m);return m;};
- const stone=material(0xd3cbb5),shadow=material(0x526d66),rim=material(0xa29c85),bronze=material(0x9a855b),glow=material(0xffdca1,true);
+ const stone=material(0xd3cbb5),shadow=material(0x526d66),rim=material(0xa29c85),masonry=material(0x718980),bronze=material(0x9a855b),glow=material(0xffdca1,true);
  function face(points,m){if(!positions.has(m))positions.set(m,[]);const p=positions.get(m);for(let i=1;i<points.length-1;i++)for(const v of[points[0],points[i],points[i+1]])p.push(...v);}
  function plate(poly,origin,along,out,depth,m){const map=(p,d)=>[origin[0]+along[0]*p[0]+out[0]*d,origin[1]+p[1],origin[2]+along[1]*p[0]+out[1]*d];face(poly.map(p=>map(p,depth)),m);face([...poly].reverse().map(p=>map(p,0)),m);for(let i=0;i<poly.length;i++)face([map(poly[i],0),map(poly[(i+1)%poly.length],0),map(poly[(i+1)%poly.length],depth),map(poly[i],depth)],m);}
  const rect=(w,h,y=0)=>[[-w/2,y],[w/2,y],[w/2,y+h],[-w/2,y+h]];
- function arch(origin,along,out,w,spring){const r=w/2,outer=r+.12,poly=[[-r,0],[r,0],[r,spring]];for(let i=1;i<=32;i++){const a=i*Math.PI/32;poly.push([r*Math.cos(a),spring+r*Math.sin(a)]);}plate(poly,origin,along,out,.035,shadow);
+ function arch(origin,along,out,w,spring,depth=0){const r=w/2,outer=r+.12,poly=[[-r,0],[r,0],[r,spring]];for(let i=1;i<=32;i++){const a=i*Math.PI/32;poly.push([r*Math.cos(a),spring+r*Math.sin(a)]);}
+  if(depth){const at=(p,d)=>[origin[0]+along[0]*p[0]+out[0]*d,origin[1]+p[1],origin[2]+along[1]*p[0]+out[1]*d];face(poly.map(p=>at(p,-depth)),shadow);for(let i=0;i<poly.length;i++){const a=poly[i],b=poly[(i+1)%poly.length];face([at(a,0),at(b,0),at(b,-depth),at(a,-depth)],rim);}for(let i=0;i<32;i++){const a=i*Math.PI/32,b=(i+1)*Math.PI/32,p=[r*Math.cos(a),spring+r*Math.sin(a)],q=[r*Math.cos(b),spring+r*Math.sin(b)];face([at(p,0),at(q,0),at([q[0],spring+r],0),at([p[0],spring+r],0)],masonry);}}
+  else plate(poly,origin,along,out,.035,shadow);
   for(const sign of[-1,1])plate(rect(.12,spring),[origin[0]+along[0]*sign*(r+.06),origin[1],origin[2]+along[1]*sign*(r+.06)],along,out,.085,stone);
   for(let i=0;i<32;i++){const a=i*Math.PI/32,b=(i+1)*Math.PI/32;plate([[r*Math.cos(a),spring+r*Math.sin(a)],[outer*Math.cos(a),spring+outer*Math.sin(a)],[outer*Math.cos(b),spring+outer*Math.sin(b)],[r*Math.cos(b),spring+r*Math.sin(b)]],origin,along,out,.085,stone);}
   plate(rect(w+.38,.10,-.1),origin,along,out,.10,stone);
@@ -45,10 +51,9 @@ export function buildEscherShaftDetails(T){
  }
  // Each turn is a framed recess ON the end wall, never an arch across a flight.
  for(const p of DESCENT_PARTS.filter(p=>p.id.startsWith('landing-'))){const north=p.minZ<92,z=north?90.62:106.58,out=[0,north?1:-1],along=[1,0];
-  w.arch([226.5,p.y+.38,z],along,out,2.8,1.25);
   for(const x of[224.15,228.85]){w.band([x,p.y+.55,z],along,out,.11,1.6,.025,w.rim);w.band([x,p.y+.65,z+(north?.03:-.03)],along,out,.035,1.35,.015,w.glow);}
  }
- // Shallow panels keep the flight walls articulated without taking walking width.
- for(const p of DESCENT_PARTS.filter(p=>p.kind==='flight')){const side=p.x>226?1:-1,x=side>0?229.185:223.815,out=[-side,0],along=[0,1];for(const t of[.2,.5,.8]){const z=p.start+(p.end-p.start)*t,y=p.top+(p.bottom-p.top)*t;w.arch([x,y+.38,z],along,out,1.45,1.05);}}
+ // Curved reveals and a closed back sit inside the carved masonry, not over it.
+ for(const n of ESCHER_SHAFT_NICHES)w.arch(n.origin,n.along,n.out,n.w,n.spring,n.depth);
  return w.finish();
 }

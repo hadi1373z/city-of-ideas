@@ -9,11 +9,11 @@ export const flightY=i=>DESCENT.top+(DESCENT.bottom-DESCENT.top)*i/DESCENT.fligh
 export function descentParts(){const out=[];for(let i=0;i<8;i++){
  const north=i%2===0,x=DESCENT.lanes[i%2],start=north?104:92,end=north?92:104;
  out.push({id:'flight-'+i,kind:'flight',i,x,start,end,top:flightY(i),bottom:flightY(i+1)});
- if(i<7)out.push({id:'landing-'+i,kind:'landing',minX:224.1,maxX:228.9,minZ:north?90.6:104,maxZ:north?92:105.4,y:flightY(i+1)});
+ if(i<7)out.push({id:'landing-'+i,kind:'landing',minX:DESCENT.shaft.minX,maxX:DESCENT.shaft.maxX,minZ:north?DESCENT.shaft.minZ:104,maxZ:north?92:DESCENT.shaft.maxZ,y:flightY(i+1)});
  }out.push({id:'entry',kind:'landing',minX:227.1,maxX:228.9,minZ:104,maxZ:106,y:.13},{id:'exit',kind:'landing',minX:224.1,maxX:225.9,minZ:104,maxZ:107,y:-40});return out;}
 export const DESCENT_PARTS=descentParts();
 export function descentSurface(x,z,fromY,tolerance=.32){const matches=[];for(const p of DESCENT_PARTS){let y;
- if(p.kind==='landing'){if(x<p.minX+.20||x>p.maxX-.20||z<(p.minZ===90.6?p.minZ+.3:p.minZ-.02)||z>p.maxZ+.02)continue;y=p.y;}
+ if(p.kind==='landing'){const turn=p.id.startsWith('landing-');if(x<p.minX+(turn?.3:.20)||x>p.maxX-(turn?.3:.20)||z<(p.minZ===90.6?p.minZ+.3:p.minZ-.02)||z>(turn&&p.maxZ===DESCENT.shaft.maxZ?p.maxZ-.3:p.maxZ+.02))continue;y=p.y;}
  else{if(Math.abs(x-p.x)>.60||z<92-.02||z>104+.02)continue;const t=Math.max(0,Math.min(1,(z-p.start)/(p.end-p.start)));y=p.top+(p.bottom-p.top)*Math.ceil(t*40-1e-8)/40;}
  if(Math.abs(y-fromY)<=tolerance)matches.push({...p,y});
  }return matches.sort((a,b)=>Math.abs(a.y-fromY)-Math.abs(b.y-fromY))[0]||null;}

@@ -1,6 +1,6 @@
-import {connectedContext,connectedRoute,JOURNEY_QUESTIONS} from './connected-journey-model.js?v=escher-finish-20261120';
+import {connectedContext,connectedRoute,JOURNEY_QUESTIONS} from './connected-journey-model.js?v=shore-niches-20261121';
 import {BABEL,babelDesk} from './babel-library-model.js?v=city-night-20261117';
-import {ESCHER_DEPTH as D} from './escher-depth-model.js?v=escher-finish-20261120';
+import {ESCHER_DEPTH as D} from './escher-depth-model.js?v=shore-niches-20261121';
 export function installConnectedJourney(M,T){
  const el=(tag,text)=>{const n=document.createElement(tag);if(text)n.textContent=text;return n;},button=(text,fn)=>{const n=el('button',text);n.type='button';n.className='glass';n.onclick=fn;return n;};
  const panel=el('details');panel.id='connected-journey';panel.lang='en';panel.dir='ltr';panel.hidden=true;

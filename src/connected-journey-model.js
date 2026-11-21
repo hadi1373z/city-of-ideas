@@ -1,6 +1,6 @@
 import {BABEL,babelDesk,surfaceAt as babelSurface,walkLibrary} from './babel-library-model.js?v=city-night-20261117';
 import {UPPER,LOWER,pointAt} from './two-face-gallery-model.js?v=city-night-20261117';
-import {ESCHER_DEPTH as D,depthRoomAt,depthFloorAt,canWalkDepth} from './escher-depth-model.js?v=escher-finish-20261120';
+import {ESCHER_DEPTH as D,depthRoomAt,depthFloorAt,canWalkDepth} from './escher-depth-model.js?v=shore-niches-20261121';
 import {lowerLocal,lowerPhysical,GALLERY_TUNNEL,tunnelContains} from './world-cylinder-model.js?v=city-night-20261117';
 import {MATH_FACULTY as F,facultyCanStand,facultyColliders} from './math-faculty-model.js?v=makers-passages-20261118';
 
