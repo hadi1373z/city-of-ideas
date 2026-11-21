@@ -1,3 +1,4 @@
+import {NIGHT_PARK} from '../src/night-park-model.js';
 import {LIGHT_HOUSE} from '../src/house-of-light-model.js';
 import {SOCRATES_SITE} from '../src/socrates-site-model.js';
 import {coastVisitor,COAST_POSITION_COPY,coastPositionText,coastDistance} from '../src/coastal-position.js';
@@ -9,7 +10,8 @@ import {COAST_LANDMARKS, COAST_EXPLORER_COPY, COAST_WALK, coastMapPoint, coastWa
 import {FOUNDATION_HOUSES,houseWorld} from '../src/foundation-houses-data.js';
 import {PARK_HEX_CELLS,CITY_HEX} from '../src/city-hex-layout.js';
 import {SEMINAR_HOUSES} from '../src/seminar-houses-data.js';
-import {CIVIC_PAIRED_COURTS,URBAN_COURTS,urbanBuildingFootprints,urbanCourtOutline} from '../src/city-urban-plan-model.js';
+import {CIVIC_PAIRED_COURTS,URBAN_COURTS,urbanBuildingFootprints,urbanCourtOutline,urbanPavedRoutes} from '../src/city-urban-plan-model.js';
+import {gardenPrecinctContains,gardenPavingContains} from '../src/six-gate-garden-paving.js';
 
 const scope = {window: {}};
 vm.runInNewContext(readFileSync(new URL('../src/artist-quarter-layout.js', import.meta.url), 'utf8'), scope);
@@ -28,10 +30,10 @@ for (const lang of ['en', 'de', 'fa']) {
   const project=points=>points.map(p=>coastMapPoint(...p).map(n=>n.toFixed(1)).join(',')).join(' ');
   for(const h of FOUNDATION_HOUSES){const footprint=[[-9,-8],[9,-8],[9,8],[-9,8]].map(([x,z])=>{const p=houseWorld(h,x,z);return[p.x,p.z];});assert(svg.includes('data-house="'+h.id+'" points="'+project(footprint)+'"'),'Each inward-facing public home must show its actual rotated 18 × 16 m floor');}
   for(const h of urbanBuildingFootprints(plan).filter(h=>h.category!=='gallery'&&h.category!=='reserve')){assert.equal([...svg.matchAll(new RegExp('data-building-footprint="'+h.id+'"','g'))].length,1,'Every existing public floor has one map outline');assert(svg.includes('data-centre="'+h.x+','+h.z+'"'));if(h.points)assert(svg.includes('points="'+project(h.points)+'"'));}
-  assert.equal((svg.match(/data-garden-cell=/g)||[]).length,5);for(const c of PARK_HEX_CELLS)assert(svg.includes('data-garden-cell="'+c.q+','+c.r+'" points="'+project(Array.from({length:6},(_,i)=>[c.x+CITY_HEX.side*Math.cos(Math.PI/6+i*Math.PI/3),c.z+CITY_HEX.side*Math.sin(Math.PI/6+i*Math.PI/3)]))+'"'),'The map must show the actual connected park lawns');
+  assert.equal((svg.match(/data-vacated-park-cell=/g)||[]).length,5);for(const c of PARK_HEX_CELLS)assert(svg.includes('data-vacated-park-cell="'+c.q+','+c.r+'" points="'+project(Array.from({length:6},(_,i)=>[c.x+CITY_HEX.side*Math.cos(Math.PI/6+i*Math.PI/3),c.z+CITY_HEX.side*Math.sin(Math.PI/6+i*Math.PI/3)]))+'"'),'The map retains the five vacated daylight parcels without falsely placing the night park there');
   for(const c of URBAN_COURTS)assert(svg.includes('data-civic-court="'+c.id+'"'));
   for(const c of CIVIC_PAIRED_COURTS)assert(svg.includes('data-civic-court="'+c.id+'" points="'+project(urbanCourtOutline(c))+'"'));
-  assert.equal((svg.match(/data-street="sixfold-front-/g)||[]).length,6);assert.equal((svg.match(/data-transformation-house="true"/g)||[]).length,6);assert(!svg.includes('data-private-home-reserve="true"'),'Personal homes now occupy the night face, not a blank upper reserve');assert(svg.includes('data-honeycomb-wall="true"'));assert(svg.includes('data-underground-link="gallery-east"'));assert(!svg.includes('NaN'));
+  assert.equal((svg.match(/data-street="garden-door-/g)||[]).length,6,'Six canonical curved door approaches replace the retired straight source strips');assert(svg.includes('data-garden-stone-field="true"'));assert(!svg.includes('data-street="sixfold-front-'),'Retired central roads cannot survive as map-only paths');assert.equal((svg.match(/data-transformation-house="true"/g)||[]).length,6);assert(!svg.includes('data-private-home-reserve="true"'),'Personal homes now occupy the night face, not a blank upper reserve');assert(svg.includes('data-honeycomb-wall="true"'));assert(svg.includes('data-underground-link="gallery-east"'));assert(!svg.includes('NaN'));
   assert(svg.includes('data-gallery-centre="true" cx="460" cy="460"'));
   assert(svg.includes('data-island="true" cx="460" cy="460" r="399"'));
   assert(svg.includes('cx="460" cy="460" r="375.2"'), 'Continuous coastal promenade');
@@ -46,8 +48,12 @@ for (const lang of ['en', 'de', 'fa']) {
   assert(svg.includes('lang="' + lang + '"'));
 }
 const generated=['en','de','fa'].map(lang=>geometry(coastalPlanSvg(plan,lang)));assert.deepEqual(generated[0],generated[1],'Translated copy cannot alter island coordinates or mirror the map');assert.deepEqual(generated[0],generated[2]);
+for(const route of urbanPavedRoutes(plan).filter(r=>!r.id.startsWith('garden-')))for(let i=1;i<route.points.length;i++){
+ const a=route.points[i-1],b=route.points[i];
+ for(const t of[.1,.5,.9])assert(!gardenPrecinctContains(a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t),'The map cannot keep an old crossing strip inside the garden');
+}
 assert.deepEqual(COAST_LANDMARKS.map(p => coastMapPoint(...p.point)), [
-  [460,460], [460,197.5], coastMapPoint(SOCRATES_SITE.x,SOCRATES_SITE.z), coastMapPoint(plan.arrival.x,plan.arrival.z), [849.1374286786722,513.2], ...SEMINAR_HOUSES.map(h=>coastMapPoint(h.x,h.z)),coastMapPoint(LIGHT_HOUSE.x,LIGHT_HOUSE.z)
+  [460,460], coastMapPoint(NIGHT_PARK.localX,NIGHT_PARK.localZ), coastMapPoint(SOCRATES_SITE.x,SOCRATES_SITE.z), coastMapPoint(plan.arrival.x,plan.arrival.z), [849.1374286786722,513.2], ...SEMINAR_HOUSES.map(h=>coastMapPoint(h.x,h.z)),coastMapPoint(LIGHT_HOUSE.x,LIGHT_HOUSE.z)
 ]);
 assert.deepEqual(COAST_LANDMARKS.find(p => p.id === 'artists').point, Array.from([plan.arrival.x, plan.arrival.z]));
 
@@ -66,7 +72,7 @@ for (let i = 1; i < COAST_WALK.length; i++) {
   const count = Math.ceil(Math.hypot(b[0]-a[0], b[1]-a[1]));
   for (let j = 0; j <= count; j++) {
     const p = [a[0]+(b[0]-a[0])*j/count, a[1]+(b[1]-a[1])*j/count];
-    assert(segments.some(([s,e]) => distance(p,s,e) < .11)||Math.abs(Math.hypot(p[0]-460,p[1]-460)-536*.7)<.11, 'Overlay must follow an existing path: ' + p);
+    assert(segments.some(([s,e]) => distance(p,s,e) < .11)||gardenPavingContains((p[0]-460)/.7,(p[1]-460)/.7)||Math.abs(Math.hypot(p[0]-460,p[1]-460)-536*.7)<.11, 'Overlay must follow an existing path or the continuous stone field: ' + p);
   }
 }
 assert(coastWalkSvg().includes('stroke-dasharray'), 'Route is identifiable without colour alone');

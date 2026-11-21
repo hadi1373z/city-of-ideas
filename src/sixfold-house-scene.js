@@ -1,13 +1,14 @@
-import {buildTransformationHouse} from './transformation-house-scene.js?v=makers-passages-20261118';
+import {buildTransformationHouse} from './transformation-house-scene.js?v=night-garden-20261121';
 import {buildHouseTiling} from './house-tiling-scene.js?v=makers-passages-20261118';
 import {SIXFOLD_HOUSES} from './sixfold-house-network-model.js?v=escher-finish-20261120';
+import {buildSixfoldHouseRoof} from './sixfold-house-roof-scene.js?v=garden-pattern-roofs-20261121';
 
 // One immutable structural prototype supplies all six houses. Only moving
 // shelves, pendulums, local lamp visibility and finish buffers are independent.
 // Distant houses use a small above-ground view of that same source geometry.
 export function buildSixfoldTransformationHouses(T,{canvas=()=>document.createElement('canvas')}={}){
  const group=new T.Group();group.name='Six houses of transformations · one connected honeycomb';
- const prototype=buildTransformationHouse(T,{canvas,includeTiling:false}),owned=new Set(),instances=[],targets=[],clonedInstances=[];
+ const prototype=buildTransformationHouse(T,{canvas,includeTiling:false,includeRoof:false}),owned=new Set(),instances=[],targets=[],clonedInstances=[];
  prototype.group.updateMatrixWorld(true);
  const sourceNodes=[];prototype.group.traverse(o=>sourceNodes.push(o));
  const sourceIndex=o=>sourceNodes.indexOf(o),secretIndex=sourceIndex(prototype.secret),lampIndex=sourceIndex(prototype.lamps),walkingIndex=sourceIndex(prototype.walking),pendulumIndices=prototype.pendulums.map(sourceIndex);
@@ -25,7 +26,6 @@ export function buildSixfoldTransformationHouses(T,{canvas=()=>document.createEl
    const copy=o.clone(false);copy.matrixAutoUpdate=false;copy.matrix.copy(o.matrixWorld);coarse.add(copy);
   }
  });
- const roofColours=[0x315b60,0x647b65,0x725f85,0x9b7555,0x587288,0x8a6d55];
  for(const h of SIXFOLD_HOUSES){
   const wrapper=new T.Group();wrapper.name=h.name+' · '+h.id+' honeycomb cell';wrapper.position.set(h.x,0,h.z);wrapper.rotation.y=h.turn;group.add(wrapper);
   const detail=prototype.group.clone(true);detail.position.x=-125;wrapper.add(detail);
@@ -34,23 +34,24 @@ export function buildSixfoldTransformationHouses(T,{canvas=()=>document.createEl
   const material=new T.MeshBasicMaterial({map:facadeTexture(h.name),toneMapped:false});owned.add(material);
   if(nodes[facadeIndex])nodes[facadeIndex].material=material;
   distant.traverse(o=>{if(o.isMesh&&o.geometry.type==='PlaneGeometry'&&Math.abs(o.matrix.elements[13]-5.7)<1e-5&&Math.abs(o.matrix.elements[14]-20.45)<1e-5)o.material=material;});
-  const roofMaterial=new T.MeshLambertMaterial({color:roofColours[h.index]});owned.add(roofMaterial);
-  for(const root of[detail,distant])root.traverse(o=>{if(o.geometry?.type==='ConeGeometry'&&o.geometry.parameters.radius===25)o.material=roofMaterial;});
+  // Mounted outside the detail/far toggle: the actual patterned roof is the
+  // same geometry at every viewing distance, never a plain coloured proxy.
+  const roof=buildSixfoldHouseRoof(T,{pattern:h.pattern});roof.group.position.x=-125;wrapper.add(roof.group);
   const lamps=nodes[lampIndex],secret=nodes[secretIndex],pendulums=pendulumIndices.map(i=>nodes[i]);lamps.visible=false;
   const localTargets=prototype.targets.map(t=>nodes[sourceIndex(t)]);for(const t of localTargets){t.userData.houseInstance=h.id;targets.push(t);}
   let tiling=null,instanceDisposed=false;
-  const instance={...h,group:wrapper,detail,exterior:distant,lamps,secret,targets:localTargets,source:{secret,pendulums,walking:nodes[walkingIndex]},
+  const instance={...h,group:wrapper,detail,exterior:distant,roof,lamps,secret,targets:localTargets,source:{secret,pendulums,walking:nodes[walkingIndex]},
    ensureInterior(){if(disposed||instanceDisposed)return null;if(!tiling){tiling=buildHouseTiling(T,{pattern:h.pattern,compact:true});detail.add(tiling.group);}return tiling;},
    get tiling(){return tiling;},
    update(time,shelfOpen=false,ratio=1.5){if(disposed||instanceDisposed)return;secret.position.x=125+(shelfOpen?3:0);pendulums.forEach((p,i)=>p.rotation.z=.3*Math.sin(time*(i?ratio:1)));},
-   setDetail(show){if(disposed||instanceDisposed)return;if(show)this.ensureInterior();detail.visible=!!show;distant.visible=!show;},
-   dispose(){if(instanceDisposed)return;instanceDisposed=true;tiling?.dispose();wrapper.removeFromParent();}
+   setDetail(show){if(disposed||instanceDisposed)return;if(show)this.ensureInterior();detail.visible=!!show;distant.visible=!show;roof.group.visible=true;},
+   dispose(){if(instanceDisposed)return;instanceDisposed=true;tiling?.dispose();roof.dispose();wrapper.removeFromParent();}
   };instances.push(instance);detail.visible=false;
  }
  let disposed=false;
  return{group,walking:group,instances,targets,prototype,
   // The coordinator activates only the nearby house, including its lamps.
-  update(time,states={},player=null,mode='city',activeHouseId=null,section=null){if(disposed)return;for(const h of instances){const state=states[h.id]||{},near=mode==='city'&&player&&Math.abs(player.y)<45&&Math.hypot(player.x-h.x,player.z-h.z)<62,cut=section&&Math.abs(h.x*Math.sin(section.angle)+h.z*Math.cos(section.angle))<26,show=h.id===activeHouseId||near||cut;h.setDetail(show);if(mode==='city'&&player?.y<-1&&!show)h.exterior.visible=false;h.update(time,state.shelfOpen,state.ratio);}},
+  update(time,states={},player=null,mode='city',activeHouseId=null,section=null){if(disposed)return;for(const h of instances){const state=states[h.id]||{},near=mode==='city'&&player&&Math.abs(player.y)<45&&Math.hypot(player.x-h.x,player.z-h.z)<62,cut=section&&Math.abs(h.x*Math.sin(section.angle)+h.z*Math.cos(section.angle))<26,show=h.id===activeHouseId||near||cut;h.setDetail(show);if(mode==='city'&&player?.y<-1&&!show)h.exterior.visible=false;h.roof.group.visible=h.detail.visible||h.exterior.visible;h.update(time,state.shelfOpen,state.ratio);}},
   dispose(){if(disposed)return;disposed=true;for(const h of instances)h.dispose();for(const o of clonedInstances)o.dispose?.();prototype.dispose();for(const r of owned)r.dispose();group.clear();}
  };
 }

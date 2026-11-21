@@ -1,8 +1,8 @@
-import {buildGardenTreeBeds} from './six-gate-garden-scene.js';
+import {buildGardenTreeBeds} from './six-gate-garden-scene.js?v=night-garden-20261121';
 import {SIXFOLD_HOUSES} from './sixfold-house-network-model.js';
-import {gardenCanStand} from './six-gate-garden-model.js';
-import {urbanRoutes,urbanBuildingFootprints,segmentDistance} from './city-urban-plan-model.js?v=six-gate-city-20261121';
-import {footprintBlocked} from './honeycomb-city-model.js?v=six-gate-city-20261121';
+import {gardenCanStand} from './six-gate-garden-model.js?v=night-garden-20261121';
+import {urbanRoutes,urbanBuildingFootprints,segmentDistance} from './city-urban-plan-model.js?v=night-garden-20261121';
+import {footprintBlocked} from './honeycomb-city-model.js?v=night-garden-20261121';
 
 const centres=[{x:0,z:0},...SIXFOLD_HOUSES];
 export function inGardenPrecinct(x,z){return centres.some(c=>{const points=Array.from({length:6},(_,i)=>[c.x+92*Math.cos(Math.PI/6+i*Math.PI/3),c.z+92*Math.sin(Math.PI/6+i*Math.PI/3)]);return points.every((a,i)=>{const b=points[(i+1)%6];return(b[0]-a[0])*(z-a[1])-(b[1]-a[1])*(x-a[0])>=0;});});}
@@ -23,7 +23,7 @@ export function existingGardenTrees(T,scene,{routes=urbanRoutes(),footprints=urb
 
 export function installGardenTreeBeds(M,T,{coast,events=globalThis}={}){
  if(M.gardenTreeBeds)return M.gardenTreeBeds;const parent=coast?.urban?.garden?.group;if(!parent)return null;
- const trees=existingGardenTrees(T,M.scene),built=buildGardenTreeBeds(T,trees);parent.add(built.group);
- let disposed=false;const api={built,trees,dispose(){if(disposed)return;disposed=true;built.dispose();events.removeEventListener?.('pagehide',api.dispose);if(M.gardenTreeBeds===api)delete M.gardenTreeBeds;}};
+ const trees=existingGardenTrees(T,M.scene),built=buildGardenTreeBeds(T,trees);parent.add(built.group);const paving=coast.urban.setTreeBeds?.(built.beds)||null;
+ let disposed=false;const api={built,trees,paving,dispose(){if(disposed)return;disposed=true;built.dispose();events.removeEventListener?.('pagehide',api.dispose);if(M.gardenTreeBeds===api)delete M.gardenTreeBeds;}};
  M.gardenTreeBeds=api;events.addEventListener?.('pagehide',api.dispose,{once:true});return api;
 }

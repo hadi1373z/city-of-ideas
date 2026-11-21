@@ -1,4 +1,4 @@
-import {HEX_DISTRICTS} from './city-hex-layout.js?v=six-gate-city-20261121';
+import {HEX_DISTRICTS} from './city-hex-layout.js?v=night-garden-20261121';
 // First architectural studies, not reconstructions of the writers' actual homes.
 const house=(id,x,z,names,style,wall,roof,feature,next)=>({id,x,z,names,style,wall,roof,feature,next,width:18,depth:16,turn:x<0?Math.PI/2:-Math.PI/2});
 export const FOUNDATION_HOUSES=[

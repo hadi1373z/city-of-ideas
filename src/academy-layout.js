@@ -1,4 +1,4 @@
-import {HEX_DISTRICTS} from './city-hex-layout.js?v=six-gate-city-20261121';
+import {HEX_DISTRICTS} from './city-hex-layout.js?v=night-garden-20261121';
 export const ACADEMY=Object.freeze({x:HEX_DISTRICTS.philosophers.x,z:0,radius:40.6,houseRadius:14,courtRadius:23,stoaOuter:30.6,entryAngle:2*Math.PI/3});
 const angles={plato:-150,aristotle:-90,epicurus:-30,'ibn-sina':30,confucius:90,hypatia:150};
 export const academySite=id=>{const a=angles[id]*Math.PI/180;return{x:ACADEMY.x+ACADEMY.radius*Math.cos(a),z:ACADEMY.radius*Math.sin(a),turn:Math.atan2(-Math.cos(a),-Math.sin(a)),angle:a};};

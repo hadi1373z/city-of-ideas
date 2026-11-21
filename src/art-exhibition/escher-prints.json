@@ -1,0 +1,1387 @@
+{
+  "title": "M.C. Escher ·20 verified print references",
+  "verified_on": "2026-11-21",
+  "count": 20,
+  "local_artwork_images": 0,
+  "record_scope": "Official viewing references in the website artwork database; no claim of reproduction rights or installation in the3D city.",
+  "topics": [
+    {
+      "topic": "Topology & infinity",
+      "works": 4
+    },
+    {
+      "topic": "Impossible architecture",
+      "works": 7
+    },
+    {
+      "topic": "Reflection & self-reference",
+      "works": 4
+    },
+    {
+      "topic": "Tessellation & transformation",
+      "works": 5
+    }
+  ],
+  "artworks": [
+    {
+      "id": "escher-mobius-strip-ii",
+      "order": 193,
+      "museum_id": 929445,
+      "title": "Möbius Strip II",
+      "artist": "M.C. Escher",
+      "artists": [
+        "M.C. Escher"
+      ],
+      "artist_credit": "M.C. Escher (Dutch, 1898–1972)",
+      "creator_roles": [
+        {
+          "name": "M.C. Escher",
+          "role": "artist",
+          "qualifier": null,
+          "extent": null
+        }
+      ],
+      "attribution_note": null,
+      "date_display": "1963",
+      "medium": "Color woodcut",
+      "artwork_type": "Print",
+      "classification": "Prints",
+      "accession": "2025.801",
+      "record_scope": "Specific museum impression identified by its object number.",
+      "primary_category": "escher",
+      "primary_category_title": "M.C. Escher · impossible worlds & mathematical prints",
+      "escher_topic": "Topology & infinity",
+      "tags": [
+        "escher",
+        "mobius-strip",
+        "topology",
+        "ants",
+        "continuous-surface"
+      ],
+      "description": "Follow an ant around the ribbon without letting your eye jump across a gap. The apparent change from one side to another becomes a test of the surface itself.",
+      "visitor_question": "Can you return to your starting point without crossing an edge?",
+      "curatorial_note": "Original looking note and visitor question; not an artist statement or museum quotation.",
+      "institution": "The Metropolitan Museum of Art",
+      "official_url": "https://www.metmuseum.org/art/collection/search/929445",
+      "source_api_url": null,
+      "metadata_source_url": "https://www.metmuseum.org/art/collection/search/929445",
+      "source_kind": "official-museum-object-page",
+      "source_verification": "Title, date and print technique checked against the official source caption/details; see work/escher-source-audit.json for the page audit and access limits.",
+      "verified_on": "2026-11-21",
+      "credit_line": "Gift of the family of Yde and Marjon van der Meulen, 2025",
+      "rights": {
+        "status": "reference-only",
+        "public_domain_flag": false,
+        "licence": null,
+        "image_reuse": "Artwork image is not reproduced. The official Escher rights notice reserves reproduction rights and calls for written permission; no image reuse licence is claimed.",
+        "copyright_notice": "All M.C. Escher works © The M.C. Escher Company – Baarn – Holland. All rights reserved.",
+        "policy_url": "https://mcescher.com/licensing/",
+        "terms_url": "https://www.escherinhetpaleis.nl/en/about-escher/masterpieces",
+        "api_guidance_url": null
+      },
+      "image": {
+        "source_url": null,
+        "credit": "The Metropolitan Museum of Art · Gift of the family of Yde and Marjon van der Meulen,2025 · Artwork © The M.C. Escher Company.",
+        "alt_text": null,
+        "preview_allowed": false,
+        "local_path": null,
+        "availability": "Official Met page states image cannot be enlarged or downloaded. Reference link only; no local image.",
+        "sha256": null,
+        "width": null,
+        "height": null
+      }
+    },
+    {
+      "id": "escher-relativity",
+      "order": 194,
+      "museum_id": null,
+      "title": "Relativity",
+      "artist": "M.C. Escher",
+      "artists": [
+        "M.C. Escher"
+      ],
+      "artist_credit": "M.C. Escher (Dutch, 1898–1972)",
+      "creator_roles": [
+        {
+          "name": "M.C. Escher",
+          "role": "artist",
+          "qualifier": null,
+          "extent": null
+        }
+      ],
+      "attribution_note": "This record identifies the July1953 lithograph version. Escher also made a woodcut; that separate technique is not conflated here.",
+      "date_display": "July 1953",
+      "medium": "Lithograph",
+      "artwork_type": "Print",
+      "classification": "Prints",
+      "accession": null,
+      "record_scope": "Composition reference from an official museum caption/commentary; no specific impression or accession is asserted.",
+      "primary_category": "escher",
+      "primary_category_title": "M.C. Escher · impossible worlds & mathematical prints",
+      "escher_topic": "Impossible architecture",
+      "tags": [
+        "escher",
+        "gravity",
+        "stairs",
+        "perspective",
+        "impossible-architecture"
+      ],
+      "description": "Choose one inhabitant and temporarily accept that person’s direction of gravity. Then follow the same staircase from a neighbour’s point of view.",
+      "visitor_question": "What counts as a floor when two people cannot agree on down?",
+      "curatorial_note": "Original looking note and visitor question; not an artist statement or museum quotation.",
+      "institution": "Museum Escher in The Palace (official reference source)",
+      "official_url": "https://www.escherinhetpaleis.nl/en/about-escher/masterpieces/relativity",
+      "source_api_url": null,
+      "metadata_source_url": "https://www.escherinhetpaleis.nl/en/about-escher/masterpieces/relativity",
+      "source_kind": "official-museum-caption-or-commentary",
+      "source_verification": "Title, date and print technique checked against the official source caption/details; see work/escher-source-audit.json for the page audit and access limits.",
+      "verified_on": "2026-11-21",
+      "credit_line": "Reference source: Museum Escher in The Palace. Artwork rights: The M.C. Escher Company.",
+      "rights": {
+        "status": "reference-only",
+        "public_domain_flag": false,
+        "licence": null,
+        "image_reuse": "Artwork image is not reproduced. The official Escher rights notice reserves reproduction rights and calls for written permission; no image reuse licence is claimed.",
+        "copyright_notice": "All M.C. Escher works © The M.C. Escher Company – Baarn – Holland. All rights reserved.",
+        "policy_url": "https://mcescher.com/licensing/",
+        "terms_url": "https://www.escherinhetpaleis.nl/en/about-escher/masterpieces",
+        "api_guidance_url": null
+      },
+      "image": {
+        "source_url": null,
+        "credit": "Artwork © The M.C. Escher Company. Official viewing reference: Museum Escher in The Palace.",
+        "alt_text": null,
+        "preview_allowed": false,
+        "local_path": null,
+        "availability": "Official museum viewing reference only; no local artwork image or reproduction permission.",
+        "sha256": null,
+        "width": null,
+        "height": null
+      }
+    },
+    {
+      "id": "escher-drawing-hands",
+      "order": 195,
+      "museum_id": null,
+      "title": "Drawing Hands",
+      "artist": "M.C. Escher",
+      "artists": [
+        "M.C. Escher"
+      ],
+      "artist_credit": "M.C. Escher (Dutch, 1898–1972)",
+      "creator_roles": [
+        {
+          "name": "M.C. Escher",
+          "role": "artist",
+          "qualifier": null,
+          "extent": null
+        }
+      ],
+      "attribution_note": null,
+      "date_display": "January 1948",
+      "medium": "Lithograph",
+      "artwork_type": "Print",
+      "classification": "Prints",
+      "accession": null,
+      "record_scope": "Composition reference from an official museum caption/commentary; no specific impression or accession is asserted.",
+      "primary_category": "escher",
+      "primary_category_title": "M.C. Escher · impossible worlds & mathematical prints",
+      "escher_topic": "Reflection & self-reference",
+      "tags": [
+        "escher",
+        "self-reference",
+        "recursion",
+        "body",
+        "image-within-image"
+      ],
+      "description": "Two hands make a circular claim about who creates whom. Notice the transition between a drawn outline and a hand that seems to have risen above the paper.",
+      "visitor_question": "Where would you place the beginning of this act of drawing?",
+      "curatorial_note": "Original looking note and visitor question; not an artist statement or museum quotation.",
+      "institution": "Museum Escher in The Palace (official reference source)",
+      "official_url": "https://www.escherinhetpaleis.nl/en/about-escher/masterpieces/drawing-hands",
+      "source_api_url": null,
+      "metadata_source_url": "https://www.escherinhetpaleis.nl/en/about-escher/masterpieces/drawing-hands",
+      "source_kind": "official-museum-caption-or-commentary",
+      "source_verification": "Title, date and print technique checked against the official source caption/details; see work/escher-source-audit.json for the page audit and access limits.",
+      "verified_on": "2026-11-21",
+      "credit_line": "Reference source: Museum Escher in The Palace. Artwork rights: The M.C. Escher Company.",
+      "rights": {
+        "status": "reference-only",
+        "public_domain_flag": false,
+        "licence": null,
+        "image_reuse": "Artwork image is not reproduced. The official Escher rights notice reserves reproduction rights and calls for written permission; no image reuse licence is claimed.",
+        "copyright_notice": "All M.C. Escher works © The M.C. Escher Company – Baarn – Holland. All rights reserved.",
+        "policy_url": "https://mcescher.com/licensing/",
+        "terms_url": "https://www.escherinhetpaleis.nl/en/about-escher/masterpieces",
+        "api_guidance_url": null
+      },
+      "image": {
+        "source_url": null,
+        "credit": "Artwork © The M.C. Escher Company. Official viewing reference: Museum Escher in The Palace.",
+        "alt_text": null,
+        "preview_allowed": false,
+        "local_path": null,
+        "availability": "Official museum viewing reference only; no local artwork image or reproduction permission.",
+        "sha256": null,
+        "width": null,
+        "height": null
+      }
+    },
+    {
+      "id": "escher-reptiles",
+      "order": 196,
+      "museum_id": null,
+      "title": "Reptiles",
+      "artist": "M.C. Escher",
+      "artists": [
+        "M.C. Escher"
+      ],
+      "artist_credit": "M.C. Escher (Dutch, 1898–1972)",
+      "creator_roles": [
+        {
+          "name": "M.C. Escher",
+          "role": "artist",
+          "qualifier": null,
+          "extent": null
+        }
+      ],
+      "attribution_note": null,
+      "date_display": "March 1943",
+      "medium": "Lithograph",
+      "artwork_type": "Print",
+      "classification": "Prints",
+      "accession": null,
+      "record_scope": "Composition reference from an official museum caption/commentary; no specific impression or accession is asserted.",
+      "primary_category": "escher",
+      "primary_category_title": "M.C. Escher · impossible worlds & mathematical prints",
+      "escher_topic": "Tessellation & transformation",
+      "tags": [
+        "escher",
+        "tessellation",
+        "metamorphosis",
+        "animal",
+        "cycle"
+      ],
+      "description": "A flat repeat becomes a creature’s journey through solid objects before returning to the page. Trace the loop and look for the precise point at which volume first appears.",
+      "visitor_question": "What is the smallest change that makes a tile seem alive?",
+      "curatorial_note": "Original looking note and visitor question; not an artist statement or museum quotation.",
+      "institution": "Museum Escher in The Palace (official reference source)",
+      "official_url": "https://www.escherinhetpaleis.nl/en/about-escher/masterpieces/reptiles",
+      "source_api_url": null,
+      "metadata_source_url": "https://www.escherinhetpaleis.nl/en/about-escher/masterpieces/reptiles",
+      "source_kind": "official-museum-caption-or-commentary",
+      "source_verification": "Title, date and print technique checked against the official source caption/details; see work/escher-source-audit.json for the page audit and access limits.",
+      "verified_on": "2026-11-21",
+      "credit_line": "Reference source: Museum Escher in The Palace. Artwork rights: The M.C. Escher Company.",
+      "rights": {
+        "status": "reference-only",
+        "public_domain_flag": false,
+        "licence": null,
+        "image_reuse": "Artwork image is not reproduced. The official Escher rights notice reserves reproduction rights and calls for written permission; no image reuse licence is claimed.",
+        "copyright_notice": "All M.C. Escher works © The M.C. Escher Company – Baarn – Holland. All rights reserved.",
+        "policy_url": "https://mcescher.com/licensing/",
+        "terms_url": "https://www.escherinhetpaleis.nl/en/about-escher/masterpieces",
+        "api_guidance_url": null
+      },
+      "image": {
+        "source_url": null,
+        "credit": "Artwork © The M.C. Escher Company. Official viewing reference: Museum Escher in The Palace.",
+        "alt_text": null,
+        "preview_allowed": false,
+        "local_path": null,
+        "availability": "Official museum viewing reference only; no local artwork image or reproduction permission.",
+        "sha256": null,
+        "width": null,
+        "height": null
+      }
+    },
+    {
+      "id": "escher-ascending-and-descending",
+      "order": 197,
+      "museum_id": null,
+      "title": "Ascending and Descending",
+      "artist": "M.C. Escher",
+      "artists": [
+        "M.C. Escher"
+      ],
+      "artist_credit": "M.C. Escher (Dutch, 1898–1972)",
+      "creator_roles": [
+        {
+          "name": "M.C. Escher",
+          "role": "artist",
+          "qualifier": null,
+          "extent": null
+        }
+      ],
+      "attribution_note": null,
+      "date_display": "March 1960",
+      "medium": "Lithograph",
+      "artwork_type": "Print",
+      "classification": "Prints",
+      "accession": null,
+      "record_scope": "Composition reference from an official museum caption/commentary; no specific impression or accession is asserted.",
+      "primary_category": "escher",
+      "primary_category_title": "M.C. Escher · impossible worlds & mathematical prints",
+      "escher_topic": "Impossible architecture",
+      "tags": [
+        "escher",
+        "stairs",
+        "loop",
+        "impossible-architecture",
+        "local-and-global"
+      ],
+      "description": "Each short stair segment offers a convincing local climb, while the whole route refuses to gain height. Follow one walker through a complete circuit.",
+      "visitor_question": "Can every step go up if the journey returns to the same landing?",
+      "curatorial_note": "Original looking note and visitor question; not an artist statement or museum quotation.",
+      "institution": "Museum Escher in The Palace (official reference source)",
+      "official_url": "https://www.escherinhetpaleis.nl/en/about-escher/escher-today/ascending-and-descending?lang=en",
+      "source_api_url": null,
+      "metadata_source_url": "https://www.escherinhetpaleis.nl/en/about-escher/escher-today/ascending-and-descending?lang=en",
+      "source_kind": "official-museum-caption-or-commentary",
+      "source_verification": "Title, date and print technique checked against the official source caption/details; see work/escher-source-audit.json for the page audit and access limits.",
+      "verified_on": "2026-11-21",
+      "credit_line": "Reference source: Museum Escher in The Palace. Artwork rights: The M.C. Escher Company.",
+      "rights": {
+        "status": "reference-only",
+        "public_domain_flag": false,
+        "licence": null,
+        "image_reuse": "Artwork image is not reproduced. The official Escher rights notice reserves reproduction rights and calls for written permission; no image reuse licence is claimed.",
+        "copyright_notice": "All M.C. Escher works © The M.C. Escher Company – Baarn – Holland. All rights reserved.",
+        "policy_url": "https://mcescher.com/licensing/",
+        "terms_url": "https://www.escherinhetpaleis.nl/en/about-escher/masterpieces",
+        "api_guidance_url": null
+      },
+      "image": {
+        "source_url": null,
+        "credit": "Artwork © The M.C. Escher Company. Official viewing reference: Museum Escher in The Palace.",
+        "alt_text": null,
+        "preview_allowed": false,
+        "local_path": null,
+        "availability": "Official museum viewing reference only; no local artwork image or reproduction permission.",
+        "sha256": null,
+        "width": null,
+        "height": null
+      }
+    },
+    {
+      "id": "escher-waterfall",
+      "order": 198,
+      "museum_id": null,
+      "title": "Waterfall",
+      "artist": "M.C. Escher",
+      "artists": [
+        "M.C. Escher"
+      ],
+      "artist_credit": "M.C. Escher (Dutch, 1898–1972)",
+      "creator_roles": [
+        {
+          "name": "M.C. Escher",
+          "role": "artist",
+          "qualifier": null,
+          "extent": null
+        }
+      ],
+      "attribution_note": null,
+      "date_display": "October 1961",
+      "medium": "Lithograph",
+      "artwork_type": "Print",
+      "classification": "Prints",
+      "accession": null,
+      "record_scope": "Composition reference from an official museum caption/commentary; no specific impression or accession is asserted.",
+      "primary_category": "escher",
+      "primary_category_title": "M.C. Escher · impossible worlds & mathematical prints",
+      "escher_topic": "Impossible architecture",
+      "tags": [
+        "escher",
+        "water",
+        "perpetual-motion",
+        "impossible-architecture",
+        "perception"
+      ],
+      "description": "A familiar watermill conceals an impossible route. Track the water rather than the towers and notice when a plausible channel ceases to fit one consistent space.",
+      "visitor_question": "At which turn does the water’s route become impossible to build?",
+      "curatorial_note": "Original looking note and visitor question; not an artist statement or museum quotation.",
+      "institution": "Museum Escher in The Palace (official reference source)",
+      "official_url": "https://www.escherinhetpaleis.nl/en/about-escher/masterpieces/waterfall",
+      "source_api_url": null,
+      "metadata_source_url": "https://www.escherinhetpaleis.nl/en/about-escher/masterpieces/waterfall",
+      "source_kind": "official-museum-caption-or-commentary",
+      "source_verification": "Title, date and print technique checked against the official source caption/details; see work/escher-source-audit.json for the page audit and access limits.",
+      "verified_on": "2026-11-21",
+      "credit_line": "Reference source: Museum Escher in The Palace. Artwork rights: The M.C. Escher Company.",
+      "rights": {
+        "status": "reference-only",
+        "public_domain_flag": false,
+        "licence": null,
+        "image_reuse": "Artwork image is not reproduced. The official Escher rights notice reserves reproduction rights and calls for written permission; no image reuse licence is claimed.",
+        "copyright_notice": "All M.C. Escher works © The M.C. Escher Company – Baarn – Holland. All rights reserved.",
+        "policy_url": "https://mcescher.com/licensing/",
+        "terms_url": "https://www.escherinhetpaleis.nl/en/about-escher/masterpieces",
+        "api_guidance_url": null
+      },
+      "image": {
+        "source_url": null,
+        "credit": "Artwork © The M.C. Escher Company. Official viewing reference: Museum Escher in The Palace.",
+        "alt_text": null,
+        "preview_allowed": false,
+        "local_path": null,
+        "availability": "Official museum viewing reference only; no local artwork image or reproduction permission.",
+        "sha256": null,
+        "width": null,
+        "height": null
+      }
+    },
+    {
+      "id": "escher-belvedere",
+      "order": 199,
+      "museum_id": null,
+      "title": "Belvedere",
+      "artist": "M.C. Escher",
+      "artists": [
+        "M.C. Escher"
+      ],
+      "artist_credit": "M.C. Escher (Dutch, 1898–1972)",
+      "creator_roles": [
+        {
+          "name": "M.C. Escher",
+          "role": "artist",
+          "qualifier": null,
+          "extent": null
+        }
+      ],
+      "attribution_note": null,
+      "date_display": "May 1958",
+      "medium": "Lithograph",
+      "artwork_type": "Print",
+      "classification": "Prints",
+      "accession": null,
+      "record_scope": "Composition reference from an official museum caption/commentary; no specific impression or accession is asserted.",
+      "primary_category": "escher",
+      "primary_category_title": "M.C. Escher · impossible worlds & mathematical prints",
+      "escher_topic": "Impossible architecture",
+      "tags": [
+        "escher",
+        "impossible-cube",
+        "architecture",
+        "perspective",
+        "local-and-global"
+      ],
+      "description": "An elegant pavilion looks stable until its columns and ladder are followed from end to end. Compare the top and bottom as two individually persuasive constructions.",
+      "visitor_question": "Which connection would you have to change to make the building stand?",
+      "curatorial_note": "Original looking note and visitor question; not an artist statement or museum quotation.",
+      "institution": "Museum Escher in The Palace (official reference source)",
+      "official_url": "https://www.escherinhetpaleis.nl/en/about-escher/masterpieces/belvedere",
+      "source_api_url": null,
+      "metadata_source_url": "https://www.escherinhetpaleis.nl/en/about-escher/masterpieces/belvedere",
+      "source_kind": "official-museum-caption-or-commentary",
+      "source_verification": "Title, date and print technique checked against the official source caption/details; see work/escher-source-audit.json for the page audit and access limits.",
+      "verified_on": "2026-11-21",
+      "credit_line": "Reference source: Museum Escher in The Palace. Artwork rights: The M.C. Escher Company.",
+      "rights": {
+        "status": "reference-only",
+        "public_domain_flag": false,
+        "licence": null,
+        "image_reuse": "Artwork image is not reproduced. The official Escher rights notice reserves reproduction rights and calls for written permission; no image reuse licence is claimed.",
+        "copyright_notice": "All M.C. Escher works © The M.C. Escher Company – Baarn – Holland. All rights reserved.",
+        "policy_url": "https://mcescher.com/licensing/",
+        "terms_url": "https://www.escherinhetpaleis.nl/en/about-escher/masterpieces",
+        "api_guidance_url": null
+      },
+      "image": {
+        "source_url": null,
+        "credit": "Artwork © The M.C. Escher Company. Official viewing reference: Museum Escher in The Palace.",
+        "alt_text": null,
+        "preview_allowed": false,
+        "local_path": null,
+        "availability": "Official museum viewing reference only; no local artwork image or reproduction permission.",
+        "sha256": null,
+        "width": null,
+        "height": null
+      }
+    },
+    {
+      "id": "escher-print-gallery",
+      "order": 200,
+      "museum_id": null,
+      "title": "Print Gallery",
+      "artist": "M.C. Escher",
+      "artists": [
+        "M.C. Escher"
+      ],
+      "artist_credit": "M.C. Escher (Dutch, 1898–1972)",
+      "creator_roles": [
+        {
+          "name": "M.C. Escher",
+          "role": "artist",
+          "qualifier": null,
+          "extent": null
+        }
+      ],
+      "attribution_note": null,
+      "date_display": "May 1956",
+      "medium": "Lithograph",
+      "artwork_type": "Print",
+      "classification": "Prints",
+      "accession": null,
+      "record_scope": "Composition reference from an official museum caption/commentary; no specific impression or accession is asserted.",
+      "primary_category": "escher",
+      "primary_category_title": "M.C. Escher · impossible worlds & mathematical prints",
+      "escher_topic": "Reflection & self-reference",
+      "tags": [
+        "escher",
+        "self-reference",
+        "recursion",
+        "image-within-image",
+        "scale"
+      ],
+      "description": "A visitor examines a print that expands into the world surrounding the gallery. Follow the image outward, then ask whether you have left it at all.",
+      "visitor_question": "When does the person looking at a picture become part of that picture?",
+      "curatorial_note": "Original looking note and visitor question; not an artist statement or museum quotation.",
+      "institution": "Museum Escher in The Palace (official reference source)",
+      "official_url": "https://www.escherinhetpaleis.nl/en/about-escher/masterpieces/print-gallery",
+      "source_api_url": null,
+      "metadata_source_url": "https://www.escherinhetpaleis.nl/en/about-escher/masterpieces/print-gallery",
+      "source_kind": "official-museum-caption-or-commentary",
+      "source_verification": "Title, date and print technique checked against the official source caption/details; see work/escher-source-audit.json for the page audit and access limits.",
+      "verified_on": "2026-11-21",
+      "credit_line": "Reference source: Museum Escher in The Palace. Artwork rights: The M.C. Escher Company.",
+      "rights": {
+        "status": "reference-only",
+        "public_domain_flag": false,
+        "licence": null,
+        "image_reuse": "Artwork image is not reproduced. The official Escher rights notice reserves reproduction rights and calls for written permission; no image reuse licence is claimed.",
+        "copyright_notice": "All M.C. Escher works © The M.C. Escher Company – Baarn – Holland. All rights reserved.",
+        "policy_url": "https://mcescher.com/licensing/",
+        "terms_url": "https://www.escherinhetpaleis.nl/en/about-escher/masterpieces",
+        "api_guidance_url": null
+      },
+      "image": {
+        "source_url": null,
+        "credit": "Artwork © The M.C. Escher Company. Official viewing reference: Museum Escher in The Palace.",
+        "alt_text": null,
+        "preview_allowed": false,
+        "local_path": null,
+        "availability": "Official museum viewing reference only; no local artwork image or reproduction permission.",
+        "sha256": null,
+        "width": null,
+        "height": null
+      }
+    },
+    {
+      "id": "escher-day-and-night",
+      "order": 201,
+      "museum_id": null,
+      "title": "Day and Night",
+      "artist": "M.C. Escher",
+      "artists": [
+        "M.C. Escher"
+      ],
+      "artist_credit": "M.C. Escher (Dutch, 1898–1972)",
+      "creator_roles": [
+        {
+          "name": "M.C. Escher",
+          "role": "artist",
+          "qualifier": null,
+          "extent": null
+        }
+      ],
+      "attribution_note": null,
+      "date_display": "February 1938",
+      "medium": "Woodcut in black and grey, printed from two blocks",
+      "artwork_type": "Print",
+      "classification": "Prints",
+      "accession": null,
+      "record_scope": "Composition reference from an official museum caption/commentary; no specific impression or accession is asserted.",
+      "primary_category": "escher",
+      "primary_category_title": "M.C. Escher · impossible worlds & mathematical prints",
+      "escher_topic": "Tessellation & transformation",
+      "tags": [
+        "escher",
+        "tessellation",
+        "figure-ground",
+        "metamorphosis",
+        "symmetry"
+      ],
+      "description": "Fields turn into birds while two neighbouring worlds exchange light and darkness. Watch the shared boundaries rather than trying to follow only one colour.",
+      "visitor_question": "Can the background of one shape become the subject of the next?",
+      "curatorial_note": "Original looking note and visitor question; not an artist statement or museum quotation.",
+      "institution": "Museum Escher in The Palace (official reference source)",
+      "official_url": "https://www.escherinhetpaleis.nl/en/about-escher/masterpieces/day-and-night",
+      "source_api_url": null,
+      "metadata_source_url": "https://www.escherinhetpaleis.nl/en/about-escher/masterpieces/day-and-night",
+      "source_kind": "official-museum-caption-or-commentary",
+      "source_verification": "Title, date and print technique checked against the official source caption/details; see work/escher-source-audit.json for the page audit and access limits.",
+      "verified_on": "2026-11-21",
+      "credit_line": "Reference source: Museum Escher in The Palace. Artwork rights: The M.C. Escher Company.",
+      "rights": {
+        "status": "reference-only",
+        "public_domain_flag": false,
+        "licence": null,
+        "image_reuse": "Artwork image is not reproduced. The official Escher rights notice reserves reproduction rights and calls for written permission; no image reuse licence is claimed.",
+        "copyright_notice": "All M.C. Escher works © The M.C. Escher Company – Baarn – Holland. All rights reserved.",
+        "policy_url": "https://mcescher.com/licensing/",
+        "terms_url": "https://www.escherinhetpaleis.nl/en/about-escher/masterpieces",
+        "api_guidance_url": null
+      },
+      "image": {
+        "source_url": null,
+        "credit": "Artwork © The M.C. Escher Company. Official viewing reference: Museum Escher in The Palace.",
+        "alt_text": null,
+        "preview_allowed": false,
+        "local_path": null,
+        "availability": "Official museum viewing reference only; no local artwork image or reproduction permission.",
+        "sha256": null,
+        "width": null,
+        "height": null
+      }
+    },
+    {
+      "id": "escher-hand-with-reflecting-sphere",
+      "order": 202,
+      "museum_id": null,
+      "title": "Hand with Reflecting Sphere",
+      "artist": "M.C. Escher",
+      "artists": [
+        "M.C. Escher"
+      ],
+      "artist_credit": "M.C. Escher (Dutch, 1898–1972)",
+      "creator_roles": [
+        {
+          "name": "M.C. Escher",
+          "role": "artist",
+          "qualifier": null,
+          "extent": null
+        }
+      ],
+      "attribution_note": null,
+      "date_display": "January 1935",
+      "medium": "Lithograph",
+      "artwork_type": "Print",
+      "classification": "Prints",
+      "accession": null,
+      "record_scope": "Composition reference from an official museum caption/commentary; no specific impression or accession is asserted.",
+      "primary_category": "escher",
+      "primary_category_title": "M.C. Escher · impossible worlds & mathematical prints",
+      "escher_topic": "Reflection & self-reference",
+      "tags": [
+        "escher",
+        "reflection",
+        "self-portrait",
+        "sphere",
+        "perspective"
+      ],
+      "description": "A hand supports a small sphere that seems to hold an entire room and its observer. Compare the hand outside the reflection with the viewpoint inside it.",
+      "visitor_question": "Where could the viewer stand without appearing in this reflected world?",
+      "curatorial_note": "Original looking note and visitor question; not an artist statement or museum quotation.",
+      "institution": "Museum Escher in The Palace (official reference source)",
+      "official_url": "https://www.escherinhetpaleis.nl/en/about-escher/masterpieces/hand-with-reflecting-sphere",
+      "source_api_url": null,
+      "metadata_source_url": "https://www.escherinhetpaleis.nl/en/about-escher/masterpieces/hand-with-reflecting-sphere",
+      "source_kind": "official-museum-caption-or-commentary",
+      "source_verification": "Title, date and print technique checked against the official source caption/details; see work/escher-source-audit.json for the page audit and access limits.",
+      "verified_on": "2026-11-21",
+      "credit_line": "Reference source: Museum Escher in The Palace. Artwork rights: The M.C. Escher Company.",
+      "rights": {
+        "status": "reference-only",
+        "public_domain_flag": false,
+        "licence": null,
+        "image_reuse": "Artwork image is not reproduced. The official Escher rights notice reserves reproduction rights and calls for written permission; no image reuse licence is claimed.",
+        "copyright_notice": "All M.C. Escher works © The M.C. Escher Company – Baarn – Holland. All rights reserved.",
+        "policy_url": "https://mcescher.com/licensing/",
+        "terms_url": "https://www.escherinhetpaleis.nl/en/about-escher/masterpieces",
+        "api_guidance_url": null
+      },
+      "image": {
+        "source_url": null,
+        "credit": "Artwork © The M.C. Escher Company. Official viewing reference: Museum Escher in The Palace.",
+        "alt_text": null,
+        "preview_allowed": false,
+        "local_path": null,
+        "availability": "Official museum viewing reference only; no local artwork image or reproduction permission.",
+        "sha256": null,
+        "width": null,
+        "height": null
+      }
+    },
+    {
+      "id": "escher-circle-limit-iii",
+      "order": 203,
+      "museum_id": null,
+      "title": "Circle Limit III",
+      "artist": "M.C. Escher",
+      "artists": [
+        "M.C. Escher"
+      ],
+      "artist_credit": "M.C. Escher (Dutch, 1898–1972)",
+      "creator_roles": [
+        {
+          "name": "M.C. Escher",
+          "role": "artist",
+          "qualifier": null,
+          "extent": null
+        }
+      ],
+      "attribution_note": null,
+      "date_display": "December 1959",
+      "medium": "Woodcut in yellow, green, blue, brown and black, printed from five blocks",
+      "artwork_type": "Print",
+      "classification": "Prints",
+      "accession": null,
+      "record_scope": "Composition reference from an official museum caption/commentary; no specific impression or accession is asserted.",
+      "primary_category": "escher",
+      "primary_category_title": "M.C. Escher · impossible worlds & mathematical prints",
+      "escher_topic": "Topology & infinity",
+      "tags": [
+        "escher",
+        "infinity",
+        "tessellation",
+        "hyperbolic-geometry",
+        "scale"
+      ],
+      "description": "Repeated fish approach a circular boundary while seeming to preserve a shared visual order. Follow one chain toward the edge and notice how distance changes its meaning.",
+      "visitor_question": "How can a finite sheet suggest a journey that never reaches its end?",
+      "curatorial_note": "Original looking note and visitor question; not an artist statement or museum quotation.",
+      "institution": "Museum Escher in The Palace (official reference source)",
+      "official_url": "https://www.escherinhetpaleis.nl/en/about-escher/timeline",
+      "source_api_url": null,
+      "metadata_source_url": "https://www.escherinhetpaleis.nl/en/about-escher/timeline",
+      "source_kind": "official-museum-caption-or-commentary",
+      "source_verification": "Title, date and print technique checked against the official source caption/details; see work/escher-source-audit.json for the page audit and access limits.",
+      "verified_on": "2026-11-21",
+      "credit_line": "Reference source: Museum Escher in The Palace. Artwork rights: The M.C. Escher Company.",
+      "rights": {
+        "status": "reference-only",
+        "public_domain_flag": false,
+        "licence": null,
+        "image_reuse": "Artwork image is not reproduced. The official Escher rights notice reserves reproduction rights and calls for written permission; no image reuse licence is claimed.",
+        "copyright_notice": "All M.C. Escher works © The M.C. Escher Company – Baarn – Holland. All rights reserved.",
+        "policy_url": "https://mcescher.com/licensing/",
+        "terms_url": "https://www.escherinhetpaleis.nl/en/about-escher/masterpieces",
+        "api_guidance_url": null
+      },
+      "image": {
+        "source_url": null,
+        "credit": "Artwork © The M.C. Escher Company. Official viewing reference: Museum Escher in The Palace.",
+        "alt_text": null,
+        "preview_allowed": false,
+        "local_path": null,
+        "availability": "Official museum viewing reference only; no local artwork image or reproduction permission.",
+        "sha256": null,
+        "width": null,
+        "height": null
+      }
+    },
+    {
+      "id": "escher-snakes",
+      "order": 204,
+      "museum_id": null,
+      "title": "Snakes",
+      "artist": "M.C. Escher",
+      "artists": [
+        "M.C. Escher"
+      ],
+      "artist_credit": "M.C. Escher (Dutch, 1898–1972)",
+      "creator_roles": [
+        {
+          "name": "M.C. Escher",
+          "role": "artist",
+          "qualifier": null,
+          "extent": null
+        }
+      ],
+      "attribution_note": null,
+      "date_display": "July 1969",
+      "medium": "Woodcut in green, orange and black, printed from three blocks",
+      "artwork_type": "Print",
+      "classification": "Prints",
+      "accession": null,
+      "record_scope": "Composition reference from an official museum caption/commentary; no specific impression or accession is asserted.",
+      "primary_category": "escher",
+      "primary_category_title": "M.C. Escher · impossible worlds & mathematical prints",
+      "escher_topic": "Topology & infinity",
+      "tags": [
+        "escher",
+        "infinity",
+        "rings",
+        "symmetry",
+        "animal"
+      ],
+      "description": "Snakes thread through rings that change scale toward the centre and edge. Separate the movements suggested by the animals from the repetition organising the whole circle.",
+      "visitor_question": "Does infinity feel different when it seems to continue inward as well as outward?",
+      "curatorial_note": "Original looking note and visitor question; not an artist statement or museum quotation.",
+      "institution": "Museum Escher in The Palace (official reference source)",
+      "official_url": "https://escherinhetpaleis.nl/en/about-escher/masterpieces/snakes",
+      "source_api_url": null,
+      "metadata_source_url": "https://escherinhetpaleis.nl/en/about-escher/masterpieces/snakes",
+      "source_kind": "official-museum-caption-or-commentary",
+      "source_verification": "Title, date and print technique checked against the official source caption/details; see work/escher-source-audit.json for the page audit and access limits.",
+      "verified_on": "2026-11-21",
+      "credit_line": "Reference source: Museum Escher in The Palace. Artwork rights: The M.C. Escher Company.",
+      "rights": {
+        "status": "reference-only",
+        "public_domain_flag": false,
+        "licence": null,
+        "image_reuse": "Artwork image is not reproduced. The official Escher rights notice reserves reproduction rights and calls for written permission; no image reuse licence is claimed.",
+        "copyright_notice": "All M.C. Escher works © The M.C. Escher Company – Baarn – Holland. All rights reserved.",
+        "policy_url": "https://mcescher.com/licensing/",
+        "terms_url": "https://www.escherinhetpaleis.nl/en/about-escher/masterpieces",
+        "api_guidance_url": null
+      },
+      "image": {
+        "source_url": null,
+        "credit": "Artwork © The M.C. Escher Company. Official viewing reference: Museum Escher in The Palace.",
+        "alt_text": null,
+        "preview_allowed": false,
+        "local_path": null,
+        "availability": "Official museum viewing reference only; no local artwork image or reproduction permission.",
+        "sha256": null,
+        "width": null,
+        "height": null
+      }
+    },
+    {
+      "id": "escher-house-of-stairs",
+      "order": 205,
+      "museum_id": null,
+      "title": "House of Stairs",
+      "artist": "M.C. Escher",
+      "artists": [
+        "M.C. Escher"
+      ],
+      "artist_credit": "M.C. Escher (Dutch, 1898–1972)",
+      "creator_roles": [
+        {
+          "name": "M.C. Escher",
+          "role": "artist",
+          "qualifier": null,
+          "extent": null
+        }
+      ],
+      "attribution_note": null,
+      "date_display": "November 1951",
+      "medium": "Lithograph",
+      "artwork_type": "Print",
+      "classification": "Prints",
+      "accession": null,
+      "record_scope": "Composition reference from an official museum caption/commentary; no specific impression or accession is asserted.",
+      "primary_category": "escher",
+      "primary_category_title": "M.C. Escher · impossible worlds & mathematical prints",
+      "escher_topic": "Impossible architecture",
+      "tags": [
+        "escher",
+        "stairs",
+        "gravity",
+        "labyrinth",
+        "perspective"
+      ],
+      "description": "Strange creatures move through a stair-filled environment whose orientations keep competing. Trace one uninterrupted route while resisting the urge to rotate the entire world in your mind.",
+      "visitor_question": "Can a stair remain the same stair when your sense of up changes?",
+      "curatorial_note": "Original looking note and visitor question; not an artist statement or museum quotation.",
+      "institution": "Museum Escher in The Palace (official reference source)",
+      "official_url": "https://www.escherinhetpaleis.nl/en/about-escher/escher-today/eschers-space",
+      "source_api_url": null,
+      "metadata_source_url": "https://www.escherinhetpaleis.nl/en/about-escher/escher-today/eschers-space",
+      "source_kind": "official-museum-caption-or-commentary",
+      "source_verification": "Title, date and print technique checked against the official source caption/details; see work/escher-source-audit.json for the page audit and access limits.",
+      "verified_on": "2026-11-21",
+      "credit_line": "Reference source: Museum Escher in The Palace. Artwork rights: The M.C. Escher Company.",
+      "rights": {
+        "status": "reference-only",
+        "public_domain_flag": false,
+        "licence": null,
+        "image_reuse": "Artwork image is not reproduced. The official Escher rights notice reserves reproduction rights and calls for written permission; no image reuse licence is claimed.",
+        "copyright_notice": "All M.C. Escher works © The M.C. Escher Company – Baarn – Holland. All rights reserved.",
+        "policy_url": "https://mcescher.com/licensing/",
+        "terms_url": "https://www.escherinhetpaleis.nl/en/about-escher/masterpieces",
+        "api_guidance_url": null
+      },
+      "image": {
+        "source_url": null,
+        "credit": "Artwork © The M.C. Escher Company. Official viewing reference: Museum Escher in The Palace.",
+        "alt_text": null,
+        "preview_allowed": false,
+        "local_path": null,
+        "availability": "Official museum viewing reference only; no local artwork image or reproduction permission.",
+        "sha256": null,
+        "width": null,
+        "height": null
+      }
+    },
+    {
+      "id": "escher-other-world",
+      "order": 206,
+      "museum_id": null,
+      "title": "Other World",
+      "artist": "M.C. Escher",
+      "artists": [
+        "M.C. Escher"
+      ],
+      "artist_credit": "M.C. Escher (Dutch, 1898–1972)",
+      "creator_roles": [
+        {
+          "name": "M.C. Escher",
+          "role": "artist",
+          "qualifier": null,
+          "extent": null
+        }
+      ],
+      "attribution_note": null,
+      "date_display": "January 1947",
+      "medium": "Wood engraving and woodcut in black, reddish brown and green, printed from three blocks",
+      "artwork_type": "Print",
+      "classification": "Prints",
+      "accession": null,
+      "record_scope": "Composition reference from an official museum caption/commentary; no specific impression or accession is asserted.",
+      "primary_category": "escher",
+      "primary_category_title": "M.C. Escher · impossible worlds & mathematical prints",
+      "escher_topic": "Impossible architecture",
+      "tags": [
+        "escher",
+        "multiple-viewpoints",
+        "gravity",
+        "architecture",
+        "simurgh"
+      ],
+      "description": "A small open room offers views in directions that do not settle into one shared orientation. Look through one opening, then test whether its neighbours belong to the same room.",
+      "visitor_question": "Could you assign one consistent floor, wall and ceiling to this space?",
+      "curatorial_note": "Original looking note and visitor question; not an artist statement or museum quotation.",
+      "institution": "Museum Escher in The Palace (official reference source)",
+      "official_url": "https://escherinhetpaleis.nl/en/about-escher/masterpieces/other-world?lang=en",
+      "source_api_url": null,
+      "metadata_source_url": "https://escherinhetpaleis.nl/en/about-escher/masterpieces/other-world?lang=en",
+      "source_kind": "official-museum-caption-or-commentary",
+      "source_verification": "Title, date and print technique checked against the official source caption/details; see work/escher-source-audit.json for the page audit and access limits.",
+      "verified_on": "2026-11-21",
+      "credit_line": "Reference source: Museum Escher in The Palace. Artwork rights: The M.C. Escher Company.",
+      "rights": {
+        "status": "reference-only",
+        "public_domain_flag": false,
+        "licence": null,
+        "image_reuse": "Artwork image is not reproduced. The official Escher rights notice reserves reproduction rights and calls for written permission; no image reuse licence is claimed.",
+        "copyright_notice": "All M.C. Escher works © The M.C. Escher Company – Baarn – Holland. All rights reserved.",
+        "policy_url": "https://mcescher.com/licensing/",
+        "terms_url": "https://www.escherinhetpaleis.nl/en/about-escher/masterpieces",
+        "api_guidance_url": null
+      },
+      "image": {
+        "source_url": null,
+        "credit": "Artwork © The M.C. Escher Company. Official viewing reference: Museum Escher in The Palace.",
+        "alt_text": null,
+        "preview_allowed": false,
+        "local_path": null,
+        "availability": "Official museum viewing reference only; no local artwork image or reproduction permission.",
+        "sha256": null,
+        "width": null,
+        "height": null
+      }
+    },
+    {
+      "id": "escher-metamorphosis-ii",
+      "order": 207,
+      "museum_id": null,
+      "title": "Metamorphosis II",
+      "artist": "M.C. Escher",
+      "artists": [
+        "M.C. Escher"
+      ],
+      "artist_credit": "M.C. Escher (Dutch, 1898–1972)",
+      "creator_roles": [
+        {
+          "name": "M.C. Escher",
+          "role": "artist",
+          "qualifier": null,
+          "extent": null
+        }
+      ],
+      "attribution_note": null,
+      "date_display": "November 1939–March 1940",
+      "medium": "Woodcut in black, green and brown, printed from twenty blocks on three combined sheets",
+      "artwork_type": "Print",
+      "classification": "Prints",
+      "accession": null,
+      "record_scope": "Composition reference from an official museum caption/commentary; no specific impression or accession is asserted.",
+      "primary_category": "escher",
+      "primary_category_title": "M.C. Escher · impossible worlds & mathematical prints",
+      "escher_topic": "Tessellation & transformation",
+      "tags": [
+        "escher",
+        "tessellation",
+        "metamorphosis",
+        "cycle",
+        "language-and-image"
+      ],
+      "description": "A long sequence lets one pattern borrow the outline of the next until animals, architecture and letters share a continuous journey. Follow a single boundary through several identities.",
+      "visitor_question": "How much can a shape change while keeping a neighbouring shape connected?",
+      "curatorial_note": "Original looking note and visitor question; not an artist statement or museum quotation.",
+      "institution": "Museum Escher in The Palace (official reference source)",
+      "official_url": "https://www.escherinhetpaleis.nl/en/about-escher/masterpieces/metamorphose-ii",
+      "source_api_url": null,
+      "metadata_source_url": "https://www.escherinhetpaleis.nl/en/about-escher/masterpieces/metamorphose-ii",
+      "source_kind": "official-museum-caption-or-commentary",
+      "source_verification": "Title, date and print technique checked against the official source caption/details; see work/escher-source-audit.json for the page audit and access limits.",
+      "verified_on": "2026-11-21",
+      "credit_line": "Reference source: Museum Escher in The Palace. Artwork rights: The M.C. Escher Company.",
+      "rights": {
+        "status": "reference-only",
+        "public_domain_flag": false,
+        "licence": null,
+        "image_reuse": "Artwork image is not reproduced. The official Escher rights notice reserves reproduction rights and calls for written permission; no image reuse licence is claimed.",
+        "copyright_notice": "All M.C. Escher works © The M.C. Escher Company – Baarn – Holland. All rights reserved.",
+        "policy_url": "https://mcescher.com/licensing/",
+        "terms_url": "https://www.escherinhetpaleis.nl/en/about-escher/masterpieces",
+        "api_guidance_url": null
+      },
+      "image": {
+        "source_url": null,
+        "credit": "Artwork © The M.C. Escher Company. Official viewing reference: Museum Escher in The Palace.",
+        "alt_text": null,
+        "preview_allowed": false,
+        "local_path": null,
+        "availability": "Official museum viewing reference only; no local artwork image or reproduction permission.",
+        "sha256": null,
+        "width": null,
+        "height": null
+      }
+    },
+    {
+      "id": "escher-three-worlds",
+      "order": 208,
+      "museum_id": null,
+      "title": "Three Worlds",
+      "artist": "M.C. Escher",
+      "artists": [
+        "M.C. Escher"
+      ],
+      "artist_credit": "M.C. Escher (Dutch, 1898–1972)",
+      "creator_roles": [
+        {
+          "name": "M.C. Escher",
+          "role": "artist",
+          "qualifier": null,
+          "extent": null
+        }
+      ],
+      "attribution_note": null,
+      "date_display": "December 1955",
+      "medium": "Lithograph",
+      "artwork_type": "Print",
+      "classification": "Prints",
+      "accession": null,
+      "record_scope": "Composition reference from an official museum caption/commentary; no specific impression or accession is asserted.",
+      "primary_category": "escher",
+      "primary_category_title": "M.C. Escher · impossible worlds & mathematical prints",
+      "escher_topic": "Reflection & self-reference",
+      "tags": [
+        "escher",
+        "reflection",
+        "water",
+        "nature",
+        "layers"
+      ],
+      "description": "A water surface lets things beneath it, floating on it and reflected above it occupy one image. Shift your attention between these layers without treating one as the real picture.",
+      "visitor_question": "How many different depths can your eye hold on one flat surface?",
+      "curatorial_note": "Original looking note and visitor question; not an artist statement or museum quotation.",
+      "institution": "Museum Escher in The Palace (official reference source)",
+      "official_url": "https://escherinhetpaleis.nl/en/about-escher/masterpieces/three-worlds?lang=en",
+      "source_api_url": null,
+      "metadata_source_url": "https://escherinhetpaleis.nl/en/about-escher/masterpieces/three-worlds?lang=en",
+      "source_kind": "official-museum-caption-or-commentary",
+      "source_verification": "Title, date and print technique checked against the official source caption/details; see work/escher-source-audit.json for the page audit and access limits.",
+      "verified_on": "2026-11-21",
+      "credit_line": "Reference source: Museum Escher in The Palace. Artwork rights: The M.C. Escher Company.",
+      "rights": {
+        "status": "reference-only",
+        "public_domain_flag": false,
+        "licence": null,
+        "image_reuse": "Artwork image is not reproduced. The official Escher rights notice reserves reproduction rights and calls for written permission; no image reuse licence is claimed.",
+        "copyright_notice": "All M.C. Escher works © The M.C. Escher Company – Baarn – Holland. All rights reserved.",
+        "policy_url": "https://mcescher.com/licensing/",
+        "terms_url": "https://www.escherinhetpaleis.nl/en/about-escher/masterpieces",
+        "api_guidance_url": null
+      },
+      "image": {
+        "source_url": null,
+        "credit": "Artwork © The M.C. Escher Company. Official viewing reference: Museum Escher in The Palace.",
+        "alt_text": null,
+        "preview_allowed": false,
+        "local_path": null,
+        "availability": "Official museum viewing reference only; no local artwork image or reproduction permission.",
+        "sha256": null,
+        "width": null,
+        "height": null
+      }
+    },
+    {
+      "id": "escher-sky-and-water-i",
+      "order": 209,
+      "museum_id": null,
+      "title": "Sky and Water I",
+      "artist": "M.C. Escher",
+      "artists": [
+        "M.C. Escher"
+      ],
+      "artist_credit": "M.C. Escher (Dutch, 1898–1972)",
+      "creator_roles": [
+        {
+          "name": "M.C. Escher",
+          "role": "artist",
+          "qualifier": null,
+          "extent": null
+        }
+      ],
+      "attribution_note": null,
+      "date_display": "June 1938",
+      "medium": "Woodcut",
+      "artwork_type": "Print",
+      "classification": "Prints",
+      "accession": null,
+      "record_scope": "Composition reference from an official museum caption/commentary; no specific impression or accession is asserted.",
+      "primary_category": "escher",
+      "primary_category_title": "M.C. Escher · impossible worlds & mathematical prints",
+      "escher_topic": "Tessellation & transformation",
+      "tags": [
+        "escher",
+        "tessellation",
+        "figure-ground",
+        "animal",
+        "metamorphosis"
+      ],
+      "description": "Birds and fish share a boundary that gradually changes which creature looks solid and which looks like an interval. Pause where neither figure clearly owns the background.",
+      "visitor_question": "At what point does the space between birds become a fish?",
+      "curatorial_note": "Original looking note and visitor question; not an artist statement or museum quotation.",
+      "institution": "Museum Escher in The Palace (official reference source)",
+      "official_url": "https://www.escherinhetpaleis.nl/en/about-escher/masterpieces/sky-and-water-i",
+      "source_api_url": null,
+      "metadata_source_url": "https://www.escherinhetpaleis.nl/en/about-escher/masterpieces/sky-and-water-i",
+      "source_kind": "official-museum-caption-or-commentary",
+      "source_verification": "Title, date and print technique checked against the official source caption/details; see work/escher-source-audit.json for the page audit and access limits.",
+      "verified_on": "2026-11-21",
+      "credit_line": "Reference source: Museum Escher in The Palace. Artwork rights: The M.C. Escher Company.",
+      "rights": {
+        "status": "reference-only",
+        "public_domain_flag": false,
+        "licence": null,
+        "image_reuse": "Artwork image is not reproduced. The official Escher rights notice reserves reproduction rights and calls for written permission; no image reuse licence is claimed.",
+        "copyright_notice": "All M.C. Escher works © The M.C. Escher Company – Baarn – Holland. All rights reserved.",
+        "policy_url": "https://mcescher.com/licensing/",
+        "terms_url": "https://www.escherinhetpaleis.nl/en/about-escher/masterpieces",
+        "api_guidance_url": null
+      },
+      "image": {
+        "source_url": null,
+        "credit": "Artwork © The M.C. Escher Company. Official viewing reference: Museum Escher in The Palace.",
+        "alt_text": null,
+        "preview_allowed": false,
+        "local_path": null,
+        "availability": "Official museum viewing reference only; no local artwork image or reproduction permission.",
+        "sha256": null,
+        "width": null,
+        "height": null
+      }
+    },
+    {
+      "id": "escher-encounter",
+      "order": 210,
+      "museum_id": null,
+      "title": "Encounter",
+      "artist": "M.C. Escher",
+      "artists": [
+        "M.C. Escher"
+      ],
+      "artist_credit": "M.C. Escher (Dutch, 1898–1972)",
+      "creator_roles": [
+        {
+          "name": "M.C. Escher",
+          "role": "artist",
+          "qualifier": null,
+          "extent": null
+        }
+      ],
+      "attribution_note": null,
+      "date_display": "May 1944",
+      "medium": "Lithograph",
+      "artwork_type": "Print",
+      "classification": "Prints",
+      "accession": null,
+      "record_scope": "Composition reference from an official museum caption/commentary; no specific impression or accession is asserted.",
+      "primary_category": "escher",
+      "primary_category_title": "M.C. Escher · impossible worlds & mathematical prints",
+      "escher_topic": "Tessellation & transformation",
+      "tags": [
+        "escher",
+        "tessellation",
+        "body",
+        "metamorphosis",
+        "encounter"
+      ],
+      "description": "Figures emerge from a repeating plane and approach one another in a shared space. Track their change in volume before interpreting the meeting itself.",
+      "visitor_question": "What makes a repeated figure become an individual you can imagine meeting?",
+      "curatorial_note": "Original looking note and visitor question; not an artist statement or museum quotation.",
+      "institution": "Museum Escher in The Palace (official reference source)",
+      "official_url": "https://www.escherinhetpaleis.nl/en/about-escher/masterpieces/encounter",
+      "source_api_url": null,
+      "metadata_source_url": "https://www.escherinhetpaleis.nl/en/about-escher/masterpieces/encounter",
+      "source_kind": "official-museum-caption-or-commentary",
+      "source_verification": "Title, date and print technique checked against the official source caption/details; see work/escher-source-audit.json for the page audit and access limits.",
+      "verified_on": "2026-11-21",
+      "credit_line": "Reference source: Museum Escher in The Palace. Artwork rights: The M.C. Escher Company.",
+      "rights": {
+        "status": "reference-only",
+        "public_domain_flag": false,
+        "licence": null,
+        "image_reuse": "Artwork image is not reproduced. The official Escher rights notice reserves reproduction rights and calls for written permission; no image reuse licence is claimed.",
+        "copyright_notice": "All M.C. Escher works © The M.C. Escher Company – Baarn – Holland. All rights reserved.",
+        "policy_url": "https://mcescher.com/licensing/",
+        "terms_url": "https://www.escherinhetpaleis.nl/en/about-escher/masterpieces",
+        "api_guidance_url": null
+      },
+      "image": {
+        "source_url": null,
+        "credit": "Artwork © The M.C. Escher Company. Official viewing reference: Museum Escher in The Palace.",
+        "alt_text": null,
+        "preview_allowed": false,
+        "local_path": null,
+        "availability": "Official museum viewing reference only; no local artwork image or reproduction permission.",
+        "sha256": null,
+        "width": null,
+        "height": null
+      }
+    },
+    {
+      "id": "escher-convex-and-concave",
+      "order": 211,
+      "museum_id": null,
+      "title": "Convex and Concave",
+      "artist": "M.C. Escher",
+      "artists": [
+        "M.C. Escher"
+      ],
+      "artist_credit": "M.C. Escher (Dutch, 1898–1972)",
+      "creator_roles": [
+        {
+          "name": "M.C. Escher",
+          "role": "artist",
+          "qualifier": null,
+          "extent": null
+        }
+      ],
+      "attribution_note": null,
+      "date_display": "March 1955",
+      "medium": "Lithograph",
+      "artwork_type": "Print",
+      "classification": "Prints",
+      "accession": null,
+      "record_scope": "Composition reference from an official museum caption/commentary; no specific impression or accession is asserted.",
+      "primary_category": "escher",
+      "primary_category_title": "M.C. Escher · impossible worlds & mathematical prints",
+      "escher_topic": "Impossible architecture",
+      "tags": [
+        "escher",
+        "inside-outside",
+        "perspective",
+        "architecture",
+        "ambiguity"
+      ],
+      "description": "An architectural surface changes its apparent inside and outside as the eye crosses the image. Find a small area you understand, then test whether that reading survives beside it.",
+      "visitor_question": "Can the same roof be outside for one person and inside for another?",
+      "curatorial_note": "Original looking note and visitor question; not an artist statement or museum quotation.",
+      "institution": "Museum Escher in The Palace (official reference source)",
+      "official_url": "https://escherinhetpaleis.nl/en/about-escher/masterpieces/convex-and-concave",
+      "source_api_url": null,
+      "metadata_source_url": "https://escherinhetpaleis.nl/en/about-escher/masterpieces/convex-and-concave",
+      "source_kind": "official-museum-caption-or-commentary",
+      "source_verification": "Title, date and print technique checked against the official source caption/details; see work/escher-source-audit.json for the page audit and access limits.",
+      "verified_on": "2026-11-21",
+      "credit_line": "Reference source: Museum Escher in The Palace. Artwork rights: The M.C. Escher Company.",
+      "rights": {
+        "status": "reference-only",
+        "public_domain_flag": false,
+        "licence": null,
+        "image_reuse": "Artwork image is not reproduced. The official Escher rights notice reserves reproduction rights and calls for written permission; no image reuse licence is claimed.",
+        "copyright_notice": "All M.C. Escher works © The M.C. Escher Company – Baarn – Holland. All rights reserved.",
+        "policy_url": "https://mcescher.com/licensing/",
+        "terms_url": "https://www.escherinhetpaleis.nl/en/about-escher/masterpieces",
+        "api_guidance_url": null
+      },
+      "image": {
+        "source_url": null,
+        "credit": "Artwork © The M.C. Escher Company. Official viewing reference: Museum Escher in The Palace.",
+        "alt_text": null,
+        "preview_allowed": false,
+        "local_path": null,
+        "availability": "Official museum viewing reference only; no local artwork image or reproduction permission.",
+        "sha256": null,
+        "width": null,
+        "height": null
+      }
+    },
+    {
+      "id": "escher-bond-of-union",
+      "order": 212,
+      "museum_id": null,
+      "title": "Bond of Union",
+      "artist": "M.C. Escher",
+      "artists": [
+        "M.C. Escher"
+      ],
+      "artist_credit": "M.C. Escher (Dutch, 1898–1972)",
+      "creator_roles": [
+        {
+          "name": "M.C. Escher",
+          "role": "artist",
+          "qualifier": null,
+          "extent": null
+        }
+      ],
+      "attribution_note": null,
+      "date_display": "April 1956",
+      "medium": "Lithograph",
+      "artwork_type": "Print",
+      "classification": "Prints",
+      "accession": null,
+      "record_scope": "Composition reference from an official museum caption/commentary; no specific impression or accession is asserted.",
+      "primary_category": "escher",
+      "primary_category_title": "M.C. Escher · impossible worlds & mathematical prints",
+      "escher_topic": "Topology & infinity",
+      "tags": [
+        "escher",
+        "ribbon",
+        "portrait",
+        "continuous-surface",
+        "inside-outside"
+      ],
+      "description": "A continuous band supplies faces with both an inside and an outside while leaving much of their apparent volume empty. Follow the ribbon rather than the likenesses.",
+      "visitor_question": "How little surface is needed for a face to feel present?",
+      "curatorial_note": "Original looking note and visitor question; not an artist statement or museum quotation.",
+      "institution": "Museum Escher in The Palace (official reference source)",
+      "official_url": "https://escherinhetpaleis.nl/en/about-escher/escher-today/perpetuum-mobile",
+      "source_api_url": null,
+      "metadata_source_url": "https://escherinhetpaleis.nl/en/about-escher/escher-today/perpetuum-mobile",
+      "source_kind": "official-museum-caption-or-commentary",
+      "source_verification": "Title, date and print technique checked against the official source caption/details; see work/escher-source-audit.json for the page audit and access limits.",
+      "verified_on": "2026-11-21",
+      "credit_line": "Reference source: Museum Escher in The Palace. Artwork rights: The M.C. Escher Company.",
+      "rights": {
+        "status": "reference-only",
+        "public_domain_flag": false,
+        "licence": null,
+        "image_reuse": "Artwork image is not reproduced. The official Escher rights notice reserves reproduction rights and calls for written permission; no image reuse licence is claimed.",
+        "copyright_notice": "All M.C. Escher works © The M.C. Escher Company – Baarn – Holland. All rights reserved.",
+        "policy_url": "https://mcescher.com/licensing/",
+        "terms_url": "https://www.escherinhetpaleis.nl/en/about-escher/masterpieces",
+        "api_guidance_url": null
+      },
+      "image": {
+        "source_url": null,
+        "credit": "Artwork © The M.C. Escher Company. Official viewing reference: Museum Escher in The Palace.",
+        "alt_text": null,
+        "preview_allowed": false,
+        "local_path": null,
+        "availability": "Official museum viewing reference only; no local artwork image or reproduction permission.",
+        "sha256": null,
+        "width": null,
+        "height": null
+      }
+    }
+  ]
+}

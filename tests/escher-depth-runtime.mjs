@@ -92,7 +92,7 @@ surface('escher');M.player.z=105.5;const stairWaypoints=[];for(let i=0;i<8;i++){
 function walkToStairPoint([x,z]){let frames=0;while(Math.hypot(M.player.x-x,M.player.z-z)>.025){assert(frames++<1800,'Stair controller stuck '+JSON.stringify({player:M.player,target:[x,z],active:api.active,stair:api.descent.active}));const d=Math.hypot(M.player.x-x,M.player.z-z),before={...M.player};M.player.yaw=Math.atan2(-(x-M.player.x),-(z-M.player.z));api.step(Math.min(.025,d/3.8),{forward:1});assert(Math.hypot(M.player.x-before.x,M.player.z-before.z)<.2,'No entrance or landing teleports');}}
 for(const p of stairWaypoints)walkToStairPoint(p);near(M.player.y,-38.2);assert(api.active&&!api.descent.active,'Museum walking takes over after the bottom landing');M.player.yaw=Math.PI;api.step(.05,{forward:1});assert(!api.descent.active,'Walking away cannot recapture the short stair deck');
 for(const p of stairWaypoints.slice(0,-1).toReversed())walkToStairPoint(p);walkToStairPoint([228,105.88]);near(M.player.y,1.93);assert(!api.active,'The ordinary surface takes over again');restoreChecked();
-surface('study');assert(api.checkPortals(20));assert.equal(api.built.interior,interior);near(M.player.x,221);near(M.player.z,155);assert(api.leave());restoreChecked();
+surface('study');assert(api.checkPortals(20));assert.equal(api.built.interior,interior);near(M.player.x,223);near(M.player.z,155);assert(api.leave());restoreChecked();
 surface('park');assert(api.checkPortals(30));assert.equal(api.built.interior,interior);assert(api.leave());
 assert.equal(scene.children.filter(o=>o.userData.escherDepth).length,1,'All three doors share exactly one built interior');
 

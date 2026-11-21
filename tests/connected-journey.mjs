@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import * as T from '../src/city-source-assets/home-tools/vendor/three.module.js';
 import {BABEL,babelDesk,surfaceAt as babelSurface} from '../src/babel-library-model.js';
 import {UPPER,LOWER,pointAt,surfaceAt as gallerySurface} from '../src/two-face-gallery-model.js';
-import {canWalkDepth,depthFloorAt} from '../src/escher-depth-model.js';
+import {ESCHER_DEPTH as D,canWalkDepth,depthFloorAt,walkDepth} from '../src/escher-depth-model.js';
 import {physicalToLower,tunnelContains} from '../src/world-cylinder-model.js';
 import {facultyCanStand} from '../src/math-faculty-model.js';
 import {buildMathCity} from '../src/city-source-assets/home-tools/math-city-scene.js';
@@ -19,10 +19,18 @@ for(const l of BABEL.levels)for(const opened of[false,true]){
 }
 assert.equal(make({x:0,z:0,y:1.93},{babelActive:true}),null,'A stale library flag cannot place a route on the surface');
 assert.equal(make({x:0,z:0,y:1.8},{escherActive:true}),null,'A stale museum flag cannot claim a surface floor');
-for(const p of[{x:136.4,z:115,y:-38.2},{x:174,z:114,y:-38.2},{x:157.63,z:125,y:-38.2},{x:221,z:155,y:-38.2},{x:216.69,z:87,y:-38.2},{x:195,z:143,y:depthFloorAt(195,143,-44)+1.8},{x:182,z:172,y:-44.2},{x:207,z:100,y:-32.2}])for(const goal of['perspective','loop','passage']){
+for(const p of[{x:136.4,z:115,y:-38.2},{x:174,z:114,y:-38.2},{x:157.63,z:125,y:-38.2},{x:223,z:155,y:-38.2},{x:216.69,z:87,y:-38.2},{x:195,z:143,y:depthFloorAt(195,143,-44)+1.8},{x:182,z:172,y:-44.2},{x:207,z:100,y:-32.2}])for(const goal of['perspective','loop','passage']){
  const path=museumRoute(p,goal);assert(path.length>0,`A real museum route from ${p.x},${p.z} to ${goal}`);
  for(const q of path){assert(canWalkDepth(q.x,q.z,{fromY:q.y}),'Museum breadcrumbs must respect cases, walls, doorways and stair');near(q.y,depthFloorAt(q.x,q.z,q.y));samples++;}
  const end=path.at(-1),target=goal==='perspective'?{x:157.63,z:125}:goal==='loop'?{x:182,z:172}:{x:136.4,z:115};assert(distance(end,target)<.01);
+}
+// The moved plinth blocks the former diagonal from the study arrival. Drive
+// the real height-aware navigator along each route from both new clear aisles
+// and the actual Clebsch/reading approaches; valid endpoints alone miss this.
+const studyArrival=D.portals.find(p=>p.id==='study').landing,museumAisles=[studyArrival,{x:223,z:151,y:-40},{x:223,z:147,y:-40},{x:220,z:147,y:-40},{x:216,z:147,y:-40},D.exhibits.find(p=>p.id==='clebsch'),D.exhibits.find(p=>p.id==='reading')];
+for(const start of museumAisles)for(const goal of['perspective','loop','passage']){
+ assert(canWalkDepth(start.x,start.z,{fromY:start.y}),'The real sculpture aisle/portal approach remains walkable');const walker={x:start.x,z:start.z,y:start.y+1.8},path=museumRoute(walker,goal);assert(path.length>0,`The actual study/sculpture aisle at${start.x},${start.z} reaches${goal}`);
+ for(const q of path){assert(canWalkDepth(q.x,q.z,{fromY:walker.y-1.8}),'Every guide segment retains the current physical height');walkDepth(walker,q.x-walker.x,q.z-walker.z,1.8);assert(distance(walker,q)<.02,'Actual museum walking cannot slide into a plinth, case, pier or wall');near(walker.y-1.8,q.y);samples++;}
 }
 for(const side of['upper','lower'])for(const done of[false,true]){
  const theta=4.2,q=pointAt(theta,side),p=side==='upper'?{...q,y:q.y+1.8}:{x:q.x-2160,z:q.z-65,y:q.y+1.8},c=make(p,{worldRoute:{side,theta,layer:'spiral'},progress:{perspective:done,loop:done}}),path=connectedRoute(c);assert(path.length>20);

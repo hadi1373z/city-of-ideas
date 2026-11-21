@@ -1,16 +1,17 @@
-import {ESCHER_PAVILION as ESCHER} from './escher-pavilion-model.js?v=six-gate-city-20261121';
+import {ESCHER_PAVILION as ESCHER} from './escher-pavilion-model.js?v=night-garden-20261121';
 import {LIGHT_HOUSE} from './house-of-light-model.js?v=live-light-niches-20261121';
 import {SOCRATES_SITE} from './socrates-site-model.js?v=shore-niches-20261121';
 import {MAKERS_SITE,MAKERS_ACCESS,MAKERS_ROOFS} from './makers-site.js?v=makers-block-20261118';
 import {PARK_GRASS_CSS,lawnMapColour} from './city-lawn-palette.js?v=makers-passages-20261118';
-import {FOUNDATION_HOUSES,FOUNDATION_ROUTES} from './foundation-houses-data.js?v=six-gate-city-20261121';
+import {FOUNDATION_HOUSES,FOUNDATION_ROUTES} from './foundation-houses-data.js?v=night-garden-20261121';
 import {CITY_ISLAND as I} from './island-layout.js?v=makers-passages-20261118';
-import {PARK_HEX_CELLS,CITY_HEX,IDEAS_PARK_SITE,PAPER_SEMINAR_COURT as COURT} from './city-hex-layout.js?v=six-gate-city-20261121';
-import {coastX,HOUSE_ORIGAMI,COAST_ROUTES} from './origami-house-math.js?v=six-gate-city-20261121';
-import {SEMINAR_HOUSES,SEMINAR_PATHS} from './seminar-houses-data.js?v=six-gate-city-20261121';
+import {PARK_HEX_CELLS,CITY_HEX,FORMER_IDEAS_PARK_SITE,PAPER_SEMINAR_COURT as COURT} from './city-hex-layout.js?v=night-garden-20261121';
+import {coastX,HOUSE_ORIGAMI,COAST_ROUTES} from './origami-house-math.js?v=night-garden-20261121';
+import {SEMINAR_HOUSES,SEMINAR_PATHS} from './seminar-houses-data.js?v=night-garden-20261121';
 import {STUDY_PATHS} from './study-houses-data.js?v=city-night-20261117';
-import {COAST_MAIN_PATHS} from './coastal-map-data.js?v=six-gate-city-20261121';
-import {URBAN_STREETS,ARCADE_STREETS,URBAN_COURTS,PRIVATE_HOME_RESERVE,HONEYCOMB_CITY,CITY_UNDERGROUND_LINKS,urbanCourtOutline,urbanBuildingFootprints,urbanLawnCells,urbanRoutes} from './city-urban-plan-model.js?v=six-gate-city-20261121';
+import {COAST_MAIN_PATHS} from './coastal-map-data.js?v=night-garden-20261121';
+import {GARDEN_STONE_BELT} from './six-gate-garden-paving.js?v=night-garden-20261121';
+import {URBAN_STREETS,ARCADE_STREETS,URBAN_COURTS,PRIVATE_HOME_RESERVE,HONEYCOMB_CITY,CITY_UNDERGROUND_LINKS,SIXFOLD_CITY,urbanCourtOutline,urbanBuildingFootprints,urbanLawnCells,urbanPavedRoutes} from './city-urban-plan-model.js?v=night-garden-20261121';
 export const COAST_MAP_COPY={en:{title:'An island around Zarathustra',gallery:'Zarathustra Gallery',ocean:'Surrounding ocean',park:'Ideas Park',artists:'Artists’ quarter',socrates:'Socrates',philosophers:'Philosophers’ quarter',makers:'Makers’ courtyard',study:'Advanced study houses',origami:'House of Origami',mountain:'Mountain of Becoming',shore:'Paper-boat lookout',note:'One circular island. The gallery at its centre. Ocean all around.'},de:{title:'Eine Insel um Zarathustra',gallery:'Zarathustra-Galerie',ocean:'Umliegender Ozean',park:'Ideenpark',artists:'Künstlerviertel',socrates:'Sokrates',philosophers:'Philosophenviertel',makers:'Hof der Schaffenden',study:'Vertiefte Lernhäuser',origami:'Haus des Origami',mountain:'Berg des Werdens',shore:'Papierboot-Aussicht',note:'Eine kreisrunde Insel. Die Galerie im Mittelpunkt. Rundum Ozean.'},fa:{title:'جزیره‌ای پیرامون زرتشت',gallery:'گالری زرتشت',ocean:'اقیانوس پیرامون جزیره',park:'پارک ایده‌ها',artists:'محلهٔ هنرمندان',socrates:'سقراط',philosophers:'محلهٔ فیلسوفان',makers:'حیاط سازندگان',study:'خانه‌های مطالعهٔ پیشرفته',origami:'خانهٔ اوریگامی',mountain:'کوه شدن',shore:'تماشای قایق کاغذی',note:'جزیره‌ای دایره‌ای؛ گالری در مرکز و اقیانوس در پیرامون.'}};
 const escape=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
 export function coastalPlanSvg(plan,lang='en'){
@@ -21,9 +22,10 @@ export function coastalPlanSvg(plan,lang='en'){
  const reserve=PRIVATE_HOME_RESERVE;if(reserve.face==='upper')parts.push('<rect data-private-home-reserve="true" x="'+px(reserve.minX)+'" y="'+pz(reserve.minZ)+'" width="'+(reserve.maxX-reserve.minX)*s+'" height="'+(reserve.maxZ-reserve.minZ)*s+'" rx="10" fill="#a9bf9b" fill-opacity=".3" stroke="#8ca78a" stroke-width=".7" stroke-dasharray="3 5"><title>Saved homes · reserved neighbourhood, designs remain private</title></rect>');
  for(const cell of urbanLawnCells())parts.push('<polygon data-neighbourhood-lawn="'+cell.id+'" points="'+points(cell.vertices)+'" fill="'+lawnMapColour(cell)+'"/>');
  parts.push(text(0,-610,c.ocean,21,'#f3f2df'));
- for(const cell of PARK_HEX_CELLS)parts.push('<polygon data-garden-cell="'+cell.q+','+cell.r+'" points="'+points(Array.from({length:6},(_,i)=>[cell.x+CITY_HEX.side*Math.cos(Math.PI/6+i*Math.PI/3),cell.z+CITY_HEX.side*Math.sin(Math.PI/6+i*Math.PI/3)]))+'" fill="'+PARK_GRASS_CSS+'"/>');
- parts.push(text(IDEAS_PARK_SITE.x,IDEAS_PARK_SITE.z+5,c.park,21));
- for(const[rIndex,r]of urbanRoutes(plan).entries()){const id=r.id||'source-'+rIndex,core=id==='sixfold-hexagon'||id.startsWith('civic-view-')||id==='gallery-promenade';parts.push(path(r.points,core?'#8b7856':r.kind==='lane'?'#a5ad94':'#b2a585',r.width*s+(core?1:0),'data-street="'+id+'"'));if(core)parts.push(path(r.points,'#e0d4b3',Math.max(.7,r.width*s-1.4)));}
+ for(const cell of PARK_HEX_CELLS)parts.push('<polygon data-vacated-park-cell="'+cell.q+','+cell.r+'" points="'+points(Array.from({length:6},(_,i)=>[cell.x+CITY_HEX.side*Math.cos(Math.PI/6+i*Math.PI/3),cell.z+CITY_HEX.side*Math.sin(Math.PI/6+i*Math.PI/3)]))+'" fill="'+PARK_GRASS_CSS+'"/>');
+ parts.push(text(FORMER_IDEAS_PARK_SITE.x,FORMER_IDEAS_PARK_SITE.z+5,{en:'Five vacant courts',de:'Fünf freie Höfe',fa:'پنج حیاط خالی'}[lang],18));
+ if(SIXFOLD_CITY)parts.push('<circle data-garden-stone-field="true" cx="460" cy="460" r="'+(GARDEN_STONE_BELT.inner+GARDEN_STONE_BELT.outer)/2*s+'" fill="none" stroke="#e7dcc3" stroke-width="'+(GARDEN_STONE_BELT.outer-GARDEN_STONE_BELT.inner)*s+'"/>');
+ for(const[rIndex,r]of urbanPavedRoutes(plan).entries()){const id=r.id||'source-'+rIndex,core=id==='sixfold-hexagon'||id.startsWith('civic-view-')||id==='gallery-promenade';parts.push(path(r.points,core?'#8b7856':r.kind==='lane'?'#a5ad94':'#b2a585',r.width*s+(core?1:0),'data-street="'+id+'"'+(r.fragment!==undefined?' data-street-fragment="'+r.fragment+'"':'')));if(core)parts.push(path(r.points,'#e0d4b3',Math.max(.7,r.width*s-1.4)));}
  for(const arcade of ARCADE_STREETS)parts.push(path(arcade.points,'#795d45',6.2*s,'data-inhabited-arcade="'+arcade.id+'"'));
  for(const wall of HONEYCOMB_CITY.walls)parts.push(path([wall.a,wall.b],'#967744',1.4,'data-honeycomb-wall="true"'));
  for(const route of CITY_UNDERGROUND_LINKS)parts.push(path(route.points,'#517d88',2,'data-underground-link="'+route.id+'" stroke-dasharray="4 4"'));

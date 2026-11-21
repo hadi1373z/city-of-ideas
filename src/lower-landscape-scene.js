@@ -1,4 +1,6 @@
 import {LOWER_COAST_WALKS,LOWER_INLET,LOWER_COAST,routeDistance,inLowerInlet,lowerLandscapeCanStand} from './lower-landscape-model.js';
+import {inNightPark,nightParkPathDistance,NIGHT_PARK_APPROACH} from './night-park-model.js';
+import {nightHomeYardReserve} from './night-home-layout.js?v=night-garden-20261121';
 
 // Adds only an owned landscape to the retained lower ground. No source lot,
 // house, lesson, actor or private object is moved or copied.
@@ -12,7 +14,7 @@ export function buildLowerLandscape(T,{parent,own,existingPaths=[],existingObsta
  const box=(w,h,d,x,y,z,m=stone,yaw=0)=>stamp(unit,m,[x,y,z],[w,h,d],new T.Quaternion().setFromAxisAngle(up,yaw));
  const circle=(x,z,r,m=stone,y=.025)=>stamp(disc,m,[x,y,z],[r,.03,r]);
  function solid(x,z,radius,kind){obstacles.push({x:x-2160,z:z-65,radius,r:radius,kind,space:'logical-lower'});}
- function clear(x,z,radius=0,{water=true,campus=true}={}){if(Math.hypot(x,z)<70+radius||Math.hypot(x,z)>563-radius)return false;if(campus&&x> -300-radius&&x< -45+radius&&z> -170-radius&&z<160+radius)return false;if(water&&inLowerInlet(x,z,radius+2.5))return false;if(allPaths.some(p=>routeDistance(x,z,p)<p.width/2+radius+2))return false;return ![...existingObstacles,...obstacles].some(b=>Math.hypot(x-(b.x+2160),z-(b.z+65))<b.radius+radius+1);}
+ function clear(x,z,radius=0,{water=true,campus=true}={}){if(nightHomeYardReserve(x,z,radius+3)||inNightPark(x,z,radius+4)||nightParkPathDistance(x,z)<NIGHT_PARK_APPROACH.width/2+radius+2)return false;if(Math.hypot(x,z)<70+radius||Math.hypot(x,z)>563-radius)return false;if(campus&&x> -300-radius&&x< -45+radius&&z> -170-radius&&z<160+radius)return false;if(water&&inLowerInlet(x,z,radius+2.5))return false;if(allPaths.some(p=>routeDistance(x,z,p)<p.width/2+radius+2))return false;return ![...existingObstacles,...obstacles].some(b=>Math.hypot(x-(b.x+2160),z-(b.z+65))<b.radius+radius+1);}
  // Shape variation has an ecological scale. These are broad meadow clearings,
  // not tile textures, alternating stripes or decorative platforms.
  function clearing(cx,cz,rx,rz,material,phase){const points=[];for(let i=0;i<56;i++){const a=i/56*Math.PI*2,r=1+.11*Math.sin(a*3+phase)+.06*Math.sin(a*7-phase),x=cx+Math.cos(a)*rx*r,z=cz+Math.sin(a)*rz*r;if(Math.hypot(x,z)>548){const s=548/Math.hypot(x,z);points.push(new T.Vector2(x*s,-z*s));}else points.push(new T.Vector2(x,-z));}const shape=new T.Shape(points),n=mesh(new T.ShapeGeometry(shape),material,'Soft-edged lower meadow clearing');n.rotation.x=-Math.PI/2;n.position.y=.009;}

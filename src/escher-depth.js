@@ -1,7 +1,8 @@
+import {CLEBSCH} from './clebsch-cubic-model.js';
 import {installEscherDescent} from './escher-descent.js?v=live-light-niches-20261121';
 import {PRINT_STUDIES,dependencyOrder} from './escher-print-studies.js?v=cloister-20261120';
-import {ESCHER_DEPTH as D,DEPTH_VIEW,DEPTH_FOCUS,depthFloorAt,depthRoomAt,walkDepth,atGalleryHandoff,perspectiveAligned,tileMismatch,loopResult} from './escher-depth-model.js?v=wall-rails-20261121';
-import {buildEscherDepth} from './escher-depth-scene.js?v=wall-rails-20261121';
+import {ESCHER_DEPTH as D,DEPTH_VIEW,DEPTH_FOCUS,depthFloorAt,depthRoomAt,walkDepth,atGalleryHandoff,perspectiveAligned,tileMismatch,loopResult} from './escher-depth-model.js?v=night-garden-20261121';
+import {buildEscherDepth} from './escher-depth-scene.js?v=night-garden-20261121';
 
 const ROOM_NAMES={vestibule:'Gallery passage',hall:'Hexagonal vaulted court','hall-gallery':'Upper court gallery','perspective-gallery':'Perspective balcony','tessellation-gallery':'Tessellation balcony','reading-gallery':'Topology balcony','gallery-stair':'Stair to the upper gallery',perspective:'Perspective chamber',tessellation:'Tessellation chamber',reading:'Topology & relations wing',stair:'Stair to the loop chamber',loop:'Lower hexagonal cloister'};
 export function installEscherDepth(M,T,{onGalleryExit=null}={}){
@@ -105,6 +106,9 @@ export function installEscherDepth(M,T,{onGalleryExit=null}={}){
    body.append(b('Restore four rising flights',()=>{directions.fill(1);built.setLoop(directions);renderExhibit(id);},'all-up'));
    directions.forEach((d,i)=>{const n=b('Flight '+(i+1)+': '+(d===1?'up +2':'down −2'),()=>{directions[i]*=-1;built.setLoop(directions);renderExhibit(id);},'flight'+i);n.setAttribute('aria-pressed',String(d===1));body.append(n);});
    const status=el('p',directions.map(d=>d===1?'+2':'−2').join('  ')+' = '+(result.rise>0?'+':'')+result.rise+(result.closed?' · The route closes. It includes descents.':' · The last landing misses the first by '+Math.abs(result.rise)+' units.'));status.setAttribute('role','status');body.append(status,el('p','The walkable stair outside this case is ordinary geometry and works in both directions. The small model is an original experiment about height, not an authentic historical artwork.'));
+  }else if(id==='clebsch'){
+   title.textContent='Clebsch cubic · 27 straight lines';body.append(el('p','How can a curved surface contain a whole straight line? Walk around the grey model: the coloured lines stay straight while the surface bends around them.'),el('p','The Clebsch diagonal cubic is defined in projective coordinates by Σ Xᵢ = 0 and Σ Xᵢ³ = 0, for five coordinates. This model computes an affine view of that surface. All 27 real projective lines appear as finite coloured segments cut by the same display sphere.'),el('p','The three black dots mark exact Eckardt points, where three surface lines meet. Colours help trace the straight lines; the repeating palette does not encode temperature, curvature or a claimed mathematical classification.'),el('p','The grey mesh is a numerical approximation to the exact cubic; its spherical boundary is a display cut, not an edge of the full surface. This is an original computed model, not an Escher artwork or a copied historical mesh.'));
+   for(const source of CLEBSCH.sources){const a=el('a',source.title+' ↗');a.href=source.url;a.target='_blank';a.rel='noopener noreferrer';const p=el('p');p.append(a);body.append(p);}
   }else if(id==='reading'){
    title.textContent='Which hand comes first?';body.append(el('p','Treat A and B as construction tasks. An arrow means a task requires the other to be complete first. Toggle the dependencies and try to name a legal first task.'),el('p','This is a finite dependency model inspired by Drawing Hands. It does not explain how Escher made the print or prove that every feedback system is impossible.'));
    for(const [key,label]of[['a','A requires B first'],['b','B requires A first']]){const n=b(label+': '+(dependency[key]?'yes':'no'),()=>{dependency[key]=!dependency[key];renderExhibit(id);},'dependency-'+key);n.setAttribute('aria-pressed',String(dependency[key]));body.append(n);}

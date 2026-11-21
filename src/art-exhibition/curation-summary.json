@@ -1,0 +1,451 @@
+{
+  "counts": {
+    "works": 280,
+    "original_research_works": 100,
+    "added_works": 180,
+    "local_illustrated_works": 80,
+    "illustrated_lead_artists": 38,
+    "magritte_pathway_references": 12,
+    "magritte_added_works": 5,
+    "magritte_works_total": 10,
+    "primary_sections": 17,
+    "lead_artists": 72,
+    "credited_creators": 79,
+    "public_domain_image_records": 165,
+    "reference_only_records": 115,
+    "artwork_types": [
+      "Artifact",
+      "Design",
+      "Drawing",
+      "Drawing and Watercolor",
+      "Installation",
+      "Painting",
+      "Photograph",
+      "Portfolio",
+      "Print",
+      "Sculpture",
+      "Textile"
+    ],
+    "newly_added_illustrated_works": 40,
+    "previous_database_works": 212,
+    "escher_reference_works": 20,
+    "escher_local_images": 0,
+    "city_artworks": 75,
+    "city_new_records": 68,
+    "city_existing_archive_matches": 7,
+    "visible_artworks": 173,
+    "city_image_dependencies": 75,
+    "online_image_artworks": 93,
+    "missing_image_records": 107,
+    "escher_visible_city_images": 4,
+    "image_bound_records": 173,
+    "remote_museum_image_bindings": 21,
+    "new_remote_only_records": 19
+  },
+  "categories": [
+    {
+      "id": "light",
+      "title": "Light as material",
+      "question": "When light becomes part of the work, what is the artwork made of?",
+      "works": 10
+    },
+    {
+      "id": "colour",
+      "title": "Colour in relationship",
+      "question": "How much of a colour belongs to its neighbours?",
+      "works": 10
+    },
+    {
+      "id": "optical",
+      "title": "Optical rhythm",
+      "question": "Can a still surface seem to move?",
+      "works": 10
+    },
+    {
+      "id": "reflection",
+      "title": "Reflection and visual ambiguity",
+      "question": "What makes an image believable?",
+      "works": 10
+    },
+    {
+      "id": "space",
+      "title": "Invented and constructed space",
+      "question": "How does an image persuade us that a space exists?",
+      "works": 10
+    },
+    {
+      "id": "systems",
+      "title": "Repetition and small rules",
+      "question": "How does one repeated decision become a complex whole?",
+      "works": 10
+    },
+    {
+      "id": "motion",
+      "title": "Motion and balance",
+      "question": "How can movement be present in a still or moving artwork?",
+      "works": 10
+    },
+    {
+      "id": "material",
+      "title": "Material, surface and touch",
+      "question": "What can a material do that a picture alone cannot?",
+      "works": 10
+    },
+    {
+      "id": "atmosphere",
+      "title": "Nature and changing atmosphere",
+      "question": "How does the same world become different through light and weather?",
+      "works": 10
+    },
+    {
+      "id": "human",
+      "title": "Human presence and the act of looking",
+      "question": "Whose experience enters an artwork, and how?",
+      "works": 10
+    },
+    {
+      "id": "dream",
+      "title": "Dreams, faces & metamorphosis",
+      "question": "Where does a familiar thing become an impossible identity?",
+      "works": 23
+    },
+    {
+      "id": "signs",
+      "title": "Small signs, invented worlds",
+      "question": "How few marks does an imagined world need?",
+      "works": 17
+    },
+    {
+      "id": "uncanny",
+      "title": "The ordinary made uncanny",
+      "question": "What makes a place or object seem to be waiting for a story?",
+      "works": 19
+    },
+    {
+      "id": "myth",
+      "title": "Visions, myth & embodied ideas",
+      "question": "How can a picture give a thought or a vision a body?",
+      "works": 21
+    },
+    {
+      "id": "connections",
+      "title": "Magritte & surrealist connections",
+      "question": "What happens when recognisable things obey unfamiliar rules?",
+      "works": 12
+    },
+    {
+      "id": "escher",
+      "title": "M.C. Escher · impossible worlds & mathematical prints",
+      "question": "Which rule of a picture can remain convincing locally while failing across the whole?",
+      "works": 20
+    },
+    {
+      "id": "city-art",
+      "title": "Artworks in the city",
+      "question": "How does an artwork change when you encounter it in a walkable city?",
+      "works": 68
+    }
+  ],
+  "artists": [
+    {
+      "artist": "James Turrell",
+      "works": 2
+    },
+    {
+      "artist": "Dan Flavin",
+      "works": 3
+    },
+    {
+      "artist": "Robert Irwin",
+      "works": 1
+    },
+    {
+      "artist": "Olafur Eliasson",
+      "works": 1
+    },
+    {
+      "artist": "László Moholy-Nagy",
+      "works": 4
+    },
+    {
+      "artist": "Man Ray (Emmanuel Radnitzky)",
+      "works": 2
+    },
+    {
+      "artist": "Joseph Mallord William Turner",
+      "works": 3
+    },
+    {
+      "artist": "Josef Albers",
+      "works": 3
+    },
+    {
+      "artist": "Ellsworth Kelly",
+      "works": 4
+    },
+    {
+      "artist": "Mark Rothko",
+      "works": 2
+    },
+    {
+      "artist": "Alma Thomas",
+      "works": 1
+    },
+    {
+      "artist": "Vasily Kandinsky",
+      "works": 2
+    },
+    {
+      "artist": "Bridget Riley",
+      "works": 4
+    },
+    {
+      "artist": "Victor de Vasarely",
+      "works": 2
+    },
+    {
+      "artist": "Robert Delaunay",
+      "works": 2
+    },
+    {
+      "artist": "Sonia Delaunay-Terk",
+      "works": 3
+    },
+    {
+      "artist": "Jesús Rafael Soto",
+      "works": 1
+    },
+    {
+      "artist": "René Magritte",
+      "works": 10
+    },
+    {
+      "artist": "Paul Klee",
+      "works": 15
+    },
+    {
+      "artist": "Claude Monet",
+      "works": 11
+    },
+    {
+      "artist": "Ruth Asawa",
+      "works": 2
+    },
+    {
+      "artist": "Giovanni Battista Piranesi",
+      "works": 9
+    },
+    {
+      "artist": "Giorgio de Chirico",
+      "works": 4
+    },
+    {
+      "artist": "Donald Judd",
+      "works": 2
+    },
+    {
+      "artist": "Yayoi Kusama",
+      "works": 3
+    },
+    {
+      "artist": "Sol LeWitt",
+      "works": 3
+    },
+    {
+      "artist": "Agnes Martin",
+      "works": 2
+    },
+    {
+      "artist": "Gego (Gertrud Goldschmidt)",
+      "works": 4
+    },
+    {
+      "artist": "Anni Albers",
+      "works": 4
+    },
+    {
+      "artist": "Alexander Calder",
+      "works": 5
+    },
+    {
+      "artist": "Lygia Clark",
+      "works": 1
+    },
+    {
+      "artist": "Fernand Léger",
+      "works": 3
+    },
+    {
+      "artist": "Katsushika Hokusai",
+      "works": 13
+    },
+    {
+      "artist": "Utagawa Hiroshige",
+      "works": 2
+    },
+    {
+      "artist": "Faith Ringgold",
+      "works": 3
+    },
+    {
+      "artist": "Georges Seurat",
+      "works": 4
+    },
+    {
+      "artist": "Odilon Redon",
+      "works": 13
+    },
+    {
+      "artist": "Arnold Böcklin",
+      "works": 1
+    },
+    {
+      "artist": "Gustave Moreau",
+      "works": 1
+    },
+    {
+      "artist": "William Blake",
+      "works": 6
+    },
+    {
+      "artist": "James Ensor",
+      "works": 7
+    },
+    {
+      "artist": "Henry Fuseli",
+      "works": 3
+    },
+    {
+      "artist": "Franz Marc",
+      "works": 3
+    },
+    {
+      "artist": "Max Ernst",
+      "works": 1
+    },
+    {
+      "artist": "Paul Delvaux",
+      "works": 1
+    },
+    {
+      "artist": "Yves Tanguy",
+      "works": 1
+    },
+    {
+      "artist": "Joan Miró",
+      "works": 1
+    },
+    {
+      "artist": "Dorothea Tanning",
+      "works": 1
+    },
+    {
+      "artist": "Roberto Matta",
+      "works": 1
+    },
+    {
+      "artist": "Gustave Doré",
+      "works": 4
+    },
+    {
+      "artist": "Jean-Jacques Grandville",
+      "works": 3
+    },
+    {
+      "artist": "Francisco de Goya",
+      "works": 6
+    },
+    {
+      "artist": "Albrecht Dürer",
+      "works": 4
+    },
+    {
+      "artist": "Aubrey Beardsley",
+      "works": 2
+    },
+    {
+      "artist": "Utagawa Kuniyoshi",
+      "works": 5
+    },
+    {
+      "artist": "Félicien Rops",
+      "works": 2
+    },
+    {
+      "artist": "William Hogarth",
+      "works": 2
+    },
+    {
+      "artist": "M.C. Escher",
+      "works": 20
+    },
+    {
+      "artist": "Wassily Kandinsky",
+      "works": 6
+    },
+    {
+      "artist": "Vincent van Gogh",
+      "works": 6
+    },
+    {
+      "artist": "Auguste Rodin",
+      "works": 6
+    },
+    {
+      "artist": "Hilma af Klint",
+      "works": 6
+    },
+    {
+      "artist": "Piet Mondrian",
+      "works": 6
+    },
+    {
+      "artist": "Dorothea Lange",
+      "works": 6
+    },
+    {
+      "artist": "William Morris",
+      "works": 6
+    },
+    {
+      "artist": "Paul Cézanne",
+      "works": 1
+    },
+    {
+      "artist": "Berthe Morisot",
+      "works": 1
+    },
+    {
+      "artist": "Salvador Dalí",
+      "works": 4
+    },
+    {
+      "artist": "Cypriot",
+      "works": 1
+    },
+    {
+      "artist": "Greek, Attic",
+      "works": 1
+    },
+    {
+      "artist": "Babylonian",
+      "works": 1
+    },
+    {
+      "artist": "Sumerian",
+      "works": 1
+    }
+  ],
+  "image_scope": "80 accepted local CC0 files,75 existing city dependencies and21 official public-domain AIC image bindings.173 distinct records have an image source binding; this is not a claim that all remote images have decoded in a browser.",
+  "image_display_counts": {
+    "meaning": "Binding counts are NOT successful browser-decoding counts. Page reports actual load/error states for the current view.",
+    "source_bound_records": 173,
+    "local_image_files": 80,
+    "city_asset_dependencies": 75,
+    "remote_museum_bindings": 21,
+    "city_or_local_records": 154,
+    "additional_remote_only_records": 19,
+    "browser_verified_current_edition": null,
+    "legacy_visible_artworks_field_meaning": "The legacy counts.visible_artworks field now means source-bound records, not browser-decoded images. Use image_bound_records and actual per-view load status."
+  }
+}

@@ -38,8 +38,9 @@ the upper environment without retaining the lower fog or light intensities.
 
 `withLowerEnvironment(render)` scopes the lower sky/fog and reading lights for
 the live pond render, restoring the upper scene even when rendering throws.
-The pond remains an actual view of the same night face, surrounded by the
-daylight park.
+Ideas Park now lives on the night face. Its original pond captures actual
+upper daylight through `withUpperEnvironment(render)`, which restores all
+visibility, lighting, fog and upper-sea state after the pass.
 
 ## Wall becoming birds
 
@@ -174,8 +175,10 @@ individual room bounds, experiments, threshold rules and attribution.
 
 ## Pond window and crossing
 
-`src/pond-world-window-*.js` uses the existing park fountain at `(0,-330)`.
-Its centre shows a projective live render of the same scene's actual lower frame.
+`src/pond-world-window-*.js` uses the existing park fountain at logical
+`(−2200,−430)` on the night face. Its centre shows a projective live render of
+the same scene's upper daylight. `night-park-model.js` owns that shared site,
+all five moved lawns, the real approach and lantern positions.
 The raised centre is removed from its real static batches while the pale rim,
 lower basin and animated paper boats remain. The water window contributes no
 floor or collision surface. Do not replace it with an image or duplicate city.
@@ -190,7 +193,8 @@ and resource ownership are in `POND-WORLD-WINDOW.md`.
 The pond context offers **Look through the pond** and **Travel to the other
 face**. The second delegates to `worldCylinder.travelFromPond`. The default is
 a live 3D camera journey around the actual cylinder edge, followed by arrival on
-the lower land. It has a skip action and honours reduced motion. It creates no
+the opposite face. From the night park it returns to the upper approach at
+`(0,.13,−222)`. It has a skip action and honours reduced motion. It creates no
 speech or video recording. `src/city-config.js` keeps `pondTransitionVideo:null`;
 a future published video path can opt into the host's video transition. The
 current feature must remain usable without that optional future asset. Leaving,
@@ -217,10 +221,12 @@ moves. Do not change upper east/west orientation for RTL interface text.
 | `babel-layout.js` / `babel-library*.js` | Original gallery opening, upper descent, five terraces/catalogue, real pit/shelf cuts and Babel entry/return ownership |
 | `math-faculty-model.js` / `math-faculty-scene.js` | Central annulus, wing shell/covered join, discipline actions, exact native shell selection and new solid colliders |
 | `escher-depth-*.js` | Museum geometry/experiments, actual gallery boundary and museum navigation lifecycle |
-| `pond-world-window-*.js` | Existing-fountain cut, live lower capture, contextual pond actions and complete renderer/borrowed-geometry restoration |
+| `night-park-model.js` / `night-park.js` | Complete original park placement, shared lawns/arrival/path/lantern reserves, local lighting and owned cleanup |
+| `pond-world-window-*.js` | Existing-fountain cut, live opposite-face capture, contextual pond actions and complete renderer/borrowed-geometry restoration |
 | `gallery.js` / `city-integration.js` | Installer order, input arbitration, render/camera hooks and existing source/tool integration |
 
-Install the source districts and Babel first, then Escher depth, the world
+Install the night-park source-parent placement before park companions and the
+coastal tree-bed collector. Then install source districts and Babel, Escher depth, the world
 cylinder/Faculty, and finally the pond. In the movement loop, offer Escher depth
 control first, then the world cylinder, then Babel, before ordinary walking.
 Only one owner consumes a frame. A held movement key is preserved when walking
@@ -264,3 +270,8 @@ the existing basin; crossing remains an explicit action.
 Upper and lower water use the same unlit ocean shader in ocean-surface.js, with identical shoreline palette, foam and fog handling. Each owns its material and time uniforms. World updates preserve reduced motion and the active scene fog.
 
 Below Babel, three closed annular earth layers occupy radii 21.7 to 58 from Y-26.6 to -95.9. The middle layer has a real east-facing rectangular cut at Z +/-2.3 and Y-40.2..-34.7 for the existing Escher corridor. The spiral well remains hollow inside r21.7; Babel and lower Faculty floors remain separate. These layers give the cutaway real earth behind the central shaft rather than exposing sky.
+
+The complete park move, original 620 trees/1240 crown instances,31 shifted/97
+unchanged supported home parcels,12 lanterns and held-input verification are
+documented in `NIGHT-IDEAS-PARK.md`. The source IDs, voices and private data
+remain unchanged.

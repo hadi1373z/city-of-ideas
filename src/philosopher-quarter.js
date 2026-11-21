@@ -1,5 +1,5 @@
-import {PHILOSOPHERS,pickLanguage,quarterPaths} from './philosopher-data.js?v=six-gate-city-20261121';
-import {ACADEMY,academyPolygon,academyHousePolygon,academyEntry,philosopherWorld,philosopherLocal,philosopherEntry} from './academy-layout.js?v=six-gate-city-20261121';
+import {PHILOSOPHERS,pickLanguage,quarterPaths} from './philosopher-data.js?v=night-garden-20261121';
+import {ACADEMY,academyPolygon,academyHousePolygon,academyEntry,philosopherWorld,philosopherLocal,philosopherEntry} from './academy-layout.js?v=night-garden-20261121';
 
 // One original academy: six real courtyard houses and one common, shaded court.
 export function createPhilosopherQuarter(T,{language=()=> 'en',canvas=()=>document.createElement('canvas')}={}){

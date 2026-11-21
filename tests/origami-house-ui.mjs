@@ -39,10 +39,10 @@ try{
   assert.equal(map.dir,language==='fa'?'rtl':'ltr');assert.equal(map.lang,language);
   assert(new URL(map.querySelector('img').src).pathname.endsWith('city-coast-'+language+'.svg'));
   for(const p of COAST_LANDMARKS){
-   selectMap('marker-'+p.id);assert.equal(map.querySelector('#coastal-location-name').textContent,c.landmarks[p.id].name);
+   selectMap((p.face==='lower'?'place-':'marker-')+p.id);assert.equal(map.querySelector('#coastal-location-name').textContent,c.landmarks[p.id].name);
    assert.equal(mapControl('place-'+p.id).getAttribute('aria-pressed'),'true');
-   assert.equal(map.querySelectorAll('button').filter(n=>n.dataset.landmark&&n.getAttribute('aria-pressed')==='true').length,2);
-   selectMap('place-'+p.id);assert.equal(mapControl('marker-'+p.id).getAttribute('aria-pressed'),'true');
+   assert.equal(map.querySelectorAll('button').filter(n=>n.dataset.landmark&&n.getAttribute('aria-pressed')==='true').length,p.face==='lower'?1:2);
+   selectMap('place-'+p.id);if(p.face!=='lower')assert.equal(mapControl('marker-'+p.id).getAttribute('aria-pressed'),'true');
   }
   assert.equal(map.querySelector('#coastal-location-info').getAttribute('aria-live'),'polite');
   assert.equal(travels.length,beforeTravel,'Selection does not travel');
@@ -55,7 +55,7 @@ try{
 
  const previousPosition={...M.player};Object.assign(M.player,{x:100,z:50,yaw:Math.PI/2});api.openMap();
  let visitorMark=map.querySelector('#coastal-visitor-position');assert(visitorMark);assert.equal(visitorMark.style.left,(460+100*.7)/920*100+'%');assert.equal(visitorMark.style.top,(460+50*.7)/920*100+'%');assert(visitorMark.style.transform.includes('rotate(-90deg)'));
- selectMap('place-gallery');const originalLeft=visitorMark.style.left;selectMap('place-park');assert.equal(visitorMark.style.left,originalLeft,'Selecting a destination must not move the visitor marker');assert(map.querySelector('#coastal-position-distance').textContent);assert.equal(M.player.x,100,'Opening the map must not travel');
+ selectMap('place-gallery');const originalLeft=visitorMark.style.left;selectMap('place-park');assert.equal(visitorMark.style.left,originalLeft,'Selecting a destination must not move the visitor marker');assert(map.querySelector('#coastal-position-distance').hidden,'Cross-face distance is not a misleading straight line on the day map');assert.equal(M.player.x,100,'Opening the map must not travel');
  M.player.x=-24000;api.openMap();assert.equal(map.querySelector('#coastal-visitor-position'),undefined);assert.equal(map.querySelector('#coastal-position-distance').hidden,true);
  Object.assign(M.player,previousPosition);
 assert.deepEqual(values,beforeMap,'Map selection and route visibility do not write storage');

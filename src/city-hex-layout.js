@@ -1,7 +1,9 @@
+import {NIGHT_PARK,PARK_SOURCE_SITE} from './night-park-model.js';
 // One regular pointy-top lattice for public districts. Positions are metres.
 // Existing houses keep their identities, local rooms and saved study content.
 export const CITY_HEX=Object.freeze({side:92,rings:3,row:138,column:Math.sqrt(3)*92});
-export const IDEAS_PARK_SITE=Object.freeze({x:0,z:-375,scale:.65,radius:158});
+export const FORMER_IDEAS_PARK_SITE=Object.freeze({...PARK_SOURCE_SITE,radius:158,face:'upper'});
+export const IDEAS_PARK_SITE=NIGHT_PARK;
 export const hexCentre=(q,r)=>({x:CITY_HEX.column*(q+r/2),z:CITY_HEX.row*r});
 // The northern garden occupies five adjacent cells; its pond, tools, people
 // and source-local gardens keep their existing positions inside this fabric.

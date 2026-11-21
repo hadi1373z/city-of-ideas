@@ -1,7 +1,7 @@
-import {buildBabelThermalVault} from './babel-thermal-vault.js?v=book-contact1';
-import {BABEL_READING_BOOK} from './babel-reading-book-model.js';
-import {buildBabelSnakeStairs} from './babel-snake-stairs.js?v=two-faces2';
-import {BABEL,stairs,babelDesk,BABEL_COPY} from './babel-library-model.js?v=two-faces2';
+import {buildBabelThermalVault} from './babel-thermal-vault.js?v=night-garden-20261121';
+import {BABEL_READING_BOOK} from './babel-reading-book-model.js?v=night-garden-20261121';
+import {buildBabelSnakeStairs} from './babel-snake-stairs.js?v=night-garden-20261121';
+import {BABEL,stairs,babelDesk,BABEL_COPY} from './babel-library-model.js?v=night-garden-20261121';
 export function buildBabelLibrary(T,{canvas=()=>document.createElement('canvas'),drawing=null}={}){
  const group=new T.Group();group.name='Beneath Zarathustra · circular Library of Babel';const owned=new Set(),own=v=>(owned.add(v),v),batches=new Map(),beamBatches=new Map(),labels=[],targets=[];
  const material=(color,opts={})=>own(new T.MeshLambertMaterial({color,...opts}));

@@ -294,12 +294,15 @@ block's eastern boundary. It does not draw a road through the hexagon's floor.
 The eight-flight shaft stays at X223.8..229.2, Z90.6..106.6, with first tread
 start(228,104) and entry(228,105.5). Its lawn/foundation cuts,320 treads, museum
 exit, Babel tunnel and underground guide graph retain their exact coordinates.
-A roughly10.18m enclosed rear link runs along X228 from Z104 to the new north
-wall at Z114.18430139592795. A real off-axis doorway passes through that wall;
-its mouldings, floor, side walls and roof share the opening. The gated alcove
-continues inside to Z119.98430139592795. The real first-flight cut is subtracted
-from the link slab, leaving the original descent open. The Waterfall print and
-route panel remain tied to this gated alcove.
+A centred rear-wall opening at X239.023011444505 passes through the north wall
+at Z114.18430139592795. Its level enclosed dogleg runs north to Z109.8, west to
+the original X228 stair axis, then north to the unchanged entry at(228,105.5).
+The puzzle shutters now occupy the actual wall opening at Z114.18430139592795;
+there is no separate inner-room gate or arch. Actual mouldings, floor, side
+walls and roof share the opening. The real first-flight cut remains subtracted
+from every new slab and tile, leaving the original descent open. Waterfall is
+centred on the corridor's short west sidewall at Z112.84215069796398;
+the route panel is mounted on the solid pavilion wall beside the opening.
 
 `pavilionRearLink` exposes the exact connection; `pavilionFootprint` includes its
 true concave rear extension AND the unchanged above-ground shaft annex down to
@@ -311,8 +314,57 @@ perspective geometry follows the new group origin through `experimentOrigin`,
 so its correct view and wrong-position rejection remain exact.
 
 `tests/escher-house-relocation.mjs` checks shared coordinates and old-path
-removal;990 full-body rays, slab/headroom support and real enclosing sides along
-the new connector; the unchanged first-flight opening; actual new perspective
+removal;1305 full-body rays, slab/headroom support and real enclosing sides along
+the dogleg connector; the unchanged first-flight opening; actual new perspective
 alignment and rejected side view; and legacy builder compatibility. Existing
 Escher descent, shaft/museum combined geometry, source activity and street tests
 remain required. Generated map assets are rebuilt from the changed authorities.
+
+## Clebsch cubic · 21 November 2026
+
+The previously empty dark reading plinth at(220,144), topY−39.58, now carries a
+computed light-grey Clebsch diagonal cubic with all27 mathematically straight
+lines in vivid colours and three exact black triple-line markers. The spherical
+cut and complete sculpture stay inside the existing plinth/collision footprint.
+The WHICH HAND COMES FIRST sign and dependency experiment remain; a separate
+nearby, height-gated reader explains the cubic and links primary sources. See
+`docs/CLEBSCH-CUBIC.md` and `tests/clebsch-cubic.mjs`. This is an original computed
+mathematical model, not an Escher work or a copied reference mesh.
+
+## Centred rear-wall portal · 21 November 2026
+
+The centred-passage proposal is implemented as real wall and corridor geometry,
+with the approved requirement that the existing stair never moves. The main
+hexagon, experiment origin and north-wall Z remain fixed. The puzzle shutters
+are integrated into the centred north-wall portal; the former six-metre internal
+alcove and duplicate freestanding arch are removed.
+A three-part3.4m-wide level dogleg joins that opening to the unchanged stair.
+Its broad turn is at Z109.8; the original first tread remains(228,104).
+
+The centred arch is cut through the actual north masonry and header, with
+connected stone jambs and a thin bronze reveal. All corridor sides, roof and
+slab exist physically; the original lozenge lattice continues over its floor.
+The shared model exposes the corridor polygon, disjoint support regions,
+centre-line route and exact shaft entry. Collision and interior detection use
+the actual outside boundary, so support-region seams are not phantom walls.
+The general concave roof/planting/map outline follows both bends and preserves
+the fixed shaft annex rather than inventing a filled rectangular courtyard.
+
+All four genuine print frames and interaction IDs remain. Waterfall is visible
+on the actual corridor west wall between Z111.5 and Z114.1843. Its unchanged
+aspect ratio and complete2.57m frame fit that short wall. Its target remains
+gated by the existing passage state. The route panel has a physical backing on the
+solid pavilion wall to the right of the centred opening. No print is placed
+across the arch, and no decorative relief is substituted for the doorway.
+
+`tests/escher-rear-portal.mjs` joins the real pavilion, shaft and museum geometry.
+It checks3888 bidirectional shoulder/torso rays,648 floor and648 roof/headroom
+samples, full turning squares, all enclosure segments,960 tread samples across
+all320 original treads, the real open first-flight cut,36 first-surface print
+rays and the measured portal/jamb/crown. The relocation test now follows the
+actual dogleg with1305 body rays. Thirty additional first-surface rays from the
+reported room view at Z126 reject any freestanding frame/shutter before the
+actual wall, both locked and unlocked. The two sliding shutter halves overlap
+by2cm at the centre seam, avoiding an unintended pinhole. Existing entrance,
+descent and combined
+stair-detail checks pass; historical explicit builder placements remain intact.

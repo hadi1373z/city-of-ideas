@@ -1,6 +1,6 @@
 import {arrangeListeningScore} from './cage-listening-model.js?v=cloister-20261120';
 import {CAGE_LISTENING} from './cage-listening-copy.js?v=cloister-20261120';
-import {SEMINAR_HOUSES,SEMINAR_PATHS,seminarWorld,seminarEntry} from './seminar-houses-data.js?v=six-gate-city-20261121';
+import {SEMINAR_HOUSES,SEMINAR_PATHS,seminarWorld,seminarEntry} from './seminar-houses-data.js?v=night-garden-20261121';
 import {oscillator,DISK_CASES,diskGeodesic,chanceScore} from './seminar-house-models.js?v=city-night-20261117';
 export function buildSeminarHouses(T,{canvas=()=>document.createElement('canvas')}={}){
  const root=new T.Group();root.name='Southern garden · form and listening';const owned=new Set(),own=r=>(owned.add(r),r),mat=(colour,extra={})=>own(new T.MeshLambertMaterial({color:colour,...extra}));

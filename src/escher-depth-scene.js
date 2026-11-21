@@ -1,5 +1,8 @@
+import {buildMobiusLattice} from './mobius-lattice-scene.js';
+import {CLEBSCH} from './clebsch-cubic-model.js';
+import {buildClebschCubic} from './clebsch-cubic-scene.js';
 import {DESCENT} from './escher-descent-model.js?v=wall-rails-20261121';
-import {roomCeilingAt,ESCHER_DEPTH as D,ESCHER_DEPTH_WALLS as WALLS,ESCHER_DEPTH_OBSTACLES as CASES,DEPTH_TRIANGLE,DEPTH_VIEW,tilePolygon,loopResult,hexagon,ringPolygons,outsidePolygonRectangle} from './escher-depth-model.js?v=wall-rails-20261121';
+import {roomCeilingAt,ESCHER_DEPTH as D,ESCHER_DEPTH_WALLS as WALLS,ESCHER_DEPTH_OBSTACLES as CASES,DEPTH_TRIANGLE,DEPTH_VIEW,tilePolygon,loopResult,hexagon,ringPolygons,outsidePolygonRectangle} from './escher-depth-model.js?v=night-garden-20261121';
 
 const shaftFinishCut={minX:DESCENT.shaft.minX-.22,maxX:DESCENT.shaft.maxX+.22,minZ:DESCENT.shaft.minZ-.22,maxZ:DESCENT.shaft.maxZ+.22};
 const WALL_PRINTS=[{file:'relativity.jpg',title:'Relativity',year:1953,ratio:500/479,x:142.25,z:120,yaw:Math.PI/2},{file:'drawing-hands.jpg',title:'Drawing Hands',year:1948,ratio:500/448,x:231.97,z:149.1,yaw:-Math.PI/2},{file:'ascending-descending.jpg',title:'Ascending and Descending',year:1960,ratio:500/595,x:179.03,z:166,yaw:Math.PI/2}];
@@ -93,15 +96,15 @@ export function buildEscherDepth(T,{canvas=()=>document.createElement('canvas'),
  for(const[a,b]of DEPTH_TRIANGLE)rod([a.x,a.y,a.z],[b.x,b.y,b.z],.105);
  for(const dx of[-3.5,0,3.5]){box(.9,.025,.9,DEPTH_VIEW.x+dx,-39.98,DEPTH_VIEW.z,brass);box(.55,.03,.55,DEPTH_VIEW.x+dx,-39.96,DEPTH_VIEW.z,ink);}
  // Original topology sculptures are parametric meshes, not claimed Escher works.
- const mobiusPositions=[],mobiusIndices=[],cx=224,cz=155;for(let i=0;i<=96;i++){const u=i/96*Math.PI*2;for(const v of[-.65,.65])mobiusPositions.push(cx+(2.2+v*Math.cos(u/2))*Math.cos(u),-37.8+v*Math.sin(u/2),cz+(2.2+v*Math.cos(u/2))*Math.sin(u));if(i<96){const n=i*2;mobiusIndices.push(n,n+1,n+2,n+1,n+3,n+2);}}
- const mg=own(new T.BufferGeometry());mg.setAttribute('position',new T.Float32BufferAttribute(mobiusPositions,3));mg.setIndex(mobiusIndices);mg.computeVertexNormals();const mm=new T.Mesh(mg,brass);mm.name='Original Möbius band · topology wing';interior.add(mm);box(5,.35,5,cx,-39.825,cz,ink);
+ const mobiusLattice=buildMobiusLattice(T,{baseY:-39.65,centreY:-37.8});mobiusLattice.group.name='Original Möbius band · topology wing';mobiusLattice.group.position.set(D.mobiusPlinth.x,0,D.mobiusPlinth.z);interior.add(mobiusLattice.group);box(D.mobiusPlinth.width,.35,D.mobiusPlinth.depth,D.mobiusPlinth.x,-39.825,D.mobiusPlinth.z,ink);
+ const clebsch=buildClebschCubic(T);interior.add(clebsch.group);targets.push(...clebsch.targets);const clebschCaption=label('CLEBSCH CUBIC · 27 STRAIGHT LINES',CLEBSCH.plinth.x,CLEBSCH.plinth.floorY+.21,CLEBSCH.plinth.z+CLEBSCH.plinth.depth/2+.016,CLEBSCH.plinth.width-.35,.17);clebschCaption.name='Clebsch cubic · caption on the existing dark plinth';clebschCaption.userData.escherDepthExhibit='clebsch';targets.push(clebschCaption);
  const knot=new T.Mesh(own(new T.TorusKnotGeometry(1.4,.14,128,8,2,3)),sage);knot.position.set(211,-37.7,152);knot.name='Original trefoil · topology wing';interior.add(knot);box(4,.35,4,211,-39.825,152,ink);
  label('CENTRAL GALLERY',138,-35.3,112.22,5,.6);
  label('PERSPECTIVE',157.63,-33.1,99.8,10,.7);
  label('TESSELLATION',216.69,-33.1,65.8,11,.7);
  label('TOPOLOGY · RELATIONS',216.69,-33.1,136.6,12,.7);
  label('LOWER CLOISTER · CAN EVERY FLIGHT RISE?',197,-41.4,184.2,16,.8,interior,Math.PI);
- for(const p of D.exhibits){const sign=label(p.name.toUpperCase(),p.x,p.y+2.8,p.z-2.2,p.id==='perspective'?11:9,.55);sign.userData.escherDepthExhibit=p.id;targets.push(sign);}
+ for(const p of D.exhibits.filter(p=>p.id!=='clebsch')){const sign=label(p.name.toUpperCase(),p.x,p.y+2.8,p.z-2.2,p.id==='perspective'?11:9,.55);sign.userData.escherDepthExhibit=p.id;targets.push(sign);}
  for(const p of D.portals){const w=p.id==='escher'?2.4:3.3,h=p.id==='escher'?3.5:4.4;for(const sign of[-1,1])box(.22,h,.38,p.x+sign*w/2,p.y+h/2,p.z,stone,surface);box(w+.2,.25,.38,p.x,p.y+h,p.z,stone,surface);if(p.id!=='escher')box(w-.28,h-.1,.08,p.x,p.y+h/2,p.z,ink,surface);const door=new T.Mesh(own(new T.PlaneGeometry(w-.28,h-.1)),ink);door.position.set(p.x,p.y+h/2,p.z+.055);if(p.id==='escher')door.visible=false;door.userData.escherDepthDoor=p.id;surface.add(door);targets.push(door);label('ESCHER · BELOW',p.x,p.y+h+.45,p.z+.23,w+1,.5,surface);if(p.id!=='escher'){const q=p.landing;box(2.4,.025,1.7,q.x,-39.98,q.z,brass);label(p.name+' ↑',q.x,-37.2,q.z-.9,6,.55);}}
  const ambient=new T.AmbientLight(0xdce7df,.85);ambient.userData.escherDepthOwned=true;lamps.add(ambient);
  for(const r of D.rooms.filter(r=>r.radius)){const[x,z]=r.centre,y=r.y+7;const light=new T.PointLight(0xffe2b5,r.id==='hall'?100:65,r.radius*2.6,1.4);light.position.set(x,y,z);light.userData.escherDepthOwned=true;lamps.add(light);for(const a of[0,2,4]){const p=r.polygon[a],lx=x+(p[0]-x)*.7,lz=z+(p[1]-z)*.7;box(.5,.5,.5,lx,r.y+4.5,lz,glow);}}
@@ -121,5 +124,5 @@ export function buildEscherDepth(T,{canvas=()=>document.createElement('canvas'),
   if(result.rise){const seam=new T.Mesh(loopGeo,red);seam.position.set(181.4,-44.9+((result.heights[0]+result.heights[4])/2-min)*.25,164.4);seam.scale.set(.16,Math.abs(result.rise)*.25,.16);loop.add(seam);}
  }
  setTessellation({});setLoop([1,1,1,1]);
- return{group,interior,surface,lamps,targets,setTessellation,setLoop,dispose(){group.removeFromParent();group.traverse(o=>{if(o.isInstancedMesh)o.dispose?.();});for(const r of owned)r.dispose();group.clear();}};
+ return{group,interior,surface,lamps,targets,clebsch,mobiusLattice,setTessellation,setLoop,dispose(){clebsch.dispose();mobiusLattice.dispose();group.removeFromParent();group.traverse(o=>{if(o.isInstancedMesh)o.dispose?.();});for(const r of owned)r.dispose();group.clear();}};
 }

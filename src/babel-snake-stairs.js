@@ -1,4 +1,4 @@
-import {BABEL} from './babel-library-model.js?v=two-faces2';
+import {BABEL} from './babel-library-model.js?v=night-garden-20261121';
 // The lower continuation of the gallery's head-width, snake-drawn staircase.
 export function buildBabelSnakeStairs(T,{drawing=null,landingMaterial=null}={}){
  const f=BABEL.flight,l=BABEL.landing,group=new T.Group();group.name='Snake staircase · gallery to Babel';const owned=new Set(),own=r=>(owned.add(r),r),stone=own(new T.MeshLambertMaterial({color:0xc8b98e})),bronze=own(new T.MeshLambertMaterial({color:0x786946})),gold=own(new T.MeshLambertMaterial({color:0xe2c47e}));

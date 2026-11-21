@@ -16,10 +16,10 @@ for(const p of[[-360,-200],[360,-200],[0,-540],[0,540]])assert(M.city.canStand(.
 assert.equal(M.city.canStand(-1000,0),false,'No walkable corridor joins the two cities');assert.equal(mapDestination.hidden,true);
 M.city.update(M.player,1,'city');assert(!world.active);assert(!world.doors[1].group.visible);
 Object.assign(M.player,{x:CITY_EDGE_DOOR.x+.5,z:CITY_EDGE_DOOR.z});M.city.update(M.player,3,'city');assert.equal(M.player.x,entry.x,'Walking through the city door enters the other world');
-M.city.update(M.player,4,'city');assert(world.active);assert(!world.doors[0].group.visible);assert(M.city.canStand(entry.x,entry.z));assert(!M.city.canStand(layout.bounds.maxX+1,entry.z));
+M.city.update(M.player,4,'city');assert(world.active);assert(!world.doors[0].group.visible);assert(M.city.canStand(entry.x,entry.z));assert(M.city.canStand(layout.bounds.maxX+1,entry.z),'The old garden rectangle does not bound the inhabited night face');assert(M.city.canStand(-2320,-365),'Ideas Park uses the same physical night disk');assert(!M.city.canStand(-2160,-631),'The night ocean remains beyond the physical edge');
 const map={clearRect(){},fillRect(){},fillText(){},strokeRect(){},beginPath(){},arc(){},fill(){}};assert(world.drawActiveMap(map));
 const returnDoor=world.doors[1].group;Object.assign(M.player,{x:returnDoor.position.x,z:returnDoor.position.z});M.city.update(M.player,7,'city');assert.equal(M.player.x,CITY_EDGE_DOOR.x+12,'The return door lands clear of the trigger');
 assert(M.showExtra({kind:'world-door',data:{worldDoor:'graveyard'}}));assert.equal(M.player.x,entry.x,'Keyboard/controller interaction uses the same arrival');
 M.mode='overview';M.city.update(M.player,8,'overview');assert(!world.active);assert.equal(world.drawActiveMap(map),false,'Overview keeps the main city map');world.dispose();assert(button.removed);
 assert(!source.includes('box(5.4,A.top+3,.04,glass'),'No full-height return-lift glass screen is built');
-console.log('PASS: isolated graveyard bounds, edge and return doors, walking and button traversal, separate map, independent ground and removed tall glass.');
+console.log('PASS: physical circular night boundary, edge and return doors, walking and button traversal, separate map, independent ground and removed tall glass.');

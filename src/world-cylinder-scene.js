@@ -1,8 +1,8 @@
 import {buildSixfoldHousePassages} from './sixfold-house-passages-scene.js?v=escher-finish-20261120';
-import {buildSectionEarth} from './world-section-earth.js?v=wall-rails-20261121';
-import {ESCHER_DEPTH} from './escher-depth-model.js?v=wall-rails-20261121';
+import {buildSectionEarth} from './world-section-earth.js?v=night-garden-20261121';
+import {ESCHER_DEPTH} from './escher-depth-model.js?v=night-garden-20261121';
 import {createOceanMaterial,updateOceanMaterial} from './ocean-surface.js?v=makers-passages-20261118';
-import {buildLowerLandscape} from './lower-landscape-scene.js?v=bird-peel-20261117b';
+import {buildLowerLandscape} from './lower-landscape-scene.js?v=night-garden-20261121';
 import {buildCylinderMetamorphosis} from './cylinder-metamorphosis-scene.js?v=escher-metal-20261118';
 import {WORLD_CYLINDER as W,lowerMatrix,GALLERY_TUNNEL} from './world-cylinder-model.js?v=bird-peel-20261117b';
 export function buildWorldCylinder(T){

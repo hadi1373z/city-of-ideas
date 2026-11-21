@@ -1,0 +1,16 @@
+{
+  "checked_on": "2026-11-21",
+  "cached_records": 100,
+  "public_domain_with_image_id": 21,
+  "non_public_domain_with_image_id": 79,
+  "public_domain_missing_image_id": 0,
+  "metadata_root": "https://www.artic.edu/iiif/2",
+  "browser_observation_from_parent": {
+    "work_id": "aic-29385",
+    "url": "https://www.artic.edu/iiif/2/5cd5edc1-be1a-486c-9210-468da7668939/full/843,/0/default.jpg",
+    "result": "Ordinary Chrome automatically completed source verification, without CAPTCHA interaction, then displayed genuine843×546JPEG after about3minutes.",
+    "scope": "One normal top-level browser navigation only; not proof that every embedded image decodes."
+  },
+  "original_probe_interpretation": "The403 automation response did not establish museum image permission denial. No request controls, cookies or secrets are exported.",
+  "binding_count_is_not_browser_verified": true
+}

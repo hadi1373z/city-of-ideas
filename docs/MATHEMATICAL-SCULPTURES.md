@@ -1,7 +1,7 @@
 # Five sculptures, four reading paths
 
 The Mathematics reading hall has an original procedural sculpture on each
-of its four real floors, plus a Möbius band with a walking ant on the geometry floor. This adds a reason to compare the papers rather than
+of its four real floors, plus an ant-free open Möbius lattice on the geometry floor. This adds a reason to compare the papers rather than
 another display of unrelated objects. The existing eleven licensed original
 first-page images, stable paper identifiers, edition notes and source/rights
 records are preserved. No external image or sculptural mesh is downloaded. No narration or private
@@ -64,35 +64,20 @@ Before the display scale, `E=G=(1+u²+v²)²`, `F=0`, `H=0` and
 `K=-4/(1+u²+v²)^4`. Zero mean curvature is not zero Gaussian curvature or a
 blanket claim of global area minimality. No museum image/model was copied.
 
-**Möbius band and ant:** a solid, original parametric ribbon sits opposite the
-Enneper patch on the geometry floor. Its ideal middle surface is
-`((R+v*cos(u/2))*cos(u), v*sin(u/2), (R+v*cos(u/2))*sin(u))`, with display
-local radius 1.65 m, half-width .58 m and a 55 mm physical thickness. A separate
-uniform 0.84 display scale and 50° rigid tilt turn the opening toward the inner
-viewing aisle, centred 2 m above the floor. The band remains recognisable from
-ordinary standing height rather than appearing edge-on. These placement
-transforms act identically on the ribbon, ant frame and curved-foot contact;
-they do not alter the mathematical surface or its one-sidedness. Two upright
-bronze supports meet the placed lower rim. The plinth, plaque and court stay
-upright; the ribbon, supports and moving ant fit between .36 m and 3.8 m
-above this floor. The shell is
-closed across the reversed seam, with one continuous gold boundary. The small
-physical thickness is explicitly distinguished from the ideal one-sided surface.
+**Möbius open lattice:** the live geometry floor now shares the same ivory
+figure-eight lattice as Escher's topology plinth. Four real longitudinal rails
+and36 transverse rungs carry one reversed-width seam, with a1.1m depth-separated
+centreline crossing and two small supporting stems. The ideal band has one
+boundary and reverses its local normal after one circuit; two restore the frame.
+The visible cells are open and every member is an extruded solid, not a hidden
+flat band. See docs/MOBIUS-LATTICE.md for frame, geometry and topology tests.
 
-A red ant has six articulated legs, two feelers, three body segments and two
-eyes. Each stance foot follows the actual curved ribbon rather than a flat
-moving frame. Its oriented centreline frame uses continuous tangent, width
-vector and surface normal: after `2π` the centreline position returns and the
-normal is reversed; after `4π` the entire frame returns. A two-circuit journey
-takes 32 seconds. This makes one-sidedness inspectable as movement instead of
-an unexplained flip or teleport.
-
-The sculpture's English study action offers pause/resume, quarter-lap stepping
-and restart. The mathematical question asks visitors to derive
-`X(u+2π,v)=X(u,−v)` and compare a full-twist band. Reduced motion freezes
-automatic walking while retaining explicit quarter-lap steps. Hidden documents
-and open study panels pause the same shared city-clock simulation; there is no
-second animation loop and no accumulated jump after returning to the tab.
+The live default contains no ants, hidden creature objects or creature controls.
+Its reader invites tracing the outside rail and inspecting the physical crossing.
+All source formulae, curved-contact mathematics, solid-ribbon builder and4π frame
+remain available for explicit legacy tests; they are not installed by the live
+scene. The existing court, visit placement, lesson identity, paper references,
+proximity/height guards, other sculpture controls and private-data rules remain.
 
 The artistic reference is the museum's account of
 [Escher's Möbius Strip II (1963)](https://www.escherinhetpaleis.nl/en/about-escher/masterpieces/mobius-strip-ii).
@@ -137,11 +122,11 @@ The clear radial landing leads to the r44.9 front reading circuit, which
 connects every monitor without crossing a sculpture court. Small 2.8×0.585 m
 plinth labels replace large freestanding signboards.
 
-`buildMathematicalSculptures` adds exactly nineteen renderable objects and no
-lights. The 400 sponge cubes, graph nodes/edges, five plinths, ant body, eyes,
-limbs and two ribbon supports use instancing. Controls update actual geometry
-or instance state, then close the reader so the visitor sees the result. Only
-the ant advances continuously, using the existing city update clock.
+`buildMathematicalSculptures` installs the ant-free lattice by default and no
+lights. The sponge cubes, graph nodes/edges, five plinths and two lattice stems
+use instancing. Controls update their actual geometry or state, then close the
+reader so the visitor sees the result. The Möbius lattice remains still; the
+explicit legacy builder retains its original nineteen-object baseline.
 The visit state is in memory only; the module never reads browser storage.
 
 Install `installMathematicalSculptures(M,T)` after the paper gallery and monitors.

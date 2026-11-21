@@ -11,33 +11,39 @@ remain authoritative in sixfold-house-network-model.js.
 
 six-gate-garden-model.js owns all placements, routes, footprints, columns,
 furniture and planting reserves. The main shaded loop has centre radius105m
-and eight metres of level walking width. Forty-eight arcade bays sit between
-six open radial gateways. Two rows of supported cream-stone columns carry
-ninety-six real shallow elliptical arches and a slate roof with bronze seams.
-Each gateway has a separate four-column loggia, two actual arched apertures
-and a hipped slate roof. There are no invisible doors or closed fence spans.
+and eight metres of level walking width. The refined stone arcade has90 bays
+between six open radial gateways. Two rows of stout limestone piers carry
+180 deep masonry arches, individual voussoir joints, solid spandrels and a
+continuous projecting cornice. Each gateway has a four-pier loggia with two
+additional arched apertures and a small hipped slate roof centred on the loop,
+rather than a detached thin shelter outside it. Fine bronze seams trim the
+sloping slate roofs. There are no invisible doors or closed fence spans.
 
 The two column rows stand outside the eight-metre walking band at radius100.1
-and109.9m. Their .43m bases have matching colliders. The lowest arch spring is
-2.75m and roof eaves4.95m; ordinary visitors have real headroom throughout.
+and109.9m. Their1.10m square bases have conservative .78m circle colliders.
+The lowest arch spring is2.85m, arch depth .84m, and roof eaves5.42m; ordinary
+visitors have real headroom throughout. The slate ridge rises to6.52m.
 Both sides of the covered promenade stay open. Walking feet stay atY.13m.
 Real paving slabs have thickness .165m, including narrow actual overlaps at
 rotated joins to avoid cracks after Float32 coordinate quantisation.
 
 The existing central block streets cross the arcade at the six30° sector
 bisectors. An evenly spaced column grid would put a pair directly in each
-street. gardenBayBoundary shifts only that shared pair tangentially4.5m at
-the inner row, retaining every other column and all six house loggias. Both
-adjacent arches and roof polygons use the same shifted boundary; there is no
-unsupported cut or roof gap. GARDEN_RETAINED_CROSSINGS records the six existing
-5.5m-wide crossing reserves for planting. All30 existing central grid edges
-remain public routes, independently of the six new house rays.
+street. gardenBayAngles starts with16 intervals per sector and omits each
+bisector pier pair wherever its full base would occupy the5.5m crossing.
+Both adjacent arches and roof polygons share the resulting wider span, with
+no unsupported cut or roof gap. The resulting216 piers include24 gate piers.
+GARDEN_RETAINED_CROSSINGS preserves those axes as walkable green/paved ground.
+The user's later request retires the old30 grid ROAD STRIPS visually; their
+coordinates still have safe body clearance, independently of the new garden walks.
 
 An open inner promenade at radius74m joins the existing east/west Gallery
 thresholds atX±67. Six radial routes begin at that promenade. They do not claim
 six new openings through the Gallery wall. Each house route reaches local
-radial125/tangent34 before turning along tangent34 to the original doorway
-at local tangent26. This elbow passes around the source hexagon rather than
+radial125/tangent34 before turning toward the original doorway at local
+tangent26. Quadratic corner rounds of roughly3.9–4.5m replace the hard elbows;
+the outward street spur shares an exact point on the curved approach for guides.
+This route passes around the source hexagon rather than
 running through its solid radial wall. Its existing porch, interior floorY0,
 eight original floors and source controller are unchanged. The source's
 pre-existing .13m outer-ground/porch difference remains source-owned.
@@ -58,17 +64,20 @@ dispose. Mount group once under the upper-city scene. Apply canStand only
 for ordinary surface walking (feet nearY.13), never to underground controllers.
 No update controller, modal, light, texture, character, progress or storage
 hook is needed. The four material batches are all original procedural geometry.
+Live installation now passes paving:false and mounts the broad stone belt from
+six-gate-garden-paving.js; see docs/SIX-GATE-GARDEN-PAVING.md. The default paving
+option remains for isolated architecture/support checks, not a second live layer.
 
 Shared exports from the model:
 
 - SIX_GATE_GARDEN: dimensions and surface ID.
 - GARDEN_GATES / GARDEN_ENTRIES: six exact public gate positions and old doors.
-- GARDEN_ROUTES: both loops, six rays, house elbows, courts and street joins.
-- GARDEN_FOOTPRINTS:48 actual roof polygons, six loggia roof polygons and18
+- GARDEN_ROUTES: both loops, six rays, curved house approaches/courts/street joins.
+- GARDEN_FOOTPRINTS:90 actual roof polygons, six loggia roof polygons and18
   seat/bed footprints. Roofs have walkThrough:true: reserve their volume for
   planting and maps without treating the entire arcade as a solid collider.
 - GARDEN_COLUMNS / GARDEN_COLLIDERS: actual bases and furniture.
-- gardenBayBoundary / GARDEN_RETAINED_CROSSINGS: supported arcade bay boundaries
+- gardenBayAngles / GARDEN_RETAINED_CROSSINGS: supported arcade bay boundaries
   and the six untouched block-street crossings through the covered ring.
 - gardenCanStand(x,z,padding=.3): only solid base/furniture exclusions.
 - gardenSurfaceAt(x,z): the new .13m supported walking domain; null outside.
@@ -95,14 +104,15 @@ r106.3486743 underground loop: preserve both as separate physical layers.
 node tests/six-gate-garden.mjs uses the actual transformed source house mesh
 and all new triangle buffers. A test-only spatial index accelerates native
 Three.js Raycaster tests; it copies exact triangles rather than collision
-proxies. The check covers30,906 body-width rays through both loops, gates,
+proxies. The check covers31,392 body-width rays through both loops, gates,
 elbow routes and source doorways,35,640 additional rays along all30 retained
-central-grid edges, and10,284 real slab-support samples. Upward
+central-grid edges, and10,446 real slab-support samples. Upward
 coverage checks prove the new garden cannot cap Babel or any of the six
 existing shaft holes. It checks the original house/network authority remains
 unchanged, full-crown exclusions and bounded geometry. Owned cleanup releases
 each new rendered resource exactly once without disposing source-house assets.
-The scene uses four finite material batches and fewer than65,000 triangles.
+The refined architecture uses four finite material batches and fewer than
+130,000 triangles, including its optional isolated paving.
 
 This focused check does not certify unrelated Gallery roof approaches, source
 trees or existing honeycomb walls. Root owns the combined live-city route/tree
@@ -112,9 +122,9 @@ data, original voices, underground ownership and isolated editions are untouched
 ## Flower beds around the existing trees
 
 The user's later correction was to keep the trees and make planted areas around
-them. It does not authorize moving/replacing trees or changing the accepted
-paths and seats. The original GARDEN_ROUTES, GARDEN_COLLIDERS,
-GARDEN_TREE_CANDIDATES and four-batch garden architecture remain unchanged.
+them. This optional helper never moves/replaces trees or changes routes,
+seats, colliders or candidates. The later independent stone-paving/arcade pass
+refines the approved architecture and path corners while keeping the tree poses.
 
 The optional buildGardenTreeBeds(T,actualPositions) export consumes the real
 upper-city trees gathered by the root installer. Each input is {x,z,radius,
@@ -145,3 +155,22 @@ idempotent disposal without source-resource release. It also retains all prior
 garden/retained-street/body-width/shaft checks. For other radii the exact cost is
 320 surface triangles plus52×round(radius×9) flower triangles per tree, with a
 minimum12 clumps; actual passed positions/radii are returned for root QA.
+
+## Accepted forest after the night-park move
+
+`accepted-street-trees.js` pins the455 existing live street-tree sites and
+renderer/RNG order recovered from commit5913a80. The original placement hash
+remains `e5d8ba834e82a1996f03c7c3696662976b6868ed5e10b9e8357f5583441df293`.
+The live default `urbanPlanting` returns copies of this immutable authority;
+regenerating the honeycomb roads or moving the park cannot add, remove or
+reseed the existing forest. Explicit alternative plans retain the procedural
+source branch. The vacated upper park stays clear pending its separate sketch.
+
+`tests/street-tree-preservation.mjs` checks all455 current roof/wall/path
+clearances, including the actual Escher rear dogleg footprint, and verifies
+that the real renderer retains all17,290 leaf and7,280 trunk/fork instance
+poses. In the real source-campus-before-district startup order, the mounted
+collector still returns exactly170 beds with unchanged positions, radii and
+ownership order (hash `6a36e9ed8958ef219e37c5ba3ec5ae23f3c6e5d969621705621511b8c3766a65`).
+The ordinary urban integration suite keeps its original455/hash assertions;
+only its obsolete upper pond-hole assertion changes to the now-vacant grass.

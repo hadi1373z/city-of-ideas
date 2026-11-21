@@ -1,3 +1,5 @@
+import {nightParkReserve} from './night-park-model.js';
+import {NIGHT_PARK_HOME_RELOCATIONS,NIGHT_PARK_HOME_ACCESS} from './night-home-park-layout.js';
 import {LOWER_COAST_WALKS,LOWER_COAST,lowerLandscapeCanStand,inLowerInlet,routeDistance} from './lower-landscape-model.js';
 
 // Presentation parcels only. Home IDs, room coordinates and saved documents
@@ -29,10 +31,17 @@ for(let ix=-10;ix<=10;ix++)for(let iz=-10;iz<=10;iz++){
 // First homes form the southern night neighbourhood. Later editions occupy
 // further connected clear parcels, all within the same physical circular face.
 sites.sort((a,b)=>{const rank=p=>Math.hypot(p.x+108,p.z-378);return rank(a)-rank(b)||a.z-b.z||a.x-b.x;});
+// Retain every unaffected edition's presentation position. Only the parcels
+// covered by the moved park receive replacements; no saved documents are read.
+export const LEGACY_NIGHT_HOME_PARCELS=Object.freeze(sites.map((s,index)=>Object.freeze({index,x:s.x,z:s.z})));
+for(const[index,x,z]of NIGHT_PARK_HOME_RELOCATIONS)sites[index]={x,z,front:[x,z+33]};
+for(const s of sites)s.front=[s.x,s.z+33];
+export const RELOCATED_NIGHT_HOME_INDICES=Object.freeze(NIGHT_PARK_HOME_RELOCATIONS.map(p=>p[0]));
 export const NIGHT_HOME_PARCELS=Object.freeze(sites.map((s,index)=>Object.freeze({index,x:s.x,z:s.z,front:Object.freeze(s.front)})));
+export function nightHomeYardReserve(x,z,margin=0){return sites.some(p=>Math.abs(x-p.x)<25+margin&&z>p.z-19-margin&&z<p.z+31+margin);}
 export function nightHomeTransform(index){const s=sites[index];if(!s)throw Error('No supported night-face home parcel for edition '+index);return{x:s.x-2160,y:.13,z:s.z-65,scale:1.35};}
-export function nightHomeAccess(index,entry){const s=sites[index];if(!s||![entry?.x,entry?.z].every(Number.isFinite))return[];const route=[];let node=s.node;while(node){route.push([node.x,node.z]);node=parents.get(key(node.x,node.z));}route.reverse();return[NIGHT_HOME_DISTRICT.anchor,...route,s.front,[entry.x+2160,entry.z+65]].map(([x,z])=>[x-2160,z-65]);}
-export function nightHomeParcelClear(index){const p=sites[index];return !!p&&!!start&&lowerLandscapeCanStand(p.x,p.z)&&clearLine(NIGHT_HOME_DISTRICT.anchor,[start.x,start.z]);}
+export function nightHomeAccess(index,entry){if(!sites[index]||![entry?.x,entry?.z].every(Number.isFinite))return[];return[...NIGHT_PARK_HOME_ACCESS[index],[entry.x+2160,entry.z+65]].map(([x,z])=>[x-2160,z-65]);}
+export function nightHomeParcelClear(index){const p=sites[index];return !!p&&!nightParkReserve(p.x,p.z,20)&&lowerLandscapeCanStand(p.x,p.z);}
 
 /** Shared trunk edges have one physical owner, even when many homes use them. */
 export function nightHomeRoadSegments(paths){

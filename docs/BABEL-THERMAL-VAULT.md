@@ -8,6 +8,12 @@ and a narrow point meeting the open book at the centre. Amber and rust-coloured 
 is visibly contained behind glass. This is an artistic object, with no claim to
 thermal engineering, geology or a simulation of molten material.
 
+The user's city narrative is now stated in the library reader in Persian,
+English and German: the city is the world of one of the library's books;
+walking its streets resembles moving through that book's pages. This is the
+city's original narrative, separate from the finite four-symbol catalogue
+experiment and from any historical quotation by Borges.
+
 ## Exact geometry and clearance
 
 `BABEL_THERMAL_VAULT` is the dimension contract. The outer mouth has radius 21

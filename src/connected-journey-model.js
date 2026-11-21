@@ -1,6 +1,6 @@
-import {BABEL,babelDesk,surfaceAt as babelSurface,walkLibrary} from './babel-library-model.js?v=city-night-20261117';
+import {BABEL,babelDesk,surfaceAt as babelSurface,walkLibrary} from './babel-library-model.js?v=night-garden-20261121';
 import {UPPER,LOWER,pointAt} from './two-face-gallery-model.js?v=city-night-20261117';
-import {ESCHER_DEPTH as D,depthRoomAt,depthFloorAt,canWalkDepth} from './escher-depth-model.js?v=wall-rails-20261121';
+import {ESCHER_DEPTH as D,depthRoomAt,depthFloorAt,canWalkDepth} from './escher-depth-model.js?v=night-garden-20261121';
 import {lowerLocal,lowerPhysical,GALLERY_TUNNEL,tunnelContains} from './world-cylinder-model.js?v=city-night-20261117';
 import {MATH_FACULTY as F,facultyCanStand,facultyColliders} from './math-faculty-model.js?v=makers-passages-20261118';
 
@@ -49,7 +49,11 @@ function babelRoute(c){
 const museumNodes=[
  [136.4,115,-40],[145,115,-40],[145,120,-40],[157.63,122,-40],[157.63,125,-40],[170,120,-40],[170,115,-40],[177,115,-40],[186,115,-40],[191,123,-40],[202,123,-40],[207,124,-40],[214,115,-40],[221,110,-40],[225,107,-40],
  [204,106,-40],[204,100,-40],[208,96,-40],[210,93,-40],[212,89,-40],[216,89,-40],[216.69,87,-40],[220,91,-40],
- [204,124,-40],[204,130,-40],[208,134,-40],[210,137,-40],[212,140,-40],[216,140,-40],[216,148,-40],[214,136,-40],[220,140,-40],[220,151,-40],[221,155,-40],
+ [204,124,-40],[204,130,-40],[208,134,-40],[210,137,-40],[212,140,-40],[216,140,-40],[216,148,-40],[214,136,-40],[220,140,-40],[220,151,-40],
+ // The study arrival is east of the moved Möbius plinth. Its clear east and
+ // south aisles turn around that plinth before joining the Clebsch/table aisle.
+ [223,151,-40],[223,147,-40],[220,147,-40],[216,147,-40],
+ [D.portals.find(p=>p.id==='study').landing.x,D.portals.find(p=>p.id==='study').landing.z,-40],
  [195,131,-40],[195,132,-40],[195,150,-46],[195,151,-46],[186,151,-46],[181,158,-46],[181,174,-46],[190,183,-46],[204,183,-46],[213,174,-46],[213,158,-46],[204,151,-46],[182,172,-46],
  [179.7,126,-40],[179.7,125,-40],[179.7,103,-34],[179.7,102,-34],
  [185,99,-34],[197,94,-34],[207,100,-34],[214,111,-34],[214,122,-34],[205,132,-34],[190,132,-34],[183,129,-34],[177,124,-34],[177,105,-34],

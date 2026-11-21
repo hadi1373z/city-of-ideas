@@ -9,13 +9,15 @@ export function installCityDiscoveries(M,T){
  const dialog=el('dialog');dialog.id='city-discoveries';dialog.dataset.confirmFocused='true';dialog.setAttribute('aria-labelledby','city-discoveries-title');
  const header=el('header'),title=el('h2'),close=el('button','×'),body=el('main'),status=el('p');title.id='city-discoveries-title';close.type='button';close.className='glass';close.dataset.close='';status.setAttribute('role','status');header.append(title,close);dialog.append(header,body,status);document.body.append(dialog);
  let view='hub',selected=[],conclusion=0,feedback='',opener=null,last=0,clock=0,lastContext='',disposed=false;
- const clue=buildTrialDiagram(T),paper=buildTrialDiagram(T),boats=buildTriangleBoats(T,M.city.PARK),escher=window.CITY_ESCHER,room=M.ramseyRoom;
- clue.group.name='Five-point sketch in Escher’s hidden alcove';clue.group.position.set(-1.455,1.65,-10.2);clue.group.rotation.z=-Math.PI/2;clue.group.traverse(o=>o.userData={...o.userData,sixthGuestClue:true});escher.group.add(clue.group);
+ // The user removed the freestanding Escher sheet. Keep its optional diagram
+ // in the Discoveries reader and preserve the separate Ramsey table model.
+ const paper=buildTrialDiagram(T),boats=buildTriangleBoats(T,M.city.PARK),escher=window.CITY_ESCHER,room=M.ramseyRoom;
  paper.group.position.copy(room.house.study.acquaintanceMap.group.position);paper.group.visible=false;room.house.study.group.add(paper.group);
  const nativePaper=room.house.study.acquaintanceMap.paper;nativePaper.userData.sixthGuestTable=true;
  M.scene.add(boats.group);M.city.targets.push(nativePaper);
  function registerVisible(target){const index=M.city.targets.indexOf(target);if(target.visible&&index<0)M.city.targets.push(target);else if(!target.visible&&index>=0)M.city.targets.splice(index,1);}
- const context=()=>({table:M.mode==='city'&&room.house.inside(M.player.x,M.player.z),alcove:M.mode==='city'&&escher.passageOpen&&Math.abs(M.player.x-escher.entry.x)<1.5&&M.player.z<escher.entry.z-15.5&&M.player.z>escher.entry.z-21.1,fountain:M.mode==='city'&&Math.hypot(M.player.x-M.city.PARK.x,M.player.z-M.city.PARK.z)<18*M.city.PARK.scale});
+ const atParkSurface=()=>Math.abs(M.player.y-(M.eye??1.8)-(M.city.PARK.groundY??.13))<.65&&(M.city.PARK.face==='lower'?M.player.x<-1000:M.player.x>-1000);
+ const context=()=>({table:M.mode==='city'&&room.house.inside(M.player.x,M.player.z),alcove:M.mode==='city'&&escher.passageOpen&&Math.abs(M.player.x-escher.entry.x)<1.5&&M.player.z<escher.entry.z-15.5&&M.player.z>escher.entry.z-21.1,fountain:M.mode==='city'&&atParkSurface()&&Math.hypot(M.player.x-M.city.PARK.x,M.player.z-M.city.PARK.z)<18*M.city.PARK.scale});
  function action(label,fn,key,parent=body,primary=false){const b=el('button',label);b.type='button';b.className=primary?'primary':'glass';if(key)b.dataset.trial=key;b.onclick=fn;parent.append(b);return b;}
  function paperVisibility(){const active=dialog.open&&view==='table'&&context().table;paper.group.visible=active;room.house.study.acquaintanceMap.group.visible=!active;}
  function recordPrediction(){const memory=M.visitorMemory.store,q=memory.question('sixth-guest','personal',w().question);if(q&&!q.history.length&&trial.state.prediction!==null)memory.answer(q.id,w().predict[trial.state.prediction]);}
@@ -26,6 +28,7 @@ export function installCityDiscoveries(M,T){
   if(place==='escher')M.quickStart('artist:escher');
   else if(place==='ramsey'){if(M.player.x>-1000){M.quickStart('graveyard-door');M.status(w().edgeDoor);}else room.visit();}
   else if(place==='book'){M.quickStart('socrates');M.homeBridge?.focusRoom('math');}
+  else if(place==='park'){const p=M.city.PARK;M.arrive({x:p.x,z:p.z+14*p.scale,y:p.groundY??.13,yaw:0});M.player.pitch=-.18;}
   else if(M.player.x<-1000){const entry=window.CITY_GRAVEYARD?.returnEntry;if(entry){M.arrive(entry);M.status(w().exitDoor);}}
   else{const p=M.city.PARK;M.arrive({x:p.x,z:p.z+14*p.scale,y:.13,yaw:0});M.player.pitch=-.18;}
  }
@@ -85,10 +88,10 @@ export function installCityDiscoveries(M,T){
  const oldTarget=M.city.targetInfo,oldShow=M.showExtra;
  M.city.targetInfo=data=>data.sixthGuestClue?{kind:'sixth-guest-clue',title:w().clue,data}:data.sixthGuestTable?{kind:'sixth-guest-table',title:w().table,data}:data.sixthGuestBoats?{kind:'sixth-guest-boats',title:w().complete,data}:oldTarget(data);
  M.showExtra=info=>{if(info.kind==='sixth-guest-clue'){if(context().alcove)open('clue');return true;}if(info.kind==='sixth-guest-table'){if(context().table){trial.begin();open('table');}return true;}if(info.kind==='sixth-guest-boats'){if(trial.state.complete)open('route');return true;}return oldShow(info);};
- const update=M.city.update;M.city.update=(...args)=>{update(...args);const time=args[1],dt=last?Math.min(.1,Math.max(0,time-last)):0;last=time;if(!document.hidden&&!document.querySelector('dialog[open]'))clock+=dt;const s=trial.state;boats.update(clock,{visible:s.complete&&M.mode==='city'&&M.player.x>-1000,color:s.witness?.color||0,reducedMotion:matchMedia('(prefers-reduced-motion: reduce)').matches});clue.group.visible=escher.passageOpen&&M.mode==='city'&&M.player.x>-1000;registerVisible(clue.group);registerVisible(boats.group);paperVisibility();
+ const update=M.city.update;M.city.update=(...args)=>{update(...args);const time=args[1],dt=last?Math.min(.1,Math.max(0,time-last)):0;last=time;if(!document.hidden&&!document.querySelector('dialog[open]'))clock+=dt;const s=trial.state;boats.update(clock,{visible:s.complete&&M.mode==='city'&&atParkSurface(),color:s.witness?.color||0,reducedMotion:matchMedia('(prefers-reduced-motion: reduce)').matches});registerVisible(boats.group);paperVisibility();
   const c=context(),key=[c.table,c.alcove,c.fountain,lang()].join(':');if(key!==lastContext){lastContext=key;if(dialog.open)render();}
  };
  const locale=()=>{launch.textContent=welcome.textContent=mapAction.textContent=w().open;tableAction.textContent=w().table;if(dialog.open)render();};locale();addEventListener('city-language',locale);
- const api={open,trial,clue,paper,boats,context,appendNotebook(parent){const card=el('article');card.append(el('h3',w().sixth),el('p',trial.state.complete?w().completeText:trial.state.clue?w().copied:w().summary));action(trial.state.complete?w().watch:w().resume,()=>{document.querySelector('#visit-notebook')?.close();open('route');},'notebook-route',card);parent.append(card);}};M.cityDiscoveries=api;
- addEventListener('pagehide',()=>{disposed=true;removeEventListener('city-language',locale);for(const target of[clue.group,nativePaper,boats.group]){const i=M.city.targets.indexOf(target);if(i>=0)M.city.targets.splice(i,1);}delete nativePaper.userData.sixthGuestTable;room.house.study.acquaintanceMap.group.visible=true;clue.dispose();paper.dispose();boats.dispose();[dialog,launch,welcome,mapAction,tableAction].forEach(n=>n.remove());},{once:true});return api;
+ const api={open,trial,paper,boats,context,appendNotebook(parent){const card=el('article');card.append(el('h3',w().sixth),el('p',trial.state.complete?w().completeText:trial.state.clue?w().copied:w().summary));action(trial.state.complete?w().watch:w().resume,()=>{document.querySelector('#visit-notebook')?.close();open('route');},'notebook-route',card);parent.append(card);}};M.cityDiscoveries=api;
+ addEventListener('pagehide',()=>{disposed=true;removeEventListener('city-language',locale);for(const target of[nativePaper,boats.group]){const i=M.city.targets.indexOf(target);if(i>=0)M.city.targets.splice(i,1);}delete nativePaper.userData.sixthGuestTable;room.house.study.acquaintanceMap.group.visible=true;paper.dispose();boats.dispose();[dialog,launch,welcome,mapAction,tableAction].forEach(n=>n.remove());},{once:true});return api;
 }

@@ -1,7 +1,7 @@
 import {MAKERS_SITE,MAKERS_ACCESS,MAKERS_ROOFS} from './makers-site.js?v=makers-block-20261118';
 import {layoutArtistEditions} from './artist-edition-layout.js?v=makers-passages-20261118';
 import './city-road-surface.js?v=city-night-20261117';
-import {nightHomeTransform,nightHomeAccess,nightHomeRoadSegments} from './night-home-layout.js?v=makers-passages-20261118';
+import {nightHomeTransform,nightHomeAccess,nightHomeRoadSegments} from './night-home-layout.js?v=night-garden-20261121';
 /* Additive source-authentic geometry for the principal City of Ideas scene.
    Copy this module to src/extra-districts.js when its controller hooks are wired. */
 const copy=value=>JSON.parse(JSON.stringify(value));

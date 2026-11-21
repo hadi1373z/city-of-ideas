@@ -1,0 +1,138 @@
+[
+  {
+    "id": "orion-nebula",
+    "source": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-42/",
+    "http_status": 200,
+    "checked_on": "2026-11-21",
+    "image_url": "https://science.nasa.gov/wp-content/uploads/2023/04/orion-nebula-xlarge_web-jpg.webp",
+    "caption_candidates": [
+      "NASA, ESA, M. Robberto (Space Telescope Science Institute/ESA) and the Hubble Space Telescope Orion Treasury Project Team",
+      "Appearing like glistening precious stones, M42’s Trapezium cluster, named for the trapezoidal arrangement of its central massive stars, is seen in this infrared Hubble image. All of the members of the Trapezium were born together in this hotbed of star formation. K.L. Luhman (Harvard-Smithsonian Center for Astrophysics, Cambridge, Mass.); and G. Schneider, E. Young, G. Rieke, A. Cotera, H. Chen, M. Rieke, R. Thompson (Steward Observatory, University of Arizona, Tucson, Ariz.) and NASA/ESA",
+      "Resembling an interstellar Frisbee, the dark feature in these two Hubble images is a protoplanetary disk of dust seen edge-on around a newborn star in M42. The two images show the disk through two different sets of filters: one to probe the disk’s chemical composition (left) and another to reduce the brightness of the nebula, revealing brighter regions above and below the disk that betray the presence of the star (right). Because the disk is edge-on, its star is largely hidden, but the disk may be an embryonic planetary system in the making. Our solar system probably formed out of such a disk 4.5 billion years ago. Mark McCaughrean (Max-Planck-Institute for Astronomy), C. Robert O'Dell (Rice University) and NASA"
+    ],
+    "metadata_only": true
+  },
+  {
+    "id": "lagoon-nebula",
+    "source": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-8/",
+    "http_status": 200,
+    "checked_on": "2026-11-21",
+    "image_url": "https://assets.science.nasa.gov/content/dam/science/missions/hubble/nebulae/emission/Hubble_M8_ACS_1_flat_FINAL.jpg/jcr:content/renditions/cq5dam.web.1280.1280.jpeg",
+    "caption_candidates": [
+      "Clouds of gas and knots of dark dust are strewn with a scattering of bright blue stars in this Hubble image of a portion of M8. The Lagoon Nebula is a vast stellar birthing place; new stars arise as portions of the dusty molecular cloud collapse. NASA, ESA, M. Mutchler (Space Telescope Science Institute); Processing: Gladys Kober (NASA/Catholic University of America)",
+      "A box in the wide-field, ground-based, ESO image of M8 (upper right) shows the location of Hubble’s view within the wider context of the nebula. NASA, ESA, M. Mutchler (Space Telescope Science Institute), and ESO; Processing: Gladys Kober (NASA/Catholic University of America)",
+      "A portion of the open cluster NGC 6530 appears as a roiling wall of smoke studded with stars in this image from the NASA's Hubble Space Telescope. NGC 6530 is a collection of several thousand stars lying around 4350 light-years from Earth in the constellation Sagittarius. The cluster is set within the larger Lagoon Nebula, a gigantic interstellar cloud of gas and dust. It is the nebula that gives this image its distinctly smoky appearance; clouds of interstellar gas and dust stretch from one side of this image to the other. Astronomers investigated NGC 6530 using Hubble’s Advanced Camera for Surveys and Wide Field Planetary Camera 2. They scoured the region in the hope of finding new examples of proplyds, a particular class of illuminated protoplanetary discs surrounding newborn stars. The vast majority of proplyds have been found in only one region, the nearby Orion Nebula. This makes understanding their origin and lifetimes in other astronomical environments challenging. Hubble’s ability to observe at infrared wavelengths — particularly with Wide Field Camera 3 — have made it an indispensable tool for understanding starbirth and the origin of exoplanetary systems. In particular, Hubble was crucial to investigations of the proplyds around newly born stars in the Orion Nebula. ESA/Hubble & NASA, ESO, and O. De Marco; Acknowledgement: M. H. Özsaraç"
+    ],
+    "metadata_only": true
+  },
+  {
+    "id": "eagle-nebula",
+    "source": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-16/",
+    "http_status": 200,
+    "checked_on": "2026-11-21",
+    "image_url": "https://science.nasa.gov/wp-content/uploads/2023/04/hubble_birthofstars_0-jpg.webp",
+    "caption_candidates": [
+      "NASA, ESA and the Hubble Heritage Team (STScI/AURA)",
+      "Observing in infrared light, Hubble pierced through the obscuring gas and dust of M16’s Pillars of Creation. This ethereal image reveals the young stars that are being formed within the pillars. It also uncovers a myriad of background stars that were hidden at visible wavelengths. NASA, ESA and the Hubble Heritage Team (STScI/AURA)",
+      "Although the Pillars of Creation are a prominent feature of M16, they are relatively small compared to the entire nebula. This video begins with a ground-based image of the sky near Serpens and zooms into Hubble’s iconic image. NASA, ESA, G. Bacon (STScI); Acknowledgment: NASA, ESA, Hubble Heritage Team (STScI/AURA), Digitized Sky Survey ((DSS), STScI/AURA, Palomar/Caltech, UKSTU/AAO), T.A. Rector (NRAO/AUI/NSF, NOAO/AURA/NSF), B.A. Wolpa (NOAO/AURA/NSF), A. Fujii"
+    ],
+    "metadata_only": true
+  },
+  {
+    "id": "carina-nebula",
+    "source": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-caldwell-catalog/caldwell-92/",
+    "http_status": 200,
+    "checked_on": "2026-11-21",
+    "image_url": "https://science.nasa.gov/wp-content/uploads/2023/04/c92-1-jpg.webp",
+    "caption_candidates": [
+      "Astronomers targeted Caldwell 92 to create one of the largest panoramic images ever taken with Hubble’s cameras, generating a stunning 50-light-year-wide view of the tumultuous central region of this strange stellar nursery. Also known as the Carina Nebula and NGC 3372, Caldwell 92 is sculpted by the action of outflowing winds and scorching ultraviolet radiation from the monster stars that inhabit this inferno. These stars are shredding the surrounding material that is the last vestige of the giant cloud from which the stars were born. NASA, ESA, N. Smith (University of California, Berkeley), and the Hubble Heritage Team (STScI/AURA); CTIO data: N. Smith (University of California, Berkeley) and NOAO/AURA/NSF",
+      "Within the tempestuous Carina Nebula lies “Mystic Mountain.” This three-light-year-tall cosmic pinnacle, imaged by Hubble’s Wide Field Camera 3 in 2010, is made up primarily of dust and gas, and exhibits signs of intense star-forming activity. The colors in this composite image correspond to the glow of oxygen (blue), hydrogen and nitrogen (green), and sulfur (red). NASA, ESA, M. Livio, and the Hubble 20th Anniversary Team (STScI)",
+      "This sparkling new image depicts a small section of the Carina Nebula, one of the NASA Hubble Space Telescope’s most-imaged objects. To take this image of the Carina Nebula, scientists relied on Hubble’s infrared light imaging capabilities, which detect longer wavelengths of light not scattered by the heavy dust and gas surrounding the stars. This image shows only a small section of the nebula, located near the center in an area with thinner gas. Due to the nebula’s enormous size – about 300 light-years – astronomers can only study it in sections, piecing together the data from separate images to get an understanding of the nebula’s large-scale structure and composition. NASA, ESA, and A. Kraus (University of Texas at Austin); Processing: Gladys Kober (NASA/Catholic University of America)"
+    ],
+    "metadata_only": true
+  },
+  {
+    "id": "tarantula-nebula",
+    "source": "https://www.nasa.gov/image-article/colorful-collage-of-tarantula-nebula/",
+    "http_status": 200,
+    "checked_on": "2026-11-21",
+    "image_url": "https://www.nasa.gov/wp-content/uploads/2026/08/30dor-crop.jpg",
+    "caption_candidates": [
+      "X-ray: NASA/CXC/Ohio State Univ./J. Rodriguez et al; Infrared: NASA/ESA/CSA/STScI; Optical: NASA/ESA/STScI; Image Processing: NASA/CXC/SAO/P. Edmonds"
+    ],
+    "metadata_only": true
+  },
+  {
+    "id": "horsehead-nebula",
+    "source": "https://science.nasa.gov/asset/hubble/horsehead-nebula-infrared/",
+    "http_status": 200,
+    "checked_on": "2026-11-21",
+    "image_url": "https://assets.science.nasa.gov/content/dam/science/missions/hubble/nebulae/emission/STScI-01EVT1JBQVFXQ7DWD6Q54K7B2M.png/jcr:content/renditions/cq5dam.web.1280.1280.png",
+    "caption_candidates": [],
+    "metadata_only": true
+  },
+  {
+    "id": "crab-nebula",
+    "source": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-1/",
+    "http_status": 200,
+    "checked_on": "2026-11-21",
+    "image_url": "https://science.nasa.gov/wp-content/uploads/2023/04/crab-nebula-mosaic-jpg.webp",
+    "caption_candidates": [
+      "NASA, ESA, J. Hester and A. Loll (Arizona State University)",
+      "Peering deep into M1, this spectacular Hubble image captures the nebula’s beating heart: the rapidly spinning pulsar at its core. Bright wisps are moving outward from the pulsar (the rightmost of the two bright stars near the center of the image) at half the speed of light to form an expanding ring. These wisps form along magnetic field lines in a gas of extremely energetic particles driven into space by the highly magnetized, rapidly rotating neutron star. NASA and ESA; Acknowledgment: J. Hester (ASU) and M. Weisskopf (NASA/MSFC)",
+      "This time-lapse movie of M1 was created from a series of 10 Hubble exposures. It reveals wave-like rings expanding outward from the nebula’s pulsar (the bright object just below the center of the image). NASA and ESA; Acknowledgment: J. Hester (Arizona State University)"
+    ],
+    "metadata_only": true
+  },
+  {
+    "id": "ring-nebula",
+    "source": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-57/",
+    "http_status": 200,
+    "checked_on": "2026-11-21",
+    "image_url": "https://science.nasa.gov/wp-content/uploads/2023/04/ring-nebula-full_jpg-jpg.webp",
+    "caption_candidates": [
+      "NASA, ESA and the Hubble Heritage (STScI/AURA)-ESA/Hubble Collaboration",
+      "Amateur vs. Hubble image of Messier 57. Amateur Image: Photographed by and used with permission of K. Hartnett; Hubble Image: NASA, ESA and the Hubble Heritage (STScI/AURA)-ESA/Hubble Collaboration",
+      "This video begins with a ground-based view of the constellation Lyra and zooms into Hubble’s image of the Ring Nebula. It ends with a 3-D model that showcases the structure of the nebula. NASA, ESA, and G. Bacon, F. Summers and Mary Estacion (STScI)"
+    ],
+    "metadata_only": true
+  },
+  {
+    "id": "helix-nebula",
+    "source": "https://www.nasa.gov/universe/nebulae/helix-nebula/",
+    "http_status": 200,
+    "checked_on": "2026-11-21",
+    "image_url": null,
+    "caption_candidates": [],
+    "metadata_only": true
+  },
+  {
+    "id": "cats-eye-nebula",
+    "source": "https://science.nasa.gov/asset/hubble/cats-eye-nebula/",
+    "http_status": 200,
+    "checked_on": "2026-11-21",
+    "image_url": "https://assets.science.nasa.gov/content/dam/science/missions/hubble/nebulae/planetary/STScI-01EVT1FTT602TMEXW2YH96T2NF.png/jcr:content/renditions/cq5dam.web.1280.1280.png",
+    "caption_candidates": [],
+    "metadata_only": true
+  },
+  {
+    "id": "butterfly-nebula",
+    "source": "https://science.nasa.gov/asset/hubble/ngc-6302-the-butterfly-nebula/",
+    "http_status": 200,
+    "checked_on": "2026-11-21",
+    "image_url": "https://assets.science.nasa.gov/content/dam/science/missions/hubble/releases/2020/06/STScI-01EVSTBMQN50AR8G725WXCCBA0.tif/jcr:content/renditions/cq5dam.web.1280.1280.jpeg",
+    "caption_candidates": [],
+    "metadata_only": true
+  },
+  {
+    "id": "veil-nebula",
+    "source": "https://science.nasa.gov/missions/hubble/hubble-captures-new-view-of-colorful-veil/",
+    "http_status": 200,
+    "checked_on": "2026-11-21",
+    "image_url": "https://assets.science.nasa.gov/content/dam/science/missions/hubble/nebulae/supernova-remnant/Hubble_Veil_SMALL_potw2508a.jpg/jcr:content/renditions/cq5dam.web.1280.1280.jpeg",
+    "caption_candidates": [
+      "This NASA/ESA Hubble Space Telescope image a supernova remnant called the Veil Nebula. ESA/Hubble & NASA, R. Sankrit"
+    ],
+    "metadata_only": true
+  }
+]

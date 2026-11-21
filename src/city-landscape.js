@@ -25,6 +25,9 @@
 // Roof-aware street-tree exclusions exist before asynchronous district mounting.
  g.CITY_CORE_TREE_EXCLUSIONS=Object.freeze([{id:'gallery',x:0,z:0,shape:'circle',radius:58},...(sixfold?ring.map(h=>({...h,shape:'circle',radius:25})):[{id:'transformations',x:125,z:0,shape:'circle',radius:25},{id:'aperiodic',x:-108.25,z:-62.5,shape:'circle',radius:16},{id:'inflation',x:0,z:-125,shape:'circle',radius:16},{id:'symmetry',x:108.25,z:-62.5,shape:'circle',radius:16}]),{id:'makers',...(g.CITY_CONFIG?.makersSite??{x:Math.sqrt(3)*138,z:-170}),shape:'circle',radius:29},{id:'socrates',x:g.CITY_SOCRATES_SITE?.x??-96,z:g.CITY_SOCRATES_SITE?.z??100,shape:'circle',radius:30},{id:'archetypes-reserved-ground',x:-318.6973486,z:276,shape:'circle',radius:55}]);
  g.cityStreetTreeClear=(x,z,clearance=7)=>g.CITY_CORE_TREE_EXCLUSIONS.every(h=>Math.hypot(x-h.x,z-h.z)>=h.radius+clearance)&&(!g.CITY_PUBLIC_TREE_CLEAR||g.CITY_PUBLIC_TREE_CLEAR(x,z,clearance));
+// The user removed the one unbedded plaza tree, not its neighbouring gardens.
+g.CITY_REMOVED_PLAZA_TREE=Object.freeze({x:69.5,z:-25});
+const removedPlazaTree=p=>Math.abs(p.x-g.CITY_REMOVED_PLAZA_TREE.x)<1e-7&&Math.abs(p.z-g.CITY_REMOVED_PLAZA_TREE.z)<1e-7;
 // Deterministic branching trees: small individual leaves, open crowns, no spherical canopy or display plinth.
 g.buildNaturalCityTrees=function(T,parent,positions){
  positions=positions.filter(p=>g.cityStreetTreeClear(p.x,p.z));
@@ -38,13 +41,16 @@ g.buildNaturalCityTrees=function(T,parent,positions){
  const foliage=new T.InstancedMesh(leafGeo,new T.MeshLambertMaterial({vertexColors:true,side:T.DoubleSide}),positions.length*38),branches=[];
  foliage.name='Individual leaves in irregular layered crowns';foliage.castShadow=true;foliage.receiveShadow=true;root.add(foliage);let leafIndex=0;
  for(const [i,p]of positions.entries()){
+  const omitted=removedPlazaTree(p),branchStart=branches.length;
   const size=.88+random()*.35,turn=random()*Math.PI*2,leanX=(random()-.5)*.34,leanZ=(random()-.5)*.34,point=(x,y,z)=>new T.Vector3(p.x+(x*Math.cos(turn)-z*Math.sin(turn))*size,y*size,p.z+(x*Math.sin(turn)+z*Math.cos(turn))*size);
   const base=point(0,0,0),mid=point(leanX,1.35,leanZ),fork=point(leanX*1.4,2.7,leanZ*1.4);branches.push([base,mid,.19*size],[mid,fork,.125*size]);
   for(let j=0;j<7;j++){const a=j*2.399963,reach=1+random()*.6,tip=point(Math.cos(a)*reach,3.4+random()*1.4,Math.sin(a)*reach),start=j<3?mid:fork;branches.push([start,tip,(.046+random()*.025)*size]);const twig=tip.clone().add(new T.Vector3(Math.cos(a+.6)*.4,size*.5,Math.sin(a+.6)*.4));branches.push([tip,twig,.022*size]);}
-  for(let j=0;j<38;j++){const a=j*2.399963+i*.7,u=(j+.5)/38,vertical=1-2*u,r=Math.sqrt(1-vertical*vertical)*(1.35+random()*.35),center=point(Math.cos(a)*r,4.1+vertical*1.6,Math.sin(a)*r);o.position.copy(center);o.rotation.set(random(),a,random());o.scale.set(size*(.9+random()*.35),size*(.8+random()*.35),size*(.9+random()*.3));o.updateMatrix();foliage.setMatrixAt(leafIndex++,o.matrix);}
+  for(let j=0;j<38;j++){const a=j*2.399963+i*.7,u=(j+.5)/38,vertical=1-2*u,r=Math.sqrt(1-vertical*vertical)*(1.35+random()*.35),center=point(Math.cos(a)*r,4.1+vertical*1.6,Math.sin(a)*r);o.position.copy(center);o.rotation.set(random(),a,random());o.scale.set(size*(.9+random()*.35),size*(.8+random()*.35),size*(.9+random()*.3));o.updateMatrix();if(!omitted)foliage.setMatrixAt(leafIndex++,o.matrix);}
+  if(omitted)branches.length=branchStart; // Keep RNG/index advancement for every other crown.
  }
+ foliage.count=leafIndex;
  const wood=new T.InstancedMesh(new T.CylinderGeometry(.58,1,1,9),new T.MeshLambertMaterial({color:0x645747}),branches.length);wood.name='Tapered trunks and visible forked branches';wood.castShadow=true;wood.receiveShadow=true;
- branches.forEach(([a,b,r],i)=>{const d=b.clone().sub(a);o.position.copy(a).add(b).multiplyScalar(.5);o.quaternion.setFromUnitVectors(up,d.clone().normalize());o.scale.set(r,d.length(),r);o.updateMatrix();wood.setMatrixAt(i,o.matrix);});root.add(wood);root.userData.naturalTrees={count:positions.length,leafClusters:leafIndex,branches:branches.length,crownClearance:7,positions:positions.map(p=>({x:p.x,z:p.z}))};return root;
+ branches.forEach(([a,b,r],i)=>{const d=b.clone().sub(a);o.position.copy(a).add(b).multiplyScalar(.5);o.quaternion.setFromUnitVectors(up,d.clone().normalize());o.scale.set(r,d.length(),r);o.updateMatrix();wood.setMatrixAt(i,o.matrix);});root.add(wood);root.userData.naturalTrees={count:positions.filter(p=>!removedPlazaTree(p)).length,leafClusters:leafIndex,branches:branches.length,crownClearance:7,positions:positions.filter(p=>!removedPlazaTree(p)).map(p=>({x:p.x,z:p.z}))};return root;
 };
 g.createCityLandscape=function(T,{parent,tiles,outerRadius=58}){
  const group=new T.Group();group.name='Polygonal central campus and real graded doorways';parent.add(group);
@@ -60,9 +66,10 @@ g.createCityLandscape=function(T,{parent,tiles,outerRadius=58}){
  const cleanLamps=lampPositions.filter(p=>clearOfPaths(p,.45));
  // Dalí's residence occupies this lot; keep both trunks and foliage out of its rooms.
  const daliLot={minX:108,maxX:128,minZ:65,maxZ:83};
- const trees=treePositions.filter((p,i)=>g.cityStreetTreeClear(p.x,p.z)&&!(p.x>daliLot.minX&&p.x<daliLot.maxX&&p.z>daliLot.minZ&&p.z<daliLot.maxZ)&&!(Math.abs(p.z)<8&&(p.x< -58||p.x>183))&&clearOfPaths(p,2)&&Math.hypot(p.x,p.z)>outerRadius+4&&treePositions.findIndex(q=>Math.hypot(q.x-p.x,q.z-p.z)<5)===i);
+ const treeSources=treePositions.filter((p,i)=>g.cityStreetTreeClear(p.x,p.z)&&!(p.x>daliLot.minX&&p.x<daliLot.maxX&&p.z>daliLot.minZ&&p.z<daliLot.maxZ)&&!(Math.abs(p.z)<8&&(p.x< -58||p.x>183))&&clearOfPaths(p,2)&&Math.hypot(p.x,p.z)>outerRadius+4&&treePositions.findIndex(q=>Math.hypot(q.x-p.x,q.z-p.z)<5)===i);
  function instances(geo,mat,list,transform,name){const m=new T.InstancedMesh(geo,mat,list.length),o=new T.Object3D();list.forEach((p,i)=>{o.position.set(0,0,0);o.scale.set(1,1,1);transform(o,p,i);o.updateMatrix();m.setMatrixAt(i,o.matrix);});m.name=name;m.userData.groundPaving=true;m.visible=g.CITY_CONFIG?.showGroundPaving!==false;group.add(m);}
- g.buildNaturalCityTrees(T,group,trees);
+ g.buildNaturalCityTrees(T,group,treeSources);
+ const trees=treeSources.filter(p=>!removedPlazaTree(p));
  instances(new T.CylinderGeometry(.1,.12,.85,10),metal,cleanLamps,(o,p)=>o.position.set(p.x,(groundHeight(p.x,p.z)??.13)+.425,p.z),'Aligned low path lights');
  instances(new T.CylinderGeometry(.14,.14,.16,10),glow,cleanLamps,(o,p)=>o.position.set(p.x,(groundHeight(p.x,p.z)??.13)+.9,p.z),'Warm path light caps');
  return{group,paths,trees,lamps:cleanLamps,groundHeight,canStand:(x,z)=>!trees.some(p=>Math.hypot(x-p.x,z-p.z)<1.8)&&!cleanLamps.some(p=>Math.hypot(x-p.x,z-p.z)<.32)};

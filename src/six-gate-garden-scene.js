@@ -1,4 +1,4 @@
-import {SIX_GATE_GARDEN as G,GARDEN_GATES,GARDEN_ARCADE_BAYS,GARDEN_COLUMNS,GARDEN_ROUTES,GARDEN_SEATS,GARDEN_BEDS,GARDEN_COLLIDERS,gardenPolar,gardenWorld,gardenCanStand,gardenTreeBedPlan} from './six-gate-garden-model.js';
+import {SIX_GATE_GARDEN as G,GARDEN_GATES,GARDEN_ARCADE_BAYS,GARDEN_COLUMNS,GARDEN_ROUTES,GARDEN_SEATS,GARDEN_BEDS,GARDEN_COLLIDERS,gardenPolar,gardenWorld,gardenCanStand,gardenTreeBedPlan} from './six-gate-garden-model.js?v=night-garden-20261121';
 
 export function buildSixGateGarden(T,{paving=true,planting=true}={}){
  const group=new T.Group();group.name='Six Gate Garden · shaded loop, open loggias and real house approaches';
@@ -61,26 +61,34 @@ export function buildSixGateGarden(T,{paving=true,planting=true}={}){
  }
 
  // Column bases occupy only the outside edges of the continuous walking band.
- // Their shared model also shifts the six sector-bisector pairs away from the
- // retained block streets; the arches/roof below consume those same boundaries.
+ // Dense warm stone piers replace the thin shade-frame columns. Both rows
+ // keep the eight-metre promenade clear, including the original street axes.
  for(const c of GARDEN_COLUMNS){
-  cylinder(c.x,.23,c.z,G.columnBaseRadius,.20,0xc3b797);
-  cylinder(c.x,2.51,c.z,G.columnRadius,4.36,0xddd2b6);
-  cylinder(c.x,4.72,c.z,.34,.20,0xe8ddc3);
-  cylinder(c.x,4.85,c.z,.39,.10,0xc2b38f);
+  box(c.x,.24,c.z,1.10,.22,1.10,0xc9b994,c.angle);
+  box(c.x,(.35+G.corniceTop)/2,c.z,.76,G.corniceTop-.35,.88,0xe4d2ae,c.angle);
+  box(c.x,2.99,c.z,1.0,.18,1.08,0xf0dfbe,c.angle);
  }
 
  // A genuine masonry arch ring extrudes around a clear elliptical aperture.
  // There is no wall or fence below its spring line and no head-height beam.
- function arch(a,b,spring=2.75,rise=1.62,depth=.32,thickness=.25){
-  const dx=b[0]-a[0],dz=b[1]-a[1],length=Math.hypot(dx,dz),u=[dx/length,dz/length],n=[-u[1],u[0]],mid=[(a[0]+b[0])/2,(a[1]+b[1])/2],half=length/2;
+ function arch(a,b,spring=G.archSpring,rise=G.archRise,depth=G.archDepth,thickness=G.archThickness){
+  const dx=b[0]-a[0],dz=b[1]-a[1],length=Math.hypot(dx,dz),u=[dx/length,dz/length],n=[-u[1],u[0]],mid=[(a[0]+b[0])/2,(a[1]+b[1])/2],half=(length-.88)/2;
   const point=(theta,outer,side)=>[mid[0]+u[0]*(half+(outer?thickness:0))*Math.cos(theta)+n[0]*side*depth/2,spring+(rise+(outer?thickness:0))*Math.sin(theta),mid[1]+u[1]*(half+(outer?thickness:0))*Math.cos(theta)+n[1]*side*depth/2];
-  for(let j=0;j<20;j++){const t=j*Math.PI/20,q=(j+1)*Math.PI/20;for(const side of[-1,1])face([point(t,false,side),point(q,false,side),point(q,true,side),point(t,true,side)],0xe0d5ba);face([point(t,false,-1),point(q,false,-1),point(q,false,1),point(t,false,1)],0xc8bca0);face([point(t,true,-1),point(q,true,-1),point(q,true,1),point(t,true,1)],0xd9cdb1);}
+  for(let j=0;j<20;j++){
+   const t=j*Math.PI/20,q=(j+1)*Math.PI/20,tone=j%3===0?0xddc69c:0xead6b1;
+   for(const side of[-1,1]){
+    face([point(t,false,side),point(q,false,side),point(q,true,side),point(t,true,side)],tone);
+    const A=point(t,true,side),B=point(q,true,side);face([A,B,[B[0],G.corniceTop-.30,B[2]],[A[0],G.corniceTop-.30,A[2]]],0xe2cdaa);
+    // Shallow warm mortar joints make the individual voussoirs legible.
+    const m=t+.004;if(j>0)face([point(t,false,side),point(m,false,side),point(m,true,side),point(t,true,side)],0xb8a486);
+   }
+   face([point(t,false,-1),point(q,false,-1),point(q,false,1),point(t,false,1)],0xc9b48d);face([point(t,true,-1),point(q,true,-1),point(q,true,1),point(t,true,1)],0xd9c29b);
+  }
+  const turn=Math.atan2(dz,dx);box(mid[0],G.corniceTop-.17,mid[1],length+.28,.34,1.16,0xe7d3ad,turn);box(mid[0],G.corniceTop+.025,mid[1],length+.42,.08,1.26,0xb9a783,turn);
  }
  for(const bay of GARDEN_ARCADE_BAYS){
   for(const r of[G.innerColumnRadius,G.outerColumnRadius]){
    const a=gardenPolar(r,bay.a),b=gardenPolar(r,bay.b);arch(a,b);
-   beam([a[0],4.92,a[1]],[b[0],4.92,b[1]],.07,0xb2a078);
   }
   const ai=gardenPolar(G.roofInner,bay.a),bi=gardenPolar(G.roofInner,bay.b),ao=gardenPolar(G.roofOuter,bay.a),bo=gardenPolar(G.roofOuter,bay.b),ar=gardenPolar(G.ringRadius,bay.a),br=gardenPolar(G.ringRadius,bay.b);
   for(const[edgeA,edgeB]of[[ai,bi],[ao,bo]]){
@@ -93,10 +101,10 @@ export function buildSixGateGarden(T,{paving=true,planting=true}={}){
 
  // Six open four-column loggias; both radial faces remain real apertures.
  for(const g of GARDEN_GATES){
-  for(const u of[G.gateInner,G.gateOuter]){const a=gardenWorld(g,u,-G.gateWidth/2),b=gardenWorld(g,u,G.gateWidth/2);arch(a,b,2.8,1.70,.43,.30);beam([a[0],4.9,a[1]],[b[0],4.9,b[1]],.07);}
+  for(const u of[G.gateInner,G.gateOuter]){const a=gardenWorld(g,u,-G.gateWidth/2),b=gardenWorld(g,u,G.gateWidth/2);arch(a,b,G.archSpring,1.75,1.02,.45);}
   const corners=g.roof,peak=gardenWorld(g,(G.gateInner+G.gateOuter)/2,0);
-  for(let i=0;i<4;i++){const a=corners[i],b=corners[(i+1)%4];face([[a[0],5.02,a[1]],[b[0],5.02,b[1]],[peak[0],6.12,peak[1]]],0x738b84,'roof');face([[a[0],4.86,a[1]],[b[0],4.86,b[1]],[peak[0],5.96,peak[1]]],0xd7cbb0,'stone');beam([a[0],5.02,a[1]],[b[0],5.02,b[1]],.055);beam([a[0],5.02,a[1]],[peak[0],6.12,peak[1]],.035);}
-  cylinder(peak[0],6.16,peak[1],.15,.18,0xae9258,'bronze');
+  for(let i=0;i<4;i++){const a=corners[i],b=corners[(i+1)%4];face([[a[0],G.roofEave,a[1]],[b[0],G.roofEave,b[1]],[peak[0],6.95,peak[1]]],0x647b74,'roof');face([[a[0],G.roofEave-.16,a[1]],[b[0],G.roofEave-.16,b[1]],[peak[0],6.79,peak[1]]],0xd7cbb0,'stone');beam([a[0],G.roofEave,a[1]],[b[0],G.roofEave,b[1]],.055);beam([a[0],G.roofEave,a[1]],[peak[0],6.95,peak[1]],.035);}
+  cylinder(peak[0],7.0,peak[1],.15,.18,0xae9258,'bronze');
  }
 
  for(const s of GARDEN_SEATS){const p=s.point;

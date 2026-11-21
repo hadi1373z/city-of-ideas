@@ -1,6 +1,6 @@
 import {CITY_ISLAND,coastX,SHORE,ISLAND_ROUTES} from './island-layout.js?v=makers-passages-20261118';
 export {coastX} from './island-layout.js?v=makers-passages-20261118';
-import {PAPER_SEMINAR_COURT as COURT} from './city-hex-layout.js?v=six-gate-city-20261121';
+import {PAPER_SEMINAR_COURT as COURT} from './city-hex-layout.js?v=night-garden-20261121';
 export const HOUSE_ORIGAMI={x:COURT.x,z:COURT.z-29,width:18,depth:16,entry:{x:COURT.x,z:COURT.z-13,y:.13,yaw:0,pitch:.06},threshold:{x:COURT.x,z:COURT.z-18},insideEntry:{x:COURT.x,z:COURT.z-23.5,y:.13,yaw:0},shore:{...SHORE}};
 export const PAPER_COLOURS=['#e9dcb9','#92b9c5','#cc9584'];
 // One short threshold approach joins the shared court, then its east hex edge.

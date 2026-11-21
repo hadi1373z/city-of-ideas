@@ -1,18 +1,18 @@
-import {installGardenTreeBeds} from './garden-tree-beds.js?v=six-gate-city-20261121';
+import {installGardenTreeBeds} from './garden-tree-beds.js?v=night-garden-20261121';
 import {createFoldWorkbenchControls} from './origami-fold-workbench-ui.js?v=cloister-details-20261120';
 import {faceRoomWork,showRoomDialog} from './room-workbench.js?v=origami-court-20261120';
 import {PARK_GRASS_HEX} from './city-lawn-palette.js?v=makers-passages-20261118';
-import {urbanRoutes,urbanBuildingFootprints} from './city-urban-plan-model.js?v=six-gate-city-20261121';
-import {FOUNDATION_HOUSES,FOUNDATION_COPY,FOUNDATION_ROUTES} from './foundation-houses-data.js?v=six-gate-city-20261121';
+import {urbanRoutes,urbanPavedRoutes,urbanBuildingFootprints} from './city-urban-plan-model.js?v=night-garden-20261121';
+import {FOUNDATION_HOUSES,FOUNDATION_COPY,FOUNDATION_ROUTES} from './foundation-houses-data.js?v=night-garden-20261121';
 import {CITY_ISLAND as ISLAND,onCityIsland,islandRadius} from './island-layout.js?v=makers-passages-20261118';
-import {buildOrigamiHouse} from './origami-house-scene.js?v=six-gate-city-20261121';
-import {buildCityCoast} from './coastal-city-scene.js?v=six-gate-city-20261121';
-import {foldHouseMemory,HOUSE_ORIGAMI as P,miura,vertexTests,CREASE_CASES,coastX,COAST_ROUTES} from './origami-house-math.js?v=six-gate-city-20261121';
+import {buildOrigamiHouse} from './origami-house-scene.js?v=night-garden-20261121';
+import {buildCityCoast} from './coastal-city-scene.js?v=night-garden-20261121';
+import {foldHouseMemory,HOUSE_ORIGAMI as P,miura,vertexTests,CREASE_CASES,coastX,COAST_ROUTES} from './origami-house-math.js?v=night-garden-20261121';
 import {FOLD_COPY} from './origami-house-copy.js?v=cloister-details-20261120';
 import {ORIGAMI_LESSONS,paperDiagram} from './origami-lessons.js?v=city-night-20261117';
-import {mountCoastalMap} from './coastal-map.js?v=six-gate-city-20261121';
-import {COAST_EXPLORER_COPY} from './coastal-map-data.js?v=six-gate-city-20261121';
-import {SEMINAR_HOUSES} from './seminar-houses-data.js?v=six-gate-city-20261121';
+import {mountCoastalMap} from './coastal-map.js?v=night-garden-20261121';
+import {COAST_EXPLORER_COPY} from './coastal-map-data.js?v=night-garden-20261121';
+import {SEMINAR_HOUSES} from './seminar-houses-data.js?v=night-garden-20261121';
 export function installOrigamiHouse(M,T){
  const cityPaths=[],hiddenRoutes=[];M.scene.traverse(o=>{const r=o.userData;if(window.CITY_CONFIG?.sixfoldHouses!==true&&r?.groundRoute&&r.points?.every(([x,z])=>Math.hypot(x,z)<ISLAND.radius))cityPaths.push({points:r.points,width:r.width});if(o.name==='Mown lawn route · no raised paving'){hiddenRoutes.push([o,o.visible]);o.visible=false;}});/* Campus roads come from the shared polygonal authority; never resurface legacy landscape curves. */cityPaths.push(...(M.artistQuarter?.garden.paths||[]));
  let parkGrass=null;M.city.park?.group.traverse(o=>{for(const material of Array.isArray(o.material)?o.material:o.material?[o.material]:[])if(!parkGrass&&material.color?.getHex()===PARK_GRASS_HEX)parkGrass=material;});
@@ -70,7 +70,7 @@ export function installOrigamiHouse(M,T){
    else if(id==='middle-section')M.worldCylinder?.overview('section');
    else if(SEMINAR_HOUSES.some(h=>h.id===id))M.startExtra('seminar:'+id);
    else if(id==='shore')visit('shore');
-   else if(id==='park'&&M.pondWorldWindow){M.arrive(M.pondWorldWindow.pond.entry);M.player.pitch=-.25;}
+   else if(id==='park'&&M.nightPark)M.nightPark.visit();
    else M.quickStart(id==='artists'?'artists-quarter':id);
   }});
   const more=el('details');more.className='coastal-more';more.append(el('summary',c.more));
@@ -99,7 +99,7 @@ export function installOrigamiHouse(M,T){
  M.showExtra=info=>{if(info?.kind!=='origami-house')return old.show?.(info);const key=info.data.origamiHouse;if(key==='shore'){open('shore');return true;}if(key==='crane'&&inside()){M.clearMovement();window.CITY_ORIGAMI?.open('crane');return true;}if(inside()&&Number.isInteger(info.data.creaseIndex)){memory.toggleCrease(info.data.creaseIndex,{inside:true});M.clearMovement();return true;}open(['folding','miura','crease','boat'].includes(key)?key:'welcome');return true;};M.startExtra=d=>d==='origami-house'?(visit('entry'),true):d==='coast'?(visit('shore'),true):old.start?.(d);
  M.city.update=(...args)=>{old.update(...args);const time=args[1],dt=last?Math.min(.08,Math.max(0,time-last)):0;last=time;const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches,paused=document.hidden||!!document.querySelector('dialog[open]');if(!paused)clock+=dt;const s=memory.state;if(s.launched&&!previousLaunch)launchClock=clock;previousLaunch=s.launched;construction.tick(dt,inside()&&tab==='folding'&&ui.d.open&&isBench()&&!document.hidden&&!document.querySelector('dialog[open]:not(#origami-house),#reader-panel:not([hidden]),#exhibit-panel:not([hidden]),#map-panel:not([hidden])'));house.update(dt,clock-launchClock,s,w(),{reduced});coast.update(clock,{reduced,fog:M.scene.fog});const near=atSurface()&&(inside()||Math.hypot(M.player.x-P.entry.x,M.player.z-P.entry.z)<7||Math.hypot(M.player.x-P.threshold.x,M.player.z-P.threshold.z)<8||atShore());panel.hidden=M.mode!=='city'||!near||paused;const key=(atShore()?'shore':'house')+lang();if(key!==contextKey){contextKey=key;panelTitle.textContent=atShore()?w().shore:w().house;panelButton.textContent=w().open;}if(near){const other=document.querySelector('#artist-quarter-context');if(other)other.hidden=true;}};
  const locale=()=>{launch.textContent=mapDoor.textContent=w().open;mapLaunch.textContent=mapReturn.textContent=w().map;panel.dir=lang()==='fa'?'rtl':'ltr';contextKey='';if(ui.d.open)render();if(map.d.open)openMap();};locale();addEventListener('city-language',locale);
- function drawMap(ctx,{s,cx,cz}){ctx.save();ctx.fillStyle='#527f90';ctx.fillRect(0,0,260,260);ctx.fillStyle='#cdbd91';ctx.beginPath();ctx.arc(cx,cz,ISLAND.radius*s,0,Math.PI*2);ctx.fill();ctx.fillStyle='#899774';ctx.beginPath();ctx.arc(cx,cz,ISLAND.lawnRadius*s,0,Math.PI*2);ctx.fill();ctx.strokeStyle='#e5d5ad';ctx.lineWidth=1;ctx.beginPath();ctx.arc(cx,cz,ISLAND.promenadeRadius*s,0,Math.PI*2);ctx.stroke();for(const route of urbanRoutes()){ctx.beginPath();route.points.forEach(([x,z],i)=>ctx[i?'lineTo':'moveTo'](cx+x*s,cz+z*s));ctx.stroke();}for(const h of urbanBuildingFootprints()){ctx.fillStyle=h.category==='pattern'?'#416e75':'#b49b75';ctx.beginPath();if(h.shape==='circle')ctx.arc(cx+h.x*s,cz+h.z*s,Math.max(1,h.radius*s),0,Math.PI*2);else h.points.forEach(([x,z],i)=>ctx[i?'lineTo':'moveTo'](cx+x*s,cz+z*s));ctx.closePath();ctx.fill();}ctx.strokeStyle='#e8d6a3';ctx.beginPath();ctx.arc(cx,cz,58*s,0,Math.PI*2);ctx.stroke();ctx.fillStyle='#e8cb86';ctx.fillRect(cx+P.x*s-2.5,cz+P.z*s-2.5,5,5);for(const h of FOUNDATION_HOUSES)ctx.fillRect(cx+h.x*s-2,cz+h.z*s-2,4,4);ctx.restore();}
+ function drawMap(ctx,{s,cx,cz}){ctx.save();ctx.fillStyle='#527f90';ctx.fillRect(0,0,260,260);ctx.fillStyle='#cdbd91';ctx.beginPath();ctx.arc(cx,cz,ISLAND.radius*s,0,Math.PI*2);ctx.fill();ctx.fillStyle='#899774';ctx.beginPath();ctx.arc(cx,cz,ISLAND.lawnRadius*s,0,Math.PI*2);ctx.fill();ctx.strokeStyle='#e5d5ad';ctx.lineWidth=1;ctx.beginPath();ctx.arc(cx,cz,ISLAND.promenadeRadius*s,0,Math.PI*2);ctx.stroke();for(const route of urbanPavedRoutes()){ctx.beginPath();route.points.forEach(([x,z],i)=>ctx[i?'lineTo':'moveTo'](cx+x*s,cz+z*s));ctx.stroke();}for(const h of urbanBuildingFootprints()){ctx.fillStyle=h.category==='pattern'?'#416e75':'#b49b75';ctx.beginPath();if(h.shape==='circle')ctx.arc(cx+h.x*s,cz+h.z*s,Math.max(1,h.radius*s),0,Math.PI*2);else h.points.forEach(([x,z],i)=>ctx[i?'lineTo':'moveTo'](cx+x*s,cz+z*s));ctx.closePath();ctx.fill();}ctx.strokeStyle='#e8d6a3';ctx.beginPath();ctx.arc(cx,cz,58*s,0,Math.PI*2);ctx.stroke();ctx.fillStyle='#e8cb86';ctx.fillRect(cx+P.x*s-2.5,cz+P.z*s-2.5,5,5);for(const h of FOUNDATION_HOUSES)ctx.fillRect(cx+h.x*s-2,cz+h.z*s-2,4,4);ctx.restore();}
  const treeBeds=installGardenTreeBeds(M,T,{coast});
  const api={house,coast,treeBeds,memory,construction,open,openMap,visit,inside,atShore,drawMap,overviewTarget:{x:0,y:13.5,z:0},overviewFogDensity:.00028,islandRadius:ISLAND.radius};window.CITY_COAST=api;M.origamiHouse=api;
  const query=new URLSearchParams(globalThis.location?.search||'');if(query.get('arrival')==='island'){oldOverview?.call(overview);document.body.dataset.coastalOverview='clear';}else if(query.get('arrival')==='origami-house'){visit('entry');open();}else if(query.get('arrival')==='coast')visit('shore');

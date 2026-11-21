@@ -7,8 +7,8 @@ import {footprintBlocked} from '../src/honeycomb-city-model.js';
 import {ESCHER_PAVILION,pavilionFootprint} from '../src/escher-pavilion-model.js';
 const urban=buildCityUrbanPlan(T,{naturalTrees:null}),routes=urbanRoutes();
 assert(urban.garden?.group.parent===urban.group,'Garden mounts once in the actual upper coast root and follows its culling');
-for(const route of GARDEN_ROUTES)assert(routes.includes(route),'Maps/paving/wall openings share every new path');
-for(const p of GARDEN_FOOTPRINTS)assert(urbanBuildingFootprints().includes(p),'Map and planting carry actual garden outlines');
+for(const route of GARDEN_ROUTES)assert.deepEqual(routes.find(r=>r.id===route.id),route,'Maps/paving/wall openings share every path coordinate');
+for(const p of GARDEN_FOOTPRINTS)assert.deepEqual(urbanBuildingFootprints().find(f=>f.id===p.id),p,'Map and planting carry actual garden outlines');
 assert(honeycombInputs().wallFootprints.every(p=>p.walkThrough));
 assert(honeycombInputs().footprints.every(p=>!p.walkThrough),'Arcade roofs cannot delete the real streets below them');
 let samples=0;
@@ -28,6 +28,6 @@ assert(HONEYCOMB_CITY.walls.length>0,'Outer city courts retain their separate ex
 const escher=pavilionFootprint();
 for(const p of[[ESCHER_PAVILION.x,ESCHER_PAVILION.z],[228,110],[228,99]])assert(footprintBlocked(...p,[escher]),'Concave pavilion, rear link and fixed stair annex all reserve their real interior');
 assert(!footprintBlocked(224,110,[escher]),'The lawn beside the narrow link stays outside its true outline');
-let draws=0;urban.group.traverse(o=>{if(o.isMesh)draws++;});assert(draws<=13,'Garden adds four batched draws to the existing nine');
+let draws=0;urban.group.traverse(o=>{if(o.isMesh)draws++;});assert(draws<=15,'Garden adds four architecture and two continuous paving draws to the existing nine');
 urban.dispose();assert.equal(urban.group.children.length,0);
 console.log(`PASS Six Gate Garden live integration: ${samples} supported-width route samples clear actual court walls, columns and planting; roof/map authority, height gates and cleanup`);

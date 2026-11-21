@@ -57,7 +57,8 @@ three broad landscape zones: soft-edged silver-green meadow clearings, an inlet
 with reed banks reaching the ocean, and an irregular slate shore. Twelve small
 groves give the outward walks shade and visual depth while keeping the outer
 landscape calm. The former fourteen closed canopy trees are replaced, together
-with the groves, by 180 trees with visible tapered forks and individually shaped
+with the groves, by136 trees after the night-park and complete home-yard
+reserves, with visible tapered forks and individually shaped
 leaves. The foliage method is adapted from this project's existing upper-city
 trees, with a bounded lower-face cluster budget. No texture downloads, external
 assets, extra houses or destination boards are added.

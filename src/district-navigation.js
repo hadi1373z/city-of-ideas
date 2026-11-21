@@ -1,5 +1,6 @@
 /* The original bounded path planner, adapted to shared world coordinates.
    This owns no renderer, actor, controls, storage, or alternate scene. */
+import {isLowerCoordinate,lowerOnLand} from './world-cylinder-model.js';
 const inside=(b,x,z)=>x>=b.minX&&x<=b.maxX&&z>=b.minZ&&z<=b.maxZ;
 const transformBounds=(b,t)=>({minX:t.x+b.minX*t.scale,maxX:t.x+b.maxX*t.scale,minZ:t.z+b.minZ*t.scale,maxZ:t.z+b.maxZ*t.scale});
 const point=(p,t)=>({...p,x:t.x+p.x*t.scale,y:t.y+(p.y||0)*t.scale,z:t.z+p.z*t.scale});
@@ -8,7 +9,7 @@ export async function createDistrictNavigation(extras,{baseCanStand,baseBounds={
  const planner=findCityPath||(await import(new URL('art-city-navigation.js',sourceBaseUrl).href)).findCityPath;
  if(typeof planner!=='function')throw Error('The original city path planner is unavailable.');
  function canStand(x,z,{y=.13,cityId,floor}={}){
-  if(![x,z,y].every(Number.isFinite)||!inside(extras.bounds,x,z))return false;
+  if(![x,z,y].every(Number.isFinite)||(isLowerCoordinate({x})?!lowerOnLand(x,z):!inside(extras.bounds,x,z)))return false;
   // Every added collider applies even when the point is a shared outdoor path.
   if(!extras.canStand(x,z,{y,...(floor===undefined?{}:{floor})}))return false;
   const region=extras.region(x,z,{y});

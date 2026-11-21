@@ -1,8 +1,9 @@
-import {COAST_LANDMARKS, COAST_EXPLORER_COPY, coastMapPoint, coastWalkSvg, coastFaceLinksSvg} from './coastal-map-data.js?v=six-gate-city-20261121';
+import {mountNightParkMap} from './night-park-map.js?v=night-garden-20261121';
+import {COAST_LANDMARKS, COAST_EXPLORER_COPY, coastMapPoint, coastWalkSvg, coastFaceLinksSvg} from './coastal-map-data.js?v=night-garden-20261121';
 
-import {seminarPathsSvg} from './seminar-houses-data.js?v=six-gate-city-20261121';
-import {coastVisitor,COAST_POSITION_COPY,coastPositionText,coastDistance} from './coastal-position.js?v=six-gate-city-20261121';
-import {mountMiddleLayerMap} from './middle-layer-map.js?v=wall-rails-20261121';
+import {seminarPathsSvg} from './seminar-houses-data.js?v=night-garden-20261121';
+import {coastVisitor,COAST_POSITION_COPY,coastPositionText,coastDistance} from './coastal-position.js?v=night-garden-20261121';
+import {mountMiddleLayerMap} from './middle-layer-map.js?v=night-garden-20261121';
 
 // Native buttons keep map selection available to touch, keyboard and controllers.
 // The SVG remains an ordinary image, with the same geometry in every language.
@@ -33,7 +34,7 @@ export function mountCoastalMap(container, {language = 'en', state, onVisit, vis
   // Physical east and west stay fixed when the surrounding interface is RTL.
   stage.dir = 'ltr';
   const image = el('img', '', 'coastal-plan');
-  image.src = new URL('./assets/city-coast-' + lang + '.svg?v=six-gate-city-20261121', import.meta.url).href;
+  image.src = new URL('./assets/city-coast-' + lang + '.svg?v=night-garden-20261121', import.meta.url).href;
   image.alt = c.title;
   image.width = image.height = 920;
   const overlay = el('img', '', 'coastal-walk-overlay');
@@ -63,7 +64,7 @@ export function mountCoastalMap(container, {language = 'en', state, onVisit, vis
       control.setAttribute('aria-controls', 'coastal-location-info');
       controls.push(control);
     }
-    stage.append(marker);
+    if(place.face!=='lower')stage.append(marker);
     list.append(item);
   }
   const caption = el('figcaption', c.places);
@@ -114,10 +115,11 @@ export function mountCoastalMap(container, {language = 'en', state, onVisit, vis
   route.append(toggle, status, guide);
   const layers=el('nav','','coastal-map-layers');layers.setAttribute('aria-label','Map layer');
   const middle=mountMiddleLayerMap(el('div'),{onVisit});
+  const night=mountNightParkMap(el('div'),{language:lang,onVisit});
   const layerButtons=[];
-  for(const[id,label]of[['surface','Surface city'],['middle','Middle layer · underground']]){const b=button(label,()=>{state.layer=id;updateLayer();});b.dataset.coastFocus='layer-'+id;layerButtons.push([id,b]);layers.append(b);}
-  function updateLayer(){const below=state.layer==='middle';layout.hidden=route.hidden=below;middle.hidden=!below;intro.textContent=below?'Explore the real rooms inside the island: six linked house basements, Babel and the Escher museum. The plan keeps north and east in the same directions as the surface map.':c.intro;for(const[id,b]of layerButtons)b.setAttribute('aria-pressed',String(id===(below?'middle':'surface')));}
-  root.append(layers,intro,layout,route,middle);
+  for(const[id,label]of[['surface','Surface city'],['middle','Middle layer · underground'],['night',lang==='fa'?'دنیای شب · پارک ایده‌ها':'Night face · Ideas Park']]){const b=button(label,()=>{state.layer=id;updateLayer();});b.dataset.coastFocus='layer-'+id;layerButtons.push([id,b]);layers.append(b);}
+  function updateLayer(){const below=state.layer==='middle',atNight=state.layer==='night';layout.hidden=route.hidden=below||atNight;middle.hidden=!below;night.hidden=!atNight;intro.textContent=below?'Explore the real rooms inside the island: six linked house basements, Babel and the Escher museum. The plan keeps north and east in the same directions as the surface map.':c.intro;for(const[id,b]of layerButtons)b.setAttribute('aria-pressed',String(id===(below?'middle':atNight?'night':'surface')));}
+  root.append(layers,intro,layout,route,middle,night);
   container.append(root);
 
   function select(id) {
@@ -127,7 +129,7 @@ export function mountCoastalMap(container, {language = 'en', state, onVisit, vis
     name.textContent = place.name;
     area.textContent = place.area;
     description.textContent = place.description;
-    distance.textContent=coastDistance(position,COAST_LANDMARKS.find(p=>p.id===id).point,lang,positionCopy);distance.hidden=!position;
+    distance.textContent=coastDistance(position,COAST_LANDMARKS.find(p=>p.id===id).point,lang,positionCopy);distance.hidden=!position||COAST_LANDMARKS.find(p=>p.id===id).face==='lower';
     visit.setAttribute('aria-label', c.visit + ' · ' + place.name);
     for (const n of controls) n.setAttribute('aria-pressed', String(n.dataset.landmark === id));
   }

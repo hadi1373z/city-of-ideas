@@ -25,7 +25,7 @@ export function buildNativeRamseyHouse(T,origin){
   if(Z< -3.4)return true;
   let table=true;for(let i=0;i<6;i++){const a=i*Math.PI/3;if(X*Math.sin(a)+(Z-.35)*Math.cos(a)>study.tableApothem+.24){table=false;break;}}
   if(table)return false;
-  if(study.seats.some(s=>Math.hypot(X-s.x,Z-s.z)<.44))return false;
+  if(study.chairs.some(c=>Math.hypot(X-c.position.x,Z-c.position.z)<.44))return false;
   if(Math.abs(X)>2.55&&Z>2.43)return false;
   if(Math.abs(X-3.45)<.67&&Math.abs(Z-1.3)<.58)return false;
   return true;

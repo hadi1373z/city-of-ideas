@@ -1,6 +1,6 @@
 import {HOUSE as H,HOUSE_LEVELS as LEVELS,stairY,houseRailLayout} from './transformation-house-model.js?v=makers-passages-20261118';
 import {buildHouseTiling} from './house-tiling-scene.js?v=makers-passages-20261118';
-export function buildTransformationHouse(T,{canvas=()=>document.createElement('canvas'),includeTiling=true}={}){
+export function buildTransformationHouse(T,{canvas=()=>document.createElement('canvas'),includeTiling=true,includeRoof=true}={}){
  const group=new T.Group();group.name='House of Transformations · inhabited rooms and deep stair';group.userData.transformationHouse=true;const owned=new Set(),own=o=>(owned.add(o),o),mat=(c,extra={})=>own(new T.MeshLambertMaterial({color:c,...extra}));const stone=mat(0xc9bea4),cream=mat(0xc6bba5),timber=mat(0x4a3e34),teal=mat(0x315b60),brass=mat(0xb89c60),clay=mat(0x9d6450),ink=mat(0x273d3d),pages=mat(0xdaccaa),glass=mat(0x8fa9a6,{transparent:true,opacity:.22}),glow=own(new T.MeshBasicMaterial({color:0xffdfad}));const books=[teal,clay,brass,ink],batches=new Map(),beams=new Map(),targets=[],walking=new T.Group();walking.name='Real house floors, stairs and corridor';group.add(walking);
  const mesh=(g,m,parent=group)=>{const o=new T.Mesh(own(g),m);parent.add(o);return o;};const box=(w,h,d,x,y,z,m=stone,yaw=0)=>{if(!batches.has(m))batches.set(m,[]);batches.get(m).push({w,h,d,x:x+125,y,z,yaw});};
  function beam(a,b,r=.045,m=brass){const p=new T.Vector3(a[0]+125,a[1],a[2]),q=new T.Vector3(b[0]+125,b[1],b[2]),d=q.clone().sub(p);if(!beams.has(m))beams.set(m,[]);beams.get(m).push({p:p.add(q).multiplyScalar(.5),q:new T.Quaternion().setFromUnitVectors(new T.Vector3(0,1,0),d.clone().normalize()),r,h:d.length()});}
@@ -32,8 +32,10 @@ export function buildTransformationHouse(T,{canvas=()=>document.createElement('c
  const joints=new Map();for(const path of railLayout.paths){const points=path.points.map(p=>new T.Vector3(p[0]+125,p[1],p[2])),curve=points.length===2?new T.LineCurve3(points[0],points[1]):new T.CatmullRomCurve3(points,false,'centripetal');appendRail(new T.TubeGeometry(curve,Math.max(4,points.length*2),path.radius,8,false));for(const p of[points[0],points.at(-1)])joints.set(p.toArray().map(v=>Math.round(v*1e6)).join(','),p);}
  for(const p of joints.values())appendRail(new T.SphereGeometry(.037,8,6).translate(p.x,p.y,p.z));for(const post of railLayout.posts)beam(post.a,post.b,.03);
  const railGeo=new T.BufferGeometry();railGeo.setAttribute('position',new T.Float32BufferAttribute(railVertices,3));railGeo.setIndex(railIndices);railGeo.computeVertexNormals();const rails=mesh(railGeo,brass);rails.name='Continuous rounded stair, bridge and annular guards';
- // Hexagonal pitched roof and a central lantern above the atrium.
- const roofShape=new T.Shape();hex.forEach(([x,z],i)=>roofShape[i?'lineTo':'moveTo'](x,-z));roofShape.closePath();const roof=mesh(new T.ConeGeometry(25,6,6,1,false,Math.PI/6),teal);roof.position.set(125,27,0);const skylight=mesh(new T.CylinderGeometry(3.8,3.8,3,6),glass);skylight.position.set(125,28,0);label('House of Transformations',0,5.7,20.45,9);
+ // The reusable legacy house retains its old roof. The live six-house owner
+ // omits it entirely and supplies the approved inset patterned stone roofs.
+ if(includeRoof){const roof=mesh(new T.ConeGeometry(25,6,6,1,false,Math.PI/6),teal);roof.position.set(125,27,0);const skylight=mesh(new T.CylinderGeometry(3.8,3.8,3,6),glass);skylight.position.set(125,28,0);}
+ label('House of Transformations',0,5.7,20.45,9);
  const tiling=includeTiling?buildHouseTiling(T):null;if(tiling)group.add(tiling.group);
  // Three separated rectangular frames invite an alignment, but never block the stair.
  const frames=new T.Group();group.add(frames);for(let i=0;i<3;i++){const k=[1,.72,.46][i],r=2.8*k,x=-14-2*k,y=-6.2+1.7*k,z=8-13*k;for(const side of[-1,1]){beam([x-r,y-r,z],[x-r,y+r,z],.06,brass);beam([x-r,y+side*r,z],[x+r,y+side*r,z],.06,brass);beam([x+r,y-r,z],[x+r,y+r,z],.06,brass);}}

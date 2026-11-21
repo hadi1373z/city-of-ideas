@@ -159,7 +159,7 @@ window.buildIdeaPark=function(THREE){
   // their source frame, mounted at the configured park site with scale .65 by city.js.
   const terrain = new THREE.Group(); terrain.name = 'Five connected honeycomb garden lawns'; scene.add(terrain);
   for (const [q,r] of [[0,-2],[1,-2],[2,-2],[1,-3],[2,-3]]) {
-    const lawn = mesh(geometry(new THREE.CylinderGeometry(92/.65,92/.65,1.5,6)), mats.grass, Math.sqrt(3)*92*(q+r/2)/.65, -.75, (138*r-(window.CITY_CONFIG?.parkSite?.z??-375))/.65, terrain, false);
+    const lawn = mesh(geometry(new THREE.CylinderGeometry(92/.65,92/.65,1.5,6)), mats.grass, Math.sqrt(3)*92*(q+r/2)/.65, -.75, (138*r+375)/.65, terrain, false);
     lawn.receiveShadow = true;
   }
 

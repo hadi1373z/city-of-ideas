@@ -1,4 +1,5 @@
 import {onCityIsland} from './island-layout.js?v=makers-passages-20261118';
+import {lowerOnLand} from './world-cylinder-model.js';
 export const CITY_EDGE_DOOR={x:-255,z:-75};
 export const inWorld=(bounds,x,z)=>x>=bounds.minX&&x<=bounds.maxX&&z>=bounds.minZ&&z<=bounds.maxZ;
 export function buildWorldDoor(T,{x,z,yaw=0,returning=false}){
@@ -20,7 +21,9 @@ export function installGraveyardWorld(M,T,layout,entry){
  const doors=[buildWorldDoor(T,{...CITY_EDGE_DOOR,yaw:Math.PI/2}),buildWorldDoor(T,{x:layout.x+60,z:layout.z,yaw:-Math.PI/2,returning:true})];
  for(const d of doors){M.scene.add(d.group);M.city.targets.push(d.group);}
  const oldCan=M.city.canStand,oldGround=M.extraGround,oldTarget=M.city.targetInfo,oldShow=M.showExtra,oldUpdate=M.city.update,oldStart=M.startExtra;
- M.city.canStand=(x,z)=>remote()?!inWorld(bounds,x,z)?false:oldCan(x,z):!onCityIsland(x,z)?false:oldCan(x,z);
+ // The old garden rectangle describes its contents, not the inhabited night
+ // face. Keep the same source collision chain throughout the physical disk.
+ M.city.canStand=(x,z)=>(remote()?lowerOnLand(x,z):onCityIsland(x,z))&&oldCan(x,z);
  M.extraGround=(x,z)=>{const y=oldGround?.(x,z);return Number.isFinite(y)?y:remote(x)?.13:undefined;};
  const go=destination=>{M.clearMovement();M.arrive(destination==='graveyard'?entry:{x:CITY_EDGE_DOOR.x+12,z:CITY_EDGE_DOOR.z,y:.13,yaw:-Math.PI/2});};
  const visitDoor=()=>M.arrive({x:CITY_EDGE_DOOR.x+7,z:CITY_EDGE_DOOR.z,y:.13,yaw:Math.PI/2});

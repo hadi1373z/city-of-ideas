@@ -1,4 +1,4 @@
-import {FOUNDATION_HOUSES,houseWorld,houseEntry,houseInside} from './foundation-houses-data.js?v=six-gate-city-20261121';
+import {FOUNDATION_HOUSES,houseWorld,houseEntry,houseInside} from './foundation-houses-data.js?v=night-garden-20261121';
 export function buildFoundationHouses(T,{canvas=()=>document.createElement('canvas')}={}){
  const group=new T.Group();group.name='Six first house studies on the island lanes';const owned=new Set(),own=r=>(owned.add(r),r),houses=[],targets=[];
  const mat=(color,options={})=>own(new T.MeshLambertMaterial({color,...options})),wood=mat(0x785d45),paper=mat(0xece1c9),brass=mat(0xb49357),glass=mat(0xb6d0d2,{transparent:true,opacity:.12,depthWrite:false,side:T.DoubleSide});

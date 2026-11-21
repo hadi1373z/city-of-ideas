@@ -1,17 +1,20 @@
+import {CLEBSCH} from './clebsch-cubic-model.js';
 import {DESCENT,STAIR_PORTAL} from './escher-descent-model.js?v=wall-rails-20261121';
 import {CLOISTER_ROOMS,CLOISTER_STAIRS,CLOISTER_GALLERIES,insidePolygon,hexagon,rectangle,ringPolygons,outsidePolygonRectangle} from './escher-cloister-layout.js?v=cloister-20261120';
 export {insidePolygon,hexagon,ringPolygons,outsidePolygonRectangle};
-export const ESCHER_DEPTH=Object.freeze({floor:-40,ceiling:-23.6,lowerFloor:-46,lowerCeiling:-39.5,radius:.28,
+export const ESCHER_MOBIUS_PLINTH=Object.freeze({x:218.5,z:155,width:5,depth:5});
+export const ESCHER_DEPTH=Object.freeze({mobiusPlinth:ESCHER_MOBIUS_PLINTH,floor:-40,ceiling:-23.6,lowerFloor:-46,lowerCeiling:-39.5,radius:.28,
  gallery:Object.freeze({x:135,z:115,y:-40,width:4}),rooms:CLOISTER_ROOMS,galleries:CLOISTER_GALLERIES,stairs:CLOISTER_STAIRS,stair:CLOISTER_STAIRS[0],
  portals:Object.freeze([
  {id:'escher',name:'Escher House · walkable stair',x:228,z:104,y:.13,gated:true,landing:{x:225,z:107,y:-40,yaw:Math.PI}},
- {id:'park',name:'Park approach',x:-84,z:-110,y:.13,landing:{x:174,z:114,y:-40,yaw:-Math.PI/2}},
- {id:'study',name:'Study-house lane',x:256,z:-112,y:.13,landing:{x:221,z:155,y:-40,yaw:Math.PI/2}}]),
+ {id:'park',name:'Upper north court',x:-84,z:-110,y:.13,landing:{x:174,z:114,y:-40,yaw:-Math.PI/2}},
+ {id:'study',name:'Study-house lane',x:256,z:-112,y:.13,landing:{x:223,z:155,y:-40,yaw:Math.PI/2}}]),
  exhibits:Object.freeze([
  {id:'perspective',name:'One triangle, several depths',x:157.63,z:125,y:-40},
  {id:'tessellation',name:'Edges that agree',x:216.69,z:87,y:-40},
  {id:'loop',name:'Can every flight rise?',x:182,z:172,y:-46},
- {id:'reading',name:'Which hand comes first?',x:220,z:151,y:-40}])});
+ {id:'reading',name:'Which hand comes first?',x:220,z:151,y:-40},
+ {id:'clebsch',name:'Clebsch cubic · 27 straight lines',x:CLEBSCH.plinth.x,z:CLEBSCH.plinth.z+2.6,y:CLEBSCH.plinth.floorY}])});
 const rect=(id,minX,maxX,minZ,maxZ,y=-40)=>({id,minX,maxX,minZ,maxZ,y});
 const inRect=(r,x,z,pad=0)=>x>=r.minX-pad&&x<=r.maxX+pad&&z>=r.minZ-pad&&z<=r.maxZ+pad;
 const inFloor=(r,x,z)=>insidePolygon(r.polygon,x,z)&&(!r.inner||!insidePolygon(hexagon(...r.centre,r.inner),x,z));
@@ -20,9 +23,9 @@ export const ESCHER_DEPTH_OBSTACLES=Object.freeze([
  rect('west tunnel jamb',134.1,134.65,112,113),rect('west tunnel jamb',134.1,134.65,117,118),
  ...[-1,1].map(side=>{const p=STAIR_PORTAL;return rect('Escher stair jamb',p.x+(side<0?-p.halfWidth:p.opening),p.x+(side<0?-p.opening:p.halfWidth),p.z,p.z+p.depth);}),
  rect('triangle case',150.63,164.63,104,116),rect('tile console',214.69,218.69,81,83),
- rect('loop table',180.7,185.3,163.7,168.3,-46),rect('reading desk',218,222,143,145),
+ rect('loop table',180.7,185.3,163.7,168.3,-46),rect('reading desk',CLEBSCH.plinth.x-CLEBSCH.plinth.width/2,CLEBSCH.plinth.x+CLEBSCH.plinth.width/2,CLEBSCH.plinth.z-CLEBSCH.plinth.depth/2,CLEBSCH.plinth.z+CLEBSCH.plinth.depth/2,CLEBSCH.plinth.floorY),
  rect('tessellation screen',208.6,224.8,69.7,70.05),
- rect('court sculpture',195,199,113,117),rect('Möbius plinth',221.5,226.5,152.5,157.5),rect('trefoil plinth',209,213,150,154),
+ rect('court sculpture',195,199,113,117),rect('Möbius plinth',ESCHER_MOBIUS_PLINTH.x-2.5,ESCHER_MOBIUS_PLINTH.x+2.5,ESCHER_MOBIUS_PLINTH.z-2.5,ESCHER_MOBIUS_PLINTH.z+2.5),rect('trefoil plinth',209,213,150,154),
  ...CLOISTER_GALLERIES.filter(r=>r.inner).flatMap(r=>{const p=hexagon(...r.centre,r.inner);return p.flatMap((a,i)=>{const b=p[(i+1)%6];return[0,1/3,2/3].flatMap(t=>[-40,-34].map(y=>{const x=a[0]+(b[0]-a[0])*t,z=a[1]+(b[1]-a[1])*t;return rect('arcade pier',x-.19,x+.19,z-.19,z+.19,y);}));});})]);
 function stairHeight(s,z){const t=Math.max(0,Math.min(s.steps,Math.ceil((z-s.minZ)/(s.maxZ-s.minZ)*s.steps-1e-9)));return s.top+(s.bottom-s.top)*t/s.steps;}
 function floorCandidates(x,z){

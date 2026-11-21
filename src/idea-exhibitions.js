@@ -3,7 +3,7 @@
  * walkable interpretation, not an unlicensed reproduction.
  */
 import {QUARTER_ARTISTS} from './artist-quarter-data.js?v=six-gate-city-20261121';
-import {DE_CHIRICO_COPY,DE_CHIRICO_SOURCE,buildDeChiricoExhibit} from './de-chirico-exhibit.js?v=city-night-20261117';
+import {DE_CHIRICO_COPY,DE_CHIRICO_SOURCE,buildDeChiricoExhibit} from './de-chirico-exhibit.js?v=night-garden-20261121';
 
 const byArtist=id=>QUARTER_ARTISTS.find(a=>a.id===id);
 export const IDEA_EXHIBITIONS=[
@@ -71,7 +71,9 @@ export function installIdeaExhibitions(M,T){
  document.querySelector('.welcome-secondary')?.append(launch);
  document.querySelector('.map-directions')?.append(map);
 
- const old={startExtra:M.startExtra,targetInfo:M.city.targetInfo,showExtra:M.showExtra};
+ const old={startExtra:M.startExtra,targetInfo:M.city.targetInfo,showExtra:M.showExtra,canStand:M.city.canStand};let collisionReleased=false;
+ const exhibitCanStand=(x,z,...args)=>(collisionReleased||exhibit.canStand(x,z,Number.isFinite(M.player?.y)?M.player.y-(M.eye??1.8):.13))&&(old.canStand?.call(M.city,x,z,...args)??true);
+ M.city.canStand=exhibitCanStand;
  const navigate=id=>{
   const item=IDEA_EXHIBITIONS.find(e=>e.id===id);
   if(!item)return false;
@@ -135,8 +137,10 @@ export function installIdeaExhibitions(M,T){
  if(query.get('arrival')==='ideas-gallery')open(query.get('theme'));
  if(query.get('arrival')==='philosophy-art')navigate('philosophy');
  return {exhibit,open,reflect,navigate,refresh,dispose(){
+  collisionReleased=true;
   launch.remove();map.remove();dialog.remove();
   for(const target of exhibit.targets){const i=M.city.targets.indexOf(target);if(i>=0)M.city.targets.splice(i,1);}
   exhibit.dispose();
+  if(M.city.canStand===exhibitCanStand)M.city.canStand=old.canStand;
  }};
 }

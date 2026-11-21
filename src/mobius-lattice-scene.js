@@ -1,0 +1,13 @@
+import {MOBIUS_LATTICE as C,defaultMobiusLattice,mobiusLatticePoint} from './mobius-lattice-model.js';
+export function buildMobiusLattice(T,{scale=.90,centreY=1.85,baseY=0,yaw=0}={}){
+ if(![scale,centreY,baseY,yaw].every(Number.isFinite)||scale<=0||centreY<=baseY)throw Error('Use a finite supported lattice placement');
+ const group=new T.Group(),body=new T.Group(),owned=new Set(),own=r=>(owned.add(r),r),data=defaultMobiusLattice();group.name='Möbius · open ivory lattice, one continuous half-twist';group.userData.mobiusLattice=true;body.position.y=centreY;body.rotation.y=yaw;body.scale.setScalar(scale);group.add(body);
+ const geometry=own(new T.BufferGeometry());geometry.setAttribute('position',new T.Float32BufferAttribute(data.positions,3));geometry.setIndex(data.indices);geometry.computeVertexNormals();geometry.computeBoundingSphere();const ivory=own(new T.MeshStandardMaterial({color:0xe5d9bb,roughness:.47,metalness:.12,emissive:0x282215,emissiveIntensity:.10})),mesh=new T.Mesh(geometry,ivory);mesh.name='Four extruded longitudinal rails and 36 open rectangular rungs';body.add(mesh);group.updateMatrixWorld(true);
+ const supportMaterial=own(new T.MeshStandardMaterial({color:0x9b8356,roughness:.43,metalness:.52})),supportGeometry=own(new T.CylinderGeometry(.052,.076,1,12)),supports=new T.InstancedMesh(supportGeometry,supportMaterial,2),stamp=new T.Object3D(),contacts=[];supports.name='Two small stems meeting real lower lattice beams';group.add(supports);
+ for(const[i,u]of[3*Math.PI/4,7*Math.PI/4].entries()){
+  const candidates=C.rails.map(v=>body.localToWorld(new T.Vector3(...mobiusLatticePoint(u,v*C.halfWidth,-C.depth/2)))).sort((a,b)=>a.y-b.y);let contact=null;
+  for(const p of candidates){for(const[dx,dz]of[[0,0],[.006,0],[-.006,0],[0,.006],[0,-.006]]){const x=p.x+dx,z=p.z+dz,hits=new T.Raycaster(new T.Vector3(x,baseY+.001,z),new T.Vector3(0,1,0),0,centreY-baseY+3).intersectObject(mesh,true);if(hits.length&&hits[0].point.y>baseY+.05){contact=hits[0].point.clone();break;}}if(contact)break;}
+  if(!contact)throw Error('No actual lattice beam supports its stem');const h=contact.y-baseY;stamp.position.set(contact.x,baseY+h/2,contact.z);stamp.scale.set(1,h,1);stamp.updateMatrix();supports.setMatrixAt(i,stamp.matrix);contacts.push(contact.toArray());
+ }
+ supports.instanceMatrix.needsUpdate=true;supports.computeBoundingSphere();let disposed=false;return{group,body,mesh,supports,contacts,data,contract:C,counts:{draws:2,triangles:data.indices.length/3+2*48},dispose(){if(disposed)return;disposed=true;group.removeFromParent();supports.dispose?.();for(const r of owned)r.dispose();group.clear();}};
+}

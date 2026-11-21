@@ -1,4 +1,4 @@
-import {buildEscherPavilion} from './escher-pavilion-scene.js?v=six-gate-city-20261121';
+import {buildEscherPavilion} from './escher-pavilion-scene.js?v=night-garden-20261121';
 import {PRINT_STUDIES} from './escher-print-studies.js?v=cloister-20261120';
 import {installPerspectiveActivity} from './escher-perspective.js?v=academy-escher-20261120';
 export const ESCHER_WORKS=[

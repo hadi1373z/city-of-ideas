@@ -1,6 +1,6 @@
 // An original sculptural reservoir under the gallery's existing central volcano.
 // All dimensions use the library's ordinary +Y-up city frame.
-import {BABEL_READING_BOOK} from './babel-reading-book-model.js';
+import {BABEL_READING_BOOK} from './babel-reading-book-model.js?v=night-garden-20261121';
 const tipY=BABEL_READING_BOOK.contact.y;
 export const BABEL_THERMAL_VAULT=Object.freeze({mouthRadius:21,mouthY:-.55,tipY,innerRadius:20.86,innerTipY:tipY+.025,fluidRadius:20.5,fluidTopY:-.78,fluidTipY:tipY+.10,collarBottomY:-3.3,segments:160,meridians:10});
 export function thermalVaultHeightAt(radius){const c=BABEL_THERMAL_VAULT;return Number.isFinite(radius)&&radius>=0&&radius<=c.mouthRadius?c.tipY+(c.mouthY-c.tipY)*radius/c.mouthRadius:null;}

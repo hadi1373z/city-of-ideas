@@ -1,3 +1,4 @@
+import {NIGHT_PARK} from '../src/night-park-model.js';
 import assert from 'node:assert/strict';
 import * as T from '../src/city-source-assets/home-tools/vendor/three.module.js';
 import {installCityDiscoveries} from '../src/city-discoveries.js';
@@ -30,13 +31,13 @@ const events=new Map();globalThis.addEventListener=(k,fn)=>events.set(k,fn);glob
 const values=new Map([['private-note','untouched']]);globalThis.localStorage={getItem:k=>values.get(k)||null,setItem:(k,v)=>values.set(k,v)};
 const memory=createVisitMemory(localStorage),origin={x:-2401,y:.13,z:35},house=buildNativeRamseyHouse(T,origin),player={x:0,z:0,y:1.93};
 let paused=0,destination=null,noteOpened=null;
-const M={player,mode:'city',scene:new T.Scene(),city:{PARK:{x:0,z:-330,scale:.65},targets:[],targetInfo:()=>({kind:'previous'}),update(){}},clearMovement(){},arrive:p=>Object.assign(player,p),quickStart:d=>destination=d,status(){},showExtra:()=>99,questionWalk:{state:{active:false},open(){}},homeBridge:{focusRoom(){}},visitorMemory:{store:memory,discover:id=>memory.discover(id),open:id=>noteOpened=id},ramseyRoom:{house,pause(){paused++;},visit:()=>Object.assign(player,house.entry)}};
+const M={player,eye:1.8,mode:'city',scene:new T.Scene(),city:{PARK:{...NIGHT_PARK},targets:[],targetInfo:()=>({kind:'previous'}),update(){}},clearMovement(){},arrive:p=>Object.assign(player,p,{y:p.y+1.8}),quickStart:d=>destination=d,status(){},showExtra:()=>99,questionWalk:{state:{active:false},open(){}},homeBridge:{focusRoom(){}},visitorMemory:{store:memory,discover:id=>memory.discover(id),open:id=>noteOpened=id},ramseyRoom:{house,pause(){paused++;},visit:()=>Object.assign(player,house.entry)}};
 const escher={group:new T.Group(),entry:{x:150,z:116.4},passageOpen:false};globalThis.window={CITY_I18N:{lang:'en'},CITY_ESCHER:escher,CITY_GRAVEYARD:{returnEntry:{x:-2345,z:0,y:.13,yaw:-Math.PI/2}}};
 const api=installCityDiscoveries(M,T),dialog=document.querySelector('#city-discoveries'),t=DISCOVERY_COPY.en;
 const button=(text)=>{const scan=n=>{if(n.tagName==='button'&&n.textContent===text)return n;for(const c of n.children){const found=scan(c);if(found)return found;}};const n=scan(dialog);assert(n,'Missing button: '+text);return n;};
 const click=text=>{const b=button(text);assert(!b.disabled);b.onclick();};
 try{
- M.city.update(player,1,'city');assert(!M.city.targets.includes(api.boats.group),'Unreleased boats must not steal interactions invisibly');assert(!M.city.targets.includes(api.clue.group),'A sealed clue is not an interaction target');
+ M.city.update(player,1,'city');assert(!M.city.targets.includes(api.boats.group),'Unreleased boats must not steal interactions invisibly');assert(!escher.group.children.some(o=>o.userData.sixthGuestClue),'The removed Escher sheet must not be built or mounted');
  assert.equal(document.querySelector('#city-discoveries-welcome').parent,welcome,'Welcome entry must stay outside the collapsed places menu');
  api.open();assert(dialog.open);click(t.begin);assert(api.trial.state.active);
  dialog.close();const savedTrial=api.trial.state;for(let i=0;i<20;i++)M.city.update(player,2+i,'city');assert.equal(document.querySelector('#city-discoveries-tracker'),null,'An active saved investigation must never create a floating continue notification');document.querySelector('#city-discoveries-open').onclick();click(t.resume);assert.deepEqual(api.trial.state,savedTrial,'Discoveries retains the same resumable investigation');dialog.close();M.showExtra({kind:'sixth-guest-clue'});assert(!dialog.open,'Cannot read a hidden clue from another place');
@@ -47,13 +48,13 @@ try{
  click(t.useClue);click(t.predict[0]);assert.equal(api.trial.state.count,6);assert.equal(memory.state.questions[0].history[0].answer,t.predict[0]);
  const summaries=[];const findSummaries=node=>{if(node.tagName==='summary')summaries.push(node);for(const child of node.children)findSummaries(child);};findSummaries(dialog);assert(summaries.length>=1);for(const summary of summaries)assert.equal(summary.tabIndex,0,'Expandable explanations must join controller navigation');
  dialog.querySelector('[data-point="1"]').onclick();for(const i of[3,5])dialog.querySelector('[data-trial="point-'+i+'"]').onclick();click(t.check);assert(api.trial.state.witness);assert(memory.has('sixth-guest-witness'));
- click(t.visitPark);assert.equal(player.x,window.CITY_GRAVEYARD.returnEntry.x,'Leave the separate world through its return door');
+ click(t.visitPark);assert.equal(player.x,NIGHT_PARK.x,'Visit the original park on the night face without taking an upper return door');assert(api.context().fountain);
  Object.assign(player,{x:0,z:0});api.open('route');click(t.visitPark);assert(api.context().fountain);assert(player.pitch<0,'Look down toward boats, rather than up toward the crane flight');api.open('route');click(t.answers[1]);click(t.release);assert(api.trial.state.complete);
  const history=memory.state.questions.find(q=>q.id==='sixth-guest').history;assert.equal(history.length,2);assert.equal(history[0].answer,t.predict[0]);assert.equal(history[1].answer,t.answers[1]);assert(history[1].reason.length>10);
- M.city.update(player,3,'city');assert(api.boats.group.visible);assert(M.city.targets.includes(api.boats.group));dialog.close();assert(house.study.acquaintanceMap.group.visible);
+ M.city.update(player,3,'city');assert(api.boats.group.visible);assert(M.city.targets.includes(api.boats.group));player.y-=4;M.city.update(player,3.1,'city');assert(!api.boats.group.visible&&!api.context().fountain,'A different height cannot activate the park fountain');player.y+=4;M.city.update(player,3.2,'city');assert(api.boats.group.visible);dialog.close();assert(house.study.acquaintanceMap.group.visible);
  api.open('route');click(t.notebook);assert.equal(noteOpened,'sixth-guest');assert.equal(values.get('private-note'),'untouched');
  window.CITY_I18N.lang='fa';events.get('city-language')();api.open();assert.equal(dialog.dir,'rtl');assert(dialog.textContent.includes(DISCOVERY_COPY.fa.sixth));
  assert.equal(M.showExtra({kind:'unrelated'}),99);assert.equal(M.city.targetInfo({}).kind,'previous');
 }finally{events.get('pagehide')?.();house.dispose();}
-assert.equal(M.city.targets.length,0);assert.equal(api.boats.group.children.length,0);assert.equal(api.clue.group.children.length,0);
+assert.equal(M.city.targets.length,0);assert.equal(api.boats.group.children.length,0);assert(!escher.group.children.some(o=>o.userData.sixthGuestClue));
 console.log('PASS live controller buttons: hidden-clue and world-door gates, table/audio separation, prediction/evidence/reflection, notebook history, private storage, FA direction and owned teardown');

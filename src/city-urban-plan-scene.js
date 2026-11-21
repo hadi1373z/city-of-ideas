@@ -1,9 +1,10 @@
-import {buildSixGateGarden} from './six-gate-garden-scene.js';
-import {SIXFOLD_CITY} from './city-urban-plan-model.js?v=six-gate-city-20261121';
+import {buildGardenPaving} from './six-gate-garden-paving.js?v=night-garden-20261121';
+import {buildSixGateGarden} from './six-gate-garden-scene.js?v=night-garden-20261121';
+import {SIXFOLD_CITY} from './city-urban-plan-model.js?v=night-garden-20261121';
 import {cutDescentGround} from './escher-descent-model.js?v=wall-rails-20261121';
 import {createParkGrassMaterial,COURT_GRASS_HEX,isCoastalLawnCell,courtGrassIndex} from './city-lawn-palette.js?v=makers-passages-20261118';
-import {URBAN_COURTS,HONEYCOMB_CITY,urbanPlanting,urbanRoutes,segmentDistance,urbanLawnCells} from './city-urban-plan-model.js?v=six-gate-city-20261121';
-import {INHABITED_BLOCKS} from './city-hex-layout.js?v=six-gate-city-20261121';
+import {URBAN_COURTS,HONEYCOMB_CITY,urbanPlanting,urbanRoutes,segmentDistance,urbanLawnCells} from './city-urban-plan-model.js?v=night-garden-20261121';
+import {INHABITED_BLOCKS} from './city-hex-layout.js?v=night-garden-20261121';
 export function buildCityUrbanPlan(T,{naturalTrees=globalThis.window?.buildNaturalCityTrees,parkGrass=null}={}){
  const group=new T.Group();group.name='Honeycomb city · gated mathematical courts and connected learning houses';const owned=new Set(),own=x=>(owned.add(x),x),box=own(new T.BoxGeometry(1,1,1)),stamp=new T.Object3D(),batches=new Map(),colliders=[],treePositions=urbanPlanting().filter(p=>HONEYCOMB_CITY.walls.every(w=>segmentDistance(p.x,p.z,w.a,w.b)>1.7)),routes=urbanRoutes();
  const mats={paving:own(new T.MeshLambertMaterial({color:0xc5baa1})),edge:own(new T.MeshLambertMaterial({color:0xaaa58d})),wood:own(new T.MeshLambertMaterial({color:0x795d45})),leaf:own(new T.MeshLambertMaterial({color:0x667d5d}))};
@@ -36,7 +37,7 @@ export function buildCityUrbanPlan(T,{naturalTrees=globalThis.window?.buildNatur
  // source-clipped gateway open. Copings and feet share one instance batch.
  for(const[material,cap]of[[wallMaterial,false],[capMaterial,true]]){const mesh=new T.InstancedMesh(box,material,HONEYCOMB_CITY.walls.length*(cap?2:1));mesh.name=cap?'Continuous warm-stone honeycomb copings and flush feet':'Real gated honeycomb court walls';HONEYCOMB_CITY.walls.forEach((w,i)=>{const dx=w.b[0]-w.a[0],dz=w.b[1]-w.a[1],length=Math.hypot(dx,dz);stamp.position.set((w.a[0]+w.b[0])/2,cap?w.height+.055:w.height/2,(w.a[1]+w.b[1])/2);stamp.rotation.set(0,Math.atan2(dx,dz),0);stamp.scale.set(cap?.95:w.thickness,cap?.11:w.height,length);stamp.updateMatrix();mesh.setMatrixAt(i,stamp.matrix);if(cap){stamp.position.y=.025;stamp.scale.set(2.4,.05,length);stamp.updateMatrix();mesh.setMatrixAt(i+HONEYCOMB_CITY.walls.length,stamp.matrix);}});mesh.instanceMatrix.needsUpdate=true;mesh.computeBoundingSphere();group.add(mesh);}
  stamp.rotation.set(0,0,0);
- const garden=SIXFOLD_CITY?buildSixGateGarden(T):null;if(garden)group.add(garden.group);
+ const garden=SIXFOLD_CITY?buildSixGateGarden(T,{paving:false}):null;let paving=garden?buildGardenPaving(T):null;if(garden){group.add(garden.group);garden.group.add(paving.group);}
  if(naturalTrees)naturalTrees(T,group,treePositions);
- return{group,lawn,garden,treePositions,colliders,walls:HONEYCOMB_CITY.walls,canStand:(x,z,feet=.13)=>(!garden||Math.abs(feet-.13)>.4||garden.canStand(x,z))&&!treePositions.some(p=>Math.hypot(x-p.x,z-p.z)<.5)&&!colliders.some(p=>Math.abs(x-p.x)<p.w/2+.25&&Math.abs(z-p.z)<p.d/2+.25)&&!HONEYCOMB_CITY.walls.some(w=>segmentDistance(x,z,w.a,w.b)<w.thickness/2+.25),dispose(){garden?.dispose();group.removeFromParent();group.traverse(o=>{if(o.geometry)owned.add(o.geometry);for(const m of Array.isArray(o.material)?o.material:o.material?[o.material]:[])owned.add(m);if(o.isInstancedMesh)o.dispose?.();});for(const r of owned)r.dispose();group.clear();}};
+ return{group,lawn,garden,get paving(){return paving;},setTreeBeds(beds){if(!garden)return null;const next=buildGardenPaving(T,{treeBeds:beds});paving?.dispose();paving=next;garden.group.add(paving.group);return paving;},treePositions,colliders,walls:HONEYCOMB_CITY.walls,canStand:(x,z,feet=.13)=>(!garden||Math.abs(feet-.13)>.4||garden.canStand(x,z))&&!treePositions.some(p=>Math.hypot(x-p.x,z-p.z)<.5)&&!colliders.some(p=>Math.abs(x-p.x)<p.w/2+.25&&Math.abs(z-p.z)<p.d/2+.25)&&!HONEYCOMB_CITY.walls.some(w=>segmentDistance(x,z,w.a,w.b)<w.thickness/2+.25),dispose(){paving?.dispose();garden?.dispose();group.removeFromParent();group.traverse(o=>{if(o.geometry)owned.add(o.geometry);for(const m of Array.isArray(o.material)?o.material:o.material?[o.material]:[])owned.add(m);if(o.isInstancedMesh)o.dispose?.();});for(const r of owned)r.dispose();group.clear();}};
 }

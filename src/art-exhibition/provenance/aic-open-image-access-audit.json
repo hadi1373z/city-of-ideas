@@ -1,0 +1,13 @@
+{
+  "work_id": "aic-29385",
+  "title": "Sunset and Moonrise",
+  "source_url": "https://www.artic.edu/iiif/2/5cd5edc1-be1a-486c-9210-468da7668939/full/843,/0/default.jpg",
+  "museum_public_domain_flag": true,
+  "documentation": "https://api.artic.edu/docs/#images",
+  "http_status": 403,
+  "content_type": "text/html; charset=UTF-8",
+  "bytes": 5743,
+  "genuine_jpeg": false,
+  "policy": "Single documented request; no retry or bypass on denial.",
+  "checked_on": "2026-11-21"
+}

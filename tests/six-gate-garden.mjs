@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import * as T from '../src/city-source-assets/home-tools/vendor/three.module.js';
-import {SIX_GATE_GARDEN as G,GARDEN_GATES,GARDEN_ROUTES,GARDEN_ENTRIES,GARDEN_COLUMNS,GARDEN_FOOTPRINTS,GARDEN_TREE_CANDIDATES,GARDEN_ARCADE_BAYS,GARDEN_RETAINED_CROSSINGS,gardenTreeClear,gardenCanStand,gardenSurfaceAt,gardenWorld,gardenBayBoundary,gardenTreeBedPlan,gardenOnRoute} from '../src/six-gate-garden-model.js';
+import {SIX_GATE_GARDEN as G,GARDEN_GATES,GARDEN_ROUTES,GARDEN_ENTRIES,GARDEN_COLUMNS,GARDEN_FOOTPRINTS,GARDEN_TREE_CANDIDATES,GARDEN_ARCADE_BAYS,GARDEN_RETAINED_CROSSINGS,gardenTreeClear,gardenCanStand,gardenSurfaceAt,gardenWorld,gardenBayAngles,gardenTreeBedPlan,gardenOnRoute} from '../src/six-gate-garden-model.js';
 import {buildSixGateGarden,buildGardenTreeBeds} from '../src/six-gate-garden-scene.js';
 import {honeycombCells} from '../src/honeycomb-city-model.js';
 import {SIXFOLD_HOUSES,sixfoldHouseEntry,sixfoldWellHoles,NETWORK_PASSAGES} from '../src/sixfold-house-network-model.js';
@@ -11,9 +11,14 @@ const garden=buildSixGateGarden(T),scene=new T.Group();scene.add(garden.group);
 const canvas=()=>({getContext:()=>new Proxy({},{get:()=>()=>{}})}),source=buildTransformationHouse(T,{canvas,includeTiling:false}),sourceRoot=new T.Group();
 for(const h of SIXFOLD_HOUSES){const wrapper=new T.Group(),copy=source.group.clone(true);copy.position.x=-125;wrapper.position.set(h.x,0,h.z);wrapper.rotation.y=h.turn;wrapper.add(copy);sourceRoot.add(wrapper);}
 scene.add(sourceRoot);scene.updateMatrixWorld(true);
-assert.equal(GARDEN_GATES.length,6);assert.equal(GARDEN_ENTRIES.length,6);assert.equal(GARDEN_COLUMNS.length,132);assert.equal(garden.group.children.length,4,'Four bounded material batches, not a mesh per arch/tile');
+assert.equal(GARDEN_GATES.length,6);assert.equal(GARDEN_ENTRIES.length,6);assert.equal(GARDEN_COLUMNS.length,GARDEN_GATES.reduce((n,g)=>n+gardenBayAngles(g).length*2+4,0));assert.equal(garden.group.children.length,4,'Four bounded material batches, not a mesh per arch/tile');
 assert.equal(scene.children.filter(c=>c.userData.transformationHouse).length,0,'The garden itself never installs a duplicate tower');
 for(const g of GARDEN_GATES){const original=sixfoldHouseEntry(g.house);assert.deepEqual(g.entry,original);assert(Math.abs(Math.hypot(...g.point)-105)<1e-9);}
+const masonryBay=GARDEN_ARCADE_BAYS[0],masonryAngle=(masonryBay.a+masonryBay.b)/2;
+function throughInnerArcade(angle,height){const origin=new T.Vector3(95*Math.cos(angle),height,95*Math.sin(angle)),direction=new T.Vector3(Math.cos(angle),0,Math.sin(angle));return new T.Raycaster(origin,direction,0,8).intersectObject(garden.group,true);}
+assert(throughInnerArcade(masonryAngle,4.9).length,'A real deep stone spandrel/cornice stands above the open arch');
+assert.equal(throughInnerArcade(masonryAngle,4.25).length,0,'The clear arch remains a true aperture below its crown');
+assert(throughInnerArcade(masonryBay.a,4.5).length,'Full-height stone piers carry the cornice between adjacent arch bays');
 
 // Spatially bin the ACTUAL transformed source triangles for efficient native
 // Raycaster queries. No collider/proxy triangles replace the rendered meshes.
@@ -67,7 +72,7 @@ for(const{a,b}of retainedEdges.values()){
 }
 for(const g of GARDEN_GATES){
  const bays=GARDEN_ARCADE_BAYS.filter(b=>b.id.startsWith('garden-arcade-'+g.id+'-'));for(let i=1;i<bays.length;i++)assert.equal(bays[i-1].b,bays[i].a,'Shared arch/roof bay boundaries remain continuous');
- const midpoint=g.angle+Math.PI/6,shift=gardenBayBoundary(g,G.baysPerSector/2)-midpoint;assert(Math.abs(G.innerColumnRadius*Math.sin(shift)-4.5)<1e-9);
+ const midpoint=g.angle+Math.PI/6;for(const angle of gardenBayAngles(g))assert(Math.abs(G.innerColumnRadius*Math.sin(angle-midpoint))>G.retainedStreetWidth/2+G.columnBaseRadius+.3,'Every dense pier base clears the entire retained crossing');
 }
 assert.equal(GARDEN_RETAINED_CROSSINGS.length,6);assert(gardenCanStand(0,-100),'The reported old street conflict stays open');
 // Complete each unchanged source doorway at body width, not only the outside
@@ -87,7 +92,7 @@ for(const h of SIXFOLD_HOUSES)assert(!gardenTreeClear(h.x+27,h.z,4),'Crown clear
 for(const p of GARDEN_TREE_CANDIDATES)assert(gardenTreeClear(p.x,p.z,p.crownRadius));assert(GARDEN_TREE_CANDIDATES.length>=6);
 for(const route of GARDEN_ROUTES)for(const p of route.points.filter((_,i)=>i%8===0))assert(!gardenTreeClear(...p,3.2),'Planting cannot cover a public route');
 assert(GARDEN_FOOTPRINTS.every(p=>p.points.length>=4));
-let allocated=0;garden.group.traverse(o=>{if(o.isMesh)allocated+=o.geometry.attributes.position.count/3;});assert(allocated<65000,'Garden architecture has a bounded triangle budget');
+let allocated=0;garden.group.traverse(o=>{if(o.isMesh)allocated+=o.geometry.attributes.position.count/3;});assert(allocated<130000,'Deeper dense stone architecture retains a bounded triangle budget');
 const sourceResources=new Set();source.group.traverse(o=>{if(o.geometry)sourceResources.add(o.geometry);for(const m of Array.isArray(o.material)?o.material:o.material?[o.material]:[])sourceResources.add(m);});let borrowedDisposed=0;for(const r of sourceResources)r.addEventListener('dispose',()=>borrowedDisposed++);
 // Existing-tree flower dressing is optional, separate and entirely inside a
 // clearance circle supplied by the real-tree owner. It cannot reposition trees

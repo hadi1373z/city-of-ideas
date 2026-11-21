@@ -1,0 +1,7 @@
+{
+  "checked_on": "2026-11-21",
+  "metadata_queries_completed": 21,
+  "stopped_http_status": 429,
+  "stopped_work_id": "aic-158410",
+  "policy": "Stopped further Commons API queries after rate limit; no proxy, retry or alternate endpoint used to bypass it."
+}

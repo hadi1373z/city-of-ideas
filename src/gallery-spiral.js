@@ -40,12 +40,32 @@ g.createGallerySpiral=function(T){
   for(let floor=0;floor<4;floor++)for(let i=0;i<steps;i++){
    const x0=startX-i*tread,x1=x0-tread,y0=base+floor*spacing+i*rise,y=y0+rise;
    quad([x0,y,z0],[x1,y,z0],[x1,y,z1],[x0,y,z1]);
-   quad([x0,y0,z0],[x0,y,z0],[x0,y,z1],[x0,y0,z1]);
-   quad([x0,y0-.18,z0],[x0,y,z0],[x1,y,z0],[x1,y0-.18,z0]);
-   quad([x1,y0-.18,z1],[x1,y,z1],[x0,y,z1],[x0,y0-.18,z1]);
-   quad([x1,y0-.18,z0],[x1,y0-.18,z1],[x0,y0-.18,z1],[x0,y0-.18,z0]);
+   quad([x0,i===0?y0-.18:y0,z0],[x0,y,z0],[x0,y,z1],[x0,i===0?y0-.18:y0,z1]);
+   quad([x1,y0-.18,z0],[x1,y,z0],[x0,y,z0],[x0,y0-.18,z0]);
+   quad([x0,y0-.18,z1],[x0,y,z1],[x1,y,z1],[x1,y0-.18,z1]);
+   quad([x1,y0-.18,z0],[x0,y0-.18,z0],[x0,y0-.18,z1],[x1,y0-.18,z1]);
+   // The stepped underside also needs its vertical returns. Without these
+   // faces each lower panel is visibly disconnected when viewed from below.
+   const backTop=i===steps-1?y:y-.18;
+   quad([x1,y0-.18,z0],[x1,y0-.18,z1],[x1,backTop,z1],[x1,backTop,z0]);
   }
-  const geometry=new T.BufferGeometry();geometry.setAttribute('position',new T.Float32BufferAttribute(positions,3));geometry.setIndex(indices);geometry.computeVertexNormals();owned.push(geometry);const ramp=new T.Mesh(geometry,surface);ramp.name='Gallery staircase · 160 real treads and vertical risers';ramp.userData={galleryStairs:true,stepCount:160,headWidth,width,widthRatio:1,snakeDrawing:!!drawing,alongSnake:true};parent.add(ramp);
+  // The floor cuts deliberately exceed the tread footprint by80mm. Complete
+  // that construction joint with real, flush stone; never reduce the clear
+  // stair width or change the existing steps/route/headroom opening.
+  function joinBox(x0,x1,a,b,y){if(x1-x0<1e-8||b-a<1e-8)return;const bottom=y-base;
+   quad([x1,y,a],[x0,y,a],[x0,y,b],[x1,y,b]);
+   quad([x0,bottom,a],[x1,bottom,a],[x1,bottom,b],[x0,bottom,b]);
+   quad([x1,bottom,a],[x1,y,a],[x1,y,b],[x1,bottom,b]);
+   quad([x0,bottom,a],[x0,bottom,b],[x0,y,b],[x0,y,a]);
+   quad([x0,bottom,a],[x0,y,a],[x1,y,a],[x1,bottom,a]);
+   quad([x1,bottom,b],[x1,y,b],[x0,y,b],[x0,bottom,b]);
+  }
+  for(let floor=0;floor<=4;floor++){
+   const b=floor===0?(g.CITY_BABEL_LAYOUT?.opening??opening):floor===4?{...opening,minZ:roofOpeningStart}:opening,y=base+floor*spacing,left=43-b.maxZ,right=43-b.minZ,a=b.minX-centerX,c=b.maxX-centerX,clearEnd=floor===4?startX-roofOpeningStart:startX;
+   joinBox(left,endX,a,c,y);if(floor<4)joinBox(startX,right,a,c,y);
+   joinBox(endX,clearEnd,a,z0,y);joinBox(endX,clearEnd,z1,c,y);
+  }
+  const geometry=new T.BufferGeometry();geometry.setAttribute('position',new T.Float32BufferAttribute(positions,3));geometry.setIndex(indices);geometry.computeVertexNormals();owned.push(geometry);const ramp=new T.Mesh(geometry,surface);ramp.name='Gallery staircase · 160 real treads and vertical risers';ramp.userData={galleryStairs:true,stepCount:160,headWidth,width,widthRatio:1,snakeDrawing:!!drawing,alongSnake:true,landingJoins:5,closedSoffit:true};parent.add(ramp);
   function beam(a,b,r,mat,name){const delta=new T.Vector3().subVectors(b,a),geo=new T.CylinderGeometry(r,r,delta.length(),8);owned.push(geo);const mesh=new T.Mesh(geo,mat);mesh.position.copy(a).add(b).multiplyScalar(.5);mesh.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),delta.normalize());mesh.name=name;parent.add(mesh);}
   const vector=(x,y,z)=>new T.Vector3(x,y,z);
   for(let floor=0;floor<4;floor++){

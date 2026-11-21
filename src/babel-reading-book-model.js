@@ -1,4 +1,4 @@
-import {BABEL} from './babel-library-model.js?v=two-faces2';
+import {BABEL} from './babel-library-model.js?v=night-garden-20261121';
 
 // The existing open book and the reservoir share one physical contact point.
 const offset=.255,leafTilt=.10,leafThickness=.035,leafY=BABEL.base+.805;

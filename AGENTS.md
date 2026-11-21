@@ -414,3 +414,104 @@ now share the formerly vacant hex(-1,3), centre(79.67433714816835,414), with
 doors facing their shared court and an eastern street connection. Keep their
 original content, storage IDs and paper-boat landing; Mirzakhani stays archived.
 See docs/ESCHER-DEPTH.md and docs/ORIGAMI-HOUSE.md for the relocation authority.
+
+The garden now follows the denser sketch architecture: real stone arches,
+spandrels and six hipped gateways surround a broad geometric stone promenade.
+Keep visible paving separate from the retained navigation/planting graph;
+urbanPavedRoutes is the map authority. All455 street-tree positions and170
+planted beds remain fixed. The six pattern-house roofs are genuine flat stone
+tiling fields with a small original glazed lantern, shared by near/far views.
+The user cancelled the central Gallery glass-roof request: keep that roof solid.
+Read docs/SIX-GATE-GARDEN-PAVING.md and docs/SIXFOLD-GARDEN-ROOFS.md.
+
+The geometry museum's formerly empty dependency-table plinth at(220,144)
+now displays an original grey Clebsch cubic with27 distinct coloured straight
+lines and three Eckardt points. Keep exact plane/cubic residuals, bounds,
+proximity gates and owned disposal in docs/CLEBSCH-CUBIC.md and its tests.
+Both existing Mobius sites now show the same ant-free open ivory lattice,
+with a real continuous half-twist and separated figure-eight crossing.
+The former ribbon/ant math is retained only behind explicit legacyMobius;
+do not restore ants or ant controls in the default scenes. Read
+docs/MOBIUS-LATTICE.md. This supersedes the earlier live-ant direction.
+
+The user removed the freestanding five-node graph sheet from Escher's surface
+pavilion. Do not build, mount or target that sheet. Preserve the optional
+Discoveries reader diagram, separate Ramsey table, saved trial and boats.
+
+The user then explicitly removed the single bare plaza tree at(69.5,-25).
+Keep its trunk, foliage and campus collider absent, while consuming its original
+random sequence so all neighbouring trees keep their exact geometry/poses.
+This one-tree exception does not authorize clearing the planted tree gardens.
+
+Ideas Park now belongs to the lower night face, logical centre(-2200,-430),
+with its complete620 trees/1240 crown instances and118 people preserved.
+Read docs/NIGHT-IDEAS-PARK.md. Keep its twelve visible lanterns, four pooled
+lights, supported meadow approach, reversed live pond and lower map together.
+The upper five former park cells are vacant proposal sites. Thirty-one of the
+first128 lower home parcels shift deterministically to clear the full park;
+all capacity, content and private home identities remain. Do not restore an
+upper park marker or blanket-clear the lower residential grounds.
+
+The observatory reader now has12 genuine nebula entries and six translated
+constellation titles, with Persian/English/German names. Preserve the real
+catalogue sky, chart directions and camera; this reading list does not add
+invented nebula coordinates. Read docs/NIGHT-NEBULAE.md.
+
+Gallery stair joints now contain flush80mm support aprons within the existing
+cuts, and outward-facing closed soffits/end returns. Keep all160 original
+treads and Babel interfaces fixed; tests/gallery-stair-joins.mjs checks actual
+combined geometry, support ownership and headroom.
+
+The ant-free Escher Mobius plinth is centred at(218.5,155), clear of the real
+arcade pier. Its study arrival is(223,155) at-40m. Keep these shared placements
+separate from the unchanged trefoil and Clebsch displays.
+
+The separate owner-private mathematical-paper management site is in
+../../services/math-paper-library, project appgprj_6b0126857af48191a850927d76978854.
+Its dedicated D1 database contains35 seeded source records and four collections.
+It manages metadata, categories and ordering, with an explicit public JSON
+export; it does not automatically publish changes to the GitHub city monitors.
+Preserve its owner-only audience and the existing guestbook separately.
+
+The Ramsey conversation now has actual departure choreography after the second
+recording's genuine ended event. Read docs/RAMSEY-DEPARTURE.md. Keep all six
+original actors/voices and complete recordings; seeking the timer to600 alone
+must not arm departure. Their chair meshes/collisions move together and the
+real doorway route completes in about32seconds. Replay/seek restores the seats;
+modal, hidden-page and outside-room states pause this visit-local sequence.
+
+The approved De Chirico study is now one original installation, The Inhabited
+Mind, at the existing(226,.13,202) site. Read docs/DE-CHIRICO-INHABITED-MIND.md.
+Keep its two faceless ivory articulated figures, four distinct arched miniature
+towers, four banded square columns, flush plinth, clear visitor loop, frontal
+viewpoint and low side plaque. Preserve the philosophy exhibition/artist/artwork
+IDs, original reference credits and other artworks. This is original geometry,
+not a reproduction of the painting; do not add another copy or obstruct its view.
+
+Escher's rear pavilion doorway is now physically centred on X239.023011444505.
+The enclosed level dogleg runs to Z109.8, west to X228, then to the unchanged
+stair entry(228,105.5). Keep every320 tread, shaft boundary, first-flight cut,
+height and reversible controller fixed. escher-pavilion-model.js shares the real
+concave corridor/annex footprint and wall opening; do not replace it with a
+freestanding arch or a rectangular map reserve. All four credited prints remain
+visible, Waterfall fits the actual short corridor sidewall and retains its gated
+target, and the route panel mounts beside the actual rear-wall opening. The
+shutters are at the wall plane Z114.1843; never restore the former freestanding
+arch/gate six metres inside the room. Read docs/ESCHER-DEPTH.md; combined body/floor/
+headroom and print rays are in tests/escher-rear-portal.mjs.
+
+The existing upper street forest now has an immutable placement authority in
+accepted-street-trees.js, recovered from commit5913a80:455 exact sites in the
+accepted renderer/RNG order. Park relocation and honeycomb regeneration must
+not regenerate or refill that existing forest. Preserve all170 existing tree
+beds, their positions/radii/order, and every retained leaf/trunk instance pose.
+The vacated upper park cells stay open grass pending the user's separate sketch.
+Run tests/street-tree-preservation.mjs with the actual current wall/roof/path
+authority, including the joined Escher rear dogleg. No private data is involved.
+
+Night movement now uses the full physical565m lower disk at all three native,
+district and former-Graveyard gates. Never restore the old remote rectangle or
+make lower walking depend on restored private-home bounds. Preserve every
+existing collider and the outer ocean rejection. tests/night-park.mjs drives
+the actual classic city, district, Graveyard and cylinder chain through1190
+held-input steps; testing the cylinder with a permissive delegate is insufficient.

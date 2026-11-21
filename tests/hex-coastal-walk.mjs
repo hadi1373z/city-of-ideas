@@ -5,13 +5,20 @@ import {HEX_COAST_WALK,COAST_PROMENADE_WALK,ISLAND_ROUTES,SHORE,CITY_ISLAND} fro
 import {COAST_PATHS,HOUSE_ORIGAMI} from '../src/origami-house-math.js';
 import {HONEYCOMB_CITY,urbanRoutes} from '../src/city-urban-plan-model.js';
 import {buildCityCoast} from '../src/coastal-city-scene.js';
-import {COAST_WALK} from '../src/coastal-map-data.js';
+import {COAST_WALK,COAST_GARDEN_WALK} from '../src/coastal-map-data.js';
+import {GARDEN_ROUTES} from '../src/six-gate-garden-model.js';
 const near=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1])<1e-6;
 for(let i=1;i<HEX_COAST_WALK.length;i++){const a=HEX_COAST_WALK[i-1],b=HEX_COAST_WALK[i];assert([...HONEYCOMB_CITY.edges,...HONEYCOMB_CITY.coastLinks].some(e=>near(e.points[0],a)&&near(e.points[1],b)||near(e.points[1],a)&&near(e.points[0],b)),'The ocean walk follows an actual generated hex edge or the existing east coast gate');}
 assert.equal(ISLAND_ROUTES.length,1);const dock=ISLAND_ROUTES[0];assert.equal(dock.id,'paper-boat-dock');assert.equal(dock.width,6);assert(Math.hypot(dock.points[1][0]-dock.points[0][0],dock.points[1][1]-dock.points[0][1])<30,'Only a short beach approach remains, never a long cross-cell road');assert.deepEqual(dock.points.at(-1),[SHORE.x,SHORE.z]);assert.deepEqual(HOUSE_ORIGAMI.entry,{x:79.67433714816835,z:401,y:.13,yaw:0,pitch:.06});
 assert(COAST_PATHS.some(r=>r.id==='paper-boat-dock'&&r.width===6));assert(urbanRoutes().some(r=>r.id==='paper-boat-dock'&&r.width===6),'The real composed renderer keeps the source dock width');
 for(const r of urbanRoutes())for(let i=1;i<r.points.length;i++){const a=r.points[i-1],b=r.points[i];assert(!(Math.abs(a[1]-76)<1e-6&&Math.abs(b[1]-76)<1e-6&&Math.abs(a[0]-b[0])>90),'No source owner reintroduces the long old z76 road');}
 const coast=buildCityCoast(T,{naturalTrees:null});coast.group.updateMatrixWorld(true);const paving=coast.group.children.filter(o=>o.isMesh&&o.name.endsWith('paving batch')),ray=(x,z,objects=paving)=>new T.Raycaster(new T.Vector3(x,1,z),new T.Vector3(0,-1,0),0,2).intersectObjects(objects,false);
+assert.deepEqual(COAST_GARDEN_WALK[0],[64,0]);assert(near(COAST_GARDEN_WALK.at(-1),[0,184]));
+const gardenSegments=GARDEN_ROUTES.flatMap(r=>r.points.slice(1).map((b,i)=>[r.points[i],b]));
+const distance=(p,a,b)=>{const dx=b[0]-a[0],dz=b[1]-a[1],t=Math.max(0,Math.min(1,((p[0]-a[0])*dx+(p[1]-a[1])*dz)/(dx*dx+dz*dz)));return Math.hypot(p[0]-a[0]-dx*t,p[1]-a[1]-dz*t);};
+for(let i=2;i<COAST_GARDEN_WALK.length;i++){const a=COAST_GARDEN_WALK[i-1],b=COAST_GARDEN_WALK[i];for(const t of[.1,.5,.9]){const p=[a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t];assert(gardenSegments.some(([s,e])=>distance(p,s,e)<1e-6),'The garden guide uses the actual rounded path, never a grass shortcut');}}
+const visiblePaving=[...paving,...coast.urban.paving.group.children.filter(o=>o.isMesh)];
+for(let i=1;i<COAST_WALK.length;i++){const a=COAST_WALK[i-1],b=COAST_WALK[i],steps=Math.ceil(Math.hypot(a[0]-b[0],a[1]-b[1]));for(let j=1;j<steps;j++){const t=j/steps,x=a[0]+(b[0]-a[0])*t,z=a[1]+(b[1]-a[1])*t;assert([[0,0],[.012,0],[-.012,0],[0,.012],[0,-.012]].some(([dx,dz])=>ray(x+dx,z+dz,[...visiblePaving,coast.promenade]).length),'Every guide segment has real visible paving at '+[x,z]);}}
 for(const [x,z]of[[370,76],[430,76],[520,76]])assert.equal(ray(x,z).length,0,'Actual old cross-cell strip must disappear from all composed paving batches');
 for(let i=1;i<HEX_COAST_WALK.length;i++){const a=HEX_COAST_WALK[i-1],b=HEX_COAST_WALK[i],dx=b[0]-a[0],dz=b[1]-a[1],length=Math.hypot(dx,dz);for(let j=0;j<=40;j++)for(const side of[-1,0,1]){const t=Math.max(.00001,Math.min(.99999,j/40)),x=a[0]+dx*t-dz/length*side*2.6,z=a[1]+dz*t+dx/length*side*2.6;assert(ray(x,z).length,'Every hex edge and gate has actual full-width rendered paving');}}
 for(const p of COAST_PROMENADE_WALK){assert(Math.abs(Math.hypot(...p)-CITY_ISLAND.promenadeRadius)<1e-6);assert(ray(...p,[coast.promenade]).length,'The guide uses the actual shoreline ring surface');}

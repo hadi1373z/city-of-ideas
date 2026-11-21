@@ -5,10 +5,10 @@ import {SIXFOLD_HOUSES,sixfoldHouseEntry} from './sixfold-house-network-model.js
 export const SIX_GATE_GARDEN=Object.freeze({
  id:'six-gate-garden',x:0,z:0,floor:.13,innerWalkRadius:74,
  ringRadius:105,ringWidth:8,innerColumnRadius:100.1,outerColumnRadius:109.9,
- roofInner:99.5,roofOuter:110.5,roofEave:4.95,roofRidge:5.65,
- gateHalfAngle:.07,baysPerSector:8,gateWidth:9.8,gateInner:111.1,gateOuter:121.1,
- columnRadius:.23,columnBaseRadius:.43,walkWidth:5.2,
- retainedStreetWidth:5.5,retainedCrossingShift:4.5
+ roofInner:99.5,roofOuter:110.5,roofEave:5.42,roofRidge:6.52,
+ gateHalfAngle:.07,baysPerSector:16,gateWidth:9.8,gateInner:99.5,gateOuter:110.5,
+ columnRadius:.52,columnBaseRadius:.78,walkWidth:5.2,
+ retainedStreetWidth:5.5,archSpring:2.85,archRise:1.75,archDepth:.84,archThickness:.40,corniceTop:5.34
 });
 const G=SIX_GATE_GARDEN,TAU=Math.PI*2;
 export const gardenPolar=(r,a)=>[r*Math.cos(a),r*Math.sin(a)];
@@ -17,6 +17,12 @@ const frozen=points=>Object.freeze(points.map(p=>Object.freeze(p)));
 const polygon=(u,v,w,d,h)=>frozen([[-w/2,-d/2],[w/2,-d/2],[w/2,d/2],[-w/2,d/2]].map(([a,b])=>gardenWorld(h,u+a,v+b)));
 const route=(id,points,width,kind='garden-walk')=>Object.freeze({id,points:frozen(points),width,kind});
 const circle=(radius,n=144)=>Array.from({length:n+1},(_,i)=>gardenPolar(radius,i*TAU/n));
+export function roundedGardenPath(points,radius=4.5){
+ const out=[points[0]];for(let i=1;i<points.length-1;i++){
+  const a=points[i-1],b=points[i],c=points[i+1],la=Math.hypot(b[0]-a[0],b[1]-a[1]),lb=Math.hypot(c[0]-b[0],c[1]-b[1]),cut=Math.min(radius,la/2-.1,lb/2-.1),p=[b[0]-(b[0]-a[0])/la*cut,b[1]-(b[1]-a[1])/la*cut],q=[b[0]+(c[0]-b[0])/lb*cut,b[1]+(c[1]-b[1])/lb*cut];
+  out.push(p);for(let j=1;j<=8;j++){const t=j/8;out.push([(1-t)*(1-t)*p[0]+2*(1-t)*t*b[0]+t*t*q[0],(1-t)*(1-t)*p[1]+2*(1-t)*t*b[1]+t*t*q[1]]);}
+ }out.push(points[points.length-1]);return out;
+}
 
 export const GARDEN_GATES=Object.freeze(SIXFOLD_HOUSES.map(h=>Object.freeze({
  id:h.id,name:h.name,angle:h.angle,pattern:h.pattern,house:h,
@@ -26,20 +32,21 @@ export const GARDEN_GATES=Object.freeze(SIXFOLD_HOUSES.map(h=>Object.freeze({
  roof:polygon((G.gateInner+G.gateOuter)/2,0,G.gateOuter-G.gateInner,G.gateWidth+.8,h)
 })));
 
-// Existing block streets cross the ring at each sector bisector. Shift only
-// that shared column pair tangentially; the neighbouring arches/roof bays use
-// the exact same boundary, leaving the original street fully open underneath.
+// Existing block street axes stay walkable even though their old visual road
+// strips are retired. Omit a proposed pier whenever its complete base would
+// occupy one of those crossings; adjacent arch/roof bays share the wider gap.
 export function gardenBayBoundary(h,index){
  const start=h.angle+G.gateHalfAngle,end=h.angle+Math.PI/3-G.gateHalfAngle;
- return start+(end-start)*index/G.baysPerSector+(index===G.baysPerSector/2?Math.asin(G.retainedCrossingShift/G.innerColumnRadius):0);
+ return start+(end-start)*index/G.baysPerSector;
 }
+export const gardenBayAngles=h=>Array.from({length:G.baysPerSector+1},(_,i)=>gardenBayBoundary(h,i)).filter(a=>Math.abs(G.innerColumnRadius*Math.sin(a-h.angle-Math.PI/6))>G.retainedStreetWidth/2+G.columnBaseRadius+.35);
 export const GARDEN_RETAINED_CROSSINGS=Object.freeze(SIXFOLD_HOUSES.map(h=>Object.freeze({
  id:'garden-retained-crossing-'+h.id,angle:h.angle+Math.PI/6,width:G.retainedStreetWidth,
  points:frozen([gardenPolar(92,h.angle+Math.PI/6),gardenPolar(123,h.angle+Math.PI/6)])
 })));
 export const GARDEN_ARCADE_BAYS=Object.freeze(SIXFOLD_HOUSES.flatMap(h=>{
- return Array.from({length:G.baysPerSector},(_,i)=>{
-  const a=gardenBayBoundary(h,i),b=gardenBayBoundary(h,i+1);
+ const angles=gardenBayAngles(h);return Array.from({length:angles.length-1},(_,i)=>{
+  const a=angles[i],b=angles[i+1];
   return Object.freeze({id:'garden-arcade-'+h.id+'-'+i,a,b,points:frozen([
    gardenPolar(G.roofInner,a),gardenPolar(G.roofOuter,a),gardenPolar(G.roofOuter,b),gardenPolar(G.roofInner,b)
   ])});
@@ -54,13 +61,14 @@ export const GARDEN_ROUTES=Object.freeze([
  route('garden-shaded-loop',circle(G.ringRadius),G.ringWidth),
  route('garden-gallery-east',[[67,0],[74,0]],7),
  route('garden-gallery-west',[[-67,0],[-74,0]],7),
- ...GARDEN_GATES.flatMap(g=>[
+ ...GARDEN_GATES.flatMap(g=>{
+  const door=roundedGardenPath([[125,0],[125,34],[SIXFOLD_HOUSES[0].x,34],[SIXFOLD_HOUSES[0].x,26]]),join=door[door.length-6];return[
   route('garden-ray-'+g.id,[gardenPolar(G.innerWalkRadius,g.angle),gardenPolar(125,g.angle)],6),
-  route('garden-door-'+g.id,[[125,0],[125,34],[SIXFOLD_HOUSES[0].x,34],[SIXFOLD_HOUSES[0].x,26]].map(([u,v])=>gardenWorld(g,u,v)),G.walkWidth),
+  route('garden-door-'+g.id,door.map(([u,v])=>gardenWorld(g,u,v)),G.walkWidth),
   route('garden-court-'+g.id,[gardenWorld(g,125,16.5),g.court],3.2),
   // This meets the already-existing tangential street at its actual outer end.
-  route('garden-street-'+g.id,[gardenWorld(g,SIXFOLD_HOUSES[0].x,34),gardenWorld(g,SIXFOLD_HOUSES[0].x,92)],3.6)
- ])
+  route('garden-street-'+g.id,roundedGardenPath([join,[SIXFOLD_HOUSES[0].x,38],[SIXFOLD_HOUSES[0].x,92]],3).map(([u,v])=>gardenWorld(g,u,v)),3.6)
+ ];})
 ]);
 
 export const GARDEN_ENTRIES=Object.freeze(GARDEN_GATES.map(g=>Object.freeze({
@@ -77,8 +85,8 @@ export const GARDEN_BEDS=Object.freeze(GARDEN_GATES.map(g=>Object.freeze({
 
 const columnRows=[];
 for(const g of GARDEN_GATES){
- for(let i=0;i<=G.baysPerSector;i++)for(const radius of[G.innerColumnRadius,G.outerColumnRadius]){
-  const angle=gardenBayBoundary(g,i),p=gardenPolar(radius,angle);
+ for(const[i,angle]of gardenBayAngles(g).entries())for(const radius of[G.innerColumnRadius,G.outerColumnRadius]){
+  const p=gardenPolar(radius,angle);
   columnRows.push(Object.freeze({id:'garden-column-'+g.id+'-'+i+'-'+radius,x:p[0],z:p[1],radius:G.columnBaseRadius,height:G.roofEave,angle}));
  }
  for(const u of[G.gateInner,G.gateOuter])for(const v of[-G.gateWidth/2,G.gateWidth/2]){
@@ -98,7 +106,7 @@ function furnitureFootprint(o){
 
 export const GARDEN_FOOTPRINTS=Object.freeze([
  ...GARDEN_ARCADE_BAYS.map(b=>Object.freeze({id:b.id,x:gardenPolar(G.ringRadius,(b.a+b.b)/2)[0],z:gardenPolar(G.ringRadius,(b.a+b.b)/2)[1],shape:'polygon',points:b.points,category:'garden-arcade',walkThrough:true,label:'Shaded garden promenade'})),
- ...GARDEN_GATES.map(g=>Object.freeze({id:'garden-loggia-'+g.id,x:gardenWorld(g,116.1,0)[0],z:gardenWorld(g,116.1,0)[1],shape:'polygon',points:g.roof,category:'garden-arcade',walkThrough:true,label:g.name+' · open loggia'})),
+ ...GARDEN_GATES.map(g=>Object.freeze({id:'garden-loggia-'+g.id,x:g.point[0],z:g.point[1],shape:'polygon',points:g.roof,category:'garden-arcade',walkThrough:true,label:g.name+' · open loggia'})),
  ...[...GARDEN_SEATS,...GARDEN_BEDS].map(furnitureFootprint)
 ]);
 
