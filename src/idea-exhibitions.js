@@ -3,7 +3,7 @@
  * walkable interpretation, not an unlicensed reproduction.
  */
 import {QUARTER_ARTISTS} from './artist-quarter-data.js?v=six-gate-city-20261121';
-import {DE_CHIRICO_COPY,DE_CHIRICO_SOURCE,buildDeChiricoExhibit} from './de-chirico-exhibit.js?v=night-garden-20261121';
+import {DE_CHIRICO_COPY,DE_CHIRICO_SOURCE,buildDeChiricoExhibit} from './de-chirico-exhibit.js?v=visual-polish-20261121';
 
 const byArtist=id=>QUARTER_ARTISTS.find(a=>a.id===id);
 export const IDEA_EXHIBITIONS=[

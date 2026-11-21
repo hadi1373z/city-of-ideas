@@ -1,4 +1,4 @@
-import {buildGardenPaving} from './six-gate-garden-paving.js?v=night-garden-20261121';
+import {buildGardenPaving} from './six-gate-garden-paving.js?v=doorway-seams-20261121';
 import {buildSixGateGarden} from './six-gate-garden-scene.js?v=night-garden-20261121';
 import {SIXFOLD_CITY} from './city-urban-plan-model.js?v=night-garden-20261121';
 import {cutDescentGround} from './escher-descent-model.js?v=wall-rails-20261121';

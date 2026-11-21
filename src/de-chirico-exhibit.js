@@ -1,4 +1,4 @@
-import {buildInhabitedMind} from './de-chirico-scene.js?v=inhabited-mind-20261121';
+import {buildInhabitedMind} from './de-chirico-scene.js?v=visual-polish-20261121';
 /* A walkable, original architectural study inspired by Giorgio de Chirico's
  * Le trouble du philosophe (1925–26). No reproduction of the painting is bundled.
  * The linked museum/gallery record is the reference, not an image licence.

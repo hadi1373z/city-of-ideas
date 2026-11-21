@@ -8,7 +8,7 @@ import {COAST_ROUTES,HOUSE_ORIGAMI} from './origami-house-math.js?v=night-garden
 import {CITY_ISLAND as I,islandRadius} from './island-layout.js?v=makers-passages-20261118';
 import {urbanRoutes,visibleUrbanRoutes,SIXFOLD_CITY,segmentDistance,streetTreeClear} from './city-urban-plan-model.js?v=night-garden-20261121';
 import {subtractGardenPaving} from './six-gate-garden-paving.js?v=night-garden-20261121';
-import {buildCityUrbanPlan} from './city-urban-plan-scene.js?v=night-garden-20261121';
+import {buildCityUrbanPlan} from './city-urban-plan-scene.js?v=visual-polish-20261121';
 export function buildCityCoast(T,{cityPaths=[],heightAt=()=>0,naturalTrees=globalThis.window?.buildNaturalCityTrees,parkGrass=null}={}){
  const group=new T.Group();group.name='Circular island and surrounding ocean';const owned=new Set(),own=r=>(owned.add(r),r),mat=c=>own(new T.MeshLambertMaterial({color:c})),sand=mat(0xcbbd96),wood=mat(0x846d50),pathMat=mat(0xc6bd9e),laneMat=mat(0x9b9e83);
  function box(w,h,d,x,y,z,m){const o=new T.Mesh(own(new T.BoxGeometry(w,h,d)),m);o.position.set(x,y,z);group.add(o);return o;}

@@ -10,7 +10,10 @@ export function buildEscherDepth(T,{canvas=()=>document.createElement('canvas'),
  const group=new T.Group();group.name='Escher · hexagonal cloister';group.userData.escherDepth=true;
  const interior=new T.Group(),surface=new T.Group(),lamps=new T.Group();interior.name='Escher underground rooms';surface.name='Three doors to one interior';group.add(interior,surface);interior.add(lamps);lamps.visible=false;
  const owned=new Set(),targets=[],own=o=>(owned.add(o),o),mat=(color,extra={})=>own(new T.MeshLambertMaterial({color,side:T.DoubleSide,...extra}));
- const floor=mat(0xd2cbb3),stone=mat(0xd0c4aa),roof=mat(0xafa187),ink=mat(0x263b3d),timber=mat(0x3c5149),sage=mat(0x71867c),brass=mat(0xb39a58),paper=mat(0xe3dfc7),tileInk=mat(0x304d50),ochre=mat(0xb7a378),red=mat(0xb45f4d),glow=own(new T.MeshBasicMaterial({color:0xffe2b9}));
+ // Scoped aged-bronze response gives the lattice and thin guards volume under
+ // the existing lamps; stone, inlays, credited prints and lighting stay fixed.
+ const brass=own(new T.MeshPhongMaterial({color:0xa48b57,specular:0xcdbb8b,shininess:42,side:T.DoubleSide}));
+ const floor=mat(0xd2cbb3),stone=mat(0xd0c4aa),roof=mat(0xafa187),ink=mat(0x263b3d),timber=mat(0x3c5149),sage=mat(0x71867c),paper=mat(0xe3dfc7),tileInk=mat(0x304d50),ochre=mat(0xb7a378),red=mat(0xb45f4d),glow=own(new T.MeshBasicMaterial({color:0xffe2b9}));
  const unit=own(new T.BoxGeometry(1,1,1)),batches=new Map(),surfaces=new Map(),obj=new T.Object3D();
  function box(w,h,d,x,y,z,m=stone,parent=interior,yaw=0){
   // Every museum solid, including its decorative panels and mouldings, must

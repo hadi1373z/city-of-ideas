@@ -2,7 +2,7 @@ import {CLEBSCH} from './clebsch-cubic-model.js';
 import {installEscherDescent} from './escher-descent.js?v=live-light-niches-20261121';
 import {PRINT_STUDIES,dependencyOrder} from './escher-print-studies.js?v=cloister-20261120';
 import {ESCHER_DEPTH as D,DEPTH_VIEW,DEPTH_FOCUS,depthFloorAt,depthRoomAt,walkDepth,atGalleryHandoff,perspectiveAligned,tileMismatch,loopResult} from './escher-depth-model.js?v=night-garden-20261121';
-import {buildEscherDepth} from './escher-depth-scene.js?v=night-garden-20261121';
+import {buildEscherDepth} from './escher-depth-scene.js?v=visual-polish-20261121';
 
 const ROOM_NAMES={vestibule:'Gallery passage',hall:'Hexagonal vaulted court','hall-gallery':'Upper court gallery','perspective-gallery':'Perspective balcony','tessellation-gallery':'Tessellation balcony','reading-gallery':'Topology balcony','gallery-stair':'Stair to the upper gallery',perspective:'Perspective chamber',tessellation:'Tessellation chamber',reading:'Topology & relations wing',stair:'Stair to the loop chamber',loop:'Lower hexagonal cloister'};
 export function installEscherDepth(M,T,{onGalleryExit=null}={}){

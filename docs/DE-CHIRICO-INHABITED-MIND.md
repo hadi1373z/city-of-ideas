@@ -37,7 +37,27 @@ instancing. The complete installation uses29 meshes/draws and201 detail instance
 (about16,155 rendered triangles). There are no timers, animation loops, storage
 writes or audio changes. Resources are explicitly owned and disposed once.
 
+The21 November daytime visual walk refined only the mineral finish. The
+original tiny grain was invisible from the actual arrival and the stone read
+as uniform plastic. A deterministic seamless field now combines broad, very
+restrained near-white colour modulation with fine height and matte roughness.
+Colour values stay within.93..1 in sRGB, preserving the palette and the warm
+ivory; height/roughness textures remain linear data. Ivory uses1.5mm nominal
+bump scale and other masonry4mm. Tall column instances deliberately omit bump
+because their stretched unit-box UVs otherwise suggest false vertical fluting.
+All three256px texture sheets share three bulk canvas uploads. No geometry,
+lights, destinations, trees, collisions or draw counts change.
+
+The visual walk inspected the Academy entrance, its central court and frontal/
+oblique views of this installation using real walking controls. This material
+polish does not claim an exact match to the watercolor concept's surrounding
+arcades, paving, planting or illustrative lighting. Browser proof is saved in
+design/visual-walk/de-chirico-material-before.jpg and
+design/visual-walk/de-chirico-material-after.jpg.
+
 Verification: `node tests/de-chirico.mjs` and `node tests/idea-exhibitions.mjs`.
+The shared finish, seam periodicity, colour/data spaces, canvas upload path and
+texture cleanup are checked by `node tests/de-chirico-finish.mjs`.
 The new suite probes real portal apertures, solid jambs, recessed window backs,
 outward-facing robe normals, both visible heads from the marked view, body-radius
 clearance and actual flush support along the walking loop, height gating and

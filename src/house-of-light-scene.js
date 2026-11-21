@@ -4,16 +4,21 @@ import {createLightMirror} from './house-of-light-mirror.js?v=live-light-niches-
 
 export function buildHouseOfLight(T,{canvasFactory=()=>document.createElement('canvas'),mirrorActive=()=>true}={}){
  const group=new T.Group();group.name='House of Light · glass pavilion, colour chambers and mirror passage';group.position.set(H.x,0,H.z);group.userData.cityDestination=H.id;
- const owned=new Set(),own=x=>(owned.add(x),x),state=initialLightState(),targets=[],stamp=new T.Object3D(),opaque=[],metals=[],glass=[],glassColours=[];
+ const owned=new Set(),own=x=>(owned.add(x),x),state=initialLightState(),targets=[],stamp=new T.Object3D(),opaque=[],metals=[],metalNormals=[],glass=[],glassColours=[];
  const stoneMat=own(new T.MeshLambertMaterial({vertexColors:true,side:T.DoubleSide})),metalMat=own(new T.MeshPhongMaterial({vertexColors:true,shininess:75,specular:0xc6bc8b,side:T.DoubleSide})),glassMat=own(new T.MeshPhongMaterial({vertexColors:true,transparent:true,opacity:.19,shininess:125,specular:0xffffff,side:T.DoubleSide,depthWrite:false}));
  const unitBox=own(new T.BoxGeometry(1,1,1)),unitCylinder=own(new T.CylinderGeometry(1,1,1,12));
- function transformed(source,colour,matrix,list=opaque){const g=source.clone().applyMatrix4(matrix),p=g.attributes.position,indices=g.index?.array||Array.from({length:p.count},(_,i)=>i),c=new T.Color(colour);for(const i of indices)list.push(p.getX(i),p.getY(i),p.getZ(i),c.r,c.g,c.b);g.dispose();}
+ function transformed(source,colour,matrix,list=opaque){const g=source.clone().applyMatrix4(matrix),p=g.attributes.position,n=g.attributes.normal,indices=g.index?.array||Array.from({length:p.count},(_,i)=>i),c=new T.Color(colour);for(const i of indices){list.push(p.getX(i),p.getY(i),p.getZ(i),c.r,c.g,c.b);if(list===metals)metalNormals.push(n.getX(i),n.getY(i),n.getZ(i));}g.dispose();}
  function box(w,h,d,x,y,z,colour=0xe2d9bd,turn=0,list=opaque){stamp.position.set(x,y,z);stamp.rotation.set(0,turn,0);stamp.scale.set(w,h,d);stamp.updateMatrix();transformed(unitBox,colour,stamp.matrix,list);}
  function cylinder(r,h,x,y,z,colour=0xb3904c){stamp.position.set(x,y,z);stamp.rotation.set(0,0,0);stamp.scale.set(r,h,r);stamp.updateMatrix();transformed(unitCylinder,colour,stamp.matrix,metals);}
  function beam(a,b,r=.055,colour=0xaf8845){const A=new T.Vector3(...a),B=new T.Vector3(...b),mid=A.clone().add(B).multiplyScalar(.5),q=new T.Quaternion().setFromUnitVectors(new T.Vector3(0,1,0),B.clone().sub(A).normalize()),matrix=new T.Matrix4().compose(mid,q,new T.Vector3(r,A.distanceTo(B),r));transformed(unitCylinder,colour,matrix,metals);}
  function face(points,colour,list=opaque){const c=new T.Color(colour);for(let i=1;i<points.length-1;i++)for(const p of[points[0],points[i],points[i+1]])list.push(...p,c.r,c.g,c.b);}
  function pane(points,colour=0xbcdce1){const c=new T.Color(colour);for(let i=1;i<points.length-1;i++)for(const p of[points[0],points[i],points[i+1]]){glass.push(...p);glassColours.push(c.r,c.g,c.b);}}
- function finish(list,material,name){const positions=[],colours=[];for(let i=0;i<list.length;i+=6){positions.push(...list.slice(i,i+3));colours.push(...list.slice(i+3,i+6));}const g=own(new T.BufferGeometry());g.setAttribute('position',new T.Float32BufferAttribute(positions,3));g.setAttribute('color',new T.Float32BufferAttribute(colours,3));g.computeVertexNormals();const mesh=new T.Mesh(g,material);mesh.name=name;group.add(mesh);return mesh;}
+ function finish(list,material,name){const positions=[],colours=[];for(let i=0;i<list.length;i+=6){positions.push(...list.slice(i,i+3));colours.push(...list.slice(i+3,i+6));}const g=own(new T.BufferGeometry());g.setAttribute('position',new T.Float32BufferAttribute(positions,3));g.setAttribute('color',new T.Float32BufferAttribute(colours,3));
+  // applyMatrix4 already uses the inverse-transpose normal matrix. Preserve
+  // those primitive normals through batching: cylinder walls stay round, while
+  // box faces and cylinder caps keep their original sharp edges. Recomputing
+  // normals on the expanded triangles made every bronze bar visibly faceted.
+  if(list===metals)g.setAttribute('normal',new T.Float32BufferAttribute(metalNormals,3));else g.computeVertexNormals();const mesh=new T.Mesh(g,material);mesh.name=name;group.add(mesh);return mesh;}
  const F=H.radius*Math.sqrt(3)/2,poly=lightPolygon().map(([x,z])=>[x-H.x,z-H.z]);
  // A genuinely level, supported hexagonal stone floor. Flat lozenges are
  // assembled from a clipped triangular lattice, all at the same feet height.

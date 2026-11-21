@@ -58,3 +58,11 @@ against every source/urban/coastal tree crown.
 tests/house-of-light-floor-reflection.mjs checks27 colour/rotation/viewpoint
 combinations, independently reflected viewing rays, horizontal clipping,
 shared source attributes, selective capture, playback, pause and cleanup.
+
+The21November daytime visual pass now retains each source cylinder's smooth
+inverse-transpose normal through the bronze structure batch. Expanded triangle
+normal recomputation previously made the round columns and roof beams appear
+faceted. Caps/boxes keep sharp normals; all positions, colours,UVs,indices,
+instance poses,61rods and both mirror captures remain unchanged. The new
+tests/house-of-light-shading.mjs compares actual geometry bytes and independently
+checks the transformed primitive normals; it is included in release checks.

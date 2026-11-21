@@ -1,5 +1,5 @@
 import {LIGHT_HOUSE as H,LIGHT_ENTRY,LIGHT_STATIONS,insideLightHouse,nearLightStation,filteredLight,addedLight,FILTERS} from './house-of-light-model.js?v=live-light-niches-20261121';
-import {buildHouseOfLight} from './house-of-light-scene.js?v=live-light-niches-20261121';
+import {buildHouseOfLight} from './house-of-light-scene.js?v=visual-polish-20261121';
 
 export function installHouseOfLight(M,T,{document:doc=globalThis.document,events=globalThis,canvasFactory=()=>doc.createElement('canvas')}={}){
  if(M.houseOfLight)return M.houseOfLight;let disposed=false,selected=null,dismissed=null,lastTime=null;const media=events.matchMedia?.('(prefers-reduced-motion: reduce)'),built=buildHouseOfLight(T,{canvasFactory,mirrorActive:()=>!disposed&&!doc.hidden&&M.mode==='city'&&Math.abs(M.player.y-M.eye-H.floor)<.4&&Math.hypot(M.player.x-H.x,M.player.z-H.z)<45});M.scene.add(built.group);M.city.targets.push(...built.targets);

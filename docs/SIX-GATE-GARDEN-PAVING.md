@@ -79,6 +79,16 @@ bed outlines. There is no broad replacement plane across a shaft.
 
 ## Verification and bounds
 
+The later close views exposed green ribbons at the sides of the two original
+doorway grades. Downward floor rays alone missed their open vertical faces.
+The tile and joint batches now also close each actual height discontinuity
+with a stone riser, clipped by the same protected porch, Gallery and tree-bed
+holes. These are vertical edge closures, not another horizontal floor; original
+walking heights, slopes, source porch slabs and all stair openings are unchanged.
+Fifteen additional horizontal rays test both west door lips, the east return
+spine's two sides and the overlapping east door grade. Both front-side windings
+are tested from the lower ground; the two original draw batches remain.
+
 node tests/six-gate-garden-paving.mjs checks25,640 actual downward route/annulus probes
 plus a dense independent comparison against the unchanged source grade function;
 upward flat/graded normals; source floor,

@@ -27,6 +27,15 @@ two-level stone arcades, vaulted ribs, teal recessed bays, geometric court floor
 and tall brass focal sculpture. It uses ordinary, walkable Euclidean geometry;
 it is not an Escher work or an exact historical architectural reconstruction.
 
+The21 November visual walk gives the existing metalwork a restrained aged-bronze
+Phong finish instead of flat yellow Lambert shading. The scoped material is
+owned and disposed by the museum builder; no additional lamp, geometry, target,
+print, shaft, step or walking coordinate changes. The lattice, vault ribs and
+guards now show modest directional highlights under the original lighting.
+Actual browser review is saved in
+`design/escher/bronze-finish-visual-review-20261121.jpg`; the separate Babel
+terrace inspection is `design/escher/babel-visual-walk-20261121.jpg`.
+
 | Space | Plan | Floor / upper gallery | Vault apex |
 | --- | --- | --- | --- |
 | Gallery vestibule | x134.4–143, z112–118, enclosed corridor | −40 | −33.5 |

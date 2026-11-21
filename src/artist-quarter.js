@@ -1,5 +1,5 @@
 import {QUARTER_ARTISTS,QUARTER_COPY} from './artist-quarter-data.js?v=six-gate-city-20261121';
-import {installIdeaExhibitions} from './idea-exhibitions.js?v=night-garden-20261121';
+import {installIdeaExhibitions} from './idea-exhibitions.js?v=visual-polish-20261121';
 import {buildArtistStudios,buildQuarterGarden} from './artist-quarter-scene.js?v=six-gate-city-20261121';
 const PLAN=globalThis.ARTIST_QUARTER_PLAN;
 const nearCourt=(x,z)=>PLAN.courts.some(c=>Math.hypot(x-c.arrival.x,z-c.arrival.z)<68);

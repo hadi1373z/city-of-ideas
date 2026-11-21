@@ -137,7 +137,24 @@ export function buildGardenPaving(T,{treeBeds=[]}={}){
   if(!domain.some(d=>intersects(bb,d.bounds)))continue;activeBeds.push(bed);
   const points=ccw(contour),v=points.map(p=>new T.Vector2(...p));for(const triangle of T.ShapeUtils.triangulateShape(v,[])){const p=triangle.map(i=>points[i]);holes.push({points:ccw(p),bounds:bounds(p)});}
  }
- const put=(poly,colour,buffer,height=()=>G.floor)=>{const c=new T.Color(colour),snap=p=>{const x=Math.fround(Math.round(p[0]*1e4)/1e4),z=Math.fround(Math.round(p[2]*1e4)/1e4);return[x,height(x,z),z];},points=poly.map(snap);for(let i=1;i<points.length-1;i++){const a=points[0],b=points[i],d=points[i+1],s=(b[0]-a[0])*(d[2]-a[2])-(b[2]-a[2])*(d[0]-a[0]);if(Math.abs(s)<1e-9)continue;for(const p of(s>0?[a,d,b]:[a,b,d]))buffer.push(p[0],p[1],p[2],c.r,c.g,c.b);}};
+ const gradeEdges=galleryGrades.flatMap(g=>g.points.map((a,i)=>[a,g.points[(i+1)%g.points.length]]));let closedGradeEdges=0;
+ const put=(poly,colour,buffer,height=()=>G.floor)=>{const c=new T.Color(colour),snap=p=>{const x=Math.fround(Math.round(p[0]*1e4)/1e4),z=Math.fround(Math.round(p[2]*1e4)/1e4);return[x,height(x,z),z];},points=poly.map(snap),emit=p=>buffer.push(p[0],p[1],p[2],c.r,c.g,c.b);for(let i=1;i<points.length-1;i++){const a=points[0],b=points[i],d=points[i+1],s=(b[0]-a[0])*(d[2]-a[2])-(b[2]-a[2])*(d[0]-a[0]);if(Math.abs(s)<1e-9)continue;for(const p of(s>0?[a,d,b]:[a,b,d]))emit(p);}
+  // The original doorway grades meet flat plaza ground with a vertical edge.
+  // Close that actual edge in the SAME clipped tile/joint buffers; an open
+  // top-only surface exposed a green ribbon when seen from the lower side.
+  for(let i=0;i<points.length;i++){
+   const a=points[i],b=points[(i+1)%points.length],dx=b[0]-a[0],dz=b[2]-a[2],len=Math.hypot(dx,dz);if(len<1e-5||Math.abs(dx)>.0002&&Math.abs(dz)>.0002)continue;
+   const x=(a[0]+b[0])/2,z=(a[2]+b[2])/2;
+   if(!gradeEdges.some(([p,q])=>Math.abs(p[0]-q[0])<EPS?Math.abs(x-p[0])<.0002&&z>=Math.min(p[1],q[1])-EPS&&z<=Math.max(p[1],q[1])+EPS:Math.abs(z-p[1])<.0002&&x>=Math.min(p[0],q[0])-EPS&&x<=Math.max(p[0],q[0])+EPS))continue;
+   for(const sign of[-1,1]){const nx=-dz/len*sign,nz=dx/len*sign,otherX=x+nx*.001,otherZ=z+nz*.001;
+    if(!gardenPavingContains(otherX,otherZ,{treeBeds:activeBeds}))continue;
+    const other=gardenPavingHeight(otherX,otherZ);if(other===null||height(x,z)-other<.001)continue;
+    const low=p=>[p[0],gardenPavingHeight(p[0]+nx*.001,p[2]+nz*.001)??G.floor,p[2]],aa=low(a),bb=low(b);
+    // Winding faces the lower side; both directions are independently closed.
+    const tri=sign>0?[a,aa,b,b,aa,bb]:[a,b,aa,b,bb,aa];for(const p of tri)emit(p);closedGradeEdges++;break;
+   }
+  }
+ };
  function graded(poly,colour,buffer){
   let remaining=[poly];
   for(const patch of galleryGrades){const next=[];for(const p of remaining){if(!intersects(polyBounds(p),patch.bounds)){next.push(p);continue;}const cut=carve(p,patch.points);next.push(...cut.outside);if(cut.inside.length)put(cut.inside,colour,buffer,patch.height);}remaining=next;if(!remaining.length)break;}
@@ -158,5 +175,6 @@ export function buildGardenPaving(T,{treeBeds=[]}={}){
   const pos=[],col=[];for(let j=0;j<buffer.length;j+=6){pos.push(buffer[j],buffer[j+1],buffer[j+2]);col.push(buffer[j+3],buffer[j+4],buffer[j+5]);}
   const geometry=own(new T.BufferGeometry());geometry.setAttribute('position',new T.Float32BufferAttribute(pos,3));geometry.setAttribute('color',new T.Float32BufferAttribute(col,3));geometry.computeVertexNormals();const material=own(new T.MeshLambertMaterial({vertexColors:true,side:T.FrontSide,polygonOffset:true,polygonOffsetFactor:i?-1:1,polygonOffsetUnits:i?-1:1})),mesh=new T.Mesh(geometry,material);mesh.name=i?'Warm geometric stone tiles · cream, honey, teal and brass inlay':'Continuous flat stone joint bed · no painted road strips';group.add(mesh);
  }
+ group.userData.closedGradeEdges=closedGradeEdges;
  let disposed=false;return{group,treeBeds,activeBeds,contains:(x,z)=>gardenPavingContains(x,z,{treeBeds:activeBeds}),heightAt:(x,z)=>gardenPavingContains(x,z,{treeBeds:activeBeds})?gardenPavingHeight(x,z):null,triangles:group.children.reduce((n,o)=>n+o.geometry.attributes.position.count/3,0),dispose(){if(disposed)return;disposed=true;group.removeFromParent();for(const r of owned)r.dispose();owned.clear();group.clear();}};
 }

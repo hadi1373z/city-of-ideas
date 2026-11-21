@@ -1,13 +1,38 @@
 import {INHABITED_MIND as H,MIND_PALETTE as C,MIND_TOWERS,MIND_COLUMNS,MIND_FIGURES,MIND_LOOP,mindCanStand,mindObstacles} from './de-chirico-model.js?v=inhabited-mind-20261121';
 
+// Periodic, deterministic mineral field: broad worn mottling and much finer
+// grain share a seamless tile, without importing a photograph or a stone asset.
+export function mindMineralSample(u,v){
+ const noise=(size,seed)=>{const x=u*size,y=v*size,ix=Math.floor(x),iy=Math.floor(y),fx=x-ix,fy=y-iy,s=t=>t*t*(3-2*t),hash=(a,b)=>{a=((a%size)+size)%size;b=((b%size)+size)%size;let n=Math.imul(a+seed,374761393)^Math.imul(b+seed*7,668265263);n=Math.imul(n^(n>>>13),1274126177);return((n^(n>>>16))>>>0)/4294967295;},a=hash(ix,iy),b=hash(ix+1,iy),c=hash(ix,iy+1),d=hash(ix+1,iy+1),t=s(fx),k=s(fy);return(a+(b-a)*t)*(1-k)+(c+(d-c)*t)*k;};
+ const broad=noise(8,17),grain=noise(48,53),fine=noise(128,97);
+ return{tint:.93+.045*broad+.020*grain+.005*fine,height:.48+.30*(grain-.5)+.15*(fine-.5),roughness:.72+.24*broad};
+}
+
 // New geometry, original procedural stone grain, no reproduced artwork/scan.
 export function buildInhabitedMind(T,{canvas=()=>document.createElement('canvas')}={}){
  const group=new T.Group(),exhibit=new T.Group();group.name='The inhabited mind · original de Chirico interpretation';exhibit.name='Approved sculpture court · two figures and four towers';exhibit.position.set(H.x,H.y,H.z);group.add(exhibit);
  const owned=new Set(),own=r=>(owned.add(r),r),targets=[],batches=new Map(),stamp=new T.Object3D();let disposed=false;
  const geometry={box:own(new T.BoxGeometry(1,1,1)),sphere:own(new T.SphereGeometry(1,22,14)),beam:own(new T.CylinderGeometry(.11,.15,1,8)),disc:own(new T.CylinderGeometry(1,1,1,24))};
- function stoneTexture(){const c=canvas();c.width=c.height=256;const ctx=c.getContext?.('2d');if(!ctx)return null;ctx.fillStyle='#f5f0e3';ctx.fillRect(0,0,256,256);let seed=2849;const random=()=>((seed=(seed*1664525+1013904223)>>>0)/4294967296);for(let i=0;i<1900;i++){const n=Math.floor(150+random()*85);ctx.fillStyle=`rgba(${n},${n-5},${n-12},.13)`;ctx.fillRect(random()*256,random()*256,random()*1.5+.3,random()*1.5+.3);}const map=own(new T.CanvasTexture(c));map.wrapS=map.wrapT=T.RepeatWrapping;map.repeat.set(2,2);map.colorSpace=T.SRGBColorSpace;return map;}
- const grain=stoneTexture(),materials={};
- for(const [key,color]of Object.entries(C))materials[key]=own(new T.MeshStandardMaterial({color,roughness:key==='brass'?.5:.88,metalness:key==='brass'?.35:0,map:['joint','ochre','brass'].includes(key)?null:grain}));
+ function stoneTextures(){
+  const sheets=[canvas(),canvas(),canvas()],contexts=sheets.map(c=>{c.width=c.height=256;return c.getContext?.('2d');});
+  if(contexts.some(c=>!c))return{colour:null,height:null,roughness:null};
+  const images=contexts.map(ctx=>ctx.createImageData?.(256,256)),bulk=images.every(image=>image?.data instanceof Uint8ClampedArray);
+  for(let y=0;y<256;y++)for(let x=0;x<256;x++){
+   const s=mindMineralSample(x/256,y/256),values=[s.tint,s.height,s.roughness];
+   for(let i=0;i<3;i++){const n=Math.round(values[i]*255);if(bulk){const offset=(y*256+x)*4;images[i].data.set([n,n,n,255],offset);}else{contexts[i].fillStyle=`rgb(${n},${n},${n})`;contexts[i].fillRect(x,y,1,1);}}
+  }
+  if(bulk)contexts.forEach((ctx,i)=>ctx.putImageData(images[i],0,0));
+  const maps=sheets.map((c,i)=>{const map=own(new T.CanvasTexture(c));map.wrapS=map.wrapT=T.RepeatWrapping;map.repeat.set(2,2);map.colorSpace=i===0?T.SRGBColorSpace:T.NoColorSpace;map.name=['Original limestone mineral colour','Original shallow mineral height','Original matte stone roughness'][i];return map;});
+  return{colour:maps[0],height:maps[1],roughness:maps[2]};
+ }
+ const grain=stoneTextures(),materials={};
+ for(const [key,color]of Object.entries(C)){
+  const stone=!['joint','ochre','brass'].includes(key);
+  // Unit-box UVs stretch up the tall column instances. Keep their colour and
+  // matte variation, but avoid stretching a bump field into false fluting.
+  const relief=stone&&key!=='column';
+  materials[key]=own(new T.MeshStandardMaterial({color,roughness:key==='brass'?.5:.88,metalness:key==='brass'?.35:0,map:stone?grain.colour:null,bumpMap:relief?grain.height:null,bumpScale:relief?(key.startsWith('ivory')?.0015:.004):0,roughnessMap:stone?grain.roughness:null}));
+ }
  const mesh=(geo,mat,name,parent=exhibit)=>{const m=new T.Mesh(geo,mat);m.name=name;m.castShadow=true;m.receiveShadow=true;parent.add(m);return m;};
  function instance(geo,mat,position,scale=[1,1,1],quaternion=null){stamp.position.set(...position);stamp.scale.set(...scale);stamp.quaternion.identity();if(quaternion)stamp.quaternion.copy(quaternion);stamp.updateMatrix();const key=geo.uuid+mat.uuid;if(!batches.has(key))batches.set(key,{geo,mat,matrices:[]});batches.get(key).matrices.push(stamp.matrix.clone());}
  const box=(w,h,d,x,y,z,key)=>instance(geometry.box,materials[key],[x,y,z],[w,h,d]);

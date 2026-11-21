@@ -27,7 +27,10 @@
  g.cityStreetTreeClear=(x,z,clearance=7)=>g.CITY_CORE_TREE_EXCLUSIONS.every(h=>Math.hypot(x-h.x,z-h.z)>=h.radius+clearance)&&(!g.CITY_PUBLIC_TREE_CLEAR||g.CITY_PUBLIC_TREE_CLEAR(x,z,clearance));
 // The user removed the one unbedded plaza tree, not its neighbouring gardens.
 g.CITY_REMOVED_PLAZA_TREE=Object.freeze({x:69.5,z:-25});
-const removedPlazaTree=p=>Math.abs(p.x-g.CITY_REMOVED_PLAZA_TREE.x)<1e-7&&Math.abs(p.z-g.CITY_REMOVED_PLAZA_TREE.z)<1e-7;
+// The later screenshot identifies the other bare source tree beside the south
+// door at (69.75,25). Keep the earlier removal and every planted bed unchanged.
+g.CITY_REMOVED_PLAZA_TREES=Object.freeze([g.CITY_REMOVED_PLAZA_TREE,Object.freeze({x:69.75,z:25})]);
+const removedPlazaTree=p=>g.CITY_REMOVED_PLAZA_TREES.some(q=>Math.abs(p.x-q.x)<1e-7&&Math.abs(p.z-q.z)<1e-7);
 // Deterministic branching trees: small individual leaves, open crowns, no spherical canopy or display plinth.
 g.buildNaturalCityTrees=function(T,parent,positions){
  positions=positions.filter(p=>g.cityStreetTreeClear(p.x,p.z));

@@ -6,7 +6,7 @@ import {urbanRoutes,urbanPavedRoutes,urbanBuildingFootprints} from './city-urban
 import {FOUNDATION_HOUSES,FOUNDATION_COPY,FOUNDATION_ROUTES} from './foundation-houses-data.js?v=night-garden-20261121';
 import {CITY_ISLAND as ISLAND,onCityIsland,islandRadius} from './island-layout.js?v=makers-passages-20261118';
 import {buildOrigamiHouse} from './origami-house-scene.js?v=night-garden-20261121';
-import {buildCityCoast} from './coastal-city-scene.js?v=night-garden-20261121';
+import {buildCityCoast} from './coastal-city-scene.js?v=visual-polish-20261121';
 import {foldHouseMemory,HOUSE_ORIGAMI as P,miura,vertexTests,CREASE_CASES,coastX,COAST_ROUTES} from './origami-house-math.js?v=night-garden-20261121';
 import {FOLD_COPY} from './origami-house-copy.js?v=cloister-details-20261120';
 import {ORIGAMI_LESSONS,paperDiagram} from './origami-lessons.js?v=city-night-20261117';

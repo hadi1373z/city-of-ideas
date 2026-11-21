@@ -515,3 +515,28 @@ make lower walking depend on restored private-home bounds. Preserve every
 existing collider and the outer ocean rejection. tests/night-park.mjs drives
 the actual classic city, district, Graveyard and cylinder chain through1190
 held-input steps; testing the cylinder with a permissive delegate is insufficient.
+
+The two Gallery doorway grades now have real stone vertical edge closures in
+the same garden tile/joint buffers. Preserve their original slopes and porch
+slabs; test horizontal low-side rays as well as downward support. The user's
+later bare-tree screenshot identifies the source campus tree at(69.75,25).
+Remove it in addition to the earlier(69.5,-25) omission, consuming both original
+RNG sequences. All455 accepted street trees,170 planted beds and retained leaf/
+wood poses remain exact; never remove a planted tree to satisfy this request.
+
+Escher niche design direction,21 November: retain the first blue/cobalt,
+turquoise, ivory and restrained gold ornamental sketch with concealed warm
+light. Cavities have roughly three sides of a hexagon, genuine vertical facets,
+upper courses forward and lower courses deeper, and symmetric sides-to-centre
+recession including the lower inner wall. The user explicitly CANCELLED the
+larger-central-facet requirement: use three equal sides. These refined drawings
+are proposals, not live niche replacements; preserve all320 stair treads,
+landings, positions and walking controls when implementing the eventual model.
+
+The three-agent visual pass was limited to daytime public space and underground
+rooms after the user explicitly excluded night work. De Chirico uses restrained
+original mineral colour/height/roughness maps with the same geometry and29draws;
+Escher's existing brass has scoped aged-bronze highlights; House of Light keeps
+the original cylindrical metal normals through batching. Preserve both fixed
+reflection captures and all paths. Do not describe this small material pass as
+an exact reconstruction of the architectural sketches or a night-world redesign.
