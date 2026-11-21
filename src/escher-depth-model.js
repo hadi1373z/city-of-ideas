@@ -1,4 +1,4 @@
-import {DESCENT,STAIR_PORTAL} from './escher-descent-model.js?v=shore-niches-20261121';
+import {DESCENT,STAIR_PORTAL} from './escher-descent-model.js?v=wall-rails-20261121';
 import {CLOISTER_ROOMS,CLOISTER_STAIRS,CLOISTER_GALLERIES,insidePolygon,hexagon,rectangle,ringPolygons,outsidePolygonRectangle} from './escher-cloister-layout.js?v=cloister-20261120';
 export {insidePolygon,hexagon,ringPolygons,outsidePolygonRectangle};
 export const ESCHER_DEPTH=Object.freeze({floor:-40,ceiling:-23.6,lowerFloor:-46,lowerCeiling:-39.5,radius:.28,

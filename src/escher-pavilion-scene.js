@@ -1,5 +1,5 @@
 import {ESCHER_PAVILION as P,pavilionPolygon,pavilionEntry,inPavilion} from './escher-pavilion-model.js?v=academy-escher-20261120';
-import {DESCENT,outsideRectangle} from './escher-descent-model.js?v=shore-niches-20261121';
+import {DESCENT,outsideRectangle} from './escher-descent-model.js?v=wall-rails-20261121';
 import {outsidePolygonRectangle} from './escher-cloister-layout.js';
 
 export function buildEscherPavilion(T,{x=228,z=115,works,loadTexture,canvas}){

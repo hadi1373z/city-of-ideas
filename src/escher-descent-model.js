@@ -12,6 +12,9 @@ export function descentParts(){const out=[];for(let i=0;i<8;i++){
  if(i<7)out.push({id:'landing-'+i,kind:'landing',minX:DESCENT.shaft.minX,maxX:DESCENT.shaft.maxX,minZ:north?DESCENT.shaft.minZ:104,maxZ:north?92:DESCENT.shaft.maxZ,y:flightY(i+1)});
  }out.push({id:'entry',kind:'landing',minX:227.1,maxX:228.9,minZ:104,maxZ:106,y:.13},{id:'exit',kind:'landing',minX:224.1,maxX:225.9,minZ:104,maxZ:107,y:-40});return out;}
 export const DESCENT_PARTS=descentParts();
+// Extend only the solid support to the enclosure; keep the established walking
+// bands and controller clearance independent of this wall-bearing margin.
+export function descentFloorBounds(p){if(p.kind==='flight')return p.x>226.5?{minX:p.x-.9,maxX:DESCENT.shaft.maxX}:{minX:DESCENT.shaft.minX,maxX:p.x+.9};return{minX:p.id==='exit'?DESCENT.shaft.minX:p.minX,maxX:p.id==='entry'?DESCENT.shaft.maxX:p.maxX};}
 export function descentSurface(x,z,fromY,tolerance=.32){const matches=[];for(const p of DESCENT_PARTS){let y;
  if(p.kind==='landing'){const turn=p.id.startsWith('landing-');if(x<p.minX+(turn?.3:.20)||x>p.maxX-(turn?.3:.20)||z<(p.minZ===90.6?p.minZ+.3:p.minZ-.02)||z>(turn&&p.maxZ===DESCENT.shaft.maxZ?p.maxZ-.3:p.maxZ+.02))continue;y=p.y;}
  else{if(Math.abs(x-p.x)>.60||z<92-.02||z>104+.02)continue;const t=Math.max(0,Math.min(1,(z-p.start)/(p.end-p.start)));y=p.top+(p.bottom-p.top)*Math.ceil(t*40-1e-8)/40;}

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import * as T from '../src/city-source-assets/home-tools/vendor/three.module.js';
-import {DESCENT_PARTS,descentSurface} from '../src/escher-descent-model.js';
+import {DESCENT_PARTS,descentFloorBounds,descentSurface} from '../src/escher-descent-model.js';
 import {buildEscherDescent} from '../src/escher-descent.js';
 import {ESCHER_DEPTH as D,depthFloorAt} from '../src/escher-depth-model.js';
 import {buildEscherDepth} from '../src/escher-depth-scene.js';
@@ -11,6 +11,12 @@ surface.group.updateMatrixWorld(true);museum.group.updateMatrixWorld(true);
 const v=p=>p.isVector3?p:new T.Vector3(...p),segment=(a,b,p)=>new T.Line3(v(a),v(b)).closestPointToPoint(v(p),true,new T.Vector3()).distanceTo(v(p));
 const ray=(root,a,b)=>{a=v(a);b=v(b);const d=b.clone().sub(a),length=d.length();return new T.Raycaster(a,d.normalize(),.001,length-.001).intersectObject(root,true);};
 const combined=new T.Group();combined.add(surface.group,museum.interior);combined.updateMatrixWorld(true);
+for(const path of surface.group.userData.stairGuardPaths)for(const point of path)assert(point.x>225.8&&point.x<227.2,'Only the open inter-flight edges carry guards; no rail remains in front of wall arches');
+for(const p of DESCENT_PARTS){const bounds=descentFloorBounds(p),outer=p.kind==='flight'?(p.x>226.5?bounds.maxX-.04:bounds.minX+.04):p.id==='entry'?bounds.maxX-.04:p.id==='exit'?bounds.minX+.04:null;if(outer===null)continue;
+ const samples=p.kind==='flight'?40:1;for(let i=0;i<samples;i++){const z=p.kind==='flight'?p.start+(p.end-p.start)*(i+.5)/40:(p.minZ+p.maxZ)/2,y=p.kind==='flight'?p.top+(p.bottom-p.top)*(i+1)/40:p.y;
+  const hits=new T.Raycaster(new T.Vector3(outer,y+.08,z),new T.Vector3(0,-1,0),0,.2).intersectObject(surface.group,true);assert(hits.some(h=>Math.abs(h.point.y-y)<.002),'Every stair and entry/exit floor closes the former wall-side gap');
+ }
+}
 // These must be actual closed cavities, not a dark polygon laid on a wall.
 for(const n of surface.group.userData.stairNiches){
  const y=n.origin[1]+1.3,start=new T.Vector3(n.origin[0]+n.out[0]*.4,y,n.origin[2]+n.out[1]*.4),direction=new T.Vector3(-n.out[0],0,-n.out[1]);

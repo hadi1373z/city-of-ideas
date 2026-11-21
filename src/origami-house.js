@@ -5,11 +5,11 @@ import {urbanRoutes,urbanBuildingFootprints} from './city-urban-plan-model.js?v=
 import {FOUNDATION_HOUSES,FOUNDATION_COPY,FOUNDATION_ROUTES} from './foundation-houses-data.js?v=makers-passages-20261118';
 import {CITY_ISLAND as ISLAND,onCityIsland,islandRadius} from './island-layout.js?v=makers-passages-20261118';
 import {buildOrigamiHouse} from './origami-house-scene.js?v=cloister-details-20261120';
-import {buildCityCoast} from './coastal-city-scene.js?v=shore-niches-20261121';
+import {buildCityCoast} from './coastal-city-scene.js?v=wall-rails-20261121';
 import {foldHouseMemory,HOUSE_ORIGAMI as P,miura,vertexTests,CREASE_CASES,coastX,COAST_ROUTES} from './origami-house-math.js?v=cloister-details-20261120';
 import {FOLD_COPY} from './origami-house-copy.js?v=cloister-details-20261120';
 import {ORIGAMI_LESSONS,paperDiagram} from './origami-lessons.js?v=city-night-20261117';
-import {mountCoastalMap} from './coastal-map.js?v=shore-niches-20261121';
+import {mountCoastalMap} from './coastal-map.js?v=wall-rails-20261121';
 import {COAST_EXPLORER_COPY} from './coastal-map-data.js?v=shore-niches-20261121';
 import {SEMINAR_HOUSES} from './seminar-houses-data.js?v=cloister-20261120';
 export function installOrigamiHouse(M,T){

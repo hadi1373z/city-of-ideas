@@ -1,5 +1,5 @@
-import {buildEscherShaftDetails,ESCHER_SHAFT_NICHES,nicheVoid} from './escher-stone-details.js?v=shore-niches-20261121';
-import {DESCENT as D,DESCENT_ANNEX as A,annexContains,STAIR_PORTAL as P,DESCENT_PARTS as PARTS,descentSurface,walkDescent,outsideRectangle} from './escher-descent-model.js?v=shore-niches-20261121';
+import {buildEscherShaftDetails,ESCHER_SHAFT_NICHES,nicheVoid} from './escher-stone-details.js?v=wall-rails-20261121';
+import {DESCENT as D,DESCENT_ANNEX as A,annexContains,STAIR_PORTAL as P,DESCENT_PARTS as PARTS,descentFloorBounds,descentSurface,walkDescent,outsideRectangle} from './escher-descent-model.js?v=wall-rails-20261121';
 export function buildEscherDescent(T){
  const group=new T.Group();group.name='Escher · continuous eight-flight descent';const owned=[],batches=new Map(),unit=new T.BoxGeometry(1,1,1);owned.push(unit);
  const mat=c=>{const m=new T.MeshLambertMaterial({color:c,side:T.DoubleSide});owned.push(m);return m;},stone=mat(0xd0c7ae),slate=mat(0x718980),light=mat(0xe2dac2),brass=mat(0x9c824e),facade=mat(0xd0c7ae);
@@ -11,19 +11,19 @@ export function buildEscherDescent(T){
  function rail(a,b){railPieces.push({a:a.clone(),b:b.clone()});}
  function guard(points){const path=points.map(p=>new T.Vector3(...p));guardPaths.push(path);for(let i=1;i<path.length;i++)rail(path[i-1],path[i]);}
  function guardPost(x,z,base,top){const key=[x,z,base].join(',');if(guardPosts.has(key))return;guardPosts.set(key,{x,z,base,top});box(.055,top-base,.055,x,(base+top)/2,z,brass);}
- for(const p of PARTS){if(p.kind==='flight'){
-  for(let i=0;i<40;i++){const z=p.start+(p.end-p.start)*(i+.5)/40,y=p.top+(p.bottom-p.top)*(i+1)/40;box(1.8,.18,.304,p.x,y-.09,z,i%8===0?light:stone);box(1.8,.018,.035,p.x,y+.009,z+(p.end>p.start?-.11:.11),slate);
-   if(i%4===0)for(const x of[p.x-.88,p.x+.88])guardPost(x,z,y,p.top+(p.bottom-p.top)*(i+.5)/40+1.08);
+ for(const p of PARTS){const floor=descentFloorBounds(p),width=floor.maxX-floor.minX,cx=(floor.minX+floor.maxX)/2;if(p.kind==='flight'){
+  const inner=p.x+(p.x>226.5?-.88:.88);
+  for(let i=0;i<40;i++){const z=p.start+(p.end-p.start)*(i+.5)/40,y=p.top+(p.bottom-p.top)*(i+1)/40;box(width,.18,.304,cx,y-.09,z,i%8===0?light:stone);box(width,.018,.035,cx,y+.009,z+(p.end>p.start?-.11:.11),slate);
+   if(i%4===0)guardPost(inner,z,y,p.top+(p.bottom-p.top)*(i+.5)/40+1.08);
   }
-  for(const x of[p.x-.88,p.x+.88]){guard([[x,p.top+1.08,p.start],[x,p.bottom+1.08,p.end]]);guardPost(x,p.start,p.top,p.top+1.08);guardPost(x,p.end,p.bottom,p.bottom+1.08);}
- }else{box(p.maxX-p.minX,.25,p.maxZ-p.minZ,(p.minX+p.maxX)/2,p.y-.125,(p.minZ+p.maxZ)/2,light);
-  if(p.id.startsWith('landing-')){const north=p.minZ<92,near=north?92:104,far=north?p.minZ+.16:p.maxZ-.16,left=224.12,right=228.88,y=p.y+1.08;
-   // Solid wall-backed landings need no fence across the alcove. Retain the
-   // two side returns and the guard beside the real opening between flights.
-   guard([[left,y,near],[left,y,far]]);guard([[right,y,far],[right,y,near]]);guard([[225.88,y,near],[227.12,y,near]]);
-   for(const x of[left,right])guardPost(x,far,p.y,y);
+  guard([[inner,p.top+1.08,p.start],[inner,p.bottom+1.08,p.end]]);guardPost(inner,p.start,p.top,p.top+1.08);guardPost(inner,p.end,p.bottom,p.bottom+1.08);
+ }else{box(width,.25,p.maxZ-p.minZ,cx,p.y-.125,(p.minZ+p.maxZ)/2,light);
+  if(p.id.startsWith('landing-')){const near=p.minZ<92?92:104,y=p.y+1.08;
+   // The enclosing wall guards the outside. Keep only the short return over
+   // the actual drop between the two flights, supported by their end posts.
+   guard([[225.88,y,near],[227.12,y,near]]);
   }else{const x=p.id==='entry'?228:225,near=104,far=p.id==='entry'?105.8:106.65,y=p.y+1.08;
-   for(const side of[-1,1]){const xx=x+side*.88;guard([[xx,y,near],[xx,y,far],[xx,y-.18,far]]);guardPost(xx,far,p.y,y);}
+   const xx=x+(p.id==='entry'?-.88:.88);guard([[xx,y,near],[xx,y,far],[xx,y-.18,far]]);guardPost(xx,far,p.y,y);
   }
  }}
  const s=D.shaft;

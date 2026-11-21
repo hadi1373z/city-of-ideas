@@ -207,7 +207,7 @@ and lower floor routes as well as the unchanged city learning journey.
 All 320 surface-descent treads and 96 museum treads retain their original
 positions and reversible controllers. Surface rail posts now reach the actual
 interpolated handrail height, instead of ending below its slope. Each of the
-seven turning landings joins both flights with supported side guards
+seven turning landings joins both flights with supported guards along the open inter-flight edges
 and a short inner return over the gap between lanes. Top and bottom guards
 continue onto their real entry/exit landings and end against posts with turned
 returns. Rounded joints and rails use two owned instance batches.
@@ -219,7 +219,7 @@ overlaps the cloister vault and reaches the stair lid, closing the former
 upper-gallery sightline into the island exterior. The upper stair remains open
 within the already closed main court vault.
 
-`tests/escher-stair-details.mjs` checks 290 post-to-rail joins against their
+`tests/escher-stair-details.mjs` checks 178 post-to-rail joins against their
 physical meshes, supported rail endings, and 5,400 bidirectional shoulder/torso
 rays across every tread, all surface turns and lateral museum-stair entrances.
 It also checks the high view above the lower doorway. These complement vertical
@@ -258,4 +258,7 @@ The pavilion court also contains an original anamorphic frame sculpture on a low
 
 The31 stair-wall arch panels now have real18cm-deep closed recesses, with stone jambs, sills and curved soffits. escher-stone-details.js supplies one shared niche layout; escher-descent.js subtracts those exact cavities from the shaft masonry. The museum floor/vault cut extends22cm into the28cm shaft enclosure, preserving6cm of overlap and preventing a separate museum slab from filling a niche. Combined-scene rays verify the actual18cm backs.
 
-All seven turning landings extend to the enclosing side/end walls. The end-wall-facing cross-rail is removed; supported side guards and the short inter-flight return still protect the real drops. The user can turn on continuous floor without a railing in front of the solid wall. Flight treads, fixed voices, private data and reversible controller handoff remain unchanged.
+All seven turning landings extend to the enclosing side/end walls. The end-wall-facing cross-rail is removed; supported guards along the open inter-flight edges and the short inter-flight return still protect the real drops. The user can turn on continuous floor without a railing in front of the solid wall. Flight treads, fixed voices, private data and reversible controller handoff remain unchanged.
+
+
+The user clarified that wall-facing flight rails must be removed too. All eight flights and both end landings now have solid bearing strips to the shaft walls, while the established navigation bands remain unchanged. descentFloorBounds shares these actual support extents. The only shaft guards follow the open inter-flight drops and their short landing returns; none run in front of the wall alcoves. A regression checks every widened tread at the wall and rejects any outer-wall rail path.

@@ -1,4 +1,4 @@
-import {DESCENT_PARTS,DESCENT_ANNEX} from './escher-descent-model.js?v=shore-niches-20261121';
+import {DESCENT_PARTS,DESCENT_ANNEX} from './escher-descent-model.js?v=wall-rails-20261121';
 
 // Original masonry details; the stair arches are real shallow closed alcoves.
 export const ESCHER_SHAFT_NICHES=Object.freeze([
