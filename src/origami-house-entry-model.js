@@ -1,4 +1,4 @@
-import {miura} from './origami-house-math.js?v=cloister-details-20261120';
+import {miura} from './origami-house-math.js?v=six-gate-city-20261121';
 
 // The entrance is the same rigid-panel construction taught at the main desk.
 // Real pleated paper geometry gives the small house an identifiable threshold.

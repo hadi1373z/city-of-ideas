@@ -247,9 +247,9 @@ side strips and header close the former views into empty earth.
 
 ## Approved surface pavilion · 20 November 2026
 
-The user's approved reference is `design/escher/hexagonal-pavilion-approved-20261120.png`. The main-city house is now one regular hexagon (27.5m radius, centre228,114), not three rectangular boxes. `escher-pavilion-model.js` supplies its physical outline, front threshold and planting reserve; `escher-pavilion-scene.js` owns the pale masonry, arched entrance/recesses, original bird frieze, continuous clipped lozenge floor, roof facets, six-column arcade and actual transparent glass lantern. The scaled design deliberately fits the original eight-flight shaft without moving its real mouth or underground destination. The earlier narrow annex is enclosed inside the rear of the larger pavilion.
+The user's approved reference is `design/escher/hexagonal-pavilion-approved-20261120.png`. The main-city house is now one regular hexagon (27.5m radius, centre239.023011444505,138), not three rectangular boxes. `escher-pavilion-model.js` supplies its physical outline, front threshold and planting reserve; `escher-pavilion-scene.js` owns the pale masonry, arched entrance/recesses, original bird frieze, continuous clipped lozenge floor, roof facets, six-column arcade and actual transparent glass lantern. The scaled design deliberately fits the original eight-flight shaft without moving its real mouth or underground destination. The narrow shaft annex retains its original position and joins the relocated hexagon through the enclosed rear link.
 
-The original perspective experiment retains its world origin228,115, all viewing markers and exact alignment; never derive its origin from the enlarged building's new front door. The three genuine print frames move onto clear inner wall faces; the gated Waterfall alcove, source attribution and original interaction IDs remain. The entrance and source gallery routes/map share the new threshold. No image from the reference board is used as a scene texture. Tests check floor support, roof/glass closure, the real stair opening, print visibility, full-body entry lanes and preserved puzzle alignment.
+The perspective experiment uses the pavilion's actual experimentOrigin, now239.023011444505,139, with all viewing markers and exact alignment translated together. Never derive its origin from the building's front door; explicit historical builder coordinates remain supported for isolated baseline tests. The three genuine print frames move onto clear inner wall faces; the gated Waterfall alcove, source attribution and original interaction IDs remain. The entrance and source gallery routes/map share the new threshold. No image from the reference board is used as a scene texture. Tests check floor support, roof/glass closure, the real stair opening, print visibility, full-body entry lanes and preserved puzzle alignment.
 
 The pavilion court also contains an original anamorphic frame sculpture on a low off-axis plinth. Its twelve edges occupy three real depths; their projections meet at exactly eight shared corners only from the brass stud. It leaves the original gate puzzle and its comparison marks unchanged. The masonry recesses are intentionally opaque arched panels, while only the central lantern is actual glass.
 
@@ -273,3 +273,46 @@ interpretations, not a photograph texture or a claim of a historical replica.
 Two geometry batches share one glazed material. Combined-scene tests retain
 opaque18cm backs, check visible tiles and genuinely three-dimensional cells in
 every niche, and prove all original stair/landing routes remain clear.
+
+## Centred pavilion and paper courtyard · 21 November 2026
+
+The user moved Origami, Noether and Cage out of Escher's block to the previously
+vacant hex(−1,3), centred at(79.67433714816835,414). Origami is at
+(79.67433714816835,385) facing +Z; Noether and Cage are at
+(45.67433714816835,437) and(113.67433714816835,437), facing north. Their shared
+courtyard runs along Z414 to the eastern hex boundary X159.3486742963367.
+The old local paths, map labels and furniture sites move with the actual houses.
+Mirzakhani remains archived and absent from the live city. Folding/listening/
+symmetry lesson IDs, explicit private saves and recorded voices are unchanged.
+
+The main Escher hexagon is centred exactly in hex(1,1) at
+(239.023011444505,138); the source group is at(239.023011444505,.13,139) because
+its local centre is Z−1. The front threshold is at Z164.41569860407205. Its real
+surface approach goes south to Z178, east to X284, north to Z138, then joins the
+block's eastern boundary. It does not draw a road through the hexagon's floor.
+
+The eight-flight shaft stays at X223.8..229.2, Z90.6..106.6, with first tread
+start(228,104) and entry(228,105.5). Its lawn/foundation cuts,320 treads, museum
+exit, Babel tunnel and underground guide graph retain their exact coordinates.
+A roughly10.18m enclosed rear link runs along X228 from Z104 to the new north
+wall at Z114.18430139592795. A real off-axis doorway passes through that wall;
+its mouldings, floor, side walls and roof share the opening. The gated alcove
+continues inside to Z119.98430139592795. The real first-flight cut is subtracted
+from the link slab, leaving the original descent open. The Waterfall print and
+route panel remain tied to this gated alcove.
+
+`pavilionRearLink` exposes the exact connection; `pavilionFootprint` includes its
+true concave rear extension AND the unchanged above-ground shaft annex down to
+Z96.1 for maps, collision reserves and planting. General polygon containment is
+required for this outline. The main `pavilionPolygon` remains a regular six-sided
+polygon; the connection does not distort it. Legacy explicit builder placements
+preserve their old relative alcove for edition and architecture baselines. Live
+perspective geometry follows the new group origin through `experimentOrigin`,
+so its correct view and wrong-position rejection remain exact.
+
+`tests/escher-house-relocation.mjs` checks shared coordinates and old-path
+removal;990 full-body rays, slab/headroom support and real enclosing sides along
+the new connector; the unchanged first-flight opening; actual new perspective
+alignment and rejected side view; and legacy builder compatibility. Existing
+Escher descent, shaft/museum combined geometry, source activity and street tests
+remain required. Generated map assets are rebuilt from the changed authorities.

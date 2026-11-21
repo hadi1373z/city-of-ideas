@@ -1,5 +1,5 @@
-import {miura} from './origami-house-math.js?v=cloister-details-20261120';
-import {ORIGAMI_ENTRY,origamiEntrySheet,origamiEntryPosts} from './origami-house-entry-model.js?v=cloister-details-20261120';
+import {miura} from './origami-house-math.js?v=six-gate-city-20261121';
+import {ORIGAMI_ENTRY,origamiEntrySheet,origamiEntryPosts} from './origami-house-entry-model.js?v=six-gate-city-20261121';
 export const ORIGAMI_ROOF=Object.freeze({profile:[[-9.7,4.15],[-5,6],[0,4.5],[5,6],[9.7,4.15]],solid:[[-8.6,-4.4],[-3.55,1.9],[2.75,8.6]],lights:[[-4.4,-3.55],[1.9,2.75]]});
 // An original folded-plate roof: daylight bands are holes in the solid plates,
 // closed by supported glass panes, rather than glass drawn over an opaque roof.

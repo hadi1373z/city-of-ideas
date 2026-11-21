@@ -1,0 +1,20 @@
+import assert from 'node:assert/strict';
+import * as T from '../src/city-source-assets/home-tools/vendor/three.module.js';
+import {existingGardenTrees,installGardenTreeBeds,inGardenPrecinct} from '../src/garden-tree-beds.js';
+import {GARDEN_TREE_CANDIDATES} from '../src/six-gate-garden-model.js';
+import {urbanRoutes,urbanBuildingFootprints,segmentDistance} from '../src/city-urban-plan-model.js';
+import {footprintBlocked} from '../src/honeycomb-city-model.js';
+const scene=new T.Scene(),trees=new T.Group(),garden=new T.Group();scene.add(trees,garden);
+trees.position.set(40,0,-17);trees.rotation.y=.31;trees.updateMatrixWorld(true);
+const worldPoints=[...GARDEN_TREE_CANDIDATES.map(p=>new T.Vector3(p.x,0,p.z)),new T.Vector3(0,0,0),new T.Vector3(500,0,500)];
+trees.userData.naturalTrees={positions:worldPoints.map(p=>{const q=trees.worldToLocal(p.clone());return{x:q.x,z:q.z};})};
+const lower=new T.Group();lower.position.y=-96;lower.userData.naturalTrees={positions:[{x:120,z:35}]};scene.add(lower);
+const treeGeometry=new T.CylinderGeometry(.2,.3,4),treeMaterial=new T.MeshBasicMaterial(),trunk=new T.Mesh(treeGeometry,treeMaterial);trees.add(trunk);let treeDisposed=0;treeGeometry.addEventListener('dispose',()=>treeDisposed++);
+const source=JSON.stringify(trees.userData.naturalTrees),pose=trees.matrixWorld.toArray(),childCount=trees.children.length;
+const selected=existingGardenTrees(T,scene);assert(selected.length>=6,'Existing actual trees in several gardens receive flower rings');
+for(const p of selected){assert(inGardenPrecinct(p.x,p.z));assert(worldPoints.some(q=>Math.hypot(q.x-p.x,q.z-p.z)<1e-7),'A ring belongs to a real existing tree, never an invented new planting');assert(!footprintBlocked(p.x,p.z,urbanBuildingFootprints(),p.radius+.25));for(const r of urbanRoutes())for(let i=1;i<r.points.length;i++)assert(segmentDistance(p.x,p.z,r.points[i-1],r.points[i])>=r.width/2+p.radius+.25,'The whole planted ring stays outside walking paths');}
+const handlers=new Set(),events={addEventListener(_t,fn){handlers.add(fn);},removeEventListener(_t,fn){handlers.delete(fn);}},M={scene};
+const api=installGardenTreeBeds(M,T,{coast:{urban:{garden:{group:garden}}},events});assert.equal(installGardenTreeBeds(M,T),api,'Repeated integration cannot duplicate flower rings');assert(api.built.beds.length===selected.length);assert.equal(garden.children.length,1);assert.equal(handlers.size,1);
+assert.equal(JSON.stringify(trees.userData.naturalTrees),source);assert.deepEqual(trees.matrixWorld.toArray(),pose);assert.equal(trees.children.length,childCount,'No tree is rebuilt, replaced or moved');
+api.dispose();api.dispose();assert.equal(treeDisposed,0,'Flower cleanup cannot dispose tree resources');assert.equal(garden.children.length,0);assert.equal(handlers.size,0);assert.equal(M.gardenTreeBeds,undefined);treeGeometry.dispose();treeMaterial.dispose();
+console.log(`PASS existing-tree garden rings: ${selected.length} real transformed trees, no added/moved trees, complete road/roof clearance, deduplication, lower-face exclusion and scoped cleanup`);

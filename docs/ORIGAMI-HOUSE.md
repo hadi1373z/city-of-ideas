@@ -24,8 +24,14 @@ The next detail pass makes the entrance visible from the street: a supported,
 closed Miura canopy uses the same rigid-panel construction as the main desk.
 Its two posts stay outside the four-metre approach, and the existing paper cranes
 are larger. The shared urban footprint and EN/DE/FA maps include the canopy.
-Arrival is now at(229,92), clear of the Escher stair pavilion at the old arrival.
-The approach test includes that pavilion's real collision polygon.
+The house now occupies the north side of the shared paper/seminar courtyard in
+hex(−1,3), at(79.67433714816835,385), facing +Z. Arrival is
+at(79.67433714816835,401), with its threshold atZ396 and inside arrival atZ390.5.
+Noether and Cage face it from(45.67433714816835,437) and
+(113.67433714816835,437). The shared court runs atZ414 and joins the eastern
+hex edge at(159.3486742963367,414). The old Escher-side Origami paths are removed.
+These placements and paths share PAPER_SEMINAR_COURT in city-hex-layout.js;
+map labels and the coastal walking guide use the same live coordinates.
 
 Surface eligibility uses actual feet height. Walking in the Escher museum below
 the same x/z cannot display Origami's prompt, claim its region or operate its

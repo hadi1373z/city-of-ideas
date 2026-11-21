@@ -1,5 +1,5 @@
-import {PHILOSOPHERS,pickLanguage} from './philosopher-data.js?v=academy-escher-20261120';
-import {createPhilosopherQuarter} from './philosopher-quarter.js?v=academy-escher-20261120';
+import {PHILOSOPHERS,pickLanguage} from './philosopher-data.js?v=six-gate-city-20261121';
+import {createPhilosopherQuarter} from './philosopher-quarter.js?v=six-gate-city-20261121';
 
 export function installPhilosopherQuarter(M,T){
  const lang=()=>window.CITY_I18N.lang,tx=(fa,en)=>CITY_I18N.tx(fa,en);

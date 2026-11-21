@@ -1,9 +1,10 @@
 import {CITY_ISLAND,coastX,SHORE,ISLAND_ROUTES} from './island-layout.js?v=makers-passages-20261118';
 export {coastX} from './island-layout.js?v=makers-passages-20261118';
-export const HOUSE_ORIGAMI={x:229,z:76,width:18,depth:16,entry:{x:229,z:92,y:.13,yaw:0,pitch:.06},threshold:{x:229,z:87},insideEntry:{x:229,z:81.5,y:.13,yaw:0},shore:{...SHORE}};
+import {PAPER_SEMINAR_COURT as COURT} from './city-hex-layout.js?v=six-gate-city-20261121';
+export const HOUSE_ORIGAMI={x:COURT.x,z:COURT.z-29,width:18,depth:16,entry:{x:COURT.x,z:COURT.z-13,y:.13,yaw:0,pitch:.06},threshold:{x:COURT.x,z:COURT.z-18},insideEntry:{x:COURT.x,z:COURT.z-23.5,y:.13,yaw:0},shore:{...SHORE}};
 export const PAPER_COLOURS=['#e9dcb9','#92b9c5','#cc9584'];
-const hexVertexX=Math.sqrt(3)*138;
-const LOCAL_ROUTES=[[[215,116],[215,90],[229,90],[229,84]],[[229,92],[229,84]],[[229,90],[249,90],[249,65]],[[203.5,65],[215,65],[249,65],[hexVertexX,46]]];
+// One short threshold approach joins the shared court, then its east hex edge.
+const LOCAL_ROUTES=[[[COURT.x,COURT.z],[COURT.x,HOUSE_ORIGAMI.entry.z],[COURT.x,HOUSE_ORIGAMI.z+8]],[[COURT.x,COURT.z],[COURT.eastX,COURT.z]]];
 export const COAST_PATHS=[...LOCAL_ROUTES.map((points,i)=>({id:'origami-court-'+i,points,width:4,kind:'court-approach'})),...ISLAND_ROUTES];
 // Keep the established array API for the source folding/boat modules.
 export const COAST_ROUTES=COAST_PATHS.map(r=>r.points);

@@ -1,5 +1,5 @@
 import {CITY_ISLAND} from './island-layout.js?v=makers-passages-20261118';
-import {coastMapPoint} from './coastal-map-data.js?v=live-light-niches-20261121';
+import {coastMapPoint} from './coastal-map-data.js?v=six-gate-city-20261121';
 
 // A fresh, in-memory plan-view snapshot whenever the overview is opened.
 // Never clamp a remote world or sailing location onto the island edge.

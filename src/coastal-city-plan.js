@@ -1,15 +1,16 @@
+import {ESCHER_PAVILION as ESCHER} from './escher-pavilion-model.js?v=six-gate-city-20261121';
 import {LIGHT_HOUSE} from './house-of-light-model.js?v=live-light-niches-20261121';
 import {SOCRATES_SITE} from './socrates-site-model.js?v=shore-niches-20261121';
 import {MAKERS_SITE,MAKERS_ACCESS,MAKERS_ROOFS} from './makers-site.js?v=makers-block-20261118';
 import {PARK_GRASS_CSS,lawnMapColour} from './city-lawn-palette.js?v=makers-passages-20261118';
-import {FOUNDATION_HOUSES,FOUNDATION_ROUTES} from './foundation-houses-data.js?v=makers-passages-20261118';
+import {FOUNDATION_HOUSES,FOUNDATION_ROUTES} from './foundation-houses-data.js?v=six-gate-city-20261121';
 import {CITY_ISLAND as I} from './island-layout.js?v=makers-passages-20261118';
-import {PARK_HEX_CELLS,CITY_HEX,IDEAS_PARK_SITE} from './city-hex-layout.js?v=makers-passages-20261118';
-import {coastX,HOUSE_ORIGAMI,COAST_ROUTES} from './origami-house-math.js?v=cloister-details-20261120';
-import {SEMINAR_HOUSES,SEMINAR_PATHS} from './seminar-houses-data.js?v=cloister-20261120';
+import {PARK_HEX_CELLS,CITY_HEX,IDEAS_PARK_SITE,PAPER_SEMINAR_COURT as COURT} from './city-hex-layout.js?v=six-gate-city-20261121';
+import {coastX,HOUSE_ORIGAMI,COAST_ROUTES} from './origami-house-math.js?v=six-gate-city-20261121';
+import {SEMINAR_HOUSES,SEMINAR_PATHS} from './seminar-houses-data.js?v=six-gate-city-20261121';
 import {STUDY_PATHS} from './study-houses-data.js?v=city-night-20261117';
-import {COAST_MAIN_PATHS} from './coastal-map-data.js?v=live-light-niches-20261121';
-import {URBAN_STREETS,ARCADE_STREETS,URBAN_COURTS,PRIVATE_HOME_RESERVE,HONEYCOMB_CITY,CITY_UNDERGROUND_LINKS,urbanCourtOutline,urbanBuildingFootprints,urbanLawnCells,urbanRoutes} from './city-urban-plan-model.js?v=live-light-niches-20261121';
+import {COAST_MAIN_PATHS} from './coastal-map-data.js?v=six-gate-city-20261121';
+import {URBAN_STREETS,ARCADE_STREETS,URBAN_COURTS,PRIVATE_HOME_RESERVE,HONEYCOMB_CITY,CITY_UNDERGROUND_LINKS,urbanCourtOutline,urbanBuildingFootprints,urbanLawnCells,urbanRoutes} from './city-urban-plan-model.js?v=six-gate-city-20261121';
 export const COAST_MAP_COPY={en:{title:'An island around Zarathustra',gallery:'Zarathustra Gallery',ocean:'Surrounding ocean',park:'Ideas Park',artists:'Artists’ quarter',socrates:'Socrates',philosophers:'Philosophers’ quarter',makers:'Makers’ courtyard',study:'Advanced study houses',origami:'House of Origami',mountain:'Mountain of Becoming',shore:'Paper-boat lookout',note:'One circular island. The gallery at its centre. Ocean all around.'},de:{title:'Eine Insel um Zarathustra',gallery:'Zarathustra-Galerie',ocean:'Umliegender Ozean',park:'Ideenpark',artists:'Künstlerviertel',socrates:'Sokrates',philosophers:'Philosophenviertel',makers:'Hof der Schaffenden',study:'Vertiefte Lernhäuser',origami:'Haus des Origami',mountain:'Berg des Werdens',shore:'Papierboot-Aussicht',note:'Eine kreisrunde Insel. Die Galerie im Mittelpunkt. Rundum Ozean.'},fa:{title:'جزیره‌ای پیرامون زرتشت',gallery:'گالری زرتشت',ocean:'اقیانوس پیرامون جزیره',park:'پارک ایده‌ها',artists:'محلهٔ هنرمندان',socrates:'سقراط',philosophers:'محلهٔ فیلسوفان',makers:'حیاط سازندگان',study:'خانه‌های مطالعهٔ پیشرفته',origami:'خانهٔ اوریگامی',mountain:'کوه شدن',shore:'تماشای قایق کاغذی',note:'جزیره‌ای دایره‌ای؛ گالری در مرکز و اقیانوس در پیرامون.'}};
 const escape=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
 export function coastalPlanSvg(plan,lang='en'){
@@ -30,11 +31,12 @@ export function coastalPlanSvg(plan,lang='en'){
  parts.push('<circle data-gallery-centre="true" cx="460" cy="460" r="'+58*s+'" fill="#d5b366" stroke="#866734" stroke-width="2"/>','<circle cx="460" cy="460" r="'+28*s+'" fill="#efe0ab"/>',text(0,9,lang==='fa'?'ز':'Z',28),text(0,-72,c.gallery,12));
  const colours={'light-art':'#89b9c3',letters:'#a77f58',philosopher:'#71816b',study:'#64817a',seminar:'#8b7eaa',artist:'#a56b55',pattern:'#497f86',making:'#b28c55',place:'#7c8d77','place-step':'#c6bd9e',humanities:'#ae9274'};
  for(const h of urbanBuildingFootprints(plan)){if(h.category==='gallery'||h.category==='reserve')continue;const extra='data-building-footprint="'+h.id+'" data-centre="'+h.x+','+h.z+'"'+(h.category==='letters'?' data-house="'+h.id+'"':'')+(h.id.startsWith('transformations')?' data-transformation-house="true"':''),shape=h.shape==='circle'?'<circle '+extra+' cx="'+px(h.x)+'" cy="'+pz(h.z)+'" r="'+h.radius*s+'"':'<polygon '+extra+' points="'+points(h.points)+'"';parts.push(shape+' fill="'+(colours[h.category]||'#d5b366')+'" stroke="#f7efd5" stroke-width=".8"><title>'+escape(h.label)+'</title></'+(h.shape==='circle'?'circle':'polygon')+'>');if(h.front)parts.push(path([[h.x,h.z],h.front],'#ead7a8',.7));if(h.id.startsWith('transformations-'))parts.push(text(h.x,h.z-34,h.label,10));if(h.category==='place')parts.push(text(h.x,h.z-23,h.label,11));}
+ parts.push(text(ESCHER.x,ESCHER.z+58,lang==='fa'?'خانهٔ پرسپکتیو':lang==='de'?'Haus der Perspektiven':'House of Perspectives',12));
  parts.push(text(LIGHT_HOUSE.x,LIGHT_HOUSE.z+38,lang==='fa'?'خانهٔ نور':lang==='de'?'Haus des Lichts':'House of Light',12));
  parts.push(text(-318.6973485926734,83,c.philosophers,14),text(SOCRATES_SITE.x,SOCRATES_SITE.z+27,c.socrates,13));
- parts.push(text(-398.3716857408417,185,'Garden galleries',13),text(398.3716857408417,-184,'Form galleries',13),text(159.3486742963367,326,'Working studios',13),text(-159.3486742963367,387,'Stories and language',13),text(239.023011444505,204,'Advanced seminars',13),text(255,-181,c.study,13));
+ parts.push(text(-398.3716857408417,185,'Garden galleries',13),text(398.3716857408417,-184,'Form galleries',13),text(159.3486742963367,326,'Working studios',13),text(-159.3486742963367,387,'Stories and language',13),text(COURT.x,COURT.z+73,lang==='fa'?'کاغذ، تقارن و شنیدن':lang==='de'?'Papier, Symmetrie und Zuhören':'Paper, symmetry and listening',13),text(255,-181,c.study,13));
  parts.push(text(MAKERS_SITE.x,MAKERS_SITE.z+27,c.makers,11));
- parts.push(path([[229,76],[350,122]],'#899880',.7,'stroke-dasharray="2 2"'),text(362,139,c.origami,13),dot(HOUSE_ORIGAMI.shore.x,HOUSE_ORIGAMI.shore.z,3,'#486c7b'),text(431,45,c.shore,12));
+ parts.push(text(HOUSE_ORIGAMI.x,HOUSE_ORIGAMI.z-16,c.origami,13),dot(HOUSE_ORIGAMI.shore.x,HOUSE_ORIGAMI.shore.z,3,'#486c7b'),text(431,45,c.shore,12));
  for(const h of FOUNDATION_HOUSES){const name=h.names[lang]||h.names.en,tx=h.x< -159.3486742963367?-247:-72,tz=h.z;parts.push(path([[h.x+(h.x<0?-10:10),h.z],[tx,tz]],'#a59473',.7),text(tx,tz-8,name,12));}
  for(const[h,label]of SEMINAR_HOUSES.map(h=>[h,h.id==='noether'?'Noether':h.id==='mirzakhani'?'Mirzakhani':'Cage']))parts.push(text(h.x,h.z+26,label,10));
  const legend=lang==='en'?'Honeycomb courts · real house entrances · dashed underground passages · homes on the night face':lang==='de'?'Sechs verbundene Lernhäuser · reale Sechseckstraßen und Untergrundwege':'شش خانهٔ پیوسته · خیابان‌های واقعی شش‌ضلعی و گذرگاه‌های زیرزمین';parts.push('<text x="460" y="865" text-anchor="middle" font-size="13" fill="#f5f3df">'+escape(legend)+'</text>','<text x="460" y="895" text-anchor="middle" font-size="17" fill="#f5f3df">'+escape(c.note)+'</text></g></svg>');return parts.join('');

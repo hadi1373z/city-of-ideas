@@ -1,13 +1,13 @@
 import {cutDescentGround} from './escher-descent-model.js?v=wall-rails-20261121';
 import {createParkGrassMaterial} from './city-lawn-palette.js?v=makers-passages-20261118';
-import {IDEAS_PARK_SITE} from './city-hex-layout.js?v=makers-passages-20261118';
+import {IDEAS_PARK_SITE} from './city-hex-layout.js?v=six-gate-city-20261121';
 import {cutHouseWell,configuredHouseWells} from './transformation-house-model.js?v=makers-passages-20261118';
 import {createOceanMaterial,updateOceanMaterial} from './ocean-surface.js?v=makers-passages-20261118';
-import {FOUNDATION_HOUSES,FOUNDATION_ROUTES} from './foundation-houses-data.js?v=makers-passages-20261118';
-import {COAST_ROUTES,HOUSE_ORIGAMI} from './origami-house-math.js?v=cloister-details-20261120';
+import {FOUNDATION_HOUSES,FOUNDATION_ROUTES} from './foundation-houses-data.js?v=six-gate-city-20261121';
+import {COAST_ROUTES,HOUSE_ORIGAMI} from './origami-house-math.js?v=six-gate-city-20261121';
 import {CITY_ISLAND as I,islandRadius} from './island-layout.js?v=makers-passages-20261118';
-import {urbanRoutes,segmentDistance,streetTreeClear} from './city-urban-plan-model.js?v=live-light-niches-20261121';
-import {buildCityUrbanPlan} from './city-urban-plan-scene.js?v=live-light-niches-20261121';
+import {urbanRoutes,segmentDistance,streetTreeClear} from './city-urban-plan-model.js?v=six-gate-city-20261121';
+import {buildCityUrbanPlan} from './city-urban-plan-scene.js?v=six-gate-city-20261121';
 export function buildCityCoast(T,{cityPaths=[],heightAt=()=>0,naturalTrees=globalThis.window?.buildNaturalCityTrees,parkGrass=null}={}){
  const group=new T.Group();group.name='Circular island and surrounding ocean';const owned=new Set(),own=r=>(owned.add(r),r),mat=c=>own(new T.MeshLambertMaterial({color:c})),sand=mat(0xcbbd96),wood=mat(0x846d50),pathMat=mat(0xc6bd9e),laneMat=mat(0x9b9e83);
  function box(w,h,d,x,y,z,m){const o=new T.Mesh(own(new T.BoxGeometry(w,h,d)),m);o.position.set(x,y,z);group.add(o);return o;}
@@ -39,5 +39,5 @@ export function buildCityCoast(T,{cityPaths=[],heightAt=()=>0,naturalTrees=globa
  for(let i=0;i<12;i++)box(4,.09,.48,257+dx,.085,73.1+i*.5,wood);
  for(const z of[73,76,79])box(.12,.85,.12,259.05+dx,.5,z,wood);box(.12,.10,6.2,259.05+dx,.88,76,wood);
  const launch=box(.5,.06,.42,258.85+dx,.95,76,mat(0xe3d6af));launch.name='Paper boat launch rest';launch.userData={origamiHouse:'shore',dynamic:true};
- return{group,sea,land,beach,promenade,launch,urban,paths:COAST_ROUTES,pavedRoutes:paths,treePositions:trees,canStand:(x,z)=>urban.canStand(x,z)&&!trees.some(p=>Math.hypot(x-p.x,z-p.z)<.45),uniforms,update(time,{reduced=false,fog}={}){updateOceanMaterial(water,time,{reduced,fog});},dispose(){urban.dispose();group.removeFromParent();group.traverse(o=>{if(o.geometry)owned.add(o.geometry);for(const m of Array.isArray(o.material)?o.material:o.material?[o.material]:[])owned.add(m);if(o.isInstancedMesh)o.dispose?.();});for(const r of owned)r.dispose();group.clear();}};
+ return{group,sea,land,beach,promenade,launch,urban,paths:COAST_ROUTES,pavedRoutes:paths,treePositions:trees,canStand:(x,z,feet=.13)=>urban.canStand(x,z,feet)&&!trees.some(p=>Math.hypot(x-p.x,z-p.z)<.45),uniforms,update(time,{reduced=false,fog}={}){updateOceanMaterial(water,time,{reduced,fog});},dispose(){urban.dispose();group.removeFromParent();group.traverse(o=>{if(o.geometry)owned.add(o.geometry);for(const m of Array.isArray(o.material)?o.material:o.material?[o.material]:[])owned.add(m);if(o.isInstancedMesh)o.dispose?.();});for(const r of owned)r.dispose();group.clear();}};
 }

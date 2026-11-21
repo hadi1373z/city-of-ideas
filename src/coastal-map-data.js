@@ -1,8 +1,8 @@
 import {LIGHT_HOUSE} from './house-of-light-model.js?v=live-light-niches-20261121';
 import {SOCRATES_SITE} from './socrates-site-model.js?v=shore-niches-20261121';
 import {MAKERS_SITE,MAKERS_ACCESS,MAKERS_ROOFS} from './makers-site.js?v=makers-block-20261118';
-import {IDEAS_PARK_SITE} from './city-hex-layout.js?v=makers-passages-20261118';
-import {SEMINAR_HOUSES} from './seminar-houses-data.js?v=cloister-20261120';
+import {IDEAS_PARK_SITE,PAPER_SEMINAR_COURT as COURT} from './city-hex-layout.js?v=six-gate-city-20261121';
+import {SEMINAR_HOUSES} from './seminar-houses-data.js?v=six-gate-city-20261121';
 import {SHORE,HEX_COAST_WALK,COAST_PROMENADE_WALK} from './island-layout.js?v=makers-passages-20261118';
 
 // The same world-to-SVG projection used by the original coastal plan.
@@ -22,13 +22,13 @@ export const COAST_MAIN_PATHS = [
  ...SOCRATES_SITE.approaches,
  // The original park/pond entrance meets the northern shared hex edge.
  [[0,-92],[0,IDEAS_PARK_SITE.z+135]],
- // Makers and the existing Origami/Proof approaches meet a real block vertex.
+ // Makers and the existing Proof approach meet a real block vertex.
  MAKERS_ACCESS.points,
  [[2*A,-92],[199,-92],[199,65],[203.5,65]]
 ];
 // The guide follows the source court approaches, real hex edges, existing
 // eastern coast gate and shoreline promenade. It creates no cross-cell road.
-export const COAST_WALK = [[64,0],[A,0],[A,-46],[2*A,-92],[199,-92],[199,65],[203.5,65],[215,65],[249,65],...HEX_COAST_WALK,...COAST_PROMENADE_WALK.slice(1),[SHORE.x,SHORE.z]];
+export const COAST_WALK = [[64,0],[A,0],[A,46],[0,92],[0,184],[A,230],[A,322],[2*A,368],[COURT.eastX,COURT.z],[COURT.x,COURT.z],[COURT.x,COURT.z-13],[COURT.x,COURT.z],[COURT.eastX,COURT.z],[2*A,368],[A,322],[A,230],[2*A,184],[2*A,92],...HEX_COAST_WALK,...COAST_PROMENADE_WALK.slice(1),[SHORE.x,SHORE.z]];
 
 
 export function coastWalkSvg() {
@@ -43,7 +43,7 @@ export const COAST_EXPLORER_COPY = {
     places: 'Five places to explore', information: 'About this place', visit: 'Visit this place',
     route: 'Walking route · Gallery → Origami → Coast', shown: 'Walking route shown.', hidden: 'Walking route hidden.',
     routeHelp: 'The dashed rust-coloured line follows existing paths. It starts at the gallery’s east approach; it is a map guide, not automatic movement.',
-    steps: ['From the gallery’s east approach, follow the central hex edge north to the shared vertex, then continue along the next hex edge to the east-side lane.', 'Follow the east-side lane south, then turn east past the north side of the House of Origami. The artists’ garden court is a separate destination in the western blocks.', 'Follow the honeycomb street edges to the eastern coast gate, then follow the shoreline promenade to the paper-boat lookout.'],
+    steps: ['From the gallery’s east approach, follow the honeycomb street edges south to the paper, symmetry and listening court.', 'Enter the shared court from its east edge and approach the House of Origami on the north side. Return along the same court approach to the hex street.', 'Follow the honeycomb street edges to the eastern coast gate, then follow the shoreline promenade to the paper-boat lookout.'],
     more: 'More city destinations',
     landmarks: {
       gallery: {name: 'Zarathustra Gallery', area: 'The island centre', description: 'Explore the gallery and its philosophical artworks. Zarathustra stands at the exact centre of this circular island.'},
@@ -59,7 +59,7 @@ export const COAST_EXPLORER_COPY = {
     places: 'Fünf Orte zum Erkunden', information: 'Über diesen Ort', visit: 'Diesen Ort besuchen',
     route: 'Spazierweg · Galerie → Origami → Küste', shown: 'Spazierweg eingeblendet.', hidden: 'Spazierweg ausgeblendet.',
     routeHelp: 'Die rostrote gestrichelte Linie folgt bestehenden Wegen. Sie beginnt am östlichen Zugang der Galerie und dient zur Orientierung; sie bewegt dich nicht automatisch.',
-    steps: ['Gehe vom östlichen Zugang der Galerie entlang der nördlichen Hexagonkante zum gemeinsamen Eckpunkt und weiter in Richtung der Werkstätten.', 'Folge der Werkstattgasse nach Süden und gehe dann nach Osten an der Nordseite des Hauses des Origami vorbei. Der Gartenhof der Künstler liegt separat in den westlichen Stadtblöcken.', 'Folge den Wabenstraßen zum östlichen Küstentor und dann der Uferpromenade zur Papierboot-Aussicht.'],
+    steps: ['Folge vom östlichen Zugang der Galerie den Wabenstraßen nach Süden zum Hof für Papier, Symmetrie und Zuhören.', 'Betritt den gemeinsamen Hof von Osten und nähere dich dem Haus des Origami an seiner Nordseite. Kehre über denselben Hofzugang zur Wabenstraße zurück.', 'Folge den Wabenstraßen zum östlichen Küstentor und dann der Uferpromenade zur Papierboot-Aussicht.'],
     more: 'Weitere Ziele in der Stadt',
     landmarks: {
       gallery: {name: 'Zarathustra-Galerie', area: 'Die Inselmitte', description: 'Erkunde die Galerie und ihre philosophischen Kunstwerke. Zarathustra steht genau im Mittelpunkt dieser kreisrunden Insel.'},
@@ -75,7 +75,7 @@ export const COAST_EXPLORER_COPY = {
     places: 'پنج مکان برای گردش', information: 'دربارهٔ این مکان', visit: 'رفتن به این مکان',
     route: 'مسیر پیاده‌روی · گالری ← اوریگامی ← ساحل', shown: 'مسیر پیاده‌روی نمایش داده شد.', hidden: 'مسیر پیاده‌روی پنهان شد.',
     routeHelp: 'خط‌چین آجری‌رنگ مسیرهای موجود را دنبال می‌کند. آغاز آن ورودی شرقی گالری است؛ این راهنمای نقشه است و شما را خودکار جابه‌جا نمی‌کند.',
-    steps: ['از ورودی شرقی گالری لبهٔ شش‌ضلعی را به شمال تا رأس مشترک دنبال کنید و در امتداد لبهٔ بعدی به سوی کارگاه‌ها بروید.', 'گذرگاه کارگاه‌ها را به جنوب بروید و سپس به شرق، از کنار بخش شمالی خانهٔ اوریگامی بگذرید. حیاط باغ هنرمندان مقصدی جداگانه در بلوک‌های غربی شهر است.', 'لبه‌های خیابان‌های شش‌ضلعی را تا دروازهٔ شرقی ساحل دنبال کنید و سپس از پیاده‌راه ساحلی به سکوی قایق کاغذی بروید.'],
+    steps: ['از ورودی شرقی گالری، خیابان‌های شش‌ضلعی را به جنوب تا حیاط کاغذ، تقارن و شنیدن دنبال کنید.', 'از لبهٔ شرقی وارد حیاط مشترک شوید و به خانهٔ اوریگامی در شمال حیاط نزدیک شوید. سپس از همان راه حیاط به خیابان شش‌ضلعی برگردید.', 'لبه‌های خیابان‌های شش‌ضلعی را تا دروازهٔ شرقی ساحل دنبال کنید و سپس از پیاده‌راه ساحلی به سکوی قایق کاغذی بروید.'],
     more: 'مقصدهای دیگر شهر',
     landmarks: {
       gallery: {name: 'گالری زرتشت', area: 'مرکز جزیره', description: 'گالری و آثار فلسفی آن را ببینید. زرتشت درست در مرکز این جزیرهٔ دایره‌ای قرار دارد.'},
@@ -89,9 +89,9 @@ export const COAST_EXPLORER_COPY = {
 
 for(const [i,h]of SEMINAR_HOUSES.entries())COAST_LANDMARKS.push({id:h.id,number:h.mapNumber,point:[h.x,h.z],seminarHouse:true});
 const seminarMapCopy={
- en:{places:'Seven places to explore',area:'The southeastern seminar court',descriptions:['Enter a stone rotunda and test how breaking rotational symmetry changes an exact oscillator model. Read the assumptions behind its conserved quantities.','Explore a turquoise ribbon-roof house, compare paths in the Poincaré disk and follow the question toward Mirzakhani’s research on closed geodesics.','Enter a timber listening house, change an original seeded score and question the roles of chance, constraints and authorship. Sound is optional.']},
- de:{places:'Sieben Orte zum Erkunden',area:'Der südöstliche Seminarhof',descriptions:['Betritt die Steinrotunde und prüfe an exakten Oszillatoren, was beim Brechen der Rotationssymmetrie erhalten bleibt. Lies die Voraussetzungen des Arguments.','Erkunde das Haus unter dem türkisen Banddach, vergleiche Wege in der Poincaré-Scheibe und folge der Frage zu Mirzakhanis Forschung über geschlossene Geodäten.','Betritt das hölzerne Haus des Zuhörens, verändere eine eigenständige gesetzte Partitur und befrage Zufall, Regeln und Autorschaft. Klang ist freiwillig.']},
- fa:{places:'هفت مکان برای گردش',area:'حیاط سمینار در جنوب‌شرق',descriptions:['وارد روتوندای سنگی شو و در مدل دقیق نوسانگر بررسی کن شکست تقارن دورانی چه چیزی را تغییر می‌دهد. فرض‌های کمیت پایسته را بخوان.','زیر سقف نواری فیروزه‌ای، مسیرهای دیسک پوانکاره را مقایسه کن و پرسش را تا پژوهش میرزاخانی دربارهٔ ژئودزیک‌های بسته دنبال کن.','وارد خانهٔ چوبی شنیدن شو؛ پارتیتور تازهٔ بذردار را تغییر بده و نقش تصادف، قید و مؤلف را بسنج. پخش صدا اختیاری است.']}
+ en:{places:'Seven places to explore',area:'The southern paper and seminar court',descriptions:['Enter a stone rotunda and test how breaking rotational symmetry changes an exact oscillator model. Read the assumptions behind its conserved quantities.','Explore a turquoise ribbon-roof house, compare paths in the Poincaré disk and follow the question toward Mirzakhani’s research on closed geodesics.','Enter a timber listening house, change an original seeded score and question the roles of chance, constraints and authorship. Sound is optional.']},
+ de:{places:'Sieben Orte zum Erkunden',area:'Der südliche Papier- und Seminarhof',descriptions:['Betritt die Steinrotunde und prüfe an exakten Oszillatoren, was beim Brechen der Rotationssymmetrie erhalten bleibt. Lies die Voraussetzungen des Arguments.','Erkunde das Haus unter dem türkisen Banddach, vergleiche Wege in der Poincaré-Scheibe und folge der Frage zu Mirzakhanis Forschung über geschlossene Geodäten.','Betritt das hölzerne Haus des Zuhörens, verändere eine eigenständige gesetzte Partitur und befrage Zufall, Regeln und Autorschaft. Klang ist freiwillig.']},
+ fa:{places:'هفت مکان برای گردش',area:'حیاط کاغذ و سمینار در جنوب',descriptions:['وارد روتوندای سنگی شو و در مدل دقیق نوسانگر بررسی کن شکست تقارن دورانی چه چیزی را تغییر می‌دهد. فرض‌های کمیت پایسته را بخوان.','زیر سقف نواری فیروزه‌ای، مسیرهای دیسک پوانکاره را مقایسه کن و پرسش را تا پژوهش میرزاخانی دربارهٔ ژئودزیک‌های بسته دنبال کن.','وارد خانهٔ چوبی شنیدن شو؛ پارتیتور تازهٔ بذردار را تغییر بده و نقش تصادف، قید و مؤلف را بسنج. پخش صدا اختیاری است.']}
 };
 for(const lang of ['en','de','fa']){const c=COAST_EXPLORER_COPY[lang],extra=seminarMapCopy[lang];c.places=extra.places;SEMINAR_HOUSES.forEach((h,i)=>c.landmarks[h.id]={name:h.names[lang],area:extra.area,description:extra.descriptions[{noether:0,mirzakhani:1,cage:2}[h.id]]});}
 

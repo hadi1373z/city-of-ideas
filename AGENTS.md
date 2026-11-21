@@ -388,3 +388,29 @@ The daytime House of Light occupies hex(1,2). Read docs/HOUSE-OF-LIGHT.md. Prese
 The House of Light now has a selective live floor reflection using the real61-rod geometry, colours and world pose; preserve its transparent tile overlay, shared attributes and capture cleanup. Escher shaft niches are raised55cm and contain original blue star tilework plus recessed faceted vault cells; keep every facet behind the wall face. See the updated house/stair docs and tests.
 
 The Superhuman sculpture/story is now OFF through CITY_CONFIG.superhumanEnabled=false. Preserve its code, original text and enabled path; do not show its figure, particles, dedicated light, picks or story UI while disabled. Keep the volcano/Babel routes and moving orange-red lava. The daylight sun is at CITY_CONFIG.daySun=(0,120,0), aimed vertically at(0,0,0); do not move the lower night sky.
+
+The approved Six Gate Garden now surrounds the central Gallery and six existing
+pattern houses. Read docs/SIX-GATE-GARDEN.md. Keep the r105 shaded loop, six open
+loggias, real tangential door approaches, source shafts and basement circuit.
+Garden roofs are walk-through reserves; only actual columns/furniture block
+surface movement. Every map, wall opening and planting owner shares its routes
+and footprints. Six shifted bisector column pairs leave all30 central grid edges
+clear. Do not restore court walls or trees across the new paths.
+The user then explicitly rejected the leftover solid low walls: all seven
+central garden cells are openCells in the generator. Keep their honeycomb
+walls absent from actual geometry and maps; outer city courts remain separate.
+The final landscape correction keeps all existing trees. garden-tree-beds.js
+reads their actual mounted renderer positions and adds low curved planting rings
+only where the full bed clears paths, roofs and columns. Keep trees, routes and
+seating fixed; never feed the new beds into tree exclusions or rebuild the forest.
+
+Escher's main hexagon is now centred in hex(1,1), at(239.023011444505,138), with
+its group atZ139 and a real enclosed rear link to the unchanged X228 stair.
+The entire fixed annex and connector have a true concave roof outline for maps
+and planting. Preserve general polygon containment and the real first-flight
+opening. The perspective activity follows the new experimentOrigin; explicit
+legacy builders retain their original placement. Origami, Noether and Cage
+now share the formerly vacant hex(-1,3), centre(79.67433714816835,414), with
+doors facing their shared court and an eastern street connection. Keep their
+original content, storage IDs and paper-boat landing; Mirzakhani stays archived.
+See docs/ESCHER-DEPTH.md and docs/ORIGAMI-HOUSE.md for the relocation authority.

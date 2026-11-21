@@ -1,9 +1,9 @@
 import {arrangeListeningScore,listeningMeasure,compareListeningScores} from './cage-listening-model.js?v=cloister-20261120';
 import {CAGE_LISTENING} from './cage-listening-copy.js?v=cloister-20261120';
 import {WORKBENCH_TEXT,faceRoomWork,showRoomDialog} from './room-workbench.js?v=city-night-20261117';
-import {SEMINAR_HOUSES} from './seminar-houses-data.js?v=cloister-20261120';
+import {SEMINAR_HOUSES} from './seminar-houses-data.js?v=six-gate-city-20261121';
 import {SEMINAR_TEXT} from './seminar-houses-copy.js?v=cloister-20261120';
-import {buildSeminarHouses} from './seminar-houses-scene.js?v=cloister-20261120';
+import {buildSeminarHouses} from './seminar-houses-scene.js?v=six-gate-city-20261121';
 import {oscillator,DISK_CASES,diskGeodesic,diskDistance,chordLength,chanceScore,SCORE_FREQUENCIES} from './seminar-house-models.js?v=city-night-20261117';
 export function installSeminarHouses(M,T){
  const built=buildSeminarHouses(T);M.scene.add(built.group);M.city.targets.push(...built.targets);M.city.buildingTargets.push(...built.houses.map(h=>h.group));

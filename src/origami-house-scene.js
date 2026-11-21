@@ -1,6 +1,6 @@
 import {buildFoldWorkbench} from './origami-fold-workbench.js?v=cloister-details-20261120';
-import {buildOrigamiArchitecture,ORIGAMI_ROOF} from './origami-house-architecture.js?v=cloister-details-20261120';
-import {HOUSE_ORIGAMI as P,PAPER_COLOURS,miura,CREASE_CASES,releasedBoatPose} from './origami-house-math.js?v=cloister-details-20261120';
+import {buildOrigamiArchitecture,ORIGAMI_ROOF} from './origami-house-architecture.js?v=six-gate-city-20261121';
+import {HOUSE_ORIGAMI as P,PAPER_COLOURS,miura,CREASE_CASES,releasedBoatPose} from './origami-house-math.js?v=six-gate-city-20261121';
 import {buildPaperBoat} from './origami-boat.js?v=city-night-20261117';
 import {buildPaperCrane} from './origami-creatures.js?v=city-night-20261117';
 export function buildOrigamiHouse(T,{canvas=()=>document.createElement('canvas')}={}){
