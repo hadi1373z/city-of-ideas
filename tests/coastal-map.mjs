@@ -1,3 +1,4 @@
+import {LIGHT_HOUSE} from '../src/house-of-light-model.js';
 import {SOCRATES_SITE} from '../src/socrates-site-model.js';
 import {coastVisitor,COAST_POSITION_COPY,coastPositionText,coastDistance} from '../src/coastal-position.js';
 import assert from 'node:assert/strict';
@@ -46,7 +47,7 @@ for (const lang of ['en', 'de', 'fa']) {
 }
 const generated=['en','de','fa'].map(lang=>geometry(coastalPlanSvg(plan,lang)));assert.deepEqual(generated[0],generated[1],'Translated copy cannot alter island coordinates or mirror the map');assert.deepEqual(generated[0],generated[2]);
 assert.deepEqual(COAST_LANDMARKS.map(p => coastMapPoint(...p.point)), [
-  [460,460], [460,197.5], coastMapPoint(SOCRATES_SITE.x,SOCRATES_SITE.z), coastMapPoint(plan.arrival.x,plan.arrival.z), [849.1374286786722,513.2], ...SEMINAR_HOUSES.map(h=>coastMapPoint(h.x,h.z))
+  [460,460], [460,197.5], coastMapPoint(SOCRATES_SITE.x,SOCRATES_SITE.z), coastMapPoint(plan.arrival.x,plan.arrival.z), [849.1374286786722,513.2], ...SEMINAR_HOUSES.map(h=>coastMapPoint(h.x,h.z)),coastMapPoint(LIGHT_HOUSE.x,LIGHT_HOUSE.z)
 ]);
 assert.deepEqual(COAST_LANDMARKS.find(p => p.id === 'artists').point, Array.from([plan.arrival.x, plan.arrival.z]));
 

@@ -1,5 +1,6 @@
-export const HUMANITY_COMMONS=Object.freeze({id:'human-care',name:'Commons of Care',x:-90,z:190,y:.13,yaw:0,radius:10,entry:Object.freeze({x:-90,z:204,y:.13,yaw:0})});
-export const COMMONS_PATH=Object.freeze({id:'human-care-spur',width:3.4,points:Object.freeze([Object.freeze([-90,204]),Object.freeze([-79.67433714816835,230])]),kind:'civic-spur'});
+const COMMONS_X=-Math.sqrt(3)*46,COMMONS_Z=414;
+export const HUMANITY_COMMONS=Object.freeze({id:'human-care',name:'Commons of Care',x:COMMONS_X,z:COMMONS_Z,y:.13,yaw:0,radius:10,cell:Object.freeze({q:-2,r:3}),entry:Object.freeze({x:COMMONS_X,z:COMMONS_Z+14,y:.13,yaw:0})});
+export const COMMONS_PATH=Object.freeze({id:'human-care-spur',width:3.4,points:Object.freeze([Object.freeze([COMMONS_X,COMMONS_Z+14]),Object.freeze([COMMONS_X,COMMONS_Z+92])]),kind:'civic-spur'});
 export const CARE_NEEDS=Object.freeze([1,2,5]);
 export const CARE_BUDGET=6;
 export const CARE_QUESTION='Whose need did your rule leave unmet—and who should help decide?';

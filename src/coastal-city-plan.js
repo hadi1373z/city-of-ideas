@@ -1,3 +1,4 @@
+import {LIGHT_HOUSE} from './house-of-light-model.js?v=house-light-20261121';
 import {SOCRATES_SITE} from './socrates-site-model.js?v=shore-niches-20261121';
 import {MAKERS_SITE,MAKERS_ACCESS,MAKERS_ROOFS} from './makers-site.js?v=makers-block-20261118';
 import {PARK_GRASS_CSS,lawnMapColour} from './city-lawn-palette.js?v=makers-passages-20261118';
@@ -7,8 +8,8 @@ import {PARK_HEX_CELLS,CITY_HEX,IDEAS_PARK_SITE} from './city-hex-layout.js?v=ma
 import {coastX,HOUSE_ORIGAMI,COAST_ROUTES} from './origami-house-math.js?v=cloister-details-20261120';
 import {SEMINAR_HOUSES,SEMINAR_PATHS} from './seminar-houses-data.js?v=cloister-20261120';
 import {STUDY_PATHS} from './study-houses-data.js?v=city-night-20261117';
-import {COAST_MAIN_PATHS} from './coastal-map-data.js?v=shore-niches-20261121';
-import {URBAN_STREETS,ARCADE_STREETS,URBAN_COURTS,PRIVATE_HOME_RESERVE,HONEYCOMB_CITY,CITY_UNDERGROUND_LINKS,urbanCourtOutline,urbanBuildingFootprints,urbanLawnCells,urbanRoutes} from './city-urban-plan-model.js?v=shore-niches-20261121';
+import {COAST_MAIN_PATHS} from './coastal-map-data.js?v=house-light-20261121';
+import {URBAN_STREETS,ARCADE_STREETS,URBAN_COURTS,PRIVATE_HOME_RESERVE,HONEYCOMB_CITY,CITY_UNDERGROUND_LINKS,urbanCourtOutline,urbanBuildingFootprints,urbanLawnCells,urbanRoutes} from './city-urban-plan-model.js?v=house-light-20261121';
 export const COAST_MAP_COPY={en:{title:'An island around Zarathustra',gallery:'Zarathustra Gallery',ocean:'Surrounding ocean',park:'Ideas Park',artists:'Artists’ quarter',socrates:'Socrates',philosophers:'Philosophers’ quarter',makers:'Makers’ courtyard',study:'Advanced study houses',origami:'House of Origami',mountain:'Mountain of Becoming',shore:'Paper-boat lookout',note:'One circular island. The gallery at its centre. Ocean all around.'},de:{title:'Eine Insel um Zarathustra',gallery:'Zarathustra-Galerie',ocean:'Umliegender Ozean',park:'Ideenpark',artists:'Künstlerviertel',socrates:'Sokrates',philosophers:'Philosophenviertel',makers:'Hof der Schaffenden',study:'Vertiefte Lernhäuser',origami:'Haus des Origami',mountain:'Berg des Werdens',shore:'Papierboot-Aussicht',note:'Eine kreisrunde Insel. Die Galerie im Mittelpunkt. Rundum Ozean.'},fa:{title:'جزیره‌ای پیرامون زرتشت',gallery:'گالری زرتشت',ocean:'اقیانوس پیرامون جزیره',park:'پارک ایده‌ها',artists:'محلهٔ هنرمندان',socrates:'سقراط',philosophers:'محلهٔ فیلسوفان',makers:'حیاط سازندگان',study:'خانه‌های مطالعهٔ پیشرفته',origami:'خانهٔ اوریگامی',mountain:'کوه شدن',shore:'تماشای قایق کاغذی',note:'جزیره‌ای دایره‌ای؛ گالری در مرکز و اقیانوس در پیرامون.'}};
 const escape=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
 export function coastalPlanSvg(plan,lang='en'){
@@ -27,8 +28,9 @@ export function coastalPlanSvg(plan,lang='en'){
  for(const route of CITY_UNDERGROUND_LINKS)parts.push(path(route.points,'#517d88',2,'data-underground-link="'+route.id+'" stroke-dasharray="4 4"'));
  for(const court of URBAN_COURTS)parts.push('<polygon data-civic-court="'+court.id+'" points="'+points(urbanCourtOutline(court))+'" fill="'+(court.shape==='hex'?'#eee0bb':'#dcd0af')+'" stroke="#a48f65" stroke-width=".7"/>');
  parts.push('<circle data-gallery-centre="true" cx="460" cy="460" r="'+58*s+'" fill="#d5b366" stroke="#866734" stroke-width="2"/>','<circle cx="460" cy="460" r="'+28*s+'" fill="#efe0ab"/>',text(0,9,lang==='fa'?'ز':'Z',28),text(0,-72,c.gallery,12));
- const colours={letters:'#a77f58',philosopher:'#71816b',study:'#64817a',seminar:'#8b7eaa',artist:'#a56b55',pattern:'#497f86',making:'#b28c55',place:'#7c8d77','place-step':'#c6bd9e',humanities:'#ae9274'};
+ const colours={'light-art':'#89b9c3',letters:'#a77f58',philosopher:'#71816b',study:'#64817a',seminar:'#8b7eaa',artist:'#a56b55',pattern:'#497f86',making:'#b28c55',place:'#7c8d77','place-step':'#c6bd9e',humanities:'#ae9274'};
  for(const h of urbanBuildingFootprints(plan)){if(h.category==='gallery'||h.category==='reserve')continue;const extra='data-building-footprint="'+h.id+'" data-centre="'+h.x+','+h.z+'"'+(h.category==='letters'?' data-house="'+h.id+'"':'')+(h.id.startsWith('transformations')?' data-transformation-house="true"':''),shape=h.shape==='circle'?'<circle '+extra+' cx="'+px(h.x)+'" cy="'+pz(h.z)+'" r="'+h.radius*s+'"':'<polygon '+extra+' points="'+points(h.points)+'"';parts.push(shape+' fill="'+(colours[h.category]||'#d5b366')+'" stroke="#f7efd5" stroke-width=".8"><title>'+escape(h.label)+'</title></'+(h.shape==='circle'?'circle':'polygon')+'>');if(h.front)parts.push(path([[h.x,h.z],h.front],'#ead7a8',.7));if(h.id.startsWith('transformations-'))parts.push(text(h.x,h.z-34,h.label,10));if(h.category==='place')parts.push(text(h.x,h.z-23,h.label,11));}
+ parts.push(text(LIGHT_HOUSE.x,LIGHT_HOUSE.z+38,lang==='fa'?'خانهٔ نور':lang==='de'?'Haus des Lichts':'House of Light',12));
  parts.push(text(-318.6973485926734,83,c.philosophers,14),text(SOCRATES_SITE.x,SOCRATES_SITE.z+27,c.socrates,13));
  parts.push(text(-398.3716857408417,185,'Garden galleries',13),text(398.3716857408417,-184,'Form galleries',13),text(159.3486742963367,326,'Working studios',13),text(-159.3486742963367,387,'Stories and language',13),text(239.023011444505,204,'Advanced seminars',13),text(255,-181,c.study,13));
  parts.push(text(MAKERS_SITE.x,MAKERS_SITE.z+27,c.makers,11));

@@ -5,11 +5,12 @@ should people decide together when the available resources do not meet every
 reported need? It is an original fictional thought experiment, not a historical
 simulation, real household dataset, diagnosis or claim about a best ethical rule.
 
-The agreed civic anchor is upper-city (−90,190), radius10 m, facing +Z, clear of
+The relocated civic anchor is southern upper-city hex(−2,3), centred at
+(−79.67433714816835,414), radius10 m, facing +Z, clear of
 the park, pond, Proof Atelier and existing houses. `humanity-commons-model.js`
 exports `HUMANITY_COMMONS` and `COMMONS_PATH` as the shared authority. The 3.4 m
-spur runs from the public approach (−90,204) to the real honeycomb junction
-(−79.67433714816835,230). The city layout owns paving connections, wall openings,
+spur runs from the public approach (−79.67433714816835,428) to the real honeycomb
+junction (−79.67433714816835,506). The city layout owns paving connections, wall openings,
 tree exclusion and the map; the Commons does not invent a separate route.
 
 An ivory sixfold shade covers one round table. Three abstract stone forms and

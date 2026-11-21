@@ -1,0 +1,30 @@
+// Original light-art pavilion. One placement authority for paving, map,
+// planting, actual glass boundaries and the visitor's experiments.
+export const LIGHT_HOUSE=Object.freeze({id:'house-of-light',x:318.6973485926734,z:276,radius:31,eave:7.2,ring:8.5,shoulder:10.2,lantern:12.6,peak:14.4,floor:.13,door:3.2,cell:Object.freeze({q:1,r:2})});
+const H=LIGHT_HOUSE,F=H.radius*Math.sqrt(3)/2;
+export const lightPolygon=(radius=H.radius)=>Array.from({length:6},(_,i)=>[H.x+radius*Math.cos(i*Math.PI/3),H.z+radius*Math.sin(i*Math.PI/3)]);
+export const LIGHT_ENTRY=Object.freeze({x:H.x,z:H.z+F+4,y:H.floor,yaw:0,pitch:.05});
+export const LIGHT_PATHS=Object.freeze([1,-1].map(sign=>Object.freeze({id:'house-of-light-'+(sign>0?'front':'rear'),kind:'civic-spur',width:5.2,points:Object.freeze([[H.x,H.z+sign*(F-2)],[H.x,H.z+sign*92]].map(Object.freeze))})));
+export const LIGHT_FOOTPRINT=Object.freeze({id:H.id,x:H.x,z:H.z,shape:'polygon',points:Object.freeze(lightPolygon(32).map(Object.freeze)),front:Object.freeze([LIGHT_ENTRY.x,LIGHT_ENTRY.z]),category:'light-art',label:'House of Light'});
+export function lightLocal(x,z){return{x:x-H.x,z:z-H.z};}
+export function insideLightHouse(x,z,margin=0){const p=lightLocal(x,z);return Array.from({length:6},(_,i)=>{const a=(i+.5)*Math.PI/3;return p.x*Math.cos(a)+p.z*Math.sin(a)<=F-margin;}).every(Boolean);}
+export const LIGHT_STATIONS=Object.freeze([
+ {id:'spectrum',title:'Suspended spectrum',x:6.8,z:8.0,question:'Can the same structure feel different when only its colour changes?',text:'Rotate an original suspended field of glass rods. Its geometry stays fixed while colour and viewpoint change. The luminous floor is an artistic projection; the installation is not a historical work by another artist.'},
+ {id:'mix',title:'Three lights',x:-18,z:-12,question:'What happens where red, green and blue light meet?',text:'Adjust three ideal light fields. In their common overlap, the three channel intensities add. Full red and green make yellow in this display model; all three make white. This is light mixing, not a recipe for mixing paint.',source:['Exploratorium · mixing coloured light','https://annex.exploratorium.edu/exhibits/mix_n_match/']},
+ {id:'surround',title:'The same grey',x:-22,z:0,question:'Are these two grey squares actually different?',text:'Both inner squares have exactly the same display colour. Change their surroundings, then reveal a continuous grey bridge between them. The comparison explores the role of context in seeing; it makes no claim that every viewer experiences the same illusion.'},
+ {id:'filters',title:'Through two filters',x:-18,z:12,question:'Does adding a filter always add more light?',text:'This ideal three-channel model multiplies the transmissions of two filters. A cyan filter transmits green and blue; a yellow filter transmits red and green. Together they leave green. Real filters have continuous spectra, which this small model does not reproduce.'},
+ {id:'mirror',title:'Looking twice',x:17.8,z:5,question:'Which directions does a flat mirror reverse?',text:'Walk toward the real mirror at the end of the framed passage. Its image changes with your viewpoint. A flat mirror reverses the component perpendicular to its plane; it does not simply exchange the world’s left and right. The repeating frames are real geometry reflected once.',source:['OpenStax · plane mirrors','https://openstax.org/books/university-physics-volume-3/pages/2-1-images-formed-by-plane-mirrors']}
+].map(Object.freeze));
+export const FILTERS=Object.freeze({cyan:Object.freeze([0,1,1]),magenta:Object.freeze([1,0,1]),yellow:Object.freeze([1,1,0]),clear:Object.freeze([1,1,1])});
+export function filteredLight(first='cyan',second='yellow'){if(!FILTERS[first]||!FILTERS[second])throw new RangeError('Choose a named filter');return FILTERS[first].map((c,i)=>c*FILTERS[second][i]);}
+export function addedLight(levels=[1,1,1],mask=[true,true,true]){if(!Array.isArray(levels)||levels.length!==3||levels.some(n=>!Number.isFinite(n)||n<0||n>1))throw new RangeError('Three light intensities between zero and one are required');return levels.map((n,i)=>mask[i]?n:0);}
+export const initialLightState=()=>({hue:.12,rotation:0,playing:false,levels:[1,1,1],surround:.04,bridge:false,first:'cyan',second:'yellow'});
+export function lightColliders(){const out=[];for(let i=0;i<6;i++){const a=[H.radius*Math.cos(i*Math.PI/3),H.radius*Math.sin(i*Math.PI/3)],b=[H.radius*Math.cos((i+1)*Math.PI/3),H.radius*Math.sin((i+1)*Math.PI/3)],n=Math.hypot(b[0]-a[0],b[1]-a[1]);if(i===1||i===4){const dx=(b[0]-a[0])/n,dz=(b[1]-a[1])/n,mid=[(a[0]+b[0])/2,(a[1]+b[1])/2];out.push({a,b:[mid[0]-dx*H.door,mid[1]-dz*H.door],r:.18},{a:[mid[0]+dx*H.door,mid[1]+dz*H.door],b,r:.18});}else out.push({a,b,r:.18});}
+ for(const[cx,cz]of[[-18,-12],[-22,0],[-18,12]])out.push({a:[cx-3,cz-3],b:[cx-3,cz+3],r:.13},{a:[cx-3,cz-3],b:[cx+3,cz-3],r:.13},{a:[cx-3,cz+3],b:[cx+3,cz+3],r:.13});
+ for(const x of[14.5,21.1])out.push({a:[x,-14],b:[x,5.5],r:.13});out.push({a:[14.5,-14],b:[21.1,-14],r:.16});
+ out.push({x:0,z:0,r:3.65},{x:6.8,z:8,w:2.3,d:1.2});
+ for(const[x,z]of[[-10,-18],[8,-19],[-7,19],[9,19]])out.push({x,z,w:4.2,d:1.0});return out;
+}
+const segments=lightColliders(),distance=(x,z,a,b)=>{const dx=b[0]-a[0],dz=b[1]-a[1],t=Math.max(0,Math.min(1,((x-a[0])*dx+(z-a[1])*dz)/(dx*dx+dz*dz)));return Math.hypot(x-a[0]-dx*t,z-a[1]-dz*t);};
+export function lightCanStand(x,z,padding=.3){if(!Number.isFinite(x)||!Number.isFinite(z))return false;const p=lightLocal(x,z);if(Math.hypot(p.x,p.z)>36)return true;return !segments.some(o=>o.a?distance(p.x,p.z,o.a,o.b)<o.r+padding:o.r?Math.hypot(p.x-o.x,p.z-o.z)<o.r+padding:Math.abs(p.x-o.x)<o.w/2+padding&&Math.abs(p.z-o.z)<o.d/2+padding);}
+export function nearLightStation(player,mode,eye=1.8){if(mode!=='city'||!player||Math.abs(player.y-eye-H.floor)>.3)return null;const p=lightLocal(player.x,player.z);return LIGHT_STATIONS.map(s=>({...s,distance:Math.hypot(p.x-s.x,p.z-s.z)})).filter(s=>s.distance<4.5).sort((a,b)=>a.distance-b.distance)[0]??null;}

@@ -1,6 +1,7 @@
+import {installHouseOfLight} from './house-of-light.js?v=house-light-20261121';
 import {installArchetypesQuarter} from './archetypes-quarter.js?v=makers-passages-20261118';
 import {installCityPlaces} from './city-places.js?v=makers-passages-20261118';
-import {installHumanityCommons} from './humanity-commons.js?v=makers-passages-20261118';
+import {installHumanityCommons} from './humanity-commons.js?v=house-light-20261121';
 import {installPenroseReadingFloor} from './penrose-reading-floor.js?v=makers-passages-20261118';
 import {installMathematicalSculptures} from './mathematical-sculptures.js?v=paper-detours-20261118';
 import {installNightObservatory} from './night-observatory.js?v=ceiling-20261117';
@@ -30,7 +31,7 @@ import {installCityDiscoveries} from './city-discoveries.js?v=quiet-entrance-202
 import {installArtistQuarter} from './artist-quarter.js?v=academy-escher-20261120';
 import {installLearningLab} from './learning-lab.js?v=ceiling-20261117';
 import {installStudyHouses} from './study-houses.js?v=ceiling-20261117';
-import {installOrigamiHouse} from './origami-house.js?v=wall-rails-20261121';
+import {installOrigamiHouse} from './origami-house.js?v=house-light-20261121';
 import {artistLineOfSight} from './artist-line-of-sight.js?v=ceiling-20261117';
 import {installPhilosopherQuarter} from './philosopher-ui.js?v=academy-escher-20261120';
 import {installSocratesTour} from './socrates-tour.js?v=ceiling-20261117';
@@ -147,10 +148,11 @@ try{
  installPenroseReadingFloor(M,T);
  installHumanityCommons(M,T);
  installCityPlaces(M,T);
+ installHouseOfLight(M,T);
  installArchetypesQuarter(M,T);
  installPondWorldWindow(M,T);
  installConnectedJourney(M,T);
- const arrivalQuery=new URLSearchParams(location.search||''),faceArrival=arrivalQuery.get('arrival');if(['penrose-floor','floor-facts','mirror-floor'].includes(faceArrival))M.penroseReadingFloor.visit();else if(faceArrival==='archetypes-quarter')M.archetypesQuarter.visitCourt();else if(faceArrival?.startsWith('archetype:'))M.archetypesQuarter.visit(faceArrival.slice(10));else if(faceArrival?.startsWith('place:'))M.cityPlaces.visit(faceArrival.slice(6));else if(faceArrival==='human-care')M.humanityCommons.visit();else if(faceArrival==='city-plan')M.worldCylinder.overview('upper');else if(faceArrival==='world-section')M.worldCylinder.overview('section');else if(faceArrival==='honeycomb')M.startExtra('philosophers');else if(faceArrival==='gravity-turn')M.worldCylinder.visitGravityTurn();else if(faceArrival==='mobius-ant')M.mathematicalSculptures.visit('mobius');else if(faceArrival==='ceiling-mosaic'){M.paperGallery.visit('foundations');M.player.x-=8;M.player.yaw=Math.PI/2;M.player.pitch=Math.atan2(M.birdFlight.built.layout.ceilingY-M.player.y,18);}else if(faceArrival==='transformations'||faceArrival?.startsWith('transformations:'))M.startExtra(faceArrival);else if(faceArrival==='transformation-basements')M.transformationHouse.visitBasements();else if(faceArrival?.startsWith('math-pavilion:'))M.startExtra(faceArrival);else if(faceArrival==='pond-crossing'){M.arrive(M.pondWorldWindow.pond.entry);M.player.pitch=-.33;}else if(faceArrival==='escher-house')M.startExtra('artist:escher');else if(faceArrival==='escher-depth')M.escherDepth.enter('gallery');else if(faceArrival==='math-entrance')M.startExtra('mathematics');else if(faceArrival==='observatory')M.nightObservatory.visit('deck');else if(faceArrival?.startsWith('paper-gallery:'))M.startExtra(faceArrival);else if(faceArrival==='paper-monitors')M.startExtra('paper-monitors');
+ const arrivalQuery=new URLSearchParams(location.search||''),faceArrival=arrivalQuery.get('arrival');if(faceArrival==='house-of-light')M.houseOfLight.visit();else if(['penrose-floor','floor-facts','mirror-floor'].includes(faceArrival))M.penroseReadingFloor.visit();else if(faceArrival==='archetypes-quarter')M.archetypesQuarter.visitCourt();else if(faceArrival?.startsWith('archetype:'))M.archetypesQuarter.visit(faceArrival.slice(10));else if(faceArrival?.startsWith('place:'))M.cityPlaces.visit(faceArrival.slice(6));else if(faceArrival==='human-care')M.humanityCommons.visit();else if(faceArrival==='city-plan')M.worldCylinder.overview('upper');else if(faceArrival==='world-section')M.worldCylinder.overview('section');else if(faceArrival==='honeycomb')M.startExtra('philosophers');else if(faceArrival==='gravity-turn')M.worldCylinder.visitGravityTurn();else if(faceArrival==='mobius-ant')M.mathematicalSculptures.visit('mobius');else if(faceArrival==='ceiling-mosaic'){M.paperGallery.visit('foundations');M.player.x-=8;M.player.yaw=Math.PI/2;M.player.pitch=Math.atan2(M.birdFlight.built.layout.ceilingY-M.player.y,18);}else if(faceArrival==='transformations'||faceArrival?.startsWith('transformations:'))M.startExtra(faceArrival);else if(faceArrival==='transformation-basements')M.transformationHouse.visitBasements();else if(faceArrival?.startsWith('math-pavilion:'))M.startExtra(faceArrival);else if(faceArrival==='pond-crossing'){M.arrive(M.pondWorldWindow.pond.entry);M.player.pitch=-.33;}else if(faceArrival==='escher-house')M.startExtra('artist:escher');else if(faceArrival==='escher-depth')M.escherDepth.enter('gallery');else if(faceArrival==='math-entrance')M.startExtra('mathematics');else if(faceArrival==='observatory')M.nightObservatory.visit('deck');else if(faceArrival?.startsWith('paper-gallery:'))M.startExtra(faceArrival);else if(faceArrival==='paper-monitors')M.startExtra('paper-monitors');
  M.status('ready');
  installCinematicIntro(M,T,socrates);
  // The bare city address opens at the approved volcanic reservoir in Babel.
