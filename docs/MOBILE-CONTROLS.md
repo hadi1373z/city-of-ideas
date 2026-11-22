@@ -19,6 +19,10 @@ release a gesture. Touch focus changes do not release a captured movement finger
 keyboard blur, window blur, resize, hidden page, pointer cancellation/lost capture,
 blocked input and native clearMovement still reset the appropriate controls.
 The noninteractive right-side look hint never intercepts scene taps or drags.
+Both control-circle centres align horizontally. The look label has a translucent
+backing and disappears after the first meaningful look drag in that page visit;
+a tap or movement-stick use does not dismiss it. No persistent preference is
+written, and accessible look instructions remain available.
 
 At widths up to 800px, or landscape screens up to 960px wide and 500px high,
 the top three-line button opens a scrollable controls panel. It transports the

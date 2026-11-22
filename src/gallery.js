@@ -248,6 +248,7 @@ function setControllerMenu(value){controllerMenu=value;document.body.dataset.con
 function controllerControls(){const root=activeControlPanel()||document.body;const collect=(scope,depth=0)=>{if(scope.nodeType===9)scope=[...scope.querySelectorAll('dialog[open]')].at(-1)||scope;const nodes=[...scope.querySelectorAll('button,a[href],input,select,textarea,[tabindex]')].filter(el=>!el.disabled&&el.tabIndex>=0&&el.getClientRects().length&&getComputedStyle(el).visibility!=='hidden'&&!el.closest('[inert]'));if(depth<2)for(const frame of scope.querySelectorAll('iframe')){if(!frame.getClientRects().length)continue;try{if(frame.contentDocument)nodes.push(...collect(frame.contentDocument,depth+1));}catch{}}return nodes;};return collect(root);}
 function focusControllerControl(direction){const nodes=controllerControls();if(!nodes.length)return;let index=nodes.findIndex(el=>el===el.ownerDocument.activeElement);index=index<0?(direction<0?nodes.length-1:0):(index+direction+nodes.length)%nodes.length;document.querySelectorAll('.controller-focus').forEach(el=>el.classList.remove('controller-focus'));for(const node of nodes)node.classList.remove('controller-focus');const node=nodes[index];node.classList.add('controller-focus');if(node.ownerDocument!==document&&!node.ownerDocument.getElementById('city-controller-focus-style')){const style=node.ownerDocument.createElement('style');style.id='city-controller-focus-style';style.textContent='.controller-focus:focus{outline:3px solid #efbc6a!important;outline-offset:3px}';node.ownerDocument.head.append(style);}node.focus();node.scrollIntoView({block:'nearest',inline:'nearest'});}
 function bindViewControls(c){
+ let hintUsed=false;
  const reset=()=>{pointer.down=false;pointer.id=null;};
  c.style.touchAction='none';c.setAttribute('aria-describedby','city-look-help');
  c.addEventListener('pointerdown',e=>{
@@ -261,7 +262,7 @@ function bindViewControls(c){
   if(document.hidden||inside&&(modalActive()||panelOpen||!$('reader-panel').hidden||controllerMenu||transition||returnLift)){reset();return;}
   const dx=e.clientX-pointer.lastX,dy=e.clientY-pointer.lastY;pointer.lastX=e.clientX;pointer.lastY=e.clientY;pointer.moved+=Math.abs(dx)+Math.abs(dy);
   if(!pointer.look)return;
-  if(inside){player.yaw-=dx*.004;player.pitch=lookPitch(player.pitch-dy*.003);}else{exteriorAngle-=dx*.006;exteriorHeight=THREE.MathUtils.clamp(exteriorHeight+dy*.2,65,360);}
+  if(inside){player.yaw-=dx*.004;player.pitch=lookPitch(player.pitch-dy*.003);if(!hintUsed&&pointer.moved>=8){hintUsed=true;window.dispatchEvent(new Event('city-look-used'));}}else{exteriorAngle-=dx*.006;exteriorHeight=THREE.MathUtils.clamp(exteriorHeight+dy*.2,65,360);}
  });
  c.addEventListener('pointerup',e=>{if(pointer.id!==e.pointerId)return;reset();if(pointer.moved<8&&!transition&&!returnLift&&!modalActive())pickSceneAt(e.clientX,e.clientY);});
  for(const type of['pointercancel','lostpointercapture'])c.addEventListener(type,e=>{if(pointer.id===e.pointerId)reset();});

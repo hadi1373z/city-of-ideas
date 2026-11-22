@@ -79,5 +79,8 @@ body[data-mobile-menu=open] .city-mobile-menu{pointer-events:auto}
  .touch-look-hint .look-orbit{position:relative;width:42px;height:42px;border:1px solid #e1cf9d99;border-radius:50%;background:#12342b73}
  .touch-look-hint .look-orbit:before,.touch-look-hint .look-orbit:after{content:'';position:absolute;background:#f1dfb7b0;inset:10px 19px}
  .touch-look-hint .look-orbit:after{inset:19px 10px}
- .touch-look-hint #city-look-label{padding:4px 8px;border-radius:5px;background:#102d31e8;color:#f5ead2;font-size:14px;line-height:1.5;text-shadow:none}
+ body.inside:not([data-mode=aerial]):not([data-ocean-voyage]) #visit-hud .touch-look-hint{height:132px;min-height:132px;bottom:calc(var(--city-touch-bottom) + 6px)}
+ .touch-look-hint .look-orbit{position:absolute;top:45px;left:45px}
+ .touch-look-hint #city-look-label{position:absolute;top:92px;left:50%;transform:translateX(-50%);white-space:nowrap;padding:4px 8px;border-radius:5px;background:#102d31bf;color:#f5ead2;font-size:14px;line-height:1.5;text-shadow:none}
+ .touch-look-hint #city-look-label[hidden]{display:none}
 }

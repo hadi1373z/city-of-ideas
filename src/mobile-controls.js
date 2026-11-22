@@ -46,4 +46,5 @@
   const look=document.getElementById('city-look-label');if(look)look.textContent=fa?'کشیدن برای نگاه':de?'Ziehen zum Umsehen':'Drag to look';const lookHelp=document.getElementById('city-look-help');if(lookHelp)lookHelp.textContent=fa?'سمت راست تصویر را برای چرخیدن و نگاه به بالا یا پایین بکشید. می‌توانید هم‌زمان با انگشت دیگر حرکت کنید.':de?'Rechts ziehen, um sich zu drehen und nach oben oder unten zu schauen. Gleichzeitig mit dem anderen Finger bewegen.':'Drag the right side to turn and look up or down. Move with the other finger at the same time.';
   if(menu){menu.title.textContent=fa?'کنترل‌ها':de?'Steuerung':'Controls';menu.toggle.setAttribute('aria-label',fa?'باز و بسته کردن کنترل‌ها':de?'Steuerung öffnen oder schließen':'Open or close controls');const label=fa?'بستن کنترل‌ها':de?'Steuerung schließen':'Close controls';menu.close.setAttribute('aria-label',label);menu.backdrop.setAttribute('aria-label',label);}}
  copy();addEventListener('city-language',copy);
+ addEventListener('city-look-used',()=>{const label=document.getElementById('city-look-label');if(label)label.hidden=true;},{once:true});
 })();
