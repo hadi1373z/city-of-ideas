@@ -583,3 +583,14 @@ tree holes or heights. It is separate from the now-installed blue Escher alcoves
 The corrected
 house-grain browser review was blocked by the preview connection; no claim of
 exact sketch fidelity or public publication has been made.
+
+The touch arrows are now one analog joystick feeding the existing native
+controller axes, with release/cancel/blur/modal resets. Keep physical gamepad
+flags and collision/stair authorities intact; do not emulate arrow key events.
+Small screens use one top three-line button and a scrollable controls dialog.
+Move the original header/toolbar nodes, never clone them; restore them on desktop
+and close the panel before an action opens its reader. Read docs/MOBILE-CONTROLS.md
+and run tests/mobile-controls.mjs plus root-controls/gamepad input checks.
+Escher pointed-niche spandrels are flush with shared shaft wall planes; the old
+detached landing rim/light bars are gone. Keep concealed ledges and pooled
+lights. Run tests/escher-niche-wall-attachment.mjs and blue-alcoves/stair checks.

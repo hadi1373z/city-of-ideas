@@ -1,5 +1,5 @@
 import {CLEBSCH} from './clebsch-cubic-model.js';
-import {installEscherDescent} from './escher-descent.js?v=escher-ornate-final-20261122';
+import {installEscherDescent} from './escher-descent.js?v=joystick-menu-wall-20261122';
 import {descentSurface} from './escher-descent-model.js';
 import {ESCHER_SHAFT_NICHES} from './escher-niche-model.js?v=escher-ornate-final-20261122';
 import {PRINT_STUDIES,dependencyOrder} from './escher-print-studies.js?v=cloister-20261120';

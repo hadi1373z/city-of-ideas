@@ -1,11 +1,35 @@
-# Mobile movement and notices
+# Touch movement and compact controls
 
-Phone controls previously used unrelated fixed bottom offsets. A Babel or Mathematics notice could cover an arrow and receive its pointer input instead. The final mobile-controls.css layer reserves a stable lower zone: 48-pixel movement buttons above a single horizontally scrollable action row, with safe-area spacing. Location text occupies the other side of that zone. Non-modal notice cards stay above it and scroll internally when their text is long; top guides are height bounded. This also applies to short phone landscape windows.
+The four touch arrows are replaced by one circular joystick. Drag direction
+selects forward/backward and strafe; distance controls speed after a 12% radial
+dead zone. Diagonal input is normalized. Releasing the controlling pointer
+stops movement. Another pointer cannot take ownership, so a second finger can
+continue looking around on the canvas.
 
-Existing controls, pointer capture and release handlers remain in gallery.js. Aerial, sailing and cinematic visibility rules remain in force. Full reading and route dialogs still pause walking and close with their existing return-to-walking control. No saved position, language, arguments or voice setting is changed.
+`mobile-controls.js` exposes `CITY_TOUCH.poll(blocked)` and merges these axes
+with the physical controller in the original `gallery.js` input update. Native
+walking, stair heights, collisions, transitions and activity interruptions still
+own movement. Do not synthesize arrow-key events or create a second walking
+controller. Blur, hidden page, resize, pointer cancellation, lost capture,
+blocked input and native `clearMovement` all reset the joystick. A focused
+joystick also accepts WASD/arrows and stops with Space, Enter or Escape.
 
-Compact Proof, Study and Seminar workbenches now use a non-modal dialog. A capture-phase arrow handler closes only these compact controls before the original movement handler takes pointer capture. A movement-close does not clear that newly held key or restore focus away from the arrow. The existing reading/route dialogs remain modal. Draft maps and saved progress are unchanged; reopen the same workbench to continue.
+At widths up to 800px, or landscape screens up to 960px wide and 500px high,
+the top three-line button opens a scrollable controls panel. It moves the
+original header controls and visit toolbar into that panel, including controls
+added after startup. It never clones controls. Returning to desktop restores
+the same nodes at their original placeholders.
 
-Verification: native Chrome checks at 312×675, 320×568 and 844×390 CSS-pixel viewports confirmed all four arrow hit targets are 48×48 and receive pointer input with notices shown. A held arrow closed a compact Proof panel and moved the view; reopening preserved the unsaved argument. Expanded Babel guidance and the Mathematics notice stayed clear of the arrows. These are browser viewport checks, not a physical-phone hardware test. The shared compact/reading presentation transition and capture-phase arrow close have a regression check in tests/mobile-controls.mjs; the existing three house UI suites still cover private drafts and explicit saves.
+The nonmodal dialog pauses native movement through the existing open-dialog
+guard. Its backdrop, close button, hamburger and Escape close it. Selecting an
+action closes the panel before that action opens another reader or dialog.
+Focus returns to the hamburger on ordinary dismissal; action selection leaves
+focus to the original action. Labels and instructions support FA, EN and DE.
 
-Notice cards have a 44-pixel × control with a localized accessible label. Dismissal uses a separate presentation class so per-frame hidden=false updates cannot immediately reopen the card. A real hidden transition ends that context and allows it to appear on a later visit. Dynamic redraws retain/recreate one close control; collapsed details put it in their visible summary without toggling the disclosure. No storage, note fields or player coordinates are read or written. Full readers, workbenches and the existing greeting dismissal retain their own close controls.
+Validation: `tests/mobile-controls.mjs`, `tests/gamepad-input.cjs`,
+`tests/root-controls.mjs`, `tests/default-language.cjs` and source checks.
+Actual 390×844 browser testing confirmed climbing the unchanged Escher stairs,
+stopping on release, opening the menu, opening help from it, and restoring the
+desktop controls at 1100×800. Screenshots:
+`design/visual-walk/mobile-joystick-20261122.jpg` and
+`design/visual-walk/mobile-menu-20261122.jpg`.

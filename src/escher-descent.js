@@ -1,4 +1,4 @@
-import {buildEscherShaftDetails,ESCHER_SHAFT_NICHES,nicheVoid} from './escher-stone-details.js?v=escher-ornate-final-20261122';
+import {buildEscherShaftDetails,ESCHER_SHAFT_NICHES,nicheVoid} from './escher-stone-details.js?v=joystick-menu-wall-20261122';
 import {DESCENT as D,DESCENT_ANNEX as A,annexContains,STAIR_PORTAL as P,DESCENT_PARTS as PARTS,descentFloorBounds,descentSurface,walkDescent,outsideRectangle} from './escher-descent-model.js?v=wall-rails-20261121';
 import {ESCHER_NICHE_WALL as WALL} from './escher-niche-model.js?v=escher-ornate-final-20261122';
 export function buildEscherDescent(T){

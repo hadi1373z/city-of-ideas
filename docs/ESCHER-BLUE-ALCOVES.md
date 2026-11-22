@@ -74,3 +74,12 @@ Run `tests/escher-blue-alcoves.mjs`, `tests/escher-niche-tile-finish.mjs`,
 This is original geometric interpretation of the approved concept, not a
 historical scanned muqarnas model or a pixel-exact reproduction of the sketch.
 No voice, private-store or night-world work is part of this change.
+
+The 22 November wall-attachment correction places the pointed-arch spandrels
+on the shared shaft face, rather than 15–20mm in front of it. This removes the
+floating rectangular shoulder seam. The superseded exposed landing rim/light
+bars are removed; the concealed inner ledges and two pooled lights remain.
+`tests/escher-niche-wall-attachment.mjs` checks 62 actual shoulder ray hits
+against the shaft planes and 28 ray hits at the former isolated bars. The new
+test first failed on the original offset geometry, then passed after correction.
+All original stair and alcove origins remain unchanged.

@@ -2,8 +2,59 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
 import {showRoomDialog} from '../src/room-workbench.js';
-const calls=[],dialog={open:false,dataset:{},returnValue:'',show(){this.open=true;calls.push('show');},showModal(){this.open=true;calls.push('modal');},close(value=''){this.open=false;this.returnValue=value;calls.push('close:'+value);}};
-showRoomDialog(dialog,true);assert.deepEqual(calls,['show']);showRoomDialog(dialog,true);assert.deepEqual(calls,['show']);showRoomDialog(dialog,false);assert.deepEqual(calls,['show','close:','modal']);assert.equal(dialog.dataset.roomPresentation,'reading');showRoomDialog(dialog,true);assert.deepEqual(calls,['show','close:','modal','close:','show']);
-let listener,capture;const compact=[dialog,{...dialog,dataset:{workbench:'true'},close:dialog.close}];const document={querySelector(selector){assert.equal(selector,'.touch-pad');return{addEventListener(type,fn,useCapture){assert.equal(type,'pointerdown');listener=fn;capture=useCapture;}};},querySelectorAll(selector){assert.equal(selector,'dialog[open][data-workbench="true"]');return compact;}};
-vm.runInNewContext(fs.readFileSync(new URL('../src/mobile-controls.js',import.meta.url),'utf8'),{document});assert.equal(capture,true);const before=calls.length;listener({target:{closest:()=>null}});assert.equal(calls.length,before);listener({target:{closest:s=>{assert.equal(s,'[data-move]');return{};}}});assert.equal(dialog.returnValue,'movement');assert(calls.slice(-2).every(x=>x==='close:movement'));assert(compact.every(x=>!x.open));
-console.log('PASS mobile controls: compact/nonmodal and full-reading/modal transitions; arrow capture closes compact work before movement without closing ordinary readers.');
+let document;
+class Element{
+ constructor(tag='div'){this.tagName=tag;this.children=[];this.parentNode=null;this.dataset={};this.attributes={};this.hidden=false;this.open=false;this.disabled=false;this.tabIndex=tag==='button'?0:-1;this.listeners=new Map();this.style={values:{},setProperty(k,v){this.values[k]=v;}};const names=new Set();this.classList={toggle:(n,on)=>on?names.add(n):names.delete(n),contains:n=>names.has(n)};this.captures=new Set();}
+ addEventListener(t,f,o){if(!this.listeners.has(t))this.listeners.set(t,[]);this.listeners.get(t).push({f,o});}
+ removeEventListener(t,f){this.listeners.set(t,(this.listeners.get(t)||[]).filter(x=>x.f!==f));}
+ fire(t,e={}){e.target??=this;e.preventDefault??=()=>{e.prevented=true;};e.stopPropagation??=()=>{e.stopped=true;};for(const{f}of[...(this.listeners.get(t)||[])])f(e);return e;}
+ append(...nodes){for(const n of nodes){n.remove();this.children.push(n);n.parentNode=this;}}
+ remove(){if(this.parentNode)this.parentNode.children=this.parentNode.children.filter(n=>n!==this);this.parentNode=null;}
+ before(n){const p=this.parentNode;n.remove();const i=p.children.indexOf(this);p.children.splice(i,0,n);n.parentNode=p;}
+ after(n){const p=this.parentNode;n.remove();const i=p.children.indexOf(this);p.children.splice(i+1,0,n);n.parentNode=p;}
+ setAttribute(k,v){this.attributes[k]=String(v);}getAttribute(k){return this.attributes[k]??null;}
+ matches(s){if(s==='[data-joystick]')return this.dataset.joystick!==undefined;if(s==='button,a[href]')return this.tagName==='button'||this.tagName==='a';if(s.startsWith('#'))return this.id===s.slice(1);if(s.startsWith('.'))return String(this.className||'').split(' ').includes(s.slice(1));return this.tagName===s;}
+ closest(s){for(let n=this;n;n=n.parentNode)if(n.matches(s))return n;return null;}
+ querySelectorAll(s){const found=[];const visit=n=>{for(const c of n.children){if(s.includes('button,')?['button','a','input','select'].includes(c.tagName):c.matches(s))found.push(c);visit(c);}};visit(this);return found;}
+ querySelector(s){return this.querySelectorAll(s)[0]??null;}
+ getClientRects(){for(let n=this;n;n=n.parentNode)if(n.hidden||n.tagName==='dialog'&&!n.open)return[];return[{}];}
+ focus(){document.activeElement=this;}
+ getBoundingClientRect(){return{left:100,top:200,width:132,height:132};}
+ setPointerCapture(id){this.captures.add(id);}releasePointerCapture(id){this.captures.delete(id);this.fire('lostpointercapture',{pointerId:id});}
+ show(){this.open=true;}showModal(){this.open=true;}close(value=''){this.open=false;this.returnValue=value;this.fire('close');}
+}
+const body=new Element('body'),headerHome=new Element('header'),hud=new Element(),header=new Element(),actions=new Element(),toggle=new Element('button'),stick=new Element('button'),thumb=new Element('span'),help=new Element('span');header.id='city-header-buttons';actions.className='visit-actions';toggle.id='city-mobile-menu';stick.dataset.joystick='';thumb.className='joystick-thumb';thumb.offsetWidth=54;help.id='city-joystick-help';stick.append(thumb);headerHome.append(toggle,header);hud.append(actions,stick,help);body.append(headerHome,hud);
+const overview=new Element('button'),language=new Element('button'),tool=new Element('button');header.append(overview,language);actions.append(tool);
+const compact=new Element('dialog'),reader=new Element('dialog');compact.dataset.workbench='true';compact.open=reader.open=true;
+document=new Element('document');document.body=body;document.documentElement={lang:'en'};document.hidden=false;document.activeElement=null;document.createElement=t=>new Element(t);document.createComment=()=>new Element('#comment');document.getElementById=id=>[body,...body.querySelectorAll('*')].find(n=>n.id===id)??find(body,n=>n.id===id);document.querySelector=s=>find(body,n=>n.matches(s));document.querySelectorAll=s=>{assert.equal(s,'dialog[open][data-workbench="true"]');return compact.open?[compact]:[];};
+function find(n,test){if(test(n))return n;for(const c of n.children){const r=find(c,test);if(r)return r;}return null;}
+const window=new Element('window');let cleared=0;window.CITY_MAIN={clearMovement(){cleared++;}};
+const media=new Element();media.matches=true;const scope={window,document,matchMedia:()=>media,addEventListener:window.addEventListener.bind(window)};
+vm.runInNewContext(fs.readFileSync(new URL('../src/mobile-controls.js',import.meta.url),'utf8'),scope);
+const api=window.CITY_TOUCH,near=(a,b)=>assert(Math.abs(a-b)<1e-8,`${a} != ${b}`),neutral=()=>{near(api.poll().forward,0);near(api.poll().strafe,0);assert(!stick.classList.contains('is-active'));};
+const down=(id=1,x=166,y=266)=>stick.fire('pointerdown',{pointerId:id,clientX:x,clientY:y,button:0,pointerType:'touch'}),move=(id,x,y)=>stick.fire('pointermove',{pointerId:id,clientX:x,clientY:y,buttons:1,pointerType:'touch'});
+neutral();down();assert(!compact.open);assert(reader.open,'Ordinary readers are never dismissed by the movement control');assert(stick.captures.has(1));move(1,166,251);near(api.poll().forward,(.5-.12)/.88);near(api.poll().strafe,0);
+move(1,196,236);near(Math.hypot(api.poll().forward,api.poll().strafe),1);assert(Math.hypot(parseFloat(stick.style.values['--joystick-x']),parseFloat(stick.style.values['--joystick-y']))<=30.000001,'The thumb stays inside its circle');
+down(2,166,296);move(2,136,266);assert(api.poll().forward>0&&api.poll().strafe>0,'A second finger cannot steal the movement stick');stick.fire('pointerup',{pointerId:2});assert(api.poll().forward>0);window.fire('pointerup',{pointerId:1});neutral();assert(!stick.captures.size);
+for(const type of['pointercancel','lostpointercapture']){down();move(1,196,266);stick.fire(type,{pointerId:1});neutral();}
+down();move(1,166,296);window.fire('blur');neutral();down();move(1,136,266);document.hidden=true;document.fire('visibilitychange');neutral();document.hidden=false;
+down();move(1,196,266);api.poll(true);neutral();down();move(1,196,266);window.fire('resize');neutral();
+const key=stick.fire('keydown',{code:'ArrowUp'});assert(key.prevented&&key.stopped);stick.fire('keydown',{code:'ArrowRight'});near(Math.hypot(api.poll().forward,api.poll().strafe),1);stick.fire('keyup',{code:'ArrowUp'});near(api.poll().strafe,1);stick.fire('keyup',{code:'ArrowRight'});neutral();
+// Real root integration consumes the analog axes, while preserving physical
+// gamepad flags and stopping the stick for readers and native clearMovement.
+const source=fs.readFileSync(new URL('../src/gallery.js',import.meta.url),'utf8'),start=source.indexOf('function updateGamepad(dt){'),end=source.indexOf('\nfunction ',start+1),rootBody=source.slice(start,end);
+let modal=false,manual=0;const world={dataset:{}},padInput={},rootState={document,window:{CITY_TOUCH:api,CITY_MAIN:{},dispatchEvent(){manual++;}},cityPad:{poll(blocked){return{connected:true,forward:blocked?0:.25,strafe:0,sprint:true,lookX:0,lookY:0};},cancelPhotoBinding(){}},padInput,modalActive:()=>modal,activeControlPanel:()=>null,$:id=>id==='world'?world:{hidden:true},panelOpen:false,controllerMenu:false,transition:null,returnLift:null,inside:true,visitMode:'city',cityPhoto:null,summitStory:{follow(){}},stopTour(){},player:{yaw:0,pitch:0},lookPitch:x=>x,Event:class{}};
+const update=Function('s','with(s){'+rootBody+';return updateGamepad;}')(rootState);
+down();move(1,166,251);update(.016);near(padInput.forward,.25+(.5-.12)/.88);assert.equal(padInput.sprint,true);assert.equal(world.dataset.controller,'connected');assert(manual>0);modal=true;update(.016);neutral();near(padInput.forward,0);modal=false;
+// The same original control nodes move into the compact menu, and return on
+// desktop; generated actions retain identity, focus and their own callbacks.
+const menu=window.CITY_MOBILE_MENU;assert(menu);assert.equal(header.parentNode.className,'mobile-menu-header-controls');assert.equal(actions.parentNode.className,'mobile-menu-visit-controls');assert.equal(toggle.getAttribute('aria-expanded'),'false');
+down();move(1,196,266);toggle.fire('click');neutral();assert(menu.open&&menu.menu.open&&!menu.backdrop.hidden);assert.equal(document.activeElement,menu.close);assert.equal(toggle.getAttribute('aria-expanded'),'true');menu.backdrop.fire('click');assert(!menu.open);assert.equal(document.activeElement,toggle);
+menu.show();let actionSawClosed=false;menu.menu.fire('click',{target:tool});actionSawClosed=!menu.open;assert(actionSawClosed,'The sheet closes before the original action opens its own dialog');assert.equal(actions.children[0],tool);
+menu.show();document.fire('keydown',{code:'Escape'});assert(!menu.open);const added=new Element('button');actions.append(added);media.matches=false;media.fire('change');assert.equal(header.parentNode,headerHome);assert.equal(actions.parentNode,hud);assert(actions.children.includes(added));assert.equal(header.children[0],overview);media.matches=true;media.fire('change');assert.equal(actions.parentNode.className,'mobile-menu-visit-controls');
+for(const[lang,pattern]of[['fa',/جوی/],['de',/Joystick/],['en',/joystick/]]){document.documentElement.lang=lang;window.fire('city-language');assert(pattern.test(stick.getAttribute('aria-label')));}
+// Existing compact-room/modal transitions are retained.
+showRoomDialog(compact,true);assert(compact.open);showRoomDialog(compact,false);assert.equal(compact.dataset.roomPresentation,'reading');showRoomDialog(compact,true);assert.equal(compact.dataset.roomPresentation,'workbench');
+api.dispose();down();neutral();assert(cleared>0);
+const html=fs.readFileSync(new URL('../src/index.html',import.meta.url),'utf8');assert(!html.includes('data-move='));assert(html.includes('aria-controls="city-controls-menu"'));assert(html.includes('data-joystick'));
+console.log('PASS mobile joystick/menu: continuous radial axes/deadzone/diagonal cap, capture/secondfinger/release/cancel/blur/visibility/modal resets, real root analog merge, keyboard access, compact workbench dismissal, live node transport/desktop restore, focus/Escape/outside/action closing, FA/EN/DE and cleanup.');
