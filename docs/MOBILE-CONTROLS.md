@@ -22,8 +22,10 @@ The noninteractive right-side look hint never intercepts scene taps or drags.
 
 At widths up to 800px, or landscape screens up to 960px wide and 500px high,
 the top three-line button opens a scrollable controls panel. It transports the
-original header and visit-toolbar nodes, including later-added buttons and the
-Admin link. Returning to desktop restores those same nodes; never clone them.
+original header and visit-toolbar nodes, including later-added visitor buttons.
+The owner-only Admin destination has no link in the public game controls. The
+location badge is hidden at the owner's request. Returning to desktop restores
+those same visitor-control nodes; never clone them.
 The nonmodal controls dialog pauses native movement through the open-dialog
 guard. Backdrop, close button, hamburger and Escape dismiss it. Selecting an
 action closes it before that action opens another reader or dialog. Ordinary

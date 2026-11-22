@@ -1,1 +1,0 @@
-(()=>{'use strict';const link=document.getElementById('city-admin');if(!link)return;function copy(){link.textContent=document.documentElement.lang==='fa'?'مدیریت':document.documentElement.lang==='de'?'Verwaltung':'Admin';}copy();addEventListener('city-language',copy);})();

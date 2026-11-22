@@ -603,8 +603,10 @@ lights. Run tests/escher-niche-wall-attachment.mjs and blue-alcoves/stair checks
 The Admin entry at src/admin/index.html links the existing public art collection,
 private paper-management Site and owner-only guestbook inbox. Keep the three
 sources/access policies intact; never embed inbox records or credentials in the
-public directory. See docs/ADMIN.md. It is linked in the original header controls,
-so the compact menu transports that same link along with the other controls.
+public directory. See docs/ADMIN.md. The user subsequently REMOVED Admin from
+the public game options: keep /admin/ available by direct owner bookmark, with
+no header or compact-menu Admin link. The location badge is also hidden at the
+user's explicit request; keep its internal context updates intact.
 The six basement doorways now have fitted masonry at the two side wings where
 the angled original cuts exceeded the straight corridor width. Keep the four-
 metre central aperture and original floor/stair model exact. The returns share
