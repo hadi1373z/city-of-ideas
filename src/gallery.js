@@ -221,7 +221,7 @@ function updateSharedVisit(dt,time){if(visitMode==='aerial')return;if(returnAppr
  else if((forward||strafe)&&!modalActive()&&$('reader-panel').hidden){const n=Math.max(1,Math.hypot(forward,strafe)),speed=(window.CITY_MAIN?.ramseyRoom?.near?2.5:movingFast()?13.5:visitMode==='city'?(window.CITY_SOCRATES_TOUR?.active?3.2:8.5):6.0)*dt;moveOnSharedGround((-Math.sin(player.yaw)*forward+Math.cos(player.yaw)*strafe)/n*speed,(-Math.cos(player.yaw)*forward-Math.sin(player.yaw)*strafe)/n*speed)}
 }
 function chapterNumber(value){return CITY_I18N.lang!=='fa'?String(value):String(value).replace(/[0-9]/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d])}
-function clearMovement(){window.CITY_TOUCH?.reset();returnApproach=null;Object.keys(keys).forEach(k=>keys[k]=false);pointer.down=false;pointer.id=null;sourceMovement={x:0,z:0};touring=false;rampTarget=null}
+function clearMovement(){window.CITY_TOUCH?.reset();window.CITY_LOOK?.reset();returnApproach=null;Object.keys(keys).forEach(k=>keys[k]=false);pointer.down=false;pointer.id=null;sourceMovement={x:0,z:0};touring=false;rampTarget=null}
 function modalActive(){return !!document.querySelector('dialog[open]')}
 function quickStart(destination,options={}){window.CITY_MAIN?.cancelActivity?.();if(window.CITY_MAIN?.startExtra?.(destination))return;clearMovement();closeExhibit();if(!options.keepTools)$('source-tools-dialog').close();if(destination==='gallery'){currentFloor=0;enter();return}if(destination==='spiral'){enterSpiral();return}setVisitMode('city');sharedCity.homeBuilt?.setFloor(0);let p,yaw=0;if(destination.startsWith('artist:')){const id=destination.slice(7),local=sharedCity.art.entryFor(id);if(!local)return;p={x:sharedCity.ART.x+local.x*sharedCity.ART.scale,z:sharedCity.ART.z+local.z*sharedCity.ART.scale};yaw=local.yaw}else p={...({socrates:{...sharedCity.landmarks.socrates},objects:{...sharedCity.landmarks.objects},park:{x:0,z:-189},city:{x:0,z:94}}[destination]||sharedCity.landmarks[destination]||{x:0,z:94})};if(destination==='socrates'&&sharedCity.homeBuilt?.entrance){const entry=sharedCity.homeBuilt.entrance;p={x:sharedCity.SOC.x+entry.x*sharedCity.SOC.scale,z:sharedCity.SOC.z+(entry.z-1.15)*sharedCity.SOC.scale}}const offsets=[0,.4,-.4,.8,-.8,1.2,-1.2];let safe=null;for(const dx of offsets)for(const dz of offsets)if(!safe&&sharedCity.canStand(p.x+dx,p.z+dz))safe={x:p.x+dx,z:p.z+dz};if(!safe)return;player.x=safe.x;player.z=safe.z;player.y=eye+cityGroundHeight(player.x,player.z);player.yaw=yaw;player.pitch=0;updateSharedHUD()}
 function sourceFrameOrigin(){return location.origin}
@@ -248,7 +248,6 @@ function setControllerMenu(value){controllerMenu=value;document.body.dataset.con
 function controllerControls(){const root=activeControlPanel()||document.body;const collect=(scope,depth=0)=>{if(scope.nodeType===9)scope=[...scope.querySelectorAll('dialog[open]')].at(-1)||scope;const nodes=[...scope.querySelectorAll('button,a[href],input,select,textarea,[tabindex]')].filter(el=>!el.disabled&&el.tabIndex>=0&&el.getClientRects().length&&getComputedStyle(el).visibility!=='hidden'&&!el.closest('[inert]'));if(depth<2)for(const frame of scope.querySelectorAll('iframe')){if(!frame.getClientRects().length)continue;try{if(frame.contentDocument)nodes.push(...collect(frame.contentDocument,depth+1));}catch{}}return nodes;};return collect(root);}
 function focusControllerControl(direction){const nodes=controllerControls();if(!nodes.length)return;let index=nodes.findIndex(el=>el===el.ownerDocument.activeElement);index=index<0?(direction<0?nodes.length-1:0):(index+direction+nodes.length)%nodes.length;document.querySelectorAll('.controller-focus').forEach(el=>el.classList.remove('controller-focus'));for(const node of nodes)node.classList.remove('controller-focus');const node=nodes[index];node.classList.add('controller-focus');if(node.ownerDocument!==document&&!node.ownerDocument.getElementById('city-controller-focus-style')){const style=node.ownerDocument.createElement('style');style.id='city-controller-focus-style';style.textContent='.controller-focus:focus{outline:3px solid #efbc6a!important;outline-offset:3px}';node.ownerDocument.head.append(style);}node.focus();node.scrollIntoView({block:'nearest',inline:'nearest'});}
 function bindViewControls(c){
- let hintUsed=false;
  const reset=()=>{pointer.down=false;pointer.id=null;};
  c.style.touchAction='none';c.setAttribute('aria-describedby','city-look-help');
  c.addEventListener('pointerdown',e=>{
@@ -262,7 +261,7 @@ function bindViewControls(c){
   if(document.hidden||inside&&(modalActive()||panelOpen||!$('reader-panel').hidden||controllerMenu||transition||returnLift)){reset();return;}
   const dx=e.clientX-pointer.lastX,dy=e.clientY-pointer.lastY;pointer.lastX=e.clientX;pointer.lastY=e.clientY;pointer.moved+=Math.abs(dx)+Math.abs(dy);
   if(!pointer.look)return;
-  if(inside){player.yaw-=dx*.004;player.pitch=lookPitch(player.pitch-dy*.003);if(!hintUsed&&pointer.moved>=8){hintUsed=true;window.dispatchEvent(new Event('city-look-used'));}}else{exteriorAngle-=dx*.006;exteriorHeight=THREE.MathUtils.clamp(exteriorHeight+dy*.2,65,360);}
+  if(inside){player.yaw-=dx*.004;player.pitch=lookPitch(player.pitch-dy*.003);}else{exteriorAngle-=dx*.006;exteriorHeight=THREE.MathUtils.clamp(exteriorHeight+dy*.2,65,360);}
  });
  c.addEventListener('pointerup',e=>{if(pointer.id!==e.pointerId)return;reset();if(pointer.moved<8&&!transition&&!returnLift&&!modalActive())pickSceneAt(e.clientX,e.clientY);});
  for(const type of['pointercancel','lostpointercapture'])c.addEventListener(type,e=>{if(pointer.id===e.pointerId)reset();});
@@ -273,8 +272,9 @@ function bindViewControls(c){
 function updateGamepad(dt){
  const blocked=document.hidden||modalActive()||!$('reader-panel').hidden||panelOpen||controllerMenu||!!transition||!!returnLift;
  if(document.hidden)cityPad.cancelPhotoBinding();
- const input=cityPad.poll(blocked),touch=window.CITY_TOUCH?.poll(blocked||!inside||visitMode==='aerial'||!!window.CITY_MAIN?.oceanSailing?.active);
+ const input=cityPad.poll(blocked),touchBlocked=blocked||!inside||visitMode==='aerial'||!!window.CITY_MAIN?.oceanSailing?.active,touch=window.CITY_TOUCH?.poll(touchBlocked),look=window.CITY_LOOK?.poll(touchBlocked);
  if(touch){input.forward=Math.max(-1,Math.min(1,input.forward+touch.forward));input.strafe=Math.max(-1,Math.min(1,input.strafe+touch.strafe));}
+ if(look){input.lookX=Math.max(-1,Math.min(1,input.lookX+look.strafe));input.lookY=Math.max(-1,Math.min(1,input.lookY-look.forward));}
  Object.assign(padInput,input);
  $('world').dataset.controller=input.connected?'connected':'disconnected';
  if(document.hidden)return;

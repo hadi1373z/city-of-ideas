@@ -586,9 +586,11 @@ exact sketch fidelity or public publication has been made.
 
 The touch arrows are now one analog joystick feeding the existing native
 controller axes, with release/cancel/blur/modal resets. The user then explicitly
-selected the recommended TWO-HAND layout: left joystick moves forward/back and
-strafes, right-side canvas drag turns and tilts the view. This supersedes the
-temporary steering-only idea. Each gesture owns its pointer ID; a second touch
+selected the TWO-HAND layout, then refined it to TWO MATCHING TRANSLUCENT
+JOYSTICKS with NO visible writing: left moves forward/back and strafes; right
+turns and tilts via the original gamepad look axes. Native canvas drag remains
+available. This supersedes the earlier right-side hint/drag-only and temporary
+steering-only ideas. Each gesture owns its pointer ID; a second touch
 cannot overwrite or end another. Touch focus changes must not release a held
 movement pointer. Keep physical gamepad
 flags and collision/stair authorities intact; do not emulate arrow key events.

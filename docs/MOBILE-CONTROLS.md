@@ -1,13 +1,16 @@
 # Touch movement and compact controls
 
-The user explicitly selected the two-hand phone layout on 22 November:
-**left joystick moves; dragging the right scene area looks around**. This
-supersedes the temporary suggestion to steer with the movement joystick.
+The final 22 November direction is **two matched translucent joysticks with no
+visible writing**: left moves, right looks. This supersedes the earlier drag-only
+right side, its disappearing text hint and the temporary steering-only idea.
 
 Up/down moves forward/back; left/right strafes without changing the view.
 Distance controls input after a 12% dead zone, with small orthogonal finger
 wobble ignored and diagonal magnitude capped at one. Releasing stops movement.
-CITY_TOUCH.poll(blocked) feeds the original controller axes in gallery.js.
+CITY_TOUCH.poll(blocked) feeds the original movement axes in gallery.js.
+CITY_LOOK uses the same bounded, pointer-owned joystick factory; its axes merge
+only into the existing gamepad lookX/lookY axes and original pitch limits. Both
+sticks work simultaneously and releasing either stops only its own action.
 All walking, stairs, collisions and world transitions remain native. Keyboard
 and physical gamepad mappings stay unchanged; never synthesize key events.
 
@@ -18,11 +21,9 @@ Both movement and looking own their pointer IDs. Another finger cannot steal or
 release a gesture. Touch focus changes do not release a captured movement finger;
 keyboard blur, window blur, resize, hidden page, pointer cancellation/lost capture,
 blocked input and native clearMovement still reset the appropriate controls.
-The noninteractive right-side look hint never intercepts scene taps or drags.
-Both control-circle centres align horizontally. The look label has a translucent
-backing and disappears after the first meaningful look drag in that page visit;
-a tap or movement-stick use does not dismiss it. No persistent preference is
-written, and accessible look instructions remain available.
+Both control-circle centres align horizontally and their bases/thumbs are
+translucent. There is no visible instruction label. Screen-reader labels and
+instructions remain available in all three languages. No preference is stored.
 
 At widths up to 800px, or landscape screens up to 960px wide and 500px high,
 the top three-line button opens a scrollable controls panel. It transports the
@@ -38,7 +39,8 @@ dismissal returns focus to the hamburger. FA/EN/DE labels share the city languag
 Validation: tests/mobile-controls.mjs executes the real root input and canvas
 handlers. It covers simultaneous movement/look pointers, focus retention,
 unrelated pointer release, left-scene drag versus artwork tap, modal suppression,
-native stair-axis delivery, analog/diagonal bounds, resets and menu transport.
+native stair-axis delivery, independent look-only yaw/pitch and stop behavior,
+analog/diagonal bounds, resets and menu transport.
 Also run tests/gamepad-input.cjs, tests/root-controls.mjs,
 tests/default-language.cjs and source integrity checks.
 

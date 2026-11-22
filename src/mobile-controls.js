@@ -22,6 +22,8 @@
  };
  const stick=document.querySelector('[data-joystick]');
  if(stick)window.CITY_TOUCH=window.createCityJoystick(stick,{onStart(){for(const dialog of document.querySelectorAll('dialog[open][data-workbench="true"]'))dialog.close('movement');}});
+ const lookStick=document.querySelector('[data-look-joystick]');
+ if(lookStick)window.CITY_LOOK=window.createCityJoystick(lookStick,{onStart(){for(const dialog of document.querySelectorAll('dialog[open][data-workbench="true"]'))dialog.close('look');}});
  function initMenu(){
   const toggle=document.getElementById('city-mobile-menu'),header=document.getElementById('city-header-buttons'),actions=document.querySelector('.visit-actions');if(!toggle||!header||!actions)return null;
   const media=matchMedia('(max-width:800px), (max-width:960px) and (max-height:500px)'),headerHome=document.createComment('Desktop header controls'),actionsHome=document.createComment('Desktop visit controls');header.before(headerHome);actions.before(actionsHome);
@@ -29,7 +31,7 @@
   const top=document.createElement('header'),title=document.createElement('h2'),close=document.createElement('button'),headerSlot=document.createElement('div'),actionsSlot=document.createElement('div');title.id='city-controls-menu-title';close.id='close-city-controls-menu';close.className='close';close.type='button';close.textContent='×';headerSlot.className='mobile-menu-header-controls';actionsSlot.className='mobile-menu-visit-controls';top.append(title,close);menu.append(top,headerSlot,actionsSlot);
   const backdrop=document.createElement('button');backdrop.type='button';backdrop.className='city-controls-backdrop';backdrop.hidden=true;backdrop.tabIndex=-1;document.body.append(backdrop,menu);
   let open=false;
-  const clear=()=>{window.CITY_TOUCH?.reset();window.CITY_MAIN?.clearMovement?.();};
+  const clear=()=>{window.CITY_TOUCH?.reset();window.CITY_LOOK?.reset();window.CITY_MAIN?.clearMovement?.();};
   function finish(focus=false){open=false;toggle.setAttribute('aria-expanded','false');delete document.body.dataset.mobileMenu;backdrop.hidden=true;clear();if(focus&&media.matches)toggle.focus();}
   function hide(focus=true){if(menu.open)menu.close();finish(focus);}
   function show(){if(!media.matches||open)return;clear();open=true;toggle.setAttribute('aria-expanded','true');document.body.dataset.mobileMenu='open';backdrop.hidden=false;menu.show();close.focus();}
@@ -42,9 +44,8 @@
   media.addEventListener('change',layout);layout();return{menu,title,close,toggle,backdrop,show,hide,get open(){return open;}};
  }
  const menu=initMenu();if(menu)window.CITY_MOBILE_MENU=menu;
- function copy(){const lang=document.documentElement.lang,fa=lang==='fa',de=lang==='de';if(stick){stick.setAttribute('aria-label',fa?'جوی‌استیک حرکت':de?'Bewegungs-Joystick':'Movement joystick');const help=document.getElementById('city-joystick-help');if(help)help.textContent=fa?'با جوی‌استیک چپ حرکت کنید؛ برای توقف رها کنید. سمت راست تصویر را برای نگاه‌کردن بکشید.':de?'Mit dem linken Joystick bewegen; zum Anhalten loslassen. Rechts ziehen, um sich umzusehen.':'Move with the left joystick; release to stop. Drag the right side to look.';}
-  const look=document.getElementById('city-look-label');if(look)look.textContent=fa?'کشیدن برای نگاه':de?'Ziehen zum Umsehen':'Drag to look';const lookHelp=document.getElementById('city-look-help');if(lookHelp)lookHelp.textContent=fa?'سمت راست تصویر را برای چرخیدن و نگاه به بالا یا پایین بکشید. می‌توانید هم‌زمان با انگشت دیگر حرکت کنید.':de?'Rechts ziehen, um sich zu drehen und nach oben oder unten zu schauen. Gleichzeitig mit dem anderen Finger bewegen.':'Drag the right side to turn and look up or down. Move with the other finger at the same time.';
+ function copy(){const lang=document.documentElement.lang,fa=lang==='fa',de=lang==='de';if(stick){stick.setAttribute('aria-label',fa?'جوی‌استیک حرکت':de?'Bewegungs-Joystick':'Movement joystick');const help=document.getElementById('city-joystick-help');if(help)help.textContent=fa?'با جوی‌استیک چپ حرکت کنید و با جوی‌استیک راست نگاه کنید؛ برای توقف رها کنید.':de?'Mit dem linken Joystick bewegen, mit dem rechten umsehen; zum Anhalten loslassen.':'Move with the left joystick and look with the right; release to stop.';}
+  if(lookStick){lookStick.setAttribute('aria-label',fa?'جوی‌استیک نگاه':de?'Blick-Joystick':'Look joystick');lookStick.parentNode.setAttribute('aria-label',fa?'کنترل نگاه':de?'Blicksteuerung':'Look controls');}const lookHelp=document.getElementById('city-look-help');if(lookHelp)lookHelp.textContent=fa?'با جوی‌استیک راست بچرخید و به بالا یا پایین نگاه کنید؛ برای توقف رها کنید.':de?'Mit dem rechten Joystick drehen und nach oben oder unten schauen; zum Anhalten loslassen.':'Use the right joystick to turn and look up or down; release to stop looking.';
   if(menu){menu.title.textContent=fa?'کنترل‌ها':de?'Steuerung':'Controls';menu.toggle.setAttribute('aria-label',fa?'باز و بسته کردن کنترل‌ها':de?'Steuerung öffnen oder schließen':'Open or close controls');const label=fa?'بستن کنترل‌ها':de?'Steuerung schließen':'Close controls';menu.close.setAttribute('aria-label',label);menu.backdrop.setAttribute('aria-label',label);}}
  copy();addEventListener('city-language',copy);
- addEventListener('city-look-used',()=>{const label=document.getElementById('city-look-label');if(label)label.hidden=true;},{once:true});
 })();
