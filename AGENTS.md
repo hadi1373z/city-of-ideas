@@ -585,7 +585,12 @@ house-grain browser review was blocked by the preview connection; no claim of
 exact sketch fidelity or public publication has been made.
 
 The touch arrows are now one analog joystick feeding the existing native
-controller axes, with release/cancel/blur/modal resets. Keep physical gamepad
+controller axes, with release/cancel/blur/modal resets. The user then explicitly
+selected the recommended TWO-HAND layout: left joystick moves forward/back and
+strafes, right-side canvas drag turns and tilts the view. This supersedes the
+temporary steering-only idea. Each gesture owns its pointer ID; a second touch
+cannot overwrite or end another. Touch focus changes must not release a held
+movement pointer. Keep physical gamepad
 flags and collision/stair authorities intact; do not emulate arrow key events.
 Small screens use one top three-line button and a scrollable controls dialog.
 Move the original header/toolbar nodes, never clone them; restore them on desktop
