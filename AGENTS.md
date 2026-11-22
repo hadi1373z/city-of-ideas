@@ -536,6 +536,17 @@ larger-central-facet requirement: use three equal sides. This design is now live
 in31 fixed apertures with .60m cavities and six courses. Preserve all320 stair
 treads, landings, original positions and walking controls; keep the outward-only
 .74m masonry reserve and museum finish cuts coherent. Run the blue-alcoves tests.
+The22 November refinement has1,105 taller lancet pockets, fitted2048px original
+ceramic atlas compositions (central medallion/threeogives, floral sides, border,
+palmette), real raised gold ribs and lapis coating on the ORIGINAL stone-frame
+envelope. InteriorRanges and frameRanges must jointly own every actual vertex;
+frame triangles must not cap the aperture. Preserve the exact320tread/9landing/
+98post/2rail hash baselines and original source walking authority. Two pooled
+warm lights follow only the nearest ledges while the descent is active; stop
+hides them, with no sun/night/private-state changes. The detailed comparison
+arrival stays on an existing tread, with its feet from descentSurface. See
+docs/ESCHER-BLUE-ALCOVES.md; do not restore checkerboard stars or bare stone
+returns, expand the frame footprint, or flatten the real recesses into a map.
 
 The three-agent visual pass was limited to daytime public space and underground
 rooms after the user explicitly excluded night work. De Chirico uses restrained

@@ -24,13 +24,13 @@ export function nicheWallPlan(n){const width=n.w-.055,depth=n.depth-.025,setback
 export function nicheWallDepth(n,u){const p=nicheWallPlan(n);for(let i=1;i<p.length;i++)if(u<=p[i][0]){const a=p[i-1],b=p[i],t=Math.max(0,Math.min(1,(u-a[0])/(b[0]-a[0])));return a[1]+(b[1]-a[1])*t;}return p.at(-1)[1];}
 export const NICHE_COURSES=6;
 export function nicheCells(n){
- const bottom=n.spring*.77,top=n.spring+n.w/2*.94,step=(top-bottom)/6,cells=[],rows=[];
+ const bottom=n.spring*.66,top=n.spring+n.w/2*.96,step=(top-bottom)/6,cells=[],rows=[];
  for(let row=0;row<6;row++){
-  const y=bottom+row*step,height=step*.88,cap=y+height+.012,half=n.w/2*Math.max(0,1-Math.pow(Math.max(0,(cap-n.spring)/(n.w/2)),1/.65)),span=Math.max(.075,2*half*.93),count=Math.max(1,Math.round(span/.205)),pitch=span/count;
+  const y=bottom+row*step,height=step*.94,cap=y+height+.010,half=n.w/2*Math.max(0,1-Math.pow(Math.max(0,(cap-n.spring)/(n.w/2)),1/.65)),span=Math.max(.075,2*half*.93),count=Math.max(1,Math.round(span/.18)),pitch=span/count;
   const course={row,y,top:y+step,span,count,frontDepth:.047+(5-row)*.035};rows.push(course);
   for(let i=0;i<count;i++){
-   const u=-span/2+pitch*(i+.5),width=pitch-.014,front=course.frontDepth+.05*(1-Math.abs(u)/(n.w/2)),r=width/2,pocket=Math.sqrt(3)*r/2;
-   cells.push({id:n.id+'-course-'+row+'-cell-'+i,row,index:i,u,y:y+.012,height,width,pitch,spring:height*.52,rise:height*.48,frontDepth:front,pocketDepth:pocket,
+   const u=-span/2+pitch*(i+.5),width=pitch-.012,front=course.frontDepth+.05*(1-Math.abs(u)/(n.w/2)),r=width/2,pocket=Math.sqrt(3)*r/2;
+   cells.push({id:n.id+'-course-'+row+'-cell-'+i,row,index:i,u,y:y+.010,height,width,pitch,spring:height*.38,rise:height*.62,frontDepth:front,pocketDepth:pocket,
     plan:[[-r,-front],[-r/2,-front-pocket],[r/2,-front-pocket],[r,-front]],panel:[u-pitch/2,u+pitch/2,y,y+step]});
   }
  }

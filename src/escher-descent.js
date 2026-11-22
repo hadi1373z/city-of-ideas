@@ -1,13 +1,13 @@
-import {buildEscherShaftDetails,ESCHER_SHAFT_NICHES,nicheVoid} from './escher-stone-details.js?v=escher-blue-alcoves-final-20261121';
+import {buildEscherShaftDetails,ESCHER_SHAFT_NICHES,nicheVoid} from './escher-stone-details.js?v=escher-ornate-final-20261122';
 import {DESCENT as D,DESCENT_ANNEX as A,annexContains,STAIR_PORTAL as P,DESCENT_PARTS as PARTS,descentFloorBounds,descentSurface,walkDescent,outsideRectangle} from './escher-descent-model.js?v=wall-rails-20261121';
-import {ESCHER_NICHE_WALL as WALL} from './escher-niche-model.js?v=escher-blue-alcoves-final-20261121';
+import {ESCHER_NICHE_WALL as WALL} from './escher-niche-model.js?v=escher-ornate-final-20261122';
 export function buildEscherDescent(T){
  const group=new T.Group();group.name='Escher · continuous eight-flight descent';const owned=[],batches=new Map(),unit=new T.BoxGeometry(1,1,1);owned.push(unit);
- const mat=c=>{const m=new T.MeshLambertMaterial({color:c,side:T.DoubleSide});owned.push(m);return m;},stone=mat(0xd0c7ae),slate=mat(0x718980),light=mat(0xe2dac2),brass=mat(0x9c824e),facade=mat(0xd0c7ae);
+ const mat=c=>{const m=new T.MeshLambertMaterial({color:c,side:T.DoubleSide});owned.push(m);return m;},stone=mat(0xd0c7ae),slate=mat(0x718980),wall=mat(0x354a3b),light=mat(0xe2dac2),brass=mat(0x9c824e),facade=mat(0xd0c7ae);
  const fill=new T.AmbientLight(0xd6e2dc,.6);fill.visible=false;group.add(fill);
  const voids=ESCHER_SHAFT_NICHES.map(nicheVoid);group.userData.stairNiches=ESCHER_SHAFT_NICHES;
  function subtract(a,b){const x0=Math.max(a.minX,b.minX),x1=Math.min(a.maxX,b.maxX),y0=Math.max(a.minY,b.minY),y1=Math.min(a.maxY,b.maxY),z0=Math.max(a.minZ,b.minZ),z1=Math.min(a.maxZ,b.maxZ);if(x1<=x0||y1<=y0||z1<=z0)return[a];return[{...a,maxX:x0},{...a,minX:x1},{minX:x0,maxX:x1,minY:a.minY,maxY:y0,minZ:a.minZ,maxZ:a.maxZ},{minX:x0,maxX:x1,minY:y1,maxY:a.maxY,minZ:a.minZ,maxZ:a.maxZ},{minX:x0,maxX:x1,minY:y0,maxY:y1,minZ:a.minZ,maxZ:z0},{minX:x0,maxX:x1,minY:y0,maxY:y1,minZ:z1,maxZ:a.maxZ}].filter(p=>p.maxX-p.minX>1e-7&&p.maxY-p.minY>1e-7&&p.maxZ-p.minZ>1e-7);}
- function box(w,h,d,x,y,z,m=stone,yaw=0){if(!batches.has(m))batches.set(m,[]);if(m===slate&&h>10&&!yaw){let pieces=[{minX:x-w/2,maxX:x+w/2,minY:y-h/2,maxY:y+h/2,minZ:z-d/2,maxZ:z+d/2}];for(const n of voids)pieces=pieces.flatMap(p=>subtract(p,n));for(const p of pieces)batches.get(m).push({w:p.maxX-p.minX,h:p.maxY-p.minY,d:p.maxZ-p.minZ,x:(p.minX+p.maxX)/2,y:(p.minY+p.maxY)/2,z:(p.minZ+p.maxZ)/2,yaw:0});}else batches.get(m).push({w,h,d,x,y,z,yaw});}
+ function box(w,h,d,x,y,z,m=stone,yaw=0){if(!batches.has(m))batches.set(m,[]);if((m===slate||m===wall)&&h>10&&!yaw){let pieces=[{minX:x-w/2,maxX:x+w/2,minY:y-h/2,maxY:y+h/2,minZ:z-d/2,maxZ:z+d/2}];for(const n of voids)pieces=pieces.flatMap(p=>subtract(p,n));for(const p of pieces)batches.get(m).push({w:p.maxX-p.minX,h:p.maxY-p.minY,d:p.maxZ-p.minZ,x:(p.minX+p.maxX)/2,y:(p.minY+p.maxY)/2,z:(p.minZ+p.maxZ)/2,yaw:0});}else batches.get(m).push({w,h,d,x,y,z,yaw});}
  const railPieces=[],guardPaths=[],guardPosts=new Map();group.userData.stairGuardPaths=guardPaths;group.userData.stairGuardPosts=guardPosts;
  function rail(a,b){railPieces.push({a:a.clone(),b:b.clone()});}
  function guard(points){const path=points.map(p=>new T.Vector3(...p));guardPaths.push(path);for(let i=1;i<path.length;i++)rail(path[i-1],path[i]);}
@@ -30,13 +30,13 @@ export function buildEscherDescent(T){
  const s=D.shaft;
  // Additional bearing masonry is OUTSIDE the fixed stair faces, never an
  // inward wall shift or a change to a tread, landing or walking width.
- for(const x of[s.minX-WALL/2,s.maxX+WALL/2])box(WALL,39.6,s.maxZ-s.minZ,x,-20.2,(s.minZ+s.maxZ)/2,slate);
+ for(const x of[s.minX-WALL/2,s.maxX+WALL/2])box(WALL,39.6,s.maxZ-s.minZ,x,-20.2,(s.minZ+s.maxZ)/2,wall);
  box(s.maxX-s.minX,.28,s.maxZ-s.minZ,(s.minX+s.maxX)/2,-40.3,(s.minZ+s.maxZ)/2,slate);
- box(s.maxX-s.minX,39.6,WALL,(s.minX+s.maxX)/2,-20.2,s.minZ-WALL/2,slate);
+ box(s.maxX-s.minX,39.6,WALL,(s.minX+s.maxX)/2,-20.2,s.minZ-WALL/2,wall);
  // A real arched reveal replaces the plain rectangular museum-side mouth.
  const doorwayHeight=3.7,wallTop=-.4,lintel=P.floor+doorwayHeight;
- box(s.maxX-s.minX,wallTop-lintel,WALL,(s.minX+s.maxX)/2,(wallTop+lintel)/2,s.maxZ+WALL/2,slate);
- for(const r of outsideRectangle({minX:s.minX,maxX:s.maxX,minZ:s.maxZ,maxZ:s.maxZ+WALL},{minX:P.x-P.opening,maxX:P.x+P.opening,minZ:s.maxZ-1,maxZ:s.maxZ+1}))box(r.maxX-r.minX,doorwayHeight,WALL,(r.minX+r.maxX)/2,P.floor+doorwayHeight/2,s.maxZ+WALL/2,slate);
+ box(s.maxX-s.minX,wallTop-lintel,WALL,(s.minX+s.maxX)/2,(wallTop+lintel)/2,s.maxZ+WALL/2,wall);
+ for(const r of outsideRectangle({minX:s.minX,maxX:s.maxX,minZ:s.maxZ,maxZ:s.maxZ+WALL},{minX:P.x-P.opening,maxX:P.x+P.opening,minZ:s.maxZ-1,maxZ:s.maxZ+1}))box(r.maxX-r.minX,doorwayHeight,WALL,(r.minX+r.maxX)/2,P.floor+doorwayHeight/2,s.maxZ+WALL/2,wall);
  const archShape=new T.Shape();archShape.moveTo(-P.halfWidth,0);archShape.lineTo(-P.halfWidth,P.height);archShape.lineTo(P.halfWidth,P.height);archShape.lineTo(P.halfWidth,0);archShape.lineTo(P.radius,0);archShape.lineTo(P.radius,P.spring);
  for(let i=1;i<=48;i++){const a=i*Math.PI/48;archShape.lineTo(P.radius*Math.cos(a),P.spring+P.radius*Math.sin(a));}archShape.lineTo(-P.radius,0);archShape.closePath();
  const archGeometry=new T.ExtrudeGeometry(archShape,{depth:P.depth,bevelEnabled:true,bevelThickness:.035,bevelSize:.035,bevelSegments:1,curveSegments:48}),arch=new T.Mesh(archGeometry,light);arch.position.set(P.x,P.floor,P.z);arch.name='Escher house · sculpted arched stair entrance';group.add(arch);owned.push(archGeometry);
@@ -60,11 +60,18 @@ export function buildEscherDescent(T){
  }
  const capGeometry=new T.BufferGeometry();capGeometry.setAttribute('position',new T.Float32BufferAttribute(capPositions,3));capGeometry.computeVertexNormals();owned.push(capGeometry);const cap=new T.Mesh(capGeometry,light);cap.name='Escher · six-facet capped stair pavilion';group.add(cap);
  const details=buildEscherShaftDetails(T);group.add(details.group);
+ // Two shared warm lights follow only the nearest recessed ledges. The31
+ // alcoves do not each allocate a live light or change the city's daylight.
+ const alcoveLights=Array.from({length:2},()=>{const l=new T.PointLight(0xffcb82,.08,2.6,2);l.name='Escher · concealed alcove ledge light';l.visible=false;group.add(l);return l;});
+ function updateAlcoveLights(player){
+  const nearest=player?ESCHER_SHAFT_NICHES.map(n=>({n,d:(n.origin[0]-player.x)**2+(n.origin[1]+.3-player.y)**2+(n.origin[2]-player.z)**2})).filter(p=>p.d<18).sort((a,b)=>a.d-b.d).slice(0,2):[];
+  alcoveLights.forEach((l,i)=>{const p=nearest[i];l.visible=!!p;if(p){const n=p.n;l.position.set(n.origin[0]-n.out[0]*.32,n.origin[1]+.12,n.origin[2]-n.out[1]*.32);}});
+ }
  const stamp=new T.Object3D(),railGeometry=new T.CylinderGeometry(.045,.045,1,8),railBatch=new T.InstancedMesh(railGeometry,brass,railPieces.length);owned.push(railGeometry);
  railPieces.forEach(({a,b},i)=>{const delta=b.clone().sub(a);stamp.position.copy(a.clone().add(b).multiplyScalar(.5));stamp.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),delta.clone().normalize());stamp.scale.set(1,delta.length(),1);stamp.updateMatrix();railBatch.setMatrixAt(i,stamp.matrix);});railBatch.instanceMatrix.needsUpdate=true;railBatch.computeBoundingSphere();railBatch.name='Continuous supported eight-flight handrails';group.add(railBatch);
  const corners=new Map();for(const path of guardPaths)for(const p of path)corners.set(p.toArray().join(','),p);const jointGeometry=new T.SphereGeometry(.046,8,6),joints=new T.InstancedMesh(jointGeometry,brass,corners.size);owned.push(jointGeometry);let ji=0;stamp.quaternion.identity();stamp.scale.set(1,1,1);for(const p of corners.values()){stamp.position.copy(p);stamp.updateMatrix();joints.setMatrixAt(ji++,stamp.matrix);}joints.instanceMatrix.needsUpdate=true;joints.computeBoundingSphere();joints.name='Rounded connected stair-rail joints';group.add(joints);
  for(const[m,items]of batches){const mesh=new T.InstancedMesh(unit,m,items.length);items.forEach((p,i)=>{stamp.position.set(p.x,p.y,p.z);stamp.rotation.set(0,p.yaw??0,0);stamp.scale.set(p.w,p.h,p.d);stamp.updateMatrix();mesh.setMatrixAt(i,stamp.matrix);});mesh.instanceMatrix.needsUpdate=true;mesh.computeBoundingSphere();group.add(mesh);}
- return{group,fill,dispose(){details.dispose();group.removeFromParent();group.traverse(o=>{if(o.isInstancedMesh)o.dispose();});owned.forEach(o=>o.dispose());group.clear();}};
+ return{group,fill,alcoveLights,updateAlcoveLights,dispose(){details.dispose();group.removeFromParent();group.traverse(o=>{if(o.isInstancedMesh)o.dispose();});alcoveLights.forEach(l=>l.dispose());owned.forEach(o=>o.dispose());group.clear();}};
 }
 export function installEscherDescent(M,T,{gateOpen,onBegin,onMuseum,onStop}={}){
  const built=buildEscherDescent(T);M.scene.add(built.group);let active=false,disposed=false,lastLevel=-1;
@@ -74,13 +81,14 @@ export function installEscherDescent(M,T,{gateOpen,onBegin,onMuseum,onStop}={}){
  const blocked=()=>document.hidden||!!document.querySelector('dialog[open],#reader-panel:not([hidden]),#exhibit-panel:not([hidden]),#map-panel:not([hidden])');
  const top=()=>Math.abs(M.player.y-M.eye-D.top)<.25&&Math.abs(M.player.x-228)<.66&&M.player.z>103.75&&M.player.z<105.85;
  const bottom=()=>Math.abs(M.player.y-M.eye-D.bottom)<.25&&Math.abs(M.player.x-225)<.66&&M.player.z>106.1&&M.player.z<106.95;
- function stop(){if(!active)return;active=false;built.fill.visible=false;delete document.body.dataset.escherDescent;onStop?.();}
+ function stop(){if(!active)return;active=false;built.fill.visible=false;built.updateAlcoveLights(null);delete document.body.dataset.escherDescent;onStop?.();}
  function step(dt,{forward=0,strafe=0,turn=0,boost=false}={}){
   if(disposed)return false;if(active&&M.mode!=='city'){stop();return false;}
   if(!active){const intoStair=-Math.cos(M.player.yaw)*(forward||0)-Math.sin(M.player.yaw)*(strafe||0)<-.001;if(M.mode!=='city'||blocked()||(!top()&&!(bottom()&&intoStair))||top()&&!gateOpen?.())return false;onBegin?.(bottom());active=true;built.fill.visible=true;document.body.dataset.escherDescent='true';lastLevel=-1;}
   if(blocked())return true;const surface=descentSurface(M.player.x,M.player.z,M.player.y-M.eye,.35);if(!surface){stop();return false;}
   dt=Math.max(0,Math.min(.5,Number.isFinite(dt)?dt:0));const clamp=n=>Number.isFinite(n)?Math.max(-1,Math.min(1,n)):0;forward=clamp(forward);strafe=clamp(strafe);M.player.yaw+=clamp(turn)*dt*1.65;const n=Math.max(1,Math.hypot(forward,strafe)),speed=(boost?6:3.8)*dt;
   walkDescent(M.player,(-Math.sin(M.player.yaw)*forward+Math.cos(M.player.yaw)*strafe)/n*speed,(-Math.cos(M.player.yaw)*forward-Math.sin(M.player.yaw)*strafe)/n*speed,M.eye);
+  built.updateAlcoveLights(M.player);
   const floor=M.player.y-M.eye,level=Math.min(8,Math.max(0,Math.round((.13-floor)/(40.13/8))));if(level!==lastLevel){lastLevel=level;M.status?.('Escher stair · '+level+' / 8 · Follow the landings; the museum is below.');}
   if(Math.abs(floor-D.bottom)<.02&&M.player.z>106.6){stop();onMuseum?.();return true;}
   if(Math.abs(floor-D.top)<.02&&M.player.z>105.85){stop();return true;}

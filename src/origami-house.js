@@ -10,7 +10,7 @@ import {buildCityCoast} from './coastal-city-scene.js?v=garden-house-stone-20261
 import {foldHouseMemory,HOUSE_ORIGAMI as P,miura,vertexTests,CREASE_CASES,coastX,COAST_ROUTES} from './origami-house-math.js?v=night-garden-20261121';
 import {FOLD_COPY} from './origami-house-copy.js?v=cloister-details-20261120';
 import {ORIGAMI_LESSONS,paperDiagram} from './origami-lessons.js?v=city-night-20261117';
-import {mountCoastalMap} from './coastal-map.js?v=escher-blue-alcoves-final-20261121';
+import {mountCoastalMap} from './coastal-map.js?v=escher-ornate-final-20261122';
 import {COAST_EXPLORER_COPY} from './coastal-map-data.js?v=coastal-terraces-20261121';
 import {SEMINAR_HOUSES} from './seminar-houses-data.js?v=night-garden-20261121';
 export function installOrigamiHouse(M,T){

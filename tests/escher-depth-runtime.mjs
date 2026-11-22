@@ -112,6 +112,7 @@ assert.equal(privateAccess,0,'Experiments never access private notes or browser 
 assert(api.enter('alcoves'));assert(api.descent.active,'The alcove shortcut uses the actual stair controller');near(M.player.x,225);near(M.player.z,106.5);near(M.player.y,-38.2);
 const alcoveStart={...M.player};assert(api.step(.1,{forward:1}));assert(M.player.z<alcoveStart.z,'Visitors can climb from the unchanged lower stair mouth');api.stop();restoreChecked();
 reader.hidden=false;assert.equal(api.enter('alcoves'),false);reader.hidden=true;
+assert(api.enter('alcove-detail'));assert(api.descent.active);near(M.player.x,225.5);near(M.player.z,101.65);const detailStart={...M.player};assert(api.step(.1,{strafe:1}));assert.notDeepEqual(M.player,detailStart,'The detailed comparison view remains on the actual walking controller');api.stop();restoreChecked();
 for(const file of['escher-depth.js','escher-depth-scene.js','escher-depth-model.js']){
  const text=await readFile(new URL('../src/'+file,import.meta.url),'utf8');assert(!/localStorage|sessionStorage|visitorMemory|indexedDB|speechSynthesis|fetch\(/.test(text),`${file} must not mutate private progress, voices or external services`);
 }

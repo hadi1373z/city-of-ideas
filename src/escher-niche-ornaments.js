@@ -1,6 +1,6 @@
 // Original procedural tilework and shallow faceted vault cells, inspired by
 // the user's architectural reference. No photograph is used as a texture.
-export {buildEscherNicheOrnaments} from './escher-niche-recess-scene.js?v=escher-blue-alcoves-final-20261121';
+export {buildEscherNicheOrnaments} from './escher-niche-recess-scene.js?v=escher-ornate-final-20261122';
 export function buildLegacyEscherNicheOrnaments(T,niches){
  const group=new T.Group();group.name='Escher · tiled recessed stair niches';
  const tiles=[],vaults=[],palette=[0x164b82,0x267f9b,0xdce4d5,0xc4a562,0x12345b].map(c=>new T.Color(c));let tileCount=0,cellCount=0;

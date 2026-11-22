@@ -1,6 +1,6 @@
 import {CLEBSCH} from './clebsch-cubic-model.js';
 import {DESCENT,STAIR_PORTAL} from './escher-descent-model.js?v=wall-rails-20261121';
-import {ESCHER_NICHE_ENCLOSURE} from './escher-niche-model.js?v=escher-blue-alcoves-final-20261121';
+import {ESCHER_NICHE_ENCLOSURE} from './escher-niche-model.js?v=escher-ornate-final-20261122';
 import {CLOISTER_ROOMS,CLOISTER_STAIRS,CLOISTER_GALLERIES,insidePolygon,hexagon,rectangle,ringPolygons,outsidePolygonRectangle} from './escher-cloister-layout.js?v=cloister-20261120';
 export {insidePolygon,hexagon,ringPolygons,outsidePolygonRectangle};
 export const ESCHER_MOBIUS_PLINTH=Object.freeze({x:218.5,z:155,width:5,depth:5});

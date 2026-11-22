@@ -24,10 +24,15 @@ assert.equal(ESCHER_NICHE_SILL,.93,'The niches are raised55cm above the previous
 const ornaments=surface.group.getObjectByName('Escher · tiled recessed stair niches');
 assert.equal(ornaments.children.length,2,'All31 decorated niches use two bounded geometry batches');
 assert(ornaments.userData.tileCount>600&&ornaments.userData.vaultCellCount>400);
-for(const mesh of ornaments.children){const p=mesh.geometry.attributes.position;for(let i=0;i<p.count;i++){
- const x=p.getX(i),y=p.getY(i),z=p.getZ(i);assert(Number.isFinite(x+y+z));
- assert(surface.group.userData.stairNiches.some(n=>{const dx=x-n.origin[0],dz=z-n.origin[2],u=dx*n.along[0]+dz*n.along[1],d=dx*n.out[0]+dz*n.out[1],v=y-n.origin[1],r=n.w/2;return d>=-n.depth-.001&&d<=-.042&&v>=.011&&Math.abs(u)<=r+.001&&v<=nicheArchHeight(n,u)+.002;}), 'Every tile and vault facet remains inside a carved pointed arch and behind its wall face');
-}}
+for(const l of ornaments.userData.nicheLayouts)for(const range of l.interiorRanges){const p=ornaments.children[range.batch].geometry.attributes.position,n=l.niche;
+ for(let i=range.start;i<range.start+range.count;i++){
+  const x=p.getX(i),y=p.getY(i),z=p.getZ(i),dx=x-n.origin[0],dz=z-n.origin[2],u=dx*n.along[0]+dz*n.along[1],d=dx*n.out[0]+dz*n.out[1],height=y-n.origin[1];assert(Number.isFinite(x+y+z));
+  assert(d>=-n.depth-.001&&d<=-.042&&height>=.011&&Math.abs(u)<=n.w/2+.001&&height<=nicheArchHeight(n,u)+.002,'Every interior tile, gold rib and vault facet remains inside its carved pointed arch and behind the wall face');
+ }
+}
+// The blue frame only coats the existing stone envelope; its detailed original
+// ring/triangle footprint is independently checked in escher-blue-alcoves.mjs.
+for(const l of ornaments.userData.nicheLayouts)for(const range of l.frameRanges){const p=ornaments.children[range.batch].geometry.attributes.position,n=l.niche;for(let i=range.start;i<range.start+range.count;i++){const dx=p.getX(i)-n.origin[0],dz=p.getZ(i)-n.origin[2],u=dx*n.along[0]+dz*n.along[1],d=dx*n.out[0]+dz*n.out[1],height=p.getY(i)-n.origin[1];assert(Math.abs(u)<=n.w/2+.191&&height>=-.101&&height<=n.spring+n.w/2+.121&&d>=-.001&&d<=(height<=0?.106:.091),'Frame coating remains inside the original stone bounds with only the agreed millimetre finish');}}
 for(const n of surface.group.userData.stairNiches){
  const y=n.origin[1]+1.3,start=new T.Vector3(n.origin[0]+n.out[0]*.4,y,n.origin[2]+n.out[1]*.4),direction=new T.Vector3(-n.out[0],0,-n.out[1]);
  const hits=new T.Raycaster(start,direction,0,1.1).intersectObject(combined,true).filter(h=>!h.object.userData.nicheOrnament);assert(hits.length,'Every alcove has a real opaque back');
@@ -44,7 +49,7 @@ for(const n of surface.group.userData.stairNiches){
  const tileStart=new T.Vector3(n.origin[0]+n.out[0]*.4,n.origin[1]+.45,n.origin[2]+n.out[1]*.4),tileHits=new T.Raycaster(tileStart,direction,0,1.1).intersectObject(combined,true);
  assert(tileHits[0]?.object.userData.nicheOrnament,'Tilework is the visible first surface in every formerly empty recess');
  const layout=ornaments.userData.nicheLayouts.find(l=>l.niche.id===n.id);
- let sculpted=false;for(const c of layout.cells.filter(c=>c.row===2)){const u=c.u,a=new T.Vector3(n.origin[0]+n.along[0]*u+n.out[0]*.4,n.origin[1]+c.y+c.spring*.5,n.origin[2]+n.along[1]*u+n.out[1]*.4),h=new T.Raycaster(a,direction,0,1.1).intersectObject(combined,true)[0];if(h?.object.name.includes('faceted')){const d=(h.point.x-n.origin[0])*n.out[0]+(h.point.z-n.origin[2])*n.out[1];if(d>-n.depth+.025&&d<-.04)sculpted=true;}}
+ let sculpted=false;for(const c of layout.cells.filter(c=>c.row===2)){const u=c.u,a=new T.Vector3(n.origin[0]+n.along[0]*u+n.out[0]*.4,n.origin[1]+c.y+c.spring*.5,n.origin[2]+n.along[1]*u+n.out[1]*.4),h=new T.Raycaster(a,direction,0,1.1).intersectObject(combined,true)[0];if(h?.object.userData.nicheOrnament){const batch=ornaments.children.indexOf(h.object),range=batch===0?c.tileRange:c.vaultRange,d=(h.point.x-n.origin[0])*n.out[0]+(h.point.z-n.origin[2])*n.out[1];if(range&&h.faceIndex*3>=range[0]&&h.faceIndex*3<range[0]+range[1]&&d>-n.depth+.025&&d<-.04)sculpted=true;}}
  assert(sculpted,'Every niche has visible three-dimensional vault cells rather than a flat printed substitute');
 }
 for(const p of DESCENT_PARTS.filter(p=>p.id.startsWith('landing-'))){

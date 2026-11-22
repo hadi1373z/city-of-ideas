@@ -1,8 +1,8 @@
 import {DESCENT} from './escher-descent-model.js?v=wall-rails-20261121';
-import {ESCHER_NICHE_ENCLOSURE} from './escher-niche-model.js?v=escher-blue-alcoves-final-20261121';
+import {ESCHER_NICHE_ENCLOSURE} from './escher-niche-model.js?v=escher-ornate-final-20261122';
 import {SIXFOLD_HOUSES,houseToWorld} from './sixfold-house-network-model.js?v=escher-finish-20261120';
 import {sixfoldPassagePlan} from './sixfold-house-passages-scene.js?v=escher-finish-20261120';
-import {ESCHER_DEPTH as D,hexagon} from './escher-depth-model.js?v=escher-blue-alcoves-final-20261121';
+import {ESCHER_DEPTH as D,hexagon} from './escher-depth-model.js?v=escher-ornate-final-20261122';
 
 const EPS=1e-7,STRATA=[[0,-8,0],[-8,-22,1],[-22,-31,2],[-31,-44,0],[-44,-52,1],[-52,-65,2],[-65,-79,0],[-79,-88,1],[-88,-96,2]],cross=(a,b)=>a[0]*b[1]-a[1]*b[0];
 const rectangle=(minX,maxX,minZ,maxZ)=>[[minX,minZ],[maxX,minZ],[maxX,maxZ],[minX,maxZ]];

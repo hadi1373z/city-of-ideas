@@ -1,8 +1,10 @@
 import {CLEBSCH} from './clebsch-cubic-model.js';
-import {installEscherDescent} from './escher-descent.js?v=escher-blue-alcoves-final-20261121';
+import {installEscherDescent} from './escher-descent.js?v=escher-ornate-final-20261122';
+import {descentSurface} from './escher-descent-model.js';
+import {ESCHER_SHAFT_NICHES} from './escher-niche-model.js?v=escher-ornate-final-20261122';
 import {PRINT_STUDIES,dependencyOrder} from './escher-print-studies.js?v=cloister-20261120';
-import {ESCHER_DEPTH as D,DEPTH_VIEW,DEPTH_FOCUS,depthFloorAt,depthRoomAt,walkDepth,atGalleryHandoff,perspectiveAligned,tileMismatch,loopResult} from './escher-depth-model.js?v=escher-blue-alcoves-final-20261121';
-import {buildEscherDepth} from './escher-depth-scene.js?v=escher-blue-alcoves-final-20261121';
+import {ESCHER_DEPTH as D,DEPTH_VIEW,DEPTH_FOCUS,depthFloorAt,depthRoomAt,walkDepth,atGalleryHandoff,perspectiveAligned,tileMismatch,loopResult} from './escher-depth-model.js?v=escher-ornate-final-20261122';
+import {buildEscherDepth} from './escher-depth-scene.js?v=escher-ornate-final-20261122';
 
 const ROOM_NAMES={vestibule:'Gallery passage',hall:'Hexagonal vaulted court','hall-gallery':'Upper court gallery','perspective-gallery':'Perspective balcony','tessellation-gallery':'Tessellation balcony','reading-gallery':'Topology balcony','gallery-stair':'Stair to the upper gallery',perspective:'Perspective chamber',tessellation:'Tessellation chamber',reading:'Topology & relations wing',stair:'Stair to the loop chamber',loop:'Lower hexagonal cloister'};
 export function installEscherDepth(M,T,{onGalleryExit=null}={}){
@@ -43,10 +45,17 @@ export function installEscherDepth(M,T,{onGalleryExit=null}={}){
  function enter(id='gallery'){
   // Explicit visitor shortcut to the existing lower stair mouth. Activate the
   // same reversible controller that ordinary visitors enter from the museum.
-  if(id==='alcoves'){
+  if(id==='alcoves'||id==='alcove-detail'){
    if(disposed||blocked())return false;M.cancelActivity?.();stop();
    M.arrive({x:225,z:106.5,y:-40,yaw:0,pitch:.02});M.setCityMode();M.clearMovement();
-   return descent.step(0,{forward:1});
+   const entered=descent.step(0,{forward:1});
+   if(entered&&id==='alcove-detail'){
+    // A comparison view from a real original tread, using the same active
+    // walking controller. This never moves a stair or invents a camera floor.
+    const x=225.5,z=101.65,floor=descentSurface(x,z,-39.2,.35),niche=ESCHER_SHAFT_NICHES.find(n=>n.id==='flight-7-0.8');
+    if(floor&&niche){const y=floor.y+M.eye,dx=niche.origin[0]-x,dz=niche.origin[2]-z;Object.assign(M.player,{x,z,y,yaw:Math.atan2(-dx,-dz),pitch:Math.atan2(niche.origin[1]+(niche.spring+niche.w/2)/2-y,Math.hypot(dx,dz))});}
+   }
+   return entered;
   }
   if(disposed||blocked())return false;if(id==='escher')return gateOpen(D.portals[0])&&descent?.approach();const p=D.portals.find(p=>p.id===id);if(id!=='gallery'&&(!p||!gateOpen(p)))return false;
   M.cancelActivity?.();if(active)stop();const landing=p?.landing??{x:136.4,z:115,y:-40,yaw:-Math.PI/2};

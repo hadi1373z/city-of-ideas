@@ -1,6 +1,6 @@
-import {connectedContext,connectedRoute,JOURNEY_QUESTIONS} from './connected-journey-model.js?v=escher-blue-alcoves-final-20261121';
+import {connectedContext,connectedRoute,JOURNEY_QUESTIONS} from './connected-journey-model.js?v=escher-ornate-final-20261122';
 import {BABEL,babelDesk} from './babel-library-model.js?v=night-garden-20261121';
-import {ESCHER_DEPTH as D} from './escher-depth-model.js?v=escher-blue-alcoves-final-20261121';
+import {ESCHER_DEPTH as D} from './escher-depth-model.js?v=escher-ornate-final-20261122';
 export function installConnectedJourney(M,T){
  const el=(tag,text)=>{const n=document.createElement(tag);if(text)n.textContent=text;return n;},button=(text,fn)=>{const n=el('button',text);n.type='button';n.className='glass';n.onclick=fn;return n;};
  const panel=el('details');panel.id='connected-journey';panel.lang='en';panel.dir='ltr';panel.hidden=true;
