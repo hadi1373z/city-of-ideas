@@ -45,6 +45,17 @@ export function buildSixfoldHousePassages(T){
   const nx=dz/len*.28,nz=-dx/len*.28,uo=[a[0]+nx,-40.24,a[1]+nz],vo=[b[0]+nx,-40.24,b[1]+nz],wo=[b[0]+nx,-34.875,b[1]+nz],qo=[a[0]+nx,-34.875,a[1]+nz];
   append(uo,wo,vo,n.map(x=>-x));append(uo,qo,wo,n.map(x=>-x));
   for(const[A,B,C,D]of[[u,uo,vo,v],[q,w,wo,qo],[u,q,qo,uo],[v,vo,wo,w]]){append(A,B,C,n);append(A,C,D,n);}}
+ // The two angled source-wall cuts extend to |z|=3.2*sin(60deg), whereas
+ // the straight corridor ends at |z|=2. Close only those narrow side wings
+ // with fitted masonry, overlapping the existing corridor wall and lintel.
+ // Nothing enters the original four-metre opening or changes its floor.
+ for(const h of SIXFOLD_HOUSES)for(const sign of[-1,1]){
+  const edge=2,end=3.2*Math.sqrt(3)/2,wallX=125-h.radius;
+  const local=[[wallX+edge/Math.sqrt(3)-.45,sign*edge],[wallX+end/Math.sqrt(3)-.45,sign*end],[wallX+end/Math.sqrt(3)+.43,sign*end],[wallX+edge/Math.sqrt(3)+.43,sign*edge]];
+  const footprint=local.map(([x,z])=>{const p=houseToWorld(h,{x,z});return[p.x,p.z];});if(area(footprint)<0)footprint.reverse();
+  poly(footprint,-40.24,false);poly(footprint,-35.15,true);
+  for(let i=0;i<footprint.length;i++){const a=footprint[i],b=footprint[(i+1)%footprint.length],dx=b[0]-a[0],dz=b[1]-a[1],len=Math.hypot(dx,dz),n=[dz/len,0,-dx/len],u=[a[0],-40.24,a[1]],v=[b[0],-40.24,b[1]],w=[b[0],-35.15,b[1]],q=[a[0],-35.15,a[1]];append(u,v,w,n);append(u,w,q,n);}
+ }
  const geo=own(new T.BufferGeometry());geo.setAttribute('position',new T.Float32BufferAttribute(pos,3));geo.setAttribute('normal',new T.Float32BufferAttribute(norm,3));geo.computeBoundingSphere();const shell=new T.Mesh(geo,stone);shell.name='One corridor union · floors, roofs and genuinely open junctions';group.add(shell);
  // Repeated ceiling beacons use two tiny batches, not extra point lights.
  const lamps=[];for(const s of plan.segments){const dx=s.b[0]-s.a[0],dz=s.b[1]-s.a[1],len=Math.hypot(dx,dz);for(let d=7;d<len-3;d+=14)lamps.push({x:s.a[0]+dx*d/len,z:s.a[1]+dz*d/len});}

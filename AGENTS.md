@@ -594,3 +594,14 @@ and run tests/mobile-controls.mjs plus root-controls/gamepad input checks.
 Escher pointed-niche spandrels are flush with shared shaft wall planes; the old
 detached landing rim/light bars are gone. Keep concealed ledges and pooled
 lights. Run tests/escher-niche-wall-attachment.mjs and blue-alcoves/stair checks.
+
+The Admin entry at src/admin/index.html links the existing public art collection,
+private paper-management Site and owner-only guestbook inbox. Keep the three
+sources/access policies intact; never embed inbox records or credentials in the
+public directory. See docs/ADMIN.md. It is linked in the original header controls,
+so the compact menu transports that same link along with the other controls.
+The six basement doorways now have fitted masonry at the two side wings where
+the angled original cuts exceeded the straight corridor width. Keep the four-
+metre central aperture and original floor/stair model exact. The returns share
+the existing passage batch. See docs/SIXFOLD-HOUSE-NETWORK.md and run the basement
+jamb, passage, network and facade baseline tests.

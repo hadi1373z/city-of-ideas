@@ -1,5 +1,5 @@
-import {buildSixfoldHousePassages} from './sixfold-house-passages-scene.js?v=escher-finish-20261120';
-import {buildSectionEarth} from './world-section-earth.js?v=escher-ornate-final-20261122';
+import {buildSixfoldHousePassages} from './sixfold-house-passages-scene.js?v=admin-basement-20261122';
+import {buildSectionEarth} from './world-section-earth.js?v=admin-basement-20261122';
 import {ESCHER_DEPTH} from './escher-depth-model.js?v=escher-ornate-final-20261122';
 import {createOceanMaterial,updateOceanMaterial} from './ocean-surface.js?v=makers-passages-20261118';
 import {buildLowerLandscape} from './lower-landscape-scene.js?v=night-garden-20261121';

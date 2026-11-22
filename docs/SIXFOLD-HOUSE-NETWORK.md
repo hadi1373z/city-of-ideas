@@ -150,3 +150,14 @@ is beyond Z116.2; release is below Z115.9 within the actual legacy overlap,
 with the same exclusion on recapture. Held-input integration walks into the
 house to(74,125), reverses and continues down the corridor, checking real floor,
 roof and wall clearance every frame of that reported route.
+
+## Basement doorway side returns · 22 November 2026
+
+The angled source-wall doorway cuts reach |localZ|=2.771m while the straight
+passage is only four metres wide. The formerly unfilled wings beside |Z|=2
+now have fitted solid stone returns in the existing passage masonry batch.
+They overlap its side wall and the existing house lintel without entering the
+four-metre aperture, moving a floor, or changing native walking and stairs.
+The independent `tests/sixfold-basement-jambs.mjs` first reproduced the open ray
+at localZ=±2.4. It now checks 414 side/clear-opening rays and 3,600 supported
+native steps across all six existing basement doors in both directions.
